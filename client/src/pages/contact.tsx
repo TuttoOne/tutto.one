@@ -1,8 +1,42 @@
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { Mail, Calendar, MapPin } from "lucide-react";
+import { Mail, Calendar, MapPin, Loader2, CheckCircle } from "lucide-react";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const submitContact = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to submit");
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    submitContact.mutate(formData);
+  };
+
   return (
     <Layout>
       <div className="max-w-3xl mx-auto px-6 py-12">
@@ -11,7 +45,7 @@ export default function Contact() {
         <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                    I'm currently accepting new clients for Q4 2024. If you're interested in structuring your business for AI, I'd love to chat.
+                    We're currently accepting new clients for 2026. If you're interested in structuring your business for AI, we'd love to chat.
                 </p>
                 
                 <div className="space-y-6">
@@ -21,7 +55,7 @@ export default function Contact() {
                         </div>
                         <div>
                             <div className="font-medium">Email</div>
-                            <div className="text-muted-foreground text-sm">hello@danielforsthofer.com</div>
+                            <div className="text-muted-foreground text-sm">hello@humanity.ai</div>
                         </div>
                     </div>
                     
@@ -48,21 +82,70 @@ export default function Contact() {
             </div>
 
             <div className="bg-card border border-border/60 rounded-2xl p-8 shadow-sm">
-                <form className="space-y-4">
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Name</label>
-                        <input className="w-full px-3 py-2 border border-border rounded-md bg-white" placeholder="Jane Doe" />
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Email</label>
-                        <input className="w-full px-3 py-2 border border-border rounded-md bg-white" placeholder="jane@company.com" />
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Message</label>
-                        <textarea className="w-full px-3 py-2 border border-border rounded-md bg-white min-h-[120px]" placeholder="Tell me about your project..." />
-                    </div>
-                    <Button className="w-full rounded-full">Send Message</Button>
-                </form>
+                {submitted ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <CheckCircle className="w-16 h-16 text-primary mb-4" />
+                    <h3 className="text-xl font-semibold mb-2">Message Sent!</h3>
+                    <p className="text-muted-foreground">We'll get back to you soon.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="space-y-2">
+                          <label htmlFor="name" className="text-sm font-medium">Name</label>
+                          <input 
+                            id="name"
+                            type="text"
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                            className="w-full px-3 py-2 border border-border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary/20" 
+                            placeholder="Jane Doe" 
+                          />
+                      </div>
+                      <div className="space-y-2">
+                          <label htmlFor="email" className="text-sm font-medium">Email</label>
+                          <input 
+                            id="email"
+                            type="email"
+                            required
+                            value={formData.email}
+                            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                            className="w-full px-3 py-2 border border-border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary/20" 
+                            placeholder="jane@company.com" 
+                          />
+                      </div>
+                      <div className="space-y-2">
+                          <label htmlFor="message" className="text-sm font-medium">Message</label>
+                          <textarea 
+                            id="message"
+                            required
+                            value={formData.message}
+                            onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                            className="w-full px-3 py-2 border border-border rounded-md bg-white min-h-[120px] focus:outline-none focus:ring-2 focus:ring-primary/20" 
+                            placeholder="Tell me about your project..." 
+                          />
+                      </div>
+                      <Button 
+                        type="submit" 
+                        disabled={submitContact.isPending}
+                        className="w-full rounded-full"
+                      >
+                        {submitContact.isPending ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          "Send Message"
+                        )}
+                      </Button>
+                      {submitContact.isError && (
+                        <p className="text-sm text-destructive text-center">
+                          Failed to send message. Please try again.
+                        </p>
+                      )}
+                  </form>
+                )}
             </div>
         </div>
       </div>
