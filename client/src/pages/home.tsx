@@ -69,7 +69,7 @@ export default function Home() {
             <InputBar onSend={handleTextInput} disabled={currentOptions.length > 0 && !isTyping} />
             
             <div className="text-center mt-3 text-xs text-muted-foreground/60">
-                Powered by a simple state machine (and Daniel's logic)
+                Powered by a simple state machine (and HumanITy's logic)
             </div>
           </div>
         </div>

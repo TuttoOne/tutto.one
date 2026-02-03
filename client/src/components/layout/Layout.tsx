@@ -15,7 +15,7 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="font-serif font-semibold text-lg tracking-tight hover:opacity-70 transition-opacity">
-          Daniel Forsthofer
+          HumanITy
         </Link>
 
         <nav className="hidden md:flex gap-8">
@@ -50,7 +50,7 @@ export function Footer() {
   return (
     <footer className="w-full py-8 mt-auto border-t border-border/40 bg-background">
       <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-        <p>© {new Date().getFullYear()} Daniel Forsthofer. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} HumanITy. All rights reserved.</p>
         <div className="flex gap-6">
           <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
           <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>

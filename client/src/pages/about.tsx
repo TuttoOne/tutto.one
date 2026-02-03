@@ -9,7 +9,7 @@ export default function About() {
         
         <div className="prose prose-lg prose-neutral max-w-none font-serif leading-relaxed text-muted-foreground">
           <p className="mb-6">
-            I'm Daniel Forsthofer, an implementation consultant focused on making businesses machine-readable.
+            I'm Daniel Forsthofer, founder of HumanITy, an implementation consultancy focused on making businesses machine-readable.
           </p>
           <p className="mb-6">
             For the past decade, I've worked at the intersection of operations and technology. I've seen firsthand that the biggest bottleneck to AI adoption isn't technology—it's <strong>information architecture</strong>.
