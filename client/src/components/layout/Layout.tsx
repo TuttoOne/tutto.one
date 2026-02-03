@@ -1,0 +1,74 @@
+import { Link, useLocation } from "wouter";
+import { cn } from "@/lib/utils";
+
+export function Header() {
+  const [location] = useLocation();
+
+  const navItems = [
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact", href: "/contact" },
+  ];
+
+  return (
+    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
+      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+        <Link href="/" className="font-serif font-semibold text-lg tracking-tight hover:opacity-70 transition-opacity">
+          Daniel Forsthofer
+        </Link>
+
+        <nav className="hidden md:flex gap-8">
+          {navItems.map((item) => (
+            <Link 
+              key={item.href} 
+              href={item.href}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary cursor-pointer",
+                location === item.href
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Mobile menu placeholder - keeping it simple for now */}
+        <div className="md:hidden">
+            <Link href="/contact" className="text-sm font-medium text-primary">
+                Get in touch
+            </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer className="w-full py-8 mt-auto border-t border-border/40 bg-background">
+      <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+        <p>© {new Date().getFullYear()} Daniel Forsthofer. All rights reserved.</p>
+        <div className="flex gap-6">
+          <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
+          <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
+          <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export function Layout({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className="min-h-screen flex flex-col bg-background font-sans text-foreground selection:bg-primary/20">
+      <Header />
+      <main className={cn("flex-1 pt-16", className)}>
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
+}
