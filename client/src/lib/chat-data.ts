@@ -140,9 +140,8 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
   contact: {
     id: "contact",
     messages: [
-      "I'm currently taking on a limited number of consulting engagements.",
-      "You can book a 15-minute intro chat directly on my calendar.",
-      "[Calendly Link Placeholder]"
+      "We're currently taking on a limited number of consulting engagements.",
+      "You can book a 15-minute intro chat directly on our calendar."
     ],
     options: [
       { label: "Open Calendar", value: "open_calendar" },

@@ -62,17 +62,17 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+              <a href="https://cal.com/tuttoone/15min" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-4 group">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-medium">Calendar</div>
+                  <div className="font-medium group-hover:text-primary transition-colors">Calendar</div>
                   <div className="text-muted-foreground text-sm">
                     Book a 15-min intro
                   </div>
                 </div>
-              </div>
+              </a>
 
               <div className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">

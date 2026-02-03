@@ -64,7 +64,7 @@ export function useChatEngine() {
 
     // Special handlers
     if (option.value === "open_calendar") {
-        window.open("https://calendly.com", "_blank");
+        window.open("https://cal.com/tuttoone/15min", "_blank");
         // Loop back or end
         setTimeout(() => processStep("start"), 2000);
         return;
