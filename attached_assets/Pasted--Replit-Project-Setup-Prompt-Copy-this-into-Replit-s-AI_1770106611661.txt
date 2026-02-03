@@ -1,0 +1,160 @@
+**Replit Project Setup Prompt**
+
+Copy this into Replit's AI assistant (or paste into a new Repl's initial prompt):
+
+---
+
+```
+## Project: Chat-First Consulting Website
+
+### Overview
+Build a chat-first consulting website with two layers:
+1. A conversational chat interface as the primary experience
+2. A blog-style content layer underneath for SEO/GEO and as the source of truth
+
+### Tech Stack
+- Framework: Astro (static site generation for SEO)
+- Chat UI: React component with TypeScript
+- Styling: Tailwind CSS
+- Chat logic: Scripted state machine (no LLM for most flows)
+- LLM fallback: Claude Haiku API (only for open-ended questions)
+- Content: Markdown files (easy to edit)
+- Deployment: Replit hosting
+
+### Folder Structure
+```
+/src
+  /components
+    /chat
+      ChatWindow.tsx      # Main chat container
+      MessageBubble.tsx   # Individual message
+      InputBar.tsx        # User input
+      StreamButton.tsx    # Suggested conversation starter
+      TypingIndicator.tsx # "Daniel is typing..." animation
+    /layout
+      Layout.astro        # Shared page layout
+      Header.tsx          # Minimal nav
+      Footer.tsx          # Simple footer
+  /pages
+    index.astro           # Chat interface + why statement
+    about.astro           # Fallback: plain about page
+    services.astro        # Fallback: services list
+    contact.astro         # Fallback: contact form
+    diagnostic.astro      # Fallback: static diagnostic info
+    blog/
+      index.astro         # Blog listing
+      [slug].astro        # Individual blog posts
+  /content
+    /blog                 # Markdown blog posts
+    /docs                 # Source content (AI Readiness, Diagnostic, Services)
+      ai-readiness.md
+      diagnostic.md
+      services.md
+      about.md
+  /lib
+    /chat
+      engine.ts           # State machine controller
+      flows.json          # Conversation flow definitions
+      responses.ts        # Response templates with personality
+      intents.ts          # Pattern matching for user input
+      haiku.ts            # Claude Haiku API fallback
+    /utils
+      sheets.ts           # Google Sheets integration
+      email.ts            # Email sending (Resend)
+  /styles
+    global.css            # Tailwind + custom styles
+/public
+  /images
+.env.example              # Required environment variables
+```
+
+### Design Specifications
+
+**Colors (Claude light mode):**
+- Background: #FAF9F7
+- Primary accent: #D97706 (orange)
+- Text primary: #1F1F1F
+- Text secondary: #6B7280
+- Chat bubble (user): #F3F4F6
+- Chat bubble (Daniel): #FFFFFF with subtle shadow
+
+**Homepage layout:**
+```
+┌────────────────────────────────────────┐
+│  Minimal header: Logo | About Services Contact Blog  │
+├────────────────────────────────────────┤
+│                                        │
+│         [Why statement quote]          │
+│    "Helping businesses become          │
+│     machine-readable in an             │
+│     AI-first economy."                 │
+│                                        │
+│  ┌──────────────────────────────────┐  │
+│  │                                  │  │
+│  │        Chat Window               │  │
+│  │                                  │  │
+│  │  [Welcome message from Daniel]   │  │
+│  │                                  │  │
+│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐  │
+│  │  │ Stream 1│ │ Stream 2│ │ Stream 3│  │
+│  │  │ Learn   │ │Run      │ │ Talk to │  │
+│  │  │ about AI│ │Diagnosis│ │ Daniel  │  │
+│  │  │Readiness│ │         │ │         │  │
+│  │  └─────────┘ └─────────┘ └─────────┘  │
+│  │                                  │  │
+│  │  [Input: Type your message...]   │  │
+│  └──────────────────────────────────┘  │
+│                                        │
+├────────────────────────────────────────┤
+│  Footer: © Daniel Forsthofer | Privacy │
+└────────────────────────────────────────┘
+```
+
+### Chat Behavior
+
+**Three conversation streams:**
+1. "Learn about AI Readiness" → Educational flow from ai-readiness.md
+2. "Run a quick diagnostic" → Interactive diagnostic (adapts to user's available time)
+3. "Talk to Daniel" → Contact/booking flow → Calendly
+
+**Conversation engine rules:**
+- 90% scripted responses from flows.json
+- Pattern match user input to intents
+- Only call Haiku API when no intent matches
+- Always provide suggested next actions (buttons or prompts)
+- Typing indicator before responses (300-800ms delay for realism)
+- Remember context within session (not across sessions)
+
+**Personality:**
+- Warm, direct, expert but approachable
+- First person ("I help businesses...")
+- Occasional light humor
+- Never robotic or corporate
+- Encouragement during diagnostic
+
+### Environment Variables (.env.example)
+```
+ANTHROPIC_API_KEY=
+GOOGLE_SHEETS_WEBHOOK_URL=
+RESEND_API_KEY=
+CALENDLY_URL=
+```
+
+### Status Report Required
+After scaffolding, report:
+1. All files created
+2. Dependencies installed
+3. Confirmation that dev server runs
+4. Any decisions or issues
+```
+
+---
+
+**Next steps after Replit scaffolds:**
+
+1. Paste the status report here
+2. I'll give you the **flows.json** conversation definitions
+3. Then the **content markdown files** (your docs formatted)
+4. Then we wire up Haiku fallback
+
+Paste the Replit output when ready.
