@@ -46,7 +46,7 @@ export default function Contact() {
           <div className="space-y-8">
             <p className="text-muted-foreground text-lg leading-relaxed">
               We're currently accepting new clients for 2026. If you're
-              interested in structuring your business for AI, we'd love to chat.
+              interested in structuring your business for AI &/ Automation, we'd love to chat.
             </p>
 
             <div className="space-y-6">
