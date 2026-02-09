@@ -1,6 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 const services = [
   {
@@ -80,8 +81,9 @@ export default function Services() {
                 <Button
                   className="w-full rounded-full"
                   variant={index === 1 ? "default" : "outline"}
+                  asChild
                 >
-                  Inquire
+                  <Link href="/contact">Inquire</Link>
                 </Button>
               </div>
             </div>

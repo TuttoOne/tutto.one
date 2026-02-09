@@ -57,17 +57,24 @@ export default function Contact() {
                 <div>
                   <div className="font-medium">Email</div>
                   <div className="text-muted-foreground text-sm">
-                    hello@humanity3.co.uk
+                    daniel (AT) tutto.one (prefer)
                   </div>
                 </div>
               </div>
 
-              <a href="https://cal.com/tuttoone/15min" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-4 group">
+              <a
+                href="https://cal.com/tuttoone/15min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-4 group"
+              >
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-medium group-hover:text-primary transition-colors">Calendar</div>
+                  <div className="font-medium group-hover:text-primary transition-colors">
+                    Calendar
+                  </div>
                   <div className="text-muted-foreground text-sm">
                     Book a 15-min intro
                   </div>
