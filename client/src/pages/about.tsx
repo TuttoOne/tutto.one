@@ -9,7 +9,7 @@ export default function About() {
         
         <div className="prose prose-lg prose-neutral max-w-none font-serif leading-relaxed text-muted-foreground">
           <p className="mb-6">
-            Hello, we are HumanITy, an implementation consultancy focused on making businesses machine-readable and automation useful.
+            Hello, we are Tutto, an implementation consultancy focused on making businesses machine-readable and automation useful.
           </p>
           <p className="mb-6">
             For the past decade, we've worked at the intersection of operations and technology. We've seen firsthand that the biggest bottleneck to AI adoption isn't technology—it's <strong>information architecture</strong>.

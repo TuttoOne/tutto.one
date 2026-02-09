@@ -24,14 +24,14 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
   start: {
     id: "start",
     messages: [
-      "Hi, I'm Daniel from HumanITy.",
+      "Hi, I'm Daniel from Tutto.",
       "We help businesses become machine-readable in an AI-first economy.",
       "How can I help you today?"
     ],
     options: [
       { label: "Learn about AI Readiness", value: "readiness" },
       { label: "Run a quick diagnostic", value: "diagnostic_start" },
-      { label: "Talk to HumanITy", value: "contact" }
+      { label: "Talk to Tutto", value: "contact" }
     ]
   },
   readiness: {
