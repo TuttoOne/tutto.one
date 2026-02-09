@@ -14,24 +14,26 @@ export default function Blog() {
 
         <div className="space-y-12">
           {BLOG_POSTS.map((post) => (
-            <article key={post.slug} className="group cursor-pointer border-b border-border/40 pb-12 last:border-0">
-              <div className="flex flex-col md:flex-row gap-6 md:items-baseline">
-                <div className="md:w-32 shrink-0 text-sm text-muted-foreground font-mono">
-                  {post.date}
-                </div>
-                <div>
-                  <h2 className="text-2xl font-serif font-semibold mb-3 group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                    Read Article <ArrowRight className="ml-1 w-4 h-4" />
+            <Link key={post.slug} href={`/blog/${post.slug}`}>
+              <article className="group cursor-pointer border-b border-border/40 pb-12 last:border-0">
+                <div className="flex flex-col md:flex-row gap-6 md:items-baseline">
+                  <div className="md:w-32 shrink-0 text-sm text-muted-foreground font-mono">
+                    {post.date}
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-serif font-semibold mb-3 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h2>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
+                      Read Article <ArrowRight className="ml-1 w-4 h-4" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </article>
+              </article>
+            </Link>
           ))}
         </div>
       </div>
