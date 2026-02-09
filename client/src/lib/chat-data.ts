@@ -168,7 +168,7 @@ export const BLOG_POSTS = [
     slug: "why-machine-readable-matters",
     title: "Why 'Machine-Readable' is the New 'Mobile-Friendly'",
     excerpt: "In 2010, you needed a responsive site. In 2024, you need responsive data.",
-    date: "Oct 12, 2024",
+    date: "Feb 3, 2026",
     readTime: "5 min read",
     content: `Remember 2010? Every business scrambled to make their website "mobile-friendly." If your site didn't work on a smartphone, you were invisible to a growing chunk of your audience.
 
@@ -208,7 +208,7 @@ The mobile-friendly revolution rewarded companies that adapted early. The machin
     slug: "the-messy-middle-of-automation",
     title: "The Messy Middle of Automation",
     excerpt: "Why 90% of AI pilots fail to scale beyond the founder's laptop.",
-    date: "Sep 28, 2024",
+    date: "Jan 20, 2026",
     readTime: "4 min read",
     content: `Every company I work with has the same story. The founder or a tech-savvy team lead built something clever — a GPT wrapper that summarises customer emails, a script that auto-categorises support tickets, a chatbot that answers basic product questions.
 
@@ -258,7 +258,7 @@ If you're stuck in the Messy Middle right now, that's actually a good sign. It m
     slug: "documentation-is-code",
     title: "Documentation is Code",
     excerpt: "Treating your company wiki like a production database.",
-    date: "Sep 15, 2024",
+    date: "Jan 8, 2026",
     readTime: "6 min read",
     content: `Here's a thought experiment: What if your company wiki went down for a week?
 

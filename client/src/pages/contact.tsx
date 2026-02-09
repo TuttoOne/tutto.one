@@ -57,7 +57,7 @@ export default function Contact() {
                 <div>
                   <div className="font-medium">Email</div>
                   <div className="text-muted-foreground text-sm">
-                    daniel (AT) tutto.one (prefer)
+                    daniel (AT) tutto.one
                   </div>
                 </div>
               </div>
