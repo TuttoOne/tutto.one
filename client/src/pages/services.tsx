@@ -12,7 +12,7 @@ const services = [
       "API Readiness Score",
       "Knowledge Graph Architecture",
     ],
-    price: "Starts at $5k",
+    price: "Starts at €£$2k ",
   },
   {
     title: "AI Agent Architecture",
