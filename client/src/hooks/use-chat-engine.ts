@@ -74,23 +74,42 @@ export function useChatEngine() {
     processStep(option.value);
   };
 
-  const handleTextInput = (text: string) => {
-      // Simple fallback for open text input - in a real app this would go to LLM
-      // For this mockup, we'll just acknowledge and redirect to start or specific flows
+  const handleTextInput = async (text: string) => {
       addMessage({ role: "user", content: text });
-      
+      setCurrentOptions([]);
       setIsTyping(true);
-      setTimeout(() => {
-          setIsTyping(false);
-          addMessage({ 
-              role: "assistant", 
-              content: "That's an interesting point. While I'm just a scripted demo right now, I'd love to discuss this in person." 
-          });
-          setCurrentOptions([
-              { label: "Book a chat", value: "contact" },
-              { label: "Back to start", value: "start" }
-          ]);
-      }, 1000);
+
+      try {
+        const historyForApi = [
+          ...messages
+            .filter((m) => m.role === "user" || m.role === "assistant")
+            .map((m) => ({ role: m.role, content: m.content })),
+          { role: "user" as const, content: text },
+        ];
+
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: historyForApi }),
+        });
+
+        if (!res.ok) throw new Error("Chat request failed");
+
+        const data = await res.json();
+        setIsTyping(false);
+        addMessage({ role: "assistant", content: data.reply });
+      } catch {
+        setIsTyping(false);
+        addMessage({
+          role: "assistant",
+          content: "Sorry, I'm having trouble connecting right now. You can book a call directly and we'll chat in person.",
+        });
+      }
+
+      setCurrentOptions([
+        { label: "Book a call", value: "contact" },
+        { label: "Back to start", value: "start" },
+      ]);
   };
 
   return {
