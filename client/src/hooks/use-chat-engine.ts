@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { CHAT_FLOWS, Message, ChatOption } from "@/lib/chat-data";
 
-const WORD_DELAY = 30;
+const WORD_DELAY = 60;
 
 export function useChatEngine() {
   const [messages, setMessages] = useState<Message[]>([]);
