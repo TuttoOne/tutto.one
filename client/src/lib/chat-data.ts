@@ -167,7 +167,7 @@ export const BLOG_POSTS = [
   {
     slug: "why-machine-readable-matters",
     title: "Why 'Machine-Readable' is the New 'Mobile-Friendly'",
-    excerpt: "In 2010, you needed a responsive site. In 2024, you need responsive data.",
+    excerpt: "In 2010, you needed a responsive site. In 2026, you need responsive data.",
     date: "Feb 3, 2026",
     readTime: "5 min read",
     content: `Remember 2010? Every business scrambled to make their website "mobile-friendly." If your site didn't work on a smartphone, you were invisible to a growing chunk of your audience.
@@ -191,7 +191,7 @@ Being machine-readable isn't about adding schema markup to your HTML (though tha
 
 ## The Companies Getting This Right
 
-The businesses winning in 2025 are the ones that made their knowledge accessible to machines *before* they needed to. They documented their processes. They structured their data. They built APIs into their workflows.
+The businesses winning in 2026 are the ones that made their knowledge accessible to machines *before* they needed to. They documented their processes. They structured their data. They built APIs into their workflows.
 
 They didn't do this because they were "AI-first" evangelists. They did it because good information architecture is good business practice. AI readiness was a side effect of operational excellence.
 
