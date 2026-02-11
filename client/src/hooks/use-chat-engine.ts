@@ -15,7 +15,10 @@ export function useChatEngine() {
     }
   }, []);
 
-  
+  useEffect(() => {
+  }, [messages, isTyping, currentOptions]);
+
+
 
   const typeWords = useCallback((id: string, fullText: string): Promise<void> => {
     return new Promise((resolve) => {
