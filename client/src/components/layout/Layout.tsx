@@ -1,8 +1,11 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export function Header() {
   const [location] = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
     { label: "About", href: "/about" },
@@ -35,13 +38,37 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Mobile menu placeholder - keeping it simple for now */}
-        <div className="md:hidden">
-            <Link href="/contact" className="text-sm font-medium text-primary">
-                Get in touch
-            </Link>
-        </div>
+        <button
+          className="md:hidden p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          data-testid="button-mobile-menu"
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {mobileOpen && (
+        <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md">
+          <nav className="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  "text-sm font-medium py-3 px-3 rounded-lg transition-colors",
+                  location === item.href
+                    ? "text-primary bg-primary/5"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
