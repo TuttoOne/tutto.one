@@ -15,9 +15,7 @@ export function useChatEngine() {
     }
   }, []);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping, currentOptions]);
+  
 
   const typeWords = useCallback((id: string, fullText: string): Promise<void> => {
     return new Promise((resolve) => {
