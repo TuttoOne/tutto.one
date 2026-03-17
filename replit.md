@@ -2,7 +2,7 @@
 
 ## Overview
 
-Tutto is a chat-first consulting website for an AI consulting firm that helps businesses become "machine-readable" in an AI-first economy. The primary user experience is a conversational chat interface powered by a scripted state machine for guided flows, with Claude Haiku as a fallback for open-ended questions. Behind the chat layer sits a traditional website with pages for About, Services, Blog, and Contact — serving both as fallback navigation and for SEO purposes.
+Tutto is a chat-first consulting website for an AI consulting firm that helps businesses become "machine-readable" in an AI-first economy. The primary user experience is a conversational chat interface powered by a scripted state machine for guided flows, with Claude Haiku as a fallback for open-ended questions. Behind the chat layer sits a traditional website with pages for About, Services, Portfolio, Blog, and Contact — serving both as fallback navigation and for SEO purposes.
 
 ## User Preferences
 
@@ -12,7 +12,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend Architecture
 - **Framework**: React 18 with TypeScript, bundled by Vite
-- **Routing**: Wouter (lightweight client-side router) with routes for Home, About, Services, Blog, Blog Posts, and Contact
+- **Routing**: Wouter (lightweight client-side router) with routes for Home, About, Services, Portfolio, Blog, Blog Posts, and Contact
 - **Styling**: Tailwind CSS v4 (using `@tailwindcss/vite` plugin) with CSS variables for theming. The design uses a warm, Claude-like color palette with Inter (sans) and Source Serif 4 (serif) fonts.
 - **UI Components**: shadcn/ui (new-york style) built on Radix UI primitives. Components live in `client/src/components/ui/`.
 - **State Management**: TanStack React Query for server state; local React state for chat engine
