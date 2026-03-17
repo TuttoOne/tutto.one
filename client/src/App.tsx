@@ -9,6 +9,7 @@ import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import About from "@/pages/about";
 import Services from "@/pages/services";
+import Portfolio from "@/pages/portfolio";
 import Contact from "@/pages/contact";
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
+      <Route path="/portfolio" component={Portfolio} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
