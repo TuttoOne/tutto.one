@@ -80,8 +80,6 @@ export function Footer() {
       <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
         <p>© {new Date().getFullYear()} Tutto. All rights reserved.</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
-          <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
           <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
         </div>
       </div>
