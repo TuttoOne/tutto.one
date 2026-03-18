@@ -165,6 +165,65 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
 
 export const BLOG_POSTS = [
   {
+    slug: "anthropic-labor-market-research",
+    title: "What Anthropic's Labor Market Research Tells Us About AI Readiness",
+    excerpt: "Anthropic's landmark study of one million AI conversations reveals which roles are most exposed to AI — and what businesses should do about it.",
+    date: "Mar 14, 2026",
+    readTime: "7 min read",
+    content: `Anthropic recently published one of the most detailed looks at how AI is actually being used in the real world. By analysing over a million conversations with Claude — with user consent — they mapped which occupations, tasks, and industries are most exposed to AI assistance right now. The findings are striking, and they carry direct implications for any business trying to plan for an AI-first future.
+
+## The Most-Used Task Categories
+
+The first thing that jumps out is where people are spending their time with AI. Software development and coding dominate, making up well over a third of all conversations. Writing and editing come second. After that, you see a long tail of analytical, research, and creative tasks.
+
+[VISUAL:task-breakdown]
+
+This isn't just a snapshot of "what Claude users do." It's a leading indicator of where AI capability is deepest and where businesses have the most to gain — or the most to adapt to.
+
+## The Wage Exposure Inversion
+
+Previous waves of automation — think factory robots, ATMs, customer-service phone trees — disproportionately affected lower-wage, routine physical jobs. AI appears to work differently.
+
+[VISUAL:wage-exposure]
+
+The research found that **higher-wage occupations are more exposed to AI assistance, not less.** Lawyers, analysts, software engineers, researchers, writers — these are the roles where Claude is being used most intensively. For the first time, automation pressure is being felt at the top of the income ladder as much as the bottom.
+
+This inverts the assumption many businesses have made: that AI is a back-office cost-cutting tool. It's increasingly a front-office capability tool.
+
+## Augmentation, Not Replacement
+
+Perhaps the most important nuance in the data: most AI use is **augmentative** — AI is helping humans do their jobs better and faster, not replacing them outright.
+
+[VISUAL:augmentation-split]
+
+This distinction matters enormously for how businesses should plan. A fully automated task requires you to redesign a workflow. An augmented task requires you to upskill the person doing it. Both need investment, but they're very different investments.
+
+## What This Means for Business Readiness
+
+The research paints a clear picture of where AI capability is concentrated right now. If your business relies heavily on software development, writing, analysis, or research — you're operating in the highest-exposure zones. That's not a warning sign. It's an opportunity.
+
+### The Readiness Gap
+
+Most businesses fall into one of two failure modes:
+
+- **The Pilot Trap**: They've run a proof-of-concept that worked brilliantly in isolation and now can't scale it into real operations.
+- **The Waiting Room**: They're holding out for AI to "mature" before engaging — not realising the early movers are already compounding advantages.
+
+The Anthropic data suggests the gap between AI-ready and AI-naive organisations is widening faster than most expect. The high-exposure roles — the ones being augmented most aggressively — belong disproportionately to the knowledge workers who drive revenue, strategy, and product.
+
+### Three Actions Worth Taking Now
+
+1. **Map your exposure.** Which roles in your organisation are in the high-exposure categories? Software developers and writers are obvious. But financial analysts, legal reviewers, and operations researchers are next in line.
+2. **Audit your knowledge infrastructure.** Augmented workers need clean, structured, machine-readable information to work from. If your internal knowledge is buried in PDFs and tribal memory, you're capping what AI can do for you.
+3. **Start with the highest-value augmentation target.** Not the cheapest task to automate — the most valuable one to accelerate. If your analysts spend 60% of their time gathering data and 40% actually analysing it, help them flip that ratio.
+
+## The Bigger Picture
+
+What Anthropic's research confirms is that the AI transition is not a future event. It's happening now, unevenly distributed, and concentrated in exactly the kinds of knowledge-intensive roles that most businesses depend on most. The organisations that come out ahead won't necessarily be the ones who deployed AI first. They'll be the ones who understood their own operations clearly enough to know where AI would make the biggest difference — and who had the information architecture in place to support it.
+
+That's the work. And most businesses haven't started it yet.`,
+  },
+  {
     slug: "why-machine-readable-matters",
     title: "Why 'Machine-Readable' is the New 'Mobile-Friendly'",
     excerpt: "In 2010, you needed a responsive site. In 2026, you need responsive data.",
