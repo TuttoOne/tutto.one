@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { Link, useParams } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/chat-data";
+import capabilityGapImg from "@assets/c1952c81bca02a7c8cc05ef7801e67ca60831c55-4096x4096_1773827088246.webp";
 
 // ── Visual components ────────────────────────────────────────────────────────
 
@@ -119,11 +120,27 @@ function AugmentationSplitChart() {
   );
 }
 
+function CapabilityGapImage() {
+  return (
+    <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-4 not-prose">
+      <img
+        src={capabilityGapImg}
+        alt="Radar chart: Theoretical AI capability vs observed AI usage by occupational category"
+        className="w-full rounded-xl"
+      />
+      <p className="text-xs text-muted-foreground mt-3 italic text-center">
+        Source: Anthropic Economic Index — theoretical AI coverage (blue) vs observed AI usage (red) by occupational category
+      </p>
+    </div>
+  );
+}
+
 const VISUALS: Record<string, Record<string, React.ReactNode>> = {
   "anthropic-labor-market-research": {
     "task-breakdown": <TaskBreakdownChart />,
     "wage-exposure": <WageExposureChart />,
     "augmentation-split": <AugmentationSplitChart />,
+    "capability-gap": <CapabilityGapImage />,
   },
 };
 
