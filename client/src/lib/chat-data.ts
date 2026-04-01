@@ -165,6 +165,63 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
 
 export const BLOG_POSTS = [
   {
+    slug: "mcp-bridge-sharepoint",
+    title: "How We Gave Claude Direct Access to a Client's SharePoint",
+    excerpt: "A practical walkthrough of MCP — the open standard quietly transforming how AI connects to business tools — and a real engagement where we built it.",
+    date: "Mar 28, 2026",
+    readTime: "6 min read",
+    content: `There's a frustrating pattern that repeats across almost every AI rollout we see. The team discovers that Claude or ChatGPT can help them with their work. They start copy-pasting data into the chat. The AI gives useful advice. Then they manually carry that advice back into SharePoint, Salesforce, or whatever system they were working in. It works. But it's friction — and friction is where adoption dies.
+
+We just finished an engagement that removes that friction entirely. Here's how it works, and why the underlying technology is one of the most significant quiet shifts in the AI ecosystem right now.
+
+## What MCP Actually Is
+
+MCP stands for Model Context Protocol. It's an open standard created by Anthropic and now backed by the Linux Foundation, OpenAI, Google DeepMind, and others. The short version: it's a universal plug that lets AI assistants connect directly to external tools and data sources.
+
+[VISUAL:mcp-architecture]
+
+Before MCP, every AI-to-tool integration was custom-built. You'd hire a developer, they'd write a specific integration between, say, Claude and your database, and then when the API changed (it always changes) you'd need to update it. MCP standardises the contract. One bridge, built once, works across Claude, ChatGPT, and any other MCP-compatible AI platform.
+
+There are already over 500 MCP servers covering platforms like Slack, Salesforce, GitHub, Google Drive, Jira, PostgreSQL, and more. The ecosystem is growing fast — which means the investment in connecting your systems to MCP pays dividends as AI capabilities expand.
+
+## The Engagement: SharePoint & Power Automate
+
+Our client's operations team was managing a complex web of SharePoint lists, lookup relationships, and Power Automate flows. They were spending significant time on data management tasks — querying records, creating and updating items, troubleshooting broken automations — that AI could handle in seconds if it had direct access.
+
+We built an MCP bridge that gives Claude exactly that access. Four capability areas:
+
+**SharePoint lists and structure.** The AI can create lists, add columns of any type (text, number, lookup, calculated, person fields), set up entity relationships between lists, and inspect full schemas. What used to require navigating SharePoint's UI or writing SharePoint REST API calls is now a conversation.
+
+**Data management.** Query items with filters and sorting. Create, update, and delete records. Run bulk data transformations. The AI constructs the correct API calls, executes them, and returns results in readable form.
+
+**Power Automate diagnostics.** List all flows, inspect their definitions, pull run history with error details, and trigger manual flows on demand. When a flow breaks at 2am and someone needs to understand why, they can ask instead of digging through logs.
+
+**Live documentation.** This one surprised the client most. Before this bridge, Claude's answers about SharePoint's Graph API or Power Automate connectors were sometimes outdated — the models were trained on older documentation. Now the AI searches current Microsoft docs before answering technical questions. The accuracy improvement was immediately noticeable.
+
+## What a Session Looks Like
+
+Here's a condensed version of a real interaction from the engagement:
+
+*"List all SharePoint lists on my site."*
+Claude returns a clean table: 8 lists found — Tasks, Clients, Projects, Invoices, Contacts, Documents, Assets, Settings.
+
+*"Add a lookup column on Tasks pointing to the Clients list."*
+Claude constructs the correct Graph API call, executes it, confirms: "Column 'Client' (lookup → Clients) added to the Tasks list."
+
+*"Show me the last 5 failed runs on the Invoice Sync flow."*
+Claude pulls the run history: 5 failures, most recent error is a connection timeout to Xero API — occurred 3 times in the past 24 hours.
+
+The entire session takes minutes. The equivalent work through SharePoint's UI and Power Automate's logs would have taken the better part of an afternoon.
+
+## The Broader Point
+
+MCP isn't just a technical curiosity — it represents a shift in how AI integration works. Instead of each business building bespoke connections between their tools and AI models, there's now a standard. That means the work of connecting your systems gets easier every month, as more platforms ship native MCP support.
+
+The businesses that get ahead of this aren't the ones with the biggest budgets. They're the ones that identify where their teams are spending time on data movement and tool-switching, and methodically remove that friction.
+
+If you're curious whether MCP makes sense for a specific platform in your stack, the scoping conversation usually takes about 30 minutes. Most bridges take 1–3 days to build and configure.`,
+  },
+  {
     slug: "anthropic-labor-market-research",
     title: "What Anthropic's Labor Market Research Tells Us About AI Readiness",
     excerpt: "Anthropic's landmark study of one million AI conversations reveals which roles are most exposed to AI — and what businesses should do about it.",
