@@ -9,7 +9,7 @@ export default function Home() {
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="text-center mb-20 pt-8">
           <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6">
-            AI Consulting · Humanity³
+            AI Consulting
           </p>
           <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6 max-w-3xl mx-auto">
             Helping businesses become machine-readable in an AI-first economy.
