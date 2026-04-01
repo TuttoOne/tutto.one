@@ -24,8 +24,6 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
   start: {
     id: "start",
     messages: [
-      "Hi, I'm Daniel from Tutto.",
-      "We help businesses become machine-readable in an AI-first economy.",
       "How can I help you today?"
     ],
     options: [
