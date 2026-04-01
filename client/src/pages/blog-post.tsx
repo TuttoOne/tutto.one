@@ -179,7 +179,73 @@ function McpArchitectureDiagram() {
   );
 }
 
+function LegalRagArchitectureDiagram() {
+  const layers = [
+    {
+      label: "Interface",
+      items: ["Chat Q&A", "Semantic Search", "Interactive Timeline"],
+      color: "border-primary/40 bg-primary/8 text-primary",
+    },
+    {
+      label: "AI & Search",
+      items: ["Local LLM (Ollama)", "Vector Search (pgvector)", "OCR Engine"],
+      color: "border-border/60 bg-secondary/30 text-foreground",
+    },
+    {
+      label: "Data",
+      items: ["Document Corpus", "PostgreSQL", "Embeddings Store"],
+      color: "border-border/60 bg-muted/30 text-muted-foreground",
+    },
+    {
+      label: "Hardware",
+      items: ["NVIDIA DGX Spark", "128GB Unified Memory", "NVMe Storage"],
+      color: "border-border/40 bg-muted/20 text-muted-foreground",
+    },
+  ];
+
+  return (
+    <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-6 not-prose">
+      <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
+        System architecture — everything runs on-premise
+      </p>
+      <div className="flex items-center gap-2 mb-5">
+        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50 border border-green-200 rounded-full px-3 py-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+          Zero data leaves the device
+        </span>
+      </div>
+      <div className="space-y-2">
+        {layers.map((layer, i) => (
+          <div key={layer.label}>
+            <div className={`rounded-xl border p-4 ${layer.color}`}>
+              <p className="text-xs font-mono uppercase tracking-wider opacity-60 mb-2">{layer.label}</p>
+              <div className="flex flex-wrap gap-2">
+                {layer.items.map((item) => (
+                  <span key={item} className="text-xs font-medium bg-background/50 border border-current/20 rounded-lg px-3 py-1.5">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+            {i < layers.length - 1 && (
+              <div className="flex justify-center my-1">
+                <div className="w-px h-4 bg-border/60" />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-muted-foreground mt-5 italic">
+        Each client receives their own DGX Spark unit, deployed and configured on-premises by Tutto
+      </p>
+    </div>
+  );
+}
+
 const VISUALS: Record<string, Record<string, React.ReactNode>> = {
+  "legalrag-on-premise-ai": {
+    "legalrag-architecture": <LegalRagArchitectureDiagram />,
+  },
   "mcp-bridge-sharepoint": {
     "mcp-architecture": <McpArchitectureDiagram />,
   },

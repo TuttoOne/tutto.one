@@ -165,6 +165,60 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
 
 export const BLOG_POSTS = [
   {
+    slug: "legalrag-on-premise-ai",
+    title: "LegalRAG: On-Premise AI for Document-Heavy Litigation",
+    excerpt: "How we built a self-hosted document intelligence platform that gives litigation teams AI-powered review without a single byte of privileged material ever leaving the building.",
+    date: "Apr 1, 2026",
+    readTime: "7 min read",
+    content: `Legal privilege is not a policy question. It is an architectural one.
+
+Cloud AI platforms — however capable — require sending your data to someone else's servers. For consumer queries or marketing copy, that's a reasonable trade-off. For privileged case documents in active litigation, it isn't. The legal risk is real, the professional conduct implications are serious, and "we trust the provider's terms of service" is not a defensible answer to a professional privilege challenge.
+
+This is the problem LegalRAG was built to solve. And the solution required rethinking the architecture from the ground up.
+
+## Bring the AI to the Data
+
+The conventional model for AI document review is cloud-in, results-out. Documents travel to the model. LegalRAG inverts this entirely.
+
+[VISUAL:legalrag-architecture]
+
+Every component runs on a single device, physically located at the client's premises: document ingestion, OCR, text extraction, AI inference, vector search, and storage. The system uses open-weight AI models running locally via Ollama — no external API calls, no data transmission, no cloud dependency of any kind. Legal Professional Privilege is satisfied by architectural design, not by contractual promise.
+
+The hardware is an NVIDIA DGX Spark — a compact but genuinely powerful machine with a GB10 Superchip, 128GB unified memory, and NVMe storage. It fits on a desk. It handles 150,000+ documents with millions of searchable chunks. Each client gets their own unit, configured and deployed at their premises.
+
+## What It Does
+
+**Document ingestion at scale.** Entire disclosure sets — PDFs, Word documents, spreadsheets, emails, images, HTML, XML, and more — are processed, chunked into searchable passages, and embedded as vectors. A checkpoint system means ingestion can run overnight and survive interruptions. The system tracks which side produced each document, preserves reference IDs from eDiscovery platforms, and maintains chain of custody throughout.
+
+**Semantic search.** Ask a question in plain English. Retrieve the most relevant passages across the entire corpus, with citations to specific source documents and page numbers. Filter by disclosure side, document type, date range, or category. No keyword matching — genuine vector similarity search.
+
+**Conversational Q&A.** A chat interface grounded entirely in the document corpus. Every answer cites its source material. The AI synthesises from retrieved passages — it does not hallucinate from its own knowledge. Every answer is traceable back to the original document. The lawyer reviews; the AI assists.
+
+**Interactive timeline.** A collapsible chronological view of case events extracted from document metadata — email dates, creation dates, contractual deadlines. Drill from year to month to individual events, filter by type and disclosure side. Provides an immediate chronological map of the case without manual extraction.
+
+**OCR and scanned document handling.** Optical character recognition for scanned PDFs and image files, with intelligent DPI management. Documents that are redacted or contain minimal text are automatically tagged rather than silently lost.
+
+## Why This Matters for Legal Teams
+
+The market for legal AI has split into two categories that don't serve the middle of the profession well. Enterprise platforms like Harvey are genuinely capable but priced for Magic Circle and Big Law. Generic AI tools (Claude, ChatGPT, Gemini via their standard interfaces) are affordable but cloud-based — unsuitable for privileged material.
+
+LegalRAG is built specifically for barristers' chambers, litigation boutiques, and mid-market firms with 10–100 lawyers handling document-heavy matters. Fraud, family, regulatory, commercial litigation — anywhere that disclosure volume is a genuine problem and cloud is a genuine risk.
+
+## What's Coming
+
+Two features currently in development extend the system significantly.
+
+**Custom taxonomies.** A builder that lets the legal team define case-specific classification frameworks — allegations, issues, parties, transaction types. The AI then classifies every document against the lawyer's own framework, creating searchable categories that reflect how the case is actually structured rather than generic document types.
+
+**Knowledge map.** An interactive visual graph showing connections between documents — shared parties, overlapping dates, cross-references, related transactions. Documents as nodes, relationships as edges, rendered as a navigable visualisation. Surfaces patterns across large document sets that linear review would miss entirely.
+
+## The Broader Principle
+
+LegalRAG is a specific answer to a specific problem. But the underlying principle applies more broadly: there are domains — legal, healthcare, defence, finance — where cloud AI creates risks that on-premise deployment eliminates. The hardware to run capable AI models locally exists now and is becoming more affordable. The question is whether organisations in sensitive sectors are willing to think about deployment architecture as a first-order design question, not an afterthought.
+
+For litigation teams, the answer is increasingly obvious. The privilege risk alone makes it so.`,
+  },
+  {
     slug: "mcp-bridge-sharepoint",
     title: "How We Gave Claude Direct Access to a Client's SharePoint",
     excerpt: "A practical walkthrough of MCP — the open standard quietly transforming how AI connects to business tools — and a real engagement where we built it.",

@@ -41,6 +41,46 @@ type PortfolioEntry = ProductEntry | ProjectEntry;
 const entries: PortfolioEntry[] = [
   {
     type: "project",
+    name: "LegalRAG",
+    tagline: "On-Premise AI · Legal Document Intelligence",
+    badge: "Client Engagement",
+    description:
+      "A self-hosted document intelligence platform for litigation and legal review — built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design.",
+    capabilities: [
+      {
+        title: "Document Ingestion at Scale",
+        detail: "150,000+ files across all formats (PDF, DOCX, MSG, EML, XLSX, TIF, and more). Checkpoint-based processing survives interruptions.",
+      },
+      {
+        title: "Semantic Search & RAG Q&A",
+        detail: "Ask questions in plain English. Every answer cites its source document and page number — no hallucination from the AI's own knowledge.",
+      },
+      {
+        title: "Interactive Timeline",
+        detail: "Chronological view of case events extracted from metadata. Drill from year to month to individual events, filtered by disclosure side.",
+      },
+      {
+        title: "Complete On-Premise Privacy",
+        detail: "OCR, inference, vector search, and storage all run locally on DGX Spark. No cloud APIs. Satisfies Legal Professional Privilege architecturally.",
+      },
+    ],
+    conversations: [
+      {
+        user: "Find all documents referencing the March 2023 board meeting and summarise the key decisions",
+        assistant: "Found 14 relevant passages across 6 documents. Key decisions recorded: approval of revised share structure (Exhibit C-112), appointment of interim CFO (Email D-0447), deferral of acquisition vote to Q3 2023 (Board Minutes C-089).",
+      },
+      {
+        user: "Show me all emails between the claimant and defendant between January and April 2022",
+        assistant: "Retrieved 38 emails. Earliest: 4 Jan 2022 (REF: D-0012). Latest: 29 Apr 2022 (REF: D-0891). 12 marked confidential by producing side. Filter applied: disclosure side — Defendant.",
+      },
+      {
+        user: "Build a timeline of contractual deadlines mentioned across all documents",
+        assistant: "Extracted 23 deadline references. Key dates: 15 Feb 2022 (payment milestone, Contract §4.2), 1 Jun 2022 (option expiry, Addendum B), 30 Sep 2022 (longstop date, original SPA). Full timeline ready to export.",
+      },
+    ],
+  },
+  {
+    type: "project",
     name: "MCP Bridge — SharePoint & Power Automate",
     tagline: "Model Context Protocol · Consulting Engagement",
     badge: "Client Engagement",
