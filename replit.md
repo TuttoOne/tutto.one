@@ -47,10 +47,12 @@ Preferred communication style: Simple, everyday language.
 - **Storage Layer** (`server/storage.ts`): `DatabaseStorage` class implementing `IStorage` interface for contact submissions
 
 ### Key Design Decisions
-1. **Chat-first UX**: The homepage is entirely a chat interface rather than a traditional landing page. Traditional pages exist as fallback/SEO content.
-2. **Hybrid chat approach**: Scripted flows handle common paths (cheaper, predictable), Claude Haiku handles open-ended questions (flexible but costs money).
-3. **Monorepo structure**: Client, server, and shared code in one repo with shared TypeScript types via the `shared/` directory.
-4. **SPA with Express backend**: Single-page app with API routes on the same server, rather than separate frontend/backend deployments.
+1. **Portfolio-first home page**: The homepage is now a hero + portfolio showcase. The chat is available site-wide as a floating widget.
+2. **Floating chat widget**: `FloatingChat` component lives in `App.tsx` (not inside individual pages/Layout) so its state persists across page navigations. Opens from a bottom-right button.
+3. **Shared portfolio component**: `client/src/components/portfolio/PortfolioDisplay.tsx` holds all portfolio data and rendering — both `/` and `/portfolio` use it.
+4. **Hybrid chat approach**: Scripted flows handle common paths (cheaper, predictable), Claude Haiku handles open-ended questions (flexible but costs money).
+5. **Monorepo structure**: Client, server, and shared code in one repo with shared TypeScript types via the `shared/` directory.
+6. **SPA with Express backend**: Single-page app with API routes on the same server, rather than separate frontend/backend deployments.
 
 ## External Dependencies
 
