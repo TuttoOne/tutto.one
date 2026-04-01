@@ -37,6 +37,15 @@ export interface ProjectEntry {
 
 export type PortfolioEntry = ProductEntry | ProjectEntry;
 
+// Subtle per-entry accent colors
+const entryThemes = [
+  { section: "bg-amber-50/70 border-amber-200/50", card: "bg-white/70 border-amber-200/60" },
+  { section: "bg-sky-50/70 border-sky-200/50",    card: "bg-white/70 border-sky-200/60" },
+  { section: "bg-violet-50/70 border-violet-200/50", card: "bg-white/70 border-violet-200/60" },
+  { section: "bg-emerald-50/70 border-emerald-200/50", card: "bg-white/70 border-emerald-200/60" },
+  { section: "bg-orange-50/70 border-orange-200/50",  card: "bg-white/70 border-orange-200/60" },
+];
+
 export const portfolioEntries: PortfolioEntry[] = [
   {
     type: "project",
@@ -156,10 +165,12 @@ function ImageCarousel({
   screenshots,
   labels,
   productName,
+  cardClass,
 }: {
   screenshots: string[];
   labels: string[];
   productName: string;
+  cardClass: string;
 }) {
   const [current, setCurrent] = useState(0);
   const prev = () => setCurrent((c) => (c === 0 ? screenshots.length - 1 : c - 1));
@@ -168,7 +179,7 @@ function ImageCarousel({
 
   return (
     <div className="space-y-3">
-      <div className="relative group rounded-xl overflow-hidden border border-border/60 bg-muted/30">
+      <div className={`relative group rounded-xl overflow-hidden border ${cardClass}`}>
         <img
           src={screenshots[current]}
           alt={`${productName} — ${labels[current]}`}
@@ -212,14 +223,14 @@ function ImageCarousel({
   );
 }
 
-function ProjectShowcase({ entry }: { entry: ProjectEntry }) {
+function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass: string }) {
   return (
-    <div className="space-y-5">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
         {entry.capabilities.map((cap) => (
           <div
             key={cap.title}
-            className="rounded-xl border border-border/60 bg-secondary/20 p-4"
+            className={`rounded-xl border p-4 ${cardClass}`}
             data-testid={`card-capability-${cap.title.toLowerCase().replace(/\s+/g, "-")}`}
           >
             <p className="text-sm font-semibold text-foreground mb-1">{cap.title}</p>
@@ -227,8 +238,8 @@ function ProjectShowcase({ entry }: { entry: ProjectEntry }) {
           </div>
         ))}
       </div>
-      <div className="rounded-xl border border-border/60 bg-muted/20 overflow-hidden">
-        <div className="px-4 py-2.5 border-b border-border/40 flex items-center gap-2">
+      <div className={`rounded-xl border overflow-hidden ${cardClass}`}>
+        <div className="px-4 py-2.5 border-b border-border/30 flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
@@ -245,7 +256,7 @@ function ProjectShowcase({ entry }: { entry: ProjectEntry }) {
               </div>
               <div className="flex gap-2 items-start">
                 <span className="text-xs font-mono text-primary shrink-0 mt-0.5">AI</span>
-                <p className="text-xs text-muted-foreground bg-secondary/40 rounded-lg px-3 py-2 leading-relaxed">
+                <p className="text-xs text-muted-foreground bg-background/60 rounded-lg px-3 py-2 leading-relaxed">
                   {conv.assistant}
                 </p>
               </div>
@@ -259,61 +270,75 @@ function ProjectShowcase({ entry }: { entry: ProjectEntry }) {
 
 export function PortfolioDisplay({ entries = portfolioEntries }: { entries?: PortfolioEntry[] }) {
   return (
-    <div className="space-y-24">
+    <div className="space-y-8">
       {entries.map((entry, index) => {
         const slug = entry.name.toLowerCase().replace(/[\s&—]+/g, "-").replace(/-+/g, "-");
+        const theme = entryThemes[index % entryThemes.length];
+        // Even entries: desktop shows summary-left, showcase-right
+        // Odd entries: desktop reverses to showcase-left, summary-right
+        const desktopOrder = index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse";
+
         return (
           <section
             key={entry.name}
-            className={`flex flex-col ${index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-12 items-start`}
+            className={`rounded-2xl border p-6 md:p-10 ${theme.section}`}
             data-testid={`section-product-${slug}`}
           >
-            <div className="w-full md:w-3/5">
-              {entry.type === "product" ? (
-                <ImageCarousel
-                  screenshots={entry.screenshots}
-                  labels={entry.screenshotLabels}
-                  productName={entry.name}
-                />
-              ) : (
-                <ProjectShowcase entry={entry} />
-              )}
-            </div>
+            {/* On mobile: summary first (top), showcase second (bottom).
+                On desktop: side-by-side, alternating which side via desktopOrder. */}
+            <div className={`flex flex-col ${desktopOrder} gap-8 md:gap-12 items-start`}>
 
-            <div className="w-full md:w-2/5 md:sticky md:top-24">
-              {entry.type === "project" && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-mono text-primary bg-primary/10 border border-primary/20 rounded-full px-3 py-1 mb-3">
-                  <Plug className="w-3 h-3" />
-                  {entry.badge}
-                </span>
-              )}
-              <p className="text-xs font-mono text-muted-foreground tracking-wider uppercase mb-2 mt-2">
-                {entry.tagline}
-              </p>
-              <h2
-                className="text-2xl md:text-3xl font-serif font-bold mb-4"
-                data-testid={`text-product-name-${slug}`}
-              >
-                {entry.name}
-              </h2>
-              <p
-                className="text-muted-foreground leading-relaxed mb-6"
-                data-testid={`text-product-desc-${slug}`}
-              >
-                {entry.description}
-              </p>
-              {entry.url && (
-                <a
-                  href={entry.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors"
-                  data-testid={`link-visit-${slug}`}
+              {/* Summary — first in DOM so it appears at top on mobile */}
+              <div className="w-full md:w-2/5 md:sticky md:top-24">
+                {entry.type === "project" && (
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-primary bg-primary/10 border border-primary/20 rounded-full px-3 py-1 mb-3">
+                    <Plug className="w-3 h-3" />
+                    {entry.badge}
+                  </span>
+                )}
+                <p className="text-xs font-mono text-muted-foreground tracking-wider uppercase mb-2 mt-2">
+                  {entry.tagline}
+                </p>
+                <h2
+                  className="text-2xl md:text-3xl font-serif font-bold mb-4"
+                  data-testid={`text-product-name-${slug}`}
                 >
-                  {entry.type === "project" && entry.urlLabel ? entry.urlLabel : `Visit ${entry.name}`}
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              )}
+                  {entry.name}
+                </h2>
+                <p
+                  className="text-muted-foreground leading-relaxed mb-6"
+                  data-testid={`text-product-desc-${slug}`}
+                >
+                  {entry.description}
+                </p>
+                {entry.url && (
+                  <a
+                    href={entry.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors"
+                    data-testid={`link-visit-${slug}`}
+                  >
+                    {entry.type === "project" && entry.urlLabel ? entry.urlLabel : `Visit ${entry.name}`}
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
+
+              {/* Showcase — second in DOM so it appears below summary on mobile */}
+              <div className="w-full md:w-3/5">
+                {entry.type === "product" ? (
+                  <ImageCarousel
+                    screenshots={entry.screenshots}
+                    labels={entry.screenshotLabels}
+                    productName={entry.name}
+                    cardClass={theme.card}
+                  />
+                ) : (
+                  <ProjectShowcase entry={entry} cardClass={theme.card} />
+                )}
+              </div>
+
             </div>
           </section>
         );
