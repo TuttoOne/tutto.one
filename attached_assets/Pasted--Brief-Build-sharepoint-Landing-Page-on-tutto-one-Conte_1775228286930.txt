@@ -1,0 +1,121 @@
+# Brief: Build /sharepoint Landing Page on tutto.one
+
+## Context
+tutto.one is an existing site hosted on Replit. I need to add a new page at `/sharepoint` that serves as the landing page for our open-source SharePoint Bridge for Claude (MCP server). The GitHub repo is live at https://github.com/TuttoOne/sp-mcp
+
+This page is the primary marketing and lead capture page for the product. It needs to convert visitors into either: (a) self-service users who install the bridge and run a free audit, or (b) leads who book a walkthrough call.
+
+## Route
+`/sharepoint` — add this as a new route/page in the existing app structure.
+
+## Page Structure
+
+### Section 1: Hero
+- **Headline:** "Connect Claude to Your SharePoint"
+- **Subheadline:** "An open-source MCP server that lets Claude read, write, audit, and restructure your SharePoint — all through conversation. Free forever."
+- **Primary CTA button:** "Get Started Free" → scrolls to the How It Works section
+- **Secondary CTA button:** "Book a Walkthrough" → links to `/contact` (the existing Contact Us page)
+- **Social proof line:** "Open source on GitHub · MIT licensed · 15 tools · Built by Tutto.one"
+
+### Section 2: Demo Video (placeholder)
+- Embed area for a YouTube video (use a placeholder/empty state for now — I'll add the video URL later)
+- Caption: "Watch Claude audit a SharePoint site and cross-reference data across 7 lists in real time"
+
+### Section 3: What It Does (3 columns or cards)
+**Card 1: "Audit"**
+- Icon: magnifying glass or clipboard
+- Text: "Claude scans your entire SharePoint environment — every list, every column, every relationship. You get a personalised AI Readiness Report showing exactly what's messy, what's missing, and how to fix it. Free."
+
+**Card 2: "Restructure"**
+- Icon: wrench or building blocks
+- Text: "Claude doesn't just diagnose — it fixes. Retype columns, create lookup relationships, migrate data, standardise naming. Your SharePoint goes from messy to AI-ready in days."
+
+**Card 3: "Build"**
+- Icon: rocket or blueprint
+- Text: "Need a complete system? We design industry-specific architectures — case management for PI firms, matter tracking for law practices, tenancy management for property companies — all powered by Claude."
+
+### Section 4: How It Works (3 steps)
+**Step 1:** "Set up the bridge" — Create an Azure App Registration, clone the repo, configure your credentials. Takes 15 minutes. Full guide in the README.
+**Step 2:** "Connect to Claude" — Add the bridge URL to Claude's MCP settings. Claude can now see and control your SharePoint.
+**Step 3:** "Run your first audit" — Paste our audit prompt into Claude. Watch it scan every list, diagnose structural problems, and give you a prioritised action plan.
+
+- **CTA button after steps:** "View on GitHub" → https://github.com/TuttoOne/sp-mcp
+
+### Section 5: The Free Audit
+- **Headline:** "Start with a Free AI Readiness Audit"
+- **Body:** "Every SharePoint is messy. Most businesses don't know how messy until they see it through AI's eyes. Our free audit scans your entire environment and shows you exactly what's holding your data back — in minutes, not weeks."
+- **The audit prompt in a styled code block** (copy-paste ready):
+```
+Audit my SharePoint site. List every list, inspect every schema, and tell me:
+1. What's well-structured and what's messy
+2. Where I'm missing lookup relationships between related lists
+3. Which columns should be choice fields instead of free-text
+4. What data quality issues you can see
+5. How you'd restructure it to work better with AI
+```
+- **"Copy prompt" button** that copies the text to clipboard
+- Below the prompt block: "Want us to run the audit for you and walk you through the findings?"
+- **Email capture form:** Email field + "Book a Free Walkthrough" submit button
+  - On submit: store the email (simple backend — JSON file, database, or whatever the existing tutto.one stack supports) and redirect to `/contact`
+  - This is the primary lead capture mechanism
+
+### Section 6: Industry Templates
+- **Headline:** "Built for Your Industry"
+- Four cards in a row:
+
+**Private Investigation (LIVE)**
+- "Case management, evidence chain of custody, subject tracking, compliance, expenses — 7 interconnected lists with full demo data"
+- Tag/badge: "Live Demo Available"
+
+**Legal Practice**
+- "Matter management, document tracking, court deadlines, billing, conflict checks"
+- Tag/badge: "Coming Soon"
+
+**Property Management**
+- "Tenancy records, compliance certificates, contractor management, maintenance"
+- Tag/badge: "Coming Soon"
+
+**Professional Services**
+- "Project tracking, resource allocation, time logging, deliverables"
+- Tag/badge: "Coming Soon"
+
+### Section 7: Custom Solutions / Services
+- **Headline:** "Need More Than a Template?"
+- **Body:** "The bridge is free. For organisations that want the full transformation, Tutto.one offers:"
+- Compact list (not bullet points — use styled cards or an accordion):
+  - **Cleanup & Restructure** — "We fix everything the audit found. Lists restructured, columns retyped, data migrated. From £500."
+  - **Industry-Specific Custom Build** — "A complete AI-powered system designed for exactly how your organisation operates. Custom MCP tools, Power Automate workflows, Claude prompt libraries. From £5,000."
+  - **Managed Service** — "We host the bridge, monitor it, and provide ongoing support. You focus on your business. From £500/month."
+  - **AI Workshops & Training** — "Get your team productive with AI-powered SharePoint. Half-day and full-day formats."
+- **CTA:** "Book a Discovery Call" → `/contact`
+
+### Section 8: Footer
+- "Built by Tutto.one · Open source on GitHub · MIT License"
+- Links: GitHub repo, Email (daniel@tutto.one), [Contact](/contact)
+- "© 2026 Tutto.one Ltd"
+
+## Design Notes
+- Match the existing tutto.one design system (fonts, colours, spacing)
+- If the existing site is dark-themed, keep dark. If light, keep light.
+- The page should feel technical but accessible — the audience is IT managers and operations directors, not developers exclusively
+- Mobile responsive
+- Fast loading — no heavy animations or massive images
+- The audit prompt code block should look like a terminal/code editor (dark background, monospace font, copy button)
+
+## Email Capture Backend
+- Whatever the simplest approach is in the current stack:
+  - If there's already a database or API: add an endpoint to store email + timestamp
+  - If not: store to a JSON file, or use a free service like Formspree/Formspark
+  - The email list will eventually move to a proper CRM, so just capture email + timestamp + source ("sharepoint-landing") for now
+
+## SEO
+- Page title: "SharePoint Bridge for Claude — Free AI-Powered SharePoint Management | Tutto.one"
+- Meta description: "Connect Claude to your SharePoint with our free, open-source MCP server. Audit, restructure, and build AI-powered business systems. 15 tools, MIT licensed."
+- OG image: use a screenshot of the GitHub README or a simple branded card (can add later)
+
+## What NOT to build
+- No login system
+- No payment/Stripe integration (that's Phase 2)
+- No partner directory (that's Phase 3)
+- No usage dashboard
+- Keep it to a single page at /sharepoint — no sub-routes needed yet
