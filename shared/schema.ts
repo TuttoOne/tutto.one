@@ -19,3 +19,20 @@ export const insertContactSubmissionSchema = createInsertSchema(contactSubmissio
 
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;
+
+export const emailLeads = pgTable("email_leads", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  email: text("email").notNull(),
+  source: text("source").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertEmailLeadSchema = createInsertSchema(emailLeads).pick({
+  email: true,
+  source: true,
+}).extend({
+  email: z.string().email(),
+});
+
+export type InsertEmailLead = z.infer<typeof insertEmailLeadSchema>;
+export type EmailLead = typeof emailLeads.$inferSelect;

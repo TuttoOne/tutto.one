@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSubmissionSchema } from "@shared/schema";
+import { insertContactSubmissionSchema, insertEmailLeadSchema } from "@shared/schema";
 import { z } from "zod";
 import Anthropic from "@anthropic-ai/sdk";
 
@@ -86,6 +86,22 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Failed to fetch submissions:", error);
       res.status(500).json({ error: "Failed to fetch submissions" });
+    }
+  });
+
+  // Email lead capture
+  app.post("/api/leads", async (req, res) => {
+    try {
+      const data = insertEmailLeadSchema.parse(req.body);
+      const lead = await storage.createEmailLead(data);
+      res.json({ success: true, lead });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid input", details: error.errors });
+      } else {
+        console.error("Lead capture error:", error);
+        res.status(500).json({ error: "Failed to capture lead" });
+      }
     }
   });
 
