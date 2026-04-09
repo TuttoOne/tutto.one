@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SharePoint MCP Bridge — How It Works</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap');
+
+:root {
+  --bg: #faf8f5;
+  --bg-warm: #f5f0e8;
+  --bg-card: #ffffff;
+  --surface: #ffffff;
+  --surface-raised: #f9f6f1;
+  --border: #e8e2d8;
+  --border-light: #f0ebe3;
+  --text: #1a1a1a;
+  --text-body: #3d3d3d;
+  --text-muted: #7a7568;
+  --text-dim: #a8a092;
+  --accent: #d97706;
+  --accent-light: #f59e0b;
+  --accent-soft: rgba(217, 119, 6, 0.08);
+  --accent-border: rgba(217, 119, 6, 0.25);
+  --green: #16a34a;
+  --green-soft: rgba(22, 163, 74, 0.08);
+  --green-border: rgba(22, 163, 74, 0.2);
+  --blue: #2563eb;
+  --blue-soft: rgba(37, 99, 235, 0.06);
+  --blue-border: rgba(37, 99, 235, 0.15);
+  --red-dot: #ef4444;
+  --amber-dot: #f59e0b;
+  --green-dot: #22c55e;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow: 0 2px 8px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Top Controls Bar ─── */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-title {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.top-tag {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.top-bar-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.step-indicator {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  margin-right: 4px;
+}
+
+.ctrl-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ctrl-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.ctrl-btn.active {
+  border-color: var(--accent);
+  color: #fff;
+  background: var(--accent);
+}
+
+/* ─── Main Split ─── */
+.split-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ─── Panel Headers ─── */
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.panel-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+.dot-claude { background: var(--accent); }
+.dot-sp { background: var(--blue); }
+
+.panel-title {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.panel-subtitle {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── MCP Bridge Bar ─── */
+.bridge-bar {
+  width: 52px;
+  background: var(--surface-raised);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.bridge-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.bridge-dot-indicator {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.4s;
+  position: relative;
+}
+
+.bridge-dot-indicator.active {
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--green-soft);
+}
+
+.bridge-arrow {
+  width: 20px;
+  height: 2px;
+  background: var(--border);
+  position: relative;
+  transition: background 0.3s;
+}
+
+.bridge-arrow.active { background: var(--accent); }
+
+.bridge-arrow::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 0; height: 0;
+  border-left: 5px solid var(--border);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.bridge-arrow.active::after { border-left-color: var(--accent); }
+
+.bridge-pulse-dot {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+}
+
+.bridge-pulse-dot.moving {
+  animation: pulseDot 0.9s ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%   { opacity: 0; transform: translateY(-50px); }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(50px); }
+}
+
+/* ─── Claude Chat Panel ─── */
+.chat-area {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--bg);
+}
+
+.msg {
+  max-width: 90%;
+  animation: msgIn 0.35s ease-out;
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.msg.user { align-self: flex-end; }
+
+.msg-label {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.msg.user .msg-label {
+  text-align: right;
+  color: var(--accent);
+}
+
+.msg.user .msg-bubble {
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius) var(--radius) 4px var(--radius);
+  padding: 10px 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  box-shadow: var(--shadow-sm);
+}
+
+.msg.assistant .msg-label { color: var(--text-dim); }
+
+.msg.assistant .msg-bubble {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) var(--radius) 4px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-body);
+  box-shadow: var(--shadow-sm);
+}
+
+.msg.assistant .msg-bubble strong { color: var(--text); font-weight: 600; }
+
+/* MCP Call Chip */
+.mcp-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  margin: 4px 0;
+}
+
+.mcp-call .spinner {
+  width: 10px; height: 10px;
+  border: 2px solid rgba(217, 119, 6, 0.25);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.mcp-call .check { color: var(--green); font-weight: 600; }
+
+/* ─── Chat Input ─── */
+.chat-input-area {
+  padding: 10px 20px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.chat-input-box {
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 10px 16px;
+  gap: 10px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.chat-input-box.typing {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.chat-input-text {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text);
+  min-height: 18px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.chat-input-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 16px;
+  background: var(--accent);
+  animation: blink 0.9s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.send-btn {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.send-btn.ready { opacity: 1; }
+
+/* ─── SharePoint Panel ─── */
+.sp-area {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sp-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.sp-empty-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--surface-raised);
+  border: 1.5px dashed var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+
+/* SharePoint List Card — matching tutto.one card style */
+.sp-list {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  animation: spListIn 0.5s ease-out;
+}
+
+@keyframes spListIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.sp-list-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sp-list-icon { font-size: 14px; }
+
+.sp-list-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.sp-list-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--green);
+  background: var(--green-soft);
+  border: 1px solid var(--green-border);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.sp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.sp-table th {
+  text-align: left;
+  padding: 7px 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--surface);
+}
+
+.sp-table td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-body);
+  font-size: 12px;
+}
+
+.sp-table tr { animation: rowIn 0.3s ease-out; }
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.sp-table tr:last-child td { border-bottom: none; }
+
+.sp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.sp-status.active { background: var(--green-soft); color: var(--green); border: 1px solid var(--green-border); }
+.sp-status.pending { background: rgba(245,158,11,0.08); color: #b45309; border: 1px solid rgba(245,158,11,0.2); }
+.sp-status.new { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-border); }
+
+.sp-new-row td {
+  animation: newRowHighlight 2.5s ease-out;
+}
+
+@keyframes newRowHighlight {
+  0%   { background: rgba(217, 119, 6, 0.12); }
+  100% { background: transparent; }
+}
+
+/* ─── Narrative Bar ─── */
+.narrative-bar {
+  padding: 10px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.narrative-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  flex: 1;
+  line-height: 1.4;
+}
+
+.narrative-text em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.progress-track {
+  width: 180px;
+  height: 3px;
+  background: var(--border-light);
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+/* ─── Conversation dots (matching tutto.one) ─── */
+.conv-dots {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 2px;
+}
+.conv-dots span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.conv-dots .d-red { background: var(--red-dot); }
+.conv-dots .d-amber { background: var(--amber-dot); }
+.conv-dots .d-green { background: var(--green-dot); }
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .split-container { flex-direction: column; }
+  .bridge-bar {
+    width: 100%;
+    height: 36px;
+    flex-direction: row;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .bridge-label { writing-mode: horizontal-tb; }
+  .panel { min-height: 0; }
+  .top-bar { padding: 10px 16px; }
+  .top-title { font-size: 14px; }
+  .top-tag { display: none; }
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <span class="top-title">SharePoint MCP Bridge</span>
+    <span class="top-tag">Interactive Demo</span>
+  </div>
+  <div class="top-bar-right">
+    <span class="step-indicator" id="stepIndicator">Ready</span>
+    <button class="ctrl-btn" onclick="replayDemo()">↻ Replay</button>
+    <button class="ctrl-btn" id="btnAuto" onclick="toggleAutoplay()">▶ Autoplay</button>
+    <button class="ctrl-btn" onclick="advanceStep()">Next →</button>
+  </div>
+</div>
+
+<!-- Split View -->
+<div class="split-container">
+
+  <!-- Claude Panel -->
+  <div class="panel panel-claude" style="border-right: 1px solid var(--border);">
+    <div class="panel-header">
+      <div class="panel-dot dot-claude"></div>
+      <span class="panel-title">Claude</span>
+      <span class="panel-subtitle">claude.ai</span>
+    </div>
+    <div class="chat-area" id="chatArea"></div>
+    <div class="chat-input-area">
+      <div class="chat-input-box" id="chatInputBox">
+        <div class="chat-input-text" id="chatInputText"></div>
+        <button class="send-btn" id="sendBtn">↑</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bridge -->
+  <div class="bridge-bar">
+    <div class="bridge-dot-indicator" id="bridgeDot"></div>
+    <div class="bridge-arrow" id="bridgeArrow"></div>
+    <span class="bridge-label">MCP</span>
+    <div class="bridge-arrow" id="bridgeArrow2" style="transform: rotate(180deg);"></div>
+    <div class="bridge-pulse-dot" id="bridgePulse"></div>
+  </div>
+
+  <!-- SharePoint Panel -->
+  <div class="panel panel-sp">
+    <div class="panel-header">
+      <div class="panel-dot dot-sp"></div>
+      <span class="panel-title">SharePoint Online</span>
+      <span class="panel-subtitle">contoso.sharepoint.com</span>
+    </div>
+    <div class="sp-area" id="spArea">
+      <div class="sp-empty" id="spEmpty">
+        <div class="sp-empty-icon">☁</div>
+        <span>No lists yet — ask Claude to build your site</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Narrative Bar -->
+<div class="narrative-bar">
+  <div class="narrative-text" id="narrativeText">Click <em>Next</em> or <em>Autoplay</em> to see the SharePoint MCP Bridge in action</div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<script>
+const SCRIPT = [
+  {
+    type: 'user_type',
+    text: 'Set up a new SharePoint site for a solicitor\'s practice. I need lists for client matters, compliance tasks, and a fee earner directory.',
+    narrative: 'The solicitor asks Claude to build their SharePoint environment from scratch'
+  },
+  {
+    type: 'assistant',
+    html: `I'll set up your solicitor's practice site with three core lists. Let me create them now via the SharePoint MCP Bridge.
+<br><br>
+<strong>Creating:</strong><br>
+① Client Matters — matter tracking with SRA references<br>
+② Compliance Tasks — regulatory deadlines and checks<br>
+③ Fee Earner Directory — your team with specialisms`,
+    narrative: 'Claude plans the structure and begins executing via MCP'
+  },
+  {
+    type: 'mcp_call',
+    tool: 'sp_list_create',
+    detail: '"Client Matters"',
+    narrative: '<em>sp_list_create</em> → Creating the Client Matters list in SharePoint'
+  },
+  {
+    type: 'sp_list',
+    id: 'matters',
+    name: 'Client Matters',
+    icon: '📋',
+    columns: ['Matter Ref', 'Client Name', 'Type', 'Fee Earner', 'Status'],
+    rows: [],
+    narrative: 'Client Matters list appears in SharePoint — ready for columns'
+  },
+  {
+    type: 'mcp_call',
+    tool: 'sp_column_add',
+    detail: 'MatterRef, ClientName, Type, FeeEarner, Status',
+    narrative: '<em>sp_column_add</em> → Adding matter-specific columns'
+  },
+  {
+    type: 'mcp_call',
+    tool: 'sp_list_create',
+    detail: '"Compliance Tasks"',
+    narrative: '<em>sp_list_create</em> → Creating the Compliance Tasks list'
+  },
+  {
+    type: 'sp_list',
+    id: 'compliance',
+    name: 'Compliance Tasks',
+    icon: '✓',
+    columns: ['Task', 'Category', 'Due Date', 'Assigned To', 'Status'],
+    rows: [
+      ['AML Policy Review', 'SRA', '2026-04-30', 'All Partners', { text: 'Pending', class: 'pending' }],
+      ['PII Insurance Renewal', 'Insurance', '2026-06-01', 'Practice Manager', { text: 'Pending', class: 'pending' }],
+      ['Client Account Reconciliation', 'Accounts', '2026-04-15', 'Accounts Team', { text: 'Active', class: 'active' }],
+    ],
+    narrative: 'Compliance Tasks list created with initial regulatory items'
+  },
+  {
+    type: 'mcp_call',
+    tool: 'sp_list_create',
+    detail: '"Fee Earner Directory"',
+    narrative: '<em>sp_list_create</em> → Creating the Fee Earner Directory'
+  },
+  {
+    type: 'sp_list',
+    id: 'feeEarners',
+    name: 'Fee Earner Directory',
+    icon: '👤',
+    columns: ['Name', 'Role', 'Specialism', 'SRA Number', 'Status'],
+    rows: [
+      ['Sarah Mitchell', 'Partner', 'Conveyancing', 'SRA/284751', { text: 'Active', class: 'active' }],
+      ['James Thornton', 'Associate', 'Family Law', 'SRA/319824', { text: 'Active', class: 'active' }],
+      ['Priya Kapoor', 'Partner', 'Commercial Litigation', 'SRA/267103', { text: 'Active', class: 'active' }],
+    ],
+    narrative: 'Fee Earner Directory populated with the practice team'
+  },
+  {
+    type: 'assistant',
+    html: `All three lists are live. Your practice site is ready:<br><br>
+• <strong>Client Matters</strong> — empty, ready for new instructions<br>
+• <strong>Compliance Tasks</strong> — 3 upcoming regulatory deadlines<br>
+• <strong>Fee Earner Directory</strong> — 3 fee earners with SRA numbers<br><br>
+Want to open a new matter?`,
+    narrative: 'The solicitor\'s SharePoint environment is fully configured'
+  },
+  {
+    type: 'user_type',
+    text: 'Yes — new client Mrs. Eleanor Whitfield, residential conveyancing purchase. Assign to Sarah Mitchell. Matter ref WHIT-2026-001.',
+    narrative: 'Now the solicitor uses natural language to create a new client matter'
+  },
+  {
+    type: 'mcp_call',
+    tool: 'sp_item_create',
+    detail: '"Client Matters" → WHIT-2026-001',
+    narrative: '<em>sp_item_create</em> → Adding the new matter to Client Matters'
+  },
+  {
+    type: 'sp_add_row',
+    listId: 'matters',
+    row: ['WHIT-2026-001', 'Mrs. E. Whitfield', 'Conveyancing', 'S. Mitchell', { text: 'New', class: 'new' }],
+    highlight: true,
+    narrative: 'The new matter appears in SharePoint in real time'
+  },
+  {
+    type: 'assistant',
+    html: `Matter <strong>WHIT-2026-001</strong> is live and assigned to Sarah Mitchell.<br><br>
+I've also added the standard conveyancing compliance tasks — AML check, source of funds verification, and conflict of interest search.`,
+    narrative: 'Claude proactively creates linked compliance tasks for the new matter'
+  },
+  {
+    type: 'mcp_call',
+    tool: 'sp_item_create',
+    detail: '"Compliance Tasks" → 3 conveyancing checks',
+    narrative: '<em>sp_item_create</em> → Adding matter-specific compliance tasks'
+  },
+  {
+    type: 'sp_add_rows',
+    listId: 'compliance',
+    rows: [
+      ['AML / KYC Check — Whitfield', 'WHIT-2026-001', '2026-04-16', 'S. Mitchell', { text: 'New', class: 'new' }],
+      ['Source of Funds Verification', 'WHIT-2026-001', '2026-04-18', 'S. Mitchell', { text: 'New', class: 'new' }],
+      ['Conflict of Interest Search', 'WHIT-2026-001', '2026-04-11', 'S. Mitchell', { text: 'New', class: 'new' }],
+    ],
+    highlight: true,
+    narrative: 'Compliance tasks auto-created and linked to the matter reference'
+  },
+  {
+    type: 'user_type',
+    text: 'Perfect. Mark the conflict check as completed.',
+    narrative: 'Modifying existing SharePoint items is just as simple'
+  },
+  {
+    type: 'mcp_call',
+    tool: 'sp_item_update',
+    detail: '"Conflict of Interest Search" → Completed',
+    narrative: '<em>sp_item_update</em> → Modifying an existing item in SharePoint'
+  },
+  {
+    type: 'sp_update_cell',
+    listId: 'compliance',
+    rowMatch: 'Conflict of Interest Search',
+    colIndex: 4,
+    newValue: { text: 'Active', class: 'active' },
+    narrative: 'The compliance task status updates in SharePoint instantly'
+  },
+  {
+    type: 'assistant',
+    html: `Done — conflict of interest search marked as completed for matter WHIT-2026-001. Two compliance tasks remaining for this matter.`,
+    narrative: 'Build, create, modify — all through natural conversation with Claude'
+  }
+];
+
+// ─── State ───
+let currentStep = -1;
+let autoplayInterval = null;
+let isAutoplaying = false;
+const spLists = {};
+
+const chatArea = document.getElementById('chatArea');
+const spArea = document.getElementById('spArea');
+const spEmpty = document.getElementById('spEmpty');
+const chatInputBox = document.getElementById('chatInputBox');
+const chatInputText = document.getElementById('chatInputText');
+const sendBtn = document.getElementById('sendBtn');
+const bridgeDot = document.getElementById('bridgeDot');
+const bridgeArrow = document.getElementById('bridgeArrow');
+const bridgeArrow2 = document.getElementById('bridgeArrow2');
+const bridgePulse = document.getElementById('bridgePulse');
+const narrativeText = document.getElementById('narrativeText');
+const progressFill = document.getElementById('progressFill');
+const stepIndicator = document.getElementById('stepIndicator');
+const btnAuto = document.getElementById('btnAuto');
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function updateProgress() {
+  const pct = Math.round(((currentStep + 1) / SCRIPT.length) * 100);
+  progressFill.style.width = pct + '%';
+  stepIndicator.textContent = `${currentStep + 1} / ${SCRIPT.length}`;
+}
+
+function scrollChat() { chatArea.scrollTop = chatArea.scrollHeight; }
+function scrollSP() { spArea.scrollTop = spArea.scrollHeight; }
+
+function renderStatusCell(val) {
+  if (typeof val === 'object' && val.text) {
+    return `<span class="sp-status ${val.class}">${val.text}</span>`;
+  }
+  return val;
+}
+
+async function typeInInput(text) {
+  chatInputBox.classList.add('typing');
+  sendBtn.classList.remove('ready');
+  chatInputText.innerHTML = '';
+  for (let i = 0; i < text.length; i++) {
+    chatInputText.textContent = text.slice(0, i + 1);
+    chatInputText.innerHTML += '<span class="chat-input-cursor"></span>';
+    await sleep(16 + Math.random() * 20);
+  }
+  sendBtn.classList.add('ready');
+  await sleep(350);
+  chatInputText.innerHTML = '';
+  chatInputBox.classList.remove('typing');
+  sendBtn.classList.remove('ready');
+}
+
+function addUserMsg(text) {
+  const div = document.createElement('div');
+  div.className = 'msg user';
+  div.innerHTML = `<div class="msg-label">You</div><div class="msg-bubble">${text}</div>`;
+  chatArea.appendChild(div);
+  scrollChat();
+}
+
+function addAssistantMsg(html) {
+  const div = document.createElement('div');
+  div.className = 'msg assistant';
+  div.innerHTML = `<div class="msg-label">Claude</div><div class="msg-bubble">${html}</div>`;
+  chatArea.appendChild(div);
+  scrollChat();
+}
+
+async function addMCPCall(tool, detail) {
+  const div = document.createElement('div');
+  div.className = 'msg assistant';
+  const callId = 'mcp-' + Date.now();
+  div.innerHTML = `<div class="msg-label">MCP Bridge</div>
+    <div class="msg-bubble" style="padding:10px 14px;">
+      <div class="mcp-call" id="${callId}">
+        <span class="spinner"></span>
+        <span>${tool}(${detail})</span>
+      </div>
+    </div>`;
+  chatArea.appendChild(div);
+  scrollChat();
+
+  bridgeDot.classList.add('active');
+  bridgeArrow.classList.add('active');
+  bridgeArrow2.classList.add('active');
+  bridgePulse.classList.add('moving');
+
+  await sleep(1200);
+
+  const call = document.getElementById(callId);
+  if (call) call.querySelector('.spinner').outerHTML = '<span class="check">✓</span>';
+  bridgePulse.classList.remove('moving');
+  await sleep(300);
+}
+
+function removeEmpty() { if (spEmpty) spEmpty.style.display = 'none'; }
+
+function addSPList(id, name, icon, columns, rows) {
+  removeEmpty();
+  const div = document.createElement('div');
+  div.className = 'sp-list';
+  div.id = 'sp-list-' + id;
+
+  let t = `<table class="sp-table"><thead><tr>`;
+  columns.forEach(c => t += `<th>${c}</th>`);
+  t += `</tr></thead><tbody id="sp-tbody-${id}">`;
+  rows.forEach(row => {
+    t += '<tr>';
+    row.forEach(cell => t += `<td>${renderStatusCell(cell)}</td>`);
+    t += '</tr>';
+  });
+  t += '</tbody></table>';
+
+  div.innerHTML = `
+    <div class="sp-list-header">
+      <span class="sp-list-icon">${icon}</span>
+      <span class="sp-list-name">${name}</span>
+      <span class="sp-list-badge">✓ Created</span>
+    </div>${t}`;
+
+  spArea.appendChild(div);
+  spLists[id] = { name, columns, rows: [...rows] };
+  scrollSP();
+}
+
+function addSPRow(listId, row, highlight) {
+  const tbody = document.getElementById('sp-tbody-' + listId);
+  if (!tbody) return;
+  const tr = document.createElement('tr');
+  if (highlight) tr.className = 'sp-new-row';
+  row.forEach(cell => {
+    const td = document.createElement('td');
+    td.innerHTML = renderStatusCell(cell);
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+  scrollSP();
+}
+
+function updateSPCell(listId, rowMatchText, colIndex, newValue) {
+  const tbody = document.getElementById('sp-tbody-' + listId);
+  if (!tbody) return;
+  tbody.querySelectorAll('tr').forEach(tr => {
+    const firstTd = tr.querySelector('td');
+    if (firstTd && firstTd.textContent.includes(rowMatchText)) {
+      const tds = tr.querySelectorAll('td');
+      if (tds[colIndex]) {
+        tds[colIndex].innerHTML = renderStatusCell(newValue);
+        tr.className = 'sp-new-row';
+      }
+    }
+  });
+}
+
+let stepping = false;
+async function advanceStep() {
+  if (stepping) return;
+  if (currentStep >= SCRIPT.length - 1) {
+    if (isAutoplaying) toggleAutoplay();
+    narrativeText.innerHTML = 'Demo complete — click <em>Replay</em> to watch again';
+    return;
+  }
+  stepping = true;
+  currentStep++;
+  const step = SCRIPT[currentStep];
+  updateProgress();
+  if (step.narrative) narrativeText.innerHTML = step.narrative;
+
+  switch (step.type) {
+    case 'user_type':
+      await typeInInput(step.text);
+      addUserMsg(step.text);
+      break;
+    case 'assistant':
+      await sleep(500);
+      addAssistantMsg(step.html);
+      break;
+    case 'mcp_call':
+      await addMCPCall(step.tool, step.detail);
+      break;
+    case 'sp_list':
+      await sleep(250);
+      addSPList(step.id, step.name, step.icon, step.columns, step.rows);
+      break;
+    case 'sp_add_row':
+      await sleep(250);
+      addSPRow(step.listId, step.row, step.highlight);
+      break;
+    case 'sp_add_rows':
+      for (const row of step.rows) {
+        await sleep(220);
+        addSPRow(step.listId, row, step.highlight);
+      }
+      break;
+    case 'sp_update_cell':
+      await sleep(350);
+      updateSPCell(step.listId, step.rowMatch, step.colIndex, step.newValue);
+      break;
+  }
+  stepping = false;
+}
+
+function toggleAutoplay() {
+  isAutoplaying = !isAutoplaying;
+  btnAuto.textContent = isAutoplaying ? '⏸ Pause' : '▶ Autoplay';
+  btnAuto.classList.toggle('active', isAutoplaying);
+  if (isAutoplaying) {
+    advanceStep();
+    autoplayInterval = setInterval(() => {
+      if (currentStep >= SCRIPT.length - 1) { toggleAutoplay(); return; }
+      advanceStep();
+    }, 2800);
+  } else {
+    clearInterval(autoplayInterval);
+  }
+}
+
+function replayDemo() {
+  if (isAutoplaying) toggleAutoplay();
+  currentStep = -1;
+  chatArea.innerHTML = '';
+  spArea.innerHTML = '';
+  if (spEmpty) { spArea.appendChild(spEmpty); spEmpty.style.display = ''; }
+  Object.keys(spLists).forEach(k => delete spLists[k]);
+  bridgeDot.classList.remove('active');
+  bridgeArrow.classList.remove('active');
+  bridgeArrow2.classList.remove('active');
+  progressFill.style.width = '0%';
+  stepIndicator.textContent = 'Ready';
+  narrativeText.innerHTML = 'Click <em>Next</em> or <em>Autoplay</em> to see the SharePoint MCP Bridge in action';
+}
+</script>
+</body>
+</html>
