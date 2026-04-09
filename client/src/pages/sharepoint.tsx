@@ -160,8 +160,7 @@ export default function Sharepoint() {
         <section className="mb-20">
           <iframe
             src="/sharepoint-demo.html"
-            className="w-full rounded-2xl border border-border/60 shadow-sm"
-            style={{ height: "560px" }}
+            className="w-full rounded-2xl border border-border/60 shadow-sm h-[680px] md:h-[560px]"
             title="SharePoint MCP Bridge — Interactive Demo"
             data-testid="iframe-sharepoint-demo"
             allow="autoplay"
