@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SharePoint MCP Bridge — Demo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
+
+:root {
+  --bg: #faf8f5;
+  --bg-card: #ffffff;
+  --surface: #ffffff;
+  --surface-raised: #f9f6f1;
+  --border: #e8e2d8;
+  --border-light: #f0ebe3;
+  --text: #1a1a1a;
+  --text-body: #3d3d3d;
+  --text-muted: #7a7568;
+  --text-dim: #a8a092;
+  --accent: #d97706;
+  --accent-soft: rgba(217, 119, 6, 0.08);
+  --accent-border: rgba(217, 119, 6, 0.25);
+  --green: #16a34a;
+  --green-soft: rgba(22, 163, 74, 0.08);
+  --green-border: rgba(22, 163, 74, 0.2);
+  --blue: #2563eb;
+  --blue-soft: rgba(37, 99, 235, 0.06);
+  --blue-border: rgba(37, 99, 235, 0.15);
+  --radius: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg); color: var(--text);
+  overflow: hidden; height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+/* ─── Top Bar ─── */
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface); flex-shrink: 0;
+}
+.top-left { display: flex; align-items: center; gap: 10px; }
+.top-title { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 15px; }
+.top-tag {
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--text-dim); background: var(--surface-raised);
+  border: 1px solid var(--border); padding: 2px 8px; border-radius: 16px;
+}
+.top-right { display: flex; gap: 6px; align-items: center; }
+.sn { font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-right: 4px; }
+.cb {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text-muted); padding: 5px 14px; border-radius: 18px;
+  font-size: 11px; font-family: 'DM Sans', sans-serif;
+  font-weight: 500; cursor: pointer; transition: all 0.2s;
+}
+.cb:hover { border-color: var(--accent); color: var(--accent); }
+.cb.act { border-color: var(--accent); color: #fff; background: var(--accent); }
+
+/* ─── Main Area ─── */
+.main { flex: 1; display: flex; overflow: hidden; position: relative; }
+
+/* ─── Panel Container — focus mode ─── */
+.panels {
+  display: flex; width: 100%; height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* On mobile: panels side by side, translate to show one */
+/* On desktop: both visible, active one expands */
+
+.panel {
+  flex-shrink: 0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Panel Headers ─── */
+.panel-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface); flex-shrink: 0;
+}
+.ph-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.ph-dot.claude { background: var(--accent); }
+.ph-dot.sp { background: var(--blue); }
+.ph-label { font-size: 12px; font-weight: 500; color: var(--text); }
+.ph-sub { font-size: 10px; color: var(--text-dim); margin-left: auto; font-family: 'JetBrains Mono', monospace; }
+
+/* ─── MCP Bridge Strip ─── */
+.bridge-strip {
+  width: 40px; flex-shrink: 0;
+  background: var(--surface-raised);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+  position: relative;
+}
+.bridge-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--border); transition: all 0.4s;
+}
+.bridge-dot.active {
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--green-soft);
+}
+.bridge-lbl {
+  writing-mode: vertical-rl;
+  font-size: 9px; font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* ─── Claude Chat ─── */
+.chat-scroll {
+  flex: 1; padding: 14px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 10px;
+  background: var(--bg);
+}
+
+.msg { max-width: 95%; animation: msgIn 0.3s ease-out; }
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.msg.user { align-self: flex-end; }
+.msg-lbl {
+  font-size: 9px; font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 3px; font-weight: 500;
+}
+.msg.user .msg-lbl { text-align: right; color: var(--accent); }
+.msg.assistant .msg-lbl { color: var(--text-dim); }
+
+.msg.user .bub {
+  background: var(--accent); color: #fff;
+  border-radius: 10px 10px 3px 10px;
+  padding: 8px 14px; font-size: 13px; line-height: 1.5;
+  box-shadow: var(--shadow-sm);
+}
+.msg.assistant .bub {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px 10px 10px 3px;
+  padding: 10px 14px; font-size: 13px; line-height: 1.6;
+  color: var(--text-body); box-shadow: var(--shadow-sm);
+}
+.msg.assistant .bub strong { color: var(--text); }
+
+.mcp-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--accent-soft); border: 1px solid var(--accent-border);
+  padding: 4px 10px; border-radius: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent);
+}
+.mcp-chip .spin {
+  width: 9px; height: 9px;
+  border: 1.5px solid rgba(217,119,6,0.25);
+  border-top-color: var(--accent); border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.mcp-chip .chk { color: var(--green); font-weight: 600; }
+
+/* Chat input */
+.chat-input {
+  padding: 8px 14px 10px;
+  border-top: 1px solid var(--border);
+  background: var(--surface); flex-shrink: 0;
+}
+.input-box {
+  display: flex; align-items: center;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 20px; padding: 8px 12px; gap: 8px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.input-box.typing { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.input-text { flex: 1; font-size: 12px; color: var(--text); min-height: 16px; font-family: inherit; }
+.input-cursor {
+  display: inline-block; width: 1.5px; height: 14px;
+  background: var(--accent); animation: blink 0.9s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+.send-btn {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent); border: none; color: #fff;
+  font-size: 12px; display: flex; align-items: center; justify-content: center;
+  opacity: 0.3; transition: opacity 0.2s; flex-shrink: 0; cursor: pointer;
+}
+.send-btn.ready { opacity: 1; }
+
+/* ─── SharePoint Panel ─── */
+.sp-scroll {
+  flex: 1; padding: 14px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--bg);
+}
+.sp-empty {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  color: var(--text-dim); font-size: 12px;
+}
+.sp-empty-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--surface-raised); border: 1.5px dashed var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+
+/* SP List Card */
+.sp-list {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  box-shadow: var(--shadow);
+  animation: spIn 0.4s ease-out;
+}
+@keyframes spIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.sp-list-head {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 12px;
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border-light);
+}
+.sp-list-name { font-weight: 600; font-size: 12px; }
+.sp-list-badge {
+  margin-left: auto; font-size: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--green); background: var(--green-soft);
+  border: 1px solid var(--green-border);
+  padding: 1px 7px; border-radius: 10px;
+}
+
+.sp-tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
+.sp-tbl th {
+  text-align: left; padding: 5px 10px;
+  color: var(--text-muted); font-weight: 500;
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--surface);
+}
+.sp-tbl td {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(232,226,216,0.5);
+  color: var(--text-body); font-size: 11px;
+}
+.sp-tbl tr:last-child td { border-bottom: none; }
+.sp-tbl tr { animation: rowSlide 0.3s ease-out; }
+@keyframes rowSlide {
+  from { opacity: 0; transform: translateX(6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.sp-status {
+  display: inline-flex; padding: 1px 7px;
+  border-radius: 8px; font-size: 9px; font-weight: 500;
+}
+.sp-status.active { background: var(--green-soft); color: var(--green); border: 1px solid var(--green-border); }
+.sp-status.pending { background: rgba(245,158,11,0.08); color: #b45309; border: 1px solid rgba(245,158,11,0.2); }
+.sp-status.new { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-border); }
+
+.sp-highlight td { animation: hlRow 2s ease-out; }
+@keyframes hlRow {
+  0% { background: rgba(217,119,6,0.15); }
+  100% { background: transparent; }
+}
+
+/* ─── Narrative Bar ─── */
+.narr-bar {
+  padding: 8px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--surface); flex-shrink: 0;
+  display: flex; align-items: center; gap: 12px;
+}
+.narr-text { font-size: 11px; color: var(--text-muted); flex: 1; line-height: 1.4; }
+.narr-text em { color: var(--accent); font-style: normal; font-weight: 500; }
+.prog-track { width: 140px; height: 3px; background: var(--border-light); border-radius: 2px; overflow: hidden; flex-shrink: 0; }
+.prog-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.5s; width: 0; }
+
+/* ─── Focus mode: Mobile = slide, Desktop = flex weight ─── */
+@media (min-width: 769px) {
+  .panel.claude-panel { width: 50%; }
+  .panel.sp-panel { width: 50%; }
+  .panel.claude-panel.focus { width: 55%; }
+  .panel.sp-panel.focus { width: 55%; }
+  .panel.claude-panel.recede { width: 45%; }
+  .panel.sp-panel.recede { width: 45%; }
+  /* Both always visible on desktop */
+}
+
+@media (max-width: 768px) {
+  .panels { width: 200%; }
+  .panel { width: 50% !important; } /* each panel = screen width */
+  .bridge-strip { display: none; }
+  .panels.show-sp { transform: translateX(-50%); }
+  .panels.show-claude { transform: translateX(0); }
+  .top-tag { display: none; }
+  /* Focus tabs for mobile */
+  .mob-tabs {
+    display: flex !important;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .mob-tab {
+    flex: 1; padding: 8px;
+    text-align: center; font-size: 11px;
+    font-weight: 500; color: var(--text-muted);
+    cursor: pointer; border: none; background: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .mob-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
+}
+
+.mob-tabs { display: none; }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-left">
+    <span class="top-title">SharePoint MCP Bridge</span>
+    <span class="top-tag">Interactive Demo</span>
+  </div>
+  <div class="top-right">
+    <span class="sn" id="sn">Ready</span>
+    <button class="cb" onclick="replayDemo()">↻ Replay</button>
+    <button class="cb" id="abBtn" onclick="toggleAuto()">▶ Autoplay</button>
+    <button class="cb" onclick="advanceStep()">Next →</button>
+  </div>
+</div>
+
+<!-- Mobile tabs -->
+<div class="mob-tabs" id="mobTabs">
+  <button class="mob-tab on" id="mtClaude" onclick="mobFocus('claude')">Claude</button>
+  <button class="mob-tab" id="mtSP" onclick="mobFocus('sp')">SharePoint</button>
+</div>
+
+<div class="main">
+  <div class="panels" id="panels">
+
+    <!-- Claude Panel -->
+    <div class="panel claude-panel focus" id="claudePanel">
+      <div class="panel-head">
+        <span class="ph-dot claude"></span>
+        <span class="ph-label">Claude</span>
+        <span class="ph-sub">claude.ai</span>
+      </div>
+      <div class="chat-scroll" id="chatScroll"></div>
+      <div class="chat-input">
+        <div class="input-box" id="inputBox">
+          <div class="input-text" id="inputText"></div>
+          <button class="send-btn" id="sendBtn">↑</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bridge -->
+    <div class="bridge-strip">
+      <div class="bridge-dot" id="bridgeDot"></div>
+      <span class="bridge-lbl">MCP</span>
+    </div>
+
+    <!-- SharePoint Panel -->
+    <div class="panel sp-panel recede" id="spPanel">
+      <div class="panel-head">
+        <span class="ph-dot sp"></span>
+        <span class="ph-label">SharePoint</span>
+        <span class="ph-sub">contoso.sharepoint.com</span>
+      </div>
+      <div class="sp-scroll" id="spScroll">
+        <div class="sp-empty" id="spEmpty">
+          <div class="sp-empty-icon">☁</div>
+          <span>No lists yet</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="narr-bar">
+  <div class="narr-text" id="narrText">Click <em>Next</em> or <em>Autoplay</em> to begin</div>
+  <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+</div>
+
+<script>
+// ─── Focus Management ───
+const panels = document.getElementById('panels');
+const claudePanel = document.getElementById('claudePanel');
+const spPanel = document.getElementById('spPanel');
+const mtClaude = document.getElementById('mtClaude');
+const mtSP = document.getElementById('mtSP');
+
+function focusClaude() {
+  claudePanel.classList.add('focus'); claudePanel.classList.remove('recede');
+  spPanel.classList.add('recede'); spPanel.classList.remove('focus');
+  panels.classList.remove('show-sp'); panels.classList.add('show-claude');
+  mtClaude.classList.add('on'); mtSP.classList.remove('on');
+}
+function focusSP() {
+  spPanel.classList.add('focus'); spPanel.classList.remove('recede');
+  claudePanel.classList.add('recede'); claudePanel.classList.remove('focus');
+  panels.classList.remove('show-claude'); panels.classList.add('show-sp');
+  mtSP.classList.add('on'); mtClaude.classList.remove('on');
+}
+function mobFocus(which) {
+  if (which === 'claude') focusClaude();
+  else focusSP();
+}
+
+// ─── DOM refs ───
+const chatScroll = document.getElementById('chatScroll');
+const spScroll = document.getElementById('spScroll');
+const spEmpty = document.getElementById('spEmpty');
+const inputBox = document.getElementById('inputBox');
+const inputText = document.getElementById('inputText');
+const sendBtn = document.getElementById('sendBtn');
+const bridgeDot = document.getElementById('bridgeDot');
+const narrText = document.getElementById('narrText');
+const progFill = document.getElementById('progFill');
+const snEl = document.getElementById('sn');
+const abBtn = document.getElementById('abBtn');
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function scrollChat() { chatScroll.scrollTop = chatScroll.scrollHeight; }
+function scrollSP() { spScroll.scrollTop = spScroll.scrollHeight; }
+
+function statusHTML(val) {
+  if (typeof val === 'object') return `<span class="sp-status ${val.c}">${val.t}</span>`;
+  return val;
+}
+
+// ─── Script ───
+const S = [
+  { type:'user', text:'Set up a new SharePoint site for a solicitor\'s practice. I need lists for client matters, compliance tasks, and a fee earner directory.', narr:'The solicitor asks Claude to build their SharePoint environment' },
+  { type:'assistant', html:'I\'ll create three core lists for your practice via the SharePoint MCP Bridge:<br><br><strong>①</strong> Client Matters<br><strong>②</strong> Compliance Tasks<br><strong>③</strong> Fee Earner Directory', narr:'Claude plans the structure and begins executing' },
+  { type:'mcp', tool:'sp_list_create', detail:'"Client Matters"', narr:'<em>sp_list_create</em> → Creating Client Matters' },
+  { type:'sp_list', id:'matters', name:'Client Matters', cols:['Matter Ref','Client','Type','Fee Earner','Status'], rows:[], narr:'Client Matters list created in SharePoint' },
+  { type:'mcp', tool:'sp_column_add', detail:'5 columns', narr:'<em>sp_column_add</em> → Adding columns' },
+  { type:'mcp', tool:'sp_list_create', detail:'"Compliance Tasks"', narr:'<em>sp_list_create</em> → Creating Compliance Tasks' },
+  { type:'sp_list', id:'compliance', name:'Compliance Tasks', cols:['Task','Category','Due','Assigned','Status'], rows:[
+    ['AML Policy Review','SRA','2026-04-30','All Partners',{t:'Pending',c:'pending'}],
+    ['PII Insurance Renewal','Insurance','2026-06-01','Practice Mgr',{t:'Pending',c:'pending'}],
+    ['Account Reconciliation','Accounts','2026-04-15','Accounts',{t:'Active',c:'active'}],
+  ], narr:'Compliance Tasks populated with regulatory items' },
+  { type:'mcp', tool:'sp_list_create', detail:'"Fee Earner Directory"', narr:'<em>sp_list_create</em> → Creating Fee Earner Directory' },
+  { type:'sp_list', id:'earners', name:'Fee Earner Directory', cols:['Name','Role','Specialism','SRA No.','Status'], rows:[
+    ['Sarah Mitchell','Partner','Conveyancing','SRA/284751',{t:'Active',c:'active'}],
+    ['James Thornton','Associate','Family Law','SRA/319824',{t:'Active',c:'active'}],
+    ['Priya Kapoor','Partner','Commercial Lit.','SRA/267103',{t:'Active',c:'active'}],
+  ], narr:'Fee Earner Directory populated with the practice team' },
+  { type:'assistant', html:'All three lists are live:<br><br>• <strong>Client Matters</strong> — ready for new matters<br>• <strong>Compliance Tasks</strong> — 3 regulatory items<br>• <strong>Fee Earner Directory</strong> — 3 fee earners<br><br>Want to open a new matter?', narr:'Practice site is fully configured' },
+  { type:'user', text:'Yes — new client Mrs. Eleanor Whitfield, residential conveyancing. Assign to Sarah Mitchell. Ref WHIT-2026-001.', narr:'Creating a new matter through natural conversation' },
+  { type:'mcp', tool:'sp_item_create', detail:'WHIT-2026-001', narr:'<em>sp_item_create</em> → Adding new matter' },
+  { type:'sp_row', listId:'matters', row:['WHIT-2026-001','Mrs. E. Whitfield','Conveyancing','S. Mitchell',{t:'New',c:'new'}], narr:'New matter appears in Client Matters' },
+  { type:'assistant', html:'Matter <strong>WHIT-2026-001</strong> is live. I\'ve also added conveyancing compliance tasks — AML check, source of funds, and conflict search.', narr:'Claude proactively creates linked compliance tasks' },
+  { type:'mcp', tool:'sp_item_create', detail:'3 compliance checks', narr:'<em>sp_item_create</em> → Adding compliance tasks' },
+  { type:'sp_rows', listId:'compliance', rows:[
+    ['AML/KYC — Whitfield','WHIT-2026-001','2026-04-16','S. Mitchell',{t:'New',c:'new'}],
+    ['Source of Funds','WHIT-2026-001','2026-04-18','S. Mitchell',{t:'New',c:'new'}],
+    ['Conflict Search','WHIT-2026-001','2026-04-11','S. Mitchell',{t:'New',c:'new'}],
+  ], narr:'Matter-specific compliance tasks created' },
+  { type:'user', text:'Mark the conflict check as completed.', narr:'Updating existing items is just as easy' },
+  { type:'mcp', tool:'sp_item_update', detail:'Conflict Search → Completed', narr:'<em>sp_item_update</em> → Updating status' },
+  { type:'sp_update', listId:'compliance', match:'Conflict Search', col:4, val:{t:'Active',c:'active'}, narr:'Status updated in SharePoint instantly' },
+  { type:'assistant', html:'Done — conflict search completed for WHIT-2026-001. Two tasks remaining.', narr:'Build, create, modify — all through conversation' },
+];
+
+let step = -1, stepping = false, autoInt = null, isAuto = false;
+
+function updateProg() {
+  progFill.style.width = Math.round(((step+1)/S.length)*100)+'%';
+  snEl.textContent = `${step+1} / ${S.length}`;
+}
+
+async function typeInput(text) {
+  focusClaude();
+  inputBox.classList.add('typing');
+  sendBtn.classList.remove('ready');
+  inputText.innerHTML = '';
+  for (let i = 0; i < text.length; i++) {
+    inputText.textContent = text.slice(0, i+1);
+    inputText.innerHTML += '<span class="input-cursor"></span>';
+    await sleep(14 + Math.random()*18);
+  }
+  sendBtn.classList.add('ready');
+  await sleep(300);
+  inputText.innerHTML = '';
+  inputBox.classList.remove('typing');
+  sendBtn.classList.remove('ready');
+}
+
+function addUser(text) {
+  focusClaude();
+  const d = document.createElement('div');
+  d.className = 'msg user';
+  d.innerHTML = `<div class="msg-lbl">You</div><div class="bub">${text}</div>`;
+  chatScroll.appendChild(d);
+  scrollChat();
+}
+
+function addAssistant(html) {
+  focusClaude();
+  const d = document.createElement('div');
+  d.className = 'msg assistant';
+  d.innerHTML = `<div class="msg-lbl">Claude</div><div class="bub">${html}</div>`;
+  chatScroll.appendChild(d);
+  scrollChat();
+}
+
+async function addMCP(tool, detail) {
+  focusClaude();
+  const d = document.createElement('div');
+  d.className = 'msg assistant';
+  const id = 'mcp'+Date.now();
+  d.innerHTML = `<div class="msg-lbl">MCP Bridge</div><div class="bub" style="padding:7px 12px"><div class="mcp-chip" id="${id}"><span class="spin"></span>${tool}(${detail})</div></div>`;
+  chatScroll.appendChild(d);
+  scrollChat();
+  bridgeDot.classList.add('active');
+  await sleep(1100);
+  const chip = document.getElementById(id);
+  if (chip) chip.querySelector('.spin').outerHTML = '<span class="chk">✓</span>';
+  await sleep(200);
+}
+
+function removeEmpty() { if (spEmpty) spEmpty.style.display = 'none'; }
+
+function addSPList(id, name, cols, rows) {
+  focusSP();
+  removeEmpty();
+  const d = document.createElement('div');
+  d.className = 'sp-list'; d.id = 'spl-'+id;
+  let t = '<table class="sp-tbl"><thead><tr>';
+  cols.forEach(c => t += `<th>${c}</th>`);
+  t += '</tr></thead><tbody id="stb-'+id+'">';
+  rows.forEach(r => {
+    t += '<tr>';
+    r.forEach(cell => t += `<td>${statusHTML(cell)}</td>`);
+    t += '</tr>';
+  });
+  t += '</tbody></table>';
+  d.innerHTML = `<div class="sp-list-head"><span class="sp-list-name">${name}</span><span class="sp-list-badge">✓ Created</span></div>${t}`;
+  spScroll.appendChild(d);
+  scrollSP();
+}
+
+function addSPRow(listId, row) {
+  focusSP();
+  const tbody = document.getElementById('stb-'+listId);
+  if (!tbody) return;
+  const tr = document.createElement('tr');
+  tr.className = 'sp-highlight';
+  row.forEach(cell => { const td = document.createElement('td'); td.innerHTML = statusHTML(cell); tr.appendChild(td); });
+  tbody.appendChild(tr);
+  // Scroll the specific list into view
+  const list = document.getElementById('spl-'+listId);
+  if (list) list.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  scrollSP();
+}
+
+function updateSPCell(listId, matchText, colIdx, val) {
+  focusSP();
+  const tbody = document.getElementById('stb-'+listId);
+  if (!tbody) return;
+  tbody.querySelectorAll('tr').forEach(tr => {
+    const td0 = tr.querySelector('td');
+    if (td0 && td0.textContent.includes(matchText)) {
+      const tds = tr.querySelectorAll('td');
+      if (tds[colIdx]) { tds[colIdx].innerHTML = statusHTML(val); tr.className = 'sp-highlight'; }
+    }
+  });
+  const list = document.getElementById('spl-'+listId);
+  if (list) list.scrollIntoView({ behavior: 'smooth', block: 'end' });
+}
+
+async function advanceStep() {
+  if (stepping) return;
+  if (step >= S.length - 1) {
+    if (isAuto) toggleAuto();
+    narrText.innerHTML = 'Demo complete — click <em>↻ Replay</em> to watch again';
+    return;
+  }
+  stepping = true;
+  step++;
+  const s = S[step];
+  updateProg();
+  if (s.narr) narrText.innerHTML = s.narr;
+
+  switch(s.type) {
+    case 'user':
+      await typeInput(s.text);
+      addUser(s.text);
+      break;
+    case 'assistant':
+      await sleep(400);
+      addAssistant(s.html);
+      break;
+    case 'mcp':
+      await addMCP(s.tool, s.detail);
+      break;
+    case 'sp_list':
+      await sleep(200);
+      addSPList(s.id, s.name, s.cols, s.rows);
+      break;
+    case 'sp_row':
+      await sleep(200);
+      addSPRow(s.listId, s.row);
+      break;
+    case 'sp_rows':
+      for (const r of s.rows) { await sleep(200); addSPRow(s.listId, r); }
+      break;
+    case 'sp_update':
+      await sleep(300);
+      updateSPCell(s.listId, s.match, s.col, s.val);
+      break;
+  }
+  stepping = false;
+}
+
+function toggleAuto() {
+  isAuto = !isAuto;
+  abBtn.textContent = isAuto ? '⏸ Pause' : '▶ Autoplay';
+  abBtn.classList.toggle('act', isAuto);
+  if (isAuto) {
+    advanceStep();
+    autoInt = setInterval(() => {
+      if (step >= S.length - 1) { toggleAuto(); return; }
+      advanceStep();
+    }, 2800);
+  } else clearInterval(autoInt);
+}
+
+function replayDemo() {
+  if (isAuto) toggleAuto();
+  step = -1;
+  chatScroll.innerHTML = '';
+  spScroll.innerHTML = '';
+  if (spEmpty) { spScroll.appendChild(spEmpty); spEmpty.style.display = ''; }
+  bridgeDot.classList.remove('active');
+  progFill.style.width = '0';
+  snEl.textContent = 'Ready';
+  narrText.innerHTML = 'Click <em>Next</em> or <em>Autoplay</em> to begin';
+  focusClaude();
+}
+</script>
+</body>
+</html>

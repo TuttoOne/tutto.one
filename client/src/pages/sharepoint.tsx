@@ -156,20 +156,15 @@ export default function Sharepoint() {
           </div>
         </section>
 
-        {/* 2. Demo Video Placeholder */}
+        {/* 2. Interactive Demo */}
         <section className="mb-20">
-          <div
-            className="w-full aspect-video bg-muted/60 rounded-2xl border border-border/60 flex flex-col items-center justify-center text-muted-foreground"
-            data-testid="div-video-placeholder"
-          >
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-            <p className="text-lg font-medium text-foreground/60">Video coming soon</p>
-            <p className="text-sm mt-1">A walkthrough of the SharePoint Bridge in action</p>
-          </div>
+          <iframe
+            src="/sp-demo.html"
+            className="w-full rounded-2xl border border-border/60 overflow-hidden"
+            style={{ height: "520px" }}
+            title="SharePoint MCP Bridge — Interactive Demo"
+            data-testid="iframe-sp-demo"
+          />
         </section>
 
         {/* 3. What It Does */}
