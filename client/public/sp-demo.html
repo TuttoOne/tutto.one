@@ -282,9 +282,8 @@ function addCard(html) {
   wrap.style.width = '100%';
   wrap.style.margin = '0 auto';
   wrap.innerHTML = html;
-  const card = wrap.firstElementChild ? wrap : wrap;
   tl.appendChild(wrap);
-  wrap.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  tl.scrollTop = tl.scrollHeight;
 }
 
 // ─── Script ───
@@ -375,10 +374,27 @@ function updProg() {
   snEl.textContent = `${step+1}/${S.length}`;
 }
 
+function doReset() {
+  step = -1;
+  tl.innerHTML = '';
+  Object.keys(lists).forEach(k => delete lists[k]);
+  pf.style.width = '0';
+  snEl.textContent = 'Ready';
+  nt.innerHTML = 'Looping demo…';
+}
+
 async function next() {
-  if (stepping || step >= S.length-1) {
-    if (step >= S.length-1 && isAuto) toggleAuto();
-    if (step >= S.length-1) nt.innerHTML = 'Demo complete — click <em>↻</em> to replay';
+  if (stepping) return;
+  // At end: loop automatically (pause 3s then restart)
+  if (step >= S.length - 1) {
+    if (!isAuto) return;
+    clearInterval(autoInt);
+    stepping = true;
+    nt.innerHTML = 'Restarting…';
+    await sleep(3000);
+    doReset();
+    stepping = false;
+    startAuto();
     return;
   }
   stepping = true;
@@ -445,28 +461,33 @@ async function next() {
   stepping = false;
 }
 
+function startAuto() {
+  isAuto = true;
+  abBtn.textContent = '⏸';
+  abBtn.classList.add('act');
+  next();
+  autoInt = setInterval(() => { next(); }, 2600);
+}
+
 function toggleAuto() {
-  isAuto = !isAuto;
-  abBtn.textContent = isAuto ? '⏸' : '▶ Auto';
-  abBtn.classList.toggle('act', isAuto);
   if (isAuto) {
-    next();
-    autoInt = setInterval(() => {
-      if (step >= S.length-1) { toggleAuto(); return; }
-      next();
-    }, 2600);
-  } else clearInterval(autoInt);
+    isAuto = false;
+    clearInterval(autoInt);
+    abBtn.textContent = '▶ Auto';
+    abBtn.classList.remove('act');
+  } else {
+    startAuto();
+  }
 }
 
 function replay() {
-  if (isAuto) toggleAuto();
-  step = -1;
-  tl.innerHTML = '';
-  Object.keys(lists).forEach(k => delete lists[k]);
-  pf.style.width = '0';
-  snEl.textContent = 'Ready';
-  nt.innerHTML = 'Click <em>Next</em> or <em>Auto</em> to begin';
+  if (isAuto) { isAuto = false; clearInterval(autoInt); }
+  doReset();
+  startAuto();
 }
+
+// Start automatically on load
+startAuto();
 </script>
 </body>
 </html>
