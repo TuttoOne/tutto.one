@@ -723,6 +723,29 @@ body {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ─── List focus: collapse inactive lists to header-only ─── */
+.sp-list .sp-list-table {
+  transition: max-height 0.35s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+.sp-list.sp-collapsed .sp-list-table {
+  max-height: 0 !important;
+  opacity: 0;
+}
+.sp-list.sp-collapsed {
+  opacity: 0.55;
+}
+.sp-list.sp-active {
+  opacity: 1;
+  box-shadow: var(--shadow-lg);
+}
+.sp-list-row-count {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  margin-left: 8px;
+}
 </style>
 </head>
 <body>
@@ -1101,6 +1124,44 @@ function updateSPCell(listId, rowMatchText, colIndex, newValue) {
   });
 }
 
+
+function updateListCount(id) {
+  const countEl = document.getElementById('sp-count-' + id);
+  if (!countEl) return;
+  const tbody = document.getElementById('sp-tbody-' + id);
+  const rows = tbody ? tbody.querySelectorAll('tr').length : 0;
+  countEl.textContent = rows > 0 ? rows + ' items' : '';
+}
+
+function focusList(listId) {
+  Object.keys(spLists).forEach(id => {
+    const el = document.getElementById('sp-list-' + id);
+    if (!el) return;
+    if (id === listId) {
+      el.classList.remove('sp-collapsed');
+      el.classList.add('sp-active');
+    } else {
+      el.classList.add('sp-collapsed');
+      el.classList.remove('sp-active');
+      updateListCount(id);
+    }
+  });
+  const activeEl = document.getElementById('sp-list-' + listId);
+  if (activeEl) {
+    activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function expandAllLists() {
+  Object.keys(spLists).forEach(id => {
+    const el = document.getElementById('sp-list-' + id);
+    if (!el) return;
+    el.classList.remove('sp-collapsed', 'sp-active');
+    const countEl = document.getElementById('sp-count-' + id);
+    if (countEl) countEl.textContent = '';
+  });
+}
+
 let stepping = false;
 async function advanceStep() {
   if (stepping) return;
@@ -1135,19 +1196,24 @@ async function advanceStep() {
       break;
     case 'sp_list':
       await sleep(250);
+      expandAllLists();
       addSPList(step.id, step.name, step.icon, step.columns, step.rows);
+      focusList(step.id);
       break;
     case 'sp_add_row':
+      focusList(step.listId);
       await sleep(250);
       addSPRow(step.listId, step.row, step.highlight);
       break;
     case 'sp_add_rows':
+      focusList(step.listId);
       for (const row of step.rows) {
         await sleep(220);
         addSPRow(step.listId, row, step.highlight);
       }
       break;
     case 'sp_update_cell':
+      focusList(step.listId);
       await sleep(350);
       updateSPCell(step.listId, step.rowMatch, step.colIndex, step.newValue);
       break;
@@ -1177,6 +1243,7 @@ function replayDemo() {
   spArea.innerHTML = '';
   if (spEmpty) { spArea.appendChild(spEmpty); spEmpty.style.display = ''; }
   Object.keys(spLists).forEach(k => delete spLists[k]);
+  expandAllLists();
   bridgeDot.classList.remove('active');
   bridgeArrow.classList.remove('active');
   bridgeArrow2.classList.remove('active');
