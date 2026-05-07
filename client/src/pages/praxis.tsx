@@ -1,215 +1,259 @@
 import { useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+
+const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono','Fira Mono','Courier New',monospace" };
+const SERIF: React.CSSProperties = { fontFamily: "'Source Serif 4',Georgia,serif" };
+const SANS: React.CSSProperties = { fontFamily: "'Inter',-apple-system,sans-serif" };
+const CAPS: React.CSSProperties = { ...MONO, textTransform: "uppercase", letterSpacing: "0.12em" };
 
 export default function Praxis() {
   useEffect(() => {
-    document.title = "Praxis — Tutto";
+    document.title = "Praxis — Client Training";
     return () => { document.title = "Tutto | AI Consulting"; };
   }, []);
 
-  const mono: React.CSSProperties = { fontFamily: "'JetBrains Mono', 'Fira Mono', 'Courier New', monospace" };
-  const serif: React.CSSProperties = { fontFamily: "'Source Serif 4', Georgia, serif" };
-
   return (
-    <div style={{ background: "#f6f1ea", minHeight: "100vh", color: "#1a1a1a" }}>
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "60px 32px 100px" }}>
+    <div style={{ background: "#f6f1ea", minHeight: "100vh", ...SANS }}>
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 32px 80px" }}>
 
-        {/* ── Window mockup ── */}
+        {/* ── Doc header ── */}
         <div style={{
-          border: "1.5px solid #1a1a1a",
-          borderRadius: 10,
-          overflow: "hidden",
-          boxShadow: "4px 4px 0 #1a1a1a",
-          marginBottom: 56,
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          borderBottom: "1px solid #1a1a1a",
+          padding: "18px 0",
+          marginBottom: 64,
         }}>
-          {/* Title bar */}
-          <div style={{
-            background: "#1a1a1a",
-            padding: "10px 16px",
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-          }}>
-            <div style={{ display: "flex", gap: 6 }}>
-              {["#ff5f56","#ffbd2e","#27c93f"].map(c => (
-                <span key={c} style={{ width: 11, height: 11, borderRadius: "50%", background: c, display: "block" }} />
-              ))}
-            </div>
-            <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-              <span style={{ ...mono, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 5, padding: "3px 18px", fontSize: 11, color: "rgba(255,255,255,0.45)" }}>
-                ~/praxis-session — VS Code
-              </span>
-            </div>
-          </div>
-
-          {/* Editor body */}
-          <div style={{ display: "flex", background: "#1e1e1e", minHeight: 280 }}>
-
-            {/* File explorer */}
-            <div style={{ width: 190, borderRight: "1px solid #2d2d2d", padding: "12px 0", flexShrink: 0 }}>
-              <div style={{ ...mono, fontSize: 9, color: "#666", padding: "0 12px 8px", letterSpacing: "0.08em", textTransform: "uppercase" }}>Explorer</div>
-              {[
-                { label: "📁 praxis-session", indent: 0, dim: false },
-                { label: "📄 skill.md", indent: 1, active: true, dim: false },
-                { label: "📄 run.py", indent: 1, dim: false },
-                { label: "📄 engagement-letter.pdf", indent: 1, dim: true },
-                { label: "📄 meeting-notes.docx", indent: 1, dim: true },
-                { label: "📄 output.md", indent: 1, dim: false },
-              ].map((f: any) => (
-                <div key={f.label} style={{
-                  ...mono,
-                  fontSize: 11,
-                  padding: `5px ${8 + f.indent * 14}px`,
-                  color: f.active ? "#e8d5b0" : f.dim ? "#444" : "#9d9d9d",
-                  background: f.active ? "rgba(255,255,255,0.06)" : "transparent",
-                  borderLeft: f.active ? "2px solid #d97706" : "2px solid transparent",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}>
-                  {f.label}
-                </div>
-              ))}
-            </div>
-
-            {/* Code editor */}
-            <div style={{ flex: 1, padding: "16px 20px", overflow: "hidden" }}>
-              {[
-                { ln: "1",  text: "# skill.md — House rules for this matter", color: "#6a9955" },
-                { ln: "2",  text: "", color: "" },
-                { ln: "3",  text: "## Output format", color: "#9cdcfe" },
-                { ln: "4",  text: "- Always begin with a one-sentence summary.", color: "#d4d4d4" },
-                { ln: "5",  text: "- Cite the source document and page number.", color: "#d4d4d4" },
-                { ln: "6",  text: "- Flag anything uncertain with [REVIEW].", color: "#d4d4d4" },
-                { ln: "7",  text: "", color: "" },
-                { ln: "8",  text: "## Scope", color: "#9cdcfe" },
-                { ln: "9",  text: "- Only use documents inside this folder.", color: "#d4d4d4" },
-                { ln: "10", text: "- Do not infer facts not present in the files.", color: "#d4d4d4" },
-                { ln: "11", text: "", color: "" },
-                { ln: "12", text: "## Tone", color: "#9cdcfe" },
-                { ln: "13", text: "- Plain English. No legal jargon unless quoting.", color: "#d4d4d4" },
-              ].map(line => (
-                <div key={line.ln} style={{ display: "flex", gap: 16, marginBottom: 2 }}>
-                  <span style={{ ...mono, fontSize: 11, color: "#404040", minWidth: 16, textAlign: "right", userSelect: "none" }}>{line.ln}</span>
-                  <span style={{ ...mono, fontSize: 11, color: line.color || "transparent" }}>{line.text || "\u00a0"}</span>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-          {/* Terminal strip */}
-          <div style={{ background: "#141414", borderTop: "1px solid #2d2d2d", padding: "10px 20px", display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ ...mono, fontSize: 11, color: "#27c93f" }}>→</span>
-            <span style={{ ...mono, fontSize: 11, color: "#666" }}>python run.py</span>
-            <span style={{ ...mono, fontSize: 11, color: "#888", marginLeft: 8 }}>✓ Done · 3 documents read · output.md written</span>
-          </div>
+          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>
+            Praxis · Client Training One-Pager · V1
+          </span>
+          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>01 / 01</span>
         </div>
 
-        {/* ── Heading ── */}
-        <div style={{ marginBottom: 48 }}>
-          <h1 style={{ ...serif, fontSize: "clamp(52px, 8vw, 80px)", fontWeight: 700, lineHeight: 1.0, letterSpacing: "-1.5px", marginBottom: 16 }}>
-            Praxis.
+        {/* ── Tagline ── */}
+        <div style={{ textAlign: "center", marginBottom: 40 }}>
+          <p style={{ ...CAPS, fontSize: 10, letterSpacing: "0.28em", color: "#1a1a1a" }}>
+            A &nbsp;M e n t a l &nbsp;M o d e l &nbsp;i n &nbsp;O n e &nbsp;P a g e
+          </p>
+        </div>
+
+        {/* ── Hero ── */}
+        <div style={{ marginBottom: 28 }}>
+          <h1 style={{
+            ...SERIF,
+            fontSize: "clamp(36px, 6vw, 60px)",
+            fontWeight: 700,
+            lineHeight: 1.12,
+            letterSpacing: "-0.5px",
+            marginBottom: 0,
+            color: "#1a1a1a",
+          }}>
+            The folder is the app.<br />
+            It runs on your machine.<br />
+            It belongs to you.
           </h1>
-          <p style={{ ...mono, fontSize: 11, color: "#a8a092", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-            A thirty-minute session · Tutto
+        </div>
+
+        {/* ── Intro para ── */}
+        <div style={{ maxWidth: 620, marginBottom: 64 }}>
+          <p style={{ fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>
+            You don't need a platform. You don't need an account. You need three tools you
+            already use — pointed at the same folder on your machine. That folder, and what's
+            inside it, is your app.
           </p>
         </div>
 
-        <div style={{ height: 1, background: "#d8d0c5", marginBottom: 48 }} />
+        {/* ── Section 01 ── */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 36 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>01 &nbsp;&nbsp;&nbsp; The Ingredients</span>
+          </div>
 
-        {/* ── Letter body ── */}
-        <div style={{ maxWidth: 620 }}>
+          {/* Three columns */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 0 }}>
+            {[
+              {
+                num: "i.",
+                title: "The editor",
+                sub: "Where you work · Free",
+                body: "An open code editor of your choice — these are usually free. It shows the files and lets you edit, search, and talk to your chosen assistant in normal language. Nothing magical, just the workshop bench.",
+              },
+              {
+                num: "ii.",
+                title: "The assistant",
+                sub: "The intelligence · ~£20/mo",
+                body: "An AI assistant that reads your folder, follows your written instructions, edits files, and runs scripts on your behalf. Use a paid version — that's what keeps the work fully secure.",
+              },
+              {
+                num: "iii.",
+                title: "Your filesystem",
+                sub: "What you already own",
+                body: "Plain folders, plain files — on the computer you already own. No cloud, no database, no proprietary format. Just the same disk you've been using for years. The thing that makes it yours.",
+              },
+            ].map((col, i) => (
+              <div key={col.num} style={{
+                borderLeft: i === 0 ? "none" : "1px solid #d8d0c5",
+                padding: i === 0 ? "0 32px 0 0" : "0 32px",
+              }}>
+                <div style={{ ...MONO, fontSize: 20, fontWeight: 400, color: "#a8a092", marginBottom: 20 }}>{col.num}</div>
+                <p style={{ fontSize: 13, fontWeight: 600, color: "#1a1a1a", marginBottom: 4 }}>{col.title}</p>
+                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 16 }}>{col.sub}</p>
+                <p style={{ fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{col.body}</p>
+              </div>
+            ))}
+          </div>
 
-          {/* Opening */}
-          <p style={{ fontSize: 17, lineHeight: 1.8, color: "#2a2a2a", marginBottom: 20 }}>
-            Praxis comes from the Greek <em>prâxis</em> — action whose purpose is in the action itself. Aristotle separated it from theory and from making. You do not learn it by reading about it. You learn it by watching it run, and then doing it yourself.
-          </p>
-          <p style={{ fontSize: 17, lineHeight: 1.8, color: "#2a2a2a", marginBottom: 40 }}>
-            Thirty minutes ago, you watched three things happen in an empty folder, on a live screen. This page names what you actually saw.
-          </p>
+          {/* Arrow */}
+          <div style={{ textAlign: "center", marginTop: 40, paddingTop: 32, borderTop: "1px solid #d8d0c5" }}>
+            <span style={{ ...MONO, fontSize: 11, color: "#7a7568" }}>
+              point all three at the same folder ↓
+            </span>
+          </div>
+        </div>
 
-          <div style={{ height: 1, background: "#d8d0c5", marginBottom: 40 }} />
+        {/* ── Section 02 ── */}
+        <div>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 36 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>02 &nbsp;&nbsp;&nbsp; The Output — A Folder on Disk</span>
+          </div>
 
-          {/* Three principles */}
-          <div style={{ marginBottom: 36 }}>
-            <p style={{ ...mono, fontSize: 10, color: "#d97706", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 14 }}>What you saw first</p>
-            <p style={{ fontSize: 17, lineHeight: 1.8, color: "#2a2a2a" }}>
-              A folder of realistic documents appeared from a single instruction. No templates. No setup screens. One sentence in plain English, and the folder was populated. The principle behind it is this: <strong>files are not passive storage</strong>. A folder, given the right contents, is an application. It has inputs, logic, and outputs. It just does not look like one until you see it run.
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
+
+            {/* Left: folder tree */}
+            <div>
+              <p style={{ ...MONO, fontSize: 12, color: "#7a7568", marginBottom: 16 }}>~/Praxis/folder</p>
+
+              <div style={{
+                border: "1px solid #c8bfb3",
+                borderRadius: 8,
+                overflow: "hidden",
+                background: "#fff",
+              }}>
+                {/* Tree header */}
+                <div style={{ padding: "10px 16px", borderBottom: "1px solid #e8e2d8", background: "#f9f6f1" }}>
+                  <span style={{ ...MONO, fontSize: 11, color: "#1a1a1a" }}>
+                    <span style={{ marginRight: 6 }}>▾</span> folder/
+                  </span>
+                  <span style={{ ...MONO, fontSize: 10, color: "#a8a092", marginLeft: 12 }}>your project</span>
+                </div>
+
+                {/* Tree rows */}
+                {[
+                  { name: "SKILL.md",      label: "the rules · written in plain English",  tag: "A" },
+                  { name: "run.py",        label: "the script · the work it does",          tag: "B" },
+                  { name: "documents/",   label: "your data · the inputs",                  tag: "C" },
+                  { name: "output/",      label: "what gets produced",                       tag: "" },
+                ].map((row) => (
+                  <div key={row.name} style={{
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "8px 16px",
+                    borderBottom: "1px solid #f0ebe3",
+                    gap: 10,
+                  }}>
+                    {row.tag && (
+                      <span style={{
+                        ...MONO, fontSize: 9, fontWeight: 600,
+                        width: 16, height: 16, borderRadius: "50%",
+                        background: "#1a1a1a", color: "#f6f1ea",
+                        display: "inline-flex", alignItems: "center", justifyContent: "center",
+                        flexShrink: 0,
+                      }}>{row.tag}</span>
+                    )}
+                    {!row.tag && <span style={{ width: 16, flexShrink: 0 }} />}
+                    <span style={{ ...MONO, fontSize: 11, color: "#1a1a1a", minWidth: 110 }}>— {row.name}</span>
+                    <span style={{ ...MONO, fontSize: 10, color: "#a8a092" }}>{row.label}</span>
+                  </div>
+                ))}
+
+                {/* Footer */}
+                <div style={{
+                  padding: "8px 16px",
+                  background: "#f9f6f1",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}>
+                  <span style={{ ...MONO, fontSize: 10, color: "#a8a092" }}>4 items · ~12 KB</span>
+                  <span style={{ ...MONO, fontSize: 10, color: "#a8a092" }}>opens in any editor · runs anywhere</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: A-D descriptions */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+              {[
+                {
+                  tag: "A",
+                  name: "SKILL.md",
+                  body: "The instructions you'd give a new hire on day one — written once, in plain language. The assistant reads this every time and follows it. Change the file, change the behaviour.",
+                },
+                {
+                  tag: "B",
+                  name: "run.py",
+                  body: "A short script that does the actual work — pulls data, transforms a document, sends an email. The assistant writes it with you and runs it for you.",
+                },
+                {
+                  tag: "C",
+                  name: "documents/",
+                  body: "Whatever the work needs to process — PDFs, spreadsheets, transcripts, contracts. Drop files in. Pull files out. No upload step.",
+                },
+                {
+                  tag: "D",
+                  name: "Version control, optional",
+                  body: "Because it's a folder, the standard tools just work — git, Time Machine, Dropbox, a USB stick. There's nothing special to back up.",
+                },
+              ].map((item) => (
+                <div key={item.tag} style={{ display: "flex", gap: 16 }}>
+                  <span style={{
+                    ...MONO, fontSize: 10, fontWeight: 600,
+                    width: 20, height: 20, borderRadius: "50%",
+                    background: "#1a1a1a", color: "#f6f1ea",
+                    display: "inline-flex", alignItems: "center", justifyContent: "center",
+                    flexShrink: 0, marginTop: 2,
+                  }}>{item.tag}</span>
+                  <div>
+                    <p style={{ ...MONO, fontSize: 11, fontWeight: 600, color: "#1a1a1a", marginBottom: 6 }}>{item.name}</p>
+                    <p style={{ fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── CTA ── */}
+        <div style={{ marginTop: 64, borderTop: "1px solid #d8d0c5", paddingTop: 40, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
+          <div>
+            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 8 }}>Ready to see it live?</p>
+            <p style={{ fontSize: 14, color: "#3d3d3d", maxWidth: 380 }}>
+              Book a thirty-minute Praxis session. We build it in front of you, on your machine, with your files.
             </p>
           </div>
+          <a
+            href="https://cal.com/tuttoone/15min"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              background: "#1a1a1a", color: "#f6f1ea",
+              fontSize: 12, fontWeight: 600, ...MONO,
+              padding: "11px 24px", borderRadius: 4,
+              textDecoration: "none", letterSpacing: "0.05em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Book a session →
+          </a>
+        </div>
 
-          <div style={{ marginBottom: 36 }}>
-            <p style={{ ...mono, fontSize: 10, color: "#d97706", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 14 }}>What you saw second</p>
-            <p style={{ fontSize: 17, lineHeight: 1.8, color: "#2a2a2a" }}>
-              A skill file was written that captured house rules in plain English — how an output should be formatted, what counts as a complete answer, what to flag for review. That file is now executable. It runs every time. <strong>Language is the new interface.</strong> You do not configure software by clicking through menus any more. You write what you want, clearly, and the machine follows it.
-            </p>
-          </div>
-
-          <div style={{ marginBottom: 40 }}>
-            <p style={{ ...mono, fontSize: 10, color: "#d97706", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 14 }}>What you saw third</p>
-            <p style={{ fontSize: 17, lineHeight: 1.8, color: "#2a2a2a" }}>
-              A short script read the documents, followed the rules, and produced the same output three runs in a row. That is not what people expect from AI. AI is probabilistic — it does not guarantee consistency. But software wrapped around AI is deterministic. <strong>AI is a component, not the whole system.</strong> The folder, the skill file, the script — those are the system. AI does the reading. The logic does the rest.
-            </p>
-          </div>
-
-          <div style={{ height: 1, background: "#d8d0c5", marginBottom: 40 }} />
-
-          {/* Production scale */}
-          <p style={{ ...mono, fontSize: 10, color: "#a8a092", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 20 }}>What is hard at production scale</p>
-          <p style={{ fontSize: 17, lineHeight: 1.8, color: "#2a2a2a", marginBottom: 20 }}>
-            What you saw takes thirty minutes to demonstrate. Getting it to work reliably across your real documents — mixed formats, inconsistent metadata, files that were never meant to be machine-readable — takes longer. Ingestion is solvable but not trivial. Retrieval quality depends on how your documents are structured. Integration with the systems you already use requires decisions about where data lives and who controls it. Governance is a question most organisations have not answered yet.
-          </p>
-          <p style={{ fontSize: 17, lineHeight: 1.8, color: "#2a2a2a", marginBottom: 48 }}>
-            The next step is a two-week diagnostic sprint. We look at your actual documents and your actual workflows, and we tell you exactly what is possible and what it would cost. The sprint is paid. It produces a clear picture, not a slide deck. If we can help you further, we will say so. If we cannot, we will say that too.
-          </p>
-
-          {/* CTA */}
-          <div style={{
-            background: "#1a1a1a",
-            borderRadius: 10,
-            padding: "36px 40px",
-            marginBottom: 56,
-          }}>
-            <p style={{ ...serif, fontSize: 22, fontWeight: 600, color: "#f6f1ea", marginBottom: 6 }}>Book the diagnostic sprint</p>
-            <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(246,241,234,0.55)", marginBottom: 24 }}>
-              Two weeks. Your documents. A clear answer.
-            </p>
-            <a
-              href="https://cal.com/tuttoone/15min"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                background: "#d97706", color: "#fff",
-                fontSize: 13, fontWeight: 600,
-                padding: "11px 22px", borderRadius: 20,
-                textDecoration: "none",
-              }}
-            >
-              Schedule a call <ArrowRight size={13} />
-            </a>
-          </div>
-
-          {/* Closing line */}
-          <p style={{
-            ...serif,
-            fontSize: 24,
-            fontWeight: 600,
-            lineHeight: 1.4,
-            fontStyle: "italic",
-            borderLeft: "3px solid #1a1a1a",
-            paddingLeft: 24,
-            marginBottom: 64,
-          }}>
-            The folder was always the application.<br />You just needed to see it run.
-          </p>
-
-          {/* Footer */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 24, borderTop: "1px solid #d8d0c5", flexWrap: "wrap", gap: 12 }}>
-            <span style={{ fontSize: 12, color: "#a8a092" }}>Tutto Products and Services</span>
-            <a href="mailto:daniel@tutto.one" style={{ fontSize: 12, color: "#7a7568", textDecoration: "none" }}>daniel@tutto.one</a>
-          </div>
+        {/* ── Doc footer ── */}
+        <div style={{
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          borderTop: "1.5px solid #1a1a1a",
+          marginTop: 48,
+          paddingTop: 14,
+        }}>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Praxis · Client Training</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Module 01 — Foundations</span>
         </div>
 
       </div>
