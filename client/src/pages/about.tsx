@@ -11,7 +11,7 @@ export default function About() {
           A small team with laser focus on your problems.
         </p>
 
-        <div className="font-serif text-[17px] space-y-6 text-muted-foreground leading-relaxed">
+        <div className="text-[17px] space-y-6 text-muted-foreground leading-relaxed">
           <p>
             We're Tutto — a tight group of AI consultants and builders who work at the intersection of operations, data, and AI. We don't do slide decks and frameworks. We get into the detail of your actual problems, build the thing that solves them, and make sure it works in production.
           </p>

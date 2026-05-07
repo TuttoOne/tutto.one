@@ -27,7 +27,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Source Serif 4', serif;
+  --font-serif: 'Roboto', sans-serif;
 }
 
 :root {
