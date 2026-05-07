@@ -16,7 +16,7 @@ export default function Home() {
           </h1>
           <p className="text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
             We build the systems, bridges, and infrastructure that let AI work
-            inside your organisation — not just beside it.
+            inside your organisation - not just beside it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

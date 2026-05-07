@@ -53,7 +53,7 @@ export const portfolioEntries: PortfolioEntry[] = [
     tagline: "On-Premise AI · Legal Document Intelligence",
     badge: "Client Engagement",
     description:
-      "A self-hosted document intelligence platform for litigation and legal review — built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design.",
+      "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design.",
     capabilities: [
       {
         title: "Document Ingestion at Scale",
@@ -61,7 +61,7 @@ export const portfolioEntries: PortfolioEntry[] = [
       },
       {
         title: "Semantic Search & RAG Q&A",
-        detail: "Ask questions in plain English. Every answer cites its source document and page number — no hallucination from the AI's own knowledge.",
+        detail: "Ask questions in plain English. Every answer cites its source document and page number - no hallucination from the AI's own knowledge.",
       },
       {
         title: "Interactive Timeline",
@@ -89,11 +89,11 @@ export const portfolioEntries: PortfolioEntry[] = [
   },
   {
     type: "project",
-    name: "MCP Bridge — SharePoint & Power Automate",
+    name: "MCP Bridge - SharePoint & Power Automate",
     tagline: "Model Context Protocol · Consulting Engagement",
     badge: "Client Engagement",
     description:
-      "We built an MCP (Model Context Protocol) bridge that gives Claude direct access to a client's SharePoint environment and Power Automate flows. Instead of copy-pasting data into a chat, the team can ask AI to query, create, and update SharePoint records — and diagnose broken automations — through natural conversation.",
+      "We built an MCP (Model Context Protocol) bridge that gives Claude direct access to a client's SharePoint environment and Power Automate flows. Instead of copy-pasting data into a chat, the team can ask AI to query, create, and update SharePoint records - and diagnose broken automations - through natural conversation.",
     url: "https://modelcontextprotocol.io",
     urlLabel: "What is MCP?",
     capabilities: [
@@ -111,7 +111,7 @@ export const portfolioEntries: PortfolioEntry[] = [
       },
       {
         title: "Live Documentation",
-        detail: "AI searches current Microsoft docs before answering — no outdated or hallucinated API guidance.",
+        detail: "AI searches current Microsoft docs before answering - no outdated or hallucinated API guidance.",
       },
     ],
     conversations: [
@@ -125,7 +125,7 @@ export const portfolioEntries: PortfolioEntry[] = [
       },
       {
         user: "Show me the last 5 failed Power Automate runs on 'Invoice Sync'",
-        assistant: "Found 5 failed runs. Most recent error: 'Connection timeout to Xero API' — occurred 3 times in the last 24 hours.",
+        assistant: "Found 5 failed runs. Most recent error: 'Connection timeout to Xero API' - occurred 3 times in the last 24 hours.",
       },
     ],
   },
@@ -134,7 +134,7 @@ export const portfolioEntries: PortfolioEntry[] = [
     name: "Creative Format Engine",
     tagline: "cfe.tutto.one",
     description:
-      "A format specification and campaign management tool for creative production — e-commerce banners, social media assets, and more. Includes a Photoshop plugin for seamless designer workflows.",
+      "A format specification and campaign management tool for creative production - e-commerce banners, social media assets, and more. Includes a Photoshop plugin for seamless designer workflows.",
     url: "https://cfe.tutto.one",
     screenshots: [cfeDashboard, cfeFormats, cfePlugin],
     screenshotLabels: ["Dashboard", "Format Specifications", "Photoshop Plugin"],
@@ -182,7 +182,7 @@ function ImageCarousel({
       <div className={`relative group rounded-xl overflow-hidden border ${cardClass}`}>
         <img
           src={screenshots[current]}
-          alt={`${productName} — ${labels[current]}`}
+          alt={`${productName} - ${labels[current]}`}
           className="w-full aspect-[16/10] object-cover object-top"
           data-testid={`img-screenshot-${slug}-${current}`}
         />
@@ -272,7 +272,7 @@ export function PortfolioDisplay({ entries = portfolioEntries }: { entries?: Por
   return (
     <div className="space-y-8">
       {entries.map((entry, index) => {
-        const slug = entry.name.toLowerCase().replace(/[\s&—]+/g, "-").replace(/-+/g, "-");
+        const slug = entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-");
         const theme = entryThemes[index % entryThemes.length];
         // Even entries: desktop shows summary-left, showcase-right
         // Odd entries: desktop reverses to showcase-left, summary-right
@@ -288,7 +288,7 @@ export function PortfolioDisplay({ entries = portfolioEntries }: { entries?: Por
                 On desktop: side-by-side, alternating which side via desktopOrder. */}
             <div className={`flex flex-col ${desktopOrder} gap-8 md:gap-12 items-start`}>
 
-              {/* Summary — first in DOM so it appears at top on mobile */}
+              {/* Summary - first in DOM so it appears at top on mobile */}
               <div className="w-full md:w-2/5 md:sticky md:top-24">
                 {entry.type === "project" && (
                   <span className="inline-flex items-center gap-1.5 text-xs font-mono text-primary bg-primary/10 border border-primary/20 rounded-full px-3 py-1 mb-3">
@@ -325,7 +325,7 @@ export function PortfolioDisplay({ entries = portfolioEntries }: { entries?: Por
                 )}
               </div>
 
-              {/* Showcase — second in DOM so it appears below summary on mobile */}
+              {/* Showcase - second in DOM so it appears below summary on mobile */}
               <div className="w-full md:w-3/5">
                 {entry.type === "product" ? (
                   <ImageCarousel

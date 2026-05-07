@@ -41,7 +41,7 @@ function TaskBreakdownChart() {
         ))}
       </div>
       <p className="text-xs text-muted-foreground mt-5 italic">
-        Source: Anthropic Economic Index — approximate shares based on published research
+        Source: Anthropic Economic Index - approximate shares based on published research
       </p>
     </div>
   );
@@ -82,7 +82,7 @@ function WageExposureChart() {
         ))}
       </div>
       <p className="text-xs text-muted-foreground mt-5 italic">
-        Source: Anthropic Economic Index — index values are illustrative of relative ordering reported in research
+        Source: Anthropic Economic Index - index values are illustrative of relative ordering reported in research
       </p>
     </div>
   );
@@ -102,7 +102,7 @@ function AugmentationSplitChart() {
           <p className="text-4xl font-serif font-bold text-primary mb-2">{augPct}%</p>
           <p className="text-sm font-semibold text-foreground mb-1">Augmentation</p>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            AI assists the human — the person remains in control and directs the output
+            AI assists the human - the person remains in control and directs the output
           </p>
         </div>
         <div className="flex-1 rounded-xl bg-muted/40 border border-border/60 p-5 text-center">
@@ -114,7 +114,7 @@ function AugmentationSplitChart() {
         </div>
       </div>
       <p className="text-xs text-muted-foreground mt-5 italic">
-        Source: Anthropic Economic Index — based on task classification across sampled conversations
+        Source: Anthropic Economic Index - based on task classification across sampled conversations
       </p>
     </div>
   );
@@ -129,7 +129,7 @@ function CapabilityGapImage() {
         className="w-full rounded-xl"
       />
       <p className="text-xs text-muted-foreground mt-3 italic text-center">
-        Source: Anthropic Economic Index — theoretical AI coverage (blue) vs observed AI usage (red) by occupational category
+        Source: Anthropic Economic Index - theoretical AI coverage (blue) vs observed AI usage (red) by occupational category
       </p>
     </div>
   );
@@ -173,7 +173,7 @@ function McpArchitectureDiagram() {
         </div>
       </div>
       <p className="text-xs text-muted-foreground mt-5 italic">
-        One standard protocol — one bridge — works across all MCP-compatible AI platforms
+        One standard protocol - one bridge - works across all MCP-compatible AI platforms
       </p>
     </div>
   );
@@ -206,7 +206,7 @@ function LegalRagArchitectureDiagram() {
   return (
     <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-6 not-prose">
       <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
-        System architecture — everything runs on-premise
+        System architecture - everything runs on-premise
       </p>
       <div className="flex items-center gap-2 mb-5">
         <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50 border border-green-200 rounded-full px-3 py-1">

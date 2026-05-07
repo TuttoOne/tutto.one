@@ -24,18 +24,18 @@ const AUDIT_PROMPT = `You are an expert SharePoint consultant helping organisati
 
 Please cover these five areas:
 
-1. Site Architecture — map the current site structure, hub sites, and navigation patterns. Flag any structural issues that will complicate AI indexing or search.
+1. Site Architecture - map the current site structure, hub sites, and navigation patterns. Flag any structural issues that will complicate AI indexing or search.
 
-2. Content & Metadata — inventory document libraries, lists, and content types. Identify missing or inconsistent metadata schemas that reduce machine-readability.
+2. Content & Metadata - inventory document libraries, lists, and content types. Identify missing or inconsistent metadata schemas that reduce machine-readability.
 
-3. Permissions & Access — assess the permissions model, broken inheritance points, and access groups. Note any configurations that could expose sensitive content to an AI tool unintentionally.
+3. Permissions & Access - assess the permissions model, broken inheritance points, and access groups. Note any configurations that could expose sensitive content to an AI tool unintentionally.
 
-4. Data Quality — flag stale content (not modified in 12+ months), duplicate files, orphaned sites, and naming inconsistencies that will degrade AI retrieval quality.
+4. Data Quality - flag stale content (not modified in 12+ months), duplicate files, orphaned sites, and naming inconsistencies that will degrade AI retrieval quality.
 
-5. AI Readiness Score — rate the environment from 1–10 and list the top 5 prioritised actions to make it machine-readable, with estimated effort (Low / Medium / High) for each.
+5. AI Readiness Score - rate the environment from 1–10 and list the top 5 prioritised actions to make it machine-readable, with estimated effort (Low / Medium / High) for each.
 
 My SharePoint environment:
-[Describe your setup here — number of sites, approximate document count, key teams that use it, and any existing metadata or content type work]`;
+[Describe your setup here - number of sites, approximate document count, key teams that use it, and any existing metadata or content type work]`;
 
 export default function Sharepoint() {
   const [email, setEmail] = useState("");
@@ -44,7 +44,7 @@ export default function Sharepoint() {
 
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = "SharePoint Bridge for Claude — Free AI-Powered SharePoint Management | Tutto.one";
+    document.title = "SharePoint Bridge for Claude - Free AI-Powered SharePoint Management | Tutto.one";
 
     const SEO_DESCRIPTION =
       "Connect Claude to your SharePoint with our free, open-source MCP server. Audit, restructure, and build AI-powered business systems. 15 tools, MIT licensed.";
@@ -122,7 +122,7 @@ export default function Sharepoint() {
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
             The SharePoint Bridge connects Claude directly to your SharePoint Online
-            environment — search documents, read pages, and surface institutional knowledge
+            environment - search documents, read pages, and surface institutional knowledge
             without copy-pasting or manual lookups. Just ask.
           </p>
           <p className="text-sm text-muted-foreground/70 mb-10">
@@ -162,7 +162,7 @@ export default function Sharepoint() {
             src="/sp-demo.html"
             className="w-full rounded-2xl border border-border/60"
             style={{ height: "540px", display: "block" }}
-            title="SharePoint MCP Bridge — Interactive Demo"
+            title="SharePoint MCP Bridge - Interactive Demo"
             data-testid="iframe-sp-demo"
           />
         </section>
@@ -179,7 +179,7 @@ export default function Sharepoint() {
                 icon: Search,
                 title: "Audit",
                 description:
-                  "Claude analyses your SharePoint structure, surfaces stale content, broken permissions, and metadata gaps — producing a prioritised AI-readiness report in minutes.",
+                  "Claude analyses your SharePoint structure, surfaces stale content, broken permissions, and metadata gaps - producing a prioritised AI-readiness report in minutes.",
               },
               {
                 icon: RefreshCw,
@@ -191,7 +191,7 @@ export default function Sharepoint() {
                 icon: Construction,
                 title: "Build",
                 description:
-                  "Once your SharePoint is clean and structured, the Bridge lets Claude query it in real time — powering custom AI agents and knowledge workflows for your team.",
+                  "Once your SharePoint is clean and structured, the Bridge lets Claude query it in real time - powering custom AI agents and knowledge workflows for your team.",
               },
             ].map((item) => (
               <div
@@ -227,7 +227,7 @@ export default function Sharepoint() {
                 step: "02",
                 title: "Connect to Claude",
                 description:
-                  "Add one entry to your Claude Desktop MCP config pointing at the server. Restart Claude — your SharePoint is now available as a live tool in every conversation.",
+                  "Add one entry to your Claude Desktop MCP config pointing at the server. Restart Claude - your SharePoint is now available as a live tool in every conversation.",
               },
               {
                 step: "03",
@@ -277,7 +277,7 @@ export default function Sharepoint() {
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl">
               Not sure if your SharePoint is AI-ready? Paste this prompt into Claude to get an
-              instant structural audit — no MCP setup required. Claude will work through five
+              instant structural audit - no MCP setup required. Claude will work through five
               key areas and give you a prioritised action plan with an AI-readiness score.
             </p>
 
@@ -437,7 +437,7 @@ export default function Sharepoint() {
             <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl">
               The open-source bridge handles the common case. For teams that need write-back
               capabilities, multi-tenant support, on-premises SharePoint, or a fully managed
-              AI workflow built on their document estate — we build it.
+              AI workflow built on their document estate - we build it.
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
               {[
@@ -446,21 +446,21 @@ export default function Sharepoint() {
                   title: "Data Audit & Knowledge Mapping",
                   price: "From £500",
                   description:
-                    "Understand what you have before you build. We map your SharePoint structure, metadata gaps, and AI-readiness — and hand you a prioritised action plan.",
+                    "Understand what you have before you build. We map your SharePoint structure, metadata gaps, and AI-readiness - and hand you a prioritised action plan.",
                 },
                 {
                   icon: Construction,
                   title: "Custom MCP Bridge Build",
                   price: "From £5,000",
                   description:
-                    "A bespoke MCP server tailored to your SharePoint environment — custom tools, schemas, permissions model, and end-to-end testing.",
+                    "A bespoke MCP server tailored to your SharePoint environment - custom tools, schemas, permissions model, and end-to-end testing.",
                 },
                 {
                   icon: Zap,
                   title: "AI Agent Architecture",
                   price: "From £5,000",
                   description:
-                    "We design and build the AI agents that sit on top of your SharePoint Bridge — automating workflows, surfacing knowledge, and acting on your behalf.",
+                    "We design and build the AI agents that sit on top of your SharePoint Bridge - automating workflows, surfacing knowledge, and acting on your behalf.",
                 },
                 {
                   icon: Repeat,

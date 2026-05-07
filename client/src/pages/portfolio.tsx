@@ -13,7 +13,7 @@ export default function Portfolio() {
             Portfolio
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Systems we've designed and built — from concept to production.
+            Systems we've designed and built - from concept to production.
           </p>
         </div>
 

@@ -170,7 +170,7 @@ export const BLOG_POSTS = [
     readTime: "7 min read",
     content: `Legal privilege is not a policy question. It is an architectural one.
 
-Cloud AI platforms — however capable — require sending your data to someone else's servers. For consumer queries or marketing copy, that's a reasonable trade-off. For privileged case documents in active litigation, it isn't. The legal risk is real, the professional conduct implications are serious, and "we trust the provider's terms of service" is not a defensible answer to a professional privilege challenge.
+Cloud AI platforms - however capable - require sending your data to someone else's servers. For consumer queries or marketing copy, that's a reasonable trade-off. For privileged case documents in active litigation, it isn't. The legal risk is real, the professional conduct implications are serious, and "we trust the provider's terms of service" is not a defensible answer to a professional privilege challenge.
 
 This is the problem LegalRAG was built to solve. And the solution required rethinking the architecture from the ground up.
 
@@ -180,49 +180,49 @@ The conventional model for AI document review is cloud-in, results-out. Document
 
 [VISUAL:legalrag-architecture]
 
-Every component runs on a single device, physically located at the client's premises: document ingestion, OCR, text extraction, AI inference, vector search, and storage. The system uses open-weight AI models running locally via Ollama — no external API calls, no data transmission, no cloud dependency of any kind. Legal Professional Privilege is satisfied by architectural design, not by contractual promise.
+Every component runs on a single device, physically located at the client's premises: document ingestion, OCR, text extraction, AI inference, vector search, and storage. The system uses open-weight AI models running locally via Ollama - no external API calls, no data transmission, no cloud dependency of any kind. Legal Professional Privilege is satisfied by architectural design, not by contractual promise.
 
-The hardware is an NVIDIA DGX Spark — a compact but genuinely powerful machine with a GB10 Superchip, 128GB unified memory, and NVMe storage. It fits on a desk. It handles 150,000+ documents with millions of searchable chunks. Each client gets their own unit, configured and deployed at their premises.
+The hardware is an NVIDIA DGX Spark - a compact but genuinely powerful machine with a GB10 Superchip, 128GB unified memory, and NVMe storage. It fits on a desk. It handles 150,000+ documents with millions of searchable chunks. Each client gets their own unit, configured and deployed at their premises.
 
 ## What It Does
 
-**Document ingestion at scale.** Entire disclosure sets — PDFs, Word documents, spreadsheets, emails, images, HTML, XML, and more — are processed, chunked into searchable passages, and embedded as vectors. A checkpoint system means ingestion can run overnight and survive interruptions. The system tracks which side produced each document, preserves reference IDs from eDiscovery platforms, and maintains chain of custody throughout.
+**Document ingestion at scale.** Entire disclosure sets - PDFs, Word documents, spreadsheets, emails, images, HTML, XML, and more - are processed, chunked into searchable passages, and embedded as vectors. A checkpoint system means ingestion can run overnight and survive interruptions. The system tracks which side produced each document, preserves reference IDs from eDiscovery platforms, and maintains chain of custody throughout.
 
-**Semantic search.** Ask a question in plain English. Retrieve the most relevant passages across the entire corpus, with citations to specific source documents and page numbers. Filter by disclosure side, document type, date range, or category. No keyword matching — genuine vector similarity search.
+**Semantic search.** Ask a question in plain English. Retrieve the most relevant passages across the entire corpus, with citations to specific source documents and page numbers. Filter by disclosure side, document type, date range, or category. No keyword matching - genuine vector similarity search.
 
-**Conversational Q&A.** A chat interface grounded entirely in the document corpus. Every answer cites its source material. The AI synthesises from retrieved passages — it does not hallucinate from its own knowledge. Every answer is traceable back to the original document. The lawyer reviews; the AI assists.
+**Conversational Q&A.** A chat interface grounded entirely in the document corpus. Every answer cites its source material. The AI synthesises from retrieved passages - it does not hallucinate from its own knowledge. Every answer is traceable back to the original document. The lawyer reviews; the AI assists.
 
-**Interactive timeline.** A collapsible chronological view of case events extracted from document metadata — email dates, creation dates, contractual deadlines. Drill from year to month to individual events, filter by type and disclosure side. Provides an immediate chronological map of the case without manual extraction.
+**Interactive timeline.** A collapsible chronological view of case events extracted from document metadata - email dates, creation dates, contractual deadlines. Drill from year to month to individual events, filter by type and disclosure side. Provides an immediate chronological map of the case without manual extraction.
 
 **OCR and scanned document handling.** Optical character recognition for scanned PDFs and image files, with intelligent DPI management. Documents that are redacted or contain minimal text are automatically tagged rather than silently lost.
 
 ## Why This Matters for Legal Teams
 
-The market for legal AI has split into two categories that don't serve the middle of the profession well. Enterprise platforms like Harvey are genuinely capable but priced for Magic Circle and Big Law. Generic AI tools (Claude, ChatGPT, Gemini via their standard interfaces) are affordable but cloud-based — unsuitable for privileged material.
+The market for legal AI has split into two categories that don't serve the middle of the profession well. Enterprise platforms like Harvey are genuinely capable but priced for Magic Circle and Big Law. Generic AI tools (Claude, ChatGPT, Gemini via their standard interfaces) are affordable but cloud-based - unsuitable for privileged material.
 
-LegalRAG is built specifically for barristers' chambers, litigation boutiques, and mid-market firms with 10–100 lawyers handling document-heavy matters. Fraud, family, regulatory, commercial litigation — anywhere that disclosure volume is a genuine problem and cloud is a genuine risk.
+LegalRAG is built specifically for barristers' chambers, litigation boutiques, and mid-market firms with 10–100 lawyers handling document-heavy matters. Fraud, family, regulatory, commercial litigation - anywhere that disclosure volume is a genuine problem and cloud is a genuine risk.
 
 ## What's Coming
 
 Two features currently in development extend the system significantly.
 
-**Custom taxonomies.** A builder that lets the legal team define case-specific classification frameworks — allegations, issues, parties, transaction types. The AI then classifies every document against the lawyer's own framework, creating searchable categories that reflect how the case is actually structured rather than generic document types.
+**Custom taxonomies.** A builder that lets the legal team define case-specific classification frameworks - allegations, issues, parties, transaction types. The AI then classifies every document against the lawyer's own framework, creating searchable categories that reflect how the case is actually structured rather than generic document types.
 
-**Knowledge map.** An interactive visual graph showing connections between documents — shared parties, overlapping dates, cross-references, related transactions. Documents as nodes, relationships as edges, rendered as a navigable visualisation. Surfaces patterns across large document sets that linear review would miss entirely.
+**Knowledge map.** An interactive visual graph showing connections between documents - shared parties, overlapping dates, cross-references, related transactions. Documents as nodes, relationships as edges, rendered as a navigable visualisation. Surfaces patterns across large document sets that linear review would miss entirely.
 
 ## The Broader Principle
 
-LegalRAG is a specific answer to a specific problem. But the underlying principle applies more broadly: there are domains — legal, healthcare, defence, finance — where cloud AI creates risks that on-premise deployment eliminates. The hardware to run capable AI models locally exists now and is becoming more affordable. The question is whether organisations in sensitive sectors are willing to think about deployment architecture as a first-order design question, not an afterthought.
+LegalRAG is a specific answer to a specific problem. But the underlying principle applies more broadly: there are domains - legal, healthcare, defence, finance - where cloud AI creates risks that on-premise deployment eliminates. The hardware to run capable AI models locally exists now and is becoming more affordable. The question is whether organisations in sensitive sectors are willing to think about deployment architecture as a first-order design question, not an afterthought.
 
 For litigation teams, the answer is increasingly obvious. The privilege risk alone makes it so.`,
   },
   {
     slug: "mcp-bridge-sharepoint",
     title: "How We Gave Claude Direct Access to a Client's SharePoint",
-    excerpt: "A practical walkthrough of MCP — the open standard quietly transforming how AI connects to business tools — and a real engagement where we built it.",
+    excerpt: "A practical walkthrough of MCP - the open standard quietly transforming how AI connects to business tools - and a real engagement where we built it.",
     date: "Mar 28, 2026",
     readTime: "6 min read",
-    content: `There's a frustrating pattern that repeats across almost every AI rollout we see. The team discovers that Claude or ChatGPT can help them with their work. They start copy-pasting data into the chat. The AI gives useful advice. Then they manually carry that advice back into SharePoint, Salesforce, or whatever system they were working in. It works. But it's friction — and friction is where adoption dies.
+    content: `There's a frustrating pattern that repeats across almost every AI rollout we see. The team discovers that Claude or ChatGPT can help them with their work. They start copy-pasting data into the chat. The AI gives useful advice. Then they manually carry that advice back into SharePoint, Salesforce, or whatever system they were working in. It works. But it's friction - and friction is where adoption dies.
 
 We just finished an engagement that removes that friction entirely. Here's how it works, and why the underlying technology is one of the most significant quiet shifts in the AI ecosystem right now.
 
@@ -234,11 +234,11 @@ MCP stands for Model Context Protocol. It's an open standard created by Anthropi
 
 Before MCP, every AI-to-tool integration was custom-built. You'd hire a developer, they'd write a specific integration between, say, Claude and your database, and then when the API changed (it always changes) you'd need to update it. MCP standardises the contract. One bridge, built once, works across Claude, ChatGPT, and any other MCP-compatible AI platform.
 
-There are already over 500 MCP servers covering platforms like Slack, Salesforce, GitHub, Google Drive, Jira, PostgreSQL, and more. The ecosystem is growing fast — which means the investment in connecting your systems to MCP pays dividends as AI capabilities expand.
+There are already over 500 MCP servers covering platforms like Slack, Salesforce, GitHub, Google Drive, Jira, PostgreSQL, and more. The ecosystem is growing fast - which means the investment in connecting your systems to MCP pays dividends as AI capabilities expand.
 
 ## The Engagement: SharePoint & Power Automate
 
-Our client's operations team was managing a complex web of SharePoint lists, lookup relationships, and Power Automate flows. They were spending significant time on data management tasks — querying records, creating and updating items, troubleshooting broken automations — that AI could handle in seconds if it had direct access.
+Our client's operations team was managing a complex web of SharePoint lists, lookup relationships, and Power Automate flows. They were spending significant time on data management tasks - querying records, creating and updating items, troubleshooting broken automations - that AI could handle in seconds if it had direct access.
 
 We built an MCP bridge that gives Claude exactly that access. Four capability areas:
 
@@ -248,26 +248,26 @@ We built an MCP bridge that gives Claude exactly that access. Four capability ar
 
 **Power Automate diagnostics.** List all flows, inspect their definitions, pull run history with error details, and trigger manual flows on demand. When a flow breaks at 2am and someone needs to understand why, they can ask instead of digging through logs.
 
-**Live documentation.** This one surprised the client most. Before this bridge, Claude's answers about SharePoint's Graph API or Power Automate connectors were sometimes outdated — the models were trained on older documentation. Now the AI searches current Microsoft docs before answering technical questions. The accuracy improvement was immediately noticeable.
+**Live documentation.** This one surprised the client most. Before this bridge, Claude's answers about SharePoint's Graph API or Power Automate connectors were sometimes outdated - the models were trained on older documentation. Now the AI searches current Microsoft docs before answering technical questions. The accuracy improvement was immediately noticeable.
 
 ## What a Session Looks Like
 
 Here's a condensed version of a real interaction from the engagement:
 
 *"List all SharePoint lists on my site."*
-Claude returns a clean table: 8 lists found — Tasks, Clients, Projects, Invoices, Contacts, Documents, Assets, Settings.
+Claude returns a clean table: 8 lists found - Tasks, Clients, Projects, Invoices, Contacts, Documents, Assets, Settings.
 
 *"Add a lookup column on Tasks pointing to the Clients list."*
 Claude constructs the correct Graph API call, executes it, confirms: "Column 'Client' (lookup → Clients) added to the Tasks list."
 
 *"Show me the last 5 failed runs on the Invoice Sync flow."*
-Claude pulls the run history: 5 failures, most recent error is a connection timeout to Xero API — occurred 3 times in the past 24 hours.
+Claude pulls the run history: 5 failures, most recent error is a connection timeout to Xero API - occurred 3 times in the past 24 hours.
 
 The entire session takes minutes. The equivalent work through SharePoint's UI and Power Automate's logs would have taken the better part of an afternoon.
 
 ## The Broader Point
 
-MCP isn't just a technical curiosity — it represents a shift in how AI integration works. Instead of each business building bespoke connections between their tools and AI models, there's now a standard. That means the work of connecting your systems gets easier every month, as more platforms ship native MCP support.
+MCP isn't just a technical curiosity - it represents a shift in how AI integration works. Instead of each business building bespoke connections between their tools and AI models, there's now a standard. That means the work of connecting your systems gets easier every month, as more platforms ship native MCP support.
 
 The businesses that get ahead of this aren't the ones with the biggest budgets. They're the ones that identify where their teams are spending time on data movement and tool-switching, and methodically remove that friction.
 
@@ -276,10 +276,10 @@ If you're curious whether MCP makes sense for a specific platform in your stack,
   {
     slug: "anthropic-labor-market-research",
     title: "What Anthropic's Labor Market Research Tells Us About AI Readiness",
-    excerpt: "Anthropic's landmark study of one million AI conversations reveals which roles are most exposed to AI — and what businesses should do about it.",
+    excerpt: "Anthropic's landmark study of one million AI conversations reveals which roles are most exposed to AI - and what businesses should do about it.",
     date: "Mar 14, 2026",
     readTime: "7 min read",
-    content: `Anthropic recently published one of the most detailed looks at how AI is actually being used in the real world. By analysing over a million conversations with Claude — with user consent — they mapped which occupations, tasks, and industries are most exposed to AI assistance right now. The findings are striking, and they carry direct implications for any business trying to plan for an AI-first future.
+    content: `Anthropic recently published one of the most detailed looks at how AI is actually being used in the real world. By analysing over a million conversations with Claude - with user consent - they mapped which occupations, tasks, and industries are most exposed to AI assistance right now. The findings are striking, and they carry direct implications for any business trying to plan for an AI-first future.
 
 ## The Most-Used Task Categories
 
@@ -287,21 +287,21 @@ The first thing that jumps out is where people are spending their time with AI. 
 
 [VISUAL:task-breakdown]
 
-This isn't just a snapshot of "what Claude users do." It's a leading indicator of where AI capability is deepest and where businesses have the most to gain — or the most to adapt to.
+This isn't just a snapshot of "what Claude users do." It's a leading indicator of where AI capability is deepest and where businesses have the most to gain - or the most to adapt to.
 
 ## The Wage Exposure Inversion
 
-Previous waves of automation — think factory robots, ATMs, customer-service phone trees — disproportionately affected lower-wage, routine physical jobs. AI appears to work differently.
+Previous waves of automation - think factory robots, ATMs, customer-service phone trees - disproportionately affected lower-wage, routine physical jobs. AI appears to work differently.
 
 [VISUAL:wage-exposure]
 
-The research found that **higher-wage occupations are more exposed to AI assistance, not less.** Lawyers, analysts, software engineers, researchers, writers — these are the roles where Claude is being used most intensively. For the first time, automation pressure is being felt at the top of the income ladder as much as the bottom.
+The research found that **higher-wage occupations are more exposed to AI assistance, not less.** Lawyers, analysts, software engineers, researchers, writers - these are the roles where Claude is being used most intensively. For the first time, automation pressure is being felt at the top of the income ladder as much as the bottom.
 
 This inverts the assumption many businesses have made: that AI is a back-office cost-cutting tool. It's increasingly a front-office capability tool.
 
 ## Augmentation, Not Replacement
 
-Perhaps the most important nuance in the data: most AI use is **augmentative** — AI is helping humans do their jobs better and faster, not replacing them outright.
+Perhaps the most important nuance in the data: most AI use is **augmentative** - AI is helping humans do their jobs better and faster, not replacing them outright.
 
 [VISUAL:augmentation-split]
 
@@ -309,34 +309,34 @@ This distinction matters enormously for how businesses should plan. A fully auto
 
 ## The Capability Gap: Where the Real Opportunity Lives
 
-The most striking chart in the entire study isn't any of the numbers above — it's a radar diagram that overlays two things: theoretical AI capability across occupational categories (blue), and how much AI is actually being used in those categories today (red).
+The most striking chart in the entire study isn't any of the numbers above - it's a radar diagram that overlays two things: theoretical AI capability across occupational categories (blue), and how much AI is actually being used in those categories today (red).
 
 [VISUAL:capability-gap]
 
-Every sector where blue extends far beyond red is a place where businesses are leaving value on the table. The gap isn't a sign that AI isn't ready — it's a sign that the organisations in those sectors haven't caught up yet. Legal, management, education, architecture, life sciences, healthcare — in all of these areas, the tools already exist to do far more than most teams are doing with them. The wider the gap between theoretical coverage and observed usage, the bigger the untapped opportunity. And in many high-value sectors, that gap is enormous. Businesses that close it first will have an advantage that compounds over time, because they'll build the workflows, the institutional knowledge, and the data infrastructure that makes each subsequent improvement easier to capture.
+Every sector where blue extends far beyond red is a place where businesses are leaving value on the table. The gap isn't a sign that AI isn't ready - it's a sign that the organisations in those sectors haven't caught up yet. Legal, management, education, architecture, life sciences, healthcare - in all of these areas, the tools already exist to do far more than most teams are doing with them. The wider the gap between theoretical coverage and observed usage, the bigger the untapped opportunity. And in many high-value sectors, that gap is enormous. Businesses that close it first will have an advantage that compounds over time, because they'll build the workflows, the institutional knowledge, and the data infrastructure that makes each subsequent improvement easier to capture.
 
 ## What This Means for Business Readiness
 
-The research paints a clear picture of where AI capability is concentrated right now. If your business relies heavily on software development, writing, analysis, or research — you're operating in the highest-exposure zones. That's not a warning sign. It's an opportunity.
+The research paints a clear picture of where AI capability is concentrated right now. If your business relies heavily on software development, writing, analysis, or research - you're operating in the highest-exposure zones. That's not a warning sign. It's an opportunity.
 
 ### The Readiness Gap
 
 Most businesses fall into one of two failure modes:
 
 - **The Pilot Trap**: They've run a proof-of-concept that worked brilliantly in isolation and now can't scale it into real operations.
-- **The Waiting Room**: They're holding out for AI to "mature" before engaging — not realising the early movers are already compounding advantages.
+- **The Waiting Room**: They're holding out for AI to "mature" before engaging - not realising the early movers are already compounding advantages.
 
-The Anthropic data suggests the gap between AI-ready and AI-naive organisations is widening faster than most expect. The high-exposure roles — the ones being augmented most aggressively — belong disproportionately to the knowledge workers who drive revenue, strategy, and product.
+The Anthropic data suggests the gap between AI-ready and AI-naive organisations is widening faster than most expect. The high-exposure roles - the ones being augmented most aggressively - belong disproportionately to the knowledge workers who drive revenue, strategy, and product.
 
 ### Three Actions Worth Taking Now
 
 1. **Map your exposure.** Which roles in your organisation are in the high-exposure categories? Software developers and writers are obvious. But financial analysts, legal reviewers, and operations researchers are next in line.
 2. **Audit your knowledge infrastructure.** Augmented workers need clean, structured, machine-readable information to work from. If your internal knowledge is buried in PDFs and tribal memory, you're capping what AI can do for you.
-3. **Start with the highest-value augmentation target.** Not the cheapest task to automate — the most valuable one to accelerate. If your analysts spend 60% of their time gathering data and 40% actually analysing it, help them flip that ratio.
+3. **Start with the highest-value augmentation target.** Not the cheapest task to automate - the most valuable one to accelerate. If your analysts spend 60% of their time gathering data and 40% actually analysing it, help them flip that ratio.
 
 ## The Bigger Picture
 
-What Anthropic's research confirms is that the AI transition is not a future event. It's happening now, unevenly distributed, and concentrated in exactly the kinds of knowledge-intensive roles that most businesses depend on most. The organisations that come out ahead won't necessarily be the ones who deployed AI first. They'll be the ones who understood their own operations clearly enough to know where AI would make the biggest difference — and who had the information architecture in place to support it.
+What Anthropic's research confirms is that the AI transition is not a future event. It's happening now, unevenly distributed, and concentrated in exactly the kinds of knowledge-intensive roles that most businesses depend on most. The organisations that come out ahead won't necessarily be the ones who deployed AI first. They'll be the ones who understood their own operations clearly enough to know where AI would make the biggest difference - and who had the information architecture in place to support it.
 
 That's the work. And most businesses haven't started it yet.`,
   },
@@ -348,7 +348,7 @@ That's the work. And most businesses haven't started it yet.`,
     readTime: "5 min read",
     content: `Remember 2010? Every business scrambled to make their website "mobile-friendly." If your site didn't work on a smartphone, you were invisible to a growing chunk of your audience.
 
-We're at a similar inflection point right now — except the audience isn't humans on phones. It's AI agents, large language models, and automated workflows trying to understand your business.
+We're at a similar inflection point right now - except the audience isn't humans on phones. It's AI agents, large language models, and automated workflows trying to understand your business.
 
 ## The Shift No One's Talking About
 
@@ -360,7 +360,7 @@ When a potential client asks ChatGPT "Who are the best AI consultants in London?
 
 Being machine-readable isn't about adding schema markup to your HTML (though that helps). It's a fundamental shift in how you think about your business information:
 
-- **Your services** need to be described in clear, unambiguous language — not marketing fluff
+- **Your services** need to be described in clear, unambiguous language - not marketing fluff
 - **Your expertise** needs to be documented in public, indexable formats
 - **Your processes** need APIs, not just SOPs buried in Google Drive
 - **Your pricing** needs structure, not "contact us for a quote"
@@ -376,7 +376,7 @@ They didn't do this because they were "AI-first" evangelists. They did it becaus
 1. **Audit your public information.** Can an AI accurately describe what you do from your web presence alone?
 2. **Document your internal processes.** If a new hire can't find it, neither can an AI agent.
 3. **Structure your data.** Move from prose to structured formats wherever possible.
-4. **Think in entities, not pages.** Your business has products, services, team members, case studies — model them as data, not just web pages.
+4. **Think in entities, not pages.** Your business has products, services, team members, case studies - model them as data, not just web pages.
 
 The mobile-friendly revolution rewarded companies that adapted early. The machine-readable revolution will do the same. The question is: will you be ready?`
   },
@@ -386,7 +386,7 @@ The mobile-friendly revolution rewarded companies that adapted early. The machin
     excerpt: "Why 90% of AI pilots fail to scale beyond the founder's laptop.",
     date: "Jan 20, 2026",
     readTime: "4 min read",
-    content: `Every company I work with has the same story. The founder or a tech-savvy team lead built something clever — a GPT wrapper that summarises customer emails, a script that auto-categorises support tickets, a chatbot that answers basic product questions.
+    content: `Every company I work with has the same story. The founder or a tech-savvy team lead built something clever - a GPT wrapper that summarises customer emails, a script that auto-categorises support tickets, a chatbot that answers basic product questions.
 
 It works brilliantly. On their laptop. For about three weeks.
 
@@ -424,7 +424,7 @@ The companies that successfully scale their AI pilots share three traits:
 
 ## The Uncomfortable Truth
 
-The Messy Middle isn't a problem to solve — it's a phase to endure. Every successful automation went through it. The difference between companies that emerge from the other side and those that don't isn't talent or budget.
+The Messy Middle isn't a problem to solve - it's a phase to endure. Every successful automation went through it. The difference between companies that emerge from the other side and those that don't isn't talent or budget.
 
 It's patience, process, and a willingness to do the boring work of data preparation before the exciting work of AI deployment.
 
@@ -438,7 +438,7 @@ If you're stuck in the Messy Middle right now, that's actually a good sign. It m
     readTime: "6 min read",
     content: `Here's a thought experiment: What if your company wiki went down for a week?
 
-If the answer is "nobody would notice," you have a documentation problem. If the answer is "everything would grind to a halt," congratulations — you've accidentally built something valuable. Now treat it that way.
+If the answer is "nobody would notice," you have a documentation problem. If the answer is "everything would grind to a halt," congratulations - you've accidentally built something valuable. Now treat it that way.
 
 ## The Wiki Graveyard
 
@@ -456,11 +456,11 @@ Bad docs don't just frustrate new hires anymore. They produce bad AI outputs, wh
 
 Software engineers figured this out years ago. Code has:
 
-- **Version control** — you can see what changed, when, and why
-- **Reviews** — changes are reviewed before they go live
-- **Testing** — automated checks ensure nothing is broken
-- **Ownership** — every file has a maintainer
-- **Standards** — consistent formatting, naming, and structure
+- **Version control** - you can see what changed, when, and why
+- **Reviews** - changes are reviewed before they go live
+- **Testing** - automated checks ensure nothing is broken
+- **Ownership** - every file has a maintainer
+- **Standards** - consistent formatting, naming, and structure
 
 Your documentation needs all of these things. Here's what that looks like in practice:
 
@@ -468,13 +468,13 @@ Your documentation needs all of these things. Here's what that looks like in pra
 Don't just edit a wiki page. Track changes. Know who updated what and when. If something breaks, you need to roll back.
 
 ### Reviews
-Major documentation changes should be reviewed, just like code. Not by committee — by the person who owns that process or domain.
+Major documentation changes should be reviewed, just like code. Not by committee - by the person who owns that process or domain.
 
 ### Testing
 Can your AI assistant answer questions correctly using this documentation? Test it. Regularly. If the AI gives wrong answers, your docs are wrong.
 
 ### Ownership
-Every document needs an owner. Not a team — a person. Someone who is responsible for keeping it accurate and current.
+Every document needs an owner. Not a team - a person. Someone who is responsible for keeping it accurate and current.
 
 ### Standards
 Consistent structure makes documentation machine-readable. Use templates. Define what "done" looks like for a doc page. Enforce it.
