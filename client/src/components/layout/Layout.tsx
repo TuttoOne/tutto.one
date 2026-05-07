@@ -12,6 +12,7 @@ export function Header() {
     { label: "Services", href: "/services" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "SharePoint", href: "/sharepoint" },
+    { label: "Praxis", href: "/praxis" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ];

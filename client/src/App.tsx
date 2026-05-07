@@ -13,6 +13,7 @@ import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
 import Contact from "@/pages/contact";
 import Sharepoint from "@/pages/sharepoint";
+import Praxis from "@/pages/praxis";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/contact" component={Contact} />
       <Route path="/sharepoint" component={Sharepoint} />
+      <Route path="/praxis" component={Praxis} />
       <Route component={NotFound} />
     </Switch>
   );
