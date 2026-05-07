@@ -1,0 +1,22 @@
+Praxis means knowledge proven by doing. It comes from the Greek prâxis — action whose purpose is in the action itself. Aristotle separated it from theoria (contemplation) and poiesis (making). Modern usage, after Freire, treats it as the loop of theory, action, reflection, sharper theory.
+The document is the leave-behind from a thirty-minute call. On that call, the reader watched three things happen in front of them, in an empty folder, on a live screen:
+
+A folder of realistic documents was created from a single instruction
+A skill.md file was written that captured their firm's house rules in plain English
+A short script was written that reads the documents, follows the rules, and produces a deterministic output — same answer on the third run as on the first
+
+The point of the call is not to show off AI. It is to make the reader see three things they had not separated before:
+
+Files are not passive storage. A folder, with the right contents, is an application
+Logic is what makes software repeatable. AI alone is probabilistic; software wrapped around AI is deterministic
+Language is the new interface to both. Plain English in a skill file becomes executable behaviour
+
+The one-pager should land that shift. It should not explain how to build one — they have the demo for that. It should explain why what they just watched matters for their business, and what the next step is.
+Structure:
+
+A short opener that defines praxis in one or two sentences, including the etymology, without sounding academic
+A middle section, no more than three short paragraphs, walking through what they saw on the call and naming the principle behind each step (files become apps, rules become language, AI becomes a component, not the whole system)
+A closing section that names what is hard about doing this at production scale — ingestion of real document types, retrieval quality, integration with existing systems, governance — and offers a paid two-week diagnostic sprint as the next step
+A single closing line that they will remember
+
+Voice: plain English, short sentences, no jargon, no metaphors that fly. No bullet point lists longer than three items. No headings that read like marketing. The reader is a managing director who has been pitched AI a hundred times and is tired of decks. This is not a deck. It is a letter from someone who built something useful in front of them and is now telling them, on one page, what they just saw.
