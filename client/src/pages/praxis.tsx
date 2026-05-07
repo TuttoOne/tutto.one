@@ -100,7 +100,30 @@ export default function Praxis() {
 
   return (
     <div style={{ background: "#f6f1ea", minHeight: "100vh", ...INTER }}>
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 32px 80px" }}>
+      <style>{`
+        .px-wrap { padding: 0 20px 80px; }
+        @media (min-width: 600px) { .px-wrap { padding: 0 32px 80px; } }
+
+        .px-cols-3 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        @media (min-width: 680px) { .px-cols-3 { grid-template-columns: 1fr 1fr 1fr; gap: 16px; } }
+
+        .px-cols-2 { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
+        @media (min-width: 680px) { .px-cols-2 { grid-template-columns: 1fr 1fr; gap: 48px; } }
+
+        .px-connector { display: flex; align-items: center; gap: 10px; margin-top: 24px; }
+        .px-connector-line { flex: 1; height: 1px; background: #c8bfb3; }
+        .px-connector-dot { width: 7px; height: 7px; border-radius: 50%; background: #1a1a1a; flex-shrink: 0; }
+        @media (max-width: 679px) {
+          .px-connector-line, .px-connector-dot { display: none; }
+          .px-connector { justify-content: center; }
+        }
+
+        .px-tree-label { font-family: 'JetBrains Mono','Fira Mono','Courier New',monospace; font-size: 10px; color: #a8a092; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        @media (max-width: 479px) { .px-tree-label { display: none; } }
+
+        .px-footer-bar { display: flex; justify-content: space-between; align-items: center; border-top: 1.5px solid #1a1a1a; margin-top: 48px; padding-top: 14px; gap: 8px; flex-wrap: wrap; }
+      `}</style>
+      <div className="px-wrap" style={{ maxWidth: 900, margin: "0 auto" }}>
 
         {/* Doc header */}
         <div style={{
@@ -150,7 +173,7 @@ export default function Praxis() {
           </div>
 
           {/* Cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
+          <div className="px-cols-3">
             {cols.map((col) => (
               <div key={col.num} style={{
                 border: "1px solid #d8d0c5",
@@ -172,19 +195,16 @@ export default function Praxis() {
           </div>
 
           {/* Connector row */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 28 }}>
-            <div style={{ flex: 1, height: 1, background: "#c8bfb3" }} />
-            <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#1a1a1a", flexShrink: 0 }} />
-            <div style={{ flex: 1, height: 1, background: "#c8bfb3" }} />
-            <div style={{
-              border: "1px solid #c8bfb3", borderRadius: 20,
-              padding: "5px 16px", flexShrink: 0, background: "#f6f1ea",
-            }}>
+          <div className="px-connector">
+            <div className="px-connector-line" />
+            <div className="px-connector-dot" />
+            <div className="px-connector-line" />
+            <div style={{ border: "1px solid #c8bfb3", borderRadius: 20, padding: "5px 16px", flexShrink: 0, background: "#f6f1ea" }}>
               <span style={{ ...MONO, fontSize: 11, color: "#5a5248" }}>point all three at the same folder ↓</span>
             </div>
-            <div style={{ flex: 1, height: 1, background: "#c8bfb3" }} />
-            <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#1a1a1a", flexShrink: 0 }} />
-            <div style={{ flex: 1, height: 1, background: "#c8bfb3" }} />
+            <div className="px-connector-line" />
+            <div className="px-connector-dot" />
+            <div className="px-connector-line" />
           </div>
         </div>
 
@@ -194,7 +214,7 @@ export default function Praxis() {
             <span style={{ ...CAPS, fontSize: 10 }}>02 &nbsp;&nbsp;&nbsp; The Output - A Folder on Disk</span>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
+          <div className="px-cols-2">
 
             {/* Folder tree */}
             <div>
@@ -218,7 +238,7 @@ export default function Praxis() {
                       : <span style={{ width: 16, flexShrink: 0 }} />
                     }
                     <span style={{ ...MONO, fontSize: 11, color: "#1a1a1a", minWidth: 110 }}>- {row.name}</span>
-                    <span style={{ ...MONO, fontSize: 10, color: "#a8a092" }}>{row.label}</span>
+                    <span className="px-tree-label">{row.label}</span>
                   </div>
                 ))}
                 <div style={{ padding: "8px 16px", background: "#f9f6f1", display: "flex", justifyContent: "space-between" }}>
@@ -249,7 +269,7 @@ export default function Praxis() {
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 36 }}>
             <span style={{ ...CAPS, fontSize: 10 }}>03 &nbsp;&nbsp;&nbsp; What It Costs</span>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
+          <div className="px-cols-3">
             {[
               {
                 label: "The tools",
@@ -302,7 +322,7 @@ export default function Praxis() {
         </div>
 
         {/* Doc footer */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1.5px solid #1a1a1a", marginTop: 48, paddingTop: 14 }}>
+        <div className="px-footer-bar">
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Praxis · Client Training</span>
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Module 01 - Foundations</span>
         </div>
