@@ -378,6 +378,17 @@ export default function Praxis() {
           </a>
         </div>
 
+        {/* Etymology */}
+        <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
+          <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>On the word</p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 20, maxWidth: 620, fontStyle: "italic" }}>
+            Praxis is the loop of putting theory into practice, then letting what you learn from doing it sharpen the theory.
+          </p>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620 }}>
+            Praxis comes from the Greek <em>prâxis</em> (πρᾶξις), meaning "doing" or "action," from the verb <em>prattein</em>, "to do" or "to act." Aristotle used it to distinguish lived action from two other modes of human activity - <em>theoria</em> (contemplation) and <em>poiesis</em> (making). Where <em>poiesis</em> produces an object outside itself, praxis is action whose end lies in the doing itself, the conduct of a life rather than the manufacture of a thing.
+          </p>
+        </div>
+
         {/* Doc footer */}
         <div className="px-footer-bar">
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Praxis · Client Training</span>
