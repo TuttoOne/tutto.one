@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
 const INTER: React.CSSProperties = { fontFamily: "'Inter', -apple-system, sans-serif" };
@@ -118,9 +119,10 @@ export default function Praxis() {
 
   return (
     <div style={{ background: "#f6f1ea", minHeight: "100vh", ...INTER }}>
+      <Header />
       <style>{`
-        .px-wrap { padding: 0 20px 80px; }
-        @media (min-width: 600px) { .px-wrap { padding: 0 32px 80px; } }
+        .px-wrap { padding: 64px 20px 80px; }
+        @media (min-width: 600px) { .px-wrap { padding: 64px 32px 80px; } }
 
         .px-cols-3 { display: grid; grid-template-columns: 1fr; gap: 14px; }
         @media (min-width: 680px) { .px-cols-3 { grid-template-columns: 1fr 1fr 1fr; gap: 16px; } }
