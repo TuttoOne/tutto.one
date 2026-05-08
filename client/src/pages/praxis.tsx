@@ -125,6 +125,61 @@ export default function Praxis() {
       `}</style>
       <div className="px-wrap" style={{ maxWidth: 900, margin: "0 auto" }}>
 
+        {/* ── Plain-English intro ── */}
+        <div style={{
+          borderRadius: 12,
+          background: "#1a1a1a",
+          padding: "clamp(28px, 5vw, 52px)",
+          marginBottom: 56,
+          marginTop: 32,
+        }}>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>
+            What is Praxis?
+          </p>
+          <h2 style={{
+            ...ROBOTO,
+            fontSize: "clamp(22px, 4vw, 36px)",
+            fontWeight: 800,
+            lineHeight: 1.2,
+            color: "#f6f1ea",
+            marginBottom: 24,
+            letterSpacing: "-0.3px",
+          }}>
+            A 30-minute Teams call that changes<br />
+            how you think about AI.
+          </h2>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
+            No technical background needed. No slides. We share our screen, open a plain folder
+            on a normal computer, and show you - live - how three tools you already use can work
+            together as a proper AI system that you own and control.
+          </p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
+            Most people come in thinking AI is a chat box. They leave understanding it as
+            infrastructure. That shift - from tool to system - is what the session is designed
+            to give you, in thirty minutes, without any jargon.
+          </p>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+            <a
+              href="https://cal.com/tuttoone/15min"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "#d97706", color: "#fff",
+                ...ROBOTO, fontSize: 13, fontWeight: 700,
+                padding: "12px 24px", borderRadius: 6,
+                textDecoration: "none", letterSpacing: "0.04em",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Book the 30-minute session →
+            </a>
+            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
+              Free · Teams or Google Meet · No preparation required
+            </span>
+          </div>
+        </div>
+
         {/* Doc header */}
         <div style={{
           display: "flex", justifyContent: "space-between", alignItems: "center",
