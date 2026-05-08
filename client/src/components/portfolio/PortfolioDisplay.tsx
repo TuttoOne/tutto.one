@@ -1,10 +1,6 @@
 import { ExternalLink, ChevronLeft, ChevronRight, Plug } from "lucide-react";
 import { useState } from "react";
 
-import cfeDashboard from "@assets/screenshot-1773752954601.png";
-import cfeFormats from "@assets/Screenshot_2026-03-17_at_14.15.25_1773753570040.png";
-import cfePlugin from "@assets/Screenshot_2026-03-17_at_14.19.11_1773753570040.png";
-
 import evHome from "@assets/Screenshot_2026-03-17_at_14.14.24_1773753293404.png";
 import evEntities from "@assets/Screenshot_2026-03-17_at_14.13.51_1773753293404.png";
 import evCollab from "@assets/Screenshot_2026-03-17_at_14.14.02_1773753293404.png";
@@ -128,16 +124,6 @@ export const portfolioEntries: PortfolioEntry[] = [
         assistant: "Found 5 failed runs. Most recent error: 'Connection timeout to Xero API' - occurred 3 times in the last 24 hours.",
       },
     ],
-  },
-  {
-    type: "product",
-    name: "Creative Format Engine",
-    tagline: "cfe.tutto.one",
-    description:
-      "A format specification and campaign management tool for creative production - e-commerce banners, social media assets, and more. Includes a Photoshop plugin for seamless designer workflows.",
-    url: "https://cfe.tutto.one",
-    screenshots: [cfeDashboard, cfeFormats, cfePlugin],
-    screenshotLabels: ["Dashboard", "Format Specifications", "Photoshop Plugin"],
   },
   {
     type: "product",
