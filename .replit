@@ -47,3 +47,8 @@ integrations = ["javascript_anthropic_ai_integrations:2.0.0"]
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 60000
+
+[userenv]
+
+[userenv.shared]
+NOTIFICATION_EMAIL = "daniel@tutto.one"

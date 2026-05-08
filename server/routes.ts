@@ -4,11 +4,16 @@ import { storage } from "./storage";
 import { insertContactSubmissionSchema, insertEmailLeadSchema } from "@shared/schema";
 import { z } from "zod";
 import Anthropic from "@anthropic-ai/sdk";
+import { Resend } from "resend";
 
 const anthropic = new Anthropic({
   apiKey: process.env.AI_INTEGRATIONS_ANTHROPIC_API_KEY,
   baseURL: process.env.AI_INTEGRATIONS_ANTHROPIC_BASE_URL,
 });
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
+const FROM_EMAIL = "Tutto <notifications@tutto.one>";
 
 const TUTTO_SYSTEM_PROMPT = `You are Daniel from Tutto, an AI consulting firm that helps businesses become machine-readable in an AI-first economy.
 
@@ -28,6 +33,19 @@ Key concepts explained simply:
 - Unified API: One single doorway to access all your company's data instead of having it scattered across dozens of different tools.
 - AI Agent: A piece of software that can do tasks on its own, like a digital employee that follows rules you set up.
 - Document repository: A central place where all your company knowledge lives, organized and searchable, not buried in random Google Docs.`;
+
+async function sendNotificationEmail(subject: string, html: string) {
+  try {
+    await resend.emails.send({
+      from: FROM_EMAIL,
+      to: NOTIFICATION_EMAIL,
+      subject,
+      html,
+    });
+  } catch (err) {
+    console.error("Failed to send notification email:", err);
+  }
+}
 
 export async function registerRoutes(
   httpServer: Server,
@@ -67,6 +85,25 @@ export async function registerRoutes(
     try {
       const data = insertContactSubmissionSchema.parse(req.body);
       const submission = await storage.createContactSubmission(data);
+
+      await sendNotificationEmail(
+        `New enquiry from ${data.name}`,
+        `
+          <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px; background: #f6f1ea;">
+            <div style="background: #1a1a1a; border-radius: 10px; padding: 28px; margin-bottom: 24px;">
+              <p style="color: #d97706; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 8px;">New Tutto Enquiry</p>
+              <h2 style="color: #f6f1ea; font-size: 22px; margin: 0;">${data.name}</h2>
+              <p style="color: rgba(246,241,234,0.5); font-size: 13px; margin: 4px 0 0;">${data.email}</p>
+            </div>
+            <div style="background: #fff; border-radius: 10px; padding: 24px; border: 1px solid #d8d0c5;">
+              <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px;">Message</p>
+              <p style="color: #1a1a1a; font-size: 14px; line-height: 1.75; margin: 0; white-space: pre-line;">${data.message}</p>
+            </div>
+            <p style="color: #a8a092; font-size: 11px; margin: 20px 0 0; text-align: center;">Tutto · tutto.one</p>
+          </div>
+        `
+      );
+
       res.json({ success: true, submission });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -89,11 +126,32 @@ export async function registerRoutes(
     }
   });
 
-  // Email lead capture
+  // Email lead capture (SharePoint page)
   app.post("/api/leads", async (req, res) => {
     try {
       const data = insertEmailLeadSchema.parse(req.body);
       const lead = await storage.createEmailLead(data);
+
+      await sendNotificationEmail(
+        `New lead: ${data.email}`,
+        `
+          <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px; background: #f6f1ea;">
+            <div style="background: #1a1a1a; border-radius: 10px; padding: 28px; margin-bottom: 24px;">
+              <p style="color: #d97706; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 8px;">New Lead Capture</p>
+              <h2 style="color: #f6f1ea; font-size: 22px; margin: 0;">${data.email}</h2>
+              ${data.name ? `<p style="color: rgba(246,241,234,0.5); font-size: 13px; margin: 4px 0 0;">${data.name}</p>` : ""}
+            </div>
+            ${data.company ? `
+            <div style="background: #fff; border-radius: 10px; padding: 24px; border: 1px solid #d8d0c5;">
+              <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px;">Company</p>
+              <p style="color: #1a1a1a; font-size: 14px; margin: 0;">${data.company}</p>
+            </div>
+            ` : ""}
+            <p style="color: #a8a092; font-size: 11px; margin: 20px 0 0; text-align: center;">Tutto · tutto.one</p>
+          </div>
+        `
+      );
+
       res.json({ success: true, lead });
     } catch (error) {
       if (error instanceof z.ZodError) {
