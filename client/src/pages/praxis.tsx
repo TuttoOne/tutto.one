@@ -150,8 +150,9 @@ export default function Praxis() {
           </h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
             No technical background needed. No slides. We share our screen, open a plain folder
-            on a normal computer, and show you - live - how three tools you already use can work
-            together as a proper AI system that you own and control.
+            on a normal computer, and show you - live - how a free code editor, a Claude
+            subscription, and your own files can work together as a proper AI system that you
+            own and control.
           </p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
             Most people come in thinking AI is a chat box. They leave understanding it as
@@ -215,9 +216,10 @@ export default function Praxis() {
         {/* Intro */}
         <div style={{ maxWidth: 620, marginBottom: 64 }}>
           <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>
-            You don't need a platform. You don't need an account. You need three tools you
-            already use - pointed at the same folder on your machine. That folder, and what's
-            inside it, is your app.
+            You don't need a proprietary platform or an account with us. The only thing you'll
+            need to subscribe to is Claude - about £20 a month - and a free code editor. Point
+            all three at the same folder on your machine. That folder, and what's inside it,
+            is your app.
           </p>
         </div>
 
