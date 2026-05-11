@@ -45,11 +45,13 @@ const entryThemes = [
 export const portfolioEntries: PortfolioEntry[] = [
   {
     type: "project",
-    name: "LegalRAG",
+    name: "Pythia",
     tagline: "On-Premise AI · Legal Document Intelligence",
     badge: "Client Engagement",
     description:
       "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design.",
+    url: "/pythia",
+    urlLabel: "About Pythia",
     capabilities: [
       {
         title: "Document Ingestion at Scale",
