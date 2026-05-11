@@ -252,7 +252,7 @@ export default function Pythia() {
             {[
               { label: "The diagnostic sprint", price: "~£2,500", note: "Two weeks. We review your real documents and workflows and tell you exactly what Pythia can do for your practice." },
               { label: "The build", price: "From £20,000", note: "Hardware and custom build, scoped after the diagnostic. Typically four to eight weeks from sign-off to a system running on your premises." },
-              { label: "Ongoing", price: "Retained", note: "We stay on hand to ingest new matter files, expand coverage, and keep the system current as your work evolves." },
+              { label: "Ongoing", price: "~20% p.a.", note: "Assessed during the build. Covers ingestion of new matter files, system maintenance, and keeping Pythia current as your work evolves." },
             ].map((p) => (
               <div key={p.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "24px 20px", background: "#faf8f5" }}>
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{p.label}</p>
