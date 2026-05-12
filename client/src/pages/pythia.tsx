@@ -118,8 +118,9 @@ export default function Pythia() {
             What is Pythia?
           </p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>
-            An AI that reads every document<br />
-            in your firm. Miss nothing.
+            An AI that reads every document.<br />
+            100% local: at your home or office.<br />
+            A private second brain that can take action.
           </h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
             Juniors spend days reading. Partners wait. The thing you miss is the thing that
