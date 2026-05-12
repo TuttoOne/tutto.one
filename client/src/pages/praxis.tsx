@@ -397,7 +397,7 @@ export default function Praxis() {
           <div className="px-cols-3">
             {[
               { label: "The tools", price: "~$20/mo", note: "VS Code is free. Claude Pro is ~$20/month. That's the only recurring cost." },
-              { label: "The session", price: "£100", strikethrough: "£200", note: "Thirty minutes, live on your machine. You leave with a working folder and the mental model to build more." },
+              { label: "The session · Spring special", price: "£100", strikethrough: "£200", note: "Limited time only — usually £200. Thirty minutes, live on your machine. You leave with a working folder and the mental model to build more." },
               { label: "The diagnostic sprint", price: "~£2,500", note: "Two weeks. We look at your real documents and workflows and tell you exactly what is possible." },
             ].map((p) => (
               <div key={p.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "24px 20px", background: "#faf8f5" }}>
