@@ -397,12 +397,15 @@ export default function Praxis() {
           <div className="px-cols-3">
             {[
               { label: "The tools", price: "~$20/mo", note: "VS Code is free. Claude Pro is ~$20/month. That's the only recurring cost." },
-              { label: "The session", price: "£100", note: "Thirty minutes, live on your machine. You leave with a working folder and the mental model to build more." },
+              { label: "The session", price: "£100", strikethrough: "£200", note: "Thirty minutes, live on your machine. You leave with a working folder and the mental model to build more." },
               { label: "The diagnostic sprint", price: "~£2,500", note: "Two weeks. We look at your real documents and workflows and tell you exactly what is possible." },
             ].map((p) => (
               <div key={p.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "24px 20px", background: "#faf8f5" }}>
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{p.label}</p>
-                <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-1px" }}>{p.price}</p>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 12 }}>
+                  <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", letterSpacing: "-1px", margin: 0 }}>{p.price}</p>
+                  {"strikethrough" in p && <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 700, color: "#c8bfb3", textDecoration: "line-through", margin: 0 }}>{(p as any).strikethrough}</p>}
+                </div>
                 <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
               </div>
             ))}
