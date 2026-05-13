@@ -154,44 +154,43 @@ export default function Praxis() {
             What is Praxis?
           </p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>
-            A 30-minute Teams call that changes<br />
+            A one-hour Teams call that changes<br />
             how you think about AI.
           </h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
-            No technical background needed. No slides. We share our screen, open a plain folder
-            on a normal computer, and show you - live - how a free code editor, a Claude
-            subscription, and your own files can work together as a proper AI system that you
-            own and control.
+            No technical background needed. The session runs in two halves. The first
+            thirty minutes covers the theory and principles - what AI actually is, how the
+            folder-based system works, and why it changes everything. No jargon.
           </p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
-            Most people come in thinking AI is a chat box. They leave understanding it as
-            infrastructure. That shift - from tool to system - is what the session is designed
-            to give you, in thirty minutes, without any jargon.
+            The second thirty minutes is practical - on your own computer, with your own
+            files. You follow along live as we build the system together. By the end of the
+            hour, you have a working setup and the mental model to take it further.
           </p>
 
           {/* Book button */}
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginBottom: 28 }}>
             <a
-              href="https://cal.com/tuttoone/30min"
+              href="https://cal.com/tuttoone/1hr"
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
             >
-              Book the 30-minute session →
+              Book the 1-hour session →
             </a>
             <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
               Teams or Google Meet · No preparation required
             </span>
           </div>
 
-          {/* New customer caveat */}
+          {/* Pre-session requirements */}
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 24, marginBottom: 28 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 10 }}>New to Tutto?</p>
+            <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 10 }}>Before the session</p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "rgba(246,241,234,0.55)", maxWidth: 520 }}>
-              For a first session, we recommend booking 45 minutes. The extra 15 gives us time to
-              hear about your industry and identify the right use case before we open the folder.
-              You can avoid that addition entirely by filling in the short form below - we'll come
-              prepared.
+              The practical half runs on your computer. To get the most from it, please have
+              Claude installed and a paid subscription active before we start - and ideally
+              Visual Studio Code too. Fill in the form below and we'll send you exactly what
+              to set up in advance.
             </p>
           </div>
 
@@ -199,12 +198,12 @@ export default function Praxis() {
           {formState === "sent" ? (
             <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "24px", textAlign: "center" }}>
               <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>Done - we'll be in touch.</p>
-              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>Book the 30-minute slot above and we'll come prepared.</p>
+              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>Book the 1-hour session above and we'll send setup instructions in advance.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "24px" }}>
               <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "rgba(246,241,234,0.7)", marginBottom: 18 }}>
-                Fill this in and book the standard 30-minute slot
+                Fill this in and we'll send you setup instructions before the session
               </p>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
                 <div>
@@ -397,7 +396,7 @@ export default function Praxis() {
           <div className="px-cols-3">
             {[
               { label: "The tools", price: "~$20/mo", note: "VS Code is free. Claude Pro is ~$20/month. That's the only recurring cost." },
-              { label: "The session · Spring special", price: "£100", strikethrough: "£200", note: "Limited time only — usually £200. Thirty minutes, live on your machine. You leave with a working folder and the mental model to build more." },
+              { label: "The session · Spring special", price: "£100", strikethrough: "£200", note: "Limited time only — usually £200. One hour: 30 minutes of theory and principles, then 30 minutes hands-on on your own computer. You leave with a working setup." },
               { label: "The diagnostic sprint", price: "~£2,500", note: "Two weeks. We look at your real documents and workflows and tell you exactly what is possible." },
             ].map((p) => (
               <div key={p.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "24px 20px", background: "#faf8f5" }}>
@@ -417,11 +416,11 @@ export default function Praxis() {
           <div>
             <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 8 }}>Ready to see it live?</p>
             <p style={{ ...INTER, fontSize: 14, color: "#3d3d3d", maxWidth: 380 }}>
-              Book a thirty-minute Praxis session. We build it in front of you, on your machine, with your files.
+              Book a one-hour Praxis session. Theory first, then hands-on together — on your machine, with your files.
             </p>
           </div>
           <a
-            href="https://cal.com/tuttoone/30min"
+            href="https://cal.com/tuttoone/1hr"
             target="_blank"
             rel="noopener noreferrer"
             style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#1a1a1a", color: "#f6f1ea", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 4, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
