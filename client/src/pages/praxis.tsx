@@ -171,7 +171,7 @@ export default function Praxis() {
           {/* Book button */}
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginBottom: 28 }}>
             <a
-              href="https://cal.com/tuttoone/1hr"
+              href="https://cal.com/tuttoone/60-min-meeting"
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
@@ -420,7 +420,7 @@ export default function Praxis() {
             </p>
           </div>
           <a
-            href="https://cal.com/tuttoone/1hr"
+            href="https://cal.com/tuttoone/60-min-meeting"
             target="_blank"
             rel="noopener noreferrer"
             style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#1a1a1a", color: "#f6f1ea", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 4, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
