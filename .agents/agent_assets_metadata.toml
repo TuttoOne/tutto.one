@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "BMg2pfKcMr2VpEvVZAJNj"
+uri = "file://tutto-content.md"
+type = "text"
+title = "Tutto — Full Site Content (Markdown)"
