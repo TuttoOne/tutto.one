@@ -429,6 +429,27 @@ export default function Praxis() {
           </a>
         </div>
 
+        {/* Programme teaser */}
+        <div style={{ marginTop: 48, borderRadius: 12, background: "#1a1a1a", padding: "32px 28px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
+          <div>
+            <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 10 }}>Want to go further?</p>
+            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#f6f1ea", marginBottom: 8, letterSpacing: "-0.2px" }}>
+              The full Praxis Programme
+            </p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", maxWidth: 400 }}>
+              Eight sessions over two months. Build real working tools for your own work
+              with Claude Code - no coding background needed. You finish with something
+              you actually use.
+            </p>
+          </div>
+          <a
+            href="/praxis-programme"
+            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap", flexShrink: 0 }}
+          >
+            See the full programme →
+          </a>
+        </div>
+
         {/* Etymology */}
         <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>On the word</p>

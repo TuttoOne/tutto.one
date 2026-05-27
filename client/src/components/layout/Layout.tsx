@@ -13,6 +13,7 @@ export function Header() {
     { label: "Portfolio", href: "/portfolio" },
     { label: "SharePoint", href: "/sharepoint" },
     { label: "Praxis", href: "/praxis" },
+    { label: "Programme", href: "/praxis-programme" },
     { label: "Pythia", href: "/pythia" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },

@@ -14,6 +14,7 @@ import Portfolio from "@/pages/portfolio";
 import Contact from "@/pages/contact";
 import Sharepoint from "@/pages/sharepoint";
 import Praxis from "@/pages/praxis";
+import PraxisProgramme from "@/pages/praxis-programme";
 import Pythia from "@/pages/pythia";
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/sharepoint" component={Sharepoint} />
       <Route path="/praxis" component={Praxis} />
+      <Route path="/praxis-programme" component={PraxisProgramme} />
       <Route path="/pythia" component={Pythia} />
       <Route component={NotFound} />
     </Switch>
