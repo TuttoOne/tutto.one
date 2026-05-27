@@ -16,6 +16,7 @@ import Sharepoint from "@/pages/sharepoint";
 import Praxis from "@/pages/praxis";
 import PraxisProgramme from "@/pages/praxis-programme";
 import Pythia from "@/pages/pythia";
+import BecomeATrainer from "@/pages/become-a-trainer";
 
 function Router() {
   return (
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/praxis" component={Praxis} />
       <Route path="/praxis-programme" component={PraxisProgramme} />
       <Route path="/pythia" component={Pythia} />
+      <Route path="/become-a-trainer" component={BecomeATrainer} />
       <Route component={NotFound} />
     </Switch>
   );

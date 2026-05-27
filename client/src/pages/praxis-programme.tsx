@@ -508,6 +508,45 @@ export default function PraxisProgramme() {
           </p>
         </div>
 
+        {/* Trainer track teaser */}
+        <div style={{ marginTop: 64, borderRadius: 12, border: "1.5px solid #d97706", background: "#fdf6ec", padding: "clamp(24px, 4vw, 44px)" }}>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 16 }}>
+            What comes next
+          </p>
+          <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "flex-start", justifyContent: "space-between" }}>
+            <div style={{ maxWidth: 480 }}>
+              <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>
+                Become a Praxis trainer.<br />Teach it, and earn from it.
+              </h3>
+              <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 0 }}>
+                Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on
+                every course you teach. I find and organise the clients with you, you deliver the sessions, and
+                a hub is behind you for the hard jobs.
+              </p>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
+              <div style={{ border: "1px solid #f0d9b0", borderRadius: 8, padding: "12px 16px", background: "#fff8ee", minWidth: 160 }}>
+                <p style={{ ...CAPS, fontSize: 8, color: "#a8a092", marginBottom: 6 }}>Trainer track</p>
+                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#1a1a1a", letterSpacing: "-0.5px" }}>£800</p>
+                <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>Four sessions</p>
+              </div>
+              <div style={{ border: "1px solid #f0d9b0", borderRadius: 8, padding: "12px 16px", background: "#fff8ee" }}>
+                <p style={{ ...CAPS, fontSize: 8, color: "#a8a092", marginBottom: 6 }}>You keep</p>
+                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#d97706", letterSpacing: "-0.5px" }}>80%</p>
+                <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>of every course you teach</p>
+              </div>
+            </div>
+          </div>
+          <div style={{ marginTop: 28 }}>
+            <a
+              href="/become-a-trainer"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "11px 22px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
+            >
+              See the trainer track →
+            </a>
+          </div>
+        </div>
+
         {/* Doc footer */}
         <div className="pp-footer-bar">
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Praxis Programme · tutto.one/praxis-programme</span>
