@@ -163,6 +163,72 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
 
 export const BLOG_POSTS = [
   {
+    slug: "glasswing-security-threshold",
+    title: "AI Has Crossed the Security Threshold. Your Patch Cycle Has Not.",
+    excerpt: "Anthropic's Project Glasswing scanned over 1,000 open-source projects and found 6,202 high or critical vulnerabilities — at 90% accuracy. The problem is not the finding. It is how long it takes to fix.",
+    date: "May 27, 2026",
+    readTime: "5 min read",
+    content: `Anthropic published an initial update on [Project Glasswing](https://www.anthropic.com/research/glasswing-initial-update) this week. It is nominally an announcement about a security initiative. What it actually describes is a threshold being crossed — and most organisations have not thought through what that means.
+
+## What Glasswing is
+
+Glasswing is Anthropic's effort to use their most capable model, Claude Mythos Preview, to find vulnerabilities in critical software before attackers do. The launch partners include AWS, Apple, Cisco, Google, Microsoft, NVIDIA and JPMorganChase. Anthropic is committing $100 million in usage credits and $4 million in direct donations to open-source security organisations.
+
+The headline framing is defensive: we are using AI to protect infrastructure. That framing is correct. It is also incomplete.
+
+## What the numbers mean
+
+Over the last few months, Mythos Preview scanned more than 1,000 open-source projects. It found 23,019 vulnerabilities in total. Of those, 6,202 were classified as high or critical severity.
+
+Anthropic then sent 1,752 of the high/critical findings to six independent security research firms for assessment. 90.6% — 1,587 — were confirmed as valid true positives. 62.4% were confirmed high or critical.
+
+Work through the arithmetic. At that true positive rate, Mythos Preview has surfaced close to 3,900 real high-or-critical vulnerabilities in open-source code from a scan that took months, not years. That number will continue rising: Anthropic says they intend to keep scanning.
+
+The scale is not the story. The rate is. A 90% true positive rate on vulnerability discovery is not a research result. It is an operational capability.
+
+## The benchmark saturation point
+
+Anthropic notes that Mythos Preview has improved to the point where it "mostly saturates existing benchmarks" for vulnerability discovery. As a result, they have supported the creation of two new benchmarks — ExploitBench and ExploitGym — specifically to track frontier models' exploit development capabilities going forward.
+
+When a model saturates a benchmark, the benchmark stops being informative. What replaces it is real-world testing, which is what Glasswing is. The move from benchmarks to production scanning is not a methodological choice. It is an acknowledgement that the capability has outgrown the measurement.
+
+The implication is direct: AI systems can now find and construct exploits for software vulnerabilities at a level that surpasses all but the most skilled human security researchers. Anthropic states this explicitly in the update.
+
+## wolfSSL
+
+The concrete example in the update is worth sitting with. wolfSSL is an open-source cryptography library used by billions of devices — routers, embedded systems, IoT hardware. Mythos Preview found a vulnerability and constructed a working exploit that would allow an attacker to forge certificates, enabling them to impersonate banks or email providers to any device running the affected library.
+
+This is not an academic finding. Certificate forgery at scale enables phishing and man-in-the-middle attacks that are effectively undetectable by end users. The device trusts the certificate. The user trusts the device.
+
+wolfSSL has been notified. The fix exists. The question, as always, is how quickly it reaches the billions of devices that are running the vulnerable version.
+
+## The real problem: asymmetry
+
+The threat model that most security teams are operating under assumes a rough parity between attacker capability and defender response time. Attackers find vulnerabilities. Security researchers validate them. Patches are developed. Organisations apply them on a quarterly cycle, or when a critical advisory arrives.
+
+What Glasswing demonstrates is that the finding side of this equation has been radically accelerated. A model can scan 1,000 projects in months. It can construct working exploits, not just flag potential weaknesses. It can do this continuously, at scale, and the capability is improving.
+
+The fixing side has not changed. Patch testing, deployment pipelines, dependency management, and the organisational friction involved in pushing updates to production systems all operate on the same timelines they did five years ago.
+
+That gap is the actual problem. The Glasswing initiative is Anthropic putting defenders on the right side of it. But defenders only benefit if they can absorb and act on findings faster than the vulnerability window stays open.
+
+## What this means in practice
+
+The update cites NIST and the UK's NCSC recommending that defenders shorten patch testing and deployment timelines, harden network default configurations, enforce multi-factor authentication, and maintain comprehensive logs. These are not new recommendations. They are newly urgent ones.
+
+A few things worth assessing in your own organisation:
+
+- **Patch velocity.** How long does it take from a critical advisory to confirmed deployment across your estate? If the answer is measured in weeks or months, that gap is your exposure window. Mythos Preview can construct a working exploit in the time it takes your change management process to schedule a maintenance window.
+
+- **Dependency inventory.** Do you know which of your systems depends on wolfSSL, or any of the other 1,000 projects that Glasswing has scanned? If your software bill of materials is incomplete or out of date, advisory notifications will not reach the right people in time.
+
+- **MFA coverage.** The banking example in the update involved a threat actor who compromised a customer email account and used it to social-engineer a wire transfer. The entry point was not a zero-day. It was a credential. MFA is not a sophisticated control. The absence of it remains one of the most common factors in successful attacks.
+
+The Glasswing initiative is genuinely good news. Anthropic is using a capability that could be used offensively to get ahead of the attack surface. But the benefit only materialises if organisations on the receiving end can actually move at the speed the threat now requires.
+
+The threshold has been crossed. The question is whether your operational tempo has caught up with it.`,
+  },
+  {
     slug: "anthropic-managed-agents-architecture",
     title: "The Harness Problem: What Anthropic's Managed Agents Tell Us About Building on AI",
     excerpt: "Anthropic published a detailed account of how they architect long-running AI agents. The engineering is interesting. The implication for anyone building on top of Claude is more important.",
