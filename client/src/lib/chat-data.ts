@@ -163,6 +163,70 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
 
 export const BLOG_POSTS = [
   {
+    slug: "anthropic-managed-agents-architecture",
+    title: "The Harness Problem: What Anthropic's Managed Agents Tell Us About Building on AI",
+    excerpt: "Anthropic published a detailed account of how they architect long-running AI agents. The engineering is interesting. The implication for anyone building on top of Claude is more important.",
+    date: "May 15, 2026",
+    readTime: "6 min read",
+    content: `Anthropic's engineering blog published a post in April titled [Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents). It is worth reading in full if you build systems that run Claude for more than a single turn. If you don't have time for that, here is what matters and why it matters for you.
+
+## The problem they are solving
+
+When you build an AI agent, you write a harness - the loop of code that calls the model, routes its tool calls, and decides what to do with the results. The harness is where your assumptions live. You write it based on what Claude can and cannot do today.
+
+The problem is that what Claude can and cannot do changes. Quickly.
+
+Anthropic give a specific example. Claude Sonnet 4.5 would wrap up tasks prematurely as it sensed its context window approaching - a phenomenon they call "context anxiety." They fixed it in the harness by adding context resets. When they upgraded to Claude Opus 4.5, the anxiety was gone. The harness fix had become dead weight. The assumption they had encoded - that the model needed help managing context pressure - was no longer true.
+
+This is the harness problem in its simplest form. Every assumption you bake in has an expiry date you cannot know in advance. Anthropic's solution is to build around interfaces that stay stable while everything underneath them changes.
+
+## Pets vs cattle
+
+The post introduces an infrastructure concept that is worth borrowing. In the original framing, a "pet" is a server you name, tend, and cannot afford to lose. "Cattle" are interchangeable - when one fails, you replace it.
+
+Anthropic's first Managed Agents architecture put everything - the harness, the sandbox, the session log - into a single container. That container became a pet. When it failed, the session was lost. When it was unresponsive, engineers had to nurse it back. Debugging required opening a shell into a container that also held user data, which meant they essentially could not debug it.
+
+The fix was decoupling. The harness (the brain) was separated from the sandbox (the hands) and the session log. Each became an independent interface. If a container died, the harness caught the failure as a tool-call error, passed it to Claude, and Claude could request a new one. No nursing required. The containers became cattle.
+
+## What decoupling actually buys you
+
+Three things worth noting.
+
+**Speed.** When the brain and hands were coupled, every session paid the container setup cost upfront - even sessions that would never touch the sandbox. Once decoupled, containers are only provisioned when actually needed. The result: p50 time-to-first-token dropped roughly 60%. p95 dropped over 90%. That is not a rounding error. That is the difference between an agent that feels responsive and one that feels broken.
+
+**Flexibility.** When the harness assumed it lived next to its tools, connecting to a client's own cloud meant either peering their network with Anthropic's or running Anthropic's harness in the client's environment. Neither is clean. Once the harness treats every execution environment as a remote tool call - \`execute(name, input) → string\` - it stops caring whether the sandbox is a container in Anthropic's cloud, a resource in your VPC, or something else entirely. The interface is the same.
+
+**Security.** In the coupled design, credentials lived in the same container as the code Claude was generating. A prompt injection only had to convince Claude to read its own environment. Once the sandbox - where Claude's generated code runs - is separated from the harness, credentials can live in a vault the sandbox cannot reach. The structural fix removes the attack surface rather than just narrowing it.
+
+## The session is not the context window
+
+One of the less obvious insights in the post is about how long-horizon agents handle memory.
+
+The conventional approach to long tasks is to manage context within the context window - compaction, trimming, summarisation. The problem with all of these is that they involve irreversible decisions. You cannot know in advance which tokens a future turn will need. Discard the wrong thing and the agent fails in ways that are hard to trace.
+
+Anthropic's approach is to treat the session log as a separate object that lives outside the context window. It is append-only, durable, and independently queryable. The harness can pull any slice of the event history and pass it to Claude as needed. Nothing is discarded. What gets loaded into the context window at any given turn is a decision the harness makes - not an irreversible transformation of the record itself.
+
+This is a meaningful design choice. It means you can change your context management strategy without losing history. It means a failed session can be resumed from any point. And it means the session log outlives any particular harness that reads from it.
+
+## What this means if you are building on Claude
+
+The Managed Agents post is partly an announcement of Anthropic's own hosted service. But the architectural thinking underneath it applies to anyone building agents, whether or not you use their managed infrastructure.
+
+The central point is that the model is improving faster than most harnesses are designed to accommodate. Assumptions that were correct six months ago may not be correct now, and assumptions you make today will likely need revisiting before the end of the year. Building harnesses that are tightly coupled to current model behaviour means each model upgrade requires harness rework.
+
+The practical implication is to think carefully about what you are encoding in your harness versus what you are leaving to the model. Every piece of scaffolding that compensates for something the model cannot do is a bet that the model will not be able to do it in future. Sometimes that bet is correct. Often it is not.
+
+A few specific things worth auditing in your own setup:
+
+- **Context management logic.** If you are aggressively trimming or summarising to handle long sessions, check whether the current model still needs it.
+- **Error handling scaffolding.** Retry logic and fallback paths that were necessary for earlier models may be unnecessary overhead now, or may interact badly with improved model behaviour.
+- **Tool routing assumptions.** If you built logic to decide which tool a model should use because it was unreliable at choosing, that logic is worth revisiting.
+
+None of this means ripping out your harness. It means treating it as something that needs periodic review against current model capability, rather than something you write once and trust indefinitely.
+
+The models are not standing still. Your harnesses probably should not either.`,
+  },
+  {
     slug: "legalrag-on-premise-ai",
     title: "LegalRAG: On-Premise AI for Document-Heavy Litigation",
     excerpt: "How we built a self-hosted document intelligence platform that gives litigation teams AI-powered review without a single byte of privileged material ever leaving the building.",

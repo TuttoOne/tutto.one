@@ -340,7 +340,8 @@ function renderMarkdown(content: string, visuals?: Record<string, React.ReactNod
 
 function renderInline(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
-  const regex = /\*\*(.+?)\*\*/g;
+  // Matches **bold**, [link text](url), and `inline code`
+  const regex = /\*\*(.+?)\*\*|\[([^\]]+)\]\(([^)]+)\)|`([^`]+)`/g;
   let lastIndex = 0;
   let match;
   let key = 0;
@@ -349,11 +350,36 @@ function renderInline(text: string): React.ReactNode[] {
     if (match.index > lastIndex) {
       parts.push(<span key={key++}>{text.slice(lastIndex, match.index)}</span>);
     }
-    parts.push(
-      <strong key={key++} className="text-foreground font-semibold">
-        {match[1]}
-      </strong>
-    );
+    if (match[1] !== undefined) {
+      // **bold**
+      parts.push(
+        <strong key={key++} className="text-foreground font-semibold">
+          {match[1]}
+        </strong>
+      );
+    } else if (match[2] !== undefined) {
+      // [link text](url)
+      const href = match[3];
+      const isExternal = href.startsWith("http");
+      parts.push(
+        <a
+          key={key++}
+          href={href}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          className="text-primary underline underline-offset-2 hover:opacity-80 transition-opacity"
+        >
+          {match[2]}
+        </a>
+      );
+    } else if (match[4] !== undefined) {
+      // `inline code`
+      parts.push(
+        <code key={key++} className="font-mono text-sm bg-secondary/60 px-1.5 py-0.5 rounded text-foreground">
+          {match[4]}
+        </code>
+      );
+    }
     lastIndex = match.index + match[0].length;
   }
 
