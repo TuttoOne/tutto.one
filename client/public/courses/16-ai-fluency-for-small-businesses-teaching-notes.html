@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis · AI Fluency for Small Businesses — teaching notes</title>
+<style>
+/* ============================================================
+   Praxis / Tutto — Design System
+   Source: tutto.one/praxis (extracted 2026-05-13)
+   ------------------------------------------------------------
+   Drop this file next to any HTML doc and link it:
+     <link rel="stylesheet" href="praxis.css">
+   It works for screen viewing AND PDF rendering (print rules
+   at the bottom). No JavaScript required.
+   ============================================================ */
+
+/* --- Fonts ----------------------------------------------------
+   Inter      — body, UI, default
+   Roboto     — display / headings (the site aliases this as "serif")
+   Source Serif 4 — long-form editorial (essays, quotes, callouts)
+   The site loads all three; we keep the same set so any doc
+   matches the website even when mixing display modes.
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+/* --- Tokens (light, default) -------------------------------- */
+:root {
+  /* Brand colors — HSL parts as the site uses, plus resolved hex for reference */
+  --background:        40 10% 98%;   /* #FAF9F6 — warm off-white */
+  --foreground:        0 0% 12%;     /* #1F1F1F — near-black */
+  --card:              0 0% 100%;    /* #FFFFFF */
+  --card-foreground:   0 0% 12%;
+  --muted:             40 5% 90%;    /* warm grey panel */
+  --muted-foreground:  220 9% 46%;   /* cool slate body-secondary */
+  --primary:           32 95% 44%;   /* #DB7400 — warm amber accent */
+  --primary-foreground: 0 0% 100%;
+  --accent:            32 95% 44%;
+  --accent-foreground: 0 0% 100%;
+  --border:            220 13% 91%;
+  --ring:              32 95% 44%;
+  --destructive:       0 84% 60%;
+
+  /* Type scale (Tailwind-compatible) */
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   1.875rem;
+  --text-4xl:   2.25rem;
+  --text-5xl:   3rem;
+  --text-6xl:   3.75rem;
+
+  /* Weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  /* Tracking & leading */
+  --tracking-tight:   -0.025em;
+  --tracking-wider:    0.05em;
+  --tracking-widest:   0.1em;
+  --leading-tight:    1.25;
+  --leading-snug:     1.375;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.625;
+
+  /* Spacing — base unit 0.25rem (4px), Tailwind-compatible */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem;   --space-20: 5rem;   --space-24: 6rem;
+
+  /* Radius */
+  --radius:     0.75rem;
+  --radius-sm:  0.375rem;
+  --radius-lg:  1rem;
+  --radius-xl:  1.5rem;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow:    0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+
+  /* Containers */
+  --content-width: 42rem;   /* 672px — comfortable reading column */
+  --page-width:    56rem;   /* 896px — wider page max */
+
+  /* Font stacks */
+  --font-sans:      'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display:   'Roboto', 'Inter', sans-serif;
+  --font-editorial: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono:      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+}
+
+/* --- Tokens (dark) -------------------------------------------
+   Auto-applies if user prefers dark, or if .dark is on <html>.
+   ------------------------------------------------------------ */
+.dark, :root.dark {
+  --background:        20 14% 4%;
+  --foreground:        40 10% 98%;
+  --card:              20 14% 8%;
+  --card-foreground:   40 10% 98%;
+  --muted:             20 14% 12%;
+  --muted-foreground:  220 9% 60%;
+  --border:            20 14% 12%;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background:        20 14% 4%;
+    --foreground:        40 10% 98%;
+    --card:              20 14% 8%;
+    --card-foreground:   40 10% 98%;
+    --muted:             20 14% 12%;
+    --muted-foreground:  220 9% 60%;
+    --border:            20 14% 12%;
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-weight: var(--weight-regular);
+  font-feature-settings: 'cv11', 'ss01';  /* Inter alternates — subtle, on the website */
+}
+
+/* --- Headings ------------------------------------------------
+   Roboto for display, tight tracking, weight 700.
+   Use h1 for the doc title only; h2 for section starts; h3 for
+   sub-sections. Don't skip levels.
+   ------------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-4);
+  color: hsl(var(--foreground));
+}
+
+h1 { font-size: var(--text-5xl); font-weight: var(--weight-black); margin-bottom: var(--space-6); }
+h2 { font-size: var(--text-3xl); margin-top: var(--space-12); }
+h3 { font-size: var(--text-xl);  margin-top: var(--space-8);  }
+h4 { font-size: var(--text-lg);  margin-top: var(--space-6);  }
+h5 { font-size: var(--text-base); text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+h6 { font-size: var(--text-sm);   text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+
+/* First heading after a section start shouldn't have top margin */
+section > :first-child,
+article > :first-child,
+.page > :first-child { margin-top: 0; }
+
+/* --- Body copy ----------------------------------------------- */
+p {
+  margin: 0 0 var(--space-4);
+  max-width: var(--content-width);
+}
+
+p.lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--weight-regular);
+}
+
+small, .text-sm { font-size: var(--text-sm); }
+.text-muted    { color: hsl(var(--muted-foreground)); }
+
+/* --- Links --------------------------------------------------- */
+a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* --- Lists --------------------------------------------------- */
+ul, ol { margin: 0 0 var(--space-4); padding-left: var(--space-6); }
+li { margin-bottom: var(--space-2); }
+li > ul, li > ol { margin-top: var(--space-2); margin-bottom: 0; }
+
+/* Dash-style list (signature site pattern: "Term — explanation") */
+ul.dash { list-style: none; padding-left: 0; }
+ul.dash > li {
+  position: relative;
+  padding-left: var(--space-6);
+}
+ul.dash > li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: hsl(var(--primary));
+  font-weight: var(--weight-bold);
+}
+
+/* --- Quotes / pull quotes ----------------------------------- */
+blockquote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--foreground));
+  border-left: 3px solid hsl(var(--primary));
+  margin: var(--space-8) 0;
+  padding: 0 var(--space-6);
+  max-width: var(--content-width);
+}
+blockquote cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+/* --- Code ---------------------------------------------------- */
+code, kbd, pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+code {
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+}
+pre {
+  background: hsl(var(--muted));
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  line-height: var(--leading-snug);
+}
+pre code { background: none; padding: 0; }
+
+/* --- Dividers ----------------------------------------------- */
+hr {
+  border: 0;
+  border-top: 1px solid hsl(var(--border));
+  margin: var(--space-12) 0;
+}
+
+/* --- Tables ------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--text-sm);
+}
+th, td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid hsl(var(--border));
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  border-bottom: 2px solid hsl(var(--foreground));
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+
+/* --- Page shell --------------------------------------------- */
+.page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-8);
+}
+
+/* --- Card --------------------------------------------------- */
+.card {
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: var(--space-4); }
+
+/* --- Callout ------------------------------------------------ */
+.callout {
+  border-left: 3px solid hsl(var(--primary));
+  background: hsl(var(--muted) / 0.5);
+  padding: var(--space-4) var(--space-6);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: var(--space-6) 0;
+}
+.callout > :first-child { margin-top: 0; }
+.callout > :last-child  { margin-bottom: 0; }
+
+/* --- Button ------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+/* --- Tag / chip --------------------------------------------- */
+.tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  background: hsl(var(--muted));
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+}
+.tag-primary {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+
+/* --- Eyebrow (small label above heading) -------------------- */
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: hsl(var(--primary));
+  margin-bottom: var(--space-3);
+}
+
+/* --- Header / brand mark ----------------------------------- */
+.brand {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+}
+.brand .dot { color: hsl(var(--primary)); }   /* "Tutto." with orange period */
+
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid hsl(var(--border));
+  margin-bottom: var(--space-12);
+}
+.doc-header .meta {
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.doc-footer {
+  margin-top: var(--space-16);
+  padding-top: var(--space-4);
+  border-top: 1px solid hsl(var(--border));
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --- Grid helpers ------------------------------------------- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.stack-sm > * + * { margin-top: var(--space-2); }
+.stack    > * + * { margin-top: var(--space-4); }
+.stack-lg > * + * { margin-top: var(--space-8); }
+
+/* --- Slide deck (16:9 landscape) ---------------------------- */
+.slide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: var(--space-12) var(--space-16);
+  background: hsl(var(--background));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  page-break-after: always;
+  break-after: page;
+}
+.slide.title {
+  justify-content: flex-end;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+}
+.slide.title h1 { color: hsl(var(--background)); font-size: var(--text-6xl); }
+.slide.title .eyebrow { color: hsl(var(--primary)); }
+.slide h2 { font-size: var(--text-4xl); margin-top: 0; }
+.slide .slide-number {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-8);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ============================================================
+   Print / PDF
+   ------------------------------------------------------------
+   These rules apply when Claude renders the doc to PDF
+   (puppeteer, weasyprint, browser print). Tested at A4.
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 20mm 18mm;
+}
+@page slide {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    background: white;
+    color: black;
+    font-size: 10.5pt;
+  }
+  .page { padding: 0; max-width: none; }
+  a { color: hsl(var(--foreground)); text-decoration: none; }
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: hsl(var(--muted-foreground));
+    word-break: break-all;
+  }
+  h1, h2, h3 { page-break-after: avoid; break-after: avoid-page; }
+  p, li, blockquote { page-break-inside: avoid; break-inside: avoid; }
+  .card, .callout { page-break-inside: avoid; break-inside: avoid; }
+  .doc-header, .doc-footer { background: white; }
+  .no-print { display: none !important; }
+  .slide { page: slide; height: 100vh; padding: 18mm 22mm; }
+}
+
+</style>
+<style>
+  html, body { margin: 0; }
+  body { background: hsl(var(--background)); }
+
+  /* sticky tracker, made to sit beside the live deck */
+  .guide-bar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: var(--space-4);
+    padding: var(--space-3) var(--space-6);
+    background: hsl(var(--background) / 0.92); backdrop-filter: blur(6px);
+    border-bottom: 1px solid hsl(var(--border));
+    font-size: var(--text-sm);
+  }
+  .guide-bar .wm { font-family: var(--font-display); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); }
+  .guide-bar .wm .dot { color: hsl(var(--primary)); }
+  .guide-bar .tracker { margin-left: auto; display: flex; align-items: center; gap: var(--space-3); color: hsl(var(--muted-foreground)); }
+  .guide-bar select { font: inherit; padding: 2px 6px; border: 1px solid hsl(var(--border)); border-radius: var(--radius-sm); background: hsl(var(--card)); max-width: 42vw; }
+  .guide-bar button { font: inherit; cursor: pointer; border: 1px solid hsl(var(--border)); background: hsl(var(--card)); border-radius: var(--radius-sm); width: 30px; height: 30px; line-height: 1; }
+  .guide-bar button:hover { border-color: hsl(var(--primary)); color: hsl(var(--primary)); }
+  .guide-bar .count { font-variant-numeric: tabular-nums; min-width: 5.5em; text-align: right; }
+  .guide-bar .count b { color: hsl(var(--foreground)); }
+
+  main { max-width: 52rem; margin: 0 auto; padding: var(--space-8) var(--space-6) 40vh; }
+  .guide-head h1 { margin-bottom: var(--space-3); }
+  .guide-head .lead { font-size: var(--text-lg); color: hsl(var(--muted-foreground)); max-width: 60ch; }
+
+  details.howto { margin: var(--space-6) 0 var(--space-10); border: 1px solid hsl(var(--border)); border-radius: var(--radius); background: hsl(var(--card)); padding: var(--space-3) var(--space-5); }
+  details.howto summary { cursor: pointer; font-family: var(--font-display); font-weight: var(--weight-bold); }
+  details.howto ul { margin: var(--space-3) 0 var(--space-2); padding-left: var(--space-5); }
+  details.howto li { margin-bottom: var(--space-2); color: hsl(var(--muted-foreground)); }
+
+  /* slide cards */
+  .card { scroll-margin-top: 64px; margin: 0 0 var(--space-8); border: 1px solid hsl(var(--border)); border-radius: var(--radius-lg); background: hsl(var(--card)); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .card-head { display: flex; gap: var(--space-4); align-items: flex-start; padding: var(--space-5) var(--space-6); background: hsl(var(--muted) / 0.5); border-bottom: 1px solid hsl(var(--border)); }
+  .card-head .badge { flex: none; width: 2.2rem; height: 2.2rem; border-radius: 999px; background: hsl(var(--foreground)); color: hsl(var(--background)); font-family: var(--font-mono); font-size: var(--text-sm); display: flex; align-items: center; justify-content: center; }
+  .card-head .eyebrow { display: block; text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: var(--text-xs); color: hsl(var(--primary)); margin-bottom: 2px; }
+  .card-head h2 { margin: 0; font-size: var(--text-2xl); }
+  .card-body { padding: var(--space-5) var(--space-6) var(--space-6); }
+  .slide-sub { font-style: italic; color: hsl(var(--muted-foreground)); margin-top: 0; }
+
+  /* blocks */
+  .block { margin: var(--space-4) 0; }
+  .block-head { margin-bottom: var(--space-1); }
+  .block-label { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wider); }
+  .block-note { font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+  .block p { margin: var(--space-1) 0 0; }
+
+  .block--idea .block-label { color: hsl(var(--muted-foreground)); }
+
+  /* the line(s) the trainer actually delivers */
+  .block--say { border-left: 3px solid hsl(var(--primary)); padding: var(--space-2) 0 var(--space-2) var(--space-5); background: hsl(var(--primary) / 0.04); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .block--say .block-label { color: hsl(var(--primary)); }
+  .block--say p { font-family: var(--font-editorial); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+
+  /* stop-and-ask */
+  .block--ask { background: hsl(var(--primary) / 0.07); border: 1px solid hsl(var(--primary) / 0.35); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .block--ask .block-label { color: hsl(var(--primary)); }
+  .block--ask ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+  .block--ask li { margin-bottom: var(--space-2); font-size: var(--text-lg); }
+  .block--ask .wait { margin-top: var(--space-2); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+
+  /* by-background: term/def grid */
+  dl.bg { display: grid; grid-template-columns: max-content 1fr; gap: 2px var(--space-4); margin: var(--space-2) 0 0; }
+  dl.bg dt { font-weight: var(--weight-semibold); color: hsl(var(--foreground)); white-space: nowrap; }
+  dl.bg dd { margin: 0; color: hsl(var(--muted-foreground)); }
+  dl.bg dd.full { grid-column: 1 / -1; }
+
+  .block--watch { font-size: var(--text-sm); color: hsl(var(--muted-foreground)); border-top: 1px dashed hsl(var(--border)); padding-top: var(--space-3); }
+  .block--watch .block-label { color: hsl(var(--muted-foreground)); }
+
+  .block--cue .block-label { color: hsl(var(--muted-foreground)); }
+
+  code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
+  a { color: hsl(var(--primary)); }
+
+  @media print {
+    .guide-bar { display: none; }
+    .card { break-inside: avoid; box-shadow: none; }
+    main { padding-bottom: var(--space-8); }
+  }
+</style>
+</head>
+<body>
+<div class="guide-bar">
+  <span class="wm">Tutto<span class="dot">.</span></span>
+  <span style="color:hsl(var(--muted-foreground))">Teaching notes</span>
+  <div class="tracker">
+    <button id="prev" title="Previous slide (&larr;)">&larr;</button>
+    <select id="jump" title="Jump to slide"><option value="0">Top</option><option value="1">1. Four moves that make AI actually work for your business</option><option value="2">2. The whole course on one screen</option><option value="3">3. Write your business down once</option><option value="4">4. The 4D Framework, two loops</option><option value="5">5. What it does well, where it slips</option><option value="6">6. Under the hood: it guesses the next word</option><option value="7">7. Describe well, then never skip the check</option><option value="8">8. Strip it before you share it, own it after</option><option value="9">9. Ask &quot;should AI do this?&quot;, not &quot;can it?&quot;</option><option value="10">10. Write the policy your team can stand behind</option><option value="11">11. Pick one real task this week</option><option value="12">12. Decide what to hand off. Describe it well. Judge it. Own it.</option></select>
+    <button id="next" title="Next slide (&rarr;)">&rarr;</button>
+    <span class="count">slide <b id="cur">&mdash;</b> / 12</span>
+  </div>
+</div>
+<main>
+  <div class="guide-head">
+    <h1>AI Fluency for Small Businesses — teaching notes</h1>
+    <p class="lead">Side-by-side notes for <code>16-praxis-ai-fluency-for-small-businesses.html</code> (12 slides). This is the 4D framework (Delegation, Description, Discernment, Diligence) reapplied to the small business owner — capabilities and limits, market research, customer data, operations, and a team AI policy. It is the sibling of course 05 (Framework &amp; Foundations); where 05 teaches the framework cold, this one runs it through one person's whole business. Reuse the 05 examples as the seed; the difference here is that the learner is usually the owner, so every slide ties back to <em>their</em> business, not a department. Written from the deck and <code>16-ai-fluency-for-small-businesses-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>Guidance, not a script. Teach the person, not the slides.</li>
+<li>Every teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Don't fill the silence. If they freeze: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
+<li><strong>By background</strong> gives a line per archetype (<code>tutor/scenarios.md</code>). Reach for the one that matches whoever's in front of you; the rest are a palette, not a checklist. For this course the strong fits are <strong>Outreach</strong>, <strong>Exec</strong>, <strong>Knowledge worker</strong> and <strong>Content</strong> — but a small business owner is usually <em>all of these at once</em>, so don't over-sort. Treat the tag as "which hat are they wearing for this task".</li>
+<li>The throughline of this whole course is one line from the deck: efficiency is not the point, it's the means. Every hour AI saves should buy back time for the human side of the business, better service, real relationships. Return to that. It's also the answer to the job-loss fear.</li>
+<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term — <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li></ul></details>
+  </div>
+  <section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>Four moves that make AI actually work for your business</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Set the frame: not tips and tricks, four habits that outlast the tools. Nine ideas, one screen each, ending in a policy the owner and their team can stand behind. The watching is the lesson, so take the silences.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Tips and tricks date fast; the tools change every few months. This is the thing underneath that doesn't: four moves that make AI actually work for your business. Learn them once and they keep working whatever the tool does next. And the point isn't to do everything faster, it's to buy back time for the part of the business only a human can do."</p>
+</div><div class="block block--cue">
+<div class="block-head"><span class="block-label">Open with</span></div>
+<p>The thing eating their week. "By the end we'll have run your real task through all four moves, and you'll have a one-page policy you could hand your team tomorrow."</p>
+</div></div></section>
+<section class="card" id="slide-2" data-slide="2"><header class="card-head"><span class="badge">2</span><div><span class="eyebrow">Spine</span><h2>The whole course on one screen</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Learn the framework, understand the tool, run its two loops, put it to work, ending in a team policy. Orient, don't teach.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Here's the shape. We learn the framework, look at how the tool actually works, run its two loops, then put it to work on something real, and we finish with a one-page AI policy. If you lose the thread, this is the map back."</p>
+</div><div class="block block--cue">
+<div class="block-head"><span class="block-label">Cue</span></div>
+<p>Twenty seconds. The 4D framework on slide 4 is the heart; everything else points at it.</p>
+</div></div></section>
+<section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Lesson 1</span><h2>Write your business down once</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Most owners retype their context into every chat. Build it once, in a back-and-forth interview with AI, into a reusable briefing sheet: mission, role, customers, constraints, where AI could help. Then every conversation starts already informed. This is the small-business version of "the folder is the memory" before the folder exists.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>Pair the project-memory framing with the briefing-sheet move: <em>"You find yourself re-explaining your business to AI every single time, who you are, what you sell, what you'd never compromise on. Do it once. Sit down and let it interview you about your business, then have it write that up as one document you paste in from then on. Every chat after that starts already knowing your business."</em> (<code>framings.md</code> — the folder is the memory, the previewed version; <code>01-claude-101</code> slide 7, projects as a workspace that remembers.) Read the caption out loud: AI fluency is using AI efficiently, effectively, ethically and safely, and the efficiency exists to buy back time for the human work.</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"What do you re-explain to AI, or to every new hire, every single time?"</li>
+<li>"Finish this sentence honestly: if AI could help me _____, I'd spend more time _____."</li>
+</ul>
+<p class="wait">(wait — the second blank is the whole course's promise; let them name it.)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(what goes in their briefing sheet)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>the house report rules, screening standards, what you never infer.</dd>
+<dt>Analyst</dt><dd>the standard column set, the "no data" rule, your reporting basis.</dd>
+<dt>Designer</dt><dd>brand tokens, the retailers you ship to, the specs that bite.</dd>
+<dt>Knowledge worker</dt><dd>the suppliers you deal with and their quirks, the schema you need.</dd>
+<dt>Reporter</dt><dd>the five-section format and who's on the team.</dd>
+<dt>Content</dt><dd>the house voice, the back catalogue, the audience you write for.</dd>
+<dt>Form-filler</dt><dd>the template, the categories, the filing cycle.</dd>
+<dt>Outreach</dt><dd>what you sell, who buys it, the relationship history that shapes the ask.</dd>
+<dt>Exec</dt><dd>mission, the KPIs you watch, the constraints you operate under.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>Owners share too much in the interview, real customer names, exact figures. Name it now, lightly: "be mindful what you paste, we'll cover privacy properly two slides on." Don't derail; just flag it. (Lesson 1 exercise says the same, gently.)</p>
+</div></div></section>
+<section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Lesson 2</span><h2>The 4D Framework, two loops</h2></div></header><div class="card-body"><p class="slide-sub"><em>The centrepiece. If they take one thing away, it's the four Ds and the two loops.</em></p><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Four competencies in two loops. The outer loop frames every job: <strong>Delegation</strong> (decide what to hand off) and <strong>Diligence</strong> (own what comes back). The inner loop does the work between them: <strong>Description</strong> (say what good looks like) and <strong>Discernment</strong> (judge what came back), run over and over, sharper each pass. Delegation sets the stage; Diligence closes it.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Four habits, two loops. The outer loop is the bookends: <strong>Delegation</strong>, decide what's even worth handing over, and <strong>Diligence</strong>, own the final result with your name on it. The inner loop runs between them: <strong>Description</strong>, say what you want and how, and</p>
+</div><div class="block block--cue">
+<div class="block-head"><span class="block-label">Discernment</span></div>
+<p>, judge what came back. You run that inner loop again and again, and it gets sharper each pass. That's the whole framework, and the rest of the course is these four." (<code>05-...</code> slide 5 is the same idea; this deck draws it as two nested loops, which is the only real difference, so point at the picture.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"Of those four, which are you already weakest at? Most people know."</li>
+<li>"Take the task eating your week. What would <em>delegation</em> even mean for it, before you typed a word?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(one real task through all four Ds)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>delegate the extraction; describe "cite every source, never infer"; discern the citations hold; stand behind the filing.</dd>
+<dt>Analyst</dt><dd>delegate the table; describe columns and basis; discern the "no data" cells are honest; own the comparison.</dd>
+<dt>Designer</dt><dd>delegate the variants; describe the brand rules; discern they're on-brand; sign off the campaign.</dd>
+<dt>Knowledge worker</dt><dd>delegate the extraction; describe the schema; discern the flagged rows; trust the CSV.</dd>
+<dt>Reporter</dt><dd>delegate the consolidation; describe the five sections; discern nothing's misattributed; send the briefing.</dd>
+<dt>Content</dt><dd>delegate the draft; describe the house voice; discern it's on-voice; publish under your name.</dd>
+<dt>Form-filler</dt><dd>delegate the allocation; describe the categories; discern the totals reconcile; submit it.</dd>
+<dt>Outreach</dt><dd>delegate the per-customer drafts; describe the format; discern no invented numbers; send it.</dd>
+<dt>Exec</dt><dd>delegate the synthesis; describe "facts, not editorial"; discern risks are stated straight; present it.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>"Describe what good looks like, once" <em>is</em> writing the rules down, the skill file they'll meet in the Claude Code courses. Plant the seed here; don't dwell. (<code>framings.md</code> — skill file as institutional memory.)</p>
+</div></div></section>
+<section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Lesson 3</span><h2>What it does well, where it slips</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Knowing how the model is trained tells you what to trust it with. Strengths: versatile across tasks, natural conversation, connects to your tools. Limits: a knowledge cutoff (stale facts), hallucinations (confident and wrong), context limits, multi-step reasoning that can slip. The limits aren't bugs to wait out, they're why you pair its speed with your oversight and verify anything that costs money to get wrong.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"It's strong exactly where most of us are short on time, speed, breadth, tireless drafting. And it's bounded in ways that matter for a business: it has a knowledge cutoff, so recent or local facts can be stale. It can be confidently wrong. The best work pairs its speed and scale with your judgment, and you verify anything that would cost you money to get wrong." (<code>05-...</code> slide 7, strong-where-you're-weak.) Read the in-diagram line: it predicts plausible text, it does not look facts up.</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"What's the judgement you bring to your business that it structurally can't?"</li>
+<li>"Where in your business would 'plausible but wrong' actually cost you money?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the limit that bites, and the strength that answers it)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>a hallucinated fact bites hardest → your verification is the value.</dd>
+<dt>Analyst</dt><dd>an invented figure → your basis-checking is the value.</dd>
+<dt>Designer</dt><dd>it lacks your taste → you curate, it supplies volume.</dd>
+<dt>Knowledge worker</dt><dd>it'll guess a blank → your "leave it empty" rule holds the line.</dd>
+<dt>Reporter</dt><dd>it can't read the room → you decide what people need to hear.</dd>
+<dt>Content</dt><dd>it doesn't know your audience → you own voice and judgement.</dd>
+<dt>Form-filler</dt><dd>rules change past its cutoff → you check this year's thresholds.</dd>
+<dt>Outreach</dt><dd>it doesn't know the relationship → you bring the angle.</dd>
+<dt>Exec</dt><dd>it can't carry accountability → you own what you act on.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>The knowledge-cutoff limit is sharper for a small business than for most: local rules, tax thresholds, this year's pricing. The lesson exercise is explicitly "ask it something local and time-sensitive, then check". Use that as the live demo of the limit.</p>
+</div></div></section>
+<section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Lesson 4</span><h2>Under the hood: it guesses the next word</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Same trick as your phone's keyboard, scaled up. From what's been said so far it ranks likely next words, picks one, adds it back, and repeats. It's prediction, not lookup, which is exactly why it can sound certain and still be wrong. The idea is a century old (Markov, 1906); transformers in 2017 made it fluent.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>Pick the route by audience (<code>framings.md</code> — deterministic vs probabilistic). For most small-business owners, the phone-keyboard route the deck draws: <em>"It's the predictive text on your phone, scaled up. From what's been typed so far it guesses the most likely next word, picks one, adds it, and guesses again. That's all. Brilliant for drafting and summarising. But it's guessing what's plausible, not looking up what's true, so it can be completely certain and completely wrong."</em> For analysts and regulated owners, the "cat sat on the mat" version. For technical peers, one sentence and move on.</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"If it's guessing a plausible answer rather than looking up a true one, what does that change about when you'd trust it?"</li>
+<li>"Where in your business would 'plausible' simply not be good enough?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the "so what" of guess-not-retrieve)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>it predicts a plausible date, it doesn't <em>know</em> one, demand sources.</dd>
+<dt>Analyst</dt><dd>it generates a plausible figure, not a true one, cite it or mark "no data".</dd>
+<dt>Designer</dt><dd>generating a plausible look is its gift, ideate freely, you curate.</dd>
+<dt>Knowledge worker</dt><dd>it can plausibly fill a blank, which is exactly why you forbid it.</dd>
+<dt>Reporter</dt><dd>it'll smooth a gap with something plausible, attribute everything.</dd>
+<dt>Content</dt><dd>plausible prose is its strength, lean in, then check the facts.</dd>
+<dt>Form-filler</dt><dd>a plausible category isn't a correct one, give it the definitions.</dd>
+<dt>Outreach</dt><dd>it'll invent a plausible stat, forbid numbers not in the file.</dd>
+<dt>Exec</dt><dd>a plausible projection isn't a real one, numbers as-is, no extrapolation.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>This is the conceptual "aha" that makes cost, safety and reliability click later. Don't skip it for time. There's a hands-on widget in the source lesson (the "Text Your Friend Markov" page), if the owner is curious, that interactive is the cleanest way to feel it; mention it as homework, don't try to run it live.</p>
+</div></div></section>
+<section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Lesson 5</span><h2>Describe well, then never skip the check</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>The inner loop, made concrete on research, the highest-stakes thing a small business asks AI for (regulations, competitors, pricing). Good context in (Describe), then discernment on the way out (Discern): is it real and current? relevant to a business <em>my</em> size? what's missing? Two outlets, use it, or verify at the source. AI accelerates research; it does not replace your expertise.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"The inner loop in practice, and the place it matters most for you is research. Two halves. Going in, you describe: who you are, what your business does, the exact thing you need. Coming back, you never skip the check, is this real and current, is it right for a business my size, what's it missing? The big trap with research is that it'll happily invent a competitor or quote a stale number with total confidence. So anything that decides money, regulations, a competitor's price, a deadline, you verify at the source." Read the caption: the gap between what AI sees and what you know is where your judgment is irreplaceable.</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"What's a piece of digging you do that means opening twenty tabs and pulling it together?"</li>
+<li>"Walk me through one round: it gives you a competitor list, what's the first thing you'd check before you trusted it?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the research job, and the claim they must verify)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>background research on a subject; verify every cited source exists.</dd>
+<dt>Analyst</dt><dd>market-rate benchmarking; verify the numbers against the original source.</dd>
+<dt>Designer</dt><dd>a competitor-campaign scan before a pitch; check the brands still trade.</dd>
+<dt>Knowledge worker</dt><dd>supplier due-diligence; confirm terms haven't changed.</dd>
+<dt>Reporter</dt><dd>a landscape read to frame the narrative; attribute every claim.</dd>
+<dt>Content</dt><dd>source-gathering for a piece; check each citation is real and current.</dd>
+<dt>Form-filler</dt><dd>this year's thresholds or allowances; verify against the official site.</dd>
+<dt>Outreach</dt><dd>a prospect brief before the proposal; confirm the company facts.</dd>
+<dt>Exec</dt><dd>a competitor or market brief; verify the headline figures before acting.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>"What if it just makes things up?" lives here. Answer straight: ask for sources, then check at least one. The lesson exercise builds exactly this habit, ask it to name a trade body or supplier, then verify it exists. (<code>objections.md</code> — hallucinate / make stuff up.)</p>
+</div></div></section>
+<section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Lesson 6</span><h2>Strip it before you share it, own it after</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>The outer loop on the owner's own business data. <strong>Delegation</strong> here is a data decision: match the tool to the sensitivity, and strip what isn't needed, names, contacts, exact figures, before you share. <strong>Diligence</strong> is owning what comes back: accurate to my records? useful, keep/edit/cut? would I put my name on it? Some tools train on your inputs; if something goes wrong, act fast, delete the chat and request data deletion.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Same outer loop, now on your own business data, sales, feedback, customer lists. Two gates. Going in, you delegate deliberately: strip names, contacts, exact figures the AI doesn't actually need, and match the tool to how sensitive the data is, some tools train on what you type. Coming back, you own it: is this accurate to my records, is it useful, would I put my name on it? And the reassurance that matters, you connect what you trust, and a tool sees only what you can see; connecting your inbox doesn't expose anyone else's." (<code>01-claude-101</code> slide 10, connectors; <code>objections.md</code> — IT/compliance/privacy.) Read the in-diagram line about acting fast if something goes wrong.</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"Which piece of your business data feels most sensitive, and what's your plan to protect it?"</li>
+<li>"Before you'd put your name on something AI produced from your data, what's the bar?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(what diligence asks of them)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>the privacy of the file; disclosure where required; you vouch for the filing.</dd>
+<dt>Analyst</dt><dd>where the data may go; transparency to stakeholders; you sign the comparison.</dd>
+<dt>Designer</dt><dd>rights and brand safety; credit AI where the client expects; you ship it.</dd>
+<dt>Knowledge worker</dt><dd>how the data is handled; a note the CSV was AI-assisted; you trust the numbers.</dd>
+<dt>Reporter</dt><dd>who sees the raw updates; the briefing is yours to stand behind.</dd>
+<dt>Content</dt><dd>your publication's disclosure norms; your name goes on it.</dd>
+<dt>Form-filler</dt><dd>the privacy of the receipts; you submit and you're accountable.</dd>
+<dt>Outreach</dt><dd>customer-data handling; you vouch for every claim in the proposal.</dd>
+<dt>Exec</dt><dd>confidentiality of the inputs; you own what you act on, AI-assisted or not.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>This is the data-safety gate for almost every small business owner. Slow down. Give the floor (Claude on the web, no install) and the ceiling (a local model, nothing leaves your network). The caption's second half also matters, AI helps even if you're "not a numbers person": formulas, plain-language read-outs of your figures. Use that to defuse the "I'm not technical" fear here. (<code>objections.md</code> — IT/compliance; not technical.)</p>
+</div></div></section>
+<section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Lesson 7</span><h2>Ask "should AI do this?", not "can it?"</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>All four Ds at once, the operations slide. Before automating, sort the work into three lanes: AI can handle (documented, standardised, FAQs, hours, return policy), AI assists and a human decides (drafts a reply, you send it), human only (complaints, contracts, judgement). The question is never capability, it's appropriateness. Then describe the system three ways, Product (what it makes), Process (the steps), Performance (tone, limits, what it must never do), and apply diligence before a single output reaches a customer.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Now operations, and this is all four Ds working together. Before you automate anything, sort the work. Don't ask 'can AI do this', ask 'should it?'. Three lanes: the stuff AI can just handle, your hours, your return policy, the documented FAQs; the stuff where AI drafts and <em>you</em> press send; and the stuff that stays human, complaints, contracts, anything needing judgement. Then for whatever you automate, describe it three ways, what it makes, the steps it follows, and how it must behave, including what it must never do. And test it on real cases before it ever touches a customer." (<code>05-...</code> slide 10 covers the three Description layers; this slide adds the sorting and the test-before-ship discipline.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"Think of last week. What's the most repetitive task you'd put in the 'AI can handle' lane?"</li>
+<li>"What in your business goes in 'human only', no matter how good the AI gets, and why?"</li>
+</ul>
+<p class="wait">(wait — the second answer is the heart of the human premium; let them feel it.)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the task they'd sort into "AI can handle / assist", and the one that stays human)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>AI drafts the standard sections; the judgement call on significance stays yours.</dd>
+<dt>Analyst</dt><dd>AI builds the recurring table; deciding what's comparable stays yours.</dd>
+<dt>Designer</dt><dd>AI batches the variants; the creative direction stays yours.</dd>
+<dt>Knowledge worker</dt><dd>AI processes the routine files; the awkward exceptions stay yours.</dd>
+<dt>Reporter</dt><dd>AI consolidates the updates; deciding the narrative stays yours.</dd>
+<dt>Content</dt><dd>AI drafts to the pattern; voice and the final argument stay yours.</dd>
+<dt>Form-filler</dt><dd>AI allocates the clear receipts; the edge cases stay yours.</dd>
+<dt>Outreach</dt><dd>AI drafts one per customer; the relationship and the ask stay yours.</dd>
+<dt>Exec</dt><dd>AI answers the standard customer FAQs; the complaint, the negotiation stay yours.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>People over-delegate the judgement and under-delegate the grunt work, the opposite of the win. And the diligence half of this slide is non-negotiable for anything customer-facing: review outputs first, be honest about AI's role, always keep a path to a human. Spend time there for any owner automating customer comms. (<code>objections.md</code> — permission/auto.)</p>
+</div></div></section>
+<section class="card" id="slide-10" data-slide="10"><header class="card-head"><span class="badge">10</span><div><span class="eyebrow">Lesson 8</span><h2>Write the policy your team can stand behind</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Scale your judgement by writing it down. One page, three honest sections: what we use AI for (approved tasks and tools), what stays human (the work AI doesn't touch, and why), how we stay accountable (oversight, transparency, what happens when something goes wrong). Being "the human in the loop" is more than oversight, you decide what problems AI should solve. Avoid dependency through understanding, not avoidance: if you can explain what the AI is doing, that's a good sign.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"The last move is to write your judgement down so your whole team works from it, not from whatever they each invent. One page, three sections, and the trick is to be honest in all three: what we use AI for, what stays human and why, and how we stay accountable when something goes wrong. This is the same idea as everything else today, the rules in your head, written down, so the work comes out your way every time, whoever's doing it. And the worry people raise, dependency, the answer is understanding: if you can explain what the AI is doing, you're fine. The time it buys back should free your team for <em>more</em> of the human work, not less." (<code>framings.md</code> — skill file as institutional memory, adapted from one expert's head to the team's shared page.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"If a customer asked you straight, 'do you use AI in your business?', what would you want to be able to say?"</li>
+<li>"What's the work in your business you'd never let AI touch, and could you say why in one sentence?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the line of the policy that matters most to them)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>the accountability section, who verifies, and what's never inferred.</dd>
+<dt>Analyst</dt><dd>the transparency section, where the data goes, what's disclosed.</dd>
+<dt>Designer</dt><dd>the "what stays human" section, taste, brand sign-off, client credit.</dd>
+<dt>Knowledge worker</dt><dd>the "what we use AI for" section, the named, approved tasks.</dd>
+<dt>Reporter</dt><dd>the accountability section, who stands behind the briefing.</dd>
+<dt>Content</dt><dd>the transparency section, disclosure norms, whose name goes on it.</dd>
+<dt>Form-filler</dt><dd>the accountability section, the review step before filing.</dd>
+<dt>Outreach</dt><dd>the "what stays human" section, the relationship, the real signature.</dd>
+<dt>Exec</dt><dd>all three, this is the document they'll actually own and circulate.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>This is where the human teacher beats the video, and the natural home for the job-loss and dependency fears. Name them and answer honestly: a human with AI beats either alone, and that gap doesn't close; we're future-proofing the role, and the policy is how you say so in writing. (<code>05-...</code> slide 7 watch-for; <code>train-the-trainer.md</code> — name the fear.) For a Praxis student, this policy <em>is</em> the artefact, point out that the one-page policy and a skill file are the same instinct, judgement written down once.</p>
+</div></div></section>
+<section class="card" id="slide-11" data-slide="11"><header class="card-head"><span class="badge">11</span><div><span class="eyebrow">Lesson 9</span><h2>Pick one real task this week</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Fluency is a habit, not a certificate. Choose one real task already waiting for you and run the full loop, Delegate, Describe, Discern, Diligence, then go round again. It's a loop, not a line. Keep a running doc of the prompts and workflows that work, so you're not starting cold each time and anyone on the team can pick them up.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"You don't get fluent by finishing a course, same as you don't get fluent in a language that way. You get there by doing it, badly at first, then better. So pick one real thing waiting for you this week, and run all four moves on it: decide what to hand off, describe it well, judge what comes back, own the result. Then do it again, it's a loop, not a line. And keep a running doc of what works, so next time you start warm." (<code>05-...</code> slide 15, fluency is built by practice. <code>framings.md</code> — the system improves through use.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"Of everything today, what's the one task you'll point this at this week, one concrete thing, not a category?"</li>
+<li>"What would 'a bit more fluent' look like for you a month from now?"</li>
+</ul>
+<p class="wait">(wait — their first answer is the use case you build the rest of the relationship around.)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the one starting task)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>turn one case file into a structured background report.</dd>
+<dt>Analyst</dt><dd>one comparison you run every quarter.</dd>
+<dt>Designer</dt><dd>one campaign's full asset list.</dd>
+<dt>Knowledge worker</dt><dd>one month's invoices into a clean CSV.</dd>
+<dt>Reporter</dt><dd>this week's briefing from the team's updates.</dd>
+<dt>Content</dt><dd>one post drafted in house voice from the back catalogue.</dd>
+<dt>Form-filler</dt><dd>one filing period's receipts allocated to the template.</dd>
+<dt>Outreach</dt><dd>one segment's proposals, personalised.</dd>
+<dt>Exec</dt><dd>one board prep, or one set of customer FAQs, turned into a repeatable output.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>Resist adding features. The win is one task done, not ten shown. The deck points onward to the blueprints at <code>claude.com/resources/use-cases</code> and to the deeper AI Fluency: Framework &amp; Foundations course (course 05), name them as the next step, then close the loop on <em>their</em> task. For a Praxis student, the durable version of this, the folder, the skill file, the script, is the next session in Claude Code. (<code>patterns.md</code> — set the next concrete step.)</p>
+</div></div></section>
+<section class="card" id="slide-12" data-slide="12"><header class="card-head"><span class="badge">12</span><div><span class="eyebrow">Close</span><h2>Decide what to hand off. Describe it well. Judge it. Own it.</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>The whole course in one line: four competencies, two loops, run on real work until the gains buy back time for the human side of the business. The framework outlasts the tools.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Four moves, two loops, one practice. If the tools change next year, and they will, this still holds. Decide what to hand off, describe it well, judge what comes back, own the result. Run that on real work until it's saving you real time, and spend that time on the part of your business only you can do."</p>
+</div><div class="block block--cue">
+<div class="block-head"><span class="block-label">Close with</span></div>
+<p>Their task from slide 11 and the next concrete step. End with the session-improvement habit: <em>"at the end of any session, tell it to look back at what you did badly and save how you fixed it, so next time it's better."</em> For Praxis students, point forward: 4D is the <em>why</em>; the skill file and Claude Code are the <em>how</em> that makes "describe what good looks like, once" permanent. (<code>framings.md</code> — the system improves through use.)</p>
+</div></div></section>
+</main>
+<script>
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const cur = document.getElementById('cur');
+  const jump = document.getElementById('jump');
+  let active = 0;
+
+  function setActive(i) {
+    active = Math.max(0, Math.min(cards.length - 1, i));
+    const n = cards[active].dataset.slide;
+    cur.textContent = n;
+    if (jump.value !== n) jump.value = n;
+  }
+  // track which card is in view
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) setActive(cards.indexOf(e.target)); });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+  cards.forEach(c => io.observe(c));
+
+  function go(i) {
+    i = Math.max(0, Math.min(cards.length - 1, i));
+    cards[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.getElementById('prev').onclick = () => go(active - 1);
+  document.getElementById('next').onclick = () => go(active + 1);
+  jump.onchange = (e) => {
+    const v = parseInt(e.target.value, 10);
+    if (v === 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+    else { const idx = cards.findIndex(c => c.dataset.slide === String(v)); if (idx >= 0) go(idx); }
+  };
+  document.addEventListener('keydown', (e) => {
+    if (/^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); go(active + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(active - 1); }
+  });
+  if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+</script>
+</body>
+</html>

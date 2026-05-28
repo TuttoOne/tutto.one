@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis · Introduction to Agent Skills — teaching notes</title>
+<style>
+/* ============================================================
+   Praxis / Tutto — Design System
+   Source: tutto.one/praxis (extracted 2026-05-13)
+   ------------------------------------------------------------
+   Drop this file next to any HTML doc and link it:
+     <link rel="stylesheet" href="praxis.css">
+   It works for screen viewing AND PDF rendering (print rules
+   at the bottom). No JavaScript required.
+   ============================================================ */
+
+/* --- Fonts ----------------------------------------------------
+   Inter      — body, UI, default
+   Roboto     — display / headings (the site aliases this as "serif")
+   Source Serif 4 — long-form editorial (essays, quotes, callouts)
+   The site loads all three; we keep the same set so any doc
+   matches the website even when mixing display modes.
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+/* --- Tokens (light, default) -------------------------------- */
+:root {
+  /* Brand colors — HSL parts as the site uses, plus resolved hex for reference */
+  --background:        40 10% 98%;   /* #FAF9F6 — warm off-white */
+  --foreground:        0 0% 12%;     /* #1F1F1F — near-black */
+  --card:              0 0% 100%;    /* #FFFFFF */
+  --card-foreground:   0 0% 12%;
+  --muted:             40 5% 90%;    /* warm grey panel */
+  --muted-foreground:  220 9% 46%;   /* cool slate body-secondary */
+  --primary:           32 95% 44%;   /* #DB7400 — warm amber accent */
+  --primary-foreground: 0 0% 100%;
+  --accent:            32 95% 44%;
+  --accent-foreground: 0 0% 100%;
+  --border:            220 13% 91%;
+  --ring:              32 95% 44%;
+  --destructive:       0 84% 60%;
+
+  /* Type scale (Tailwind-compatible) */
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   1.875rem;
+  --text-4xl:   2.25rem;
+  --text-5xl:   3rem;
+  --text-6xl:   3.75rem;
+
+  /* Weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  /* Tracking & leading */
+  --tracking-tight:   -0.025em;
+  --tracking-wider:    0.05em;
+  --tracking-widest:   0.1em;
+  --leading-tight:    1.25;
+  --leading-snug:     1.375;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.625;
+
+  /* Spacing — base unit 0.25rem (4px), Tailwind-compatible */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem;   --space-20: 5rem;   --space-24: 6rem;
+
+  /* Radius */
+  --radius:     0.75rem;
+  --radius-sm:  0.375rem;
+  --radius-lg:  1rem;
+  --radius-xl:  1.5rem;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow:    0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+
+  /* Containers */
+  --content-width: 42rem;   /* 672px — comfortable reading column */
+  --page-width:    56rem;   /* 896px — wider page max */
+
+  /* Font stacks */
+  --font-sans:      'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display:   'Roboto', 'Inter', sans-serif;
+  --font-editorial: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono:      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+}
+
+/* --- Tokens (dark) -------------------------------------------
+   Auto-applies if user prefers dark, or if .dark is on <html>.
+   ------------------------------------------------------------ */
+.dark, :root.dark {
+  --background:        20 14% 4%;
+  --foreground:        40 10% 98%;
+  --card:              20 14% 8%;
+  --card-foreground:   40 10% 98%;
+  --muted:             20 14% 12%;
+  --muted-foreground:  220 9% 60%;
+  --border:            20 14% 12%;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background:        20 14% 4%;
+    --foreground:        40 10% 98%;
+    --card:              20 14% 8%;
+    --card-foreground:   40 10% 98%;
+    --muted:             20 14% 12%;
+    --muted-foreground:  220 9% 60%;
+    --border:            20 14% 12%;
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-weight: var(--weight-regular);
+  font-feature-settings: 'cv11', 'ss01';  /* Inter alternates — subtle, on the website */
+}
+
+/* --- Headings ------------------------------------------------
+   Roboto for display, tight tracking, weight 700.
+   Use h1 for the doc title only; h2 for section starts; h3 for
+   sub-sections. Don't skip levels.
+   ------------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-4);
+  color: hsl(var(--foreground));
+}
+
+h1 { font-size: var(--text-5xl); font-weight: var(--weight-black); margin-bottom: var(--space-6); }
+h2 { font-size: var(--text-3xl); margin-top: var(--space-12); }
+h3 { font-size: var(--text-xl);  margin-top: var(--space-8);  }
+h4 { font-size: var(--text-lg);  margin-top: var(--space-6);  }
+h5 { font-size: var(--text-base); text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+h6 { font-size: var(--text-sm);   text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+
+/* First heading after a section start shouldn't have top margin */
+section > :first-child,
+article > :first-child,
+.page > :first-child { margin-top: 0; }
+
+/* --- Body copy ----------------------------------------------- */
+p {
+  margin: 0 0 var(--space-4);
+  max-width: var(--content-width);
+}
+
+p.lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--weight-regular);
+}
+
+small, .text-sm { font-size: var(--text-sm); }
+.text-muted    { color: hsl(var(--muted-foreground)); }
+
+/* --- Links --------------------------------------------------- */
+a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* --- Lists --------------------------------------------------- */
+ul, ol { margin: 0 0 var(--space-4); padding-left: var(--space-6); }
+li { margin-bottom: var(--space-2); }
+li > ul, li > ol { margin-top: var(--space-2); margin-bottom: 0; }
+
+/* Dash-style list (signature site pattern: "Term — explanation") */
+ul.dash { list-style: none; padding-left: 0; }
+ul.dash > li {
+  position: relative;
+  padding-left: var(--space-6);
+}
+ul.dash > li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: hsl(var(--primary));
+  font-weight: var(--weight-bold);
+}
+
+/* --- Quotes / pull quotes ----------------------------------- */
+blockquote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--foreground));
+  border-left: 3px solid hsl(var(--primary));
+  margin: var(--space-8) 0;
+  padding: 0 var(--space-6);
+  max-width: var(--content-width);
+}
+blockquote cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+/* --- Code ---------------------------------------------------- */
+code, kbd, pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+code {
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+}
+pre {
+  background: hsl(var(--muted));
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  line-height: var(--leading-snug);
+}
+pre code { background: none; padding: 0; }
+
+/* --- Dividers ----------------------------------------------- */
+hr {
+  border: 0;
+  border-top: 1px solid hsl(var(--border));
+  margin: var(--space-12) 0;
+}
+
+/* --- Tables ------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--text-sm);
+}
+th, td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid hsl(var(--border));
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  border-bottom: 2px solid hsl(var(--foreground));
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+
+/* --- Page shell --------------------------------------------- */
+.page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-8);
+}
+
+/* --- Card --------------------------------------------------- */
+.card {
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: var(--space-4); }
+
+/* --- Callout ------------------------------------------------ */
+.callout {
+  border-left: 3px solid hsl(var(--primary));
+  background: hsl(var(--muted) / 0.5);
+  padding: var(--space-4) var(--space-6);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: var(--space-6) 0;
+}
+.callout > :first-child { margin-top: 0; }
+.callout > :last-child  { margin-bottom: 0; }
+
+/* --- Button ------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+/* --- Tag / chip --------------------------------------------- */
+.tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  background: hsl(var(--muted));
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+}
+.tag-primary {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+
+/* --- Eyebrow (small label above heading) -------------------- */
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: hsl(var(--primary));
+  margin-bottom: var(--space-3);
+}
+
+/* --- Header / brand mark ----------------------------------- */
+.brand {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+}
+.brand .dot { color: hsl(var(--primary)); }   /* "Tutto." with orange period */
+
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid hsl(var(--border));
+  margin-bottom: var(--space-12);
+}
+.doc-header .meta {
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.doc-footer {
+  margin-top: var(--space-16);
+  padding-top: var(--space-4);
+  border-top: 1px solid hsl(var(--border));
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --- Grid helpers ------------------------------------------- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.stack-sm > * + * { margin-top: var(--space-2); }
+.stack    > * + * { margin-top: var(--space-4); }
+.stack-lg > * + * { margin-top: var(--space-8); }
+
+/* --- Slide deck (16:9 landscape) ---------------------------- */
+.slide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: var(--space-12) var(--space-16);
+  background: hsl(var(--background));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  page-break-after: always;
+  break-after: page;
+}
+.slide.title {
+  justify-content: flex-end;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+}
+.slide.title h1 { color: hsl(var(--background)); font-size: var(--text-6xl); }
+.slide.title .eyebrow { color: hsl(var(--primary)); }
+.slide h2 { font-size: var(--text-4xl); margin-top: 0; }
+.slide .slide-number {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-8);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ============================================================
+   Print / PDF
+   ------------------------------------------------------------
+   These rules apply when Claude renders the doc to PDF
+   (puppeteer, weasyprint, browser print). Tested at A4.
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 20mm 18mm;
+}
+@page slide {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    background: white;
+    color: black;
+    font-size: 10.5pt;
+  }
+  .page { padding: 0; max-width: none; }
+  a { color: hsl(var(--foreground)); text-decoration: none; }
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: hsl(var(--muted-foreground));
+    word-break: break-all;
+  }
+  h1, h2, h3 { page-break-after: avoid; break-after: avoid-page; }
+  p, li, blockquote { page-break-inside: avoid; break-inside: avoid; }
+  .card, .callout { page-break-inside: avoid; break-inside: avoid; }
+  .doc-header, .doc-footer { background: white; }
+  .no-print { display: none !important; }
+  .slide { page: slide; height: 100vh; padding: 18mm 22mm; }
+}
+
+</style>
+<style>
+  html, body { margin: 0; }
+  body { background: hsl(var(--background)); }
+
+  /* sticky tracker, made to sit beside the live deck */
+  .guide-bar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: var(--space-4);
+    padding: var(--space-3) var(--space-6);
+    background: hsl(var(--background) / 0.92); backdrop-filter: blur(6px);
+    border-bottom: 1px solid hsl(var(--border));
+    font-size: var(--text-sm);
+  }
+  .guide-bar .wm { font-family: var(--font-display); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); }
+  .guide-bar .wm .dot { color: hsl(var(--primary)); }
+  .guide-bar .tracker { margin-left: auto; display: flex; align-items: center; gap: var(--space-3); color: hsl(var(--muted-foreground)); }
+  .guide-bar select { font: inherit; padding: 2px 6px; border: 1px solid hsl(var(--border)); border-radius: var(--radius-sm); background: hsl(var(--card)); max-width: 42vw; }
+  .guide-bar button { font: inherit; cursor: pointer; border: 1px solid hsl(var(--border)); background: hsl(var(--card)); border-radius: var(--radius-sm); width: 30px; height: 30px; line-height: 1; }
+  .guide-bar button:hover { border-color: hsl(var(--primary)); color: hsl(var(--primary)); }
+  .guide-bar .count { font-variant-numeric: tabular-nums; min-width: 5.5em; text-align: right; }
+  .guide-bar .count b { color: hsl(var(--foreground)); }
+
+  main { max-width: 52rem; margin: 0 auto; padding: var(--space-8) var(--space-6) 40vh; }
+  .guide-head h1 { margin-bottom: var(--space-3); }
+  .guide-head .lead { font-size: var(--text-lg); color: hsl(var(--muted-foreground)); max-width: 60ch; }
+
+  details.howto { margin: var(--space-6) 0 var(--space-10); border: 1px solid hsl(var(--border)); border-radius: var(--radius); background: hsl(var(--card)); padding: var(--space-3) var(--space-5); }
+  details.howto summary { cursor: pointer; font-family: var(--font-display); font-weight: var(--weight-bold); }
+  details.howto ul { margin: var(--space-3) 0 var(--space-2); padding-left: var(--space-5); }
+  details.howto li { margin-bottom: var(--space-2); color: hsl(var(--muted-foreground)); }
+
+  /* slide cards */
+  .card { scroll-margin-top: 64px; margin: 0 0 var(--space-8); border: 1px solid hsl(var(--border)); border-radius: var(--radius-lg); background: hsl(var(--card)); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .card-head { display: flex; gap: var(--space-4); align-items: flex-start; padding: var(--space-5) var(--space-6); background: hsl(var(--muted) / 0.5); border-bottom: 1px solid hsl(var(--border)); }
+  .card-head .badge { flex: none; width: 2.2rem; height: 2.2rem; border-radius: 999px; background: hsl(var(--foreground)); color: hsl(var(--background)); font-family: var(--font-mono); font-size: var(--text-sm); display: flex; align-items: center; justify-content: center; }
+  .card-head .eyebrow { display: block; text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: var(--text-xs); color: hsl(var(--primary)); margin-bottom: 2px; }
+  .card-head h2 { margin: 0; font-size: var(--text-2xl); }
+  .card-body { padding: var(--space-5) var(--space-6) var(--space-6); }
+  .slide-sub { font-style: italic; color: hsl(var(--muted-foreground)); margin-top: 0; }
+
+  /* blocks */
+  .block { margin: var(--space-4) 0; }
+  .block-head { margin-bottom: var(--space-1); }
+  .block-label { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wider); }
+  .block-note { font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+  .block p { margin: var(--space-1) 0 0; }
+
+  .block--idea .block-label { color: hsl(var(--muted-foreground)); }
+
+  /* the line(s) the trainer actually delivers */
+  .block--say { border-left: 3px solid hsl(var(--primary)); padding: var(--space-2) 0 var(--space-2) var(--space-5); background: hsl(var(--primary) / 0.04); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .block--say .block-label { color: hsl(var(--primary)); }
+  .block--say p { font-family: var(--font-editorial); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+
+  /* stop-and-ask */
+  .block--ask { background: hsl(var(--primary) / 0.07); border: 1px solid hsl(var(--primary) / 0.35); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .block--ask .block-label { color: hsl(var(--primary)); }
+  .block--ask ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+  .block--ask li { margin-bottom: var(--space-2); font-size: var(--text-lg); }
+  .block--ask .wait { margin-top: var(--space-2); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+
+  /* by-background: term/def grid */
+  dl.bg { display: grid; grid-template-columns: max-content 1fr; gap: 2px var(--space-4); margin: var(--space-2) 0 0; }
+  dl.bg dt { font-weight: var(--weight-semibold); color: hsl(var(--foreground)); white-space: nowrap; }
+  dl.bg dd { margin: 0; color: hsl(var(--muted-foreground)); }
+  dl.bg dd.full { grid-column: 1 / -1; }
+
+  .block--watch { font-size: var(--text-sm); color: hsl(var(--muted-foreground)); border-top: 1px dashed hsl(var(--border)); padding-top: var(--space-3); }
+  .block--watch .block-label { color: hsl(var(--muted-foreground)); }
+
+  .block--cue .block-label { color: hsl(var(--muted-foreground)); }
+
+  code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
+  a { color: hsl(var(--primary)); }
+
+  @media print {
+    .guide-bar { display: none; }
+    .card { break-inside: avoid; box-shadow: none; }
+    main { padding-bottom: var(--space-8); }
+  }
+</style>
+</head>
+<body>
+<div class="guide-bar">
+  <span class="wm">Tutto<span class="dot">.</span></span>
+  <span style="color:hsl(var(--muted-foreground))">Teaching notes</span>
+  <div class="tracker">
+    <button id="prev" title="Previous slide (&larr;)">&larr;</button>
+    <select id="jump" title="Jump to slide"><option value="0">Top</option><option value="1">1. Teach Claude Code something once. It remembers when it matters.</option><option value="2">2. The whole course on one screen</option><option value="3">3. If you keep explaining it, write it down once</option><option value="4">4. Build one: folder, file, restart</option><option value="5">5. Keep SKILL.md lean: split the rest out</option><option value="6">6. Five tools, five jobs</option><option value="7">7. Three ways to share: widest reach last</option><option value="8">8. When it breaks, it&#x27;s one of five things</option><option value="9">9. Write it once. Describe it well. Let Claude load it when it fits.</option></select>
+    <button id="next" title="Next slide (&rarr;)">&rarr;</button>
+    <span class="count">slide <b id="cur">&mdash;</b> / 9</span>
+  </div>
+</div>
+<main>
+  <div class="guide-head">
+    <h1>Introduction to Agent Skills — teaching notes</h1>
+    <p class="lead">Side-by-side notes for <code>13-praxis-introduction-to-agent-skills.html</code> (9 slides). This is the deep dive on the idea Praxis calls the heart of the method: the plain-English skill file as institutional memory (<code>framings.md</code> — skill file as institutional memory; <code>patterns.md</code>). Claude 101 (course 02) and AI Fluency (course 05) both point here. The deck is a developer course; these notes hold the framing for the nine non-technical archetypes, because the plain-English SKILL.md is exactly what makes Skills land for them. Written from the deck and <code>13-introduction-to-agent-skills-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>Guidance, not a script. Teach the person, not the slides.</li>
+<li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
+<li><strong>By background</strong> gives a line per archetype (<code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in front of you and ignore the rest. A palette, not a checklist.</li>
+<li>This is the most technical course in the set. Two confusions are near-certain and the notes flag them: the "I can't read code / what is it doing" fear (<code>objections.md</code> — can't read code), and conflating the Claude Code <em>skill</em> taught here with the app <em>skill</em> from Claude 101. The cure for both is the same: the intelligence lives in the plain-English SKILL.md, not in any code.</li>
+<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only — <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
+<li>Do not read code aloud. If they ask what a line does, point at the skill file, not the script (<code>framings.md</code> — voice, what never to say).</li></ul></details>
+  </div>
+  <section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>Teach Claude Code something once. It remembers when it matters.</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Set the frame: six ideas, one per screen, and the whole course is one move — turn a thing you keep explaining into a thing Claude loads by itself. The watching is the lesson, so take the silences.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Six ideas, one screen each. The whole course is one move: anything you find yourself explaining to Claude over and over, you write down once, and from then on it loads itself the moment it's relevant. I'll show you, then stop and ask where it fits your work."</p>
+</div><div class="block block--cue">
+<div class="block-head"><span class="block-label">Open with</span></div>
+<p>The task they named in intake, the one they do the same way every time. "By the end, that's the skill we'll have described."</p>
+</div></div></section>
+<section class="card" id="slide-2" data-slide="2"><header class="card-head"><span class="badge">2</span><div><span class="eyebrow">Spine</span><h2>The whole course on one screen</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Four moves: grasp what a skill is, build one, place it among the other tools and share it, then fix it when it misbehaves. Orient, don't teach.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Here's the shape. First, what a skill actually is. Then we build one. Then we place it next to the other ways to customise Claude Code and we share it. Then we fix it when it doesn't fire. If you lose the thread, this is the map back."</p>
+</div><div class="block block--cue">
+<div class="block-head"><span class="block-label">Cue</span></div>
+<p>Twenty seconds, then move. Lesson 1 is the centrepiece; everything else serves it.</p>
+</div></div></section>
+<section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Lesson 1 (if you take one thing away)</span><h2>If you keep explaining it, write it down once</h2></div></header><div class="card-body"><p class="slide-sub"><em>The centrepiece. If they take one thing away, it's this.</em></p><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>A skill is a folder of instructions. Claude holds only its one-line description until your request matches, then it loads the rest. The rule of thumb: if you keep repeating an instruction, that's a skill waiting to be written.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"This is the idea the whole programme has been building to. The rules your best person carries in their head, written down once, so the work comes out their way every time. That written-down thing is a skill: a folder with a plain-English file in it. Claude keeps only its one-line description in mind, and the moment your request matches, it pulls in the full instructions. Up to now those rules walked out the door at six o'clock. The skill file pulls them out of the head and onto disk." (<code>framings.md</code> — skill file as institutional memory; adapt "best person" to their role.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"What's a task you do the same way every time, where the 'right way' lives in someone's head?"</li>
+<li>"If that person left tomorrow, what would walk out the door with them?"</li>
+</ul>
+<p class="wait">(wait — this lands hard for regulated and professional rooms.)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the skill they'd write down once)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>the house report rules — eight sections, cite every source, never infer.</dd>
+<dt>Analyst</dt><dd>the vendor-comparison method — fixed columns, mark blanks "no data".</dd>
+<dt>Designer</dt><dd>the asset-manifest method — read each brief, list every variant, flag specs.</dd>
+<dt>Knowledge worker</dt><dd>the invoice-to-CSV method — the schema, and "leave blanks blank".</dd>
+<dt>Reporter</dt><dd>the weekly-briefing method — the five sections, attribute every line.</dd>
+<dt>Content</dt><dd>the house-voice rules — hook, problem, argument, close; no off-voice lines.</dd>
+<dt>Form-filler</dt><dd>the receipt-allocation method — one section each, totals must reconcile.</dd>
+<dt>Outreach</dt><dd>the proposal method — five sections, one per customer, no invented numbers.</dd>
+<dt>Exec</dt><dd>the exec-brief method — revenue, at-risk, decisions, steady; facts not editorial.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>Two confusions. First, the caption's point: a skill is not CLAUDE.md (which loads every conversation) and not a slash command (which you type) — a skill activates itself on a match. Name that difference. Second, this is the Claude Code skill, the plain-English SKILL.md you write, not the built-in app skill from Claude 101 that made you a spreadsheet. If they sat course 02, say so out loud or they'll merge the two (<code>train-the-trainer.md</code> — module 6 vs module 14).</p>
+</div></div></section>
+<section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Lesson 2</span><h2>Build one: folder, file, restart</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Three steps: make a directory, write SKILL.md (a name and a description, then the instructions), restart. Claude loads every skill's name and description at startup and matches your request to them. When two skills share a name, priority decides: Enterprise, then Personal, then Project, then Plugins.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Building one is three steps: a folder, a file called SKILL.md, restart. The file is plain English — a name, a one-line description of when to use it, then the instructions. You build it just by talking to Claude Code; you don't write the file by hand. On restart it reads every skill's name and description, and from then on it matches what you ask against them." (<code>framings.md</code> — Claude as translator; the work is describing the rules, not coding.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"If you had to write the one-line description — <em>when</em> should Claude reach for your skill?"</li>
+<li>"What would you call it, so you'd know it from any other?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the description they'd write — "use this when...")</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>"...building a subject background report from a case folder."</dd>
+<dt>Analyst</dt><dd>"...comparing vendor or provider responses into a like-for-like table."</dd>
+<dt>Designer</dt><dd>"...listing every asset and variant a campaign brief needs."</dd>
+<dt>Knowledge worker</dt><dd>"...pulling a folder of invoices into a clean CSV."</dd>
+<dt>Reporter</dt><dd>"...consolidating the team's updates into the Monday briefing."</dd>
+<dt>Content</dt><dd>"...drafting a post in our house voice from the back catalogue."</dd>
+<dt>Form-filler</dt><dd>"...allocating a folder of receipts to the filing template."</dd>
+<dt>Outreach</dt><dd>"...drafting one proposal per customer from their file."</dd>
+<dt>Exec</dt><dd>"...turning the board inputs into a one-page brief."</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>The priority ladder (Enterprise &gt; Personal &gt; Project &gt; Plugins) reads as corporate plumbing to a solo operator. Don't oversell it. The one line that matters for them is the caption's: keep names distinct, because if two skills share a name, priority silently picks the winner. Also reassure: Claude asks you to confirm before it loads the full skill, so nothing fires behind your back (<code>objections.md</code> — permission / auto).</p>
+</div></div></section>
+<section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Lesson 3</span><h2>Keep SKILL.md lean: split the rest out</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Two fields are required (name, description), two optional (allowed-tools, model). Past about 500 lines, move detail into supporting files Claude opens only when it needs them: scripts to run, references to read, assets to use. This is progressive disclosure: a table of contents in context, not the whole document.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Keep the main file short. Two things are required, the name and the description, and a couple are optional. When a skill grows, you don't cram it into one giant file. You split the detail into side files Claude only opens when it actually needs them. And two controls earn their place even for non-technical work: you can fence a skill to read-only with allowed-tools, and you tell Claude to <em>run</em> a script rather than read it, so only the result costs anything, never the source." (Ties to <code>framings.md</code> — the context window: the folder is the memory, and you keep the working memory clean.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"In your method, what's the one-page summary, and what's the thick reference you'd only pull out for the odd case?"</li>
+<li>"Is there a part of your work where you'd want it strictly read-only — look, don't touch?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the lean SKILL.md vs the side file it points to)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>the eight-section rules in SKILL.md; the source-classification guide in a reference, read only on an odd source. Read-only on the case folder fits here.</dd>
+<dt>Analyst</dt><dd>the column set in SKILL.md; the comparability rules in a reference.</dd>
+<dt>Designer</dt><dd>the manifest format in SKILL.md; the retailer spec sheets as assets.</dd>
+<dt>Knowledge worker</dt><dd>the CSV schema in SKILL.md; the known supplier quirks in a reference.</dd>
+<dt>Reporter</dt><dd>the five sections in SKILL.md; the team roster as an asset.</dd>
+<dt>Content</dt><dd>the voice rules in SKILL.md; the back catalogue as reference posts.</dd>
+<dt>Form-filler</dt><dd>the allocation rules in SKILL.md; the category definitions in a reference.</dd>
+<dt>Outreach</dt><dd>the proposal format in SKILL.md; the knowledge base as a reference.</dd>
+<dt>Exec</dt><dd>the brief format in SKILL.md; the KPI definitions in a reference.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>This is the slide where "I can't read code" surfaces — frontmatter, YAML, allowed-tools all look like gibberish. Head it off: "Don't read the code. The intelligence lives in the plain-English skill file. The rest is enforcement, and Claude writes and maintains it." (<code>objections.md</code> — can't read code; what is it doing.) Some technical slides here (the exact metadata fields) genuinely don't vary by domain; give the one shared example and don't force nine.</p>
+</div></div></section>
+<section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Lesson 4</span><h2>Five tools, five jobs</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Skills load on demand when your request matches. The other four customisations solve different problems: CLAUDE.md is always loaded; subagents are work you delegate to an isolated context; hooks fire on an event like a file save; MCP connects external tools. Each fires at a different moment. Most real setups use several at once.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Five ways to shape Claude Code, and they're not rivals. A skill fires when your request matches it. CLAUDE.md is the always-on house rules. Subagents are work you hand off to run on its own. Hooks fire on an event, like saving a file. Connectors, MCP, plug in your outside tools. The skill is the right reach when the knowledge should apply automatically the moment the topic comes up. Pick by <em>when</em> each one fires." (CLAUDE.md is the project's standing rules; the skill is the on-demand method.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"Of your rules, which are 'always, every time' and which are 'only when this task comes up'?"</li>
+<li>"Which of your tools or systems would you most want Claude to reach into?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the always-on rule vs the on-demand skill)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>always-on: "cite sources, never infer"; on a match: the full report method.</dd>
+<dt>Analyst</dt><dd>always-on: "no recommendations, comparison only"; on a match: the table build.</dd>
+<dt>Designer</dt><dd>always-on: the brand tokens; on a match: the asset manifest.</dd>
+<dt>Knowledge worker</dt><dd>always-on: "currency as written, never guess"; on a match: the CSV extract.</dd>
+<dt>Reporter</dt><dd>always-on: "attribute every line"; on a match: the weekly briefing.</dd>
+<dt>Content</dt><dd>always-on: the house-voice don'ts; on a match: the post draft.</dd>
+<dt>Form-filler</dt><dd>always-on: "never drop a receipt"; on a match: the allocation run.</dd>
+<dt>Outreach</dt><dd>always-on: "no invented numbers"; on a match: the per-customer proposal.</dd>
+<dt>Exec</dt><dd>always-on: "facts, not editorial"; on a match: the board brief.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>The five-box grid invites "do I need all of this?" The honest answer: no, not to start. They need one skill on one painful task. Subagents, hooks and MCP are where this goes later, not the first build (<code>patterns.md</code> — set one concrete step). Resist the urge to teach all five.</p>
+</div></div></section>
+<section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Lesson 5</span><h2>Three ways to share: widest reach last</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>A skill gets more valuable the more it's shared. Three reaches: commit it to the repo so your team gets it on clone; ship it as a plugin so the community can install it; or push it through enterprise-managed settings so the whole organisation has it at highest priority, for the standards that <em>must</em> be consistent.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"A skill one person uses is handy. The same skill shared across a team is a standard. Three ways out, by reach. Drop it in the project folder and everyone who opens that folder has it. Package it as a plugin for anyone to install. Or, for a firm, an admin pushes it to everyone, at top priority, for the rules that aren't optional. This is the upgrade from 'a tool I use' to 'how our firm works'." (<code>framings.md</code> — skill file as institutional memory; this is where it becomes an institutional asset, not a personal one.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"If your method became the firm's standard, whose work would come out more like yours?"</li>
+<li>"Is there a rule in your world that shouldn't be optional for anyone?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(what becomes the shared standard)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>the firm-wide report rules, so every analyst files the same shape.</dd>
+<dt>Analyst</dt><dd>the standard comparison, so every review is defensible the same way.</dd>
+<dt>Designer</dt><dd>the brand and spec rules, shared across the studio on every campaign.</dd>
+<dt>Knowledge worker</dt><dd>the extraction schema, so every month's CSV matches.</dd>
+<dt>Reporter</dt><dd>the briefing format, so every squad's update reads the same.</dd>
+<dt>Content</dt><dd>the house voice, enforced for everyone who writes.</dd>
+<dt>Form-filler</dt><dd>the allocation rules, so no one files differently at quarter end.</dd>
+<dt>Outreach</dt><dd>the proposal format, shared across the BD team.</dd>
+<dt>Exec</dt><dd>the brief format and KPI definitions, standard across every operator.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>The caption's gotcha is easy to miss and matters once they delegate: subagents start with a clean context and don't inherit your skills, so you list them in the agent's <code>skills:</code> field, and the built-in agents can't use skills at all. Name it once; don't dwell, it's a later concern. For most rooms, the live point is the first reach: commit to the folder, and the team has it.</p>
+</div></div></section>
+<section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Lesson 6</span><h2>When it breaks, it's one of five things</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Run the skills validator first, it catches structure before you debug logic. Then match symptom to fix: not triggering (improve the description, add phrases you'd really type), not loading (named dir, file named exactly SKILL.md, valid YAML), wrong skill used (make descriptions distinct), being shadowed (priority clash, rename or ask the admin), runtime error (deps, chmod +x, forward slashes). Most "won't trigger" problems are just the description.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"When a skill doesn't fire, don't panic and don't read the code. It's almost always the description: Claude couldn't see the link between what you typed and what the skill says it's for. The fix is to add the exact phrases you'd really use. Test it the way you'd actually ask, and any wording that fails to trigger, you add to the description. That single fix solves most of it." (Echoes Claude 101's slide 5: when it's off, it's almost always fixable, and the fix is context the description didn't carry.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"What are the three different ways you'd actually phrase this task out loud?"</li>
+<li>"When AI has missed your intent before, was it really wrong, or did it just not know what you meant?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the trigger phrases to feed the description)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>"background check", "due diligence", "screen this subject", "run the file".</dd>
+<dt>Analyst</dt><dd>"compare these providers", "build the comparison", "vendor review".</dd>
+<dt>Designer</dt><dd>"what assets does this campaign need", "list the variants", "asset manifest".</dd>
+<dt>Knowledge worker</dt><dd>"pull these invoices", "extract to CSV", "process the inbox".</dd>
+<dt>Reporter</dt><dd>"do the Monday briefing", "consolidate the updates", "weekly summary".</dd>
+<dt>Content</dt><dd>"draft a post", "write this up in our voice", "blog this".</dd>
+<dt>Form-filler</dt><dd>"allocate these receipts", "fill the template", "categorise these".</dd>
+<dt>Outreach</dt><dd>"write proposals for these customers", "draft outreach", "one per account".</dd>
+<dt>Exec</dt><dd>"give me the board brief", "one-pager from these inputs", "what needs a decision".</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>This is the slide that most invites "what is it doing under the hood". Redirect every time: the description is plain English, the validator and <code>claude --debug</code> report by name, and if you want to change behaviour you change the skill file in English, not the code (<code>objections.md</code> — can't read code; what is it doing). The runtime-error row (deps, chmod, slashes) is genuinely developer territory and doesn't vary by domain; flag it as "your developer's department, not yours" and move on rather than forcing nine examples.</p>
+</div></div></section>
+<section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Close</span><h2>Write it once. Describe it well. Let Claude load it when it fits.</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>The whole course in one line: a folder and a SKILL.md turn a repeated instruction into automatic, shareable expertise, built lean, placed among the other tools, fixed by its description. The work is the describing, not the coding.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"If you keep one thing: write your method down once, describe well when it should fire, and let Claude load it when it fits. Everything today was a way to make that durable, sharable, and reliable. The rules that lived in someone's head now live on disk, and they come out the same every time."</p>
+</div><div class="block block--cue">
+<div class="block-head"><span class="block-label">Close with</span></div>
+<p>Their skill from slide 1, and the next concrete step: "Next time we open your real folder and write that one." Then the session-improvement habit: <em>"at the end, tell it to look back at what we did badly today and save how we fixed it"</em> (<code>framings.md</code> — the system improves through use). For Praxis students, this is where Claude 101 and AI Fluency land: the skill file is the <em>how</em> behind "describe what good looks like, once".</p>
+</div></div></section>
+</main>
+<script>
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const cur = document.getElementById('cur');
+  const jump = document.getElementById('jump');
+  let active = 0;
+
+  function setActive(i) {
+    active = Math.max(0, Math.min(cards.length - 1, i));
+    const n = cards[active].dataset.slide;
+    cur.textContent = n;
+    if (jump.value !== n) jump.value = n;
+  }
+  // track which card is in view
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) setActive(cards.indexOf(e.target)); });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+  cards.forEach(c => io.observe(c));
+
+  function go(i) {
+    i = Math.max(0, Math.min(cards.length - 1, i));
+    cards[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.getElementById('prev').onclick = () => go(active - 1);
+  document.getElementById('next').onclick = () => go(active + 1);
+  jump.onchange = (e) => {
+    const v = parseInt(e.target.value, 10);
+    if (v === 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+    else { const idx = cards.findIndex(c => c.dataset.slide === String(v)); if (idx >= 0) go(idx); }
+  };
+  document.addEventListener('keydown', (e) => {
+    if (/^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); go(active + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(active - 1); }
+  });
+  if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+</script>
+</body>
+</html>

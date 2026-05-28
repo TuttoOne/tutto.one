@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis · AI Fluency for Nonprofits — talking deck</title>
+<style>
+/* ============================================================
+   Praxis / Tutto — Design System
+   Source: tutto.one/praxis (extracted 2026-05-13)
+   ------------------------------------------------------------
+   Drop this file next to any HTML doc and link it:
+     <link rel="stylesheet" href="praxis.css">
+   It works for screen viewing AND PDF rendering (print rules
+   at the bottom). No JavaScript required.
+   ============================================================ */
+
+/* --- Fonts ----------------------------------------------------
+   Inter      — body, UI, default
+   Roboto     — display / headings (the site aliases this as "serif")
+   Source Serif 4 — long-form editorial (essays, quotes, callouts)
+   The site loads all three; we keep the same set so any doc
+   matches the website even when mixing display modes.
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+/* --- Tokens (light, default) -------------------------------- */
+:root {
+  /* Brand colors — HSL parts as the site uses, plus resolved hex for reference */
+  --background:        40 10% 98%;   /* #FAF9F6 — warm off-white */
+  --foreground:        0 0% 12%;     /* #1F1F1F — near-black */
+  --card:              0 0% 100%;    /* #FFFFFF */
+  --card-foreground:   0 0% 12%;
+  --muted:             40 5% 90%;    /* warm grey panel */
+  --muted-foreground:  220 9% 46%;   /* cool slate body-secondary */
+  --primary:           32 95% 44%;   /* #DB7400 — warm amber accent */
+  --primary-foreground: 0 0% 100%;
+  --accent:            32 95% 44%;
+  --accent-foreground: 0 0% 100%;
+  --border:            220 13% 91%;
+  --ring:              32 95% 44%;
+  --destructive:       0 84% 60%;
+
+  /* Type scale (Tailwind-compatible) */
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   1.875rem;
+  --text-4xl:   2.25rem;
+  --text-5xl:   3rem;
+  --text-6xl:   3.75rem;
+
+  /* Weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  /* Tracking & leading */
+  --tracking-tight:   -0.025em;
+  --tracking-wider:    0.05em;
+  --tracking-widest:   0.1em;
+  --leading-tight:    1.25;
+  --leading-snug:     1.375;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.625;
+
+  /* Spacing — base unit 0.25rem (4px), Tailwind-compatible */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem;   --space-20: 5rem;   --space-24: 6rem;
+
+  /* Radius */
+  --radius:     0.75rem;
+  --radius-sm:  0.375rem;
+  --radius-lg:  1rem;
+  --radius-xl:  1.5rem;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow:    0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+
+  /* Containers */
+  --content-width: 42rem;   /* 672px — comfortable reading column */
+  --page-width:    56rem;   /* 896px — wider page max */
+
+  /* Font stacks */
+  --font-sans:      'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display:   'Roboto', 'Inter', sans-serif;
+  --font-editorial: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono:      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+}
+
+/* --- Tokens (dark) -------------------------------------------
+   Auto-applies if user prefers dark, or if .dark is on <html>.
+   ------------------------------------------------------------ */
+.dark, :root.dark {
+  --background:        20 14% 4%;
+  --foreground:        40 10% 98%;
+  --card:              20 14% 8%;
+  --card-foreground:   40 10% 98%;
+  --muted:             20 14% 12%;
+  --muted-foreground:  220 9% 60%;
+  --border:            20 14% 12%;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background:        20 14% 4%;
+    --foreground:        40 10% 98%;
+    --card:              20 14% 8%;
+    --card-foreground:   40 10% 98%;
+    --muted:             20 14% 12%;
+    --muted-foreground:  220 9% 60%;
+    --border:            20 14% 12%;
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-weight: var(--weight-regular);
+  font-feature-settings: 'cv11', 'ss01';  /* Inter alternates — subtle, on the website */
+}
+
+/* --- Headings ------------------------------------------------
+   Roboto for display, tight tracking, weight 700.
+   Use h1 for the doc title only; h2 for section starts; h3 for
+   sub-sections. Don't skip levels.
+   ------------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-4);
+  color: hsl(var(--foreground));
+}
+
+h1 { font-size: var(--text-5xl); font-weight: var(--weight-black); margin-bottom: var(--space-6); }
+h2 { font-size: var(--text-3xl); margin-top: var(--space-12); }
+h3 { font-size: var(--text-xl);  margin-top: var(--space-8);  }
+h4 { font-size: var(--text-lg);  margin-top: var(--space-6);  }
+h5 { font-size: var(--text-base); text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+h6 { font-size: var(--text-sm);   text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+
+/* First heading after a section start shouldn't have top margin */
+section > :first-child,
+article > :first-child,
+.page > :first-child { margin-top: 0; }
+
+/* --- Body copy ----------------------------------------------- */
+p {
+  margin: 0 0 var(--space-4);
+  max-width: var(--content-width);
+}
+
+p.lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--weight-regular);
+}
+
+small, .text-sm { font-size: var(--text-sm); }
+.text-muted    { color: hsl(var(--muted-foreground)); }
+
+/* --- Links --------------------------------------------------- */
+a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* --- Lists --------------------------------------------------- */
+ul, ol { margin: 0 0 var(--space-4); padding-left: var(--space-6); }
+li { margin-bottom: var(--space-2); }
+li > ul, li > ol { margin-top: var(--space-2); margin-bottom: 0; }
+
+/* Dash-style list (signature site pattern: "Term — explanation") */
+ul.dash { list-style: none; padding-left: 0; }
+ul.dash > li {
+  position: relative;
+  padding-left: var(--space-6);
+}
+ul.dash > li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: hsl(var(--primary));
+  font-weight: var(--weight-bold);
+}
+
+/* --- Quotes / pull quotes ----------------------------------- */
+blockquote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--foreground));
+  border-left: 3px solid hsl(var(--primary));
+  margin: var(--space-8) 0;
+  padding: 0 var(--space-6);
+  max-width: var(--content-width);
+}
+blockquote cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+/* --- Code ---------------------------------------------------- */
+code, kbd, pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+code {
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+}
+pre {
+  background: hsl(var(--muted));
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  line-height: var(--leading-snug);
+}
+pre code { background: none; padding: 0; }
+
+/* --- Dividers ----------------------------------------------- */
+hr {
+  border: 0;
+  border-top: 1px solid hsl(var(--border));
+  margin: var(--space-12) 0;
+}
+
+/* --- Tables ------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--text-sm);
+}
+th, td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid hsl(var(--border));
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  border-bottom: 2px solid hsl(var(--foreground));
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+
+/* --- Page shell --------------------------------------------- */
+.page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-8);
+}
+
+/* --- Card --------------------------------------------------- */
+.card {
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: var(--space-4); }
+
+/* --- Callout ------------------------------------------------ */
+.callout {
+  border-left: 3px solid hsl(var(--primary));
+  background: hsl(var(--muted) / 0.5);
+  padding: var(--space-4) var(--space-6);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: var(--space-6) 0;
+}
+.callout > :first-child { margin-top: 0; }
+.callout > :last-child  { margin-bottom: 0; }
+
+/* --- Button ------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+/* --- Tag / chip --------------------------------------------- */
+.tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  background: hsl(var(--muted));
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+}
+.tag-primary {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+
+/* --- Eyebrow (small label above heading) -------------------- */
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: hsl(var(--primary));
+  margin-bottom: var(--space-3);
+}
+
+/* --- Header / brand mark ----------------------------------- */
+.brand {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+}
+.brand .dot { color: hsl(var(--primary)); }   /* "Tutto." with orange period */
+
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid hsl(var(--border));
+  margin-bottom: var(--space-12);
+}
+.doc-header .meta {
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.doc-footer {
+  margin-top: var(--space-16);
+  padding-top: var(--space-4);
+  border-top: 1px solid hsl(var(--border));
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --- Grid helpers ------------------------------------------- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.stack-sm > * + * { margin-top: var(--space-2); }
+.stack    > * + * { margin-top: var(--space-4); }
+.stack-lg > * + * { margin-top: var(--space-8); }
+
+/* --- Slide deck (16:9 landscape) ---------------------------- */
+.slide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: var(--space-12) var(--space-16);
+  background: hsl(var(--background));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  page-break-after: always;
+  break-after: page;
+}
+.slide.title {
+  justify-content: flex-end;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+}
+.slide.title h1 { color: hsl(var(--background)); font-size: var(--text-6xl); }
+.slide.title .eyebrow { color: hsl(var(--primary)); }
+.slide h2 { font-size: var(--text-4xl); margin-top: 0; }
+.slide .slide-number {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-8);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ============================================================
+   Print / PDF
+   ------------------------------------------------------------
+   These rules apply when Claude renders the doc to PDF
+   (puppeteer, weasyprint, browser print). Tested at A4.
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 20mm 18mm;
+}
+@page slide {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    background: white;
+    color: black;
+    font-size: 10.5pt;
+  }
+  .page { padding: 0; max-width: none; }
+  a { color: hsl(var(--foreground)); text-decoration: none; }
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: hsl(var(--muted-foreground));
+    word-break: break-all;
+  }
+  h1, h2, h3 { page-break-after: avoid; break-after: avoid-page; }
+  p, li, blockquote { page-break-inside: avoid; break-inside: avoid; }
+  .card, .callout { page-break-inside: avoid; break-inside: avoid; }
+  .doc-header, .doc-footer { background: white; }
+  .no-print { display: none !important; }
+  .slide { page: slide; height: 100vh; padding: 18mm 22mm; }
+}
+
+</style>
+<style>
+  /* ===== On-screen presentation harness =====================
+     One slide per screen. Arrow keys / space / click to advance,
+     F11 for fullscreen. Built on Praxis tokens from praxis.css.
+     ========================================================= */
+  html, body { height: 100%; margin: 0; }
+  body { background: hsl(var(--background)); overflow: hidden; }
+
+  .deck-slide {
+    position: fixed; inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5vh 6vw 7vh;
+    background: hsl(var(--background));
+  }
+  .deck-slide.active { display: flex; }
+
+  .stage { width: 100%; max-width: 1180px; margin: 0 auto; }
+
+  /* slide chrome */
+  .chrome {
+    position: fixed; top: 3.2vh; left: 6vw; right: 6vw;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: var(--text-sm); color: hsl(var(--muted-foreground));
+  }
+  .chrome .wm { font-family: var(--font-display); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); color: hsl(var(--foreground)); }
+  .chrome .wm .dot { color: hsl(var(--primary)); }
+
+  .deck-slide .eyebrow { margin-bottom: var(--space-2); }
+  .deck-slide h2 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); margin: 0 0 var(--space-2); }
+  .deck-slide .lead { max-width: 60ch; margin-bottom: var(--space-6); }
+
+  /* diagram canvas */
+  .diagram { width: 100%; margin-top: var(--space-2); }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 70ch; }
+  .cap code { font-size: 0.85em; }
+
+  /* SVG shared styles */
+  svg text { font-family: var(--font-sans); fill: hsl(var(--foreground)); }
+  .s-ink   { fill: hsl(var(--foreground)); }
+  .s-amber { fill: hsl(var(--primary)); }
+  .s-muted { fill: hsl(var(--muted-foreground)); }
+  .l-ink   { stroke: hsl(var(--foreground)); fill: none; }
+  .l-amber { stroke: hsl(var(--primary)); fill: none; }
+  .l-faint { stroke: hsl(var(--border)); fill: none; }
+  .box     { fill: #fff; stroke: hsl(var(--border)); }
+  .box-amber { fill: hsl(var(--primary) / 0.08); stroke: hsl(var(--primary)); }
+  .box-ink   { fill: hsl(var(--foreground)); stroke: hsl(var(--foreground)); }
+  .t-lbl   { font-size: 19px; font-weight: 600; }
+  .t-sub   { font-size: 14px; fill: hsl(var(--muted-foreground)); }
+  .t-tiny  { font-size: 12.5px; fill: hsl(var(--muted-foreground)); }
+  .t-mono  { font-family: var(--font-mono); font-size: 14px; }
+  .t-white { fill: hsl(var(--background)); }
+
+  /* title / closing slides — dark */
+  .deck-slide.title { background: hsl(var(--foreground)); justify-content: flex-end; }
+  .deck-slide.title h1 { color: hsl(var(--background)); font-size: clamp(2.6rem, 6vw, 4.2rem); margin-bottom: var(--space-4); }
+  .deck-slide.title .eyebrow { color: hsl(var(--primary)); }
+  .deck-slide.title .lead { color: hsl(40 10% 80%); }
+  .deck-slide.title .chrome .wm { color: hsl(var(--background)); }
+  .deck-slide.title .chrome { color: hsl(40 8% 60%); }
+
+  /* agenda groups */
+  .spine { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); margin-top: var(--space-6); }
+  .spine .grp h4 { margin: 0 0 var(--space-3); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: hsl(var(--primary)); }
+  .spine ol { list-style: none; margin: 0; padding: 0; }
+  .spine li { font-size: var(--text-base); margin-bottom: var(--space-2); display: flex; gap: var(--space-2); line-height: var(--leading-snug); }
+  .spine li .n { font-family: var(--font-mono); font-size: var(--text-xs); color: hsl(var(--muted-foreground)); padding-top: 0.2em; min-width: 1.2em; }
+
+  /* nav UI */
+  .slide-counter { position: fixed; bottom: 3.2vh; right: 6vw; font-size: var(--text-xs); letter-spacing: var(--tracking-wider); color: hsl(var(--muted-foreground)); }
+  .deck-slide.title .slide-counter { color: hsl(40 8% 55%); }
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: hsl(var(--primary)); transition: width 0.2s ease; z-index: 10; }
+  .hint { position: fixed; bottom: 3.2vh; left: 6vw; font-size: var(--text-xs); color: hsl(var(--muted-foreground)); opacity: 0.7; }
+
+  @media print {
+    body { overflow: visible; }
+    @page { size: A4 landscape; margin: 0; }
+    .deck-slide { position: relative; inset: auto; display: flex !important; height: 100vh; page-break-after: always; }
+    .progress, .hint, .slide-counter { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- ============ 1 · TITLE ============================================= -->
+<section class="deck-slide title active">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · talking deck</span></div>
+  <div class="stage">
+    <span class="eyebrow">Praxis — built from Anthropic's AI Fluency for Nonprofits</span>
+    <h1>Working with AI<br>fluently — without<br>losing the mission.</h1>
+    <p class="lead">Nine ideas, one per screen. A shared way to use AI that stays effective, ethical, and true to what your organisation is for. The drama is in the watching, so take the silences.</p>
+  </div>
+  <span class="slide-counter">01</span>
+</section>
+
+<!-- ============ 2 · THE SPINE ========================================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The shape of the course</span></div>
+  <div class="stage">
+    <span class="eyebrow">Where we're going</span>
+    <h2>The whole course on one screen</h2>
+    <p class="lead">Two loops do the work. Describe and discern is the everyday back-and-forth; delegate and be diligent is the bigger call about whether AI belongs at all.</p>
+    <div class="spine">
+      <div class="grp">
+        <h4>Foundation</h4>
+        <ol>
+          <li><span class="n">1</span> What AI Fluency is</li>
+          <li><span class="n">2</span> The 4D Framework</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>Describe &amp; discern</h4>
+        <ol>
+          <li><span class="n">3</span> Researching with AI</li>
+          <li><span class="n">4</span> Writing with AI</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>Delegate &amp; be diligent</h4>
+        <ol>
+          <li><span class="n">5</span> Privacy &amp; data</li>
+          <li><span class="n">6</span> Data analysis</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>Make it real</h4>
+        <ol>
+          <li><span class="n">7</span> Workflow augmentation</li>
+          <li><span class="n">8</span> Integration</li>
+          <li><span class="n">9</span> Your first task</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <span class="slide-counter">02</span>
+</section>
+
+<!-- ============ 3 · L1 WHAT AI FLUENCY IS ============================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 1 · Foundation</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 1</span>
+    <h2>Fluency is four things at once</h2>
+    <p class="lead">Not just getting AI to work — getting it to work in a way you'd defend. Effective, efficient, ethical, safe, all grounded in your mission.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 260" role="img" aria-label="AI Fluency rests on four qualities, grounded in mission">
+        <rect x="10"  y="20" width="200" height="56" rx="12" class="box"/>
+        <text x="110" y="54" text-anchor="middle" class="t-lbl">Effective</text>
+        <rect x="250" y="20" width="200" height="56" rx="12" class="box"/>
+        <text x="350" y="54" text-anchor="middle" class="t-lbl">Efficient</text>
+        <rect x="490" y="20" width="200" height="56" rx="12" class="box"/>
+        <text x="590" y="54" text-anchor="middle" class="t-lbl">Ethical</text>
+        <rect x="730" y="20" width="200" height="56" rx="12" class="box"/>
+        <text x="830" y="54" text-anchor="middle" class="t-lbl">Safe</text>
+
+        <line x1="110" y1="76" x2="110" y2="118" class="l-faint" stroke-width="1.8" marker-end="url(#d1f)"/>
+        <line x1="350" y1="76" x2="350" y2="118" class="l-faint" stroke-width="1.8" marker-end="url(#d1f)"/>
+        <line x1="590" y1="76" x2="590" y2="118" class="l-faint" stroke-width="1.8" marker-end="url(#d1f)"/>
+        <line x1="830" y1="76" x2="830" y2="118" class="l-faint" stroke-width="1.8" marker-end="url(#d1f)"/>
+
+        <rect x="110" y="120" width="720" height="56" rx="12" class="box-amber"/>
+        <text x="470" y="154" text-anchor="middle" class="t-lbl s-amber">AI Fluency</text>
+
+        <line x1="470" y1="176" x2="470" y2="200" class="l-amber" stroke-width="2.5" marker-end="url(#d1a)"/>
+        <rect x="350" y="202" width="240" height="48" rx="10" class="box-ink"/>
+        <text x="470" y="231" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Your mission</text>
+        <defs>
+          <marker id="d1a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+          <marker id="d1f" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">For a nonprofit, every efficiency gain should translate into more impact for the people you serve. Start by writing one reusable context document about your organisation — its mission, your role, your constraints — to share into future conversations.</p>
+  </div>
+  <span class="slide-counter">03</span>
+</section>
+
+<!-- ============ 4 · L2 THE 4D FRAMEWORK (centrepiece) ================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 2 · Foundation</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 2 — if you take one thing away</span>
+    <h2>Four competencies, two loops</h2>
+    <p class="lead">Delegation and diligence decide whether AI belongs. Description and discernment make the collaboration actually good.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 300" role="img" aria-label="The 4D Framework as two loops">
+        <!-- LEFT panel: the whether/when loop -->
+        <text x="20" y="32" class="t-lbl">The whether / when loop</text>
+        <text x="20" y="54" class="t-tiny">Delegation → Diligence</text>
+
+        <rect x="60" y="78" width="200" height="52" rx="12" class="box"/>
+        <text x="160" y="104" text-anchor="middle" class="t-lbl" style="font-size:16px">Delegation</text>
+        <text x="160" y="122" text-anchor="middle" class="t-tiny">should AI do this?</text>
+
+        <line x1="160" y1="130" x2="160" y2="150" class="l-ink" stroke-width="2" marker-end="url(#d2i)"/>
+        <rect x="60" y="150" width="200" height="40" rx="10" class="box"/>
+        <text x="160" y="175" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">AI helps with it</text>
+
+        <line x1="160" y1="190" x2="160" y2="210" class="l-ink" stroke-width="2" marker-end="url(#d2i)"/>
+        <rect x="60" y="210" width="200" height="52" rx="12" class="box"/>
+        <text x="160" y="236" text-anchor="middle" class="t-lbl" style="font-size:16px">Diligence</text>
+        <text x="160" y="254" text-anchor="middle" class="t-tiny">own the result</text>
+
+        <path d="M 260 236 C 340 236, 340 104, 260 104" class="l-amber" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#d2a)"/>
+        <text x="352" y="166" class="t-tiny s-amber" style="font-weight:600">decide,</text>
+        <text x="352" y="184" class="t-tiny s-amber" style="font-weight:600">then answer for it</text>
+
+        <!-- divider -->
+        <line x1="500" y1="20" x2="500" y2="280" class="l-faint" stroke-width="1" stroke-dasharray="4 5"/>
+
+        <!-- RIGHT panel: the everyday loop -->
+        <text x="540" y="32" class="t-lbl">The everyday loop</text>
+        <text x="540" y="54" class="t-tiny">Description &#8644; Discernment</text>
+
+        <rect x="540" y="120" width="180" height="74" rx="12" class="box-amber"/>
+        <text x="630" y="152" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Description</text>
+        <text x="630" y="172" text-anchor="middle" class="t-tiny">say what you want</text>
+
+        <rect x="770" y="120" width="180" height="74" rx="12" class="box-amber"/>
+        <text x="860" y="152" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Discernment</text>
+        <text x="860" y="172" text-anchor="middle" class="t-tiny">judge what you got</text>
+
+        <line x1="722" y1="148" x2="768" y2="148" class="l-amber" stroke-width="2.2" marker-end="url(#d2a)"/>
+        <line x1="768" y1="168" x2="722" y2="168" class="l-amber" stroke-width="2.2" marker-end="url(#d2a)"/>
+        <text x="745" y="226" text-anchor="middle" class="t-tiny">back-and-forth until it's right</text>
+        <defs>
+          <marker id="d2i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d2a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">The four interlock — you rarely run one without the others. Delegation and diligence decide whether AI belongs; description and discernment make the work good. That interplay <i>is</i> the fluency.</p>
+  </div>
+  <span class="slide-counter">04</span>
+</section>
+
+<!-- ============ 5 · L3 RESEARCHING =================================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 3 · Describe &amp; discern</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 3</span>
+    <h2>Research is a loop, not a single ask</h2>
+    <p class="lead">A context-rich prompt gets you oriented fast. Then you verify, notice the gaps, and ask a sharper follow-up.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 290" role="img" aria-label="The research loop: prompt, synthesise, discern, refine">
+        <rect x="20"  y="60" width="240" height="62" rx="12" class="box"/>
+        <text x="140" y="90"  text-anchor="middle" class="t-lbl">Prompt + context</text>
+        <text x="140" y="110" text-anchor="middle" class="t-tiny">who you serve, what you need</text>
+
+        <rect x="370" y="60" width="240" height="62" rx="12" class="box"/>
+        <text x="490" y="90"  text-anchor="middle" class="t-lbl">AI synthesises</text>
+        <text x="490" y="110" text-anchor="middle" class="t-tiny">gathers and summarises</text>
+
+        <rect x="720" y="60" width="240" height="62" rx="12" class="box-amber"/>
+        <text x="840" y="90"  text-anchor="middle" class="t-lbl s-amber">Discern</text>
+        <text x="840" y="110" text-anchor="middle" class="t-tiny">verify · gaps · recency</text>
+
+        <line x1="260" y1="91" x2="368" y2="91" class="l-ink" stroke-width="2" marker-end="url(#d3i)"/>
+        <line x1="610" y1="91" x2="718" y2="91" class="l-ink" stroke-width="2" marker-end="url(#d3i)"/>
+
+        <line x1="880" y1="122" x2="880" y2="176" class="l-ink" stroke-width="2" marker-end="url(#d3i)"/>
+        <rect x="800" y="178" width="160" height="44" rx="10" class="box-ink"/>
+        <text x="880" y="206" text-anchor="middle" class="t-tiny t-white" style="font-size:14px;font-weight:600">use it — you decide</text>
+
+        <path d="M 760 122 C 760 258, 140 258, 140 124" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#d3a)"/>
+        <text x="450" y="252" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">first answer is a draft — refine and ask again</text>
+        <defs>
+          <marker id="d3i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d3a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">AI gets you oriented quickly, but you stay the decision-maker. Flag specific claims for verification, ask it to track down the original source, and check whether a "good fit" funder is actually aligned, not just topically related.</p>
+  </div>
+  <span class="slide-counter">05</span>
+</section>
+
+<!-- ============ 6 · L4 WRITING ====================================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 4 · Describe &amp; discern</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 4</span>
+    <h2>AI drafts faster — you keep the voice</h2>
+    <p class="lead">Feed it what it can't know: your track record, your partnerships, the way you actually talk. Then discern every line.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Writing: you bring context, AI drafts, you discern and own it">
+        <text x="20" y="26" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">What only you can bring</text>
+        <rect x="20" y="40" width="250" height="44" rx="10" class="box"/>
+        <text x="40" y="68" class="t-tiny s-ink">Your voice &amp; past work</text>
+        <rect x="20" y="98" width="250" height="44" rx="10" class="box"/>
+        <text x="40" y="126" class="t-tiny s-ink">Track record, partnerships</text>
+        <rect x="20" y="156" width="250" height="44" rx="10" class="box"/>
+        <text x="40" y="184" class="t-tiny s-ink">Community relationships</text>
+
+        <line x1="270" y1="62"  x2="378" y2="100" class="l-amber" stroke-width="1.8" marker-end="url(#d4a)"/>
+        <line x1="270" y1="120" x2="378" y2="120" class="l-amber" stroke-width="1.8" marker-end="url(#d4a)"/>
+        <line x1="270" y1="178" x2="378" y2="140" class="l-amber" stroke-width="1.8" marker-end="url(#d4a)"/>
+
+        <rect x="380" y="80" width="180" height="80" rx="12" class="box-amber"/>
+        <text x="470" y="116" text-anchor="middle" class="t-lbl s-amber">AI drafts</text>
+        <text x="470" y="138" text-anchor="middle" class="t-tiny">fast, from your context</text>
+
+        <line x1="560" y1="120" x2="618" y2="120" class="l-ink" stroke-width="2" marker-end="url(#d4i)"/>
+        <rect x="620" y="80" width="180" height="80" rx="12" class="box"/>
+        <text x="710" y="112" text-anchor="middle" class="t-lbl">Discern</text>
+        <text x="710" y="136" text-anchor="middle" class="t-tiny">voice? accurate?</text>
+        <text x="710" y="152" text-anchor="middle" class="t-tiny">whose framing?</text>
+
+        <line x1="800" y1="120" x2="828" y2="120" class="l-ink" stroke-width="2" marker-end="url(#d4i)"/>
+        <rect x="830" y="80" width="130" height="80" rx="12" class="box-ink"/>
+        <text x="895" y="114" text-anchor="middle" class="t-lbl t-white" style="font-size:15px">You own</text>
+        <text x="895" y="136" text-anchor="middle" class="t-lbl t-white" style="font-size:15px">every word</text>
+        <defs>
+          <marker id="d4i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">"Make this more compelling" gets you nothing. "Add our work with the Riverside shelter, in our own plain voice" gets you a draft you can stand behind. Watch for deficit framing about the people you serve.</p>
+  </div>
+  <span class="slide-counter">06</span>
+</section>
+
+<!-- ============ 7 · L5 PRIVACY & DATA =============================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 5 · Delegate &amp; be diligent</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 5</span>
+    <h2>Decide what AI never needs to see</h2>
+    <p class="lead">Most analysis doesn't need names. Strip what identifies people, match the tool to the sensitivity, then share.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Data hygiene pipeline: raw data, sanitise, match the tool, safe to share">
+        <rect x="20"  y="70" width="200" height="72" rx="12" class="box"/>
+        <text x="120" y="102" text-anchor="middle" class="t-lbl">Your data</text>
+        <text x="120" y="124" text-anchor="middle" class="t-tiny">names · PII · amounts</text>
+
+        <rect x="270" y="70" width="230" height="72" rx="12" class="box-amber"/>
+        <text x="385" y="102" text-anchor="middle" class="t-lbl s-amber">Sanitise</text>
+        <text x="385" y="124" text-anchor="middle" class="t-tiny">names → Person A, drop contacts</text>
+
+        <rect x="550" y="70" width="200" height="72" rx="12" class="box"/>
+        <text x="650" y="102" text-anchor="middle" class="t-lbl">Match the tool</text>
+        <text x="650" y="124" text-anchor="middle" class="t-tiny">free vs. retention policy</text>
+
+        <rect x="800" y="70" width="160" height="72" rx="12" class="box-ink"/>
+        <text x="880" y="102" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Safe to</text>
+        <text x="880" y="124" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">share</text>
+
+        <line x1="220" y1="106" x2="268" y2="106" class="l-ink" stroke-width="2" marker-end="url(#d5i)"/>
+        <line x1="500" y1="106" x2="548" y2="106" class="l-ink" stroke-width="2" marker-end="url(#d5i)"/>
+        <line x1="750" y1="106" x2="798" y2="106" class="l-ink" stroke-width="2" marker-end="url(#d5i)"/>
+
+        <text x="20" y="186" class="t-tiny s-ink" style="font-weight:600">Work back from the goal: what data is truly necessary?</text>
+        <text x="20" y="210" class="t-tiny">For Claude, adjust privacy settings and opt out of training at <tspan class="t-mono" style="font-size:12px">privacy.anthropic.com</tspan>.</text>
+        <defs>
+          <marker id="d5i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">Safe AI use isn't avoiding AI — it's using it responsibly. Match the tool to the task: a free account for brainstorming, a protected one for anything sensitive. If something goes wrong, delete the conversation, request deletion, and follow your protocols.</p>
+  </div>
+  <span class="slide-counter">07</span>
+</section>
+
+<!-- ============ 8 · L6 DATA ANALYSIS ================================ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 6 · Delegate &amp; be diligent</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 6</span>
+    <h2>Trust it where you can already check it</h2>
+    <p class="lead">Before you let AI loose on new data, test it on past data where you know the answer. Match the known result, and you've earned the confidence.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 290" role="img" aria-label="Validation loop: known data, AI analyses, does it match, then trust on new data">
+        <rect x="20"  y="60" width="220" height="62" rx="12" class="box"/>
+        <text x="130" y="90"  text-anchor="middle" class="t-lbl">Known data</text>
+        <text x="130" y="110" text-anchor="middle" class="t-tiny">you know the result</text>
+
+        <rect x="310" y="60" width="200" height="62" rx="12" class="box"/>
+        <text x="410" y="90"  text-anchor="middle" class="t-lbl">AI analyses</text>
+        <text x="410" y="110" text-anchor="middle" class="t-tiny">patterns, formulas</text>
+
+        <rect x="580" y="60" width="220" height="62" rx="12" class="box-amber"/>
+        <text x="690" y="90"  text-anchor="middle" class="t-lbl s-amber">Matches?</text>
+        <text x="690" y="110" text-anchor="middle" class="t-tiny">against what you know</text>
+
+        <line x1="240" y1="91" x2="308" y2="91" class="l-ink" stroke-width="2" marker-end="url(#d6i)"/>
+        <line x1="510" y1="91" x2="578" y2="91" class="l-ink" stroke-width="2" marker-end="url(#d6i)"/>
+
+        <line x1="755" y1="122" x2="755" y2="186" class="l-ink" stroke-width="2" marker-end="url(#d6i)"/>
+        <text x="775" y="160" class="t-tiny s-ink" style="font-weight:600">yes</text>
+        <rect x="650" y="188" width="210" height="50" rx="10" class="box-ink"/>
+        <text x="755" y="218" text-anchor="middle" class="t-tiny t-white" style="font-size:14px;font-weight:600">now trust it on new data</text>
+
+        <path d="M 620 122 C 620 264, 410 264, 410 124" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#d6a)"/>
+        <text x="510" y="256" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">no — tell it what it missed</text>
+        <defs>
+          <marker id="d6i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">AI can help even if you're not data-savvy — it writes the formulas and reshapes messy data, as long as you keep asking it to explain. You stay accountable for whether the answer makes sense and for being transparent about AI's role.</p>
+  </div>
+  <span class="slide-counter">08</span>
+</section>
+
+<!-- ============ 9 · L7 WORKFLOW AUGMENTATION ======================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 7 · Make it real</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 7</span>
+    <h2>"Should AI do this?" beats "Can it?"</h2>
+    <p class="lead">Sort the work first. Some tasks AI can run, some it can draft for you to check, some stay human. The sort is the whole game.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Triage tasks into three lanes by AI-appropriateness">
+        <rect x="20"  y="30" width="290" height="120" rx="14" class="box-amber"/>
+        <text x="165" y="74"  text-anchor="middle" class="t-lbl s-amber">AI handles</text>
+        <text x="165" y="104" text-anchor="middle" class="t-tiny">standardised,</text>
+        <text x="165" y="122" text-anchor="middle" class="t-tiny">documented answers</text>
+
+        <rect x="345" y="30" width="290" height="120" rx="14" class="box"/>
+        <text x="490" y="74"  text-anchor="middle" class="t-lbl">AI drafts, you decide</text>
+        <text x="490" y="104" text-anchor="middle" class="t-tiny">it prepares,</text>
+        <text x="490" y="122" text-anchor="middle" class="t-tiny">you review before it goes</text>
+
+        <rect x="670" y="30" width="290" height="120" rx="14" class="box-ink"/>
+        <text x="815" y="74"  text-anchor="middle" class="t-lbl t-white">Human only</text>
+        <text x="815" y="104" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">complaints, high stakes,</text>
+        <text x="815" y="122" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">judgment calls</text>
+
+        <text x="20" y="196" class="t-tiny s-ink" style="font-weight:600">Then describe the system: product (the output) · process (the steps) · performance (the tone).</text>
+        <text x="20" y="220" class="t-tiny">Test with real examples; refine the description where it gets things wrong.</text>
+      </svg>
+    </div>
+    <p class="cap">Start with Problem Awareness: list what people actually ask before automating anything. Keep all three kinds of diligence — be intentional about what you automate, review outputs before they ship, and be honest about AI's role.</p>
+  </div>
+  <span class="slide-counter">09</span>
+</section>
+
+<!-- ============ 10 · L8 INTEGRATION ================================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 8 · Make it real</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 8</span>
+    <h2>You are the human in the loop</h2>
+    <p class="lead">AI should free you for the handwritten card, not automate it away. A short policy lets the whole team work the same way.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="An AI policy scales the team; the human stays in the loop">
+        <rect x="20" y="20" width="420" height="210" rx="12" class="box"/>
+        <text x="40" y="50" class="t-mono s-amber" style="font-weight:600">AI policy</text>
+        <line x1="40" y1="62" x2="420" y2="62" class="l-faint" stroke-width="1"/>
+        <text x="40" y="92"  class="t-tiny s-ink">Platforms — what we use, what's off-limits</text>
+        <text x="40" y="120" class="t-tiny s-ink">Delegation — what stays human</text>
+        <text x="40" y="148" class="t-tiny s-ink">Oversight — who reviews outputs</text>
+        <text x="40" y="176" class="t-tiny s-ink">Transparency — what we disclose</text>
+        <text x="40" y="204" class="t-tiny s-ink">Values — mission first, always</text>
+
+        <line x1="440" y1="125" x2="520" y2="125" class="l-amber" stroke-width="2.5" marker-end="url(#d8a)"/>
+        <text x="480" y="115" text-anchor="middle" class="t-tiny">scales</text>
+        <text x="480" y="148" text-anchor="middle" class="t-tiny">the team</text>
+
+        <rect x="540" y="55" width="420" height="140" rx="12" class="box-amber"/>
+        <text x="560" y="86" class="t-lbl s-amber" style="font-size:16px">The human in the loop</text>
+        <text x="560" y="116" class="t-tiny s-ink">you choose what AI should solve</text>
+        <text x="560" y="144" class="t-tiny s-ink">you judge whether it fits your values</text>
+        <text x="560" y="172" class="t-tiny s-ink">you keep the relationships and real-world impact</text>
+        <defs>
+          <marker id="d8a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">Avoid dependency through understanding, not avoidance: if you can explain what the AI is doing, that's healthy augmentation. Decide early what happens with the time you save — so it goes back into human work, not away from it.</p>
+  </div>
+  <span class="slide-counter">10</span>
+</section>
+
+<!-- ============ 11 · L9 YOUR FIRST TASK ============================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 9 · Make it real</span></div>
+  <div class="stage">
+    <span class="eyebrow">Lesson 9</span>
+    <h2>Run all four Ds on one real task this week</h2>
+    <p class="lead">Pick something already waiting — a grant, a donor report, data to analyse — and take it through the loop.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 290" role="img" aria-label="The 4D cycle applied to one real task, a loop not a line">
+        <text x="20" y="40" class="t-tiny">Pick one task already waiting for you, then go round:</text>
+
+        <rect x="20"  y="80" width="200" height="62" rx="12" class="box"/>
+        <text x="120" y="108" text-anchor="middle" class="t-lbl">Delegate</text>
+        <text x="120" y="128" text-anchor="middle" class="t-tiny">what's AI's? what's yours?</text>
+
+        <rect x="270" y="80" width="190" height="62" rx="12" class="box"/>
+        <text x="365" y="108" text-anchor="middle" class="t-lbl">Describe</text>
+        <text x="365" y="128" text-anchor="middle" class="t-tiny">context + what you want</text>
+
+        <rect x="510" y="80" width="190" height="62" rx="12" class="box-amber"/>
+        <text x="605" y="108" text-anchor="middle" class="t-lbl s-amber">Discern</text>
+        <text x="605" y="128" text-anchor="middle" class="t-tiny">evaluate, refine</text>
+
+        <rect x="750" y="80" width="200" height="62" rx="12" class="box"/>
+        <text x="850" y="108" text-anchor="middle" class="t-lbl">Diligence</text>
+        <text x="850" y="128" text-anchor="middle" class="t-tiny">own the result</text>
+
+        <line x1="220" y1="111" x2="268" y2="111" class="l-ink" stroke-width="2.5" marker-end="url(#d9i)"/>
+        <line x1="460" y1="111" x2="508" y2="111" class="l-ink" stroke-width="2.5" marker-end="url(#d9i)"/>
+        <line x1="700" y1="111" x2="748" y2="111" class="l-ink" stroke-width="2.5" marker-end="url(#d9i)"/>
+
+        <path d="M 850 142 C 850 256, 120 256, 120 144" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#d9a)"/>
+        <text x="485" y="250" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">a loop, not a line — go round again</text>
+        <defs>
+          <marker id="d9i" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d9a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">Step-by-step blueprints for common nonprofit tasks — grants, donor comms, data — live at <code>claude.com/resources</code>. AI Fluency isn't a destination; it's a practice that keeps your mission at the centre as the tools change.</p>
+  </div>
+  <span class="slide-counter">11</span>
+</section>
+
+<!-- ============ 12 · CLOSE ========================================== -->
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
+  <div class="stage">
+    <span class="eyebrow">The whole thing, in one line</span>
+    <h1>Delegate. Describe.<br>Discern. Be diligent.</h1>
+    <p class="lead">Two loops do the work: describe and discern day to day, delegate and stay diligent for the bigger calls. The mission stays at the centre of every one.</p>
+    <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
+  </div>
+  <span class="slide-counter">12</span>
+</section>
+
+<div class="slide-counter" style="display:none"></div>
+<div class="hint" id="hint">← → or space · F11 fullscreen</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.deck-slide'));
+  const progress = document.getElementById('progress');
+  const hint = document.getElementById('hint');
+  let i = 0;
+
+  // restore position from hash (#7) so reloads don't lose your place
+  const fromHash = parseInt(location.hash.slice(1), 10);
+  if (!isNaN(fromHash) && fromHash >= 1 && fromHash <= slides.length) i = fromHash - 1;
+
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    history.replaceState(null, '', '#' + (i + 1));
+  }
+  function next() { show(i + 1); }
+  function prev() { show(i - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+  });
+  // click to advance (ignore links)
+  document.addEventListener('click', (e) => { if (!e.target.closest('a')) next(); });
+  // fade the hint after a few seconds
+  setTimeout(() => { if (hint) hint.style.opacity = '0'; }, 4000);
+
+  show(i);
+</script>
+</body>
+</html>
