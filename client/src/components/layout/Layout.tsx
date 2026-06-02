@@ -23,7 +23,7 @@ export function Header() {
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="font-serif font-semibold text-lg tracking-tight hover:opacity-70 transition-opacity">
-          Tutto
+          Tutto<span className="text-primary">.</span>
         </Link>
 
         <nav className="hidden md:flex gap-8">
