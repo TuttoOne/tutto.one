@@ -163,6 +163,60 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
 
 export const BLOG_POSTS = [
   {
+    slug: "praxis-closed-loop",
+    title: "The Podcast That Clarified Why Praxis Exists",
+    excerpt: "A Lenny's Newsletter article made something click for me about why most AI training fails. The answer was already in how Praxis was built — I just had not said it clearly enough.",
+    date: "Jun 2, 2026",
+    readTime: "5 min read",
+    content: `A few months ago I read a piece on [Lenny's Newsletter](https://www.lennysnewsletter.com/p/how-to-build-ai-product-sense) that clarified something I had been circling. The article is by Tal Raviv and Aman Khan, and the argument is about what they call "AI product sense" — the ability to correctly anticipate what will be truly impactful for users and what is actually feasible with AI. Their claim: you do not build it by reading explainer posts. You build it by getting your hands into coding agents and doing real work with them.
+
+The reason, they argue, is that consumer tools like ChatGPT are opaque. You type, something comes back. You have no idea why it came back that way, what the model was doing, or where it broke down. Coding agents like Claude Code are different: you can read the reasoning, watch the tool calls, see the context window fill up. You hit the same walls that engineers hit. And in hitting them, you start to actually understand how the thing works.
+
+Reading that, I thought: that is exactly the problem Praxis was built to solve. And I had not been saying it clearly enough.
+
+## Most AI training is the wrong kind of hard
+
+There is a lot of AI training available right now. Most of it is either too abstract or too tutorial-ised. The abstract kind teaches you concepts without letting you touch anything - you leave knowing what a context window is but not feeling it run out on a real task. The tutorial kind walks you through a pre-baked exercise where everything goes right and you leave with a screenshot but not a skill.
+
+Anthropic's own learning platform at [anthropic.skilljar.com](https://anthropic.skilljar.com/) is genuinely good. The courses are well-made. They cover the ground properly - from the basics of what Claude is and how to use it, through Claude Code, the API, Model Context Protocol, agents and subagents, and specialist tracks for educators, small businesses, and nonprofits. The content is correct and the theory is solid.
+
+What it cannot do is sit next to you.
+
+## What Praxis adds
+
+Praxis is built on the Anthropic curriculum. The [course library](https://tutto.one/courses) contains the materials from sixteen of those courses - everything from Claude 101 through to Introduction to Subagents and AI Fluency for Small Businesses - adapted for guided sessions. Every session starts from the theory the Anthropic course establishes and then does one more thing: you build something real with it, in the session, while I watch.
+
+The difference this makes is the same difference Tal and Aman describe in the article. When you are building live - when the tool does something unexpected, or the context runs out, or the first version of the tool does not quite do what you needed - you feel those moments and we work through them together. That is where the understanding actually forms. Not in reading about it, but in hitting the problem and finding your way out of it with someone who has done it before.
+
+The sessions cover the same ground as the Anthropic courses but in a different order: output before theory. You see what the thing does before I explain why it works that way. Most people find that the theory lands twice as hard once they have already seen the behaviour.
+
+## The closed loop
+
+Here is the part that I think is genuinely useful: Anthropic offers certification. Once you have been through the programme, you have the theory from the curriculum, the practical experience from the sessions, and the ability to sit the Anthropic tests and get certified.
+
+That is the closed loop. Theory, practice, and a credential that means something because it comes from the people who built the model.
+
+The [Praxis course library](https://tutto.one/courses) covers sixteen tracks:
+
+- **Claude 101** and **Claude Code 101** - the foundations, including how the tools work and what they are actually good for
+- **Claude Code in Action** and the **Anthropic API** track - getting into the practical layer, connecting tools, building real things
+- **Model Context Protocol** - how AI connects to the software you already use
+- **Agent Skills** and **Subagents** - how to build things that can take actions, not just answer questions
+- **AI Fluency** tracks for educators, students, small businesses, and nonprofits - the same foundations applied to specific contexts
+
+Each of these has a corresponding Praxis session: a guided, practical hour where you work through the material on something from your own work rather than a generic exercise.
+
+## Who this is for
+
+If you have already started exploring AI tools and you want to get further - faster, with less confusion, and with a clear path to certification - this is the practical layer the Anthropic curriculum does not provide on its own.
+
+If you are an educator, a consultant, or someone who wants to teach this material yourself, the [Praxis trainer track](/become-a-trainer) builds on the same foundation.
+
+The Lenny's article is worth reading if you want to understand the argument for why hands-on matters. The short version is that you cannot build intuition about a tool from the outside. You have to use it, break it, and understand what just happened. That is what Praxis is for.
+
+Details and booking at [/praxis](/praxis) and [/praxis-programme](/praxis-programme).`,
+  },
+  {
     slug: "glasswing-security-threshold",
     title: "AI Has Crossed the Security Threshold. Your Patch Cycle Has Not.",
     excerpt: "Anthropic's Project Glasswing scanned over 1,000 open-source projects and found 6,202 high or critical vulnerabilities — at 90% accuracy. The problem is not the finding. It is how long it takes to fix.",
