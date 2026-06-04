@@ -1,9 +1,10 @@
-import { useParams, Link } from "wouter";
+import { useParams, Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import ReactMarkdown from "react-markdown";
 
 export default function PraxisLearn() {
   const { course, lesson } = useParams<{ course: string; lesson?: string }>();
+  const [, navigate] = useLocation();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["/api/courses", course, lesson ?? "index"],
@@ -14,6 +15,24 @@ export default function PraxisLearn() {
       return res.json() as Promise<{ meta: Record<string, any>; content: string }>;
     },
   });
+
+  // Custom link renderer: convert relative .md hrefs to SPA routes
+  const LinkRenderer = ({ href, children }: { href?: string; children?: React.ReactNode }) => {
+    if (href && href.endsWith(".md")) {
+      const slug = href.replace(/^\.\//, "").replace(/\.md$/, "");
+      const to = `/praxis/learn/${course}/${slug}`;
+      return (
+        <a
+          href={to}
+          onClick={(e) => { e.preventDefault(); navigate(to); }}
+          className="underline cursor-pointer"
+        >
+          {children}
+        </a>
+      );
+    }
+    return <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">{children}</a>;
+  };
 
   if (isLoading) {
     return (
@@ -59,7 +78,7 @@ export default function PraxisLearn() {
 
         {/* content */}
         <div className="text-gray-800 leading-relaxed space-y-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-10 [&_h2]:mb-3 [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:rounded [&_code]:text-sm [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_a]:underline [&_a]:hover:no-underline">
-          <ReactMarkdown>{data.content}</ReactMarkdown>
+          <ReactMarkdown components={{ a: LinkRenderer }}>{data.content}</ReactMarkdown>
         </div>
 
         {/* back */}
