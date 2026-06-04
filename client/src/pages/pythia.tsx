@@ -6,14 +6,18 @@ const INTER: React.CSSProperties = { fontFamily: "'Inter', -apple-system, sans-s
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono','Fira Mono','Courier New',monospace" };
 const CAPS: React.CSSProperties = { ...INTER, textTransform: "uppercase", letterSpacing: "0.12em" };
 
-function SearchIcon() {
+function HierarchyIcon() {
   return (
     <div style={{ width: 52, height: 52, borderRadius: 12, background: "#e8eef8", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <circle cx="11" cy="11" r="7" stroke="#4a7cc7" strokeWidth="1.5"/>
-        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="#4a7cc7" strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="8" y1="11" x2="14" y2="11" stroke="#4a7cc7" strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="11" y1="8" x2="11" y2="14" stroke="#4a7cc7" strokeWidth="1.5" strokeLinecap="round"/>
+        <rect x="9" y="2" width="6" height="4" rx="1" stroke="#4a7cc7" strokeWidth="1.5"/>
+        <rect x="2" y="10" width="6" height="4" rx="1" stroke="#4a7cc7" strokeWidth="1.5"/>
+        <rect x="9" y="10" width="6" height="4" rx="1" stroke="#4a7cc7" strokeWidth="1.5"/>
+        <rect x="16" y="10" width="6" height="4" rx="1" stroke="#4a7cc7" strokeWidth="1.5"/>
+        <line x1="12" y1="6" x2="12" y2="10" stroke="#4a7cc7" strokeWidth="1.5"/>
+        <line x1="5" y1="8" x2="19" y2="8" stroke="#4a7cc7" strokeWidth="1.5"/>
+        <line x1="5" y1="8" x2="5" y2="10" stroke="#4a7cc7" strokeWidth="1.5"/>
+        <line x1="19" y1="8" x2="19" y2="10" stroke="#4a7cc7" strokeWidth="1.5"/>
       </svg>
     </div>
   );
@@ -31,17 +35,14 @@ function LockIcon() {
   );
 }
 
-function TimelineIcon() {
+function LoopIcon() {
   return (
     <div style={{ width: 52, height: 52, borderRadius: 12, background: "#ebebeb", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <line x1="12" y1="3" x2="12" y2="21" stroke="#6b6b6b" strokeWidth="1.5"/>
-        <circle cx="12" cy="6" r="2" fill="#6b6b6b"/>
-        <circle cx="12" cy="12" r="2" fill="#6b6b6b"/>
-        <circle cx="12" cy="18" r="2" fill="#6b6b6b"/>
-        <line x1="12" y1="6" x2="18" y2="6" stroke="#6b6b6b" strokeWidth="1.5"/>
-        <line x1="12" y1="12" x2="18" y2="12" stroke="#6b6b6b" strokeWidth="1.5"/>
-        <line x1="12" y1="18" x2="18" y2="18" stroke="#6b6b6b" strokeWidth="1.5"/>
+        <path d="M4 12a8 8 0 0 1 14.93-4H16" stroke="#6b6b6b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 12a8 8 0 0 1-14.93 4H8" stroke="#6b6b6b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <polyline points="19 5 19.93 8 17 8" stroke="#6b6b6b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <polyline points="5 19 4.07 16 7 16" stroke="#6b6b6b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     </div>
   );
@@ -50,48 +51,48 @@ function TimelineIcon() {
 const capabilities = [
   {
     num: "i.",
-    Icon: SearchIcon,
-    title: "Ask in plain English",
-    sub: "Semantic search · Cited answers",
-    body: "Ask it the way you'd brief a junior. Every answer cites the source document and page number. No guessing. No hallucination from the AI's own knowledge.",
+    Icon: HierarchyIcon,
+    title: "A hierarchy of knowledge",
+    sub: "Structured · Searchable · Yours",
+    body: "Every document, note, and decision organised into a structured hierarchy you define. Semantic search runs across all of it. Ask anything — it finds the answer in the record, not in a guess.",
   },
   {
     num: "ii.",
     Icon: LockIcon,
-    title: "Nothing leaves the office",
-    sub: "On-premise · Zero cloud APIs",
-    body: "OCR, inference, vector search, and storage all run locally on your hardware. No data sent to third parties. Satisfies Legal Professional Privilege architecturally.",
+    title: "AI as orchestrator, not custodian",
+    sub: "Local-first · Zero cloud exposure",
+    body: "The AI connects to your knowledge base and instructs agents to act on it. Your data stays on your hardware at every step. Nothing is sent to third-party APIs. The AI orchestrates — it never holds.",
   },
   {
     num: "iii.",
-    Icon: TimelineIcon,
-    title: "Every document. Every format.",
-    sub: "150,000+ files · All formats",
-    body: "PDF, DOCX, MSG, EML, XLSX, TIF, and more. Pythia reads in your first disclosure set in a few weeks. New documents are added as they arrive.",
+    Icon: LoopIcon,
+    title: "Self-improving by design",
+    sub: "Each session sharpens the system",
+    body: "Every question, correction, and refinement feeds back into the system. The hierarchy grows more accurate, the search improves, and the agents get better instructions — without any data leaving your environment.",
   },
 ];
 
 const questions = [
   {
     tag: "A",
-    q: "Find all documents referencing the March 2023 board meeting and summarise the key decisions.",
-    a: "Found 14 relevant passages across 6 documents. Key decisions: approval of revised share structure (Exhibit C-112), appointment of interim CFO (Email D-0447), deferral of acquisition vote to Q3 2023 (Board Minutes C-089).",
+    q: "Summarise everything we know about the Hartwell account and flag any unresolved issues.",
+    a: "Found 34 relevant entries across notes, emails, and project files. 3 unresolved issues flagged: outstanding approval from legal (noted 14 Mar), unanswered pricing question (thread from 2 Apr), and a decision logged as provisional in the project record.",
   },
   {
     tag: "B",
-    q: "Show me all emails between the claimant and defendant between January and April 2022.",
-    a: "Retrieved 38 emails. Earliest: 4 Jan 2022 (REF: D-0012). Latest: 29 Apr 2022 (REF: D-0891). 12 marked confidential by producing side.",
+    q: "What decisions have we made about the product roadmap in the last 90 days?",
+    a: "18 logged decisions. Key changes: deprioritised v2 export module (12 Feb), approved new onboarding flow (3 Mar), deferred API redesign to Q4 (27 Mar). Sources: 6 meeting notes, 2 Slack threads, 1 board summary.",
   },
   {
     tag: "C",
-    q: "Build a timeline of contractual deadlines mentioned across all documents.",
-    a: "Extracted 23 deadline references. Key dates: 15 Feb 2022 (payment milestone, Contract §4.2), 1 Jun 2022 (option expiry, Addendum B), 30 Sep 2022 (longstop date, original SPA).",
+    q: "Find everything connected to the compliance audit and build a timeline.",
+    a: "Traced 27 documents. Timeline starts 8 Jan (initial scope). Key gaps: no sign-off recorded between 14 Feb and 9 Mar. Flagged 2 policy documents with conflicting revision dates.",
   },
 ];
 
 export default function Pythia() {
   useEffect(() => {
-    document.title = "Pythia - Read every file. Miss nothing.";
+    document.title = "Pythia - A private second brain that acts.";
     return () => { document.title = "Tutto | AI Consulting"; };
   }, []);
 
@@ -118,54 +119,47 @@ export default function Pythia() {
             What is Pythia?
           </p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>
-            An AI that reads every document.<br />
-            100% local: at your home or office.<br />
-            A private second brain that can take action.
+            A private second brain.<br />
+            AI as the orchestrator.<br />
+            Agents that act. Data that stays.
           </h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
-            Juniors spend days reading. Partners wait. The thing you miss is the thing that
-            loses the case. Pythia reads everything - every file, every footnote - and lets
-            you ask questions the way you'd brief a junior.
+            Pythia creates a hierarchy of your information — structured, searchable, and entirely on your own hardware. You ask questions in plain language. The AI figures out what you need and instructs agents to find it, cross-reference it, or act on it.
           </p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
-            It runs on your hardware. Nothing leaves your office. No cloud, no third-party
-            APIs, no exposure. Legal Professional Privilege satisfied by architecture, not
-            by policy.
+            At no point does your data leave. The AI is detached from the knowledge base — it orchestrates, it doesn't store. Each interaction makes the system sharper.
           </p>
           <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
-            On-site · Private · UK-built
+            Local-first · Any knowledge domain · Self-improving
           </span>
         </div>
 
         {/* Doc header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #1a1a1a", padding: "18px 0", marginBottom: 64 }}>
-          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>Pythia · Legal Document Intelligence · V1</span>
+          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>Pythia · Private Knowledge Intelligence · V1</span>
           <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>01 / 01</span>
         </div>
 
         {/* Tagline */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <p style={{ ...CAPS, fontSize: 10, letterSpacing: "0.28em", color: "#1a1a1a" }}>
-            B i l l &nbsp;f o r &nbsp;T h i n k i n g, &nbsp;N o t &nbsp;S e a r c h i n g
+            Y o u r &nbsp;K n o w l e d g e. &nbsp;Y o u r &nbsp;H a r d w a r e. &nbsp;Y o u r &nbsp;R u l e s.
           </p>
         </div>
 
         {/* Hero */}
         <div style={{ marginBottom: 28 }}>
           <h1 style={{ ...ROBOTO, fontSize: "clamp(36px, 6vw, 60px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a" }}>
-            Read every file.<br />
-            Find what matters.<br />
-            In hours, not days.
+            Structure it.<br />
+            Search it.<br />
+            Act on it privately.
           </h1>
         </div>
 
         {/* Intro */}
         <div style={{ maxWidth: 620, marginBottom: 64 }}>
           <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>
-            Pythia is a self-hosted document intelligence platform for litigation and legal
-            review. It processes entire disclosure sets locally - semantic search,
-            conversational Q&A with citations, interactive timelines, and OCR. Ask it the way
-            you'd brief a junior. It finds every relevant file, and shows you exactly why.
+            Most organisations have knowledge scattered across files, emails, and tools — findable only by the people who already know where to look. Pythia organises that knowledge into a structured hierarchy, makes it semantically searchable, and connects an AI orchestration layer that can query it, reason across it, and instruct agents to act — without any of that data ever touching an external service.
           </p>
         </div>
 
@@ -197,9 +191,9 @@ export default function Pythia() {
             {/* Stats column */}
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {[
-                { stat: "3 days → 3 hours", label: "Document review per matter" },
-                { stat: "Zero",             label: "Files leave your office" },
-                { stat: "Every footnote",   label: "Found and explained" },
+                { stat: "Zero",           label: "Data sent to external services" },
+                { stat: "Any domain",     label: "Legal, medical, ops, research — your choice" },
+                { stat: "Better each time", label: "Self-improving with every session" },
               ].map((s) => (
                 <div key={s.stat} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "24px 20px", background: "#faf8f5" }}>
                   <p style={{ ...ROBOTO, fontSize: 28, fontWeight: 900, color: "#1a1a1a", marginBottom: 6, letterSpacing: "-0.5px" }}>{s.stat}</p>
@@ -238,16 +232,16 @@ export default function Pythia() {
         <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>On the name</p>
           <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 20, maxWidth: 620, fontStyle: "italic" }}>
-            The Pythia was the Oracle at Delphi - the one you consulted when you needed an answer from everything that had been heard.
+            The Pythia was the Oracle at Delphi — the one you consulted when you needed an answer from everything that had been heard.
           </p>
           <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620 }}>
-            Pythia was the title given to the high priestess of the Temple of Apollo at Delphi, who served as its oracle. The name derives from Python, the serpent Apollo slew at Delphi. To put a question to the Pythia was not to ask for a guess - it was to receive the distilled answer from everything the oracle had witnessed and absorbed. That is the model: every document, read; every question, answered from the record itself.
+            Pythia was the title given to the high priestess of the Temple of Apollo at Delphi, who served as its oracle. The name derives from Python, the serpent Apollo slew at Delphi. To put a question to the Pythia was not to ask for a guess — it was to receive the distilled answer from everything the oracle had witnessed and absorbed. That is the model: every document, read; every question, answered from the record itself.
           </p>
         </div>
 
         {/* Doc footer */}
         <div className="py-footer-bar">
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Pythia · Legal Document Intelligence</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Pythia · Private Knowledge Intelligence</span>
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Module 01 - Overview</span>
         </div>
 
