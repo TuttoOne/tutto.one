@@ -17,6 +17,7 @@ import Praxis from "@/pages/praxis";
 import PraxisProgramme from "@/pages/praxis-programme";
 import Pythia from "@/pages/pythia";
 import BecomeATrainer from "@/pages/become-a-trainer";
+import PraxisLearn from "@/pages/praxis-learn";
 
 function Router() {
   return (
@@ -33,6 +34,8 @@ function Router() {
       <Route path="/praxis-programme" component={PraxisProgramme} />
       <Route path="/pythia" component={Pythia} />
       <Route path="/become-a-trainer" component={BecomeATrainer} />
+      <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
+      <Route path="/praxis/learn/:course" component={PraxisLearn} />
       <Route component={NotFound} />
     </Switch>
   );
