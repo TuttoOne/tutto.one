@@ -1,6 +1,7 @@
 import { useParams, Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function PraxisLearn() {
   const { course, lesson } = useParams<{ course: string; lesson?: string }>();
@@ -77,8 +78,8 @@ export default function PraxisLearn() {
         )}
 
         {/* content */}
-        <div className="text-gray-800 leading-relaxed space-y-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-10 [&_h2]:mb-3 [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:rounded [&_code]:text-sm [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_a]:underline [&_a]:hover:no-underline">
-          <ReactMarkdown components={{ a: LinkRenderer }}>{data.content}</ReactMarkdown>
+        <div className="text-gray-800 leading-relaxed space-y-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-10 [&_h2]:mb-3 [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:rounded [&_code]:text-sm [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_a]:underline [&_a]:hover:no-underline [&_table]:w-full [&_table]:border-collapse [&_table]:my-6 [&_th]:text-left [&_th]:border-b-2 [&_th]:border-gray-200 [&_th]:pb-2 [&_th]:pr-4 [&_th]:font-semibold [&_td]:border-b [&_td]:border-gray-100 [&_td]:py-2 [&_td]:pr-4 [&_td]:align-top">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ a: LinkRenderer }}>{data.content}</ReactMarkdown>
         </div>
 
         {/* back */}
