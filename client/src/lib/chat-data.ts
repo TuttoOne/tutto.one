@@ -168,37 +168,53 @@ export const BLOG_POSTS = [
     excerpt: "Brian Madden has built a public knowledge system that lets AI draw on his thinking in real time. The same methodology sits at the heart of Praxis — and he deserves the credit.",
     date: "Jun 4, 2026",
     readTime: "4 min read",
-    content: `A few months ago I came across [Brian Madden's public knowledge repository](https://brianmadden.ai) and it stopped me. It is a precise articulation of the idea that Praxis is built on, made explicit and made public.
+    content: `[Brian Madden](https://brianmadden.ai) has built something I wish existed when I started thinking about how AI should work with professional knowledge. His public knowledge repository at [brianmadden.ai](https://brianmadden.ai) is a worked example of an idea that most organisations are still trying to articulate: if you want AI to work well with your thinking, your thinking has to be structured in a way that AI can actually work with.
 
-## What brianmadden.ai actually is
+This post is about what he has built, why the principles matter, and why it connects directly to what Praxis teaches.
 
-The [FAQs on Brian's site](https://brianmadden.ai) are worth reading in full. The short version: it is not a chatbot. It is not a digital twin. It is a **data source** — a structured, machine-readable version of his professional thinking that your AI can draw on when you ask it something relevant.
+## What brianmadden.ai is — and what it is not
 
-In his own words: *"You talk to your AI, and it draws on my knowledge when relevant. It's more like an always-updated context & knowledge source for your chatbot."*
+The FAQs on Brian's site are the best starting point and they are worth reading carefully. The distinctions he draws are precise, and each one rules out a different misunderstanding.
 
-The underlying system is what Brian calls a personal AI-powered knowledge system — sometimes called a second brain. Everything he needs to work: content, ideas, his to-do list, thinking, meeting notes, documents, plans. The public site is a subset of that private system, updated daily. Content flows from the private system to a public GitHub repo using explicit publishing principles.
+**Is it a chatbot?**
 
-The GitHub repo is the source of truth. You can fork it.
+No. It is a data source your AI connects to. You talk to your AI, and it draws on Brian's knowledge when relevant. It is more like an always-updated context and knowledge source for your chatbot than a chatbot itself.
 
-## Why this matters
+**Is it a digital twin?**
 
-What Brian has built is a worked example of the core principle behind Praxis: if you want AI to work well with your knowledge, your knowledge has to be structured in a way that AI can work with.
+No. A digital twin simulates a person. This makes published thinking accessible. The distinction matters: a simulation tries to reproduce behaviour; a knowledge repository makes reasoning transparent and reusable.
 
-A browser chatbot does not have access to your documents, your precedents, your institutional knowledge, or your professional judgement. It guesses what a reasonable answer looks like. That is useful for one-off questions. It is a liability for anything you want to run consistently.
+**Where does it come from?**
 
-The gap between "AI gives good answers" and "AI does my actual work reliably" is almost always a knowledge-structure problem, not a model problem.
+Brian maintains a personal AI-powered knowledge system — sometimes called a second brain — which is how he uses AI on a daily basis. That system has everything he needs to work: content, ideas, his to-do list, thinking, meeting notes, documents, plans. [brianmadden.ai](https://brianmadden.ai) is a subset of that private system, updated daily. Content flows from the private system to the public repository using explicit publishing principles.
 
-## Praxis teaches exactly this methodology
+**How current is it?**
 
-Praxis is the training programme that teaches you to close that gap. The skill file — the central artefact in every Praxis session — is the working implementation of the same idea: professional knowledge written down in plain English, structured so that a script can read it and apply it the same way, every time.
+The "current thinking" file updates frequently. The synthesis updates when new posts are published. Crucially, the AI flags stale content rather than presenting old thinking as current — a design decision that most knowledge systems do not make.
+
+**Can you fork it?**
+
+Yes. The GitHub repo is the source of truth. Fork it, build on it, use the frameworks in your own work.
+
+## Why these principles matter
+
+What Brian has built is a demonstration of something important: the gap between "AI gives good answers" and "AI does my actual work reliably" is almost always a knowledge-structure problem, not a model problem.
+
+A browser chatbot does not have access to your documents, your precedents, your institutional knowledge, or your professional judgement. It guesses what a reasonable answer looks like based on everything it was trained on. That is genuinely useful for one-off questions. It is a liability for anything you want to run consistently, at scale, with your specific standards applied.
+
+The solution is not a better model. It is better-structured knowledge — explicit, current, machine-readable, and forkable.
+
+## Why Praxis teaches this methodology
+
+Praxis is the training programme that teaches you to build that structure for your own work. The skill file — the central artefact in every Praxis session — is the working implementation of exactly this idea. Professional knowledge written down in plain English, structured so that a script can read it and apply it the same way, every time.
 
 The [Praxis course materials](https://github.com/TuttoOne/praxis) are themselves built on this principle. The course content is maintained as a structured knowledge repository — a folder of markdown files, organised by topic, written to be read by both humans and AI. You can explore it in the [Praxis course library](/praxis/learn).
 
 ## The credit
 
-The terminology I use in Praxis — machine-readable knowledge, the separation of the data layer from the reasoning layer, the idea that professional knowledge should be explicit and forkable — owes a direct debt to Brian's work.
+The terminology and framing I use in Praxis — machine-readable knowledge, the separation of the data layer from the reasoning layer, the idea that professional knowledge should be explicit and forkable — owes a direct debt to Brian's work. He articulated the architecture before I did, and he published it.
 
-If this framing is useful to you, his site is the place to go deeper. The FAQs in particular explain what this kind of system is and is not — the distinctions matter.
+If this framing is useful to you, his site is the place to go deeper.
 
 [brianmadden.ai](https://brianmadden.ai)`,
   },
