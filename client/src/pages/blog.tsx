@@ -24,12 +24,9 @@ export default function Blog() {
                     <h2 className="text-2xl font-serif font-semibold mb-3 group-hover:text-primary transition-colors">
                       {post.title}
                     </h2>
-                    <p className="text-muted-foreground leading-relaxed mb-4">
+                    <p className="text-muted-foreground leading-relaxed">
                       {post.excerpt}
                     </p>
-                    <div className="flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
-                      Read Article <ArrowRight className="ml-1 w-4 h-4" />
-                    </div>
                   </div>
                 </div>
               </article>
