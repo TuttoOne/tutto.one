@@ -38,13 +38,24 @@ Key concepts explained simply:
 const _ghCache = new Map<string, { data: string; exp: number }>();
 
 async function fetchGithub(path: string): Promise<string> {
-  const url = `https://raw.githubusercontent.com/TuttoOne/praxis/main/${path}`;
-  const hit = _ghCache.get(url);
+  const cacheKey = path;
+  const hit = _ghCache.get(cacheKey);
   if (hit && hit.exp > Date.now()) return hit.data;
-  const res = await fetch(url);
+
+  const res = await fetch(
+    `https://api.github.com/repos/TuttoOne/praxis/contents/${path}?ref=main`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Accept: "application/vnd.github.raw",
+        "User-Agent": "tutto-one",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    }
+  );
   if (!res.ok) throw new Error(`GitHub ${res.status}: ${path}`);
   const text = await res.text();
-  _ghCache.set(url, { data: text, exp: Date.now() + 5 * 60 * 1000 });
+  _ghCache.set(cacheKey, { data: text, exp: Date.now() + 5 * 60 * 1000 });
   return text;
 }
 
