@@ -46,7 +46,7 @@ async function fetchGithub(path: string): Promise<string> {
     `https://api.github.com/repos/TuttoOne/praxis/contents/${path}?ref=main`,
     {
       headers: {
-        Authorization: `Bearer ${process.env["praxis<>tutto.one"]}`,
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         Accept: "application/vnd.github.raw",
         "User-Agent": "tutto-one",
         "X-GitHub-Api-Version": "2022-11-28",
