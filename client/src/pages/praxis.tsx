@@ -70,7 +70,23 @@ function CoursesSection() {
     },
   });
 
-  if (isLoading || isError || !courses) return null;
+  const MOCK_COURSES: Record<string, { meta: Record<string, any>; path: string }[]> = {
+    "praxis-foundations": [
+      { meta: { order: 0, title: "Course overview", description: "The mental model behind Praxis — what the folder system is and why it works." }, path: "courses/praxis-foundations/index.md" },
+      { meta: { order: 1, title: "The folder is the app" }, path: "courses/praxis-foundations/01-the-folder-is-the-app.md" },
+      { meta: { order: 2, title: "SKILL.md — writing instructions that stick" }, path: "courses/praxis-foundations/02-skill-md.md" },
+      { meta: { order: 3, title: "Your first run.py" }, path: "courses/praxis-foundations/03-first-run-py.md" },
+      { meta: { order: 4, title: "Working with documents" }, path: "courses/praxis-foundations/04-working-with-documents.md" },
+    ],
+    "train-the-trainer": [
+      { meta: { order: 0, title: "Course overview", description: "How to deliver a Praxis session — facilitation, pacing, and handling different rooms." }, path: "courses/train-the-trainer/index.md" },
+      { meta: { order: 1, title: "Reading the room" }, path: "courses/train-the-trainer/01-reading-the-room.md" },
+      { meta: { order: 2, title: "The intake conversation" }, path: "courses/train-the-trainer/02-intake-conversation.md" },
+      { meta: { order: 3, title: "Handling the practical half" }, path: "courses/train-the-trainer/03-practical-half.md" },
+    ],
+  };
+
+  const display = (!isLoading && courses) ? courses : MOCK_COURSES;
 
   const labels: Record<string, string> = {
     "praxis-foundations": "Praxis Foundations",
@@ -85,7 +101,7 @@ function CoursesSection() {
           Work through the concepts at your own pace before a live session, or revisit them after.
         </p>
         <div className="grid sm:grid-cols-2 gap-6">
-          {Object.entries(courses).map(([slug, lessons]) => {
+          {Object.entries(display).map(([slug, lessons]) => {
             const overview = lessons.find((l) => l.meta.order === "0" || l.meta.order === 0);
             const numbered = lessons.filter((l) => Number(l.meta.order) > 0);
             return (
