@@ -24,9 +24,6 @@ export default function About() {
 
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 64, marginTop: 32 }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>
-            About
-          </p>
           <h1 style={{ ...ROBOTO, fontSize: "clamp(26px, 4.5vw, 42px)", fontWeight: 900, lineHeight: 1.15, color: "#f6f1ea", marginBottom: 20, letterSpacing: "-0.3px" }}>
             Exploring AI Practically
           </h1>
