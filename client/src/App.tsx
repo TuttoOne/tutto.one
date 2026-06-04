@@ -5,16 +5,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { FloatingChat } from "@/components/chat/FloatingChat";
 import NotFound from "@/pages/not-found";
-import Home from "@/pages/home";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
-import About from "@/pages/about";
-import Services from "@/pages/services";
-import Portfolio from "@/pages/portfolio";
-import Contact from "@/pages/contact";
 import Sharepoint from "@/pages/sharepoint";
 import Praxis from "@/pages/praxis";
-import PraxisProgramme from "@/pages/praxis-programme";
 import Pythia from "@/pages/pythia";
 import BecomeATrainer from "@/pages/become-a-trainer";
 import PraxisLearn from "@/pages/praxis-learn";
@@ -22,16 +16,12 @@ import PraxisLearn from "@/pages/praxis-learn";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={Praxis} />
+      <Route path="/praxis" component={Praxis} />
+      <Route path="/praxis-programme" component={Praxis} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
-      <Route path="/about" component={About} />
-      <Route path="/services" component={Services} />
-      <Route path="/portfolio" component={Portfolio} />
-      <Route path="/contact" component={Contact} />
       <Route path="/sharepoint" component={Sharepoint} />
-      <Route path="/praxis" component={Praxis} />
-      <Route path="/praxis-programme" component={PraxisProgramme} />
       <Route path="/pythia" component={Pythia} />
       <Route path="/become-a-trainer" component={BecomeATrainer} />
       <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />

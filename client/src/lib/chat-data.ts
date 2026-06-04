@@ -339,6 +339,54 @@ The Glasswing initiative is genuinely good news. Anthropic is using a capability
 The threshold has been crossed. The question is whether your operational tempo has caught up with it.`,
   },
   {
+    slug: "important-steps-ai-journey",
+    title: "Important Steps in Any AI Journey",
+    excerpt: "Before the tools matter, the knowledge has to be there. Three things that need to happen in roughly this order in any serious AI adoption.",
+    date: "May 20, 2026",
+    readTime: "4 min read",
+    content: `Most organisations approach AI the wrong way around. They start with the tools — which model, which platform, which chat interface — and wonder why the outputs are inconsistent and the productivity gains are smaller than expected.
+
+The tools are fine. The problem is that the tools have nothing solid to work with. Good AI outputs depend on well-structured inputs: clear documentation, mapped processes, explicit rules. Most organisations do not have these. Not because they have not tried, but because until now there was no external pressure to be that precise.
+
+AI changes the pressure. Here are three things that need to happen in roughly this order.
+
+## Know what knowledge you actually have
+
+The first step is a data audit and knowledge mapping exercise. Not a technology project — a knowledge project.
+
+You are trying to answer three questions: what information exists in your organisation, where does it live, and how consistent is it? Most organisations find the answer surprising. Knowledge is distributed across email threads, shared drives, individual hard drives, tribal memory, and software systems that do not talk to each other.
+
+The output of this exercise is a map: what you have, what format it is in, where the gaps are, and what an AI agent would need to do useful work with any of it. It also produces a practical assessment of what is already accessible to AI versus what needs to be restructured first.
+
+This work does not require any AI tools to do it. It requires honest investigation and clear documentation.
+
+## Design workflows before automating them
+
+The second step is designing the specific workflows that AI can run reliably.
+
+The mistake here is rushing to automation before you have a deterministic description of the process. A language model will generate something plausible. Plausible is not the same as correct, and it is not the same as consistent. Before you automate anything, you need to be able to describe exactly what the correct output looks like, what inputs it depends on, and what rules it follows.
+
+That description becomes the skill file — the plain-English specification that governs what the agent does. The agent runs the same rules against the same inputs and produces the same output, every time.
+
+This is where most organisations slow down. The work of making tacit knowledge explicit — pulling the rules out of people's heads and onto paper — is harder than it sounds and more valuable than it looks.
+
+## Build capability in your team
+
+The third step is team enablement: training the people who will use, maintain, and extend these systems.
+
+This is not prompt engineering training. It is something more durable: teaching people to write for machines. To document their expertise as if they were briefing a very capable, very literal colleague who has no context and will follow instructions exactly as written.
+
+Teams that develop this capability get compounding returns. Every process they document becomes usable by AI. Every rule they write explicitly becomes part of an organisational knowledge base that outlasts any individual.
+
+Teams that skip this step find themselves dependent on whoever set up the initial system, unable to change it when things shift.
+
+## In order
+
+These three steps are not independent. The audit reveals what is worth structuring. The architecture turns structured knowledge into working systems. The training builds the people who keep those systems honest.
+
+Doing them in a different order is not impossible. But starting with the tools without the knowledge is the most common way to spend significant money and end up back where you started.`,
+  },
+  {
     slug: "anthropic-managed-agents-architecture",
     title: "The Harness Problem: What Anthropic's Managed Agents Tell Us About Building on AI",
     excerpt: "Anthropic published a detailed account of how they architect long-running AI agents. The engineering is interesting. The implication for anyone building on top of Claude is more important.",

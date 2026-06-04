@@ -8,15 +8,10 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
-    { label: "About", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Portfolio", href: "/portfolio" },
     { label: "SharePoint", href: "/sharepoint" },
-    { label: "Praxis", href: "/praxis" },
-    { label: "Programme", href: "/praxis-programme" },
+    { label: "Praxis", href: "/" },
     { label: "Pythia", href: "/pythia" },
-    { label: "Blog", href: "/blog" },
-    { label: "Contact", href: "/contact" },
+    { label: "Thinking", href: "/blog" },
   ];
 
   return (

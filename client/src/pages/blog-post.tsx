@@ -438,20 +438,6 @@ export default function BlogPost() {
           {renderMarkdown(post.content, visuals)}
         </div>
 
-        <footer className="mt-16 pt-8 border-t border-border/40">
-          <div className="bg-secondary/30 rounded-2xl p-8 text-center">
-            <h3 className="text-xl font-serif font-bold mb-2">Want to discuss this?</h3>
-            <p className="text-muted-foreground mb-6">Book a free 15-minute intro call.</p>
-            <a
-              href="https://cal.com/tuttoone/15min"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
-            >
-              Book a Call
-            </a>
-          </div>
-        </footer>
       </article>
     </Layout>
   );

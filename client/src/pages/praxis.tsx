@@ -59,7 +59,7 @@ const INPUT: React.CSSProperties = {
 };
 
 function CoursesSection() {
-  const { data: courses, isLoading, isError } = useQuery<
+  const { data: courses, isLoading } = useQuery<
     Record<string, { meta: Record<string, any>; path: string }[]>
   >({
     queryKey: ["/api/courses"],
@@ -143,6 +143,76 @@ function CoursesSection() {
   );
 }
 
+const sessions = [
+  {
+    n: "01",
+    title: "Foundations and your first build",
+    body: "See it work before any theory. Understand where AI is brilliant and where it has to be exact, whether your files are safe, and what it costs. Build your first small working thing, live.",
+  },
+  {
+    n: "02",
+    title: "The build loop, and capturing your know-how",
+    body: "Describe what you want and watch Claude Code build it. Then write down the rules your work follows, in plain English, so the tool applies them every single time. Build a real tool for your own work.",
+  },
+  {
+    n: "03",
+    title: "Your tools and surfaces",
+    body: "The Claude app and the move into your own files. Connecting Claude to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.",
+  },
+  {
+    n: "04",
+    title: "Keeping versions, and safe handover",
+    body: "How to keep versions of your work, hand a tool to a colleague or developer cleanly, and build so it is still changeable in a year rather than a tangle you cannot undo.",
+  },
+  {
+    n: "05",
+    title: "How your tools talk to other software",
+    body: "What you are paying for and what you are not. What an API is, in plain terms. Keeping everything in one place instead of a knot of half-connected apps. And what 'training an AI' actually means, so you can stop worrying your data is being swallowed.",
+  },
+  {
+    n: "06",
+    title: "Build something real, end to end",
+    body: "A full build for your own work, mostly driven by you, with me reading the room. You finish the core programme with a tool you use and a certificate that shows what you built.",
+  },
+  {
+    n: "07",
+    title: "Going deeper",
+    body: "Fixing things when they break. Bigger, multi-part builds. And whichever surface fits your work: design, the web, your documents.",
+  },
+  {
+    n: "08",
+    title: "A first integration, and your final build",
+    body: "Connect your tool to something else you use. Understand hosting and automation at a level you can act on. Ship your final build.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Do I need to know how to code?",
+    a: "No. You describe what you want in plain English. Claude Code writes the code. We use the time to make sure you understand what you are building and why.",
+  },
+  {
+    q: "I have only ever used AI in a chat box. Is this for me?",
+    a: "Yes. That is exactly the starting point this is built for.",
+  },
+  {
+    q: "Is my data safe?",
+    a: "Your files stay on your own machine. You choose the folder Claude Code works in, and that folder is the boundary. It asks before going any further. For regulated or sensitive work, we map your IT and compliance questions before touching anything.",
+  },
+  {
+    q: "What will it cost me to run afterwards?",
+    a: "About twenty dollars a month for the subscription. The tools you build run locally and do not charge per use.",
+  },
+  {
+    q: "What if I get stuck between sessions?",
+    a: "You get a practice task and a clear way to get unstuck. When something breaks, the fix is usually one screenshot away, and learning that habit is part of the programme.",
+  },
+  {
+    q: "One-to-one or a group?",
+    a: "Both are available. Tell me which suits you and we will shape it accordingly.",
+  },
+];
+
 export default function Praxis() {
   useEffect(() => {
     document.title = "Praxis - Client Training";
@@ -151,6 +221,7 @@ export default function Praxis() {
 
   const [form, setForm] = useState({ name: "", email: "", industry: "", goals: "", aiHistory: "" });
   const [formState, setFormState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -217,6 +288,12 @@ export default function Praxis() {
         .px-cols-2 { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
         @media (min-width: 680px) { .px-cols-2 { grid-template-columns: 1fr 1fr; gap: 48px; } }
 
+        .pp-cols-2 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        @media (min-width: 680px) { .pp-cols-2 { grid-template-columns: 1fr 1fr; gap: 16px; } }
+
+        .pp-sessions { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        @media (min-width: 680px) { .pp-sessions { grid-template-columns: 1fr 1fr; gap: 14px; } }
+
         .px-connector { display: flex; align-items: center; gap: 10px; margin-top: 24px; }
         .px-connector-line { flex: 1; height: 1px; background: #c8bfb3; }
         .px-connector-dot { width: 7px; height: 7px; border-radius: 50%; background: #1a1a1a; flex-shrink: 0; }
@@ -232,6 +309,8 @@ export default function Praxis() {
 
         .px-input::placeholder { color: rgba(246,241,234,0.3); }
         .px-input:focus { border-color: rgba(217,119,6,0.6) !important; }
+
+        .pp-faq-btn { width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 0; }
       `}</style>
       <div className="px-wrap" style={{ maxWidth: 900, margin: "0 auto" }}>
 
@@ -255,21 +334,6 @@ export default function Praxis() {
             hour, you have a working setup and the mental model to take it further.
           </p>
 
-          {/* Book button */}
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginBottom: 28 }}>
-            <a
-              href="https://cal.com/tuttoone/60-min-meeting"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
-            >
-              Book the 1-hour session →
-            </a>
-            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
-              Teams or Google Meet · No preparation required
-            </span>
-          </div>
-
           {/* Pre-session requirements */}
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 24, marginBottom: 28 }}>
             <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 10 }}>Before the session</p>
@@ -285,7 +349,7 @@ export default function Praxis() {
           {formState === "sent" ? (
             <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "24px", textAlign: "center" }}>
               <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>Done - we'll be in touch.</p>
-              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>Book the 1-hour session above and we'll send setup instructions in advance.</p>
+              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>We'll send setup instructions before the session.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "24px" }}>
@@ -428,7 +492,7 @@ export default function Praxis() {
         </div>
 
         {/* Section 02 */}
-        <div>
+        <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 36 }}>
             <span style={{ ...CAPS, fontSize: 10 }}>02 &nbsp;&nbsp;&nbsp; The Output - A Folder on Disk</span>
           </div>
@@ -446,7 +510,7 @@ export default function Praxis() {
                   { name: "documents/", label: "your data · the inputs",               tag: "C" },
                   { name: "output/",    label: "what gets produced",                   tag: "" },
                 ].map((row) => (
-                  <div key={row.name} style={{ display: "flex", alignItems: "center", padding: "8px 16px", borderBottom: "1px solid #f0ebe3", gap: 10 }}>
+                  <div key={row.name} style={{ padding: "8px 16px", borderBottom: "1px solid #f0ece6", display: "flex", gap: 12, alignItems: "center" }}>
                     {row.tag
                       ? <span style={{ ...MONO, fontSize: 9, fontWeight: 600, width: 16, height: 16, borderRadius: "50%", background: "#1a1a1a", color: "#f6f1ea", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{row.tag}</span>
                       : <span style={{ width: 16, flexShrink: 0 }} />
@@ -475,65 +539,212 @@ export default function Praxis() {
           </div>
         </div>
 
-        {/* Pricing section */}
-        <div style={{ marginTop: 64 }}>
-          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 36 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>03 &nbsp;&nbsp;&nbsp; What It Costs</span>
+        {/* ── The Praxis Programme ── */}
+        <div style={{ borderTop: "2px solid #1a1a1a", paddingTop: 24, marginBottom: 64, marginTop: 72 }}>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.18em", marginBottom: 8 }}>The Praxis Programme</p>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(24px, 4vw, 38px)", fontWeight: 900, lineHeight: 1.15, color: "#1a1a1a", letterSpacing: "-0.3px" }}>
+            You will not learn to code.<br />
+            You will learn to build.
+          </h2>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d", maxWidth: 620, marginTop: 20 }}>
+            Eight sessions over two months. For people who have used AI in a chat box
+            and want to go further. You will build small, working tools that do your
+            repetitive work for you, in plain English, with someone sitting beside you
+            who has done it before.
+          </p>
+        </div>
+
+        {/* PP Section 01 - Who this is for */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>01 &nbsp;&nbsp;&nbsp; Who This Is For</span>
           </div>
-          <div className="px-cols-3">
+          <div className="pp-cols-2">
             {[
-              { label: "The tools", price: "~$20/mo", note: "VS Code is free. Claude Pro is ~$20/month. That's the only recurring cost." },
-              { label: "The session · Spring special", price: "£100", strikethrough: "£200", note: "Limited time only — usually £200. One hour: 30 minutes of theory and principles, then 30 minutes hands-on on your own computer. You leave with a working setup." },
-              { label: "The diagnostic sprint", price: "~£2,500", note: "Two weeks. We look at your real documents and workflows and tell you exactly what is possible." },
-            ].map((p) => (
-              <div key={p.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "24px 20px", background: "#faf8f5" }}>
-                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{p.label}</p>
-                <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 12 }}>
-                  <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", letterSpacing: "-1px", margin: 0 }}>{p.price}</p>
-                  {"strikethrough" in p && <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 700, color: "#c8bfb3", textDecoration: "line-through", margin: 0 }}>{(p as any).strikethrough}</p>}
-                </div>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
+              { label: "Hit the ceiling", body: "You have used AI as a chat assistant and reached the limit of what copy-and-paste can do." },
+              { label: "A task that repeats", body: "You have a task you do every week that you suspect a machine could do for you." },
+              { label: "Not a developer", body: "You are not trying to become one. You want to make useful things. That is a different goal, and this programme is built around it." },
+              { label: "Rather be shown", body: "You would rather be shown than left alone with a pile of conflicting videos. It works for professionals, small teams, and anyone whose week is full of work that repeats." },
+            ].map((item) => (
+              <div key={item.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
+                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>{item.label}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* CTA */}
-        <div style={{ marginTop: 48, borderTop: "1px solid #d8d0c5", paddingTop: 40, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
-          <div>
-            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 8 }}>Ready to see it live?</p>
-            <p style={{ ...INTER, fontSize: 14, color: "#3d3d3d", maxWidth: 380 }}>
-              Book a one-hour Praxis session. Theory first, then hands-on together — on your machine, with your files.
-            </p>
+        {/* PP Section 02 - Why a person */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>02 &nbsp;&nbsp;&nbsp; Why a Person, Not Another Video</span>
           </div>
-          <a
-            href="https://cal.com/tuttoone/60-min-meeting"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#1a1a1a", color: "#f6f1ea", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 4, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
-          >
-            Book a session →
-          </a>
+          <div style={{ maxWidth: 700 }}>
+            {[
+              { label: "Tailored to your actual work", body: "Not a generic example you have to translate. We start with the task that eats your week and build from there." },
+              { label: "We meet you where you are", body: "No burying you in tools you have never heard of to look clever. Every session starts from where you actually are." },
+              { label: "The fiddly parts are where a guide earns their keep", body: "Installing the tool, the first setup, the moment something breaks: that is exactly the part the free videos skip, and exactly where most people quietly give up." },
+            ].map((item, i) => (
+              <div key={item.label} style={{ display: "flex", gap: 20, marginBottom: i < 2 ? 28 : 0 }}>
+                <div style={{ ...MONO, fontSize: 11, color: "#d97706", fontWeight: 700, flexShrink: 0, marginTop: 2, width: 20 }}>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <div>
+                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 }}>{item.label}</p>
+                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Programme teaser */}
-        <div style={{ marginTop: 48, borderRadius: 12, background: "#1a1a1a", padding: "32px 28px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
-          <div>
-            <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 10 }}>Want to go further?</p>
-            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#f6f1ea", marginBottom: 8, letterSpacing: "-0.2px" }}>
-              The full Praxis Programme
+        {/* PP Section 03 - What you'll be able to do */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>03 &nbsp;&nbsp;&nbsp; What You Will Be Able to Do by the End</span>
+          </div>
+          <div className="pp-cols-2">
+            {[
+              { body: "Build small working tools for your own work, by describing what you want in plain English." },
+              { body: "Capture your own rules and judgement so a tool works the way you do, every time." },
+              { body: "Understand what is safe, what it costs, and what it can and cannot do." },
+              { body: "Hand a tool to a colleague or a developer cleanly, with no black box." },
+              { body: "Keep building on your own after the programme ends." },
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", border: "1px solid #d8d0c5", borderRadius: 10, padding: "18px 20px", background: "#faf8f5" }}>
+                <span style={{ ...MONO, fontSize: 9, fontWeight: 700, width: 18, height: 18, borderRadius: "50%", background: "#d97706", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                  {i + 1}
+                </span>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d", margin: 0 }}>{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* PP Section 04 - The eight sessions */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>04 &nbsp;&nbsp;&nbsp; The Eight Sessions</span>
+          </div>
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>
+            Weekly, over roughly two months. The first six get you to a confident, independent builder.
+            The last two take you deeper, into the kind of work that usually needs a developer.
+          </p>
+          <div className="pp-sessions">
+            {sessions.map((s) => (
+              <div key={s.n} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5", position: "relative" }}>
+                <span style={{ ...MONO, fontSize: 10, color: "#b0a898", position: "absolute", top: 16, right: 18 }}>{s.n}</span>
+                <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "#1a1a1a", marginBottom: 8, paddingRight: 24 }}>{s.title}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{s.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* PP Section 05 - What you finish with */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>05 &nbsp;&nbsp;&nbsp; What You Finish With</span>
+          </div>
+          <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "32px 28px", background: "#faf8f5", maxWidth: 620 }}>
+            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>
+              The actual tools you built along the way.
             </p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", maxWidth: 400 }}>
-              Eight sessions over two months. Build real working tools for your own work
-              with Claude Code - no coding background needed. You finish with something
-              you actually use.
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>
+              A certificate confirming you completed the programme — and, more to the point, the
+              tools you built during it. The certificate records what you made, not just that you
+              turned up. That is the proof that matters.
+            </p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>
+              A note on honesty, because it sets the right expectation: you will get most of the way
+              there yourself. On anything complex, the last stretch you finish by hand or hand off.
+              Even getting most of the way is a large saving on how the work is done today — and that
+              is the saving we are after.
             </p>
           </div>
+        </div>
+
+        {/* PP Section 06 - How it works */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>06 &nbsp;&nbsp;&nbsp; How It Works</span>
+          </div>
+          <div className="pp-cols-2">
+            {[
+              { label: "Format", body: "One-to-one or small group. You choose what suits you." },
+              { label: "Cadence", body: "One session a week, about an hour each, over roughly two months. A short practice task between each session." },
+              { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
+              { label: "What you need", body: "A laptop — Mac or Windows. A Claude account. We set up everything else together in the first session." },
+            ].map((item) => (
+              <div key={item.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
+                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>{item.label}</p>
+                <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* PP Section 08 - Common questions */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <span style={{ ...CAPS, fontSize: 10 }}>07 &nbsp;&nbsp;&nbsp; Common Questions</span>
+          </div>
+          <div style={{ maxWidth: 680 }}>
+            {faqs.map((faq, i) => (
+              <div
+                key={i}
+                style={{
+                  borderBottom: "1px solid #d8d0c5",
+                  paddingBottom: openFaq === i ? 20 : 0,
+                }}
+              >
+                <button
+                  className="pp-faq-btn"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  style={{ padding: "18px 0", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}
+                >
+                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0, textAlign: "left" }}>{faq.q}</p>
+                  <span style={{ ...MONO, fontSize: 14, color: "#a8a092", flexShrink: 0 }}>{openFaq === i ? "−" : "+"}</span>
+                </button>
+                {openFaq === i && (
+                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d", paddingBottom: 4 }}>{faq.a}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* What this will not do */}
+        <div style={{ marginBottom: 56, paddingTop: 8 }}>
+          <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>A note on expectations</p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", maxWidth: 620, fontStyle: "italic" }}>
+            It will not make you a software engineer in eight weeks.
+          </p>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>
+            It will make you someone who can build genuinely useful things, and who knows when a job is
+            big enough to call in a developer, and how to brief them when you do. That is a more
+            valuable place to stand than it sounds.
+          </p>
+        </div>
+
+        {/* Trainer track teaser */}
+        <div style={{ marginBottom: 56, borderRadius: 12, border: "1.5px solid #d97706", background: "#fdf6ec", padding: "clamp(24px, 4vw, 44px)" }}>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 16 }}>
+            What comes next
+          </p>
+          <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>
+            Become a Praxis trainer.
+          </h3>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 20, maxWidth: 560 }}>
+            Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on
+            every course you teach. I find and organise the clients with you, you deliver the sessions, and
+            a hub is behind you for the hard jobs.
+          </p>
           <a
-            href="/praxis-programme"
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap", flexShrink: 0 }}
+            href="/become-a-trainer"
+            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "11px 22px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
           >
-            See the full programme →
+            See the trainer track →
           </a>
         </div>
 
