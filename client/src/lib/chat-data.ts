@@ -208,11 +208,11 @@ The solution is not a better model. It is better-structured knowledge — explic
 
 Praxis is the training programme that teaches you to build that structure for your own work. The skill file — the central artefact in every Praxis session — is the working implementation of exactly this idea. Professional knowledge written down in plain English, structured so that a script can read it and apply it the same way, every time.
 
-The [Praxis course materials](https://github.com/TuttoOne/praxis) are themselves built on this principle. The course content is maintained as a structured knowledge repository — a folder of markdown files, organised by topic, written to be read by both humans and AI. You can explore it in the [Praxis course library](/praxis/learn).
+The Praxis course materials are themselves built on this principle. The course content is maintained as a structured knowledge repository — a folder of markdown files, organised by topic, written to be read by both humans and AI. You can explore it in the [Praxis course library](https://tutto.one/praxis/learn/praxis-foundations).
 
 ## The credit
 
-The terminology and framing I use in Praxis — machine-readable knowledge, the separation of the data layer from the reasoning layer, the idea that professional knowledge should be explicit and forkable — owes a direct debt to Brian's work. He articulated the architecture before I did, and he published it.
+The idea of publishing a personal knowledge system as a GitHub repo — open, shareable, and forkable by anyone — is something Brian pioneered, and I want to attribute that to him directly.
 
 If this framing is useful to you, his site is the place to go deeper.
 
