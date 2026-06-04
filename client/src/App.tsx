@@ -15,10 +15,10 @@ import PraxisLearn from "@/pages/praxis-learn";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Praxis} />
+      <Route path="/" component={Blog} />
+      <Route path="/blog" component={Blog} />
       <Route path="/praxis" component={Praxis} />
       <Route path="/praxis-programme" component={Praxis} />
-      <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/pythia" component={Pythia} />
       <Route path="/become-a-trainer" component={BecomeATrainer} />

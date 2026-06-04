@@ -314,120 +314,17 @@ export default function Praxis() {
       `}</style>
       <div className="px-wrap" style={{ maxWidth: 900, margin: "0 auto" }}>
 
-        {/* ── Plain-English intro ── */}
-        <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>
-            What is Praxis?
+        {/* ── Preamble ── */}
+        <div style={{ borderRadius: 10, background: "#1a1a1a", padding: "clamp(22px, 4vw, 40px)", marginBottom: 48, marginTop: 32 }}>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 14 }}>
+            What Praxis is
           </p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>
-            A one-hour Teams call that changes<br />
-            how you think about AI.
-          </h2>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
-            No technical background needed. The session runs in two halves. The first
-            thirty minutes covers the theory and principles - what AI actually is, how the
-            folder-based system works, and why it changes everything. No jargon.
+          <p style={{ ...ROBOTO, fontSize: "clamp(16px, 2.8vw, 22px)", fontWeight: 700, lineHeight: 1.35, color: "#f6f1ea", marginBottom: 14, maxWidth: 540 }}>
+            Coaching, teaching, and guiding people through what setting up AI looks like for them.
           </p>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
-            The second thirty minutes is practical - on your own computer, with your own
-            files. You follow along live as we build the system together. By the end of the
-            hour, you have a working setup and the mental model to take it further.
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "rgba(246,241,234,0.6)", maxWidth: 520 }}>
+            Every session is built around your context, your files, and your work. No generic demos. You leave with a working system and the understanding to keep building on your own.
           </p>
-
-          {/* Pre-session requirements */}
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 24, marginBottom: 28 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 10 }}>Before the session</p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "rgba(246,241,234,0.55)", maxWidth: 520 }}>
-              The practical half runs on your computer. To get the most from it, please have
-              Claude installed and a paid subscription active before we start - and ideally
-              Visual Studio Code too. Fill in the form below and we'll send you exactly what
-              to set up in advance.
-            </p>
-          </div>
-
-          {/* Quick form */}
-          {formState === "sent" ? (
-            <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "24px", textAlign: "center" }}>
-              <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>Done - we'll be in touch.</p>
-              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>We'll send setup instructions before the session.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "24px" }}>
-              <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "rgba(246,241,234,0.7)", marginBottom: 18 }}>
-                Fill this in and we'll send you setup instructions before the session
-              </p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
-                <div>
-                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>Name</label>
-                  <input
-                    className="px-input"
-                    style={INPUT}
-                    required
-                    placeholder="Jane Smith"
-                    value={form.name}
-                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                  />
-                </div>
-                <div>
-                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>Email</label>
-                  <input
-                    className="px-input"
-                    type="email"
-                    style={INPUT}
-                    required
-                    placeholder="jane@company.com"
-                    value={form.email}
-                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                  />
-                </div>
-              </div>
-              <div style={{ marginBottom: 12 }}>
-                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>Industry</label>
-                <input
-                  className="px-input"
-                  style={INPUT}
-                  placeholder="e.g. Legal, Finance, Healthcare, Consulting..."
-                  value={form.industry}
-                  onChange={e => setForm(f => ({ ...f, industry: e.target.value }))}
-                />
-              </div>
-              <div style={{ marginBottom: 12 }}>
-                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>What would you like to get out of AI?</label>
-                <textarea
-                  className="px-input"
-                  style={{ ...INPUT, resize: "vertical", minHeight: 72 }}
-                  placeholder="Save time on document review, automate a report, understand what's possible..."
-                  value={form.goals}
-                  onChange={e => setForm(f => ({ ...f, goals: e.target.value }))}
-                />
-              </div>
-              <div style={{ marginBottom: 20 }}>
-                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>How have you used AI so far?</label>
-                <textarea
-                  className="px-input"
-                  style={{ ...INPUT, resize: "vertical", minHeight: 60 }}
-                  placeholder="Occasionally use ChatGPT, tried Copilot, haven't started yet..."
-                  value={form.aiHistory}
-                  onChange={e => setForm(f => ({ ...f, aiHistory: e.target.value }))}
-                />
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-                <p style={{ ...INTER, fontSize: 11, color: "rgba(246,241,234,0.3)", maxWidth: 340 }}>
-                  No marketing. Your details are stored only to prepare for and respond to your session enquiry.
-                </p>
-                <button
-                  type="submit"
-                  disabled={formState === "sending"}
-                  style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, background: formState === "sending" ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.12)", color: "#f6f1ea", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 6, padding: "10px 22px", cursor: formState === "sending" ? "default" : "pointer", whiteSpace: "nowrap" }}
-                >
-                  {formState === "sending" ? "Sending..." : "Submit"}
-                </button>
-              </div>
-              {formState === "error" && (
-                <p style={{ ...INTER, fontSize: 12, color: "#f87171", marginTop: 10 }}>Something went wrong - please try again.</p>
-              )}
-            </form>
-          )}
         </div>
 
         {/* Doc header */}

@@ -173,30 +173,31 @@ export const BLOG_POSTS = [
       headline: "The best combination is always the person plus the machine.",
       sub: "Why unlocking this for everyone is the only logical move.",
     },
-    content: `The goal here is to make awareness about the systems at work so accessible that it's easy enough for every person to use machines to their maximum capabilities. There are rules, complexities and a world of creativity in the unlikely combinations of things that have been part of the unlikelihood of life itself, which we have to learn from.
+    content: `After losing to Deep Blue in 1997, Kasparov didn't walk away from chess or from computers. He invented Advanced Chess — a format where humans and machines play together. The best combination, he found, wasn't one or the other. It was both.
 
-People are afraid of what they don't know.
-Of losing control.
-Of not being the top dogs.
-Of losing their livelihoods.
+That's the idea everything here is built on.
 
-But if the best combination in every situation is the person plus the machine — which allows each one of us to be a better version of ourselves for the benefit of the whole — then the logical move is to bring down the barriers as low as we possibly can.
+The goal is to make awareness about the systems at work so accessible that it's easy enough for every person to use machines to their maximum capabilities. There are rules, complexities, and a world of creativity in the unlikely combinations of things — combinations that have been part of the unlikelihood of life itself — which we have to learn from.
 
-No matter how fast we can build things in code, there is always a time constraint. Anything we build takes time to get right. But it's in iteration and absorbing more content to learn from that we can fabricate better systems. We can continually provide reasons for a situation being right but, just as important, we must show the systems we create what wrong means and looks like in every situation.
+People are afraid of what they don't know, of losing control, of not being the top dogs, of losing their livelihoods. These fears are real and they're reasonable. But if the best combination in every situation is the person plus the machine — which allows each one of us to be a better version of ourselves for the benefit of the whole — then the logical move is to bring down the barriers as low as we possibly can.
 
-If we can go through a process of creating training and coaching that are perfectly geared to each individual's context, we will be in a position we have never been in before. It's similar to the notion that we could be at the dawn of creating content that is instantaneously built — a world of choose your own adventure that is context and content aware at a level we cannot yet comprehend.
+No matter how fast we can build things in code, there is always a time constraint. Anything we build takes time to get right. It's in iteration, and in absorbing more content to learn from, that we can fabricate better systems. We can continually provide reasons for a situation being right — but just as important, we must show the systems we create what wrong means and looks like in every situation. Training runs in both directions.
 
-Imagine if this were the case for education within every aspect of our lives. The ability to teach in the right way, with examples that land, with tone so precisely suited to our current state of mind that we stay engaged — and more than that, lean deeper and participate in the creation of artefacts in order to improve ourselves and the world around us.
+If we can go through a process of creating training and coaching that is perfectly geared to each individual's context, we will be in a position we have never been in before. It's similar to the notion that we could be at the dawn of creating content that is instantaneously built — a world of choose your own adventure that is context and content aware at a level we cannot yet comprehend.
+
+Imagine if this were the case for education within every aspect of our lives. The ability to teach in the right way, with examples that land, with tone so precisely suited to your current state of mind that you stay engaged — and more than that, lean deeper and participate in the creation of artefacts in order to improve yourself and the world around you. Not a course, not a manual. Something that moves at your pace and meets you where you are.
 
 We tune each other. We lean on each other. And we have mechanisms of being the physical and thinking companions to one another that we've only really dreamed of in the past. This really does feel like a world of science fiction.
 
 This is the dream.
 
-Because each gap can then be assessed by a couple of criteria: is the task a knowledge gap or is it an action gap? Often both, and that's fine. But in order to work towards a limitless world of opportunity and creation, we need to be able to categorise the gap, triage the solution and then plan and execute the delivery.
+To get there practically, each gap needs to be assessed by a couple of criteria: is the task a knowledge gap or an action gap? Often both, and that's fine. But in order to work towards a limitless world of opportunity and creation, we need to be able to categorise the gap, triage the solution, and plan and execute the delivery.
 
-The foundational aspects of this solution-based approach involve teaching and coaching people to lean into the world of AI so that we can all play our part in refining the tasks we encounter. Everyone needs to learn how to use it. It's an exploration. We can all understand it because it speaks our language. We can see its shortcomings, but we must report these and create lasting fixes.
+The foundational aspect of this solution-based approach is teaching and coaching people to lean into the world of AI so that we can all play our part in refining the tasks we encounter. Everyone needs to learn how to use it. It's an exploration. We can all understand it because it speaks our language. We can see its shortcomings, and we must report these and create lasting fixes — not work around them.
 
-How do we get the distribution on this which is required to make it as ubiquitous as Coca-Cola? We need to put the fridge everywhere. We must grant access to everyone at the highest possible level. We must provide the ability to self-train. We must have guides that we trust.`,
+The question is distribution. How do we get this to everyone — as ubiquitous as Coca-Cola? We need to put the fridge everywhere. We must grant access to everyone at the highest possible level. We must provide the ability to self-train. We must have guides that we trust.
+
+That's the work.`,
   },
   {
     slug: "machine-readable-knowledge",
