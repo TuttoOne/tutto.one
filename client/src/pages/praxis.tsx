@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -55,6 +57,75 @@ const INPUT: React.CSSProperties = {
   outline: "none",
   ...INTER,
 };
+
+function CoursesSection() {
+  const { data: courses, isLoading, isError } = useQuery<
+    Record<string, { meta: Record<string, any>; path: string }[]>
+  >({
+    queryKey: ["/api/courses"],
+    queryFn: async () => {
+      const r = await fetch("/api/courses");
+      if (!r.ok) throw new Error("courses unavailable");
+      return r.json();
+    },
+  });
+
+  if (isLoading || isError || !courses) return null;
+
+  const labels: Record<string, string> = {
+    "praxis-foundations": "Praxis Foundations",
+    "train-the-trainer": "Train the Trainer",
+  };
+
+  return (
+    <section className="py-16 bg-gray-50 border-t border-gray-200">
+      <div className="max-w-4xl mx-auto px-6">
+        <h2 className="text-xl font-semibold mb-2">Self-study course material</h2>
+        <p className="text-gray-500 text-sm mb-8">
+          Work through the concepts at your own pace before a live session, or revisit them after.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {Object.entries(courses).map(([slug, lessons]) => {
+            const overview = lessons.find((l) => l.meta.order === "0" || l.meta.order === 0);
+            const numbered = lessons.filter((l) => Number(l.meta.order) > 0);
+            return (
+              <div key={slug} className="bg-white rounded border border-gray-200 p-6">
+                <h3 className="font-semibold mb-1">{labels[slug] ?? slug}</h3>
+                {overview && (
+                  <p className="text-gray-500 text-xs mb-4">{overview.meta.description}</p>
+                )}
+                <ol className="space-y-1.5">
+                  {numbered.map((l) => {
+                    const file = l.path.split("/").pop()?.replace(".md", "");
+                    return (
+                      <li key={l.path} className="flex gap-2 items-start">
+                        <span className="text-gray-300 text-xs w-4 shrink-0 pt-0.5">
+                          {l.meta.order}.
+                        </span>
+                        <Link
+                          href={`/praxis/learn/${slug}/${file}`}
+                          className="text-sm text-gray-700 hover:text-black leading-snug"
+                        >
+                          {l.meta.title}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ol>
+                <Link
+                  href={`/praxis/learn/${slug}`}
+                  className="inline-block mt-5 text-xs text-gray-400 hover:text-gray-700 underline"
+                >
+                  Course overview →
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Praxis() {
   useEffect(() => {
@@ -468,6 +539,7 @@ export default function Praxis() {
         </div>
 
       </div>
+      <CoursesSection />
     </div>
   );
 }

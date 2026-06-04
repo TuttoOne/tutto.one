@@ -216,14 +216,26 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/api/courses/:course/:lesson?", async (req, res) => {
+  app.get("/api/courses/:course/:lesson", async (req, res) => {
     const { course, lesson } = req.params;
-    if (!/^[a-z0-9-]+$/.test(course) || (lesson && !/^[a-z0-9-]+$/.test(lesson))) {
+    if (!/^[a-z0-9-]+$/.test(course) || !/^[a-z0-9-]+$/.test(lesson)) {
       return res.status(400).json({ error: "Invalid path" });
     }
     try {
-      const path = lesson ? `courses/${course}/${lesson}.md` : `courses/${course}/index.md`;
-      const { meta, content } = parseFrontmatter(await fetchGithub(path));
+      const { meta, content } = parseFrontmatter(await fetchGithub(`courses/${course}/${lesson}.md`));
+      res.json({ meta, content });
+    } catch {
+      res.status(404).json({ error: "Not found" });
+    }
+  });
+
+  app.get("/api/courses/:course", async (req, res) => {
+    const { course } = req.params;
+    if (!/^[a-z0-9-]+$/.test(course)) {
+      return res.status(400).json({ error: "Invalid path" });
+    }
+    try {
+      const { meta, content } = parseFrontmatter(await fetchGithub(`courses/${course}/index.md`));
       res.json({ meta, content });
     } catch {
       res.status(404).json({ error: "Not found" });
