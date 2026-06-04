@@ -72,14 +72,14 @@ function CoursesSection() {
 
   const MOCK_COURSES: Record<string, { meta: Record<string, any>; path: string }[]> = {
     "praxis-foundations": [
-      { meta: { order: 0, title: "Course overview", description: "The mental model behind Praxis — what the folder system is and why it works." }, path: "courses/praxis-foundations/index.md" },
+      { meta: { order: 0, title: "Course overview", description: "The mental model behind Praxis - what the folder system is and why it works." }, path: "courses/praxis-foundations/index.md" },
       { meta: { order: 1, title: "The folder is the app" }, path: "courses/praxis-foundations/01-the-folder-is-the-app.md" },
-      { meta: { order: 2, title: "SKILL.md — writing instructions that stick" }, path: "courses/praxis-foundations/02-skill-md.md" },
+      { meta: { order: 2, title: "SKILL.md - writing instructions that stick" }, path: "courses/praxis-foundations/02-skill-md.md" },
       { meta: { order: 3, title: "Your first run.py" }, path: "courses/praxis-foundations/03-first-run-py.md" },
       { meta: { order: 4, title: "Working with documents" }, path: "courses/praxis-foundations/04-working-with-documents.md" },
     ],
     "train-the-trainer": [
-      { meta: { order: 0, title: "Course overview", description: "How to deliver a Praxis session — facilitation, pacing, and handling different rooms." }, path: "courses/train-the-trainer/index.md" },
+      { meta: { order: 0, title: "Course overview", description: "How to deliver a Praxis session - facilitation, pacing, and handling different rooms." }, path: "courses/train-the-trainer/index.md" },
       { meta: { order: 1, title: "Reading the room" }, path: "courses/train-the-trainer/01-reading-the-room.md" },
       { meta: { order: 2, title: "The intake conversation" }, path: "courses/train-the-trainer/02-intake-conversation.md" },
       { meta: { order: 3, title: "Handling the practical half" }, path: "courses/train-the-trainer/03-practical-half.md" },
@@ -548,14 +548,14 @@ export default function Praxis() {
               The actual tools you built along the way.
             </p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>
-              A certificate confirming you completed the programme — and, more to the point, the
+              A certificate confirming you completed the programme - and, more to the point, the
               tools you built during it. The certificate records what you made, not just that you
               turned up. That is the proof that matters.
             </p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>
               A note on honesty, because it sets the right expectation: you will get most of the way
               there yourself. On anything complex, the last stretch you finish by hand or hand off.
-              Even getting most of the way is a large saving on how the work is done today — and that
+              Even getting most of the way is a large saving on how the work is done today - and that
               is the saving we are after.
             </p>
           </div>
@@ -571,7 +571,7 @@ export default function Praxis() {
               { label: "Format", body: "One-to-one or small group. You choose what suits you." },
               { label: "Cadence", body: "One session a week, about an hour each, over roughly two months. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
-              { label: "What you need", body: "A laptop — Mac or Windows. A Claude account. We set up everything else together in the first session." },
+              { label: "What you need", body: "A laptop - Mac or Windows. A Claude account. We set up everything else together in the first session." },
             ].map((item) => (
               <div key={item.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>{item.label}</p>

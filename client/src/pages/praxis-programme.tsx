@@ -88,7 +88,7 @@ const faqs = [
 
 export default function PraxisProgramme() {
   useEffect(() => {
-    document.title = "Praxis — Learn to Build Your Own Tools with Claude Code";
+    document.title = "Praxis - Learn to Build Your Own Tools with Claude Code";
     return () => { document.title = "Tutto | AI Consulting"; };
   }, []);
 
@@ -302,14 +302,14 @@ export default function PraxisProgramme() {
               The actual tools you built along the way.
             </p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>
-              A certificate confirming you completed the programme — and, more to the point, the
+              A certificate confirming you completed the programme - and, more to the point, the
               tools you built during it. The certificate records what you made, not just that you
               turned up. That is the proof that matters.
             </p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>
               A note on honesty, because it sets the right expectation: you will get most of the way
               there yourself. On anything complex, the last stretch you finish by hand or hand off.
-              Even getting most of the way is a large saving on how the work is done today — and that
+              Even getting most of the way is a large saving on how the work is done today - and that
               is the saving we are after.
             </p>
           </div>
@@ -325,7 +325,7 @@ export default function PraxisProgramme() {
               { label: "Format", body: "One-to-one or small group. You choose what suits you." },
               { label: "Cadence", body: "One session a week, about an hour each, over roughly two months. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
-              { label: "What you need", body: "A laptop — Mac or Windows. A Claude account. We set up everything else together in the first session." },
+              { label: "What you need", body: "A laptop - Mac or Windows. A Claude account. We set up everything else together in the first session." },
             ].map((item) => (
               <div key={item.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>{item.label}</p>
@@ -355,7 +355,7 @@ export default function PraxisProgramme() {
               {
                 label: "Refer a friend",
                 price: "£800",
-                note: "Refer someone who signs up, and the whole course is half price for you — £100 per session.",
+                note: "Refer someone who signs up, and the whole course is half price for you - £100 per session.",
                 highlight: true,
               },
             ].map((p) => (
@@ -383,7 +383,7 @@ export default function PraxisProgramme() {
           <div style={{ marginTop: 20, padding: "16px 20px", background: "#f0ece6", borderRadius: 8, maxWidth: 560 }}>
             <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>
               Running the tools you build costs about <strong style={{ color: "#1a1a1a" }}>$20/month</strong> for the Claude Code subscription.
-              The tools themselves run on your own machine — no per-use charges.
+              The tools themselves run on your own machine - no per-use charges.
             </p>
           </div>
         </div>

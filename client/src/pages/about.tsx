@@ -7,7 +7,7 @@ const CAPS: React.CSSProperties = { ...INTER, textTransform: "uppercase", letter
 
 export default function About() {
   useEffect(() => {
-    document.title = "About — Daniel Forsthofer";
+    document.title = "About - Daniel Forsthofer";
     return () => { document.title = "Tutto | AI Consulting"; };
   }, []);
 
@@ -28,11 +28,10 @@ export default function About() {
             About
           </p>
           <h1 style={{ ...ROBOTO, fontSize: "clamp(26px, 4.5vw, 42px)", fontWeight: 900, lineHeight: 1.15, color: "#f6f1ea", marginBottom: 20, letterSpacing: "-0.3px" }}>
-            It's not going away.<br />
-            Better to lean in and learn.
+            Exploring AI Practically
           </h1>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", maxWidth: 520 }}>
-            The basis for everything here is philosophy. What does it mean? What is the utility? Is it right or wrong? What can we change — and what simply isn't ours to control?
+            The basis for everything here is philosophy. What does it mean? What is the utility? Is it right or wrong? What can we change - and what simply isn't ours to control?
           </p>
         </div>
 
@@ -40,23 +39,20 @@ export default function About() {
 
           {/* Bio */}
           <div>
-            <p style={{ ...INTER, fontSize: 15, lineHeight: 1.85, color: "#2a2a2a", marginBottom: 24, fontWeight: 500 }}>
-              Daniel Forsthofer thinks in questions before he thinks in answers.
-            </p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
-              The background is philosophy — not as an academic pursuit, but as the practical foundation for everything else. What does it mean? What is the actual utility? Is this right or wrong? And — perhaps most usefully — what can we change, and what simply isn't ours to control?
+              The background is philosophy - not as an academic pursuit, but as the practical foundation for everything else. What does it mean? What is the actual utility? Is this right or wrong? And - perhaps most usefully - what can we change, and what simply isn't ours to control?
             </p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
               That last question is where Stoicism becomes relevant. The Stoics were not pessimists; they were realists with a clear framework for action. Distinguish between what is within your control and what isn't. Accept the latter. Act on the former. The rest is noise.
             </p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
-              AI falls into the second category. It is not a choice. It is the product of economic, technological, and scientific conditions that are still accelerating, and no individual decision — yours, your company's, your government's — will stop it. That is the part you don't control.
+              AI falls into the second category. It is not a choice. It is the product of economic, technological, and scientific conditions that are still accelerating, and no individual decision - yours, your company's, your government's - will stop it. That is the part you don't control.
             </p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
               What you do control is whether you understand it, and whether you use it well.
             </p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
-              The gap between people who understand these systems and people who don't is going to compound. The people who engage — who learn to work alongside AI rather than around it, who build things that help them rather than waiting for someone else to do it — will be in a different position to those who don't. That is not hype. It is just how tools work.
+              The gap between people who understand these systems and people who don't is going to compound. The people who engage - who learn to work alongside AI rather than around it, who build things that help them rather than waiting for someone else to do it - will be in a different position to those who don't. That is not hype. It is just how tools work.
             </p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
               Daniel works with businesses and individuals who want to understand what is actually happening: what these systems are, what they are genuinely good at, where they fail, and what a working setup looks like for their specific context. Some want strategy. Most want to build something useful and understand what they have built.

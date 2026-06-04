@@ -26,7 +26,7 @@ function Router() {
     <>
       <ScrollToTop />
       <Switch>
-        <Route path="/" component={Blog} />
+        <Route path="/" component={About} />
         <Route path="/blog" component={Blog} />
         <Route path="/praxis" component={Praxis} />
         <Route path="/praxis-programme" component={Praxis} />

@@ -68,7 +68,7 @@ const faqs = [
 
 export default function BecomeATrainer() {
   useEffect(() => {
-    document.title = "Become a Praxis Trainer — teach it, and earn from it";
+    document.title = "Become a Praxis Trainer - teach it, and earn from it";
     return () => { document.title = "Tutto | AI Consulting"; };
   }, []);
 

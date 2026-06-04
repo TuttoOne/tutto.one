@@ -54,21 +54,21 @@ const capabilities = [
     Icon: HierarchyIcon,
     title: "A hierarchy of knowledge",
     sub: "Structured · Searchable · Yours",
-    body: "Every document, note, and decision organised into a structured hierarchy you define. Semantic search runs across all of it. Ask anything — it finds the answer in the record, not in a guess.",
+    body: "Every document, note, and decision organised into a structured hierarchy you define. Semantic search runs across all of it. Ask anything - it finds the answer in the record, not in a guess.",
   },
   {
     num: "ii.",
     Icon: LockIcon,
     title: "AI as orchestrator, not custodian",
     sub: "Local-first · Zero cloud exposure",
-    body: "The AI connects to your knowledge base and instructs agents to act on it. Your data stays on your hardware at every step. Nothing is sent to third-party APIs. The AI orchestrates — it never holds.",
+    body: "The AI connects to your knowledge base and instructs agents to act on it. Your data stays on your hardware at every step. Nothing is sent to third-party APIs. The AI orchestrates - it never holds.",
   },
   {
     num: "iii.",
     Icon: LoopIcon,
     title: "Self-improving by design",
     sub: "Each session sharpens the system",
-    body: "Every question, correction, and refinement feeds back into the system. The hierarchy grows more accurate, the search improves, and the agents get better instructions — without any data leaving your environment.",
+    body: "Every question, correction, and refinement feeds back into the system. The hierarchy grows more accurate, the search improves, and the agents get better instructions - without any data leaving your environment.",
   },
 ];
 
@@ -124,10 +124,10 @@ export default function Pythia() {
             Agents that act. Data that stays.
           </h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
-            Pythia creates a hierarchy of your information — structured, searchable, and entirely on your own hardware. You ask questions in plain language. The AI figures out what you need and instructs agents to find it, cross-reference it, or act on it.
+            Pythia creates a hierarchy of your information - structured, searchable, and entirely on your own hardware. You ask questions in plain language. The AI figures out what you need and instructs agents to find it, cross-reference it, or act on it.
           </p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
-            At no point does your data leave. The AI is detached from the knowledge base — it orchestrates, it doesn't store. Each interaction makes the system sharper.
+            At no point does your data leave. The AI is detached from the knowledge base - it orchestrates, it doesn't store. Each interaction makes the system sharper.
           </p>
           <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
             Local-first · Any knowledge domain · Self-improving
@@ -159,7 +159,7 @@ export default function Pythia() {
         {/* Intro */}
         <div style={{ maxWidth: 620, marginBottom: 64 }}>
           <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>
-            Most organisations have knowledge scattered across files, emails, and tools — findable only by the people who already know where to look. Pythia organises that knowledge into a structured hierarchy, makes it semantically searchable, and connects an AI orchestration layer that can query it, reason across it, and instruct agents to act — without any of that data ever touching an external service.
+            Most organisations have knowledge scattered across files, emails, and tools - findable only by the people who already know where to look. Pythia organises that knowledge into a structured hierarchy, makes it semantically searchable, and connects an AI orchestration layer that can query it, reason across it, and instruct agents to act - without any of that data ever touching an external service.
           </p>
         </div>
 
@@ -192,7 +192,7 @@ export default function Pythia() {
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {[
                 { stat: "Zero",           label: "Data sent to external services" },
-                { stat: "Any domain",     label: "Legal, medical, ops, research — your choice" },
+                { stat: "Any domain",     label: "Legal, medical, ops, research - your choice" },
                 { stat: "Better each time", label: "Self-improving with every session" },
               ].map((s) => (
                 <div key={s.stat} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "24px 20px", background: "#faf8f5" }}>
@@ -232,10 +232,10 @@ export default function Pythia() {
         <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>On the name</p>
           <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 20, maxWidth: 620, fontStyle: "italic" }}>
-            The Pythia was the Oracle at Delphi — the one you consulted when you needed an answer from everything that had been heard.
+            The Pythia was the Oracle at Delphi - the one you consulted when you needed an answer from everything that had been heard.
           </p>
           <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620 }}>
-            Pythia was the title given to the high priestess of the Temple of Apollo at Delphi, who served as its oracle. The name derives from Python, the serpent Apollo slew at Delphi. To put a question to the Pythia was not to ask for a guess — it was to receive the distilled answer from everything the oracle had witnessed and absorbed. That is the model: every document, read; every question, answered from the record itself.
+            Pythia was the title given to the high priestess of the Temple of Apollo at Delphi, who served as its oracle. The name derives from Python, the serpent Apollo slew at Delphi. To put a question to the Pythia was not to ask for a guess - it was to receive the distilled answer from everything the oracle had witnessed and absorbed. That is the model: every document, read; every question, answered from the record itself.
           </p>
         </div>
 

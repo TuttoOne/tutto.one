@@ -165,7 +165,7 @@ export const BLOG_POSTS = [
   {
     slug: "the-best-combination",
     title: "The Best Combination",
-    excerpt: "A principle. Why the person plus the machine is always the best combination — and why bringing down the barriers as low as possible is the only logical move.",
+    excerpt: "A principle. Why the person plus the machine is always the best combination - and why bringing down the barriers as low as possible is the only logical move.",
     date: "Jun 5, 2026",
     readTime: "4 min read",
     introCard: {
@@ -173,19 +173,19 @@ export const BLOG_POSTS = [
       headline: "The best combination is always the person plus the machine.",
       sub: "Why unlocking this for everyone is the only logical move.",
     },
-    content: `After losing to Deep Blue in 1997, Kasparov didn't walk away from chess or from computers. He invented Advanced Chess — a format where humans and machines play together. The best combination, he found, wasn't one or the other. It was both.
+    content: `After losing to Deep Blue in 1997, Kasparov didn't walk away from chess or from computers. He invented Advanced Chess - a format where humans and machines play together. The best combination, he found, wasn't one or the other. It was both.
 
 That's the idea everything here is built on.
 
-The goal is to make awareness about the systems at work so accessible that it's easy enough for every person to use machines to their maximum capabilities. There are rules, complexities, and a world of creativity in the unlikely combinations of things — combinations that have been part of the unlikelihood of life itself — which we have to learn from.
+The goal is to make awareness about the systems at work so accessible that it's easy enough for every person to use machines to their maximum capabilities. There are rules, complexities, and a world of creativity in the unlikely combinations of things - combinations that have been part of the unlikelihood of life itself - which we have to learn from.
 
-People are afraid of what they don't know, of losing control, of not being the top dogs, of losing their livelihoods. These fears are real and they're reasonable. But if the best combination in every situation is the person plus the machine — which allows each one of us to be a better version of ourselves for the benefit of the whole — then the logical move is to bring down the barriers as low as we possibly can.
+People are afraid of what they don't know, of losing control, of not being the top dogs, of losing their livelihoods. These fears are real and they're reasonable. But if the best combination in every situation is the person plus the machine - which allows each one of us to be a better version of ourselves for the benefit of the whole - then the logical move is to bring down the barriers as low as we possibly can.
 
-No matter how fast we can build things in code, there is always a time constraint. Anything we build takes time to get right. It's in iteration, and in absorbing more content to learn from, that we can fabricate better systems. We can continually provide reasons for a situation being right — but just as important, we must show the systems we create what wrong means and looks like in every situation. Training runs in both directions.
+No matter how fast we can build things in code, there is always a time constraint. Anything we build takes time to get right. It's in iteration, and in absorbing more content to learn from, that we can fabricate better systems. We can continually provide reasons for a situation being right - but just as important, we must show the systems we create what wrong means and looks like in every situation. Training runs in both directions.
 
-If we can go through a process of creating training and coaching that is perfectly geared to each individual's context, we will be in a position we have never been in before. It's similar to the notion that we could be at the dawn of creating content that is instantaneously built — a world of choose your own adventure that is context and content aware at a level we cannot yet comprehend.
+If we can go through a process of creating training and coaching that is perfectly geared to each individual's context, we will be in a position we have never been in before. It's similar to the notion that we could be at the dawn of creating content that is instantaneously built - a world of choose your own adventure that is context and content aware at a level we cannot yet comprehend.
 
-Imagine if this were the case for education within every aspect of our lives. The ability to teach in the right way, with examples that land, with tone so precisely suited to your current state of mind that you stay engaged — and more than that, lean deeper and participate in the creation of artefacts in order to improve yourself and the world around you. Not a course, not a manual. Something that moves at your pace and meets you where you are.
+Imagine if this were the case for education within every aspect of our lives. The ability to teach in the right way, with examples that land, with tone so precisely suited to your current state of mind that you stay engaged - and more than that, lean deeper and participate in the creation of artefacts in order to improve yourself and the world around you. Not a course, not a manual. Something that moves at your pace and meets you where you are.
 
 We tune each other. We lean on each other. And we have mechanisms of being the physical and thinking companions to one another that we've only really dreamed of in the past. This really does feel like a world of science fiction.
 
@@ -193,23 +193,23 @@ This is the dream.
 
 To get there practically, each gap needs to be assessed by a couple of criteria: is the task a knowledge gap or an action gap? Often both, and that's fine. But in order to work towards a limitless world of opportunity and creation, we need to be able to categorise the gap, triage the solution, and plan and execute the delivery.
 
-The foundational aspect of this solution-based approach is teaching and coaching people to lean into the world of AI so that we can all play our part in refining the tasks we encounter. Everyone needs to learn how to use it. It's an exploration. We can all understand it because it speaks our language. We can see its shortcomings, and we must report these and create lasting fixes — not work around them.
+The foundational aspect of this solution-based approach is teaching and coaching people to lean into the world of AI so that we can all play our part in refining the tasks we encounter. Everyone needs to learn how to use it. It's an exploration. We can all understand it because it speaks our language. We can see its shortcomings, and we must report these and create lasting fixes - not work around them.
 
-The question is distribution. How do we get this to everyone — as ubiquitous as Coca-Cola? We need to put the fridge everywhere. We must grant access to everyone at the highest possible level. We must provide the ability to self-train. We must have guides that we trust.
+The question is distribution. How do we get this to everyone - as ubiquitous as Coca-Cola? We need to put the fridge everywhere. We must grant access to everyone at the highest possible level. We must provide the ability to self-train. We must have guides that we trust.
 
 That's the work.`,
   },
   {
     slug: "machine-readable-knowledge",
     title: "Making Knowledge Machine-Readable",
-    excerpt: "Brian Madden has built a public knowledge system that lets AI draw on his thinking in real time. The same methodology sits at the heart of Praxis — and he deserves the credit.",
+    excerpt: "Brian Madden has built a public knowledge system that lets AI draw on his thinking in real time. The same methodology sits at the heart of Praxis - and he deserves the credit.",
     date: "Jun 4, 2026",
     readTime: "4 min read",
     content: `[Brian Madden](https://brianmadden.ai) has built something I wish existed when I started thinking about how AI should work with professional knowledge. His public knowledge repository at [brianmadden.ai](https://brianmadden.ai) is a worked example of an idea that most organisations are still trying to articulate: if you want AI to work well with your thinking, your thinking has to be structured in a way that AI can actually work with.
 
 This post is about what he has built, why the principles matter, and why it connects directly to what Praxis teaches.
 
-## What brianmadden.ai is — and what it is not
+## What brianmadden.ai is - and what it is not
 
 The FAQs on Brian's site are the best starting point and they are worth reading carefully. The distinctions he draws are precise, and each one rules out a different misunderstanding.
 
@@ -223,11 +223,11 @@ No. A digital twin simulates a person. This makes published thinking accessible.
 
 **Where does it come from?**
 
-Brian maintains a personal AI-powered knowledge system — sometimes called a second brain — which is how he uses AI on a daily basis. That system has everything he needs to work: content, ideas, his to-do list, thinking, meeting notes, documents, plans. [brianmadden.ai](https://brianmadden.ai) is a subset of that private system, updated daily. Content flows from the private system to the public repository using explicit publishing principles.
+Brian maintains a personal AI-powered knowledge system - sometimes called a second brain - which is how he uses AI on a daily basis. That system has everything he needs to work: content, ideas, his to-do list, thinking, meeting notes, documents, plans. [brianmadden.ai](https://brianmadden.ai) is a subset of that private system, updated daily. Content flows from the private system to the public repository using explicit publishing principles.
 
 **How current is it?**
 
-The "current thinking" file updates frequently. The synthesis updates when new posts are published. Crucially, the AI flags stale content rather than presenting old thinking as current — a design decision that most knowledge systems do not make.
+The "current thinking" file updates frequently. The synthesis updates when new posts are published. Crucially, the AI flags stale content rather than presenting old thinking as current - a design decision that most knowledge systems do not make.
 
 **Can you fork it?**
 
@@ -239,17 +239,17 @@ What Brian has built is a demonstration of something important: the gap between 
 
 A browser chatbot does not have access to your documents, your precedents, your institutional knowledge, or your professional judgement. It guesses what a reasonable answer looks like based on everything it was trained on. That is genuinely useful for one-off questions. It is a liability for anything you want to run consistently, at scale, with your specific standards applied.
 
-The solution is not a better model. It is better-structured knowledge — explicit, current, machine-readable, and forkable.
+The solution is not a better model. It is better-structured knowledge - explicit, current, machine-readable, and forkable.
 
 ## Why Praxis teaches this methodology
 
-Praxis is the training programme that teaches you to build that structure for your own work. The skill file — the central artefact in every Praxis session — is the working implementation of exactly this idea. Professional knowledge written down in plain English, structured so that a script can read it and apply it the same way, every time.
+Praxis is the training programme that teaches you to build that structure for your own work. The skill file - the central artefact in every Praxis session - is the working implementation of exactly this idea. Professional knowledge written down in plain English, structured so that a script can read it and apply it the same way, every time.
 
-The Praxis course materials are themselves built on this principle. The course content is maintained as a structured knowledge repository — a folder of markdown files, organised by topic, written to be read by both humans and AI. You can explore it in the [Praxis course library](https://tutto.one/praxis/learn/praxis-foundations).
+The Praxis course materials are themselves built on this principle. The course content is maintained as a structured knowledge repository - a folder of markdown files, organised by topic, written to be read by both humans and AI. You can explore it in the [Praxis course library](https://tutto.one/praxis/learn/praxis-foundations).
 
 ## The credit
 
-The idea of publishing a personal knowledge system as a GitHub repo — open, shareable, and forkable by anyone — is something Brian pioneered, and I want to attribute that to him directly.
+The idea of publishing a personal knowledge system as a GitHub repo - open, shareable, and forkable by anyone - is something Brian pioneered, and I want to attribute that to him directly.
 
 If this framing is useful to you, his site is the place to go deeper.
 
@@ -258,10 +258,10 @@ If this framing is useful to you, his site is the place to go deeper.
   {
     slug: "praxis-closed-loop",
     title: "The Podcast That Clarified Why Praxis Exists",
-    excerpt: "A Lenny's Newsletter article made something click for me about why most AI training fails. The answer was already in how Praxis was built — I just had not said it clearly enough.",
+    excerpt: "A Lenny's Newsletter article made something click for me about why most AI training fails. The answer was already in how Praxis was built - I just had not said it clearly enough.",
     date: "Jun 2, 2026",
     readTime: "5 min read",
-    content: `A few months ago I read a piece on [Lenny's Newsletter](https://www.lennysnewsletter.com/p/how-to-build-ai-product-sense) that clarified something I had been circling. The article is by Tal Raviv and Aman Khan, and the argument is about what they call "AI product sense" — the ability to correctly anticipate what will be truly impactful for users and what is actually feasible with AI. Their claim: you do not build it by reading explainer posts. You build it by getting your hands into coding agents and doing real work with them.
+    content: `A few months ago I read a piece on [Lenny's Newsletter](https://www.lennysnewsletter.com/p/how-to-build-ai-product-sense) that clarified something I had been circling. The article is by Tal Raviv and Aman Khan, and the argument is about what they call "AI product sense" - the ability to correctly anticipate what will be truly impactful for users and what is actually feasible with AI. Their claim: you do not build it by reading explainer posts. You build it by getting your hands into coding agents and doing real work with them.
 
 The reason, they argue, is that consumer tools like ChatGPT are opaque. You type, something comes back. You have no idea why it came back that way, what the model was doing, or where it broke down. Coding agents like Claude Code are different: you can read the reasoning, watch the tool calls, see the context window fill up. You hit the same walls that engineers hit. And in hitting them, you start to actually understand how the thing works.
 
@@ -312,10 +312,10 @@ Details and booking at [/praxis](/praxis) and [/praxis-programme](/praxis-progra
   {
     slug: "glasswing-security-threshold",
     title: "AI Has Crossed the Security Threshold. Your Patch Cycle Has Not.",
-    excerpt: "Anthropic's Project Glasswing scanned over 1,000 open-source projects and found 6,202 high or critical vulnerabilities — at 90% accuracy. The problem is not the finding. It is how long it takes to fix.",
+    excerpt: "Anthropic's Project Glasswing scanned over 1,000 open-source projects and found 6,202 high or critical vulnerabilities - at 90% accuracy. The problem is not the finding. It is how long it takes to fix.",
     date: "May 27, 2026",
     readTime: "5 min read",
-    content: `Anthropic published an initial update on [Project Glasswing](https://www.anthropic.com/research/glasswing-initial-update) this week. It is nominally an announcement about a security initiative. What it actually describes is a threshold being crossed — and most organisations have not thought through what that means.
+    content: `Anthropic published an initial update on [Project Glasswing](https://www.anthropic.com/research/glasswing-initial-update) this week. It is nominally an announcement about a security initiative. What it actually describes is a threshold being crossed - and most organisations have not thought through what that means.
 
 ## What Glasswing is
 
@@ -327,7 +327,7 @@ The headline framing is defensive: we are using AI to protect infrastructure. Th
 
 Over the last few months, Mythos Preview scanned more than 1,000 open-source projects. It found 23,019 vulnerabilities in total. Of those, 6,202 were classified as high or critical severity.
 
-Anthropic then sent 1,752 of the high/critical findings to six independent security research firms for assessment. 90.6% — 1,587 — were confirmed as valid true positives. 62.4% were confirmed high or critical.
+Anthropic then sent 1,752 of the high/critical findings to six independent security research firms for assessment. 90.6% - 1,587 - were confirmed as valid true positives. 62.4% were confirmed high or critical.
 
 Work through the arithmetic. At that true positive rate, Mythos Preview has surfaced close to 3,900 real high-or-critical vulnerabilities in open-source code from a scan that took months, not years. That number will continue rising: Anthropic says they intend to keep scanning.
 
@@ -335,7 +335,7 @@ The scale is not the story. The rate is. A 90% true positive rate on vulnerabili
 
 ## The benchmark saturation point
 
-Anthropic notes that Mythos Preview has improved to the point where it "mostly saturates existing benchmarks" for vulnerability discovery. As a result, they have supported the creation of two new benchmarks — ExploitBench and ExploitGym — specifically to track frontier models' exploit development capabilities going forward.
+Anthropic notes that Mythos Preview has improved to the point where it "mostly saturates existing benchmarks" for vulnerability discovery. As a result, they have supported the creation of two new benchmarks - ExploitBench and ExploitGym - specifically to track frontier models' exploit development capabilities going forward.
 
 When a model saturates a benchmark, the benchmark stops being informative. What replaces it is real-world testing, which is what Glasswing is. The move from benchmarks to production scanning is not a methodological choice. It is an acknowledgement that the capability has outgrown the measurement.
 
@@ -343,7 +343,7 @@ The implication is direct: AI systems can now find and construct exploits for so
 
 ## wolfSSL
 
-The concrete example in the update is worth sitting with. wolfSSL is an open-source cryptography library used by billions of devices — routers, embedded systems, IoT hardware. Mythos Preview found a vulnerability and constructed a working exploit that would allow an attacker to forge certificates, enabling them to impersonate banks or email providers to any device running the affected library.
+The concrete example in the update is worth sitting with. wolfSSL is an open-source cryptography library used by billions of devices - routers, embedded systems, IoT hardware. Mythos Preview found a vulnerability and constructed a working exploit that would allow an attacker to forge certificates, enabling them to impersonate banks or email providers to any device running the affected library.
 
 This is not an academic finding. Certificate forgery at scale enables phishing and man-in-the-middle attacks that are effectively undetectable by end users. The device trusts the certificate. The user trusts the device.
 
@@ -381,7 +381,7 @@ The threshold has been crossed. The question is whether your operational tempo h
     excerpt: "Before the tools matter, the knowledge has to be there. Three things that need to happen in roughly this order in any serious AI adoption.",
     date: "May 20, 2026",
     readTime: "4 min read",
-    content: `Most organisations approach AI the wrong way around. They start with the tools — which model, which platform, which chat interface — and wonder why the outputs are inconsistent and the productivity gains are smaller than expected.
+    content: `Most organisations approach AI the wrong way around. They start with the tools - which model, which platform, which chat interface - and wonder why the outputs are inconsistent and the productivity gains are smaller than expected.
 
 The tools are fine. The problem is that the tools have nothing solid to work with. Good AI outputs depend on well-structured inputs: clear documentation, mapped processes, explicit rules. Most organisations do not have these. Not because they have not tried, but because until now there was no external pressure to be that precise.
 
@@ -389,7 +389,7 @@ AI changes the pressure. Here are three things that need to happen in roughly th
 
 ## Know what knowledge you actually have
 
-The first step is a data audit and knowledge mapping exercise. Not a technology project — a knowledge project.
+The first step is a data audit and knowledge mapping exercise. Not a technology project - a knowledge project.
 
 You are trying to answer three questions: what information exists in your organisation, where does it live, and how consistent is it? Most organisations find the answer surprising. Knowledge is distributed across email threads, shared drives, individual hard drives, tribal memory, and software systems that do not talk to each other.
 
@@ -403,9 +403,9 @@ The second step is designing the specific workflows that AI can run reliably.
 
 The mistake here is rushing to automation before you have a deterministic description of the process. A language model will generate something plausible. Plausible is not the same as correct, and it is not the same as consistent. Before you automate anything, you need to be able to describe exactly what the correct output looks like, what inputs it depends on, and what rules it follows.
 
-That description becomes the skill file — the plain-English specification that governs what the agent does. The agent runs the same rules against the same inputs and produces the same output, every time.
+That description becomes the skill file - the plain-English specification that governs what the agent does. The agent runs the same rules against the same inputs and produces the same output, every time.
 
-This is where most organisations slow down. The work of making tacit knowledge explicit — pulling the rules out of people's heads and onto paper — is harder than it sounds and more valuable than it looks.
+This is where most organisations slow down. The work of making tacit knowledge explicit - pulling the rules out of people's heads and onto paper - is harder than it sounds and more valuable than it looks.
 
 ## Build capability in your team
 
@@ -828,9 +828,9 @@ That's the bar now. Documentation isn't just for humans anymore. It's for machin
     readTime: "4 min read",
     content: `Most organisations have a SharePoint. Most of them are full of institutional knowledge that nobody can find when they need it.
 
-The standard fix is a better search. But search doesn't answer questions — it returns results. You still have to open the files, read through them, and synthesise what you're looking for. That's the problem.
+The standard fix is a better search. But search doesn't answer questions - it returns results. You still have to open the files, read through them, and synthesise what you're looking for. That's the problem.
 
-The SharePoint Bridge takes a different approach. It connects Claude directly to your SharePoint Online environment so you can ask questions in plain English and get answers — with citations, from the actual documents — in seconds.
+The SharePoint Bridge takes a different approach. It connects Claude directly to your SharePoint Online environment so you can ask questions in plain English and get answers - with citations, from the actual documents - in seconds.
 
 ## What it does
 
@@ -838,7 +838,7 @@ The Bridge gives Claude three capabilities against your SharePoint environment.
 
 **Audit**: Claude analyses your SharePoint structure, surfaces stale content, broken permissions, and metadata gaps, and produces a prioritised AI-readiness report. You find out what you actually have before you try to build anything on top of it.
 
-**Restructure**: With an audit in hand, Claude can help you rationalise libraries, align content types, and fix site architecture so your SharePoint becomes genuinely machine-readable — consistent enough for an AI to work with reliably.
+**Restructure**: With an audit in hand, Claude can help you rationalise libraries, align content types, and fix site architecture so your SharePoint becomes genuinely machine-readable - consistent enough for an AI to work with reliably.
 
 **Build**: Once the structure is clean, the Bridge lets Claude query it live. You can build custom AI agents and knowledge workflows that draw on your real documents in real time.
 
@@ -846,19 +846,19 @@ The Bridge gives Claude three capabilities against your SharePoint environment.
 
 Setup takes under fifteen minutes and needs no infrastructure or data exports.
 
-You register an Azure AD application with Sites.Read.All permissions, clone the repo, and add your tenant ID, client ID, and client secret to a .env file. Then add one entry to your Claude Desktop MCP config. Restart Claude — your SharePoint is now a live tool in every conversation.
+You register an Azure AD application with Sites.Read.All permissions, clone the repo, and add your tenant ID, client ID, and client secret to a .env file. Then add one entry to your Claude Desktop MCP config. Restart Claude - your SharePoint is now a live tool in every conversation.
 
 The repo has full setup instructions: [github.com/TuttoOne/sp-mcp](https://github.com/TuttoOne/sp-mcp).
 
 ## The free audit prompt
 
-If you want to check your AI-readiness before setting up the Bridge, there is a prompt that runs entirely inside the standard Claude interface — no MCP needed. You describe your SharePoint environment, and Claude works through five areas: site architecture, content and metadata quality, permissions model, data hygiene, and an overall AI-readiness score from 1 to 10 with the top five prioritised actions.
+If you want to check your AI-readiness before setting up the Bridge, there is a prompt that runs entirely inside the standard Claude interface - no MCP needed. You describe your SharePoint environment, and Claude works through five areas: site architecture, content and metadata quality, permissions model, data hygiene, and an overall AI-readiness score from 1 to 10 with the top five prioritised actions.
 
 It takes about ten minutes and gives you a clear view of where to start.
 
 ## Why this exists
 
-SharePoint is where a lot of organisational knowledge actually lives — not in a knowledge base or a wiki, but in folders of PDFs and Word documents that accumulate over years. The problem isn't the format. It's that the knowledge is locked in a form that AI can't access.
+SharePoint is where a lot of organisational knowledge actually lives - not in a knowledge base or a wiki, but in folders of PDFs and Word documents that accumulate over years. The problem isn't the format. It's that the knowledge is locked in a form that AI can't access.
 
 The Bridge is the first step toward making that knowledge machine-readable: findable, queryable, and usable by the tools that are now good enough to work with it. Free, open source, MIT licensed.
 
