@@ -163,6 +163,46 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
 
 export const BLOG_POSTS = [
   {
+    slug: "machine-readable-knowledge",
+    title: "Making Knowledge Machine-Readable",
+    excerpt: "Brian Madden has built a public knowledge system that lets AI draw on his thinking in real time. The same methodology sits at the heart of Praxis — and he deserves the credit.",
+    date: "Jun 4, 2026",
+    readTime: "4 min read",
+    content: `A few months ago I came across [Brian Madden's public knowledge repository](https://brianmadden.ai) and it stopped me. It is a precise articulation of the idea that Praxis is built on, made explicit and made public.
+
+## What brianmadden.ai actually is
+
+The [FAQs on Brian's site](https://brianmadden.ai) are worth reading in full. The short version: it is not a chatbot. It is not a digital twin. It is a **data source** — a structured, machine-readable version of his professional thinking that your AI can draw on when you ask it something relevant.
+
+In his own words: *"You talk to your AI, and it draws on my knowledge when relevant. It's more like an always-updated context & knowledge source for your chatbot."*
+
+The underlying system is what Brian calls a personal AI-powered knowledge system — sometimes called a second brain. Everything he needs to work: content, ideas, his to-do list, thinking, meeting notes, documents, plans. The public site is a subset of that private system, updated daily. Content flows from the private system to a public GitHub repo using explicit publishing principles.
+
+The GitHub repo is the source of truth. You can fork it.
+
+## Why this matters
+
+What Brian has built is a worked example of the core principle behind Praxis: if you want AI to work well with your knowledge, your knowledge has to be structured in a way that AI can work with.
+
+A browser chatbot does not have access to your documents, your precedents, your institutional knowledge, or your professional judgement. It guesses what a reasonable answer looks like. That is useful for one-off questions. It is a liability for anything you want to run consistently.
+
+The gap between "AI gives good answers" and "AI does my actual work reliably" is almost always a knowledge-structure problem, not a model problem.
+
+## Praxis teaches exactly this methodology
+
+Praxis is the training programme that teaches you to close that gap. The skill file — the central artefact in every Praxis session — is the working implementation of the same idea: professional knowledge written down in plain English, structured so that a script can read it and apply it the same way, every time.
+
+The [Praxis course materials](https://github.com/TuttoOne/praxis) are themselves built on this principle. The course content is maintained as a structured knowledge repository — a folder of markdown files, organised by topic, written to be read by both humans and AI. You can explore it in the [Praxis course library](/praxis/learn).
+
+## The credit
+
+The terminology I use in Praxis — machine-readable knowledge, the separation of the data layer from the reasoning layer, the idea that professional knowledge should be explicit and forkable — owes a direct debt to Brian's work.
+
+If this framing is useful to you, his site is the place to go deeper. The FAQs in particular explain what this kind of system is and is not — the distinctions matter.
+
+[brianmadden.ai](https://brianmadden.ai)`,
+  },
+  {
     slug: "praxis-closed-loop",
     title: "The Podcast That Clarified Why Praxis Exists",
     excerpt: "A Lenny's Newsletter article made something click for me about why most AI training fails. The answer was already in how Praxis was built — I just had not said it clearly enough.",

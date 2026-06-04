@@ -3,6 +3,85 @@ import { useQuery } from "@tanstack/react-query";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+// ── Table parser ──────────────────────────────────────────────────────────────
+
+function parseTableBlock(block: string): { headers: string[]; rows: string[][] } | null {
+  const lines = block.trim().split("\n");
+  if (lines.length < 3) return null;
+  if (!lines.every((l) => l.trim().startsWith("|"))) return null;
+  const sep = lines[1].trim();
+  if (!/^\|[\s|:-]+\|?\s*$/.test(sep)) return null;
+  const parseRow = (line: string) =>
+    line.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+  return {
+    headers: parseRow(lines[0]),
+    rows: lines.slice(2).map(parseRow),
+  };
+}
+
+function GfmTable({ block }: { block: string }) {
+  const table = parseTableBlock(block);
+  if (!table) return <ReactMarkdown remarkPlugins={[remarkGfm]}>{block}</ReactMarkdown>;
+  return (
+    <div className="overflow-x-auto my-6">
+      <table className="w-full border-collapse text-sm">
+        <thead>
+          <tr>
+            {table.headers.map((h, i) => (
+              <th key={i} className="text-left border-b-2 border-gray-200 pb-2 pr-6 font-semibold whitespace-nowrap">
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row, i) => (
+            <tr key={i} className="border-b border-gray-100">
+              {row.map((cell, j) => (
+                <td key={j} className="py-2 pr-6 align-top">{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// ── Content renderer (handles table blocks + regular markdown) ────────────────
+
+function ContentRenderer({
+  content,
+  linkRenderer,
+}: {
+  content: string;
+  linkRenderer: React.ComponentType<any>;
+}) {
+  const blocks = content.split(/\n{2,}/);
+
+  return (
+    <>
+      {blocks.map((block, i) => {
+        const lines = block.trim().split("\n");
+        const isTable =
+          lines.length >= 3 && lines.every((l) => l.trim().startsWith("|"));
+        if (isTable) return <GfmTable key={i} block={block} />;
+        return (
+          <ReactMarkdown
+            key={i}
+            remarkPlugins={[remarkGfm]}
+            components={{ a: linkRenderer }}
+          >
+            {block}
+          </ReactMarkdown>
+        );
+      })}
+    </>
+  );
+}
+
+// ── Page ─────────────────────────────────────────────────────────────────────
+
 export default function PraxisLearn() {
   const { course, lesson } = useParams<{ course: string; lesson?: string }>();
   const [, navigate] = useLocation();
@@ -17,22 +96,21 @@ export default function PraxisLearn() {
     },
   });
 
-  // Custom link renderer: convert relative .md hrefs to SPA routes
   const LinkRenderer = ({ href, children }: { href?: string; children?: React.ReactNode }) => {
     if (href && href.endsWith(".md")) {
       const slug = href.replace(/^\.\//, "").replace(/\.md$/, "");
       const to = `/praxis/learn/${course}/${slug}`;
       return (
-        <a
-          href={to}
-          onClick={(e) => { e.preventDefault(); navigate(to); }}
-          className="underline cursor-pointer"
-        >
+        <a href={to} onClick={(e) => { e.preventDefault(); navigate(to); }} className="underline cursor-pointer">
           {children}
         </a>
       );
     }
-    return <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">{children}</a>;
+    return (
+      <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">
+        {children}
+      </a>
+    );
   };
 
   if (isLoading) {
@@ -78,8 +156,8 @@ export default function PraxisLearn() {
         )}
 
         {/* content */}
-        <div className="text-gray-800 leading-relaxed space-y-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-10 [&_h2]:mb-3 [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:rounded [&_code]:text-sm [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_a]:underline [&_a]:hover:no-underline [&_table]:w-full [&_table]:border-collapse [&_table]:my-6 [&_th]:text-left [&_th]:border-b-2 [&_th]:border-gray-200 [&_th]:pb-2 [&_th]:pr-4 [&_th]:font-semibold [&_td]:border-b [&_td]:border-gray-100 [&_td]:py-2 [&_td]:pr-4 [&_td]:align-top">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ a: LinkRenderer }}>{data.content}</ReactMarkdown>
+        <div className="text-gray-800 leading-relaxed [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-10 [&_h2]:mb-3 [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ul]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_ol]:mb-4 [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:rounded [&_code]:text-sm [&_pre]:bg-gray-100 [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:mb-4 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_a]:underline [&_a]:hover:no-underline [&_hr]:border-gray-200 [&_hr]:my-8">
+          <ContentRenderer content={data.content} linkRenderer={LinkRenderer} />
         </div>
 
         {/* back */}
