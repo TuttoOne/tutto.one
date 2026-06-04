@@ -132,19 +132,9 @@ export default function Pythia() {
             APIs, no exposure. Legal Professional Privilege satisfied by architecture, not
             by policy.
           </p>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-            <a
-              href="https://cal.com/tuttoone/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
-            >
-              Book a conversation →
-            </a>
-            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
-              On-site · Private · UK-built
-            </span>
-          </div>
+          <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
+            On-site · Private · UK-built
+          </span>
         </div>
 
         {/* Doc header */}
@@ -242,44 +232,6 @@ export default function Pythia() {
             </div>
 
           </div>
-        </div>
-
-        {/* Section 03 */}
-        <div style={{ marginTop: 64 }}>
-          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 36 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>03 &nbsp;&nbsp;&nbsp; Engagement</span>
-          </div>
-          <div className="py-cols-3">
-            {[
-              { label: "The diagnostic sprint", price: "~£2,500", note: "Two weeks. We review your real documents and workflows and tell you exactly what Pythia can do for your practice." },
-              { label: "The build", price: "From £20,000", note: "Hardware and custom build, scoped after the diagnostic. Typically four to eight weeks from sign-off to a system running on your premises." },
-              { label: "Ongoing", price: "~20% p.a.", note: "Assessed during the build. Covers ingestion of new matter files, system maintenance, and keeping Pythia current as your work evolves." },
-            ].map((p) => (
-              <div key={p.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "24px 20px", background: "#faf8f5" }}>
-                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{p.label}</p>
-                <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-1px" }}>{p.price}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div style={{ marginTop: 48, borderTop: "1px solid #d8d0c5", paddingTop: 40, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
-          <div>
-            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 8 }}>Ready to see it in your practice?</p>
-            <p style={{ ...INTER, fontSize: 14, color: "#3d3d3d", maxWidth: 380 }}>
-              Book a thirty-minute conversation. We'll walk through your documents and tell you what's possible.
-            </p>
-          </div>
-          <a
-            href="https://cal.com/tuttoone/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#1a1a1a", color: "#f6f1ea", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 4, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
-          >
-            Book a conversation →
-          </a>
         </div>
 
         {/* Etymology */}
