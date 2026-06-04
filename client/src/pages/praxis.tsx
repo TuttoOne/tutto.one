@@ -624,27 +624,6 @@ export default function Praxis() {
           </p>
         </div>
 
-        {/* Trainer track teaser */}
-        <div style={{ marginBottom: 56, borderRadius: 12, border: "1.5px solid #d97706", background: "#fdf6ec", padding: "clamp(24px, 4vw, 44px)" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 16 }}>
-            What comes next
-          </p>
-          <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>
-            Become a Praxis trainer.
-          </h3>
-          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 20, maxWidth: 560 }}>
-            Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on
-            every course you teach. I find and organise the clients with you, you deliver the sessions, and
-            a hub is behind you for the hard jobs.
-          </p>
-          <a
-            href="/become-a-trainer"
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "11px 22px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
-          >
-            See the trainer track →
-          </a>
-        </div>
-
         {/* Etymology */}
         <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>On the word</p>
