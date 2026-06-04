@@ -8,10 +8,9 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
-    { label: "SharePoint", href: "/sharepoint" },
+    { label: "Thinking", href: "/blog" },
     { label: "Praxis", href: "/" },
     { label: "Pythia", href: "/pythia" },
-    { label: "Thinking", href: "/blog" },
   ];
 
   return (

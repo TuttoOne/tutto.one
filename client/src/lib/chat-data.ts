@@ -163,6 +163,42 @@ export const CHAT_FLOWS: Record<string, FlowStep> = {
 
 export const BLOG_POSTS = [
   {
+    slug: "the-best-combination",
+    title: "The Best Combination",
+    excerpt: "A principle. Why the person plus the machine is always the best combination — and why bringing down the barriers as low as possible is the only logical move.",
+    date: "Jun 5, 2026",
+    readTime: "4 min read",
+    introCard: {
+      tagline: "A principle",
+      headline: "The best combination is always the person plus the machine.",
+      sub: "Why unlocking this for everyone is the only logical move.",
+    },
+    content: `The goal here is to make awareness about the systems at work so accessible that it's easy enough for every person to use machines to their maximum capabilities. There are rules, complexities and a world of creativity in the unlikely combinations of things that have been part of the unlikelihood of life itself, which we have to learn from.
+
+People are afraid of what they don't know.
+Of losing control.
+Of not being the top dogs.
+Of losing their livelihoods.
+
+But if the best combination in every situation is the person plus the machine — which allows each one of us to be a better version of ourselves for the benefit of the whole — then the logical move is to bring down the barriers as low as we possibly can.
+
+No matter how fast we can build things in code, there is always a time constraint. Anything we build takes time to get right. But it's in iteration and absorbing more content to learn from that we can fabricate better systems. We can continually provide reasons for a situation being right but, just as important, we must show the systems we create what wrong means and looks like in every situation.
+
+If we can go through a process of creating training and coaching that are perfectly geared to each individual's context, we will be in a position we have never been in before. It's similar to the notion that we could be at the dawn of creating content that is instantaneously built — a world of choose your own adventure that is context and content aware at a level we cannot yet comprehend.
+
+Imagine if this were the case for education within every aspect of our lives. The ability to teach in the right way, with examples that land, with tone so precisely suited to our current state of mind that we stay engaged — and more than that, lean deeper and participate in the creation of artefacts in order to improve ourselves and the world around us.
+
+We tune each other. We lean on each other. And we have mechanisms of being the physical and thinking companions to one another that we've only really dreamed of in the past. This really does feel like a world of science fiction.
+
+This is the dream.
+
+Because each gap can then be assessed by a couple of criteria: is the task a knowledge gap or is it an action gap? Often both, and that's fine. But in order to work towards a limitless world of opportunity and creation, we need to be able to categorise the gap, triage the solution and then plan and execute the delivery.
+
+The foundational aspects of this solution-based approach involve teaching and coaching people to lean into the world of AI so that we can all play our part in refining the tasks we encounter. Everyone needs to learn how to use it. It's an exploration. We can all understand it because it speaks our language. We can see its shortcomings, but we must report these and create lasting fixes.
+
+How do we get the distribution on this which is required to make it as ubiquitous as Coca-Cola? We need to put the fridge everywhere. We must grant access to everyone at the highest possible level. We must provide the ability to self-train. We must have guides that we trust.`,
+  },
+  {
     slug: "machine-readable-knowledge",
     title: "Making Knowledge Machine-Readable",
     excerpt: "Brian Madden has built a public knowledge system that lets AI draw on his thinking in real time. The same methodology sits at the heart of Praxis — and he deserves the credit.",
@@ -782,5 +818,49 @@ Pick one critical process in your business. Document it as if you were explainin
 Then feed that documentation to an AI and ask it questions. If it answers correctly, you've written good documentation. If it doesn't, revise until it does.
 
 That's the bar now. Documentation isn't just for humans anymore. It's for machines too. And machines are much less forgiving of ambiguity.`
+  },
+  {
+    slug: "sharepoint-bridge",
+    title: "Giving Claude Direct Access to Your SharePoint",
+    excerpt: "The SharePoint Bridge is a free, open-source MCP server that connects Claude to your SharePoint Online environment. No copy-pasting. No exports. Just ask.",
+    date: "Apr 15, 2026",
+    readTime: "4 min read",
+    content: `Most organisations have a SharePoint. Most of them are full of institutional knowledge that nobody can find when they need it.
+
+The standard fix is a better search. But search doesn't answer questions — it returns results. You still have to open the files, read through them, and synthesise what you're looking for. That's the problem.
+
+The SharePoint Bridge takes a different approach. It connects Claude directly to your SharePoint Online environment so you can ask questions in plain English and get answers — with citations, from the actual documents — in seconds.
+
+## What it does
+
+The Bridge gives Claude three capabilities against your SharePoint environment.
+
+**Audit**: Claude analyses your SharePoint structure, surfaces stale content, broken permissions, and metadata gaps, and produces a prioritised AI-readiness report. You find out what you actually have before you try to build anything on top of it.
+
+**Restructure**: With an audit in hand, Claude can help you rationalise libraries, align content types, and fix site architecture so your SharePoint becomes genuinely machine-readable — consistent enough for an AI to work with reliably.
+
+**Build**: Once the structure is clean, the Bridge lets Claude query it live. You can build custom AI agents and knowledge workflows that draw on your real documents in real time.
+
+## How to set it up
+
+Setup takes under fifteen minutes and needs no infrastructure or data exports.
+
+You register an Azure AD application with Sites.Read.All permissions, clone the repo, and add your tenant ID, client ID, and client secret to a .env file. Then add one entry to your Claude Desktop MCP config. Restart Claude — your SharePoint is now a live tool in every conversation.
+
+The repo has full setup instructions: [github.com/TuttoOne/sp-mcp](https://github.com/TuttoOne/sp-mcp).
+
+## The free audit prompt
+
+If you want to check your AI-readiness before setting up the Bridge, there is a prompt that runs entirely inside the standard Claude interface — no MCP needed. You describe your SharePoint environment, and Claude works through five areas: site architecture, content and metadata quality, permissions model, data hygiene, and an overall AI-readiness score from 1 to 10 with the top five prioritised actions.
+
+It takes about ten minutes and gives you a clear view of where to start.
+
+## Why this exists
+
+SharePoint is where a lot of organisational knowledge actually lives — not in a knowledge base or a wiki, but in folders of PDFs and Word documents that accumulate over years. The problem isn't the format. It's that the knowledge is locked in a form that AI can't access.
+
+The Bridge is the first step toward making that knowledge machine-readable: findable, queryable, and usable by the tools that are now good enough to work with it. Free, open source, MIT licensed.
+
+[View on GitHub](https://github.com/TuttoOne/sp-mcp)`,
   }
 ];

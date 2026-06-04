@@ -412,6 +412,9 @@ export default function BlogPost() {
 
   const visuals = VISUALS[post.slug];
 
+  const ROBOTO = "'Roboto', -apple-system, sans-serif";
+  const INTER = "'Inter', -apple-system, sans-serif";
+
   return (
     <Layout>
       <article className="max-w-3xl mx-auto px-6 py-12">
@@ -420,19 +423,44 @@ export default function BlogPost() {
           Back to Blog
         </Link>
 
-        <header className="mb-12">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4 font-mono">
-            <span>{post.date}</span>
-            <span className="text-border">|</span>
-            <span>{post.readTime}</span>
-          </div>
-          <h1 className="text-3xl md:text-4xl font-serif font-bold leading-tight mb-4">
-            {post.title}
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            {post.excerpt}
-          </p>
-        </header>
+        {(post as any).introCard ? (
+          <>
+            <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 40 }}>
+              {(post as any).introCard.tagline && (
+                <p style={{ fontFamily: INTER, fontSize: 9, textTransform: "uppercase", letterSpacing: "0.14em", color: "#d97706", marginBottom: 18 }}>
+                  {(post as any).introCard.tagline}
+                </p>
+              )}
+              <h1 style={{ fontFamily: ROBOTO, fontSize: "clamp(24px, 4.5vw, 44px)", fontWeight: 900, lineHeight: 1.15, color: "#f6f1ea", letterSpacing: "-0.3px", marginBottom: (post as any).introCard.sub ? 16 : 0 }}>
+                {(post as any).introCard.headline}
+              </h1>
+              {(post as any).introCard.sub && (
+                <p style={{ fontFamily: INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", marginTop: 16, maxWidth: 520 }}>
+                  {(post as any).introCard.sub}
+                </p>
+              )}
+            </div>
+            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-10 font-mono">
+              <span>{post.date}</span>
+              <span className="text-border">|</span>
+              <span>{post.readTime}</span>
+            </div>
+          </>
+        ) : (
+          <header className="mb-12">
+            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4 font-mono">
+              <span>{post.date}</span>
+              <span className="text-border">|</span>
+              <span>{post.readTime}</span>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-serif font-bold leading-tight mb-4">
+              {post.title}
+            </h1>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              {post.excerpt}
+            </p>
+          </header>
+        )}
 
         <div className="border-t border-border/40 pt-10 font-serif text-[17px]">
           {renderMarkdown(post.content, visuals)}

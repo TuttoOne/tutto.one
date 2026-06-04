@@ -7,7 +7,6 @@ import { FloatingChat } from "@/components/chat/FloatingChat";
 import NotFound from "@/pages/not-found";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
-import Sharepoint from "@/pages/sharepoint";
 import Praxis from "@/pages/praxis";
 import Pythia from "@/pages/pythia";
 import BecomeATrainer from "@/pages/become-a-trainer";
@@ -21,7 +20,6 @@ function Router() {
       <Route path="/praxis-programme" component={Praxis} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
-      <Route path="/sharepoint" component={Sharepoint} />
       <Route path="/pythia" component={Pythia} />
       <Route path="/become-a-trainer" component={BecomeATrainer} />
       <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
