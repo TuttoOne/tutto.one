@@ -1,0 +1,69 @@
+Open server/routes.ts. Find the line at the top where imports are (likely import type { Express }... or similar). Add this block at the top of the file, after the imports:
+
+// GitHub content cache
+const _ghCache = new Map<string, { data: string; exp: number }>();
+
+async function fetchGithub(path: string): Promise<string> {
+  const url = `https://raw.githubusercontent.com/TuttoOne/praxis/main/${path}`;
+  const hit = _ghCache.get(url);
+  if (hit && hit.exp > Date.now()) return hit.data;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`GitHub ${res.status}: ${path}`);
+  const text = await res.text();
+  _ghCache.set(url, { data: text, exp: Date.now() + 5 * 60 * 1000 });
+  return text;
+}
+
+function parseFrontmatter(text: string): { meta: Record<string, any>; content: string } {
+  if (!text.startsWith("---")) return { meta: {}, content: text };
+  const end = text.indexOf("\n---", 3);
+  if (end === -1) return { meta: {}, content: text };
+  const meta: Record<string, any> = {};
+  for (const line of text.slice(3, end).trim().split("\n")) {
+    const ci = line.indexOf(":");
+    if (ci === -1) continue;
+    const k = line.slice(0, ci).trim();
+    const v = line.slice(ci + 1).trim().replace(/^["']|["']$/g, "");
+    meta[k] = v;
+  }
+  return { meta, content: text.slice(end + 4).trim() };
+}
+Then find the closing } of the registerRoutes function (near the end of the file, after the existing app.post("/api/leads", ...) route). Add these two routes before that closing }:
+
+  app.get("/api/courses", async (req, res) => {
+    try {
+      const manifest = JSON.parse(await fetchGithub("_manifest.json"));
+      const files: string[] = (manifest.files ?? []).filter(
+        (f: string) => f.startsWith("courses/") && f.endsWith(".md") && !f.endsWith("README.md")
+      );
+      const courses: Record<string, { meta: any; path: string }[]> = {};
+      for (const path of files) {
+        try {
+          const { meta } = parseFrontmatter(await fetchGithub(path));
+          if (!meta.course) continue;
+          if (!courses[meta.course]) courses[meta.course] = [];
+          courses[meta.course].push({ meta, path });
+        } catch { /* skip files that 404 */ }
+      }
+      for (const arr of Object.values(courses)) {
+        arr.sort((a, b) => Number(a.meta.order ?? 99) - Number(b.meta.order ?? 99));
+      }
+      res.json(courses);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/courses/:course/:lesson?", async (req, res) => {
+    const { course, lesson } = req.params;
+    if (!/^[a-z0-9-]+$/.test(course) || (lesson && !/^[a-z0-9-]+$/.test(lesson))) {
+      return res.status(400).json({ error: "Invalid path" });
+    }
+    try {
+      const path = lesson ? `courses/${course}/${lesson}.md` : `courses/${course}/index.md`;
+      const { meta, content } = parseFrontmatter(await fetchGithub(path));
+      res.json({ meta, content });
+    } catch {
+      res.status(404).json({ error: "Not found" });
+    }
+  });
