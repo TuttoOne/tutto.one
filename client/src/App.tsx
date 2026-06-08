@@ -10,6 +10,7 @@ import BlogPost from "@/pages/blog-post";
 import Praxis from "@/pages/praxis";
 import Pythia from "@/pages/pythia";
 import About from "@/pages/about";
+import SecondBrain from "@/pages/second-brain";
 import BecomeATrainer from "@/pages/become-a-trainer";
 import PraxisLearn from "@/pages/praxis-learn";
 
@@ -33,6 +34,7 @@ function Router() {
         <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/pythia" component={Pythia} />
         <Route path="/about" component={About} />
+        <Route path="/second-brain" component={SecondBrain} />
         <Route path="/become-a-trainer" component={BecomeATrainer} />
         <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
         <Route path="/praxis/learn/:course" component={PraxisLearn} />

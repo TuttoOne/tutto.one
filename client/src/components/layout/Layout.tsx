@@ -11,6 +11,7 @@ export function Header() {
     { label: "Thinking", href: "/blog" },
     { label: "Praxis", href: "/praxis" },
     { label: "Pythia", href: "/pythia" },
+    { label: "Second Brain", href: "/second-brain" },
   ];
 
   return (
