@@ -27,7 +27,7 @@ export default function About() {
           <h1 style={{ ...ROBOTO, fontSize: "clamp(26px, 4.5vw, 42px)", fontWeight: 900, lineHeight: 1.15, color: "#f6f1ea", marginBottom: 20, letterSpacing: "-0.3px" }}>
             Exploring AI Practically
           </h1>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", maxWidth: 520 }}>Making LLM-based AI systems useful is a very hands-on experience. The technology is new; it's moving very fast and it is extremely powerful if used in the right way. What someone using these tools needs to get used to quickly is treating technology like a conversation rather than clicking a button and expecting a perfect result. </p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", maxWidth: 520 }}>Making LLM-based AI systems useful is a very hands-on experience. The technology is new; it's moving very fast and it is extremely powerful if used in the right way. Learn by doing, and build your own second brain.</p>
         </div>
 
         <div className="ab-cols">
@@ -42,14 +42,12 @@ export default function About() {
               "Is AI a good fit for me, for my organisation?"<br />
               "What can we control, and what do we have no say over?"
             </p>
-            <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
-              That last question is where Stoicism becomes relevant. The Stoics were not pessimists; they were realists with a clear framework for action. Distinguish between what is within your control and what isn't. Accept the latter. Act on the former. The rest is noise.
-            </p>
+            <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>Distinguish between what is within your control and what isn't. Accept the latter. Act on the former. The rest is noise.</p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
               AI falls into the second category. It is not a choice. It is the product of economic, technological, and scientific conditions that are still accelerating, and no individual decision - yours, your company's, your government's - will stop it. That is the part you don't control.
             </p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
-              What you do control is whether you understand it, and whether you use it well. Don't bury your head in the sand because you don't like it, and what it's doing to the world. Try to understand it and how it can be harnessed.
+              What you do control is whether you understand it, and whether you use it well. Don't bury your head in the sand because you don't like AI, and what it's doing to the world. Try to understand it and how it can be used to be a better human.
             </p>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.85, color: "#3d3d3d", marginBottom: 22 }}>
               The gap between people who understand these systems and people who don't is going to compound. The people who engage - who learn to work alongside AI rather than around it, who build things that help them rather than waiting for someone else to do it - will be in a different position to those who don't. That is not hype. It is just how tools work.
