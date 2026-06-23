@@ -25,7 +25,31 @@ A chat interface grounded in the document corpus. Questions are answered with ci
 A collapsible chronological view of case events extracted from document metadata — email dates, creation dates, contractual deadlines. Drill down from year to month to individual events. Filter by event type and disclosure side. Provides an immediate chronological overview without manual review.
 
 **OCR for Scanned Documents**
-Optical character recognition for scanned PDFs and image files, with intelligent DPI management and low-content detection. Documents that are redacted or contain minimal text are automatically tagged rather than lost.
+Optical character recognition for scanned PDFs and image files, with intelligent DPI management and low-content detection. Documents that are redacted or contain minimal text are automatically tagged rather than lost. An overnight vision re-extraction pass recovers text from scans that defeat conventional OCR.
+
+**Entity Extraction**
+Every document is scanned for the people, organisations, and places it mentions, using on-device named-entity recognition. Browse the corpus by entity, see every document a party appears in, and jump straight to the relevant material. Extraction runs in seconds per document, allowing the entire corpus to be entity-indexed.
+
+**Knowledge Graph**
+An interactive visual graph showing connections between documents and the parties that link them — shared people, organisations, and references rendered as a navigable network. Click any node to expand its neighbours, search the graph, and surface patterns across large document sets that linear review would miss.
+
+**Custom Taxonomies & Classification**
+The system classifies every document against case-specific categories — document types, parties, issues, and bespoke tags defined by the legal team. Suggested tags can be reviewed and accepted in bulk, building a searchable, lawyer-defined structure over the whole corpus.
+
+**Disclosure Audit**
+Statistical and pattern checks across the disclosure set that surface exactly what an opposing solicitor will probe at trial: gaps in disclosure numbering, document-type droughts, and month-over-month volume cliffs. Each anomaly is flagged for review, turning completeness from a hope into a checkable property — on a 200,000-document corpus the checks run in seconds.
+
+**Junior-Lawyer Orchestrator**
+A task-driven assistant that takes a plain-English legal instruction, selects the appropriate junior-lawyer skill(s), runs each against the corpus, and synthesises a single cited work product. All reasoning runs on the local model — nothing leaves the device. Long-running research agents can build complete chronologies for an entity or cross-reference accounts across documents to flag contradictions.
+
+**Limitation Calculator**
+A rule-based Limitation Act 1980 calculator for England & Wales civil litigation. Given an accrual date and cause of action, it returns the cut-off date, days remaining or expired, the governing statutory section, and any arguable extensions or exceptions.
+
+**Document Preview & Summaries**
+Each document carries an at-a-glance summary and a first-page image preview, shown consistently across search results, the file browser, entity views, and the graph. A full-screen preview mode renders the original file alongside its extracted text.
+
+**Quality & Citation Controls**
+A second-stage cross-encoder reranker sharpens retrieval relevance, while citation-verification and critic passes check that generated answers are actually grounded in the cited sources before they reach the lawyer.
 
 ## What Makes It Different
 
@@ -41,20 +65,20 @@ Handles 150,000+ documents with millions of searchable chunks. Checkpoint-based 
 **Transparency Over Trust**
 Every search result cites its source. Every timeline event links to its document. The AI assists the lawyer's review — it doesn't replace the lawyer's judgment.
 
-## Planned Features
+**Completeness First**
+Most tools help you find what is there. LegalRAG also tells you what may be missing — flagging gaps in the disclosure record and probing the corpus the way opposing counsel will. The goal is not just answers, but defensible coverage.
 
-**Custom Taxonomies**
-A taxonomy builder that allows the legal team to define case-specific classification frameworks — allegations, issues, parties, transaction types. The AI classifies every document against the lawyer's own framework, creating bespoke searchable categories that reflect how the case is actually structured.
+## Roadmap
 
-**Knowledge Map**
-An interactive visual graph showing connections between documents — shared parties, overlapping dates, cross-references, related transactions. Documents as nodes, relationships as edges, rendered as a navigable hub-and-spoke visualisation. Surfaces patterns across large document sets that linear review would miss.
+The platform is moving from single-device deployments toward a managed fleet: a private high-capacity reasoning hub paired with per-client DGX Spark units, so each firm keeps its own data on its own device while sharing centrally-maintained skills, models, and updates. Continued work focuses on deeper case-theory tooling, richer cross-document analysis, and multi-firm operation with strict per-client isolation.
 
 ## Technology Stack
 
 - **Hardware:** NVIDIA DGX Spark (GB10 Superchip, 128GB unified memory, NVMe storage)
-- **AI Models:** Open-weight models running locally via Ollama (reasoning + embeddings)
+- **AI Models:** Open-weight models running locally via Ollama — large reasoning model for Q&A and orchestration, fast models for ingestion, plus on-device named-entity recognition and a cross-encoder reranker
+- **Retrieval:** Hybrid vector + keyword search with reciprocal-rank fusion, second-stage reranking, and agentic multi-round retrieval for complex questions
 - **Database:** PostgreSQL with pgvector for hybrid text and vector search
-- **Security:** ClamAV, AppArmor, UFW, Fail2ban, AIDE, auditd — hardened Linux with daily scanning
+- **Security:** Hardened Linux with ClamAV, AppArmor, UFW, Fail2ban, AIDE and auditd; TOTP-gated administrative controls and a least-privilege read-only role for analysis tooling
 - **Access:** Tailscale peer-to-peer VPN for secure remote access without port forwarding
 
 ## Who It's For
@@ -66,7 +90,7 @@ An interactive visual graph showing connections between documents — shared par
 
 ## Deployment Model
 
-Each client gets their own DGX Spark unit, configured and deployed at their premises. The system is self-contained — no ongoing cloud dependency. Setup, ingestion, and training are handled as a managed service by Humanity³.
+Each client gets their own DGX Spark unit, configured and deployed at their premises. The system is self-contained — no ongoing cloud dependency, and each firm's data never leaves its own device. Setup, ingestion, and training are handled as a managed service by Humanity³, with skills, models, and updates maintained centrally and pushed to each deployment.
 
 ---
 
