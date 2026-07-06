@@ -6,3 +6,9 @@ id = "BMg2pfKcMr2VpEvVZAJNj"
 uri = "file://tutto-content.md"
 type = "text"
 title = "Tutto — Full Site Content (Markdown)"
+
+[[outputs]]
+id = "c0VoH9sHpOK7XOgR0YTjA"
+uri = "file://HANDOVER.md"
+type = "text"
+title = "Tutto — Handover & Migration Plan"
