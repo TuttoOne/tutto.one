@@ -1,5 +1,18 @@
 import { storage } from "./storage";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// This is the SINGLE source of truth for seeding blog posts into the database.
+// The live site reads posts from the DB (edit them via the /admin dashboard);
+// this array only seeds an empty database.
+//
+// ⚠️  `content` and `excerpt` are backtick-delimited template literals. If your
+//     text needs a literal backtick (`) — e.g. for inline code — you MUST escape
+//     it as \` , otherwise the string ends early and the whole build breaks.
+//     The blog renderer supports inline code with single backticks in the OUTPUT,
+//     so in source write it as:  \`like this\`
+//     (The old duplicate copy of this data in client/src/lib/chat-data.ts was
+//      removed — do not reintroduce it.)
+// ─────────────────────────────────────────────────────────────────────────────
 export const BLOG_SEED_DATA = [
   {
     slug: "the-best-combination",
