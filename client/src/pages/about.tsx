@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Header } from "@/components/layout/Layout";
+import { useQuery } from "@tanstack/react-query";
 
 const ROBOTO: React.CSSProperties = {
   fontFamily: "'Roboto', -apple-system, sans-serif",
@@ -13,6 +14,11 @@ const CAPS: React.CSSProperties = {
   letterSpacing: "0.12em",
 };
 
+const DEFAULT_HERO = {
+  headline: "Exploring AI Practically",
+  sub: "Making LLM-based AI systems useful is a very hands-on experience. The technology is new; it's moving very fast and it is extremely powerful if used in the right way. This is an exploration of one step in making all of that possible. I don't pretend to have all the answers, but I trust in the process because I've seen it work over and over again - and I want to share that with you.",
+};
+
 export default function About() {
   useEffect(() => {
     document.title = "About - Daniel Forsthofer";
@@ -20,6 +26,16 @@ export default function About() {
       document.title = "Tutto | AI Consulting";
     };
   }, []);
+
+  const { data: heroContent } = useQuery<{ value: string }>({
+    queryKey: ["/api/site-content/about-hero"],
+    retry: false,
+  });
+
+  const hero = (() => {
+    if (!heroContent) return DEFAULT_HERO;
+    try { return { ...DEFAULT_HERO, ...JSON.parse(heroContent.value) }; } catch { return DEFAULT_HERO; }
+  })();
 
   return (
     <div style={{ background: "#f6f1ea", minHeight: "100vh", ...INTER }}>
@@ -52,7 +68,7 @@ export default function About() {
               letterSpacing: "-0.3px",
             }}
           >
-            Exploring AI Practically
+            {hero.headline}
           </h1>
           <p
             style={{
@@ -63,12 +79,7 @@ export default function About() {
               maxWidth: 520,
             }}
           >
-            Making LLM-based AI systems useful is a very hands-on experience.
-            The technology is new; it's moving very fast and it is extremely
-            powerful if used in the right way. This is an exploration of one
-            step in making all of that possible. I don't pretend to have all the
-            answers, but I trust in the process because I've seen it work over
-            and over again - and I want to share that with you.
+            {hero.sub}
           </p>
         </div>
 

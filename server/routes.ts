@@ -5,6 +5,7 @@ import { insertContactSubmissionSchema, insertEmailLeadSchema } from "@shared/sc
 import { z } from "zod";
 import Anthropic from "@anthropic-ai/sdk";
 import { Resend } from "resend";
+import { registerAdminRoutes } from "./admin-routes";
 
 const anthropic = new Anthropic({
   apiKey: process.env.AI_INTEGRATIONS_ANTHROPIC_API_KEY,
@@ -179,14 +180,8 @@ export async function registerRoutes(
             <div style="background: #1a1a1a; border-radius: 10px; padding: 28px; margin-bottom: 24px;">
               <p style="color: #d97706; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 8px;">New Lead Capture</p>
               <h2 style="color: #f6f1ea; font-size: 22px; margin: 0;">${data.email}</h2>
-              ${data.name ? `<p style="color: rgba(246,241,234,0.5); font-size: 13px; margin: 4px 0 0;">${data.name}</p>` : ""}
+              <p style="color: rgba(246,241,234,0.5); font-size: 13px; margin: 4px 0 0;">${data.source}</p>
             </div>
-            ${data.company ? `
-            <div style="background: #fff; border-radius: 10px; padding: 24px; border: 1px solid #d8d0c5;">
-              <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px;">Company</p>
-              <p style="color: #1a1a1a; font-size: 14px; margin: 0;">${data.company}</p>
-            </div>
-            ` : ""}
             <p style="color: #a8a092; font-size: 11px; margin: 20px 0 0; text-align: center;">Tutto · tutto.one</p>
           </div>
         `
@@ -200,6 +195,43 @@ export async function registerRoutes(
         console.error("Lead capture error:", error);
         res.status(500).json({ error: "Failed to capture lead" });
       }
+    }
+  });
+
+  // Public blog routes
+  app.get("/api/blog", async (req, res) => {
+    try {
+      const posts = await storage.getAllBlogPosts(true);
+      res.json(posts);
+    } catch (error) {
+      console.error("Failed to fetch blog posts:", error);
+      res.status(500).json({ error: "Failed to fetch blog posts" });
+    }
+  });
+
+  app.get("/api/blog/:slug", async (req, res) => {
+    try {
+      const post = await storage.getBlogPostBySlug(req.params.slug);
+      if (!post || !post.published) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+      res.json(post);
+    } catch (error) {
+      console.error("Failed to fetch blog post:", error);
+      res.status(500).json({ error: "Failed to fetch blog post" });
+    }
+  });
+
+  // Public site content
+  app.get("/api/site-content/:key", async (req, res) => {
+    try {
+      const content = await storage.getSiteContent(req.params.key);
+      if (!content) {
+        return res.status(404).json({ error: "Content not found" });
+      }
+      res.json(content);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch content" });
     }
   });
 
@@ -252,6 +284,9 @@ export async function registerRoutes(
       res.status(404).json({ error: "Not found" });
     }
   });
+
+  // Register admin routes
+  registerAdminRoutes(app);
 
   return httpServer;
 }

@@ -256,10 +256,35 @@ function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass:
   );
 }
 
-export function PortfolioDisplay({ entries = portfolioEntries }: { entries?: PortfolioEntry[] }) {
+export interface PortfolioTextOverride {
+  id: string;
+  name?: string;
+  tagline?: string;
+  description?: string;
+  url?: string;
+}
+
+export function PortfolioDisplay({
+  entries = portfolioEntries,
+  overrides,
+}: {
+  entries?: PortfolioEntry[];
+  overrides?: PortfolioTextOverride[];
+}) {
+  const mergedEntries = overrides
+    ? entries.map((entry) => {
+        const slug = entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-");
+        const ov = overrides.find((o) => o.id === slug);
+        if (!ov) return entry;
+        const { id: _id, ...rest } = ov;
+        void _id;
+        return { ...entry, ...Object.fromEntries(Object.entries(rest).filter(([, v]) => v !== undefined)) };
+      })
+    : entries;
+
   return (
     <div className="space-y-8">
-      {entries.map((entry, index) => {
+      {mergedEntries.map((entry, index) => {
         const slug = entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-");
         const theme = entryThemes[index % entryThemes.length];
         // Even entries: desktop shows summary-left, showcase-right

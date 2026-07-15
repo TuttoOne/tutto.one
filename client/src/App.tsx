@@ -15,6 +15,9 @@ import LegalRag from "@/pages/legalrag";
 import GtmOrchestrator from "@/pages/gtm-orchestrator";
 import BecomeATrainer from "@/pages/become-a-trainer";
 import PraxisLearn from "@/pages/praxis-learn";
+import AdminDashboard from "@/pages/admin-dashboard";
+import AdminLogin from "@/pages/admin-login";
+import AdminSetup from "@/pages/admin-setup";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -42,6 +45,9 @@ function Router() {
         <Route path="/become-a-trainer" component={BecomeATrainer} />
         <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
         <Route path="/praxis/learn/:course" component={PraxisLearn} />
+        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/admin/login" component={AdminLogin} />
+        <Route path="/admin/setup" component={AdminSetup} />
         <Route component={NotFound} />
       </Switch>
     </>

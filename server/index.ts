@@ -1,7 +1,9 @@
 import express, { type Request, Response, NextFunction } from "express";
+import cookieParser from "cookie-parser";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+import { seedBlogPostsIfEmpty } from "./seed-blog";
 
 const app = express();
 const httpServer = createServer(app);
@@ -21,6 +23,7 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -48,7 +51,11 @@ app.use((req, res, next) => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
+      // Never log response bodies for admin auth/setup routes — they may contain
+      // TOTP secrets, QR codes, or temporary tokens
+      const isSensitiveAdminRoute =
+        path.startsWith("/api/admin/setup") || path.startsWith("/api/admin/login");
+      if (capturedJsonResponse && !isSensitiveAdminRoute) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
 
@@ -60,6 +67,13 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Seed blog posts on startup if empty
+  try {
+    await seedBlogPostsIfEmpty();
+  } catch (err) {
+    console.error("Failed to seed blog posts:", err);
+  }
+
   await registerRoutes(httpServer, app);
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {

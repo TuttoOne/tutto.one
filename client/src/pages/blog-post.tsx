@@ -1,7 +1,8 @@
 import { Layout } from "@/components/layout/Layout";
 import { Link, useParams } from "wouter";
 import { ArrowLeft } from "lucide-react";
-import { BLOG_POSTS } from "@/lib/chat-data";
+import { useQuery } from "@tanstack/react-query";
+import type { BlogPost } from "@shared/schema";
 import capabilityGapImg from "@assets/c1952c81bca02a7c8cc05ef7801e67ca60831c55-4096x4096_1773827088246.webp";
 
 // ── Visual components ────────────────────────────────────────────────────────
@@ -340,7 +341,6 @@ function renderMarkdown(content: string, visuals?: Record<string, React.ReactNod
 
 function renderInline(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
-  // Matches **bold**, [link text](url), and `inline code`
   const regex = /\*\*(.+?)\*\*|\[([^\]]+)\]\(([^)]+)\)|`([^`]+)`/g;
   let lastIndex = 0;
   let match;
@@ -351,14 +351,12 @@ function renderInline(text: string): React.ReactNode[] {
       parts.push(<span key={key++}>{text.slice(lastIndex, match.index)}</span>);
     }
     if (match[1] !== undefined) {
-      // **bold**
       parts.push(
         <strong key={key++} className="text-foreground font-semibold">
           {match[1]}
         </strong>
       );
     } else if (match[2] !== undefined) {
-      // [link text](url)
       const href = match[3];
       const isExternal = href.startsWith("http");
       parts.push(
@@ -373,7 +371,6 @@ function renderInline(text: string): React.ReactNode[] {
         </a>
       );
     } else if (match[4] !== undefined) {
-      // `inline code`
       parts.push(
         <code key={key++} className="font-mono text-sm bg-secondary/60 px-1.5 py-0.5 rounded text-foreground">
           {match[4]}
@@ -394,9 +391,27 @@ function renderInline(text: string): React.ReactNode[] {
 
 export default function BlogPost() {
   const params = useParams<{ slug: string }>();
-  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
 
-  if (!post) {
+  const { data: post, isLoading, isError } = useQuery<BlogPost>({
+    queryKey: [`/api/blog/${params.slug}`],
+  });
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="max-w-3xl mx-auto px-6 py-12 animate-pulse">
+          <div className="h-4 bg-muted rounded w-24 mb-8" />
+          <div className="h-8 bg-muted rounded w-3/4 mb-4" />
+          <div className="h-4 bg-muted rounded w-1/2 mb-12" />
+          <div className="space-y-4">
+            {[1,2,3,4,5].map(i => <div key={i} className="h-4 bg-muted rounded" />)}
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (isError || !post) {
     return (
       <Layout>
         <div className="max-w-3xl mx-auto px-6 py-12 text-center">
@@ -410,6 +425,10 @@ export default function BlogPost() {
     );
   }
 
+  const introCard = (() => {
+    if (!post.introCard) return null;
+    try { return JSON.parse(post.introCard); } catch { return null; }
+  })();
   const visuals = VISUALS[post.slug];
 
   const ROBOTO = "'Roboto', -apple-system, sans-serif";
@@ -423,20 +442,20 @@ export default function BlogPost() {
           Back to Blog
         </Link>
 
-        {(post as any).introCard ? (
+        {introCard ? (
           <>
             <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 40 }}>
-              {(post as any).introCard.tagline && (
+              {introCard.tagline && (
                 <p style={{ fontFamily: INTER, fontSize: 9, textTransform: "uppercase", letterSpacing: "0.14em", color: "#d97706", marginBottom: 18 }}>
-                  {(post as any).introCard.tagline}
+                  {introCard.tagline}
                 </p>
               )}
-              <h1 style={{ fontFamily: ROBOTO, fontSize: "clamp(24px, 4.5vw, 44px)", fontWeight: 900, lineHeight: 1.15, color: "#f6f1ea", letterSpacing: "-0.3px", marginBottom: (post as any).introCard.sub ? 16 : 0 }}>
-                {(post as any).introCard.headline}
+              <h1 style={{ fontFamily: ROBOTO, fontSize: "clamp(24px, 4.5vw, 44px)", fontWeight: 900, lineHeight: 1.15, color: "#f6f1ea", letterSpacing: "-0.3px", marginBottom: introCard.sub ? 16 : 0 }}>
+                {introCard.headline}
               </h1>
-              {(post as any).introCard.sub && (
+              {introCard.sub && (
                 <p style={{ fontFamily: INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", marginTop: 16, maxWidth: 520 }}>
-                  {(post as any).introCard.sub}
+                  {introCard.sub}
                 </p>
               )}
             </div>

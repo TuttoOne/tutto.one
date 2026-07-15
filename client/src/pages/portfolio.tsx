@@ -1,7 +1,18 @@
 import { Layout } from "@/components/layout/Layout";
-import { PortfolioDisplay } from "@/components/portfolio/PortfolioDisplay";
+import { PortfolioDisplay, type PortfolioTextOverride } from "@/components/portfolio/PortfolioDisplay";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Portfolio() {
+  const { data: portfolioContent } = useQuery<{ value: string }>({
+    queryKey: ["/api/site-content/portfolio"],
+    retry: false,
+  });
+
+  const overrides: PortfolioTextOverride[] | undefined = (() => {
+    if (!portfolioContent) return undefined;
+    try { return JSON.parse(portfolioContent.value); } catch { return undefined; }
+  })();
+
   return (
     <Layout>
       <div className="max-w-5xl mx-auto px-6 py-12">
@@ -17,7 +28,7 @@ export default function Portfolio() {
           </p>
         </div>
 
-        <PortfolioDisplay />
+        <PortfolioDisplay overrides={overrides} />
       </div>
     </Layout>
   );

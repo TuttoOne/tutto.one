@@ -2,8 +2,16 @@ import { Layout } from "@/components/layout/Layout";
 import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 
-const services = [
+interface ServiceItem {
+  title: string;
+  description: string;
+  features: string[];
+  price: string;
+}
+
+const DEFAULT_SERVICES: ServiceItem[] = [
   {
     title: "Data Audit & Knowledge Mapping",
     description:
@@ -40,6 +48,20 @@ const services = [
 ];
 
 export default function Services() {
+  const { data: servicesContent } = useQuery<{ value: string }>({
+    queryKey: ["/api/site-content/services"],
+    retry: false,
+  });
+
+  const services: ServiceItem[] = (() => {
+    if (!servicesContent) return DEFAULT_SERVICES;
+    try {
+      return JSON.parse(servicesContent.value);
+    } catch {
+      return DEFAULT_SERVICES;
+    }
+  })();
+
   return (
     <Layout>
       <div className="max-w-5xl mx-auto px-6 py-12">
@@ -56,6 +78,7 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={index}
+              data-testid={`card-service-${index}`}
               className="bg-card border border-border/60 rounded-2xl p-8 hover:shadow-lg transition-all hover:-translate-y-1 duration-300 flex flex-col"
             >
               <h3 className="text-xl font-serif font-bold mb-4">
