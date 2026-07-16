@@ -10,6 +10,7 @@ import BlogPost from "@/pages/blog-post";
 import Praxis from "@/pages/praxis";
 import Pythia from "@/pages/pythia";
 import About from "@/pages/about";
+import Team from "@/pages/team";
 import SecondBrain from "@/pages/second-brain";
 import LegalRag from "@/pages/legalrag";
 import GtmOrchestrator from "@/pages/gtm-orchestrator";
@@ -39,6 +40,7 @@ function Router() {
         <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/pythia" component={Pythia} />
         <Route path="/about" component={About} />
+        <Route path="/team" component={Team} />
         <Route path="/second-brain" component={SecondBrain} />
         <Route path="/legalrag" component={LegalRag} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />

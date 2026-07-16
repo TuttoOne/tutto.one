@@ -15,8 +15,8 @@ const CAPS: React.CSSProperties = {
 };
 
 const DEFAULT_HERO = {
-  headline: "Exploring AI Practically",
-  sub: "Making LLM-based AI systems useful is a very hands-on experience. The technology is new; it's moving very fast and it is extremely powerful if used in the right way. This is an exploration of one step in making all of that possible. I don't pretend to have all the answers, but I trust in the process because I've seen it work over and over again - and I want to share that with you.",
+  headline: "Learn by doing",
+  sub: "Making AI useful is a hands-on experience. The technology is new, moving fast, and genuinely powerful when used in the right way. Any leap is less daunting when you take the first step with someone beside you who's taken enough scary ones to like them. I don't pretend to have all the answers - I've just stopped waiting for them, and I want to share what I've found.",
 };
 
 export default function About() {
@@ -175,6 +175,12 @@ export default function About() {
                 marginBottom: 22,
               }}
             >
+              Fear is the starting condition here, not the enemy. People fear
+              change and the unknown - so do I, still. The answer isn't bravado;
+              it's a first step, then another. My role is not to be the expert
+              above you, but the experienced first-stepper beside you.
+              <br />
+              <br />
               I work with businesses and individuals who want to understand what
               is actually happening: what these systems are, what they are
               genuinely good at, where they fail, and what a working setup looks
