@@ -453,6 +453,156 @@ Three things stand out as actionable from this research.
 
 That last point is where most of the work actually sits. And it's the work that pays the highest dividends.`,
   },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // DRAFTS pulled from the second-brain repo (2026-07). published: false — these
+  // stay OFF the public blog and are visible only in /admin until Daniel gives
+  // the explicit go to publish. Do not flip `published` without his sign-off.
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    slug: "learn-by-doing",
+    title: "Learn by doing",
+    excerpt: "Fifteen years ago my wife and I said yes to paella. We didn't really know what we were doing - we did it anyway. The skill was never paella. It was saying yes before I felt ready, and learning by doing.",
+    date: "Jun 5, 2026",
+    readTime: "3 min read",
+    introCard: JSON.stringify({
+      tagline: "A principle",
+      headline: "Learn by doing.",
+      sub: "Fifteen years ago my wife and I said yes to paella. We didn't really know what we were doing. We did it anyway.",
+    }),
+    published: false,
+    content: `Fifteen years ago my wife and I said yes to paella.
+
+It wasn't a plan. It was a weekend thing - cook, feed people, be part of the street food scene that was growing back home in South Africa. We didn't really know what we were doing.
+
+We did it anyway.
+
+I loved it. The early starts. The setup when it's still quiet. The same faces every week. Selling out and then picking apart why one week beat the last. It was physical, it was a rush, and it paid.
+
+So we reinvested. Then more. Then more. Bigger premises. A longer menu. More fridges. More staff. We overbuilt - and the wheels were coming off before we saw them. Covid just made it impossible to ignore.
+
+So we stripped it back. Launched a cheaper version overnight to stay alive. It worked. We made it.
+
+And somewhere in that mess I noticed something. The thing I was actually good at wasn't paella. It was the figuring-out. Helping the thing adapt. Explaining why. Making a scary moment feel like something you could handle.
+
+That's the part I keep coming back to.
+
+Because the skill was never paella. It was saying yes before I felt ready, and learning by doing. I'd done it years earlier teaching teenagers guitar - I was never a great player, I was just patient, and I could make it click. Same thing.
+
+Now I do the same thing with AI.
+
+People will always be afraid of change. Of the unknown. So am I - still. I just found a way through it: you take a first step. Then another. The doing teaches you.
+
+You don't have to become an expert before you're allowed to start. And it's easier with someone in the room who's taken enough scary first steps to have got a taste for them. That's me now. That's the part I like.
+
+I still don't have all the answers. I've just stopped waiting for them.
+
+Learn by doing.`,
+  },
+
+  {
+    slug: "second-brain-not-a-metaphor",
+    title: "Your second brain is not a metaphor",
+    excerpt: "We say 'second brain' like we say 'my other half' - fond exaggeration nobody really means. After three months building these systems and watching them start to connect, I've stopped treating it as a figure of speech.",
+    date: "Jun 5, 2026",
+    readTime: "6 min read",
+    introCard: JSON.stringify({
+      tagline: "Philosophy",
+      headline: "Your second brain is not a metaphor.",
+      sub: 'We throw the phrase around like "my other half" - fond exaggeration nobody really means. I think we should mean it.',
+    }),
+    published: false,
+    content: `I've spent the last three months building systems.
+
+Not one. Several. A separate setup for each part of my life - the work I do, the ideas I'm chasing, the businesses I run, the things I just care about. Each one built on its own, for its own reason, in its own corner.
+
+This brain - the personal one - is the latest. Plain-text files an AI can read: my paella story, the way I talk, what I'm trying to build and why.
+
+The tidy part I expected. Filing things into folders. That's not what got me.
+
+What got me is what happens when you start connecting them.
+
+Each system was an island. Useful alone. But wire them together - let the personal brain see the work, the ideas meet the businesses - and it stops behaving like storage. It starts behaving like a network. Something in one corner lights up something in another. I asked it about my own life and it tied the way I run a catering business from another continent to the way I want to teach - a connection I'd never made out loud myself.
+
+That's the part that's getting wild. It's less like a filing cabinet every day, and more like a neural network - a lot of separate things, built for different reasons, starting to fire together.
+
+And it's why I've stopped treating "second brain" as a figure of speech.
+
+We throw the phrase around like "my other half." A bit of fond exaggeration. Nobody really means it.
+
+I think we should mean it.
+
+Back in 1998 two philosophers, Andy Clark and David Chalmers, made an argument that sounds mad until it doesn't. They said the mind doesn't stop at the skull.
+
+Their example was a man called Otto. Otto's memory is failing, so he writes everything down in a notebook and trusts it completely. His friend Inga just remembers things the normal way. When they both decide to go to the museum, Inga recalls the address; Otto looks it up. The notebook is doing the exact job Inga's memory does.
+
+So why, they asked, call one of them "mind" and the other "just a notebook"? If a process would count as thinking when it happens in your head, it still counts when it happens on the page. The page is part of the thinking.
+
+You already live this. You just don't notice.
+
+You don't hold phone numbers in your head anymore. Or half the dates you're meant to remember. Or how to get to the place you drove to last week. Your phone holds them. And you trust it like memory - you'd sooner doubt your own recall than the calendar.
+
+That's an extended mind. It's been in your pocket for years.
+
+What's different now is that the new part doesn't just hold things. It thinks back. You put something in, and it answers. The notebook started talking. And when you connect enough notebooks, they start talking to each other.
+
+That changes what "I'll get to it later" actually means.
+
+If a second brain were just another app, putting it off would cost you a little convenience. No drama. But if it's really an extension of your mind - a place your thinking can live, connect, and grow - then putting it off isn't skipping a tool. It's choosing how much of your own head to build, and how soon.
+
+I said somewhere else that building one of these is like saving. Small deposits, compounding quietly. This is why it's not just a line. You're not saving up points or productivity. You're saving up mind. The person who starts a few rough notes today and keeps going isn't a little ahead in three years. They're thinking with more than they were born with.
+
+Now the part the excitable people skip.
+
+If your mind can grow into a tool, it can also shrink into one.
+
+Lean on it to remember for you, and your memory gets lazy - you've felt that already, with the phone numbers. Lean on it to think for you, and the same thing happens to your thinking. You get a little smaller each time you hand over the part that was yours to do.
+
+So the line I hold is simple. Extend yourself. Don't replace yourself. Use it to reach further than you could alone - not to stop reaching. The day it's doing the thinking and you're just nodding along, you've built something. But it isn't a second brain. It's a first one you've stopped using.
+
+I'm three months in. The systems exist. Connecting them is what I'm doing now - and that's where it's getting wild. I don't know all of what it becomes. That's fine - I've stopped waiting to know before I start.
+
+But the question has already changed for me. It was never "should I use AI." It's quieter than that, and harder.
+
+What do I want to keep in my own head - and what am I willing to think with?`,
+  },
+
+  {
+    slug: "never-just-one-reason",
+    title: "It's never just one reason",
+    excerpt: "When someone tells me why they haven't started with AI, it's never just one reason. Too busy, not allowed, scared of doing it wrong - usually all at once. Here's what I've actually stopped doing.",
+    date: "Jun 5, 2026",
+    readTime: "3 min read",
+    introCard: JSON.stringify({
+      tagline: "Reasons people don't start",
+      headline: "It's never just one reason.",
+      sub: "Too busy. Company won't allow it. Scared of doing it wrong. Usually it's more than one - at once, on the same Tuesday.",
+    }),
+    published: false,
+    content: `When someone tells me why they haven't started with AI, it's never just one reason.
+
+They're too busy. Their company won't allow it. They're scared of doing it wrong - losing money, being out of their depth. Or they tried it once, got generic slop back, and wrote the whole thing off.
+
+Usually it's more than one. At once. On the same Tuesday.
+
+That's not weakness. That's just life. Life isn't singular. I feel most of these too, depending on the day. I'm not perfect, and I've stopped pretending the perfect moment is coming.
+
+And the slop one - that's fair. The first go is often rubbish. It's not magic, and it's not the right tool for every job. But generic results usually mean the steering was off, not that the thing is useless. That part you learn by doing.
+
+What I've actually stopped doing is waiting. You'll never wake up un-busy, fully allowed, and unafraid on the same morning. Wait for that and you wait forever.
+
+So borrow the line people use about money. The best time to start saving was ten years ago. The second best time is today.
+
+A second brain is the same. It's an asset - just a different kind. You don't build it in one big heroic go. You build it the way you build savings: small, regular deposits. A thought here. A note there. A few minutes that would've gone to the scroll.
+
+It compounds. Quietly, then all at once. I've been making those deposits into my own systems for fifteen years without calling it that - and the ones who start small and keep going end up miles ahead of the ones still waiting to begin properly.
+
+You don't need the perfect moment. You need to open the account.
+
+First step: put one thing in today. One thought, one note, one question worth answering. That's the deposit. Tomorrow, make another.
+
+Which one's loudest for you right now?`,
+  },
 ];
 
 const DEFAULT_PORTFOLIO_JSON = JSON.stringify([
@@ -467,23 +617,42 @@ const DEFAULT_ABOUT_HERO_JSON = JSON.stringify({
   sub: "Making LLM-based AI systems useful is a very hands-on experience. The technology is new; it's moving very fast and it is extremely powerful if used in the right way. This is an exploration of one step in making all of that possible. I don't pretend to have all the answers, but I trust in the process because I've seen it work over and over again - and I want to share that with you.",
 });
 
+type SeedPost = (typeof BLOG_SEED_DATA)[number];
+
+async function createSeedPost(post: SeedPost) {
+  await storage.createBlogPost({
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    date: post.date,
+    readTime: post.readTime,
+    content: post.content,
+    introCard: post.introCard ?? null,
+    published: post.published,
+  });
+}
+
 export async function seedBlogPostsIfEmpty() {
   const count = await storage.getBlogPostCount();
   if (count === 0) {
     console.log("Seeding blog posts...");
     for (const post of BLOG_SEED_DATA) {
-      await storage.createBlogPost({
-        slug: post.slug,
-        title: post.title,
-        excerpt: post.excerpt,
-        date: post.date,
-        readTime: post.readTime,
-        content: post.content,
-        introCard: post.introCard ?? null,
-        published: post.published,
-      });
+      await createSeedPost(post);
     }
     console.log(`Seeded ${BLOG_SEED_DATA.length} blog posts.`);
+  } else {
+    // DB already seeded: insert only slugs that don't exist yet (e.g. drafts
+    // added to the seed after first run). Existing posts are never modified or
+    // deleted, so live edits made via /admin are always preserved.
+    let added = 0;
+    for (const post of BLOG_SEED_DATA) {
+      const existing = await storage.getBlogPostBySlug(post.slug);
+      if (!existing) {
+        await createSeedPost(post);
+        added++;
+      }
+    }
+    if (added > 0) console.log(`Added ${added} new blog post(s) from seed.`);
   }
 
   // Seed default site content if not yet stored
