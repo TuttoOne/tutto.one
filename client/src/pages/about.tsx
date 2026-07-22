@@ -247,12 +247,10 @@ export default function About() {
                 alt="Daniel Forsthofer"
                 style={{
                   width: "100%",
+                  height: "auto",
                   borderRadius: 8,
                   marginTop: 16,
                   display: "block",
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                  maxHeight: 220,
                 }}
               />
             </div>
