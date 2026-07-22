@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import path from "path";
 import { storage } from "./storage";
 import { insertContactSubmissionSchema, insertEmailLeadSchema } from "@shared/schema";
 import { z } from "zod";
@@ -283,6 +284,17 @@ export async function registerRoutes(
     } catch {
       res.status(404).json({ error: "Not found" });
     }
+  });
+
+  // Praxis France decks — served at extensionless URLs in both dev and prod.
+  // Files live in client/public (dev) which vite copies to dist/public (prod).
+  const deckDir =
+    process.env.NODE_ENV === "production"
+      ? path.resolve(__dirname, "public")
+      : path.resolve(process.cwd(), "client", "public");
+  app.get(["/praxisfrance-en", "/praxisfrance-fr"], (req, res) => {
+    const lang = req.path.endsWith("-fr") ? "fr" : "en";
+    res.sendFile(path.join(deckDir, `praxisfrance-${lang}.html`));
   });
 
   // Register admin routes

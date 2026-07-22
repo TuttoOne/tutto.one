@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis · Practical AI — a free evening (English master)</title>
+<link rel="stylesheet" href="/praxis.css">
+<style>
+  /* ===== On-screen presentation harness — same as the course decks ===== */
+  html, body { height: 100%; margin: 0; }
+  body { background: hsl(var(--background)); overflow: hidden; }
+
+  .deck-slide {
+    position: fixed; inset: 0;
+    display: none; flex-direction: column; justify-content: center;
+    padding: 4.5vh 6vw 7vh; background: hsl(var(--background));
+  }
+  .deck-slide.active { display: flex; }
+  .stage { width: 100%; max-width: 1180px; margin: 0 auto; }
+
+  .chrome {
+    position: fixed; top: 3.2vh; left: 6vw; right: 6vw;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: var(--text-sm); color: hsl(var(--muted-foreground));
+  }
+  .chrome .wm { font-family: var(--font-display); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); color: hsl(var(--foreground)); }
+  .chrome .wm .dot { color: hsl(var(--primary)); }
+
+  .deck-slide .eyebrow { margin-bottom: var(--space-2); }
+  .deck-slide h2 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); margin: 0 0 var(--space-2); }
+  .deck-slide .lead { max-width: 62ch; margin-bottom: var(--space-6); }
+
+  .diagram { width: 100%; margin-top: var(--space-2); }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 74ch; }
+  .cap code { font-size: 0.85em; }
+
+  svg text { font-family: var(--font-sans); fill: hsl(var(--foreground)); }
+  .s-ink { fill: hsl(var(--foreground)); }
+  .s-amber { fill: hsl(var(--primary)); }
+  .l-ink { stroke: hsl(var(--foreground)); fill: none; }
+  .l-amber { stroke: hsl(var(--primary)); fill: none; }
+  .l-faint { stroke: hsl(var(--border)); fill: none; }
+  .box { fill: #fff; stroke: hsl(var(--border)); }
+  .box-amber { fill: hsl(var(--primary) / 0.08); stroke: hsl(var(--primary)); }
+  .box-ink { fill: hsl(var(--foreground)); stroke: hsl(var(--foreground)); }
+  .t-lbl { font-size: 19px; font-weight: 600; }
+  .t-sub { font-size: 14px; fill: hsl(var(--muted-foreground)); }
+  .t-tiny { font-size: 12.5px; fill: hsl(var(--muted-foreground)); }
+  .t-mono { font-family: var(--font-mono); font-size: 14px; }
+  .t-white { fill: hsl(var(--background)); }
+
+  .deck-slide.title { background: hsl(var(--foreground)); justify-content: flex-end; }
+  .deck-slide.title h1 { color: hsl(var(--background)); font-size: clamp(2.6rem, 6vw, 4.2rem); margin-bottom: var(--space-4); }
+  .deck-slide.title .eyebrow { color: hsl(var(--primary)); }
+  .deck-slide.title .lead { color: hsl(40 10% 80%); }
+  .deck-slide.title .chrome .wm { color: hsl(var(--background)); }
+  .deck-slide.title .chrome { color: hsl(40 8% 60%); }
+
+  .spine { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); margin-top: var(--space-6); }
+  .spine .grp h4 { margin: 0 0 var(--space-3); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: hsl(var(--primary)); }
+  .spine ol { list-style: none; margin: 0; padding: 0; }
+  .spine li { font-size: var(--text-base); margin-bottom: var(--space-2); display: flex; gap: var(--space-2); line-height: var(--leading-snug); }
+  .spine li .n { font-family: var(--font-mono); font-size: var(--text-xs); color: hsl(var(--muted-foreground)); padding-top: 0.2em; min-width: 1.2em; }
+
+  .slide-counter { position: fixed; bottom: 3.2vh; right: 6vw; font-size: var(--text-xs); letter-spacing: var(--tracking-wider); color: hsl(var(--muted-foreground)); }
+  .deck-slide.title .slide-counter { color: hsl(40 8% 55%); }
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: hsl(var(--primary)); transition: width 0.2s ease; z-index: 10; }
+  .hint { position: fixed; bottom: 3.2vh; left: 6vw; font-size: var(--text-xs); color: hsl(var(--muted-foreground)); opacity: 0.7; }
+
+  @media print {
+    body { overflow: visible; }
+    @page { size: A4 landscape; margin: 0; }
+    .deck-slide { position: relative; inset: auto; display: flex !important; height: 100vh; page-break-after: always; }
+    .progress, .hint, .slide-counter { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- ============ 1 · TITLE ============================================= -->
+<section class="deck-slide title active">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · a free evening</span></div>
+  <div class="stage">
+    <span class="eyebrow">Praxis — ninety minutes on practical AI</span>
+    <h1>What this actually is,<br>and what you can<br>build with it.</h1>
+    <p class="lead">No jargon, no fear. One thing built live in front of you, and a straight answer to what it means for your work, your business, and your children.</p>
+  </div>
+  <span class="slide-counter">01</span>
+</section>
+
+<!-- ============ 2 · THE SPINE ========================================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Tonight, on one screen</span></div>
+  <div class="stage">
+    <span class="eyebrow">Where we're going</span>
+    <h2>The whole evening on one screen</h2>
+    <p class="lead">Four moves. If you get lost, we come back here. You don't need to remember any of it — you need to see one thing work.</p>
+    <div class="spine">
+      <div class="grp">
+        <h4>Ground</h4>
+        <ol>
+          <li><span class="n">1</span> The two stories about AI</li>
+          <li><span class="n">2</span> What it actually is</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>Show</h4>
+        <ol>
+          <li><span class="n">3</span> Empty folder to a working tool</li>
+          <li><span class="n">4</span> What you just saw</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>You</h4>
+        <ol>
+          <li><span class="n">5</span> What it means for your work</li>
+          <li><span class="n">6</span> And for your children</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>Control</h4>
+        <ol>
+          <li><span class="n">7</span> Building safely</li>
+          <li><span class="n">8</span> What "sovereign" means</li>
+          <li><span class="n">9</span> Why not look away</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <span class="slide-counter">02</span>
+</section>
+
+<!-- ============ 3 · THE TWO STORIES =================================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Ground · the two stories</span></div>
+  <div class="stage">
+    <span class="eyebrow">Ground</span>
+    <h2>Two stories about AI, both wrong</h2>
+    <p class="lead">You've been sold fear or hype. The people who shouted "it takes every job" the loudest are the ones now walking it back.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 260" role="img" aria-label="Two stories and the middle">
+        <rect x="20" y="30" width="300" height="96" rx="14" class="box"/>
+        <text x="170" y="66" text-anchor="middle" class="t-lbl">Apocalypse</text>
+        <text x="170" y="92" text-anchor="middle" class="t-tiny">"the machines take everything"</text>
+        <text x="170" y="110" text-anchor="middle" class="t-tiny">— sells fear, drives funding</text>
+
+        <rect x="660" y="30" width="300" height="96" rx="14" class="box"/>
+        <text x="810" y="66" text-anchor="middle" class="t-lbl">Utopia</text>
+        <text x="810" y="92" text-anchor="middle" class="t-tiny">"it fixes everything, just adopt"</text>
+        <text x="810" y="110" text-anchor="middle" class="t-tiny">— sells subscriptions</text>
+
+        <rect x="170" y="164" width="640" height="76" rx="14" class="box-amber"/>
+        <text x="490" y="198" text-anchor="middle" class="t-lbl s-amber">Where we stand</text>
+        <text x="490" y="222" text-anchor="middle" class="t-tiny">some jobs change · a person with AI beats either alone · that gap doesn't close</text>
+
+        <line x1="170" y1="126" x2="320" y2="162" class="l-faint" stroke-width="1.5"/>
+        <line x1="810" y1="126" x2="660" y2="162" class="l-faint" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <p class="cap">The straight version: AI is a real shift, some work changes, and it opens up things that used to need money or years of training. The answer to a changing job is a new skill, not a redundant person.</p>
+  </div>
+  <span class="slide-counter">03</span>
+</section>
+
+<!-- ============ 4 · WHAT IT ACTUALLY IS ============================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Ground · what it is</span></div>
+  <div class="stage">
+    <span class="eyebrow">Ground — if you take one thing away</span>
+    <h2>A calculator is certain. AI guesses well.</h2>
+    <p class="lead">Software follows fixed rules: 2 + 2 is 4, every time. AI predicts the most likely next word — brilliant for language, but it can be confidently wrong.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Deterministic software versus probabilistic AI">
+        <rect x="20" y="40" width="300" height="96" rx="14" class="box"/>
+        <text x="170" y="76" text-anchor="middle" class="t-lbl">Software</text>
+        <text x="170" y="102" text-anchor="middle" class="t-tiny">fixed rules · same answer</text>
+        <text x="170" y="120" text-anchor="middle" class="t-tiny">every single time</text>
+
+        <rect x="660" y="40" width="300" height="96" rx="14" class="box"/>
+        <text x="810" y="76" text-anchor="middle" class="t-lbl">AI</text>
+        <text x="810" y="102" text-anchor="middle" class="t-tiny">reads and writes language</text>
+        <text x="810" y="120" text-anchor="middle" class="t-tiny">· sure of itself, sometimes wrong</text>
+
+        <rect x="300" y="176" width="380" height="60" rx="14" class="box-amber"/>
+        <text x="490" y="204" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Claude Code pairs the two</text>
+        <text x="490" y="224" text-anchor="middle" class="t-tiny">AI reads and phrases · software decides and repeats</text>
+
+        <line x1="170" y1="136" x2="420" y2="174" class="l-amber" stroke-width="2" marker-end="url(#w4a)"/>
+        <line x1="810" y1="136" x2="560" y2="174" class="l-amber" stroke-width="2" marker-end="url(#w4a)"/>
+        <defs>
+          <marker id="w4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">Claude understands your language and turns it into the instructions. The instructions do the work, the same way each time. That pairing is the whole trick you're about to watch.</p>
+  </div>
+  <span class="slide-counter">04</span>
+</section>
+
+<!-- ============ 5 · DEMO DIVIDER ===================================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Show · live</span></div>
+  <div class="stage">
+    <span class="eyebrow">Show — leave the deck now</span>
+    <h2>Empty folder to a working tool</h2>
+    <p class="lead">A village carpenter's quote system, built in front of you. Three steps: the job files, the workshop's rules, and a tool that turns one into a devis — the same devis, every time.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 210" role="img" aria-label="The three steps of the demo">
+        <rect x="20" y="60" width="260" height="90" rx="14" class="box"/>
+        <text x="150" y="98" text-anchor="middle" class="t-lbl">1 · The jobs</text>
+        <text x="150" y="124" text-anchor="middle" class="t-tiny">a folder of client requests</text>
+
+        <rect x="360" y="60" width="260" height="90" rx="14" class="box-amber"/>
+        <text x="490" y="98" text-anchor="middle" class="t-lbl s-amber">2 · The rules</text>
+        <text x="490" y="124" text-anchor="middle" class="t-tiny">the workshop's house rules, on disk</text>
+
+        <rect x="700" y="60" width="260" height="90" rx="14" class="box"/>
+        <text x="830" y="98" text-anchor="middle" class="t-lbl">3 · The tool</text>
+        <text x="830" y="124" text-anchor="middle" class="t-tiny">same devis, every time</text>
+
+        <line x1="280" y1="105" x2="358" y2="105" class="l-ink" stroke-width="2.5" marker-end="url(#w5a)"/>
+        <line x1="620" y1="105" x2="698" y2="105" class="l-ink" stroke-width="2.5" marker-end="url(#w5a)"/>
+        <defs>
+          <marker id="w5a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">Full script in <code>demo/demo-script.md</code>. If the wifi drops, open the pre-built folder and still run the tool live — the point survives offline.</p>
+  </div>
+  <span class="slide-counter">05</span>
+</section>
+
+<!-- ============ 6 · WHAT YOU JUST SAW ================================ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Show · what you saw</span></div>
+  <div class="stage">
+    <span class="eyebrow">Show</span>
+    <h2>The AI did the small job. The rules did the work.</h2>
+    <p class="lead">That's the pattern behind everything worth building: the machine reads and phrases, your written-down rules decide, and the result holds still.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 240" role="img" aria-label="Requests through rules to a steady result">
+        <rect x="20" y="80" width="220" height="80" rx="12" class="box"/>
+        <text x="130" y="114" text-anchor="middle" class="t-lbl">Requests</text>
+        <text x="130" y="138" text-anchor="middle" class="t-tiny">AI writes the language</text>
+
+        <rect x="300" y="80" width="240" height="80" rx="12" class="box-amber"/>
+        <text x="420" y="108" text-anchor="middle" class="t-lbl s-amber">Your rules</text>
+        <text x="420" y="132" text-anchor="middle" class="t-tiny">skill.md — the workshop's</text>
+        <text x="420" y="150" text-anchor="middle" class="t-tiny">memory, on disk</text>
+
+        <rect x="600" y="80" width="220" height="80" rx="12" class="box"/>
+        <text x="710" y="114" text-anchor="middle" class="t-lbl">The tool</text>
+        <text x="710" y="138" text-anchor="middle" class="t-tiny">enforces the rules</text>
+
+        <rect x="856" y="80" width="104" height="80" rx="12" class="box-ink"/>
+        <text x="908" y="108" text-anchor="middle" class="t-lbl t-white" style="font-size:15px">Devis</text>
+        <text x="908" y="132" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">same</text>
+        <text x="908" y="148" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">each time</text>
+
+        <line x1="240" y1="120" x2="298" y2="120" class="l-ink" stroke-width="2" marker-end="url(#w6a)"/>
+        <line x1="540" y1="120" x2="598" y2="120" class="l-ink" stroke-width="2" marker-end="url(#w6a)"/>
+        <line x1="820" y1="120" x2="854" y2="120" class="l-ink" stroke-width="2" marker-end="url(#w6a)"/>
+        <text x="20" y="50" class="t-tiny">The valuable part isn't the tool. It's the rules — the way your best person works, written down once.</text>
+        <defs>
+          <marker id="w6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">About twenty dollars a month, on your own laptop. The hard part isn't the tool — it's writing the rules for the work that actually matters, and owning the loop of fixing them until they hold.</p>
+  </div>
+  <span class="slide-counter">06</span>
+</section>
+
+<!-- ============ 7 · WHAT IT MEANS FOR YOUR WORK ====================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>You · your work</span></div>
+  <div class="stage">
+    <span class="eyebrow">You</span>
+    <h2>The same pattern fits most of your week</h2>
+    <p class="lead">A folder of documents, a set of rules, a steady result. That's a quote, an enquiry, a form, a set of minutes — most of the paperwork that eats your time.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 230" role="img" aria-label="Three everyday examples">
+        <rect x="20" y="40" width="300" height="150" rx="14" class="box"/>
+        <text x="170" y="78" text-anchor="middle" class="t-lbl">The artisan</text>
+        <text x="170" y="110" text-anchor="middle" class="t-tiny">quotes, invoices, reminders —</text>
+        <text x="170" y="130" text-anchor="middle" class="t-tiny">consistent, with the legal lines</text>
+        <text x="170" y="150" text-anchor="middle" class="t-tiny">never missing</text>
+
+        <rect x="340" y="40" width="300" height="150" rx="14" class="box-amber"/>
+        <text x="490" y="78" text-anchor="middle" class="t-lbl s-amber">The gîte owner</text>
+        <text x="490" y="110" text-anchor="middle" class="t-tiny">enquiries answered in three</text>
+        <text x="490" y="130" text-anchor="middle" class="t-tiny">languages, in your voice,</text>
+        <text x="490" y="150" text-anchor="middle" class="t-tiny">from your house rules</text>
+
+        <rect x="660" y="40" width="300" height="150" rx="14" class="box"/>
+        <text x="810" y="78" text-anchor="middle" class="t-lbl">Farm &amp; office</text>
+        <text x="810" y="110" text-anchor="middle" class="t-tiny">dossiers and forms drafted</text>
+        <text x="810" y="130" text-anchor="middle" class="t-tiny">from your files — the admin</text>
+        <text x="810" y="150" text-anchor="middle" class="t-tiny">that steals your evenings</text>
+      </svg>
+    </div>
+    <p class="cap">You don't put your work into an app. You put the tool into your own folder, on your own machine, and it learns how you do things.</p>
+  </div>
+  <span class="slide-counter">07</span>
+</section>
+
+<!-- ============ 8 · AND FOR YOUR CHILDREN ============================ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>You · your children</span></div>
+  <div class="stage">
+    <span class="eyebrow">You</span>
+    <h2>We've done this before — the calculator</h2>
+    <p class="lead">Teachers picketed. "Children will never learn to think." It didn't destroy mathematics. It became ordinary — but only because the teaching changed alongside it.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 210" role="img" aria-label="The calculator normalised because teaching changed">
+        <rect x="20" y="70" width="250" height="80" rx="14" class="box"/>
+        <text x="145" y="104" text-anchor="middle" class="t-lbl">1970s</text>
+        <text x="145" y="128" text-anchor="middle" class="t-tiny">feared, banned, resisted</text>
+
+        <rect x="365" y="70" width="250" height="80" rx="14" class="box-amber"/>
+        <text x="490" y="104" text-anchor="middle" class="t-lbl s-amber">The teaching changed</text>
+        <text x="490" y="128" text-anchor="middle" class="t-tiny">estimate · check it's reasonable</text>
+
+        <rect x="710" y="70" width="250" height="80" rx="14" class="box"/>
+        <text x="835" y="104" text-anchor="middle" class="t-lbl">Now</text>
+        <text x="835" y="128" text-anchor="middle" class="t-tiny">ordinary, in every pocket</text>
+
+        <line x1="270" y1="110" x2="363" y2="110" class="l-ink" stroke-width="2.5" marker-end="url(#w8a)"/>
+        <line x1="615" y1="110" x2="708" y2="110" class="l-ink" stroke-width="2.5" marker-end="url(#w8a)"/>
+        <defs>
+          <marker id="w8a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">AI won't become ordinary on its own — it can be confidently wrong, so the skill our children need is directing it and checking it, not fearing it or trusting it blindly. That teaching is exactly what tonight is a small piece of.</p>
+  </div>
+  <span class="slide-counter">08</span>
+</section>
+
+<!-- ============ 9 · BUILDING SAFELY (THE DIAL) ======================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Control · safely</span></div>
+  <div class="stage">
+    <span class="eyebrow">Control</span>
+    <h2>Safety is a dial, and you hold it</h2>
+    <p class="lead">The postcard versus the sealed envelope. How much leaves your hands is a setting you choose — and the way you build is the same all the way up.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 240" role="img" aria-label="The three-position safety dial">
+        <line x1="90" y1="70" x2="890" y2="70" class="l-faint" stroke-width="3"/>
+        <circle cx="90" cy="70" r="8" class="s-muted"/>
+        <circle cx="490" cy="70" r="8" class="s-muted"/>
+        <circle cx="890" cy="70" r="10" class="s-amber"/>
+
+        <rect x="20" y="100" width="240" height="96" rx="12" class="box"/>
+        <text x="140" y="130" text-anchor="middle" class="t-lbl" style="font-size:16px">In the browser</text>
+        <text x="140" y="154" text-anchor="middle" class="t-tiny">dummy data · nothing</text>
+        <text x="140" y="172" text-anchor="middle" class="t-tiny">real to leak</text>
+
+        <rect x="370" y="100" width="240" height="96" rx="12" class="box"/>
+        <text x="490" y="130" text-anchor="middle" class="t-lbl" style="font-size:16px">Your own laptop</text>
+        <text x="490" y="154" text-anchor="middle" class="t-tiny">your files stay on</text>
+        <text x="490" y="172" text-anchor="middle" class="t-tiny">the machine</text>
+
+        <rect x="720" y="100" width="240" height="96" rx="12" class="box-amber"/>
+        <text x="840" y="130" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">On your premises</text>
+        <text x="840" y="154" text-anchor="middle" class="t-tiny">nothing leaves the</text>
+        <text x="840" y="172" text-anchor="middle" class="t-tiny">building at all</text>
+
+        <text x="490" y="222" text-anchor="middle" class="t-tiny">Start on the left with nothing at risk. Move right as the work gets more sensitive. The dial is yours.</text>
+      </svg>
+    </div>
+    <p class="cap">One safe-use habit covers most of it: before you type something in, ask "would I mind if this exact text were public?" If yes, move up the dial.</p>
+  </div>
+  <span class="slide-counter">09</span>
+</section>
+
+<!-- ============ 10 · WHAT SOVEREIGN MEANS ============================ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Control · sovereign</span></div>
+  <div class="stage">
+    <span class="eyebrow">Control</span>
+    <h2>"Where it sits" isn't the same as "who controls it"</h2>
+    <p class="lead">This matters here more than most places. A French data centre owned by a foreign company still answers to that country's law. Location is not control.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 220" role="img" aria-label="Residency versus sovereignty">
+        <rect x="40" y="50" width="400" height="120" rx="14" class="box"/>
+        <text x="240" y="88" text-anchor="middle" class="t-lbl">Data in France,</text>
+        <text x="240" y="114" text-anchor="middle" class="t-lbl">foreign-owned cloud</text>
+        <text x="240" y="144" text-anchor="middle" class="t-tiny">still reachable under foreign law</text>
+
+        <rect x="540" y="50" width="400" height="120" rx="14" class="box-amber"/>
+        <text x="740" y="88" text-anchor="middle" class="t-lbl s-amber">Data on your machine,</text>
+        <text x="740" y="114" text-anchor="middle" class="t-lbl s-amber">under your roof</text>
+        <text x="740" y="144" text-anchor="middle" class="t-tiny">it never leaves — that is sovereign</text>
+
+        <text x="490" y="200" text-anchor="middle" class="t-tiny">Three questions: where does the data sit, whose law governs it there, and who can be made to hand it over?</text>
+      </svg>
+    </div>
+    <p class="cap">You don't need the top of the dial for a devis. You do need to know the choice exists — and that with your own tools, on your own machine, the choice is yours.</p>
+  </div>
+  <span class="slide-counter">10</span>
+</section>
+
+<!-- ============ 11 · WHY NOT LOOK AWAY =============================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Control · don't look away</span></div>
+  <div class="stage">
+    <span class="eyebrow">Control</span>
+    <h2>The one thing worse than getting it wrong</h2>
+    <p class="lead">Nobody here has to become technical. But looking away isn't safety — it's the only move that leaves you with no say in it.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 200" role="img" aria-label="Roles change, the person stays">
+        <rect x="30" y="70" width="250" height="70" rx="12" class="box"/>
+        <text x="155" y="112" text-anchor="middle" class="t-lbl">A role changes</text>
+
+        <rect x="365" y="70" width="250" height="70" rx="12" class="box-amber"/>
+        <text x="490" y="104" text-anchor="middle" class="t-lbl s-amber">A new skill</text>
+        <text x="490" y="126" text-anchor="middle" class="t-tiny">learned, not feared</text>
+
+        <rect x="700" y="70" width="250" height="70" rx="12" class="box"/>
+        <text x="825" y="112" text-anchor="middle" class="t-lbl">The person stays</text>
+
+        <line x1="280" y1="105" x2="363" y2="105" class="l-ink" stroke-width="2.5" marker-end="url(#w11a)"/>
+        <line x1="615" y1="105" x2="698" y2="105" class="l-ink" stroke-width="2.5" marker-end="url(#w11a)"/>
+        <defs>
+          <marker id="w11a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">You are not meant to absorb all of this tonight. You saw one thing work, once. That's the point. Being early, in a village, with your own tools, is the whole advantage.</p>
+  </div>
+  <span class="slide-counter">11</span>
+</section>
+
+<!-- ============ 12 · CLOSE =========================================== -->
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
+  <div class="stage">
+    <span class="eyebrow">If you'd like to go further</span>
+    <h1>Leave your name.<br>The first conversation<br>is free.</h1>
+    <p class="lead">Take the one-pager on your way out. If any of this fits your work or your business, write your name and email on the sheet, and we'll find a quiet half-hour.</p>
+    <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one · daniel@tutto.one</p>
+  </div>
+  <span class="slide-counter">12</span>
+</section>
+
+<div class="hint" id="hint">← → or space · F11 fullscreen</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.deck-slide'));
+  const progress = document.getElementById('progress');
+  const hint = document.getElementById('hint');
+  let i = 0;
+  const fromHash = parseInt(location.hash.slice(1), 10);
+  if (!isNaN(fromHash) && fromHash >= 1 && fromHash <= slides.length) i = fromHash - 1;
+
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    history.replaceState(null, '', '#' + (i + 1));
+  }
+  function next() { show(i + 1); }
+  function prev() { show(i - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+  });
+  document.addEventListener('click', (e) => { if (!e.target.closest('a')) next(); });
+  setTimeout(() => { if (hint) hint.style.opacity = '0'; }, 4000);
+  show(i);
+</script>
+</body>
+</html>
