@@ -603,6 +603,83 @@ First step: put one thing in today. One thought, one note, one question worth an
 
 Which one's loudest for you right now?`,
   },
+
+  {
+    slug: "climbing-k2-yang-zhilin",
+    title: "The Mountain With No Summit: Yang Zhilin on Agents and the Data Wall",
+    excerpt: "Moonshot AI's founder gave his first proper interview in eighteen months and spent it on first principles instead of the business questions everyone wanted answered. Three of his claims are worth stealing.",
+    date: "Jul 24, 2026",
+    readTime: "6 min read",
+    introCard: null,
+    published: false,
+    content: `Yang Zhilin, the founder of Moonshot AI, gave his first in-depth interview in about eighteen months shortly after shipping Kimi K2. Everyone wanted him to talk about the commercial position - Kimi sliding down China's app rankings, DeepSeek eating the oxygen, an API price war that had compressed margins to nothing. He mostly refused. He spent ninety minutes on technical strategy and first principles instead.
+
+Read carefully, that's not an evasion. It's an answer to the business question, just delivered sideways.
+
+## A mountain with no summit
+
+His organising metaphor is a snowy mountain that doesn't have a top. He takes it from David Deutsch's *The Beginning of Infinity*, a book he says he's read several times, and from it he pulls two lines worth carving somewhere visible: problems are inevitable, and problems are solvable. Every solved problem lifts you a few hundred metres and reveals the next one. He says he hopes the mountain has no summit.
+
+That's also his answer on AGI. He rejects the idea of it as a moment where a switch flips. It's a direction, not a step. Models already beat 99% of humans at maths and programming competitions, and those wins arrived piecemeal, benchmark by benchmark. He compares it to the steam engine - the mechanical breakthrough came fast, the economic reorganisation took a century.
+
+I find this useful well beyond model labs. A roadmap built around "reaching AI transformation" optimises for a headline. A roadmap built around crossing specific capability thresholds tracks what's actually happening. Most of the AI adoption plans I see are the first kind. The second kind is harder to write and much easier to act on.
+
+The name K2 comes from the same place. K2 isn't the highest peak, but it's arguably the hardest to climb. Yang admits the naming is a bit confusing and entirely deliberate: the current shift from chat to agents is a harder stretch than more scaling of chat models ever was.
+
+## Brains in vats
+
+The central technical claim in the interview is that reasoning and agentic capability are two different scaling paths, not one.
+
+A pure reasoning model is what he calls a brain in a vat - a brain in a fish tank with no connection to the outside world. It thinks in isolation and only touches reality when it emits a final answer. An agent breaks the glass. It searches, writes code, reads what came back, and adjusts based on what actually happened. Both spend the same underlying resource - tokens before committing - but one spends them thinking and the other spends them acting and checking.
+
+His example is Claude. He points out that Claude's raw reasoning benchmark scores aren't the highest in the field, while its performance as an agent is very high. His read: agentic capability is a deliberate technical bet built on environment interaction and feedback, not a side effect of being clever. An agent iterating against live feedback beats a smarter model that only thinks.
+
+If you've ever wondered why a model that looks brilliant in a chat window turns out mediocre when you wire it into a real workflow, that's the gap. Benchmarks measure the brain in the vat. Your business runs on the other thing.
+
+He extends it to coding agents with a good image: coding is the fingertips of the hand, not the whole hand. Code is the easiest domain to verify - tests pass or they don't - which is exactly why every lab raced there first and why coding agents improved faster than anything else. But he notes that lawyers, PMs and designers already use coding tools for work that has nothing to do with software, because code is the universal language for automating anything digital. Moonshot's target is a general agent that happens to be excellent at coding, not a coding tool that also answers questions.
+
+The implied warning is sharp: being ahead on coding agents doesn't automatically make you ahead on agents.
+
+## The data wall
+
+Yang is blunter than most founders about the constraint. "Scaling has a data wall. I think this is an objective fact." High-quality training data is growing too slowly to keep feeding bigger models on the pretraining recipe alone.
+
+Moonshot's answer is to extract more intelligence per token rather than hunt for more tokens. Two things carry that. The first is optimiser research - the team adopted Muon in place of Adam, the optimiser that's dominated deep learning for a decade. Yang's claim is that Muon roughly doubles data efficiency, because it accounts for dependencies between parameters that Adam treats as independent. At K2's scale of roughly 30 trillion high-quality tokens, that behaves like having 60 trillion. He mentions that training went largely as predicted apart from one instability that only appeared at full scale - the kind of problem no small experiment will ever show you.
+
+The second is shifting compute out of pretraining and into reinforcement learning. RL is on-policy: the model learns from samples it generates itself rather than from a fixed dataset, which scales better once the data wall bites.
+
+Underneath both sits a principle he stated in an earlier interview and I keep coming back to: if a problem can be solved with scale, don't solve it with a new algorithm. The value of a new algorithm is that it lets you scale better.
+
+## Managing with RL instead of SFT
+
+The part that stuck with me most isn't technical. Yang says his co-founder tells him daily to manage with an RL approach rather than an SFT approach.
+
+Supervised fine-tuning, applied to people, is telling the team exactly how to do the thing. Safe, and it kills initiative. Reinforcement learning is defining the reward and letting people find their own path. But the failure mode transfers along with the method: "The biggest problem with managing via RL is that you can easily be hacked." Teams, like models, optimise the metric rather than the goal. Which makes defining the reward the single most important design decision you make.
+
+He admits he hasn't solved the balance and is learning it live. That's the honest version, and it's the same problem every organisation hits the moment it puts a number on something.
+
+## Open source, read with clear eyes
+
+A year before this interview, Yang had argued that a market leader wouldn't open-source. K2 shipped open-weight. Asked about the reversal, he was unusually direct: "Because we are not yet the absolute global leader." Open-sourcing shares know-how, accelerates everyone, and lets companies that would otherwise be pure competitors climb the mountain together.
+
+Worth taking the metaphor off for a second. At the time of recording Kimi had slipped from second to fourth in China on monthly actives, behind DeepSeek and Doubao, and the price war had done its damage. Open-sourcing was the move available to a technically excellent lab losing the distribution war - a way to compete on developer mindshare instead of app rankings. From here in mid-2026, with K2's successors getting serious attention from Western developers, the gamble has aged well. But it was a gamble made under pressure, and to his credit he more or less says so.
+
+## What I'd actually take from it
+
+Three claims are load-bearing and worth tracking against reality.
+
+**Reasoning and agentic capability are separable.** The Claude observation supports it and the trajectory of agent-first products since has largely borne it out. Practically: stop choosing tools on benchmark scores and start testing them on your actual loop.
+
+**Token efficiency beats parameter count as the competitive edge.** More intelligence out of the same data, rather than more data. The organisational version of this is the one I care about - most companies don't have a model problem, they have a "the knowledge isn't in a form anything can use" problem.
+
+**Open-sourcing from behind can convert a distribution disadvantage into an ecosystem advantage.** The most contingent of the three, and the one where the philosophy and the survival strategy are hardest to tell apart.
+
+The mountain image is the bit I'll keep, though. Not because it's profound - because it sets the right expectation. There is no release, no rollout, no launch after which you're finished. Every problem you solve lifts you a few hundred metres and shows you the next one. That's not a warning. On a good day it's the whole appeal.
+
+---
+
+*Sources: the Zhang Xiaojun podcast interview with Yang Zhilin (published August 2025). Direct transcript access was blocked, so quotes and claims here come from published translations and detailed coverage of the same interview - primarily China Story's translated analysis and The AI Corner's breakdown, plus contextual reporting on Kimi's 2025 user rankings. Quoted lines are translations from Mandarin and vary between sources; treat them as faithful paraphrases rather than verbatim English. Where I've added assessment - the open-source section, the management section, and the closing - that's mine, not his.*`,
+  },
 ];
 
 const DEFAULT_PORTFOLIO_JSON = JSON.stringify([
