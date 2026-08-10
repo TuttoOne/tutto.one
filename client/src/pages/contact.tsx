@@ -103,7 +103,7 @@ export default function Contact() {
                 <CheckCircle className="w-16 h-16 text-primary mb-4" />
                 <h3 className="text-xl font-semibold mb-2">{t(copy.contact.sent)}</h3>
                 <p className="text-muted-foreground">
-                  We'll get back to you soon.
+                  {t(copy.contact.sentBody)}
                 </p>
               </div>
             ) : (
@@ -177,7 +177,7 @@ export default function Contact() {
                 </Button>
                 {submitContact.isError && (
                   <p className="text-sm text-destructive text-center">
-                    Failed to send message. Please try again.
+                    {t(copy.contact.sendError)}
                   </p>
                 )}
               </form>

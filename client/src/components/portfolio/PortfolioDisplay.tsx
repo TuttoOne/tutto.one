@@ -2,6 +2,7 @@ import { ExternalLink, ChevronLeft, ChevronRight, Plug } from "lucide-react";
 import { useState } from "react";
 import { usePreferences } from "@/lib/preferences";
 import { PORTFOLIO_FR } from "@/lib/portfolio-fr";
+import { copy, useT } from "@/lib/i18n";
 
 import evHome from "@assets/Screenshot_2026-03-17_at_14.14.24_1773753293404.png";
 import evEntities from "@assets/Screenshot_2026-03-17_at_14.13.51_1773753293404.png";
@@ -162,6 +163,7 @@ function ImageCarousel({
   productName: string;
   cardClass: string;
 }) {
+  const t = useT();
   const [current, setCurrent] = useState(0);
   const prev = () => setCurrent((c) => (c === 0 ? screenshots.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === screenshots.length - 1 ? 0 : c + 1));
@@ -179,7 +181,7 @@ function ImageCarousel({
         <button
           onClick={prev}
           className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border/60 rounded-full p-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-background"
-          aria-label="Previous screenshot"
+          aria-label={t(copy.portfolio.prevShot)}
           data-testid={`button-prev-${slug}`}
         >
           <ChevronLeft className="w-4 h-4" />
@@ -187,7 +189,7 @@ function ImageCarousel({
         <button
           onClick={next}
           className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border/60 rounded-full p-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-background"
-          aria-label="Next screenshot"
+          aria-label={t(copy.portfolio.nextShot)}
           data-testid={`button-next-${slug}`}
         >
           <ChevronRight className="w-4 h-4" />
@@ -214,6 +216,7 @@ function ImageCarousel({
 }
 
 function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass: string }) {
+  const t = useT();
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
@@ -233,7 +236,7 @@ function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass:
           <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
-          <span className="ml-2 text-xs font-mono text-muted-foreground">Example conversations</span>
+          <span className="ml-2 text-xs font-mono text-muted-foreground">{t(copy.portfolio.exampleConversations)}</span>
         </div>
         <div className="p-4 space-y-4">
           {entry.conversations.map((conv, i) => (
@@ -274,6 +277,7 @@ export function PortfolioDisplay({
   overrides?: PortfolioTextOverride[];
 }) {
   const { locale } = usePreferences();
+  const t = useT();
 
   // French first, then admin overrides on top: an override is something the
   // author typed deliberately, so it should win over the stock translation.

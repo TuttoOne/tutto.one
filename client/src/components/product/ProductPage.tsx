@@ -9,6 +9,7 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { copy, useT } from "@/lib/i18n";
 
 /** Small amber eyebrow used above headings. */
 export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -231,9 +232,10 @@ export function ExampleSession({
 
 /** Closing note on a product's name — kept quiet, at the foot of the page. */
 export function Etymology({ pull, children }: { pull: string; children: React.ReactNode }) {
+  const t = useT();
   return (
     <section className="mt-16 pt-10 border-t border-border">
-      <Eyebrow className="mb-5 text-muted-foreground/70">On the name</Eyebrow>
+      <Eyebrow className="mb-5 text-muted-foreground/70">{t(copy.common.onTheName)}</Eyebrow>
       <p className="font-serif text-lg italic text-foreground leading-relaxed max-w-2xl mb-5">
         {pull}
       </p>

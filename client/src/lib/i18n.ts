@@ -68,6 +68,11 @@ export const copy = {
       fr: "Écosse, Londres, France, Afrique du Sud (travail à distance)",
     },
     sent: { en: "Message sent", fr: "Message envoyé" },
+    sentBody: { en: "We'll get back to you soon.", fr: "Nous vous répondrons rapidement." },
+    sendError: {
+      en: "Failed to send message. Please try again.",
+      fr: "L'envoi du message a échoué. Veuillez réessayer.",
+    },
     fieldName: { en: "Name", fr: "Nom" },
     fieldEmail: { en: "Email", fr: "Courriel" },
     fieldMessage: { en: "Message", fr: "Message" },
@@ -88,6 +93,9 @@ export const copy = {
       fr: "Des systèmes que nous avons conçus et construits — du concept à la production.",
     },
     badgeClientEngagement: { en: "Client Engagement", fr: "Mission client" },
+    exampleConversations: { en: "Example conversations", fr: "Exemples d'échanges" },
+    prevShot: { en: "Previous screenshot", fr: "Capture précédente" },
+    nextShot: { en: "Next screenshot", fr: "Capture suivante" },
   },
 
   blog: {
