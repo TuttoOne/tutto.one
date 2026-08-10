@@ -257,7 +257,10 @@ function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass:
   const t = useT();
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3">
+      {/* Stacks on phones: two columns left each card about 150px wide, which
+          broke the prose into two or three words a line — worse in French,
+          which runs longer than the English. */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {entry.capabilities.map((cap) => (
           <div
             key={cap.title}
@@ -265,7 +268,7 @@ function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass:
             data-testid={`card-capability-${cap.title.toLowerCase().replace(/\s+/g, "-")}`}
           >
             <p className="text-sm font-semibold text-foreground mb-1">{cap.title}</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">{cap.detail}</p>
+            <p className="text-sm sm:text-xs text-muted-foreground leading-relaxed">{cap.detail}</p>
           </div>
         ))}
       </div>
