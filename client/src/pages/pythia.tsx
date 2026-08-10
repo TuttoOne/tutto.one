@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import {
   ProductHero,
@@ -75,6 +76,22 @@ const BEYOND_LEGAL = [
     title: "Self-improving by design",
     qualifier: "Each session sharpens the system",
     body: "Every question, correction and refinement feeds back in. The structure grows more accurate and the retrieval improves, without anything leaving your environment.",
+  },
+];
+
+/** The principle already running in other domains — live, not hypothetical. */
+const APPLIED = [
+  {
+    name: "Bomza — SANS 10400",
+    domain: "Building regulations · South Africa",
+    body: "Verification of building plans against the South African National Building Regulations. Documents checked against a published standard, with every finding traced back to the clause it comes from.",
+    href: "https://bomza.tutto.one/",
+  },
+  {
+    name: "EntityVault",
+    domain: "Entity management · Consent-based sharing",
+    body: "Tokenised storage and consent-based collaboration, so records can be shared between parties without exposing the underlying data to any of them.",
+    href: "https://entityvault.tutto.one/",
   },
 ];
 
@@ -160,6 +177,32 @@ export default function Pythia() {
               <FeatureCard key={c.numeral} numeral={c.numeral} title={c.title} qualifier={c.qualifier}>
                 {c.body}
               </FeatureCard>
+            ))}
+          </CardGrid>
+
+          <p className="mt-12 mb-5 text-sm text-muted-foreground">
+            Two projects already running on the same principle:
+          </p>
+          <CardGrid cols={2}>
+            {APPLIED.map((p) => (
+              <a
+                key={p.name}
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-card border border-border rounded-2xl p-6 hover:border-primary/40 transition-colors"
+              >
+                <div className="flex items-start justify-between gap-3 mb-1.5">
+                  <h3 className="text-lg font-serif font-bold group-hover:text-primary transition-colors">
+                    {p.name}
+                  </h3>
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors shrink-0 mt-1" />
+                </div>
+                <p className="text-[11px] uppercase tracking-[0.1em] text-muted-foreground/70 mb-4">
+                  {p.domain}
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{p.body}</p>
+              </a>
             ))}
           </CardGrid>
         </Section>
