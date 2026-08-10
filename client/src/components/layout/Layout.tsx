@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { PointerMark } from "@/components/brand/PointerMark";
 
 export function Header() {
   const [location] = useLocation();
@@ -20,8 +21,15 @@ export function Header() {
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-serif font-semibold text-lg tracking-tight hover:opacity-70 transition-opacity">
-          Tutto<span className="text-primary">.</span>
+        <Link
+          href="/"
+          aria-label="Tutto — home"
+          className="group flex items-center gap-2.5 hover:opacity-80 transition-opacity"
+        >
+          <PointerMark className="h-6 w-auto text-primary shrink-0" />
+          <span className="font-serif font-semibold text-lg tracking-tight">
+            Tutto<span className="text-primary">.</span>
+          </span>
         </Link>
 
         <nav className="hidden md:flex gap-5 lg:gap-7">

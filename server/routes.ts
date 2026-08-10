@@ -13,7 +13,15 @@ const anthropic = new Anthropic({
   baseURL: process.env.AI_INTEGRATIONS_ANTHROPIC_BASE_URL,
 });
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Constructed lazily. `new Resend(undefined)` throws, and at module scope that
+// crashes the whole server at import time in any environment without the key
+// set — including local development.
+let _resend: Resend | null = null;
+function getResend(): Resend | null {
+  if (!process.env.RESEND_API_KEY) return null;
+  if (!_resend) _resend = new Resend(process.env.RESEND_API_KEY);
+  return _resend;
+}
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
 const FROM_EMAIL = "Tutto <notifications@tutto.one>";
 
@@ -77,6 +85,11 @@ function parseFrontmatter(text: string): { meta: Record<string, any>; content: s
 }
 
 async function sendNotificationEmail(subject: string, html: string) {
+  const resend = getResend();
+  if (!resend) {
+    console.warn(`[email] skipped "${subject}" — RESEND_API_KEY is not set`);
+    return;
+  }
   try {
     await resend.emails.send({
       from: FROM_EMAIL,
