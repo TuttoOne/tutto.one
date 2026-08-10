@@ -110,8 +110,8 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
      * toggle rather than being written into the copy.
      */
     note: {
-      en: "Refer one person who takes the course and your own fee halves. Refer two and it costs you nothing — we refund it in full.",
-      fr: "Parrainez une personne qui suit la formation et votre tarif est divisé par deux. Parrainez-en deux et la formation ne vous coûte rien : nous vous remboursons intégralement.",
+      en: "Every referral who signs up and pays takes 50% off your own fee. Two referrals and the training costs you nothing — we refund it in full.",
+      fr: "Chaque personne que vous parrainez, si elle s'inscrit et règle sa formation, réduit votre propre tarif de 50 %. Deux parrainages et la formation ne vous coûte rien : nous vous remboursons intégralement.",
     },
     priceKey: "enablementFrom",
     pricePrefix: STARTS_AT,

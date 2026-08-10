@@ -338,6 +338,27 @@ export const copy = {
     },
 
     s2Label: { en: "What it looks like in use", fr: "En pratique" },
+    shotsLabel: { en: "The system", fr: "Le système" },
+    shotsTitle: {
+      en: "Running on a client's own hardware.",
+      fr: "En fonctionnement sur le matériel d'un client.",
+    },
+    shotsBody: {
+      en: "Screens from a live deployment. Names and identifying detail are not shown.",
+      fr: "Captures d'un déploiement en production. Les noms et éléments identifiants ne sont pas affichés.",
+    },
+    shot1: {
+      en: "Describe a legal task in plain language. The system routes it to the relevant skills, drafts against the corpus, and verifies every claim against a cited source.",
+      fr: "Décrivez une tâche juridique en langage courant. Le système l'oriente vers les compétences pertinentes, rédige à partir du corpus et vérifie chaque affirmation par rapport à sa source citée.",
+    },
+    shot2: {
+      en: "Corpus readiness across a 234,000-document estate — what is ingested, embedded, classified and summarised, and what is not yet.",
+      fr: "État de préparation du corpus sur un fonds de 234 000 documents : ce qui est intégré, vectorisé, classé et résumé — et ce qui ne l'est pas encore.",
+    },
+    shot3: {
+      en: "Statistical checks over the disclosure list: numbering gaps, doc-type droughts and volume cliffs, each with wording to put to the other side.",
+      fr: "Contrôles statistiques sur la liste des pièces : ruptures de numérotation, absences prolongées d'un type de document et chutes de volume, chacun assorti d'une formulation à adresser à la partie adverse.",
+    },
     stat1: { en: "3 days → 3 hours", fr: "3 jours → 3 heures" },
     stat1Label: { en: "Document review per matter", fr: "Revue documentaire par dossier" },
     stat2: { en: "Zero", fr: "Zéro" },

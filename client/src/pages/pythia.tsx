@@ -151,6 +151,35 @@ export default function Pythia() {
 
         <Section
           index="03"
+          label={t(copy.pythia.shotsLabel)}
+          title={t(copy.pythia.shotsTitle)}
+          intro={<p>{t(copy.pythia.shotsBody)}</p>}
+        >
+          <div className="space-y-8">
+            {[
+              { src: "/pythia/orchestrator.webp", caption: t(copy.pythia.shot1) },
+              { src: "/pythia/dashboard.webp", caption: t(copy.pythia.shot2) },
+              { src: "/pythia/disclosure-audit.webp", caption: t(copy.pythia.shot3) },
+            ].map((shot) => (
+              <figure key={shot.src}>
+                <img
+                  src={shot.src}
+                  alt=""
+                  width={1600}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full rounded-2xl border border-border bg-card"
+                />
+                <figcaption className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                  {shot.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          index="04"
           label={t(copy.pythia.s3Label)}
           title={t(copy.pythia.s3Title)}
           intro={<p>{t(copy.pythia.s3Body)}</p>}
@@ -188,7 +217,7 @@ export default function Pythia() {
           </CardGrid>
         </Section>
 
-        <Section index="04" label={t(copy.pythia.s4Label)} intro={<p>{t(copy.pythia.s4Body)}</p>}>
+        <Section index="05" label={t(copy.pythia.s4Label)} intro={<p>{t(copy.pythia.s4Body)}</p>}>
           <CardGrid cols={3}>
             <PriceRow title={t(copy.pythia.e1Title)} price={p("sprint")}>
               {t(copy.pythia.e1Body)}

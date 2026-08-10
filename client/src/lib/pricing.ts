@@ -5,9 +5,9 @@
  *
  * 1. EUR is the stated base — those are the figures that were set commercially.
  *    GBP and ZAR are the same price expressed for those markets, at roughly
- *    EUR/1.2 and EUR x 20, rounded to a figure that reads like a rate card.
- *    They are NOT live FX: converting at spot gives £8,208, which reads as an
- *    accident rather than a price.
+ *    EUR/1.2 and EUR x 20. They are NOT live FX rates — they are fixed so the
+ *    price is stable — but the figures are carried exactly rather than rounded
+ *    to a tidier number.
  *
  * 2. Derived figures are COMPUTED, never typed in. Course tuition is eight
  *    sessions; the referral rate is half the course; the trainer split is 80/20.
@@ -20,6 +20,9 @@
  *    names.
  */
 import type { Currency, Locale } from "./preferences";
+
+/** Sessions in a full Praxis course. Declared before PRICES, which uses it. */
+const COURSE_SESSIONS_N = 8;
 
 export type PriceKey =
   // Praxis
@@ -35,10 +38,13 @@ export type PriceKey =
   | "spBuildFrom"
   | "spRetainerMonthly";
 
+/** The session rate. Course tuition and team enablement are both eight of these. */
+const SESSION = { GBP: 200, EUR: 250, ZAR: 5000 };
+
 /** Base rates. Everything else on the site is derived from these. */
 export const PRICES: Record<PriceKey, Record<Currency, number>> = {
   /** Standard one-hour Praxis session. Course tuition is eight of these. */
-  sessionStandard: { GBP: 200, EUR: 250, ZAR: 5000 },
+  sessionStandard: SESSION,
   /** Promotional session rate — half the standard rate. */
   sessionPromo: { GBP: 100, EUR: 125, ZAR: 2500 },
   /** Third-party AI subscription, approx. Quoted at ~$20/mo at source. */
@@ -49,10 +55,21 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    * the services page quote the same engagement, so they quote the same key.
    */
   sprint: { GBP: 2000, EUR: 2400, ZAR: 48000 },
-  /** Pythia build. Excludes hardware. */
-  build: { GBP: 8200, EUR: 9850, ZAR: 197000 },
-  /** Team enablement, from. */
-  enablementFrom: { GBP: 3500, EUR: 4200, ZAR: 84000 },
+  /**
+   * Pythia build. Excludes hardware. Carried at the exact converted figure
+   * rather than rounded to a tidier number.
+   */
+  build: { GBP: 8208, EUR: 9850, ZAR: 197000 },
+  /**
+   * Team enablement IS the training — the same eight sessions as the course,
+   * computed from the session rate so the two can never show different prices
+   * for the same thing.
+   */
+  enablementFrom: {
+    GBP: SESSION.GBP * COURSE_SESSIONS_N,
+    EUR: SESSION.EUR * COURSE_SESSIONS_N,
+    ZAR: SESSION.ZAR * COURSE_SESSIONS_N,
+  },
 
   /** SharePoint audit, from. */
   spAuditFrom: { GBP: 500, EUR: 600, ZAR: 12000 },
@@ -65,7 +82,7 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
 /** Share of tuition kept by the trainer who delivers the course. */
 export const TRAINER_SHARE = 0.8;
 /** Sessions in a full Praxis course. Course tuition is this times the rate. */
-export const COURSE_SESSIONS = 8;
+export const COURSE_SESSIONS = COURSE_SESSIONS_N;
 /** Sessions in the train-the-trainer track, charged at the standard rate. */
 export const TRAINER_TRACK_SESSIONS = 4;
 /** Students used in the worked annual example on the trainer page. */
@@ -83,8 +100,8 @@ export const ONGOING_MAX_PCT = 20;
 /** Price keys offered in the admin content editor. */
 export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
   { key: "sprint", label: "Diagnostic sprint / data audit (€2,400)" },
-  { key: "enablementFrom", label: "Team enablement (€4,200)" },
-  { key: "build", label: "Pythia build (€9,850)" },
+  { key: "enablementFrom", label: "Team enablement / training (€2,000)" },
+  { key: "build", label: "Pythia build, excl. hardware (€9,850)" },
   { key: "sessionStandard", label: "Praxis session, standard (€250)" },
   { key: "sessionPromo", label: "Praxis session, promo (€125)" },
   { key: "spAuditFrom", label: "SharePoint audit (€600)" },
@@ -125,7 +142,7 @@ export function courseEconomics(currency: Currency, locale: Locale) {
     session: f(session),
     /** Full course, no referrals. */
     course: f(course),
-    /** One referral who signs up: half price. */
+    /** Each paying referral takes 50% of the original off. */
     courseWithOneReferral: f(course / 2),
     /** Two referrals: nothing to pay, the fee is refunded in full. */
     referralsForFree: REFERRALS_FOR_FREE,
