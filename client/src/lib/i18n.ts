@@ -122,32 +122,16 @@ export const copy = {
     inquire: { en: "Inquire", fr: "Nous consulter" },
     notSureTitle: { en: "Not sure where to start?", fr: "Vous ne savez pas par où commencer ?" },
     notSureBody: {
-      en: "Run the diagnostic in the chat interface to get a personalized recommendation.",
-      fr: "Lancez le diagnostic dans la fenêtre de discussion pour obtenir une recommandation personnalisée.",
+      en: "Book a thirty-minute call. We'll tell you honestly which of these fits, or whether none of them does.",
+      fr: "Réservez un appel de trente minutes. Nous vous dirons honnêtement laquelle de ces prestations vous convient — ou si aucune ne convient.",
     },
-    runDiagnostic: { en: "Run diagnostic", fr: "Lancer le diagnostic" },
+    runDiagnostic: { en: "Book a call", fr: "Réserver un appel" },
   },
 
   blogPost: {
     back: { en: "Back to Thinking", fr: "Retour aux réflexions" },
-    chat: {
-    title: { en: "Chat with Tutto", fr: "Discuter avec Tutto" },
-    sub: { en: "Ask us anything", fr: "Posez-nous vos questions" },
-    open: { en: "Open chat", fr: "Ouvrir la discussion" },
-    close: { en: "Close chat", fr: "Fermer la discussion" },
-    placeholder: { en: "Type a message...", fr: "Écrivez un message…" },
-  },
-
-  notFound: { en: "Article not found", fr: "Article introuvable" },
+    notFound: { en: "Article not found", fr: "Article introuvable" },
     notFoundBody: { en: "This article doesn't exist.", fr: "Cet article n'existe pas." },
-  },
-
-  chat: {
-    title: { en: "Chat with Tutto", fr: "Discuter avec Tutto" },
-    sub: { en: "Ask us anything", fr: "Posez-nous vos questions" },
-    open: { en: "Open chat", fr: "Ouvrir la discussion" },
-    close: { en: "Close chat", fr: "Fermer la discussion" },
-    placeholder: { en: "Type a message...", fr: "Écrivez un message…" },
   },
 
   notFound: {

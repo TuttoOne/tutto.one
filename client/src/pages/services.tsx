@@ -99,7 +99,7 @@ export default function Services() {
             {t(copy.services.notSureBody)}
           </p>
           <Button className="rounded-full px-8 py-6 text-lg" asChild>
-            <a href="/">
+            <a href="https://cal.com/tuttoone/15min" target="_blank" rel="noopener noreferrer">
               {t(copy.services.runDiagnostic)} <ArrowRight className="ml-2" />
             </a>
           </Button>
