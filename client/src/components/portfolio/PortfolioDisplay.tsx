@@ -52,7 +52,7 @@ export const portfolioEntries: PortfolioEntry[] = [
     tagline: "On-Premise AI · Legal Document Intelligence",
     badge: "Client Engagement",
     description:
-      "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design.",
+      "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design. The same applies well beyond litigation: any legal, compliance or commercially sensitive material that has to stay on-premise, or that cannot be sent to a cloud model for AI processing.",
     url: "/pythia",
     urlLabel: "About Pythia",
     capabilities: [

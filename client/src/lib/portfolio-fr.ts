@@ -26,7 +26,7 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
     tagline: "IA sur site · Intelligence documentaire juridique",
     badge: "Mission client",
     description:
-      "Une plateforme d'intelligence documentaire auto-hébergée pour le contentieux et la revue juridique, bâtie sur du matériel NVIDIA DGX Spark. Elle traite localement des fonds documentaires entiers : recherche sémantique, questions-réponses avec citations, chronologies interactives et OCR. Aucune donnée ne quitte l'appareil, ce qui satisfait le secret professionnel par conception.",
+      "Une plateforme d'intelligence documentaire auto-hébergée pour le contentieux et la revue juridique, bâtie sur du matériel NVIDIA DGX Spark. Elle traite localement des fonds documentaires entiers : recherche sémantique, questions-réponses avec citations, chronologies interactives et OCR. Aucune donnée ne quitte l'appareil, ce qui satisfait le secret professionnel par conception. Cela vaut bien au-delà du contentieux : pour tout document juridique, réglementaire ou couvert par le secret des affaires qui doit rester sur site, ou qui ne peut être transmis à un modèle en cloud pour être traité par l'IA.",
     urlLabel: "En savoir plus sur Pythia",
     capabilities: {
       "Document Ingestion at Scale": {
