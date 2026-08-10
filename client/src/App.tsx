@@ -4,12 +4,24 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { FloatingChat } from "@/components/chat/FloatingChat";
 import NotFound from "@/pages/not-found";
-import Blog from "@/pages/blog";
-import BlogPost from "@/pages/blog-post";
+
+// Primary structure
+import Home from "@/pages/home";
+import About from "@/pages/about";
+import Services from "@/pages/services";
+import Portfolio from "@/pages/portfolio";
 import Praxis from "@/pages/praxis";
 import Pythia from "@/pages/pythia";
-import About from "@/pages/about";
+import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
+import Contact from "@/pages/contact";
+import Sharepoint from "@/pages/sharepoint";
+import FicheCapacites from "@/pages/fiche-capacites";
+
+// Unlisted: reachable by direct link, deliberately absent from the nav so any
+// URL already shared with a client keeps working.
 import SecondBrain from "@/pages/second-brain";
 import LegalRag from "@/pages/legalrag";
 import GtmOrchestrator from "@/pages/gtm-orchestrator";
@@ -32,13 +44,21 @@ function Router() {
     <>
       <ScrollToTop />
       <Switch>
-        <Route path="/" component={About} />
-        <Route path="/blog" component={Blog} />
-        <Route path="/praxis" component={Praxis} />
-        <Route path="/praxis-programme" component={Praxis} />
-        <Route path="/blog/:slug" component={BlogPost} />
-        <Route path="/pythia" component={Pythia} />
+        {/* Primary structure */}
+        <Route path="/" component={Home} />
         <Route path="/about" component={About} />
+        <Route path="/services" component={Services} />
+        <Route path="/portfolio" component={Portfolio} />
+        <Route path="/praxis" component={Praxis} />
+        <Route path="/pythia" component={Pythia} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/blog/:slug" component={BlogPost} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/sharepoint" component={Sharepoint} />
+        <Route path="/fiche-capacites" component={FicheCapacites} />
+
+        {/* Unlisted */}
+        <Route path="/praxis-programme" component={Praxis} />
         <Route path="/second-brain" component={SecondBrain} />
         <Route path="/legalrag" component={LegalRag} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
@@ -48,6 +68,7 @@ function Router() {
         <Route path="/admin" component={AdminDashboard} />
         <Route path="/admin/login" component={AdminLogin} />
         <Route path="/admin/setup" component={AdminSetup} />
+
         <Route component={NotFound} />
       </Switch>
     </>
@@ -60,6 +81,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
+        <FloatingChat />
       </TooltipProvider>
     </QueryClientProvider>
   );

@@ -99,6 +99,29 @@
   }
 }
 
+/* Print: strip site chrome so document pages (e.g. /fiche-capacites) render as a clean sheet */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  header,
+  footer {
+    display: none !important;
+  }
+  main {
+    padding-top: 0 !important;
+  }
+}
+
 /* Custom Scrollbar for Chat */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;

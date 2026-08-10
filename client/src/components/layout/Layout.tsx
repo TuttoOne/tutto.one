@@ -8,9 +8,13 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
-    { label: "Thinking", href: "/blog" },
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Work", href: "/portfolio" },
     { label: "Praxis", href: "/praxis" },
     { label: "Pythia", href: "/pythia" },
+    { label: "Thinking", href: "/blog" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
@@ -20,7 +24,7 @@ export function Header() {
           Tutto<span className="text-primary">.</span>
         </Link>
 
-        <nav className="hidden md:flex gap-8">
+        <nav className="hidden md:flex gap-5 lg:gap-7">
           {navItems.map((item) => (
             <Link 
               key={item.href} 
