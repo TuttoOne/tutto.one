@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { usePageTr } from "@/lib/page-fr";
+import { SECOND_BRAIN_FR } from "@/lib/fr/second-brain";
 import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -233,12 +235,13 @@ function ClockIcon() {
 }
 
 function FileTag({ label }: { label: string }) {
+  const tr = usePageTr(SECOND_BRAIN_FR);
   return (
     <div style={{
       ...INTER, fontSize: 11, color: TEXT, background: "#ede8e1",
       border: `1px solid ${BORDER}`, borderRadius: 6,
       padding: "5px 10px", whiteSpace: "nowrap"
-    }}>{label}</div>
+    }}>{tr(label)}</div>
   );
 }
 
@@ -254,6 +257,7 @@ function StepNumber({ n, color = AMBER }: { n: number; color?: string }) {
 }
 
 export default function SecondBrain() {
+  const tr = usePageTr(SECOND_BRAIN_FR);
   useEffect(() => {
     document.title = "Second Brain - Tutto";
     return () => { document.title = "Tutto | AI Consulting"; };
@@ -281,15 +285,9 @@ export default function SecondBrain() {
 
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: DARK, padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
-          <p style={{ ...CAPS, fontSize: 9, color: AMBER, letterSpacing: "0.14em", marginBottom: 16 }}>
-            Second Brain
-          </p>
-          <h1 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 38px)", fontWeight: 900, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.3px" }}>
-            A second brain captures knowledge and business processes - even when undocumented.
-          </h1>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", maxWidth: 560 }}>
-            Think and talk. Your second brain captures the invisible 80% - including how work really gets done.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: AMBER, letterSpacing: "0.14em", marginBottom: 16 }}>{tr("Second Brain")}</p>
+          <h1 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 38px)", fontWeight: 900, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.3px" }}>{tr("A second brain captures knowledge and business processes - even when undocumented.")}</h1>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", maxWidth: 560 }}>{tr("Think and talk. Your second brain captures the invisible 80% - including how work really gets done.")}</p>
         </div>
 
         {/* Section 1: The Core System */}
@@ -298,8 +296,8 @@ export default function SecondBrain() {
           {/* Think & Talk */}
           <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "22px 20px", background: CARD }}>
             <PersonSpeakIcon />
-            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 8 }}>Think & Talk</p>
-            <p style={{ ...INTER, fontSize: 11, color: MUTED, marginBottom: 14 }}>Any dictation</p>
+            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 8 }}>{tr("Think & Talk")}</p>
+            <p style={{ ...INTER, fontSize: 11, color: MUTED, marginBottom: 14 }}>{tr("Any dictation")}</p>
             {[
               "Dictate your thinking",
               "Discuss with colleagues",
@@ -309,30 +307,30 @@ export default function SecondBrain() {
             ].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 9 }}>
                 <span style={{ width: 5, height: 5, borderRadius: "50%", background: AMBER, flexShrink: 0, marginTop: 6 }} />
-                <span style={{ ...INTER, fontSize: 12, lineHeight: 1.6, color: TEXT }}>{item}</span>
+                <span style={{ ...INTER, fontSize: 12, lineHeight: 1.6, color: TEXT }}>{tr(item)}</span>
               </div>
             ))}
           </div>
 
           {/* Second Brain (centre) */}
           <div style={{ border: `2px solid ${AMBER}`, borderRadius: 10, padding: "22px 20px", background: CARD }}>
-            <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 6 }}>Your Second Brain</p>
-            <p style={{ ...INTER, fontSize: 11, color: MUTED, marginBottom: 16 }}>Plain-text files</p>
+            <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 6 }}>{tr("Your Second Brain")}</p>
+            <p style={{ ...INTER, fontSize: 11, color: MUTED, marginBottom: 16 }}>{tr("Plain-text files")}</p>
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 20 }}>
               {["Frameworks & mental models", "Projects & initiatives", "Research & insights", "Writing & content", "Notes & conversations", "Artefacts & data"].map((f) => (
-                <FileTag key={f} label={f} />
+                <FileTag key={f} label={tr(f)} />
               ))}
             </div>
 
             {/* Conversation Loop */}
             <div style={{ background: "#1a1a1a", borderRadius: 8, padding: "16px 16px 14px" }}>
-              <p style={{ ...CAPS, fontSize: 8, color: "rgba(255,255,255,0.4)", marginBottom: 4, textAlign: "center" }}>Conversation Loop</p>
+              <p style={{ ...CAPS, fontSize: 8, color: "rgba(255,255,255,0.4)", marginBottom: 4, textAlign: "center" }}>{tr("Conversation Loop")}</p>
               <LoopArrowsIcon />
               <div className="sb-loop">
                 <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 6, padding: "12px 14px" }}>
-                  <p style={{ ...ROBOTO, fontSize: 11, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>AI Reads Full Context</p>
-                  <p style={{ ...INTER, fontSize: 11, lineHeight: 1.6, color: "rgba(246,241,234,0.55)" }}>Every conversation draws on your entire accumulated knowledge base.</p>
+                  <p style={{ ...ROBOTO, fontSize: 11, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>{tr("AI Reads Full Context")}</p>
+                  <p style={{ ...INTER, fontSize: 11, lineHeight: 1.6, color: "rgba(246,241,234,0.55)" }}>{tr("Every conversation draws on your entire accumulated knowledge base.")}</p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -340,8 +338,8 @@ export default function SecondBrain() {
                   </svg>
                 </div>
                 <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 6, padding: "12px 14px" }}>
-                  <p style={{ ...ROBOTO, fontSize: 11, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>AI Writes Back</p>
-                  <p style={{ ...INTER, fontSize: 11, lineHeight: 1.6, color: "rgba(246,241,234,0.55)" }}>Updates files, connects insights, reconciles contradictions, and weaves new knowledge in unprompted.</p>
+                  <p style={{ ...ROBOTO, fontSize: 11, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>{tr("AI Writes Back")}</p>
+                  <p style={{ ...INTER, fontSize: 11, lineHeight: 1.6, color: "rgba(246,241,234,0.55)" }}>{tr("Updates files, connects insights, reconciles contradictions, and weaves new knowledge in unprompted.")}</p>
                 </div>
               </div>
             </div>
@@ -350,8 +348,8 @@ export default function SecondBrain() {
           {/* Compounds Daily */}
           <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "22px 20px", background: CARD }}>
             <GrowthChartIcon />
-            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 8 }}>Compounds Daily</p>
-            <p style={{ ...INTER, fontSize: 12, color: MUTED, lineHeight: 1.7, marginBottom: 16 }}>The base grows richer and more connected every day.</p>
+            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 8 }}>{tr("Compounds Daily")}</p>
+            <p style={{ ...INTER, fontSize: 12, color: MUTED, lineHeight: 1.7, marginBottom: 16 }}>{tr("The base grows richer and more connected every day.")}</p>
             {[
               "Noticing patterns",
               "Surfacing connections",
@@ -360,7 +358,7 @@ export default function SecondBrain() {
             ].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 9 }}>
                 <span style={{ width: 5, height: 5, borderRadius: "50%", background: BLUE, flexShrink: 0, marginTop: 6 }} />
-                <span style={{ ...INTER, fontSize: 12, lineHeight: 1.6, color: TEXT }}>{item}</span>
+                <span style={{ ...INTER, fontSize: 12, lineHeight: 1.6, color: TEXT }}>{tr(item)}</span>
               </div>
             ))}
           </div>
@@ -369,13 +367,9 @@ export default function SecondBrain() {
         {/* Section 2: Business Process Meta Layer */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ borderRadius: 10, background: "#2a2a2a", padding: "20px 24px", marginBottom: 24 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 8 }}>Meta Layer</p>
-            <h2 style={{ ...ROBOTO, fontSize: "clamp(16px, 2.5vw, 22px)", fontWeight: 800, color: "#f6f1ea", marginBottom: 8 }}>
-              Capturing Business Processes
-            </h2>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", maxWidth: 580 }}>
-              As you think and talk about how work gets done, your second brain captures and structures it into business process models - without interrupting your flow.
-            </p>
+            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 8 }}>{tr("Meta Layer")}</p>
+            <h2 style={{ ...ROBOTO, fontSize: "clamp(16px, 2.5vw, 22px)", fontWeight: 800, color: "#f6f1ea", marginBottom: 8 }}>{tr("Capturing Business Processes")}</h2>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", maxWidth: 580 }}>{tr("As you think and talk about how work gets done, your second brain captures and structures it into business process models - without interrupting your flow.")}</p>
           </div>
 
           {/* 4-step flow with arrow connectors on desktop */}
@@ -395,9 +389,9 @@ export default function SecondBrain() {
                   <Icon />
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
                     <StepNumber n={n} />
-                    <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: DARK }}>{title}</p>
+                    <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: DARK }}>{tr(title)}</p>
                   </div>
-                  <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: MUTED }}>{body}</p>
+                  <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: MUTED }}>{tr(body)}</p>
                   {n < 4 && (
                     <div className="sb-arrow" style={{
                       position: "absolute", right: -18, top: "50%", transform: "translateY(-50%)",
@@ -417,13 +411,13 @@ export default function SecondBrain() {
 
           {/* Process Layer Meta */}
           <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "20px 20px", background: CARD, marginBottom: 16 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 6 }}>Process Layer (Meta)</p>
-            <p style={{ ...INTER, fontSize: 11, color: MUTED, marginBottom: 14 }}>Sits on top of your knowledge base</p>
+            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 6 }}>{tr("Process Layer (Meta)")}</p>
+            <p style={{ ...INTER, fontSize: 11, color: MUTED, marginBottom: 14 }}>{tr("Sits on top of your knowledge base")}</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 8 }}>
               {["Process maps & flows", "Roles & responsibilities", "Inputs / Outputs", "Policies & rules", "Systems & tools used", "Exceptions & variants", "Version history"].map((item) => (
                 <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: 7 }}>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", background: AMBER, flexShrink: 0, marginTop: 6 }} />
-                  <span style={{ ...INTER, fontSize: 11, lineHeight: 1.6, color: TEXT }}>{item}</span>
+                  <span style={{ ...INTER, fontSize: 11, lineHeight: 1.6, color: TEXT }}>{tr(item)}</span>
                 </div>
               ))}
             </div>
@@ -431,7 +425,7 @@ export default function SecondBrain() {
 
           {/* What Gets Captured strip */}
           <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "16px 20px", background: CARD }}>
-            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>What Gets Captured</p>
+            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>{tr("What Gets Captured")}</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {([
                 { Icon: StepsIcon, label: "Steps & sequences" },
@@ -459,10 +453,8 @@ export default function SecondBrain() {
         {/* Section 3: Verify & Evolve */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ borderRadius: 10, background: "#2a2a2a", padding: "20px 24px", marginBottom: 24 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 8 }}>Living Documentation</p>
-            <h2 style={{ ...ROBOTO, fontSize: "clamp(16px, 2.5vw, 22px)", fontWeight: 800, color: "#f6f1ea" }}>
-              Verify & Evolve with the Business
-            </h2>
+            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 8 }}>{tr("Living Documentation")}</p>
+            <h2 style={{ ...ROBOTO, fontSize: "clamp(16px, 2.5vw, 22px)", fontWeight: 800, color: "#f6f1ea" }}>{tr("Verify & Evolve with the Business")}</h2>
           </div>
 
           <div className="sb-steps">
@@ -480,9 +472,9 @@ export default function SecondBrain() {
                 <Icon />
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
                   <StepNumber n={n} color={BLUE} />
-                  <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: DARK }}>{title}</p>
+                  <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: DARK }}>{tr(title)}</p>
                 </div>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: MUTED }}>{body}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: MUTED }}>{tr(body)}</p>
                 {n < 4 && (
                   <div className="sb-arrow" style={{
                     position: "absolute", right: -18, top: "50%", transform: "translateY(-50%)",
@@ -503,10 +495,8 @@ export default function SecondBrain() {
         {/* Result callout */}
         <div style={{ borderRadius: 12, background: DARK, padding: "clamp(24px, 4vw, 40px)", display: "grid", gap: 24, gridTemplateColumns: "1fr" }}>
           <div>
-            <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 12 }}>Result</p>
-            <p style={{ ...ROBOTO, fontSize: "clamp(15px, 2vw, 19px)", fontWeight: 700, color: "#f6f1ea", lineHeight: 1.5 }}>
-              Your organisation builds a living map of how work really gets done - captured effortlessly, verified collaboratively, and continuously improved.
-            </p>
+            <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 12 }}>{tr("Result")}</p>
+            <p style={{ ...ROBOTO, fontSize: "clamp(15px, 2vw, 19px)", fontWeight: 700, color: "#f6f1ea", lineHeight: 1.5 }}>{tr("Your organisation builds a living map of how work really gets done - captured effortlessly, verified collaboratively, and continuously improved.")}</p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
             {[
@@ -520,7 +510,7 @@ export default function SecondBrain() {
                   <circle cx="8" cy="8" r="7" fill="none" stroke={AMBER} strokeWidth="1.5"/>
                   <path d="M4.5 8l2.5 2.5 4.5-4.5" stroke={AMBER} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 </svg>
-                <span style={{ ...INTER, fontSize: 12, lineHeight: 1.6, color: "rgba(246,241,234,0.75)" }}>{item}</span>
+                <span style={{ ...INTER, fontSize: 12, lineHeight: 1.6, color: "rgba(246,241,234,0.75)" }}>{tr(item)}</span>
               </div>
             ))}
           </div>

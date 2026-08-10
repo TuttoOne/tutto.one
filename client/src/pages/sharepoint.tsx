@@ -1,4 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
+import { usePageTr } from "@/lib/page-fr";
+import { SHAREPOINT_FR } from "@/lib/fr/sharepoint";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -40,6 +42,7 @@ My SharePoint environment:
 [Describe your setup here - number of sites, approximate document count, key teams that use it, and any existing metadata or content type work]`;
 
 export default function Sharepoint() {
+  const tr = usePageTr(SHAREPOINT_FR);
   const [email, setEmail] = useState("");
   const [copied, setCopied] = useState(false);
   const [, navigate] = useLocation();
@@ -120,35 +123,21 @@ export default function Sharepoint() {
 
         {/* 1. Hero */}
         <section className="py-20 text-center">
-          <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6">
-            Open Source · MCP Server · Free Forever
-          </p>
-          <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6 max-w-4xl mx-auto">
-            Give AI direct access to your SharePoint
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
-            The SharePoint Bridge connects Claude directly to your SharePoint Online
-            environment - search documents, read pages, and surface institutional knowledge
-            without copy-pasting or manual lookups. Just ask.
-          </p>
-          <p className="text-sm text-muted-foreground/70 mb-10">
-            Free and open source. Used by legal, finance, and operations teams.
-          </p>
+          <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6">{tr("Open Source · MCP Server · Free Forever")}</p>
+          <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6 max-w-4xl mx-auto">{tr("Give AI direct access to your SharePoint")}</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">{tr("The SharePoint Bridge connects Claude directly to your SharePoint Online environment - search documents, read pages, and surface institutional knowledge without copy-pasting or manual lookups. Just ask.")}</p>
+          <p className="text-sm text-muted-foreground/70 mb-10">{tr("Free and open source. Used by legal, finance, and operations teams.")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={scrollToHowItWorks}
               className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
               data-testid="button-get-started"
-            >
-              Get Started Free
-            </button>
+            >{tr("Get Started Free")}</button>
             <a
               href="/contact"
               className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
               data-testid="link-book-walkthrough-hero"
-            >
-              Book a Walkthrough
-            </a>
+            >{tr("Book a Walkthrough")}</a>
             <a
               href="https://github.com/TuttoOne/sp-mcp"
               target="_blank"
@@ -156,9 +145,7 @@ export default function Sharepoint() {
               className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
               data-testid="link-github-hero"
             >
-              <Github className="w-4 h-4" />
-              View on GitHub
-            </a>
+              <Github className="w-4 h-4" />{tr("View on GitHub")}</a>
           </div>
         </section>
 
@@ -175,10 +162,8 @@ export default function Sharepoint() {
 
         {/* 3. What It Does */}
         <section className="mb-20">
-          <h2 className="text-3xl font-serif font-bold mb-4 text-center">What It Does</h2>
-          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 leading-relaxed">
-            Three capabilities that transform how your organisation interacts with SharePoint knowledge.
-          </p>
+          <h2 className="text-3xl font-serif font-bold mb-4 text-center">{tr("What It Does")}</h2>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 leading-relaxed">{tr("Three capabilities that transform how your organisation interacts with SharePoint knowledge.")}</p>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
@@ -208,8 +193,8 @@ export default function Sharepoint() {
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
                   <item.icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                <h3 className="font-semibold text-lg mb-2">{tr(item.title)}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{tr(item.description)}</p>
               </div>
             ))}
           </div>
@@ -217,10 +202,8 @@ export default function Sharepoint() {
 
         {/* 4. How It Works */}
         <section id="how-it-works" className="mb-20 scroll-mt-20">
-          <h2 className="text-3xl font-serif font-bold mb-4 text-center">How It Works</h2>
-          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 leading-relaxed">
-            Set up in under 15 minutes. No infrastructure, no middleware, no data exports required.
-          </p>
+          <h2 className="text-3xl font-serif font-bold mb-4 text-center">{tr("How It Works")}</h2>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 leading-relaxed">{tr("Set up in under 15 minutes. No infrastructure, no middleware, no data exports required.")}</p>
           <div className="space-y-6">
             {[
               {
@@ -251,8 +234,8 @@ export default function Sharepoint() {
                   {item.step}
                 </div>
                 <div className="flex-1 bg-card border border-border/60 rounded-xl p-5 shadow-sm">
-                  <h3 className="font-semibold mb-1">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                  <h3 className="font-semibold mb-1">{tr(item.title)}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{tr(item.description)}</p>
                 </div>
               </div>
             ))}
@@ -265,9 +248,7 @@ export default function Sharepoint() {
               className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
               data-testid="link-github-how-it-works"
             >
-              <Github className="w-4 h-4" />
-              View on GitHub
-              <ExternalLink className="w-3 h-3 opacity-70" />
+              <Github className="w-4 h-4" />{tr("View on GitHub")}<ExternalLink className="w-3 h-3 opacity-70" />
             </a>
           </div>
         </section>
@@ -275,21 +256,13 @@ export default function Sharepoint() {
         {/* 5. Free Audit */}
         <section className="mb-20">
           <div className="bg-card border border-border/60 rounded-2xl p-8 md:p-12 shadow-sm">
-            <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-3">
-              Free tool
-            </p>
-            <h2 className="text-3xl font-serif font-bold mb-4">
-              Run a free SharePoint audit with Claude
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-              Not sure if your SharePoint is AI-ready? Paste this prompt into Claude to get an
-              instant structural audit - no MCP setup required. Claude will work through five
-              key areas and give you a prioritised action plan with an AI-readiness score.
-            </p>
+            <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-3">{tr("Free tool")}</p>
+            <h2 className="text-3xl font-serif font-bold mb-4">{tr("Run a free SharePoint audit with Claude")}</h2>
+            <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl">{tr("Not sure if your SharePoint is AI-ready? Paste this prompt into Claude to get an instant structural audit - no MCP setup required. Claude will work through five key areas and give you a prioritised action plan with an AI-readiness score.")}</p>
 
             <div className="relative rounded-xl overflow-hidden border border-zinc-700 mb-8">
               <div className="flex items-center justify-between px-4 py-2 bg-zinc-800 border-b border-zinc-700">
-                <span className="text-xs font-mono text-zinc-400">sharepoint-audit-prompt.txt</span>
+                <span className="text-xs font-mono text-zinc-400">{tr("sharepoint-audit-prompt.txt")}</span>
                 <button
                   onClick={handleCopyPrompt}
                   className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-zinc-700"
@@ -298,13 +271,11 @@ export default function Sharepoint() {
                   {copied ? (
                     <>
                       <CheckCircle className="w-3.5 h-3.5 text-green-400" />
-                      <span className="text-green-400">Copied!</span>
+                      <span className="text-green-400">{tr("Copied!")}</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5" />
-                      Copy prompt
-                    </>
+                      <Copy className="w-3.5 h-3.5" />{tr("Copy prompt")}</>
                   )}
                 </button>
               </div>
@@ -314,11 +285,8 @@ export default function Sharepoint() {
             </div>
 
             <div className="border-t border-border/60 pt-8">
-              <h3 className="font-semibold mb-1">Want us to run the audit for you?</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Leave your email and we'll be in touch about a free, personalised SharePoint
-                audit for your environment.
-              </p>
+              <h3 className="font-semibold mb-1">{tr("Want us to run the audit for you?")}</h3>
+              <p className="text-sm text-muted-foreground mb-4">{tr("Leave your email and we'll be in touch about a free, personalised SharePoint audit for your environment.")}</p>
               <form
                 onSubmit={handleEmailSubmit}
                 className="flex flex-col sm:flex-row gap-3 max-w-md"
@@ -329,7 +297,7 @@ export default function Sharepoint() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@company.com"
+                  placeholder={tr("you@company.com")}
                   className="flex-1 px-3 py-2 border border-border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"
                   data-testid="input-email-capture"
                 />
@@ -341,18 +309,14 @@ export default function Sharepoint() {
                 >
                   {submitLead.isPending ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Sending...
-                    </>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />{tr("Sending...")}</>
                   ) : (
                     "Get My Free Audit"
                   )}
                 </Button>
               </form>
               {submitLead.isError && (
-                <p className="text-sm text-destructive mt-2" data-testid="text-email-error">
-                  Something went wrong. Please try again.
-                </p>
+                <p className="text-sm text-destructive mt-2" data-testid="text-email-error">{tr("Something went wrong. Please try again.")}</p>
               )}
             </div>
           </div>
@@ -360,13 +324,8 @@ export default function Sharepoint() {
 
         {/* 6. Industry Templates */}
         <section className="mb-20">
-          <h2 className="text-3xl font-serif font-bold mb-4 text-center">
-            Industry Templates
-          </h2>
-          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 leading-relaxed">
-            Pre-built query templates and audit prompts tailored to SharePoint patterns
-            common in your sector.
-          </p>
+          <h2 className="text-3xl font-serif font-bold mb-4 text-center">{tr("Industry Templates")}</h2>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 leading-relaxed">{tr("Pre-built query templates and audit prompts tailored to SharePoint patterns common in your sector.")}</p>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[
               {
@@ -433,18 +392,10 @@ export default function Sharepoint() {
           <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8 md:p-12">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles className="w-5 h-5 text-primary" />
-              <span className="text-xs font-mono text-primary uppercase tracking-widest">
-                Tutto Services
-              </span>
+              <span className="text-xs font-mono text-primary uppercase tracking-widest">{tr("Tutto Services")}</span>
             </div>
-            <h2 className="text-3xl font-serif font-bold mb-4">
-              Need a custom SharePoint integration?
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-              The open-source bridge handles the common case. For teams that need write-back
-              capabilities, multi-tenant support, on-premises SharePoint, or a fully managed
-              AI workflow built on their document estate - we build it.
-            </p>
+            <h2 className="text-3xl font-serif font-bold mb-4">{tr("Need a custom SharePoint integration?")}</h2>
+            <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl">{tr("The open-source bridge handles the common case. For teams that need write-back capabilities, multi-tenant support, on-premises SharePoint, or a fully managed AI workflow built on their document estate - we build it.")}</p>
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
               {[
                 {
@@ -487,33 +438,24 @@ export default function Sharepoint() {
                     </div>
                     <span className="text-xs font-mono text-primary font-semibold">{item.price}</span>
                   </div>
-                  <h3 className="font-semibold mb-1 text-sm">{item.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
+                  <h3 className="font-semibold mb-1 text-sm">{tr(item.title)}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{tr(item.description)}</p>
                 </div>
               ))}
             </div>
-            <p className="text-sm text-muted-foreground mb-6">
-              First bridge setup includes a free consultation to scope your integration needs.
-            </p>
+            <p className="text-sm text-muted-foreground mb-6">{tr("First bridge setup includes a free consultation to scope your integration needs.")}</p>
             <a
               href="/contact"
               className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
               data-testid="link-book-discovery"
-            >
-              Book a Discovery Call
-            </a>
+            >{tr("Book a Discovery Call")}</a>
           </div>
         </section>
 
         {/* 8. Footer */}
         <section className="mb-20 text-center border-t border-border/40 pt-16">
-          <h2 className="text-3xl font-serif font-bold mb-4">
-            Ready to connect Claude to your SharePoint?
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">
-            The bridge is free, open source, and takes 15 minutes to set up. If you'd rather
-            have us walk you through it, book a call.
-          </p>
+          <h2 className="text-3xl font-serif font-bold mb-4">{tr("Ready to connect Claude to your SharePoint?")}</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed">{tr("The bridge is free, open source, and takes 15 minutes to set up. If you'd rather have us walk you through it, book a call.")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <a
               href="https://github.com/TuttoOne/sp-mcp"
@@ -522,16 +464,12 @@ export default function Sharepoint() {
               className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
               data-testid="link-github-footer"
             >
-              <Github className="w-4 h-4" />
-              View on GitHub
-            </a>
+              <Github className="w-4 h-4" />{tr("View on GitHub")}</a>
             <a
               href="/contact"
               className="inline-flex items-center justify-center px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
               data-testid="link-book-walkthrough-footer"
-            >
-              Book a Walkthrough
-            </a>
+            >{tr("Book a Walkthrough")}</a>
           </div>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground mb-6">
             <a
@@ -547,16 +485,12 @@ export default function Sharepoint() {
               href="/contact"
               className="hover:text-foreground transition-colors"
               data-testid="link-footer-contact"
-            >
-              Contact
-            </a>
+            >{tr("Contact")}</a>
             <a
               href="/"
               className="hover:text-foreground transition-colors"
               data-testid="link-footer-home"
-            >
-              tutto.one
-            </a>
+            >{tr("tutto.one")}</a>
           </div>
           <p className="text-xs text-muted-foreground/60">
             © {new Date().getFullYear()} Tutto. Released under the{" "}
@@ -566,9 +500,7 @@ export default function Sharepoint() {
               rel="noopener noreferrer"
               className="hover:text-foreground transition-colors underline"
               data-testid="link-footer-license"
-            >
-              MIT License
-            </a>
+            >{tr("MIT License")}</a>
             {" "}· Built by{" "}
             <a
               href="/"
@@ -582,9 +514,7 @@ export default function Sharepoint() {
               href="mailto:daniel@tutto.one"
               className="hover:text-foreground transition-colors underline"
               data-testid="link-footer-email"
-            >
-              daniel@tutto.one
-            </a>
+            >{tr("daniel@tutto.one")}</a>
           </p>
         </section>
 

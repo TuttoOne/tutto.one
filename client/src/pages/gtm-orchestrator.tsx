@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { usePageTr } from "@/lib/page-fr";
+import { GTM_FR } from "@/lib/fr/gtm-orchestrator";
 import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = {
@@ -300,6 +302,7 @@ const stats = [
 ];
 
 export default function GtmOrchestrator() {
+  const tr = usePageTr(GTM_FR);
   useEffect(() => {
     document.title = "GTM Orchestrator - Tutto";
     return () => {
@@ -345,9 +348,7 @@ export default function GtmOrchestrator() {
               letterSpacing: "0.14em",
               marginBottom: 16,
             }}
-          >
-            GTM Orchestrator
-          </p>
+          >{tr("GTM Orchestrator")}</p>
           <h1
             style={{
               ...ROBOTO,
@@ -358,9 +359,7 @@ export default function GtmOrchestrator() {
               marginBottom: 16,
               letterSpacing: "-0.3px",
             }}
-          >
-            AI-Powered Sales Outreach Engine
-          </h1>
+          >{tr("AI-Powered Sales Outreach Engine")}</h1>
           <p
             style={{
               ...INTER,
@@ -369,12 +368,7 @@ export default function GtmOrchestrator() {
               color: "rgba(246,241,234,0.65)",
               maxWidth: 600,
             }}
-          >
-            A custom system designed and built to run B2B prospecting
-            end-to-end. Researches prospects, writes personalised emails in the
-            sender's voice, schedules and sends safely, and keeps every account
-            moving — with a human reviewing, not retyping.
-          </p>
+          >{tr("A custom system designed and built to run B2B prospecting end-to-end. Researches prospects, writes personalised emails in the sender's voice, schedules and sends safely, and keeps every account moving — with a human reviewing, not retyping.")}</p>
         </div>
 
         {/* The Problem */}
@@ -387,9 +381,7 @@ export default function GtmOrchestrator() {
             marginBottom: 48,
           }}
         >
-          <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>
-            The Problem
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>{tr("The Problem")}</p>
           <p
             style={{
               ...ROBOTO,
@@ -399,10 +391,7 @@ export default function GtmOrchestrator() {
               lineHeight: 1.45,
               marginBottom: 16,
             }}
-          >
-            Personalised outreach at scale is impossible by hand. Generic
-            templates get ignored.
-          </p>
+          >{tr("Personalised outreach at scale is impossible by hand. Generic templates get ignored.")}</p>
           <p
             style={{
               ...INTER,
@@ -411,13 +400,7 @@ export default function GtmOrchestrator() {
               color: MUTED,
               maxWidth: 660,
             }}
-          >
-            Running outreach across the Nordics, Baltics and Netherlands —
-            thousands of prospects, dozens of live accounts, and a CRM that does
-            not research, write, or follow up on its own. Done manually, true
-            personalisation does not scale. Done with templates, response rates
-            collapse. This system eliminates that trade-off.
-          </p>
+          >{tr("Running outreach across the Nordics, Baltics and Netherlands — thousands of prospects, dozens of live accounts, and a CRM that does not research, write, or follow up on its own. Done manually, true personalisation does not scale. Done with templates, response rates collapse. This system eliminates that trade-off.")}</p>
         </div>
 
         {/* What it does */}
@@ -437,9 +420,7 @@ export default function GtmOrchestrator() {
                 color: "rgba(255,255,255,0.4)",
                 marginBottom: 6,
               }}
-            >
-              Capabilities
-            </p>
+            >{tr("Capabilities")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -447,9 +428,7 @@ export default function GtmOrchestrator() {
                 fontWeight: 800,
                 color: "#f6f1ea",
               }}
-            >
-              What it does
-            </h2>
+            >{tr("What it does")}</h2>
           </div>
           <div className="gtm-features">
             {(
@@ -534,9 +513,7 @@ export default function GtmOrchestrator() {
                 color: "rgba(255,255,255,0.4)",
                 marginBottom: 6,
               }}
-            >
-              Metrics
-            </p>
+            >{tr("Metrics")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -544,9 +521,7 @@ export default function GtmOrchestrator() {
                 fontWeight: 800,
                 color: "#f6f1ea",
               }}
-            >
-              By the numbers
-            </h2>
+            >{tr("By the numbers")}</h2>
           </div>
           <div className="gtm-stats">
             {stats.map(({ value, label }) => (
@@ -592,12 +567,7 @@ export default function GtmOrchestrator() {
               marginTop: 12,
               fontStyle: "italic",
             }}
-          >
-            Figures pulled live from the system's database. Conversion and reply
-            rates are deliberately omitted — not yet reliably tracked. The
-            honest proof point: sourced live deals including SSAB, Eidsiva and
-            GleSYS.
-          </p>
+          >{tr("Figures pulled live from the system's database. Conversion and reply rates are deliberately omitted — not yet reliably tracked. The honest proof point: sourced live deals including SSAB, Eidsiva and GleSYS.")}</p>
         </div>
 
         {/* Privacy and Data Flow */}
@@ -617,9 +587,7 @@ export default function GtmOrchestrator() {
                 color: "rgba(255,255,255,0.4)",
                 marginBottom: 6,
               }}
-            >
-              Architecture
-            </p>
+            >{tr("Architecture")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -627,9 +595,7 @@ export default function GtmOrchestrator() {
                 fontWeight: 800,
                 color: "#f6f1ea",
               }}
-            >
-              Privacy and data flow
-            </h2>
+            >{tr("Privacy and data flow")}</h2>
           </div>
           <div
             style={{
@@ -648,12 +614,7 @@ export default function GtmOrchestrator() {
                 color: TEXT,
                 marginBottom: 0,
               }}
-            >
-              The system runs on an NVIDIA DGX Spark — not on rented cloud
-              infrastructure. Prospect records, CRM data, and licensing
-              information live on the device and stay there. There are three
-              data paths, separated by design.
-            </p>
+            >{tr("The system runs on an NVIDIA DGX Spark — not on rented cloud infrastructure. Prospect records, CRM data, and licensing information live on the device and stay there. There are three data paths, separated by design.")}</p>
           </div>
           <div className="gtm-flows">
             {[
@@ -708,13 +669,7 @@ export default function GtmOrchestrator() {
               marginTop: 14,
             }}
           >
-            <p style={{ ...INTER, fontSize: 12, lineHeight: 1.8, color: TEXT }}>
-              The orchestration layer is Claude running headlessly, directing
-              the local models and reserving the frontier model for the few
-              steps that actually require it. Every call out of the device
-              passes through one auditable chokepoint, so escalation is the
-              exception, not the default.
-            </p>
+            <p style={{ ...INTER, fontSize: 12, lineHeight: 1.8, color: TEXT }}>{tr("The orchestration layer is Claude running headlessly, directing the local models and reserving the frontier model for the few steps that actually require it. Every call out of the device passes through one auditable chokepoint, so escalation is the exception, not the default.")}</p>
           </div>
         </div>
 
@@ -735,9 +690,7 @@ export default function GtmOrchestrator() {
                 color: "rgba(255,255,255,0.4)",
                 marginBottom: 6,
               }}
-            >
-              Differentiators
-            </p>
+            >{tr("Differentiators")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -745,9 +698,7 @@ export default function GtmOrchestrator() {
                 fontWeight: 800,
                 color: "#f6f1ea",
               }}
-            >
-              What makes it different
-            </h2>
+            >{tr("What makes it different")}</h2>
           </div>
           <div className="gtm-diffs">
             {[
@@ -816,9 +767,7 @@ export default function GtmOrchestrator() {
                 color: "rgba(255,255,255,0.4)",
                 marginBottom: 6,
               }}
-            >
-              Technology
-            </p>
+            >{tr("Technology")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -826,9 +775,7 @@ export default function GtmOrchestrator() {
                 fontWeight: 800,
                 color: "#f6f1ea",
               }}
-            >
-              Stack
-            </h2>
+            >{tr("Stack")}</h2>
           </div>
           <div
             style={{
@@ -917,9 +864,7 @@ export default function GtmOrchestrator() {
             padding: "clamp(24px, 4vw, 40px)",
           }}
         >
-          <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 12 }}>
-            Built by Humanity³
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 12 }}>{tr("Built by Humanity³")}</p>
           <p
             style={{
               ...ROBOTO,
@@ -929,9 +874,7 @@ export default function GtmOrchestrator() {
               lineHeight: 1.5,
               marginBottom: 16,
             }}
-          >
-            A division of Tutto Products and Services
-          </p>
+          >{tr("A division of Tutto Products and Services")}</p>
           <p
             style={{
               ...INTER,
@@ -940,13 +883,7 @@ export default function GtmOrchestrator() {
               color: "rgba(246,241,234,0.6)",
               maxWidth: 560,
             }}
-          >
-            The system is a specific answer to a specific problem. The
-            underlying principle applies broadly: most sales and GTM functions
-            can be restructured so that the sensitive work stays on your
-            hardware, the AI is directed rather than trusted, and the human in
-            the loop reviews decisions instead of making them one at a time.
-          </p>
+          >{tr("The system is a specific answer to a specific problem. The underlying principle applies broadly: most sales and GTM functions can be restructured so that the sensitive work stays on your hardware, the AI is directed rather than trusted, and the human in the loop reviews decisions instead of making them one at a time.")}</p>
         </div>
       </div>
     </div>

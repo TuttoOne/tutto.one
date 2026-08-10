@@ -157,16 +157,8 @@ export default function PraxisProgramme() {
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The Praxis Programme")}</p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Build your own tools")}<br />{tr("with Claude Code.")}</h2>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
-            Eight sessions over two months. For people who have used AI in a chat box
-            and want to go further. You will build small, working tools that do your
-            repetitive work for you, in plain English, with someone sitting beside you
-            who has done it before.
-          </p>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
-            No coding background needed. By the end you will have built something you
-            actually use, and you will know how to keep building on your own.
-          </p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain English, with someone sitting beside you who has done it before.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("No coding background needed. By the end you will have built something you actually use, and you will know how to keep building on your own.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
             <a
               href="#get-started"
@@ -194,13 +186,7 @@ export default function PraxisProgramme() {
 
         {/* Intro */}
         <div style={{ maxWidth: 620, marginBottom: 64 }}>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>
-            You have typed questions into ChatGPT or Claude and got useful answers back. This is the next
-            step: using Claude Code to build small, working tools that do your repetitive work for you.
-            The internet is full of free tutorials. What a video cannot do is see where you are stuck
-            and hear what you are unsure about. That gap - between "I have heard of Claude Code" and
-            "I am building" - is the whole reason this programme exists.
-          </p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("You have typed questions into ChatGPT or Claude and got useful answers back. This is the next step: using Claude Code to build small, working tools that do your repetitive work for you. The internet is full of free tutorials. What a video cannot do is see where you are stuck and hear what you are unsure about. That gap - between \"I have heard of Claude Code\" and \"I am building\" - is the whole reason this programme exists.")}</p>
         </div>
 
         {/* Section 01 - Who this is for */}
@@ -275,10 +261,7 @@ export default function PraxisProgramme() {
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
             <span style={{ ...CAPS, fontSize: 10 }}>{tr("04 &nbsp;&nbsp;&nbsp; The Eight Sessions")}</span>
           </div>
-          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>
-            Weekly, over roughly two months. The first six get you to a confident, independent builder.
-            The last two take you deeper, into the kind of work that usually needs a developer.
-          </p>
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Weekly, over roughly two months. The first six get you to a confident, independent builder. The last two take you deeper, into the kind of work that usually needs a developer.")}</p>
           <div className="pp-sessions">
             {sessions.map((s) => (
               <div key={s.n} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5", position: "relative" }}>
@@ -297,17 +280,8 @@ export default function PraxisProgramme() {
           </div>
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "32px 28px", background: "#faf8f5", maxWidth: 620 }}>
             <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>{tr("The actual tools you built along the way.")}</p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>
-              A certificate confirming you completed the programme - and, more to the point, the
-              tools you built during it. The certificate records what you made, not just that you
-              turned up. That is the proof that matters.
-            </p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>
-              A note on honesty, because it sets the right expectation: you will get most of the way
-              there yourself. On anything complex, the last stretch you finish by hand or hand off.
-              Even getting most of the way is a large saving on how the work is done today - and that
-              is the saving we are after.
-            </p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>{tr("A certificate confirming you completed the programme - and, more to the point, the tools you built during it. The certificate records what you made, not just that you turned up. That is the proof that matters.")}</p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>{tr("A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.")}</p>
           </div>
         </div>
 
@@ -416,10 +390,7 @@ export default function PraxisProgramme() {
         <div id="get-started" style={{ marginTop: 64, borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 48px)" }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Get started")}</p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>{tr("Tell me the task that eats your week.")}</h2>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "rgba(246,241,234,0.65)", marginBottom: 32, maxWidth: 480 }}>
-            I will tell you honestly whether this is the right thing for you. The first step is a
-            short call.
-          </p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "rgba(246,241,234,0.65)", marginBottom: 32, maxWidth: 480 }}>{tr("I will tell you honestly whether this is the right thing for you. The first step is a short call.")}</p>
 
           {formState === "sent" ? (
             <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "28px 24px", textAlign: "center" }}>
@@ -486,11 +457,7 @@ export default function PraxisProgramme() {
         <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>{tr("On what this will not do")}</p>
           <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", maxWidth: 620, fontStyle: "italic" }}>{tr("It will not make you a software engineer in eight weeks.")}</p>
-          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>
-            It will make you someone who can build genuinely useful things, and who knows when a job is
-            big enough to call in a developer, and how to brief them when you do. That is a more
-            valuable place to stand than it sounds.
-          </p>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>{tr("It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.")}</p>
         </div>
 
         {/* Trainer track teaser */}
@@ -499,11 +466,7 @@ export default function PraxisProgramme() {
           <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "flex-start", justifyContent: "space-between" }}>
             <div style={{ maxWidth: 480 }}>
               <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>{tr("Become a Praxis trainer.")}<br />{tr("Teach it, and earn from it.")}</h3>
-              <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 0 }}>
-                Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on
-                every course you teach. I find and organise the clients with you, you deliver the sessions, and
-                a hub is behind you for the hard jobs.
-              </p>
+              <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 0 }}>{tr("Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on every course you teach. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.")}</p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
               <div style={{ border: "1px solid #f0d9b0", borderRadius: 8, padding: "12px 16px", background: "#fff8ee", minWidth: 160 }}>

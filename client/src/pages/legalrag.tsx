@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { usePageTr } from "@/lib/page-fr";
+import { LEGALRAG_FR } from "@/lib/fr/legalrag";
 import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -141,6 +143,7 @@ function EyeIcon() {
 }
 
 export default function LegalRag() {
+  const tr = usePageTr(LEGALRAG_FR);
   useEffect(() => {
     document.title = "LegalRAG - On-Premise AI for Legal";
     return () => { document.title = "Tutto | AI Consulting"; };
@@ -167,31 +170,23 @@ export default function LegalRag() {
 
         {/* Hero */}
         <div style={{ borderRadius: 12, background: DARK, padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
-          <p style={{ ...CAPS, fontSize: 9, color: AMBER, letterSpacing: "0.14em", marginBottom: 16 }}>LegalRAG</p>
-          <h1 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 38px)", fontWeight: 900, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.3px" }}>
-            On-Premise AI Document Intelligence for Legal
-          </h1>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", maxWidth: 580 }}>
-            A self-hosted document intelligence platform built for litigation and legal review. All processing, AI inference, and storage stays on your hardware. No data ever leaves the device.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: AMBER, letterSpacing: "0.14em", marginBottom: 16 }}>{tr("LegalRAG")}</p>
+          <h1 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 38px)", fontWeight: 900, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.3px" }}>{tr("On-Premise AI Document Intelligence for Legal")}</h1>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", maxWidth: 580 }}>{tr("A self-hosted document intelligence platform built for litigation and legal review. All processing, AI inference, and storage stays on your hardware. No data ever leaves the device.")}</p>
         </div>
 
         {/* The Problem */}
         <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "28px 28px", background: CARD, marginBottom: 48 }}>
-          <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>The Problem</p>
-          <p style={{ ...ROBOTO, fontSize: "clamp(15px, 2vw, 20px)", fontWeight: 700, color: DARK, lineHeight: 1.45, marginBottom: 16 }}>
-            Cloud AI creates unacceptable risk for privileged material. Manual review of large disclosure sets is prohibitively slow.
-          </p>
-          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: MUTED, maxWidth: 640 }}>
-            Legal teams handling large-scale disclosure face a fundamental tension: cloud AI platforms offer powerful document analysis, but sending privileged case material to external servers creates unacceptable risks under Legal Professional Privilege, GDPR, and professional conduct rules. LegalRAG eliminates this tension. It brings the AI to the data, not the data to the AI.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>{tr("The Problem")}</p>
+          <p style={{ ...ROBOTO, fontSize: "clamp(15px, 2vw, 20px)", fontWeight: 700, color: DARK, lineHeight: 1.45, marginBottom: 16 }}>{tr("Cloud AI creates unacceptable risk for privileged material. Manual review of large disclosure sets is prohibitively slow.")}</p>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: MUTED, maxWidth: 640 }}>{tr("Legal teams handling large-scale disclosure face a fundamental tension: cloud AI platforms offer powerful document analysis, but sending privileged case material to external servers creates unacceptable risks under Legal Professional Privilege, GDPR, and professional conduct rules. LegalRAG eliminates this tension. It brings the AI to the data, not the data to the AI.")}</p>
         </div>
 
         {/* What it does */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ borderRadius: 10, background: "#2a2a2a", padding: "18px 24px", marginBottom: 20 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>Capabilities</p>
-            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>What it does</h2>
+            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>{tr("Capabilities")}</p>
+            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>{tr("What it does")}</h2>
           </div>
           <div className="lr-features">
             {([
@@ -223,8 +218,8 @@ export default function LegalRag() {
             ] as const).map(({ Icon, title, body }) => (
               <div key={title} style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "22px 20px", background: CARD }}>
                 <Icon />
-                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: DARK, marginBottom: 10 }}>{title}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: MUTED }}>{body}</p>
+                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: DARK, marginBottom: 10 }}>{tr(title)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: MUTED }}>{tr(body)}</p>
               </div>
             ))}
           </div>
@@ -233,8 +228,8 @@ export default function LegalRag() {
         {/* What makes it different */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ borderRadius: 10, background: "#2a2a2a", padding: "18px 24px", marginBottom: 20 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>Differentiators</p>
-            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>What makes it different</h2>
+            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>{tr("Differentiators")}</p>
+            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>{tr("What makes it different")}</h2>
           </div>
           <div className="lr-diffs">
             {([
@@ -261,8 +256,8 @@ export default function LegalRag() {
             ] as const).map(({ Icon, title, body }) => (
               <div key={title} style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "22px 20px", background: CARD }}>
                 <Icon />
-                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: DARK, marginBottom: 10 }}>{title}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: MUTED }}>{body}</p>
+                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: DARK, marginBottom: 10 }}>{tr(title)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: MUTED }}>{tr(body)}</p>
               </div>
             ))}
           </div>
@@ -271,21 +266,17 @@ export default function LegalRag() {
         {/* Planned features */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ borderRadius: 10, background: "#2a2a2a", padding: "18px 24px", marginBottom: 20 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>Roadmap</p>
-            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>Planned features</h2>
+            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>{tr("Roadmap")}</p>
+            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>{tr("Planned features")}</h2>
           </div>
           <div className="lr-planned">
             <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "22px 20px", background: CARD }}>
-              <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 10 }}>Custom Taxonomies</p>
-              <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: MUTED }}>
-                A taxonomy builder that allows the legal team to define case-specific classification frameworks — allegations, issues, parties, transaction types. The AI classifies every document against the lawyer's own framework, creating bespoke searchable categories that reflect how the case is actually structured.
-              </p>
+              <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 10 }}>{tr("Custom Taxonomies")}</p>
+              <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: MUTED }}>{tr("A taxonomy builder that allows the legal team to define case-specific classification frameworks — allegations, issues, parties, transaction types. The AI classifies every document against the lawyer's own framework, creating bespoke searchable categories that reflect how the case is actually structured.")}</p>
             </div>
             <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "22px 20px", background: CARD }}>
-              <p style={{ ...CAPS, fontSize: 9, color: BLUE, marginBottom: 10 }}>Knowledge Map</p>
-              <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: MUTED }}>
-                An interactive visual graph showing connections between documents — shared parties, overlapping dates, cross-references, related transactions. Documents as nodes, relationships as edges, rendered as a navigable hub-and-spoke visualisation. Surfaces patterns across large document sets that linear review would miss.
-              </p>
+              <p style={{ ...CAPS, fontSize: 9, color: BLUE, marginBottom: 10 }}>{tr("Knowledge Map")}</p>
+              <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: MUTED }}>{tr("An interactive visual graph showing connections between documents — shared parties, overlapping dates, cross-references, related transactions. Documents as nodes, relationships as edges, rendered as a navigable hub-and-spoke visualisation. Surfaces patterns across large document sets that linear review would miss.")}</p>
             </div>
           </div>
         </div>
@@ -295,7 +286,7 @@ export default function LegalRag() {
 
           {/* Tech stack */}
           <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "24px 22px", background: CARD }}>
-            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 16 }}>Technology Stack</p>
+            <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 16 }}>{tr("Technology Stack")}</p>
             {([
               { label: "Hardware", value: "NVIDIA DGX Spark — GB10 Superchip, 128GB unified memory, NVMe storage" },
               { label: "AI Models", value: "Open-weight models via Ollama — reasoning + embeddings, fully local" },
@@ -304,7 +295,7 @@ export default function LegalRag() {
               { label: "Access", value: "Tailscale peer-to-peer VPN — secure remote access, no port forwarding" },
             ]).map(({ label, value }) => (
               <div key={label} style={{ marginBottom: 14, paddingBottom: 14, borderBottom: `1px solid ${BORDER}` }}>
-                <p style={{ ...CAPS, fontSize: 8, color: AMBER, marginBottom: 4 }}>{label}</p>
+                <p style={{ ...CAPS, fontSize: 8, color: AMBER, marginBottom: 4 }}>{tr(label)}</p>
                 <p style={{ ...INTER, fontSize: 12, lineHeight: 1.6, color: TEXT }}>{value}</p>
               </div>
             ))}
@@ -313,7 +304,7 @@ export default function LegalRag() {
           {/* Who it's for + deployment */}
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "24px 22px", background: CARD }}>
-              <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>Who it's for</p>
+              <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>{tr("Who it's for")}</p>
               {[
                 "Barristers and chambers handling document-heavy commercial litigation",
                 "Law firms with privacy-sensitive practices — fraud, family, regulatory",
@@ -322,29 +313,23 @@ export default function LegalRag() {
               ].map((item) => (
                 <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 10 }}>
                   <span style={{ width: 5, height: 5, borderRadius: "50%", background: AMBER, flexShrink: 0, marginTop: 5 }} />
-                  <span style={{ ...INTER, fontSize: 12, lineHeight: 1.65, color: TEXT }}>{item}</span>
+                  <span style={{ ...INTER, fontSize: 12, lineHeight: 1.65, color: TEXT }}>{tr(item)}</span>
                 </div>
               ))}
             </div>
 
             <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "24px 22px", background: CARD }}>
-              <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>Deployment Model</p>
-              <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: TEXT }}>
-                Each client receives their own DGX Spark unit, configured and deployed at their premises. The system is self-contained — no ongoing cloud dependency. Setup, ingestion, and training are handled as a managed service.
-              </p>
+              <p style={{ ...CAPS, fontSize: 9, color: MUTED, marginBottom: 14 }}>{tr("Deployment Model")}</p>
+              <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: TEXT }}>{tr("Each client receives their own DGX Spark unit, configured and deployed at their premises. The system is self-contained — no ongoing cloud dependency. Setup, ingestion, and training are handled as a managed service.")}</p>
             </div>
           </div>
         </div>
 
         {/* Footer callout */}
         <div style={{ borderRadius: 12, background: DARK, padding: "clamp(24px, 4vw, 40px)" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 12 }}>Built by Humanity³</p>
-          <p style={{ ...ROBOTO, fontSize: "clamp(14px, 2vw, 18px)", fontWeight: 700, color: "#f6f1ea", lineHeight: 1.5, marginBottom: 16 }}>
-            A division of Tutto Products and Services
-          </p>
-          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "rgba(246,241,234,0.6)", maxWidth: 520 }}>
-            LegalRAG is a specific answer to a specific problem. The underlying principle applies broadly: there are domains where cloud AI creates risks that on-premise deployment eliminates. The hardware to run capable AI models locally exists now — and is becoming more affordable. The question is whether organisations in sensitive sectors are willing to treat deployment architecture as a first-order design question, not an afterthought.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: AMBER, marginBottom: 12 }}>{tr("Built by Humanity³")}</p>
+          <p style={{ ...ROBOTO, fontSize: "clamp(14px, 2vw, 18px)", fontWeight: 700, color: "#f6f1ea", lineHeight: 1.5, marginBottom: 16 }}>{tr("A division of Tutto Products and Services")}</p>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "rgba(246,241,234,0.6)", maxWidth: 520 }}>{tr("LegalRAG is a specific answer to a specific problem. The underlying principle applies broadly: there are domains where cloud AI creates risks that on-premise deployment eliminates. The hardware to run capable AI models locally exists now — and is becoming more affordable. The question is whether organisations in sensitive sectors are willing to treat deployment architecture as a first-order design question, not an afterthought.")}</p>
         </div>
 
       </div>
