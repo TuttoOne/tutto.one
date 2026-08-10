@@ -181,6 +181,26 @@ export default function Pythia() {
           <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-2xl">
             {t(copy.pythia.languageNote)}
           </p>
+
+          <a
+            href="https://pythia-demo.tutto.one/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-8 flex items-center justify-between gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
+          >
+            <div>
+              <p className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                {t(copy.pythia.demoTitle)}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1 max-w-xl">
+                {t(copy.pythia.demoBody)}
+              </p>
+            </div>
+            <span className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-primary shrink-0">
+              {t(copy.pythia.demoCta)}
+              <ArrowUpRight className="w-4 h-4" />
+            </span>
+          </a>
         </Section>
 
         <Section

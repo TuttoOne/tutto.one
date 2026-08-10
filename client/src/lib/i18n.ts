@@ -344,6 +344,12 @@ export const copy = {
       en: "Corpus readiness across a 234,000-document estate — what is ingested, embedded, classified and summarised, and what is not yet.",
       fr: "État de préparation du corpus sur un fonds de 234 000 documents : ce qui est intégré, vectorisé, classé et résumé — et ce qui ne l'est pas encore.",
     },
+    demoTitle: { en: "Try it yourself", fr: "Essayez par vous-même" },
+    demoBody: {
+      en: "The Atelier Vallon demonstration is open — the same system, on the fictional corpus, with nothing to install and no sign-up. It is in French.",
+      fr: "La démonstration Atelier Vallon est ouverte à tous : le même système, sur le corpus fictif, sans rien à installer ni inscription.",
+    },
+    demoCta: { en: "Open the demonstration", fr: "Ouvrir la démonstration" },
     fitLabel: { en: "Where it fits", fr: "À qui cela s'adresse" },
     fitBody: {
       en: "Pythia suits anything legal, regulatory or commercially sensitive that cannot be sent to a cloud service or a US-hosted model — privileged material, regulated records, contractual or export-controlled data. The constraint is the same wherever it comes from: the documents cannot leave. Everything runs on hardware you control.",
