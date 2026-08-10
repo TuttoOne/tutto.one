@@ -4,6 +4,7 @@ import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
 import { seedBlogPostsIfEmpty } from "./seed-blog";
+import { clearStalePortfolioOverride } from "./cleanup-portfolio-override";
 
 const app = express();
 const httpServer = createServer(app);
@@ -72,6 +73,14 @@ app.use((req, res, next) => {
     await seedBlogPostsIfEmpty();
   } catch (err) {
     console.error("Failed to seed blog posts:", err);
+  }
+
+  // One-off: drop a portfolio override that is just a saved copy of the
+  // defaults, so edits in code stop being silently masked. No-op once done.
+  try {
+    await clearStalePortfolioOverride();
+  } catch (err) {
+    console.error("Failed to check the portfolio override:", err);
   }
 
   await registerRoutes(httpServer, app);
