@@ -84,6 +84,13 @@ export default function Praxis() {
             ))}
           </CardGrid>
           <p className="mt-6 text-sm text-muted-foreground italic">{t(copy.praxis.ingFoot)}</p>
+
+          <div className="mt-8 bg-secondary/30 border border-border rounded-2xl p-6 max-w-2xl">
+            <Eyebrow className="mb-3 text-muted-foreground/70">
+              {t(copy.praxis.toolingNoteLabel)}
+            </Eyebrow>
+            <p className="text-muted-foreground leading-relaxed">{t(copy.praxis.toolingNote)}</p>
+          </div>
         </Section>
 
         <Section

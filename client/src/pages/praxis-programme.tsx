@@ -66,7 +66,7 @@ const sessions = [
 const faqs = [
   {
     q: "Do I need to know how to code?",
-    a: "No. You describe what you want in plain language. Claude Code writes the code. We use the time to make sure you understand what you are building and why.",
+    a: "No. You describe what you want in plain language. The assistant writes the code. We use the time to make sure you understand what you are building and why.",
   },
   {
     q: "I have only ever used AI in a chat box. Is this for me?",
@@ -294,13 +294,25 @@ export default function PraxisProgramme() {
               { label: "Format", body: "One-to-one or small group. You choose what suits you." },
               { label: "Cadence", body: "One session a week, about an hour each, over roughly two months. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
-              { label: "What you need", body: "A laptop - Mac or Windows. A Claude account. We set up everything else together in the first session." },
+              { label: "What you need", body: "A laptop - Mac or Windows. An account with the AI assistant of your choice. We set up everything else together in the first session." },
             ].map((item) => (
               <div key={tr(item.label)} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>{tr(item.label)}</p>
                 <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(item.body)}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Choice of assistant */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ background: "#f0ece6", borderRadius: 10, padding: "24px 26px", maxWidth: 660 }}>
+            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>
+              {tr("On the choice of assistant")}
+            </p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d" }}>
+              {tr("We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine — which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.")}
+            </p>
           </div>
         </div>
 

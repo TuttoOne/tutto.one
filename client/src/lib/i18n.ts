@@ -222,6 +222,11 @@ export const copy = {
       en: "Plain folders, plain files, on the computer you already own. No cloud, no database, no proprietary format. The same disk you have been using for years - the thing that makes it yours.",
       fr: "Des dossiers ordinaires, des fichiers ordinaires, sur l'ordinateur que vous possédez déjà. Pas de cloud, pas de base de données, pas de format propriétaire. Le même disque que vous utilisez depuis des années — c'est ce qui fait qu'il vous appartient.",
     },
+    toolingNoteLabel: { en: "On the choice of assistant", fr: "Sur le choix de l'assistant" },
+    toolingNote: {
+      en: "We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine — which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.",
+      fr: "Nous enseignons avec Claude comme exemple, parce que c'est celui avec lequel la plupart des gens arrivent. Ce n'est pas une obligation. La même méthode fonctionne avec Mistral, avec OpenAI, ou avec des modèles à poids ouverts exécutés entièrement sur votre propre machine — ce qui est la bonne réponse lorsque le travail ne peut pas sortir de vos locaux. Vous choisissez l'assistant ; nous l'installons avec vous dès la première séance.",
+    },
     ingFoot: {
       en: "Point all three at the same folder.",
       fr: "Dirigez les trois vers le même dossier.",

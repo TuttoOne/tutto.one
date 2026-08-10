@@ -198,4 +198,13 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Une séance par semaine, sur près de deux mois. Les six premières vous rendent autonome et sûr de vous. Les deux dernières vous emmènent plus loin, vers le type de travail qui réclame d'ordinaire un développeur.",
   "You have typed questions into ChatGPT or Claude and got useful answers back. This is the next step: using Claude Code to build small, working tools that do your repetitive work for you. The internet is full of free tutorials. What a video cannot do is see where you are stuck and hear what you are unsure about. That gap - between \"I have heard of Claude Code\" and \"I am building\" - is the whole reason this programme exists.":
     "Vous avez posé des questions à ChatGPT ou à Claude et obtenu des réponses utiles. Voici l'étape suivante : utiliser Claude Code pour construire de petits outils fonctionnels qui prennent en charge vos tâches répétitives. Internet regorge de tutoriels gratuits. Ce qu'une vidéo ne peut pas faire, c'est voir où vous bloquez et entendre ce dont vous doutez. C'est précisément cet écart — entre « j'ai entendu parler de Claude Code » et « je construis » — qui justifie l'existence de ce programme.",
+
+  "On the choice of assistant":
+    "Sur le choix de l'assistant",
+  "We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine — which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.":
+    "Nous enseignons avec Claude comme exemple, parce que c'est celui avec lequel la plupart des gens arrivent. Ce n'est pas une obligation. La même méthode fonctionne avec Mistral, avec OpenAI, ou avec des modèles à poids ouverts exécutés entièrement sur votre propre machine — ce qui est la bonne réponse lorsque le travail ne peut pas sortir de vos locaux. Vous choisissez l'assistant ; nous l'installons avec vous dès la première séance.",
+  "A laptop - Mac or Windows. An account with the AI assistant of your choice. We set up everything else together in the first session.":
+    "Un ordinateur portable, Mac ou Windows. Un compte auprès de l'assistant IA de votre choix. Nous installons tout le reste ensemble lors de la première séance.",
+  "No. You describe what you want in plain language. The assistant writes the code. We use the time to make sure you understand what you are building and why.":
+    "Non. Vous décrivez ce que vous voulez en langage courant. L'assistant écrit le code. Nous mettons le temps à profit pour que vous compreniez ce que vous construisez, et pourquoi.",
 };
