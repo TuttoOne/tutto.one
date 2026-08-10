@@ -1,10 +1,13 @@
 import { Layout } from "@/components/layout/Layout";
 import { PortfolioDisplay, type PortfolioTextOverride } from "@/components/portfolio/PortfolioDisplay";
+import { AnimatedPointer } from "@/components/brand/AnimatedPointer";
 import { Link } from "wouter";
 import { ArrowDown } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { copy, useT } from "@/lib/i18n";
 
 export default function Home() {
+  const t = useT();
   const { data: portfolioContent } = useQuery<{ value: string }>({
     queryKey: ["/api/site-content/portfolio"],
     retry: false,
@@ -19,15 +22,17 @@ export default function Home() {
     <Layout>
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="text-center mb-20 pt-8">
+          <div className="flex justify-center mb-6">
+            <AnimatedPointer className="w-28 h-28 md:w-32 md:h-32" />
+          </div>
           <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6">
-            This is the AI era.
+            {t(copy.home.eyebrow)}
           </p>
           <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6 max-w-3xl mx-auto">
-            Technology Consulting
+            {t(copy.home.title)}
           </h1>
           <p className="text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-            We build the systems, bridges, and infrastructure that let AI work
-            inside your organisation - not just beside it.
+            {t(copy.home.standfirst)}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -37,20 +42,20 @@ export default function Home() {
               className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
               data-testid="link-book-call-hero"
             >
-              Book a 30-minute call
+              {t(copy.common.bookCall)}
             </a>
             <Link
               href="/about"
               className="inline-flex items-center justify-center px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
               data-testid="link-about-hero"
             >
-              About us
+              {t(copy.common.aboutUs)}
             </Link>
           </div>
           <div className="mt-16 flex justify-center">
             <div className="flex flex-col items-center gap-2 text-muted-foreground/50">
               <p className="text-xs font-mono uppercase tracking-widest">
-                Our work
+                {t(copy.common.ourWork)}
               </p>
               <ArrowDown className="w-4 h-4 animate-bounce" />
             </div>

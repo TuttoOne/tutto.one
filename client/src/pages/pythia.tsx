@@ -12,34 +12,17 @@ import {
   Etymology,
   ClosingCta,
 } from "@/components/product/ProductPage";
+import { copy, useT } from "@/lib/i18n";
+import { usePreferences } from "@/lib/preferences";
+import { price } from "@/lib/pricing";
 
-const HOW_IT_WORKS = [
-  {
-    numeral: "i.",
-    title: "Ask in plain English",
-    qualifier: "Semantic search · Cited answers",
-    body: "Ask it the way you'd brief a junior. Every answer cites the source document and page number. No guessing, and no answer drawn from the model's own knowledge rather than your files.",
-  },
-  {
-    numeral: "ii.",
-    title: "Nothing leaves the office",
-    qualifier: "On-premise · Zero cloud APIs",
-    body: "OCR, inference, vector search and storage all run locally on your hardware. No data is sent to third parties. Legal Professional Privilege is satisfied by architecture, not by policy.",
-  },
-  {
-    numeral: "iii.",
-    title: "Every document, every format",
-    qualifier: "150,000+ files · All formats",
-    body: "PDF, DOCX, MSG, EML, XLSX, TIF and more. Pythia reads in your first disclosure set in a few weeks, and new documents are added as they arrive.",
-  },
-];
+const BOOKING = "https://cal.com/tuttoone/30min";
 
-const STATS = [
-  { stat: "3 days → 3 hours", label: "Document review per matter" },
-  { stat: "Zero", label: "Files that leave your office" },
-  { stat: "Every footnote", label: "Found, cited and explained" },
-];
-
+/**
+ * The example session stays in English in both locales: it is a transcript of
+ * machine output over an English disclosure set, and translating a quoted
+ * record would misrepresent it.
+ */
 const SESSION = [
   {
     tag: "A",
@@ -58,89 +41,79 @@ const SESSION = [
   },
 ];
 
-const BEYOND_LEGAL = [
-  {
-    numeral: "i.",
-    title: "A hierarchy of knowledge",
-    qualifier: "Structured · Searchable · Yours",
-    body: "Every document, note and decision organised into a structure you define, with semantic search across all of it. Ask anything and it answers from the record rather than from a guess.",
-  },
-  {
-    numeral: "ii.",
-    title: "AI as orchestrator, not custodian",
-    qualifier: "Local-first · Zero cloud exposure",
-    body: "The AI connects to your knowledge base and instructs agents to act on it. It orchestrates; it never holds. Your data stays on your hardware at every step.",
-  },
-  {
-    numeral: "iii.",
-    title: "Self-improving by design",
-    qualifier: "Each session sharpens the system",
-    body: "Every question, correction and refinement feeds back in. The structure grows more accurate and the retrieval improves, without anything leaving your environment.",
-  },
-];
-
-/** The principle already running in other domains — live, not hypothetical. */
-const APPLIED = [
-  {
-    name: "Bomza — SANS 10400",
-    domain: "Building regulations · South Africa",
-    body: "Verification of building plans against the South African National Building Regulations. Documents checked against a published standard, with every finding traced back to the clause it comes from.",
-    href: "https://bomza.tutto.one/",
-  },
-  {
-    name: "EntityVault",
-    domain: "Entity management · Consent-based sharing",
-    body: "Tokenised storage and consent-based collaboration, so records can be shared between parties without exposing the underlying data to any of them.",
-    href: "https://entityvault.tutto.one/",
-  },
-];
-
 export default function Pythia() {
+  const t = useT();
+  const { locale, currency } = usePreferences();
+  const p = (k: Parameters<typeof price>[0]) => price(k, currency, locale);
+
   useEffect(() => {
-    document.title = "Pythia — On-premise document intelligence | Tutto";
+    document.title =
+      locale === "fr"
+        ? "Pythia — intelligence documentaire sur site | Tutto"
+        : "Pythia — On-premise document intelligence | Tutto";
     return () => {
       document.title = "Tutto | AI Consulting";
     };
-  }, []);
+  }, [locale]);
+
+  const howItWorks = [
+    { numeral: "i.", title: t(copy.pythia.c1Title), qualifier: t(copy.pythia.c1Qual), body: t(copy.pythia.c1Body) },
+    { numeral: "ii.", title: t(copy.pythia.c2Title), qualifier: t(copy.pythia.c2Qual), body: t(copy.pythia.c2Body) },
+    { numeral: "iii.", title: t(copy.pythia.c3Title), qualifier: t(copy.pythia.c3Qual), body: t(copy.pythia.c3Body) },
+  ];
+
+  const beyondLegal = [
+    { numeral: "i.", title: t(copy.pythia.b1Title), qualifier: t(copy.pythia.b1Qual), body: t(copy.pythia.b1Body) },
+    { numeral: "ii.", title: t(copy.pythia.b2Title), qualifier: t(copy.pythia.b2Qual), body: t(copy.pythia.b2Body) },
+    { numeral: "iii.", title: t(copy.pythia.b3Title), qualifier: t(copy.pythia.b3Qual), body: t(copy.pythia.b3Body) },
+  ];
+
+  const stats = [
+    { stat: t(copy.pythia.stat1), label: t(copy.pythia.stat1Label) },
+    { stat: t(copy.pythia.stat2), label: t(copy.pythia.stat2Label) },
+    { stat: t(copy.pythia.stat3), label: t(copy.pythia.stat3Label) },
+  ];
+
+  const applied = [
+    {
+      name: "Bomza — SANS 10400",
+      domain: t(copy.pythia.app1Domain),
+      body: t(copy.pythia.app1Body),
+      href: "https://bomza.tutto.one/",
+    },
+    {
+      name: "EntityVault",
+      domain: t(copy.pythia.app2Domain),
+      body: t(copy.pythia.app2Body),
+      href: "https://entityvault.tutto.one/",
+    },
+  ];
 
   return (
     <Layout>
       <div className="max-w-5xl mx-auto px-6 py-12">
         <ProductHero
-          eyebrow="Pythia · Document intelligence"
-          title={<>Read every file. Find what matters. In hours, not days.</>}
+          eyebrow={t(copy.pythia.eyebrow)}
+          title={t(copy.pythia.title)}
           standfirst={
             <>
-              <p>
-                Juniors spend days reading. Partners wait. The thing you miss is the thing that
-                loses the case. Pythia reads everything — every file, every footnote — and lets you
-                ask questions the way you'd brief a junior.
-              </p>
-              <p>
-                It runs on your hardware. Nothing leaves your office. No cloud, no third-party APIs,
-                no exposure.
-              </p>
+              <p>{t(copy.pythia.lead1)}</p>
+              <p>{t(copy.pythia.lead2)}</p>
             </>
           }
-          primaryCta={{ label: "Book a conversation", href: "https://cal.com/tuttoone/30min" }}
-          secondaryCta={{ label: "See the wider portfolio", href: "/portfolio" }}
-          meta="On-premise · Private · 30 minutes"
+          primaryCta={{ label: t(copy.common.bookConversation), href: BOOKING }}
+          secondaryCta={{ label: t(copy.common.seePortfolio), href: "/portfolio" }}
+          meta={t(copy.pythia.meta)}
         />
 
         <Section
           index="01"
-          label="How it works"
-          title="A self-hosted document intelligence platform for document-heavy work."
-          intro={
-            <p>
-              Pythia processes entire disclosure sets locally: semantic search, conversational Q&amp;A
-              with citations, interactive timelines, and OCR. It finds every relevant file, and shows
-              you exactly why it surfaced.
-            </p>
-          }
+          label={t(copy.pythia.s1Label)}
+          title={t(copy.pythia.s1Title)}
+          intro={<p>{t(copy.pythia.s1Body)}</p>}
         >
           <CardGrid cols={3}>
-            {HOW_IT_WORKS.map((c) => (
+            {howItWorks.map((c) => (
               <FeatureCard key={c.numeral} numeral={c.numeral} title={c.title} qualifier={c.qualifier}>
                 {c.body}
               </FeatureCard>
@@ -148,99 +121,78 @@ export default function Pythia() {
           </CardGrid>
         </Section>
 
-        <Section index="02" label="What it looks like in use">
+        <Section index="02" label={t(copy.pythia.s2Label)}>
           <div className="grid md:grid-cols-2 gap-5 items-start">
             <div className="flex flex-col gap-4">
-              {STATS.map((s) => (
+              {stats.map((s) => (
                 <StatCard key={s.stat} stat={s.stat} label={s.label} />
               ))}
             </div>
-            <ExampleSession caption="Pythia · example session" items={SESSION} />
+            <ExampleSession caption={t(copy.pythia.sessionCaption)} items={SESSION} />
           </div>
         </Section>
 
         <Section
           index="03"
-          label="Beyond legal"
-          title="The same architecture, pointed at any body of knowledge."
-          intro={
-            <p>
-              Litigation is the hardest version of the problem: high volume, high stakes, and a
-              privilege requirement that rules out the cloud entirely. Solve it there and it
-              transfers. The same system runs over operations, research, compliance or engineering
-              records — a private second brain that acts, on your hardware.
-            </p>
-          }
+          label={t(copy.pythia.s3Label)}
+          title={t(copy.pythia.s3Title)}
+          intro={<p>{t(copy.pythia.s3Body)}</p>}
         >
           <CardGrid cols={3}>
-            {BEYOND_LEGAL.map((c) => (
+            {beyondLegal.map((c) => (
               <FeatureCard key={c.numeral} numeral={c.numeral} title={c.title} qualifier={c.qualifier}>
                 {c.body}
               </FeatureCard>
             ))}
           </CardGrid>
 
-          <p className="mt-12 mb-5 text-sm text-muted-foreground">
-            Two projects already running on the same principle:
-          </p>
+          <p className="mt-12 mb-5 text-sm text-muted-foreground">{t(copy.pythia.appliedIntro)}</p>
           <CardGrid cols={2}>
-            {APPLIED.map((p) => (
+            {applied.map((a) => (
               <a
-                key={p.name}
-                href={p.href}
+                key={a.name}
+                href={a.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group bg-card border border-border rounded-2xl p-6 hover:border-primary/40 transition-colors"
               >
                 <div className="flex items-start justify-between gap-3 mb-1.5">
                   <h3 className="text-lg font-serif font-bold group-hover:text-primary transition-colors">
-                    {p.name}
+                    {a.name}
                   </h3>
                   <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors shrink-0 mt-1" />
                 </div>
                 <p className="text-[11px] uppercase tracking-[0.1em] text-muted-foreground/70 mb-4">
-                  {p.domain}
+                  {a.domain}
                 </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{p.body}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{a.body}</p>
               </a>
             ))}
           </CardGrid>
         </Section>
 
-        <Section
-          index="04"
-          label="Engagement"
-          intro={<p>Three stages, each one a decision point rather than a commitment to the next.</p>}
-        >
+        <Section index="04" label={t(copy.pythia.s4Label)} intro={<p>{t(copy.pythia.s4Body)}</p>}>
           <CardGrid cols={3}>
-            <PriceRow title="Diagnostic sprint" price="~£2,500">
-              Two weeks. We review your real documents and workflows and tell you exactly what Pythia
-              can do for your practice.
+            <PriceRow title={t(copy.pythia.e1Title)} price={p("sprint")}>
+              {t(copy.pythia.e1Body)}
             </PriceRow>
-            <PriceRow title="The build" price="From £20,000">
-              Hardware and custom build, scoped after the diagnostic. Typically four to eight weeks
-              from sign-off to a system running on your premises.
+            <PriceRow title={t(copy.pythia.e2Title)} price={`${t(copy.pythia.e2Price)} ${p("build")}`}>
+              {t(copy.pythia.e2Body)}
             </PriceRow>
-            <PriceRow title="Ongoing" price="~20% p.a.">
-              Assessed during the build. Covers ingestion of new matter files, system maintenance,
-              and keeping Pythia current as your work evolves.
+            <PriceRow title={t(copy.pythia.e3Title)} price={t(copy.pythia.e3Price)}>
+              {t(copy.pythia.e3Body)}
             </PriceRow>
           </CardGrid>
         </Section>
 
-        <Etymology pull="The Pythia was the Oracle at Delphi — the one you consulted when you needed an answer from everything that had been heard.">
-          Pythia was the title given to the high priestess of the Temple of Apollo at Delphi, who
-          served as its oracle. The name derives from Python, the serpent Apollo slew at Delphi. To
-          put a question to the Pythia was not to ask for a guess — it was to receive the distilled
-          answer from everything the oracle had witnessed and absorbed. That is the model: every
-          document, read; every question, answered from the record itself.
-        </Etymology>
+        <Etymology pull={t(copy.pythia.etymPull)}>{t(copy.pythia.etymBody)}</Etymology>
 
         <ClosingCta
-          title="Ready to see it in your practice?"
-          body="Book a thirty-minute conversation. We'll walk through your documents and tell you what's possible."
-          href="https://cal.com/tuttoone/30min"
-          label="Book a conversation"
+          title={t(copy.pythia.ctaTitle)}
+          body={t(copy.pythia.ctaBody)}
+          href={BOOKING}
+          label={t(copy.common.bookConversation)}
+          messageLabel={t(copy.common.sendMessage)}
         />
       </div>
     </Layout>

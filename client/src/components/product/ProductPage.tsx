@@ -248,11 +248,13 @@ export function ClosingCta({
   body,
   href,
   label,
+  messageLabel = "Send a message",
 }: {
   title: string;
   body: string;
   href: string;
   label: string;
+  messageLabel?: string;
 }) {
   return (
     <div className="mt-16 p-8 bg-secondary/30 rounded-2xl border border-border">
@@ -271,7 +273,7 @@ export function ClosingCta({
           href="/contact"
           className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
         >
-          Send a message <ArrowRight className="w-4 h-4" />
+          {messageLabel} <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
     </div>

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
-import { Header } from "@/components/layout/Layout";
+import { Header, Layout } from "@/components/layout/Layout";
 import { useQuery } from "@tanstack/react-query";
+import { usePreferences } from "@/lib/preferences";
+import { FicheSheet } from "@/pages/fiche-capacites";
 
 const ROBOTO: React.CSSProperties = {
   fontFamily: "'Roboto', -apple-system, sans-serif",
@@ -20,12 +22,15 @@ const DEFAULT_HERO = {
 };
 
 export default function About() {
+  const { locale } = usePreferences();
+
   useEffect(() => {
-    document.title = "About - Daniel Forsthofer";
+    document.title =
+      locale === "fr" ? "À propos - Daniel Forsthofer" : "About - Daniel Forsthofer";
     return () => {
       document.title = "Tutto | AI Consulting";
     };
-  }, []);
+  }, [locale]);
 
   const { data: heroContent } = useQuery<{ value: string }>({
     queryKey: ["/api/site-content/about-hero"],
@@ -36,6 +41,18 @@ export default function About() {
     if (!heroContent) return DEFAULT_HERO;
     try { return { ...DEFAULT_HERO, ...JSON.parse(heroContent.value) }; } catch { return DEFAULT_HERO; }
   })();
+
+  // The French About is the capability sheet — written for the French market
+  // rather than translated from the English page, which is a different pitch.
+  if (locale === "fr") {
+    return (
+      <Layout>
+        <div className="max-w-3xl mx-auto px-6 py-12">
+          <FicheSheet />
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <div style={{ background: "#f6f1ea", minHeight: "100vh", ...INTER }}>
