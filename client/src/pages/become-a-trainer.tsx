@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Layout";
+import { usePreferences } from "@/lib/preferences";
+import {
+  trainerEconomics,
+  COURSE_SESSIONS,
+  TRAINER_TRACK_SESSIONS,
+  EXAMPLE_STUDENTS,
+} from "@/lib/pricing";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
 const INTER: React.CSSProperties = { fontFamily: "'Inter', -apple-system, sans-serif" };
@@ -67,6 +74,9 @@ const faqs = [
 ];
 
 export default function BecomeATrainer() {
+  const { locale, currency } = usePreferences();
+  const econ = trainerEconomics(currency, locale);
+
   useEffect(() => {
     document.title = "Become a Praxis Trainer - teach it, and earn from it";
     return () => { document.title = "Tutto | AI Consulting"; };
@@ -276,13 +286,13 @@ export default function BecomeATrainer() {
             {[
               {
                 label: "Trainer track",
-                price: "£800",
-                note: "Four sessions at the standard £200 rate.",
+                price: econ.trainerTrack,
+                note: `${TRAINER_TRACK_SESSIONS} sessions at the standard ${econ.sessionStandard} rate.`,
               },
               {
                 label: "All-in to qualify",
-                price: "£2,400",
-                note: "Praxis (£1,600) plus the trainer track (£800). After that, no further fees.",
+                price: econ.trainerTotal,
+                note: `Praxis (${econ.courseTuition}) plus the trainer track (${econ.trainerTrack}). After that, no further fees.`,
                 highlight: true,
               },
             ].map((p) => (
@@ -311,12 +321,12 @@ export default function BecomeATrainer() {
           {/* Earnings table */}
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, overflow: "hidden", maxWidth: 600, marginBottom: 24 }}>
             <div style={{ background: "#1a1a1a", padding: "14px 20px" }}>
-              <p style={{ ...CAPS, fontSize: 9, color: "#d97706", margin: 0 }}>Per eight-session course (£1,600 tuition)</p>
+              <p style={{ ...CAPS, fontSize: 9, color: "#d97706", margin: 0 }}>Per {COURSE_SESSIONS}-session course ({econ.courseTuition} tuition)</p>
             </div>
             <div style={{ background: "#faf8f5" }}>
               {[
-                { label: "Per session", you: "£160", daniel: "£40" },
-                { label: "Per full course", you: "£1,280", daniel: "£320", bold: true },
+                { label: "Per session", you: econ.sessionYou, daniel: econ.sessionMine },
+                { label: "Per full course", you: econ.courseYou, daniel: econ.courseMine, bold: true },
               ].map((row) => (
                 <div
                   key={row.label}
@@ -343,9 +353,10 @@ export default function BecomeATrainer() {
           <div style={{ padding: "20px 24px", background: "#f0ece6", borderRadius: 8, maxWidth: 600 }}>
             <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>An illustration, not a promise</p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>
-              Teach 24 students through a full course over a year and that is £38,400 of tuition.{" "}
-              <strong style={{ color: "#1a1a1a" }}>You keep £30,720.</strong>{" "}
-              I keep £7,680 for keeping the clients coming and the method sharp. Teach more, earn more.
+              Teach {EXAMPLE_STUDENTS} students through a full course over a year and that is{" "}
+              {econ.yearTuition} of tuition.{" "}
+              <strong style={{ color: "#1a1a1a" }}>You keep {econ.yearYou}.</strong>{" "}
+              I keep {econ.yearMine} for keeping the clients coming and the method sharp. Teach more, earn more.
               Teach part-time, scale it to fit.
             </p>
           </div>

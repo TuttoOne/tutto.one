@@ -138,8 +138,8 @@ export default function Praxis() {
             </PriceRow>
             <PriceRow
               title={t(copy.praxis.costSessionTitle)}
-              price={p("session")}
-              was={p("sessionWas")}
+              price={p("sessionPromo")}
+              was={p("sessionStandard")}
             >
               {t(copy.praxis.costSession)}
             </PriceRow>

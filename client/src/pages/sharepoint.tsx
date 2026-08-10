@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
+import { usePreferences } from "@/lib/preferences";
+import { price } from "@/lib/pricing";
 import {
   Github,
   CheckCircle,
@@ -41,6 +43,10 @@ export default function Sharepoint() {
   const [email, setEmail] = useState("");
   const [copied, setCopied] = useState(false);
   const [, navigate] = useLocation();
+  const { locale, currency } = usePreferences();
+  const p = (k: Parameters<typeof price>[0]) => price(k, currency, locale);
+  const FROM = locale === "fr" ? "À partir de" : "From";
+  const PER_MONTH = locale === "fr" ? "/mois" : "/month";
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -444,28 +450,28 @@ export default function Sharepoint() {
                 {
                   icon: Search,
                   title: "Data Audit & Knowledge Mapping",
-                  price: "From £500",
+                  price: `${FROM} ${p("spAuditFrom")}`,
                   description:
                     "Understand what you have before you build. We map your SharePoint structure, metadata gaps, and AI-readiness - and hand you a prioritised action plan.",
                 },
                 {
                   icon: Construction,
                   title: "Custom MCP Bridge Build",
-                  price: "From £5,000",
+                  price: `${FROM} ${p("spBuildFrom")}`,
                   description:
                     "A bespoke MCP server tailored to your SharePoint environment - custom tools, schemas, permissions model, and end-to-end testing.",
                 },
                 {
                   icon: Zap,
                   title: "AI Agent Architecture",
-                  price: "From £5,000",
+                  price: `${FROM} ${p("spBuildFrom")}`,
                   description:
                     "We design and build the AI agents that sit on top of your SharePoint Bridge - automating workflows, surfacing knowledge, and acting on your behalf.",
                 },
                 {
                   icon: Repeat,
                   title: "Ongoing Support & Training",
-                  price: "From £500/month",
+                  price: `${FROM} ${p("spRetainerMonthly")}${PER_MONTH}`,
                   description:
                     "Monthly retainer covering template updates, model upgrades, usage monitoring, and team training as your SharePoint and AI stack evolve.",
                 },

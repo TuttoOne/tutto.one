@@ -3,13 +3,29 @@ import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
+import { usePreferences } from "@/lib/preferences";
+import { price, type PriceKey } from "@/lib/pricing";
+import { pick } from "@/lib/i18n";
 
 interface ServiceItem {
   title: string;
   description: string;
   features: string[];
-  price: string;
+  /**
+   * Literal price text. Only set by the admin content editor, which stores a
+   * plain string and cannot know about the currency toggle — when present it
+   * wins, and that card stops following the toggle.
+   */
+  price?: string;
+  /** Currency-aware price, resolved against the pricing table at render. */
+  priceKey?: PriceKey;
+  /** Shown before the amount, e.g. "Starts at". */
+  pricePrefix?: { en: string; fr: string };
+  /** Cards with no fixed price at all. */
+  priceLabel?: { en: string; fr: string };
 }
+
+const STARTS_AT = { en: "Starts at", fr: "À partir de" };
 
 const DEFAULT_SERVICES: ServiceItem[] = [
   {
@@ -21,7 +37,8 @@ const DEFAULT_SERVICES: ServiceItem[] = [
       "API Readiness Score",
       "Knowledge Graph Architecture",
     ],
-    price: "Starts at £2k",
+    priceKey: "auditFrom",
+    pricePrefix: STARTS_AT,
   },
   {
     title: "AI Agent Architecture",
@@ -32,7 +49,7 @@ const DEFAULT_SERVICES: ServiceItem[] = [
       "Human-in-the-loop Design",
       "Tool Selection & Integration",
     ],
-    price: "Custom Scoping",
+    priceLabel: { en: "Custom scoping", fr: "Cadrage sur mesure" },
   },
   {
     title: "Team Enablement",
@@ -43,11 +60,13 @@ const DEFAULT_SERVICES: ServiceItem[] = [
       "Documentation Standards",
       "AI Governance Frameworks",
     ],
-    price: "Starts at £3.5k",
+    priceKey: "enablementFrom",
+    pricePrefix: STARTS_AT,
   },
 ];
 
 export default function Services() {
+  const { locale, currency } = usePreferences();
   const { data: servicesContent } = useQuery<{ value: string }>({
     queryKey: ["/api/site-content/services"],
     retry: false,
@@ -99,7 +118,11 @@ export default function Services() {
 
               <div className="mt-auto">
                 <div className="text-sm font-medium text-muted-foreground mb-4">
-                  {service.price}
+                  {service.priceKey
+                    ? `${service.pricePrefix ? pick(service.pricePrefix, locale) + " " : ""}${price(service.priceKey, currency, locale)}`
+                    : service.priceLabel
+                      ? pick(service.priceLabel, locale)
+                      : service.price}
                 </div>
                 <Button
                   className="w-full rounded-full"
