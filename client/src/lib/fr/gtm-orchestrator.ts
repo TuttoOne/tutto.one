@@ -35,8 +35,8 @@ export const GTM_FR: FrDict = {
 
   "Researches every prospect automatically":
     "Étudie automatiquement chaque prospect",
-  "A research engine profiles each company and contact — what they do, their tech stack, competitive replacement signals (Citrix, VPN, RDS), country-specific buying culture — and writes a structured dossier with a personalisation hook. 45 deep-research reports generated; 6,675 prospects profiled across 9 countries.":
-    "Un moteur de recherche profile chaque entreprise et chaque contact — activité, socle technique, signaux de remplacement concurrentiel (Citrix, VPN, RDS), culture d'achat propre au pays — et rédige un dossier structuré assorti d'une accroche personnalisée. 45 rapports de recherche approfondie produits ; 6 675 prospects profilés dans 9 pays.",
+  "A research engine profiles each company and contact — what they do, their tech stack, competitive replacement signals, country-specific buying culture — and writes a structured dossier with a personalisation hook. 45 deep-research reports generated; 6,675 prospects profiled across 9 countries.":
+    "Un moteur de recherche profile chaque entreprise et chaque contact — activité, socle technique, signaux de remplacement concurrentiel, culture d'achat propre au pays — et rédige un dossier structuré assorti d'une accroche personnalisée. 45 rapports de recherche approfondie produits ; 6 675 prospects profilés dans 9 pays.",
   "Writes in the sender's voice, not AI voice":
     "Écrit avec la voix de l'expéditeur, pas celle d'une IA",
   "A multi-stage writing pipeline drafts each message, then runs it through automated editorial gates — mechanics, fact-checking, voice-match, and an 'AI-tell' detector that strips the giveaways that get cold email deleted. Anything that fails is held back rather than sent.":
@@ -45,8 +45,8 @@ export const GTM_FR: FrDict = {
   "A sequence scheduler enrols prospects into multi-step campaigns with a send-claim architecture — idempotency keys and fail-closed guards so nothing double-sends or loops. Every send is logged and auditable. 670 emails drafted, 482 sent, across 11 campaign types.":
     "Un planificateur de séquences inscrit les prospects dans des campagnes multi-étapes selon une architecture de réservation d'envoi : clés d'idempotence et garde-fous à sécurité positive, pour qu'aucun message ne parte deux fois ni ne boucle. Chaque envoi est journalisé et auditable. 670 courriels rédigés, 482 envoyés, sur 11 types de campagnes.",
   "Connects without API access": "Se connecte sans accès API",
-  "Reverse-engineered session-replay integrations for HubSpot CRM, Apollo.io, and the TSplus licence portal where no developer API was available. Live CRM, enrichment and licensing data surfaces directly into the workflow. Website-visitor signals (790 companies tracked) feed warm leads in automatically.":
-    "Des intégrations par rejeu de session, obtenues par rétro-ingénierie, pour le CRM HubSpot, Apollo.io et le portail de licences TSplus, là où aucune API destinée aux développeurs n'existait. Les données de CRM, d'enrichissement et de licences remontent directement dans le flux de travail. Les signaux de visite du site (790 entreprises suivies) alimentent automatiquement les pistes tièdes.",
+  "Reverse-engineered session-replay integrations for HubSpot CRM, Apollo.io, and a licence portal where no developer API was available. Live CRM, enrichment and licensing data surfaces directly into the workflow. Website-visitor signals (790 companies tracked) feed warm leads in automatically.":
+    "Des intégrations par rejeu de session, obtenues par rétro-ingénierie, pour le CRM HubSpot, Apollo.io et un portail de licences, là où aucune API destinée aux développeurs n'existait. Les données de CRM, d'enrichissement et de licences remontent directement dans le flux de travail. Les signaux de visite du site (790 entreprises suivies) alimentent automatiquement les pistes tièdes.",
   "Keeps the pipeline warm on its own":
     "Entretient le pipeline de lui-même",
   "Daily automations graduate new prospects into campaigns, draft follow-ups for deals that go quiet, and send a morning briefing — so accounts keep moving without manual chasing. Live opportunities at SSAB, Eidsiva, GleSYS, Vektus and others sourced through the system.":

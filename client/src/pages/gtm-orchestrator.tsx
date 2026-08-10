@@ -47,13 +47,13 @@ export default function GtmOrchestrator() {
 
   const capabilityBodies: Record<string, string> = {
     "Researches every prospect automatically":
-      "A research engine profiles each company and contact — what they do, their tech stack, competitive replacement signals (Citrix, VPN, RDS), country-specific buying culture — and writes a structured dossier with a personalisation hook. 45 deep-research reports generated; 6,675 prospects profiled across 9 countries.",
+      "A research engine profiles each company and contact — what they do, their tech stack, competitive replacement signals, country-specific buying culture — and writes a structured dossier with a personalisation hook. 45 deep-research reports generated; 6,675 prospects profiled across 9 countries.",
     "Writes in the sender's voice, not AI voice":
       "A multi-stage writing pipeline drafts each message, then runs it through automated editorial gates — mechanics, fact-checking, voice-match, and an 'AI-tell' detector that strips the giveaways that get cold email deleted. Anything that fails is held back rather than sent.",
     "Sends safely and on schedule":
       "A sequence scheduler enrols prospects into multi-step campaigns with a send-claim architecture — idempotency keys and fail-closed guards so nothing double-sends or loops. Every send is logged and auditable. 670 emails drafted, 482 sent, across 11 campaign types.",
     "Connects without API access":
-      "Reverse-engineered session-replay integrations for HubSpot CRM, Apollo.io, and the TSplus licence portal where no developer API was available. Live CRM, enrichment and licensing data surfaces directly into the workflow. Website-visitor signals (790 companies tracked) feed warm leads in automatically.",
+      "Reverse-engineered session-replay integrations for HubSpot CRM, Apollo.io, and a licence portal where no developer API was available. Live CRM, enrichment and licensing data surfaces directly into the workflow. Website-visitor signals (790 companies tracked) feed warm leads in automatically.",
     "Keeps the pipeline warm on its own":
       "Daily automations graduate new prospects into campaigns, draft follow-ups for deals that go quiet, and send a morning briefing — so accounts keep moving without manual chasing. Live opportunities at SSAB, Eidsiva, GleSYS, Vektus and others sourced through the system.",
   };
