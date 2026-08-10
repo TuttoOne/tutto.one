@@ -15,6 +15,7 @@ import AboutMe from "@/pages/about-me";
 import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
 import Praxis from "@/pages/praxis";
+import PraxisProgramme from "@/pages/praxis-programme";
 import Pythia from "@/pages/pythia";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
@@ -61,7 +62,7 @@ function Router() {
         <Route path="/fiche-capacites" component={FicheCapacites} />
 
         {/* Unlisted */}
-        <Route path="/praxis-programme" component={Praxis} />
+        <Route path="/praxis-programme" component={PraxisProgramme} />
         <Route path="/second-brain" component={SecondBrain} />
         <Route path="/legalrag" component={LegalRag} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
