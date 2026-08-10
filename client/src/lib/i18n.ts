@@ -407,14 +407,14 @@ export const copy = {
     e2Title: { en: "The build", fr: "La réalisation" },
     e2Price: { en: "From", fr: "À partir de" },
     e2Body: {
-      en: "Hardware and custom build, scoped after the diagnostic. Typically four to eight weeks from sign-off to a system running on your premises.",
-      fr: "Matériel et développement sur mesure, cadrés après le diagnostic. Généralement quatre à huit semaines entre la validation et un système en fonctionnement dans vos locaux.",
+      en: "Custom build, scoped after the diagnostic. Excludes hardware. Typically four to eight weeks from sign-off to a system running on your premises.",
+      fr: "Développement sur mesure, cadré après le diagnostic. Hors matériel. Généralement quatre à huit semaines entre la validation et un système en fonctionnement dans vos locaux.",
     },
     e3Title: { en: "Ongoing", fr: "Suivi" },
-    e3Price: { en: "~20% p.a.", fr: "~20 % par an" },
+    e3Price: { en: "10–20% p.a.", fr: "10–20 % par an" },
     e3Body: {
-      en: "Assessed during the build. Covers ingestion of new matter files, system maintenance, and keeping Pythia current as your work evolves.",
-      fr: "Évalué pendant la réalisation. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
+      en: "Agreed during the project, not fixed up front. Covers ingestion of new matter files, system maintenance, and keeping Pythia current as your work evolves.",
+      fr: "Convenu pendant le projet, et non fixé d'avance. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
     },
 
     etymPull: {

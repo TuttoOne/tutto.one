@@ -97,8 +97,8 @@ export default function PraxisProgramme() {
   const toolsMonthly = `${price("toolsMonthly", currency, locale)}${locale === "fr" ? "/mois" : "/month"}`;
   const referralNote =
     locale === "fr"
-      ? `Parrainez quelqu'un qui s'inscrit, et la formation entière est à moitié prix pour vous — ${price("sessionPromo", currency, locale)} par séance.`
-      : `Refer someone who signs up, and the whole course is half price for you - ${price("sessionPromo", currency, locale)} per session.`;
+      ? `Parrainez une personne qui suit la formation et le tarif tombe à ${econ.courseWithOneReferral}. Parrainez-en deux et la formation ne vous coûte rien : nous vous remboursons intégralement.`
+      : `Refer one person who takes the course and the price drops to ${econ.courseWithOneReferral}. Refer two and the course costs you nothing — we refund it in full.`;
   useEffect(() => {
     document.title = "Praxis - Learn to Build Your Own Tools with Claude Code";
     return () => { document.title = "Tutto | AI Consulting"; };
@@ -323,7 +323,7 @@ export default function PraxisProgramme() {
               },
               {
                 label: "Refer a friend",
-                price: econ.courseYou,
+                price: econ.courseWithOneReferral,
                 note: referralNote,
                 highlight: true,
               },

@@ -64,6 +64,11 @@ export default function Services() {
               </ul>
 
               <div className="mt-auto">
+                {service.note && (
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-4 pt-4 border-t border-border">
+                    {pick(service.note, locale)}
+                  </p>
+                )}
                 <div className="text-sm font-medium text-muted-foreground mb-4">
                   {service.priceKey
                     ? `${service.pricePrefix ? pick(service.pricePrefix, locale) + " " : ""}${price(service.priceKey, currency, locale)}`

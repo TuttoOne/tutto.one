@@ -1,24 +1,23 @@
 /**
  * Every price on the site, in one table.
  *
- * Two rules keep this honest:
+ * Three rules keep this honest:
  *
- * 1. These are NOT live FX conversions. Converting £100 at spot gives €118.37,
- *    which reads as an accident rather than a price. Each currency gets its own
- *    round figure, the way it would appear on a rate card.
+ * 1. EUR is the stated base — those are the figures that were set commercially.
+ *    GBP and ZAR are the same price expressed for those markets, at roughly
+ *    EUR/1.2 and EUR x 20, rounded to a figure that reads like a rate card.
+ *    They are NOT live FX: converting at spot gives £8,208, which reads as an
+ *    accident rather than a price.
  *
- * 2. Derived figures are COMPUTED, never typed in. The trainer split is 80/20
- *    of the session rate, and the annual figures are multiples of course
- *    tuition. Hardcoding those per currency guarantees they eventually
- *    contradict the numbers they are supposed to be derived from.
+ * 2. Derived figures are COMPUTED, never typed in. Course tuition is eight
+ *    sessions; the referral rate is half the course; the trainer split is 80/20.
+ *    Typing those per currency guarantees they eventually contradict the
+ *    numbers they are supposed to come from — which is exactly what happened to
+ *    the referral card, which was showing 80% of the course instead of half.
  *
- * ---------------------------------------------------------------------------
- * ONLY THE GBP COLUMN COMES FROM PUBLISHED COPY. The EUR and ZAR figures are
- * indicative, set at roughly 1.17x and 23.5x sterling and rounded to plausible
- * rate-card numbers. They are a commercial decision, not a calculation.
- * Review before relying on them. Change a number here and it changes
- * everywhere it appears on the site.
- * ---------------------------------------------------------------------------
+ * 3. One thing, one key. The diagnostic sprint and the data audit are the same
+ *    engagement, so they share `sprint` rather than drifting apart under two
+ *    names.
  */
 import type { Currency, Locale } from "./preferences";
 
@@ -30,39 +29,28 @@ export type PriceKey =
   // Engagements
   | "sprint"
   | "build"
-  // Services
-  | "auditFrom"
   | "enablementFrom"
   // SharePoint
   | "spAuditFrom"
   | "spBuildFrom"
   | "spRetainerMonthly";
 
-/**
- * Base rates. Everything else on the site is derived from these.
- *
- * The session rate is the keystone: course tuition, the trainer track and the
- * annual example are all multiples of it. EUR 250 and ZAR 5,000 were chosen so
- * those multiples land on round numbers (EUR 2,000 / 1,000 / 3,000;
- * ZAR 40,000 / 20,000 / 60,000) rather than on the ragged figures a straight
- * conversion produces. The promotional rate is half the standard rate in every
- * currency, as it is in sterling.
- */
+/** Base rates. Everything else on the site is derived from these. */
 export const PRICES: Record<PriceKey, Record<Currency, number>> = {
-  /** Standard one-hour Praxis session. */
+  /** Standard one-hour Praxis session. Course tuition is eight of these. */
   sessionStandard: { GBP: 200, EUR: 250, ZAR: 5000 },
-  /** Current promotional session rate — half the standard rate. */
+  /** Promotional session rate — half the standard rate. */
   sessionPromo: { GBP: 100, EUR: 125, ZAR: 2500 },
   /** Third-party AI subscription, approx. Quoted at ~$20/mo at source. */
   toolsMonthly: { GBP: 16, EUR: 19, ZAR: 400 },
 
-  /** Two-week diagnostic sprint (Praxis and Pythia both quote this). */
-  sprint: { GBP: 2500, EUR: 3000, ZAR: 60000 },
-  /** Pythia build, from. */
-  build: { GBP: 20000, EUR: 24000, ZAR: 480000 },
-
-  /** Data audit & knowledge mapping, from. */
-  auditFrom: { GBP: 2000, EUR: 2400, ZAR: 48000 },
+  /**
+   * Two-week diagnostic sprint — the data audit and knowledge map. Pythia and
+   * the services page quote the same engagement, so they quote the same key.
+   */
+  sprint: { GBP: 2000, EUR: 2400, ZAR: 48000 },
+  /** Pythia build. Excludes hardware. */
+  build: { GBP: 8200, EUR: 9850, ZAR: 197000 },
   /** Team enablement, from. */
   enablementFrom: { GBP: 3500, EUR: 4200, ZAR: 84000 },
 
@@ -82,30 +70,34 @@ export const COURSE_SESSIONS = 8;
 export const TRAINER_TRACK_SESSIONS = 4;
 /** Students used in the worked annual example on the trainer page. */
 export const EXAMPLE_STUDENTS = 24;
+/** Referrals that reduce the course fee to nothing. */
+export const REFERRALS_FOR_FREE = 2;
 
 /**
- * Price keys offered in the admin content editor, so a price can be chosen
- * there without typing a literal amount that would ignore the currency toggle.
- * Labels show the sterling figure purely as a recognisable handle.
+ * Ongoing support for a Pythia build, as a share of build cost per year.
+ * A range rather than a figure: it is agreed during the project.
  */
+export const ONGOING_MIN_PCT = 10;
+export const ONGOING_MAX_PCT = 20;
+
+/** Price keys offered in the admin content editor. */
 export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
-  { key: "auditFrom", label: "Data audit (£2,000)" },
-  { key: "enablementFrom", label: "Team enablement (£3,500)" },
-  { key: "sprint", label: "Diagnostic sprint (£2,500)" },
-  { key: "build", label: "Pythia build (£20,000)" },
-  { key: "sessionStandard", label: "Praxis session, standard (£200)" },
-  { key: "sessionPromo", label: "Praxis session, promo (£100)" },
-  { key: "spAuditFrom", label: "SharePoint audit (£500)" },
-  { key: "spBuildFrom", label: "SharePoint build (£5,000)" },
-  { key: "spRetainerMonthly", label: "SharePoint retainer (£500/mo)" },
-  { key: "toolsMonthly", label: "AI subscription (£16/mo)" },
+  { key: "sprint", label: "Diagnostic sprint / data audit (€2,400)" },
+  { key: "enablementFrom", label: "Team enablement (€4,200)" },
+  { key: "build", label: "Pythia build (€9,850)" },
+  { key: "sessionStandard", label: "Praxis session, standard (€250)" },
+  { key: "sessionPromo", label: "Praxis session, promo (€125)" },
+  { key: "spAuditFrom", label: "SharePoint audit (€600)" },
+  { key: "spBuildFrom", label: "SharePoint build (€6,000)" },
+  { key: "spRetainerMonthly", label: "SharePoint retainer (€600/mo)" },
+  { key: "toolsMonthly", label: "AI subscription (€19/mo)" },
 ];
 
 const SYMBOLS: Record<Currency, string> = { GBP: "£", EUR: "€", ZAR: "R" };
 
 /**
  * Format an amount as a rate-card price: symbol, grouped thousands, no
- * decimals. Intl handles grouping so French renders 23 500, not 23,500.
+ * decimals. Intl handles grouping so French renders 9 850, not 9,850.
  */
 export function formatMoney(amount: number, currency: Currency, locale: Locale): string {
   const grouped = new Intl.NumberFormat(locale === "fr" ? "fr-FR" : "en-GB", {
@@ -124,15 +116,28 @@ export function amount(key: PriceKey, currency: Currency): number {
   return PRICES[key][currency];
 }
 
+/** Course tuition and the referral ladder, all derived from the session rate. */
+export function courseEconomics(currency: Currency, locale: Locale) {
+  const session = amount("sessionStandard", currency);
+  const course = session * COURSE_SESSIONS;
+  const f = (n: number) => formatMoney(n, currency, locale);
+  return {
+    session: f(session),
+    /** Full course, no referrals. */
+    course: f(course),
+    /** One referral who signs up: half price. */
+    courseWithOneReferral: f(course / 2),
+    /** Two referrals: nothing to pay, the fee is refunded in full. */
+    referralsForFree: REFERRALS_FOR_FREE,
+  };
+}
+
 /**
  * The trainer revenue split, derived from the session and course rates so the
  * two halves always add back up to the whole in every currency.
  */
 export function trainerEconomics(currency: Currency, locale: Locale) {
   const session = amount("sessionStandard", currency);
-  // Course tuition and the trainer track are multiples of the session rate,
-  // because the page says so in words ("four sessions at the standard rate").
-  // Deriving them means the words stay true in every currency.
   const course = session * COURSE_SESSIONS;
   const track = session * TRAINER_TRACK_SESSIONS;
   const yearTuition = course * EXAMPLE_STUDENTS;
@@ -151,7 +156,7 @@ export function trainerEconomics(currency: Currency, locale: Locale) {
     trainerTrack: f(track),
     /** Praxis course plus the trainer track. */
     trainerTotal: f(course + track),
-    /** Half-price referral rate, per session. */
-    referralPerSession: f(session / 2),
+    /** Half-price course rate, after one referral. */
+    courseWithOneReferral: f(course / 2),
   };
 }

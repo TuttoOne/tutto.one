@@ -31,6 +31,8 @@ export interface ServiceItem {
   pricePrefix?: { en: string; fr: string };
   /** For cards with no fixed amount, e.g. "Custom scoping". */
   priceLabel?: { en: string; fr: string };
+  /** Extra terms shown under the price, e.g. the referral scheme. */
+  note?: { en: string; fr: string };
 }
 
 export const STARTS_AT = { en: "Starts at", fr: "À partir de" };
@@ -63,7 +65,7 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
       "Évaluation de la maturité des API",
       "Architecture du graphe de connaissances",
     ],
-    priceKey: "auditFrom",
+    priceKey: "sprint",
     pricePrefix: STARTS_AT,
   },
   {
@@ -102,6 +104,15 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
       "Normes de documentation",
       "Cadres de gouvernance de l'IA",
     ],
+    /**
+     * The referral terms belong with the training service. Amounts are
+     * resolved from the pricing table at render so they follow the currency
+     * toggle rather than being written into the copy.
+     */
+    note: {
+      en: "Refer one person who takes the course and your own fee halves. Refer two and it costs you nothing — we refund it in full.",
+      fr: "Parrainez une personne qui suit la formation et votre tarif est divisé par deux. Parrainez-en deux et la formation ne vous coûte rien : nous vous remboursons intégralement.",
+    },
     priceKey: "enablementFrom",
     pricePrefix: STARTS_AT,
   },
