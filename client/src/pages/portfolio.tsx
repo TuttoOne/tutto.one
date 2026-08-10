@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { PortfolioDisplay, type PortfolioTextOverride } from "@/components/portfolio/PortfolioDisplay";
 import { useQuery } from "@tanstack/react-query";
 import { copy, useT } from "@/lib/i18n";
+import { GoDeeper } from "@/components/portfolio/GoDeeper";
 
 export default function Portfolio() {
   const t = useT();
@@ -31,6 +32,8 @@ export default function Portfolio() {
         </div>
 
         <PortfolioDisplay overrides={overrides} />
+
+        <GoDeeper />
       </div>
     </Layout>
   );

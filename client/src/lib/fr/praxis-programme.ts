@@ -9,21 +9,19 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "One-to-one or small group · Online or in person":
     "En individuel ou en petit groupe · À distance ou sur place",
   "Praxis Programme · Eight Sessions · V1": "Programme Praxis · Huit séances · V1",
-  "B u i l d &nbsp;T h i n g s &nbsp;T h a t &nbsp;W o r k":
-    "C o n s t r u i r e &nbsp;C e &nbsp;Q u i &nbsp;M a r c h e",
   "You will not learn to code.": "Vous n'apprendrez pas à coder.",
   "You will learn to build.": "Vous apprendrez à construire.",
 
-  "01 &nbsp;&nbsp;&nbsp; Who This Is For": "01 &nbsp;&nbsp;&nbsp; À qui cela s'adresse",
-  "02 &nbsp;&nbsp;&nbsp; Why a Person, Not Another Video":
-    "02 &nbsp;&nbsp;&nbsp; Pourquoi un accompagnant plutôt qu'une vidéo de plus",
-  "03 &nbsp;&nbsp;&nbsp; What You Will Be Able to Do by the End":
-    "03 &nbsp;&nbsp;&nbsp; Ce que vous saurez faire à la fin",
-  "04 &nbsp;&nbsp;&nbsp; The Eight Sessions": "04 &nbsp;&nbsp;&nbsp; Les huit séances",
-  "05 &nbsp;&nbsp;&nbsp; What You Finish With": "05 &nbsp;&nbsp;&nbsp; Ce avec quoi vous repartez",
-  "06 &nbsp;&nbsp;&nbsp; How It Works": "06 &nbsp;&nbsp;&nbsp; Comment cela se déroule",
-  "07 &nbsp;&nbsp;&nbsp; What It Costs": "07 &nbsp;&nbsp;&nbsp; Les tarifs",
-  "08 &nbsp;&nbsp;&nbsp; Common Questions": "08 &nbsp;&nbsp;&nbsp; Questions fréquentes",
+  "Who This Is For": "\u00c0 qui cela s'adresse",
+  "Why a Person, Not Another Video":
+    "Pourquoi un accompagnant plut\u00f4t qu'une vid\u00e9o de plus",
+  "What You Will Be Able to Do by the End":
+    "Ce que vous saurez faire \u00e0 la fin",
+  "The Eight Sessions": "Les huit s\u00e9ances",
+  "What You Finish With": "Ce avec quoi vous repartez",
+  "How It Works": "Comment cela se d\u00e9roule",
+  "What It Costs": "Les tarifs",
+  "Common Questions": "Questions fr\u00e9quentes",
 
   "The actual tools you built along the way.":
     "Les outils que vous aurez réellement construits en chemin.",

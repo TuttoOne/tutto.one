@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import {
   ProductHero,
@@ -159,6 +160,23 @@ export default function Praxis() {
             <p className="text-muted-foreground leading-relaxed">{t(copy.praxis.prereq)}</p>
           </div>
         </Section>
+
+        <Link
+          href="/praxis-programme"
+          className="mt-16 group flex items-center justify-between gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
+        >
+          <div>
+            <p className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+              {t(copy.praxis.programmeTitle)}
+            </p>
+            <p className="text-sm text-muted-foreground mt-1 max-w-xl">
+              {t(copy.praxis.programmeBody)}
+            </p>
+          </div>
+          <span className="hidden sm:inline text-sm font-medium text-primary shrink-0">
+            {t(copy.praxis.programmeLink)} →
+          </span>
+        </Link>
 
         <Etymology pull={t(copy.praxis.etymPull)}>
           {locale === "fr" ? (

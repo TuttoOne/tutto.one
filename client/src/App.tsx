@@ -25,7 +25,6 @@ import FicheCapacites from "@/pages/fiche-capacites";
 
 // Unlisted: reachable by direct link, deliberately absent from the nav so any
 // URL already shared with a client keeps working.
-import SecondBrain from "@/pages/second-brain";
 import LegalRag from "@/pages/legalrag";
 import GtmOrchestrator from "@/pages/gtm-orchestrator";
 import BecomeATrainer from "@/pages/become-a-trainer";
@@ -63,7 +62,6 @@ function Router() {
 
         {/* Unlisted */}
         <Route path="/praxis-programme" component={PraxisProgramme} />
-        <Route path="/second-brain" component={SecondBrain} />
         <Route path="/legalrag" component={LegalRag} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
         <Route path="/become-a-trainer" component={BecomeATrainer} />

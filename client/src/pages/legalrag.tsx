@@ -185,8 +185,7 @@ export default function LegalRag() {
         {/* What it does */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ borderRadius: 10, background: "#2a2a2a", padding: "18px 24px", marginBottom: 20 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>{tr("Capabilities")}</p>
-            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>{tr("What it does")}</h2>
+            <h2 style={{ ...ROBOTO, fontSize: "clamp(18px, 2.6vw, 24px)", fontWeight: 800, color: "#f6f1ea", margin: 0 }}>{tr("What it does")}</h2>
           </div>
           <div className="lr-features">
             {([
@@ -228,8 +227,7 @@ export default function LegalRag() {
         {/* What makes it different */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ borderRadius: 10, background: "#2a2a2a", padding: "18px 24px", marginBottom: 20 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>{tr("Differentiators")}</p>
-            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>{tr("What makes it different")}</h2>
+            <h2 style={{ ...ROBOTO, fontSize: "clamp(18px, 2.6vw, 24px)", fontWeight: 800, color: "#f6f1ea", margin: 0 }}>{tr("What makes it different")}</h2>
           </div>
           <div className="lr-diffs">
             {([
@@ -266,8 +264,7 @@ export default function LegalRag() {
         {/* Planned features */}
         <div style={{ marginBottom: 48 }}>
           <div style={{ borderRadius: 10, background: "#2a2a2a", padding: "18px 24px", marginBottom: 20 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>{tr("Roadmap")}</p>
-            <h2 style={{ ...ROBOTO, fontSize: "clamp(15px, 2.2vw, 20px)", fontWeight: 800, color: "#f6f1ea" }}>{tr("Planned features")}</h2>
+            <h2 style={{ ...ROBOTO, fontSize: "clamp(18px, 2.6vw, 24px)", fontWeight: 800, color: "#f6f1ea", margin: 0 }}>{tr("Planned features")}</h2>
           </div>
           <div className="lr-planned">
             <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, padding: "22px 20px", background: CARD }}>

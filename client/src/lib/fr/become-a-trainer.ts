@@ -10,21 +10,19 @@ export const BECOME_A_TRAINER_FR: FrDict = {
     "Prérequis : avoir suivi le programme Praxis",
   "Praxis Trainer Track · Four Sessions · V1":
     "Parcours formateur Praxis · Quatre séances · V1",
-  "T e a c h &nbsp;W h a t &nbsp;Y o u &nbsp;K n o w":
-    "T r a n s m e t t r e &nbsp;C e &nbsp;Q u e &nbsp;V o u s &nbsp;S a v e z",
   "You built it.": "Vous l'avez construit.",
   "Now teach it.": "Transmettez-le.",
 
-  "01 &nbsp;&nbsp;&nbsp; Who This Is For": "01 &nbsp;&nbsp;&nbsp; À qui cela s'adresse",
-  "02 &nbsp;&nbsp;&nbsp; The Deal, in Plain Terms":
-    "02 &nbsp;&nbsp;&nbsp; L'accord, en termes simples",
-  "03 &nbsp;&nbsp;&nbsp; The Four Sessions": "03 &nbsp;&nbsp;&nbsp; Les quatre séances",
-  "04 &nbsp;&nbsp;&nbsp; What You Get": "04 &nbsp;&nbsp;&nbsp; Ce que vous recevez",
-  "05 &nbsp;&nbsp;&nbsp; What It Costs, and What You Earn":
-    "05 &nbsp;&nbsp;&nbsp; Ce que cela coûte, et ce que vous gagnez",
-  "06 &nbsp;&nbsp;&nbsp; The Bar, and Why It Is There":
-    "06 &nbsp;&nbsp;&nbsp; L'exigence, et sa raison d'être",
-  "07 &nbsp;&nbsp;&nbsp; Common Questions": "07 &nbsp;&nbsp;&nbsp; Questions fréquentes",
+  "Who This Is For": "\u00c0 qui cela s'adresse",
+  "The Deal, in Plain Terms":
+    "L'accord, en termes simples",
+  "The Four Sessions": "Les quatre s\u00e9ances",
+  "What You Get": "Ce que vous recevez",
+  "What It Costs, and What You Earn":
+    "Ce que cela co\u00fbte, et ce que vous gagnez",
+  "The Bar, and Why It Is There":
+    "L'exigence, et sa raison d'\u00eatre",
+  "Common Questions": "Questions fr\u00e9quentes",
 
   "One session a week, at the standard Praxis rate. Each session has a specific job.":
     "Une séance par semaine, au tarif Praxis standard. Chaque séance a un objectif précis.",

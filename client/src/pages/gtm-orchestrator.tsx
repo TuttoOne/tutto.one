@@ -304,7 +304,7 @@ const stats = [
 export default function GtmOrchestrator() {
   const tr = usePageTr(GTM_FR);
   useEffect(() => {
-    document.title = "GTM Orchestrator - Tutto";
+    document.title = "GTM - Tutto";
     return () => {
       document.title = "Tutto | AI Consulting";
     };
@@ -348,7 +348,7 @@ export default function GtmOrchestrator() {
               letterSpacing: "0.14em",
               marginBottom: 16,
             }}
-          >{tr("GTM Orchestrator")}</p>
+          >{tr("GTM")}</p>
           <h1
             style={{
               ...ROBOTO,
@@ -413,14 +413,6 @@ export default function GtmOrchestrator() {
               marginBottom: 20,
             }}
           >
-            <p
-              style={{
-                ...CAPS,
-                fontSize: 9,
-                color: "rgba(255,255,255,0.4)",
-                marginBottom: 6,
-              }}
-            >{tr("Capabilities")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -506,14 +498,6 @@ export default function GtmOrchestrator() {
               marginBottom: 20,
             }}
           >
-            <p
-              style={{
-                ...CAPS,
-                fontSize: 9,
-                color: "rgba(255,255,255,0.4)",
-                marginBottom: 6,
-              }}
-            >{tr("Metrics")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -580,14 +564,6 @@ export default function GtmOrchestrator() {
               marginBottom: 20,
             }}
           >
-            <p
-              style={{
-                ...CAPS,
-                fontSize: 9,
-                color: "rgba(255,255,255,0.4)",
-                marginBottom: 6,
-              }}
-            >{tr("Architecture")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -683,14 +659,6 @@ export default function GtmOrchestrator() {
               marginBottom: 20,
             }}
           >
-            <p
-              style={{
-                ...CAPS,
-                fontSize: 9,
-                color: "rgba(255,255,255,0.4)",
-                marginBottom: 6,
-              }}
-            >{tr("Differentiators")}</p>
             <h2
               style={{
                 ...ROBOTO,
@@ -760,14 +728,6 @@ export default function GtmOrchestrator() {
               marginBottom: 20,
             }}
           >
-            <p
-              style={{
-                ...CAPS,
-                fontSize: 9,
-                color: "rgba(255,255,255,0.4)",
-                marginBottom: 6,
-              }}
-            >{tr("Technology")}</p>
             <h2
               style={{
                 ...ROBOTO,

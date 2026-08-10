@@ -176,7 +176,6 @@ export default function PraxisProgramme() {
 
         {/* Tagline */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <p style={{ ...CAPS, fontSize: 10, letterSpacing: "0.28em", color: "#1a1a1a" }}>{tr("B u i l d &nbsp;T h i n g s &nbsp;T h a t &nbsp;W o r k")}</p>
         </div>
 
         {/* Hero */}
@@ -192,7 +191,7 @@ export default function PraxisProgramme() {
         {/* Section 01 - Who this is for */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("01 &nbsp;&nbsp;&nbsp; Who This Is For")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Who This Is For")}</h2>
           </div>
           <div className="pp-cols-2">
             {[
@@ -212,7 +211,7 @@ export default function PraxisProgramme() {
         {/* Section 02 - Why a person */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("02 &nbsp;&nbsp;&nbsp; Why a Person, Not Another Video")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Why a Person, Not Another Video")}</h2>
           </div>
           <div style={{ maxWidth: 700 }}>
             {[
@@ -236,7 +235,7 @@ export default function PraxisProgramme() {
         {/* Section 03 - What you'll be able to do */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("03 &nbsp;&nbsp;&nbsp; What You Will Be Able to Do by the End")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Will Be Able to Do by the End")}</h2>
           </div>
           <div className="pp-cols-2">
             {[
@@ -259,7 +258,7 @@ export default function PraxisProgramme() {
         {/* Section 04 - The eight sessions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("04 &nbsp;&nbsp;&nbsp; The Eight Sessions")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Eight Sessions")}</h2>
           </div>
           <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Weekly, over roughly two months. The first six get you to a confident, independent builder. The last two take you deeper, into the kind of work that usually needs a developer.")}</p>
           <div className="pp-sessions">
@@ -276,7 +275,7 @@ export default function PraxisProgramme() {
         {/* Section 05 - What you finish with */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("05 &nbsp;&nbsp;&nbsp; What You Finish With")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Finish With")}</h2>
           </div>
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "32px 28px", background: "#faf8f5", maxWidth: 620 }}>
             <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>{tr("The actual tools you built along the way.")}</p>
@@ -288,7 +287,7 @@ export default function PraxisProgramme() {
         {/* Section 06 - How it works */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("06 &nbsp;&nbsp;&nbsp; How It Works")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("How It Works")}</h2>
           </div>
           <div className="pp-cols-2">
             {[
@@ -308,7 +307,7 @@ export default function PraxisProgramme() {
         {/* Section 07 - Pricing */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("07 &nbsp;&nbsp;&nbsp; What It Costs")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What It Costs")}</h2>
           </div>
           <div className="pp-cols-3">
             {[
@@ -358,7 +357,7 @@ export default function PraxisProgramme() {
         {/* Section 08 - Common questions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("08 &nbsp;&nbsp;&nbsp; Common Questions")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Common Questions")}</h2>
           </div>
           <div style={{ maxWidth: 680 }}>
             {faqs.map((faq, i) => (
@@ -375,11 +374,11 @@ export default function PraxisProgramme() {
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   style={{ padding: "18px 0", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}
                 >
-                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0, textAlign: "left" }}>{faq.q}</p>
+                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0, textAlign: "left" }}>{tr(faq.q)}</p>
                   <span style={{ ...MONO, fontSize: 14, color: "#a8a092", flexShrink: 0 }}>{openFaq === i ? "−" : "+"}</span>
                 </button>
                 {openFaq === i && (
-                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d", paddingBottom: 4 }}>{faq.a}</p>
+                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d", paddingBottom: 4 }}>{tr(faq.a)}</p>
                 )}
               </div>
             ))}

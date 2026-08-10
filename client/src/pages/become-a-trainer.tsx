@@ -154,7 +154,6 @@ export default function BecomeATrainer() {
 
         {/* Tagline */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <p style={{ ...CAPS, fontSize: 10, letterSpacing: "0.28em", color: "#1a1a1a" }}>{tr("T e a c h &nbsp;W h a t &nbsp;Y o u &nbsp;K n o w")}</p>
         </div>
 
         {/* Hero */}
@@ -170,7 +169,7 @@ export default function BecomeATrainer() {
         {/* Section 01 - Who this is for */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("01 &nbsp;&nbsp;&nbsp; Who This Is For")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Who This Is For")}</h2>
           </div>
           <div className="bt-cols-2">
             {[
@@ -190,7 +189,7 @@ export default function BecomeATrainer() {
         {/* Section 02 - The deal */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("02 &nbsp;&nbsp;&nbsp; The Deal, in Plain Terms")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Deal, in Plain Terms")}</h2>
           </div>
           <div style={{ maxWidth: 700 }}>
             {[
@@ -216,7 +215,7 @@ export default function BecomeATrainer() {
         {/* Section 03 - The four sessions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("03 &nbsp;&nbsp;&nbsp; The Four Sessions")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Four Sessions")}</h2>
           </div>
           <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("One session a week, at the standard Praxis rate. Each session has a specific job.")}</p>
           <div className="bt-sessions">
@@ -233,7 +232,7 @@ export default function BecomeATrainer() {
         {/* Section 04 - What you get */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("04 &nbsp;&nbsp;&nbsp; What You Get")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Get")}</h2>
           </div>
           <div className="bt-cols-2">
             {[
@@ -254,7 +253,7 @@ export default function BecomeATrainer() {
         {/* Section 05 - Pricing & earnings */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("05 &nbsp;&nbsp;&nbsp; What It Costs, and What You Earn")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What It Costs, and What You Earn")}</h2>
           </div>
 
           {/* Cost cards */}
@@ -339,7 +338,7 @@ export default function BecomeATrainer() {
         {/* Section 06 - The bar */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("06 &nbsp;&nbsp;&nbsp; The Bar, and Why It Is There")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Bar, and Why It Is There")}</h2>
           </div>
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "32px 28px", background: "#faf8f5", maxWidth: 620 }}>
             <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>{tr("One standard, not a quiz.")}</p>
@@ -352,7 +351,7 @@ export default function BecomeATrainer() {
         {/* Section 07 - Common questions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>{tr("07 &nbsp;&nbsp;&nbsp; Common Questions")}</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Common Questions")}</h2>
           </div>
           <div style={{ maxWidth: 680 }}>
             {faqs.map((faq, i) => (
