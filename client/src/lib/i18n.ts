@@ -87,6 +87,7 @@ export const copy = {
       en: "Systems we've designed and built - from concept to production.",
       fr: "Des systèmes que nous avons conçus et construits — du concept à la production.",
     },
+    badgeClientEngagement: { en: "Client Engagement", fr: "Mission client" },
   },
 
   blog: {

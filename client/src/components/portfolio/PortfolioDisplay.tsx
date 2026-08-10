@@ -1,5 +1,7 @@
 import { ExternalLink, ChevronLeft, ChevronRight, Plug } from "lucide-react";
 import { useState } from "react";
+import { usePreferences } from "@/lib/preferences";
+import { PORTFOLIO_FR } from "@/lib/portfolio-fr";
 
 import evHome from "@assets/Screenshot_2026-03-17_at_14.14.24_1773753293404.png";
 import evEntities from "@assets/Screenshot_2026-03-17_at_14.13.51_1773753293404.png";
@@ -271,8 +273,34 @@ export function PortfolioDisplay({
   entries?: PortfolioEntry[];
   overrides?: PortfolioTextOverride[];
 }) {
+  const { locale } = usePreferences();
+
+  // French first, then admin overrides on top: an override is something the
+  // author typed deliberately, so it should win over the stock translation.
+  const localised =
+    locale === "fr"
+      ? entries.map((entry): PortfolioEntry => {
+          const fr = PORTFOLIO_FR[entry.name];
+          if (!fr) return entry;
+          const common = {
+            tagline: fr.tagline ?? entry.tagline,
+            description: fr.description ?? entry.description,
+          };
+          // Only project entries carry a badge, capabilities or a link label.
+          return entry.type === "project"
+            ? {
+                ...entry,
+                ...common,
+                badge: fr.badge ?? entry.badge,
+                urlLabel: fr.urlLabel ?? entry.urlLabel,
+                capabilities: entry.capabilities.map((c) => fr.capabilities?.[c.title] ?? c),
+              }
+            : { ...entry, ...common };
+        })
+      : entries;
+
   const mergedEntries = overrides
-    ? entries.map((entry) => {
+    ? localised.map((entry) => {
         const slug = entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-");
         const ov = overrides.find((o) => o.id === slug);
         if (!ov) return entry;
@@ -280,7 +308,7 @@ export function PortfolioDisplay({
         void _id;
         return { ...entry, ...Object.fromEntries(Object.entries(rest).filter(([, v]) => v !== undefined)) };
       })
-    : entries;
+    : localised;
 
   return (
     <div className="space-y-8">
