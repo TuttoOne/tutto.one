@@ -15,8 +15,8 @@ export const LOCALES: { value: Locale; label: string; long: string }[] = [
 ];
 
 export const CURRENCIES: { value: Currency; label: string; symbol: string }[] = [
-  { value: "GBP", label: "GBP", symbol: "£" },
   { value: "EUR", label: "EUR", symbol: "€" },
+  { value: "GBP", label: "GBP", symbol: "£" },
   { value: "ZAR", label: "ZAR", symbol: "R" },
 ];
 
@@ -51,8 +51,11 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
   const [locale, setLocaleState] = useState<Locale>(
     () => readStored<Locale>(LOCALE_KEY, ["en", "fr"]) ?? detectLocale(),
   );
+  // EUR is the default: it is the currency the rate card is set in, and the
+  // market the site is being pointed at. A returning visitor's own choice still
+  // wins, since that is read first.
   const [currency, setCurrencyState] = useState<Currency>(
-    () => readStored<Currency>(CURRENCY_KEY, ["GBP", "EUR", "ZAR"]) ?? "GBP",
+    () => readStored<Currency>(CURRENCY_KEY, ["GBP", "EUR", "ZAR"]) ?? "EUR",
   );
 
   // Keep <html lang> honest — it drives screen-reader pronunciation and hyphenation.
