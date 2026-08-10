@@ -1,368 +1,201 @@
 import { useEffect } from "react";
-import { Header, Layout } from "@/components/layout/Layout";
-import { useQuery } from "@tanstack/react-query";
+import { Layout } from "@/components/layout/Layout";
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
 import { usePreferences } from "@/lib/preferences";
-import { FicheSheet } from "@/pages/fiche-capacites";
+import { copy, useT } from "@/lib/i18n";
 
-const ROBOTO: React.CSSProperties = {
-  fontFamily: "'Roboto', -apple-system, sans-serif",
-};
-const INTER: React.CSSProperties = {
-  fontFamily: "'Inter', -apple-system, sans-serif",
-};
-const CAPS: React.CSSProperties = {
-  ...INTER,
-  textTransform: "uppercase",
-  letterSpacing: "0.12em",
-};
-
-const DEFAULT_HERO = {
-  headline: "Learn by doing",
-  sub: "Making AI useful is a hands-on experience. The technology is new, moving fast, and genuinely powerful when used in the right way. Any leap is less daunting when you take the first step with someone beside you who's taken enough scary ones to like them. I don't pretend to have all the answers - I've just stopped waiting for them, and I want to share what I've found.",
-};
-
+/**
+ * The company-level About. Deliberately impersonal — the individual story,
+ * photograph and contact details live at /about/me.
+ */
 export default function About() {
   const { locale } = usePreferences();
+  const t = useT();
 
   useEffect(() => {
-    document.title =
-      locale === "fr" ? "À propos - Daniel Forsthofer" : "About - Daniel Forsthofer";
+    document.title = locale === "fr" ? "À propos - Tutto" : "About - Tutto";
     return () => {
       document.title = "Tutto | AI Consulting";
     };
   }, [locale]);
 
-  const { data: heroContent } = useQuery<{ value: string }>({
-    queryKey: ["/api/site-content/about-hero"],
-    retry: false,
-  });
-
-  const hero = (() => {
-    if (!heroContent) return DEFAULT_HERO;
-    try { return { ...DEFAULT_HERO, ...JSON.parse(heroContent.value) }; } catch { return DEFAULT_HERO; }
-  })();
-
-  // The French About is the capability sheet — written for the French market
-  // rather than translated from the English page, which is a different pitch.
-  if (locale === "fr") {
-    return (
-      <Layout>
-        <div className="max-w-3xl mx-auto px-6 py-12">
-          <FicheSheet />
-        </div>
-      </Layout>
-    );
-  }
+  const isFr = locale === "fr";
 
   return (
-    <div style={{ background: "#f6f1ea", minHeight: "100vh", ...INTER }}>
-      <Header />
-      <style>{`
-        .ab-wrap { padding: 64px 20px 100px; }
-        @media (min-width: 600px) { .ab-wrap { padding: 64px 32px 100px; } }
-        .ab-cols { display: grid; grid-template-columns: 1fr; gap: 48px; }
-        @media (min-width: 680px) { .ab-cols { grid-template-columns: 2fr 1fr; gap: 64px; } }
-      `}</style>
-      <div className="ab-wrap" style={{ maxWidth: 860, margin: "0 auto" }}>
-        {/* Dark intro card */}
-        <div
-          style={{
-            borderRadius: 12,
-            background: "#1a1a1a",
-            padding: "clamp(28px, 5vw, 52px)",
-            marginBottom: 64,
-            marginTop: 32,
-          }}
-        >
-          <h1
-            style={{
-              ...ROBOTO,
-              fontSize: "clamp(26px, 4.5vw, 42px)",
-              fontWeight: 900,
-              lineHeight: 1.15,
-              color: "#f6f1ea",
-              marginBottom: 20,
-              letterSpacing: "-0.3px",
-            }}
-          >
-            {hero.headline}
-          </h1>
-          <p
-            style={{
-              ...INTER,
-              fontSize: 15,
-              lineHeight: 1.8,
-              color: "rgba(246,241,234,0.65)",
-              maxWidth: 520,
-            }}
-          >
-            {hero.sub}
-          </p>
+    <Layout>
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <h1 className="text-4xl font-serif font-bold mb-4">{t(copy.about.title)}</h1>
+        <p className="text-xl text-muted-foreground mb-16 max-w-xl">{t(copy.about.standfirst)}</p>
+
+        <div className="font-serif text-[17px] space-y-6 text-muted-foreground leading-relaxed">
+          {isFr ? (
+            <>
+              <p>
+                Tutto est un cabinet de conseil et de réalisation qui travaille à l'intersection des
+                opérations, des données et de l'IA. Pas de présentations ni de méthodologies : nous
+                entrons dans le détail de vos problèmes réels, nous construisons ce qui les résout,
+                et nous nous assurons que cela fonctionne en production.
+              </p>
+              <p>
+                Notre travail couvre tout ce que la préparation à l'IA exige réellement. Parfois il
+                s'agit de construire une{" "}
+                <strong className="text-foreground font-semibold">passerelle MCP</strong> qui donne à
+                l'assistant IA de vos équipes un accès direct à SharePoint ou Salesforce — pour
+                qu'elles interrogent au lieu de copier-coller. Parfois il s'agit de déployer une{" "}
+                <strong className="text-foreground font-semibold">
+                  plateforme d'intelligence documentaire autonome
+                </strong>{" "}
+                sur site, afin qu'une équipe juridique puisse mener une revue assistée par IA sur
+                150 000 documents couverts par le secret professionnel sans qu'un seul octet ne
+                quitte le bâtiment.
+              </p>
+              <p>
+                Le fil conducteur : la plupart des problèmes d'adoption de l'IA ne sont pas des
+                problèmes d'IA. Ce sont des{" "}
+                <strong className="text-foreground font-semibold">
+                  problèmes d'architecture de l'information
+                </strong>
+                . Votre savoir est enfoui dans des fils de discussion, des PDF, la mémoire
+                institutionnelle et des processus que personne n'a documentés. Les humains
+                s'accommodent de cette ambiguïté. L'IA, non. Notre métier est de structurer ce
+                désordre.
+              </p>
+
+              <h2 className="text-2xl font-serif font-bold text-foreground pt-6">
+                Ce que nous croyons
+              </h2>
+              <p>
+                L'IA est déjà utilisée le plus intensément dans les métiers qui créent le plus de
+                valeur : ingénierie logicielle, analyse, droit, recherche, rédaction. L'écart n'est
+                pas dans les outils ; il est entre ce que l'IA pourrait théoriquement apporter à une
+                organisation et ce qu'elle en fait aujourd'hui. C'est dans cet écart que nous
+                travaillons.
+              </p>
+              <p>
+                Les entreprises qui s'en sortiront le mieux ne seront pas celles qui auront déployé
+                l'IA les premières, mais celles qui auront compris leurs propres opérations assez
+                clairement pour savoir où l'IA ferait la plus grande différence — et qui disposaient
+                de l'infrastructure informationnelle pour la soutenir. Construire cette
+                infrastructure est un travail ingrat. C'est aussi le plus utile que nous fassions.
+              </p>
+
+              <h2 className="text-2xl font-serif font-bold text-foreground pt-6">
+                Notre façon de travailler
+              </h2>
+              <p>
+                Nous sommes volontairement de taille réduite. Chaque client a donc un accès direct
+                aux personnes qui font le travail, et non à une équipe junior briefée de seconde
+                main. Nous cadrons chaque mission en un seul échange, nous avançons vite, et nous
+                livrons des choses qui tournent réellement en production. Aucun transfert à des
+                intégrateurs. Rien qui finisse sur une étagère.
+              </p>
+              <p>
+                La plupart des missions commencent par une conversation de trente minutes. Nous vous
+                dirons honnêtement si nous pensons pouvoir aider, et à quoi cela ressemblerait.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                Tutto is a consultancy and build shop working at the intersection of operations,
+                data, and AI. We don't do slide decks and frameworks. We get into the detail of your
+                actual problems, build the thing that solves them, and make sure it works in
+                production.
+              </p>
+              <p>
+                Our work spans the full range of what AI readiness actually requires. Sometimes that
+                means building an{" "}
+                <strong className="text-foreground font-semibold">MCP bridge</strong> that gives your
+                team's AI assistant direct access to SharePoint or Salesforce — so they're asking
+                instead of copy-pasting. Sometimes it means deploying a{" "}
+                <strong className="text-foreground font-semibold">
+                  self-contained document intelligence platform
+                </strong>{" "}
+                on-premise so a legal team can run AI-powered review across 150,000 privileged
+                documents without a single byte leaving the building. Sometimes it means working out
+                why an AI pilot worked brilliantly in isolation and fails to scale — and fixing the
+                information architecture underneath it.
+              </p>
+              <p>
+                The common thread: most AI adoption problems aren't AI problems. They're{" "}
+                <strong className="text-foreground font-semibold">
+                  information architecture problems
+                </strong>
+                . Your knowledge is buried in Slack threads, PDFs, institutional memory, and
+                processes nobody has documented. Humans navigate that ambiguity. AI cannot. Our job
+                is to structure the chaos — turning implicit organisational knowledge into explicit,
+                machine-consumable assets.
+              </p>
+
+              <h2 className="text-2xl font-serif font-bold text-foreground pt-6">What we believe</h2>
+              <p>
+                AI is already being used most intensively in exactly the roles that drive the most
+                value — software engineers, analysts, lawyers, researchers, writers. The gap isn't in
+                the tools; it's between what AI can theoretically do for an organisation and what
+                they're actually doing with it today. That gap is where we work.
+              </p>
+              <p>
+                The businesses that come out ahead won't be the ones who deployed AI first. They'll
+                be the ones who understood their own operations clearly enough to know where AI would
+                make the biggest difference — and had the information infrastructure in place to
+                support it. Building that infrastructure is unglamorous work. It's also the most
+                valuable work we do.
+              </p>
+
+              <h2 className="text-2xl font-serif font-bold text-foreground pt-6">How we work</h2>
+              <p>
+                We're small by design. That means every client gets direct access to the people doing
+                the work — not a junior team briefed secondhand. We scope every engagement in a
+                single call, move fast, and ship things that actually run in production. No handoffs
+                to implementation partners. No shelfware.
+              </p>
+              <p>
+                Most engagements start with a 30-minute conversation. We'll tell you honestly whether
+                we think we can help, and what that looks like.
+              </p>
+            </>
+          )}
         </div>
 
-        <div className="ab-cols">
-          {/* Bio */}
+        {/* The personal page sits underneath this one. */}
+        <Link
+          href="/about/me"
+          className="mt-14 group flex items-center justify-between gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
+        >
           <div>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-                fontWeight: "normal",
-              }}
-            >
-              My background is in philosophy - not as an academic pursuit, but
-              as the practical foundation for working with technology.
-              <br />
-              <br />
-              "What does it mean to use AI systems?"
-              <br />
-              "What is the utility / ROI?"
-              <br />
-              "Is AI a good fit for me, for my organisation?"
-              <br />
-              "What can we control, and what do we have no say over?"
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary mb-2">
+              {t(copy.about.personalEyebrow)}
             </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-              className="font-bold">
-              Distinguish between what is within your control and what isn't.
-              Accept the latter. Act on the former. The rest is noise.
+            <p className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+              {t(copy.about.personalTitle)}
             </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-            >
-              AI falls into the second category. It is not a choice. It is the
-              product of economic, technological, and scientific conditions that
-              are still accelerating, and no individual decision - yours, your
-              company's, your government's - will stop it. That is the part we
-              don't control.
-            </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-            >
-              What you do control is whether you understand it, and whether you
-              use it well. Don't bury your head in the sand because you don't
-              like AI, and what it's doing to the world. Try to understand it
-              and how it can be used to improve the world. Even a small action
-              can have a big impact, so lean in!
-            </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-            >
-              The gap between people who understand these systems and people who
-              don't is going to compound. The people who engage - who learn to
-              work alongside AI rather than around it, who build things that
-              help them rather than waiting for someone else to do it - will be
-              in a different position to those who don't. That is not hype. It
-              is just how tools work.
-            </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-            >
-              Fear is the starting condition here, not the enemy. People fear
-              change and the unknown - so do I, still. The answer isn't bravado;
-              it's a first step, then another. My role is not to be the expert
-              above you, but the experienced first-stepper beside you.
-              <br />
-              <br />
-              I work with businesses and individuals who want to understand what
-              is actually happening: what these systems are, what they are
-              genuinely good at, where they fail, and what a working setup looks
-              like for their specific context. Some want strategy. Most want to
-              build something useful and understand what they have built.
-            </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 15,
-                lineHeight: 1.85,
-                color: "#1a1a1a",
-                fontWeight: 500,
-              }}
-            >
-              We learn by doing & AI is a participant.
-              <br />
-              You have nothing to lose, everything to gain.
-            </p>
+            <p className="text-sm text-muted-foreground mt-1">{t(copy.about.personalBody)}</p>
           </div>
+          <ArrowRight className="w-5 h-5 text-muted-foreground/50 group-hover:text-primary transition-colors shrink-0" />
+        </Link>
 
-          {/* Sidebar */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <div
-              style={{
-                border: "1px solid #d8d0c5",
-                borderRadius: 10,
-                padding: "22px 20px",
-                background: "#faf8f5",
-              }}
+        <div className="mt-10 p-8 bg-secondary/30 rounded-2xl border border-border">
+          <h3 className="text-xl font-serif font-bold mb-2">{t(copy.common.readyToTalk)}</h3>
+          <p className="text-muted-foreground mb-6">{t(copy.about.ctaBody)}</p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="https://cal.com/tuttoone/15min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
             >
-              <p
-                style={{
-                  ...CAPS,
-                  fontSize: 9,
-                  color: "#a8a092",
-                  marginBottom: 16,
-                }}
-              >
-                Connect
-              </p>
-              <a
-                href="https://www.linkedin.com/in/daniel-forsthofer/"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  ...INTER,
-                  fontSize: 13,
-                  color: "#1a1a1a",
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  fontWeight: 500,
-                }}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#0077b5">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-                Daniel Forsthofer
-              </a>
-              <img
-                src="/profile.jpg"
-                alt="Daniel Forsthofer"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: 8,
-                  marginTop: 16,
-                  display: "block",
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                border: "1px solid #d8d0c5",
-                borderRadius: 10,
-                padding: "22px 20px",
-                background: "#faf8f5",
-              }}
+              {t(copy.common.bookCall)}
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
             >
-              <p
-                style={{
-                  ...CAPS,
-                  fontSize: 9,
-                  color: "#a8a092",
-                  marginBottom: 14,
-                }}
-              >
-                Grounding
-              </p>
-              {[
-                "Philosophy first",
-                "Stoic framework",
-                "Utility over novelty",
-                "Practice, don't just teach",
-              ].map((item) => (
-                <div
-                  key={item}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 8,
-                    marginBottom: 10,
-                  }}
-                >
-                  <span
-                    style={{
-                      width: 5,
-                      height: 5,
-                      borderRadius: "50%",
-                      background: "#d97706",
-                      flexShrink: 0,
-                      marginTop: 7,
-                    }}
-                  />
-                  <span
-                    style={{
-                      ...INTER,
-                      fontSize: 12,
-                      lineHeight: 1.6,
-                      color: "#3d3d3d",
-                    }}
-                  >
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div
-              style={{
-                border: "1px solid #d8d0c5",
-                borderRadius: 10,
-                padding: "22px 20px",
-                background: "#faf8f5",
-              }}
-            >
-              <p
-                style={{
-                  ...CAPS,
-                  fontSize: 9,
-                  color: "#a8a092",
-                  marginBottom: 12,
-                }}
-              >
-                The position
-              </p>
-              <p
-                style={{
-                  ...INTER,
-                  fontSize: 12,
-                  lineHeight: 1.75,
-                  color: "#3d3d3d",
-                  fontStyle: "italic",
-                }}
-              >
-                "It will happen with or without us. Better to lean in and
-                learn."
-              </p>
-            </div>
+              {t(copy.common.sendMessage)} <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }

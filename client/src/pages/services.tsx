@@ -4,66 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { usePreferences } from "@/lib/preferences";
-import { price, type PriceKey } from "@/lib/pricing";
+import { price } from "@/lib/pricing";
+import { DEFAULT_SERVICES, type ServiceItem } from "@/lib/services-content";
 import { pick } from "@/lib/i18n";
 
-interface ServiceItem {
-  title: string;
-  description: string;
-  features: string[];
-  /**
-   * Literal price text. Only set by the admin content editor, which stores a
-   * plain string and cannot know about the currency toggle — when present it
-   * wins, and that card stops following the toggle.
-   */
-  price?: string;
-  /** Currency-aware price, resolved against the pricing table at render. */
-  priceKey?: PriceKey;
-  /** Shown before the amount, e.g. "Starts at". */
-  pricePrefix?: { en: string; fr: string };
-  /** Cards with no fixed price at all. */
-  priceLabel?: { en: string; fr: string };
-}
-
-const STARTS_AT = { en: "Starts at", fr: "À partir de" };
-
-const DEFAULT_SERVICES: ServiceItem[] = [
-  {
-    title: "Data Audit & Knowledge Mapping",
-    description:
-      "We audit your existing documentation, databases, and communication channels to create a structured map of your organizational knowledge.",
-    features: [
-      "Audit of Files/CRMs/Software/Drives",
-      "API Readiness Score",
-      "Knowledge Graph Architecture",
-    ],
-    priceKey: "auditFrom",
-    pricePrefix: STARTS_AT,
-  },
-  {
-    title: "AI Agent Architecture",
-    description:
-      "Design and implement specific agent workflows to automate core business processes using your structured data.",
-    features: [
-      "Custom Agent Workflows",
-      "Human-in-the-loop Design",
-      "Tool Selection & Integration",
-    ],
-    priceLabel: { en: "Custom scoping", fr: "Cadrage sur mesure" },
-  },
-  {
-    title: "Team Enablement",
-    description:
-      "Workshops and training to help your team understand how to write for machines and manage AI workers.",
-    features: [
-      "Prompt Engineering Training",
-      "Documentation Standards",
-      "AI Governance Frameworks",
-    ],
-    priceKey: "enablementFrom",
-    pricePrefix: STARTS_AT,
-  },
-];
 
 export default function Services() {
   const { locale, currency } = usePreferences();

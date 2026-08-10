@@ -36,6 +36,31 @@ export const copy = {
     readyToTalk: { en: "Ready to talk?", fr: "Envie d'en parler ?" },
   },
 
+  about: {
+    title: { en: "About", fr: "À propos" },
+    standfirst: {
+      en: "A small team with laser focus on your problems.",
+      fr: "Une petite équipe entièrement concentrée sur vos problèmes.",
+    },
+    ctaBody: {
+      en: "30 minutes. We'll tell you honestly what we think.",
+      fr: "Trente minutes. Nous vous dirons honnêtement ce que nous en pensons.",
+    },
+    personalEyebrow: { en: "The person behind it", fr: "La personne derrière" },
+    personalTitle: { en: "About me", fr: "À propos de moi" },
+    personalBody: {
+      en: "How I got here, how I work, and how to reach me.",
+      fr: "Mon parcours, ma façon de travailler, et comment me joindre.",
+    },
+  },
+
+  contact: {
+    label: { en: "Get in touch", fr: "Me contacter" },
+    address: { en: "Address", fr: "Adresse" },
+    phone: { en: "Telephone", fr: "Téléphone" },
+    email: { en: "Email", fr: "Courriel" },
+  },
+
   home: {
     eyebrow: { en: "This is the AI era.", fr: "Nous sommes à l'ère de l'IA." },
     title: { en: "Technology Consulting", fr: "Conseil en technologie" },

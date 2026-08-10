@@ -11,6 +11,7 @@ import NotFound from "@/pages/not-found";
 // Primary structure
 import Home from "@/pages/home";
 import About from "@/pages/about";
+import AboutMe from "@/pages/about-me";
 import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
 import Praxis from "@/pages/praxis";
@@ -48,6 +49,7 @@ function Router() {
         {/* Primary structure */}
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
+        <Route path="/about/me" component={AboutMe} />
         <Route path="/services" component={Services} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/praxis" component={Praxis} />

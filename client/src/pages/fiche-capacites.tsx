@@ -5,9 +5,9 @@ import { Printer } from "lucide-react";
 // Fill these in. Leave a value as an empty string to omit it from the sheet.
 // The SIRET line stays off until registration comes through.
 const CONTACT = {
-  commune: "[commune]",
-  region: "Nord du Lot",
-  telephone: "[téléphone]",
+  commune: "Loubressac",
+  region: "Lot 46130",
+  telephone: "+33 6 84 20 56 38",
   email: "daniel@tutto.one",
 };
 // ---------------------------------------------------------------------------
