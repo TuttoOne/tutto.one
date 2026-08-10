@@ -130,8 +130,24 @@ export const copy = {
 
   blogPost: {
     back: { en: "Back to Thinking", fr: "Retour aux réflexions" },
-    notFound: { en: "Article not found", fr: "Article introuvable" },
+    chat: {
+    title: { en: "Chat with Tutto", fr: "Discuter avec Tutto" },
+    sub: { en: "Ask us anything", fr: "Posez-nous vos questions" },
+    open: { en: "Open chat", fr: "Ouvrir la discussion" },
+    close: { en: "Close chat", fr: "Fermer la discussion" },
+    placeholder: { en: "Type a message...", fr: "Écrivez un message…" },
+  },
+
+  notFound: { en: "Article not found", fr: "Article introuvable" },
     notFoundBody: { en: "This article doesn't exist.", fr: "Cet article n'existe pas." },
+  },
+
+  chat: {
+    title: { en: "Chat with Tutto", fr: "Discuter avec Tutto" },
+    sub: { en: "Ask us anything", fr: "Posez-nous vos questions" },
+    open: { en: "Open chat", fr: "Ouvrir la discussion" },
+    close: { en: "Close chat", fr: "Fermer la discussion" },
+    placeholder: { en: "Type a message...", fr: "Écrivez un message…" },
   },
 
   notFound: {

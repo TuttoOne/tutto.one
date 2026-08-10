@@ -1,5 +1,6 @@
 import { useParams, Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
+import { usePreferences } from "@/lib/preferences";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -83,6 +84,7 @@ function ContentRenderer({
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function PraxisLearn() {
+  const { locale } = usePreferences();
   const { course, lesson } = useParams<{ course: string; lesson?: string }>();
   const [, navigate] = useLocation();
 
@@ -124,7 +126,7 @@ export default function PraxisLearn() {
   if (isError || !data) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-        <p className="text-gray-500">Lesson not found.</p>
+        <p className="text-gray-500">{locale === "fr" ? "Leçon introuvable." : "Lesson not found."}</p>
         <Link href="/praxis" className="text-sm underline">← Back to Praxis</Link>
       </div>
     );

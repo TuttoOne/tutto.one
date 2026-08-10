@@ -19,11 +19,10 @@ import { price } from "@/lib/pricing";
 const BOOKING = "https://cal.com/tuttoone/30min";
 
 /**
- * The example session stays in English in both locales: it is a transcript of
- * machine output over an English disclosure set, and translating a quoted
- * record would misrepresent it.
+ * Illustrative exchange, not a transcript of a real matter, so it is shown in
+ * the reader's language — matching the portfolio, which does the same.
  */
-const SESSION = [
+const SESSION_EN = [
   {
     tag: "A",
     q: "Find all documents referencing the March 2023 board meeting and summarise the key decisions.",
@@ -38,6 +37,24 @@ const SESSION = [
     tag: "C",
     q: "Build a timeline of contractual deadlines mentioned across all documents.",
     a: "Extracted 23 deadline references. Key dates: 15 Feb 2022 (payment milestone, Contract §4.2), 1 Jun 2022 (option expiry, Addendum B), 30 Sep 2022 (longstop date, original SPA).",
+  },
+];
+
+const SESSION_FR = [
+  {
+    tag: "A",
+    q: "Trouve tous les documents mentionnant le conseil d'administration de mars 2023 et résume les décisions principales.",
+    a: "14 passages pertinents trouvés dans 6 documents. Décisions consignées : approbation de la nouvelle structure du capital (pièce C-112), nomination d'un directeur financier par intérim (courriel D-0447), report du vote sur l'acquisition au 3e trimestre 2023 (procès-verbal C-089).",
+  },
+  {
+    tag: "B",
+    q: "Montre-moi tous les courriels échangés entre le demandeur et le défendeur entre janvier et avril 2022.",
+    a: "38 courriels récupérés. Le plus ancien : 4 janvier 2022 (réf. D-0012). Le plus récent : 29 avril 2022 (réf. D-0891). 12 marqués confidentiels par la partie productrice.",
+  },
+  {
+    tag: "C",
+    q: "Établis une chronologie des échéances contractuelles mentionnées dans l'ensemble des documents.",
+    a: "23 échéances extraites. Dates clés : 15 février 2022 (jalon de paiement, contrat §4.2), 1er juin 2022 (expiration de l'option, avenant B), 30 septembre 2022 (date butoir, contrat de cession initial).",
   },
 ];
 
@@ -128,7 +145,7 @@ export default function Pythia() {
                 <StatCard key={s.stat} stat={s.stat} label={s.label} />
               ))}
             </div>
-            <ExampleSession caption={t(copy.pythia.sessionCaption)} items={SESSION} />
+            <ExampleSession caption={t(copy.pythia.sessionCaption)} items={locale === "fr" ? SESSION_FR : SESSION_EN} />
           </div>
         </Section>
 

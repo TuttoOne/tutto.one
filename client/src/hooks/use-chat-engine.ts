@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { CHAT_FLOWS, Message, ChatOption } from "@/lib/chat-data";
+import { CHAT_FLOWS, stepMessages, optionLabel, Message, ChatOption } from "@/lib/chat-data";
+import { usePreferences } from "@/lib/preferences";
 
 const WORD_DELAY = 60;
 
@@ -8,6 +9,13 @@ export function useChatEngine() {
   const [isTyping, setIsTyping] = useState(false);
   const [currentOptions, setCurrentOptions] = useState<ChatOption[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Held in a ref because processStep is memoised and runs inside async
+  // timeouts — reading locale from a closure would pin it to whatever it was
+  // when the flow started.
+  const { locale } = usePreferences();
+  const localeRef = useRef(locale);
+  localeRef.current = locale;
 
   useEffect(() => {
     if (messages.length === 0) {
@@ -58,11 +66,12 @@ export function useChatEngine() {
     setCurrentOptions([]);
     setIsTyping(true);
 
-    for (let i = 0; i < step.messages.length; i++) {
+    const msgs = stepMessages(step, localeRef.current);
+    for (let i = 0; i < msgs.length; i++) {
       await new Promise((resolve) => setTimeout(resolve, 300));
       setIsTyping(false);
-      await addMessageWithTyping(step.messages[i]);
-      if (i < step.messages.length - 1) {
+      await addMessageWithTyping(msgs[i]);
+      if (i < msgs.length - 1) {
         setIsTyping(true);
       }
     }
@@ -86,7 +95,7 @@ export function useChatEngine() {
   };
 
   const handleOptionSelect = (option: ChatOption) => {
-    addMessage({ role: "user", content: option.label });
+    addMessage({ role: "user", content: optionLabel(option, localeRef.current) });
     setCurrentOptions([]);
 
     if (option.value === "open_calendar") {
@@ -125,13 +134,15 @@ export function useChatEngine() {
     } catch {
       setIsTyping(false);
       await addMessageWithTyping(
-        "Sorry, I'm having trouble connecting right now. You can book a call directly and we'll chat in person."
+        localeRef.current === "fr"
+          ? "Désolé, la connexion ne passe pas pour le moment. Vous pouvez réserver un appel directement et nous en parlerons de vive voix."
+          : "Sorry, I'm having trouble connecting right now. You can book a call directly and we'll chat in person.",
       );
     }
 
     setCurrentOptions([
-      { label: "Book a call", value: "contact" },
-      { label: "Back to start", value: "start" },
+      { label: "Book a call", labelFr: "Réserver un appel", value: "contact" },
+      { label: "Back to start", labelFr: "Revenir au début", value: "start" },
     ]);
   };
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { copy, useT } from "@/lib/i18n";
 import { Send, ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -8,6 +9,7 @@ interface InputBarProps {
 }
 
 export function InputBar({ onSend, disabled }: InputBarProps) {
+  const t = useT();
   const [text, setText] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,7 +27,7 @@ export function InputBar({ onSend, disabled }: InputBarProps) {
         value={text}
         onChange={(e) => setText(e.target.value)}
         disabled={disabled}
-        placeholder="Type a message..."
+        placeholder={t(copy.chat.placeholder)}
         className="w-full px-5 py-4 pr-12 rounded-full border border-border/60 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-[15px] placeholder:text-muted-foreground/60"
       />
       <Button

@@ -4,8 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useChatEngine } from "@/hooks/use-chat-engine";
 import { MessageBubble, TypingIndicator } from "./MessageBubble";
 import { InputBar } from "./InputBar";
+import { copy, useT } from "@/lib/i18n";
+import { usePreferences } from "@/lib/preferences";
+import { optionLabel } from "@/lib/chat-data";
 
 export function FloatingChat() {
+  const t = useT();
+  const { locale } = usePreferences();
   const [open, setOpen] = useState(false);
   const messagesBottomRef = useRef<HTMLDivElement>(null);
   const {
@@ -38,13 +43,13 @@ export function FloatingChat() {
           >
             <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-secondary/20 shrink-0">
               <div>
-                <p className="text-sm font-semibold text-foreground">Chat with Tutto</p>
-                <p className="text-xs text-muted-foreground">Ask us anything</p>
+                <p className="text-sm font-semibold text-foreground">{t(copy.chat.title)}</p>
+                <p className="text-xs text-muted-foreground">{t(copy.chat.sub)}</p>
               </div>
               <button
                 onClick={() => setOpen(false)}
                 className="p-1.5 rounded-lg hover:bg-muted/50 transition-colors"
-                aria-label="Close chat"
+                aria-label={t(copy.chat.close)}
                 data-testid="button-close-chat"
               >
                 <X className="w-4 h-4 text-muted-foreground" />
@@ -69,7 +74,7 @@ export function FloatingChat() {
                       className="text-xs px-3 py-1.5 rounded-full border border-primary/20 text-primary bg-primary/5 hover:bg-primary/10 transition-colors font-medium"
                       data-testid={`button-chat-option-${opt.value}`}
                     >
-                      {opt.label}
+                      {optionLabel(opt, locale)}
                     </button>
                   ))}
                 </div>
@@ -85,7 +90,7 @@ export function FloatingChat() {
         className="w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        aria-label={open ? "Close chat" : "Open chat"}
+        aria-label={open ? t(copy.chat.close) : t(copy.chat.open)}
         data-testid="button-floating-chat"
       >
         <AnimatePresence mode="wait" initial={false}>
