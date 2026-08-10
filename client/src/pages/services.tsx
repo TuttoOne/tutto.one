@@ -6,11 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
 import { DEFAULT_SERVICES, type ServiceItem } from "@/lib/services-content";
-import { pick } from "@/lib/i18n";
+import { pick, copy, useT } from "@/lib/i18n";
 
 
 export default function Services() {
   const { locale, currency } = usePreferences();
+  const t = useT();
   const { data: servicesContent } = useQuery<{ value: string }>({
     queryKey: ["/api/site-content/services"],
     retry: false,
@@ -30,10 +31,10 @@ export default function Services() {
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Services
+            {t(copy.services.title)}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Preparing your organization for the automated workforce.
+            {t(copy.services.standfirst)}
           </p>
         </div>
 
@@ -73,7 +74,7 @@ export default function Services() {
                   variant={index === 1 ? "default" : "outline"}
                   asChild
                 >
-                  <Link href="/contact">Inquire</Link>
+                  <Link href="/contact">{t(copy.services.inquire)}</Link>
                 </Button>
               </div>
             </div>
@@ -82,15 +83,14 @@ export default function Services() {
 
         <div className="mt-20 text-center bg-secondary/30 rounded-3xl p-12">
           <h2 className="text-3xl font-serif font-bold mb-4">
-            Not sure where to start?
+            {t(copy.services.notSureTitle)}
           </h2>
           <p className="text-muted-foreground mb-8">
-            Run the diagnostic in the chat interface to get a personalized
-            recommendation.
+            {t(copy.services.notSureBody)}
           </p>
           <Button className="rounded-full px-8 py-6 text-lg" asChild>
             <a href="/">
-              Run Diagnostic <ArrowRight className="ml-2" />
+              {t(copy.services.runDiagnostic)} <ArrowRight className="ml-2" />
             </a>
           </Button>
         </div>

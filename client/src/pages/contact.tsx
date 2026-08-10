@@ -1,10 +1,12 @@
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import { copy, useT } from "@/lib/i18n";
 import { Mail, Calendar, MapPin, Loader2, CheckCircle } from "lucide-react";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 export default function Contact() {
+  const t = useT();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,7 +42,7 @@ export default function Contact() {
   return (
     <Layout>
       <div className="max-w-3xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-serif font-bold mb-8">Get in Touch</h1>
+        <h1 className="text-4xl font-serif font-bold mb-8">{t(copy.contact.title)}</h1>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-8">
@@ -76,7 +78,7 @@ export default function Contact() {
                     Calendar
                   </div>
                   <div className="text-muted-foreground text-sm">
-                    Book a 15-min intro
+                    {t(copy.contact.bookSub)}
                   </div>
                 </div>
               </a>
@@ -86,9 +88,9 @@ export default function Contact() {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-medium">Location</div>
+                  <div className="font-medium">{t(copy.contact.location)}</div>
                   <div className="text-muted-foreground text-sm">
-                    Scotland, London, France, South Africa (Remote Friendly)
+                    {t(copy.contact.locationValue)}
                   </div>
                 </div>
               </div>
@@ -99,7 +101,7 @@ export default function Contact() {
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-12 text-center">
                 <CheckCircle className="w-16 h-16 text-primary mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Message Sent!</h3>
+                <h3 className="text-xl font-semibold mb-2">{t(copy.contact.sent)}</h3>
                 <p className="text-muted-foreground">
                   We'll get back to you soon.
                 </p>
@@ -108,7 +110,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
-                    Name
+                    {t(copy.contact.fieldName)}
                   </label>
                   <input
                     id="name"
@@ -119,12 +121,12 @@ export default function Contact() {
                       setFormData((prev) => ({ ...prev, name: e.target.value }))
                     }
                     className="w-full px-3 py-2 border border-border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    placeholder="Jane Doe"
+                    placeholder={t(copy.contact.phName)}
                   />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium">
-                    Email
+                    {t(copy.contact.fieldEmail)}
                   </label>
                   <input
                     id="email"
@@ -138,12 +140,12 @@ export default function Contact() {
                       }))
                     }
                     className="w-full px-3 py-2 border border-border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    placeholder="jane@company.com"
+                    placeholder={t(copy.contact.phEmail)}
                   />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium">
-                    Message
+                    {t(copy.contact.fieldMessage)}
                   </label>
                   <textarea
                     id="message"
@@ -156,7 +158,7 @@ export default function Contact() {
                       }))
                     }
                     className="w-full px-3 py-2 border border-border rounded-md bg-white min-h-[120px] focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    placeholder="Tell me about your project..."
+                    placeholder={t(copy.contact.phMessage)}
                   />
                 </div>
                 <Button
@@ -167,10 +169,10 @@ export default function Contact() {
                   {submitContact.isPending ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Sending...
+                      {t(copy.contact.sending)}
                     </>
                   ) : (
-                    "Send Message"
+                    t(copy.contact.submit)
                   )}
                 </Button>
                 {submitContact.isError && (

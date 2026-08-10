@@ -59,6 +59,69 @@ export const copy = {
     address: { en: "Address", fr: "Adresse" },
     phone: { en: "Telephone", fr: "Téléphone" },
     email: { en: "Email", fr: "Courriel" },
+    title: { en: "Get in Touch", fr: "Nous contacter" },
+    bookLabel: { en: "Book a call", fr: "Réserver un appel" },
+    bookSub: { en: "Book a 15-min intro", fr: "Réserver une présentation de 15 min" },
+    location: { en: "Location", fr: "Implantation" },
+    locationValue: {
+      en: "Scotland, London, France, South Africa (remote friendly)",
+      fr: "Écosse, Londres, France, Afrique du Sud (travail à distance)",
+    },
+    sent: { en: "Message sent", fr: "Message envoyé" },
+    fieldName: { en: "Name", fr: "Nom" },
+    fieldEmail: { en: "Email", fr: "Courriel" },
+    fieldMessage: { en: "Message", fr: "Message" },
+    phName: { en: "Jane Doe", fr: "Marie Dupont" },
+    phEmail: { en: "jane@company.com", fr: "marie@entreprise.fr" },
+    phMessage: {
+      en: "Tell me about your project...",
+      fr: "Parlez-moi de votre projet…",
+    },
+    submit: { en: "Send message", fr: "Envoyer le message" },
+    sending: { en: "Sending...", fr: "Envoi en cours…" },
+  },
+
+  portfolio: {
+    title: { en: "Portfolio", fr: "Réalisations" },
+    standfirst: {
+      en: "Systems we've designed and built - from concept to production.",
+      fr: "Des systèmes que nous avons conçus et construits — du concept à la production.",
+    },
+  },
+
+  blog: {
+    title: { en: "Thinking", fr: "Réflexions" },
+    standfirst: {
+      en: "Essays on the intersection of organizational knowledge, AI architecture, and the future of work.",
+      fr: "Des articles à la croisée du savoir organisationnel, de l'architecture de l'IA et de l'avenir du travail.",
+    },
+    loadError: {
+      en: "Failed to load posts. Please try again.",
+      fr: "Impossible de charger les articles. Veuillez réessayer.",
+    },
+  },
+
+  services: {
+    title: { en: "Services", fr: "Prestations" },
+    standfirst: {
+      en: "Preparing your organization for the automated workforce.",
+      fr: "Préparer votre organisation à une main-d'œuvre automatisée.",
+    },
+    inquire: { en: "Inquire", fr: "Nous consulter" },
+    notSureTitle: { en: "Not sure where to start?", fr: "Vous ne savez pas par où commencer ?" },
+    notSureBody: {
+      en: "Run the diagnostic in the chat interface to get a personalized recommendation.",
+      fr: "Lancez le diagnostic dans la fenêtre de discussion pour obtenir une recommandation personnalisée.",
+    },
+    runDiagnostic: { en: "Run diagnostic", fr: "Lancer le diagnostic" },
+  },
+
+  notFound: {
+    title: { en: "404 — page not found", fr: "404 — page introuvable" },
+    body: {
+      en: "That page does not exist. Try the navigation above.",
+      fr: "Cette page n'existe pas. Utilisez la navigation ci-dessus.",
+    },
   },
 
   home: {

@@ -1,8 +1,10 @@
 import { Layout } from "@/components/layout/Layout";
 import { PortfolioDisplay, type PortfolioTextOverride } from "@/components/portfolio/PortfolioDisplay";
 import { useQuery } from "@tanstack/react-query";
+import { copy, useT } from "@/lib/i18n";
 
 export default function Portfolio() {
+  const t = useT();
   const { data: portfolioContent } = useQuery<{ value: string }>({
     queryKey: ["/api/site-content/portfolio"],
     retry: false,
@@ -21,10 +23,10 @@ export default function Portfolio() {
             className="text-4xl md:text-5xl font-serif font-bold mb-6"
             data-testid="text-portfolio-title"
           >
-            Portfolio
+            {t(copy.portfolio.title)}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Systems we've designed and built - from concept to production.
+            {t(copy.portfolio.standfirst)}
           </p>
         </div>
 
