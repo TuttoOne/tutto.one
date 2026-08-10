@@ -5,7 +5,7 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
-import { DEFAULT_SERVICES, type ServiceItem } from "@/lib/services-content";
+import { DEFAULT_SERVICES, localiseService, type ServiceItem } from "@/lib/services-content";
 import { pick, copy, useT } from "@/lib/i18n";
 
 
@@ -39,21 +39,23 @@ export default function Services() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {services.map((service, index) => {
+            const text = localiseService(service, locale);
+            return (
             <div
               key={index}
               data-testid={`card-service-${index}`}
               className="bg-card border border-border/60 rounded-2xl p-8 hover:shadow-lg transition-all hover:-translate-y-1 duration-300 flex flex-col"
             >
               <h3 className="text-xl font-serif font-bold mb-4">
-                {service.title}
+                {text.title}
               </h3>
               <p className="text-muted-foreground mb-8 text-sm leading-relaxed min-h-[80px]">
-                {service.description}
+                {text.description}
               </p>
 
               <ul className="space-y-3 mb-8 flex-1">
-                {service.features.map((feature, i) => (
+                {text.features.map((feature, i) => (
                   <li key={i} className="flex items-start text-sm">
                     <Check className="w-5 h-5 text-primary mr-3 shrink-0" />
                     <span>{feature}</span>
@@ -78,7 +80,8 @@ export default function Services() {
                 </Button>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-20 text-center bg-secondary/30 rounded-3xl p-12">

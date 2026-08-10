@@ -295,7 +295,11 @@ export function PortfolioDisplay({
                 urlLabel: fr.urlLabel ?? entry.urlLabel,
                 capabilities: entry.capabilities.map((c) => fr.capabilities?.[c.title] ?? c),
               }
-            : { ...entry, ...common };
+            : {
+                ...entry,
+                ...common,
+                screenshotLabels: fr.screenshotLabels ?? entry.screenshotLabels,
+              };
         })
       : entries;
 

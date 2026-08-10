@@ -2,6 +2,9 @@ import { Layout } from "@/components/layout/Layout";
 import { Link, useParams } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { usePreferences } from "@/lib/preferences";
+import { BLOG_FR } from "@/lib/blog-fr";
+import { copy, useT } from "@/lib/i18n";
 import type { BlogPost } from "@shared/schema";
 import capabilityGapImg from "@assets/c1952c81bca02a7c8cc05ef7801e67ca60831c55-4096x4096_1773827088246.webp";
 
@@ -392,6 +395,8 @@ function renderInline(text: string): React.ReactNode[] {
 export default function BlogPost() {
   const params = useParams<{ slug: string }>();
 
+  const { locale } = usePreferences();
+  const t = useT();
   const { data: post, isLoading, isError } = useQuery<BlogPost>({
     queryKey: [`/api/blog/${params.slug}`],
   });
@@ -415,15 +420,19 @@ export default function BlogPost() {
     return (
       <Layout>
         <div className="max-w-3xl mx-auto px-6 py-12 text-center">
-          <h1 className="text-4xl font-serif font-bold mb-4">Article Not Found</h1>
-          <p className="text-muted-foreground mb-8">This article doesn't exist.</p>
+          <h1 className="text-4xl font-serif font-bold mb-4">{t(copy.blogPost.notFound)}</h1>
+          <p className="text-muted-foreground mb-8">{t(copy.blogPost.notFoundBody)}</p>
           <Link href="/blog" className="text-primary font-medium hover:underline">
-            Back to Blog
+            {t(copy.blogPost.back)}
           </Link>
         </div>
       </Layout>
     );
   }
+
+  // Title, standfirst, date and read time come from the French overlay; the
+  // article body is still served in English in both locales.
+  const fr = locale === "fr" ? BLOG_FR[post.slug] : undefined;
 
   const introCard = (() => {
     if (!post.introCard) return null;
@@ -439,7 +448,7 @@ export default function BlogPost() {
       <article className="max-w-3xl mx-auto px-6 py-12">
         <Link href="/blog" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
           <ArrowLeft className="w-4 h-4 mr-1" />
-          Back to Blog
+          {t(copy.blogPost.back)}
         </Link>
 
         {introCard ? (
@@ -460,23 +469,23 @@ export default function BlogPost() {
               )}
             </div>
             <div className="flex items-center gap-4 text-sm text-muted-foreground mb-10 font-mono">
-              <span>{post.date}</span>
+              <span>{fr?.date ?? post.date}</span>
               <span className="text-border">|</span>
-              <span>{post.readTime}</span>
+              <span>{fr?.readTime ?? post.readTime}</span>
             </div>
           </>
         ) : (
           <header className="mb-12">
             <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4 font-mono">
-              <span>{post.date}</span>
+              <span>{fr?.date ?? post.date}</span>
               <span className="text-border">|</span>
-              <span>{post.readTime}</span>
+              <span>{fr?.readTime ?? post.readTime}</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-serif font-bold leading-tight mb-4">
-              {post.title}
+              {fr?.title ?? post.title}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              {post.excerpt}
+              {fr?.excerpt ?? post.excerpt}
             </p>
           </header>
         )}

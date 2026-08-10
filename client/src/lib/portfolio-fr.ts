@@ -15,6 +15,8 @@ export type PortfolioFr = {
   description?: string;
   urlLabel?: string;
   capabilities?: Record<string, { title: string; detail: string }>;
+  /** Captions under the product screenshots, in source order. */
+  screenshotLabels?: string[];
 };
 
 export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
@@ -81,10 +83,12 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
   EntityVault: {
     description:
       "Une plateforme de gestion des entités pensée d'abord pour la confidentialité : stockage tokenisé, demandes de collaboration et recherche d'entités. Conçue pour les organisations qui prennent la protection des données au sérieux.",
+    screenshotLabels: ["Accueil", "Mes entités", "Demandes de collaboration"],
   },
 
   "AI ROI Portal": {
     description:
       "Un tableau de bord de conseil pour suivre le retour sur investissement de l'adoption de l'IA, les indicateurs d'usage, les jalons de projet et les économies réalisées. Il aide les équipes à mesurer l'impact réel de l'automatisation.",
+    screenshotLabels: ["Tableau de bord ROI", "Suivi de l'usage de l'IA", "Projets"],
   },
 };

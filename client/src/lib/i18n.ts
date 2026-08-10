@@ -117,6 +117,12 @@ export const copy = {
     runDiagnostic: { en: "Run diagnostic", fr: "Lancer le diagnostic" },
   },
 
+  blogPost: {
+    back: { en: "Back to Thinking", fr: "Retour aux réflexions" },
+    notFound: { en: "Article not found", fr: "Article introuvable" },
+    notFoundBody: { en: "This article doesn't exist.", fr: "Cet article n'existe pas." },
+  },
+
   notFound: {
     title: { en: "404 — page not found", fr: "404 — page introuvable" },
     body: {
