@@ -355,6 +355,10 @@ export const copy = {
       en: "Corpus readiness across a 234,000-document estate — what is ingested, embedded, classified and summarised, and what is not yet.",
       fr: "État de préparation du corpus sur un fonds de 234 000 documents : ce qui est intégré, vectorisé, classé et résumé — et ce qui ne l'est pas encore.",
     },
+    shot4: {
+      en: "The knowledge map, built on Atelier Vallon — a fictional workshop made for demonstration, so no client document is ever used. Documents rarely cite each other; they connect through an instrument, a part, a person, a procedure.",
+      fr: "La carte des connaissances, sur l'Atelier Vallon — un atelier fictif conçu pour la démonstration, afin qu'aucun document de client ne soit jamais utilisé. Les documents ne se citent pas entre eux : ils se rejoignent par un instrument, une pièce, une personne, une procédure.",
+    },
     shot3: {
       en: "Statistical checks over the disclosure list: numbering gaps, doc-type droughts and volume cliffs, each with wording to put to the other side.",
       fr: "Contrôles statistiques sur la liste des pièces : ruptures de numérotation, absences prolongées d'un type de document et chutes de volume, chacun assorti d'une formulation à adresser à la partie adverse.",
