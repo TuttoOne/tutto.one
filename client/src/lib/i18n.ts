@@ -96,6 +96,9 @@ export const copy = {
     exampleConversations: { en: "Example conversations", fr: "Exemples d'échanges" },
     prevShot: { en: "Previous screenshot", fr: "Capture précédente" },
     nextShot: { en: "Next screenshot", fr: "Capture suivante" },
+    speakerYou: { en: "You", fr: "Vous" },
+    speakerAi: { en: "AI", fr: "IA" },
+    visit: { en: "Visit", fr: "Voir" },
   },
 
   blog: {

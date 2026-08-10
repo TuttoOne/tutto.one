@@ -5,9 +5,9 @@
  * translator has one file to work in. Anything absent here falls back to the
  * English, so a new entry appears immediately rather than disappearing.
  *
- * Example conversations are deliberately NOT translated: they are transcripts
- * of machine output over English-language documents, and translating a quoted
- * record would misrepresent what the system actually returned.
+ * The example conversations ARE translated. They are illustrative — invented to
+ * show the shape of an exchange, not transcripts of a real matter — so a French
+ * reader should see them in French. Keyed on the English question.
  */
 export type PortfolioFr = {
   tagline?: string;
@@ -15,6 +15,8 @@ export type PortfolioFr = {
   description?: string;
   urlLabel?: string;
   capabilities?: Record<string, { title: string; detail: string }>;
+  /** Keyed on the English `user` line of each example exchange. */
+  conversations?: Record<string, { user: string; assistant: string }>;
   /** Captions under the product screenshots, in source order. */
   screenshotLabels?: string[];
 };
@@ -48,6 +50,23 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
           "OCR, inférence, recherche vectorielle et stockage s'exécutent localement sur le DGX Spark. Aucune API cloud. Le secret professionnel est satisfait par l'architecture.",
       },
     },
+    conversations: {
+      "Find all documents referencing the March 2023 board meeting and summarise the key decisions": {
+        user: "Trouve tous les documents mentionnant le conseil d'administration de mars 2023 et résume les décisions principales",
+        assistant:
+          "14 passages pertinents trouvés dans 6 documents. Décisions consignées : approbation de la nouvelle structure du capital (pièce C-112), nomination d'un directeur financier par intérim (courriel D-0447), report du vote sur l'acquisition au 3e trimestre 2023 (procès-verbal C-089).",
+      },
+      "Show me all emails between the claimant and defendant between January and April 2022": {
+        user: "Montre-moi tous les courriels échangés entre le demandeur et le défendeur entre janvier et avril 2022",
+        assistant:
+          "38 courriels récupérés. Le plus ancien : 4 janvier 2022 (réf. D-0012). Le plus récent : 29 avril 2022 (réf. D-0891). 12 marqués confidentiels par la partie productrice.",
+      },
+      "Build a timeline of contractual deadlines mentioned across all documents": {
+        user: "Établis une chronologie des échéances contractuelles mentionnées dans l'ensemble des documents",
+        assistant:
+          "23 échéances extraites. Dates clés : 15 février 2022 (jalon de paiement, contrat §4.2), 1er juin 2022 (expiration de l'option, avenant B), 30 septembre 2022 (date butoir, contrat de cession initial).",
+      },
+    },
   },
 
   "MCP Bridge - SharePoint & Power Automate": {
@@ -76,6 +95,23 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
         title: "Documentation à jour",
         detail:
           "L'IA consulte la documentation Microsoft en vigueur avant de répondre — pas de conseils d'API périmés ou inventés.",
+      },
+    },
+    conversations: {
+      "List all SharePoint lists on my site": {
+        user: "Liste toutes les listes SharePoint de mon site",
+        assistant:
+          "8 listes trouvées : Tâches, Clients, Projets, Factures, Contacts, Documents, Actifs, Paramètres.",
+      },
+      "Add a lookup column on Tasks pointing to the Clients list": {
+        user: "Ajoute une colonne de recherche sur Tâches pointant vers la liste Clients",
+        assistant:
+          "Colonne « Client » (recherche → Clients) ajoutée à la liste Tâches avec succès.",
+      },
+      "Show me the last 5 failed Power Automate runs on 'Invoice Sync'": {
+        user: "Montre-moi les 5 dernières exécutions en échec du flux « Invoice Sync »",
+        assistant:
+          "5 exécutions en échec trouvées. Erreur la plus récente : « délai de connexion dépassé vers l'API Xero » — survenue 3 fois au cours des dernières 24 heures.",
       },
     },
   },

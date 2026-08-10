@@ -242,13 +242,13 @@ function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass:
           {entry.conversations.map((conv, i) => (
             <div key={i} className="space-y-1.5">
               <div className="flex gap-2 items-start">
-                <span className="text-xs font-mono text-muted-foreground shrink-0 mt-0.5">You</span>
+                <span className="text-xs font-mono text-muted-foreground shrink-0 mt-0.5">{t(copy.portfolio.speakerYou)}</span>
                 <p className="text-xs text-foreground bg-primary/8 rounded-lg px-3 py-2 leading-relaxed">
                   {conv.user}
                 </p>
               </div>
               <div className="flex gap-2 items-start">
-                <span className="text-xs font-mono text-primary shrink-0 mt-0.5">AI</span>
+                <span className="text-xs font-mono text-primary shrink-0 mt-0.5">{t(copy.portfolio.speakerAi)}</span>
                 <p className="text-xs text-muted-foreground bg-background/60 rounded-lg px-3 py-2 leading-relaxed">
                   {conv.assistant}
                 </p>
@@ -279,12 +279,36 @@ export function PortfolioDisplay({
   const { locale } = usePreferences();
   const t = useT();
 
-  // French first, then admin overrides on top: an override is something the
-  // author typed deliberately, so it should win over the stock translation.
-  const localised =
+  // Admin overrides FIRST, then the French overlay on top.
+  //
+  // The order matters and the obvious one is wrong. Overrides are stored as a
+  // single English string per field, so applying them last silently replaced
+  // every translated tagline and description with English — while leaving the
+  // fields the override does not carry (capabilities, screenshot captions) in
+  // French, which is how the page ended up half-translated. An override edits
+  // the English source; the translation is applied to whatever that source is.
+  const overridden = overrides
+    ? entries.map((entry) => {
+        const slug = entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-");
+        const ov = overrides.find((o) => o.id === slug);
+        if (!ov) return entry;
+        const { id: _id, ...rest } = ov;
+        void _id;
+        return { ...entry, ...Object.fromEntries(Object.entries(rest).filter(([, v]) => v !== undefined)) };
+      })
+    : entries;
+
+  const mergedEntries =
     locale === "fr"
-      ? entries.map((entry): PortfolioEntry => {
-          const fr = PORTFOLIO_FR[entry.name];
+      ? overridden.map((entry): PortfolioEntry => {
+          // Keyed on the original name, so renaming an entry in the admin
+          // editor does not silently drop its translation.
+          const original = entries.find(
+            (e) =>
+              e.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-") ===
+              entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-"),
+          );
+          const fr = PORTFOLIO_FR[entry.name] ?? (original ? PORTFOLIO_FR[original.name] : undefined);
           if (!fr) return entry;
           const common = {
             tagline: fr.tagline ?? entry.tagline,
@@ -298,6 +322,9 @@ export function PortfolioDisplay({
                 badge: fr.badge ?? entry.badge,
                 urlLabel: fr.urlLabel ?? entry.urlLabel,
                 capabilities: entry.capabilities.map((c) => fr.capabilities?.[c.title] ?? c),
+                conversations: entry.conversations.map(
+                  (c) => fr.conversations?.[c.user] ?? c,
+                ),
               }
             : {
                 ...entry,
@@ -305,18 +332,7 @@ export function PortfolioDisplay({
                 screenshotLabels: fr.screenshotLabels ?? entry.screenshotLabels,
               };
         })
-      : entries;
-
-  const mergedEntries = overrides
-    ? localised.map((entry) => {
-        const slug = entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-");
-        const ov = overrides.find((o) => o.id === slug);
-        if (!ov) return entry;
-        const { id: _id, ...rest } = ov;
-        void _id;
-        return { ...entry, ...Object.fromEntries(Object.entries(rest).filter(([, v]) => v !== undefined)) };
-      })
-    : localised;
+      : overridden;
 
   return (
     <div className="space-y-8">
@@ -368,7 +384,9 @@ export function PortfolioDisplay({
                     className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors"
                     data-testid={`link-visit-${slug}`}
                   >
-                    {entry.type === "project" && entry.urlLabel ? entry.urlLabel : `Visit ${entry.name}`}
+                    {entry.type === "project" && entry.urlLabel
+                      ? entry.urlLabel
+                      : `${t(copy.portfolio.visit)} ${entry.name}`}
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}
