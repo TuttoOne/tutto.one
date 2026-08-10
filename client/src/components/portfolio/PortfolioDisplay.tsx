@@ -62,7 +62,7 @@ export const portfolioEntries: PortfolioEntry[] = [
       },
       {
         title: "Semantic Search & RAG Q&A",
-        detail: "Ask questions in plain English. Every answer cites its source document and page number - no hallucination from the AI's own knowledge.",
+        detail: "Ask questions in plain language. Every answer cites its source document and page number - no hallucination from the AI's own knowledge.",
       },
       {
         title: "Interactive Timeline",

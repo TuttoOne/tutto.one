@@ -68,7 +68,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Voir le système fonctionner avant toute théorie. Comprendre où l'IA excelle et où elle doit être exacte, si vos fichiers sont en sécurité, et ce que cela coûte. Construire en direct votre première petite réalisation qui fonctionne.",
   "The build loop, and capturing your know-how":
     "La boucle de construction, et la mise par écrit de votre savoir-faire",
-  "Describe what you want and watch Claude Code build it. Then write down the rules your work follows, in plain English, so the tool applies them every single time. Build a real tool for your own work.":
+  "Describe what you want and watch Claude Code build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.":
     "Décrivez ce que vous voulez et regardez Claude Code le construire. Puis consignez les règles que suit votre travail, en langage courant, pour que l'outil les applique à chaque fois. Construisez un véritable outil pour votre propre activité.",
   "Your tools and surfaces": "Vos outils et vos interfaces",
   "The Claude app and the move into your own files. Connecting Claude to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.":
@@ -94,7 +94,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
 
   // --- FAQ ---
   "Do I need to know how to code?": "Dois-je savoir coder ?",
-  "No. You describe what you want in plain English. Claude Code writes the code. We use the time to make sure you understand what you are building and why.":
+  "No. You describe what you want in plain language. Claude Code writes the code. We use the time to make sure you understand what you are building and why.":
     "Non. Vous décrivez ce que vous voulez en langage courant. Claude Code écrit le code. Nous mettons le temps à profit pour que vous compreniez ce que vous construisez, et pourquoi.",
   "I have only ever used AI in a chat box. Is this for me?":
     "Je n'ai jamais utilisé l'IA autrement que dans une fenêtre de discussion. Est-ce pour moi ?",
@@ -142,7 +142,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "L'installation, la première configuration, le moment où quelque chose casse : c'est précisément ce que les vidéos gratuites passent sous silence, et précisément là que la plupart des gens abandonnent en silence.",
 
   // --- Outcomes ---
-  "Build small working tools for your own work, by describing what you want in plain English.":
+  "Build small working tools for your own work, by describing what you want in plain language.":
     "Construire de petits outils fonctionnels pour votre propre activité, en décrivant ce que vous voulez en langage courant.",
   "Capture your own rules and judgement so a tool works the way you do, every time.":
     "Consigner vos propres règles et votre jugement pour qu'un outil travaille à votre manière, à chaque fois.",
@@ -186,7 +186,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Une attestation confirmant que vous avez suivi le programme — et, plus important encore, les outils que vous avez construits en chemin. L'attestation consigne ce que vous avez réalisé, et pas seulement votre présence. C'est cette preuve-là qui compte.",
   "A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.":
     "Un mot de franchise, pour poser la bonne attente : vous ferez vous-même l'essentiel du chemin. Sur tout ce qui est complexe, la dernière portion se termine à la main ou se délègue. Faire déjà l'essentiel du chemin représente une économie considérable par rapport à la façon dont le travail se fait aujourd'hui — et c'est cette économie que nous visons.",
-  "Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain English, with someone sitting beside you who has done it before.":
+  "Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain language, with someone sitting beside you who has done it before.":
     "Huit séances sur deux mois. Pour celles et ceux qui ont utilisé l'IA dans une fenêtre de discussion et veulent aller plus loin. Vous construirez de petits outils fonctionnels qui prendront en charge vos tâches répétitives, en langage courant, avec à vos côtés quelqu'un qui l'a déjà fait.",
   "Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on every course you teach. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
     "Quatre séances supplémentaires vous transforment en formateur. Vous conservez 80 % des honoraires de chaque formation que vous animez. Je trouve et j'organise les clients avec vous, vous assurez les séances, et une structure vous épaule pour les cas difficiles.",

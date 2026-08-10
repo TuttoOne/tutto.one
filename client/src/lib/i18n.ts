@@ -227,7 +227,7 @@ export const copy = {
       en: "Nothing here is exotic. What you leave the session with is four things in a directory, which you can read, edit, copy and back up with tools you already trust.",
       fr: "Rien d'exotique ici. Vous repartez de la séance avec quatre éléments dans un répertoire, que vous pouvez lire, modifier, copier et sauvegarder avec les outils auxquels vous faites déjà confiance.",
     },
-    fileA: { en: "the rules · written in plain English", fr: "les règles · en langage courant" },
+    fileA: { en: "the rules · written in plain language", fr: "les règles · en langage courant" },
     fileB: { en: "the script · the work it does", fr: "le script · le travail effectué" },
     fileC: { en: "your data · the inputs", fr: "vos données · les entrées" },
     fileD: { en: "what gets produced", fr: "ce qui est produit" },
@@ -312,7 +312,7 @@ export const copy = {
       en: "Pythia processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. It finds every relevant file, and shows you exactly why it surfaced.",
       fr: "Pythia traite localement des fonds documentaires entiers : recherche sémantique, questions-réponses avec citations, chronologies interactives et OCR. Le système trouve chaque fichier pertinent et vous montre exactement pourquoi il ressort.",
     },
-    c1Title: { en: "Ask in plain English", fr: "Poser la question en langage courant" },
+    c1Title: { en: "Ask in plain language", fr: "Poser la question en langage courant" },
     c1Qual: { en: "Semantic search · Cited answers", fr: "Recherche sémantique · Réponses sourcées" },
     c1Body: {
       en: "Ask it the way you'd brief a junior. Every answer cites the source document and page number. No guessing, and no answer drawn from the model's own knowledge rather than your files.",

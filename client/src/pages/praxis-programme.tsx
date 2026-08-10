@@ -29,7 +29,7 @@ const sessions = [
   {
     n: "02",
     title: "The build loop, and capturing your know-how",
-    body: "Describe what you want and watch Claude Code build it. Then write down the rules your work follows, in plain English, so the tool applies them every single time. Build a real tool for your own work.",
+    body: "Describe what you want and watch Claude Code build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.",
   },
   {
     n: "03",
@@ -66,7 +66,7 @@ const sessions = [
 const faqs = [
   {
     q: "Do I need to know how to code?",
-    a: "No. You describe what you want in plain English. Claude Code writes the code. We use the time to make sure you understand what you are building and why.",
+    a: "No. You describe what you want in plain language. Claude Code writes the code. We use the time to make sure you understand what you are building and why.",
   },
   {
     q: "I have only ever used AI in a chat box. Is this for me?",
@@ -157,12 +157,12 @@ export default function PraxisProgramme() {
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The Praxis Programme")}</p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Build your own tools")}<br />{tr("with Claude Code.")}</h2>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain English, with someone sitting beside you who has done it before.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain language, with someone sitting beside you who has done it before.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("No coding background needed. By the end you will have built something you actually use, and you will know how to keep building on your own.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
             <a
               href="#get-started"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
             >{tr("Book an intro call →")}</a>
             <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>{tr("One-to-one or small group · Online or in person")}</span>
           </div>
@@ -240,7 +240,7 @@ export default function PraxisProgramme() {
           </div>
           <div className="pp-cols-2">
             {[
-              { body: "Build small working tools for your own work, by describing what you want in plain English." },
+              { body: "Build small working tools for your own work, by describing what you want in plain language." },
               { body: "Capture your own rules and judgement so a tool works the way you do, every time." },
               { body: "Understand what is safe, what it costs, and what it can and cannot do." },
               { body: "Hand a tool to a colleague or a developer cleanly, with no black box." },

@@ -92,16 +92,20 @@ export default function Praxis() {
           intro={<p>{t(copy.praxis.s3Body)}</p>}
         >
           <div className="grid md:grid-cols-2 gap-5 items-start">
-            <div className="bg-card border border-border rounded-2xl p-6 font-mono text-[13px] leading-relaxed overflow-x-auto">
-              <p className="text-muted-foreground mb-3">~/Praxis/folder/</p>
+            {/* The note wraps rather than scrolling: a horizontal scrollbar inside
+                a card hides content, and the French runs longer than the English. */}
+            <div className="bg-card border border-border rounded-2xl p-6 font-mono text-[13px] leading-relaxed">
+              <p className="text-muted-foreground mb-3 break-all">~/Praxis/folder/</p>
               {folder.map((f, i) => (
-                <div key={f.path} className="flex gap-2 text-foreground whitespace-nowrap">
-                  <span className="text-muted-foreground/50 select-none">
+                <div key={f.path} className="flex items-start gap-2 text-foreground mb-1 last:mb-0">
+                  <span className="shrink-0 text-muted-foreground/50 select-none">
                     {i === folder.length - 1 ? "└──" : "├──"}
                   </span>
-                  <span className="min-w-[7.5rem]">{f.path}</span>
-                  <span className="text-muted-foreground/70 hidden sm:inline">— {f.note}</span>
-                  {f.tag && <span className="ml-auto pl-3 text-primary/60">[{f.tag}]</span>}
+                  <span className="shrink-0">{f.path}</span>
+                  <span className="min-w-0 flex-1 text-muted-foreground/70 hidden sm:block break-words">
+                    — {f.note}
+                  </span>
+                  {f.tag && <span className="shrink-0 text-primary/60">[{f.tag}]</span>}
                 </div>
               ))}
             </div>

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { usePageTr } from "@/lib/page-fr";
+import { BECOME_A_TRAINER_FR } from "@/lib/fr/become-a-trainer";
 import { Header } from "@/components/layout/Layout";
 import { usePreferences } from "@/lib/preferences";
 import {
@@ -74,6 +76,7 @@ const faqs = [
 ];
 
 export default function BecomeATrainer() {
+  const tr = usePageTr(BECOME_A_TRAINER_FR);
   const { locale, currency } = usePreferences();
   const econ = trainerEconomics(currency, locale);
 
@@ -130,69 +133,44 @@ export default function BecomeATrainer() {
 
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>
-            Praxis Trainer Track
-          </p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>
-            Teach Praxis.<br />
-            Earn from it.
-          </h2>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
-            Four sessions on top of Praxis turn you from someone who can build into someone who can teach
-            it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition.
-          </p>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
-            You have been through Praxis. You can build working tools with Claude Code, and you have felt
-            how fast the people around you want the same thing.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Praxis Trainer Track")}</p>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Teach Praxis.")}<br />{tr("Earn from it.")}</h2>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("You have been through Praxis. You can build working tools with Claude Code, and you have felt how fast the people around you want the same thing.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
             <a
               href="#get-started"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
-            >
-              Book a call to start →
-            </a>
-            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
-              Prerequisite: completion of the Praxis programme
-            </span>
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
+            >{tr("Book a call to start →")}</a>
+            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>{tr("Prerequisite: completion of the Praxis programme")}</span>
           </div>
         </div>
 
         {/* Doc header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #1a1a1a", padding: "18px 0", marginBottom: 64 }}>
-          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>Praxis Trainer Track · Four Sessions · V1</span>
+          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>{tr("Praxis Trainer Track · Four Sessions · V1")}</span>
           <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>01 / 01</span>
         </div>
 
         {/* Tagline */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <p style={{ ...CAPS, fontSize: 10, letterSpacing: "0.28em", color: "#1a1a1a" }}>
-            T e a c h &nbsp;W h a t &nbsp;Y o u &nbsp;K n o w
-          </p>
+          <p style={{ ...CAPS, fontSize: 10, letterSpacing: "0.28em", color: "#1a1a1a" }}>{tr("T e a c h &nbsp;W h a t &nbsp;Y o u &nbsp;K n o w")}</p>
         </div>
 
         {/* Hero */}
         <div style={{ marginBottom: 28 }}>
-          <h1 style={{ ...ROBOTO, fontSize: "clamp(32px, 5.5vw, 56px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a" }}>
-            You built it.<br />
-            Now teach it.
-          </h1>
+          <h1 style={{ ...ROBOTO, fontSize: "clamp(32px, 5.5vw, 56px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a" }}>{tr("You built it.")}<br />{tr("Now teach it.")}</h1>
         </div>
 
         {/* Intro */}
         <div style={{ maxWidth: 620, marginBottom: 64 }}>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>
-            People keep asking you how you did it, and you have started explaining it without being asked.
-            This is how you turn that into an income: four more sessions, a readiness bar to clear, and then
-            you are teaching Praxis under the same name, with clients I find and organise with you, keeping
-            80% of everything you earn.
-          </p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("People keep asking you how you did it, and you have started explaining it without being asked. This is how you turn that into an income: four more sessions, a readiness bar to clear, and then you are teaching Praxis under the same name, with clients I find and organise with you, keeping 80% of everything you earn.")}</p>
         </div>
 
         {/* Section 01 - Who this is for */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>01 &nbsp;&nbsp;&nbsp; Who This Is For</span>
+            <span style={{ ...CAPS, fontSize: 10 }}>{tr("01 &nbsp;&nbsp;&nbsp; Who This Is For")}</span>
           </div>
           <div className="bt-cols-2">
             {[
@@ -202,8 +180,8 @@ export default function BecomeATrainer() {
               { label: "Plug in, not start from scratch", body: "You would rather plug into a method that works than invent one. The playbook, the materials, and the clients are already here." },
             ].map((item) => (
               <div key={item.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
-                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>{item.label}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>{tr(item.label)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(item.body)}</p>
               </div>
             ))}
           </div>
@@ -212,7 +190,7 @@ export default function BecomeATrainer() {
         {/* Section 02 - The deal */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>02 &nbsp;&nbsp;&nbsp; The Deal, in Plain Terms</span>
+            <span style={{ ...CAPS, fontSize: 10 }}>{tr("02 &nbsp;&nbsp;&nbsp; The Deal, in Plain Terms")}</span>
           </div>
           <div style={{ maxWidth: 700 }}>
             {[
@@ -227,8 +205,8 @@ export default function BecomeATrainer() {
                   {String(i + 1).padStart(2, "0")}
                 </div>
                 <div>
-                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 }}>{item.label}</p>
-                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 }}>{tr(item.label)}</p>
+                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(item.body)}</p>
                 </div>
               </div>
             ))}
@@ -238,17 +216,15 @@ export default function BecomeATrainer() {
         {/* Section 03 - The four sessions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>03 &nbsp;&nbsp;&nbsp; The Four Sessions</span>
+            <span style={{ ...CAPS, fontSize: 10 }}>{tr("03 &nbsp;&nbsp;&nbsp; The Four Sessions")}</span>
           </div>
-          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>
-            One session a week, at the standard Praxis rate. Each session has a specific job.
-          </p>
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("One session a week, at the standard Praxis rate. Each session has a specific job.")}</p>
           <div className="bt-sessions">
             {trainerSessions.map((s) => (
               <div key={s.n} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5", position: "relative" }}>
                 <span style={{ ...MONO, fontSize: 10, color: "#b0a898", position: "absolute", top: 16, right: 18 }}>{s.n}</span>
-                <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "#1a1a1a", marginBottom: 8, paddingRight: 24 }}>{s.title}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{s.body}</p>
+                <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "#1a1a1a", marginBottom: 8, paddingRight: 24 }}>{tr(s.title)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(s.body)}</p>
               </div>
             ))}
           </div>
@@ -257,7 +233,7 @@ export default function BecomeATrainer() {
         {/* Section 04 - What you get */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>04 &nbsp;&nbsp;&nbsp; What You Get</span>
+            <span style={{ ...CAPS, fontSize: 10 }}>{tr("04 &nbsp;&nbsp;&nbsp; What You Get")}</span>
           </div>
           <div className="bt-cols-2">
             {[
@@ -268,8 +244,8 @@ export default function BecomeATrainer() {
               { label: "A network", body: "Other trainers doing the same thing, sharing what works." },
             ].map((item) => (
               <div key={item.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
-                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>{item.label}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>{tr(item.label)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(item.body)}</p>
               </div>
             ))}
           </div>
@@ -278,7 +254,7 @@ export default function BecomeATrainer() {
         {/* Section 05 - Pricing & earnings */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>05 &nbsp;&nbsp;&nbsp; What It Costs, and What You Earn</span>
+            <span style={{ ...CAPS, fontSize: 10 }}>{tr("05 &nbsp;&nbsp;&nbsp; What It Costs, and What You Earn")}</span>
           </div>
 
           {/* Cost cards */}
@@ -307,13 +283,11 @@ export default function BecomeATrainer() {
                 }}
               >
                 {p.highlight && (
-                  <span style={{ ...CAPS, fontSize: 8, color: "#d97706", letterSpacing: "0.12em", position: "absolute", top: -9, left: 16, background: "#fdf6ec", padding: "0 6px" }}>
-                    Total to qualify
-                  </span>
+                  <span style={{ ...CAPS, fontSize: 8, color: "#d97706", letterSpacing: "0.12em", position: "absolute", top: -9, left: 16, background: "#fdf6ec", padding: "0 6px" }}>{tr("Total to qualify")}</span>
                 )}
-                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{p.label}</p>
+                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{tr(p.label)}</p>
                 <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-1px" }}>{p.price}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{tr(p.note)}</p>
               </div>
             ))}
           </div>
@@ -338,20 +312,20 @@ export default function BecomeATrainer() {
                     background: row.bold ? "#fdf6ec" : undefined,
                   }}
                 >
-                  <p style={{ ...INTER, fontSize: 12, color: "#5a5248", margin: 0, fontWeight: row.bold ? 600 : 400 }}>{row.label}</p>
+                  <p style={{ ...INTER, fontSize: 12, color: "#5a5248", margin: 0, fontWeight: row.bold ? 600 : 400 }}>{tr(row.label)}</p>
                   <p style={{ ...ROBOTO, fontSize: row.bold ? 16 : 13, fontWeight: row.bold ? 800 : 400, color: "#1a1a1a", margin: 0 }}>You keep {row.you}</p>
                   <p style={{ ...INTER, fontSize: 12, color: "#a8a092", margin: 0 }}>I keep {row.daniel}</p>
                 </div>
               ))}
               <div style={{ padding: "12px 20px" }}>
-                <p style={{ ...INTER, fontSize: 11, color: "#7a7568", margin: 0 }}>80% yours / 20% mine, on every course you teach.</p>
+                <p style={{ ...INTER, fontSize: 11, color: "#7a7568", margin: 0 }}>{tr("80% yours / 20% mine, on every course you teach.")}</p>
               </div>
             </div>
           </div>
 
           {/* Illustration */}
           <div style={{ padding: "20px 24px", background: "#f0ece6", borderRadius: 8, maxWidth: 600 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>An illustration, not a promise</p>
+            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>{tr("An illustration, not a promise")}</p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>
               Teach {EXAMPLE_STUDENTS} students through a full course over a year and that is{" "}
               {econ.yearTuition} of tuition.{" "}
@@ -365,33 +339,20 @@ export default function BecomeATrainer() {
         {/* Section 06 - The bar */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>06 &nbsp;&nbsp;&nbsp; The Bar, and Why It Is There</span>
+            <span style={{ ...CAPS, fontSize: 10 }}>{tr("06 &nbsp;&nbsp;&nbsp; The Bar, and Why It Is There")}</span>
           </div>
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "32px 28px", background: "#faf8f5", maxWidth: 620 }}>
-            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>
-              One standard, not a quiz.
-            </p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>
-              You will carry the Praxis name, so there is a standard to clear before you teach anyone for money.
-              It is a demonstration: one real session, or a full mock if no client is ready yet, with me watching,
-              then an honest conversation about what worked and what did not.
-            </p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>
-              This protects you as much as the brand. A trainer who is rushed out before they are ready loses
-              their first clients and their confidence. We would rather get you genuinely ready.
-            </p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248", fontStyle: "italic" }}>
-              To be straight about it: this is Praxis confirming you can teach Praxis to our standard.
-              It is not an accredited qualification from an exam board, and we do not pretend otherwise.
-              The honesty is the point, and it is exactly why clients trust the people who carry our name.
-            </p>
+            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>{tr("One standard, not a quiz.")}</p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>{tr("You will carry the Praxis name, so there is a standard to clear before you teach anyone for money. It is a demonstration: one real session, or a full mock if no client is ready yet, with me watching, then an honest conversation about what worked and what did not.")}</p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>{tr("This protects you as much as the brand. A trainer who is rushed out before they are ready loses their first clients and their confidence. We would rather get you genuinely ready.")}</p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248", fontStyle: "italic" }}>{tr("To be straight about it: this is Praxis confirming you can teach Praxis to our standard. It is not an accredited qualification from an exam board, and we do not pretend otherwise. The honesty is the point, and it is exactly why clients trust the people who carry our name.")}</p>
           </div>
         </div>
 
         {/* Section 07 - Common questions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>07 &nbsp;&nbsp;&nbsp; Common Questions</span>
+            <span style={{ ...CAPS, fontSize: 10 }}>{tr("07 &nbsp;&nbsp;&nbsp; Common Questions")}</span>
           </div>
           <div style={{ maxWidth: 680 }}>
             {faqs.map((faq, i) => (
@@ -408,11 +369,11 @@ export default function BecomeATrainer() {
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   style={{ padding: "18px 0", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}
                 >
-                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0, textAlign: "left" }}>{faq.q}</p>
+                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0, textAlign: "left" }}>{tr(faq.q)}</p>
                   <span style={{ ...MONO, fontSize: 14, color: "#a8a092", flexShrink: 0 }}>{openFaq === i ? "−" : "+"}</span>
                 </button>
                 {openFaq === i && (
-                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d", paddingBottom: 4 }}>{faq.a}</p>
+                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d", paddingBottom: 4 }}>{tr(faq.a)}</p>
                 )}
               </div>
             ))}
@@ -421,60 +382,54 @@ export default function BecomeATrainer() {
 
         {/* Get started */}
         <div id="get-started" style={{ marginTop: 64, borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 48px)" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>Get started</p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>
-            Tell me who is already asking you for help.
-          </h2>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "rgba(246,241,234,0.65)", marginBottom: 32, maxWidth: 480 }}>
-            We will map your path to teaching. The first step is a short call.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Get started")}</p>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>{tr("Tell me who is already asking you for help.")}</h2>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "rgba(246,241,234,0.65)", marginBottom: 32, maxWidth: 480 }}>{tr("We will map your path to teaching. The first step is a short call.")}</p>
 
           {formState === "sent" ? (
             <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "28px 24px", textAlign: "center" }}>
-              <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>Done - we'll be in touch.</p>
-              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>Expect a reply within one working day.</p>
+              <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>{tr("Done - we'll be in touch.")}</p>
+              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>{tr("Expect a reply within one working day.")}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "24px" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
                 <div>
-                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>Name</label>
+                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("Name")}</label>
                   <input
                     className="bt-input"
                     style={INPUT}
                     required
-                    placeholder="Jane Smith"
-                    value={form.name}
+                    placeholder={tr("Jane Smith")}
+                    value={tr(form.name)}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   />
                 </div>
                 <div>
-                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>Email</label>
+                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("Email")}</label>
                   <input
                     className="bt-input"
                     type="email"
                     style={INPUT}
                     required
-                    placeholder="jane@company.com"
+                    placeholder={tr("jane@company.com")}
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   />
                 </div>
               </div>
               <div style={{ marginBottom: 20 }}>
-                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>Who is already asking you for help?</label>
+                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("Who is already asking you for help?")}</label>
                 <textarea
                   className="bt-input"
                   style={{ ...INPUT, resize: "vertical", minHeight: 80 }}
-                  placeholder="e.g. Three colleagues who saw what I built and want to learn. A few clients who keep asking about AI tools..."
+                  placeholder={tr("e.g. Three colleagues who saw what I built and want to learn. A few clients who keep asking about AI tools...")}
                   value={form.context}
                   onChange={e => setForm(f => ({ ...f, context: e.target.value }))}
                 />
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-                <p style={{ ...INTER, fontSize: 11, color: "rgba(246,241,234,0.3)", maxWidth: 340 }}>
-                  No marketing. Your details are used only to prepare for and respond to your enquiry.
-                </p>
+                <p style={{ ...INTER, fontSize: 11, color: "rgba(246,241,234,0.3)", maxWidth: 340 }}>{tr("No marketing. Your details are used only to prepare for and respond to your enquiry.")}</p>
                 <button
                   type="submit"
                   disabled={formState === "sending"}
@@ -484,32 +439,25 @@ export default function BecomeATrainer() {
                 </button>
               </div>
               {formState === "error" && (
-                <p style={{ ...INTER, fontSize: 12, color: "#f87171", marginTop: 10 }}>Something went wrong - please try again or email daniel@tutto.one</p>
+                <p style={{ ...INTER, fontSize: 12, color: "#f87171", marginTop: 10 }}>{tr("Something went wrong - please try again or email daniel@tutto.one")}</p>
               )}
             </form>
           )}
 
-          <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.35)", marginTop: 20 }}>
-            Or email directly: daniel@tutto.one
-          </p>
+          <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.35)", marginTop: 20 }}>{tr("Or email directly: daniel@tutto.one")}</p>
         </div>
 
         {/* Closing note */}
         <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>On what this is not</p>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", maxWidth: 620, fontStyle: "italic" }}>
-            It is not a franchise, and it is not a passive income scheme.
-          </p>
-          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>
-            You will do real work with real people. What it gives you is the method, the materials, the clients organised alongside you,
-            and a hub that handles what you cannot. That is a more useful foundation than building from scratch, and it is exactly what it says it is.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>{tr("On what this is not")}</p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", maxWidth: 620, fontStyle: "italic" }}>{tr("It is not a franchise, and it is not a passive income scheme.")}</p>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>{tr("You will do real work with real people. What it gives you is the method, the materials, the clients organised alongside you, and a hub that handles what you cannot. That is a more useful foundation than building from scratch, and it is exactly what it says it is.")}</p>
         </div>
 
         {/* Doc footer */}
         <div className="bt-footer-bar">
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Praxis Trainer Track · tutto.one/become-a-trainer</span>
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Four sessions · 80 / 20</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Praxis Trainer Track · tutto.one/become-a-trainer")}</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Four sessions · 80 / 20")}</span>
         </div>
 
       </div>

@@ -240,7 +240,7 @@ function FileTag({ label }: { label: string }) {
     <div style={{
       ...INTER, fontSize: 11, color: TEXT, background: "#ede8e1",
       border: `1px solid ${BORDER}`, borderRadius: 6,
-      padding: "5px 10px", whiteSpace: "nowrap"
+      padding: "5px 10px"
     }}>{tr(label)}</div>
   );
 }
