@@ -93,23 +93,6 @@ export const copy = {
       fr: "Des systèmes que nous avons conçus et construits — du concept à la production.",
     },
     badgeClientEngagement: { en: "Client Engagement", fr: "Mission client" },
-    deeperTitle: { en: "Go deeper", fr: "Aller plus loin" },
-    deeperBody: {
-      en: "Detailed write-ups of the systems above, and the thinking behind them.",
-      fr: "Des présentations détaillées des systèmes ci-dessus, et du raisonnement qui les sous-tend.",
-    },
-    legalragBlurb: {
-      en: "On-premise document intelligence for legal teams. Nothing leaves the building.",
-      fr: "Intelligence documentaire sur site pour les équipes juridiques. Rien ne quitte le bâtiment.",
-    },
-    gtmBlurb: {
-      en: "A sales outreach engine that researches, writes and sends — on your own hardware.",
-      fr: "Un moteur de prospection qui étudie, rédige et envoie — sur votre propre matériel.",
-    },
-    sharepointBlurb: {
-      en: "A free, open-source bridge that gives Claude direct access to SharePoint.",
-      fr: "Une passerelle gratuite et open source qui donne à Claude un accès direct à SharePoint.",
-    },
     exampleConversations: { en: "Example conversations", fr: "Exemples d'échanges" },
     prevShot: { en: "Previous screenshot", fr: "Capture précédente" },
     nextShot: { en: "Next screenshot", fr: "Capture suivante" },

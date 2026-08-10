@@ -74,7 +74,7 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
     badge: "Mission client",
     description:
       "Nous avons construit une passerelle MCP (Model Context Protocol) qui donne à Claude un accès direct à l'environnement SharePoint et aux flux Power Automate d'un client. Au lieu de copier-coller des données dans une conversation, l'équipe peut demander à l'IA d'interroger, de créer et de mettre à jour des enregistrements SharePoint — et de diagnostiquer les automatisations défaillantes — en langage naturel.",
-    urlLabel: "Qu'est-ce que le MCP ?",
+    urlLabel: "En savoir plus sur la passerelle SharePoint",
     capabilities: {
       "SharePoint Lists & Structure": {
         title: "Listes et structure SharePoint",
@@ -126,5 +126,47 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
     description:
       "Un tableau de bord de conseil pour suivre le retour sur investissement de l'adoption de l'IA, les indicateurs d'usage, les jalons de projet et les économies réalisées. Il aide les équipes à mesurer l'impact réel de l'automatisation.",
     screenshotLabels: ["Tableau de bord ROI", "Suivi de l'usage de l'IA", "Projets"],
+  },
+
+  GTM: {
+    tagline: "Moteur de prospection commerciale · Sur site",
+    badge: "Mission client",
+    description:
+      "Un système sur mesure qui mène la prospection B2B de bout en bout. Il étudie les prospects, rédige des courriels personnalisés dans la voix de l'expéditeur, planifie et envoie en toute sûreté, et fait avancer chaque compte — l'humain relisant plutôt que ressaisissant. Il tourne sur un NVIDIA DGX Spark, et non sur du cloud loué.",
+    urlLabel: "En savoir plus sur GTM",
+    capabilities: {
+      "Researches every prospect": {
+        title: "Étudie chaque prospect",
+        detail:
+          "Profile chaque entreprise et chaque contact, puis rédige un dossier structuré assorti d'une accroche personnalisée. 6 675 prospects profilés dans 9 pays.",
+      },
+      "Writes in the sender's voice": {
+        title: "Écrit avec la voix de l'expéditeur",
+        detail:
+          "Des contrôles éditoriaux automatisés vérifient la forme, les faits et la correspondance de ton, et suppriment les marqueurs qui font supprimer un courriel de prospection. Tout ce qui échoue est retenu.",
+      },
+      "Sends safely and on schedule": {
+        title: "Envoie en toute sûreté, au bon moment",
+        detail:
+          "Des clés d'idempotence et des garde-fous à sécurité positive garantissent qu'aucun message ne part deux fois ni ne boucle. Chaque envoi est journalisé et auditable.",
+      },
+      "Local by default": {
+        title: "Local par défaut",
+        detail:
+          "Des modèles à poids ouverts, sur la machine, assurent l'essentiel du travail. Un modèle de pointe n'est appelé qu'au travers d'une frontière unique et auditable, les éléments identifiants restant sur place.",
+      },
+    },
+    conversations: {
+      "Which accounts have gone quiet in the last three weeks?": {
+        user: "Quels comptes sont restés silencieux ces trois dernières semaines ?",
+        assistant:
+          "12 comptes sans contact entrant depuis le 20 juillet. Les plus importants : SSAB (renouvellement de licence, 3e trimestre), Eidsiva (pilote cadré le 2 juillet). Relances rédigées, prêtes à relecture.",
+      },
+      "Draft the follow-up for SSAB in my voice": {
+        user: "Rédige la relance pour SSAB dans ma voix",
+        assistant:
+          "Brouillon prêt. Contrôles de forme, de faits et de ton validés. Une affirmation retenue pour relecture : la date de renouvellement provient du CRM, mise à jour le 14 juillet.",
+      },
+    },
   },
 };

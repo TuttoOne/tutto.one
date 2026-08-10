@@ -95,8 +95,8 @@ export const portfolioEntries: PortfolioEntry[] = [
     badge: "Client Engagement",
     description:
       "We built an MCP (Model Context Protocol) bridge that gives Claude direct access to a client's SharePoint environment and Power Automate flows. Instead of copy-pasting data into a chat, the team can ask AI to query, create, and update SharePoint records - and diagnose broken automations - through natural conversation.",
-    url: "https://modelcontextprotocol.io",
-    urlLabel: "What is MCP?",
+    url: "/sharepoint",
+    urlLabel: "About the SharePoint Bridge",
     capabilities: [
       {
         title: "SharePoint Lists & Structure",
@@ -127,6 +127,44 @@ export const portfolioEntries: PortfolioEntry[] = [
       {
         user: "Show me the last 5 failed Power Automate runs on 'Invoice Sync'",
         assistant: "Found 5 failed runs. Most recent error: 'Connection timeout to Xero API' - occurred 3 times in the last 24 hours.",
+      },
+    ],
+  },
+  {
+    type: "project",
+    name: "GTM",
+    tagline: "Sales Outreach Engine · On-Premise",
+    badge: "Client Engagement",
+    description:
+      "A custom system that runs B2B prospecting end to end. It researches prospects, writes personalised emails in the sender's voice, schedules and sends safely, and keeps every account moving - with a human reviewing rather than retyping. It runs on an NVIDIA DGX Spark, not rented cloud.",
+    url: "/gtm-orchestrator",
+    urlLabel: "About GTM",
+    capabilities: [
+      {
+        title: "Researches every prospect",
+        detail: "Profiles each company and contact, then writes a structured dossier with a personalisation hook. 6,675 prospects profiled across 9 countries.",
+      },
+      {
+        title: "Writes in the sender's voice",
+        detail: "Automated editorial gates check mechanics, facts and voice-match, and strip the tells that get cold email deleted. Anything that fails is held back.",
+      },
+      {
+        title: "Sends safely and on schedule",
+        detail: "Idempotency keys and fail-closed guards mean nothing double-sends or loops. Every send is logged and auditable.",
+      },
+      {
+        title: "Local by default",
+        detail: "Open-weight models on-device do the bulk of the work. A frontier model is called only across a single auditable boundary, with identifying detail held back.",
+      },
+    ],
+    conversations: [
+      {
+        user: "Which accounts have gone quiet in the last three weeks?",
+        assistant: "12 accounts with no inbound since 20 Jul. Highest value: SSAB (licence renewal, Q3), Eidsiva (pilot scoped 2 Jul). Follow-ups drafted for review.",
+      },
+      {
+        user: "Draft the follow-up for SSAB in my voice",
+        assistant: "Draft ready. Passed mechanics, fact-check and voice-match. Held one claim for review: renewal date cited from CRM, last updated 14 Jul.",
       },
     ],
   },
