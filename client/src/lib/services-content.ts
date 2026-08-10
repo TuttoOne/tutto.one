@@ -33,6 +33,13 @@ export interface ServiceItem {
   priceLabel?: { en: string; fr: string };
   /** Extra terms shown under the price, e.g. the referral scheme. */
   note?: { en: string; fr: string };
+  /**
+   * Where the card's button goes. Defaults to the contact form, but a service
+   * with a page of its own should send the reader there instead — someone
+   * weighing up training wants to see what it involves before enquiring.
+   */
+  href?: string;
+  ctaLabel?: { en: string; fr: string };
 }
 
 export const STARTS_AT = { en: "Starts at", fr: "À partir de" };
@@ -115,5 +122,7 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
     },
     priceKey: "enablementFrom",
     pricePrefix: STARTS_AT,
+    href: "/praxis-programme",
+    ctaLabel: { en: "See the programme", fr: "Voir le programme" },
   },
 ];

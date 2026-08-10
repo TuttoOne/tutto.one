@@ -81,7 +81,9 @@ export default function Services() {
                   variant={index === 1 ? "default" : "outline"}
                   asChild
                 >
-                  <Link href="/contact">{t(copy.services.inquire)}</Link>
+                  <Link href={service.href ?? "/contact"}>
+                    {service.ctaLabel ? pick(service.ctaLabel, locale) : t(copy.services.inquire)}
+                  </Link>
                 </Button>
               </div>
             </div>
