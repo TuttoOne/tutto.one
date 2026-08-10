@@ -355,6 +355,15 @@ export const copy = {
       en: "Corpus readiness across a 234,000-document estate — what is ingested, embedded, classified and summarised, and what is not yet.",
       fr: "État de préparation du corpus sur un fonds de 234 000 documents : ce qui est intégré, vectorisé, classé et résumé — et ce qui ne l'est pas encore.",
     },
+    fitLabel: { en: "Where it fits", fr: "À qui cela s'adresse" },
+    fitBody: {
+      en: "Pythia suits anything legal, regulatory or commercially sensitive that cannot be sent to a cloud service or a US-hosted model — privileged material, regulated records, contractual or export-controlled data. The constraint is the same wherever it comes from: the documents cannot leave. Everything runs on hardware you control.",
+      fr: "Pythia convient à tout ce qui relève du juridique, du réglementaire ou du secret des affaires et ne peut être transmis à un service en cloud ou à un modèle hébergé aux États-Unis : pièces couvertes par le secret professionnel, données réglementées, informations contractuelles ou sous contrôle export. La contrainte est la même quelle qu'en soit l'origine : les documents ne peuvent pas sortir. Tout s'exécute sur du matériel que vous maîtrisez.",
+    },
+    languageNote: {
+      en: "We work in French as well as English. The screen above is the French interface; engagements, sessions and written work are delivered in either language.",
+      fr: "Nous travaillons en français comme en anglais. L'écran ci-dessus montre l'interface française ; les missions, les séances et les livrables écrits sont assurés dans l'une ou l'autre langue.",
+    },
     shot4: {
       en: "The knowledge map, built on Atelier Vallon — a fictional workshop made for demonstration, so no client document is ever used. Documents rarely cite each other; they connect through an instrument, a part, a person, a procedure.",
       fr: "La carte des connaissances, sur l'Atelier Vallon — un atelier fictif conçu pour la démonstration, afin qu'aucun document de client ne soit jamais utilisé. Les documents ne se citent pas entre eux : ils se rejoignent par un instrument, une pièce, une personne, une procédure.",

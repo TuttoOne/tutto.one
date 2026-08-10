@@ -177,6 +177,10 @@ export default function Pythia() {
               </figure>
             ))}
           </div>
+
+          <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-2xl">
+            {t(copy.pythia.languageNote)}
+          </p>
         </Section>
 
         <Section
@@ -218,7 +222,15 @@ export default function Pythia() {
           </CardGrid>
         </Section>
 
-        <Section index="05" label={t(copy.pythia.s4Label)} intro={<p>{t(copy.pythia.s4Body)}</p>}>
+        <Section index="05" label={t(copy.pythia.fitLabel)}>
+          <div className="bg-secondary/30 border border-border rounded-2xl p-8">
+            <p className="font-serif text-lg text-foreground leading-relaxed max-w-3xl">
+              {t(copy.pythia.fitBody)}
+            </p>
+          </div>
+        </Section>
+
+        <Section index="06" label={t(copy.pythia.s4Label)} intro={<p>{t(copy.pythia.s4Body)}</p>}>
           <CardGrid cols={3}>
             <PriceRow title={t(copy.pythia.e1Title)} price={p("sprint")}>
               {t(copy.pythia.e1Body)}
