@@ -157,10 +157,10 @@ export default function Pythia() {
         >
           <div className="space-y-8">
             {[
-              { src: "/pythia/orchestrator.webp", caption: t(copy.pythia.shot1) },
-              { src: "/pythia/dashboard.webp", caption: t(copy.pythia.shot2) },
-              { src: "/pythia/disclosure-audit.webp", caption: t(copy.pythia.shot3) },
-              { src: "/pythia/knowledge-map.webp", caption: t(copy.pythia.shot4) },
+              { src: "/pythia-shots/orchestrator.webp", caption: t(copy.pythia.shot1) },
+              { src: "/pythia-shots/dashboard.webp", caption: t(copy.pythia.shot2) },
+              { src: "/pythia-shots/disclosure-audit.webp", caption: t(copy.pythia.shot3) },
+              { src: "/pythia-shots/knowledge-map.webp", caption: t(copy.pythia.shot4) },
             ].map((shot) => (
               <figure key={shot.src}>
                 <img
@@ -183,7 +183,7 @@ export default function Pythia() {
           </p>
 
           <a
-            href="https://pythia-demo.tutto.one/"
+            href="/pythia-demo/"
             target="_blank"
             rel="noopener noreferrer"
             className="group mt-8 flex items-center justify-between gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
