@@ -1,0 +1,635 @@
+/* Three screens, one stylesheet, no external anything.
+ *
+ * Plain and dense on purpose. The audience is a French quality manager and a rural
+ * development officer, on a projector, possibly on a laptop screen in a room with the blinds
+ * open. Legibility beats atmosphere.
+ */
+
+:root {
+  --ink: #16181d;
+  --ink-soft: #565b66;
+  --line: #d8dade;
+  --line-soft: #ebecef;
+  --bg: #ffffff;
+  --bg-soft: #f6f7f8;
+  --accent: #1f3a68;
+  --bad: #8a1c26;
+  --warn: #8a5a00;
+  --good: #1c5c2e;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .07), 0 8px 24px rgba(0, 0, 0, .07);
+}
+
+* { box-sizing: border-box; }
+
+/* The HTML `hidden` attribute is applied by the browser's own stylesheet as
+ * [hidden] { display: none }, which any class selector that sets `display` beats on
+ * specificity. `.viewer` sets display:flex, so the document overlay rendered on page load and
+ * greyed out the entire app — every tab and every row still there underneath, none of them
+ * clickable. Anything toggled by `hidden` in this file needs this to hold. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font: 14px/1.5 "DejaVu Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* ---------------------------------------------------------------- banner */
+
+.banner {
+  background: #fff5d6;
+  border-bottom: 1px solid #e6d9a8;
+  padding: 8px 20px;
+  font-size: 12.5px;
+  color: #5a4a12;
+}
+
+/* ---------------------------------------------------------------- topbar */
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 14px 20px 0 20px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.brand .mark {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+
+.brand .sub { font-size: 12px; color: var(--ink-soft); }
+
+.tabs { display: flex; gap: 2px; }
+
+.tabs button {
+  appearance: none;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  background: var(--bg-soft);
+  color: var(--ink-soft);
+  padding: 9px 16px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  top: 1px;
+}
+
+.tabs button.active {
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom: 1px solid var(--bg);
+}
+
+/* ---------------------------------------------------------------- views */
+
+main { padding: 20px; }
+.view { display: none; }
+.view.active { display: block; }
+
+.viewhead { margin-bottom: 16px; max-width: 74ch; }
+.viewhead h1 { font-size: 20px; margin: 0 0 4px 0; }
+.viewhead p { margin: 0; color: var(--ink-soft); font-size: 13px; }
+
+h2.sectiontitle {
+  font-size: 15px;
+  margin: 28px 0 10px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.small { font-size: 12px; color: var(--ink-soft); }
+
+/* ---------------------------------------------------------------- filters */
+
+.filters {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.filters input[type=search] {
+  flex: 1 1 300px;
+  min-width: 220px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font: inherit;
+  font-size: 13px;
+}
+
+.filters select {
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font: inherit;
+  font-size: 13px;
+  background: var(--bg);
+}
+
+.count { font-size: 12px; color: var(--ink-soft); margin-left: auto; white-space: nowrap; }
+
+/* ---------------------------------------------------------------- tables */
+
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 3px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+
+th {
+  text-align: left;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: var(--ink-soft);
+  background: var(--bg-soft);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+th.num, td.num { text-align: right; }
+
+td { padding: 7px 10px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+
+tbody tr:hover { background: #f2f6fd; }
+tbody tr.clickable { cursor: pointer; }
+tbody tr.unreadable td { color: var(--ink-soft); }
+
+td.file { font-family: "DejaVu Sans Mono", ui-monospace, monospace; font-size: 11.5px; }
+td.folder { color: var(--ink-soft); font-size: 11.5px; }
+
+.tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 9px;
+  font-size: 11px;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  white-space: nowrap;
+}
+
+.tag.bad { color: var(--bad); border-color: #e0b8bc; background: #fdf3f4; }
+.tag.good { color: var(--good); border-color: #b8d8c1; background: #f2f9f4; }
+.tag.warn { color: var(--warn); border-color: #e2cc9a; background: #fdf8ec; }
+.tag.muted { color: var(--ink-soft); }
+
+/* ---------------------------------------------------------------- run screen */
+
+.controls { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+
+.controls button, .speeds button {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 12.5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.controls button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.speeds { font-size: 12px; color: var(--ink-soft); display: flex; gap: 3px; align-items: center; }
+.speeds button { padding: 4px 9px; font-size: 11.5px; }
+.speeds button.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.clock { margin-left: auto; font-family: "DejaVu Sans Mono", monospace; font-size: 13px; color: var(--ink-soft); }
+
+.progress { height: 4px; background: var(--line-soft); border-radius: 2px; overflow: hidden; margin-bottom: 16px; }
+#bar { height: 100%; width: 0; background: var(--accent); transition: width .12s linear; }
+
+.runcols { display: grid; grid-template-columns: minmax(220px, 1fr) 1.3fr 1.3fr; gap: 18px; }
+@media (max-width: 900px) { .runcols { grid-template-columns: 1fr; } }
+
+.runcol h2 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--ink-soft);
+  margin: 0 0 6px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.runcol h2 + h2 { margin-top: 18px; }
+
+.stage { font-size: 13px; padding: 8px 10px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 3px; }
+
+.tally { font-size: 12px; }
+.tally td { padding: 3px 6px; border-bottom: 1px solid var(--line-soft); }
+.tally td.num { font-family: "DejaVu Sans Mono", monospace; width: 3.5em; }
+
+.ticker {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 340px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--bg-soft);
+  font-size: 11.5px;
+  font-family: "DejaVu Sans Mono", monospace;
+}
+
+.ticker li { padding: 3px 8px; border-bottom: 1px solid var(--line-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ticker li .cls { color: var(--accent); }
+.ticker.exceptions li { color: var(--bad); }
+.ticker.exceptions li .why { color: var(--ink-soft); }
+
+.pill { background: var(--bad); color: #fff; border-radius: 9px; padding: 0 7px; font-size: 11px; font-family: "DejaVu Sans Mono", monospace; }
+
+/* ---------------------------------------------------------------- finding screen */
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 16px; }
+
+.kpis div { border: 1px solid var(--line); border-radius: 3px; padding: 10px 12px; }
+.kpis .n { display: block; font-size: 22px; font-weight: 700; line-height: 1.1; }
+.kpis .l { font-size: 10.5px; text-transform: uppercase; letter-spacing: .3px; color: var(--ink-soft); }
+.kpis div.alert { border-color: #e0b8bc; background: #fdf3f4; }
+.kpis div.alert .n { color: var(--bad); }
+
+.disclaimer {
+  border-left: 3px solid var(--ink);
+  padding: 8px 0 8px 12px;
+  font-size: 12.5px;
+  color: var(--ink);
+  background: var(--bg-soft);
+  margin-bottom: 8px;
+}
+
+.finding { border: 1px solid var(--line); border-left: 3px solid var(--bad); border-radius: 3px; padding: 12px 14px; margin-bottom: 12px; }
+.finding .clause { font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--bad); }
+.finding h3 { font-size: 14.5px; margin: 3px 0 6px 0; }
+.finding p { margin: 0 0 6px 0; font-size: 13px; }
+.finding .missing { color: var(--ink-soft); }
+.finding .cites { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line-soft); }
+.finding .cites .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .4px; color: var(--ink-soft); }
+.finding .cites ul { list-style: none; margin: 4px 0 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 5px; }
+
+.cite {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  padding: 3px 9px;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+  text-align: left;
+  max-width: 100%;
+}
+
+.cite:hover { background: #eaf0fb; border-color: var(--accent); }
+.cite .pg { color: var(--ink-soft); }
+.cite.pageonly { border-style: dashed; }
+.morecites { font-size: 11.5px; color: var(--ink-soft); align-self: center; }
+
+/* ---------------------------------------------------------------- viewer */
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 24, 29, .82);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewerbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.vtitle strong { font-family: "DejaVu Sans Mono", monospace; font-size: 13px; }
+.vtitle .small { display: block; }
+.vnav { display: flex; gap: 6px; align-items: center; font-size: 12px; }
+
+.vnav button {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 5px 11px;
+  font: inherit;
+  font-size: 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.vnav button.close { background: var(--ink); border-color: var(--ink); color: #fff; }
+.vnav button:disabled { opacity: .4; cursor: default; }
+
+.viewerbody { flex: 1; overflow: auto; padding: 20px; display: flex; justify-content: center; align-items: flex-start; }
+
+.pagestage { position: relative; display: inline-block; box-shadow: var(--shadow); background: #fff; }
+.pagestage img { display: block; max-width: min(920px, 100%); height: auto; }
+
+/* The highlight. Placed from the pipeline's own rectangle, scaled from PDF points to the
+   rendered image. Two rings so it reads on both dark print and pale scans. */
+.highlight {
+  position: absolute;
+  border: 2px solid #d4a017;
+  background: rgba(255, 214, 64, .28);
+  box-shadow: 0 0 0 3px rgba(255, 214, 64, .3);
+  border-radius: 2px;
+  pointer-events: none;
+  animation: pulse 1.6s ease-out 2;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 3px rgba(255, 214, 64, .0); }
+  40% { box-shadow: 0 0 0 9px rgba(255, 214, 64, .45); }
+  100% { box-shadow: 0 0 0 3px rgba(255, 214, 64, .3); }
+}
+
+.viewernote {
+  max-width: 460px;
+  margin: 40px auto;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warn);
+  border-radius: 3px;
+  padding: 16px 18px;
+  font-size: 13px;
+}
+
+.viewernote h3 { margin: 0 0 6px 0; font-size: 14px; }
+.viewernote p { margin: 0 0 6px 0; }
+
+/* What the checks could not examine. Same weight as a finding, because it is the boundary of
+   the coverage figures above it. */
+.limits { list-style: none; margin: 0 0 6px 0; padding: 0; }
+.limits li {
+  border-left: 3px solid var(--warn);
+  background: #fdf8ec;
+  padding: 7px 12px;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  border-radius: 0 3px 3px 0;
+}
+
+/* ---------------------------------------------------------------- the map
+ *
+ * Coordinates come from the pipeline, computed once at build time (pipeline/relations.py).
+ * Nothing is simulated in the browser: the map is identical every time it is opened, which
+ * matters when you have rehearsed saying "the cluster on the left".
+ */
+
+.mapbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.mapbar input[type=search] { flex: 1 1 260px; min-width: 200px; padding: 6px 10px;
+  border: 1px solid var(--line); border-radius: 3px; font: inherit; font-size: 12.5px; }
+.mapbar select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 3px;
+  font: inherit; font-size: 12.5px; background: var(--bg); }
+.mapbar button { appearance: none; border: 1px solid var(--line); background: var(--bg);
+  padding: 6px 12px; font: inherit; font-size: 12.5px; border-radius: 3px; cursor: pointer; }
+
+.switch { font-size: 12.5px; color: var(--ink-soft); display: flex; align-items: center; gap: 5px;
+  white-space: nowrap; cursor: pointer; }
+
+.mapwrap {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #fcfcfd;
+  overflow: hidden;
+  height: min(72vh, 760px);
+}
+
+#map { display: block; width: 100%; height: 100%; cursor: grab; }
+#map.dragging { cursor: grabbing; }
+
+/* Edges. Thin and pale by default so the nodes carry the picture; a finding's path is the
+   only thing allowed to be loud. */
+#map .edge { stroke: #c9ccd2; stroke-width: 0.7; fill: none; }
+#map .edge.finding { stroke: #b3323f; stroke-width: 1.6; }
+#map .edge.dim { stroke: #e8e9ec; }
+#map .edge.hot { stroke: var(--accent); stroke-width: 1.8; }
+
+#map .node { cursor: pointer; }
+#map .node circle, #map .node polygon, #map .node rect { stroke: #fff; stroke-width: 1; }
+#map .node.dim { opacity: 0.14; }
+#map .node.hot circle, #map .node.hot polygon { stroke: var(--ink); stroke-width: 2; }
+
+#map .n-doc { fill: #9aa3b0; }
+#map .n-instrument { fill: #1f3a68; }
+#map .n-part { fill: #0f6b5c; }
+#map .n-person { fill: #7a4b12; }
+#map .n-supplier { fill: #5b2a72; }
+#map .n-procedure { fill: #2f6da8; }
+#map .n-heat { fill: #8a8f98; }
+#map .n-finding { fill: #b3323f; }
+#map .n-isolated { fill: #d9dbe0; }
+
+#map .label { font: 10px "DejaVu Sans", sans-serif; fill: var(--ink); pointer-events: none;
+  paint-order: stroke; stroke: #fcfcfd; stroke-width: 3px; }
+#map .label.dim { opacity: 0.12; }
+#map .bandlabel { font: 9.5px "DejaVu Sans", sans-serif; fill: var(--ink-soft); pointer-events: none; }
+#map .bandrule { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 3; }
+
+.maptip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--ink);
+  color: #fff;
+  padding: 6px 9px;
+  border-radius: 3px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  max-width: 280px;
+  z-index: 5;
+  box-shadow: var(--shadow);
+}
+.maptip strong { display: block; font-size: 12px; }
+.maptip .t-sub { color: #c8ccd4; }
+.maptip .t-flag { color: #ffb3ba; }
+
+.mappanel {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: min(360px, 46%);
+  background: var(--bg);
+  border-left: 1px solid var(--line);
+  padding: 14px 16px 16px 16px;
+  overflow-y: auto;
+  z-index: 6;
+  box-shadow: -6px 0 18px rgba(0,0,0,.06);
+}
+.panelclose { position: absolute; top: 8px; right: 10px; appearance: none; border: none;
+  background: none; font-size: 20px; line-height: 1; color: var(--ink-soft); cursor: pointer; }
+.mappanel h3 { margin: 0 6px 2px 0; font-size: 14.5px; }
+.mappanel .p-kind { font-size: 10.5px; text-transform: uppercase; letter-spacing: .4px;
+  color: var(--ink-soft); margin-bottom: 10px; }
+.mappanel .p-flag { border-left: 3px solid var(--bad); background: #fdf3f4; padding: 6px 10px;
+  font-size: 12px; margin-bottom: 10px; }
+.mappanel h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .4px;
+  color: var(--ink-soft); margin: 12px 0 5px 0; padding-bottom: 3px;
+  border-bottom: 1px solid var(--line); }
+.mappanel ul { list-style: none; margin: 0; padding: 0; }
+.mappanel li { padding: 4px 0; border-bottom: 1px solid var(--line-soft); font-size: 12px; }
+.mappanel li button { appearance: none; border: none; background: none; padding: 0;
+  font: inherit; color: var(--accent); text-align: left; cursor: pointer; text-decoration: underline; }
+.mappanel li .rel { color: var(--ink-soft); font-size: 11px; }
+
+.maplegend {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background: rgba(255,255,255,.93);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 7px 10px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  z-index: 4;
+}
+.legendrow { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; white-space: nowrap; }
+.lg { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.lg-doc { background: #9aa3b0; }
+.lg-instrument { background: #1f3a68; }
+.lg-part { background: #0f6b5c; }
+.lg-person { background: #7a4b12; }
+.lg-supplier { background: #5b2a72; }
+.lg-procedure { background: #2f6da8; }
+.lg-heat { background: #8a8f98; }
+.lg-finding { background: #b3323f; }
+.lg-isolated { background: #d9dbe0; border: 1px solid #c2c5cc; }
+
+/* ---------------------------------------------------------------- intro
+ *
+ * The first screen, in the tutto.one house style: warm off-white ground, amber accent,
+ * heavy grotesque headings. The dashboard below keeps its own plain, dense treatment —
+ * that was a deliberate choice for a projector in a room with the blinds open, and this
+ * section is the only place where atmosphere earns its keep.
+ *
+ * Tokens are redeclared locally rather than overwriting :root, so nothing below the fold
+ * shifts. The site loads Inter and Roboto from Google Fonts; this page cannot, because the
+ * CSP is `style-src 'self'; font-src 'self'` and that restriction is a selling point rather
+ * than an oversight. Roboto leads the stack because it is genuinely present on most Linux
+ * and Android machines, and the system grotesque behind it is a close enough second.
+ */
+.intro {
+  --h-bg:      #faf9f7;
+  --h-ink:     #1f1f1f;
+  --h-muted:   #6b7280;
+  --h-line:    #e5e7eb;
+  --h-primary: #d97706;
+  --h-card:    #ffffff;
+  --h-radius:  12px;
+
+  background: var(--h-bg);
+  border-bottom: 1px solid var(--h-line);
+  padding: clamp(48px, 9vw, 104px) 20px clamp(40px, 7vw, 80px);
+  color: var(--h-ink);
+}
+.intro-inner { max-width: 900px; margin: 0 auto; }
+
+.intro-eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--h-muted); margin: 0 0 20px;
+}
+
+.intro-title {
+  font-family: Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(30px, 5.4vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+  margin: 0 0 22px;
+  color: var(--h-ink);
+}
+
+.intro-stand {
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.65;
+  color: var(--h-muted);
+  max-width: 42em;
+  margin: 0 0 32px;
+}
+
+/* Pill buttons, as on the home page. */
+.intro-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 56px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 12px 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.btn-primary { background: var(--h-primary); color: #fff; border: 1px solid var(--h-primary); }
+.btn-primary:hover { background: #c26a05; border-color: #c26a05; }
+.btn-ghost { background: transparent; color: var(--h-ink); border: 1px solid var(--h-line); }
+.btn-ghost:hover { background: rgba(0,0,0,.035); }
+.btn:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 3px; }
+
+.intro-kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--h-muted); margin: 0 0 16px;
+}
+
+/* auto-fit rather than a fixed four-up: on a laptop this becomes two rows of two, and on a
+ * phone one column, without a media query per breakpoint. */
+.intro-grid {
+  display: grid; gap: 14px; margin-bottom: 48px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.intro-card {
+  background: var(--h-card);
+  border: 1px solid var(--h-line);
+  border-radius: var(--h-radius);
+  padding: 20px;
+}
+.intro-card h2 {
+  font-family: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 15px; font-weight: 700; margin: 0 0 8px; color: var(--h-ink);
+}
+.intro-card p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--h-muted); }
+
+/* The limits are stated on the first screen rather than in a footnote. For this audience a
+ * sheet with no stated limits reads as a sales document; one that names them reads as a
+ * professional. */
+.intro-limits {
+  border-top: 1px solid var(--h-line);
+  padding-top: 28px;
+}
+.intro-limits ul { margin: 0; padding-left: 18px; }
+.intro-limits li {
+  font-size: 13.5px; line-height: 1.65; color: var(--h-muted); margin-bottom: 12px;
+}
+.intro-limits li:last-child { margin-bottom: 0; }
+.intro-limits strong { color: var(--h-ink); font-weight: 600; }
+
+/* Landing on the dashboard after following "Voir le système" should not bury the tabs
+ * under the sticky topbar, and an in-page jump should be a jump for anyone who has asked
+ * the OS to stop animating things. */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+#systeme { scroll-margin-top: 0; }

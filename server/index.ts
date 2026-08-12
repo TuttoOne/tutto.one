@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
+import { guardPythiaDemo } from "./pythia-demo";
 import { createServer } from "http";
 import { seedBlogPostsIfEmpty } from "./seed-blog";
 import { clearStalePortfolioOverride } from "./cleanup-portfolio-override";
@@ -97,6 +98,10 @@ app.use((req, res, next) => {
 
     return res.status(status).json({ message });
   });
+
+  // The Atelier Vallon demo carries its own, much stricter headers. Mounted before the static
+  // handler and before Vite so the headers are set whichever one ends up serving the files.
+  guardPythiaDemo(app);
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route

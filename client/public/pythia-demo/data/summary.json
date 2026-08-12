@@ -1,0 +1,129 @@
+{
+  "provenance": {
+    "generated_utc": "2026-08-10T14:26:41+00:00",
+    "host": "spark-e991",
+    "python": "3.12.3",
+    "pymupdf": "1.28.2:",
+    "extractor": "legalrag ingest/src/extractor.py",
+    "legalrag_path": "/home/daniel-tutto/Projects/legalrag-product",
+    "ocr_language": "fra+eng",
+    "classify_model": "qwen2.5:14b",
+    "reason_model": "qwen2.5:32b",
+    "seed": 42
+  },
+  "inventory": {
+    "documents": 301,
+    "readable": 261,
+    "unreadable": 40,
+    "duplicates": 0,
+    "pages": 315,
+    "by_class": {
+      "audit_interne": 4,
+      "certificat_etalonnage": 15,
+      "certificat_matiere": 46,
+      "evaluation_fournisseur": 10,
+      "fiche_suiveuse": 12,
+      "formation": 25,
+      "manuel": 1,
+      "non_conformite": 20,
+      "procedure": 12,
+      "rapport_controle": 114,
+      "revue_direction": 2
+    },
+    "by_class_year": {
+      "audit_interne": {
+        "2023": 1,
+        "2024": 1,
+        "2025": 2
+      },
+      "certificat_etalonnage": {
+        "2024": 5,
+        "2025": 3,
+        "2026": 7
+      },
+      "certificat_matiere": {
+        "2023": 7,
+        "2024": 9,
+        "2025": 19,
+        "2026": 11
+      },
+      "evaluation_fournisseur": {
+        "2022": 4,
+        "2023": 5,
+        "2024": 1
+      },
+      "fiche_suiveuse": {
+        "2023": 2,
+        "2025": 4,
+        "2026": 6
+      },
+      "formation": {
+        "2023": 17,
+        "2024": 2,
+        "2025": 6
+      },
+      "manuel": {
+        "2023": 1
+      },
+      "non_conformite": {
+        "2023": 5,
+        "2024": 6,
+        "2025": 4,
+        "2026": 5
+      },
+      "procedure": {
+        "2023": 12
+      },
+      "rapport_controle": {
+        "2023": 31,
+        "2024": 35,
+        "2025": 27,
+        "2026": 21
+      },
+      "revue_direction": {
+        "2023": 1,
+        "2025": 1
+      }
+    },
+    "by_language": {
+      "en": 8,
+      "fr": 253
+    },
+    "by_suffix": {
+      ".jpg": 1,
+      ".pdf": 300
+    },
+    "undated": 0,
+    "unclassified": 0,
+    "exceptions_by_reason": {
+      "encrypted": 1,
+      "low_content": 18,
+      "no_content": 20,
+      "not_language": 1
+    },
+    "extraction_cache": {
+      "hits": 301,
+      "misses": 0
+    }
+  },
+  "register": {
+    "documents": 301,
+    "documents_readable": 261,
+    "documents_unreadable": 40,
+    "pages": 315,
+    "clauses_total": 53,
+    "clauses_assessable": 38,
+    "clauses_not_assessable": 15,
+    "by_status": {
+      "absent": 4,
+      "evidenced": 28,
+      "partial": 6
+    },
+    "evidenced": 28,
+    "partial": 6,
+    "absent": 4,
+    "not_evaluated": 0,
+    "findings": 9,
+    "findings_uncited": 0
+  }
+}

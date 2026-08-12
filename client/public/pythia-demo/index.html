@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier Vallon — état du système documentaire</title>
+<script>
+/* Every asset here is referenced relatively, which breaks when the page is served at a path
+ * without a trailing slash. Behind `tailscale serve --set-path /vallon`, opening
+ * https://host/vallon returns this page, and the browser then resolves "app.css" against /vallon
+ * rather than /vallon/ — so it asks the host for /app.css and gets somebody else's site. The page
+ * loads and quietly fetches nothing, which is the same silent kind of failure as an invisible
+ * overlay.
+ *
+ * A directory URL is one with no dot in its last segment. Redirect once, add the slash, done. */
+(function () {
+  var path = location.pathname;
+  var last = path.split('/').pop();
+  if (last && last.indexOf('.') === -1) {
+    location.replace(path + '/' + location.search + location.hash);
+  }
+})();
+</script>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- Marked fictional on every screen, not in a footnote. The banner is outside the view
+     container so it cannot be navigated away from. -->
+<div class="banner" role="note">
+  <strong>Démonstration.</strong> L'Atelier Vallon est une <strong>entreprise fictive</strong>.
+  Tous les documents ont été fabriqués pour cette démonstration. Aucun document de client n'y figure.
+</div>
+
+<!-- Intro. A first screen that says what this is before it shows anything, in the tutto.one
+     house style. Pure HTML + CSS: the anchor scrolls, so no script and no CSP hash changes. -->
+<section class="intro">
+  <div class="intro-inner">
+    <p class="intro-eyebrow">Démonstration ouverte · Pythia</p>
+
+    <h1 class="intro-title">Ce que vos dossiers établissent&nbsp;— document par document, page par page.</h1>
+
+    <p class="intro-stand">
+      Un système d'analyse documentaire, en fonctionnement, sur les 301 documents d'un atelier de
+      mécanique de précision. Il les lit, les classe, et rend compte de ce que les preuves
+      documentaires établissent au regard de l'EN&nbsp;9100 — chaque constat renvoyant à un document
+      et à une page précise.
+    </p>
+
+    <div class="intro-cta">
+      <a class="btn btn-primary" href="#systeme">Voir le système →</a>
+      <a class="btn btn-ghost" href="/pythia">En savoir plus sur Pythia</a>
+    </div>
+
+    <p class="intro-kicker">Ce que vous allez voir</p>
+    <div class="intro-grid">
+      <div class="intro-card">
+        <h2>Le fonds documentaire</h2>
+        <p>Les 301 documents tels que le système les a compris — y compris ceux qu'il n'a pas pu
+        lire. Les illisibles sont affichés comme tels&nbsp;: c'est un constat, pas une lacune de
+        l'écran.</p>
+      </div>
+      <div class="intro-card">
+        <h2>L'analyse</h2>
+        <p>Le déroulement réel d'une passe complète sur le fonds. Rien n'est masqué derrière une
+        attente&nbsp;: ce qui se voit est ce qui s'est passé.</p>
+      </div>
+      <div class="intro-card">
+        <h2>Le constat</h2>
+        <p>Ce que les preuves établissent, chapitre par chapitre. Chaque constat s'ouvre jusqu'à la
+        page citée, pour être vérifié plutôt que cru.</p>
+      </div>
+      <div class="intro-card">
+        <h2>La carte</h2>
+        <p>Les documents ne se citent pas entre eux. Ils se rejoignent par un instrument, une pièce,
+        une personne, une coulée — et c'est là que se trouvent les constats.</p>
+      </div>
+    </div>
+
+    <div class="intro-limits">
+      <p class="intro-kicker">Ce que cette démonstration n'est pas</p>
+      <ul>
+        <li><strong>L'Atelier Vallon est une entreprise fictive.</strong> Tous les documents ont été
+        fabriqués pour cette démonstration, avec des non-conformités volontairement introduites.
+        Aucun document de client n'y figure, et il n'en est jamais demandé avant qu'un accord soit
+        signé.</li>
+        <li><strong>Je ne suis ni organisme certificateur, ni auditeur certifié.</strong> Le système
+        constate ce que les preuves documentaires établissent&nbsp;; la décision de conformité
+        appartient à l'entreprise et à son certificateur.</li>
+        <li><strong>Rien à installer, aucune inscription.</strong> Ce site est entièrement statique.
+        Il n'y a nulle part où déposer un document — l'absence de risque est une propriété de
+        l'architecture, pas une promesse.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<header class="topbar" id="systeme">
+  <div class="brand">
+    <span class="mark">Atelier Vallon</span>
+    <span class="sub">État du système documentaire — EN 9100:2018</span>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-view="fonds" class="active">Le fonds documentaire</button>
+    <button role="tab" data-view="analyse">L'analyse</button>
+    <button role="tab" data-view="constat">Le constat</button>
+    <button role="tab" data-view="carte">La carte</button>
+  </nav>
+</header>
+
+<main>
+  <!-- 1. the corpus ------------------------------------------------------------ -->
+  <section id="view-fonds" class="view active">
+    <div class="viewhead">
+      <h1>Le fonds documentaire</h1>
+      <p>Tout ce qui se trouve dans les dossiers, tel que le système l'a compris. Les documents
+         illisibles apparaissent avec le motif : c'est le constat, pas une lacune de l'écran.</p>
+    </div>
+
+    <div class="filters">
+      <input type="search" id="q" placeholder="Rechercher un nom de fichier, une référence, un dossier…" autocomplete="off">
+      <select id="f-classe"><option value="">Toutes les classes</option></select>
+      <select id="f-etat">
+        <option value="">Tous les états</option>
+        <option value="lisible">Lisibles</option>
+        <option value="illisible">Illisibles</option>
+      </select>
+      <select id="f-langue"><option value="">Toutes les langues</option></select>
+      <span id="count" class="count"></span>
+    </div>
+
+    <div class="tablewrap">
+      <table id="corpus">
+        <thead><tr>
+          <th data-sort="filename">Fichier</th>
+          <th data-sort="folder">Dossier</th>
+          <th data-sort="classe_label">Classe</th>
+          <th data-sort="date">Date</th>
+          <th class="num" data-sort="pages">Pages</th>
+          <th data-sort="langue">Langue</th>
+          <th data-sort="lisible">État</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. the run -------------------------------------------------------------- -->
+  <section id="view-analyse" class="view">
+    <div class="viewhead">
+      <h1>L'analyse</h1>
+      <p>Le déroulement réel d'une passe sur les 301 documents. Rien n'est masqué derrière une
+         attente : ce qui se voit ici est ce qui s'est passé.</p>
+    </div>
+
+    <div class="controls">
+      <button id="play" class="primary">Lancer</button>
+      <button id="reset">Reprendre au début</button>
+      <span class="speeds">
+        Vitesse
+        <button data-speed="1">1×</button>
+        <button data-speed="8" class="active">8×</button>
+        <button data-speed="40">40×</button>
+        <button data-speed="0">Fin</button>
+      </span>
+      <span id="clock" class="clock">00:00</span>
+    </div>
+
+    <div class="progress"><div id="bar"></div></div>
+
+    <div class="runcols">
+      <div class="runcol">
+        <h2>Étape</h2>
+        <div id="stage" class="stage">en attente</div>
+        <h2>Classement</h2>
+        <table id="classtally" class="tally"><tbody></tbody></table>
+      </div>
+      <div class="runcol">
+        <h2>Documents</h2>
+        <ul id="ticker" class="ticker"></ul>
+      </div>
+      <div class="runcol">
+        <h2>Documents illisibles <span id="excount" class="pill">0</span></h2>
+        <ul id="exceptions" class="ticker exceptions"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. the finding ---------------------------------------------------------- -->
+  <section id="view-constat" class="view">
+    <div class="viewhead">
+      <h1>Le constat</h1>
+      <p>Chaque constat renvoie à un document et à une page. Cliquez sur une pièce citée pour
+         l'ouvrir à l'endroit exact.</p>
+    </div>
+
+    <div id="kpis" class="kpis"></div>
+
+    <div class="disclaimer" id="disclaimer"></div>
+
+    <h2 class="sectiontitle">Constats</h2>
+    <div id="findings"></div>
+
+    <div id="limits" hidden></div>
+
+    <h2 class="sectiontitle">Position par chapitre</h2>
+    <p class="small" id="clausenote"></p>
+    <div class="tablewrap">
+      <table id="clauses">
+        <thead><tr>
+          <th class="num">Chapitre</th><th>Intitulé</th><th>Position</th><th class="num">Pièces</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4. the map --------------------------------------------------------------- -->
+  <section id="view-carte" class="view">
+    <div class="viewhead">
+      <h1>La carte</h1>
+      <p>Les documents ne se citent pas entre eux : ils se rejoignent par un instrument, une
+         pièce, une personne, une procédure, une coulée. C'est là que se trouvent les constats,
+         qui portent tous sur plusieurs documents à la fois.</p>
+    </div>
+
+    <div class="mapbar">
+      <label class="switch">
+        <input type="checkbox" id="m-findings"> Ne montrer que les constats
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="m-labels" checked> Noms des entités
+      </label>
+      <select id="m-kind">
+        <option value="">Tous les types de lien</option>
+      </select>
+      <input type="search" id="m-search" placeholder="Trouver un instrument, une pièce, une personne…" autocomplete="off">
+      <button id="m-reset">Recentrer</button>
+      <span id="m-count" class="count"></span>
+    </div>
+
+    <div class="mapwrap">
+      <svg id="map" role="img" aria-label="Carte des relations entre documents"></svg>
+      <div id="m-tip" class="maptip" hidden></div>
+
+      <aside id="m-panel" class="mappanel" hidden>
+        <button id="m-panel-close" class="panelclose" aria-label="Fermer">×</button>
+        <div id="m-panel-body"></div>
+      </aside>
+
+      <div class="maplegend">
+        <div class="legendrow"><span class="lg lg-doc"></span> document</div>
+        <div class="legendrow"><span class="lg lg-instrument"></span> moyen de contrôle</div>
+        <div class="legendrow"><span class="lg lg-part"></span> pièce</div>
+        <div class="legendrow"><span class="lg lg-person"></span> personne</div>
+        <div class="legendrow"><span class="lg lg-supplier"></span> prestataire</div>
+        <div class="legendrow"><span class="lg lg-procedure"></span> procédure</div>
+        <div class="legendrow"><span class="lg lg-heat"></span> coulée / lot</div>
+        <div class="legendrow"><span class="lg lg-finding"></span> impliqué dans un constat</div>
+        <div class="legendrow"><span class="lg lg-isolated"></span> sans lien</div>
+      </div>
+    </div>
+
+    <p class="small" id="m-note"></p>
+  </section>
+</main>
+
+<!-- the document viewer, shared by screens 1 and 3 --------------------------- -->
+<div id="viewer" class="viewer" hidden>
+  <div class="viewerbar">
+    <div class="vtitle">
+      <strong id="v-name"></strong>
+      <span id="v-meta" class="small"></span>
+    </div>
+    <div class="vnav">
+      <button id="v-prev">Page précédente</button>
+      <span id="v-page"></span>
+      <button id="v-next">Page suivante</button>
+      <button id="v-close" class="close">Fermer</button>
+    </div>
+  </div>
+  <div class="viewerbody">
+    <div id="v-stage" class="pagestage">
+      <img id="v-img" alt="">
+      <div id="v-hl" class="highlight" hidden></div>
+    </div>
+    <div id="v-note" class="viewernote" hidden></div>
+  </div>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
