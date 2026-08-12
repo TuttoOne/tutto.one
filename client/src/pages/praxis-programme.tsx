@@ -29,12 +29,12 @@ const sessions = [
   {
     n: "02",
     title: "The build loop, and capturing your know-how",
-    body: "Describe what you want and watch Claude Code build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.",
+    body: "Describe what you want and watch the assistant build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.",
   },
   {
     n: "03",
     title: "Your tools and surfaces",
-    body: "The Claude app and the move into your own files. Connecting Claude to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.",
+    body: "The assistant's desktop app and the move into your own files. Connecting it to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.",
   },
   {
     n: "04",
@@ -74,7 +74,7 @@ const faqs = [
   },
   {
     q: "Is my data safe?",
-    a: "Your files stay on your own machine. You choose the folder Claude Code works in, and that folder is the boundary. It asks before going any further. For regulated or sensitive work, we map your IT and compliance questions before touching anything.",
+    a: "Your files stay on your own machine. You choose the folder the assistant works in, and that folder is the boundary. It asks before going any further. For regulated or sensitive work, we map your IT and compliance questions before touching anything.",
   },
   {
     q: "What will it cost me to run afterwards?",
@@ -100,7 +100,7 @@ export default function PraxisProgramme() {
       ? `Parrainez une personne qui suit la formation et le tarif tombe à ${econ.courseWithOneReferral}. Parrainez-en deux et la formation ne vous coûte rien : nous vous remboursons intégralement.`
       : `Refer one person who takes the course and the price drops to ${econ.courseWithOneReferral}. Refer two and the course costs you nothing — we refund it in full.`;
   useEffect(() => {
-    document.title = "Praxis - Learn to Build Your Own Tools with Claude Code";
+    document.title = "Praxis - Learn to Build Your Own Tools with AI";
     return () => { document.title = "Tutto | AI Consulting"; };
   }, []);
 
@@ -156,7 +156,7 @@ export default function PraxisProgramme() {
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The Praxis Programme")}</p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Build your own tools")}<br />{tr("with Claude Code.")}</h2>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Build your own tools")}<br />{tr("with an AI assistant.")}</h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain language, with someone sitting beside you who has done it before.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("No coding background needed. By the end you will have built something you actually use, and you will know how to keep building on your own.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
@@ -185,7 +185,7 @@ export default function PraxisProgramme() {
 
         {/* Intro */}
         <div style={{ maxWidth: 620, marginBottom: 64 }}>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("You have typed questions into ChatGPT or Claude and got useful answers back. This is the next step: using Claude Code to build small, working tools that do your repetitive work for you. The internet is full of free tutorials. What a video cannot do is see where you are stuck and hear what you are unsure about. That gap - between \"I have heard of Claude Code\" and \"I am building\" - is the whole reason this programme exists.")}</p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("You have typed questions into ChatGPT or Claude and got useful answers back. This is the next step: using an AI assistant to build small, working tools that do your repetitive work for you. The internet is full of free tutorials. What a video cannot do is see where you are stuck and hear what you are unsure about. That gap - between \"I have asked an AI questions\" and \"I am building\" - is the whole reason this programme exists.")}</p>
         </div>
 
         {/* Section 01 - Who this is for */}
@@ -360,8 +360,12 @@ export default function PraxisProgramme() {
             ))}
           </div>
           <div style={{ marginTop: 20, padding: "16px 20px", background: "#f0ece6", borderRadius: 8, maxWidth: 560 }}>
-            <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>{tr("Running the tools you build costs about")}<strong style={{ color: "#1a1a1a" }}>{toolsMonthly}</strong> for the Claude Code subscription.
-              The tools themselves run on your own machine - no per-use charges.
+            <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>
+              {tr("Running the tools you build costs about")}{" "}
+              <strong style={{ color: "#1a1a1a" }}>{toolsMonthly}</strong>{" "}
+              {tr(
+                "for a subscription to a frontier AI system — Claude, Mistral or OpenAI — or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.",
+              )}
             </p>
           </div>
         </div>

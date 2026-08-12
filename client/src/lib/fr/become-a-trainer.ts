@@ -153,8 +153,8 @@ export const BECOME_A_TRAINER_FR: FrDict = {
   // --- Multi-line blocks ---
   "Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition.":
     "Quatre séances supplémentaires après Praxis vous font passer de quelqu'un qui sait construire à quelqu'un qui peut l'enseigner pour en vivre. Vous enseignez, je trouve et j'organise les clients avec vous, et vous conservez 80 % des honoraires.",
-  "You have been through Praxis. You can build working tools with Claude Code, and you have felt how fast the people around you want the same thing.":
-    "Vous avez suivi Praxis. Vous savez construire des outils fonctionnels avec Claude Code, et vous avez mesuré la vitesse à laquelle votre entourage veut la même chose.",
+  "You have been through Praxis. You can build working tools with an AI assistant, and you have felt how fast the people around you want the same thing.":
+    "Vous avez suivi Praxis. Vous savez construire des outils fonctionnels avec un assistant IA, et vous avez mesuré la vitesse à laquelle votre entourage veut la même chose.",
   "People keep asking you how you did it, and you have started explaining it without being asked. This is how you turn that into an income: four more sessions, a readiness bar to clear, and then you are teaching Praxis under the same name, with clients I find and organise with you, keeping 80% of everything you earn.":
     "On vous demande sans cesse comment vous avez fait, et vous avez commencé à l'expliquer sans qu'on vous le demande. Voici comment en tirer un revenu : quatre séances de plus, une exigence d'aptitude à franchir, et vous enseignez Praxis sous le même nom, avec des clients que je trouve et organise avec vous, en conservant 80 % de tout ce que vous gagnez.",
   "You will carry the Praxis name, so there is a standard to clear before you teach anyone for money. It is a demonstration: one real session, or a full mock if no client is ready yet, with me watching, then an honest conversation about what worked and what did not.":

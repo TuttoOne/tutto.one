@@ -136,7 +136,7 @@ export default function BecomeATrainer() {
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Praxis Trainer Track")}</p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Teach Praxis.")}<br />{tr("Earn from it.")}</h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition.")}</p>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("You have been through Praxis. You can build working tools with Claude Code, and you have felt how fast the people around you want the same thing.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("You have been through Praxis. You can build working tools with an AI assistant, and you have felt how fast the people around you want the same thing.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
             <a
               href="#get-started"

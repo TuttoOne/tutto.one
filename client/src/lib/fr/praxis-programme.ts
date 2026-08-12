@@ -4,7 +4,7 @@ import type { FrDict } from "../page-fr";
 export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The Praxis Programme": "Le programme Praxis",
   "Build your own tools": "Construisez vos propres outils",
-  "with Claude Code.": "avec Claude Code.",
+  "with an AI assistant.": "avec un assistant IA.",
   "Book an intro call →": "Réserver un premier échange →",
   "One-to-one or small group · Online or in person":
     "En individuel ou en petit groupe · À distance ou sur place",
@@ -28,6 +28,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Best value": "Meilleur rapport",
   "Running the tools you build costs about":
     "Faire tourner les outils que vous construisez coûte environ",
+  "for a subscription to a frontier AI system — Claude, Mistral or OpenAI — or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.":
+    "pour un abonnement à un système d'IA de premier plan — Claude, Mistral ou OpenAI — ou rien du tout si vous exécutez des modèles à poids ouverts sur votre propre matériel. Les outils eux-mêmes tournent sur votre machine, sans facturation à l'usage.",
 
   "Get started": "Commencer",
   "Tell me the task that eats your week.":
@@ -66,11 +68,11 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Voir le système fonctionner avant toute théorie. Comprendre où l'IA excelle et où elle doit être exacte, si vos fichiers sont en sécurité, et ce que cela coûte. Construire en direct votre première petite réalisation qui fonctionne.",
   "The build loop, and capturing your know-how":
     "La boucle de construction, et la mise par écrit de votre savoir-faire",
-  "Describe what you want and watch Claude Code build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.":
-    "Décrivez ce que vous voulez et regardez Claude Code le construire. Puis consignez les règles que suit votre travail, en langage courant, pour que l'outil les applique à chaque fois. Construisez un véritable outil pour votre propre activité.",
+  "Describe what you want and watch the assistant build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.":
+    "Décrivez ce que vous voulez et regardez l'assistant le construire. Puis consignez les règles que suit votre travail, en langage courant, pour que l'outil les applique à chaque fois. Construisez un véritable outil pour votre propre activité.",
   "Your tools and surfaces": "Vos outils et vos interfaces",
-  "The Claude app and the move into your own files. Connecting Claude to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.":
-    "L'application Claude et le passage à vos propres fichiers. Connecter Claude aux applications que vous utilisez déjà. Le laisser travailler en sécurité pour vous, en gardant la maîtrise de ce à quoi il a accès.",
+  "The assistant's desktop app and the move into your own files. Connecting it to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.":
+    "L'application de bureau de l'assistant et le passage à vos propres fichiers. Le connecter aux applications que vous utilisez déjà. Le laisser travailler en sécurité pour vous, en gardant la maîtrise de ce à quoi il a accès.",
   "Keeping versions, and safe handover":
     "Gérer les versions, et transmettre sans risque",
   "How to keep versions of your work, hand a tool to a colleague or developer cleanly, and build so it is still changeable in a year rather than a tangle you cannot undo.":
@@ -92,15 +94,15 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
 
   // --- FAQ ---
   "Do I need to know how to code?": "Dois-je savoir coder ?",
-  "No. You describe what you want in plain language. Claude Code writes the code. We use the time to make sure you understand what you are building and why.":
-    "Non. Vous décrivez ce que vous voulez en langage courant. Claude Code écrit le code. Nous mettons le temps à profit pour que vous compreniez ce que vous construisez, et pourquoi.",
+  "No. You describe what you want in plain language. The assistant writes the code. We use the time to make sure you understand what you are building and why.":
+    "Non. Vous décrivez ce que vous voulez en langage courant. L'assistant écrit le code. Nous mettons le temps à profit pour que vous compreniez ce que vous construisez, et pourquoi.",
   "I have only ever used AI in a chat box. Is this for me?":
     "Je n'ai jamais utilisé l'IA autrement que dans une fenêtre de discussion. Est-ce pour moi ?",
   "Yes. That is exactly the starting point this is built for.":
     "Oui. C'est précisément le point de départ pour lequel ce programme est conçu.",
   "Is my data safe?": "Mes données sont-elles en sécurité ?",
-  "Your files stay on your own machine. You choose the folder Claude Code works in, and that folder is the boundary. It asks before going any further. For regulated or sensitive work, we map your IT and compliance questions before touching anything.":
-    "Vos fichiers restent sur votre machine. Vous choisissez le dossier dans lequel Claude Code travaille, et ce dossier constitue la limite. Il demande avant d'aller plus loin. Pour les activités réglementées ou sensibles, nous cartographions vos exigences informatiques et de conformité avant toute manipulation.",
+  "Your files stay on your own machine. You choose the folder the assistant works in, and that folder is the boundary. It asks before going any further. For regulated or sensitive work, we map your IT and compliance questions before touching anything.":
+    "Vos fichiers restent sur votre machine. Vous choisissez le dossier dans lequel l'assistant travaille, et ce dossier constitue la limite. Il demande avant d'aller plus loin. Pour les activités réglementées ou sensibles, nous cartographions vos exigences informatiques et de conformité avant toute manipulation.",
   "What will it cost me to run afterwards?":
     "Combien cela me coûtera-t-il ensuite ?",
   "About twenty dollars a month for the subscription. The tools you build run locally and do not charge per use.":
@@ -162,8 +164,6 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Online, via Teams or Google Meet. In person on request.":
     "À distance, via Teams ou Google Meet. Sur place à la demande.",
   "What you need": "Ce qu'il vous faut",
-  "A laptop - Mac or Windows. A Claude account. We set up everything else together in the first session.":
-    "Un ordinateur portable, Mac ou Windows. Un compte Claude. Nous installons tout le reste ensemble lors de la première séance.",
 
   // --- Pricing ---
   "Per session": "Par séance",
@@ -196,8 +196,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Aucune expérience du code n'est requise. À la fin, vous aurez construit quelque chose que vous utilisez vraiment, et vous saurez continuer à construire par vous-même.",
   "Weekly, over roughly two months. The first six get you to a confident, independent builder. The last two take you deeper, into the kind of work that usually needs a developer.":
     "Une séance par semaine, sur près de deux mois. Les six premières vous rendent autonome et sûr de vous. Les deux dernières vous emmènent plus loin, vers le type de travail qui réclame d'ordinaire un développeur.",
-  "You have typed questions into ChatGPT or Claude and got useful answers back. This is the next step: using Claude Code to build small, working tools that do your repetitive work for you. The internet is full of free tutorials. What a video cannot do is see where you are stuck and hear what you are unsure about. That gap - between \"I have heard of Claude Code\" and \"I am building\" - is the whole reason this programme exists.":
-    "Vous avez posé des questions à ChatGPT ou à Claude et obtenu des réponses utiles. Voici l'étape suivante : utiliser Claude Code pour construire de petits outils fonctionnels qui prennent en charge vos tâches répétitives. Internet regorge de tutoriels gratuits. Ce qu'une vidéo ne peut pas faire, c'est voir où vous bloquez et entendre ce dont vous doutez. C'est précisément cet écart — entre « j'ai entendu parler de Claude Code » et « je construis » — qui justifie l'existence de ce programme.",
+  "You have typed questions into ChatGPT or Claude and got useful answers back. This is the next step: using an AI assistant to build small, working tools that do your repetitive work for you. The internet is full of free tutorials. What a video cannot do is see where you are stuck and hear what you are unsure about. That gap - between \"I have asked an AI questions\" and \"I am building\" - is the whole reason this programme exists.":
+    "Vous avez posé des questions à ChatGPT ou à Claude et obtenu des réponses utiles. Voici l'étape suivante : utiliser un assistant IA pour construire de petits outils fonctionnels qui prennent en charge vos tâches répétitives. Internet regorge de tutoriels gratuits. Ce qu'une vidéo ne peut pas faire, c'est voir où vous bloquez et entendre ce dont vous doutez. C'est précisément cet écart — entre « j'ai posé des questions à une IA » et « je construis » — qui justifie l'existence de ce programme.",
 
   "On the choice of assistant":
     "Sur le choix de l'assistant",
@@ -205,6 +205,4 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Nous enseignons avec Claude comme exemple, parce que c'est celui avec lequel la plupart des gens arrivent. Ce n'est pas une obligation. La même méthode fonctionne avec Mistral, avec OpenAI, ou avec des modèles à poids ouverts exécutés entièrement sur votre propre machine — ce qui est la bonne réponse lorsque le travail ne peut pas sortir de vos locaux. Vous choisissez l'assistant ; nous l'installons avec vous dès la première séance.",
   "A laptop - Mac or Windows. An account with the AI assistant of your choice. We set up everything else together in the first session.":
     "Un ordinateur portable, Mac ou Windows. Un compte auprès de l'assistant IA de votre choix. Nous installons tout le reste ensemble lors de la première séance.",
-  "No. You describe what you want in plain language. The assistant writes the code. We use the time to make sure you understand what you are building and why.":
-    "Non. Vous décrivez ce que vous voulez en langage courant. L'assistant écrit le code. Nous mettons le temps à profit pour que vous compreniez ce que vous construisez, et pourquoi.",
 };
