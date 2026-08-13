@@ -102,7 +102,7 @@ export default function Praxis() {
           <div className="grid md:grid-cols-2 gap-5 items-start">
             {/* The note wraps rather than scrolling: a horizontal scrollbar inside
                 a card hides content, and the French runs longer than the English. */}
-            <div className="bg-card border border-border rounded-2xl p-6 font-mono text-[13px] leading-relaxed">
+            <div className="bg-card border border-border rounded-2xl p-6 font-mono text-[13px] leading-relaxed md:sticky md:top-24">
               <p className="text-muted-foreground mb-3 break-all">~/Praxis/folder/</p>
               {folder.map((f, i) => (
                 <div key={f.path} className="flex items-start gap-2 text-foreground mb-1 last:mb-0">

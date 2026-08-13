@@ -126,7 +126,10 @@ export function AppliedExplainer() {
         }
       >
         <div className="grid md:grid-cols-2 gap-5 items-start">
-          <div className="flex flex-col gap-4">
+          {/* Sticky on desktop, as the portfolio entries are: the shorter column
+              rides down to fill the gap the taller one leaves. top-24 clears the
+              fixed header. Mobile stacks, so it stays static there. */}
+          <div className="flex flex-col gap-4 md:sticky md:top-24">
             {stats.map((s) => (
               <StatCard key={s.stat} stat={s.stat} label={s.label} />
             ))}

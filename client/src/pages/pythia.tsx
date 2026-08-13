@@ -140,7 +140,8 @@ export default function Pythia() {
 
         <Section index="02" label={t(copy.pythia.s2Label)}>
           <div className="grid md:grid-cols-2 gap-5 items-start">
-            <div className="flex flex-col gap-4">
+            {/* Sticky on desktop, matching the portfolio entries. */}
+            <div className="flex flex-col gap-4 md:sticky md:top-24">
               {stats.map((s) => (
                 <StatCard key={s.stat} stat={s.stat} label={s.label} />
               ))}
