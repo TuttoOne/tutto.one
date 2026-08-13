@@ -76,23 +76,40 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
     pricePrefix: STARTS_AT,
   },
   {
-    title: "AI Agent Architecture",
-    titleFr: "Architecture d'agents IA",
+    /**
+     * Named for the choice, not the technique. "AI Agent Architecture" described
+     * how the thing is built; what clients actually weigh is where it runs and
+     * whose model reads their data, so the card leads on both.
+     */
+    title: "Your Infrastructure, Your Models",
+    titleFr: "Votre infrastructure, vos modèles",
     description:
-      "Design and implement specific agent workflows to automate core business processes using your structured data.",
+      "We design and build the working system, then deploy it wherever you choose: your own hardware, a private or public cloud, or a hosted environment. Where a model is needed, you choose that too.",
     descriptionFr:
-      "Conception et mise en œuvre de flux d'agents dédiés, pour automatiser vos processus métier à partir de vos données structurées.",
+      "Nous concevons et construisons le système, puis le déployons là où vous le décidez : votre propre matériel, un nuage privé ou public, ou un environnement hébergé. Là où un modèle est nécessaire, vous le choisissez également.",
     features: [
-      "Custom Agent Workflows",
-      "Human-in-the-loop Design",
+      "Local, Private or Public Deployment",
+      "Open-weight or Frontier Models",
+      "Human-in-the-loop Workflows",
       "Tool Selection & Integration",
     ],
     featuresFr: [
-      "Flux d'agents sur mesure",
-      "Conception avec supervision humaine",
+      "Déploiement local, privé ou public",
+      "Modèles à poids ouverts ou de premier plan",
+      "Flux avec supervision humaine",
       "Choix et intégration des outils",
     ],
-    priceLabel: { en: "Custom scoping", fr: "Cadrage sur mesure" },
+    /**
+     * A stated price, not "custom scoping". One scripting engagement is about
+     * forty hours; the hosting caveat is the only genuine variable, so it is
+     * stated as a caveat rather than smuggled into an open-ended quote.
+     */
+    note: {
+      en: "Priced on deployment to hosting or hardware you specify, where running it costs you nothing further. If we have to host it, that is quoted separately.",
+      fr: "Tarif établi pour un déploiement sur l'hébergement ou le matériel que vous indiquez, dont l'exploitation ne vous coûte rien de plus. Si l'hébergement nous incombe, il est chiffré à part.",
+    },
+    priceKey: "scriptBuildFrom",
+    pricePrefix: STARTS_AT,
   },
   {
     title: "Team Enablement",

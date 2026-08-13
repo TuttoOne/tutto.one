@@ -31,6 +31,7 @@ export type PriceKey =
   | "toolsMonthly"
   // Engagements
   | "sprint"
+  | "scriptBuildFrom"
   | "build"
   | "enablementFrom"
   // SharePoint
@@ -40,6 +41,15 @@ export type PriceKey =
 
 /** The session rate. Course tuition and team enablement are both eight of these. */
 const SESSION = { GBP: 200, EUR: 250, ZAR: 5000 };
+
+/** Build rate per hour. The scripting engagement is a multiple of this. */
+const HOUR = { GBP: 83, EUR: 100, ZAR: 2000 };
+/**
+ * Hours in one scripting engagement, taken from a delivered piece of work
+ * rather than estimated. Exported so the figure can be quoted alongside the
+ * price instead of being restated in prose that then drifts from it.
+ */
+export const SCRIPT_BUILD_HOURS = 40;
 
 /** Base rates. Everything else on the site is derived from these. */
 export const PRICES: Record<PriceKey, Record<Currency, number>> = {
@@ -55,6 +65,17 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    * the services page quote the same engagement, so they quote the same key.
    */
   sprint: { GBP: 2000, EUR: 2400, ZAR: 48000 },
+  /**
+   * One scripting build: a working solution on infrastructure the client
+   * already has. Computed from the hourly rate and the hours, so the two can
+   * never contradict each other. Assumes the client's own hosting or hardware;
+   * anything we have to host is quoted separately.
+   */
+  scriptBuildFrom: {
+    GBP: HOUR.GBP * SCRIPT_BUILD_HOURS,
+    EUR: HOUR.EUR * SCRIPT_BUILD_HOURS,
+    ZAR: HOUR.ZAR * SCRIPT_BUILD_HOURS,
+  },
   /**
    * Pythia build. Excludes hardware. Carried at the exact converted figure
    * rather than rounded to a tidier number.
@@ -100,6 +121,7 @@ export const ONGOING_MAX_PCT = 20;
 /** Price keys offered in the admin content editor. */
 export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
   { key: "sprint", label: "Diagnostic sprint / data audit (€2,400)" },
+  { key: "scriptBuildFrom", label: "Scripting build, 40h (€4,000)" },
   { key: "enablementFrom", label: "Team enablement / training (€2,000)" },
   { key: "build", label: "Pythia build, excl. hardware (€9,850)" },
   { key: "sessionStandard", label: "Praxis session, standard (€250)" },
