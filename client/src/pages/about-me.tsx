@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Header, Layout } from "@/components/layout/Layout";
 import { useQuery } from "@tanstack/react-query";
 import { usePreferences } from "@/lib/preferences";
+import { SITE_TITLE } from "@/lib/i18n";
 import { FicheSheet } from "@/pages/fiche-capacites";
 
 const ROBOTO: React.CSSProperties = {
@@ -28,7 +29,7 @@ export default function About() {
     document.title =
       locale === "fr" ? "À propos de moi - Daniel Forsthofer" : "About me - Daniel Forsthofer";
     return () => {
-      document.title = "Tutto | AI Consulting";
+      document.title = SITE_TITLE;
     };
   }, [locale]);
 

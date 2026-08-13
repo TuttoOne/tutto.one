@@ -3,7 +3,7 @@ import { Layout } from "@/components/layout/Layout";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { usePreferences } from "@/lib/preferences";
-import { copy, useT } from "@/lib/i18n";
+import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 
 /**
  * The company-level About. Deliberately impersonal — the individual story,
@@ -16,7 +16,7 @@ export default function About() {
   useEffect(() => {
     document.title = locale === "fr" ? "À propos - Tutto" : "About - Tutto";
     return () => {
-      document.title = "Tutto | AI Consulting";
+      document.title = SITE_TITLE;
     };
   }, [locale]);
 

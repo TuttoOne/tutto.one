@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { usePageTr } from "@/lib/page-fr";
 import { PRAXIS_PROGRAMME_FR } from "@/lib/fr/praxis-programme";
 import { usePreferences } from "@/lib/preferences";
+import { SITE_TITLE } from "@/lib/i18n";
 import { trainerEconomics, price } from "@/lib/pricing";
 import { Header } from "@/components/layout/Layout";
 
@@ -101,7 +102,7 @@ export default function PraxisProgramme() {
       : `Refer one person who takes the course and the price drops to ${econ.courseWithOneReferral}. Refer two and the course costs you nothing — we refund it in full.`;
   useEffect(() => {
     document.title = "Praxis - Learn to Build Your Own Tools with AI";
-    return () => { document.title = "Tutto | AI Consulting"; };
+    return () => { document.title = SITE_TITLE; };
   }, []);
 
   const [form, setForm] = useState({ name: "", email: "", task: "" });

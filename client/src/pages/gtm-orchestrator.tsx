@@ -10,7 +10,7 @@ import {
   ClosingCta,
 } from "@/components/product/ProductPage";
 import { useT } from "@/lib/i18n";
-import { copy } from "@/lib/i18n";
+import { copy, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { usePageTr } from "@/lib/page-fr";
 import { GTM_FR } from "@/lib/fr/gtm-orchestrator";
@@ -33,7 +33,7 @@ export default function GtmOrchestrator() {
         ? "GTM — moteur de prospection sur site | Tutto"
         : "GTM — On-premise sales outreach engine | Tutto";
     return () => {
-      document.title = "Tutto | AI Consulting";
+      document.title = SITE_TITLE;
     };
   }, [locale]);
 

@@ -11,7 +11,7 @@ import {
   ClosingCta,
   Eyebrow,
 } from "@/components/product/ProductPage";
-import { copy, useT } from "@/lib/i18n";
+import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
 
@@ -28,7 +28,7 @@ export default function Praxis() {
         ? "Praxis — une heure qui change votre façon de penser l'IA | Tutto"
         : "Praxis — One hour that changes how you think about AI | Tutto";
     return () => {
-      document.title = "Tutto | AI Consulting";
+      document.title = SITE_TITLE;
     };
   }, [locale]);
 
@@ -187,21 +187,21 @@ export default function Praxis() {
 
         <Etymology pull={t(copy.praxis.etymPull)}>
           {locale === "fr" ? (
-            <>
+            <p>
               Praxis désigne la connaissance éprouvée par l'action. Le mot vient du grec{" "}
               <em>prâxis</em> — l'action dont la finalité réside dans l'action elle-même. Aristote la
               distinguait de la <em>theoria</em> (la contemplation) et de la <em>poiesis</em> (la
               fabrication, qui produit un objet extérieur à elle). L'usage moderne, après Freire, y
               voit la boucle théorie, action, réflexion, théorie affinée.
-            </>
+            </p>
           ) : (
-            <>
+            <p>
               Praxis means knowledge proven by doing. It comes from the Greek <em>prâxis</em> —
               action whose purpose lies in the action itself. Aristotle separated it from{" "}
               <em>theoria</em> (contemplation) and <em>poiesis</em> (making, which produces an object
               outside itself). Modern usage, after Freire, treats it as the loop of theory, action,
               reflection, sharper theory.
-            </>
+            </p>
           )}
         </Etymology>
 

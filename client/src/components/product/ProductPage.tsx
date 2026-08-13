@@ -239,7 +239,11 @@ export function Etymology({ pull, children }: { pull: string; children: React.Re
       <p className="font-serif text-lg italic text-foreground leading-relaxed max-w-2xl mb-5">
         {pull}
       </p>
-      <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">{children}</p>
+      {/* A div rather than a p: the home page's note runs to two paragraphs.
+          Callers supply their own <p> tags. */}
+      <div className="text-sm text-muted-foreground leading-relaxed max-w-2xl space-y-4">
+        {children}
+      </div>
     </section>
   );
 }

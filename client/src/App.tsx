@@ -1,4 +1,4 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route, Redirect, useLocation } from "wouter";
 import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -59,6 +59,9 @@ function Router() {
         <Route path="/fiche-capacites" component={FicheCapacites} />
 
         {/* Unlisted */}
+        {/* The explainer had its own page for a day; it now opens the home page.
+            The URL stays alive so anything already shared still lands. */}
+        <Route path="/how-ai-works-here">{() => <Redirect to="/" />}</Route>
         <Route path="/praxis-programme" component={PraxisProgramme} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
         <Route path="/become-a-trainer" component={BecomeATrainer} />

@@ -12,7 +12,7 @@ import {
   Etymology,
   ClosingCta,
 } from "@/components/product/ProductPage";
-import { copy, useT } from "@/lib/i18n";
+import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
 
@@ -69,7 +69,7 @@ export default function Pythia() {
         ? "Pythia — intelligence documentaire sur site | Tutto"
         : "Pythia — On-premise document intelligence | Tutto";
     return () => {
-      document.title = "Tutto | AI Consulting";
+      document.title = SITE_TITLE;
     };
   }, [locale]);
 
@@ -264,7 +264,9 @@ export default function Pythia() {
           </CardGrid>
         </Section>
 
-        <Etymology pull={t(copy.pythia.etymPull)}>{t(copy.pythia.etymBody)}</Etymology>
+        <Etymology pull={t(copy.pythia.etymPull)}>
+          <p>{t(copy.pythia.etymBody)}</p>
+        </Etymology>
 
         <ClosingCta
           title={t(copy.pythia.ctaTitle)}

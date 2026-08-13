@@ -3,6 +3,7 @@ import { usePageTr } from "@/lib/page-fr";
 import { BECOME_A_TRAINER_FR } from "@/lib/fr/become-a-trainer";
 import { Header } from "@/components/layout/Layout";
 import { usePreferences } from "@/lib/preferences";
+import { SITE_TITLE } from "@/lib/i18n";
 import {
   trainerEconomics,
   COURSE_SESSIONS,
@@ -82,7 +83,7 @@ export default function BecomeATrainer() {
 
   useEffect(() => {
     document.title = "Become a Praxis Trainer - teach it, and earn from it";
-    return () => { document.title = "Tutto | AI Consulting"; };
+    return () => { document.title = SITE_TITLE; };
   }, []);
 
   const [form, setForm] = useState({ name: "", email: "", context: "" });

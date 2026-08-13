@@ -1,26 +1,19 @@
 import { Layout } from "@/components/layout/Layout";
-import { PortfolioDisplay, type PortfolioTextOverride } from "@/components/portfolio/PortfolioDisplay";
+import { AppliedExplainer } from "@/components/product/AppliedExplainer";
 import { AnimatedPointer } from "@/components/brand/AnimatedPointer";
 import { Link } from "wouter";
 import { ArrowDown } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
 import { copy, useT } from "@/lib/i18n";
 
 export default function Home() {
   const t = useT();
-  const { data: portfolioContent } = useQuery<{ value: string }>({
-    queryKey: ["/api/site-content/portfolio"],
-    retry: false,
-  });
-
-  const overrides: PortfolioTextOverride[] | undefined = (() => {
-    if (!portfolioContent) return undefined;
-    try { return JSON.parse(portfolioContent.value); } catch { return undefined; }
-  })();
 
   return (
     <Layout>
       <div className="max-w-5xl mx-auto px-6 py-12">
+        {/* The portfolio used to sit below this hero, duplicating /portfolio.
+            The case for what we do earns the space better; the work is one
+            click away from the nav and from section 04 of the explainer. */}
         <div className="text-center mb-20 pt-8">
           <div className="flex justify-center mb-6">
             <AnimatedPointer className="w-28 h-28 md:w-32 md:h-32" />
@@ -55,14 +48,14 @@ export default function Home() {
           <div className="mt-16 flex justify-center">
             <div className="flex flex-col items-center gap-2 text-muted-foreground/50">
               <p className="text-xs font-mono uppercase tracking-widest">
-                {t(copy.common.ourWork)}
+                {t(copy.home.scrollHint)}
               </p>
               <ArrowDown className="w-4 h-4 animate-bounce" />
             </div>
           </div>
         </div>
 
-        <PortfolioDisplay overrides={overrides} />
+        <AppliedExplainer />
       </div>
     </Layout>
   );
