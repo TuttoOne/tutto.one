@@ -18,9 +18,6 @@ export default function Home() {
           <div className="flex justify-center mb-6">
             <AnimatedPointer className="w-28 h-28 md:w-32 md:h-32" />
           </div>
-          <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6">
-            {t(copy.home.eyebrow)}
-          </p>
           <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight mb-6 max-w-3xl mx-auto">
             {t(copy.home.title)}
           </h1>

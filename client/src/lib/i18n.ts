@@ -150,12 +150,12 @@ export const copy = {
   },
 
   home: {
-    eyebrow: { en: "This is the AI era.", fr: "Nous sommes à l'ère de l'IA." },
     /**
-     * "Applied AI", not "Technology Consulting": the narrower claim is the
-     * true one, and it is the claim /how-ai-works-here spends a page earning.
+     * The full name, carried untranslated in both locales because it is a name
+     * rather than a description. It replaced "Technology Consulting", which
+     * claimed more than we do and said less.
      */
-    title: { en: "Applied AI", fr: "L'IA appliquée" },
+    title: { en: "Tutto Applied AI", fr: "Tutto Applied AI" },
     standfirst: {
       en: "We build the systems, bridges, and infrastructure that let AI work inside your organisation - not just beside it.",
       fr: "Je construis les systèmes, les passerelles et l'infrastructure qui permettent à l'IA de travailler au sein de votre organisation, et non à côté d'elle.",
