@@ -158,16 +158,21 @@ export default function Pythia() {
         >
           <div className="space-y-8">
             {[
-              { src: "/pythia-shots/orchestrator.webp", caption: t(copy.pythia.shot1) },
-              { src: "/pythia-shots/dashboard.webp", caption: t(copy.pythia.shot2) },
-              { src: "/pythia-shots/disclosure-audit.webp", caption: t(copy.pythia.shot3) },
-              { src: "/pythia-shots/knowledge-map.webp", caption: t(copy.pythia.shot4) },
+              /* Intrinsic heights differ by a few pixels per shot, and they have
+                 to be the real ones: width alone gives the browser no aspect
+                 ratio, so it reserved no space and the page jumped as each
+                 screenshot arrived. */
+              { src: "/pythia-shots/orchestrator.webp", h: 919, caption: t(copy.pythia.shot1) },
+              { src: "/pythia-shots/dashboard.webp", h: 920, caption: t(copy.pythia.shot2) },
+              { src: "/pythia-shots/disclosure-audit.webp", h: 905, caption: t(copy.pythia.shot3) },
+              { src: "/pythia-shots/knowledge-map.webp", h: 897, caption: t(copy.pythia.shot4) },
             ].map((shot) => (
               <figure key={shot.src}>
                 <img
                   src={shot.src}
                   alt=""
                   width={1600}
+                  height={shot.h}
                   loading="lazy"
                   decoding="async"
                   className="w-full rounded-2xl border border-border bg-card"

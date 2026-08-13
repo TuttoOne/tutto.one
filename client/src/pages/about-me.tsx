@@ -263,6 +263,10 @@ export default function About() {
               <img
                 src="/profile.jpg"
                 alt="Daniel Forsthofer"
+                width={675}
+                height={900}
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: "100%",
                   height: "auto",

@@ -121,6 +121,10 @@ function CapabilityGapImage() {
       <img
         src={capabilityGapImg}
         alt={tr("Radar chart: Theoretical AI capability vs observed AI usage by occupational category")}
+        width={3840}
+        height={3840}
+        loading="lazy"
+        decoding="async"
         className="w-full rounded-xl"
       />
       <p className="text-xs text-muted-foreground mt-3 italic text-center">{tr("Source: Anthropic Economic Index - theoretical AI coverage (blue) vs observed AI usage (red) by occupational category")}</p>

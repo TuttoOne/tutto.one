@@ -213,6 +213,8 @@ function ImageCarousel({
         <img
           src={screenshots[current]}
           alt={`${productName} - ${labels[current]}`}
+          loading="lazy"
+          decoding="async"
           className="w-full aspect-[16/10] object-cover object-top"
           data-testid={`img-screenshot-${slug}-${current}`}
         />

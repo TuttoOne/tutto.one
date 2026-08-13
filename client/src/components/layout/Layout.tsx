@@ -29,8 +29,12 @@ export function Header() {
     { label: t(copy.nav.contact), href: "/contact" },
   ];
 
+  /* The header is opaque rather than translucent-and-blurred. A backdrop-filter
+     over a scrolling page is re-rasterised every frame, which is what made the
+     scroll feel unsteady; against a background this close to white the blur was
+     buying almost nothing to look at. Same for the mobile panel below. */
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
+    <header className="fixed top-0 w-full z-50 bg-background border-b border-border/40">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
         <Link
           href="/"
@@ -79,7 +83,7 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-border/40 bg-background/95 backdrop-blur-md">
+        <div className="lg:hidden border-t border-border/40 bg-background">
           <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1 md:hidden">
             {navItems.map((item) => {
               const className = cn(
