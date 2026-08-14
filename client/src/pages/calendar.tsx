@@ -1,54 +1,44 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
-import { CurrencyToggle } from "@/components/layout/PreferenceToggles";
 import { cn } from "@/lib/utils";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
 
-const MAILTO = "mailto:daniel@tutto.one?subject=Applied%20AI%20Evenings";
+const MAILTO = "mailto:daniel@tutto.one?subject=Applied%20AI%20Events";
 
 type Leaf = { en: string; fr: string };
-
-type Evening = {
-  /** Zero-padded so the numerals line up in the left column. */
-  day: string;
-  month: Leaf;
-  weekday: Leaf;
-  title: Leaf;
-  body: Leaf;
-  tag?: Leaf;
-};
 
 const c = copy.calendar;
 
 /**
- * The paid course, Tuesdays 20:00–21:00 Paris, in English. The free overview
- * is not in here: it repeats every week, so it is shown once as a standing
- * slot above rather than as an identical row per Tuesday.
+ * One month of the online run, and every month is the same four. Describing
+ * the cycle once and listing the dates separately keeps the page from
+ * repeating itself twelve times over an autumn.
  */
-const ONLINE: Evening[] = [
-  { day: "15", month: c.sep, weekday: c.tue, title: c.o2Title, body: c.o2Body },
-  { day: "22", month: c.sep, weekday: c.tue, title: c.o3Title, body: c.o3Body },
-  { day: "29", month: c.sep, weekday: c.tue, title: c.o4Title, body: c.o4Body },
-  { day: "06", month: c.oct, weekday: c.tue, title: c.o5Title, body: c.o5Body },
-  { day: "13", month: c.oct, weekday: c.tue, title: c.o6Title, body: c.o6Body },
+const SESSIONS: { n: string; title: Leaf; body: Leaf; free?: boolean }[] = [
+  { n: "1", title: c.o1Title, body: c.o1Body, free: true },
+  { n: "2", title: c.o2Title, body: c.o2Body },
+  { n: "3", title: c.o3Title, body: c.o3Body },
+  { n: "4", title: c.o4Title, body: c.o4Body },
 ];
 
 /**
- * Every second Thursday, 20:30–22:00, in French, in a village hall. The same
- * talk each time in a different commune, so the ordinals run in date order.
- * Each one sits two days after a Tuesday session — the course class that week,
- * or the free overview when the course is not running.
+ * The Tuesdays each cycle lands on. September runs 1–22 and drops the 29th:
+ * a month with five Tuesdays skips the last, so the cycle stays four long.
  */
-const LOT: Evening[] = [
-  { day: "10", month: c.sep, weekday: c.thu, title: c.l1Title, body: c.l1Body, tag: c.tagVenue },
-  { day: "24", month: c.sep, weekday: c.thu, title: c.l2Title, body: c.l2Body, tag: c.tagVenue },
-  { day: "08", month: c.oct, weekday: c.thu, title: c.l3Title, body: c.l3Body, tag: c.tagVenue },
-  { day: "22", month: c.oct, weekday: c.thu, title: c.l4Title, body: c.l4Body, tag: c.tagVenue },
-  { day: "05", month: c.nov, weekday: c.thu, title: c.l5Title, body: c.l5Body, tag: c.tagVenue },
-  { day: "19", month: c.nov, weekday: c.thu, title: c.l6Title, body: c.l6Body, tag: c.tagVenue },
+const TUESDAYS: { month: Leaf; days: string[] }[] = [
+  { month: c.sep, days: ["1", "8", "15", "22"] },
+  { month: c.oct, days: ["6", "13", "20", "27"] },
+  { month: c.nov, days: ["3", "10", "17", "24"] },
+];
+
+/** Every second Thursday, 20:30–22:00, the same talk in a different commune. */
+const THURSDAYS: { month: Leaf; days: string[] }[] = [
+  { month: c.sep, days: ["10", "24"] },
+  { month: c.oct, days: ["8", "22"] },
+  { month: c.nov, days: ["5", "19"] },
 ];
 
 const NOTES: { title: Leaf; body: Leaf }[] = [
@@ -57,40 +47,44 @@ const NOTES: { title: Leaf; body: Leaf }[] = [
   { title: c.note3Title, body: c.note3Body },
 ];
 
-function Listing({ evenings, className = "mt-8" }: { evenings: Evening[]; className?: string }) {
+/** The dates, as a strip of month rows rather than a row per event. */
+function Dates({
+  label,
+  groups,
+  note,
+}: {
+  label: Leaf;
+  groups: { month: Leaf; days: string[] }[];
+  note: Leaf;
+}) {
   const t = useT();
   return (
-    <div className={className}>
-      {evenings.map((e) => (
-        <article
-          key={`${e.month.en}-${e.day}`}
-          className="grid grid-cols-1 sm:grid-cols-[7rem_1fr] gap-3 sm:gap-x-8 sm:gap-y-1 items-start
-                     py-6 border-t border-border last:border-b"
-        >
-          {/* Tabular figures keep the day numerals on the same optical stem. */}
-          <div className="flex items-baseline gap-2.5 sm:gap-2 tabular-nums">
-            <span className="font-serif font-black text-primary text-4xl sm:text-[2.75rem] leading-[0.85] tracking-tighter">
-              {e.day}
+    <div className="mt-8 rounded-2xl border border-border bg-card p-6 md:p-7">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        {t(label)}
+      </p>
+      <div className="mt-4 flex flex-col gap-3">
+        {groups.map((g) => (
+          <div key={g.month.en} className="flex items-baseline gap-4">
+            <span className="w-12 shrink-0 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+              {t(g.month)}
             </span>
-            <span className="flex flex-row sm:flex-col gap-1.5 sm:gap-0 text-[11px] font-semibold uppercase tracking-[0.12em] leading-snug text-muted-foreground">
-              <span>{t(e.month)}</span>
-              <span>{t(e.weekday)}</span>
+            <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5 tabular-nums">
+              {g.days.map((d) => (
+                <span
+                  key={d}
+                  className="font-serif font-black text-2xl leading-none tracking-tight text-primary"
+                >
+                  {d}
+                </span>
+              ))}
             </span>
           </div>
-
-          <div className="flex flex-col gap-1.5">
-            <h3 className="font-serif font-bold text-lg leading-snug text-balance">{t(e.title)}</h3>
-            <p className="max-w-prose text-[15px] leading-relaxed text-muted-foreground">
-              {t(e.body)}
-            </p>
-            {e.tag && (
-              <span className="self-start mt-1 rounded-full border border-border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                {t(e.tag)}
-              </span>
-            )}
-          </div>
-        </article>
-      ))}
+        ))}
+      </div>
+      <p className="mt-5 max-w-prose text-[14px] leading-relaxed text-muted-foreground">
+        {t(note)}
+      </p>
     </div>
   );
 }
@@ -111,7 +105,7 @@ export default function Calendar() {
   }, [locale]);
 
   const perClass = p("eveningClass");
-  const allSix = p("eveningSeries");
+  const allThree = p("eveningSeries");
 
   return (
     <Layout>
@@ -129,14 +123,9 @@ export default function Calendar() {
 
           <div className="flex flex-wrap gap-x-7 gap-y-2 pt-3 mt-1 border-t border-border text-[13px] text-muted-foreground">
             <span className="font-semibold text-foreground">{t(c.factFirstFree)}</span>
-            {/* The header's currency switch is hidden below lg, and this is a
-                page people read to decide what it costs — so the switch is
-                repeated next to the figures. Both drive the same stored
-                preference, so they never disagree. */}
-            <span className="inline-flex items-center gap-2">
+            <span>
               <b className="font-semibold text-foreground">{perClass}</b> {t(c.factPerClass)}{" "}
-              <b className="font-semibold text-foreground">{allSix}</b> {t(c.factAllSix)}
-              <CurrencyToggle className="ml-0.5" />
+              <b className="font-semibold text-foreground">{allThree}</b> {t(c.factAllSix)}
             </span>
             <span className="font-semibold text-foreground">{t(c.factHour)}</span>
             <span>{t(c.factZones)}</span>
@@ -146,41 +135,57 @@ export default function Calendar() {
 
         <section className="mt-14 md:mt-20">
           <h2 className="font-serif font-bold text-2xl tracking-tight">{t(c.onlineTitle)}</h2>
-          <p className="mt-1.5 max-w-prose text-[15px] text-muted-foreground">
-            {t(c.onlineIntroA)} <span className="font-semibold text-foreground">{perClass}</span>{" "}
-            {t(c.onlineIntroB)} <span className="font-semibold text-foreground">{allSix}</span>{" "}
-            {t(c.onlineIntroC)}
-          </p>
-          {/* The recurring free session. A card rather than a dated row,
-              because it has no single date to put in the left column. */}
-          <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/[0.04] p-6 md:p-7 flex flex-col gap-2">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
-              {t(c.standingWhen)}
-            </p>
-            <h3 className="font-serif font-bold text-xl leading-snug text-balance">
-              {t(c.o1Title)}
-            </h3>
-            <p className="max-w-prose text-[15px] leading-relaxed text-muted-foreground">
-              {t(c.o1Body)}
-            </p>
-            <p className="max-w-prose text-[15px] leading-relaxed text-muted-foreground">
-              {t(c.standingNote)}
-            </p>
-            <span className="self-start mt-1 rounded-full bg-primary px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
-              {t(c.standingTag)}
-            </span>
+          <p className="mt-1.5 max-w-prose text-[15px] text-muted-foreground">{t(c.onlineIntro)}</p>
+
+          <div className="mt-8">
+            {SESSIONS.map((s) => (
+              <article
+                key={s.n}
+                className="grid grid-cols-1 sm:grid-cols-[7rem_1fr] gap-3 sm:gap-x-8 sm:gap-y-1
+                           items-start py-6 border-t border-border last:border-b"
+              >
+                {/* Position in the month, where a one-off listing would show a date. */}
+                <div className="flex items-baseline gap-2.5 sm:gap-2">
+                  <span className="font-serif font-black text-primary text-4xl sm:text-[2.75rem] leading-[0.85] tracking-tighter tabular-nums">
+                    {s.n}
+                  </span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em] leading-snug text-muted-foreground">
+                    {t(c.nthTuesday)}
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <h3 className="font-serif font-bold text-lg leading-snug text-balance">
+                    {t(s.title)}
+                  </h3>
+                  <p className="max-w-prose text-[15px] leading-relaxed text-muted-foreground">
+                    {t(s.body)}
+                  </p>
+                  {s.free && (
+                    <span className="self-start mt-1 rounded-full bg-primary px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
+                      {t(c.tagFree)}
+                    </span>
+                  )}
+                </div>
+              </article>
+            ))}
           </div>
 
-          <p className="mt-10 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            {t(c.courseLabel)}
-          </p>
-          <Listing evenings={ONLINE} className="mt-3" />
+          <Dates label={c.datesLabel} groups={TUESDAYS} note={c.datesNote} />
         </section>
 
         <section className="mt-14 md:mt-20">
           <h2 className="font-serif font-bold text-2xl tracking-tight">{t(c.lotTitle)}</h2>
           <p className="mt-1.5 max-w-prose text-[15px] text-muted-foreground">{t(c.lotIntro)}</p>
-          <Listing evenings={LOT} />
+
+          <div className="mt-8 pt-6 border-t border-border flex flex-col gap-1.5">
+            <h3 className="font-serif font-bold text-lg leading-snug">{t(c.lotEveningTitle)}</h3>
+            <p className="max-w-prose text-[15px] leading-relaxed text-muted-foreground">
+              {t(c.lotEveningBody)}
+            </p>
+          </div>
+
+          <Dates label={c.lotDatesLabel} groups={THURSDAYS} note={c.lotDatesNote} />
         </section>
 
         {/* Set before the notes and the sign-up panel: someone deciding what to
@@ -213,9 +218,9 @@ export default function Calendar() {
                   {t(col.head)}
                 </h3>
                 <ul className="flex flex-col gap-2.5">
-                  {col.points.map((p) => (
+                  {col.points.map((pt) => (
                     <li
-                      key={p.en}
+                      key={pt.en}
                       className="grid grid-cols-[0.75rem_1fr] gap-2 text-[15px] leading-relaxed text-muted-foreground"
                     >
                       <span
@@ -225,7 +230,7 @@ export default function Calendar() {
                           col.here ? "bg-primary" : "bg-muted-foreground/40",
                         )}
                       />
-                      <span>{t(p)}</span>
+                      <span>{t(pt)}</span>
                     </li>
                   ))}
                 </ul>

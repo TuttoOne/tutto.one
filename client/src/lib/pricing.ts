@@ -50,16 +50,20 @@ const HOUR = { GBP: 83, EUR: 100, ZAR: 2000 };
 /** One Applied AI Evening — a single online class. The pass is a multiple of this. */
 const EVENING = { GBP: 40, EUR: 50, ZAR: 1000 };
 /**
- * Paid classes in the online course. The free Tuesday overview repeats weekly
- * and is not one of them, so this is five rather than the six dates listed.
+ * Paid classes in one month of the online course. The free session on the
+ * first Tuesday is not one of them, so a month is three paid plus one free.
  */
-export const EVENING_CLASSES = 5;
+export const EVENING_CLASSES = 3;
 /**
- * Classes actually charged for in the pass: five run, four are paid for. The
- * pass price is computed from this so "five for the price of four" stays true
+ * Classes actually charged for in the pass: three run, two are paid for. The
+ * pass price is computed from this so "three for the price of two" stays true
  * in every currency instead of being typed in three times and drifting.
+ *
+ * It has to stay below EVENING_CLASSES or the pass costs more than buying the
+ * classes one at a time, which is what happened when the course was cut from
+ * five to three and this was left at four.
  */
-const EVENING_CLASSES_PAID = 4;
+const EVENING_CLASSES_PAID = 2;
 /**
  * Hours in one scripting engagement, taken from a delivered piece of work
  * rather than estimated. Exported so the figure can be quoted alongside the

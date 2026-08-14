@@ -24,7 +24,7 @@ export function Header() {
       external: true,
     },
     { label: t(copy.nav.praxis), href: "/praxis" },
-    { label: t(copy.nav.evenings), href: "/calendar" },
+    { label: t(copy.nav.events), href: "/calendar" },
     { label: t(copy.nav.pythia), href: "/pythia" },
     { label: t(copy.nav.thinking), href: "/blog" },
     { label: t(copy.nav.contact), href: "/contact" },
