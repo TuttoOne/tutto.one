@@ -12,6 +12,12 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "You will not learn to code.": "Vous n'apprendrez pas à coder.",
   "You will learn to build.": "Vous apprendrez à construire.",
 
+  "One-to-one, or a small group of your own people. Either way it is built around you, not around a syllabus.":
+    "En t\u00eate-\u00e0-t\u00eate, ou en petit groupe compos\u00e9 de vos propres collaborateurs. Dans les deux cas, le programme se construit autour de vous, et non autour d'un r\u00e9f\u00e9rentiel.",
+  "Your use cases": "Vos cas d'usage",
+  "Send the work you want to fix when you register - the quote, the report, the weekly export. We learn on your examples from the first session. The group evenings run on generic ones; this does not.":
+    "Envoyez \u00e0 l'inscription le travail que vous voulez corriger : le devis, le rapport, l'export hebdomadaire. Nous apprenons sur vos exemples d\u00e8s la premi\u00e8re s\u00e9ance. Les soir\u00e9es collectives fonctionnent sur des exemples g\u00e9n\u00e9riques ; ce programme, non.",
+
   "Who This Is For": "\u00c0 qui cela s'adresse",
   "Why a Person, Not Another Video":
     "Pourquoi un accompagnant plut\u00f4t qu'une vid\u00e9o de plus",

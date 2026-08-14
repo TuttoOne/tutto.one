@@ -292,7 +292,8 @@ export default function PraxisProgramme() {
           </div>
           <div className="pp-cols-2">
             {[
-              { label: "Format", body: "One-to-one or small group. You choose what suits you." },
+              { label: "Format", body: "One-to-one, or a small group of your own people. Either way it is built around you, not around a syllabus." },
+              { label: "Your use cases", body: "Send the work you want to fix when you register - the quote, the report, the weekly export. We learn on your examples from the first session. The group evenings run on generic ones; this does not." },
               { label: "Cadence", body: "One session a week, about an hour each, over roughly two months. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
               { label: "What you need", body: "A laptop - Mac or Windows. An account with the AI assistant of your choice. We set up everything else together in the first session." },

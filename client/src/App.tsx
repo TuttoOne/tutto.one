@@ -15,6 +15,7 @@ import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
 import Praxis from "@/pages/praxis";
 import PraxisProgramme from "@/pages/praxis-programme";
+import Calendar from "@/pages/calendar";
 import Pythia from "@/pages/pythia";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
@@ -51,6 +52,7 @@ function Router() {
         <Route path="/services" component={Services} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/praxis" component={Praxis} />
+        <Route path="/calendar" component={Calendar} />
         <Route path="/pythia" component={Pythia} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />

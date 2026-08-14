@@ -24,6 +24,7 @@ export function Header() {
       external: true,
     },
     { label: t(copy.nav.praxis), href: "/praxis" },
+    { label: t(copy.nav.evenings), href: "/calendar" },
     { label: t(copy.nav.pythia), href: "/pythia" },
     { label: t(copy.nav.thinking), href: "/blog" },
     { label: t(copy.nav.contact), href: "/contact" },
@@ -47,7 +48,11 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden md:flex gap-4 lg:gap-6">
+        {/* Breakpoints are set by the French labels, which run about 40% longer
+            than the English: nine items plus the toggles only fit from xl, and
+            the full row only fits from lg. Below that everything lives in the
+            menu. Sizing this off the English overflowed /fr at 768 and 1024. */}
+        <nav className="hidden lg:flex gap-3 xl:gap-5">
           {navItems.map((item) => {
             const className = cn(
               "text-sm font-medium transition-colors hover:text-primary cursor-pointer whitespace-nowrap",
@@ -65,14 +70,14 @@ export function Header() {
           })}
         </nav>
 
-        {/* Toggles need room; below lg they move into the mobile menu. */}
-        <div className="hidden lg:flex items-center gap-2 shrink-0">
+        {/* Toggles need room; below xl they move into the menu. */}
+        <div className="hidden xl:flex items-center gap-2 shrink-0">
           <LanguageToggle />
           <CurrencyToggle />
         </div>
 
         <button
-          className="lg:hidden p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors"
+          className="xl:hidden p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           data-testid="button-mobile-menu"
           aria-label={t(copy.nav.menu)}
@@ -83,8 +88,8 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-border/40 bg-background">
-          <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1 md:hidden">
+        <div className="xl:hidden border-t border-border/40 bg-background">
+          <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1 lg:hidden">
             {navItems.map((item) => {
               const className = cn(
                 "text-sm font-medium py-3 px-3 rounded-lg transition-colors",

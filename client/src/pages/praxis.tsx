@@ -162,15 +162,42 @@ export default function Praxis() {
         </Section>
 
         <Section index="05" label={t(copy.praxis.s5Label)}>
-          <div className="bg-secondary/30 border border-border rounded-2xl p-6 max-w-2xl">
-            <Eyebrow className="mb-3 text-muted-foreground/70">{t(copy.praxis.prereqLabel)}</Eyebrow>
-            <p className="text-muted-foreground leading-relaxed">{t(copy.praxis.prereq)}</p>
+          <div className="grid md:grid-cols-2 gap-5 items-start max-w-4xl">
+            {/* What separates this from the group evenings: it runs on work the
+                client sends first, so it is the first thing asked for. */}
+            <div className="bg-primary/[0.04] border border-primary/30 rounded-2xl p-6">
+              <Eyebrow className="mb-3 text-primary">{t(copy.praxis.tailoredLabel)}</Eyebrow>
+              <p className="text-muted-foreground leading-relaxed">{t(copy.praxis.tailored)}</p>
+            </div>
+            <div className="bg-secondary/30 border border-border rounded-2xl p-6">
+              <Eyebrow className="mb-3 text-muted-foreground/70">
+                {t(copy.praxis.prereqLabel)}
+              </Eyebrow>
+              <p className="text-muted-foreground leading-relaxed">{t(copy.praxis.prereq)}</p>
+            </div>
           </div>
         </Section>
 
         <Link
-          href="/praxis-programme"
+          href="/calendar"
           className="mt-16 group flex items-center justify-between gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
+        >
+          <div>
+            <p className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+              {t(copy.calendar.fromPraxisTitle)}
+            </p>
+            <p className="text-sm text-muted-foreground mt-1 max-w-xl">
+              {t(copy.calendar.fromPraxisBody)}
+            </p>
+          </div>
+          <span className="hidden sm:inline text-sm font-medium text-primary shrink-0">
+            {t(copy.calendar.fromPraxisLink)} →
+          </span>
+        </Link>
+
+        <Link
+          href="/praxis-programme"
+          className="mt-4 group flex items-center justify-between gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
         >
           <div>
             <p className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors">

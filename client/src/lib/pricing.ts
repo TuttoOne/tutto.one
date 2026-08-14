@@ -29,6 +29,8 @@ export type PriceKey =
   | "sessionStandard"
   | "sessionPromo"
   | "toolsMonthly"
+  | "eveningClass"
+  | "eveningSeries"
   // Engagements
   | "sprint"
   | "scriptBuildFrom"
@@ -44,6 +46,20 @@ const SESSION = { GBP: 200, EUR: 250, ZAR: 5000 };
 
 /** Build rate per hour. The scripting engagement is a multiple of this. */
 const HOUR = { GBP: 83, EUR: 100, ZAR: 2000 };
+
+/** One Applied AI Evening — a single online class. The pass is a multiple of this. */
+const EVENING = { GBP: 40, EUR: 50, ZAR: 1000 };
+/**
+ * Paid classes in the online course. The free Tuesday overview repeats weekly
+ * and is not one of them, so this is five rather than the six dates listed.
+ */
+export const EVENING_CLASSES = 5;
+/**
+ * Classes actually charged for in the pass: five run, four are paid for. The
+ * pass price is computed from this so "five for the price of four" stays true
+ * in every currency instead of being typed in three times and drifting.
+ */
+const EVENING_CLASSES_PAID = 4;
 /**
  * Hours in one scripting engagement, taken from a delivered piece of work
  * rather than estimated. Exported so the figure can be quoted alongside the
@@ -59,6 +75,14 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
   sessionPromo: { GBP: 100, EUR: 125, ZAR: 2500 },
   /** Third-party AI subscription, approx. Quoted at ~$20/mo at source. */
   toolsMonthly: { GBP: 16, EUR: 19, ZAR: 400 },
+  /** One Applied AI Evening, online. The first class of the run is free. */
+  eveningClass: EVENING,
+  /** The whole course, computed so it cannot contradict the class rate. */
+  eveningSeries: {
+    GBP: EVENING.GBP * EVENING_CLASSES_PAID,
+    EUR: EVENING.EUR * EVENING_CLASSES_PAID,
+    ZAR: EVENING.ZAR * EVENING_CLASSES_PAID,
+  },
 
   /**
    * Two-week diagnostic sprint — the data audit and knowledge map. Pythia and
