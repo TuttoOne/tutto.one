@@ -716,8 +716,8 @@ export const copy = {
     eyebrow: { en: "Praxis · Autumn 2026", fr: "Praxis · Automne 2026" },
     title: { en: "Applied AI Evenings", fr: "Les soirées IA appliquée" },
     leadA: {
-      en: "The same four sessions online every month — the first one free — and an evening in person in the Lot every fortnight. After work, an hour online or ninety minutes in a hall.",
-      fr: "Les quatre mêmes séances en ligne chaque mois — la première gratuite — et une soirée en présentiel dans le Lot tous les quinze jours. Après le travail : une heure en ligne, ou quatre-vingt-dix minutes dans une salle.",
+      en: "The same four sessions online every month, the first one free, and an evening in person in the Lot every fortnight. After work, an hour online or ninety minutes in a hall.",
+      fr: "Les quatre mêmes séances en ligne chaque mois, la première gratuite, et une soirée en présentiel dans le Lot tous les quinze jours. Après le travail : une heure en ligne, ou quatre-vingt-dix minutes dans une salle.",
     },
     leadStrong: {
       en: "Every date stands on its own.",
@@ -731,8 +731,7 @@ export const copy = {
     factFirstFree: { en: "First Tuesday free", fr: "Premier mardi gratuit" },
     factPerClass: { en: "a class,", fr: "la séance," },
     factAllSix: { en: "for all three", fr: "les trois" },
-    factHour: { en: "One hour, 20:00 Paris", fr: "Une heure, 20h00 heure de Paris" },
-    factZones: { en: "19:00 UK · 20:00 South Africa", fr: "19h00 Royaume-Uni · 20h00 Afrique du Sud" },
+    factHour: { en: "One hour, 20:00 CET", fr: "Une heure, 20h00 CET" },
     factLotFree: { en: "Lot evenings free", fr: "Soirées du Lot gratuites" },
 
     onlineTitle: { en: "Online, every month", fr: "En ligne, chaque mois" },
@@ -742,6 +741,11 @@ export const copy = {
     },
     /** Marks a session's place in the monthly cycle, in place of a date. */
     nthTuesday: { en: "Tue of the month", fr: "mardi du mois" },
+    /** Ordinal suffix set superscript against the session number. */
+    ord1: { en: "st", fr: "er" },
+    ord2: { en: "nd", fr: "e" },
+    ord3: { en: "rd", fr: "e" },
+    ord4: { en: "th", fr: "e" },
     datesLabel: { en: "The Tuesdays", fr: "Les mardis" },
     datesNote: {
       en: "When a month has five Tuesdays the last one is skipped, so September finishes on the 22nd.",
@@ -750,8 +754,8 @@ export const copy = {
 
     lotTitle: { en: "In the Lot, in person", fr: "Dans le Lot, en présentiel" },
     lotIntro: {
-      en: "Every second Thursday, 20:30 to 22:00, in French. Ninety minutes in a village hall, open to anyone, and free. It is the same evening each time in a different commune, so come to whichever is nearest — there is nothing to catch up on and no order to follow.",
-      fr: "Un jeudi sur deux, de 20h30 à 22h00, en français. Quatre-vingt-dix minutes dans une salle des fêtes, ouvertes à tous, et gratuites. C'est la même soirée à chaque fois, dans une commune différente : venez à la plus proche — rien à rattraper, aucun ordre à suivre.",
+      en: "Every second Thursday, 20:30 to 22:00, in French. Ninety minutes in a village hall, open to anyone, and free. It is the same evening each time in a different commune, so come to whichever is nearest. There is nothing to catch up on and no order to follow.",
+      fr: "Un jeudi sur deux, de 20h30 à 22h00, en français. Quatre-vingt-dix minutes dans une salle des fêtes, ouvertes à tous, et gratuites. C'est la même soirée à chaque fois, dans une commune différente ; venez à la plus proche. Rien à rattraper, aucun ordre à suivre.",
     },
     lotDatesLabel: { en: "The Thursdays", fr: "Les jeudis" },
     lotDatesNote: {
@@ -796,8 +800,8 @@ export const copy = {
       fr: "Vos règles, vos connexions, et quelque chose de réel",
     },
     o4Body: {
-      en: "Write down the rules your work already follows, so a tool applies them the same way every time, including the day you are not there. Connect it to your calendar, your drive, your documents, with you deciding what it can touch. Then one build end to end on a job that comes round every week — your own MCP included, the small piece that lets an assistant reach a system you already use.",
-      fr: "Mettez par écrit les règles que votre travail suit déjà, pour qu'un outil les applique de la même façon à chaque fois, y compris le jour où vous n'êtes pas là. Reliez-le à votre agenda, votre espace de stockage, vos documents, en décidant vous-même de ce qu'il peut toucher. Puis une construction de bout en bout sur une tâche qui revient chaque semaine — votre propre MCP compris, la petite pièce qui permet à un assistant d'atteindre un système que vous utilisez déjà.",
+      en: "Write down the rules your work already follows, so a tool applies them the same way every time, including the day you are not there. Connect it to your calendar, your drive, your documents, with you deciding what it can touch. Then one build end to end on a job that comes round every week, your own MCP included, the small piece that lets an assistant reach a system you already use.",
+      fr: "Mettez par écrit les règles que votre travail suit déjà, pour qu'un outil les applique de la même façon à chaque fois, y compris le jour où vous n'êtes pas là. Reliez-le à votre agenda, votre espace de stockage, vos documents, en décidant vous-même de ce qu'il peut toucher. Puis une construction de bout en bout sur une tâche qui revient chaque semaine, votre propre MCP compris, la petite pièce qui permet à un assistant d'atteindre un système que vous utilisez déjà.",
     },
 
     /** One description, since it is the same talk in each commune. */
@@ -815,7 +819,7 @@ export const copy = {
     note2Title: { en: "Built live, not recorded", fr: "Construit en direct, pas préenregistré" },
     note2Body: {
       en: "The part that matters has no slides. Things occasionally go wrong on screen, which is the useful bit, and the part a polished video will never show you.",
-      fr: "La partie qui compte n'a pas de diapositives. Il arrive que les choses se passent mal à l'écran, et c'est justement le plus utile — ce qu'une vidéo bien léchée ne vous montrera jamais.",
+      fr: "La partie qui compte n'a pas de diapositives. Il arrive que les choses se passent mal à l'écran, et c'est justement le plus utile : ce qu'une vidéo bien léchée ne vous montrera jamais.",
     },
     /**
      * The distinction that matters commercially: these are group workshops on
@@ -834,8 +838,8 @@ export const copy = {
       fr: "En groupe. D'autres personnes sont là, avec leurs propres questions.",
     },
     compareA2: {
-      en: "Generic examples — a carpenter's quote, a report that comes round every week. Not your files.",
-      fr: "Des exemples génériques — le devis d'un menuisier, un rapport qui revient chaque semaine. Pas vos fichiers.",
+      en: "Generic examples: a carpenter's quote, a report that comes round every week. Not your files.",
+      fr: "Des exemples génériques : le devis d'un menuisier, un rapport qui revient chaque semaine. Pas vos fichiers.",
     },
     compareA3: {
       en: "Short. A free hour, or three classes if you want the course.",

@@ -17,11 +17,11 @@ const c = copy.calendar;
  * the cycle once and listing the dates separately keeps the page from
  * repeating itself twelve times over an autumn.
  */
-const SESSIONS: { n: string; title: Leaf; body: Leaf; free?: boolean }[] = [
-  { n: "1", title: c.o1Title, body: c.o1Body, free: true },
-  { n: "2", title: c.o2Title, body: c.o2Body },
-  { n: "3", title: c.o3Title, body: c.o3Body },
-  { n: "4", title: c.o4Title, body: c.o4Body },
+const SESSIONS: { n: string; ord: Leaf; title: Leaf; body: Leaf; free?: boolean }[] = [
+  { n: "1", ord: c.ord1, title: c.o1Title, body: c.o1Body, free: true },
+  { n: "2", ord: c.ord2, title: c.o2Title, body: c.o2Body },
+  { n: "3", ord: c.ord3, title: c.o3Title, body: c.o3Body },
+  { n: "4", ord: c.ord4, title: c.o4Title, body: c.o4Body },
 ];
 
 /**
@@ -63,17 +63,20 @@ function Dates({
       <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
         {t(label)}
       </p>
-      <div className="mt-4 flex flex-col gap-3">
+      <div className="mt-4 flex flex-col gap-2.5">
         {groups.map((g) => (
-          <div key={g.month.en} className="flex items-baseline gap-4">
+          <div key={g.month.en} className="flex items-center gap-4">
             <span className="w-12 shrink-0 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
               {t(g.month)}
             </span>
-            <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5 tabular-nums">
+            {/* Each date boxed, so the strip reads as days on a calendar. */}
+            <span className="flex flex-wrap gap-2 tabular-nums">
               {g.days.map((d) => (
                 <span
                   key={d}
-                  className="font-serif font-black text-2xl leading-none tracking-tight text-primary"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl
+                             border border-primary/25 bg-primary/[0.06]
+                             font-serif font-black text-xl leading-none tracking-tight text-primary"
                 >
                   {d}
                 </span>
@@ -121,14 +124,14 @@ export default function Calendar() {
             {t(c.leadA)} <strong className="font-semibold">{t(c.leadStrong)}</strong> {t(c.leadB)}
           </p>
 
-          <div className="flex flex-wrap gap-x-7 gap-y-2 pt-3 mt-1 border-t border-border text-[13px] text-muted-foreground">
+          {/* One line each on a phone, a single wrapped row from sm up. */}
+          <div className="flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:gap-x-7 sm:gap-y-2 pt-3 mt-1 border-t border-border text-[13px] text-muted-foreground">
             <span className="font-semibold text-foreground">{t(c.factFirstFree)}</span>
             <span>
               <b className="font-semibold text-foreground">{perClass}</b> {t(c.factPerClass)}{" "}
               <b className="font-semibold text-foreground">{allThree}</b> {t(c.factAllSix)}
             </span>
             <span className="font-semibold text-foreground">{t(c.factHour)}</span>
-            <span>{t(c.factZones)}</span>
             <span>{t(c.factLotFree)}</span>
           </div>
         </header>
@@ -141,13 +144,15 @@ export default function Calendar() {
             {SESSIONS.map((s) => (
               <article
                 key={s.n}
-                className="grid grid-cols-1 sm:grid-cols-[7rem_1fr] gap-3 sm:gap-x-8 sm:gap-y-1
+                className="grid grid-cols-1 sm:grid-cols-[9rem_1fr] gap-3 sm:gap-x-8 sm:gap-y-1
                            items-start py-6 border-t border-border last:border-b"
               >
                 {/* Position in the month, where a one-off listing would show a date. */}
                 <div className="flex items-baseline gap-2.5 sm:gap-2">
                   <span className="font-serif font-black text-primary text-4xl sm:text-[2.75rem] leading-[0.85] tracking-tighter tabular-nums">
                     {s.n}
+                    {/* Ordinal set small and high, off the numeral's top right. */}
+                    <sup className="text-[0.36em] font-bold tracking-normal">{t(s.ord)}</sup>
                   </span>
                   <span className="text-[11px] font-semibold uppercase tracking-[0.12em] leading-snug text-muted-foreground">
                     {t(c.nthTuesday)}
