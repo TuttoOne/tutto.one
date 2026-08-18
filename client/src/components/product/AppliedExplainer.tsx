@@ -92,7 +92,7 @@ export function AppliedExplainer() {
 
   const routes = [
     { href: "/praxis", title: t(copy.applied.r1Title), body: t(copy.applied.r1Body) },
-    { href: "/services", title: t(copy.applied.r2Title), body: t(copy.applied.r2Body) },
+    { href: "/ways-in", title: t(copy.applied.r2Title), body: t(copy.applied.r2Body) },
     { href: "/pythia", title: t(copy.applied.r3Title), body: t(copy.applied.r3Body) },
   ];
 

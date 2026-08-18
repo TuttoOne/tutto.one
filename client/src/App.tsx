@@ -11,6 +11,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import AboutMe from "@/pages/about-me";
+import WaysIn from "@/pages/ways-in";
 import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
 import Praxis from "@/pages/praxis";
@@ -49,6 +50,9 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/about/me" component={AboutMe} />
+        {/* /ways-in is what the nav opens; /services is the priced detail
+           one click down, and keeps its URL so shared links still land. */}
+        <Route path="/ways-in" component={WaysIn} />
         <Route path="/services" component={Services} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/praxis" component={Praxis} />

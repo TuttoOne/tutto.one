@@ -21,6 +21,10 @@ export const SITE_TITLE = "Tutto | Applied AI";
 export const copy = {
   nav: {
     about: { en: "About", fr: "À propos" },
+    /* The nav entry now opens /ways-in; the priced detail lives at /services,
+       one click down. "Approche" is deliberately shorter than "Prestations" —
+       the row's breakpoints are set by the French, per the note in Layout. */
+    approach: { en: "Approach", fr: "Approche" },
     services: { en: "Services", fr: "Prestations" },
     work: { en: "Work", fr: "Réalisations" },
     praxis: { en: "Praxis", fr: "Praxis" },
@@ -134,6 +138,128 @@ export const copy = {
       fr: "Réservez un appel de trente minutes. Nous vous dirons honnêtement laquelle de ces prestations vous convient — ou si aucune ne convient.",
     },
     runDiagnostic: { en: "Book a call", fr: "Réserver un appel" },
+    backToApproach: { en: "How we work", fr: "Notre façon de travailler" },
+  },
+
+  /**
+   * The alternate services page at /ways-in.
+   *
+   * The six things clients ask for collapse onto one axis — whether we end up
+   * owning the system or they do — so the page is two columns of three rather
+   * than six cards. The numerals are kept because the six map back to a real
+   * list; they are not decoration.
+   */
+  waysIn: {
+    eyebrow: { en: "How we work", fr: "Notre façon de travailler" },
+    title: { en: "Two ways in", fr: "Deux portes d'entrée" },
+    lead1: {
+      en: "Every engagement is scoped to what you actually want, so this is not a menu. It is the two shapes the work takes.",
+      fr: "Chaque mission est cadrée sur ce que vous voulez vraiment : ceci n'est donc pas un catalogue, mais les deux formes que prend le travail.",
+    },
+    lead2: {
+      en: "We build it, or you learn to build it. Most clients end up doing both.",
+      fr: "Soit nous le construisons, soit vous apprenez à le construire. La plupart de nos clients finissent par faire les deux.",
+    },
+    meta: {
+      en: "Scoped in one call. Nothing here is a package.",
+      fr: "Cadré en un seul appel. Rien de tout ceci n'est un forfait.",
+    },
+
+    s1Label: { en: "What you want", fr: "Ce que vous voulez" },
+
+    buildHeading: { en: "We build it", fr: "Nous le construisons" },
+    buildQualifier: {
+      en: "You end up with a system that runs.",
+      fr: "Vous repartez avec un système qui tourne.",
+    },
+    buildCta: { en: "See what we have built", fr: "Voir ce que nous avons construit" },
+
+    learnHeading: { en: "You build it", fr: "Vous le construisez" },
+    learnQualifier: {
+      en: "You end up able to build the next one.",
+      fr: "Vous repartez capable de construire le suivant.",
+    },
+    learnCta: { en: "How Praxis works", fr: "Comment fonctionne Praxis" },
+
+    b1Q: {
+      en: "“I want something to just run.”",
+      fr: "« Je veux quelque chose qui tourne, tout simplement. »",
+    },
+    b1Body: {
+      en: "Automation, data plumbing, a script that ends a chore you repeat every week. It runs on infrastructure you already have.",
+      fr: "Automatisation, mise en ordre des données, un script qui met fin à une corvée hebdomadaire. Le tout sur une infrastructure que vous avez déjà.",
+    },
+    b2Q: {
+      en: "“I want it to make judgement calls, not just move data.”",
+      fr: "« Je veux qu'il tranche, pas seulement qu'il déplace des données. »",
+    },
+    b2Body: {
+      en: "A front end your team actually uses, with a model in the loop at the point where the decision is — triggered by the work itself, not by someone remembering to open a chat window.",
+      fr: "Une interface que votre équipe utilise vraiment, avec un modèle dans la boucle là où se prend la décision — déclenché par le travail lui-même, et non parce que quelqu'un a pensé à ouvrir une fenêtre de conversation.",
+    },
+    b3Q: {
+      en: "“I want it wired into what we already pay for.”",
+      fr: "« Je veux que ce soit branché sur ce que nous payons déjà. »",
+    },
+    b3Body: {
+      en: "API and MCP work. Your CRM, your SharePoint, your finance system — reachable by the AI your team already has open, instead of copy-pasted into it.",
+      fr: "Travail d'API et de MCP. Votre CRM, votre SharePoint, votre outil comptable — accessibles à l'IA que votre équipe a déjà ouverte, au lieu d'y être recopiés à la main.",
+    },
+
+    l1Q: {
+      en: "“I want to build my own.”",
+      fr: "« Je veux construire les miens. »",
+    },
+    l1Body: {
+      en: "We build the first one alongside you, on your problem, with your team watching how it is done. You build the rest without us.",
+      fr: "Nous construisons le premier avec vous, sur votre problème, votre équipe voyant comment on s'y prend. Vous construisez les suivants sans nous.",
+    },
+    l2Q: {
+      en: "“I want to actually be good at this.”",
+      fr: "« Je veux vraiment savoir m'en servir. »",
+    },
+    l2Body: {
+      en: "Praxis. One hour at a time, on your own work, until something you brought with you runs.",
+      fr: "Praxis. Une heure à la fois, sur votre propre travail, jusqu'à ce que ce que vous avez apporté fonctionne.",
+    },
+    l3Q: {
+      en: "“I want the whole organisation to be.”",
+      fr: "« Je veux que toute l'organisation le soit. »",
+    },
+    l3Body: {
+      en: "Discovery, then strategy. Implementation and change management if you want us for those, and support once it is live.",
+      fr: "Diagnostic, puis stratégie. Mise en œuvre et conduite du changement si vous souhaitez nous confier ces étapes, et accompagnement une fois le système en service.",
+    },
+
+    s2Label: { en: "What it costs", fr: "Ce que cela coûte" },
+    s2Title: { en: "Diagnostic", fr: "Diagnostic" },
+    /** `{price}` is replaced with the two-week diagnostic, in the reader's currency. */
+    priceBody1: {
+      en: "Most engagements start with a two-week diagnostic — {price}. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
+      fr: "La plupart des missions commencent par un diagnostic de deux semaines — {price}. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
+    },
+    priceBody2: {
+      en: "After that, nothing here is a package. Build work is quoted from the scope the diagnostic found. Training is priced per session. We will tell you on the first call if we think the answer is smaller than you expected.",
+      fr: "Ensuite, rien de tout ceci n'est un forfait. Le développement est chiffré à partir du périmètre révélé par le diagnostic. La formation est facturée à la séance. Nous vous dirons dès le premier appel si nous pensons que la réponse est plus modeste que ce que vous imaginiez.",
+    },
+
+    detailLabel: {
+      en: "The engagements in detail",
+      fr: "Le détail des prestations",
+    },
+    detailBody: {
+      en: "Named packages, what each one includes, and what it costs.",
+      fr: "Prestations nommées, ce que chacune comprend, et son prix.",
+    },
+
+    ctaTitle: {
+      en: "Not sure which column you are in?",
+      fr: "Vous ne savez pas dans quelle colonne vous êtes ?",
+    },
+    ctaBody: {
+      en: "Almost nobody is, at the start. Thirty minutes is usually enough to tell — and we will say so if the honest answer is that you do not need us.",
+      fr: "Au début, presque personne ne le sait. Trente minutes suffisent généralement à le déterminer — et nous vous le dirons si la réponse honnête est que vous n'avez pas besoin de nous.",
+    },
   },
 
   blogPost: {

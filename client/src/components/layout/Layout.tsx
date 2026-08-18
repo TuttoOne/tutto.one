@@ -16,7 +16,7 @@ export function Header() {
      handle /usecase/ in the client and land on the 404 route. */
   const navItems = [
     { label: t(copy.nav.about), href: "/about" },
-    { label: t(copy.nav.services), href: "/services" },
+    { label: t(copy.nav.approach), href: "/ways-in" },
     { label: t(copy.nav.work), href: "/portfolio" },
     {
       label: t({ en: "Use cases", fr: "Cas d'usage" }),

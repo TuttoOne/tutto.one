@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
@@ -29,7 +29,16 @@ export default function Services() {
   return (
     <Layout>
       <div className="max-w-5xl mx-auto px-6 py-12">
-        <div className="text-center mb-16">
+        {/* This page is now the detail layer under /ways-in rather than the
+            entry point, so it opens with the way back up. */}
+        <Link
+          href="/ways-in"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" /> {t(copy.services.backToApproach)}
+        </Link>
+
+        <div className="text-center mb-16 mt-8">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
             {t(copy.services.title)}
           </h1>
