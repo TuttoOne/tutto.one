@@ -11,7 +11,6 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import AboutMe from "@/pages/about-me";
-import WaysIn from "@/pages/ways-in";
 import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
 import Praxis from "@/pages/praxis";
@@ -50,9 +49,6 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/about/me" component={AboutMe} />
-        {/* /ways-in is what the nav opens; /services is the priced detail
-           one click down, and keeps its URL so shared links still land. */}
-        <Route path="/ways-in" component={WaysIn} />
         <Route path="/services" component={Services} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/praxis" component={Praxis} />
@@ -68,6 +64,9 @@ function Router() {
         {/* The explainer had its own page for a day; it now opens the home page.
             The URL stays alive so anything already shared still lands. */}
         <Route path="/how-ai-works-here">{() => <Redirect to="/" />}</Route>
+        {/* "How we work" was briefly its own page; it is now the top of
+           /services, so send anything that points here down to it. */}
+        <Route path="/ways-in">{() => <Redirect to="/services" />}</Route>
         <Route path="/praxis-programme" component={PraxisProgramme} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
         <Route path="/become-a-trainer" component={BecomeATrainer} />

@@ -21,10 +21,6 @@ export const SITE_TITLE = "Tutto | Applied AI";
 export const copy = {
   nav: {
     about: { en: "About", fr: "À propos" },
-    /* The nav entry now opens /ways-in; the priced detail lives at /services,
-       one click down. "Approche" is deliberately shorter than "Prestations" —
-       the row's breakpoints are set by the French, per the note in Layout. */
-    approach: { en: "Approach", fr: "Approche" },
     services: { en: "Services", fr: "Prestations" },
     work: { en: "Work", fr: "Réalisations" },
     praxis: { en: "Praxis", fr: "Praxis" },
@@ -132,22 +128,17 @@ export const copy = {
       fr: "Préparer votre organisation à une main-d'œuvre automatisée.",
     },
     inquire: { en: "Inquire", fr: "Nous consulter" },
-    notSureTitle: { en: "Not sure where to start?", fr: "Vous ne savez pas par où commencer ?" },
-    notSureBody: {
-      en: "Book a thirty-minute call. We'll tell you honestly which of these fits, or whether none of them does.",
-      fr: "Réservez un appel de trente minutes. Nous vous dirons honnêtement laquelle de ces prestations vous convient — ou si aucune ne convient.",
-    },
     runDiagnostic: { en: "Book a call", fr: "Réserver un appel" },
-    backToApproach: { en: "How we work", fr: "Notre façon de travailler" },
   },
 
   /**
-   * The alternate services page at /ways-in.
+   * The opening of /services, above the named engagements.
    *
    * The six things clients ask for collapse onto one axis — whether we end up
-   * owning the system or they do — so the page is two columns of three rather
-   * than six cards. The numerals are kept because the six map back to a real
-   * list; they are not decoration.
+   * owning the system or they do — so it is two columns of three rather than
+   * six cards. The numerals are kept because the six map back to a real list;
+   * they are not decoration. Named `waysIn` after the headline rather than the
+   * page, since the page also carries the `services` block below it.
    */
   waysIn: {
     eyebrow: { en: "How we work", fr: "Notre façon de travailler" },
@@ -241,15 +232,6 @@ export const copy = {
     priceBody2: {
       en: "After that, nothing here is a package. Build work is quoted from the scope the diagnostic found. Training is priced per session. We will tell you on the first call if we think the answer is smaller than you expected.",
       fr: "Ensuite, rien de tout ceci n'est un forfait. Le développement est chiffré à partir du périmètre révélé par le diagnostic. La formation est facturée à la séance. Nous vous dirons dès le premier appel si nous pensons que la réponse est plus modeste que ce que vous imaginiez.",
-    },
-
-    detailLabel: {
-      en: "The engagements in detail",
-      fr: "Le détail des prestations",
-    },
-    detailBody: {
-      en: "Named packages, what each one includes, and what it costs.",
-      fr: "Prestations nommées, ce que chacune comprend, et son prix.",
     },
 
     ctaTitle: {
