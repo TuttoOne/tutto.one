@@ -32,6 +32,18 @@ export const copy = {
     menu: { en: "Toggle menu", fr: "Ouvrir le menu" },
   },
 
+  footer: {
+    /**
+     * Sitewide disclosure. Kept to one sentence: it should read as a note the
+     * site is comfortable making, not an apology, and it sits under every page
+     * so length is what would make it tiresome.
+     */
+    builtWith: {
+      en: "This site — its systems, copy and design — is built directly with Claude, and its hand shows throughout.",
+      fr: "Ce site — ses systèmes, ses textes et son design — est construit directement avec Claude, dont la main se voit partout.",
+    },
+  },
+
   common: {
     bookCall: { en: "Book a 30-minute call", fr: "Réserver un appel de 30 minutes" },
     bookConversation: { en: "Book a conversation", fr: "Réserver un échange" },

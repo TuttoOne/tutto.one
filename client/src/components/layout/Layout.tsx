@@ -24,9 +24,9 @@ export function Header() {
       external: true,
     },
     { label: t(copy.nav.praxis), href: "/praxis" },
-    { label: t(copy.nav.events), href: "/calendar" },
     { label: t(copy.nav.pythia), href: "/pythia" },
     { label: t(copy.nav.thinking), href: "/blog" },
+    { label: t(copy.nav.events), href: "/calendar" },
     { label: t(copy.nav.contact), href: "/contact" },
   ];
 
@@ -127,6 +127,15 @@ export function Footer() {
   const t = useT();
   return (
     <footer className="w-full py-8 mt-auto border-t border-border/40 bg-background">
+      {/* The disclosure sits on its own line above the legal row rather than
+          beside it: at the width the copyright leaves it would wrap to three
+          ragged lines on a laptop. Smaller and lighter than the row below,
+          because it is a note about the site rather than part of its business. */}
+      <div className="max-w-6xl mx-auto px-6 mb-5">
+        <p className="text-xs text-muted-foreground/70 leading-relaxed max-w-2xl">
+          {t(copy.footer.builtWith)}
+        </p>
+      </div>
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
         <p>
           © {new Date().getFullYear()} Tutto.{" "}
