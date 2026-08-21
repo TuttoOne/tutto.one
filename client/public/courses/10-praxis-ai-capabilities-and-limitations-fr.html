@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
-<head>
+<html lang="fr" class="light"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction to MCP — talking deck</title>
+<title>Praxis · Capacités et limites de l'IA — deck parlé</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -745,17 +744,13 @@ th {
 
   .deck-slide .eyebrow { margin-bottom: var(--space-2); }
   .deck-slide h2 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); margin: 0 0 var(--space-2); }
-  .deck-slide .lead { max-width: 60ch; margin-bottom: var(--space-6); }
+  .deck-slide .lead { max-width: 62ch; margin-bottom: var(--space-6); }
 
   /* diagram canvas */
   .diagram { width: 100%; margin-top: var(--space-2); }
   .diagram svg { width: 100%; height: auto; display: block; }
-  .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 70ch; }
+  .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 74ch; }
   .cap code { font-size: 0.85em; }
-  .qa { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-5); }
-  .qa p { margin: 0; font-size: var(--text-sm); color: hsl(var(--foreground)); line-height: var(--leading-snug); max-width: 46ch; }
-  .qa span { display: block; font-weight: var(--weight-bold); color: hsl(var(--primary)); margin-bottom: var(--space-1); }
-  @media (max-width: 640px) { .qa { grid-template-columns: 1fr; } }
 
   /* SVG shared styles */
   svg text { font-family: var(--font-sans); fill: hsl(var(--foreground)); }
@@ -768,7 +763,9 @@ th {
   .box     { fill: #fff; stroke: hsl(var(--border)); }
   .box-amber { fill: hsl(var(--primary) / 0.08); stroke: hsl(var(--primary)); }
   .box-ink   { fill: hsl(var(--foreground)); stroke: hsl(var(--foreground)); }
+  .fill-amber { fill: hsl(var(--primary) / 0.10); stroke: none; }
   .t-lbl   { font-size: 19px; font-weight: 600; }
+  .t-lbl-s { font-size: 16px; font-weight: 600; }
   .t-sub   { font-size: 14px; fill: hsl(var(--muted-foreground)); }
   .t-tiny  { font-size: 12.5px; fill: hsl(var(--muted-foreground)); }
   .t-mono  { font-family: var(--font-mono); font-size: 14px; }
@@ -803,7 +800,7 @@ th {
   }
 </style>
 </head>
-<body>
+<body class="">
 
 <nav id="psn" class="no-print" style="position:fixed;top:0;left:0;right:0;z-index:9999;height:44px;display:flex;align-items:center;gap:0;padding:0 18px;background:rgba(250,249,246,0.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid hsl(220,13%,91%);box-sizing:border-box;">
   <a href="/" style="font-family:'Roboto',-apple-system,sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:-0.025em;color:#1f1f1f;text-decoration:none;white-space:nowrap;flex-shrink:0;">Tutto<span style="color:#db7400;">.</span></a>
@@ -854,56 +851,54 @@ th {
 </style>
 
 
-<div class="progress" id="progress"></div>
+<div class="progress" id="progress" style="width: 91.6667%;"></div>
 
 <!-- ============ 1 · TITLE ============================================= -->
-<section class="deck-slide title active">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · talking deck</span></div>
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · deck parlé</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — built from Anthropic's Introduction to Model Context Protocol</span>
-    <h1>One protocol, so any<br>AI app can reach any<br>tool or data source.</h1>
-    <p class="lead">Eleven ideas, one per screen. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.</p>
+    <span class="eyebrow">Praxis — d'après « AI Capabilities &amp; Limitations » d'Anthropic</span>
+    <h1 class="">Ce que l'IA sait faire,<br>là où elle casse,<br>et comment faire la différence.</h1>
+    <p class="lead">Neuf idées, une par écran — un modèle simple et clair de la machine. Chacune est un point à montrer pendant que vous expliquez. Tout se joue dans le regard, alors laissez les silences.</p>
   </div>
   <span class="slide-counter">01</span>
 </section>
 
 <!-- ============ 2 · THE SPINE ========================================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The shape of the course</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Le plan du cours</span></div>
   <div class="stage">
-    <span class="eyebrow">Where we're going</span>
-    <h2>The whole course on one screen</h2>
-    <p class="lead">Four moves: grasp what MCP is, then learn its three primitives — tools, resources, prompts — one at a time, server side and client side.</p>
+    <span class="eyebrow">Où nous allons</span>
+    <h2 class="">Tout le cours sur un écran</h2>
+    <p class="lead">Quatre temps : ce qu'est l'IA générative, comment se forme son caractère, les quatre propriétés qui la bornent, et la confiance calibrée qui en découle.</p>
     <div class="spine">
       <div class="grp">
-        <h4>Foundation</h4>
+        <h4>Ce qu'est l'IA</h4>
         <ol>
-          <li><span class="n">1</span> Introducing MCP</li>
-          <li><span class="n">2</span> MCP clients</li>
-          <li><span class="n">3</span> Project setup</li>
+          <li><span class="n">1</span> Deux moitiés d'un même système</li>
+          <li><span class="n">2</span> Quatre propriétés, un continuum</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Tools</h4>
+        <h4>Comment elle se forme</h4>
         <ol>
-          <li><span class="n">4</span> Defining tools</li>
-          <li><span class="n">5</span> The server inspector</li>
-          <li><span class="n">6</span> Implementing a client</li>
+          <li><span class="n">3</span> Caractère : pré-entraînement + fine-tuning</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Resources &amp; prompts</h4>
+        <h4>Les quatre propriétés</h4>
         <ol>
-          <li><span class="n">7</span> Defining resources</li>
-          <li><span class="n">8</span> Accessing resources</li>
-          <li><span class="n">9</span> Defining prompts</li>
-          <li><span class="n">10</span> Prompts in the client</li>
+          <li><span class="n">4</span> Prédiction du token suivant</li>
+          <li><span class="n">5</span> Connaissances</li>
+          <li><span class="n">6</span> Mémoire de travail</li>
+          <li><span class="n">7</span> Pilotabilité</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Recap</h4>
+        <h4>Confiance calibrée</h4>
         <ol>
-          <li><span class="n">11</span> MCP review</li>
+          <li><span class="n">8</span> Quand les propriétés se heurtent</li>
+          <li><span class="n">9</span> Situer la tâche</li>
         </ol>
       </div>
     </div>
@@ -911,488 +906,424 @@ th {
   <span class="slide-counter">02</span>
 </section>
 
-<!-- ============ 3 · L1 INTRODUCING MCP =============================== -->
+<!-- ============ 3 · L1 TWO HALVES OF ONE SYSTEM ====================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 1 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 1 · Ce qu'est l'IA</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 1</span>
-    <h2>M&times;N integrations become M+N</h2>
-    <p class="lead">Without a standard, every app wires up to every tool by hand. MCP is the standard connector that ends the tangle.</p>
+    <span class="eyebrow">Leçon 1</span>
+    <h2 class="">Deux moitiés d'un même système</h2>
+    <p class="lead">Le cadre des 4D enseigne comment <em>vous</em> travaillez avec l'IA. Ce cours enseigne comment l'IA travaille avec <em>vous</em> : les propriétés de la machine auxquelles répondent ces compétences humaines.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 270" role="img" aria-label="M by N integrations versus M plus N with MCP">
-        <!-- WITHOUT side -->
-        <text x="20" y="30" class="t-lbl">Without MCP</text>
-        <text x="20" y="50" class="t-tiny">every app &times; every tool, by hand</text>
-        <rect x="20"  y="70" width="86" height="36" rx="8" class="box"/><text x="63"  y="93" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="20"  y="120" width="86" height="36" rx="8" class="box"/><text x="63"  y="143" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="20"  y="170" width="86" height="36" rx="8" class="box"/><text x="63"  y="193" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="300" y="70" width="86" height="36" rx="8" class="box"/><text x="343" y="93" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="300" y="120" width="86" height="36" rx="8" class="box"/><text x="343" y="143" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="300" y="170" width="86" height="36" rx="8" class="box"/><text x="343" y="193" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <g class="l-faint" stroke-width="1.3">
-          <line x1="106" y1="88"  x2="300" y2="88"/><line x1="106" y1="88"  x2="300" y2="138"/><line x1="106" y1="88"  x2="300" y2="188"/>
-          <line x1="106" y1="138" x2="300" y2="88"/><line x1="106" y1="138" x2="300" y2="138"/><line x1="106" y1="138" x2="300" y2="188"/>
-          <line x1="106" y1="188" x2="300" y2="88"/><line x1="106" y1="188" x2="300" y2="138"/><line x1="106" y1="188" x2="300" y2="188"/>
-        </g>
-        <text x="203" y="238" text-anchor="middle" class="t-tiny">9 custom integrations</text>
+      <svg viewBox="0 0 1026.5 250" role="img" aria-label="Human competencies meet machine properties">
+        <!-- human side -->
+        <rect x="20" y="40" width="350" height="180" rx="14" class="box-ink"></rect>
+        <text x="40" y="76" class="t-lbl t-white">Vous : les 4D</text>
+        <text x="40" y="108" class="t-tiny" style="fill:hsl(40 10% 82%)">Délégation : quoi confier</text>
+        <text x="40" y="134" class="t-tiny" style="fill:hsl(40 10% 82%)">Description : comment demander</text>
+        <text x="40" y="160" class="t-tiny" style="fill:hsl(40 10% 82%)">Discernement : juger le résultat</text>
+        <text x="40" y="186" class="t-tiny" style="fill:hsl(40 10% 82%)">Diligence : vérifier et assumer</text>
 
-        <!-- divider -->
-        <line x1="470" y1="20" x2="470" y2="250" class="l-faint" stroke-width="1" stroke-dasharray="4 5"/>
+        <!-- middle hinge -->
+        <text x="490" y="112" text-anchor="middle" class="t-tiny">deux moitiés</text>
+        <line x1="390" y1="130" x2="588" y2="130" class="l-amber" stroke-width="2.5" marker-start="url(#aL)" marker-end="url(#aR)"></line>
+        <text x="490" y="166" text-anchor="middle" class="t-lbl-s s-amber">un système</text>
 
-        <!-- WITH side -->
-        <text x="520" y="30" class="t-lbl">With MCP</text>
-        <text x="520" y="50" class="t-tiny">build to the protocol once</text>
-        <rect x="520" y="70" width="86" height="36" rx="8" class="box"/><text x="563" y="93" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="520" y="120" width="86" height="36" rx="8" class="box"/><text x="563" y="143" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="520" y="170" width="86" height="36" rx="8" class="box"/><text x="563" y="193" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="690" y="100" width="96" height="76" rx="12" class="box-amber"/>
-        <text x="738" y="135" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">MCP</text>
-        <text x="738" y="156" text-anchor="middle" class="t-tiny">standard</text>
-        <rect x="870" y="70" width="86" height="36" rx="8" class="box"/><text x="913" y="93" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="870" y="120" width="86" height="36" rx="8" class="box"/><text x="913" y="143" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="870" y="170" width="86" height="36" rx="8" class="box"/><text x="913" y="193" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <g class="l-amber" stroke-width="1.6">
-          <line x1="606" y1="88"  x2="690" y2="130"/><line x1="606" y1="138" x2="690" y2="138"/><line x1="606" y1="188" x2="690" y2="146"/>
-          <line x1="786" y1="130" x2="870" y2="88"/><line x1="786" y1="138" x2="870" y2="138"/><line x1="786" y1="146" x2="870" y2="188"/>
-        </g>
-        <text x="738" y="238" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">6 connections to one standard</text>
+        <!-- machine side -->
+        <rect x="610" y="40" width="391.8" height="180" rx="14" class="box-amber"></rect>
+        <text x="630" y="76" class="t-lbl s-amber">La machine : 4 propriétés</text>
+        <text x="630" y="108" class="t-tiny s-ink">Prédiction du prochain token : d'où viennent les réponses</text>
+        <text x="630" y="134" class="t-tiny s-ink">Connaissances : ce qu'elle sait vraiment</text>
+        <text x="630" y="160" class="t-tiny s-ink">Mémoire de travail : ce à quoi elle prête attention maintenant</text>
+        <text x="630" y="186" class="t-tiny s-ink">Pilotabilité : le contrôle dont vous disposez</text>
+        <defs>
+          <marker id="aR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
+          <marker id="aL" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="hsl(var(--primary))"></path></marker>
+        </defs>
       </svg>
     </div>
-    <p class="cap">MCP is a standard, like USB-C for AI: build to the protocol once and every compliant tool just works. It also splits the work — app builders on one side, tool builders on the other.</p>
+    <p class="cap">Pourquoi c'est durable : les limites bougent à mesure que les modèles progressent, mais les propriétés restent les mêmes. Apprenez-les une fois, elles continuent de servir.</p>
   </div>
   <span class="slide-counter">03</span>
 </section>
 
-<!-- ============ 4 · L2 MCP CLIENTS (ARCHITECTURE) ==================== -->
+<!-- ============ 4 · L2 FOUR PROPERTIES, ONE CONTINUUM (centrepiece) === -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 2 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 2 · Ce qu'est l'IA</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 2</span>
-    <h2>Host, client, server — one client per server</h2>
-    <p class="lead">The app you use is the host. Inside it, each client holds one connection to one server, and the server wraps the real tool or data.</p>
+    <span class="eyebrow">Leçon 2 : si vous ne retenez qu'une chose</span>
+    <h2 class="">Quatre propriétés, chacune un continuum</h2>
+    <p class="lead">L'IA n'est pas uniformément brillante ni uniformément peu fiable. Elle est forte et faible selon quatre axes prévisibles, et c'est le même mécanisme qui produit les deux extrêmes.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="Host client server architecture">
-        <!-- host containing clients -->
-        <rect x="20" y="40" width="300" height="170" rx="14" class="box-ink"/>
-        <text x="170" y="72" text-anchor="middle" class="t-lbl t-white">Host</text>
-        <text x="170" y="92" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">Claude Code · Desktop · Cursor</text>
-        <rect x="44" y="112" width="116" height="78" rx="10" class="box-amber"/>
-        <text x="102" y="148" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">client</text>
-        <text x="102" y="168" text-anchor="middle" class="t-tiny">one server</text>
-        <rect x="180" y="112" width="116" height="78" rx="10" class="box-amber"/>
-        <text x="238" y="148" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">client</text>
-        <text x="238" y="168" text-anchor="middle" class="t-tiny">one server</text>
+      <svg viewBox="0 0 980 300" role="img" aria-label="Four properties on a capability to limitation continuum">
+        <!-- header poles -->
+        <text x="278" y="40" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Capacité · faites-lui confiance</text>
+        <text x="966" y="40" text-anchor="end" class="t-sub s-amber" style="font-weight:600">Limite · vérifiez davantage →</text>
 
-        <!-- transports -->
-        <line x1="320" y1="151" x2="470" y2="100" class="l-amber" stroke-width="2.2" marker-end="url(#l2a)"/>
-        <line x1="320" y1="151" x2="470" y2="190" class="l-amber" stroke-width="2.2" marker-end="url(#l2a)"/>
-        <text x="395" y="112" text-anchor="middle" class="t-tiny s-amber">JSON-RPC</text>
+        <!-- row 1 : NTP -->
+        <text x="14" y="90" class="t-lbl-s">Prédiction du token suivant</text>
+        <text x="14" y="108" class="t-tiny">d'où viennent les réponses ?</text>
+        <rect x="278" y="72" width="688" height="36" rx="8" class="box"></rect>
+        <rect x="612" y="73" width="353" height="34" rx="7" class="fill-amber"></rect>
+        <text x="292" y="95" class="t-tiny s-ink">résumer · reformater · expliquer</text>
+        <text x="954" y="95" text-anchor="end" class="t-tiny s-amber">inédit · rare · vrai contre qui sonne vrai</text>
 
-        <!-- servers -->
-        <rect x="470" y="68" width="220" height="64" rx="12" class="box"/>
-        <text x="580" y="98" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="580" y="118" text-anchor="middle" class="t-tiny">exposes tools · resources · prompts</text>
-        <rect x="470" y="158" width="220" height="64" rx="12" class="box"/>
-        <text x="580" y="188" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="580" y="208" text-anchor="middle" class="t-tiny">exposes tools · resources · prompts</text>
+        <!-- row 2 : Knowledge -->
+        <text x="14" y="146" class="t-lbl-s">Connaissances</text>
+        <text x="14" y="164" class="t-tiny">que sait-elle vraiment ?</text>
+        <rect x="278" y="128" width="688" height="36" rx="8" class="box"></rect>
+        <rect x="612" y="129" width="353" height="34" rx="7" class="fill-amber"></rect>
+        <text x="292" y="151" class="t-tiny s-ink">courant · répandu · stable</text>
+        <text x="954" y="151" text-anchor="end" class="t-tiny s-amber">rare · après la date de coupure · de niche · contesté</text>
 
-        <!-- backing systems -->
-        <line x1="690" y1="100" x2="760" y2="100" class="l-faint" stroke-width="2" marker-end="url(#l2faint)"/>
-        <line x1="690" y1="190" x2="760" y2="190" class="l-faint" stroke-width="2" marker-end="url(#l2faint)"/>
-        <rect x="760" y="74" width="200" height="52" rx="10" class="box"/>
-        <text x="860" y="105" text-anchor="middle" class="t-tiny s-ink">a real tool / API</text>
-        <rect x="760" y="164" width="200" height="52" rx="10" class="box"/>
-        <text x="860" y="195" text-anchor="middle" class="t-tiny s-ink">a database / files</text>
-        <defs>
-          <marker id="l2a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l2faint" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"/></marker>
-        </defs>
+        <!-- row 3 : Working Memory -->
+        <text x="14" y="202" class="t-lbl-s">Mémoire de travail</text>
+        <text x="14" y="220" class="t-tiny">à quoi prête-t-elle attention maintenant ?</text>
+        <rect x="278" y="184" width="688" height="36" rx="8" class="box"></rect>
+        <rect x="612" y="185" width="353" height="34" rx="7" class="fill-amber"></rect>
+        <text x="292" y="207" class="t-tiny s-ink">tient dans la fenêtre · vous fournissez le contexte</text>
+        <text x="954" y="207" text-anchor="end" class="t-tiny s-amber">très long · d'une session à l'autre (la falaise)</text>
+
+        <!-- row 4 : Steerability -->
+        <text x="14" y="258" class="t-lbl-s">Pilotabilité</text>
+        <text x="14" y="276" class="t-tiny">quel contrôle ai-je ?</text>
+        <rect x="278" y="240" width="688" height="36" rx="8" class="box"></rect>
+        <rect x="612" y="241" width="353" height="34" rx="7" class="fill-amber"></rect>
+        <text x="292" y="263" class="t-tiny s-ink">court · concret · vérifiable</text>
+        <text x="954" y="263" text-anchor="end" class="t-tiny s-amber">raisonnement long · abstrait · précision</text>
       </svg>
     </div>
-    <p class="cap">Messages travel as JSON-RPC over a transport: stdio for a local server, HTTP for a remote one. The host can hold many clients at once, but each client talks to exactly one server.</p>
-    <div class="qa">
-      <p><span>What does each side hold?</span> The <strong>server offers the capabilities</strong> — tools, resources, prompts. The <strong>client is the connection</strong> that reaches one server and brokers them to the host. Supplier vs. connector.</p>
-      <p><span>Is the client one shared pipe?</span> No — <strong>one client per server</strong>. The host opens a separate, named line to each server, so you grant and revoke them one at a time.</p>
-    </div>
+    <p class="cap">La confiance calibrée, ce n'est pas faire confiance à l'IA en bloc ni s'en méfier en bloc. C'est situer votre tâche sur chaque axe, puis ajuster votre niveau de vérification à cette position.</p>
   </div>
   <span class="slide-counter">04</span>
 </section>
 
-<!-- ============ 5 · L3 PROJECT SETUP ================================= -->
+<!-- ============ 5 · L3 HOW CHARACTER FORMS =========================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 3 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 3 · Comment il se forme</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 3</span>
-    <h2>A server is a few lines to start</h2>
-    <p class="lead">The Python SDK's FastMCP does the protocol plumbing. You create a server, register capabilities, and run it over a transport.</p>
+    <span class="eyebrow">Leçon 3</span>
+    <h2 class="">Le caractère est entraîné, il n'émerge pas</h2>
+    <p class="lead">La politesse, la serviabilité et la prudence n'apparaissent pas par magie. Deux étapes d'entraînement les construisent, et chacune laisse des traces prévisibles.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="FastMCP server setup steps">
-        <rect x="10" y="60" width="210" height="96" rx="14" class="box"/>
-        <text x="115" y="98"  text-anchor="middle" class="t-lbl">Project</text>
-        <text x="115" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">uv · mcp SDK</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="Pretraining to fine-tuning, and the fingerprints left behind">
+        <!-- stage 1 -->
+        <rect x="20" y="36" width="320" height="96.2" rx="12" class="box"></rect>
+        <text x="40" y="66" class="t-lbl">Pré-entraînement</text>
+        <text x="40" y="92" class="t-tiny">lit d'immenses textes · prédit le token suivant</text>
+        <text x="40" y="104.5" class="t-tiny"><tspan x="40">machine à compléter des documents, </tspan><tspan x="40" dy="15.0">aucune idée d'aider</tspan></text>
 
-        <rect x="262" y="60" width="210" height="96" rx="14" class="box"/>
-        <text x="367" y="98"  text-anchor="middle" class="t-lbl">Server</text>
-        <text x="367" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">FastMCP("name")</text>
+        <!-- arrow -->
+        <text x="399.1" y="101.6" text-anchor="middle" class="t-tiny s-amber"><tspan x="399.1">+ préférences </tspan><tspan x="399.1" dy="15.0">humaines</tspan></text>
+        <line x1="340" y1="82" x2="460" y2="82" class="l-amber" stroke-width="2.5" marker-end="url(#l3a)"></line>
 
-        <rect x="514" y="60" width="210" height="96" rx="14" class="box-amber"/>
-        <text x="619" y="98"  text-anchor="middle" class="t-lbl s-amber">Register</text>
-        <text x="619" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">@tool @resource</text>
+        <!-- stage 2 -->
+        <rect x="460" y="36" width="320" height="97" rx="12" class="box-amber"></rect>
+        <text x="480" y="66" class="t-lbl s-amber">Affinage</text>
+        <text x="480" y="92" class="t-tiny s-ink">les préférences en font un assistant</text>
+        <text x="480" y="112" class="t-tiny s-ink">traite ce que vous écrivez comme une demande</text>
 
-        <rect x="766" y="60" width="204" height="96" rx="14" class="box"/>
-        <text x="868" y="98"  text-anchor="middle" class="t-lbl">Run</text>
-        <text x="868" y="124" text-anchor="middle" class="t-tiny">stdio · HTTP</text>
+        <!-- 3 H's -->
+        <rect x="800" y="36" width="160" height="92" rx="12" class="box-ink"></rect>
+        <text x="880" y="64" text-anchor="middle" class="t-tiny t-white" style="font-weight:600">Utile</text>
+        <text x="880" y="88" text-anchor="middle" class="t-tiny t-white" style="font-weight:600">Fiable</text>
+        <text x="880" y="112" text-anchor="middle" class="t-tiny t-white" style="font-weight:600">Inoffensif</text>
 
-        <line x1="220" y1="108" x2="260" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <line x1="472" y1="108" x2="512" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <line x1="724" y1="108" x2="764" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <text x="490" y="198" text-anchor="middle" class="t-tiny">Decorators turn ordinary Python functions into MCP capabilities.</text>
+        <!-- fingerprints -->
+        <text x="20" y="166" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Les traces que ça laisse</text>
+        <rect x="20" y="180" width="225" height="50" rx="10" class="box"></rect>
+        <text x="36" y="204" class="t-tiny s-ink" style="font-weight:600">La complaisance</text>
+        <text x="36" y="222" class="t-tiny">approuve trop facilement</text>
+        <rect x="257" y="180" width="225" height="50" rx="10" class="box"></rect>
+        <text x="273" y="204" class="t-tiny s-ink" style="font-weight:600">La verbosité</text>
+        <text x="273" y="222" class="t-tiny">explique trop, par défaut</text>
+        <rect x="494" y="180" width="225" height="50" rx="10" class="box"></rect>
+        <text x="510" y="204" class="t-tiny s-ink" style="font-weight:600">L'excès de prudence</text>
+        <text x="510" y="222" class="t-tiny">des réserves réflexes</text>
+        <rect x="731" y="180" width="229" height="50" rx="10" class="box"></rect>
+        <text x="747" y="204" class="t-tiny s-ink" style="font-weight:600">L'assurance trompeuse</text>
+        <text x="747" y="222" class="t-tiny">avoir l'air sûr ≠ avoir raison</text>
         <defs>
-          <marker id="l3a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="l3a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">stdio runs the server as a local subprocess of the host; HTTP exposes it as a remote service. Same server code either way — the transport is just how messages travel.</p>
-    <div class="qa">
-      <p><span>What does "transport-agnostic" mean?</span> MCP fixes the <strong>language, not the channel</strong>. The JSON-RPC messages are identical whether they ride a local stdio pipe or an HTTP connection — neither side's logic changes.</p>
-      <p><span>Rewrite the server to go remote?</span> No. Its tools, resources and prompts stay the same; you <strong>swap the transport</strong> (stdio → HTTP), not the code.</p>
-    </div>
+    <p class="cap">Ouvrez une demande par une hypothèse fausse — « je trouve ce plan inattaquable » — et regardez-le vous donner raison. C'est la complaisance, et une fois que vous savez la nommer, vous la voyez venir.</p>
   </div>
   <span class="slide-counter">05</span>
 </section>
 
-<!-- ============ 6 · L4 DEFINING TOOLS =============================== -->
+<!-- ============ 6 · L4 NEXT TOKEN PREDICTION ========================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 4 · Tools</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 4 · Les quatre propriétés</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 4</span>
-    <h2>Tools — actions the model can choose to call</h2>
-    <p class="lead">Decorate a function and its name, docstring and typed arguments become a schema the model reads. The model decides when to use it.</p>
+    <span class="eyebrow">Leçon 4</span>
+    <h2 class="">C'est de l'autocomplétion à grande échelle</h2>
+    <p class="lead">L'IA écrit mot après mot, selon ce qui suit habituellement quoi. Ce seul mécanisme vous donne à la fois la fluidité et l'invention.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Defining a tool the model calls">
-        <!-- server function -->
-        <rect x="20" y="50" width="320" height="140" rx="14" class="box"/>
-        <text x="40" y="82" class="t-mono s-amber" style="font-weight:600">@mcp.tool()</text>
-        <text x="40" y="108" class="t-mono" style="font-size:13px">def get_weather(city):</text>
-        <text x="40" y="132" class="t-tiny s-ink">name · description · input schema</text>
-        <line x1="40" y1="148" x2="320" y2="148" class="l-faint" stroke-width="1"/>
-        <text x="40" y="172" class="t-tiny">the verbs — they do things, have side effects</text>
+      <svg viewBox="0 0 1017.5 262" role="img" aria-label="Token prediction and the capability to limitation spectrum">
+        <!-- token inset -->
+        <text x="20" y="34" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Un token à la fois</text>
+        <rect x="20" y="44" width="300" height="54" rx="10" class="box"></rect>
+        <text x="38" y="76" class="t-mono">…réparer le build ? je pense▮</text>
+        <rect x="340" y="50" width="86" height="42" rx="8" class="box-amber"></rect>
+        <text x="383" y="76" text-anchor="middle" class="t-tiny s-ink">nous · 32%</text>
+        <rect x="436" y="50" width="86" height="42" rx="8" class="box"></rect>
+        <text x="479" y="76" text-anchor="middle" class="t-tiny">le · 16 %</text>
+        <rect x="532" y="50" width="78" height="42" rx="8" class="box"></rect>
+        <text x="571" y="76" text-anchor="middle" class="t-tiny">je · 11 %</text>
+        <text x="640" y="72" class="t-tiny">on choisit parmi les suites probables : c'est l'échantillonnage</text>
 
-        <!-- exposes -->
-        <line x1="340" y1="120" x2="440" y2="120" class="l-amber" stroke-width="2.5" marker-end="url(#l4a)"/>
-        <text x="390" y="110" text-anchor="middle" class="t-tiny">exposed</text>
+        <!-- spectrum -->
+        <text x="20" y="138" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Capacité</text>
+        <text x="960" y="138" text-anchor="end" class="t-sub s-amber" style="font-weight:600">Limite</text>
+        <rect x="20" y="148" width="940" height="44" rx="10" class="box"></rect>
+        <rect x="520" y="149" width="439" height="42" rx="9" class="fill-amber"></rect>
+        <text x="38" y="175" class="t-tiny s-ink">chemins balisés : résumer · reformater · expliquer</text>
+        <text x="942" y="175" text-anchor="end" class="t-tiny s-amber">inédit · rare · affirmations précises</text>
 
-        <!-- model decides -->
-        <rect x="440" y="74" width="220" height="92" rx="14" class="box-amber"/>
-        <text x="550" y="108" text-anchor="middle" class="t-lbl s-amber">Model</text>
-        <text x="550" y="132" text-anchor="middle" class="t-tiny">reads the schema,</text>
-        <text x="550" y="150" text-anchor="middle" class="t-tiny">decides to call it</text>
-
-        <!-- result back -->
-        <line x1="660" y1="120" x2="760" y2="120" class="l-ink" stroke-width="2" marker-end="url(#l4b)"/>
-        <rect x="760" y="86" width="200" height="68" rx="12" class="box-ink"/>
-        <text x="860" y="118" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Result</text>
-        <text x="860" y="140" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">returned to the model</text>
-
-        <text x="20" y="222" class="t-tiny s-ink" style="font-weight:600">Model-controlled:</text>
-        <text x="150" y="222" class="t-tiny">the model picks the moment, not the app or the user.</text>
-        <defs>
-          <marker id="l4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l4b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
-        </defs>
+        <!-- fabrication note -->
+        <text x="20" y="224" class="t-tiny"><tspan class="s-ink" style="font-weight:600">La fabrication se concentre dans les détails précis</tspan> — noms, dates, statistiques, citations, URL, verbatim. Plus l'affirmation est précise, plus elle mérite une vérification.</text>
+        <text x="20" y="250" class="t-tiny">Écartée par : les citations · le signalement d'incertitude · une sortie contrainte · générer puis vérifier.</text>
       </svg>
     </div>
-    <p class="cap">A clear name and description matter: that text is all the model has to decide whether and how to call the tool. Treat the docstring as a prompt, not a comment.</p>
+    <p class="cap">La démo « SMS à un ami » le rend concret : continuez à taper le mot suggéré par votre téléphone et vous avez construit un petit modèle de langage. La fluidité et la fabrication sont le même mécanisme — impossible d'avoir l'une sans l'autre.</p>
   </div>
   <span class="slide-counter">06</span>
 </section>
 
-<!-- ============ 7 · L5 THE SERVER INSPECTOR ========================= -->
+<!-- ============ 7 · L5 KNOWLEDGE ===================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 5 · Tools</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 5 · Les quatre propriétés</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 5</span>
-    <h2>Test the server before wiring it to an app</h2>
-    <p class="lead">The Inspector connects straight to your server — no LLM involved. List what it exposes, call each tool by hand, read the raw response.</p>
+    <span class="eyebrow">Leçon 5</span>
+    <h2 class="">Il sait ce qu'il a lu, figé à une date de coupure</h2>
+    <p class="lead">Pas de navigation en direct par défaut, aucune expérience vécue, un arrêt net à la date de coupure de l'entraînement. La vraie question n'est pas « est-ce qu'il sait cela ? » mais « à quel point était-ce présent dans ce qu'il a lu ? »</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="MCP Inspector connected to a server">
-        <!-- inspector -->
-        <rect x="40" y="70" width="260" height="110" rx="14" class="box-amber"/>
-        <text x="170" y="108" text-anchor="middle" class="t-lbl s-amber">MCP Inspector</text>
-        <text x="170" y="134" text-anchor="middle" class="t-tiny">a test client, no model</text>
-        <text x="170" y="154" text-anchor="middle" class="t-tiny">browser UI</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="Training data up to a knowledge cutoff, and the tools that breach it">
+        <text x="20" y="50" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Capacité — fréquent · récent dans l'entraînement · constant</text>
+        <text x="960" y="50" text-anchor="end" class="t-sub s-amber" style="font-weight:600">Limite</text>
 
-        <!-- connection -->
-        <line x1="300" y1="125" x2="420" y2="125" class="l-amber" stroke-width="2.5" marker-end="url(#l5a)"/>
-        <line x1="420" y1="140" x2="300" y2="140" class="l-amber" stroke-width="2.5" marker-end="url(#l5b)"/>
-        <text x="360" y="112" text-anchor="middle" class="t-tiny">call</text>
-        <text x="360" y="168" text-anchor="middle" class="t-tiny">raw response</text>
+        <!-- training data bar -->
+        <rect x="20" y="64" width="540" height="60" rx="10" class="box"></rect>
+        <text x="40" y="100" class="t-tiny s-ink">sujets courants, bien documentés, stables</text>
+        <circle cx="430" cy="90" r="3" class="s-muted"></circle><circle cx="455" cy="105" r="3" class="s-muted"></circle>
+        <circle cx="480" cy="84" r="3" class="s-muted"></circle><circle cx="505" cy="108" r="3" class="s-muted"></circle>
+        <circle cx="525" cy="92" r="3" class="s-muted"></circle>
 
-        <!-- server -->
-        <rect x="420" y="70" width="240" height="110" rx="14" class="box"/>
-        <text x="540" y="104" text-anchor="middle" class="t-lbl">Your server</text>
-        <text x="540" y="132" text-anchor="middle" class="t-tiny">tools · resources ·</text>
-        <text x="540" y="150" text-anchor="middle" class="t-tiny">prompts</text>
+        <!-- cutoff wall -->
+        <line x1="575" y1="48" x2="575" y2="196" class="l-ink" stroke-width="2" stroke-dasharray="5 5"></line>
+        <text x="575" y="216" text-anchor="middle" class="t-tiny" style="font-weight:600">date de coupure des connaissances</text>
 
-        <!-- checklist -->
-        <rect x="710" y="70" width="250" height="110" rx="12" class="box"/>
-        <text x="730" y="100" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Check, in isolation</text>
-        <text x="730" y="126" class="t-tiny">does it list correctly?</text>
-        <text x="730" y="148" class="t-tiny">does each call return?</text>
-        <text x="730" y="170" class="t-tiny">is the shape right?</text>
+        <!-- beyond -->
+        <rect x="590" y="64" width="370" height="60" rx="10" class="box-amber"></rect>
+        <text x="775" y="100" text-anchor="middle" class="t-tiny s-amber">rare · postérieur à la coupure · de niche · contesté</text>
+
+        <!-- mitigations breaching the wall -->
+        <rect x="590" y="150" width="115" height="44" rx="9" class="box"></rect>
+        <text x="647" y="177" text-anchor="middle" class="t-tiny s-ink">recherche web</text>
+        <rect x="717" y="150" width="115" height="44" rx="9" class="box"></rect>
+        <text x="774" y="177" text-anchor="middle" class="t-tiny s-ink">recherche / RAG</text>
+        <rect x="844" y="150" width="116" height="44" rx="9" class="box"></rect>
+        <text x="902" y="177" text-anchor="middle" class="t-tiny s-ink">outils</text>
+        <line x1="647" y1="150" x2="647" y2="126" class="l-amber" stroke-width="1.8" stroke-dasharray="4 4" marker-end="url(#l5a)"></line>
+        <line x1="774" y1="150" x2="774" y2="126" class="l-amber" stroke-width="1.8" stroke-dasharray="4 4" marker-end="url(#l5a)"></line>
+        <line x1="902" y1="150" x2="902" y2="126" class="l-amber" stroke-width="1.8" stroke-dasharray="4 4" marker-end="url(#l5a)"></line>
         <defs>
-          <marker id="l5a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l5b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+          <marker id="l5a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">Debug the server on its own first. If the Inspector can list and call everything cleanly, the problem later is in the client wiring — not the server.</p>
+    <p class="cap">Défaillances typiques : des données périmées, une couverture inégale, un biais hérité sur ce qui compte comme « normal », et aucune mémoire de ses sources. La démo à 1024 dimensions montre comment la recherche trouve du sens, pas des mots-clés : « voiture » se place près de « ma Civic a besoin de freins ».</p>
   </div>
   <span class="slide-counter">07</span>
 </section>
 
-<!-- ============ 8 · L6 IMPLEMENTING A CLIENT ======================== -->
+<!-- ============ 8 · L6 WORKING MEMORY =============================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 6 · Tools</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 6 · Les quatre propriétés</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 6</span>
-    <h2>The client feeds tools to the model, in a loop</h2>
-    <p class="lead">Your client lists the server's tools, hands their schemas to Claude, runs whatever Claude asks for, and feeds the result back — until it has an answer.</p>
+    <span class="eyebrow">Leçon 6</span>
+    <h2 class="">Le milieu d'un contexte long se perd</h2>
+    <p class="lead">Tout ce à quoi l'IA prête attention tient dans une fenêtre fixe. L'attention pèse sur les bords : ce qui tombe au milieu disparaît sans bruit.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="Client tool-use loop">
-        <rect x="20"  y="70" width="180" height="64" rx="12" class="box"/>
-        <text x="110" y="100" text-anchor="middle" class="t-lbl" style="font-size:16px">Client</text>
-        <text x="110" y="122" text-anchor="middle" class="t-tiny">lists tools</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="The serial-position recall curve across a context window">
+        <text x="20" y="34" class="t-tiny">Placez un fait clé au milieu d'un contexte long et la précision chute de plus de 30 % (Liu et al., 2023). La même courbe en U que la mémoire humaine.</text>
 
-        <rect x="250" y="70" width="180" height="64" rx="12" class="box-amber"/>
-        <text x="340" y="100" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Claude</text>
-        <text x="340" y="122" text-anchor="middle" class="t-tiny">asks for a tool</text>
+        <!-- axes -->
+        <line x1="70" y1="70" x2="70" y2="190" class="l-faint" stroke-width="1.5"></line>
+        <line x1="70" y1="190" x2="930" y2="190" class="l-faint" stroke-width="1.5"></line>
+        <text x="60" y="74" text-anchor="end" class="t-tiny">rappel</text>
 
-        <rect x="480" y="70" width="180" height="64" rx="12" class="box"/>
-        <text x="570" y="100" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="570" y="122" text-anchor="middle" class="t-tiny">runs it</text>
+        <!-- U curve -->
+        <path d="M90,92 C 260,92 350,176 500,176 C 650,176 740,92 910,92" class="l-amber" stroke-width="2.5" fill="none"></path>
+        <circle cx="90" cy="92" r="5" class="s-amber"></circle>
+        <circle cx="500" cy="176" r="5" class="s-muted"></circle>
+        <circle cx="910" cy="92" r="5" class="s-amber"></circle>
 
-        <rect x="710" y="70" width="180" height="64" rx="12" class="box-ink"/>
-        <text x="800" y="100" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Answer</text>
-        <text x="800" y="122" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">when done</text>
+        <!-- zone labels -->
+        <text x="90" y="80" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">primauté</text>
+        <text x="500" y="206" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">perdu au milieu</text>
+        <text x="910" y="80" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">récence</text>
+        <text x="90" y="210" text-anchor="middle" class="t-tiny">début</text>
+        <text x="910" y="210" text-anchor="middle" class="t-tiny">fin</text>
 
-        <line x1="200" y1="102" x2="248" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-        <line x1="430" y1="102" x2="478" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-        <line x1="660" y1="102" x2="708" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-
-        <!-- loop back: server result -> claude -->
-        <path d="M 570 134 C 570 200, 340 200, 340 136" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#l6amber)"/>
-        <text x="455" y="194" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">result back to Claude — loop until the task is done</text>
-        <defs>
-          <marker id="l6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
-          <marker id="l6amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+        <!-- placement advice -->
+        <text x="176.6" y="98.4" class="t-tiny">★ l'instruction clé en tête</text>
+        <text x="794.1" y="103.4" text-anchor="end" class="t-tiny">répétez ce qui compte ★</text>
       </svg>
     </div>
-    <p class="cap">This is the same agentic loop a chat window doesn't have: the model can act, see the result, and decide what to do next. MCP is just how the tools get there.</p>
+    <p class="cap">C'est une falaise, pas une pente : ça marche jusqu'à ce que ça ne marche plus, et le débordement est silencieux. La solution n'est pas plus de contexte, mais un contexte mieux pensé : l'essentiel en tête, répéter ce qui compte, repartir à zéro. La mémoire, la compaction et les projets repoussent la falaise.</p>
   </div>
   <span class="slide-counter">08</span>
 </section>
 
-<!-- ============ 9 · L7 DEFINING RESOURCES =========================== -->
+<!-- ============ 9 · L7 STEERABILITY ================================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 7 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 7 · Les quatre propriétés</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 7</span>
-    <h2>Resources — data to pull in, addressed by URI</h2>
-    <p class="lead">Read-only data the server exposes at an address. No side effects: think GET, not POST.</p>
+    <span class="eyebrow">Leçon 7</span>
+    <h2 class="">Il suit la lettre, pas l'esprit</h2>
+    <p class="lead">Le modèle suit les instructions comme il fait tout le reste : en prolongeant un motif. D'où sa docilité, et l'écart entre ce que vous avez dit et ce que vous vouliez dire.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Defining direct and templated resources">
-        <!-- direct -->
-        <rect x="20" y="50" width="430" height="74" rx="12" class="box-amber"/>
-        <text x="40" y="80" class="t-mono s-amber" style="font-weight:600">@mcp.resource("docs://documents")</text>
-        <text x="40" y="106" class="t-tiny s-ink">direct — returns the whole list</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="Instruction pattern-matched to output, and where control holds or slips">
+        <!-- flow -->
+        <rect x="20" y="40" width="220" height="64" rx="12" class="box"></rect>
+        <text x="130" y="68" text-anchor="middle" class="t-lbl-s">Votre instruction</text>
+        <text x="130" y="90" text-anchor="middle" class="t-tiny">« fais plus court »</text>
 
-        <!-- templated -->
-        <rect x="20" y="140" width="430" height="74" rx="12" class="box"/>
-        <text x="40" y="170" class="t-mono s-amber" style="font-weight:600">docs://documents/{id}</text>
-        <text x="40" y="196" class="t-tiny s-ink">templated — a parameter picks one item</text>
+        <text x="320" y="62" text-anchor="middle" class="t-tiny s-amber">reconnu comme motif,</text>
+        <text x="320" y="90" text-anchor="middle" class="t-tiny s-amber">pas compris</text>
+        <line x1="240" y1="72" x2="400" y2="72" class="l-amber" stroke-width="2.5" marker-end="url(#l7a)"></line>
 
-        <!-- arrow to data -->
-        <line x1="450" y1="132" x2="560" y2="132" class="l-amber" stroke-width="2.5" marker-end="url(#l7a)"/>
-        <text x="505" y="122" text-anchor="middle" class="t-tiny">read</text>
+        <rect x="400" y="40" width="200" height="64" rx="12" class="box"></rect>
+        <text x="500" y="68" text-anchor="middle" class="t-lbl-s">Sortie</text>
+        <text x="500" y="90" text-anchor="middle" class="t-tiny">moins de mots</text>
 
-        <!-- returns data, GET-like -->
-        <rect x="560" y="70" width="400" height="124" rx="14" class="box"/>
-        <text x="580" y="104" class="t-lbl" style="font-size:17px">Returns data</text>
-        <text x="580" y="134" class="t-tiny s-ink">no side effects · safe to read anytime</text>
-        <text x="580" y="160" class="t-tiny">like a <tspan class="t-mono" style="font-size:13px">GET</tspan> endpoint, addressed by URI</text>
-        <text x="580" y="184" class="t-tiny">contrast tools, which <tspan class="s-ink" style="font-weight:600">do</tspan> things</text>
+        <line x1="600" y1="72" x2="660" y2="72" class="l-faint" stroke-width="2" marker-end="url(#l7f)"></line>
+        <rect x="660" y="40" width="300" height="64" rx="12" class="box-amber"></rect>
+        <text x="810" y="68" text-anchor="middle" class="t-lbl-s s-amber">≠ ce que vous vouliez dire</text>
+        <text x="810" y="90" text-anchor="middle" class="t-tiny s-ink">faire ressortir la demande pour un lecteur pressé</text>
+
+        <!-- two zones -->
+        <rect x="20" y="140" width="455" height="86" rx="12" class="box"></rect>
+        <text x="40" y="170" class="t-lbl-s">Contrôle serré ✓</text>
+        <text x="40" y="196" class="t-tiny">court · concret · vérifiable</text>
+        <text x="40" y="216" class="t-tiny">format · longueur · rôle explicite</text>
+
+        <rect x="505" y="140" width="455" height="86" rx="12" class="box-amber"></rect>
+        <text x="525" y="170" class="t-lbl-s s-amber">Prise lâche ✗</text>
+        <text x="525" y="196" class="t-tiny s-ink">longues chaînes de raisonnement · demandes abstraites · calcul</text>
+        <text x="525" y="216" class="t-tiny s-ink">les petites erreurs dérivent et s'accumulent</text>
         <defs>
-          <marker id="l7a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+          <marker id="l7a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
+          <marker id="l7f" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">A URI scheme like <code>docs://</code> names the data. Direct resources return a collection; templated ones take a parameter to fetch exactly one — a single document, a single record.</p>
+    <p class="cap">Quand c'est suivi à la lettre mais sans utilité, reformulez l'objectif : le répéter plus fort n'y changera rien. « Plus court, pour que le dirigeant voie la demande en page deux » fonctionne. Dans un travail en plusieurs étapes, insérez un point de contrôle pour qu'un écart initial ne se propage pas jusqu'au bout.</p>
   </div>
   <span class="slide-counter">09</span>
 </section>
 
-<!-- ============ 10 · L8 ACCESSING RESOURCES ========================= -->
+<!-- ============ 10 · L8 WHEN PROPERTIES COLLIDE ===================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 8 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 8 · La confiance calibrée</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 8</span>
-    <h2>The app decides which resources to load</h2>
-    <p class="lead">Unlike tools, the model doesn't reach for resources. The application — often the user — chooses what context to bring in.</p>
+    <span class="eyebrow">Leçon 8</span>
+    <h2 class="">La plupart des échecs viennent de deux propriétés qui se rencontrent</h2>
+    <p class="lead">Sur le terrain, les ennuis viennent rarement d'une seule propriété. Nommez les deux qui sont entrées en collision, et la solution apparaît d'elle-même.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Accessing resources via at-mention">
-        <!-- user @-mention -->
-        <rect x="20" y="80" width="220" height="84" rx="14" class="box"/>
-        <text x="130" y="116" text-anchor="middle" class="t-lbl" style="font-size:16px">User picks</text>
-        <text x="130" y="140" text-anchor="middle" class="t-mono" style="font-size:14px">@report.pdf</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="Two collision pairs, each leading to a failure and its fix">
+        <!-- four properties across the top -->
+        <rect x="20" y="30" width="215" height="46" rx="10" class="box"></rect>
+        <text x="127" y="59" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Prédiction du prochain token</text>
+        <rect x="245" y="30" width="215" height="46" rx="10" class="box"></rect>
+        <text x="352" y="59" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Connaissances</text>
+        <rect x="520" y="30" width="215" height="46" rx="10" class="box"></rect>
+        <text x="627" y="59" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Mémoire de travail</text>
+        <rect x="745" y="30" width="215" height="46" rx="10" class="box"></rect>
+        <text x="852" y="59" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Orientabilité</text>
 
-        <!-- client reads -->
-        <line x1="240" y1="122" x2="340" y2="122" class="l-amber" stroke-width="2.5" marker-end="url(#l8a)"/>
-        <rect x="340" y="80" width="240" height="84" rx="14" class="box-amber"/>
-        <text x="460" y="112" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Client reads</text>
-        <text x="460" y="136" text-anchor="middle" class="t-tiny">list, then read by URI</text>
+        <!-- pair brackets -->
+        <path d="M127 76 L127 96 L352 96 L352 76" class="l-amber" stroke-width="1.5"></path>
+        <line x1="240" y1="96" x2="240" y2="112" class="l-amber" stroke-width="1.5" marker-end="url(#l8a)"></line>
+        <path d="M627 76 L627 96 L852 96 L852 76" class="l-amber" stroke-width="1.5"></path>
+        <line x1="740" y1="96" x2="740" y2="112" class="l-amber" stroke-width="1.5" marker-end="url(#l8a)"></line>
 
-        <!-- into context -->
-        <line x1="580" y1="122" x2="680" y2="122" class="l-amber" stroke-width="2.5" marker-end="url(#l8a)"/>
-        <rect x="680" y="80" width="280" height="84" rx="14" class="box-ink"/>
-        <text x="820" y="112" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Into context</text>
-        <text x="820" y="136" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">contents dropped in for the model</text>
+        <!-- failures -->
+        <rect x="20" y="116" width="440" height="44" rx="10" class="box-amber"></rect>
+        <text x="240" y="143" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">Détails hallucinés</text>
+        <rect x="520" y="116" width="440" height="44" rx="10" class="box-amber"></rect>
+        <text x="740" y="143" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">Dérive en conversation longue</text>
 
-        <text x="20" y="206" class="t-tiny s-ink" style="font-weight:600">Application-controlled:</text>
-        <text x="210" y="206" class="t-tiny">the host surfaces resources as @-mentions you choose from.</text>
+        <!-- fixes -->
+        <line x1="240" y1="160" x2="240" y2="180" class="l-ink" stroke-width="1.5" marker-end="url(#l8b)"></line>
+        <line x1="740" y1="160" x2="740" y2="180" class="l-ink" stroke-width="1.5" marker-end="url(#l8b)"></line>
+        <text x="240" y="200" text-anchor="middle" class="t-tiny">Solution : vérifier les noms, les dates, les sources</text>
+        <text x="740" y="200" text-anchor="middle" class="t-tiny">Solution : redonner le contexte, reformuler l'objectif</text>
         <defs>
-          <marker id="l8a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+          <marker id="l8a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
+          <marker id="l8b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">That's the difference from a tool: a tool is the model's to call, a resource is the app's to load. Same server, two different control models — which is the heart of MCP.</p>
+    <p class="cap">D'autres paires fonctionnent pareil : un calcul faux mais assuré (déléguez-le au code), une prémisse fausse acceptée sans broncher (demandez une vraie contradiction). Nommer la paire, c'est du Discernement appliqué : vous évaluez mieux quand vous savez à quel type d'erreur vous avez affaire.</p>
   </div>
   <span class="slide-counter">10</span>
 </section>
 
-<!-- ============ 11 · L9 DEFINING PROMPTS ============================ -->
-<section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 9 · Resources &amp; prompts</span></div>
+<!-- ============ 11 · L9 LOCATE THE TASK ============================= -->
+<section class="deck-slide active">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 9 · La confiance calibrée</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 9</span>
-    <h2>Prompts — reusable templates the author ships</h2>
-    <p class="lead">A tested, parameterized prompt the server exposes, so the right wording is baked in instead of reinvented every time.</p>
+    <span class="eyebrow">Leçon 9</span>
+    <h2 class="">Gardez en tête un petit modèle de la machine</h2>
+    <p class="lead">Être fluide, ce n'est pas mémoriser tous les modes de défaillance. C'est reconnaître à quel type d'erreur vous avez affaire, et choisir la réponse qui correspond.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="Defining a prompt template">
-        <!-- prompt definition -->
-        <rect x="20" y="50" width="380" height="140" rx="14" class="box"/>
-        <text x="40" y="82" class="t-mono s-amber" style="font-weight:600">@mcp.prompt()</text>
-        <text x="40" y="108" class="t-mono" style="font-size:13px">def summarize(doc_id):</text>
-        <line x1="40" y1="124" x2="380" y2="124" class="l-faint" stroke-width="1"/>
-        <text x="40" y="148" class="t-tiny s-ink">a parameter to fill</text>
-        <text x="40" y="172" class="t-tiny">expert wording, written once</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="Something feels off, run it through the four properties, reach for the matching fix">
+        <rect x="20" y="80" width="230" height="70" rx="12" class="box"></rect>
+        <text x="135" y="112" text-anchor="middle" class="t-lbl-s">Quelque chose cloche</text>
+        <text x="135" y="134" text-anchor="middle" class="t-tiny">dans la réponse</text>
 
-        <!-- expands to -->
-        <line x1="400" y1="120" x2="510" y2="120" class="l-amber" stroke-width="2.5" marker-end="url(#l9a)"/>
-        <text x="455" y="110" text-anchor="middle" class="t-tiny">expands to</text>
+        <line x1="250" y1="115" x2="320" y2="115" class="l-ink" stroke-width="2.5" marker-end="url(#l9a)"></line>
 
-        <!-- messages -->
-        <rect x="510" y="62" width="450" height="116" rx="14" class="box-amber"/>
-        <text x="530" y="96" class="t-lbl s-amber" style="font-size:17px">A full message</text>
-        <text x="530" y="126" class="t-tiny s-ink">"Summarise document {doc_id}, three bullets…"</text>
-        <text x="530" y="152" class="t-tiny">ready to send to the model</text>
+        <rect x="320" y="56" width="360" height="138" rx="14" class="box-amber"></rect>
+        <text x="500" y="86" text-anchor="middle" class="t-lbl-s s-amber">Quelle propriété ?</text>
+        <text x="500" y="116" text-anchor="middle" class="t-tiny s-ink">Prédiction du mot suivant · Connaissances</text>
+        <text x="500" y="140" text-anchor="middle" class="t-tiny s-ink">Mémoire de travail · Pilotabilité</text>
+        <text x="500" y="172" text-anchor="middle" class="t-tiny">situez la tâche sur chaque continuum</text>
+
+        <line x1="680" y1="115" x2="743.4" y2="115" class="l-ink" stroke-width="2.5" marker-end="url(#l9a)"></line>
+
+        <rect x="745" y="80" width="221.6" height="70" rx="12" class="box-ink"></rect>
+        <text x="855" y="112" text-anchor="middle" class="t-lbl-s t-white">Le correctif qui correspond</text>
+        <text x="855" y="134" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 82%)">vérifier · nourrir · point d'étape</text>
+
+        <text x="500" y="228" text-anchor="middle" class="t-tiny"><tspan class="s-ink" style="font-weight:600">Les modèles changent sans arrêt.</tspan> Les limites reculent ; les quatre questions, non.</text>
         <defs>
-          <marker id="l9a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+          <marker id="l9a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">Prompts move hard-won phrasing out of people's heads and into the server. The author tunes it once; everyone else just calls it and gets the good version.</p>
+    <p class="cap">C'est ça, la confiance calibrée, et elle survit à chaque nouvelle version. Ce cours, c'est la moitié machine ; le cours 4D Framework &amp; Foundations, c'est la moitié humaine qui s'en sert.</p>
   </div>
   <span class="slide-counter">11</span>
 </section>
 
-<!-- ============ 12 · L10 PROMPTS IN THE CLIENT ====================== -->
-<section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 10 · Resources &amp; prompts</span></div>
+<!-- ============ 12 · CLOSE ========================================== -->
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 10</span>
-    <h2>Prompts surface as slash commands</h2>
-    <p class="lead">The client lists the server's prompts and offers them to the user. Pick one, fill the arguments, and it expands into the full message.</p>
-    <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="Prompts surfaced as slash commands">
-        <rect x="20" y="70" width="220" height="84" rx="14" class="box"/>
-        <text x="130" y="102" text-anchor="middle" class="t-lbl" style="font-size:16px">User types</text>
-        <text x="130" y="128" text-anchor="middle" class="t-mono" style="font-size:14px">/summarize</text>
-
-        <line x1="240" y1="112" x2="340" y2="112" class="l-amber" stroke-width="2.5" marker-end="url(#l10a)"/>
-        <rect x="340" y="70" width="240" height="84" rx="14" class="box-amber"/>
-        <text x="460" y="102" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Fill arguments</text>
-        <text x="460" y="128" text-anchor="middle" class="t-tiny">which doc? how long?</text>
-
-        <line x1="580" y1="112" x2="680" y2="112" class="l-amber" stroke-width="2.5" marker-end="url(#l10a)"/>
-        <rect x="680" y="70" width="280" height="84" rx="14" class="box-ink"/>
-        <text x="820" y="102" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Sent to the model</text>
-        <text x="820" y="128" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">expanded, ready to run</text>
-
-        <text x="20" y="196" class="t-tiny s-ink" style="font-weight:600">User-controlled:</text>
-        <text x="160" y="196" class="t-tiny">the user triggers it deliberately — not the model, not the app.</text>
-        <defs>
-          <marker id="l10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
-      </svg>
-    </div>
-    <p class="cap">If you've used a slash command in Claude Code, you've used an MCP prompt. The server ships the command; the client makes it a one-keystroke action.</p>
+    <span class="eyebrow">Tout ça, en une ligne</span>
+    <h1 class="">Quatre propriétés.<br>Chacune un continuum.<br>Une confiance calibrée.</h1>
+    <p class="lead">Prédiction du mot suivant, Connaissances, Mémoire de travail, Pilotabilité : situez votre tâche sur chacune, puis ajustez la rigueur de vos vérifications à sa position.</p>
+    <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
   </div>
   <span class="slide-counter">12</span>
 </section>
 
-<!-- ============ 13 · L11 MCP REVIEW (centrepiece) =================== -->
-<section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 11 · Recap</span></div>
-  <div class="stage">
-    <span class="eyebrow">Lesson 11 — if you take one thing away</span>
-    <h2>Three primitives, three owners</h2>
-    <p class="lead">The whole protocol, in one picture: what the server exposes, and who gets to trigger each one.</p>
-    <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="The three MCP primitives and who controls each">
-        <!-- tools -->
-        <rect x="20" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="165" y="78" text-anchor="middle" class="t-lbl s-amber">Tools</text>
-        <text x="165" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">model-controlled</text>
-        <text x="165" y="130" text-anchor="middle" class="t-tiny">actions · the model calls them</text>
-
-        <!-- resources -->
-        <rect x="345" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="490" y="78" text-anchor="middle" class="t-lbl s-amber">Resources</text>
-        <text x="490" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">application-controlled</text>
-        <text x="490" y="130" text-anchor="middle" class="t-tiny">data · the app loads them</text>
-
-        <!-- prompts -->
-        <rect x="670" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="815" y="78" text-anchor="middle" class="t-lbl s-amber">Prompts</text>
-        <text x="815" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">user-controlled</text>
-        <text x="815" y="130" text-anchor="middle" class="t-tiny">templates · the user triggers them</text>
-
-        <!-- carrier line -->
-        <text x="490" y="200" text-anchor="middle" class="t-sub" style="fill:hsl(var(--foreground))">all exposed by a <tspan style="font-weight:600">server</tspan>, reached by a <tspan style="font-weight:600">client</tspan> inside your <tspan style="font-weight:600">host</tspan></text>
-        <text x="490" y="226" text-anchor="middle" class="t-tiny">over JSON-RPC, on stdio (local) or HTTP (remote)</text>
-      </svg>
-    </div>
-    <p class="cap">Everything in the course hangs off this: tools the model calls, resources the app loads, prompts the user triggers. Get the owners straight and the rest follows.</p>
-  </div>
-  <span class="slide-counter">13</span>
-</section>
-
-<!-- ============ 14 · CLOSE ========================================== -->
-<section class="deck-slide title">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
-  <div class="stage">
-    <span class="eyebrow">The whole thing, in one line</span>
-    <h1>One protocol.<br>Three primitives.<br>Any tool, any app.</h1>
-    <p class="lead">Tools, resources and prompts, exposed by a server and reached by a client inside your host — so context and capability plug in once instead of being rebuilt every time.</p>
-    <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
-  </div>
-  <span class="slide-counter">14</span>
-</section>
-
 <div class="slide-counter" style="display:none"></div>
-<div class="hint" id="hint">← → or space · F11 fullscreen</div>
+<div class="hint" id="hint" style="opacity: 0;">← → ou espace · F11 plein écran</div>
 
 <script>
   const slides = Array.from(document.querySelectorAll('.deck-slide'));
@@ -1427,5 +1358,9 @@ th {
 
   show(i);
 </script>
-</body>
-</html>
+
+
+
+<deepl-input-controller translate="no"></deepl-input-controller>
+
+</body></html>

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
-<head>
+<html lang="en" class="light"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction to MCP — talking deck</title>
+<title>Praxis · Start Here — talking deck</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -745,17 +744,13 @@ th {
 
   .deck-slide .eyebrow { margin-bottom: var(--space-2); }
   .deck-slide h2 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); margin: 0 0 var(--space-2); }
-  .deck-slide .lead { max-width: 60ch; margin-bottom: var(--space-6); }
+  .deck-slide .lead { max-width: 62ch; margin-bottom: var(--space-6); }
 
   /* diagram canvas */
   .diagram { width: 100%; margin-top: var(--space-2); }
   .diagram svg { width: 100%; height: auto; display: block; }
-  .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 70ch; }
+  .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 72ch; }
   .cap code { font-size: 0.85em; }
-  .qa { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-5); }
-  .qa p { margin: 0; font-size: var(--text-sm); color: hsl(var(--foreground)); line-height: var(--leading-snug); max-width: 46ch; }
-  .qa span { display: block; font-weight: var(--weight-bold); color: hsl(var(--primary)); margin-bottom: var(--space-1); }
-  @media (max-width: 640px) { .qa { grid-template-columns: 1fr; } }
 
   /* SVG shared styles */
   svg text { font-family: var(--font-sans); fill: hsl(var(--foreground)); }
@@ -803,7 +798,7 @@ th {
   }
 </style>
 </head>
-<body>
+<body class="">
 
 <nav id="psn" class="no-print" style="position:fixed;top:0;left:0;right:0;z-index:9999;height:44px;display:flex;align-items:center;gap:0;padding:0 18px;background:rgba(250,249,246,0.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid hsl(220,13%,91%);box-sizing:border-box;">
   <a href="/" style="font-family:'Roboto',-apple-system,sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:-0.025em;color:#1f1f1f;text-decoration:none;white-space:nowrap;flex-shrink:0;">Tutto<span style="color:#db7400;">.</span></a>
@@ -854,56 +849,51 @@ th {
 </style>
 
 
-<div class="progress" id="progress"></div>
+<div class="progress" id="progress" style="width: 64.2857%;"></div>
 
 <!-- ============ 1 · TITLE ============================================= -->
-<section class="deck-slide title active">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · talking deck</span></div>
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · the overview</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — built from Anthropic's Introduction to Model Context Protocol</span>
-    <h1>One protocol, so any<br>AI app can reach any<br>tool or data source.</h1>
-    <p class="lead">Eleven ideas, one per screen. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.</p>
+    <span class="eyebrow">Praxis — start here</span>
+    <h1 class="">The systems I build.<br>And how you build them too.<br></h1>
+    <p class="lead">There are three parts to getting momentum. The first part describes the idea of working in folders rather than in the Claude app. The second part shows you proof and examples of what's been achieved. The third part is when you take over and do the presenting, not me anymore. This is so we can get the theory to stick through practical use. This is Praxis.<br></p>
   </div>
   <span class="slide-counter">01</span>
 </section>
 
 <!-- ============ 2 · THE SPINE ========================================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The shape of the course</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>What this overview is</span></div>
   <div class="stage">
     <span class="eyebrow">Where we're going</span>
-    <h2>The whole course on one screen</h2>
-    <p class="lead">Four moves: grasp what MCP is, then learn its three primitives — tools, resources, prompts — one at a time, server side and client side.</p>
-    <div class="spine">
+    <h2 class="">Three things, then the rest of the library</h2>
+    <p class="lead">First the idea. Then the proof. Then your turn. After this overview, the rest of the library takes each part further, until you're building systems that solve real problems in your own work.</p>
+    <div class="spine" style="grid-template-columns:repeat(3,1fr)">
       <div class="grp">
-        <h4>Foundation</h4>
+        <h4>The idea</h4>
         <ol>
-          <li><span class="n">1</span> Introducing MCP</li>
-          <li><span class="n">2</span> MCP clients</li>
-          <li><span class="n">3</span> Project setup</li>
+          <li><span class="n">1</span> Software vs AI</li>
+          <li><span class="n">2</span> One concept: folder, skill, script</li>
+          <li><span class="n">3</span> Ask for the thing that makes the answer</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Tools</h4>
+        <h4>The proof</h4>
         <ol>
-          <li><span class="n">4</span> Defining tools</li>
-          <li><span class="n">5</span> The server inspector</li>
-          <li><span class="n">6</span> Implementing a client</li>
+          <li><span class="n">4</span> Built, not bought</li>
+          <li><span class="n">5</span> My books &amp; events, no subscription</li>
+          <li><span class="n">6</span> Outreach that knows each country</li>
+          <li><span class="n">7</span> Scaling up</li>
+          <li><span class="n">8</span> Why it keeps getting better</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Resources &amp; prompts</h4>
+        <h4>Your turn</h4>
         <ol>
-          <li><span class="n">7</span> Defining resources</li>
-          <li><span class="n">8</span> Accessing resources</li>
-          <li><span class="n">9</span> Defining prompts</li>
-          <li><span class="n">10</span> Prompts in the client</li>
-        </ol>
-      </div>
-      <div class="grp">
-        <h4>Recap</h4>
-        <ol>
-          <li><span class="n">11</span> MCP review</li>
+          <li><span class="n">9</span> From one build to many</li>
+          <li><span class="n">10</span> Finding your use case</li>
+          <li><span class="n">11</span> What it costs</li>
         </ol>
       </div>
     </div>
@@ -911,488 +901,351 @@ th {
   <span class="slide-counter">02</span>
 </section>
 
-<!-- ============ 3 · L1 INTRODUCING MCP =============================== -->
+<!-- ============ 3 · SOFTWARE VS AI =================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 1 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The idea · how it works</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 1</span>
-    <h2>M&times;N integrations become M+N</h2>
-    <p class="lead">Without a standard, every app wires up to every tool by hand. MCP is the standard connector that ends the tangle.</p>
+    <span class="eyebrow">The idea</span>
+    <h2 class="">Software is exact. AI is likely. Pair them.</h2>
+    <p class="lead">Software does what you tell it, the same way, every time. AI is different: it gives you answers based on probability, and it comes out a little different each time. Claude Code puts the two together. You say what you want in English, and it writes rules that then run the same way every time.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 270" role="img" aria-label="M by N integrations versus M plus N with MCP">
-        <!-- WITHOUT side -->
-        <text x="20" y="30" class="t-lbl">Without MCP</text>
-        <text x="20" y="50" class="t-tiny">every app &times; every tool, by hand</text>
-        <rect x="20"  y="70" width="86" height="36" rx="8" class="box"/><text x="63"  y="93" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="20"  y="120" width="86" height="36" rx="8" class="box"/><text x="63"  y="143" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="20"  y="170" width="86" height="36" rx="8" class="box"/><text x="63"  y="193" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="300" y="70" width="86" height="36" rx="8" class="box"/><text x="343" y="93" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="300" y="120" width="86" height="36" rx="8" class="box"/><text x="343" y="143" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="300" y="170" width="86" height="36" rx="8" class="box"/><text x="343" y="193" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <g class="l-faint" stroke-width="1.3">
-          <line x1="106" y1="88"  x2="300" y2="88"/><line x1="106" y1="88"  x2="300" y2="138"/><line x1="106" y1="88"  x2="300" y2="188"/>
-          <line x1="106" y1="138" x2="300" y2="88"/><line x1="106" y1="138" x2="300" y2="138"/><line x1="106" y1="138" x2="300" y2="188"/>
-          <line x1="106" y1="188" x2="300" y2="88"/><line x1="106" y1="188" x2="300" y2="138"/><line x1="106" y1="188" x2="300" y2="188"/>
-        </g>
-        <text x="203" y="238" text-anchor="middle" class="t-tiny">9 custom integrations</text>
+      <svg viewBox="0 0 980 240" role="img" aria-label="Software and AI combined as Claude Code">
+        <rect x="120" y="20" width="300" height="78" rx="12" class="box"></rect>
+        <text x="140" y="52" class="t-lbl">Software (rules)</text>
+        <text x="140" y="78" class="t-tiny">deterministic · same answer every time</text>
 
-        <!-- divider -->
-        <line x1="470" y1="20" x2="470" y2="250" class="l-faint" stroke-width="1" stroke-dasharray="4 5"/>
+        <rect x="560" y="20" width="300" height="78" rx="12" class="box"></rect>
+        <text x="580" y="52" class="t-lbl">AI (Claude)</text>
+        <text x="580" y="78" class="t-tiny">probabilistic · likely, not guaranteed</text>
 
-        <!-- WITH side -->
-        <text x="520" y="30" class="t-lbl">With MCP</text>
-        <text x="520" y="50" class="t-tiny">build to the protocol once</text>
-        <rect x="520" y="70" width="86" height="36" rx="8" class="box"/><text x="563" y="93" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="520" y="120" width="86" height="36" rx="8" class="box"/><text x="563" y="143" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="520" y="170" width="86" height="36" rx="8" class="box"/><text x="563" y="193" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="690" y="100" width="96" height="76" rx="12" class="box-amber"/>
-        <text x="738" y="135" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">MCP</text>
-        <text x="738" y="156" text-anchor="middle" class="t-tiny">standard</text>
-        <rect x="870" y="70" width="86" height="36" rx="8" class="box"/><text x="913" y="93" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="870" y="120" width="86" height="36" rx="8" class="box"/><text x="913" y="143" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="870" y="170" width="86" height="36" rx="8" class="box"/><text x="913" y="193" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <g class="l-amber" stroke-width="1.6">
-          <line x1="606" y1="88"  x2="690" y2="130"/><line x1="606" y1="138" x2="690" y2="138"/><line x1="606" y1="188" x2="690" y2="146"/>
-          <line x1="786" y1="130" x2="870" y2="88"/><line x1="786" y1="138" x2="870" y2="138"/><line x1="786" y1="146" x2="870" y2="188"/>
-        </g>
-        <text x="738" y="238" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">6 connections to one standard</text>
+        <line x1="270" y1="98" x2="430" y2="150" class="l-faint" stroke-width="2" marker-end="url(#ov4)"></line>
+        <line x1="710" y1="98" x2="550" y2="150" class="l-faint" stroke-width="2" marker-end="url(#ov4)"></line>
+
+        <rect x="240" y="150" width="500" height="74" rx="14" class="box-amber"></rect>
+        <text x="490" y="183" text-anchor="middle" class="t-lbl s-amber">Claude Code</text>
+        <text x="490" y="207" text-anchor="middle" class="t-tiny">you talk in English; it writes code that runs the same way every time</text>
+        <defs><marker id="ov4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">MCP is a standard, like USB-C for AI: build to the protocol once and every compliant tool just works. It also splits the work — app builders on one side, tool builders on the other.</p>
+    <p class="cap">Think of it as an Excel formula that now lives in your folder. The logic is captured once, and it repeats.</p>
   </div>
   <span class="slide-counter">03</span>
 </section>
 
-<!-- ============ 4 · L2 MCP CLIENTS (ARCHITECTURE) ==================== -->
+<!-- ============ 4 · FOUR PARTS ======================================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 2 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The idea · the architecture</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 2</span>
-    <h2>Host, client, server — one client per server</h2>
-    <p class="lead">The app you use is the host. Inside it, each client holds one connection to one server, and the server wraps the real tool or data.</p>
+    <span class="eyebrow">The idea</span>
+    <h2 class="">Every system I build has the same four parts</h2>
+    <p class="lead">Everything lives in a folder on your machine. The rules are written in plain English, the know-how is saved as a skill, a script does the repeating, and your files sit right next to them. You work in your own folders, not in the Claude app.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="Host client server architecture">
-        <!-- host containing clients -->
-        <rect x="20" y="40" width="300" height="170" rx="14" class="box-ink"/>
-        <text x="170" y="72" text-anchor="middle" class="t-lbl t-white">Host</text>
-        <text x="170" y="92" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">Claude Code · Desktop · Cursor</text>
-        <rect x="44" y="112" width="116" height="78" rx="10" class="box-amber"/>
-        <text x="102" y="148" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">client</text>
-        <text x="102" y="168" text-anchor="middle" class="t-tiny">one server</text>
-        <rect x="180" y="112" width="116" height="78" rx="10" class="box-amber"/>
-        <text x="238" y="148" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">client</text>
-        <text x="238" y="168" text-anchor="middle" class="t-tiny">one server</text>
+      <svg viewBox="0 0 980 230" role="img" aria-label="A folder holding rules, a skill, a script and data">
+        <rect x="60" y="24" width="860" height="180" rx="16" class="l-amber" fill="hsl(var(--primary) / 0.04)" stroke-width="1.5"></rect>
+        <text x="84" y="52" class="t-mono s-amber">your-folder/</text>
 
-        <!-- transports -->
-        <line x1="320" y1="151" x2="470" y2="100" class="l-amber" stroke-width="2.2" marker-end="url(#l2a)"/>
-        <line x1="320" y1="151" x2="470" y2="190" class="l-amber" stroke-width="2.2" marker-end="url(#l2a)"/>
-        <text x="395" y="112" text-anchor="middle" class="t-tiny s-amber">JSON-RPC</text>
+        <rect x="96" y="74" width="190" height="104" rx="12" class="box"></rect>
+        <text x="116" y="106" class="t-lbl" style="font-size:16px">CLAUDE.md</text>
+        <text x="116" y="130" class="t-tiny">the rules, in</text>
+        <text x="116" y="147" class="t-tiny">plain English</text>
 
-        <!-- servers -->
-        <rect x="470" y="68" width="220" height="64" rx="12" class="box"/>
-        <text x="580" y="98" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="580" y="118" text-anchor="middle" class="t-tiny">exposes tools · resources · prompts</text>
-        <rect x="470" y="158" width="220" height="64" rx="12" class="box"/>
-        <text x="580" y="188" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="580" y="208" text-anchor="middle" class="t-tiny">exposes tools · resources · prompts</text>
+        <rect x="305" y="74" width="190" height="104" rx="12" class="box"></rect>
+        <text x="325" y="106" class="t-lbl" style="font-size:16px">skill</text>
+        <text x="325" y="130" class="t-tiny">packaged</text>
+        <text x="325" y="147" class="t-tiny">know-how</text>
 
-        <!-- backing systems -->
-        <line x1="690" y1="100" x2="760" y2="100" class="l-faint" stroke-width="2" marker-end="url(#l2faint)"/>
-        <line x1="690" y1="190" x2="760" y2="190" class="l-faint" stroke-width="2" marker-end="url(#l2faint)"/>
-        <rect x="760" y="74" width="200" height="52" rx="10" class="box"/>
-        <text x="860" y="105" text-anchor="middle" class="t-tiny s-ink">a real tool / API</text>
-        <rect x="760" y="164" width="200" height="52" rx="10" class="box"/>
-        <text x="860" y="195" text-anchor="middle" class="t-tiny s-ink">a database / files</text>
-        <defs>
-          <marker id="l2a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l2faint" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"/></marker>
-        </defs>
+        <rect x="514" y="74" width="190" height="104" rx="12" class="box-amber"></rect>
+        <text x="534" y="106" class="t-lbl s-amber" style="font-size:16px">script</text>
+        <text x="534" y="130" class="t-tiny">does the</text>
+        <text x="534" y="147" class="t-tiny">repeating</text>
+
+        <rect x="723" y="74" width="170" height="104" rx="12" class="box"></rect>
+        <text x="743" y="106" class="t-lbl" style="font-size:16px">your files</text>
+        <text x="743" y="130" class="t-tiny">the memory.</text>
+        <text x="743" y="147" class="t-tiny">no app to log in to</text>
       </svg>
     </div>
-    <p class="cap">Messages travel as JSON-RPC over a transport: stdio for a local server, HTTP for a remote one. The host can hold many clients at once, but each client talks to exactly one server.</p>
-    <div class="qa">
-      <p><span>What does each side hold?</span> The <strong>server offers the capabilities</strong> — tools, resources, prompts. The <strong>client is the connection</strong> that reaches one server and brokers them to the host. Supplier vs. connector.</p>
-      <p><span>Is the client one shared pipe?</span> No — <strong>one client per server</strong>. The host opens a separate, named line to each server, so you grant and revoke them one at a time.</p>
-    </div>
+    <p class="cap">There's no website to go down and no portal to break. Everything the system knows is in that folder, and the folder is yours.</p>
   </div>
   <span class="slide-counter">04</span>
 </section>
 
-<!-- ============ 5 · L3 PROJECT SETUP ================================= -->
+<!-- ============ 5 · ASK FOR THE THING ================================ -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 3 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The idea · the move</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 3</span>
-    <h2>A server is a few lines to start</h2>
-    <p class="lead">The Python SDK's FastMCP does the protocol plumbing. You create a server, register capabilities, and run it over a transport.</p>
+    <span class="eyebrow">The idea</span>
+    <h2 class="">Don't ask for the answer. Ask for the thing that makes it.</h2>
+    <p class="lead">If you ask AI for an answer, you get a good one, but it's different every time. If you ask it to build the script that produces the answer, you now have something that runs the same way for the next thousand. That's the difference between using AI and building with it.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="FastMCP server setup steps">
-        <rect x="10" y="60" width="210" height="96" rx="14" class="box"/>
-        <text x="115" y="98"  text-anchor="middle" class="t-lbl">Project</text>
-        <text x="115" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">uv · mcp SDK</text>
+      <svg viewBox="0 0 980 230" role="img" aria-label="Asking for an answer versus asking for the script">
+        <text x="20" y="36" class="t-lbl">Ask for the answer</text>
+        <rect x="20" y="56" width="160" height="46" rx="10" class="box"></rect>
+        <text x="100" y="84" text-anchor="middle" class="t-mono">prompt</text>
+        <line x1="180" y1="79" x2="250" y2="79" class="l-faint" stroke-width="2" marker-end="url(#ov6f)"></line>
+        <rect x="250" y="44" width="150" height="30" rx="8" class="box"></rect><text x="325" y="64" text-anchor="middle" class="t-tiny">answer A</text>
+        <rect x="250" y="80" width="150" height="30" rx="8" class="box"></rect><text x="325" y="100" text-anchor="middle" class="t-tiny">answer B (different)</text>
+        <text x="20" y="138" class="t-tiny">good, but new every time</text>
 
-        <rect x="262" y="60" width="210" height="96" rx="14" class="box"/>
-        <text x="367" y="98"  text-anchor="middle" class="t-lbl">Server</text>
-        <text x="367" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">FastMCP("name")</text>
+        <line x1="470" y1="30" x2="470" y2="200" class="l-faint" stroke-width="1" stroke-dasharray="4 5"></line>
 
-        <rect x="514" y="60" width="210" height="96" rx="14" class="box-amber"/>
-        <text x="619" y="98"  text-anchor="middle" class="t-lbl s-amber">Register</text>
-        <text x="619" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">@tool @resource</text>
-
-        <rect x="766" y="60" width="204" height="96" rx="14" class="box"/>
-        <text x="868" y="98"  text-anchor="middle" class="t-lbl">Run</text>
-        <text x="868" y="124" text-anchor="middle" class="t-tiny">stdio · HTTP</text>
-
-        <line x1="220" y1="108" x2="260" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <line x1="472" y1="108" x2="512" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <line x1="724" y1="108" x2="764" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <text x="490" y="198" text-anchor="middle" class="t-tiny">Decorators turn ordinary Python functions into MCP capabilities.</text>
+        <text x="520" y="36" class="t-lbl s-amber">Ask for the script</text>
+        <rect x="520" y="56" width="160" height="46" rx="10" class="box"></rect>
+        <text x="600" y="84" text-anchor="middle" class="t-mono">prompt</text>
+        <line x1="680" y1="79" x2="750" y2="79" class="l-amber" stroke-width="2.5" marker-end="url(#ov6a)"></line>
+        <rect x="750" y="56" width="200" height="46" rx="10" class="box-amber"></rect>
+        <text x="850" y="84" text-anchor="middle" class="t-mono s-amber">script</text>
+        <text x="520" y="138" class="t-sub s-amber">same result, the next 1,000 times</text>
+        <line x1="850" y1="102" x2="850" y2="150" class="l-amber" stroke-width="2" marker-end="url(#ov6a)"></line>
+        <text x="850" y="172" text-anchor="middle" class="t-tiny">runs on its own</text>
         <defs>
-          <marker id="l3a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="ov6f" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"></path></marker>
+          <marker id="ov6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">stdio runs the server as a local subprocess of the host; HTTP exposes it as a remote service. Same server code either way — the transport is just how messages travel.</p>
-    <div class="qa">
-      <p><span>What does "transport-agnostic" mean?</span> MCP fixes the <strong>language, not the channel</strong>. The JSON-RPC messages are identical whether they ride a local stdio pipe or an HTTP connection — neither side's logic changes.</p>
-      <p><span>Rewrite the server to go remote?</span> No. Its tools, resources and prompts stay the same; you <strong>swap the transport</strong> (stdio → HTTP), not the code.</p>
-    </div>
+    <p class="cap">This one move is behind every system on the next few screens.</p>
   </div>
   <span class="slide-counter">05</span>
 </section>
 
-<!-- ============ 6 · L4 DEFINING TOOLS =============================== -->
+<!-- ============ 6 · BUILT NOT BOUGHT ================================ -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 4 · Tools</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The proof</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 4</span>
-    <h2>Tools — actions the model can choose to call</h2>
-    <p class="lead">Decorate a function and its name, docstring and typed arguments become a schema the model reads. The model decides when to use it.</p>
+    <span class="eyebrow">The proof</span>
+    <h2 class="">Built, not bought. Starting with my own company.</h2>
+    <p class="lead">I run my own company on systems built this way: our books and events, and our outreach. The subscriptions they replaced are cancelled. We build the same way for clients. I'll show you three, and why they keep getting better.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Defining a tool the model calls">
-        <!-- server function -->
-        <rect x="20" y="50" width="320" height="140" rx="14" class="box"/>
-        <text x="40" y="82" class="t-mono s-amber" style="font-weight:600">@mcp.tool()</text>
-        <text x="40" y="108" class="t-mono" style="font-size:13px">def get_weather(city):</text>
-        <text x="40" y="132" class="t-tiny s-ink">name · description · input schema</text>
-        <line x1="40" y1="148" x2="320" y2="148" class="l-faint" stroke-width="1"/>
-        <text x="40" y="172" class="t-tiny">the verbs — they do things, have side effects</text>
+      <svg viewBox="0 0 980 210" role="img" aria-label="Rented software replaced by systems you own">
+        <text x="20" y="28" class="t-tiny s-muted">what you used to rent</text>
+        <rect x="20" y="40" width="300" height="40" rx="10" class="box" opacity="0.5"></rect><text x="40" y="65" class="t-tiny">accounting package · £/mo</text>
+        <rect x="20" y="88" width="300" height="40" rx="10" class="box" opacity="0.5"></rect><text x="40" y="113" class="t-tiny">event &amp; quoting tool · £/mo</text>
+        <rect x="20" y="136" width="300" height="40" rx="10" class="box" opacity="0.5"></rect><text x="40" y="161" class="t-tiny">email &amp; CRM platform · £/mo</text>
 
-        <!-- exposes -->
-        <line x1="340" y1="120" x2="440" y2="120" class="l-amber" stroke-width="2.5" marker-end="url(#l4a)"/>
-        <text x="390" y="110" text-anchor="middle" class="t-tiny">exposed</text>
-
-        <!-- model decides -->
-        <rect x="440" y="74" width="220" height="92" rx="14" class="box-amber"/>
-        <text x="550" y="108" text-anchor="middle" class="t-lbl s-amber">Model</text>
-        <text x="550" y="132" text-anchor="middle" class="t-tiny">reads the schema,</text>
-        <text x="550" y="150" text-anchor="middle" class="t-tiny">decides to call it</text>
-
-        <!-- result back -->
-        <line x1="660" y1="120" x2="760" y2="120" class="l-ink" stroke-width="2" marker-end="url(#l4b)"/>
-        <rect x="760" y="86" width="200" height="68" rx="12" class="box-ink"/>
-        <text x="860" y="118" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Result</text>
-        <text x="860" y="140" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">returned to the model</text>
-
-        <text x="20" y="222" class="t-tiny s-ink" style="font-weight:600">Model-controlled:</text>
-        <text x="150" y="222" class="t-tiny">the model picks the moment, not the app or the user.</text>
-        <defs>
-          <marker id="l4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l4b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
-        </defs>
+        <line x1="340" y1="108" x2="470" y2="108" class="l-amber" stroke-width="2.5" marker-end="url(#s7)"></line>
+        <rect x="490" y="58" width="460" height="100" rx="16" class="box-amber"></rect>
+        <text x="520" y="96" class="t-lbl s-amber">systems you own</text>
+        <text x="520" y="122" class="t-sub">folder · skill · script · no monthly fee</text>
+        <text x="520" y="144" class="t-tiny">the asset stays yours, on your machine</text>
+        <defs><marker id="s7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">A clear name and description matter: that text is all the model has to decide whether and how to call the tool. Treat the docstring as a prompt, not a comment.</p>
+    <p class="cap">The best proof I have is that my own business runs on this. Two of these systems are mine, one we built for a client, and all three improve with use.</p>
   </div>
   <span class="slide-counter">06</span>
 </section>
 
-<!-- ============ 7 · L5 THE SERVER INSPECTOR ========================= -->
+<!-- ============ 7 · TUTTO BOOKS ===================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 5 · Tools</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The proof · my own company</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 5</span>
-    <h2>Test the server before wiring it to an app</h2>
-    <p class="lead">The Inspector connects straight to your server — no LLM involved. List what it exposes, call each tool by hand, read the raw response.</p>
+    <span class="eyebrow">Real system · Tutto's own books</span>
+    <h2 class="">My company's books and events, with no subscription</h2>
+    <p class="lead">An event or a job becomes a quote. The quote becomes an invoice. It goes out through our own email service and the books stay current. I cancelled the accounting package; this does the job and the data stays with me.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="MCP Inspector connected to a server">
-        <!-- inspector -->
-        <rect x="40" y="70" width="260" height="110" rx="14" class="box-amber"/>
-        <text x="170" y="108" text-anchor="middle" class="t-lbl s-amber">MCP Inspector</text>
-        <text x="170" y="134" text-anchor="middle" class="t-tiny">a test client, no model</text>
-        <text x="170" y="154" text-anchor="middle" class="t-tiny">browser UI</text>
-
-        <!-- connection -->
-        <line x1="300" y1="125" x2="420" y2="125" class="l-amber" stroke-width="2.5" marker-end="url(#l5a)"/>
-        <line x1="420" y1="140" x2="300" y2="140" class="l-amber" stroke-width="2.5" marker-end="url(#l5b)"/>
-        <text x="360" y="112" text-anchor="middle" class="t-tiny">call</text>
-        <text x="360" y="168" text-anchor="middle" class="t-tiny">raw response</text>
-
-        <!-- server -->
-        <rect x="420" y="70" width="240" height="110" rx="14" class="box"/>
-        <text x="540" y="104" text-anchor="middle" class="t-lbl">Your server</text>
-        <text x="540" y="132" text-anchor="middle" class="t-tiny">tools · resources ·</text>
-        <text x="540" y="150" text-anchor="middle" class="t-tiny">prompts</text>
-
-        <!-- checklist -->
-        <rect x="710" y="70" width="250" height="110" rx="12" class="box"/>
-        <text x="730" y="100" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Check, in isolation</text>
-        <text x="730" y="126" class="t-tiny">does it list correctly?</text>
-        <text x="730" y="148" class="t-tiny">does each call return?</text>
-        <text x="730" y="170" class="t-tiny">is the shape right?</text>
-        <defs>
-          <marker id="l5a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l5b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+      <svg viewBox="0 0 980 200" role="img" aria-label="An event becomes a quote, an invoice, then an email">
+        <rect x="20" y="64" width="200" height="72" rx="12" class="box"></rect>
+        <text x="120" y="98" text-anchor="middle" class="t-lbl" style="font-size:15px">event / job</text>
+        <text x="120" y="120" text-anchor="middle" class="t-tiny">it starts here</text>
+        <line x1="220" y1="100" x2="270" y2="100" class="l-amber" stroke-width="2.5" marker-end="url(#s8)"></line>
+        <rect x="270" y="64" width="180" height="72" rx="12" class="box-amber"></rect>
+        <text x="360" y="98" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">quote</text>
+        <text x="360" y="120" text-anchor="middle" class="t-tiny">generated</text>
+        <line x1="450" y1="100" x2="500" y2="100" class="l-amber" stroke-width="2.5" marker-end="url(#s8)"></line>
+        <rect x="500" y="64" width="180" height="72" rx="12" class="box-amber"></rect>
+        <text x="590" y="98" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">invoice</text>
+        <text x="590" y="120" text-anchor="middle" class="t-tiny">generated</text>
+        <line x1="680" y1="100" x2="730" y2="100" class="l-amber" stroke-width="2.5" marker-end="url(#s8)"></line>
+        <rect x="730" y="64" width="230" height="72" rx="12" class="box"></rect>
+        <text x="845" y="98" text-anchor="middle" class="t-lbl" style="font-size:15px">sent &amp; booked</text>
+        <text x="845" y="120" text-anchor="middle" class="t-tiny">via our own email service</text>
+        <defs><marker id="s8" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">Debug the server on its own first. If the Inspector can list and call everything cleanly, the problem later is in the client wiring — not the server.</p>
+    <p class="cap">No portal to log into, no monthly fee. We built it once and it runs every month.</p>
   </div>
   <span class="slide-counter">07</span>
 </section>
 
-<!-- ============ 8 · L6 IMPLEMENTING A CLIENT ======================== -->
-<section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 6 · Tools</span></div>
+<!-- ============ 8 · TSPLUS ========================================== -->
+<section class="deck-slide active">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The proof · client outreach</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 6</span>
-    <h2>The client feeds tools to the model, in a loop</h2>
-    <p class="lead">Your client lists the server's tools, hands their schemas to Claude, runs whatever Claude asks for, and feeds the result back — until it has an answer.</p>
+    <span class="eyebrow">Real system · TSplus outreach &amp; intelligence</span>
+    <h2 class="">Sales that knows how to talk across borders</h2>
+    <p class="lead">An emailing and intelligence system with its own dashboard. It drafts messages suited to how people communicate in each country, tracks the pipeline, and produces the reports and quotes I send straight to customers.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="Client tool-use loop">
-        <rect x="20"  y="70" width="180" height="64" rx="12" class="box"/>
-        <text x="110" y="100" text-anchor="middle" class="t-lbl" style="font-size:16px">Client</text>
-        <text x="110" y="122" text-anchor="middle" class="t-tiny">lists tools</text>
-
-        <rect x="250" y="70" width="180" height="64" rx="12" class="box-amber"/>
-        <text x="340" y="100" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Claude</text>
-        <text x="340" y="122" text-anchor="middle" class="t-tiny">asks for a tool</text>
-
-        <rect x="480" y="70" width="180" height="64" rx="12" class="box"/>
-        <text x="570" y="100" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="570" y="122" text-anchor="middle" class="t-tiny">runs it</text>
-
-        <rect x="710" y="70" width="180" height="64" rx="12" class="box-ink"/>
-        <text x="800" y="100" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Answer</text>
-        <text x="800" y="122" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">when done</text>
-
-        <line x1="200" y1="102" x2="248" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-        <line x1="430" y1="102" x2="478" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-        <line x1="660" y1="102" x2="708" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-
-        <!-- loop back: server result -> claude -->
-        <path d="M 570 134 C 570 200, 340 200, 340 136" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#l6amber)"/>
-        <text x="455" y="194" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">result back to Claude — loop until the task is done</text>
-        <defs>
-          <marker id="l6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
-          <marker id="l6amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+      <svg viewBox="0 0 980 210" role="img" aria-label="Prospects through a country-aware engine and dashboard to reports and quotes">
+        <rect x="20" y="78" width="150" height="60" rx="12" class="box"></rect>
+        <text x="95" y="106" text-anchor="middle" class="t-lbl" style="font-size:15px">prospects</text>
+        <text x="95" y="125" text-anchor="middle" class="t-tiny">by market</text>
+        <line x1="170" y1="108" x2="210" y2="108" class="l-amber" stroke-width="2.5" marker-end="url(#s9)"></line>
+        <rect x="210" y="68" width="250" height="80" rx="14" class="box-amber"></rect>
+        <text x="335" y="102" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">sequence engine</text>
+        <text x="335" y="126" text-anchor="middle" class="t-tiny">knows how each country communicates</text>
+        <line x1="460" y1="108" x2="500" y2="108" class="l-amber" stroke-width="2.5" marker-end="url(#s9)"></line>
+        <rect x="500" y="78" width="180" height="60" rx="14" class="box-ink"></rect>
+        <text x="590" y="106" text-anchor="middle" class="t-lbl t-white" style="font-size:15px">dashboard</text>
+        <text x="590" y="125" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">the pipeline, live</text>
+        <line x1="680" y1="100" x2="730" y2="76" class="l-amber" stroke-width="2.5" marker-end="url(#s9)"></line>
+        <line x1="680" y1="116" x2="730" y2="140" class="l-amber" stroke-width="2.5" marker-end="url(#s9)"></line>
+        <rect x="730" y="50" width="230" height="50" rx="10" class="box"></rect><text x="845" y="80" text-anchor="middle" class="t-tiny">reports → customers</text>
+        <rect x="730" y="116" width="230" height="50" rx="10" class="box"></rect><text x="845" y="146" text-anchor="middle" class="t-tiny">quotes → customers</text>
+        <defs><marker id="s9" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">This is the same agentic loop a chat window doesn't have: the model can act, see the result, and decide what to do next. MCP is just how the tools get there.</p>
+    <p class="cap">The country know-how is written into the rules, so every message goes out the way it should, however many we send.</p>
   </div>
   <span class="slide-counter">08</span>
 </section>
 
-<!-- ============ 9 · L7 DEFINING RESOURCES =========================== -->
+<!-- ============ 9 · RGBC IMAGE GEN ================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 7 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The proof · creative at scale</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 7</span>
-    <h2>Resources — data to pull in, addressed by URI</h2>
-    <p class="lead">Read-only data the server exposes at an address. No side effects: think GET, not POST.</p>
+    <span class="eyebrow">Real build · creative production for a client</span>
+    <h2 class="">One spec PDF in. Seventy-eight finished assets out.</h2>
+    <p class="lead">An e-commerce platform sends a spec for 78 asset formats. A script turns that PDF into a reusable set of rules, like one big spreadsheet formula, then produces all 78. Each comes back editable, so a person finishes the last ten percent.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Defining direct and templated resources">
-        <!-- direct -->
-        <rect x="20" y="50" width="430" height="74" rx="12" class="box-amber"/>
-        <text x="40" y="80" class="t-mono s-amber" style="font-weight:600">@mcp.resource("docs://documents")</text>
-        <text x="40" y="106" class="t-tiny s-ink">direct — returns the whole list</text>
-
-        <!-- templated -->
-        <rect x="20" y="140" width="430" height="74" rx="12" class="box"/>
-        <text x="40" y="170" class="t-mono s-amber" style="font-weight:600">docs://documents/{id}</text>
-        <text x="40" y="196" class="t-tiny s-ink">templated — a parameter picks one item</text>
-
-        <!-- arrow to data -->
-        <line x1="450" y1="132" x2="560" y2="132" class="l-amber" stroke-width="2.5" marker-end="url(#l7a)"/>
-        <text x="505" y="122" text-anchor="middle" class="t-tiny">read</text>
-
-        <!-- returns data, GET-like -->
-        <rect x="560" y="70" width="400" height="124" rx="14" class="box"/>
-        <text x="580" y="104" class="t-lbl" style="font-size:17px">Returns data</text>
-        <text x="580" y="134" class="t-tiny s-ink">no side effects · safe to read anytime</text>
-        <text x="580" y="160" class="t-tiny">like a <tspan class="t-mono" style="font-size:13px">GET</tspan> endpoint, addressed by URI</text>
-        <text x="580" y="184" class="t-tiny">contrast tools, which <tspan class="s-ink" style="font-weight:600">do</tspan> things</text>
-        <defs>
-          <marker id="l7a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+      <svg viewBox="0 0 980 210" role="img" aria-label="A spec PDF becomes reusable rules, then 78 editable assets">
+        <rect x="20" y="78" width="150" height="60" rx="12" class="box"></rect>
+        <text x="95" y="104" text-anchor="middle" class="t-mono" style="font-size:13px">spec.pdf</text>
+        <text x="95" y="124" text-anchor="middle" class="t-tiny">78 formats specified</text>
+        <line x1="170" y1="108" x2="200" y2="108" class="l-amber" stroke-width="2.5" marker-end="url(#s10)"></line>
+        <rect x="200" y="68" width="240" height="80" rx="14" class="box-amber"></rect>
+        <text x="320" y="102" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">reusable rules</text>
+        <text x="320" y="126" text-anchor="middle" class="t-tiny">like one big spreadsheet formula</text>
+        <line x1="440" y1="108" x2="470" y2="108" class="l-amber" stroke-width="2.5" marker-end="url(#s10)"></line>
+        <rect x="470" y="40" width="220" height="136" rx="12" class="box"></rect>
+        <text x="580" y="32" text-anchor="middle" class="t-tiny s-muted">×78 assets generated</text>
+        <rect x="486" y="58" width="26" height="26" rx="4" class="box-amber"></rect><rect x="520" y="58" width="26" height="26" rx="4" class="box"></rect><rect x="554" y="58" width="26" height="26" rx="4" class="box"></rect><rect x="588" y="58" width="26" height="26" rx="4" class="box"></rect><rect x="622" y="58" width="26" height="26" rx="4" class="box"></rect>
+        <rect x="486" y="94" width="26" height="26" rx="4" class="box"></rect><rect x="520" y="94" width="26" height="26" rx="4" class="box"></rect><rect x="554" y="94" width="26" height="26" rx="4" class="box-amber"></rect><rect x="588" y="94" width="26" height="26" rx="4" class="box"></rect><rect x="622" y="94" width="26" height="26" rx="4" class="box"></rect>
+        <rect x="486" y="130" width="26" height="26" rx="4" class="box"></rect><rect x="520" y="130" width="26" height="26" rx="4" class="box"></rect><rect x="554" y="130" width="26" height="26" rx="4" class="box"></rect><rect x="588" y="130" width="26" height="26" rx="4" class="box"></rect><rect x="622" y="130" width="26" height="26" rx="4" class="box-amber"></rect>
+        <line x1="690" y1="108" x2="720" y2="108" class="l-amber" stroke-width="2.5" marker-end="url(#s10)"></line>
+        <rect x="720" y="68" width="240" height="80" rx="12" class="box"></rect>
+        <text x="840" y="102" text-anchor="middle" class="t-lbl" style="font-size:15px">editable</text>
+        <text x="840" y="126" text-anchor="middle" class="t-tiny">a person finishes the last 10%</text>
+        <defs><marker id="s10" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">A URI scheme like <code>docs://</code> names the data. Direct resources return a collection; templated ones take a parameter to fetch exactly one — a single document, a single record.</p>
+    <p class="cap">The manual part, reading a long spec and making every size by hand, becomes a formula you run.</p>
   </div>
   <span class="slide-counter">09</span>
 </section>
 
-<!-- ============ 10 · L8 ACCESSING RESOURCES ========================= -->
+<!-- ============ 10 · IT COMPOUNDS =================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 8 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The proof · why it compounds</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 8</span>
-    <h2>The app decides which resources to load</h2>
-    <p class="lead">Unlike tools, the model doesn't reach for resources. The application — often the user — chooses what context to bring in.</p>
+    <span class="eyebrow">The proof</span>
+    <h2 class="">It gets better the more you use it</h2>
+    <p class="lead">Not all 78 are perfect the first time. But the user shows the system what it got wrong, and the rules improve. Ten percent to fix becomes five percent, then one. The time you save grows every month.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Accessing resources via at-mention">
-        <!-- user @-mention -->
-        <rect x="20" y="80" width="220" height="84" rx="14" class="box"/>
-        <text x="130" y="116" text-anchor="middle" class="t-lbl" style="font-size:16px">User picks</text>
-        <text x="130" y="140" text-anchor="middle" class="t-mono" style="font-size:14px">@report.pdf</text>
-
-        <!-- client reads -->
-        <line x1="240" y1="122" x2="340" y2="122" class="l-amber" stroke-width="2.5" marker-end="url(#l8a)"/>
-        <rect x="340" y="80" width="240" height="84" rx="14" class="box-amber"/>
-        <text x="460" y="112" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Client reads</text>
-        <text x="460" y="136" text-anchor="middle" class="t-tiny">list, then read by URI</text>
-
-        <!-- into context -->
-        <line x1="580" y1="122" x2="680" y2="122" class="l-amber" stroke-width="2.5" marker-end="url(#l8a)"/>
-        <rect x="680" y="80" width="280" height="84" rx="14" class="box-ink"/>
-        <text x="820" y="112" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Into context</text>
-        <text x="820" y="136" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">contents dropped in for the model</text>
-
-        <text x="20" y="206" class="t-tiny s-ink" style="font-weight:600">Application-controlled:</text>
-        <text x="210" y="206" class="t-tiny">the host surfaces resources as @-mentions you choose from.</text>
-        <defs>
-          <marker id="l8a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+      <svg viewBox="0 0 980 210" role="img" aria-label="Errors to fix shrink from ten to five to one percent over time">
+        <rect x="40" y="44" width="240" height="110" rx="12" class="box"></rect>
+        <text x="62" y="80" class="t-lbl" style="font-size:16px">Today</text>
+        <text x="62" y="104" class="t-tiny">~10% to fix by hand</text>
+        <rect x="62" y="120" width="190" height="14" rx="4" class="box-amber"></rect>
+        <line x1="280" y1="99" x2="350" y2="99" class="l-amber" stroke-width="2.5" marker-end="url(#s11)"></line>
+        <rect x="350" y="44" width="240" height="110" rx="12" class="box"></rect>
+        <text x="372" y="80" class="t-lbl" style="font-size:16px">With feedback</text>
+        <text x="372" y="104" class="t-tiny">~5% to fix</text>
+        <rect x="372" y="120" width="95" height="14" rx="4" class="box-amber"></rect>
+        <line x1="590" y1="99" x2="660" y2="99" class="l-amber" stroke-width="2.5" marker-end="url(#s11)"></line>
+        <rect x="660" y="44" width="240" height="110" rx="12" class="box"></rect>
+        <text x="682" y="80" class="t-lbl" style="font-size:16px">Over time</text>
+        <text x="682" y="104" class="t-tiny">~1% to fix</text>
+        <rect x="682" y="120" width="20" height="14" rx="4" class="box-amber"></rect>
+        <text x="470" y="192" text-anchor="middle" class="t-tiny s-muted">the more you correct it, the less there is to correct, and the more time you save</text>
+        <defs><marker id="s11" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">That's the difference from a tool: a tool is the model's to call, a resource is the app's to load. Same server, two different control models — which is the heart of MCP.</p>
+    <p class="cap">This is the real return. A bought tool is as good as it will ever be on day one. A system you teach keeps improving.</p>
   </div>
   <span class="slide-counter">10</span>
 </section>
 
-<!-- ============ 11 · L9 DEFINING PROMPTS ============================ -->
+<!-- ============ 11 · ONE BUILD BECOMES MANY ========================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 9 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Your turn · scale &amp; safety</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 9</span>
-    <h2>Prompts — reusable templates the author ships</h2>
-    <p class="lead">A tested, parameterized prompt the server exposes, so the right wording is baked in instead of reinvented every time.</p>
+    <span class="eyebrow">Your turn</span>
+    <h2 class="">One build becomes many. And it can stay private.</h2>
+    <p class="lead">Build it once for one case and you've built it for every case like it, whether that's ten or a hundred. And when the data is sensitive, the whole system can run on your own machine, where nothing leaves your network.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="Defining a prompt template">
-        <!-- prompt definition -->
-        <rect x="20" y="50" width="380" height="140" rx="14" class="box"/>
-        <text x="40" y="82" class="t-mono s-amber" style="font-weight:600">@mcp.prompt()</text>
-        <text x="40" y="108" class="t-mono" style="font-size:13px">def summarize(doc_id):</text>
-        <line x1="40" y1="124" x2="380" y2="124" class="l-faint" stroke-width="1"/>
-        <text x="40" y="148" class="t-tiny s-ink">a parameter to fill</text>
-        <text x="40" y="172" class="t-tiny">expert wording, written once</text>
+      <svg viewBox="0 0 980 220" role="img" aria-label="Widening rings of scale, plus a local-only option">
+        <circle cx="300" cy="110" r="98" class="l-faint" fill="none" stroke-width="1.4"></circle>
+        <circle cx="300" cy="110" r="70" class="l-faint" fill="none" stroke-width="1.4"></circle>
+        <circle cx="300" cy="110" r="42" class="box-amber"></circle>
+        <text x="300" y="106" text-anchor="middle" class="t-tiny s-amber">one</text>
+        <text x="300" y="122" text-anchor="middle" class="t-tiny s-amber">case</text>
+        <text x="300" y="58" text-anchor="middle" class="t-tiny s-muted">many like it</text>
+        <text x="300" y="30" text-anchor="middle" class="t-tiny s-muted">a whole operation</text>
 
-        <!-- expands to -->
-        <line x1="400" y1="120" x2="510" y2="120" class="l-amber" stroke-width="2.5" marker-end="url(#l9a)"/>
-        <text x="455" y="110" text-anchor="middle" class="t-tiny">expands to</text>
+        <line x1="430" y1="110" x2="540" y2="110" class="l-faint" stroke-width="1.5" stroke-dasharray="4 5"></line>
 
-        <!-- messages -->
-        <rect x="510" y="62" width="450" height="116" rx="14" class="box-amber"/>
-        <text x="530" y="96" class="t-lbl s-amber" style="font-size:17px">A full message</text>
-        <text x="530" y="126" class="t-tiny s-ink">"Summarise document {doc_id}, three bullets…"</text>
-        <text x="530" y="152" class="t-tiny">ready to send to the model</text>
-        <defs>
-          <marker id="l9a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+        <rect x="560" y="58" width="380" height="104" rx="14" class="box"></rect>
+        <text x="585" y="92" class="t-lbl" style="font-size:16px">runs on your machine</text>
+        <text x="585" y="118" class="t-tiny">a local model does the work</text>
+        <text x="585" y="138" class="t-tiny">on data that never leaves the office</text>
       </svg>
     </div>
-    <p class="cap">Prompts move hard-won phrasing out of people's heads and into the server. The author tunes it once; everyone else just calls it and gets the good version.</p>
+    <p class="cap">The work you do once pays back on every case like it. And when the system runs on your own machine, the data never leaves the office, so confidentiality is a fact, not a promise.</p>
   </div>
   <span class="slide-counter">11</span>
 </section>
 
-<!-- ============ 12 · L10 PROMPTS IN THE CLIENT ====================== -->
+<!-- ============ 12 · FIND YOUR USE CASE ============================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 10 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Your turn · where to start</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 10</span>
-    <h2>Prompts surface as slash commands</h2>
-    <p class="lead">The client lists the server's prompts and offers them to the user. Pick one, fill the arguments, and it expands into the full message.</p>
+    <span class="eyebrow">Your turn</span>
+    <h2 class="">How to find the one that's yours</h2>
+    <p class="lead">You don't need a big strategy. Look for a task that ticks three boxes: it touches several systems, it repeats the same way every time, and it's costly when it's wrong. A task that ticks all three is where to start, and you can usually find one in an afternoon.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="Prompts surfaced as slash commands">
-        <rect x="20" y="70" width="220" height="84" rx="14" class="box"/>
-        <text x="130" y="102" text-anchor="middle" class="t-lbl" style="font-size:16px">User types</text>
-        <text x="130" y="128" text-anchor="middle" class="t-mono" style="font-size:14px">/summarize</text>
+      <svg viewBox="0 0 980 200" role="img" aria-label="Three tests that point to a use case">
+        <rect x="20" y="50" width="270" height="100" rx="12" class="box"></rect>
+        <text x="40" y="86" class="t-lbl" style="font-size:16px">Touches several</text>
+        <text x="40" y="110" class="t-lbl" style="font-size:16px">systems</text>
+        <text x="40" y="134" class="t-tiny">copy-paste between tools</text>
 
-        <line x1="240" y1="112" x2="340" y2="112" class="l-amber" stroke-width="2.5" marker-end="url(#l10a)"/>
-        <rect x="340" y="70" width="240" height="84" rx="14" class="box-amber"/>
-        <text x="460" y="102" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Fill arguments</text>
-        <text x="460" y="128" text-anchor="middle" class="t-tiny">which doc? how long?</text>
+        <rect x="310" y="50" width="270" height="100" rx="12" class="box"></rect>
+        <text x="330" y="86" class="t-lbl" style="font-size:16px">Same steps</text>
+        <text x="330" y="110" class="t-lbl" style="font-size:16px">every time</text>
+        <text x="330" y="134" class="t-tiny">a report, a summary, an export</text>
 
-        <line x1="580" y1="112" x2="680" y2="112" class="l-amber" stroke-width="2.5" marker-end="url(#l10a)"/>
-        <rect x="680" y="70" width="280" height="84" rx="14" class="box-ink"/>
-        <text x="820" y="102" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Sent to the model</text>
-        <text x="820" y="128" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">expanded, ready to run</text>
+        <rect x="600" y="50" width="270" height="100" rx="12" class="box"></rect>
+        <text x="620" y="86" class="t-lbl" style="font-size:16px">Costly when</text>
+        <text x="620" y="110" class="t-lbl" style="font-size:16px">it's wrong</text>
+        <text x="620" y="134" class="t-tiny">worth getting right</text>
 
-        <text x="20" y="196" class="t-tiny s-ink" style="font-weight:600">User-controlled:</text>
-        <text x="160" y="196" class="t-tiny">the user triggers it deliberately — not the model, not the app.</text>
-        <defs>
-          <marker id="l10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+        <line x1="870" y1="100" x2="930" y2="100" class="l-amber" stroke-width="2.5" marker-end="url(#ov14)"></line>
+        <text x="935" y="96" class="t-lbl s-amber" style="font-size:15px">YOUR</text>
+        <text x="935" y="116" class="t-lbl s-amber" style="font-size:15px">USE</text>
+        <text x="935" y="136" class="t-lbl s-amber" style="font-size:15px">CASE</text>
+        <defs><marker id="ov14" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">If you've used a slash command in Claude Code, you've used an MCP prompt. The server ships the command; the client makes it a one-keystroke action.</p>
+    <p class="cap">What it costs: about twenty dollars a month. Expect it to get you ninety percent of the way; you finish the last ten by hand. The hard thing to find is a guide who has done it before, not the software.</p>
   </div>
   <span class="slide-counter">12</span>
 </section>
 
-<!-- ============ 13 · L11 MCP REVIEW (centrepiece) =================== -->
-<section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 11 · Recap</span></div>
-  <div class="stage">
-    <span class="eyebrow">Lesson 11 — if you take one thing away</span>
-    <h2>Three primitives, three owners</h2>
-    <p class="lead">The whole protocol, in one picture: what the server exposes, and who gets to trigger each one.</p>
-    <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="The three MCP primitives and who controls each">
-        <!-- tools -->
-        <rect x="20" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="165" y="78" text-anchor="middle" class="t-lbl s-amber">Tools</text>
-        <text x="165" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">model-controlled</text>
-        <text x="165" y="130" text-anchor="middle" class="t-tiny">actions · the model calls them</text>
-
-        <!-- resources -->
-        <rect x="345" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="490" y="78" text-anchor="middle" class="t-lbl s-amber">Resources</text>
-        <text x="490" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">application-controlled</text>
-        <text x="490" y="130" text-anchor="middle" class="t-tiny">data · the app loads them</text>
-
-        <!-- prompts -->
-        <rect x="670" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="815" y="78" text-anchor="middle" class="t-lbl s-amber">Prompts</text>
-        <text x="815" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">user-controlled</text>
-        <text x="815" y="130" text-anchor="middle" class="t-tiny">templates · the user triggers them</text>
-
-        <!-- carrier line -->
-        <text x="490" y="200" text-anchor="middle" class="t-sub" style="fill:hsl(var(--foreground))">all exposed by a <tspan style="font-weight:600">server</tspan>, reached by a <tspan style="font-weight:600">client</tspan> inside your <tspan style="font-weight:600">host</tspan></text>
-        <text x="490" y="226" text-anchor="middle" class="t-tiny">over JSON-RPC, on stdio (local) or HTTP (remote)</text>
-      </svg>
-    </div>
-    <p class="cap">Everything in the course hangs off this: tools the model calls, resources the app loads, prompts the user triggers. Get the owners straight and the rest follows.</p>
-  </div>
-  <span class="slide-counter">13</span>
-</section>
-
-<!-- ============ 14 · CLOSE ========================================== -->
+<!-- ============ 13 · CLOSE ========================================== -->
 <section class="deck-slide title">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
   <div class="stage">
     <span class="eyebrow">The whole thing, in one line</span>
-    <h1>One protocol.<br>Three primitives.<br>Any tool, any app.</h1>
-    <p class="lead">Tools, resources and prompts, exposed by a server and reached by a client inside your host — so context and capability plug in once instead of being rebuilt every time.</p>
+    <h1 class="">Talk to it like a colleague.<br>Give it your context.<br>Build the thing that repeats.</h1>
+    <p class="lead">That's how every system on these screens was made, and it's how you make yours. The rest of the library goes one level deeper, one course at a time. Start anywhere.</p>
     <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
   </div>
-  <span class="slide-counter">14</span>
+  <span class="slide-counter">13</span>
 </section>
 
 <div class="slide-counter" style="display:none"></div>
-<div class="hint" id="hint">← → or space · F11 fullscreen</div>
+<div class="hint" id="hint" style="opacity: 0;">← → or space · F11 fullscreen</div>
 
 <script>
   const slides = Array.from(document.querySelectorAll('.deck-slide'));
@@ -1427,5 +1280,11 @@ th {
 
   show(i);
 </script>
-</body>
-</html>
+
+
+
+<deepl-input-controller translate="no"></deepl-input-controller>
+
+
+
+</body></html>

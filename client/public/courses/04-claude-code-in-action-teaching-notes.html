@@ -315,6 +315,31 @@ th {
 .callout > :first-child { margin-top: 0; }
 .callout > :last-child  { margin-bottom: 0; }
 
+/* --- Keynote: highlighted "hard concept" callout (decks + notes) ---
+   Use on a slide to flag difficult, verified content with a pointer to
+   the teacher notes for the full detail. Self-contained so it works
+   wherever praxis.css is loaded or inlined. */
+.keynote {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: hsl(var(--primary) / 0.07);
+  border: 1px solid hsl(var(--primary) / 0.35);
+  border-left: 4px solid hsl(var(--primary));
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.keynote::before {
+  content: "\2691"; /* ⚑ flag */
+  color: hsl(var(--primary));
+  font-size: var(--text-lg);
+  line-height: 1.1;
+}
+.keynote p { margin: 0; font-size: var(--text-sm); line-height: var(--leading-snug); color: hsl(var(--foreground)); }
+.keynote .kn-label { display: block; font-family: var(--font-display); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: var(--text-xs); color: hsl(var(--primary)); margin-bottom: 2px; }
+.keynote .kn-see { color: hsl(var(--muted-foreground)); font-style: italic; }
+
 /* --- Button ------------------------------------------------- */
 .btn {
   display: inline-block;
@@ -438,6 +463,220 @@ th {
 }
 
 /* ============================================================
+   Patterns — borrowed from the training one-pager
+   ------------------------------------------------------------
+   These are heavier, more editorial blocks. Use for training
+   handouts, mental-model one-pagers, and anything that needs
+   to teach rather than report.
+   ============================================================ */
+
+/* --- Section header with number + rule --------------------- */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin: var(--space-16) 0 var(--space-6);
+}
+.section-head .num {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+  letter-spacing: var(--tracking-wider);
+}
+.section-head .label {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: hsl(var(--foreground));
+}
+.section-head .rule {
+  flex: 1;
+  height: 1px;
+  background: hsl(var(--border));
+}
+
+/* --- Numbered ingredient cards (three-up explainer) -------- */
+.ingredients {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+.ingredient {
+  padding: var(--space-6) var(--space-5);
+  border-right: 1px solid hsl(var(--border));
+  position: relative;
+}
+.ingredient:last-child { border-right: 0; }
+.ingredient .num {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-4);
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+}
+.ingredient .tile {
+  width: 84px;
+  height: 84px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-5);
+  background: hsl(var(--muted));
+}
+.ingredient h3 {
+  font-size: var(--text-2xl);
+  margin: 0 0 var(--space-1);
+  letter-spacing: var(--tracking-tight);
+}
+.ingredient .role {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: var(--space-3);
+}
+.ingredient p {
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* --- File-tree block (for "the folder is the app" diagrams) - */
+.folder {
+  background: hsl(var(--muted) / 0.4);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.folder-tab {
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.folder-tab .dots { display: inline-flex; gap: 6px; }
+.folder-tab .dots span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: hsl(0 0% 60%);
+}
+.folder .tree {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  padding: var(--space-4) 0;
+}
+.folder .row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  gap: var(--space-2);
+  border-bottom: 1px dashed hsl(var(--border));
+}
+.folder .row:last-child { border-bottom: 0; }
+.folder .row .glyph { color: hsl(var(--muted-foreground)); }
+.folder .row .name  { color: hsl(var(--foreground)); }
+.folder .row .name b { color: hsl(var(--primary)); font-weight: var(--weight-semibold); }
+.folder .row .annot {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+}
+.folder .row.head {
+  background: hsl(var(--muted) / 0.6);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid hsl(var(--border));
+}
+.folder .row.head .name { font-weight: var(--weight-semibold); }
+.folder .row.indent { padding-left: var(--space-10); }
+
+/* --- Annotation list (lettered side-notes for a diagram) --- */
+.annotations { display: flex; flex-direction: column; gap: var(--space-6); }
+.annotation {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: var(--space-3);
+}
+.annotation .marker {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid hsl(var(--foreground));
+  background: hsl(var(--background));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+}
+.annotation h4 {
+  font-size: var(--text-lg);
+  margin: 2px 0 var(--space-1);
+}
+.annotation h4 code {
+  font-size: 0.85em;
+  color: hsl(var(--primary));
+  background: hsl(var(--muted));
+}
+.annotation p {
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* --- Page registration marks (editorial corners) ------------ */
+.regmarks {
+  position: relative;
+}
+.regmarks::before,
+.regmarks::after,
+.regmarks > .reg-bl,
+.regmarks > .reg-br {
+  content: "";
+  position: absolute;
+  width: 12px; height: 12px;
+  border: 1px solid hsl(var(--muted-foreground));
+  pointer-events: none;
+}
+.regmarks::before { top: 12px; left: 12px;  border-right: 0; border-bottom: 0; }
+.regmarks::after  { top: 12px; right: 12px; border-left: 0;  border-bottom: 0; }
+.regmarks > .reg-bl { bottom: 12px; left: 12px;  border-right: 0; border-top: 0; }
+.regmarks > .reg-br { bottom: 12px; right: 12px; border-left: 0;  border-top: 0; }
+
+/* --- Hero pattern: eyebrow + display + lede --------------- */
+.hero {
+  margin-bottom: var(--space-12);
+}
+.hero h1 {
+  font-size: var(--text-6xl);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+.hero h1 em {
+  font-style: italic;
+  color: hsl(var(--primary));
+}
+.hero .lede {
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: hsl(var(--muted-foreground));
+  max-width: var(--content-width);
+}
+.hero .lede strong { color: hsl(var(--foreground)); font-weight: var(--weight-medium); }
+
+/* ============================================================
    Print / PDF
    ------------------------------------------------------------
    These rules apply when Claude renders the doc to PDF
@@ -547,6 +786,12 @@ th {
 
   .block--cue .block-label { color: hsl(var(--muted-foreground)); }
 
+  /* Key concept: highlighted, verified "hard content" — flagged so a trainer
+     spots the difficult bits at a glance. Pairs with the deck .keynote callout. */
+  .block--key { background: hsl(var(--primary) / 0.06); border: 1px solid hsl(var(--primary) / 0.3); border-left: 4px solid hsl(var(--primary)); border-radius: 0 var(--radius) var(--radius) 0; padding: var(--space-3) var(--space-4); }
+  .block--key .block-label { color: hsl(var(--primary)); }
+  .block--key .block-label::before { content: "\2691  "; }
+
   code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
   a { color: hsl(var(--primary)); }
 
@@ -588,7 +833,6 @@ th {
     var b=document.getElementById('psn-btn');
     if(d&&!d.contains(e.target)&&!b.contains(e.target))d.style.display='none';
   });
-  // Hover highlight on dropdown links
   var links=document.querySelectorAll('#psn-dd a');
   links.forEach(function(a){
     a.addEventListener('mouseover',function(){a.style.background='hsl(220,13%,97%)';});
@@ -605,6 +849,7 @@ th {
   /* offset scrolled content so it starts below both bars */
   main { padding-top: calc(var(--space-8, 2rem) + 44px) !important; }
 </style>
+
 <div class="guide-bar">
   <span class="wm">Tutto<span class="dot">.</span></span>
   <span style="color:hsl(var(--muted-foreground))">Teaching notes</span>
@@ -885,6 +1130,13 @@ th {
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>This is the same idea as <code>CLAUDE.md</code> and skills from course 02 — your method, captured once, reused — just packaged as a slash command. Name the family resemblance or they'll file it as a separate trick. The win is "the team works the same way", not the syntax of a Markdown file.</p>
+</div><div class="block block--key">
+<div class="block-head"><span class="block-label">Key concept — runtime parameters in a custom command</span> <span class="block-note">Verified against the official Claude Code slash-command docs (June 2026). Not the spoken script; for a room that wants the syntax. File goes in <code>.claude/commands/&lt;name&gt;.md</code> (project, shared) or <code>~/.claude/commands/&lt;name&gt;.md</code> (user, every project); the filename is the command, subfolders namespace it (<code>git/commit.md</code> → <code>/git:commit</code>). The body is a <strong>prompt template</strong>; the <code>$</code> placeholders are the fill-ins. Two ways to take input</span></div>
+<p>Add a changelog entry for version $1, of type "$2", with the message: "$3". ``<code> </code>/changelog 1.4.0 fixed "Handle null user"<code> fills </code>$1<code>/</code>$2<code>/</code>$3<code> and injects the git log. (Note: the Praxis commands in this repo's own </code>.claude/commands/<code> — </code>/plato<code>, </code>/demo<code>, </code>/socrates` — are exactly this pattern.)</p>
+<ul>
+<li><strong><code>$ARGUMENTS</code></strong> — everything the user typed, as one blob. <code>/fix-issue 1234</code> → <code>1234</code>. Use when you just forward whatever they passed.</li>
+<li><strong><code>$1</code>, <code>$2</code>, <code>$3</code>…</strong> — positional args for distinct roles. <code>/open-pr feature/login main</code> → <code>$1</code>=<code>feature/login</code>, <code>$2</code>=<code>main</code>. Supporting pieces: <code>argument-hint:</code> frontmatter shows expected args in autocomplete; `<code> !</code>command<code> </code><code> runs a shell command and inlines its output at invocation (needs </code>allowed-tools<code> for that Bash call); </code>@path/to/file<code> pulls a file's contents in. Other frontmatter: </code>description<code>, </code>allowed-tools<code>, </code>model<code>. Worked example: </code>``markdown</li>
+</ul>
 </div></div></section>
 <section class="card" id="slide-11" data-slide="11"><header class="card-head"><span class="badge">11</span><div><span class="eyebrow">Lesson 9 · Drive &amp; customise</span><h2>MCP: reach the tools outside your code</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + course 02 slide 13.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
@@ -915,6 +1167,12 @@ th {
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>This is the data-safety gate for almost everyone. Slow down. Give the floor (Claude on the web, no install) and the ceiling (a local model, nothing leaves your network), and for banks and firms frame it as the IT-discovery conversation, not a yes/no. (<code>objections.md</code> — IT/compliance/privacy.) On cost: prune unused servers, or the context fills before you've asked anything.</p>
+</div><div class="block block--key">
+<div class="block-head"><span class="block-label">Key concept — MCP servers in GitHub Actions</span></div>
+<p>Verified against the official docs (<code>code.claude.com/docs/en/github-actions</code> and <code>anthropics/claude-code-action</code> <code>docs/configuration.md</code>, June 2026). Not in the spoken script; for the rare room that runs MCP in CI. There's a <strong>two-level permission model and both levels are required</strong>: 1. <strong>Configure the server</strong> via <code>--mcp-config</code> inside <code>claude_args</code> (inline JSON or a file path). 2. <strong>Allow-list each tool</strong> in <code>--allowedTools</code> using the <code>mcp__&lt;server-name&gt;__&lt;tool-name&gt;</code> pattern; the prefix <code>mcp__&lt;server&gt;__*</code> allows every tool from that server. Defining the server alone does nothing — a tool not named in <code>--allowedTools</code> can't be called. That's deliberate defense-in-depth: a misconfigured or hostile server still can't act without explicit per-tool permission. ```yaml</p>
+<ul>
+<li>uses: anthropics/claude-code-action@v1 with: anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }} claude_args: | --mcp-config '{"mcpServers": {"sequential-thinking": {"command": "npx", "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]}}}' --allowedTools mcp__sequential-thinking__sequentialthinking ``<code> Supporting requirements: a workflow </code>permissions:<code> block (</code>contents<code>, </code>issues<code>, </code>pull-requests<code>, plus </code>id-token: write<code> for Bedrock/Vertex OIDC) and the </code>ANTHROPIC_API_KEY<code> secret. Migration note: the beta </code>allowed_tools<code> input moved to </code>claude_args: --allowedTools` in v1.</li>
+</ul>
 </div></div></section>
 <section class="card" id="slide-12" data-slide="12"><header class="card-head"><span class="badge">12</span><div><span class="eyebrow">Lesson 10 · Drive &amp; customise</span><h2>GitHub: from local change to pull request</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + general Claude Code knowledge. Most technical/team-scale slide so far — keep it conceptual for non-technical rooms.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
@@ -975,6 +1233,9 @@ th {
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>This is the conceptual peak of the course, and the one most non-technical learners won't set up alone on day one. That's fine — the value is grasping "guaranteed, not suggested". This is where the system becomes trustworthy at team scale. Don't read JSON aloud; teach the guarantee. (Mirrors course 02 slide 14.)</p>
+</div><div class="block block--key">
+<div class="block-head"><span class="block-label">Key concept — the primary purpose of hooks</span></div>
+<p>To <strong>turn what you'd ask Claude to do into what always happens</strong> — convert a probabilistic request into a deterministic guarantee. Prompts are run by the model (it usually complies, but "usually" isn't "always"); hooks are run by the harness at a fixed lifecycle point, every time, no exceptions. Rule of thumb: if it must happen every single time without fail, it doesn't belong in a prompt, it belongs in a hook. Three shapes it takes: <strong>guarantee an action</strong> (format every file, log every call — <code>PostToolUse</code>), <strong>block a dangerous one</strong> (stop an <code>rm -rf</code>, a commit to <code>main</code>, a read of <code>.env</code> — <code>PreToolUse</code>), <strong>inject standing context</strong> (<code>SessionStart</code>, <code>UserPromptSubmit</code>). The deeper payoff and the reason this is the course's peak: it's what moves a team from "we'll review it after" to "it can't happen in the first place" — the trust that makes unsupervised work safe.</p>
 </div></div></section>
 <section class="card" id="slide-14" data-slide="14"><header class="card-head"><span class="badge">14</span><div><span class="eyebrow">Lesson 12 · Hooks &amp; SDK</span><h2>Defining a hook: event → matcher → command</h2></div></header><div class="card-body"><p class="slide-sub"><em>Source: text lesson "Gotchas around hooks" + deck slide. The most technical slide in the course; for non-technical rooms teach the shape, not the syntax.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
@@ -995,6 +1256,12 @@ th {
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Do not get lost in the settings file. The teachable idea is the <em>gate</em>: some actions should be impossible, not just reviewed. Name absolute paths once (it's a security recommendation) and move on. The how-to-share-it problem is the next slide.</p>
+</div><div class="block block--key">
+<div class="block-head"><span class="block-label">Key concept — which hook blocks a tool call</span> <span class="block-note">Verified against the official Claude Code hooks docs (June 2026). The blocking hook is <strong><code>PreToolUse</code></strong> — it's the only one that runs <em>before</em> a tool executes, so it's the only one positioned to stop it. (<code>PostToolUse</code> runs after; <code>UserPromptSubmit</code>, <code>Stop</code>, <code>Notification</code>, <code>SessionStart</code> fire at unrelated points.) It receives the tool name and its input, so you gate on conditions — match <code>Bash</code> against a deny-list, block any <code>Edit</code>/<code>Write</code> touching <code>.env</code>, secrets, or prod paths. Two ways to block</span></div>
+<ul>
+<li><strong>Exit code 2</strong> → tool call blocked; the hook's stderr is returned to Claude as the reason.</li>
+<li><strong>JSON</strong> on stdout with a permission decision (the structured form the slide doesn't show): ``<code>json { "hookSpecificOutput": { "hookEventName": "PreToolUse", "permissionDecision": "deny", "permissionDecisionReason": "Editing of .env files is not allowed" } } </code>`<code> </code>"allow"<code> auto-approves, </code>"deny"<code> blocks, </code>"ask"` prompts the user.</li>
+</ul>
 </div></div></section>
 <section class="card" id="slide-15" data-slide="15"><header class="card-head"><span class="badge">15</span><div><span class="eyebrow">Lesson 13 · Hooks &amp; SDK</span><h2>Hooks in practice: share them, debug them</h2></div></header><div class="card-body"><p class="slide-sub"><em>Source: text lessons "Gotchas around hooks" + "Useful hooks!". Two real, concrete problems — keep them grounded.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>

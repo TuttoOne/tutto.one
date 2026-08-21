@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="fr" class="light"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis · Premiers pas avec l'IA — deck de présentation</title>
+<style>
+/* ============================================================
+   Praxis / Tutto — Design System
+   Source: tutto.one/praxis (extracted 2026-05-13)
+   ------------------------------------------------------------
+   Drop this file next to any HTML doc and link it:
+     <style>
+/* ============================================================
+   Praxis / Tutto — Design System
+   Source: tutto.one/praxis (extracted 2026-05-13)
+   ------------------------------------------------------------
+   Drop this file next to any HTML doc and link it:
+     <link rel="stylesheet" href="praxis.css">
+   It works for screen viewing AND PDF rendering (print rules
+   at the bottom). No JavaScript required.
+   ============================================================ */
+
+/* --- Fonts ----------------------------------------------------
+   Inter      — body, UI, default
+   Roboto     — display / headings (the site aliases this as "serif")
+   Source Serif 4 — long-form editorial (essays, quotes, callouts)
+   The site loads all three; we keep the same set so any doc
+   matches the website even when mixing display modes.
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+/* --- Tokens (light, default) -------------------------------- */
+:root {
+  /* Brand colors — HSL parts as the site uses, plus resolved hex for reference */
+  --background:        40 10% 98%;   /* #FAF9F6 — warm off-white */
+  --foreground:        0 0% 12%;     /* #1F1F1F — near-black */
+  --card:              0 0% 100%;    /* #FFFFFF */
+  --card-foreground:   0 0% 12%;
+  --muted:             40 5% 90%;    /* warm grey panel */
+  --muted-foreground:  220 9% 46%;   /* cool slate body-secondary */
+  --primary:           32 95% 44%;   /* #DB7400 — warm amber accent */
+  --primary-foreground: 0 0% 100%;
+  --accent:            32 95% 44%;
+  --accent-foreground: 0 0% 100%;
+  --border:            220 13% 91%;
+  --ring:              32 95% 44%;
+  --destructive:       0 84% 60%;
+
+  /* Type scale (Tailwind-compatible) */
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   1.875rem;
+  --text-4xl:   2.25rem;
+  --text-5xl:   3rem;
+  --text-6xl:   3.75rem;
+
+  /* Weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  /* Tracking & leading */
+  --tracking-tight:   -0.025em;
+  --tracking-wider:    0.05em;
+  --tracking-widest:   0.1em;
+  --leading-tight:    1.25;
+  --leading-snug:     1.375;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.625;
+
+  /* Spacing — base unit 0.25rem (4px), Tailwind-compatible */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem;   --space-20: 5rem;   --space-24: 6rem;
+
+  /* Radius */
+  --radius:     0.75rem;
+  --radius-sm:  0.375rem;
+  --radius-lg:  1rem;
+  --radius-xl:  1.5rem;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow:    0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+
+  /* Containers */
+  --content-width: 42rem;   /* 672px — comfortable reading column */
+  --page-width:    56rem;   /* 896px — wider page max */
+
+  /* Font stacks */
+  --font-sans:      'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display:   'Roboto', 'Inter', sans-serif;
+  --font-editorial: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono:      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+}
+
+/* --- Tokens (dark) -------------------------------------------
+   Auto-applies if user prefers dark, or if .dark is on <html>.
+   ------------------------------------------------------------ */
+.dark, :root.dark {
+  --background:        20 14% 4%;
+  --foreground:        40 10% 98%;
+  --card:              20 14% 8%;
+  --card-foreground:   40 10% 98%;
+  --muted:             20 14% 12%;
+  --muted-foreground:  220 9% 60%;
+  --border:            20 14% 12%;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background:        20 14% 4%;
+    --foreground:        40 10% 98%;
+    --card:              20 14% 8%;
+    --card-foreground:   40 10% 98%;
+    --muted:             20 14% 12%;
+    --muted-foreground:  220 9% 60%;
+    --border:            20 14% 12%;
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-weight: var(--weight-regular);
+  font-feature-settings: 'cv11', 'ss01';  /* Inter alternates — subtle, on the website */
+}
+
+/* --- Headings ------------------------------------------------
+   Roboto for display, tight tracking, weight 700.
+   Use h1 for the doc title only; h2 for section starts; h3 for
+   sub-sections. Don't skip levels.
+   ------------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-4);
+  color: hsl(var(--foreground));
+}
+
+h1 { font-size: var(--text-5xl); font-weight: var(--weight-black); margin-bottom: var(--space-6); }
+h2 { font-size: var(--text-3xl); margin-top: var(--space-12); }
+h3 { font-size: var(--text-xl);  margin-top: var(--space-8);  }
+h4 { font-size: var(--text-lg);  margin-top: var(--space-6);  }
+h5 { font-size: var(--text-base); text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+h6 { font-size: var(--text-sm);   text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+
+/* First heading after a section start shouldn't have top margin */
+section > :first-child,
+article > :first-child,
+.page > :first-child { margin-top: 0; }
+
+/* --- Body copy ----------------------------------------------- */
+p {
+  margin: 0 0 var(--space-4);
+  max-width: var(--content-width);
+}
+
+p.lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--weight-regular);
+}
+
+small, .text-sm { font-size: var(--text-sm); }
+.text-muted    { color: hsl(var(--muted-foreground)); }
+
+/* --- Links --------------------------------------------------- */
+a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* --- Lists --------------------------------------------------- */
+ul, ol { margin: 0 0 var(--space-4); padding-left: var(--space-6); }
+li { margin-bottom: var(--space-2); }
+li > ul, li > ol { margin-top: var(--space-2); margin-bottom: 0; }
+
+/* Dash-style list (signature site pattern: "Term — explanation") */
+ul.dash { list-style: none; padding-left: 0; }
+ul.dash > li {
+  position: relative;
+  padding-left: var(--space-6);
+}
+ul.dash > li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: hsl(var(--primary));
+  font-weight: var(--weight-bold);
+}
+
+/* --- Quotes / pull quotes ----------------------------------- */
+blockquote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--foreground));
+  border-left: 3px solid hsl(var(--primary));
+  margin: var(--space-8) 0;
+  padding: 0 var(--space-6);
+  max-width: var(--content-width);
+}
+blockquote cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+/* --- Code ---------------------------------------------------- */
+code, kbd, pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+code {
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+}
+pre {
+  background: hsl(var(--muted));
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  line-height: var(--leading-snug);
+}
+pre code { background: none; padding: 0; }
+
+/* --- Dividers ----------------------------------------------- */
+hr {
+  border: 0;
+  border-top: 1px solid hsl(var(--border));
+  margin: var(--space-12) 0;
+}
+
+/* --- Tables ------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--text-sm);
+}
+th, td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid hsl(var(--border));
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  border-bottom: 2px solid hsl(var(--foreground));
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+
+/* --- Page shell --------------------------------------------- */
+.page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-8);
+}
+
+/* --- Card --------------------------------------------------- */
+.card {
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: var(--space-4); }
+
+/* --- Callout ------------------------------------------------ */
+.callout {
+  border-left: 3px solid hsl(var(--primary));
+  background: hsl(var(--muted) / 0.5);
+  padding: var(--space-4) var(--space-6);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: var(--space-6) 0;
+}
+.callout > :first-child { margin-top: 0; }
+.callout > :last-child  { margin-bottom: 0; }
+
+/* --- Keynote: highlighted "hard concept" callout (decks + notes) ---
+   Use on a slide to flag difficult, verified content with a pointer to
+   the teacher notes for the full detail. Self-contained so it works
+   wherever praxis.css is loaded or inlined. */
+.keynote {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: hsl(var(--primary) / 0.07);
+  border: 1px solid hsl(var(--primary) / 0.35);
+  border-left: 4px solid hsl(var(--primary));
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.keynote::before {
+  content: "\2691"; /* ⚑ flag */
+  color: hsl(var(--primary));
+  font-size: var(--text-lg);
+  line-height: 1.1;
+}
+.keynote p { margin: 0; font-size: var(--text-sm); line-height: var(--leading-snug); color: hsl(var(--foreground)); }
+.keynote .kn-label { display: block; font-family: var(--font-display); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: var(--text-xs); color: hsl(var(--primary)); margin-bottom: 2px; }
+.keynote .kn-see { color: hsl(var(--muted-foreground)); font-style: italic; }
+
+/* --- Button ------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+/* --- Tag / chip --------------------------------------------- */
+.tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  background: hsl(var(--muted));
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+}
+.tag-primary {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+
+/* --- Eyebrow (small label above heading) -------------------- */
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: hsl(var(--primary));
+  margin-bottom: var(--space-3);
+}
+
+/* --- Header / brand mark ----------------------------------- */
+.brand {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+}
+.brand .dot { color: hsl(var(--primary)); }   /* "Tutto." with orange period */
+
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid hsl(var(--border));
+  margin-bottom: var(--space-12);
+}
+.doc-header .meta {
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.doc-footer {
+  margin-top: var(--space-16);
+  padding-top: var(--space-4);
+  border-top: 1px solid hsl(var(--border));
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --- Grid helpers ------------------------------------------- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.stack-sm > * + * { margin-top: var(--space-2); }
+.stack    > * + * { margin-top: var(--space-4); }
+.stack-lg > * + * { margin-top: var(--space-8); }
+
+/* --- Slide deck (16:9 landscape) ---------------------------- */
+.slide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: var(--space-12) var(--space-16);
+  background: hsl(var(--background));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  page-break-after: always;
+  break-after: page;
+}
+.slide.title {
+  justify-content: flex-end;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+}
+.slide.title h1 { color: hsl(var(--background)); font-size: var(--text-6xl); }
+.slide.title .eyebrow { color: hsl(var(--primary)); }
+.slide h2 { font-size: var(--text-4xl); margin-top: 0; }
+.slide .slide-number {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-8);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ============================================================
+   Patterns — borrowed from the training one-pager
+   ------------------------------------------------------------
+   These are heavier, more editorial blocks. Use for training
+   handouts, mental-model one-pagers, and anything that needs
+   to teach rather than report.
+   ============================================================ */
+
+/* --- Section header with number + rule --------------------- */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin: var(--space-16) 0 var(--space-6);
+}
+.section-head .num {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+  letter-spacing: var(--tracking-wider);
+}
+.section-head .label {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: hsl(var(--foreground));
+}
+.section-head .rule {
+  flex: 1;
+  height: 1px;
+  background: hsl(var(--border));
+}
+
+/* --- Numbered ingredient cards (three-up explainer) -------- */
+.ingredients {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+.ingredient {
+  padding: var(--space-6) var(--space-5);
+  border-right: 1px solid hsl(var(--border));
+  position: relative;
+}
+.ingredient:last-child { border-right: 0; }
+.ingredient .num {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-4);
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+}
+.ingredient .tile {
+  width: 84px;
+  height: 84px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-5);
+  background: hsl(var(--muted));
+}
+.ingredient h3 {
+  font-size: var(--text-2xl);
+  margin: 0 0 var(--space-1);
+  letter-spacing: var(--tracking-tight);
+}
+.ingredient .role {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: var(--space-3);
+}
+.ingredient p {
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* --- File-tree block (for "the folder is the app" diagrams) - */
+.folder {
+  background: hsl(var(--muted) / 0.4);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.folder-tab {
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.folder-tab .dots { display: inline-flex; gap: 6px; }
+.folder-tab .dots span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: hsl(0 0% 60%);
+}
+.folder .tree {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  padding: var(--space-4) 0;
+}
+.folder .row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  gap: var(--space-2);
+  border-bottom: 1px dashed hsl(var(--border));
+}
+.folder .row:last-child { border-bottom: 0; }
+.folder .row .glyph { color: hsl(var(--muted-foreground)); }
+.folder .row .name  { color: hsl(var(--foreground)); }
+.folder .row .name b { color: hsl(var(--primary)); font-weight: var(--weight-semibold); }
+.folder .row .annot {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+}
+.folder .row.head {
+  background: hsl(var(--muted) / 0.6);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid hsl(var(--border));
+}
+.folder .row.head .name { font-weight: var(--weight-semibold); }
+.folder .row.indent { padding-left: var(--space-10); }
+
+/* --- Annotation list (lettered side-notes for a diagram) --- */
+.annotations { display: flex; flex-direction: column; gap: var(--space-6); }
+.annotation {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: var(--space-3);
+}
+.annotation .marker {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid hsl(var(--foreground));
+  background: hsl(var(--background));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+}
+.annotation h4 {
+  font-size: var(--text-lg);
+  margin: 2px 0 var(--space-1);
+}
+.annotation h4 code {
+  font-size: 0.85em;
+  color: hsl(var(--primary));
+  background: hsl(var(--muted));
+}
+.annotation p {
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* --- Page registration marks (editorial corners) ------------ */
+.regmarks {
+  position: relative;
+}
+.regmarks::before,
+.regmarks::after,
+.regmarks > .reg-bl,
+.regmarks > .reg-br {
+  content: "";
+  position: absolute;
+  width: 12px; height: 12px;
+  border: 1px solid hsl(var(--muted-foreground));
+  pointer-events: none;
+}
+.regmarks::before { top: 12px; left: 12px;  border-right: 0; border-bottom: 0; }
+.regmarks::after  { top: 12px; right: 12px; border-left: 0;  border-bottom: 0; }
+.regmarks > .reg-bl { bottom: 12px; left: 12px;  border-right: 0; border-top: 0; }
+.regmarks > .reg-br { bottom: 12px; right: 12px; border-left: 0;  border-top: 0; }
+
+/* --- Hero pattern: eyebrow + display + lede --------------- */
+.hero {
+  margin-bottom: var(--space-12);
+}
+.hero h1 {
+  font-size: var(--text-6xl);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+.hero h1 em {
+  font-style: italic;
+  color: hsl(var(--primary));
+}
+.hero .lede {
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: hsl(var(--muted-foreground));
+  max-width: var(--content-width);
+}
+.hero .lede strong { color: hsl(var(--foreground)); font-weight: var(--weight-medium); }
+
+/* ============================================================
+   Print / PDF
+   ------------------------------------------------------------
+   These rules apply when Claude renders the doc to PDF
+   (puppeteer, weasyprint, browser print). Tested at A4.
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 20mm 18mm;
+}
+@page slide {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    background: white;
+    color: black;
+    font-size: 10.5pt;
+  }
+  .page { padding: 0; max-width: none; }
+  a { color: hsl(var(--foreground)); text-decoration: none; }
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: hsl(var(--muted-foreground));
+    word-break: break-all;
+  }
+  h1, h2, h3 { page-break-after: avoid; break-after: avoid-page; }
+  p, li, blockquote { page-break-inside: avoid; break-inside: avoid; }
+  .card, .callout { page-break-inside: avoid; break-inside: avoid; }
+  .doc-header, .doc-footer { background: white; }
+  .no-print { display: none !important; }
+  .slide { page: slide; height: 100vh; padding: 18mm 22mm; }
+}
+
+</style>
+   It works for screen viewing AND PDF rendering (print rules
+   at the bottom). No JavaScript required.
+   ============================================================ */
+
+/* --- Fonts ----------------------------------------------------
+   Inter      — body, UI, default
+   Roboto     — display / headings (the site aliases this as "serif")
+   Source Serif 4 — long-form editorial (essays, quotes, callouts)
+   The site loads all three; we keep the same set so any doc
+   matches the website even when mixing display modes.
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+/* --- Tokens (light, default) -------------------------------- */
+:root {
+  /* Brand colors — HSL parts as the site uses, plus resolved hex for reference */
+  --background:        40 10% 98%;   /* #FAF9F6 — warm off-white */
+  --foreground:        0 0% 12%;     /* #1F1F1F — near-black */
+  --card:              0 0% 100%;    /* #FFFFFF */
+  --card-foreground:   0 0% 12%;
+  --muted:             40 5% 90%;    /* warm grey panel */
+  --muted-foreground:  220 9% 46%;   /* cool slate body-secondary */
+  --primary:           32 95% 44%;   /* #DB7400 — warm amber accent */
+  --primary-foreground: 0 0% 100%;
+  --accent:            32 95% 44%;
+  --accent-foreground: 0 0% 100%;
+  --border:            220 13% 91%;
+  --ring:              32 95% 44%;
+  --destructive:       0 84% 60%;
+
+  /* Type scale (Tailwind-compatible) */
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   1.875rem;
+  --text-4xl:   2.25rem;
+  --text-5xl:   3rem;
+  --text-6xl:   3.75rem;
+
+  /* Weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  /* Tracking & leading */
+  --tracking-tight:   -0.025em;
+  --tracking-wider:    0.05em;
+  --tracking-widest:   0.1em;
+  --leading-tight:    1.25;
+  --leading-snug:     1.375;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.625;
+
+  /* Spacing — base unit 0.25rem (4px), Tailwind-compatible */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem;   --space-20: 5rem;   --space-24: 6rem;
+
+  /* Radius */
+  --radius:     0.75rem;
+  --radius-sm:  0.375rem;
+  --radius-lg:  1rem;
+  --radius-xl:  1.5rem;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow:    0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+
+  /* Containers */
+  --content-width: 42rem;   /* 672px — comfortable reading column */
+  --page-width:    56rem;   /* 896px — wider page max */
+
+  /* Font stacks */
+  --font-sans:      'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display:   'Roboto', 'Inter', sans-serif;
+  --font-editorial: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono:      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+}
+
+/* --- Tokens (dark) -------------------------------------------
+   Auto-applies if user prefers dark, or if .dark is on <html>.
+   ------------------------------------------------------------ */
+.dark, :root.dark {
+  --background:        20 14% 4%;
+  --foreground:        40 10% 98%;
+  --card:              20 14% 8%;
+  --card-foreground:   40 10% 98%;
+  --muted:             20 14% 12%;
+  --muted-foreground:  220 9% 60%;
+  --border:            20 14% 12%;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background:        20 14% 4%;
+    --foreground:        40 10% 98%;
+    --card:              20 14% 8%;
+    --card-foreground:   40 10% 98%;
+    --muted:             20 14% 12%;
+    --muted-foreground:  220 9% 60%;
+    --border:            20 14% 12%;
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-weight: var(--weight-regular);
+  font-feature-settings: 'cv11', 'ss01';  /* Inter alternates — subtle, on the website */
+}
+
+/* --- Headings ------------------------------------------------
+   Roboto for display, tight tracking, weight 700.
+   Use h1 for the doc title only; h2 for section starts; h3 for
+   sub-sections. Don't skip levels.
+   ------------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-4);
+  color: hsl(var(--foreground));
+}
+
+h1 { font-size: var(--text-5xl); font-weight: var(--weight-black); margin-bottom: var(--space-6); }
+h2 { font-size: var(--text-3xl); margin-top: var(--space-12); }
+h3 { font-size: var(--text-xl);  margin-top: var(--space-8);  }
+h4 { font-size: var(--text-lg);  margin-top: var(--space-6);  }
+h5 { font-size: var(--text-base); text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+h6 { font-size: var(--text-sm);   text-transform: uppercase; letter-spacing: var(--tracking-widest); color: hsl(var(--muted-foreground)); }
+
+/* First heading after a section start shouldn't have top margin */
+section > :first-child,
+article > :first-child,
+.page > :first-child { margin-top: 0; }
+
+/* --- Body copy ----------------------------------------------- */
+p {
+  margin: 0 0 var(--space-4);
+  max-width: var(--content-width);
+}
+
+p.lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--muted-foreground));
+  font-weight: var(--weight-regular);
+}
+
+small, .text-sm { font-size: var(--text-sm); }
+.text-muted    { color: hsl(var(--muted-foreground)); }
+
+/* --- Links --------------------------------------------------- */
+a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* --- Lists --------------------------------------------------- */
+ul, ol { margin: 0 0 var(--space-4); padding-left: var(--space-6); }
+li { margin-bottom: var(--space-2); }
+li > ul, li > ol { margin-top: var(--space-2); margin-bottom: 0; }
+
+/* Dash-style list (signature site pattern: "Term — explanation") */
+ul.dash { list-style: none; padding-left: 0; }
+ul.dash > li {
+  position: relative;
+  padding-left: var(--space-6);
+}
+ul.dash > li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: hsl(var(--primary));
+  font-weight: var(--weight-bold);
+}
+
+/* --- Quotes / pull quotes ----------------------------------- */
+blockquote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: hsl(var(--foreground));
+  border-left: 3px solid hsl(var(--primary));
+  margin: var(--space-8) 0;
+  padding: 0 var(--space-6);
+  max-width: var(--content-width);
+}
+blockquote cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+/* --- Code ---------------------------------------------------- */
+code, kbd, pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+code {
+  background: hsl(var(--muted));
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+}
+pre {
+  background: hsl(var(--muted));
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  line-height: var(--leading-snug);
+}
+pre code { background: none; padding: 0; }
+
+/* --- Dividers ----------------------------------------------- */
+hr {
+  border: 0;
+  border-top: 1px solid hsl(var(--border));
+  margin: var(--space-12) 0;
+}
+
+/* --- Tables ------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--text-sm);
+}
+th, td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid hsl(var(--border));
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  border-bottom: 2px solid hsl(var(--foreground));
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+
+/* --- Page shell --------------------------------------------- */
+.page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-8);
+}
+
+/* --- Card --------------------------------------------------- */
+.card {
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: var(--space-4); }
+
+/* --- Callout ------------------------------------------------ */
+.callout {
+  border-left: 3px solid hsl(var(--primary));
+  background: hsl(var(--muted) / 0.5);
+  padding: var(--space-4) var(--space-6);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: var(--space-6) 0;
+}
+.callout > :first-child { margin-top: 0; }
+.callout > :last-child  { margin-bottom: 0; }
+
+/* --- Keynote: highlighted "hard concept" callout (decks + notes) ---
+   Use on a slide to flag difficult, verified content with a pointer to
+   the teacher notes for the full detail. Self-contained so it works
+   wherever praxis.css is loaded or inlined. */
+.keynote {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: hsl(var(--primary) / 0.07);
+  border: 1px solid hsl(var(--primary) / 0.35);
+  border-left: 4px solid hsl(var(--primary));
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.keynote::before {
+  content: "\2691"; /* ⚑ flag */
+  color: hsl(var(--primary));
+  font-size: var(--text-lg);
+  line-height: 1.1;
+}
+.keynote p { margin: 0; font-size: var(--text-sm); line-height: var(--leading-snug); color: hsl(var(--foreground)); }
+.keynote .kn-label { display: block; font-family: var(--font-display); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: var(--text-xs); color: hsl(var(--primary)); margin-bottom: 2px; }
+.keynote .kn-see { color: hsl(var(--muted-foreground)); font-style: italic; }
+
+/* --- Button ------------------------------------------------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+/* --- Tag / chip --------------------------------------------- */
+.tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: hsl(var(--muted-foreground));
+  background: hsl(var(--muted));
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+}
+.tag-primary {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+
+/* --- Eyebrow (small label above heading) -------------------- */
+.eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: hsl(var(--primary));
+  margin-bottom: var(--space-3);
+}
+
+/* --- Header / brand mark ----------------------------------- */
+.brand {
+  font-family: var(--font-display);
+  font-weight: var(--weight-black);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+}
+.brand .dot { color: hsl(var(--primary)); }   /* "Tutto." with orange period */
+
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid hsl(var(--border));
+  margin-bottom: var(--space-12);
+}
+.doc-header .meta {
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+}
+
+.doc-footer {
+  margin-top: var(--space-16);
+  padding-top: var(--space-4);
+  border-top: 1px solid hsl(var(--border));
+  font-size: var(--text-sm);
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --- Grid helpers ------------------------------------------- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.stack-sm > * + * { margin-top: var(--space-2); }
+.stack    > * + * { margin-top: var(--space-4); }
+.stack-lg > * + * { margin-top: var(--space-8); }
+
+/* --- Slide deck (16:9 landscape) ---------------------------- */
+.slide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: var(--space-12) var(--space-16);
+  background: hsl(var(--background));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  page-break-after: always;
+  break-after: page;
+}
+.slide.title {
+  justify-content: flex-end;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+}
+.slide.title h1 { color: hsl(var(--background)); font-size: var(--text-6xl); }
+.slide.title .eyebrow { color: hsl(var(--primary)); }
+.slide h2 { font-size: var(--text-4xl); margin-top: 0; }
+.slide .slide-number {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-8);
+  font-size: var(--text-xs);
+  color: hsl(var(--muted-foreground));
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ============================================================
+   Print / PDF
+   ------------------------------------------------------------
+   These rules apply when Claude renders the doc to PDF
+   (puppeteer, weasyprint, browser print). Tested at A4.
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 20mm 18mm;
+}
+@page slide {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    background: white;
+    color: black;
+    font-size: 10.5pt;
+  }
+  .page { padding: 0; max-width: none; }
+  a { color: hsl(var(--foreground)); text-decoration: none; }
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: hsl(var(--muted-foreground));
+    word-break: break-all;
+  }
+  h1, h2, h3 { page-break-after: avoid; break-after: avoid-page; }
+  p, li, blockquote { page-break-inside: avoid; break-inside: avoid; }
+  .card, .callout { page-break-inside: avoid; break-inside: avoid; }
+  .doc-header, .doc-footer { background: white; }
+  .no-print { display: none !important; }
+  .slide { page: slide; height: 100vh; padding: 18mm 22mm; }
+}
+
+</style>
+<style>
+  /* ===== On-screen presentation harness =====================
+     One slide per screen. Arrow keys or space to advance,
+     F11 for fullscreen. Built on Praxis tokens from praxis.css.
+     ========================================================= */
+  html, body { height: 100%; margin: 0; }
+  body { background: hsl(var(--background)); overflow: hidden; }
+
+  .deck-slide {
+    position: fixed; inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5vh 6vw 7vh;
+    background: hsl(var(--background));
+  }
+  .deck-slide.active { display: flex; }
+
+  .stage { width: 100%; max-width: 1180px; margin: 0 auto; }
+
+  /* slide chrome */
+  .chrome {
+    position: fixed; top: 3.2vh; left: 6vw; right: 6vw;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: var(--text-sm); color: hsl(var(--muted-foreground));
+  }
+  .chrome .wm { font-family: var(--font-display); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); color: hsl(var(--foreground)); }
+  .chrome .wm .dot { color: hsl(var(--primary)); }
+
+  .deck-slide .eyebrow { margin-bottom: var(--space-2); }
+  .deck-slide h2 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); margin: 0 0 var(--space-2); }
+  .deck-slide .lead { max-width: 62ch; margin-bottom: var(--space-6); }
+
+  /* diagram canvas */
+  .diagram { width: 100%; margin-top: var(--space-2); }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 72ch; }
+  .cap code { font-size: 0.85em; }
+
+  /* SVG shared styles */
+  svg text { font-family: var(--font-sans); fill: hsl(var(--foreground)); }
+  .s-ink   { fill: hsl(var(--foreground)); }
+  .s-amber { fill: hsl(var(--primary)); }
+  .s-muted { fill: hsl(var(--muted-foreground)); }
+  .l-ink   { stroke: hsl(var(--foreground)); fill: none; }
+  .l-amber { stroke: hsl(var(--primary)); fill: none; }
+  .l-faint { stroke: hsl(var(--border)); fill: none; }
+  .box     { fill: #fff; stroke: hsl(var(--border)); }
+  .box-amber { fill: hsl(var(--primary) / 0.08); stroke: hsl(var(--primary)); }
+  .box-ink   { fill: hsl(var(--foreground)); stroke: hsl(var(--foreground)); }
+  .t-lbl   { font-size: 19px; font-weight: 600; }
+  .t-sub   { font-size: 14px; fill: hsl(var(--muted-foreground)); }
+  .t-tiny  { font-size: 12.5px; fill: hsl(var(--muted-foreground)); }
+  .t-mono  { font-family: var(--font-mono); font-size: 14px; }
+  .t-white { fill: hsl(var(--background)); }
+  .bar     { fill: hsl(var(--primary) / 0.25); }
+  .bar-strong { fill: hsl(var(--primary)); }
+  .line-faded { fill: hsl(var(--border)); }
+
+  /* title / closing slides — dark */
+  .deck-slide.title { background: hsl(var(--foreground)); justify-content: flex-end; }
+  .deck-slide.title h1 { color: hsl(var(--background)); font-size: clamp(2.6rem, 6vw, 4.2rem); margin-bottom: var(--space-4); }
+  .deck-slide.title .eyebrow { color: hsl(var(--primary)); }
+  .deck-slide.title .lead { color: hsl(40 10% 80%); }
+  .deck-slide.title .chrome .wm { color: hsl(var(--background)); }
+  .deck-slide.title .chrome { color: hsl(40 8% 60%); }
+
+  /* agenda groups */
+  .spine { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); margin-top: var(--space-6); }
+  .spine .grp h4 { margin: 0 0 var(--space-3); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: hsl(var(--primary)); }
+  .spine ol { list-style: none; margin: 0; padding: 0; }
+  .spine li { font-size: var(--text-base); margin-bottom: var(--space-2); display: flex; gap: var(--space-2); line-height: var(--leading-snug); }
+  .spine li .n { font-family: var(--font-mono); font-size: var(--text-xs); color: hsl(var(--muted-foreground)); padding-top: 0.2em; min-width: 1.2em; }
+
+  /* nav UI */
+  .slide-counter { position: fixed; bottom: 3.2vh; right: 6vw; font-size: var(--text-xs); letter-spacing: var(--tracking-wider); color: hsl(var(--muted-foreground)); }
+  .deck-slide.title .slide-counter { color: hsl(40 8% 55%); }
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: hsl(var(--primary)); transition: width 0.2s ease; z-index: 10; }
+  .hint { position: fixed; bottom: 3.2vh; left: 6vw; font-size: var(--text-xs); color: hsl(var(--muted-foreground)); opacity: 0.7; }
+
+  @media print {
+    body { overflow: visible; }
+    @page { size: A4 landscape; margin: 0; }
+    .deck-slide { position: relative; inset: auto; display: flex !important; height: 100vh; page-break-after: always; break-inside: avoid; }
+    .progress, .hint, .slide-counter { display: none; }
+  }
+</style>
+<style id="claude-agent-animation-styles">
+      @keyframes claude-pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+      #claude-agent-glow-border-inner {
+        animation: claude-pulse 2s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #claude-agent-glow-border-inner {
+          animation: none;
+        }
+      }
+    </style></head>
+<body class="">
+
+<nav id="psn" class="no-print" style="position:fixed;top:0;left:0;right:0;z-index:9999;height:44px;display:flex;align-items:center;gap:0;padding:0 18px;background:rgba(250,249,246,0.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid hsl(220,13%,91%);box-sizing:border-box;">
+  <a href="/" style="font-family:'Roboto',-apple-system,sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:-0.025em;color:#1f1f1f;text-decoration:none;white-space:nowrap;flex-shrink:0;">Tutto<span style="color:#db7400;">.</span></a>
+  <span style="width:1px;height:18px;background:hsl(220,13%,88%);margin:0 14px;flex-shrink:0;"></span>
+  <a id="psn-lib" href="../index.html" style="font-size:0.8125rem;font-weight:500;color:#6b7280;text-decoration:none;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;padding:6px 10px;border:1px solid hsl(220,13%,91%);border-radius:6px;background:hsl(220,13%,97%);">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Library
+  </a>
+  <div style="flex:1;"></div>
+  <button onclick="var d=document.getElementById('psn-dd');d.style.display=d.style.display==='block'?'none':'block';" style="background:none;border:1px solid hsl(220,13%,91%);border-radius:6px;cursor:pointer;padding:5px 10px;font-size:0.875rem;color:#1f1f1f;font-family:'Inter',-apple-system,sans-serif;height:32px;display:flex;align-items:center;gap:5px;white-space:nowrap;" id="psn-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    tutto.one
+  </button>
+  <div id="psn-dd" style="display:none;position:fixed;top:48px;right:12px;background:#fff;border:1px solid hsl(220,13%,91%);border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.10);padding:6px 0;min-width:190px;z-index:10000;font-family:'Inter',-apple-system,sans-serif;font-size:0.875rem;">
+    <a href="/" style="display:block;padding:9px 18px;color:#1f1f1f;text-decoration:none;">tutto.one</a>
+    <a href="/praxis" style="display:block;padding:9px 18px;color:#1f1f1f;text-decoration:none;">Praxis</a>
+    <a href="/praxis-programme" style="display:block;padding:9px 18px;color:#1f1f1f;text-decoration:none;">Programme</a>
+    <a href="/become-a-trainer" style="display:block;padding:9px 18px;color:#1f1f1f;text-decoration:none;">Become a Trainer</a>
+    <div style="height:1px;background:hsl(220,13%,91%);margin:4px 0;"></div>
+    <a href="/blog" style="display:block;padding:9px 18px;color:#1f1f1f;text-decoration:none;">Blog</a>
+    <a href="/contact" style="display:block;padding:9px 18px;color:#1f1f1f;text-decoration:none;">Contact</a>
+  </div>
+</nav>
+<script>
+(function(){
+  document.addEventListener('click',function(e){
+    var d=document.getElementById('psn-dd');
+    var b=document.getElementById('psn-btn');
+    if(d&&!d.contains(e.target)&&!b.contains(e.target))d.style.display='none';
+  });
+  var links=document.querySelectorAll('#psn-dd a');
+  links.forEach(function(a){
+    a.addEventListener('mouseover',function(){a.style.background='hsl(220,13%,97%)';});
+    a.addEventListener('mouseout',function(){a.style.background='';});
+  });
+})();
+</script>
+
+<style id="psn-overrides">
+  /* push slide deck below nav bar */
+  .deck-slide { top: 44px !important; left: 0 !important; right: 0 !important; bottom: 0 !important; }
+  /* push chrome (top bar of slide) down */
+  .chrome { top: calc(3.2vh + 44px) !important; }
+  /* hide duplicate Tutto. in chrome since it's now in nav */
+  .chrome .wm { display: none !important; }
+  .chrome > span:first-child + * { display: none !important; }
+  body { padding-top: 0; }
+</style>
+
+
+<div class="progress" id="progress" style="width: 23.5294%;"></div>
+
+<!-- ============ 1 · TITRE ============================================= -->
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · deck de présentation</span></div>
+  <div class="stage">
+    <span class="eyebrow">Praxis · le parcours du débutant, construit à partir des cours d'Anthropic</span>
+    <h1 class="">Ce qu'est vraiment l'IA,<br>et comment bien<br>s'en servir dès le départ.</h1>
+    <p class="lead">Quatorze idées, une par écran, pour quelqu'un qui part de zéro. D'abord la machine, puis ce à quoi se fier, puis ce que rapporte un vrai travail avec Claude.</p>
+  </div>
+  <span class="slide-counter">01</span>
+  <div class="hint" id="hint" style="opacity: 0;">→ ou cliquez pour avancer</div>
+</section>
+
+<!-- ============ 2 · LA COLONNE VERTÉBRALE ============================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Où nous allons</span></div>
+  <div class="stage">
+    <span class="eyebrow">Le parcours</span>
+    <h2 class="">Toute la séance sur un seul écran</h2>
+    <p class="lead">Quatre temps : voir ce qu'est la machine, savoir à quoi se fier, apprendre à travailler avec, puis l'installer dans votre semaine.</p>
+    <div class="spine">
+      <div class="grp">
+        <h4>Ce que c'est</h4>
+        <ol>
+          <li><span class="n">1</span> Un mot à la fois</li>
+          <li><span class="n">2</span> Comment il a appris à aider</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>À quoi se fier</h4>
+        <ol>
+          <li><span class="n">3</span> Ses points forts, ce qu'il faut vérifier</li>
+          <li><span class="n">4</span> Une mémoire qui se remplit</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>Travailler avec</h4>
+        <ol>
+          <li><span class="n">5</span> Un collègue, pas un moteur de recherche</li>
+          <li><span class="n">6</span> Le brief</li>
+          <li><span class="n">7</span> La boucle</li>
+          <li><span class="n">8</span> Dites l'objectif</li>
+          <li><span class="n">9</span> Montrez-lui la vraie matière</li>
+          <li><span class="n">10</span> Arrêtez de tout réexpliquer</li>
+        </ol>
+      </div>
+      <div class="grp">
+        <h4>Ancrer l'habitude</h4>
+        <ol>
+          <li><span class="n">11</span> Décidez ce qui reste à vous</li>
+          <li><span class="n">12</span> Avant de l'envoyer</li>
+          <li><span class="n">13</span> La suite</li>
+          <li><span class="n">14</span> Votre première semaine</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <span class="slide-counter">02</span>
+</section>
+
+<!-- ============ 3 · UN MOT À LA FOIS ================================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Ce que c'est · 1 sur 2</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 1 · derrière le rideau</span>
+    <h2 class="">Il écrit un mot à la fois.</h2>
+    <p class="lead">Claude n'est pas un moteur de recherche qui va chercher une réponse. Il prédit le mot suivant, encore et encore, à partir de régularités apprises sur une montagne de textes.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Une phrase complétée un mot à la fois à partir d'une liste de mots suivants probables">
+        <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-ink"></path></marker></defs>
+        <text x="80" y="52" class="t-mono" font-size="21">La réunion a débordé, on reprend</text>
+        <rect x="500" y="30" width="64" height="34" rx="8" class="box-amber"></rect>
+        <text x="532" y="53" class="t-lbl s-amber" text-anchor="middle">?</text>
+        <line x1="532" y1="72" x2="532" y2="104" class="l-ink" stroke-width="1.6" marker-end="url(#ah3)"></line>
+        <!-- candidats -->
+        <text x="300" y="132" class="t-tiny" text-anchor="end">les mots suivants les plus probables</text>
+        <g>
+          <rect x="330" y="116" width="90" height="30" rx="7" class="box-amber"></rect>
+          <text x="375" y="136" class="t-mono" text-anchor="middle">demain</text>
+          <rect x="436" y="122" width="248" height="18" rx="4" class="bar-strong"></rect>
+          <text x="696" y="136" class="t-tiny">62 %</text>
+        </g>
+        <g>
+          <rect x="330" y="156" width="90" height="30" rx="7" class="box"></rect>
+          <text x="375" y="176" class="t-mono" text-anchor="middle">lundi</text>
+          <rect x="436" y="162" width="84" height="18" rx="4" class="bar"></rect>
+          <text x="532" y="176" class="t-tiny">21 %</text>
+        </g>
+        <g>
+          <rect x="330" y="196" width="90" height="30" rx="7" class="box"></rect>
+          <text x="375" y="216" class="t-mono" text-anchor="middle">ensuite</text>
+          <rect x="436" y="202" width="36" height="18" rx="4" class="bar"></rect>
+          <text x="484" y="216" class="t-tiny">9 %</text>
+        </g>
+      </svg>
+    </div>
+    <p class="cap">Le clavier de votre téléphone fait une petite version de ça depuis des années. Claude, c'est la même idée à une échelle énorme : choisir un mot probable, puis le suivant, jusqu'à ce qu'une réponse existe. Ce seul fait explique presque tout ce qui suit.</p>
+  </div>
+  <span class="slide-counter">03</span>
+</section>
+
+<!-- ============ 4 · COMMENT IL A APPRIS =============================== -->
+<section class="deck-slide active">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Ce que c'est · 2 sur 2</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 2 · d'où viennent les bonnes manières</span>
+    <h2 class="">Il a beaucoup lu, puis on lui a appris à aider.</h2>
+    <p class="lead">Deux étapes. D'abord il apprend à prédire du texte sur des milliards d'exemples. Ensuite des humains notent ses réponses jusqu'à ce qu'il se comporte comme un assistant.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 220" role="img" aria-label="Chaîne d'entraînement : une montagne de textes devient un prédicteur de texte, puis les retours humains en font un assistant">
+        <defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-ink"></path></marker></defs>
+        <rect x="30" y="60" width="240" height="100" rx="12" class="box"></rect>
+        <text x="150" y="102" class="t-lbl" text-anchor="middle">Une montagne de texte</text>
+        <text x="150" y="128" class="t-sub" text-anchor="middle">livres · articles · sites web</text>
+        <line x1="278" y1="110" x2="358" y2="110" class="l-ink" stroke-width="1.6" marker-end="url(#ah4)"></line>
+        <text x="318" y="52" class="t-tiny" text-anchor="middle">apprend à deviner</text>
+        <text x="318" y="69" class="t-tiny" text-anchor="middle">le mot suivant</text>
+        <rect x="366" y="60" width="240" height="100" rx="12" class="box"></rect>
+        <text x="486" y="102" class="t-lbl" text-anchor="middle">Un prédicteur de texte</text>
+        <text x="486" y="128" class="t-sub" text-anchor="middle">fluide, mais ne sait pas aider</text>
+        <line x1="614" y1="110" x2="694" y2="110" class="l-ink" stroke-width="1.6" marker-end="url(#ah4)"></line>
+        <text x="654" y="52" class="t-tiny" text-anchor="middle">des humains notent</text>
+        <text x="654" y="69" class="t-tiny" text-anchor="middle">ses réponses</text>
+        <rect x="702" y="60" width="248" height="100" rx="12" class="box-amber"></rect>
+        <text x="826" y="96" class="t-lbl" text-anchor="middle">Un assistant</text>
+        <text x="826" y="120" class="t-sub" text-anchor="middle">répond, signale ses limites,</text>
+        <text x="826" y="138" class="t-sub" text-anchor="middle">refuse les demandes nuisibles</text>
+      </svg>
+    </div>
+    <p class="cap">La politesse et la prudence sont apprises, elles n'ont rien de magique. Le même entraînement laisse des habitudes à connaître : il a tendance à vous donner raison, et à écrire long. Vous pouvez lui demander de vous contredire, et d'être bref.</p>
+  </div>
+  <span class="slide-counter">04</span>
+</section>
+
+<!-- ============ 5 · POINTS FORTS, POINTS À VÉRIFIER =================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>À quoi se fier · 1 sur 2</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 3 · calibrer, pas croire</span>
+    <h2 class="">Solide sur le travail courant. Vérifiez les affirmations précises.</h2>
+    <p class="lead">Parce qu'il prédit ce qui sonne juste, il excelle sur le travail que le monde a vu un million de fois, et il peut énoncer un fait faux avec une confiance totale.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Un document dont la prose est fiable mais dont les noms, dates, chiffres et liens méritent vérification">
+        <!-- document -->
+        <rect x="30" y="24" width="480" height="202" rx="12" class="box"></rect>
+        <rect x="58" y="52" width="360" height="10" rx="5" class="line-faded"></rect>
+        <rect x="58" y="76" width="424" height="10" rx="5" class="line-faded"></rect>
+        <rect x="58" y="100" width="150" height="10" rx="5" class="line-faded"></rect>
+        <rect x="216" y="95" width="120" height="20" rx="10" class="box-amber"></rect>
+        <text x="276" y="109" class="t-tiny s-amber" text-anchor="middle">un nom</text>
+        <rect x="344" y="100" width="120" height="10" rx="5" class="line-faded"></rect>
+        <rect x="58" y="124" width="240" height="10" rx="5" class="line-faded"></rect>
+        <rect x="306" y="119" width="104" height="20" rx="10" class="box-amber"></rect>
+        <text x="358" y="133" class="t-tiny s-amber" text-anchor="middle">une date</text>
+        <rect x="58" y="148" width="404" height="10" rx="5" class="line-faded"></rect>
+        <rect x="58" y="172" width="110" height="10" rx="5" class="line-faded"></rect>
+        <rect x="176" y="167" width="128" height="20" rx="10" class="box-amber"></rect>
+        <text x="240" y="181" class="t-tiny s-amber" text-anchor="middle">un chiffre</text>
+        <rect x="312" y="172" width="150" height="10" rx="5" class="line-faded"></rect>
+        <rect x="58" y="196" width="200" height="10" rx="5" class="line-faded"></rect>
+        <rect x="266" y="191" width="140" height="20" rx="10" class="box-amber"></rect>
+        <text x="336" y="205" class="t-tiny s-amber" text-anchor="middle">une source</text>
+        <!-- légende à droite -->
+        <text x="570" y="60" class="t-lbl">Les lignes grises : ça va.</text>
+        <text x="570" y="86" class="t-sub">Résumés, brouillons, explications, reformulations.</text>
+        <text x="570" y="136" class="t-lbl s-amber">Les zones ambre : à vérifier.</text>
+        <text x="570" y="162" class="t-sub">Noms, dates, chiffres, citations et liens.</text>
+        <text x="570" y="182" class="t-sub">Plus une affirmation est précise, plus elle</text>
+        <text x="570" y="202" class="t-sub">mérite un coup d'œil avant que vous l'utilisiez.</text>
+      </svg>
+    </div>
+    <p class="cap">On appelle ça une hallucination : sûr de lui, mais faux. Pas besoin d'en avoir peur, il faut une habitude : vérifier les détails, demander les sources, ou activer la recherche web. Soyez le plus prudent hors de votre domaine, là où vous ne pouvez pas repérer l'erreur.</p>
+  </div>
+  <span class="slide-counter">05</span>
+</section>
+
+<!-- ============ 6 · UNE MÉMOIRE QUI SE REMPLIT ======================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>À quoi se fier · 2 sur 2</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 4 · pourquoi il « oublie »</span>
+    <h2 class="">Il a une mémoire de travail, et elle se remplit.</h2>
+    <p class="lead">Tout ce à quoi Claude fait attention tient dans un seul contenant. Ce qui est dedans, il peut s'en servir. Ce qui en sort, il l'a perdu sans le dire.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 240" role="img" aria-label="Une mémoire de travail de taille fixe qui garde les messages récents pendant que les plus anciens sortent ; une nouvelle conversation part vide">
+        <!-- contenu perdu -->
+        <rect x="40" y="90" width="150" height="16" rx="8" class="line-faded" opacity="0.55"></rect>
+        <rect x="40" y="118" width="120" height="16" rx="8" class="line-faded" opacity="0.4"></rect>
+        <rect x="40" y="146" width="140" height="16" rx="8" class="line-faded" opacity="0.25"></rect>
+        <text x="110" y="192" class="t-tiny" text-anchor="middle">les parties anciennes sortent,</text>
+        <text x="110" y="208" class="t-tiny" text-anchor="middle">sans prévenir</text>
+        <!-- la fenêtre -->
+        <rect x="240" y="48" width="430" height="150" rx="14" class="box-amber"></rect>
+        <text x="455" y="34" class="t-sub s-amber" text-anchor="middle">ce que Claude tient en ce moment</text>
+        <rect x="268" y="74" width="300" height="16" rx="8" class="bar"></rect>
+        <rect x="268" y="102" width="374" height="16" rx="8" class="bar"></rect>
+        <rect x="268" y="130" width="250" height="16" rx="8" class="bar"></rect>
+        <rect x="268" y="158" width="340" height="16" rx="8" class="bar-strong"></rect>
+        <!-- nouvelle conversation -->
+        <rect x="740" y="48" width="210" height="150" rx="14" class="box"></rect>
+        <text x="845" y="108" class="t-lbl" text-anchor="middle">Une nouvelle</text>
+        <text x="845" y="132" class="t-lbl" text-anchor="middle">conversation</text>
+        <text x="845" y="162" class="t-sub" text-anchor="middle">part de zéro</text>
+      </svg>
+    </div>
+    <p class="cap">Deux habitudes en découlent. Dans les longues conversations, redites ce qui compte au lieu de croire que le début a survécu. Et ne supposez pas qu'il se souvient de la semaine dernière : les corrections ne passent pas d'une conversation à l'autre si vous ne les enregistrez pas quelque part. Le contenant est grand, environ 500 pages, mais il n'est pas infini.</p>
+  </div>
+  <span class="slide-counter">06</span>
+</section>
+
+<!-- ============ 7 · UN COLLÈGUE, PAS UN MOTEUR DE RECHERCHE =========== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Travailler avec · 1 sur 6</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 5 · rencontrer Claude comme il faut</span>
+    <h2 class="">Traitez-le comme un collègue, pas comme un moteur de recherche.</h2>
+    <p class="lead">Pas de syntaxe spéciale, pas de mots magiques. Parlez-lui comme vous briefez un collègue compétent, et donnez-lui du travail qui a de la matière.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 230" role="img" aria-label="Contraste entre Claude utilisé comme boîte à questions et Claude utilisé comme partenaire de réflexion">
+        <defs><marker id="ah7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-amber"></path></marker></defs>
+        <rect x="40" y="40" width="380" height="160" rx="12" class="box"></rect>
+        <text x="230" y="76" class="t-lbl" text-anchor="middle">Une boîte à questions</text>
+        <text x="230" y="106" class="t-sub" text-anchor="middle">« Que veut dire ce sigle ? »</text>
+        <text x="230" y="130" class="t-sub" text-anchor="middle">« Écris un haïku. »</text>
+        <text x="230" y="164" class="t-tiny" text-anchor="middle">de petites réponses à de petites questions</text>
+        <line x1="432" y1="120" x2="512" y2="120" class="l-amber" stroke-width="2" marker-end="url(#ah7)"></line>
+        <rect x="524" y="40" width="416" height="160" rx="12" class="box-amber"></rect>
+        <text x="732" y="76" class="t-lbl" text-anchor="middle">Un partenaire de réflexion</text>
+        <text x="732" y="106" class="t-sub" text-anchor="middle">« Rédige le mail client sur le retard. »</text>
+        <text x="732" y="130" class="t-sub" text-anchor="middle">« Trouve la tendance dans ce tableur. »</text>
+        <text x="732" y="154" class="t-sub" text-anchor="middle">« Cherche les failles de mon plan. »</text>
+        <text x="732" y="184" class="t-tiny" text-anchor="middle">travaille avec vous sur de vraies tâches</text>
+      </svg>
+    </div>
+    <p class="cap">Le même Claude sur le web, sur l'ordinateur et sur le mobile, et vous restez connecté partout. Le vrai saut n'est pas un meilleur outil, c'est une meilleure classe de tâches : apportez-lui le travail que vous feriez vous-même, pas seulement ce que vous iriez chercher.</p>
+  </div>
+  <span class="slide-counter">07</span>
+</section>
+
+<!-- ============ 8 · LE BRIEF ========================================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Travailler avec · 2 sur 6</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 6 · si vous ne retenez qu'une chose</span>
+    <h2 class="">Un bon résultat commence par un vrai brief.</h2>
+    <p class="lead">Claude ne lit pas dans vos pensées. Une bonne demande fait trois choses : elle plante le décor, dit la tâche, donne les règles.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 260" role="img" aria-label="Les trois parties d'un brief, appliquées à un exemple de prompt">
+        <!-- trois blocs -->
+        <rect x="30" y="30" width="290" height="60" rx="10" class="box"></rect>
+        <text x="52" y="55" class="t-lbl">1 · Plantez le décor</text>
+        <text x="52" y="77" class="t-sub">qui vous êtes, ce qui se passe</text>
+        <rect x="30" y="100" width="290" height="60" rx="10" class="box-amber"></rect>
+        <text x="52" y="125" class="t-lbl">2 · Dites la tâche</text>
+        <text x="52" y="147" class="t-sub">ce que vous voulez obtenir</text>
+        <rect x="30" y="170" width="290" height="60" rx="10" class="box"></rect>
+        <text x="52" y="195" class="t-lbl">3 · Donnez les règles</text>
+        <text x="52" y="217" class="t-sub">ton, longueur, format</text>
+        <!-- carte exemple -->
+        <rect x="370" y="30" width="580" height="200" rx="12" class="box"></rect>
+        <rect x="370" y="42" width="5" height="52" class="s-muted"></rect>
+        <text x="398" y="62" class="t-mono">Je dirige les services clients. Notre intégration</text>
+        <text x="398" y="84" class="t-mono">logicielle chez un grand compte a deux semaines de retard.</text>
+        <rect x="370" y="106" width="5" height="30" class="s-amber"></rect>
+        <text x="398" y="126" class="t-mono s-amber">Écris un email sur le retard du projet.</text>
+        <rect x="370" y="148" width="5" height="52" class="s-muted"></rect>
+        <text x="398" y="168" class="t-mono">Professionnel, avec des excuses. Moins de 150 mots.</text>
+        <text x="398" y="190" class="t-mono">Termine par la nouvelle date de livraison.</text>
+      </svg>
+    </div>
+    <p class="cap">Comparez avec « écris un mail sur le retard du projet ». Même demande, sans décor, sans règles : vous obtenez du générique et vous accusez l'outil. La plupart des réponses décevantes sont des demandes mal briefées.</p>
+  </div>
+  <span class="slide-counter">08</span>
+</section>
+
+<!-- ============ 9 · LA BOUCLE ========================================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Travailler avec · 3 sur 6</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 7 · la méthode</span>
+    <h2 class="">La première réponse est un brouillon, pas un verdict.</h2>
+    <p class="lead">Travailler avec Claude est une boucle : demander, lire ce qui revient, dire quoi changer, recommencer. C'est vous qui décidez quand c'est fini.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 240" role="img" aria-label="La boucle de travail : demander, lire, dire quoi changer, meilleur brouillon, jusqu'à ce que vous décidiez que c'est fini">
+        <defs>
+          <marker id="ah9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-ink"></path></marker>
+          <marker id="ah9a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-amber"></path></marker>
+        </defs>
+        <rect x="30" y="70" width="170" height="70" rx="12" class="box"></rect>
+        <text x="115" y="112" class="t-lbl" text-anchor="middle">Demandez</text>
+        <line x1="208" y1="105" x2="258" y2="105" class="l-ink" stroke-width="1.6" marker-end="url(#ah9)"></line>
+        <rect x="266" y="70" width="170" height="70" rx="12" class="box"></rect>
+        <text x="351" y="105" class="t-lbl" text-anchor="middle">Lisez</text>
+        <text x="351" y="126" class="t-tiny" text-anchor="middle">votre jugement</text>
+        <line x1="444" y1="105" x2="494" y2="105" class="l-ink" stroke-width="1.6" marker-end="url(#ah9)"></line>
+        <rect x="502" y="70" width="200" height="70" rx="12" class="box-amber"></rect>
+        <text x="602" y="100" class="t-lbl" text-anchor="middle">Dites quoi</text>
+        <text x="602" y="122" class="t-lbl" text-anchor="middle">changer</text>
+        <line x1="710" y1="105" x2="760" y2="105" class="l-ink" stroke-width="1.6" marker-end="url(#ah9)"></line>
+        <rect x="768" y="70" width="182" height="70" rx="12" class="box-ink"></rect>
+        <text x="859" y="112" class="t-lbl t-white" text-anchor="middle">Terminé</text>
+        <!-- retour de boucle -->
+        <path d="M 602 148 L 602 190 L 351 190 L 351 148" class="l-amber" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah9a)"></path>
+        <text x="476" y="212" class="t-tiny s-amber" text-anchor="middle">« Bien, mais adoucis le ton » · « Développe le point deux » · autant de tours qu'il faut</text>
+      </svg>
+    </div>
+    <p class="cap">Un retour précis vaut mieux qu'un retour vague : « coupe les deux premiers paragraphes » marche mieux que « fais plus court ». Et si une conversation part de travers, repartir à zéro avec un meilleur brief va souvent plus vite que de sauver l'ancienne.</p>
+  </div>
+  <span class="slide-counter">09</span>
+</section>
+
+<!-- ============ 10 · DITES L'OBJECTIF ================================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Travailler avec · 4 sur 6</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 8 · l'amélioration que presque tout le monde rate</span>
+    <h2 class="">Dites ce que vous cherchez à obtenir, pas seulement quoi changer.</h2>
+    <p class="lead">Une consigne peut être suivie à la lettre et rater votre intention. Donnez l'objectif à côté de la consigne, et l'écart se referme.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 260" role="img" aria-label="Trois consignes mises en regard de ce que la personne voulait vraiment dire">
+        <text x="60" y="40" class="t-sub">Ce que vous avez dit</text>
+        <text x="530" y="40" class="t-sub">Ce que vous vouliez dire</text>
+        <rect x="40" y="56" width="400" height="44" rx="10" class="box"></rect>
+        <text x="64" y="84" class="t-mono">« Fais plus court. »</text>
+        <rect x="510" y="56" width="440" height="44" rx="10" class="box"></rect>
+        <text x="534" y="84" class="t-sub">Un lecteur pressé doit voir la demande quand même.</text>
+        <rect x="40" y="110" width="400" height="44" rx="10" class="box"></rect>
+        <text x="64" y="138" class="t-mono">« Fais plus professionnel. »</text>
+        <rect x="510" y="110" width="440" height="44" rx="10" class="box"></rect>
+        <text x="534" y="138" class="t-sub">Ça part au conseil, plus à l'équipe.</text>
+        <rect x="40" y="164" width="400" height="44" rx="10" class="box"></rect>
+        <text x="64" y="192" class="t-mono">« Ajoute du détail. »</text>
+        <rect x="510" y="164" width="440" height="44" rx="10" class="box"></rect>
+        <text x="534" y="192" class="t-sub">Développe seulement ce qui aide à décider.</text>
+        <rect x="40" y="224" width="910" height="4" rx="2" class="bar-strong"></rect>
+      </svg>
+    </div>
+    <p class="cap">Le correctif en une ligne : « Fais plus court. Mon objectif, c'est que le point clé survive à vingt secondes de lecture en diagonale. » Consigne plus objectif. Ça marche aussi avec les humains.</p>
+  </div>
+  <span class="slide-counter">10</span>
+</section>
+
+<!-- ============ 11 · MONTREZ-LUI LA VRAIE MATIÈRE ===================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Travailler avec · 5 sur 6</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 9 · le contexte est le carburant</span>
+    <h2 class="">Montrez-lui la vraie matière.</h2>
+    <p class="lead">Ne décrivez pas votre document à Claude. Donnez-le-lui. Il lit les rapports, les tableurs, les images et les présentations, et répond à partir de ce qui s'y trouve vraiment.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Des fichiers entrent dans Claude et des résultats utiles en ressortent">
+        <defs><marker id="ah11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-ink"></path></marker></defs>
+        <g>
+          <rect x="40" y="30" width="200" height="40" rx="9" class="box"></rect><text x="140" y="56" class="t-mono" text-anchor="middle">rapport-annuel.pdf</text>
+          <rect x="40" y="82" width="200" height="40" rx="9" class="box"></rect><text x="140" y="108" class="t-mono" text-anchor="middle">chiffres-ventes.xlsx</text>
+          <rect x="40" y="134" width="200" height="40" rx="9" class="box"></rect><text x="140" y="160" class="t-mono" text-anchor="middle">tableau-blanc.jpg</text>
+          <rect x="40" y="186" width="200" height="40" rx="9" class="box"></rect><text x="140" y="212" class="t-mono" text-anchor="middle">notes-reunion.docx</text>
+        </g>
+        <line x1="252" y1="50" x2="380" y2="108" class="l-faint" stroke-width="1.4"></line>
+        <line x1="252" y1="102" x2="380" y2="120" class="l-faint" stroke-width="1.4"></line>
+        <line x1="252" y1="154" x2="380" y2="136" class="l-faint" stroke-width="1.4"></line>
+        <line x1="252" y1="206" x2="380" y2="148" class="l-faint" stroke-width="1.4"></line>
+        <rect x="390" y="88" width="200" height="80" rx="14" class="box-amber"></rect>
+        <text x="490" y="135" class="t-lbl s-amber" text-anchor="middle">Claude</text>
+        <line x1="598" y1="128" x2="678" y2="128" class="l-ink" stroke-width="1.6" marker-end="url(#ah11)"></line>
+        <g>
+          <text x="700" y="76" class="t-lbl">Ce que vous récupérez</text>
+          <text x="700" y="108" class="t-sub">le résumé en langage clair</text>
+          <text x="700" y="132" class="t-sub">la tendance cachée dans les chiffres</text>
+          <text x="700" y="156" class="t-sub">ce que dit vraiment le schéma</text>
+          <text x="700" y="180" class="t-sub">le brouillon, ancré dans vos notes</text>
+        </g>
+      </svg>
+    </div>
+    <p class="cap">Une conversation tient environ 500 pages, donc « lis ce contrat de 60 pages et signale ce qui sort de l'ordinaire » est une demande normale, pas une prouesse. Le bon contexte transforme un brouillon générique en quelque chose qui ressemble à votre travail, parce que c'en est.</p>
+  </div>
+  <span class="slide-counter">11</span>
+</section>
+
+<!-- ============ 12 · ARRÊTEZ DE TOUT RÉEXPLIQUER ====================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Travailler avec · 6 sur 6</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 10 · configurez-le une seule fois</span>
+    <h2 class="">Arrêtez de vous réexpliquer à chaque fois.</h2>
+    <p class="lead">Un projet est un espace de travail où vivent vos fichiers et vos consignes permanentes. Chaque conversation qui s'y ouvre démarre déjà briefée.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Un projet qui contient des fichiers et des consignes, pour que chaque nouvelle conversation démarre briefée">
+        <rect x="60" y="26" width="860" height="200" rx="16" class="box"></rect>
+        <text x="92" y="60" class="t-lbl">Votre projet : « Compte client X »</text>
+        <rect x="92" y="82" width="250" height="118" rx="12" class="box"></rect>
+        <text x="116" y="112" class="t-lbl">Fichiers</text>
+        <text x="116" y="138" class="t-sub">déposés une seule fois :</text>
+        <text x="116" y="158" class="t-sub">charte de marque, contrats,</text>
+        <text x="116" y="178" class="t-sub">livrables passés</text>
+        <rect x="366" y="82" width="250" height="118" rx="12" class="box"></rect>
+        <text x="390" y="112" class="t-lbl">Consignes</text>
+        <text x="390" y="138" class="t-sub">comment vous aimez ça :</text>
+        <text x="390" y="158" class="t-sub">« toujours en langage clair,</text>
+        <text x="390" y="178" class="t-sub">toujours finir par les suites »</text>
+        <rect x="640" y="82" width="250" height="118" rx="12" class="box-amber"></rect>
+        <text x="664" y="112" class="t-lbl s-amber">Chaque échange</text>
+        <text x="664" y="138" class="t-sub">démarre en connaissant les</text>
+        <text x="664" y="158" class="t-sub">fichiers, en suivant les règles,</text>
+        <text x="664" y="178" class="t-sub">sans rien redéposer ni répéter</text>
+      </svg>
+    </div>
+    <p class="cap">La mémoire de Claude retient aussi votre rôle et vos préférences d'une conversation à l'autre, et vous pouvez revoir ou modifier ce qu'elle contient. Entre les deux, la dixième conversation ne devrait rien avoir à voir avec la première : vous avez arrêté de vous présenter.</p>
+  </div>
+  <span class="slide-counter">12</span>
+</section>
+
+<!-- ============ 13 · DÉCIDEZ CE QUI RESTE À VOUS ====================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Ancrer l'habitude · 1 sur 4</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 11 · le choix de jugement</span>
+    <h2 class="">Décidez ce qui reste à vous.</h2>
+    <p class="lead">Bien utiliser Claude commence avant le premier prompt : pour chaque travail, choisissez ce que vous gardez, ce que vous faites ensemble, et ce que vous confiez.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="Trois catégories : garder, faire ensemble, confier">
+        <rect x="40" y="36" width="280" height="180" rx="12" class="box"></rect>
+        <text x="180" y="72" class="t-lbl" text-anchor="middle">Garder</text>
+        <text x="180" y="104" class="t-sub" text-anchor="middle">la décision finale</text>
+        <text x="180" y="128" class="t-sub" text-anchor="middle">tout ce qui est confidentiel</text>
+        <text x="180" y="152" class="t-sub" text-anchor="middle">tout ce que vous ne pourriez</text>
+        <text x="180" y="172" class="t-sub" text-anchor="middle">pas vérifier si c'était faux</text>
+        <rect x="350" y="36" width="280" height="180" rx="12" class="box-amber"></rect>
+        <text x="490" y="72" class="t-lbl s-amber" text-anchor="middle">Faire ensemble</text>
+        <text x="490" y="104" class="t-sub" text-anchor="middle">réfléchir à un problème</text>
+        <text x="490" y="128" class="t-sub" text-anchor="middle">rédiger et retravailler</text>
+        <text x="490" y="152" class="t-sub" text-anchor="middle">éprouver un plan</text>
+        <text x="490" y="172" class="t-sub" text-anchor="middle">donner du sens aux données</text>
+        <rect x="660" y="36" width="280" height="180" rx="12" class="box"></rect>
+        <text x="800" y="72" class="t-lbl" text-anchor="middle">Confier</text>
+        <text x="800" y="104" class="t-sub" text-anchor="middle">résumer et reformater</text>
+        <text x="800" y="128" class="t-sub" text-anchor="middle">les premiers jets de routine</text>
+        <text x="800" y="152" class="t-sub" text-anchor="middle">le travail de recherche,</text>
+        <text x="800" y="172" class="t-sub" text-anchor="middle">avec des sources à vérifier</text>
+      </svg>
+    </div>
+    <p class="cap">Le but n'est pas de tout automatiser. C'est au milieu que la valeur se concentre : vous apportez l'expertise et l'enjeu, Claude apporte la vitesse et l'ampleur. Si vous ne savez pas où ranger une tâche, demandez à Claude de vous aider à la découper. Cette conversation ne coûte rien.</p>
+  </div>
+  <span class="slide-counter">13</span>
+</section>
+
+<!-- ============ 14 · AVANT DE L'ENVOYER =============================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Ancrer l'habitude · 2 sur 4</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 12 · le standard professionnel</span>
+    <h2 class="">Trois vérifications avant que ça quitte votre bureau.</h2>
+    <p class="lead">Un travail assisté par l'IA reste votre travail. Trois vérifications rapides en font quelque chose que vous pouvez assumer.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 220" role="img" aria-label="Trois points de contrôle avant l'envoi : vérifier les détails, le dire à qui de droit, signer le résultat">
+        <defs><marker id="ah14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-ink"></path></marker></defs>
+        <rect x="30" y="60" width="250" height="90" rx="12" class="box"></rect>
+        <text x="155" y="94" class="t-lbl" text-anchor="middle">Vérifiez les détails</text>
+        <text x="155" y="120" class="t-sub" text-anchor="middle">noms, chiffres, affirmations :</text>
+        <text x="155" y="138" class="t-sub" text-anchor="middle">vérifiés, pas supposés</text>
+        <line x1="288" y1="105" x2="328" y2="105" class="l-ink" stroke-width="1.6" marker-end="url(#ah14)"></line>
+        <rect x="336" y="60" width="250" height="90" rx="12" class="box"></rect>
+        <text x="461" y="94" class="t-lbl" text-anchor="middle">Dites-le</text>
+        <text x="461" y="120" class="t-sub" text-anchor="middle">là où votre public s'attend</text>
+        <text x="461" y="138" class="t-sub" text-anchor="middle">à savoir que l'IA a aidé</text>
+        <line x1="594" y1="105" x2="634" y2="105" class="l-ink" stroke-width="1.6" marker-end="url(#ah14)"></line>
+        <rect x="642" y="60" width="250" height="90" rx="12" class="box-ink"></rect>
+        <text x="767" y="94" class="t-lbl t-white" text-anchor="middle">Signez-le</text>
+        <text x="767" y="120" class="t-sub t-white" text-anchor="middle" opacity="0.8">le résultat est à vous,</text>
+        <text x="767" y="138" class="t-sub t-white" text-anchor="middle" opacity="0.8">pas à l'outil</text>
+      </svg>
+    </div>
+    <p class="cap">Ce que « le dire » veut dire dépend du contexte : un rapport client, une note interne et un mail personnel ne portent pas les mêmes attentes. Sachez où votre entreprise place la limite, et dans le doute, dites-le simplement en bas de page.</p>
+  </div>
+  <span class="slide-counter">14</span>
+</section>
+
+<!-- ============ 15 · LA SUITE ========================================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Ancrer l'habitude · 3 sur 4</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 13 · l'horizon</span>
+    <h2 class="">Des réponses aux livrables finis.</h2>
+    <p class="lead">Tout ça se passe dans une fenêtre de conversation. Les mêmes compétences se transposent aux outils où Claude travaille dans vos vrais fichiers et vous rend des documents finis.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 260" role="img" aria-label="Trois marches : Chat donne des réponses, Cowork rend des documents finis, Code construit des logiciels">
+        <rect x="40" y="150" width="280" height="80" rx="12" class="box"></rect>
+        <text x="180" y="184" class="t-lbl" text-anchor="middle">Chat</text>
+        <text x="180" y="208" class="t-sub" text-anchor="middle">penser tout haut, rédiger, décider</text>
+        <rect x="350" y="100" width="280" height="130" rx="12" class="box-amber"></rect>
+        <text x="490" y="134" class="t-lbl s-amber" text-anchor="middle">Cowork</text>
+        <text x="490" y="160" class="t-sub" text-anchor="middle">pointez-le sur un dossier et vos outils,</text>
+        <text x="490" y="180" class="t-sub" text-anchor="middle">décrivez le résultat, récupérez</text>
+        <text x="490" y="200" class="t-sub" text-anchor="middle">le document fini</text>
+        <rect x="660" y="50" width="280" height="180" rx="12" class="box"></rect>
+        <text x="800" y="84" class="t-lbl" text-anchor="middle">Code</text>
+        <text x="800" y="110" class="t-sub" text-anchor="middle">construire un vrai logiciel</text>
+        <text x="800" y="130" class="t-sub" text-anchor="middle">en le décrivant</text>
+        <text x="800" y="162" class="t-tiny" text-anchor="middle">le moteur derrière Cowork,</text>
+        <text x="800" y="180" class="t-tiny" text-anchor="middle">pour quand vous serez prêt</text>
+      </svg>
+    </div>
+    <p class="cap">Le saut, c'est de déléguer, pas seulement de discuter : « regarde les notes de réunion, le fil de mails et la proposition, puis écris-moi le résumé d'une page pour le comité de direction. » Il planifie, avance par étapes, demande avant d'agir, et enregistre le résultat dans votre dossier. C'est pour une prochaine séance ; les compétences d'aujourd'hui en sont la base.</p>
+  </div>
+  <span class="slide-counter">15</span>
+</section>
+
+<!-- ============ 16 · VOTRE PREMIÈRE SEMAINE =========================== -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Ancrer l'habitude · 4 sur 4</span></div>
+  <div class="stage">
+    <span class="eyebrow">Étape 14 · commencez maintenant, commencez petit</span>
+    <h2 class="">Choisissez une tâche cette semaine.</h2>
+    <p class="lead">Pas dix. Une tâche récurrente que vous faites déjà : le mail hebdomadaire, les notes de réunion, la vérification du tableur. Passez-la dans la boucle.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 230" role="img" aria-label="Une boucle d'habitude hebdomadaire : choisir une tâche, bien la briefer, juger et affiner, garder le prompt qui marche">
+        <defs>
+          <marker id="ah16" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-ink"></path></marker>
+          <marker id="ah16a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="s-amber"></path></marker>
+        </defs>
+        <rect x="30" y="60" width="205" height="80" rx="12" class="box"></rect>
+        <text x="132" y="94" class="t-lbl" text-anchor="middle">Une seule tâche</text>
+        <text x="132" y="118" class="t-sub" text-anchor="middle">récurrente, réelle, à vous</text>
+        <line x1="243" y1="100" x2="283" y2="100" class="l-ink" stroke-width="1.6" marker-end="url(#ah16)"></line>
+        <rect x="291" y="60" width="205" height="80" rx="12" class="box"></rect>
+        <text x="393" y="94" class="t-lbl" text-anchor="middle">Briefez-le bien</text>
+        <text x="393" y="118" class="t-sub" text-anchor="middle">décor · tâche · règles</text>
+        <line x1="504" y1="100" x2="544" y2="100" class="l-ink" stroke-width="1.6" marker-end="url(#ah16)"></line>
+        <rect x="552" y="60" width="205" height="80" rx="12" class="box"></rect>
+        <text x="654" y="94" class="t-lbl" text-anchor="middle">Jugez et affinez</text>
+        <text x="654" y="118" class="t-sub" text-anchor="middle">comparez à votre version</text>
+        <line x1="765" y1="100" x2="805" y2="100" class="l-ink" stroke-width="1.6" marker-end="url(#ah16)"></line>
+        <rect x="813" y="60" width="140" height="80" rx="12" class="box-amber"></rect>
+        <text x="883" y="94" class="t-lbl s-amber" text-anchor="middle">Gardez le</text>
+        <text x="883" y="116" class="t-lbl s-amber" text-anchor="middle">prompt</text>
+        <path d="M 883 148 L 883 186 L 132 186 L 132 148" class="l-amber" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah16a)"></path>
+        <text x="507" y="208" class="t-tiny s-amber" text-anchor="middle">la semaine d'après : même tâche, meilleur brief, puis une deuxième tâche</text>
+      </svg>
+    </div>
+    <p class="cap">Comparer la réponse de Claude à votre propre version est le meilleur professeur qui soit : vous verrez exactement où il vous fait gagner du temps et où votre jugement reste indispensable. Les prompts qui marchent deviennent votre bibliothèque. C'est tout le parcours, une tâche à la fois.</p>
+  </div>
+  <span class="slide-counter">16</span>
+</section>
+
+<!-- ============ 17 · CLÔTURE ========================================== -->
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · deck de présentation</span></div>
+  <div class="stage">
+    <span class="eyebrow">Toute la séance en une ligne</span>
+    <h1 class="">L'outil prédit des mots.<br>Le résultat dépend de<br>la personne qui conduit.</h1>
+    <p class="lead">tutto.one/praxis · daniel@tutto.one</p>
+  </div>
+  <span class="slide-counter">17</span>
+</section>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.deck-slide'));
+  const progress = document.getElementById('progress');
+  const hint = document.getElementById('hint');
+  let i = 0;
+
+  // restaure la position depuis le hash (#7) pour ne pas perdre sa place au rechargement
+  const fromHash = parseInt(location.hash.slice(1), 10);
+  if (!isNaN(fromHash) && fromHash >= 1 && fromHash <= slides.length) i = fromHash - 1;
+
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    history.replaceState(null, '', '#' + (i + 1));
+  }
+  function next() { show(i + 1); }
+  function prev() { show(i - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+  });
+  // clic pour avancer (on ignore les liens)
+  // Click-to-advance removed: it fires on any stray click, which makes editing
+  // and simply reading a slide unpleasant. Arrow keys, space and the toolbar
+  // arrows still advance.
+  // le repère s'efface après quelques secondes
+  setTimeout(() => { if (hint) hint.style.opacity = '0'; }, 4000);
+
+  show(i);
+</script>
+
+
+
+<deepl-input-controller translate="no"></deepl-input-controller>
+
+</body></html>

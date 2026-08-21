@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="fr" class="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction to MCP — talking deck</title>
+<title>Praxis · AI Fluency: Framework &amp; Foundations — deck de présentation</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -752,10 +752,6 @@ th {
   .diagram svg { width: 100%; height: auto; display: block; }
   .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 70ch; }
   .cap code { font-size: 0.85em; }
-  .qa { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-5); }
-  .qa p { margin: 0; font-size: var(--text-sm); color: hsl(var(--foreground)); line-height: var(--leading-snug); max-width: 46ch; }
-  .qa span { display: block; font-weight: var(--weight-bold); color: hsl(var(--primary)); margin-bottom: var(--space-1); }
-  @media (max-width: 640px) { .qa { grid-template-columns: 1fr; } }
 
   /* SVG shared styles */
   svg text { font-family: var(--font-sans); fill: hsl(var(--foreground)); }
@@ -858,52 +854,54 @@ th {
 
 <!-- ============ 1 · TITLE ============================================= -->
 <section class="deck-slide title active">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · talking deck</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · deck de présentation</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — built from Anthropic's Introduction to Model Context Protocol</span>
-    <h1>One protocol, so any<br>AI app can reach any<br>tool or data source.</h1>
-    <p class="lead">Eleven ideas, one per screen. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.</p>
+    <span class="eyebrow">Praxis — construit à partir d'AI Fluency: Framework &amp; Foundations d'Anthropic</span>
+    <h1>Comment collaborer<br>vraiment avec l'IA.</h1>
+    <p class="lead">Treize idées, une par écran — un cadre qui survivra aux astuces du moment. Tout se joue dans le regard, alors laissez les silences.</p>
   </div>
   <span class="slide-counter">01</span>
 </section>
 
 <!-- ============ 2 · THE SPINE ========================================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The shape of the course</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>La structure du cours</span></div>
   <div class="stage">
-    <span class="eyebrow">Where we're going</span>
-    <h2>The whole course on one screen</h2>
-    <p class="lead">Four moves: grasp what MCP is, then learn its three primitives — tools, resources, prompts — one at a time, server side and client side.</p>
+    <span class="eyebrow">Où nous allons</span>
+    <h2>Tout le cours sur un écran</h2>
+    <p class="lead">Poser les fondations, voir comment l'outil fonctionne vraiment, apprendre les quatre compétences, puis les mettre en pratique.</p>
     <div class="spine">
       <div class="grp">
-        <h4>Foundation</h4>
+        <h4>Les fondations</h4>
         <ol>
-          <li><span class="n">1</span> Introducing MCP</li>
-          <li><span class="n">2</span> MCP clients</li>
-          <li><span class="n">3</span> Project setup</li>
+          <li><span class="n">1</span> Ce que veut dire la maîtrise</li>
+          <li><span class="n">2</span> Trois façons de travailler avec l'IA</li>
+          <li><span class="n">3</span> Le cadre des 4D</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Tools</h4>
+        <h4>Comment l'IA fonctionne</h4>
         <ol>
-          <li><span class="n">4</span> Defining tools</li>
-          <li><span class="n">5</span> The server inspector</li>
-          <li><span class="n">6</span> Implementing a client</li>
+          <li><span class="n">4</span> Comment elle génère</li>
+          <li><span class="n">5</span> Ce qu'elle sait faire et ne sait pas faire</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Resources &amp; prompts</h4>
+        <h4>Les quatre compétences</h4>
         <ol>
-          <li><span class="n">7</span> Defining resources</li>
-          <li><span class="n">8</span> Accessing resources</li>
-          <li><span class="n">9</span> Defining prompts</li>
-          <li><span class="n">10</span> Prompts in the client</li>
+          <li><span class="n">6</span> La délégation</li>
+          <li><span class="n">8</span> La description</li>
+          <li><span class="n">10</span> Le discernement</li>
+          <li><span class="n">12</span> La diligence</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Recap</h4>
+        <h4>En pratique</h4>
         <ol>
-          <li><span class="n">11</span> MCP review</li>
+          <li><span class="n">7</span> Planifier un vrai projet</li>
+          <li><span class="n">9</span> Techniques de prompt</li>
+          <li><span class="n">11</span> La boucle décrire–discerner</li>
+          <li><span class="n">13</span> Continuez à gagner en aisance</li>
         </ol>
       </div>
     </div>
@@ -911,488 +909,505 @@ th {
   <span class="slide-counter">02</span>
 </section>
 
-<!-- ============ 3 · L1 INTRODUCING MCP =============================== -->
+<!-- ============ 3 · L1 WHAT IS AI FLUENCY ============================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 1 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 1 · Fondations</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 1</span>
-    <h2>M&times;N integrations become M+N</h2>
-    <p class="lead">Without a standard, every app wires up to every tool by hand. MCP is the standard connector that ends the tangle.</p>
+    <span class="eyebrow">Leçon 1</span>
+    <h2>L'aisance, c'est collaborer, pas s'y connaître en IA</h2>
+    <p class="lead">L'aisance avec l'IA, c'est la capacité à travailler avec l'IA de façon efficace, efficiente, éthique et sûre.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 270" role="img" aria-label="M by N integrations versus M plus N with MCP">
-        <!-- WITHOUT side -->
-        <text x="20" y="30" class="t-lbl">Without MCP</text>
-        <text x="20" y="50" class="t-tiny">every app &times; every tool, by hand</text>
-        <rect x="20"  y="70" width="86" height="36" rx="8" class="box"/><text x="63"  y="93" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="20"  y="120" width="86" height="36" rx="8" class="box"/><text x="63"  y="143" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="20"  y="170" width="86" height="36" rx="8" class="box"/><text x="63"  y="193" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="300" y="70" width="86" height="36" rx="8" class="box"/><text x="343" y="93" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="300" y="120" width="86" height="36" rx="8" class="box"/><text x="343" y="143" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="300" y="170" width="86" height="36" rx="8" class="box"/><text x="343" y="193" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <g class="l-faint" stroke-width="1.3">
-          <line x1="106" y1="88"  x2="300" y2="88"/><line x1="106" y1="88"  x2="300" y2="138"/><line x1="106" y1="88"  x2="300" y2="188"/>
-          <line x1="106" y1="138" x2="300" y2="88"/><line x1="106" y1="138" x2="300" y2="138"/><line x1="106" y1="138" x2="300" y2="188"/>
-          <line x1="106" y1="188" x2="300" y2="88"/><line x1="106" y1="188" x2="300" y2="138"/><line x1="106" y1="188" x2="300" y2="188"/>
-        </g>
-        <text x="203" y="238" text-anchor="middle" class="t-tiny">9 custom integrations</text>
+      <svg viewBox="0 0 980 240" role="img" aria-label="The four qualities of AI fluency">
+        <text x="267" y="28" text-anchor="middle" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Le travail est fait</text>
+        <text x="753" y="28" text-anchor="middle" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Fait de façon responsable</text>
 
-        <!-- divider -->
-        <line x1="470" y1="20" x2="470" y2="250" class="l-faint" stroke-width="1" stroke-dasharray="4 5"/>
+        <rect x="40"  y="50" width="210" height="110" rx="14" class="box"/>
+        <text x="145" y="100" text-anchor="middle" class="t-lbl">Efficace</text>
+        <text x="145" y="128" text-anchor="middle" class="t-tiny">le bon résultat</text>
 
-        <!-- WITH side -->
-        <text x="520" y="30" class="t-lbl">With MCP</text>
-        <text x="520" y="50" class="t-tiny">build to the protocol once</text>
-        <rect x="520" y="70" width="86" height="36" rx="8" class="box"/><text x="563" y="93" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="520" y="120" width="86" height="36" rx="8" class="box"/><text x="563" y="143" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="520" y="170" width="86" height="36" rx="8" class="box"/><text x="563" y="193" text-anchor="middle" class="t-tiny s-ink">app</text>
-        <rect x="690" y="100" width="96" height="76" rx="12" class="box-amber"/>
-        <text x="738" y="135" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">MCP</text>
-        <text x="738" y="156" text-anchor="middle" class="t-tiny">standard</text>
-        <rect x="870" y="70" width="86" height="36" rx="8" class="box"/><text x="913" y="93" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="870" y="120" width="86" height="36" rx="8" class="box"/><text x="913" y="143" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <rect x="870" y="170" width="86" height="36" rx="8" class="box"/><text x="913" y="193" text-anchor="middle" class="t-tiny s-ink">tool</text>
-        <g class="l-amber" stroke-width="1.6">
-          <line x1="606" y1="88"  x2="690" y2="130"/><line x1="606" y1="138" x2="690" y2="138"/><line x1="606" y1="188" x2="690" y2="146"/>
-          <line x1="786" y1="130" x2="870" y2="88"/><line x1="786" y1="138" x2="870" y2="138"/><line x1="786" y1="146" x2="870" y2="188"/>
-        </g>
-        <text x="738" y="238" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">6 connections to one standard</text>
+        <rect x="283" y="50" width="210" height="110" rx="14" class="box"/>
+        <text x="388" y="100" text-anchor="middle" class="t-lbl">Efficient</text>
+        <text x="388" y="128" text-anchor="middle" class="t-tiny">sans effort gaspillé</text>
+
+        <rect x="526" y="50" width="210" height="110" rx="14" class="box"/>
+        <text x="631" y="100" text-anchor="middle" class="t-lbl">Éthique</text>
+        <text x="631" y="128" text-anchor="middle" class="t-tiny">fidèle à vos valeurs</text>
+
+        <rect x="769" y="50" width="210" height="110" rx="14" class="box"/>
+        <text x="874" y="100" text-anchor="middle" class="t-lbl">Sûr</text>
+        <text x="874" y="128" text-anchor="middle" class="t-tiny">aucun dommage</text>
+
+        <path d="M40 176 L40 188 L493 188 L493 176" class="l-amber" stroke-width="1.5"/>
+        <path d="M526 176 L526 188 L979 188 L979 176" class="l-amber" stroke-width="1.5"/>
+        <text x="267" y="214" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">efficace · efficient</text>
+        <text x="753" y="214" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">éthique · sûr</text>
       </svg>
     </div>
-    <p class="cap">MCP is a standard, like USB-C for AI: build to the protocol once and every compliant tool just works. It also splits the work — app builders on one side, tool builders on the other.</p>
+    <p class="cap">Le basculement, c'est de traiter l'IA comme un collaborateur avec qui vous construisez une relation de travail, pas comme une technologie à étudier, ni comme un distributeur automatique que vous interrogez.</p>
+    <div class="keynote"><p><span class="kn-label">Concept clé</span>La définition exacte : l'aisance avec l'IA, c'est la capacité à <em>collaborer</em> avec l'IA de façon <strong>efficace, performant, éthique et sûr</strong> — grâce aux 4D. <span class="kn-see">→ notes du formateur.</span></p></div>
   </div>
   <span class="slide-counter">03</span>
 </section>
 
-<!-- ============ 4 · L2 MCP CLIENTS (ARCHITECTURE) ==================== -->
+<!-- ============ 4 · L2 THREE WAYS TO WORK ============================ -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 2 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 2 · Fondamentaux</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 2</span>
-    <h2>Host, client, server — one client per server</h2>
-    <p class="lead">The app you use is the host. Inside it, each client holds one connection to one server, and the server wraps the real tool or data.</p>
+    <span class="eyebrow">Leçon 2</span>
+    <h2>Trois façons de travailler avec l'IA</h2>
+    <p class="lead">De la tâche définie que vous confiez, à la réflexion commune, jusqu'à l'IA qui agit pour vous.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="Host client server architecture">
-        <!-- host containing clients -->
-        <rect x="20" y="40" width="300" height="170" rx="14" class="box-ink"/>
-        <text x="170" y="72" text-anchor="middle" class="t-lbl t-white">Host</text>
-        <text x="170" y="92" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">Claude Code · Desktop · Cursor</text>
-        <rect x="44" y="112" width="116" height="78" rx="10" class="box-amber"/>
-        <text x="102" y="148" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">client</text>
-        <text x="102" y="168" text-anchor="middle" class="t-tiny">one server</text>
-        <rect x="180" y="112" width="116" height="78" rx="10" class="box-amber"/>
-        <text x="238" y="148" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">client</text>
-        <text x="238" y="168" text-anchor="middle" class="t-tiny">one server</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="Automation, augmentation, agency">
+        <rect x="40"  y="50" width="280" height="110" rx="14" class="box"/>
+        <text x="180" y="90"  text-anchor="middle" class="t-lbl">Automatisation</text>
+        <text x="180" y="116" text-anchor="middle" class="t-tiny">l'IA exécute une tâche</text>
+        <text x="180" y="134" text-anchor="middle" class="t-tiny">que vous définissez</text>
 
-        <!-- transports -->
-        <line x1="320" y1="151" x2="470" y2="100" class="l-amber" stroke-width="2.2" marker-end="url(#l2a)"/>
-        <line x1="320" y1="151" x2="470" y2="190" class="l-amber" stroke-width="2.2" marker-end="url(#l2a)"/>
-        <text x="395" y="112" text-anchor="middle" class="t-tiny s-amber">JSON-RPC</text>
+        <rect x="350" y="50" width="280" height="110" rx="14" class="box-amber"/>
+        <text x="490" y="90"  text-anchor="middle" class="t-lbl s-amber">Augmentation</text>
+        <text x="490" y="116" text-anchor="middle" class="t-tiny">vous et l'IA</text>
+        <text x="490" y="134" text-anchor="middle" class="t-tiny">réfléchissez ensemble</text>
 
-        <!-- servers -->
-        <rect x="470" y="68" width="220" height="64" rx="12" class="box"/>
-        <text x="580" y="98" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="580" y="118" text-anchor="middle" class="t-tiny">exposes tools · resources · prompts</text>
-        <rect x="470" y="158" width="220" height="64" rx="12" class="box"/>
-        <text x="580" y="188" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="580" y="208" text-anchor="middle" class="t-tiny">exposes tools · resources · prompts</text>
+        <rect x="660" y="50" width="280" height="110" rx="14" class="box"/>
+        <text x="800" y="90"  text-anchor="middle" class="t-lbl">Autonomie</text>
+        <text x="800" y="116" text-anchor="middle" class="t-tiny">vous la configurez pour</text>
+        <text x="800" y="134" text-anchor="middle" class="t-tiny">qu'elle agisse seule</text>
 
-        <!-- backing systems -->
-        <line x1="690" y1="100" x2="760" y2="100" class="l-faint" stroke-width="2" marker-end="url(#l2faint)"/>
-        <line x1="690" y1="190" x2="760" y2="190" class="l-faint" stroke-width="2" marker-end="url(#l2faint)"/>
-        <rect x="760" y="74" width="200" height="52" rx="10" class="box"/>
-        <text x="860" y="105" text-anchor="middle" class="t-tiny s-ink">a real tool / API</text>
-        <rect x="760" y="164" width="200" height="52" rx="10" class="box"/>
-        <text x="860" y="195" text-anchor="middle" class="t-tiny s-ink">a database / files</text>
+        <line x1="320" y1="105" x2="350" y2="105" class="l-faint" stroke-width="2" marker-end="url(#d2a)"/>
+        <line x1="630" y1="105" x2="660" y2="105" class="l-faint" stroke-width="2" marker-end="url(#d2a)"/>
+
+        <line x1="40" y1="200" x2="940" y2="200" class="l-faint" stroke-width="1.5" marker-end="url(#d2a)"/>
+        <text x="40"  y="226" class="t-tiny">vous dirigez chaque étape</text>
+        <text x="940" y="226" text-anchor="end" class="t-tiny">elle travaille de façon indépendante</text>
         <defs>
-          <marker id="l2a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l2faint" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"/></marker>
+          <marker id="d2a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"/></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">Messages travel as JSON-RPC over a transport: stdio for a local server, HTTP for a remote one. The host can hold many clients at once, but each client talks to exactly one server.</p>
-    <div class="qa">
-      <p><span>What does each side hold?</span> The <strong>server offers the capabilities</strong> — tools, resources, prompts. The <strong>client is the connection</strong> that reaches one server and brokers them to the host. Supplier vs. connector.</p>
-      <p><span>Is the client one shared pipe?</span> No — <strong>one client per server</strong>. The host opens a separate, named line to each server, so you grant and revoke them one at a time.</p>
-    </div>
+    <p class="cap">Ce ne sont pas des niveaux à gravir : ce sont des modes que vous choisissez selon la tâche. Les quatre compétences valent pour les trois.</p>
   </div>
   <span class="slide-counter">04</span>
 </section>
 
-<!-- ============ 5 · L3 PROJECT SETUP ================================= -->
+<!-- ============ 5 · L3 THE 4D FRAMEWORK (centrepiece) ================ -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 3 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 3 · Fondamentaux</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 3</span>
-    <h2>A server is a few lines to start</h2>
-    <p class="lead">The Python SDK's FastMCP does the protocol plumbing. You create a server, register capabilities, and run it over a transport.</p>
+    <span class="eyebrow">Leçon 3 — si vous ne retenez qu'une chose</span>
+    <h2>Délégation · Description · Discernement · Diligence</h2>
+    <p class="lead">Quatre compétences qui, ensemble, rendent la collaboration efficace, performante, éthique et sûre.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="FastMCP server setup steps">
-        <rect x="10" y="60" width="210" height="96" rx="14" class="box"/>
-        <text x="115" y="98"  text-anchor="middle" class="t-lbl">Project</text>
-        <text x="115" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">uv · mcp SDK</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="The 4D framework">
+        <text x="40" y="32" class="t-tiny">La délégation met en place · La diligence garde l'ensemble responsable.</text>
 
-        <rect x="262" y="60" width="210" height="96" rx="14" class="box"/>
-        <text x="367" y="98"  text-anchor="middle" class="t-lbl">Server</text>
-        <text x="367" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">FastMCP("name")</text>
+        <rect x="40"  y="55" width="210" height="92" rx="13" class="box"/>
+        <text x="145" y="88"  text-anchor="middle" class="t-lbl">Délégation</text>
+        <text x="145" y="112" text-anchor="middle" class="t-tiny">décider ce qu'on</text>
+        <text x="145" y="130" text-anchor="middle" class="t-tiny">confie à l'IA</text>
 
-        <rect x="514" y="60" width="210" height="96" rx="14" class="box-amber"/>
-        <text x="619" y="98"  text-anchor="middle" class="t-lbl s-amber">Register</text>
-        <text x="619" y="124" text-anchor="middle" class="t-mono" style="font-size:13px">@tool @resource</text>
+        <rect x="283" y="55" width="210" height="92" rx="13" class="box-amber"/>
+        <text x="388" y="88"  text-anchor="middle" class="t-lbl s-amber">Description</text>
+        <text x="388" y="112" text-anchor="middle" class="t-tiny">dire ce que vous</text>
+        <text x="388" y="130" text-anchor="middle" class="t-tiny">voulez, et comment</text>
 
-        <rect x="766" y="60" width="204" height="96" rx="14" class="box"/>
-        <text x="868" y="98"  text-anchor="middle" class="t-lbl">Run</text>
-        <text x="868" y="124" text-anchor="middle" class="t-tiny">stdio · HTTP</text>
+        <rect x="526" y="55" width="210" height="92" rx="13" class="box-amber"/>
+        <text x="631" y="88"  text-anchor="middle" class="t-lbl s-amber">Discernement</text>
+        <text x="631" y="112" text-anchor="middle" class="t-tiny">juger ce qui</text>
+        <text x="631" y="130" text-anchor="middle" class="t-tiny">revient</text>
 
-        <line x1="220" y1="108" x2="260" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <line x1="472" y1="108" x2="512" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <line x1="724" y1="108" x2="764" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l3a)"/>
-        <text x="490" y="198" text-anchor="middle" class="t-tiny">Decorators turn ordinary Python functions into MCP capabilities.</text>
+        <rect x="769" y="55" width="210" height="92" rx="13" class="box"/>
+        <text x="874" y="88"  text-anchor="middle" class="t-lbl">Diligence</text>
+        <text x="874" y="112" text-anchor="middle" class="t-tiny">assumer le</text>
+        <text x="874" y="130" text-anchor="middle" class="t-tiny">résultat final</text>
+
+        <line x1="250" y1="101" x2="283" y2="101" class="l-ink" stroke-width="2" marker-end="url(#d3a)"/>
+        <line x1="493" y1="101" x2="526" y2="101" class="l-ink" stroke-width="2" marker-end="url(#d3a)"/>
+        <line x1="736" y1="101" x2="769" y2="101" class="l-ink" stroke-width="2" marker-end="url(#d3a)"/>
+
+        <path d="M 631 147 C 631 205, 388 205, 388 149" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#d3amber)"/>
+        <text x="509" y="232" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">Description ⇄ Discernement — la boucle de travail</text>
         <defs>
-          <marker id="l3a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d3a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d3amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">stdio runs the server as a local subprocess of the host; HTTP exposes it as a remote service. Same server code either way — the transport is just how messages travel.</p>
-    <div class="qa">
-      <p><span>What does "transport-agnostic" mean?</span> MCP fixes the <strong>language, not the channel</strong>. The JSON-RPC messages are identical whether they ride a local stdio pipe or an HTTP connection — neither side's logic changes.</p>
-      <p><span>Rewrite the server to go remote?</span> No. Its tools, resources and prompts stay the same; you <strong>swap the transport</strong> (stdio → HTTP), not the code.</p>
-    </div>
+    <p class="cap">La Délégation décide de ce qui vaut la peine d'être fait ensemble ; la Description et le Discernement tournent en boucle au milieu ; la Diligence en garde la responsabilité. Tout le reste du cours, ce sont ces quatre-là.</p>
   </div>
   <span class="slide-counter">05</span>
 </section>
 
-<!-- ============ 6 · L4 DEFINING TOOLS =============================== -->
+<!-- ============ 6 · L4 HOW GENERATIVE AI WORKS ====================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 4 · Tools</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 4 · Comment fonctionne l'IA</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 4</span>
-    <h2>Tools — actions the model can choose to call</h2>
-    <p class="lead">Decorate a function and its name, docstring and typed arguments become a schema the model reads. The model decides when to use it.</p>
+    <span class="eyebrow">Leçon 4</span>
+    <h2>Elle génère, elle ne consulte rien</h2>
+    <p class="lead">Un modèle de langage crée du contenu nouveau à partir de motifs qu'il a appris : il ne va pas chercher des réponses stockées.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Defining a tool the model calls">
-        <!-- server function -->
-        <rect x="20" y="50" width="320" height="140" rx="14" class="box"/>
-        <text x="40" y="82" class="t-mono s-amber" style="font-weight:600">@mcp.tool()</text>
-        <text x="40" y="108" class="t-mono" style="font-size:13px">def get_weather(city):</text>
-        <text x="40" y="132" class="t-tiny s-ink">name · description · input schema</text>
-        <line x1="40" y1="148" x2="320" y2="148" class="l-faint" stroke-width="1"/>
-        <text x="40" y="172" class="t-tiny">the verbs — they do things, have side effects</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="How a language model is built">
+        <text x="40" y="28" class="t-tiny">Génère à partir de motifs — elle ne va pas chercher une réponse stockée.</text>
 
-        <!-- exposes -->
-        <line x1="340" y1="120" x2="440" y2="120" class="l-amber" stroke-width="2.5" marker-end="url(#l4a)"/>
-        <text x="390" y="110" text-anchor="middle" class="t-tiny">exposed</text>
+        <rect x="40"  y="42" width="250" height="86" rx="13" class="box"/>
+        <text x="165" y="78"  text-anchor="middle" class="t-lbl">Pré-entraînement</text>
+        <text x="165" y="102" text-anchor="middle" class="t-tiny">repérer des motifs dans</text>
+        <text x="165" y="120" text-anchor="middle" class="t-tiny">des milliards d'exemples</text>
 
-        <!-- model decides -->
-        <rect x="440" y="74" width="220" height="92" rx="14" class="box-amber"/>
-        <text x="550" y="108" text-anchor="middle" class="t-lbl s-amber">Model</text>
-        <text x="550" y="132" text-anchor="middle" class="t-tiny">reads the schema,</text>
-        <text x="550" y="150" text-anchor="middle" class="t-tiny">decides to call it</text>
+        <rect x="365" y="42" width="250" height="86" rx="13" class="box"/>
+        <text x="490" y="78"  text-anchor="middle" class="t-lbl">Ajustement fin</text>
+        <text x="490" y="102" text-anchor="middle" class="t-tiny">apprendre à suivre</text>
+        <text x="490" y="120" text-anchor="middle" class="t-tiny">instructions, be helpful</text>
 
-        <!-- result back -->
-        <line x1="660" y1="120" x2="760" y2="120" class="l-ink" stroke-width="2" marker-end="url(#l4b)"/>
-        <rect x="760" y="86" width="200" height="68" rx="12" class="box-ink"/>
-        <text x="860" y="118" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Result</text>
-        <text x="860" y="140" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">returned to the model</text>
+        <rect x="690" y="42" width="250" height="86" rx="13" class="box-ink"/>
+        <text x="815" y="86"  text-anchor="middle" class="t-lbl t-white">Le modèle</text>
+        <text x="815" y="110" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">génère du contenu nouveau</text>
 
-        <text x="20" y="222" class="t-tiny s-ink" style="font-weight:600">Model-controlled:</text>
-        <text x="150" y="222" class="t-tiny">the model picks the moment, not the app or the user.</text>
+        <line x1="290" y1="85" x2="365" y2="85" class="l-ink" stroke-width="2" marker-end="url(#d4a)"/>
+        <line x1="615" y1="85" x2="690" y2="85" class="l-ink" stroke-width="2" marker-end="url(#d4a)"/>
+
+        <text x="40" y="166" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Rendu possible par trois choses à la fois</text>
+        <rect x="40"  y="180" width="290" height="50" rx="10" class="box"/>
+        <text x="185" y="210" text-anchor="middle" class="t-tiny s-ink">L'architecture transformer</text>
+        <rect x="355" y="180" width="290" height="50" rx="10" class="box"/>
+        <text x="500" y="210" text-anchor="middle" class="t-tiny s-ink">Des données d'entraînement massives</text>
+        <rect x="670" y="180" width="290" height="50" rx="10" class="box"/>
+        <text x="815" y="210" text-anchor="middle" class="t-tiny s-ink">Un bond en puissance de calcul</text>
         <defs>
-          <marker id="l4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l4b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">A clear name and description matter: that text is all the model has to decide whether and how to call the tool. Treat the docstring as a prompt, not a comment.</p>
+    <p class="cap">Trois choses devaient arriver ensemble : l'architecture transformer, des données d'entraînement massives et un bond en puissance de calcul. Comprendre qu'il génère au lieu d'aller chercher, c'est ce qui rend ses limites logiques.</p>
   </div>
   <span class="slide-counter">06</span>
 </section>
 
-<!-- ============ 7 · L5 THE SERVER INSPECTOR ========================= -->
+<!-- ============ 7 · L5 CAPABILITIES & LIMITATIONS =================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 5 · Tools</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 5 · Comment l'IA fonctionne</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 5</span>
-    <h2>Test the server before wiring it to an app</h2>
-    <p class="lead">The Inspector connects straight to your server — no LLM involved. List what it exposes, call each tool by hand, read the raw response.</p>
+    <span class="eyebrow">Leçon 5</span>
+    <h2>Fort là où vous êtes faible, faible là où vous êtes fort</h2>
+    <p class="lead">Polyvalent sur la langue et les tâches, mais borné par ce qu'il sait et jusqu'où il peut raisonner.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="MCP Inspector connected to a server">
-        <!-- inspector -->
-        <rect x="40" y="70" width="260" height="110" rx="14" class="box-amber"/>
-        <text x="170" y="108" text-anchor="middle" class="t-lbl s-amber">MCP Inspector</text>
-        <text x="170" y="134" text-anchor="middle" class="t-tiny">a test client, no model</text>
-        <text x="170" y="154" text-anchor="middle" class="t-tiny">browser UI</text>
+      <svg viewBox="0 0 980 256" role="img" aria-label="Capabilities and limitations">
+        <rect x="40" y="40" width="420" height="172" rx="14" class="box"/>
+        <text x="62" y="74" class="t-lbl" style="font-size:17px">Ce qu'il fait bien</text>
+        <text x="62" y="108" class="t-tiny">— polyvalent sur de nombreuses tâches</text>
+        <text x="62" y="136" class="t-tiny">— une langue fluide et naturelle</text>
+        <text x="62" y="164" class="t-tiny">— il garde le fil d'une conversation</text>
+        <text x="62" y="192" class="t-tiny">— il se branche sur des outils externes</text>
 
-        <!-- connection -->
-        <line x1="300" y1="125" x2="420" y2="125" class="l-amber" stroke-width="2.5" marker-end="url(#l5a)"/>
-        <line x1="420" y1="140" x2="300" y2="140" class="l-amber" stroke-width="2.5" marker-end="url(#l5b)"/>
-        <text x="360" y="112" text-anchor="middle" class="t-tiny">call</text>
-        <text x="360" y="168" text-anchor="middle" class="t-tiny">raw response</text>
+        <rect x="520" y="40" width="420" height="172" rx="14" class="box-amber"/>
+        <text x="542" y="74" class="t-lbl s-amber" style="font-size:17px">À surveiller</text>
+        <text x="542" y="108" class="t-tiny">— une date de coupure des connaissances</text>
+        <text x="542" y="136" class="t-tiny">— les hallucinations : sûr de lui, mais faux</text>
+        <text x="542" y="164" class="t-tiny">— un contexte fini, une mémoire de travail</text>
+        <text x="542" y="192" class="t-tiny">— le raisonnement complexe peut déraper</text>
 
-        <!-- server -->
-        <rect x="420" y="70" width="240" height="110" rx="14" class="box"/>
-        <text x="540" y="104" text-anchor="middle" class="t-lbl">Your server</text>
-        <text x="540" y="132" text-anchor="middle" class="t-tiny">tools · resources ·</text>
-        <text x="540" y="150" text-anchor="middle" class="t-tiny">prompts</text>
-
-        <!-- checklist -->
-        <rect x="710" y="70" width="250" height="110" rx="12" class="box"/>
-        <text x="730" y="100" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Check, in isolation</text>
-        <text x="730" y="126" class="t-tiny">does it list correctly?</text>
-        <text x="730" y="148" class="t-tiny">does each call return?</text>
-        <text x="730" y="170" class="t-tiny">is the shape right?</text>
-        <defs>
-          <marker id="l5a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-          <marker id="l5b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+        <text x="490" y="242" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Les meilleurs résultats associent son étendue à votre jugement et à votre supervision.</text>
       </svg>
     </div>
-    <p class="cap">Debug the server on its own first. If the Inspector can list and call everything cleanly, the problem later is in the client wiring — not the server.</p>
+    <p class="cap">Ces limites ne sont pas des bugs qui vont disparaître : c'est la raison pour laquelle vous restez dans la boucle. Associez son étendue à votre jugement, votre créativité et votre supervision.</p>
   </div>
   <span class="slide-counter">07</span>
 </section>
 
-<!-- ============ 8 · L6 IMPLEMENTING A CLIENT ======================== -->
+<!-- ============ 8 · L6 DELEGATION =================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 6 · Tools</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 6 · Compétence</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 6</span>
-    <h2>The client feeds tools to the model, in a loop</h2>
-    <p class="lead">Your client lists the server's tools, hands their schemas to Claude, runs whatever Claude asks for, and feeds the result back — until it has an answer.</p>
+    <span class="eyebrow">Leçon 6</span>
+    <h2>La délégation — décider ce qui vaut la peine d'être fait ensemble</h2>
+    <p class="lead">Avant d'écrire le moindre prompt, déterminez ce qui vous revient, ce qui revient à l'IA, et ce qui se fait à deux.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="Client tool-use loop">
-        <rect x="20"  y="70" width="180" height="64" rx="12" class="box"/>
-        <text x="110" y="100" text-anchor="middle" class="t-lbl" style="font-size:16px">Client</text>
-        <text x="110" y="122" text-anchor="middle" class="t-tiny">lists tools</text>
+      <svg viewBox="0 0 980 266" role="img" aria-label="The three parts of delegation">
+        <rect x="70"  y="40" width="340" height="86" rx="13" class="box"/>
+        <text x="240" y="74"  text-anchor="middle" class="t-lbl">Comprendre le problème</text>
+        <text x="240" y="100" text-anchor="middle" class="t-tiny">votre objectif et le travail qu'il demande</text>
 
-        <rect x="250" y="70" width="180" height="64" rx="12" class="box-amber"/>
-        <text x="340" y="100" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Claude</text>
-        <text x="340" y="122" text-anchor="middle" class="t-tiny">asks for a tool</text>
+        <rect x="570" y="40" width="340" height="86" rx="13" class="box"/>
+        <text x="740" y="74"  text-anchor="middle" class="t-lbl">Comprendre l'outil</text>
+        <text x="740" y="100" text-anchor="middle" class="t-tiny">ce que cette IA sait faire et ne sait pas faire</text>
 
-        <rect x="480" y="70" width="180" height="64" rx="12" class="box"/>
-        <text x="570" y="100" text-anchor="middle" class="t-lbl" style="font-size:16px">Server</text>
-        <text x="570" y="122" text-anchor="middle" class="t-tiny">runs it</text>
+        <rect x="290" y="170" width="400" height="86" rx="13" class="box-amber"/>
+        <text x="490" y="204" text-anchor="middle" class="t-lbl s-amber">Répartir les tâches</text>
+        <text x="490" y="230" text-anchor="middle" class="t-tiny">confiez chaque partie à qui la fait le mieux</text>
 
-        <rect x="710" y="70" width="180" height="64" rx="12" class="box-ink"/>
-        <text x="800" y="100" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Answer</text>
-        <text x="800" y="122" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">when done</text>
-
-        <line x1="200" y1="102" x2="248" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-        <line x1="430" y1="102" x2="478" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-        <line x1="660" y1="102" x2="708" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"/>
-
-        <!-- loop back: server result -> claude -->
-        <path d="M 570 134 C 570 200, 340 200, 340 136" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#l6amber)"/>
-        <text x="455" y="194" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">result back to Claude — loop until the task is done</text>
+        <line x1="280" y1="126" x2="430" y2="168" class="l-ink" stroke-width="2" marker-end="url(#d6a)"/>
+        <line x1="700" y1="126" x2="550" y2="168" class="l-ink" stroke-width="2" marker-end="url(#d6a)"/>
         <defs>
-          <marker id="l6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
-          <marker id="l6amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+          <marker id="d6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">This is the same agentic loop a chat window doesn't have: the model can act, see the result, and decide what to do next. MCP is just how the tools get there.</p>
+    <p class="cap">Il faut les deux : votre expertise métier et une vraie idée de l'outil. Le but n'est pas de tout automatiser, c'est de trouver la meilleure répartition pour cette tâche.</p>
   </div>
   <span class="slide-counter">08</span>
 </section>
 
-<!-- ============ 9 · L7 DEFINING RESOURCES =========================== -->
+<!-- ============ 9 · L7 PROJECT PLANNING ============================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 7 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 7 · En pratique</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 7</span>
-    <h2>Resources — data to pull in, addressed by URI</h2>
-    <p class="lead">Read-only data the server exposes at an address. No side effects: think GET, not POST.</p>
+    <span class="eyebrow">Leçon 7</span>
+    <h2>Transformer la délégation en plan</h2>
+    <p class="lead">Choisissez un vrai projet, définissez ce qu'est un bon résultat, découpez-le en tâches, puis indiquez qui fait quoi.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Defining direct and templated resources">
-        <!-- direct -->
-        <rect x="20" y="50" width="430" height="74" rx="12" class="box-amber"/>
-        <text x="40" y="80" class="t-mono s-amber" style="font-weight:600">@mcp.resource("docs://documents")</text>
-        <text x="40" y="106" class="t-tiny s-ink">direct — returns the whole list</text>
+      <svg viewBox="0 0 980 250" role="img" aria-label="Planning a project with delegation">
+        <rect x="40"  y="60" width="200" height="96" rx="13" class="box"/>
+        <text x="140" y="98"  text-anchor="middle" class="t-lbl">Vision</text>
+        <text x="140" y="122" text-anchor="middle" class="t-tiny">ce qu'est</text>
+        <text x="140" y="140" text-anchor="middle" class="t-tiny">un bon résultat</text>
 
-        <!-- templated -->
-        <rect x="20" y="140" width="430" height="74" rx="12" class="box"/>
-        <text x="40" y="170" class="t-mono s-amber" style="font-weight:600">docs://documents/{id}</text>
-        <text x="40" y="196" class="t-tiny s-ink">templated — a parameter picks one item</text>
+        <rect x="273" y="60" width="200" height="96" rx="13" class="box"/>
+        <text x="373" y="98"  text-anchor="middle" class="t-lbl">Tâches</text>
+        <text x="373" y="122" text-anchor="middle" class="t-tiny">découper</text>
+        <text x="373" y="140" text-anchor="middle" class="t-tiny">le travail</text>
 
-        <!-- arrow to data -->
-        <line x1="450" y1="132" x2="560" y2="132" class="l-amber" stroke-width="2.5" marker-end="url(#l7a)"/>
-        <text x="505" y="122" text-anchor="middle" class="t-tiny">read</text>
+        <rect x="506" y="60" width="200" height="96" rx="13" class="box-amber"/>
+        <text x="606" y="98"  text-anchor="middle" class="t-lbl s-amber">Déléguer</text>
+        <text x="606" y="122" text-anchor="middle" class="t-tiny">vous · l'IA ·</text>
+        <text x="606" y="140" text-anchor="middle" class="t-tiny">à deux</text>
 
-        <!-- returns data, GET-like -->
-        <rect x="560" y="70" width="400" height="124" rx="14" class="box"/>
-        <text x="580" y="104" class="t-lbl" style="font-size:17px">Returns data</text>
-        <text x="580" y="134" class="t-tiny s-ink">no side effects · safe to read anytime</text>
-        <text x="580" y="160" class="t-tiny">like a <tspan class="t-mono" style="font-size:13px">GET</tspan> endpoint, addressed by URI</text>
-        <text x="580" y="184" class="t-tiny">contrast tools, which <tspan class="s-ink" style="font-weight:600">do</tspan> things</text>
+        <rect x="739" y="60" width="200" height="96" rx="13" class="box"/>
+        <text x="839" y="98"  text-anchor="middle" class="t-lbl">Plan</text>
+        <text x="839" y="122" text-anchor="middle" class="t-tiny">le fil conducteur</text>
+        <text x="839" y="140" text-anchor="middle" class="t-tiny">du cours</text>
+
+        <line x1="240" y1="108" x2="273" y2="108" class="l-ink" stroke-width="2" marker-end="url(#d7a)"/>
+        <line x1="473" y1="108" x2="506" y2="108" class="l-ink" stroke-width="2" marker-end="url(#d7a)"/>
+        <line x1="706" y1="108" x2="739" y2="108" class="l-ink" stroke-width="2" marker-end="url(#d7a)"/>
+
+        <text x="40" y="200" class="t-tiny s-ink" style="font-weight:600">Nommez la réussite dès le départ : c'est la cible que vous jugerez ensuite.</text>
         <defs>
-          <marker id="l7a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+          <marker id="d7a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">A URI scheme like <code>docs://</code> names the data. Direct resources return a collection; templated ones take a parameter to fetch exactly one — a single document, a single record.</p>
+    <p class="cap">Le cours suit un même projet à travers toutes les compétences. Nommer la réussite dès le départ, c'est ce qui rend le Discernement possible ensuite : on ne juge que par rapport à une cible.</p>
   </div>
   <span class="slide-counter">09</span>
 </section>
 
-<!-- ============ 10 · L8 ACCESSING RESOURCES ========================= -->
+<!-- ============ 10 · L8 DESCRIPTION ================================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 8 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 8 · Compétence</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 8</span>
-    <h2>The app decides which resources to load</h2>
-    <p class="lead">Unlike tools, the model doesn't reach for resources. The application — often the user — chooses what context to bring in.</p>
+    <span class="eyebrow">Leçon 8</span>
+    <h2>Description : dites quoi, comment, et comment se comporter</h2>
+    <p class="lead">Trois couches : le résultat voulu, la façon d'y arriver, et la manière de travailler avec vous.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 240" role="img" aria-label="Accessing resources via at-mention">
-        <!-- user @-mention -->
-        <rect x="20" y="80" width="220" height="84" rx="14" class="box"/>
-        <text x="130" y="116" text-anchor="middle" class="t-lbl" style="font-size:16px">User picks</text>
-        <text x="130" y="140" text-anchor="middle" class="t-mono" style="font-size:14px">@report.pdf</text>
+      <svg viewBox="0 0 980 210" role="img" aria-label="The three types of description">
+        <rect x="30"  y="40" width="290" height="140" rx="13" class="box"/>
+        <text x="175" y="80"  text-anchor="middle" class="t-lbl">Produit</text>
+        <text x="175" y="112" text-anchor="middle" class="t-tiny">quoi produire :</text>
+        <text x="175" y="134" text-anchor="middle" class="t-tiny">sortie, format,</text>
+        <text x="175" y="156" text-anchor="middle" class="t-tiny">public, style</text>
 
-        <!-- client reads -->
-        <line x1="240" y1="122" x2="340" y2="122" class="l-amber" stroke-width="2.5" marker-end="url(#l8a)"/>
-        <rect x="340" y="80" width="240" height="84" rx="14" class="box-amber"/>
-        <text x="460" y="112" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Client reads</text>
-        <text x="460" y="136" text-anchor="middle" class="t-tiny">list, then read by URI</text>
+        <rect x="345" y="40" width="290" height="140" rx="13" class="box-amber"/>
+        <text x="490" y="80"  text-anchor="middle" class="t-lbl s-amber">Processus</text>
+        <text x="490" y="112" text-anchor="middle" class="t-tiny">comment s'y prendre :</text>
+        <text x="490" y="134" text-anchor="middle" class="t-tiny">méthode, étapes,</text>
+        <text x="490" y="156" text-anchor="middle" class="t-tiny">cadres</text>
 
-        <!-- into context -->
-        <line x1="580" y1="122" x2="680" y2="122" class="l-amber" stroke-width="2.5" marker-end="url(#l8a)"/>
-        <rect x="680" y="80" width="280" height="84" rx="14" class="box-ink"/>
-        <text x="820" y="112" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Into context</text>
-        <text x="820" y="136" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">contents dropped in for the model</text>
-
-        <text x="20" y="206" class="t-tiny s-ink" style="font-weight:600">Application-controlled:</text>
-        <text x="210" y="206" class="t-tiny">the host surfaces resources as @-mentions you choose from.</text>
-        <defs>
-          <marker id="l8a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+        <rect x="660" y="40" width="290" height="140" rx="13" class="box"/>
+        <text x="805" y="80"  text-anchor="middle" class="t-lbl">Comportement</text>
+        <text x="805" y="112" text-anchor="middle" class="t-tiny">comment se comporter :</text>
+        <text x="805" y="134" text-anchor="middle" class="t-tiny">concis ou détaillé,</text>
+        <text x="805" y="156" text-anchor="middle" class="t-tiny">exigeant ou bienveillant</text>
       </svg>
     </div>
-    <p class="cap">That's the difference from a tool: a tool is the model's to call, a resource is the app's to load. Same server, two different control models — which is the heart of MCP.</p>
+    <p class="cap">L'IA ne lit pas dans vos pensées, et c'est un partenaire, pas une base de données. Le Processus est la couche que la plupart des gens sautent, et elle pèse souvent autant que l'objectif lui-même.</p>
   </div>
   <span class="slide-counter">10</span>
 </section>
 
-<!-- ============ 11 · L9 DEFINING PROMPTS ============================ -->
+<!-- ============ 11 · L9 PROMPTING TECHNIQUES ======================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 9 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 9 · En pratique</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 9</span>
-    <h2>Prompts — reusable templates the author ships</h2>
-    <p class="lead">A tested, parameterized prompt the server exposes, so the right wording is baked in instead of reinvented every time.</p>
+    <span class="eyebrow">Leçon 9</span>
+    <h2>Six leviers qui font marcher un prompt</h2>
+    <p class="lead">Des techniques concrètes pour transformer une demande floue en brief clair.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="Defining a prompt template">
-        <!-- prompt definition -->
-        <rect x="20" y="50" width="380" height="140" rx="14" class="box"/>
-        <text x="40" y="82" class="t-mono s-amber" style="font-weight:600">@mcp.prompt()</text>
-        <text x="40" y="108" class="t-mono" style="font-size:13px">def summarize(doc_id):</text>
-        <line x1="40" y1="124" x2="380" y2="124" class="l-faint" stroke-width="1"/>
-        <text x="40" y="148" class="t-tiny s-ink">a parameter to fill</text>
-        <text x="40" y="172" class="t-tiny">expert wording, written once</text>
+      <svg viewBox="0 0 980 270" role="img" aria-label="Six prompting techniques">
+        <rect x="30"  y="40" width="290" height="58" rx="11" class="box"/>
+        <text x="175" y="75"  text-anchor="middle" class="t-lbl" style="font-size:16px"><tspan class="t-mono s-amber" style="font-size:13px">1 </tspan>Donnez du contexte</text>
+        <rect x="345" y="40" width="290" height="58" rx="11" class="box"/>
+        <text x="490" y="75"  text-anchor="middle" class="t-lbl" style="font-size:16px"><tspan class="t-mono s-amber" style="font-size:13px">2 </tspan>Montrez des exemples</text>
+        <rect x="660" y="40" width="290" height="58" rx="11" class="box"/>
+        <text x="805" y="75"  text-anchor="middle" class="t-lbl" style="font-size:16px"><tspan class="t-mono s-amber" style="font-size:13px">3 </tspan>Précisez les contraintes</text>
 
-        <!-- expands to -->
-        <line x1="400" y1="120" x2="510" y2="120" class="l-amber" stroke-width="2.5" marker-end="url(#l9a)"/>
-        <text x="455" y="110" text-anchor="middle" class="t-tiny">expands to</text>
+        <rect x="30"  y="112" width="290" height="58" rx="11" class="box"/>
+        <text x="175" y="147" text-anchor="middle" class="t-lbl" style="font-size:16px"><tspan class="t-mono s-amber" style="font-size:13px">4 </tspan>Découpez en étapes</text>
+        <rect x="345" y="112" width="290" height="58" rx="11" class="box"/>
+        <text x="490" y="147" text-anchor="middle" class="t-lbl" style="font-size:16px"><tspan class="t-mono s-amber" style="font-size:13px">5 </tspan>Demandez-lui de réfléchir d'abord</text>
+        <rect x="660" y="112" width="290" height="58" rx="11" class="box"/>
+        <text x="805" y="147" text-anchor="middle" class="t-lbl" style="font-size:16px"><tspan class="t-mono s-amber" style="font-size:13px">6 </tspan>Définissez le rôle et le ton</text>
 
-        <!-- messages -->
-        <rect x="510" y="62" width="450" height="116" rx="14" class="box-amber"/>
-        <text x="530" y="96" class="t-lbl s-amber" style="font-size:17px">A full message</text>
-        <text x="530" y="126" class="t-tiny s-ink">"Summarise document {doc_id}, three bullets…"</text>
-        <text x="530" y="152" class="t-tiny">ready to send to the model</text>
-        <defs>
-          <marker id="l9a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+        <rect x="30" y="192" width="920" height="58" rx="11" class="box-amber"/>
+        <text x="490" y="227" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">L'arme secrète : donnez votre prompt à l'IA et demandez-lui de l'améliorer</text>
       </svg>
     </div>
-    <p class="cap">Prompts move hard-won phrasing out of people's heads and into the server. The author tunes it once; everyone else just calls it and gets the good version.</p>
+    <p class="cap">Un prompt s'affine, il ne se réussit pas du premier coup. Le raccourci que presque personne n'utilise : donnez votre prompt à l'IA et demandez-lui de faire mieux.</p>
   </div>
   <span class="slide-counter">11</span>
 </section>
 
-<!-- ============ 12 · L10 PROMPTS IN THE CLIENT ====================== -->
+<!-- ============ 12 · L10 DISCERNMENT =============================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 10 · Resources &amp; prompts</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 10 · Compétence</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 10</span>
-    <h2>Prompts surface as slash commands</h2>
-    <p class="lead">The client lists the server's prompts and offers them to the user. Pick one, fill the arguments, and it expands into the full message.</p>
+    <span class="eyebrow">Leçon 10</span>
+    <h2>Le discernement : juger ce qui revient</h2>
+    <p class="lead">L'envers de la Description : évaluer le résultat, la démarche et le comportement. Les trois mêmes niveaux, vus de l'autre bout.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 230" role="img" aria-label="Prompts surfaced as slash commands">
-        <rect x="20" y="70" width="220" height="84" rx="14" class="box"/>
-        <text x="130" y="102" text-anchor="middle" class="t-lbl" style="font-size:16px">User types</text>
-        <text x="130" y="128" text-anchor="middle" class="t-mono" style="font-size:14px">/summarize</text>
+      <svg viewBox="0 0 980 200" role="img" aria-label="The three types of discernment">
+        <rect x="30"  y="30" width="290" height="140" rx="13" class="box"/>
+        <text x="175" y="70"  text-anchor="middle" class="t-lbl">Résultat</text>
+        <text x="175" y="102" text-anchor="middle" class="t-tiny">est-il exact,</text>
+        <text x="175" y="124" text-anchor="middle" class="t-tiny">pertinent,</text>
+        <text x="175" y="146" text-anchor="middle" class="t-tiny">cohérent ?</text>
 
-        <line x1="240" y1="112" x2="340" y2="112" class="l-amber" stroke-width="2.5" marker-end="url(#l10a)"/>
-        <rect x="340" y="70" width="240" height="84" rx="14" class="box-amber"/>
-        <text x="460" y="102" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Fill arguments</text>
-        <text x="460" y="128" text-anchor="middle" class="t-tiny">which doc? how long?</text>
+        <rect x="345" y="30" width="290" height="140" rx="13" class="box-amber"/>
+        <text x="490" y="70"  text-anchor="middle" class="t-lbl s-amber">Démarche</text>
+        <text x="490" y="102" text-anchor="middle" class="t-tiny">le raisonnement</text>
+        <text x="490" y="124" text-anchor="middle" class="t-tiny">tient-il ? des</text>
+        <text x="490" y="146" text-anchor="middle" class="t-tiny">manques ?</text>
 
-        <line x1="580" y1="112" x2="680" y2="112" class="l-amber" stroke-width="2.5" marker-end="url(#l10a)"/>
-        <rect x="680" y="70" width="280" height="84" rx="14" class="box-ink"/>
-        <text x="820" y="102" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">Sent to the model</text>
-        <text x="820" y="128" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">expanded, ready to run</text>
-
-        <text x="20" y="196" class="t-tiny s-ink" style="font-weight:600">User-controlled:</text>
-        <text x="160" y="196" class="t-tiny">the user triggers it deliberately — not the model, not the app.</text>
-        <defs>
-          <marker id="l10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
-        </defs>
+        <rect x="660" y="30" width="290" height="140" rx="13" class="box"/>
+        <text x="805" y="70"  text-anchor="middle" class="t-lbl">Comportement</text>
+        <text x="805" y="102" text-anchor="middle" class="t-tiny">son attitude était-elle</text>
+        <text x="805" y="124" text-anchor="middle" class="t-tiny">adapté à la</text>
+        <text x="805" y="146" text-anchor="middle" class="t-tiny">tâche ?</text>
       </svg>
     </div>
-    <p class="cap">If you've used a slash command in Claude Code, you've used an MCP prompt. The server ships the command; the client makes it a one-keystroke action.</p>
+    <p class="cap">Votre expertise est ce qui aiguise le discernement : vous ne repérez que ce que vous sauriez remarquer. Même les meilleurs modèles gagnent à ce qu'un humain vérifie le travail.</p>
   </div>
   <span class="slide-counter">12</span>
 </section>
 
-<!-- ============ 13 · L11 MCP REVIEW (centrepiece) =================== -->
+<!-- ============ 13 · L11 THE DESCRIBE-DISCERN LOOP ================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 11 · Recap</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 11 · En pratique</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 11 — if you take one thing away</span>
-    <h2>Three primitives, three owners</h2>
-    <p class="lead">The whole protocol, in one picture: what the server exposes, and who gets to trigger each one.</p>
+    <span class="eyebrow">Leçon 11</span>
+    <h2>Dites-le, vérifiez-le, affinez-le</h2>
+    <p class="lead">Le vrai travail se fait dans la boucle entre décrire ce que vous voulez et juger ce que vous obtenez.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="The three MCP primitives and who controls each">
-        <!-- tools -->
-        <rect x="20" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="165" y="78" text-anchor="middle" class="t-lbl s-amber">Tools</text>
-        <text x="165" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">model-controlled</text>
-        <text x="165" y="130" text-anchor="middle" class="t-tiny">actions · the model calls them</text>
+      <svg viewBox="0 0 980 260" role="img" aria-label="The description-discernment loop">
+        <text x="40" y="32" class="t-tiny">Vous apportez l'expertise, et la décision finale vous appartient.</text>
 
-        <!-- resources -->
-        <rect x="345" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="490" y="78" text-anchor="middle" class="t-lbl s-amber">Resources</text>
-        <text x="490" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">application-controlled</text>
-        <text x="490" y="130" text-anchor="middle" class="t-tiny">data · the app loads them</text>
+        <rect x="40"  y="55" width="250" height="88" rx="13" class="box-amber"/>
+        <text x="165" y="92"  text-anchor="middle" class="t-lbl s-amber">Décrire</text>
+        <text x="165" y="116" text-anchor="middle" class="t-tiny">dites-le clairement</text>
 
-        <!-- prompts -->
-        <rect x="670" y="40" width="290" height="120" rx="14" class="box-amber"/>
-        <text x="815" y="78" text-anchor="middle" class="t-lbl s-amber">Prompts</text>
-        <text x="815" y="106" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">user-controlled</text>
-        <text x="815" y="130" text-anchor="middle" class="t-tiny">templates · the user triggers them</text>
+        <rect x="365" y="55" width="250" height="88" rx="13" class="box"/>
+        <text x="490" y="92"  text-anchor="middle" class="t-lbl">Résultat</text>
+        <text x="490" y="116" text-anchor="middle" class="t-tiny">ce qui revient</text>
 
-        <!-- carrier line -->
-        <text x="490" y="200" text-anchor="middle" class="t-sub" style="fill:hsl(var(--foreground))">all exposed by a <tspan style="font-weight:600">server</tspan>, reached by a <tspan style="font-weight:600">client</tspan> inside your <tspan style="font-weight:600">host</tspan></text>
-        <text x="490" y="226" text-anchor="middle" class="t-tiny">over JSON-RPC, on stdio (local) or HTTP (remote)</text>
+        <rect x="690" y="55" width="250" height="88" rx="13" class="box-amber"/>
+        <text x="815" y="92"  text-anchor="middle" class="t-lbl s-amber">Discerner</text>
+        <text x="815" y="116" text-anchor="middle" class="t-tiny">jugez-le</text>
+
+        <line x1="290" y1="99" x2="365" y2="99" class="l-ink" stroke-width="2" marker-end="url(#d11a)"/>
+        <line x1="615" y1="99" x2="690" y2="99" class="l-ink" stroke-width="2" marker-end="url(#d11a)"/>
+
+        <path d="M 815 143 C 815 215, 165 215, 165 145" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#d11amber)"/>
+        <text x="490" y="242" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">affiner : décrivez-le mieux, et recommencez</text>
+        <defs>
+          <marker id="d11a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
+          <marker id="d11amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
       </svg>
     </div>
-    <p class="cap">Everything in the course hangs off this: tools the model calls, resources the app loads, prompts the user triggers. Get the owners straight and the rest follows.</p>
+    <p class="cap">C'est là que la collaboration dépasse chacun des deux côtés travaillant seul. Vous restez celui qui intègre le jugement et assume la décision finale.</p>
   </div>
   <span class="slide-counter">13</span>
 </section>
 
-<!-- ============ 14 · CLOSE ========================================== -->
-<section class="deck-slide title">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
+<!-- ============ 14 · L12 DILIGENCE ================================= -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 12 · Compétence</span></div>
   <div class="stage">
-    <span class="eyebrow">The whole thing, in one line</span>
-    <h1>One protocol.<br>Three primitives.<br>Any tool, any app.</h1>
-    <p class="lead">Tools, resources and prompts, exposed by a server and reached by a client inside your host — so context and capability plug in once instead of being rebuilt every time.</p>
-    <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
+    <span class="eyebrow">Leçon 12</span>
+    <h2>La diligence : assumer le résultat</h2>
+    <p class="lead">La couche de responsabilité : comment vous choisissez l'outil, votre degré de transparence, et ce que vous assumez.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 200" role="img" aria-label="The three parts of diligence">
+        <rect x="30"  y="30" width="290" height="140" rx="13" class="box"/>
+        <text x="175" y="70"  text-anchor="middle" class="t-lbl">Création</text>
+        <text x="175" y="102" text-anchor="middle" class="t-tiny">quelle IA, et</text>
+        <text x="175" y="124" text-anchor="middle" class="t-tiny">comment vous l'utilisez :</text>
+        <text x="175" y="146" text-anchor="middle" class="t-tiny">confidentialité, adéquation</text>
+
+        <rect x="345" y="30" width="290" height="140" rx="13" class="box"/>
+        <text x="490" y="70"  text-anchor="middle" class="t-lbl">Transparence</text>
+        <text x="490" y="102" text-anchor="middle" class="t-tiny">être clair sur</text>
+        <text x="490" y="124" text-anchor="middle" class="t-tiny">le rôle de l'IA avec</text>
+        <text x="490" y="146" text-anchor="middle" class="t-tiny">ceux qui doivent le savoir</text>
+
+        <rect x="660" y="30" width="290" height="140" rx="13" class="box-amber"/>
+        <text x="805" y="70"  text-anchor="middle" class="t-lbl s-amber">Diffusion</text>
+        <text x="805" y="102" text-anchor="middle" class="t-tiny">vérifier et assumer</text>
+        <text x="805" y="124" text-anchor="middle" class="t-tiny">ce que vous</text>
+        <text x="805" y="146" text-anchor="middle" class="t-tiny">partagez</text>
+      </svg>
+    </div>
+    <p class="cap">Chaque contexte attend un niveau d'information différent. Une déclaration de diligence nomme le rôle de l'IA dans le travail et votre responsabilité sur le résultat.</p>
+    <div class="keynote"><p><span class="kn-label">Concept clé</span>La diligence, c'est le D de la responsabilité, en trois parties : <strong>Création</strong> (quelle IA, et comment), <strong>Transparence</strong> (être clair sur le rôle de l'IA), <strong>Diffusion</strong> (vérifier et assumer ce que vous partagez). <span class="kn-see">→ notes du formateur.</span></p></div>
   </div>
   <span class="slide-counter">14</span>
 </section>
 
+<!-- ============ 15 · L13 CONCLUSION ================================ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 13 · Conclusion</span></div>
+  <div class="stage">
+    <span class="eyebrow">Leçon 13</span>
+    <h2>La maîtrise se construit par la pratique, elle ne s'active pas</h2>
+    <p class="lead">Déléguer, décrire, discerner, rester diligent — dans l'automatisation, l'augmentation et l'agentivité.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 980 250" role="img" aria-label="The four competencies as a practice loop">
+        <text x="490" y="30" text-anchor="middle" class="t-tiny">Valable pour les trois : automatisation · augmentation · agentivité</text>
+
+        <rect x="40"  y="52" width="210" height="74" rx="13" class="box"/>
+        <text x="145" y="96"  text-anchor="middle" class="t-lbl">Délégation</text>
+        <rect x="283" y="52" width="210" height="74" rx="13" class="box"/>
+        <text x="388" y="96"  text-anchor="middle" class="t-lbl">Description</text>
+        <rect x="526" y="52" width="210" height="74" rx="13" class="box"/>
+        <text x="631" y="96"  text-anchor="middle" class="t-lbl">Discernement</text>
+        <rect x="769" y="52" width="210" height="74" rx="13" class="box"/>
+        <text x="874" y="96"  text-anchor="middle" class="t-lbl">Diligence</text>
+
+        <path d="M 874 126 C 874 192, 145 192, 145 128" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#d13amber)"/>
+        <text x="509" y="214" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">la pratique — la maîtrise se construit, elle ne s'active pas</text>
+        <text x="490" y="242" text-anchor="middle" class="t-tiny">L'IA est puissante, pas magique — elle ne vaut que ce que vaut votre engagement.</text>
+        <defs>
+          <marker id="d13amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="cap">Traitez l'IA comme un partenaire de réflexion, tenez le cap sur l'efficace, l'efficient, l'éthique et le sûr, et le cadre continue de fonctionner à mesure que les modèles changent.</p>
+  </div>
+  <span class="slide-counter">15</span>
+</section>
+
+<!-- ============ 16 · CLOSE ========================================== -->
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
+  <div class="stage">
+    <span class="eyebrow">Tout, en une ligne</span>
+    <h1>Déléguez bien.<br>Décrivez et discernez.<br>Restez diligent.</h1>
+    <p class="lead">Quatre compétences, trois façons de travailler, une habitude — la pratique.</p>
+    <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
+  </div>
+  <span class="slide-counter">16</span>
+</section>
+
 <div class="slide-counter" style="display:none"></div>
-<div class="hint" id="hint">← → or space · F11 fullscreen</div>
+<div class="hint" id="hint">← → ou espace · F11 plein écran</div>
 
 <script>
   const slides = Array.from(document.querySelectorAll('.deck-slide'));

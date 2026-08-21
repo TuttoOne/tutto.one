@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="light"><head>
+<html lang="fr" class="light"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Claude Code 101 — talking deck</title>
+<title>Praxis · Claude Code 101 — deck commenté</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -849,51 +849,51 @@ th {
 </style>
 
 
-<div class="progress" id="progress" style="width: 26.6667%;"></div>
+<div class="progress" id="progress" style="width: 80%;"></div>
 
 <!-- ============ 1 · TITLE ============================================= -->
 <section class="deck-slide title">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · talking deck</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · deck commenté</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — built from Anthropic's Claude Code 101</span>
-    <h1 class="">What Claude Code<br>actually is, and how<br>to work with it.</h1>
-    <p class="lead">Twelve ideas, one per screen. Show each one working, then stop and ask where it fits their work. Leave the silences in.</p>
+    <span class="eyebrow">Praxis — construit à partir de Claude Code 101 d'Anthropic</span>
+    <h1 class="">Ce qu'est vraiment<br>Claude Code, et comment<br>travailler avec.</h1>
+    <p class="lead">Douze idées, une par écran. Montrez chacune en action, puis arrêtez-vous et demandez où elle s'inscrit dans leur travail. Laissez les silences.</p>
   </div>
   <span class="slide-counter">01</span>
 </section>
 
 <!-- ============ 2 · THE SPINE ========================================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The shape of the course</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>La structure du cours</span></div>
   <div class="stage">
-    <span class="eyebrow">Where we're going</span>
-    <h2 class="">The whole course on one screen</h2>
-    <p class="lead">Four moves: understand the tool, get it running, learn the one workflow, then customise it to your work.</p>
+    <span class="eyebrow">Où nous allons</span>
+    <h2 class="">Tout le cours sur un écran</h2>
+    <p class="lead">Quatre mouvements : comprendre l'outil, le mettre en route, apprendre la méthode, puis l'adapter à votre travail.</p>
     <div class="spine">
       <div class="grp">
-        <h4>Foundation</h4>
+        <h4>Fondations</h4>
         <ol>
-          <li><span class="n">1</span> What is Claude Code?</li>
-          <li><span class="n">2</span> How it works</li>
+          <li><span class="n">1</span> Qu'est-ce que Claude Code ?</li>
+          <li><span class="n">2</span> Comment ça marche</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Setup</h4>
+        <h4>Installation</h4>
         <ol>
-          <li><span class="n">3</span> Installing it</li>
-          <li><span class="n">4</span> Your first prompt</li>
+          <li><span class="n">3</span> L'installer</li>
+          <li><span class="n">4</span> Votre premier prompt</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>The method</h4>
+        <h4>La méthode</h4>
         <ol>
-          <li><span class="n">5</span> Explore → Plan → Code → Commit</li>
-          <li><span class="n">6</span> Context management</li>
-          <li><span class="n">7</span> Code review</li>
+          <li><span class="n">5</span> Explorer → Planifier → Coder → Valider</li>
+          <li><span class="n">6</span> Gestion du contexte</li>
+          <li><span class="n">7</span> Revue de code</li>
         </ol>
       </div>
       <div class="grp">
-        <h4>Customise</h4>
+        <h4>Personnaliser</h4>
         <ol>
           <li><span class="n">8</span> CLAUDE.md</li>
           <li><span class="n">9</span> Subagents</li>
@@ -909,43 +909,43 @@ th {
 
 <!-- ============ 3 · L1 WHAT IS CLAUDE CODE ============================ -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 1 · Foundation</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 1 · Fondamentaux</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 1</span>
-    <h2 class="">Chat answers. An agent acts.</h2>
-    <p class="lead">Claude.ai hands text back and waits. Claude Code reaches into your files, terminal and codebase and does the work itself.</p>
+    <span class="eyebrow">Leçon 1</span>
+    <h2 class="">Le chat répond. Un agent agit.</h2>
+    <p class="lead">Claude.ai vous rend du texte et attend. Claude Code va dans vos fichiers, votre terminal et votre code, et fait le travail lui-même.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 300" role="img" aria-label="Chat versus agent">
         <!-- CHAT side -->
         <text x="20" y="34" class="t-lbl">Chat</text>
-        <text x="20" y="56" class="t-tiny">text in, text out — you carry it across</text>
+        <text x="20" y="56" class="t-tiny">du texte en entrée, du texte en sortie — à vous de faire le transfert</text>
         <rect x="20" y="80" width="150" height="54" rx="10" class="box"></rect>
-        <text x="95" y="112" text-anchor="middle" class="t-mono">you</text>
+        <text x="95" y="112" text-anchor="middle" class="t-mono">vous</text>
         <line x1="170" y1="107" x2="250" y2="107" class="l-faint" stroke-width="2" marker-end="url(#afaint)"></line>
         <rect x="250" y="80" width="150" height="54" rx="10" class="box"></rect>
         <text x="325" y="112" text-anchor="middle" class="t-mono">Claude.ai</text>
         <line x1="250" y1="124" x2="170" y2="124" class="l-faint" stroke-width="2" marker-end="url(#afaint)"></line>
-        <text x="20" y="180" class="t-tiny">copy · paste · run it yourself · paste the error back</text>
+        <text x="20" y="180" class="t-tiny">copier · coller · exécuter vous-même · recoller l'erreur</text>
 
         <!-- divider -->
         <line x1="470" y1="20" x2="470" y2="280" class="l-faint" stroke-width="1" stroke-dasharray="4 5"></line>
 
         <!-- AGENT side -->
         <text x="520" y="34" class="t-lbl">Agent</text>
-        <text x="520" y="56" class="t-tiny">an LLM in a loop, with tools and access</text>
+        <text x="520" y="56" class="t-tiny">un LLM dans une boucle, avec des outils et des accès</text>
         <rect x="520" y="80" width="150" height="54" rx="10" class="box-ink"></rect>
-        <text x="595" y="112" text-anchor="middle" class="t-mono t-white">you</text>
+        <text x="595" y="112" text-anchor="middle" class="t-mono t-white">vous</text>
         <line x1="670" y1="107" x2="730" y2="107" class="l-amber" stroke-width="2.5" marker-end="url(#aamber)"></line>
         <rect x="730" y="64" width="170" height="86" rx="12" class="box-amber"></rect>
         <text x="815" y="96" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">Claude Code</text>
-        <text x="815" y="120" text-anchor="middle" class="t-tiny">loops until done</text>
+        <text x="815" y="120" text-anchor="middle" class="t-tiny">boucle jusqu'à avoir fini</text>
         <!-- environment row -->
         <rect x="520" y="196" width="118" height="48" rx="10" class="box"></rect>
-        <text x="579" y="225" text-anchor="middle" class="t-tiny s-ink">files</text>
+        <text x="579" y="225" text-anchor="middle" class="t-tiny s-ink">fichiers</text>
         <rect x="654" y="196" width="118" height="48" rx="10" class="box"></rect>
         <text x="713" y="225" text-anchor="middle" class="t-tiny s-ink">terminal</text>
         <rect x="788" y="196" width="112" height="48" rx="10" class="box"></rect>
-        <text x="844" y="225" text-anchor="middle" class="t-tiny s-ink">codebase</text>
+        <text x="844" y="225" text-anchor="middle" class="t-tiny s-ink">code</text>
         <line x1="815" y1="150" x2="815" y2="194" class="l-amber" stroke-width="2.5" marker-end="url(#aamber)"></line>
         <line x1="713" y1="150" x2="713" y2="194" class="l-amber" stroke-width="1.5" stroke-dasharray="3 4"></line>
         <line x1="579" y1="150" x2="579" y2="194" class="l-amber" stroke-width="1.5" stroke-dasharray="3 4"></line>
@@ -955,419 +955,419 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">An agent reads and understands the codebase, edits files across the project, runs terminal commands, and searches the web — then decides what to do next.</p>
+    <p class="cap">Un agent lit et comprend le code, modifie des fichiers dans tout le projet, exécute des commandes dans le terminal et cherche sur le web — puis décide de la suite.</p>
   </div>
   <span class="slide-counter">03</span>
 </section>
 
 <!-- ============ 4 · L2 HOW IT WORKS (THE LOOP) ======================= -->
-<section class="deck-slide active">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 2 · Foundation</span></div>
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 2 · Fondamentaux</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 2</span>
-    <h2 class="">The agentic loop</h2>
-    <p class="lead">Everything else sits on this: prompt, gather context, act, verify — and loop back until the result holds up.</p>
+    <span class="eyebrow">Leçon 2</span>
+    <h2 class="">La boucle agentique</h2>
+    <p class="lead">Tout le reste repose là-dessus : le prompt, la collecte du contexte, l'action, la vérification — et on reboucle jusqu'à ce que le résultat tienne.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 290" role="img" aria-label="The agentic loop">
         <!-- loop nodes across the top -->
         <g>
           <rect x="20" y="70" width="170" height="60" rx="12" class="box"></rect>
           <text x="105" y="98" text-anchor="middle" class="t-lbl">Prompt</text>
-          <text x="105" y="118" text-anchor="middle" class="t-tiny">you ask</text>
+          <text x="105" y="118" text-anchor="middle" class="t-tiny">vous demandez</text>
 
           <rect x="250" y="70" width="170" height="60" rx="12" class="box"></rect>
-          <text x="335" y="98" text-anchor="middle" class="t-lbl">Gather</text>
-          <text x="335" y="118" text-anchor="middle" class="t-tiny">context it needs</text>
+          <text x="335" y="98" text-anchor="middle" class="t-lbl">Rassembler</text>
+          <text x="335" y="118" text-anchor="middle" class="t-tiny">le contexte nécessaire</text>
 
           <rect x="480" y="70" width="170" height="60" rx="12" class="box-amber"></rect>
-          <text x="565" y="98" text-anchor="middle" class="t-lbl s-amber">Act</text>
-          <text x="565" y="118" text-anchor="middle" class="t-tiny">edit · run · search</text>
+          <text x="565" y="98" text-anchor="middle" class="t-lbl s-amber">Agir</text>
+          <text x="565" y="118" text-anchor="middle" class="t-tiny">éditer · lancer · chercher</text>
 
           <rect x="710" y="70" width="170" height="60" rx="12" class="box"></rect>
-          <text x="795" y="98" text-anchor="middle" class="t-lbl">Verify</text>
-          <text x="795" y="118" text-anchor="middle" class="t-tiny">did it work?</text>
+          <text x="795" y="98" text-anchor="middle" class="t-lbl">Vérifier</text>
+          <text x="795" y="118" text-anchor="middle" class="t-tiny">ça a marché ?</text>
         </g>
         <!-- forward arrows -->
         <line x1="190" y1="100" x2="248" y2="100" class="l-ink" stroke-width="2" marker-end="url(#l2a)"></line>
         <line x1="420" y1="100" x2="478" y2="100" class="l-ink" stroke-width="2" marker-end="url(#l2a)"></line>
         <line x1="650" y1="100" x2="708" y2="100" class="l-ink" stroke-width="2" marker-end="url(#l2a)"></line>
-        <!-- verify -> done -->
-        <line x1="795" y1="130" x2="794.2" y2="221.5" class="l-ink" stroke-width="2" marker-end="url(#l2a)"></line>
-        <rect x="710" y="223" width="170" height="44" rx="10" class="box-ink"></rect>
-        <text x="794.2" y="247.9" text-anchor="middle" class="t-tiny t-white" style="font-size:14px;font-weight:600">done — waits for you</text>
-        <!-- loop back: verify -> gather -->
-        <path d="M 795 130 C 795 250, 335 250, 335 132" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#l2amber)"></path>
-        <text x="540" y="250.6" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">if not — loop back and try again</text>
+        <!-- verify -> terminé --&gt;
+        <line x1="795" y1="130" x2="795" y2="180" class="l-ink" stroke-width="2" marker-end="url(#l2a)"/>
+        <rect x="710" y="180" width="170" height="44" rx="10" class="box-ink"/>
+        <text x="795" y="208" text-anchor="middle" class="t-tiny t-white" style="font-size:14px;font-weight:600">terminé — il attend</text>
+        <!-- loop back: verify -> rassembler --&gt;
+        <path d="M 795 130 C 795 250, 335 250, 335 132" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#l2amber)"/>
+        <text x="540" y="244" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">sinon — retour en boucle, nouvel essai</text>
         <!-- steer note -->
-        <text x="20" y="30" class="t-tiny">You can add context, interrupt, or steer at any point in the loop.</text>
+        <text x="20" y="30" class="t-tiny">Vous pouvez ajouter du contexte, interrompre ou réorienter à tout moment dans la boucle.</text>
         <defs>
           <marker id="l2a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"></path></marker>
           <marker id="l2amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">Four parts make the loop run: the <b>loop</b> itself, a managed <b>context</b> window, <b>tools</b> it can call, and <b>permissions</b> you control. That combination is what a chat window doesn't have.</p>
+    <p class="cap">Quatre éléments font tourner la boucle : la <b>boucle</b> elle-même, une <b>fenêtre de contexte</b> gérée, <b>les outils</b> qu'il peut appeler, et <b>les permissions</b> que vous contrôlez. C'est cette combinaison qu'une fenêtre de chat n'a pas.</p>
   </div>
   <span class="slide-counter">04</span>
 </section>
 
 <!-- ============ 5 · L3 INSTALLING ==================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 3 · Setup</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 3 · Installation</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 3</span>
-    <h2 class="">Five places it runs</h2>
-    <p class="lead">The same agent runs in five places. Wherever you start it, it can see that folder and everything inside it.</p>
+    <span class="eyebrow">Leçon 3</span>
+    <h2 class="">Cinq endroits où il tourne</h2>
+    <p class="lead">Le même agent tourne à cinq endroits. Où que vous le lanciez, il voit ce dossier et tout ce qu'il contient.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Five surfaces to run Claude Code">
         <rect x="10" y="40" width="180" height="120" rx="14" class="box-amber"></rect>
         <text x="100" y="86" text-anchor="middle" class="t-lbl s-amber">Terminal</text>
-        <text x="100" y="112" text-anchor="middle" class="t-tiny">features land</text>
-        <text x="100" y="130" text-anchor="middle" class="t-tiny">here first</text>
+        <text x="100" y="112" text-anchor="middle" class="t-tiny">les nouveautés arrivent</text>
+        <text x="100" y="130" text-anchor="middle" class="t-tiny">ici en premier</text>
 
         <rect x="206" y="40" width="180" height="120" rx="14" class="box"></rect>
         <text x="296" y="86" text-anchor="middle" class="t-lbl">VS Code</text>
-        <text x="296" y="120" text-anchor="middle" class="t-tiny">in your editor</text>
+        <text x="296" y="120" text-anchor="middle" class="t-tiny">dans votre éditeur</text>
 
         <rect x="402" y="40" width="176" height="120" rx="14" class="box"></rect>
         <text x="490" y="86" text-anchor="middle" class="t-lbl">JetBrains</text>
-        <text x="490" y="120" text-anchor="middle" class="t-tiny">in your IDE</text>
+        <text x="490" y="120" text-anchor="middle" class="t-tiny">dans votre IDE</text>
 
         <rect x="594" y="40" width="176" height="120" rx="14" class="box"></rect>
         <text x="682" y="86" text-anchor="middle" class="t-lbl">Desktop</text>
-        <text x="682" y="120" text-anchor="middle" class="t-tiny">runs in the</text>
-        <text x="682" y="138" text-anchor="middle" class="t-tiny">background</text>
+        <text x="682" y="120" text-anchor="middle" class="t-tiny">tourne en</text>
+        <text x="682" y="138" text-anchor="middle" class="t-tiny">arrière-plan</text>
 
         <rect x="786" y="40" width="184" height="120" rx="14" class="box"></rect>
         <text x="878" y="86" text-anchor="middle" class="t-lbl">Web</text>
-        <text x="878" y="120" text-anchor="middle" class="t-tiny">GitHub repos,</text>
-        <text x="878" y="138" text-anchor="middle" class="t-tiny">remote</text>
+        <text x="878" y="120" text-anchor="middle" class="t-tiny">dépôts GitHub,</text>
+        <text x="878" y="138" text-anchor="middle" class="t-tiny">à distance</text>
 
-        <text x="10" y="210" class="t-tiny">Sign in with a Claude account (Pro · Max · Enterprise) or an API key.</text>
-        <text x="10" y="232" class="t-tiny s-ink" style="font-weight:600">Run it in a folder → it can see that folder and all its subfolders.</text>
+        <text x="10" y="210" class="t-tiny">Connectez-vous avec un compte Claude (Pro · Max · Enterprise) ou une clé API.</text>
+        <text x="10" y="232" class="t-tiny s-ink" style="font-weight:600">Lancez-le dans un dossier → il voit ce dossier et tous ses sous-dossiers.</text>
       </svg>
     </div>
-    <p class="cap">Want the cutting edge? Terminal. Want it inside your editor? VS Code or JetBrains. Want it working while you do other things? Desktop. Working from a GitHub repo remotely? Web.</p>
+    <p class="cap">Vous voulez les dernières nouveautés ? Le terminal. Vous le voulez dans votre éditeur ? VS Code ou JetBrains. Vous le voulez au travail pendant que vous faites autre chose ? Desktop. Vous travaillez à distance depuis un dépôt GitHub ? Le web.</p>
   </div>
   <span class="slide-counter">05</span>
 </section>
 
 <!-- ============ 6 · L4 YOUR FIRST PROMPT ============================= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 4 · Setup</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 4 · Installation</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 4</span>
-    <h2 class="">One key sets how much you watch</h2>
-    <p class="lead">Press <code>Shift + Tab</code> to cycle how hands-on you are. There's no right answer — only what you're comfortable with.</p>
+    <span class="eyebrow">Leçon 4</span>
+    <h2 class="">Une seule touche règle votre niveau de contrôle</h2>
+    <p class="lead">Appuyez sur <code>Shift + Tab</code> pour changer votre degré d'implication. Il n'y a pas de bonne réponse, seulement ce qui vous met à l'aise.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Permission modes cycle">
         <rect x="40" y="60" width="250" height="110" rx="14" class="box"></rect>
-        <text x="165" y="100" text-anchor="middle" class="t-lbl">Approval</text>
-        <text x="165" y="128" text-anchor="middle" class="t-tiny">asks before every</text>
-        <text x="165" y="146" text-anchor="middle" class="t-tiny">edit or command</text>
+        <text x="165" y="100" text-anchor="middle" class="t-lbl">Validation</text>
+        <text x="165" y="128" text-anchor="middle" class="t-tiny">demande avant chaque</text>
+        <text x="165" y="146" text-anchor="middle" class="t-tiny">modification ou commande</text>
 
         <rect x="365" y="60" width="250" height="110" rx="14" class="box"></rect>
-        <text x="490" y="100" text-anchor="middle" class="t-lbl">Auto-accept</text>
-        <text x="490" y="128" text-anchor="middle" class="t-tiny">edits flow freely,</text>
-        <text x="490" y="146" text-anchor="middle" class="t-tiny">commands still ask</text>
+        <text x="490" y="100" text-anchor="middle" class="t-lbl">Validation automatique</text>
+        <text x="490" y="128" text-anchor="middle" class="t-tiny">les modifications passent seules,</text>
+        <text x="490" y="146" text-anchor="middle" class="t-tiny">les commandes demandent toujours</text>
 
         <rect x="690" y="60" width="250" height="110" rx="14" class="box-amber"></rect>
-        <text x="815" y="100" text-anchor="middle" class="t-lbl s-amber">Plan mode</text>
-        <text x="815" y="128" text-anchor="middle" class="t-tiny">read-only — researches</text>
-        <text x="815" y="146" text-anchor="middle" class="t-tiny">and writes a plan first</text>
+        <text x="815" y="100" text-anchor="middle" class="t-lbl s-amber">Mode plan</text>
+        <text x="815" y="128" text-anchor="middle" class="t-tiny">lecture seule — il explore</text>
+        <text x="815" y="146" text-anchor="middle" class="t-tiny">et rédige un plan d'abord</text>
 
         <line x1="290" y1="115" x2="363" y2="115" class="l-ink" stroke-width="2" marker-end="url(#l4a)"></line>
         <line x1="615" y1="115" x2="688" y2="115" class="l-ink" stroke-width="2" marker-end="url(#l4a)"></line>
-        <path d="M 815 170 C 815 220, 165 220, 165 172" class="l-faint" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#l4faint)"></path>
-        <text x="490" y="214" text-anchor="middle" class="t-tiny">Shift + Tab cycles round</text>
+        <path d="M 815 170 C 815 220, 165 220, 165 172" class="l-faint" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#__pe_l4faint_bglpb)"></path>
+        <text x="490" y="227.3" text-anchor="middle" class="t-tiny">Shift + Tab fait défiler les modes</text>
         <defs>
           <marker id="l4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"></path></marker>
           <marker id="l4faint" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"></path></marker>
-        </defs>
+        <marker id="__pe_l4faint_bglpb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="-130.6"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">Plan mode is the safe place to start anything complex: it reads your code, asks clarifying questions, and hands back a plan before a single file changes.</p>
+    <p class="cap">Le mode plan est le point de départ sûr pour tout ce qui est complexe : il lit votre code, pose ses questions, et vous rend un plan avant qu'un seul fichier ne bouge.</p>
   </div>
   <span class="slide-counter">06</span>
 </section>
 
 <!-- ============ 7 · L5 EXPLORE PLAN CODE COMMIT (centrepiece) ========= -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 5 · The method</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 5 · La méthode</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 5 — if you take one thing away</span>
-    <h2 class="">Explore → Plan → Code → Commit</h2>
-    <p class="lead">Most people jump straight to "write the code" and course-correct forever. This is the workflow that saves the rework.</p>
+    <span class="eyebrow">Leçon 5 — si vous ne retenez qu'une chose</span>
+    <h2 class="">Explorer → Planifier → Coder → Valider</h2>
+    <p class="lead">La plupart des gens passent directement au « écris le code » et corrigent le tir indéfiniment. Voici le déroulé qui évite de tout refaire.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Explore Plan Code Commit">
         <!-- the four steps -->
         <g>
           <rect x="10" y="60" width="220" height="96" rx="14" class="box"></rect>
-          <text x="120" y="98" text-anchor="middle" class="t-lbl">Explore</text>
-          <text x="120" y="124" text-anchor="middle" class="t-tiny">reads files,</text>
-          <text x="120" y="142" text-anchor="middle" class="t-tiny">gathers context</text>
+          <text x="120" y="98" text-anchor="middle" class="t-lbl">Explorer</text>
+          <text x="120" y="124" text-anchor="middle" class="t-tiny">il lit les fichiers,</text>
+          <text x="120" y="142" text-anchor="middle" class="t-tiny">il rassemble le contexte</text>
 
           <rect x="262" y="60" width="220" height="96" rx="14" class="box-amber"></rect>
-          <text x="372" y="98" text-anchor="middle" class="t-lbl s-amber">Plan</text>
-          <text x="372" y="124" text-anchor="middle" class="t-tiny">a plan you can</text>
-          <text x="372" y="142" text-anchor="middle" class="t-tiny">measure against</text>
+          <text x="372" y="98" text-anchor="middle" class="t-lbl s-amber">Planifier</text>
+          <text x="372" y="124" text-anchor="middle" class="t-tiny">un plan sur lequel</text>
+          <text x="372" y="142" text-anchor="middle" class="t-tiny">vous pouvez juger</text>
 
           <rect x="514" y="60" width="220" height="96" rx="14" class="box"></rect>
-          <text x="624" y="98" text-anchor="middle" class="t-lbl">Code</text>
-          <text x="624" y="124" text-anchor="middle" class="t-tiny">back-and-forth</text>
-          <text x="624" y="142" text-anchor="middle" class="t-tiny">to the result</text>
+          <text x="624" y="98" text-anchor="middle" class="t-lbl">Coder</text>
+          <text x="624" y="124" text-anchor="middle" class="t-tiny">des allers-retours</text>
+          <text x="624" y="142" text-anchor="middle" class="t-tiny">jusqu'au résultat</text>
 
           <rect x="766" y="60" width="204" height="96" rx="14" class="box"></rect>
-          <text x="868" y="98" text-anchor="middle" class="t-lbl">Commit</text>
-          <text x="868" y="124" text-anchor="middle" class="t-tiny">review, then</text>
-          <text x="868" y="142" text-anchor="middle" class="t-tiny">push</text>
+          <text x="868" y="98" text-anchor="middle" class="t-lbl">Valider</text>
+          <text x="868" y="124" text-anchor="middle" class="t-tiny">relire, puis</text>
+          <text x="868" y="142" text-anchor="middle" class="t-tiny">pousser</text>
         </g>
         <line x1="230" y1="108" x2="260" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l5a)"></line>
         <line x1="482" y1="108" x2="512" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l5a)"></line>
         <line x1="734" y1="108" x2="764" y2="108" class="l-ink" stroke-width="2.5" marker-end="url(#l5a)"></line>
         <!-- brackets under -->
         <path d="M10 180 L10 192 L482 192 L482 180" class="l-amber" stroke-width="1.5"></path>
-        <text x="246" y="214" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">Plan mode does both — cheapest place to course-correct</text>
+        <text x="246" y="214" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">Le mode plan fait les deux : l'endroit le moins cher pour corriger le tir</text>
         <path d="M766 180 L766 192 L970 192 L970 180" class="l-faint" stroke-width="1.5"></path>
-        <text x="868" y="214" text-anchor="middle" class="t-tiny">subagent reviews first</text>
+        <text x="868" y="214" text-anchor="middle" class="t-tiny">un subagent relit d'abord</text>
         <defs>
           <marker id="l5a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">Make "correct" explicit (success criteria), give it tools and a test suite to check against, and if it keeps hitting the same wall — tell it to save the fix to <code>CLAUDE.md</code>.</p>
+    <p class="cap">Rendez « correct » explicite (critères de réussite), donnez-lui des outils et une suite de tests pour vérifier, et s'il bute toujours sur le même mur : dites-lui d'enregistrer la correction dans <code>CLAUDE.md</code>.</p>
   </div>
   <span class="slide-counter">07</span>
 </section>
 
 <!-- ============ 8 · L6 CONTEXT MANAGEMENT ============================ -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 6 · The method</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 6 · La méthode</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 6</span>
-    <h2 class="">Context is working memory — it fills up</h2>
-    <p class="lead">Every file read, command run and message sent takes space. Three commands keep it usable.</p>
+    <span class="eyebrow">Leçon 6</span>
+    <h2 class="">Le contexte est une mémoire de travail : il se remplit</h2>
+    <p class="lead">Chaque fichier lu, commande lancée et message envoyé prend de la place. Trois commandes le gardent utilisable.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Context window and commands">
         <!-- context window bar -->
-        <text x="20" y="40" class="t-sub">The context window</text>
+        <text x="20" y="40" class="t-sub">La fenetre de contexte</text>
         <rect x="20" y="52" width="600" height="46" rx="8" class="box"></rect>
         <rect x="22" y="54" width="430" height="42" rx="7" fill="hsl(var(--primary) / 0.18)"></rect>
         <rect x="22" y="54" width="430" height="42" rx="7" class="l-amber" stroke-width="0"></rect>
         <line x1="540" y1="46" x2="540" y2="104" class="l-ink" stroke-width="1.5" stroke-dasharray="3 3"></line>
-        <text x="540" y="120" text-anchor="middle" class="t-tiny">limit</text>
-        <text x="232" y="80" text-anchor="middle" class="t-tiny s-ink">prompts · files · tool results</text>
-        <text x="640" y="80" class="t-tiny">→ auto-compacts near the limit</text>
+        <text x="540" y="120" text-anchor="middle" class="t-tiny">limite</text>
+        <text x="232" y="80" text-anchor="middle" class="t-tiny s-ink">prompts · fichiers · résultats d'outils</text>
+        <text x="640" y="80" class="t-tiny">→ compacte automatiquement près de la limite</text>
 
         <!-- three commands -->
         <g>
           <rect x="20" y="150" width="290" height="76" rx="12" class="box"></rect>
           <text x="40" y="180" class="t-mono s-amber" style="font-weight:600">/compact</text>
-          <text x="40" y="204" class="t-tiny">summarise, keep the thread —</text>
-          <text x="40" y="220" class="t-tiny">same feature, running long</text>
+          <text x="40" y="204" class="t-tiny">résumer, garder le fil :</text>
+          <text x="40" y="220" class="t-tiny">même fonctionnalité, qui dure</text>
 
           <rect x="345" y="150" width="290" height="76" rx="12" class="box"></rect>
           <text x="365" y="180" class="t-mono s-amber" style="font-weight:600">/clear</text>
-          <text x="365" y="204" class="t-tiny">wipe it — starting a new,</text>
-          <text x="365" y="220" class="t-tiny">unrelated feature</text>
+          <text x="365" y="204" class="t-tiny">tout effacer : on démarre une</text>
+          <text x="365" y="220" class="t-tiny">fonctionnalité sans rapport</text>
 
           <rect x="670" y="150" width="290" height="76" rx="12" class="box"></rect>
           <text x="690" y="180" class="t-mono s-amber" style="font-weight:600">/context</text>
-          <text x="690" y="204" class="t-tiny">see what's filling it</text>
-          <text x="690" y="220" class="t-tiny">up, and by how much</text>
+          <text x="690" y="204" class="t-tiny">voir ce qui le remplit</text>
+          <text x="690" y="220" class="t-tiny">et dans quelle proportion</text>
         </g>
       </svg>
     </div>
-    <p class="cap">Spend less context: be <b>specific</b> (vague prompts cost more, not less), turn off MCP servers you're not using, and hand exploration to a <b>subagent</b> that returns just the answer.</p>
+    <p class="cap">Consommer moins de contexte : soyez <b>précis</b> (les prompts vagues coûtent plus cher, pas moins), coupez les serveurs MCP que vous n'utilisez pas, et confiez l'exploration à un <b>subagent</b> qui ne renvoie que la réponse.</p>
   </div>
   <span class="slide-counter">08</span>
 </section>
 
 <!-- ============ 9 · L7 CODE REVIEW =================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 7 · The method</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 7 · La méthode</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 7</span>
-    <h2 class="">Fresh eyes before you push</h2>
-    <p class="lead">The agent that wrote the code carries its own bias. A subagent reviews it cold, in its own context.</p>
+    <span class="eyebrow">Leçon 7</span>
+    <h2 class="">Un regard neuf avant de pousser</h2>
+    <p class="lead">L'agent qui a écrit le code porte ses propres biais. Un subagent le relit à froid, dans son propre contexte.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Code review flow">
         <rect x="10" y="80" width="200" height="80" rx="12" class="box"></rect>
-        <text x="110" y="114" text-anchor="middle" class="t-lbl">Your changes</text>
-        <text x="110" y="138" text-anchor="middle" class="t-tiny">session just wrote them</text>
+        <text x="110" y="114" text-anchor="middle" class="t-lbl">Vos modifications</text>
+        <text x="110" y="138" text-anchor="middle" class="t-tiny">la session vient de les écrire</text>
 
         <rect x="270" y="80" width="220" height="80" rx="12" class="box-amber"></rect>
-        <text x="380" y="108" text-anchor="middle" class="t-lbl s-amber">Subagent review</text>
-        <text x="380" y="132" text-anchor="middle" class="t-tiny">fresh context · read-only ·</text>
-        <text x="380" y="148" text-anchor="middle" class="t-tiny">checked into the repo</text>
+        <text x="380" y="108" text-anchor="middle" class="t-lbl s-amber">Revue par subagent</text>
+        <text x="380" y="132" text-anchor="middle" class="t-tiny">contexte neuf · lecture seule ·</text>
+        <text x="380" y="148" text-anchor="middle" class="t-tiny">versionné dans le repo</text>
 
         <rect x="550" y="80" width="220" height="80" rx="12" class="box"></rect>
         <text x="660" y="108" text-anchor="middle" class="t-mono" style="font-size:15px">/commit-push-pr</text>
-        <text x="660" y="138" text-anchor="middle" class="t-tiny">commit · push · open PR</text>
+        <text x="660" y="138" text-anchor="middle" class="t-tiny">commit · push · ouvrir la PR</text>
 
         <rect x="830" y="80" width="140" height="80" rx="12" class="box-ink"></rect>
         <text x="900" y="114" text-anchor="middle" class="t-lbl t-white" style="font-size:16px">PR</text>
-        <text x="900" y="138" text-anchor="middle" class="t-tiny t-white" style="fill:hsl(40 10% 80%)">posted to Slack</text>
+        <text x="900" y="138" text-anchor="middle" class="t-tiny t-white" style="fill:hsl(40 10% 80%)">publiée sur Slack</text>
 
         <line x1="210" y1="120" x2="268" y2="120" class="l-ink" stroke-width="2" marker-end="url(#l7a)"></line>
         <line x1="490" y1="120" x2="548" y2="120" class="l-ink" stroke-width="2" marker-end="url(#l7a)"></line>
         <line x1="770" y1="120" x2="828" y2="120" class="l-ink" stroke-width="2" marker-end="url(#l7a)"></line>
         <!-- resume -->
-        <path d="M 900 160 C 900 210, 380 210, 380 162" class="l-faint" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#l7faint)"></path>
-        <text x="640" y="204" text-anchor="middle" class="t-tiny"><tspan class="t-mono">claude --from-pr &lt;n&gt;</tspan> resumes the session later</text>
+        <path d="M 900 160 C 900 210, 380 210, 380 162" class="l-faint" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#__pe_l7faint_xgs5x)"></path>
+        <text x="640" y="218.1" text-anchor="middle" class="t-tiny"><tspan class="t-mono">claude --from-pr &lt;n&gt;</tspan> reprend la session plus tard</text>
         <defs>
           <marker id="l7a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"></path></marker>
           <marker id="l7faint" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"></path></marker>
-        </defs>
+        <marker id="__pe_l7faint_xgs5x" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="-120.0"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--muted-foreground))"></path></marker></defs>
       </svg>
     </div>
-    <p class="cap">Keep the reviewer read-only — it flags issues, it doesn't edit. Check it into the repo so the whole team reviews the same way.</p>
+    <p class="cap">Gardez le relecteur en lecture seule : il signale les problèmes, il ne modifie pas. Versionnez-le dans le repo pour que toute l'équipe relise de la même façon.</p>
   </div>
   <span class="slide-counter">09</span>
 </section>
 
 <!-- ============ 10 · L8 CLAUDE.md =================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 8 · Customise</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 8 · Personnaliser</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 8</span>
-    <h2 class="">CLAUDE.md — memory that survives the session</h2>
-    <p class="lead">A plain file that holds the rules of your work, read at the start of every session, so Claude starts already briefed.</p>
+    <span class="eyebrow">Leçon 8</span>
+    <h2 class="">CLAUDE.md — la mémoire qui survit à la session</h2>
+    <p class="lead">Un simple fichier qui contient les règles de votre travail, lu au début de chaque session, pour que Claude démarre déjà briefé.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="CLAUDE.md memory hierarchy">
         <!-- the file -->
         <rect x="20" y="40" width="300" height="170" rx="12" class="box"></rect>
         <text x="40" y="70" class="t-mono s-amber" style="font-weight:600">CLAUDE.md</text>
         <line x1="40" y1="82" x2="300" y2="82" class="l-faint" stroke-width="1"></line>
-        <text x="40" y="108" class="t-tiny s-ink"># Project — the stack</text>
-        <text x="40" y="132" class="t-tiny s-ink"># Commands — dev, test, lint</text>
-        <text x="40" y="156" class="t-tiny s-ink"># Code style — your conventions</text>
-        <text x="40" y="184" class="t-tiny">@README.md — pull in docs</text>
+        <text x="40" y="108" class="t-tiny s-ink"># Projet — la stack</text>
+        <text x="40" y="132" class="t-tiny s-ink"># Commandes — dev, test, lint</text>
+        <text x="40" y="156" class="t-tiny s-ink"># Style de code — vos conventions</text>
+        <text x="40" y="184" class="t-tiny">@README.md — importer la doc</text>
 
         <!-- appended to prompt -->
         <line x1="320" y1="125" x2="400" y2="125" class="l-amber" stroke-width="2.5" marker-end="url(#l8a)"></line>
-        <text x="360" y="115" text-anchor="middle" class="t-tiny">read every</text>
+        <text x="360" y="115" text-anchor="middle" class="t-tiny">lu à chaque</text>
         <text x="360" y="148" text-anchor="middle" class="t-tiny">session</text>
 
         <!-- hierarchy -->
-        <rect x="410" y="55" width="250" height="64" rx="10" class="box-amber"></rect>
-        <text x="430" y="82" class="t-lbl s-amber" style="font-size:15px">Project level</text>
-        <text x="430" y="104" class="t-tiny">in the repo root · shared with the team</text>
+        <rect x="410" y="55" width="270.8" height="64" rx="10" class="box-amber"></rect>
+        <text x="430" y="82" class="t-lbl s-amber" style="font-size:15px">Niveau projet</text>
+        <text x="430" y="104" class="t-tiny">racine du dépôt · partagé avec l'équipe</text>
 
-        <rect x="410" y="135" width="250" height="64" rx="10" class="box"></rect>
-        <text x="430" y="162" class="t-lbl" style="font-size:15px">User level</text>
-        <text x="430" y="184" class="t-tiny">your config folder · all your projects</text>
+        <rect x="410" y="135" width="270.8" height="64" rx="10" class="box"></rect>
+        <text x="430" y="162" class="t-lbl" style="font-size:15px">Niveau utilisateur</text>
+        <text x="430" y="184" class="t-tiny">votre dossier de config · tous vos projets</text>
 
         <!-- start tip -->
-        <rect x="700" y="55" width="260" height="144" rx="10" class="box"></rect>
-        <text x="720" y="84" class="t-lbl" style="font-size:15px">How to start</text>
-        <text x="720" y="112" class="t-tiny">Begin with none. Notice what</text>
-        <text x="720" y="130" class="t-tiny">you keep correcting.</text>
-        <text x="720" y="156" class="t-tiny">Run <tspan class="t-mono" style="font-size:13px">/init</tspan> to generate one,</text>
-        <text x="720" y="174" class="t-tiny">or ask Claude to "save that</text>
-        <text x="720" y="192" class="t-tiny">to memory."</text>
+        <rect x="700" y="46.7" width="280.8" height="158.1" rx="10" class="box"></rect>
+        <text x="720" y="84" class="t-lbl" style="font-size:15px">Par où commencer</text>
+        <text x="720" y="112" class="t-tiny">Commencez sans rien. Repérez ce que</text>
+        <text x="720" y="130" class="t-tiny">vous corrigez sans cesse.</text>
+        <text x="720" y="156" class="t-tiny">Lancez <tspan class="t-mono" style="font-size:13px">/init</tspan> pour en générer un,</text>
+        <text x="720" y="174" class="t-tiny">ou demandez à Claude d'« enregistrer ça</text>
+        <text x="720" y="192" class="t-tiny">en mémoire ».</text>
         <defs>
           <marker id="l8a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">It's an onboarding script for your codebase, appended to every prompt. Commit it so the team shares one source of truth — keep it compact and only what's necessary.</p>
-    <div class="keynote"><p><span class="kn-label">Key concept</span>Three levels, stacked: project <code>./CLAUDE.md</code> (committed, team), local <code>./CLAUDE.local.md</code> (gitignored, just you), user <code>~/.claude/CLAUDE.md</code> (every project on your machine). <span class="kn-see">→ full detail in the teacher notes.</span></p></div>
+    <p class="cap">C'est un script d'accueil pour votre code, ajouté à chaque prompt. Committez-le pour que l'équipe partage une seule source de vérité — gardez-le compact et limité à l'essentiel.</p>
+    <div class="keynote"><p><span class="kn-label">Notion clé</span>Trois niveaux, empilés : projet <code>./CLAUDE.md</code> (committé, équipe), local <code>./CLAUDE.local.md</code> (ignoré par git, rien que pour vous), utilisateur <code>~/.claude/CLAUDE.md</code> (tous les projets de votre machine). <span class="kn-see">→ tout le détail dans les notes du formateur.</span></p></div>
   </div>
   <span class="slide-counter">10</span>
 </section>
 
 <!-- ============ 11 · L9 SUBAGENTS =================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 9 · Customise</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 9 · Personnaliser</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 9</span>
-    <h2 class="">Subagents — send the heavy lifting away</h2>
-    <p class="lead">A subagent does the messy exploration in its own context and hands back only the answer. Your main context stays clean.</p>
+    <span class="eyebrow">Leçon 9</span>
+    <h2 class="">Les subagents : déléguer le gros du travail</h2>
+    <p class="lead">Un subagent fait l'exploration désordonnée dans son propre contexte et ne vous rend que la réponse. Votre contexte principal reste propre.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Subagent delegation">
         <!-- main context -->
         <rect x="40" y="40" width="300" height="170" rx="14" class="box-ink"></rect>
-        <text x="190" y="74" text-anchor="middle" class="t-lbl t-white">Main context</text>
-        <text x="190" y="98" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">stays focused on the feature</text>
+        <text x="190" y="74" text-anchor="middle" class="t-lbl t-white">Contexte principal</text>
+        <text x="190" y="98" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">reste concentré sur la fonctionnalité</text>
 
         <!-- spawn arrow -->
         <line x1="340" y1="100" x2="470" y2="100" class="l-amber" stroke-width="2.5" marker-end="url(#l9a)"></line>
-        <text x="405" y="90" text-anchor="middle" class="t-tiny s-amber">spawn</text>
+        <text x="405" y="90" text-anchor="middle" class="t-tiny s-amber">lance</text>
 
         <!-- subagent -->
         <rect x="470" y="40" width="300" height="100" rx="14" class="box-amber"></rect>
         <text x="620" y="74" text-anchor="middle" class="t-lbl s-amber">Subagent</text>
-        <text x="620" y="98" text-anchor="middle" class="t-tiny">own context window ·</text>
-        <text x="620" y="116" text-anchor="middle" class="t-tiny">explores, searches, in parallel</text>
+        <text x="620" y="98" text-anchor="middle" class="t-tiny">sa propre fenêtre de contexte ·</text>
+        <text x="620" y="116" text-anchor="middle" class="t-tiny">explore, cherche, en parallèle</text>
 
         <!-- return arrow -->
         <path d="M 470 130 C 405 150, 405 150, 340 150" class="l-amber" stroke-width="2.5" marker-end="url(#l9a)"></path>
-        <text x="405" y="178" text-anchor="middle" class="t-tiny s-amber">returns a summary</text>
+        <text x="405" y="178" text-anchor="middle" class="t-tiny s-amber">renvoie un résumé</text>
 
         <!-- create -->
         <rect x="470" y="160" width="470" height="50" rx="10" class="box"></rect>
-        <text x="490" y="190" class="t-tiny">Create one with <tspan class="t-mono" style="font-size:13px">/agents</tspan> — Claude writes the Markdown + YAML for you.</text>
+        <text x="490" y="190" class="t-tiny">Créez-en un avec <tspan class="t-mono" style="font-size:13px">/agents</tspan> — Claude écrit le Markdown et le YAML pour vous.</text>
         <defs>
           <marker id="l9a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">"Where are the auth endpoints?" — the subagent reads half the codebase to find out, but only the answer comes back. The journey never clutters your main window.</p>
+    <p class="cap">« Où sont les endpoints d'authentification ? » — le subagent lit la moitié du code pour le savoir, mais seule la réponse revient. Le trajet n'encombre jamais votre fenêtre principale.</p>
   </div>
   <span class="slide-counter">11</span>
 </section>
 
 <!-- ============ 12 · L10 SKILLS ===================================== -->
-<section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 10 · Customise</span></div>
+<section class="deck-slide active">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 10 · Personnaliser</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 10</span>
-    <h2 class="">Skills — capability loaded only when needed</h2>
-    <p class="lead">A skill advertises itself with a name and one line. Claude loads the full instructions only when it decides to use it.</p>
+    <span class="eyebrow">Leçon 10</span>
+    <h2 class="">Les skills : une capacité chargée seulement quand elle sert</h2>
+    <p class="lead">Un skill s'annonce avec un nom et une ligne. Claude charge les instructions complètes seulement quand il décide de l'utiliser.</p>
     <div class="diagram">
-      <svg viewBox="0 0 980 250" role="img" aria-label="Skills lazy loading">
+      <svg viewBox="0 0 1033.3 250" role="img" aria-label="Skills lazy loading">
         <!-- always in context -->
-        <text x="20" y="36" class="t-sub">Always in context — cheap</text>
-        <rect x="20" y="50" width="430" height="70" rx="12" class="box"></rect>
+        <text x="20" y="36" class="t-sub">Toujours en contexte — peu coûteux</text>
+        <rect x="20" y="50" width="296.9" height="88.3" rx="12" class="box"></rect>
         <text x="40" y="80" class="t-mono s-amber" style="font-weight:600">pdf-tools</text>
-        <text x="40" y="104" class="t-tiny">"fill and merge PDF forms" — name + one-line description</text>
+        <text x="40" y="104" class="t-tiny">« remplir, fusionner des formulaires PDF »</text>
 
         <!-- trigger -->
-        <line x1="450" y1="85" x2="540" y2="85" class="l-amber" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#l10a)"></line>
-        <text x="495" y="74" text-anchor="middle" class="t-tiny s-amber">when</text>
-        <text x="495" y="108" text-anchor="middle" class="t-tiny s-amber">relevant</text>
+        <line x1="318.6" y1="85" x2="559.3" y2="85" class="l-amber" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#l10a)"></line>
+        <text x="418" y="74" text-anchor="middle" class="t-tiny s-amber">quand</text>
+        <text x="418" y="108" text-anchor="middle" class="t-tiny s-amber">c'est pertinent</text>
 
         <!-- loaded on demand -->
-        <text x="560" y="36" class="t-sub">Loaded on demand — full body</text>
-        <rect x="560" y="50" width="400" height="160" rx="12" class="box-amber"></rect>
-        <text x="580" y="80" class="t-tiny s-ink" style="font-weight:600">full instructions</text>
-        <text x="580" y="104" class="t-tiny">step-by-step procedure</text>
-        <text x="580" y="126" class="t-tiny">scripts and helper files</text>
-        <text x="580" y="148" class="t-tiny">examples</text>
-        <text x="580" y="182" class="t-tiny">— none of this sits in context until it's called</text>
+        <text x="560" y="36" class="t-sub">Chargé à la demande — corps complet</text>
+        <rect x="560" y="50" width="446.1" height="160" rx="12" class="box-amber"></rect>
+        <text x="580" y="80" class="t-tiny s-ink" style="font-weight:600">instructions complètes</text>
+        <text x="580" y="104" class="t-tiny">procédure étape par étape</text>
+        <text x="580" y="126" class="t-tiny">scripts et fichiers d'appoint</text>
+        <text x="580" y="148" class="t-tiny">exemples</text>
+        <text x="580" y="182" class="t-tiny">— rien de tout cela n'occupe le contexte tant que ce n'est pas appelé</text>
 
         <!-- contrast note -->
-        <text x="20" y="160" class="t-tiny">Contrast with MCP, which</text>
-        <text x="20" y="180" class="t-tiny">loads every tool definition</text>
-        <text x="20" y="200" class="t-tiny">up front (next slide).</text>
+        <text x="26" y="171" class="t-tiny">À comparer avec MCP, qui</text>
+        <text x="26" y="191" class="t-tiny">charge toutes les définitions d'outils</text>
+        <text x="26" y="211" class="t-tiny">d'emblée (diapositive suivante).</text>
         <defs>
           <marker id="l10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
-      </svg>
+      <text x="134.9" y="123.2" text-anchor="middle" class="t-tiny">nom + description en une ligne</text></svg>
     </div>
-    <p class="cap">That's the win over loading everything up front: skills keep the context window lean. (The course points to a dedicated "Introduction to agent skills" for the deep dive.)</p>
+    <p class="cap">C'est là le gain par rapport au chargement de tout d'emblée : les skills gardent la fenêtre de contexte légère. (Le cours renvoie à un module dédié, « Introduction to agent skills », pour aller plus loin.)</p>
   </div>
   <span class="slide-counter">12</span>
 </section>
 
 <!-- ============ 13 · L11 MCP ======================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 11 · Customise</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 11 · Personnaliser</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 11</span>
-    <h2 class="">MCP — a bridge to everything outside the code</h2>
-    <p class="lead">Most of your context lives in databases, apps and repos. MCP lets Claude Code reach it through tools.</p>
+    <span class="eyebrow">Leçon 11</span>
+    <h2 class="">MCP — un pont vers tout ce qui est hors du code</h2>
+    <p class="lead">L'essentiel de votre contexte vit dans des bases de données, des applications et des dépôts. MCP permet à Claude Code d'y accéder via des outils.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="MCP connections and scoping">
         <!-- Claude Code core -->
@@ -1377,13 +1377,13 @@ th {
 
         <!-- external sources -->
         <rect x="40" y="150" width="180" height="56" rx="10" class="box-amber"></rect>
-        <text x="130" y="184" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Linear · issues</text>
+        <text x="130" y="184" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Linear · tickets</text>
         <rect x="250" y="150" width="180" height="56" rx="10" class="box-amber"></rect>
         <text x="340" y="184" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Docs · Context7</text>
         <rect x="460" y="150" width="180" height="56" rx="10" class="box-amber"></rect>
-        <text x="550" y="184" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Databases</text>
+        <text x="550" y="184" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">Bases de données</text>
         <rect x="670" y="150" width="180" height="56" rx="10" class="box-amber"></rect>
-        <text x="760" y="184" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">GitHub · repos</text>
+        <text x="760" y="184" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">GitHub · dépôts</text>
 
         <line x1="450" y1="100" x2="150" y2="148" class="l-amber" stroke-width="1.8"></line>
         <line x1="475" y1="100" x2="350" y2="148" class="l-amber" stroke-width="1.8"></line>
@@ -1392,23 +1392,23 @@ th {
 
         <!-- scoping + cost on the right -->
         <rect x="700" y="20" width="260" height="92" rx="10" class="box"></rect>
-        <text x="720" y="46" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Scope it</text>
+        <text x="720" y="46" class="t-sub" style="font-weight:600;fill:hsl(var(--foreground))">Cadrez-le</text>
         <text x="720" y="70" class="t-tiny">local · user · project</text>
-        <text x="720" y="92" class="t-tiny">project = <tspan class="t-mono" style="font-size:12px">.mcp.json</tspan> in the repo</text>
+        <text x="720" y="92" class="t-tiny">project = <tspan class="t-mono" style="font-size:12px">.mcp.json</tspan> dans le dépôt</text>
       </svg>
     </div>
-    <p class="cap">Watch the cost: every server loads its tool definitions into context, used or not. Run <code>/mcp</code> and disable what you're not using — a CLI like <code>gh</code>, or a Skill, is often leaner.</p>
+    <p class="cap">Attention au coût : chaque serveur charge ses définitions d'outils dans le contexte, utilisées ou non. Lancez <code>/mcp</code> et désactivez ce dont vous ne vous servez pas — un CLI comme <code>gh</code>, ou un skill, est souvent plus léger.</p>
   </div>
   <span class="slide-counter">13</span>
 </section>
 
 <!-- ============ 14 · L12 HOOKS ====================================== -->
 <section class="deck-slide">
-  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 12 · Customise</span></div>
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 12 · Personnaliser</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 12</span>
-    <h2 class="">Hooks — the things that must happen, always</h2>
-    <p class="lead">A hook is a rule that runs automatically at fixed points in the lifecycle — every time, no exceptions.</p>
+    <span class="eyebrow">Leçon 12</span>
+    <h2 class="">Les hooks — ce qui doit se passer, toujours</h2>
+    <p class="lead">Un hook est une règle qui s'exécute automatiquement à des moments fixes du cycle de vie — à chaque fois, sans exception.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Hook lifecycle events">
         <!-- lifecycle line -->
@@ -1417,28 +1417,28 @@ th {
         <g>
           <circle cx="120" cy="120" r="9" class="s-amber"></circle>
           <text x="120" y="92" text-anchor="middle" class="t-mono" style="font-size:13px">UserPromptSubmit</text>
-          <text x="120" y="156" text-anchor="middle" class="t-tiny">you submit</text>
+          <text x="120" y="156" text-anchor="middle" class="t-tiny">vous envoyez un prompt</text>
 
           <circle cx="350" cy="120" r="9" class="s-amber"></circle>
           <text x="350" y="92" text-anchor="middle" class="t-mono" style="font-size:13px">PreToolUse</text>
-          <text x="350" y="156" text-anchor="middle" class="t-tiny">before a tool — can block</text>
+          <text x="350" y="156" text-anchor="middle" class="t-tiny">avant un outil — peut bloquer</text>
 
           <circle cx="600" cy="120" r="9" class="s-amber"></circle>
           <text x="600" y="92" text-anchor="middle" class="t-mono" style="font-size:13px">PostToolUse</text>
-          <text x="600" y="156" text-anchor="middle" class="t-tiny">after — e.g. auto-format</text>
+          <text x="600" y="156" text-anchor="middle" class="t-tiny">après — par ex. formatage automatique</text>
 
           <circle cx="820" cy="120" r="9" class="s-amber"></circle>
           <text x="820" y="92" text-anchor="middle" class="t-mono" style="font-size:13px">Stop</text>
-          <text x="820" y="156" text-anchor="middle" class="t-tiny">Claude finishes</text>
+          <text x="820" y="156" text-anchor="middle" class="t-tiny">Claude a terminé</text>
         </g>
         <!-- notes, two non-overlapping blocks -->
-        <text x="40" y="202" class="t-tiny"><tspan class="s-ink" style="font-weight:600">PreToolUse</tspan> exit code 2 blocks the action</text>
-        <text x="40" y="224" class="t-tiny">e.g. no <tspan class="t-mono" style="font-size:12px">rm -rf</tspan> · no commits to main</text>
-        <text x="940" y="202" text-anchor="end" class="t-tiny">Configured in <tspan class="t-mono" style="font-size:12px">settings.json</tspan></text>
-        <text x="940" y="224" text-anchor="end" class="t-tiny">check it into the repo</text>
+        <text x="40" y="202" class="t-tiny"><tspan class="s-ink" style="font-weight:600">PreToolUse</tspan> le code de sortie 2 bloque l'action</text>
+        <text x="40" y="224" class="t-tiny">ex. : non <tspan class="t-mono" style="font-size:12px">rm -rf</tspan> · aucun commit sur main</text>
+        <text x="940" y="202" text-anchor="end" class="t-tiny">Configuré dans <tspan class="t-mono" style="font-size:12px">settings.json</tspan></text>
+        <text x="940" y="224" text-anchor="end" class="t-tiny">versionné dans le repo</text>
       </svg>
     </div>
-    <p class="cap">Auto-format on every edit, log every command for compliance, block writes to production. If it needs to happen every time without fail, don't put it in a prompt — put it in a hook.</p>
+    <p class="cap">Formatage automatique à chaque modification, journalisation de chaque commande pour la conformité, écritures bloquées en production. Si ça doit arriver à chaque fois sans faute, ne le mettez pas dans un prompt : mettez-le dans un hook.</p>
   </div>
   <span class="slide-counter">14</span>
 </section>
@@ -1447,16 +1447,16 @@ th {
 <section class="deck-slide title">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
   <div class="stage">
-    <span class="eyebrow">The whole thing, in one line</span>
-    <h1 class="">Understand the loop.<br>Run the workflow.<br>Customise to your work.</h1>
-    <p class="lead">Explore → Plan → Code → Commit is the spine. Context, CLAUDE.md, subagents, skills, MCP and hooks are how you make it yours.</p>
+    <span class="eyebrow">Tout, en une ligne</span>
+    <h1 class="">Comprenez la boucle.<br>Exécutez le workflow.<br>Adaptez à votre travail.</h1>
+    <p class="lead">Explorer → Planifier → Coder → Commiter, c'est la colonne vertébrale. Le contexte, CLAUDE.md, les subagents, les skills, MCP et les hooks, c'est ce qui la rend vôtre.</p>
     <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
   </div>
   <span class="slide-counter">15</span>
 </section>
 
 <div class="slide-counter" style="display:none"></div>
-<div class="hint" id="hint" style="opacity: 0;">← → or space · F11 fullscreen</div>
+<div class="hint" id="hint" style="opacity: 0;">← → ou espace · F11 plein écran</div>
 
 <script>
   const slides = Array.from(document.querySelectorAll('.deck-slide'));
@@ -1494,4 +1494,20 @@ th {
 
 
 
-<deepl-input-controller translate="no"></deepl-input-controller></body></html>
+<deepl-input-controller translate="no"></deepl-input-controller>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

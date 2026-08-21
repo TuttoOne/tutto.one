@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Claude 101 — teaching notes</title>
+<title>Praxis · Introduction to Agent Skills — teaching notes</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -855,227 +855,48 @@ th {
   <span style="color:hsl(var(--muted-foreground))">Teaching notes</span>
   <div class="tracker">
     <button id="prev" title="Previous slide (&larr;)">&larr;</button>
-    <select id="jump" title="Jump to slide"><option value="0">Top</option><option value="1">1. What Claude is, and how to actually work with it</option><option value="2">2. The whole course on one screen</option><option value="3">3. Not a chatbot, a thinking partner</option><option value="4">4. Set the stage · define the task · specify the rules</option><option value="5">5. When it&#x27;s off, it&#x27;s almost always fixable</option><option value="6">6. Three modes, matched to the size of the job</option><option value="7">7. Projects: a workspace that remembers</option><option value="8">8. Artifacts: the output, rendered beside the chat</option><option value="9">9. Skills: packaged know-how, run the same way every time</option><option value="10">10. Connectors: bring your tools into the conversation</option><option value="11">11. Enterprise Search: ask your whole company one question</option><option value="12">12. Research: from one search to a researched report</option><option value="13">13. Whatever your role, there&#x27;s a starting point</option><option value="14">14. One intelligence, where you already work</option><option value="15">15. Talk to it like a colleague. Give it your context. Iterate to the result.</option></select>
+    <select id="jump" title="Jump to slide"><option value="0">Top</option><option value="1">1. Teach Claude Code something once. It remembers when it matters.</option><option value="2">2. The whole course on one screen</option><option value="3">3. If you keep explaining it, write it down once</option><option value="4">4. Build one: folder, file, restart</option><option value="5">5. Keep SKILL.md lean: split the rest out</option><option value="6">6. Five tools, five jobs</option><option value="7">7. Three ways to share: widest reach last</option><option value="8">8. When it breaks, it&#x27;s one of five things</option><option value="9">9. Write it once. Describe it well. Let Claude load it when it fits.</option></select>
     <button id="next" title="Next slide (&rarr;)">&rarr;</button>
-    <span class="count">slide <b id="cur">&mdash;</b> / 15</span>
+    <span class="count">slide <b id="cur">&mdash;</b> / 9</span>
   </div>
 </div>
 <main>
   <div class="guide-head">
-    <h1>Claude 101 — teaching notes</h1>
-    <p class="lead">Side-by-side notes for <code>01-praxis-claude-101.html</code> (15 slides). The deck is what the room looks at; this is what you say, where you stop, and how you make each idea land for the person in front of you. Written from the deck and <code>01-claude-101-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
-    <details class="howto" open><summary>How to use these notes</summary><ul><li>These are guidance, not a script. Teach the person, not the slides.</li>
+    <h1>Introduction to Agent Skills — teaching notes</h1>
+    <p class="lead">Side-by-side notes for <code>08-praxis-introduction-to-agent-skills.html</code> (9 slides). This is the deep dive on the idea Praxis calls the heart of the method: the plain-English skill file as institutional memory (<code>framings.md</code> — skill file as institutional memory; <code>patterns.md</code>). Claude 101 (course 02) and AI Fluency (course 05) both point here. The deck is a developer course; these notes hold the framing for the nine non-technical archetypes, because the plain-English SKILL.md is exactly what makes Skills land for them. Written from the deck and <code>08-introduction-to-agent-skills-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>Guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
-<li><strong>By background</strong> gives you a line per archetype (from <code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in the room and ignore the rest. They are a palette, not a checklist to read out.</li>
+<li><strong>By background</strong> gives a line per archetype (<code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in front of you and ignore the rest. A palette, not a checklist.</li>
+<li>This is the most technical course in the set. Two confusions are near-certain and the notes flag them: the "I can't read code / what is it doing" fear (<code>objections.md</code> — can't read code), and conflating the Claude Code <em>skill</em> taught here with the app <em>skill</em> from Claude 101. The cure for both is the same: the intelligence lives in the plain-English SKILL.md, not in any code.</li>
 <li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only — <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
-<li>Run the intake five questions first (<code>train-the-trainer.md</code>) so you know which background you're teaching to before slide 1.</li></ul></details>
+<li>Do not read code aloud. If they ask what a line does, point at the skill file, not the script (<code>framings.md</code> — voice, what never to say).</li></ul></details>
   </div>
-  <section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>What Claude is, and how to actually work with it</h2></div></header><div class="card-body"><div class="block block--idea">
+  <section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>Teach Claude Code something once. It remembers when it matters.</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Set the frame: twelve ideas, one per screen. You show each one working, then hand it back to them. No lecturing.</p>
+<p>Set the frame: six ideas, one per screen, and the whole course is one move — turn a thing you keep explaining into a thing Claude loads by itself. The watching is the lesson, so take the silences.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"There are twelve ideas in this course, one per screen. For each one I'll show you the thing working, then stop and ask where it fits in your work. You don't need to remember it all today. What matters is that you see each one actually work."</p>
+<p>"Six ideas, one screen each. The whole course is one move: anything you find yourself explaining to Claude over and over, you write down once, and from then on it loads itself the moment it's relevant. I'll show you, then stop and ask where it fits your work."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Open with</span></div>
-<p>The intake answer they gave you: name the one task they said eats their week, and promise you'll come back to it on the use-case slide. That is the hook for the whole session.</p>
+<p>The task they named in intake, the one they do the same way every time. "By the end, that's the skill we'll have described."</p>
 </div></div></section>
 <section class="card" id="slide-2" data-slide="2"><header class="card-head"><span class="badge">2</span><div><span class="eyebrow">Spine</span><h2>The whole course on one screen</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Four moves: meet the tool, learn to talk to it, organise the work, expand its reach and put it to work. Show the plan so nobody feels lost later.</p>
+<p>Four moves: grasp what a skill is, build one, place it among the other tools and share it, then fix it when it misbehaves. Orient, don't teach.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"This is the plan for the session, in four parts. First, what Claude is and how to work with it. Then, how to write an instruction that gets a good result. Then, how to organise the work so you stop repeating yourself. And last, how to connect it to the tools you already use. If you get lost at any point, we come back to this screen."</p>
+<p>"Here's the shape. First, what a skill actually is. Then we build one. Then we place it next to the other ways to customise Claude Code and we share it. Then we fix it when it doesn't fire. If you lose the thread, this is the map back."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Cue</span></div>
-<p>Don't teach the spine, just orient. Twenty seconds, then move.</p>
+<p>Twenty seconds, then move. Lesson 1 is the centrepiece; everything else serves it.</p>
 </div></div></section>
-<section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Lesson 1</span><h2>Not a chatbot, a thinking partner</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Lesson 1 (if you take one thing away)</span><h2>If you keep explaining it, write it down once</h2></div></header><div class="card-body"><p class="slide-sub"><em>The centrepiece. If they take one thing away, it's this.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>A chatbot answers and you're on your own. Claude brings the intelligence; you bring the context and judgement; you work the problem together.</p>
+<p>A skill is a folder of instructions. Claude holds only its one-line description until your request matches, then it loads the rest. The rule of thumb: if you keep repeating an instruction, that's a skill waiting to be written.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"You may have used a chatbot before: you ask a question, you get an answer, and that's the end of it. Claude works best when you treat it differently. It knows a great deal in general, but it knows nothing about your work — your clients, your standards, your way of doing things. You supply that part. And when the first answer isn't right, you don't start over; you tell it what's wrong and it corrects, the same way you'd work something out with a colleague." (Pairs with <code>framings.md</code> — Claude as translator/teacher, and the "brief it like a junior" line.)</p>
-</div><div class="block block--ask">
-<div class="block-head"><span class="block-label">Pause, then ask</span></div>
-<ul>
-<li>"Where in your week do you already work something out with a colleague, back and forth, rather than just asking one question?"</li>
-<li>"What's the context or judgement in your job that no chatbot would have?"</li>
-</ul>
-<p class="wait">(wait)</p>
-</div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span></div>
-<dl class="bg">
-<dt>Investigator</dt><dd>thinking through what a thin case file is <em>missing</em> before you write.</dd>
-<dt>Analyst</dt><dd>deciding whether two vendors can even be compared on the same basis.</dd>
-<dt>Designer</dt><dd>riffing three creative routes for a campaign, not one canned idea.</dd>
-<dt>Knowledge worker</dt><dd>working out how to handle the odd invoice, not just the clean ones.</dd>
-<dt>Reporter</dt><dd>deciding what actually belongs in Monday's briefing and what doesn't.</dd>
-<dt>Content</dt><dd>working out the argument of a post with you, not generic copy out of a slot.</dd>
-<dt>Form-filler</dt><dd>reasoning through which category an awkward receipt really belongs in.</dd>
-<dt>Outreach</dt><dd>sharpening the angle for one specific client, then drafting together.</dd>
-<dt>Exec</dt><dd>stress-testing the board narrative against the numbers before the meeting.</dd>
-</dl>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>The "is my data safe?" fear often surfaces here, the moment they picture working <em>with</em> it. Don't wave it away. Name it and say you'll cover exactly what it can see on the connectors slide. (<code>objections.md</code> — IT/compliance, "where is the AI".)</p>
-</div></div></section>
-<section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Lesson 2</span><h2>Set the stage · define the task · specify the rules</h2></div></header><div class="card-body"><p class="slide-sub"><em>The centrepiece. If they take one thing away, it's this.</em></p><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>A good prompt carries three things: who you are and the context (stage), the action you want (task), and the constraints (rules). And the first message starts a conversation, not a one-shot.</p>
-</div><div class="block block--say">
-<div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"A good instruction has three parts. The context: who you are and what this work is for. The task: what exactly you want done. The rules: the tone, the format, and if you can, an example of what good looks like. Most people write one short line and expect it to guess the rest — it can't read your mind. The more you tell it, the better the result. A useful comparison: brief it the way you'd brief a capable new colleague on their first day." (<code>framings.md</code> — brief like a junior; the six-year-old version for informal rooms. Never use both in one session.)</p>
-</div><div class="block block--ask">
-<div class="block-head"><span class="block-label">Pause, then ask</span></div>
-<ul>
-<li>"Take that task you said eats your week. Brief me on it out loud, like I'm your new hire. Stage, task, rules."</li>
-<li>"What's the rule a good person in your job follows that a newcomer wouldn't know yet?"</li>
-</ul>
-<p class="wait">(wait — let them draft it badly; that's the lesson.)</p>
-</div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the same brief, in their words)</span></div>
-<dl class="bg">
-<dt>Investigator</dt><dd>"You're my due-diligence analyst; summarise this subject's litigation history; cite every source, never infer."</dd>
-<dt>Analyst</dt><dd>"You're reviewing vendor RFIs; build a like-for-like table; mark blanks 'no data'."</dd>
-<dt>Designer</dt><dd>"You're my studio assistant; list every asset this campaign needs; flag missing specs as 'ask client'."</dd>
-<dt>Knowledge worker</dt><dd>"You're my bookkeeper; pull these invoices into a CSV; leave absent fields blank, don't guess."</dd>
-<dt>Reporter</dt><dd>"You're my chief of staff; turn these updates into Monday's briefing; cite who said what."</dd>
-<dt>Content</dt><dd>"You're our staff writer; draft a post in our house voice; reference one past piece."</dd>
-<dt>Form-filler</dt><dd>"You're my tax-prep assistant; allocate each receipt to the template's sections; never drop one."</dd>
-<dt>Outreach</dt><dd>"You're my BD lead; one proposal per customer; only use numbers that are in the file."</dd>
-<dt>Exec</dt><dd>"You're my analyst; one page: where revenue is, what's at risk, what needs a decision."</dd>
-</dl>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>They'll write one vague line and be disappointed. That's the teachable moment, not a failure. Show the difference specificity makes, then set 80/20 <em>before</em> any live run: "You'll get ninety percent of the way; you finish the last ten." (<code>patterns.md</code> — the 80/20 expectation.)</p>
-</div></div></section>
-<section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Lesson 3</span><h2>When it's off, it's almost always fixable</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>The first draft is a starting point. Most disappointing answers trace to one thing: context the prompt didn't carry. Too generic, wrong format, confident-but-wrong, tone off — each has a fix.</p>
-</div><div class="block block--say">
-<div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"When you get a bad answer, it's usually not because the tool can't do the job. It's because something you know never made it into the instruction. Too generic? It didn't know your role or your audience. Wrong format? Show it an example instead of describing what you want. Confident but wrong? That happens — ask it to cite sources, and check the facts that matter. Spotting what's missing and adding it is the main skill in working with AI. It has a name, AI Fluency, and there's a whole Praxis session on it."</p>
-</div><div class="block block--ask">
-<div class="block-head"><span class="block-label">Pause, then ask</span></div>
-<ul>
-<li>"When AI has let you down before, which of these four was it — too generic, wrong format, confidently wrong, or wrong tone?"</li>
-<li>"What would you have needed to tell it to fix that?"</li>
-</ul>
-<p class="wait">(wait)</p>
-</div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the failure they'll hit most, and the fix)</span></div>
-<dl class="bg">
-<dt>Investigator</dt><dd>confident but wrong on a date or amount → demand a source for every claim.</dd>
-<dt>Analyst</dt><dd>too generic a comparison → hand it the column set and the basis.</dd>
-<dt>Designer</dt><dd>wrong format → show one finished asset as the example.</dd>
-<dt>Knowledge worker</dt><dd>invented a missing VAT number → tell it to leave blanks blank.</dd>
-<dt>Reporter</dt><dd>tone too breezy for leadership → paste a past briefing to match.</dd>
-<dt>Content</dt><dd>off-voice draft → paste two past posts as the voice sample.</dd>
-<dt>Form-filler</dt><dd>mis-filed a receipt → give it the section definitions.</dd>
-<dt>Outreach</dt><dd>generic proposal → feed the customer file, forbid invented numbers.</dd>
-<dt>Exec</dt><dd>editorialised a risk → tell it to state facts, not "at risk".</dd>
-</dl>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"What if it just makes things up?" is the real fear under this slide. Answer it straight: ask for sources, verify the high-stakes facts, and later the skill file makes "cite a source, never infer" a standing rule. (<code>objections.md</code> — hallucinate / make stuff up.)</p>
-</div></div></section>
-<section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Lesson 4</span><h2>Three modes, matched to the size of the job</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>The desktop app gives you one Claude in three modes — Chat, Cowork, Code — and you pick by how big and how hands-off the work is. Cowork and Code run on Claude Code underneath.</p>
-</div><div class="block block--say">
-<div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"The app gives you the same Claude in three modes, and you pick by the size of the job. Chat is for quick questions and short drafts. Cowork is for the bigger jobs: it works across several files or sources for a stretch and comes back with a finished piece of work. Code is for building software. Nothing to memorise here — when a job feels too big for a chat window, there's a mode built for it."</p>
-</div><div class="block block--ask">
-<div class="block-head"><span class="block-label">Pause, then ask</span></div>
-<ul>
-<li>"Of the work you do, what's a thirty-second question, and what's a half-day grind across lots of files?"</li>
-<li>"Which of those would change your week most if it got faster?"</li>
-</ul>
-<p class="wait">(wait)</p>
-</div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(where each mode fits)</span></div>
-<dl class="bg">
-<dt>Investigator</dt><dd>Chat to scope a subject; Cowork to draft the full report from the file.</dd>
-<dt>Analyst</dt><dd>Chat for a definition; Cowork to build the comparison across every response.</dd>
-<dt>Designer</dt><dd>Chat to brainstorm concepts; Cowork to produce the asset manifest.</dd>
-<dt>Knowledge worker</dt><dd>Cowork to process the whole inbox folder in one pass.</dd>
-<dt>Reporter</dt><dd>Cowork to consolidate every update into the weekly briefing.</dd>
-<dt>Content</dt><dd>Chat to test a hook; Cowork to draft against the back catalogue.</dd>
-<dt>Form-filler</dt><dd>Cowork to allocate a full folder of receipts to the template.</dd>
-<dt>Outreach</dt><dd>Cowork to generate one proposal per customer file.</dd>
-<dt>Exec</dt><dd>Chat to pressure-test a number; Code once you want the brief to run itself.</dd>
-</dl>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the bridge to Claude Code without saying "terminal" yet. Default on-ramp is the sidebar, not the terminal (<code>train-the-trainer.md</code> — sidebar first). Don't sell the terminal to someone who hasn't opened the app.</p>
-</div></div></section>
-<section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Lesson 5</span><h2>Projects: a workspace that remembers</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>Stop re-uploading the same files and re-explaining the same rules. A project holds knowledge, instructions and memory once; every chat inside it starts already briefed.</p>
-</div><div class="block block--say">
-<div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Right now, every new chat starts from zero, so you end up re-uploading the same files and re-explaining the same rules. A project fixes that. You put the files and the rules in once, and every conversation you start inside the project already knows them. The practical effect: you stop repeating yourself, and the work stops getting lost when a chat ends." (Previews <code>framings.md</code> — the folder is the memory; the context window. In Claude Code that 'place' becomes a folder on your machine.)</p>
-</div><div class="block block--ask">
-<div class="block-head"><span class="block-label">Pause, then ask</span></div>
-<ul>
-<li>"What do you find yourself re-explaining to AI every single time you open it?"</li>
-<li>"If it just <em>knew</em> that, every time, what would you stop repeating?"</li>
-</ul>
-<p class="wait">(wait)</p>
-</div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(what goes in the project)</span></div>
-<dl class="bg">
-<dt>Investigator</dt><dd>the house report rules and screening checklists, briefed into every matter.</dd>
-<dt>Analyst</dt><dd>the standard column set and the "no data" rule for every vendor review.</dd>
-<dt>Designer</dt><dd>brand tokens and retailer spec sheets, ready for any campaign.</dd>
-<dt>Knowledge worker</dt><dd>the CSV schema and known supplier quirks, so each month starts briefed.</dd>
-<dt>Reporter</dt><dd>the five-section briefing format and the team roster.</dd>
-<dt>Content</dt><dd>the house-voice guide and the back catalogue of posts.</dd>
-<dt>Form-filler</dt><dd>the template and the category definitions, reused each cycle.</dd>
-<dt>Outreach</dt><dd>the knowledge base and the proposal format, shared with the team.</dd>
-<dt>Exec</dt><dd>the retainer book and the KPI definitions, so each board prep starts warm.</dd>
-</dl>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"Does it forget like ChatGPT does?" Yes, a chat does; a project doesn't, and a folder in Claude Code really doesn't. This is the cleanest place to plant why the folder beats the browser. (<code>objections.md</code> — browser / why not ChatGPT.)</p>
-</div></div></section>
-<section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Lesson 6</span><h2>Artifacts: the output, rendered beside the chat</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>Not a wall of code buried in the conversation. A finished thing in its own window: rendered, editable, ready to use, and shareable.</p>
-</div><div class="block block--say">
-<div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"When it produces something substantial — a document, a table, a working page — it opens it in its own window next to the conversation, properly formatted, where you can read it, edit it, download it and share it. If it ever answers inside the chat when you wanted something usable, say 'make that an artifact' and it will."</p>
-</div><div class="block block--ask">
-<div class="block-head"><span class="block-label">Pause, then ask</span></div>
-<ul>
-<li>"What's the deliverable you actually hand over — the document, the table, the deck?"</li>
-<li>"How much of your time goes into <em>formatting</em> that, versus the thinking?"</li>
-</ul>
-<p class="wait">(wait)</p>
-</div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the artifact they'd want rendered)</span></div>
-<dl class="bg">
-<dt>Investigator</dt><dd>the background report, formatted, ready to lift into the case system.</dd>
-<dt>Analyst</dt><dd>the comparison table, rendered and exportable.</dd>
-<dt>Designer</dt><dd>the asset manifest as a table, plus a CSV.</dd>
-<dt>Knowledge worker</dt><dd>the extracted CSV, viewable and downloadable.</dd>
-<dt>Reporter</dt><dd>the Monday briefing, formatted to drop into email.</dd>
-<dt>Content</dt><dd>the post draft, rendered with headings, ready to paste.</dd>
-<dt>Form-filler</dt><dd>the filled template, laid out to match the form.</dd>
-<dt>Outreach</dt><dd>each proposal, rendered per customer.</dd>
-<dt>Exec</dt><dd>the one-page brief, formatted to print.</dd>
-</dl>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Iterate one change at a time. People try to fix five things in one message and lose track of which note did what.</p>
-</div></div></section>
-<section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Lesson 7</span><h2>Skills: packaged know-how, run the same way every time</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>A skill is a folder of instructions Claude loads when relevant. Two kinds: built-in (Excel, Word, PDF, maintained by Anthropic) and custom (your repeatable workflow, built just by talking). Clean rule: projects store knowledge (the <em>what</em>); skills perform tasks (the <em>how</em>).</p>
-</div><div class="block block--say">
-<div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"A skill is a set of instructions Claude keeps and applies whenever that task comes up. The built-in ones you've already used — that's how it makes spreadsheets and documents. The valuable ones are the ones you make yourself: you describe how you do a repeatable task — the steps, the rules, the format — and from then on it does that task your way, every time, without being re-told. You build it by talking to it; there's no code involved. For a firm, this is the part that matters: the way your most experienced person does the job can be written down once and used by everyone." (<code>framings.md</code> — skill file as institutional memory; adapt "senior person" to their role.)</p>
+<p>"This is the idea the whole programme has been building to. The rules your best person carries in their head, written down once, so the work comes out their way every time. That written-down thing is a skill: a folder with a plain-English file in it. Claude keeps only its one-line description in mind, and the moment your request matches, it pulls in the full instructions. Up to now those rules walked out the door at six o'clock. The skill file pulls them out of the head and onto disk." (<code>framings.md</code> — skill file as institutional memory; adapt "best person" to their role.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1084,181 +905,181 @@ th {
 </ul>
 <p class="wait">(wait — this lands hard for regulated and professional rooms.)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the custom skill they'd build)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the skill they'd write down once)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>a Subject Background Report skill (the PI exemplar).</dd>
-<dt>Analyst</dt><dd>a vendor-comparison skill with fixed columns and the "no data" rule.</dd>
-<dt>Designer</dt><dd>an asset-manifest skill that reads briefs and lists every variant.</dd>
-<dt>Knowledge worker</dt><dd>an invoice-to-CSV skill with a review queue for anything ambiguous.</dd>
-<dt>Reporter</dt><dd>a weekly-briefing skill in the five-section format.</dd>
-<dt>Content</dt><dd>a house-voice review skill that flags lines that drift off voice.</dd>
-<dt>Form-filler</dt><dd>a receipt-allocation skill that never drops a line and reconciles totals.</dd>
-<dt>Outreach</dt><dd>a proposal skill, one per customer, in a fixed five sections.</dd>
-<dt>Exec</dt><dd>an exec-brief skill: revenue, at-risk, decisions, steady.</dd>
+<dt>Investigator</dt><dd>the house report rules — eight sections, cite every source, never infer.</dd>
+<dt>Analyst</dt><dd>the vendor-comparison method — fixed columns, mark blanks "no data".</dd>
+<dt>Designer</dt><dd>the asset-manifest method — read each brief, list every variant, flag specs.</dd>
+<dt>Knowledge worker</dt><dd>the invoice-to-CSV method — the schema, and "leave blanks blank".</dd>
+<dt>Reporter</dt><dd>the weekly-briefing method — the five sections, attribute every line.</dd>
+<dt>Content</dt><dd>the house-voice rules — hook, problem, argument, close; no off-voice lines.</dd>
+<dt>Form-filler</dt><dd>the receipt-allocation method — one section each, totals must reconcile.</dd>
+<dt>Outreach</dt><dd>the proposal method — five sections, one per customer, no invented numbers.</dd>
+<dt>Exec</dt><dd>the exec-brief method — revenue, at-risk, decisions, steady; facts not editorial.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Don't conflate two different things both called "skills". The app <em>skill</em> here is one thing; the plain-English <em>skill file</em> you write in Claude Code (course 02, and the deep-dive "Introduction to Agent Skills") is the heart of our method. The deck itself points to that course. Name the difference or they'll merge them. (<code>train-the-trainer.md</code> — module 6 vs module 14.)</p>
+<p>Two confusions. First, the caption's point: a skill is not CLAUDE.md (which loads every conversation) and not a slash command (which you type) — a skill activates itself on a match. Name that difference. Second, this is the Claude Code skill, the plain-English SKILL.md you write, not the built-in app skill from Claude 101 that made you a spreadsheet. If they sat course 02, say so out loud or they'll merge the two (<code>train-the-trainer.md</code> — module 6 vs module 14).</p>
 </div></div></section>
-<section class="card" id="slide-10" data-slide="10"><header class="card-head"><span class="badge">10</span><div><span class="eyebrow">Lesson 8</span><h2>Connectors: bring your tools into the conversation</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Lesson 2</span><h2>Build one: folder, file, restart</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Instead of starting cold, Claude works with your actual data — searching, reading and acting across the apps you already use. MCP is the one standard behind it ("USB-C for AI"). Permissions are scoped and revocable; it sees only what you can see.</p>
+<p>Three steps: make a directory, write SKILL.md (a name and a description, then the instructions), restart. Claude loads every skill's name and description at startup and matches your request to them. When two skills share a name, priority decides: Enterprise, then Personal, then Project, then Plugins.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Connectors let Claude work with the tools you already use — Drive, Gmail, Slack and the rest — through one standard. Instead of copy-pasting things in, it reads the actual source. On the question everyone asks: it can only see what your own account can see. Connecting your email gives it your inbox, nobody else's. You choose what to connect, and you can disconnect any of it at any time."</p>
+<p>"Building one is three steps: a folder, a file called SKILL.md, restart. The file is plain English — a name, a one-line description of when to use it, then the instructions. You build it just by talking to Claude Code; you don't write the file by hand. On restart it reads every skill's name and description, and from then on it matches what you ask against them." (<code>framings.md</code> — Claude as translator; the work is describing the rules, not coding.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Where does the data you'd want it to work with actually live today?"</li>
-<li>"Which one tool, connected, would save you the most copy-paste?"</li>
+<li>"If you had to write the one-line description — <em>when</em> should Claude reach for your skill?"</li>
+<li>"What would you call it, so you'd know it from any other?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the connector that earns its place)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the description they'd write — "use this when...")</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>Drive where case files live — after the IT/compliance conversation.</dd>
-<dt>Analyst</dt><dd>the warehouse or Drive holding vendor responses.</dd>
-<dt>Designer</dt><dd>Adobe or Figma, plus Drive for brand assets.</dd>
-<dt>Knowledge worker</dt><dd>Gmail and Drive where the invoices land.</dd>
-<dt>Reporter</dt><dd>Slack and Drive where the status updates live.</dd>
-<dt>Content</dt><dd>the CMS or Notion holding the back catalogue.</dd>
-<dt>Form-filler</dt><dd>Drive or email where receipts arrive.</dd>
-<dt>Outreach</dt><dd>the CRM and Gmail for customer context.</dd>
-<dt>Exec</dt><dd>Drive, Slack and email for the board-pack inputs.</dd>
+<dt>Investigator</dt><dd>"...building a subject background report from a case folder."</dd>
+<dt>Analyst</dt><dd>"...comparing vendor or provider responses into a like-for-like table."</dd>
+<dt>Designer</dt><dd>"...listing every asset and variant a campaign brief needs."</dd>
+<dt>Knowledge worker</dt><dd>"...pulling a folder of invoices into a clean CSV."</dd>
+<dt>Reporter</dt><dd>"...consolidating the team's updates into the Monday briefing."</dd>
+<dt>Content</dt><dd>"...drafting a post in our house voice from the back catalogue."</dd>
+<dt>Form-filler</dt><dd>"...allocating a folder of receipts to the filing template."</dd>
+<dt>Outreach</dt><dd>"...drafting one proposal per customer from their file."</dd>
+<dt>Exec</dt><dd>"...turning the board inputs into a one-page brief."</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the data-safety gate for almost everyone. Slow down. Give the floor (Claude on the web, no install) and the ceiling (a local model, nothing leaves your network), and for banks and firms frame it as the IT/compliance discovery conversation. (<code>objections.md</code> — IT/compliance/privacy. <code>train-the-trainer.md</code> — module 2.)</p>
+<p>The priority ladder (Enterprise &gt; Personal &gt; Project &gt; Plugins) reads as corporate plumbing to a solo operator. Don't oversell it. The one line that matters for them is the caption's: keep names distinct, because if two skills share a name, priority silently picks the winner. Also reassure: Claude asks you to confirm before it loads the full skill, so nothing fires behind your back (<code>objections.md</code> — permission / auto).</p>
 </div></div></section>
-<section class="card" id="slide-11" data-slide="11"><header class="card-head"><span class="badge">11</span><div><span class="eyebrow">Lesson 9</span><h2>Enterprise Search: ask your whole company one question</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Lesson 3</span><h2>Keep SKILL.md lean: split the rest out</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>A pre-built project over your organisation's knowledge. "What happened while I was out?" answered across every connected source, with citations. Team and Enterprise plans only, and it returns only what you already have permission to see.</p>
+<p>Two fields are required (name, description), two optional (allowed-tools, model). Past about 500 lines, move detail into supporting files Claude opens only when it needs them: scripts to run, references to read, assets to use. This is progressive disclosure: a table of contents in context, not the whole document.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Enterprise Search lets you ask one question across everything your organisation has — the documents, the chat, the email — and get one answer, with citations back to the sources. It only returns what you already have permission to see; an administrator sets it up, and nothing changes about who can access what."</p>
+<p>"Keep the main file short. Two things are required, the name and the description, and a couple are optional. When a skill grows, you don't cram it into one giant file. You split the detail into side files Claude only opens when it actually needs them. And two controls earn their place even for non-technical work: you can fence a skill to read-only with allowed-tools, and you tell Claude to <em>run</em> a script rather than read it, so only the result costs anything, never the source." (Ties to <code>framings.md</code> — the context window: the folder is the memory, and you keep the working memory clean.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"What question do you ask three different people or systems to answer today?"</li>
-<li>"What would you ask your whole organisation, if you could ask it once?"</li>
+<li>"In your method, what's the one-page summary, and what's the thick reference you'd only pull out for the odd case?"</li>
+<li>"Is there a part of your work where you'd want it strictly read-only — look, don't touch?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the "while I was out" question)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the lean SKILL.md vs the side file it points to)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>"what's the latest across all open matters?"</dd>
-<dt>Analyst</dt><dd>"which vendor reviews are still missing data?"</dd>
-<dt>Designer</dt><dd>"where's the approved master for this campaign?"</dd>
-<dt>Knowledge worker</dt><dd>"which suppliers changed terms this quarter?"</dd>
-<dt>Reporter</dt><dd>"what shipped across all squads last week?" — the briefing, org-wide.</dd>
-<dt>Content</dt><dd>"what have we already published on this topic?"</dd>
-<dt>Form-filler</dt><dd>"what's still outstanding for this filing period?"</dd>
-<dt>Outreach</dt><dd>"what's the status of every deal in this segment?"</dd>
-<dt>Exec</dt><dd>"what happened while I was out?", answered across the whole company.</dd>
+<dt>Investigator</dt><dd>the eight-section rules in SKILL.md; the source-classification guide in a reference, read only on an odd source. Read-only on the case folder fits here.</dd>
+<dt>Analyst</dt><dd>the column set in SKILL.md; the comparability rules in a reference.</dd>
+<dt>Designer</dt><dd>the manifest format in SKILL.md; the retailer spec sheets as assets.</dd>
+<dt>Knowledge worker</dt><dd>the CSV schema in SKILL.md; the known supplier quirks in a reference.</dd>
+<dt>Reporter</dt><dd>the five sections in SKILL.md; the team roster as an asset.</dd>
+<dt>Content</dt><dd>the voice rules in SKILL.md; the back catalogue as reference posts.</dd>
+<dt>Form-filler</dt><dd>the allocation rules in SKILL.md; the category definitions in a reference.</dd>
+<dt>Outreach</dt><dd>the proposal format in SKILL.md; the knowledge base as a reference.</dd>
+<dt>Exec</dt><dd>the brief format in SKILL.md; the KPI definitions in a reference.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Be straight about the plan gate: a solo operator or small firm won't have this yet. Don't oversell a feature they can't switch on. Frame it as where this goes at team scale, then return to what they can do today.</p>
+<p>This is the slide where "I can't read code" surfaces — frontmatter, YAML, allowed-tools all look like gibberish. Head it off: "Don't read the code. The intelligence lives in the plain-English skill file. The rest is enforcement, and Claude writes and maintains it." (<code>objections.md</code> — can't read code; what is it doing.) Some technical slides here (the exact metadata fields) genuinely don't vary by domain; give the one shared example and don't force nine.</p>
 </div></div></section>
-<section class="card" id="slide-12" data-slide="12"><header class="card-head"><span class="badge">12</span><div><span class="eyebrow">Lesson 10</span><h2>Research: from one search to a researched report</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Lesson 4</span><h2>Five tools, five jobs</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Not a single lookup. Claude works agentically: it plans, runs many searches that build on each other, then writes it up with every claim cited. Minutes, not seconds.</p>
+<p>Skills load on demand when your request matches. The other four customisations solve different problems: CLAUDE.md is always loaded; subagents are work you delegate to an isolated context; hooks fire on an event like a file save; MCP connects external tools. Each fires at a different moment. Most real setups use several at once.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"The Research function is for questions that need real digging. Instead of one search, it runs many: it makes a plan, searches, reads what it finds, decides what to look up next, and writes the result up with a citation for every claim. That takes five to fifteen minutes, not seconds. Use it when a good answer needs twenty sources rather than one."</p>
+<p>"Five ways to shape Claude Code, and they're not rivals. A skill fires when your request matches it. CLAUDE.md is the always-on house rules. Subagents are work you hand off to run on its own. Hooks fire on an event, like saving a file. Connectors, MCP, plug in your outside tools. The skill is the right reach when the knowledge should apply automatically the moment the topic comes up. Pick by <em>when</em> each one fires." (CLAUDE.md is the project's standing rules; the skill is the on-demand method.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"What's a piece of digging you do that means opening twenty tabs and pulling it together?"</li>
-<li>"Where would a cited, written-up version of that save you an afternoon?"</li>
+<li>"Of your rules, which are 'always, every time' and which are 'only when this task comes up'?"</li>
+<li>"Which of your tools or systems would you most want Claude to reach into?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the research job)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the always-on rule vs the on-demand skill)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>open-source background research on a subject, every claim cited.</dd>
-<dt>Analyst</dt><dd>market-rate benchmarking across many sources for a vendor review.</dd>
-<dt>Designer</dt><dd>a competitor-campaign scan before a pitch.</dd>
-<dt>Knowledge worker</dt><dd>supplier due-diligence before onboarding.</dd>
-<dt>Reporter</dt><dd>a landscape read to frame the quarterly narrative.</dd>
-<dt>Content</dt><dd>source-gathering for a thought-leadership piece, cited.</dd>
-<dt>Form-filler</dt><dd>checking the current thresholds or allowances before a filing.</dd>
-<dt>Outreach</dt><dd>a prospect or company brief before writing the proposal.</dd>
-<dt>Exec</dt><dd>a market or competitor brief for the board, with citations.</dd>
+<dt>Investigator</dt><dd>always-on: "cite sources, never infer"; on a match: the full report method.</dd>
+<dt>Analyst</dt><dd>always-on: "no recommendations, comparison only"; on a match: the table build.</dd>
+<dt>Designer</dt><dd>always-on: the brand tokens; on a match: the asset manifest.</dd>
+<dt>Knowledge worker</dt><dd>always-on: "currency as written, never guess"; on a match: the CSV extract.</dd>
+<dt>Reporter</dt><dd>always-on: "attribute every line"; on a match: the weekly briefing.</dd>
+<dt>Content</dt><dd>always-on: the house-voice don'ts; on a match: the post draft.</dd>
+<dt>Form-filler</dt><dd>always-on: "never drop a receipt"; on a match: the allocation run.</dd>
+<dt>Outreach</dt><dd>always-on: "no invented numbers"; on a match: the per-customer proposal.</dd>
+<dt>Exec</dt><dd>always-on: "facts, not editorial"; on a match: the board brief.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Tie back to slide 5: the cited report is how you catch "confident but wrong". Verify the high-stakes facts even when it shows its sources. (<code>objections.md</code> — hallucinate.)</p>
+<p>The five-box grid invites "do I need all of this?" The honest answer: no, not to start. They need one skill on one painful task. Subagents, hooks and MCP are where this goes later, not the first build (<code>patterns.md</code> — set one concrete step). Resist the urge to teach all five.</p>
 </div></div></section>
-<section class="card" id="slide-13" data-slide="13"><header class="card-head"><span class="badge">13</span><div><span class="eyebrow">Lesson 11</span><h2>Whatever your role, there's a starting point</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Lesson 5</span><h2>Three ways to share: widest reach last</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The point isn't the feature list, it's the work. There's one concrete place to begin in every function. This is where you return to the task they named in intake.</p>
+<p>A skill gets more valuable the more it's shared. Three reaches: commit it to the repo so your team gets it on clone; ship it as a plugin so the community can install it; or push it through enterprise-managed settings so the whole organisation has it at highest priority, for the standards that <em>must</em> be consistent.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"We've seen a lot of features today. You don't need most of them yet. What you need is one task — a real one, from your actual week — to start with. Let's pick yours now." (Then go to their task from intake, not the grid on the slide.)</p>
+<p>"A skill one person uses is handy. The same skill shared across a team is a standard. Three ways out, by reach. Drop it in the project folder and everyone who opens that folder has it. Package it as a plugin for anyone to install. Or, for a firm, an admin pushes it to everyone, at top priority, for the rules that aren't optional. This is the upgrade from 'a tool I use' to 'how our firm works'." (<code>framings.md</code> — skill file as institutional memory; this is where it becomes an institutional asset, not a personal one.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Of everything we've seen, what's the one task you'd point this at first?"</li>
-<li>"What does 'good' look like for that task, so you'd know it worked?"</li>
-</ul>
-<p class="wait">(wait — their answer is the use case you build the rest of the relationship around.)</p>
-</div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the one starting task)</span></div>
-<dl class="bg">
-<dt>Investigator</dt><dd>turn one case file into a structured background report.</dd>
-<dt>Analyst</dt><dd>one vendor comparison you run every quarter.</dd>
-<dt>Designer</dt><dd>one campaign's full asset list.</dd>
-<dt>Knowledge worker</dt><dd>one month's invoices into a clean CSV.</dd>
-<dt>Reporter</dt><dd>this week's briefing from the team's updates.</dd>
-<dt>Content</dt><dd>one post drafted in house voice from the back catalogue.</dd>
-<dt>Form-filler</dt><dd>one filing period's receipts allocated to the template.</dd>
-<dt>Outreach</dt><dd>one segment's proposals, personalised.</dd>
-<dt>Exec</dt><dd>one board prep turned into a one-page brief.</dd>
-</dl>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Resist the urge to add features. The win is one task done, not ten shown. The next session is hands-on with their files, not more theory. (<code>patterns.md</code> — set the next concrete step.)</p>
-</div></div></section>
-<section class="card" id="slide-14" data-slide="14"><header class="card-head"><span class="badge">14</span><div><span class="eyebrow">Lesson 12</span><h2>One intelligence, where you already work</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>claude.ai is one front door. The same Claude shows up inside the tools you spend your day in — Claude Code, Slack, Excel, PowerPoint, Chrome — each version tuned to that surface. Where you go next depends on the work.</p>
-</div><div class="block block--say">
-<div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Everything we did today was in the Claude app, but the same Claude is available inside other tools: in Slack, in Excel and PowerPoint, in the browser, and in a version called Claude Code that works directly with the files and folders on your computer. So the question to leave with isn't whether to switch tools. It's which of the tools you already spend your day in would benefit most from having Claude inside it." (Hold the one term: it's <strong>Claude Code</strong>, every time.)</p>
-</div><div class="block block--ask">
-<div class="block-head"><span class="block-label">Pause, then ask</span></div>
-<ul>
-<li>"Which tool do you spend the most hours in each week?"</li>
-<li>"What would change if the intelligence we've been using lived <em>inside</em> that tool?"</li>
+<li>"If your method became the firm's standard, whose work would come out more like yours?"</li>
+<li>"Is there a rule in your world that shouldn't be optional for anyone?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(where they'd meet Claude next)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(what becomes the shared standard)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>Claude Code on the case folder — the durable, auditable surface.</dd>
-<dt>Analyst</dt><dd>Excel sidebar for models; Claude Code for the repeatable comparison.</dd>
-<dt>Designer</dt><dd>the design surfaces, plus Claude Code for batch asset generation.</dd>
-<dt>Knowledge worker</dt><dd>Claude Code on the folder, so the monthly job becomes a script.</dd>
-<dt>Reporter</dt><dd>Slack where the team talks; Claude Code for the recurring briefing.</dd>
-<dt>Content</dt><dd>the browser or CMS sidebar for drafting in place.</dd>
-<dt>Form-filler</dt><dd>Excel and PDF surfaces; Claude Code for the recurring allocation.</dd>
-<dt>Outreach</dt><dd>the CRM and email surface; Claude Code for batch proposals.</dd>
-<dt>Exec</dt><dd>PowerPoint for the board deck; Claude Code for the recurring brief.</dd>
+<dt>Investigator</dt><dd>the firm-wide report rules, so every analyst files the same shape.</dd>
+<dt>Analyst</dt><dd>the standard comparison, so every review is defensible the same way.</dd>
+<dt>Designer</dt><dd>the brand and spec rules, shared across the studio on every campaign.</dd>
+<dt>Knowledge worker</dt><dd>the extraction schema, so every month's CSV matches.</dd>
+<dt>Reporter</dt><dd>the briefing format, so every squad's update reads the same.</dd>
+<dt>Content</dt><dd>the house voice, enforced for everyone who writes.</dd>
+<dt>Form-filler</dt><dd>the allocation rules, so no one files differently at quarter end.</dd>
+<dt>Outreach</dt><dd>the proposal format, shared across the BD team.</dd>
+<dt>Exec</dt><dd>the brief format and KPI definitions, standard across every operator.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the natural bridge to <strong>Claude Code 101</strong> (course 02) and to running <code>/plato</code> themselves. End by pointing forward: the durable version of everything they liked today lives in a folder, and that's the next session.</p>
+<p>The caption's gotcha is easy to miss and matters once they delegate: subagents start with a clean context and don't inherit your skills, so you list them in the agent's <code>skills:</code> field, and the built-in agents can't use skills at all. Name it once; don't dwell, it's a later concern. For most rooms, the live point is the first reach: commit to the folder, and the team has it.</p>
 </div></div></section>
-<section class="card" id="slide-15" data-slide="15"><header class="card-head"><span class="badge">15</span><div><span class="eyebrow">Close</span><h2>Talk to it like a colleague. Give it your context. Iterate to the result.</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Lesson 6</span><h2>When it breaks, it's one of five things</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The whole course in one line: brief it like a colleague (stage, task, rules), then refine. Projects, artifacts and skills organise the work; connectors, search and research expand its reach; and it meets you in the tools you already use.</p>
+<p>Run the skills validator first, it catches structure before you debug logic. Then match symptom to fix: not triggering (improve the description, add phrases you'd really type), not loading (named dir, file named exactly SKILL.md, valid YAML), wrong skill used (make descriptions distinct), being shadowed (priority clash, rename or ask the admin), runtime error (deps, chmod +x, forward slashes). Most "won't trigger" problems are just the description.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"To sum up the session: give it proper context and a clear instruction, the way you would with a capable colleague, and when the answer isn't right, add what's missing and go again. That's the core of it. Projects, skills and connectors exist so you can do that with less repetition and in more places."</p>
+<p>"When a skill doesn't fire, don't panic and don't read the code. It's almost always the description: Claude couldn't see the link between what you typed and what the skill says it's for. The fix is to add the exact phrases you'd really use. Test it the way you'd actually ask, and any wording that fails to trigger, you add to the description. That single fix solves most of it." (Echoes Claude 101's slide 5: when it's off, it's almost always fixable, and the fix is context the description didn't carry.)</p>
+</div><div class="block block--ask">
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
+<ul>
+<li>"What are the three different ways you'd actually phrase this task out loud?"</li>
+<li>"When AI has missed your intent before, was it really wrong, or did it just not know what you meant?"</li>
+</ul>
+<p class="wait">(wait)</p>
+</div><div class="block block--grid">
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the trigger phrases to feed the description)</span></div>
+<dl class="bg">
+<dt>Investigator</dt><dd>"background check", "due diligence", "screen this subject", "run the file".</dd>
+<dt>Analyst</dt><dd>"compare these providers", "build the comparison", "vendor review".</dd>
+<dt>Designer</dt><dd>"what assets does this campaign need", "list the variants", "asset manifest".</dd>
+<dt>Knowledge worker</dt><dd>"pull these invoices", "extract to CSV", "process the inbox".</dd>
+<dt>Reporter</dt><dd>"do the Monday briefing", "consolidate the updates", "weekly summary".</dd>
+<dt>Content</dt><dd>"draft a post", "write this up in our voice", "blog this".</dd>
+<dt>Form-filler</dt><dd>"allocate these receipts", "fill the template", "categorise these".</dd>
+<dt>Outreach</dt><dd>"write proposals for these customers", "draft outreach", "one per account".</dd>
+<dt>Exec</dt><dd>"give me the board brief", "one-pager from these inputs", "what needs a decision".</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>This is the slide that most invites "what is it doing under the hood". Redirect every time: the description is plain English, the validator and <code>claude --debug</code> report by name, and if you want to change behaviour you change the skill file in English, not the code (<code>objections.md</code> — can't read code; what is it doing). The runtime-error row (deps, chmod, slashes) is genuinely developer territory and doesn't vary by domain; flag it as "your developer's department, not yours" and move on rather than forcing nine examples.</p>
+</div></div></section>
+<section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Close</span><h2>Write it once. Describe it well. Let Claude load it when it fits.</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>The whole course in one line: a folder and a SKILL.md turn a repeated instruction into automatic, shareable expertise, built lean, placed among the other tools, fixed by its description. The work is the describing, not the coding.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"If you keep one thing: write your method down once, describe well when it should fire, and let Claude load it when it fits. Everything today was a way to make that durable, sharable, and reliable. The rules that lived in someone's head now live on disk, and they come out the same every time."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Close with</span></div>
-<p>Their task from slide 13, and the next concrete step: "Next time we open your real folder and build the one you named." Then the session-improvement habit: <em>"at the end, tell it to look back at what we did badly today and save how we fixed it."</em> (<code>patterns.md</code> — close every session by teaching the system to improve.)</p>
+<p>Their skill from slide 1, and the next concrete step: "Next time we open your real folder and write that one." Then the session-improvement habit: <em>"at the end, tell it to look back at what we did badly today and save how we fixed it"</em> (<code>framings.md</code> — the system improves through use). For Praxis students, this is where Claude 101 and AI Fluency land: the skill file is the <em>how</em> behind "describe what good looks like, once".</p>
 </div></div></section>
 </main>
 <script>

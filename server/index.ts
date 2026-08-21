@@ -103,12 +103,27 @@ app.use((req, res, next) => {
   // handler and before Vite so the headers are set whichever one ends up serving the files.
   guardPythiaDemo(app);
 
+
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (process.env.NODE_ENV === "production") {
     serveStatic(app);
   } else {
+    // The course library is a folder of static pages, not a React route. In production
+    // express.static resolves /courses to its index.html; Vite's catch-all does not, and
+    // hands back the SPA shell instead. Serve it explicitly in development so the URL the
+    // blog posts link to behaves the same way locally.
+    const path = await import("path");
+    const coursesIndex = path.resolve(
+      process.cwd(),
+      "client",
+      "public",
+      "courses",
+      "index.html",
+    );
+    app.get(["/courses", "/courses/"], (_req, res) => res.sendFile(coursesIndex));
+
     const { setupVite } = await import("./vite");
     await setupVite(httpServer, app);
   }

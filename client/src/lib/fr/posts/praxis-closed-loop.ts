@@ -17,7 +17,7 @@ Ce qu'elle ne peut pas faire, c'est s'asseoir à côté de vous.
 
 ## Ce que Praxis ajoute
 
-Praxis s'appuie sur le programme d'Anthropic. La [bibliothèque de cours](https://tutto.one/courses) reprend les supports de seize de ces cours — de Claude 101 jusqu'à l'introduction aux sous-agents et à la maîtrise de l'IA pour les petites entreprises — adaptés à des séances accompagnées. Chaque séance part de la théorie posée par le cours Anthropic, puis fait une chose de plus : vous construisez quelque chose de réel avec, pendant la séance, sous mon regard.
+Praxis s'appuie sur le programme d'Anthropic. La [bibliothèque de cours](https://tutto.one/courses) reprend les supports de dix-sept de ces cours — des premiers pas avec l'IA jusqu'aux sous-agents et aux séances spécialisées — adaptés à des séances accompagnées, et chacun existe désormais en français comme en anglais. Chaque séance part de la théorie posée par le cours Anthropic, puis fait une chose de plus : vous construisez quelque chose de réel avec, pendant la séance, sous mon regard.
 
 La différence que cela produit est exactement celle que décrivent Tal et Aman. Quand vous construisez en direct — quand l'outil fait quelque chose d'inattendu, que le contexte sature, ou que la première version ne fait pas tout à fait ce qu'il fallait — vous vivez ces moments et nous les traversons ensemble. C'est là que la compréhension se forme réellement. Non pas en lisant, mais en heurtant le problème et en trouvant la sortie avec quelqu'un qui l'a déjà fait.
 
@@ -29,13 +29,16 @@ Voici le point qui me semble réellement utile : Anthropic propose une certifica
 
 C'est la boucle complète. Théorie, pratique, et un titre qui a du sens parce qu'il vient de ceux qui ont conçu le modèle.
 
-La [bibliothèque de cours Praxis](https://tutto.one/courses) couvre seize parcours :
+La [bibliothèque de cours Praxis](https://tutto.one/courses) couvre dix-sept parcours :
 
+- **Premiers pas avec l'IA** et **Pour commencer** — la rampe d'accès, pour ceux qui n'ont encore rien utilisé de tout cela
 - **Claude 101** et **Claude Code 101** — les fondations : le fonctionnement des outils et ce à quoi ils servent réellement
 - **Claude Code en pratique** et le parcours **API Anthropic** — la couche pratique : connecter des outils, construire pour de vrai
 - **Model Context Protocol** — comment l'IA se relie aux logiciels que vous utilisez déjà
 - **Compétences d'agent** et **sous-agents** — comment construire des systèmes qui agissent, et pas seulement qui répondent
-- Les parcours de **maîtrise de l'IA** pour les enseignants, les étudiants, les petites entreprises et les associations — les mêmes fondations appliquées à des contextes précis
+- **Capacités et limites de l'IA** — ce que les modèles savent faire, ce qu'ils ne savent pas faire, et comment distinguer les deux
+- Les parcours de **maîtrise de l'IA** pour les enseignants et les petites entreprises — les mêmes fondations appliquées à des contextes précis
+- Les séances spécialisées : **où Claude garde ce qu'il sait**, **ce qu'est une évaluation**, et **mesurer l'extraction** — la matière plus avancée, pour ceux qui construisent déjà
 
 À chacun correspond une séance Praxis : une heure guidée et pratique, où vous travaillez la matière sur un cas issu de votre propre activité plutôt que sur un exercice générique.
 
