@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { copy, useT, useLocale, SITE_TITLE } from "@/lib/i18n";
 import { usePageTr } from "@/lib/page-fr";
@@ -477,6 +478,17 @@ export default function UseCase() {
               <b className="text-foreground">{t(c.recordedTitle)}</b>
               {t(c.recordedBody)}
             </p>
+          </div>
+          <div className="mt-6 max-w-2xl rounded-2xl border border-border bg-secondary p-6">
+            <p className="leading-relaxed text-muted-foreground">
+              <b className="text-foreground">{t(c.hardwareTitle)}</b> {t(c.hardwareBody)}
+            </p>
+            <Link
+              href="/sovereign"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+            >
+              {t(c.hardwareCta)} <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </section>
 

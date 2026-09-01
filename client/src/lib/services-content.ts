@@ -110,6 +110,13 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
     },
     priceKey: "scriptBuildFrom",
     pricePrefix: STARTS_AT,
+    /**
+     * Sends the reader to the page that argues this card at length, the way
+     * Team Enablement below sends them to the programme. Someone weighing up
+     * where their data would run wants to see it before enquiring.
+     */
+    href: "/sovereign",
+    ctaLabel: { en: "See how it runs", fr: "Voir comment cela fonctionne" },
   },
   {
     title: "Team Enablement",

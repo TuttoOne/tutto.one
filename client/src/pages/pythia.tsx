@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { Link } from "wouter";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import {
   ProductHero,
@@ -254,6 +255,27 @@ export default function Pythia() {
               {t(copy.pythia.fitBody)}
             </p>
           </div>
+
+          {/* This page is written for litigation throughout, which leaves the
+              reader who arrived from a factory or an accounts department doing
+              the translation themselves. Send them somewhere written for them. */}
+          <Link
+            href="/sovereign"
+            className="group mt-5 flex items-center justify-between gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
+          >
+            <div>
+              <p className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                {t(copy.pythia.generalTitle)}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1 max-w-xl">
+                {t(copy.pythia.generalBody)}
+              </p>
+            </div>
+            <span className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-primary shrink-0">
+              {t(copy.pythia.generalCta)}
+              <ArrowRight className="w-4 h-4" />
+            </span>
+          </Link>
         </Section>
 
         <Section index="06" label={t(copy.pythia.s4Label)} intro={<p>{t(copy.pythia.s4Body)}</p>}>

@@ -23,9 +23,27 @@ export const copy = {
     about: { en: "About", fr: "À propos" },
     services: { en: "Services", fr: "Prestations" },
     work: { en: "Work", fr: "Réalisations" },
-    praxis: { en: "Praxis", fr: "Praxis" },
+    /**
+     * Points at /praxis, which keeps its name everywhere else. "Praxis"
+     * in the bar told a first-time visitor nothing about what was behind
+     * it; the page itself still opens on the name and explains it.
+     *
+     * The French is "Formation" rather than a translation of "Learn":
+     * it is the word the French market actually uses for this, and the
+     * one that signals fundable professional training.
+     */
+    praxis: { en: "Learn", fr: "Formation" },
     events: { en: "Events", fr: "Événements" },
-    pythia: { en: "Pythia", fr: "Pythia" },
+    /**
+     * The nav entry that used to read "Pythia" and point at /pythia. The name
+     * meant nothing to a reader who was not a litigator, so the bar now names
+     * the proposition and /pythia is reached from inside the page.
+     *
+     * The French is the noun, not the adjective: "souveraineté numérique" is
+     * ordinary political vocabulary in France, so the word arrives already
+     * meaning something. Bare "Souverain" would not.
+     */
+    sovereign: { en: "Sovereign", fr: "Souveraineté" },
     thinking: { en: "Thinking", fr: "Réflexions" },
     usecase: { en: "Use cases", fr: "Cas d'usage" },
     contact: { en: "Contact", fr: "Contact" },
@@ -588,6 +606,19 @@ export const copy = {
       fr: "Convenu pendant le projet, et non fixé d'avance. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
     },
 
+    /**
+     * Everything above this point is written for litigation. Somebody who is
+     * not a lawyer has usually worked out by now that it might apply to them
+     * anyway; this is where they are told so, and sent somewhere written for
+     * them rather than left to translate the rest themselves.
+     */
+    generalTitle: { en: "Not a law firm?", fr: "Vous n'êtes pas un cabinet d'avocats ?" },
+    generalBody: {
+      en: "The same system, on the same hardware, doing the work an accounts department or a machine shop already does by hand. There is a page written that way round.",
+      fr: "Le même système, sur le même matériel, faisant le travail qu'un service comptable ou un atelier accomplit déjà à la main. Une page est écrite dans ce sens-là.",
+    },
+    generalCta: { en: "See it for any business", fr: "Le voir pour toute entreprise" },
+
     etymPull: {
       en: "The Pythia was the Oracle at Delphi - the one you consulted when you needed an answer from everything that had been heard.",
       fr: "La Pythie était l'oracle de Delphes — celle que l'on consultait lorsqu'on voulait une réponse tirée de tout ce qui avait été entendu.",
@@ -600,6 +631,273 @@ export const copy = {
     ctaBody: {
       en: "Book a thirty-minute conversation. We'll walk through your documents and tell you what's possible.",
       fr: "Réservez un échange de trente minutes. Nous parcourons vos documents et vous disons ce qui est possible.",
+    },
+  },
+
+  /**
+   * The general front door at /sovereign.
+   *
+   * `pythia` above opens in legal register — disclosure sets, privilege, the
+   * Oracle at Delphi — so a reader who is not a litigator has to work out on
+   * their own that any of it applies to them. This block makes the general case
+   * first and puts the law firm where it belongs: in the evidence, not in the
+   * definition. Same product, same prices, different door.
+   *
+   * Most of the argument was already written elsewhere on this site — `applied`
+   * for the local-first case, `usecase` for the recorded runs. Where that is so,
+   * this block carries the compressed version and links out, rather than
+   * re-arguing it in slightly worse words.
+   */
+  sovereign: {
+    eyebrow: { en: "Pythia · Sovereign AI", fr: "Pythia · IA souveraine" },
+    title: {
+      en: "Everything your business holds, readable. Without any of it leaving the building.",
+      fr: "Tout ce que votre entreprise conserve, enfin lisible. Sans que rien ne sorte de vos murs.",
+    },
+    lead1: {
+      en: "Every business keeps more written material than anyone can read. Invoices, CVs, supplier certificates, contracts, signed delivery notes, photographs of paper, fifteen years of email. The answers are in there. Finding one is somebody's afternoon, every time.",
+      fr: "Toute entreprise conserve plus d'écrits que personne ne peut en lire. Factures, CV, certificats fournisseurs, contrats, bons de livraison signés, photographies de documents papier, quinze ans de courriels. Les réponses s'y trouvent. Aller en chercher une, c'est l'après-midi de quelqu'un, à chaque fois.",
+    },
+    lead2: {
+      en: "Pythia reads all of it and answers questions from it — and it runs on a computer you own, in your building. No cloud account, no upload, no file going anywhere. For a lot of businesses that is not a preference. It is the condition of doing the work at all.",
+      fr: "Pythia lit l'ensemble et répond aux questions à partir de ces documents — sur un ordinateur qui vous appartient, dans vos locaux. Aucun compte en ligne, aucun téléversement, aucun fichier qui s'en va ailleurs. Pour beaucoup d'entreprises, ce n'est pas une préférence. C'est la condition même pour que le travail puisse se faire.",
+    },
+    meta: {
+      en: "Your hardware · Nothing uploaded · 30 minutes",
+      fr: "Votre matériel · Rien n'est téléversé · 30 minutes",
+    },
+
+    s1Label: { en: "What it actually is", fr: "De quoi il s'agit" },
+    c1Title: { en: "A machine that has read everything", fr: "Une machine qui a tout lu" },
+    c1Qual: { en: "Your files · Not the internet", fr: "Vos fichiers · Pas l'internet" },
+    c1Body: {
+      en: "Point it at your shared drive, your accounting system, your email archive. It reads what is there — including the scans and the photographs of paper — and it answers from those files rather than from whatever a model happens to know.",
+      fr: "On le branche sur votre disque partagé, votre logiciel comptable, vos archives de courriels. Il lit ce qui s'y trouve — y compris les documents scannés et les photographies de papier — et répond à partir de ces fichiers, non de ce qu'un modèle sait par ailleurs.",
+    },
+    c2Title: { en: "A box in your building", fr: "Une machine dans vos murs" },
+    c2Qual: { en: "Your hardware · Your network", fr: "Votre matériel · Votre réseau" },
+    c2Body: {
+      en: "It sits on hardware you own, on your own network. Nothing is uploaded and there is no account to cancel. If your internet goes down, it keeps working.",
+      fr: "Il tourne sur du matériel qui vous appartient, sur votre propre réseau. Rien n'est téléversé et il n'y a aucun abonnement à résilier. Si votre connexion tombe, il continue de fonctionner.",
+    },
+    c3Title: { en: "It shows its working", fr: "Il montre d'où vient sa réponse" },
+    c3Qual: { en: "Every answer, sourced", fr: "Chaque réponse, sourcée" },
+    c3Body: {
+      en: "Every answer comes back with the document and the page it came from. Nobody has to take it on trust, and a new starter can check it.",
+      fr: "Chaque réponse revient avec le document et la page dont elle provient. Personne n'a à la croire sur parole, et un nouvel arrivant peut la vérifier.",
+    },
+
+    s2Label: { en: "Jobs it does", fr: "Ce qu'il fait" },
+    s2Title: {
+      en: "The work somebody is already doing by hand",
+      fr: "Le travail que quelqu'un fait déjà à la main",
+    },
+    s2Body: {
+      en: "Six jobs, in six different departments. None of them is exotic. All of them are somebody's week.",
+      fr: "Six tâches, dans six services différents. Aucune n'a rien d'exotique. Toutes constituent la semaine de quelqu'un.",
+    },
+    /**
+     * Cards 1 and 3 carry no link and no figures on purpose: nothing has been
+     * recorded for either, and `usecase.recordedBody` promises that a number on
+     * this site came out of a run that really happened. `jNote` says so rather
+     * than leaving the reader to notice.
+     */
+    j1Title: { en: "Invoices for payment", fr: "Les factures à payer" },
+    j1Qual: { en: "Accounts payable", fr: "Comptabilité fournisseurs" },
+    j1Body: {
+      en: "Supplier invoices arrive as PDFs, as scans, as photographs taken on a phone. Each one has to be matched to a purchase order, checked against the rate that was agreed, and stopped if it is a duplicate or the VAT is wrong. What comes back is the short list a person actually needs to look at.",
+      fr: "Les factures fournisseurs arrivent en PDF, en scan, en photographie prise au téléphone. Chacune doit être rapprochée du bon de commande, contrôlée au regard du tarif convenu, et bloquée s'il s'agit d'un doublon ou si la TVA est erronée. Ce qui revient, c'est la courte liste qu'une personne doit réellement examiner.",
+    },
+    j2Title: { en: "CVs and applications", fr: "CV et candidatures" },
+    j2Qual: { en: "Recruitment", fr: "Recrutement" },
+    j2Body: {
+      en: "Twelve hundred applications, five channels, six jobs, and no two written the same way. The rules go down in plain language before anything arrives. Then every application is screened against them, and every no carries the rule that stopped it.",
+      fr: "Mille deux cents candidatures, cinq canaux, six postes, et pas deux rédigées de la même façon. Les règles sont consignées en langage courant avant la première arrivée. Puis chaque candidature est examinée à leur aune, et chaque refus porte la règle qui l'a arrêtée.",
+    },
+    j3Title: { en: "Paper and scans", fr: "Le papier et les scans" },
+    j3Qual: { en: "Reading what was never typed", fr: "Lire ce qui n'a jamais été saisi" },
+    j3Body: {
+      en: "Delivery notes, signed forms, a certificate that arrived as a photograph. It reads them, pulls out the fields that matter, and tells you which ones it could not read rather than guessing at them.",
+      fr: "Bons de livraison, formulaires signés, un certificat arrivé sous forme de photographie. Il les lit, en extrait les champs qui comptent, et vous signale ceux qu'il n'a pas pu lire au lieu de les deviner.",
+    },
+    j4Title: { en: "Quality and supplier records", fr: "Qualité et dossiers fournisseurs" },
+    j4Qual: { en: "ISO 9001 · EN 9100", fr: "ISO 9001 · EN 9100" },
+    j4Body: {
+      en: "A twelve-person machine shop with three hundred documents and an auditor coming. Which certificates have lapsed, which procedure was never signed, which non-conformity has no closure record against it.",
+      fr: "Un atelier de mécanique de douze salariés, trois cents documents, et un auditeur qui arrive. Quels certificats sont périmés, quelle procédure n'a jamais été signée, quelle non-conformité n'a aucun enregistrement de clôture.",
+    },
+    j5Title: { en: "Regulatory returns", fr: "Les déclarations réglementaires" },
+    j5Qual: { en: "Reporting", fr: "Reporting réglementaire" },
+    j5Body: {
+      en: "Sixty-two thousand rows out of the core system every quarter, and some of them are wrong. Eight rules decide what can be reported, and somebody has to be able to defend every figure in it.",
+      fr: "Soixante-deux mille lignes sorties du système central chaque trimestre, dont certaines sont fausses. Huit règles déterminent ce qui peut être déclaré, et quelqu'un doit pouvoir défendre chacun des chiffres.",
+    },
+    j6Title: { en: "Checking against a standard", fr: "Le contrôle au regard d'une norme" },
+    j6Qual: { en: "Compliance", fr: "Conformité" },
+    j6Body: {
+      en: "Plans and documents checked against a published rulebook, with every finding traced back to the clause it came from.",
+      fr: "Des plans et des documents contrôlés au regard d'un référentiel publié, chaque constat étant rattaché à l'article dont il découle.",
+    },
+    jNote: {
+      en: "Four of these you can open or watch, and they are linked above. The other two are the same shape of work, described: we have not recorded a run of either, and would rather say so than let a number imply one.",
+      fr: "Quatre d'entre elles peuvent être ouvertes ou regardées, et les liens sont ci-dessus. Les deux autres sont la même forme de travail, décrite : nous n'en avons enregistré aucune exécution, et préférons le dire plutôt que de laisser un chiffre le faire croire.",
+    },
+    jWatch: { en: "Watch it run", fr: "Voir l'exécution" },
+    jDemo: { en: "Open the demonstration", fr: "Ouvrir la démonstration" },
+    jProject: { en: "See the project", fr: "Voir le projet" },
+    reportTitle: {
+      en: "And the monthly report nobody has time to run.",
+      fr: "Et le rapport mensuel que personne n'a le temps de produire.",
+    },
+    reportBody: {
+      en: "The database you already own, asked a question directly instead of exported to a spreadsheet once a month and rebuilt by hand. That one is worked through in full on the home page.",
+      fr: "La base de données que vous possédez déjà, interrogée directement au lieu d'être exportée vers un tableur une fois par mois et reconstruite à la main. Cet exemple est développé en entier sur la page d'accueil.",
+    },
+    reportCta: { en: "Read it there", fr: "Le lire là-bas" },
+
+    s3Label: { en: "Three you can watch", fr: "Trois à regarder" },
+    s3Body: {
+      en: "Three of the jobs above were recorded on an ordinary desktop machine. The longest took just over three seconds. Press the button and watch one happen.",
+      fr: "Trois des tâches ci-dessus ont été enregistrées sur un ordinateur de bureau ordinaire. La plus longue a pris un peu plus de trois secondes. Appuyez sur le bouton et regardez-en une se dérouler.",
+    },
+
+    sovereignTitle: { en: "What sovereign means here.", fr: "Ce que « souverain » veut dire ici." },
+    sovereignBody: {
+      en: "The data, the machine it runs on, and the decision about what happens to either one all belong to you. Not a clause in somebody's contract and not a setting in somebody's preferences page — a fact about where the wires go.",
+      fr: "Les données, la machine sur laquelle elles sont traitées, et la décision de ce qu'il advient de l'une comme de l'autre vous appartiennent. Pas une clause dans le contrat d'un tiers ni une case dans son écran de réglages : un fait, qui tient au trajet des câbles.",
+    },
+
+    s4Label: { en: "Why it runs in your building", fr: "Pourquoi il tourne chez vous" },
+    s4Title: {
+      en: "Four different reasons, one identical constraint",
+      fr: "Quatre raisons différentes, une contrainte identique",
+    },
+    s4Body: {
+      en: "Some businesses cannot send their files anywhere at all. A law firm cannot, because privilege forbids it. A manufacturer cannot, because the standard is licensed and the drawings are export-controlled. A clinic cannot, because of the patients. An accountant cannot, because of the clients. The reasons have nothing to do with one another. The constraint is the same one every time: the documents stay in the building.",
+      fr: "Certaines entreprises ne peuvent envoyer leurs fichiers nulle part. Un cabinet d'avocats ne le peut pas : le secret professionnel l'interdit. Un industriel ne le peut pas : la norme est sous licence et les plans sous contrôle export. Un cabinet médical ne le peut pas, à cause des patients. Un expert-comptable ne le peut pas, à cause de ses clients. Les raisons n'ont rien à voir entre elles. La contrainte, elle, est chaque fois la même : les documents restent dans les murs.",
+    },
+    w1Title: { en: "Privacy, obviously", fr: "La confidentialité, bien sûr" },
+    w1Body: {
+      en: "On-premise is not a setting somebody switches on in a preferences page. It is an architecture, and it is either true of your system or it is not.",
+      fr: "Le sur-site n'est pas une case à cocher dans un écran de réglages. C'est une architecture, et elle est vraie de votre système ou elle ne l'est pas.",
+    },
+    w2Title: { en: "It does not change under you", fr: "Rien ne bouge sous vos pieds" },
+    w2Body: {
+      en: "A cloud service is updated on somebody else's schedule, and a process that was defensible in March can quietly stop being so in June. A system on your own machine changes when you change it.",
+      fr: "Un service en nuage est mis à jour au calendrier d'un autre, et un processus défendable en mars peut cesser de l'être en juin sans que nul ne vous prévienne. Un système installé sur votre machine ne change que lorsque vous le changez.",
+    },
+    w3Title: { en: "The cost curve bends the other way", fr: "La courbe des coûts s'inverse" },
+    w3Body: {
+      en: "Cloud AI is priced per question, so the better it works for you the more of it you buy. Hardware you own is priced once.",
+      fr: "L'IA en nuage se facture à la question : mieux elle vous sert, plus vous en achetez. Le matériel que vous possédez se paie une fois.",
+    },
+    wMore: {
+      en: "That case is made properly on the home page, along with what running a model on your own machine actually involves — trade-offs included.",
+      fr: "Cet argument est développé comme il se doit sur la page d'accueil, avec ce qu'implique réellement l'exécution d'un modèle sur votre propre machine — arbitrages compris.",
+    },
+    wMoreCta: { en: "The longer argument", fr: "L'argument développé" },
+
+    hwLabel: { en: "What it runs on", fr: "Sur quoi il tourne" },
+    h1Title: { en: "One machine", fr: "Une seule machine" },
+    h1Body: {
+      en: "A tower with a good graphics card, standing in the same cupboard as your server. Not a data centre, and not a rack.",
+      fr: "Une tour équipée d'une bonne carte graphique, posée dans le même placard que votre serveur. Pas un centre de données, pas une baie.",
+    },
+    h2Title: { en: "You own it", fr: "Elle vous appartient" },
+    h2Body: {
+      en: "You buy the hardware, or we specify it and you buy it. There is no monthly fee keeping the software alive.",
+      fr: "Vous achetez le matériel, ou nous le spécifions et vous l'achetez. Aucun abonnement mensuel ne conditionne le fonctionnement du logiciel.",
+    },
+    h3Title: { en: "Or somewhere else entirely", fr: "Ou bien tout ailleurs" },
+    h3Body: {
+      en: "A private cloud, or a machine we host. The same system either way, and the choice is yours — which is what Your Infrastructure, Your Models already promises on the services page.",
+      fr: "Un nuage privé, ou une machine que nous hébergeons. Le même système dans tous les cas, et le choix vous revient — c'est ce que promet déjà « Votre infrastructure, vos modèles » sur la page des prestations.",
+    },
+    modelTitle: {
+      en: "And the model is a component, not the commitment.",
+      fr: "Et le modèle est un composant, pas un engagement.",
+    },
+    modelBody: {
+      en: "What you are handed at the end is a folder: your instructions in plain language, the scripts that do the work, your data. An open-weight model on hardware in your own building will run it. So will Mistral, or a frontier model, if that is what the work turns out to want. The choice stays reversible.",
+      fr: "Ce qu'on vous remet au bout du compte est un dossier : vos instructions en langage courant, les scripts qui font le travail, vos données. Un modèle à poids ouverts installé chez vous saura les exécuter. Mistral aussi, ou un modèle de premier plan si le travail l'exige. Le choix reste réversible.",
+    },
+
+    s5Label: { en: "Already running this way", fr: "Déjà en fonctionnement" },
+    s5Body: {
+      en: "Four systems built on the same principle, in four rooms that have nothing else in common.",
+      fr: "Quatre systèmes bâtis sur le même principe, dans quatre contextes qui n'ont rien d'autre en commun.",
+    },
+    ev1Title: {
+      en: "A sales system, on the client's own hardware",
+      fr: "Un système commercial, sur le matériel du client",
+    },
+    ev1Qual: { en: "Business development", fr: "Développement commercial" },
+    ev1Body: {
+      en: "6,675 prospects researched and profiled on a machine standing in the building. Open-weight models do the bulk of the reading and writing; a frontier model is called across one auditable boundary, with identifying detail held back.",
+      fr: "6 675 prospects recherchés et profilés sur une machine présente dans les locaux. Des modèles à poids ouverts assurent l'essentiel de la lecture et de la rédaction ; un modèle de premier plan n'est appelé qu'à travers une frontière unique et auditable, les éléments identifiants étant retenus.",
+    },
+    ev2Title: { en: "A law firm's document set", fr: "Le fonds documentaire d'un cabinet d'avocats" },
+    ev2Qual: {
+      en: "Litigation · The hardest version",
+      fr: "Contentieux · La version la plus exigeante",
+    },
+    ev2Body: {
+      en: "High volume, high stakes, and a privilege requirement that rules out the cloud entirely — the version of this problem where sending a file outside ends a career. It was built there first, which is why the rest of this page is not a promise.",
+      fr: "Gros volumes, enjeux élevés, et une exigence de secret professionnel qui exclut totalement le nuage — la version du problème où envoyer un fichier au-dehors met fin à une carrière. C'est là qu'il a d'abord été construit, et c'est pourquoi le reste de cette page n'est pas une promesse.",
+    },
+    ev3Title: { en: "Bomza", fr: "Bomza" },
+    ev3Qual: {
+      en: "Building regulations · South Africa",
+      fr: "Réglementation du bâtiment · Afrique du Sud",
+    },
+    ev3Body: {
+      en: "Building plans verified against a published national standard, with every finding traced back to the clause it comes from.",
+      fr: "Des plans de construction vérifiés au regard d'une norme nationale publiée, chaque constat étant rattaché à l'article dont il découle.",
+    },
+    ev4Title: { en: "EntityVault", fr: "EntityVault" },
+    ev4Qual: {
+      en: "Entity management · Consent-based sharing",
+      fr: "Gestion des entités · Partage sous consentement",
+    },
+    ev4Body: {
+      en: "Tokenised storage and consent-based collaboration, so records can be shared between parties without exposing the underlying data to any of them.",
+      fr: "Stockage tokenisé et collaboration sous consentement : les dossiers peuvent être partagés entre parties sans exposer à aucune d'elles les données sous-jacentes.",
+    },
+
+    bringLabel: { en: "What you would need to bring", fr: "Ce qu'il faudrait apporter" },
+    bringBody: {
+      en: "The work you already repeat. A few examples of it done properly. The software you already licence. And a person who can tell a right answer from a wrong one — that last one does not go away. Checking the output is the new job, and it is the part worth being clear about.",
+      fr: "Le travail que vous répétez déjà. Quelques exemples bien faits. Les logiciels sous licence que vous avez déjà. Et une personne capable de distinguer une bonne réponse d'une mauvaise : celle-là ne disparaît pas. Vérifier le résultat est le nouveau métier, et c'est la part sur laquelle il faut être clair.",
+    },
+
+    s6Label: { en: "Engagement", fr: "Modalités d'intervention" },
+    s6Body: {
+      en: "Three stages, each one a decision point rather than a commitment to the next. The same three whatever the trade.",
+      fr: "Trois étapes, chacune constituant un point de décision plutôt qu'un engagement pour la suivante. Les mêmes trois, quel que soit le métier.",
+    },
+    /** The general reading of `pythia.e1Body`, which says "for your practice". */
+    e1Body: {
+      en: "Two weeks. We look at your real documents and the way the work actually moves, and tell you what this would and would not do for you.",
+      fr: "Deux semaines. Nous examinons vos documents réels et la façon dont le travail circule vraiment, puis nous vous disons ce que cela ferait — et ne ferait pas — pour vous.",
+    },
+
+    legalTitle: {
+      en: "If your constraint is privilege",
+      fr: "Si votre contrainte est le secret professionnel",
+    },
+    legalBody: {
+      en: "There is a page written for litigation in particular — disclosure sets, cited answers, and the audit checks that go with them.",
+      fr: "Une page est écrite pour le contentieux en particulier : fonds de pièces, réponses sourcées, et les contrôles qui les accompagnent.",
+    },
+    legalCta: { en: "Read the Pythia page", fr: "Lire la page Pythia" },
+
+    ctaTitle: {
+      en: "What is the job that eats your week?",
+      fr: "Quelle est la tâche qui dévore votre semaine ?",
+    },
+    ctaBody: {
+      en: "Bring us the specific one, not the impressive one. Thirty minutes is usually enough to tell you honestly whether this is worth your time.",
+      fr: "Apportez-nous la tâche précise, pas la plus impressionnante. Trente minutes suffisent en général pour vous dire honnêtement si cela vaut votre temps.",
     },
   },
 
@@ -814,8 +1112,8 @@ export const copy = {
     },
     r3Title: { en: "See a whole system", fr: "Voir un système entier" },
     r3Body: {
-      en: "Pythia in full — what it does, what it costs, and an open demonstration you can click through without speaking to anybody.",
-      fr: "Pythia en entier — ce qu'il fait, ce qu'il coûte, et une démonstration ouverte que vous pouvez parcourir sans parler à personne.",
+      en: "Pythia in full — a system that reads everything you hold and answers from it, on a machine you own. What it does, what it costs, and an open demonstration you can click through without speaking to anybody.",
+      fr: "Pythia en entier — un système qui lit tout ce que vous conservez et répond à partir de là, sur une machine qui vous appartient. Ce qu'il fait, ce qu'il coûte, et une démonstration ouverte que vous pouvez parcourir sans parler à personne.",
     },
 
     ctaTitle: {
@@ -1148,6 +1446,18 @@ export const copy = {
       en: "Bring us the specific one, not the impressive one. Thirty minutes is usually enough to tell you honestly whether this is worth your time.",
       fr: "Apportez-nous la tâche précise, pas la plus impressionnante. Trente minutes suffisent en général pour vous dire honnêtement si cela vaut votre temps.",
     },
+
+    /**
+     * The third beat says "on your own machine", and until now the page left it
+     * at that. This names the system that does it and gives the reader
+     * somewhere to go and read about it.
+     */
+    hardwareTitle: { en: "Where these actually run.", fr: "Où tout cela s'exécute." },
+    hardwareBody: {
+      en: "On a machine in the building, reading files that never leave it. That is a system in its own right, and it has a page of its own.",
+      fr: "Sur une machine présente dans les locaux, qui lit des fichiers qui n'en sortent jamais. C'est un système à part entière, et il a sa propre page.",
+    },
+    hardwareCta: { en: "Sovereign AI", fr: "L'IA souveraine" },
   },
 
 } as const;

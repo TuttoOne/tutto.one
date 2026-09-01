@@ -18,6 +18,7 @@ import Praxis from "@/pages/praxis";
 import PraxisProgramme from "@/pages/praxis-programme";
 import Calendar from "@/pages/calendar";
 import Pythia from "@/pages/pythia";
+import Sovereign from "@/pages/sovereign";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import Contact from "@/pages/contact";
@@ -61,6 +62,10 @@ function Router() {
         <Route path="/usecase/" component={UseCase} />
         <Route path="/praxis" component={Praxis} />
         <Route path="/calendar" component={Calendar} />
+        {/* The general front door to Pythia, and what the nav now points at.
+           /pythia keeps its own URL and its legal copy: the two pages are
+           the same product written for two different readers. */}
+        <Route path="/sovereign" component={Sovereign} />
         <Route path="/pythia" component={Pythia} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />
