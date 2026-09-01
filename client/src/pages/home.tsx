@@ -4,12 +4,9 @@ import { AnimatedPointer } from "@/components/brand/AnimatedPointer";
 import { Link } from "wouter";
 import { ArrowDown } from "lucide-react";
 import { copy, useT } from "@/lib/i18n";
-import { usePreferences } from "@/lib/preferences";
-import { Plate } from "@/components/product/ProductPage";
 
 export default function Home() {
   const t = useT();
-  const { locale } = usePreferences();
 
   return (
     <Layout>
@@ -53,25 +50,6 @@ export default function Home() {
               <ArrowDown className="w-4 h-4 animate-bounce" />
             </div>
           </div>
-        </div>
-
-        {/* The plate sits between the hero and the explainer: it is what the
-            scroll hint above points at, and it states the whole argument in one
-            picture before the explainer takes it apart. Drawn per language,
-            because the lettering is inside the drawing.
-
-            This is the final crop rather than the full plate: no headline, and
-            tighter around the basket. The hero directly above has already made
-            that claim in larger type, and the drawing repeating it in hand
-            lettering read as the page saying the same thing twice. */}
-        <div className="mb-20">
-          <Plate
-            src={`/artwork/skills-final-${locale === "fr" ? "fr" : "en"}.webp`}
-            width={1672}
-            height={761}
-            alt={t(copy.plates.skills)}
-            caption={t(copy.home.plateSkillsCaption)}
-          />
         </div>
 
         <AppliedExplainer />

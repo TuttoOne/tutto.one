@@ -171,14 +171,6 @@ export default function Sovereign() {
         />
 
         <Section index="01" label={t(c.s1Label)}>
-          <Plate
-            src="/artwork/hands.webp"
-            width={1254}
-            height={1254}
-            alt={t(copy.plates.hands)}
-            caption={t(c.plateHandsCaption)}
-            className="mb-10 max-w-sm"
-          />
           <CardGrid cols={3}>
             {what.map((card) => (
               <FeatureCard

@@ -141,12 +141,12 @@ export default function Praxis() {
           intro={<p>{t(copy.praxis.s3Body)}</p>}
         >
           <Plate
-            src="/artwork/computer.webp"
-            width={1024}
-            height={1024}
-            alt={t(copy.plates.computer)}
-            caption={t(copy.praxis.plateComputerCaption)}
-            className="mb-10 max-w-sm"
+            src="/artwork/file-on-disk.webp"
+            width={1800}
+            height={1347}
+            alt={t(copy.plates.fileOnDisk)}
+            caption={t(copy.praxis.plateFileOnDiskCaption)}
+            className="mb-10"
           />
 
           <div className="grid md:grid-cols-2 gap-5 items-start">

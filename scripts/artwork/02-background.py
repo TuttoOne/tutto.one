@@ -33,7 +33,11 @@ FILES = {
  'EN-ContextWindow.png':'EN-Context', 'FR-ContextWindow.png':'FR-Context',
  'computer.png':'Computer', 'hands.png':'Hands', 'people.png':'People',
  'hallicination.png':'Hallucination', 'man.png':'Man', 'woman.png':'Woman',
- 'woman2.png':'Woman2', 'Cafe.png':'Cafe', 'Sovreign.webp':'Sovereign',
+ 'woman2.png':'Woman2', 'lawyer.png':'Lawyer', 'builder.png':'Builder',
+ 'file on disk.png':'FileOnDisk', 'calendar.png':'Calendar',
+ # long generated filename, kept as supplied
+ 'tutto_one_this_style_with_orange_not_red._a_local_teacher_ins_967539ae-993c-43db-a2e5-4d75eed6cc43_2.png':'Teacher',
+ 'sovreign.png':'Sovereign',
 }
 
 def ground(a):

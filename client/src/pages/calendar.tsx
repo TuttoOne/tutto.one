@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Plate } from "@/components/product/ProductPage";
 import { Link } from "wouter";
 import { Layout } from "@/components/layout/Layout";
 import { cn } from "@/lib/utils";
@@ -134,6 +135,17 @@ export default function Calendar() {
           </div>
         </header>
 
+        {/* What an evening is actually for, before the dates. Kept to a spot:
+            the header above it is already carrying a very large headline. */}
+        <Plate
+          src="/artwork/hands.webp"
+          width={1254}
+          height={1254}
+          alt={t(copy.plates.hands)}
+          caption={t(c.plateHandsCaption)}
+          className="mt-12 max-w-sm"
+        />
+
         <section className="mt-14 md:mt-20">
           <h2 className="font-serif font-bold text-2xl tracking-tight">{t(c.onlineTitle)}</h2>
           <p className="mt-1.5 max-w-prose text-[15px] text-muted-foreground">{t(c.onlineIntro)}</p>
@@ -250,6 +262,16 @@ export default function Calendar() {
             </div>
           ))}
         </section>
+
+        {/* Ahead of the joining instructions, where a reader is picking a date. */}
+        <Plate
+          src="/artwork/calendar.webp"
+          width={1800}
+          height={1347}
+          alt={t(copy.plates.calendar)}
+          caption={t(c.plateCalendarCaption)}
+          className="mt-14 md:mt-20"
+        />
 
         <section className="mt-14 md:mt-20 rounded-2xl bg-secondary/30 border border-border p-7 md:p-10 flex flex-col gap-3.5">
           <h2 className="font-serif font-bold text-2xl tracking-tight">{t(c.joinTitle)}</h2>

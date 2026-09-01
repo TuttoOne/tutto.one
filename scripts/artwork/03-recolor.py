@@ -42,11 +42,15 @@ JOBS={
  # frame ends up with two reds and an amber in it. The tricolore on the basket
  # keeps its red — an amber stripe stops reading as the French flag.
  'Hallucination': ('Hallucination', None, [(1716,378,1752,416)]),
- # Both of these are red throughout rather than red in one place: the poster
- # ground is already gone by this point, so what is left is cabling, screen text
- # and signage, and it all moves together.
+ # These are red throughout rather than red in one place, so what is left after
+ # the ground pass — cabling, screen text, a jumper, pinned pages, a bar chart —
+ # all moves together.
  'Sovereign': ('Sovereign', None),
- 'Cafe':      ('Cafe', None),
+ 'Lawyer':    ('Lawyer', None),
+ 'Teacher':   ('Teacher', None),
+ 'Builder':   ('Builder', None),
+ 'FileOnDisk':('FileOnDisk', None),
+ 'Calendar':  ('Calendar', None),
 }
 
 def to_hsv(a):

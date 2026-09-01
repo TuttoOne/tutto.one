@@ -15,11 +15,13 @@ ORANGE = {
     'EN-Skills':'skills-en', 'FR-Skills':'skills-fr',
     'EN-Skills-Final':'skills-final-en', 'FR-Skills-Final':'skills-final-fr',
     'EN-Context':'context-en', 'FR-Context':'context-fr',
-    'People':'people', 'Hallucination':'hallucination',
-    'Sovereign':'sovereign', 'Cafe':'cafe',
+    'Hallucination':'hallucination',
+    # 'People' is still processed but retired from the site, so it is not shipped
+    'Lawyer':'lawyer', 'Teacher':'teacher', 'Builder':'builder', 'FileOnDisk':'file-on-disk', 'Calendar':'calendar',
+    # 'Sovereign' and 'People' are still processed but not on any page, so not shipped
 }
 # no red of ours to move, so these come straight off the background pass
-PLAIN = {'Computer':'computer', 'Hands':'hands', 'Man':'man', 'Woman':'woman', 'Woman2':'woman2'}
+PLAIN = {'Hands':'hands', 'Man':'man', 'Woman':'woman', 'Woman2':'woman2'}
 
 MAXW = 1800   # nothing is displayed wider than ~1000px, so this is already 2x
 os.makedirs(DST, exist_ok=True)

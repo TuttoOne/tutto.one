@@ -138,12 +138,12 @@ export default function Services() {
 
         <Section index="01" label={t(copy.waysIn.s1Label)}>
           <Plate
-            src="/artwork/people.webp"
-            width={1024}
-            height={1024}
-            alt={t(copy.plates.people)}
-            caption={t(copy.waysIn.platePeopleCaption)}
-            className="mb-10 max-w-sm"
+            src="/artwork/teacher.webp"
+            width={1800}
+            height={1347}
+            alt={t(copy.plates.teacher)}
+            caption={t(copy.waysIn.plateTeacherCaption)}
+            className="mb-10"
           />
 
           <div className="grid md:grid-cols-2 gap-5">

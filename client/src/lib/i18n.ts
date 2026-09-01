@@ -173,9 +173,9 @@ export const copy = {
    */
   waysIn: {
     /** Caption for the spot drawing in section 01. */
-    platePeopleCaption: {
-      en: "You are not hiring six specialists. You are writing down what six specialists would know.",
-      fr: "Vous n'embauchez pas six spécialistes. Vous écrivez ce que six spécialistes sauraient.",
+    plateTeacherCaption: {
+      en: "The second way in. An evening in a room like this one is where most people find out the work is smaller than they feared.",
+      fr: "La seconde façon d'entrer. Une soirée dans une salle comme celle-ci, c'est là que la plupart découvrent que le travail est plus petit qu'ils ne le craignaient.",
     },
     eyebrow: { en: "How we work", fr: "Notre façon de travailler" },
     title: { en: "Two ways in", fr: "Deux portes d'entrée" },
@@ -308,15 +308,6 @@ export const copy = {
     /** Labels the arrow under the hero. It used to read "our work", because the
      *  portfolio sat below; what sits below now is the case for the work. */
     scrollHint: { en: "How it works", fr: "En pratique" },
-    /**
-     * Sits under the plate at the top of the page. Short on purpose: the hero
-     * has already made the claim and the explainer below argues it, so this
-     * only has to say what the reader is looking at.
-     */
-    plateSkillsCaption: {
-      en: "Skills are written instructions, not staff — and the model that reads them can be one you run yourself.",
-      fr: "Les skills sont des instructions écrites, pas des salariés — et le modèle qui les lit peut être un modèle que vous faites tourner vous-même.",
-    },
   },
 
   /**
@@ -338,17 +329,25 @@ export const copy = {
       en: "A woman at the centre of a brain, a mail client, a code editor and a spreadsheet, each joined to her by a single line.",
       fr: "Une femme au centre d'un cerveau, d'une messagerie, d'un éditeur de code et d'un tableur, chacun relié à elle par un trait.",
     },
-    computer: {
-      en: "A desk drawn in ink: a lamp, a laptop showing a chart, a calculator, an open notebook and a cup of coffee.",
-      fr: "Un bureau dessiné à l'encre : une lampe, un portable affichant un graphique, une calculatrice, un carnet ouvert et une tasse de café.",
+    fileOnDisk: {
+      en: "An orange document folder, thick with papers, standing upright on an outsized floppy disk.",
+      fr: "Un dossier orange, épais de papiers, dressé sur une disquette surdimensionnée.",
     },
     hallucination: {
       en: "The same Paris street twice. In the first a puzzle piece is missing from the sky, marked with a question mark. In the second the gap has been filled with a hot-air balloon shaped like a beret.",
       fr: "La même rue parisienne, deux fois. Sur la première, une pièce de puzzle manque dans le ciel, marquée d'un point d'interrogation. Sur la seconde, le trou a été comblé par une montgolfière en forme de béret.",
     },
-    people: {
-      en: "A basket of drawn faces, one woman at the front and the rest ranged behind her.",
-      fr: "Un panier de visages dessinés, une femme au premier plan et les autres rangés derrière elle.",
+    teacher: {
+      en: "A speaker in an orange shirt standing in front of a seated audience, gesturing at a chart of six rising bars on the wall behind him.",
+      fr: "Un intervenant en chemise orange devant un public assis, désignant un graphique de six barres croissantes sur le mur derrière lui.",
+    },
+    calendar: {
+      en: "A spiral desk calendar with an orange header band and an orange pencil lying across it, against a pale sky with ink-drawn clouds.",
+      fr: "Un calendrier à spirale au bandeau orange, un crayon orange posé en travers, sur un ciel pâle aux nuages dessinés à l'encre.",
+    },
+    builder: {
+      en: "Someone in a hard hat holding a large plan open behind a computer case with its side off, surrounded by tools, rolled drawings, a monitor and a keyboard.",
+      fr: "Quelqu'un en casque de chantier déployant un grand plan derrière un boîtier d'ordinateur ouvert, entouré d'outils, de plans roulés, d'un écran et d'un clavier.",
     },
     portraitA: {
       en: "A drawn portrait of a man in glasses, a jacket and a tie.",
@@ -366,9 +365,9 @@ export const copy = {
       en: "A strip explaining a context window. A brain fills with notes and faces until a gauge reads full and nothing more will go in; then two ways round it — looking things up in an outside store when needed, and summarising old memories to free space.",
       fr: "Une planche expliquant la fenêtre de contexte. Un cerveau se remplit de notes et de visages jusqu'à ce qu'une jauge affiche « plein » et que plus rien n'entre ; puis deux façons de contourner le problème — aller chercher l'information dans une réserve extérieure au moment voulu, et résumer les anciens souvenirs pour libérer de la place.",
     },
-    cafe: {
-      en: "A bar owner in a striped shirt and apron, leaning on his counter in front of the bottles, the taps and a handwritten café sign.",
-      fr: "Un patron de bar en marinière et tablier, accoudé à son comptoir devant les bouteilles, les tireuses et une pancarte de café écrite à la main.",
+    lawyer: {
+      en: "Seen from behind, someone in an orange jumper at a desk buried in paper: stacks either side, an open book, a typewriter, and pages pinned across the bookshelves and hanging from the ceiling.",
+      fr: "Vu de dos, quelqu'un en pull orange à un bureau enseveli sous le papier : des piles de chaque côté, un livre ouvert, une machine à écrire, et des feuilles punaisées sur les rayonnages et suspendues au plafond.",
     },
     skills: {
       en: "Claude, Mistral and a code editor on one side, Hugging Face, Kimi and Ollama on the other, around a basket of specialists labelled research, writing, data, automation, design and communication. The banner reads: skills = specialists.",
@@ -472,9 +471,9 @@ export const copy = {
       en: "The assistant's memory is a room, not a warehouse. Fill it and the oldest things fall out — which is why the folder holds the rules on disk, where they are read fresh each time rather than remembered.",
       fr: "La mémoire de l'assistant est une pièce, pas un entrepôt. Remplissez-la et les plus anciens éléments tombent — d'où les règles conservées sur le disque, relues à chaque fois plutôt que mémorisées.",
     },
-    plateComputerCaption: {
-      en: "No new software on the machine. The same desk, the same files, one folder more.",
-      fr: "Aucun logiciel de plus sur la machine. Le même bureau, les mêmes fichiers, un dossier de plus.",
+    plateFileOnDiskCaption: {
+      en: "This is the whole artefact. Not an account and not a platform: a folder you can copy, back up, and open on any machine you own.",
+      fr: "C'est là tout l'objet. Pas un compte, pas une plateforme : un dossier que vous pouvez copier, sauvegarder et ouvrir sur n'importe quelle machine qui vous appartient.",
     },
     s3Title: { en: "A folder on disk.", fr: "Un dossier sur le disque." },
     s3Body: {
@@ -876,10 +875,6 @@ export const copy = {
       en: "The specialists in the basket are skills, not staff: folders of written instructions the assistant picks up when the work calls for them. Which model reads them stays your choice — including open ones running on your own machine, on your own files.",
       fr: "Les spécialistes du panier sont des skills, pas des salariés : des dossiers d'instructions écrites que l'assistant reprend quand le travail l'exige. Le modèle qui les lit reste votre choix — y compris un modèle ouvert, sur votre machine et sur vos fichiers.",
     },
-    plateHandsCaption: {
-      en: "One assistant, reaching the things you already use. None of this is a new place to log in.",
-      fr: "Un seul assistant, qui atteint ce que vous utilisez déjà. Rien de tout cela n'est un nouvel endroit où se connecter.",
-    },
     platePortraitsCaption: {
       en: "Somebody in accounts, somebody in recruitment, somebody in quality. The six jobs below are theirs, and all six are being done by hand this week.",
       fr: "Quelqu'un à la comptabilité, quelqu'un au recrutement, quelqu'un à la qualité. Les six tâches ci-dessous sont les leurs, et toutes les six se font à la main cette semaine.",
@@ -1170,18 +1165,18 @@ export const copy = {
       fr: "Chacun de ces systèmes est présenté plus en détail, captures et exemples d'échanges à l'appui, dans les réalisations.",
     },
 
-    plateCafeCaption: {
-      en: "Not a technology company. The paperwork behind a counter like this one is the work — the orders, the supplier records, the returns nobody has time for.",
-      fr: "Pas une entreprise de technologie. La paperasse derrière un comptoir comme celui-ci, c'est ça le travail — les commandes, les fiches fournisseurs, les déclarations que personne n'a le temps de faire.",
+    /** Sits above section 03. Short: the section heading below does the arguing. */
+    plateSkillsCaption: {
+      en: "Skills are written instructions, not staff — and the model that reads them can be one you run yourself.",
+      fr: "Les skills sont des instructions écrites, pas des salariés — et le modèle qui les lit peut être un modèle que vous faites tourner vous-même.",
     },
-    /**
-     * The same drawing carries section 01 of /services, where it argues that the
-     * specialists are written down rather than hired. Here it has to say the
-     * quieter thing: that what is written down sits on your own disk.
-     */
-    platePeopleCaption: {
-      en: "The specialists are skills — folders of written instructions, sitting on a disk you own. Nothing in the basket is a service you rent by the month.",
-      fr: "Les spécialistes sont des skills — des dossiers d'instructions écrites, posés sur un disque qui vous appartient. Rien dans le panier n'est un service qui se loue au mois.",
+    plateLawyerCaption: {
+      en: "One of those rooms. A disclosure set runs to 150,000 documents and nobody can read it in the time there is, so the work is not reading faster: it is making the pile answerable.",
+      fr: "Une de ces pièces. Un dossier de communication de pièces compte 150 000 documents que personne ne peut lire dans le temps imparti ; le travail n'est donc pas de lire plus vite, mais de rendre la pile interrogeable.",
+    },
+    plateBuilderCaption: {
+      en: "Local first is a building decision before it is a privacy one. The case comes off, the plan is on the table, and the machine it runs on is one you can put a hand on.",
+      fr: "Le local d'abord est un choix de construction avant d'être un choix de confidentialité. Le boîtier s'ouvre, le plan est sur la table, et la machine qui le fait tourner, vous pouvez la toucher de la main.",
     },
     s5Label: { en: "On your own machine", fr: "Sur votre propre machine" },
     s5Title: {
@@ -1263,6 +1258,15 @@ export const copy = {
    * fragments that read correctly in both languages around an inserted figure.
    */
   calendar: {
+    plateCalendarCaption: {
+      en: "Dates, not a course. Nothing assumes you were there last time, so pick the evening that suits and come to that one.",
+      fr: "Des dates, pas un cursus. Rien ne suppose que vous étiez là la fois précédente : choisissez la soirée qui vous convient et venez à celle-là.",
+    },
+    /** Caption for the drawing under the header. */
+    plateHandsCaption: {
+      en: "What an evening is for: one person, and the tools they already had, wired to talk to each other.",
+      fr: "C'est à cela que sert une soirée : une personne, et les outils qu'elle avait déjà, reliés entre eux.",
+    },
     eyebrow: { en: "Praxis · Autumn 2026", fr: "Praxis · Automne 2026" },
     title: { en: "Applied AI Evenings", fr: "Les soirées IA appliquée" },
     leadA: {

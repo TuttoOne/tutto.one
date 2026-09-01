@@ -146,6 +146,20 @@ export function AppliedExplainer() {
         </p>
       </Section>
 
+      {/* Sits above section 03 rather than under the hero: the argument for what
+          a skill is lands better next to "why this matters" than as the first
+          thing on the page. Drawn per language, because the lettering is inside
+          the drawing, and it is the final crop, which carries no headline of its
+          own to compete with the section heading below it. */}
+      <Plate
+        src={`/artwork/skills-final-${locale === "fr" ? "fr" : "en"}.webp`}
+        width={1672}
+        height={761}
+        alt={t(copy.plates.skills)}
+        caption={t(copy.applied.plateSkillsCaption)}
+        className="mt-16"
+      />
+
       <Section
         index="03"
         label={t(copy.applied.s3Label)}
@@ -173,11 +187,11 @@ export function AppliedExplainer() {
         intro={<p>{t(copy.applied.s4Body)}</p>}
       >
         <Plate
-          src="/artwork/cafe.webp"
+          src="/artwork/lawyer.webp"
           width={1800}
           height={1347}
-          alt={t(copy.plates.cafe)}
-          caption={t(copy.applied.plateCafeCaption)}
+          alt={t(copy.plates.lawyer)}
+          caption={t(copy.applied.plateLawyerCaption)}
           className="mb-10"
         />
 
@@ -199,12 +213,12 @@ export function AppliedExplainer() {
 
       <Section index="05" label={t(copy.applied.s5Label)} title={t(copy.applied.s5Title)}>
         <Plate
-          src="/artwork/people.webp"
-          width={1024}
-          height={1024}
-          alt={t(copy.plates.people)}
-          caption={t(copy.applied.platePeopleCaption)}
-          className="mb-10 max-w-sm"
+          src="/artwork/builder.webp"
+          width={1800}
+          height={1347}
+          alt={t(copy.plates.builder)}
+          caption={t(copy.applied.plateBuilderCaption)}
+          className="mb-10"
         />
 
         <CardGrid cols={3}>

@@ -35,8 +35,13 @@ pixel", because most of the red in this set is not ours to move:
 | --- | --- | --- |
 | 4D, Flow, Skills, Context, People | beanies, lips | checkmarks, pins, numerals, hearts, the RAG label, the red X, the Claude and Mistral marks |
 | Hallucination | awnings, chair weave, balloon, arrow | the tricolore on the balloon basket |
-| Sovereign, Cafe | everything left after the ground swap — cabling, screen text, walls, signage | — |
-| computer, hands, man, woman, woman2 | nothing | the only red in `hands.png` is the Gmail and Mistral marks; the rest carry none |
+| Lawyer, Teacher, Builder, FileOnDisk, Sovereign | everything — a jumper, pinned pages, a bar chart, a hard hat, a folder, cabling and screen text all move together | — |
+| hands, man, woman, woman2 | nothing | the only red in `hands.png` is the Gmail and Mistral marks; the rest carry none |
+
+Not everything processed is shipped. `04-export.py` writes only what a page
+actually uses, so drawings that have been swapped out — the basket, the desk, the
+brain-on-a-machine — stay available as masters under `artwork/orange/` without
+adding weight to the build.
 
 Region boxes and the glyph coordinates in `01-banner.py` are measured per file.
 If a plate is redrawn they need re-measuring.
