@@ -4,7 +4,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { ClosingCta, ProductHero, Section } from "@/components/product/ProductPage";
+import { ClosingCta, Plate, ProductHero, Section } from "@/components/product/ProductPage";
 import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
 import { DEFAULT_SERVICES, localiseService, type ServiceItem } from "@/lib/services-content";
@@ -137,6 +137,15 @@ export default function Services() {
         />
 
         <Section index="01" label={t(copy.waysIn.s1Label)}>
+          <Plate
+            src="/artwork/people.webp"
+            width={1024}
+            height={1024}
+            alt={t(copy.plates.people)}
+            caption={t(copy.waysIn.platePeopleCaption)}
+            className="mb-10 max-w-sm"
+          />
+
           <div className="grid md:grid-cols-2 gap-5">
             <Column
               heading={t(copy.waysIn.buildHeading)}

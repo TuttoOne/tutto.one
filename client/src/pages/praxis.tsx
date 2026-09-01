@@ -10,6 +10,7 @@ import {
   Etymology,
   ClosingCta,
   Eyebrow,
+  Plate,
 } from "@/components/product/ProductPage";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
@@ -31,6 +32,9 @@ export default function Praxis() {
       document.title = SITE_TITLE;
     };
   }, [locale]);
+
+  /** The plates are lettered by hand, so each is drawn twice; pick the reader's. */
+  const plate = (name: string) => `/artwork/${name}-${locale === "fr" ? "fr" : "en"}.webp`;
 
   const ingredients = [
     { numeral: "i.", title: t(copy.praxis.ing1Title), qualifier: t(copy.praxis.ing1Qual), body: t(copy.praxis.ing1Body) },
@@ -73,7 +77,24 @@ export default function Praxis() {
           label={t(copy.praxis.s1Label)}
           title={t(copy.praxis.s1Title)}
           intro={<p>{t(copy.praxis.s1Body)}</p>}
-        />
+        >
+          <Plate
+            src={plate("4d")}
+            width={1672}
+            height={941}
+            alt={t(copy.plates.fourD)}
+            caption={t(copy.praxis.plate4dCaption)}
+          />
+          <div className="mt-10">
+            <Plate
+              src="/artwork/hallucination.webp"
+              width={2118}
+              height={726}
+              alt={t(copy.plates.hallucination)}
+              caption={t(copy.praxis.plateHallucinationCaption)}
+            />
+          </div>
+        </Section>
 
         <Section index="02" label={t(copy.praxis.s2Label)}>
           <CardGrid cols={3}>
@@ -91,6 +112,26 @@ export default function Praxis() {
             </Eyebrow>
             <p className="text-muted-foreground leading-relaxed">{t(copy.praxis.toolingNote)}</p>
           </div>
+
+          <div className="mt-10">
+            <Plate
+              src={plate("flow")}
+              width={1562}
+              height={1007}
+              alt={t(copy.plates.flow)}
+              caption={t(copy.praxis.plateFlowCaption)}
+            />
+          </div>
+
+          <div className="mt-10">
+            <Plate
+              src={plate("context")}
+              width={1740}
+              height={904}
+              alt={t(copy.plates.context)}
+              caption={t(copy.praxis.plateContextCaption)}
+            />
+          </div>
         </Section>
 
         <Section
@@ -99,6 +140,15 @@ export default function Praxis() {
           title={t(copy.praxis.s3Title)}
           intro={<p>{t(copy.praxis.s3Body)}</p>}
         >
+          <Plate
+            src="/artwork/computer.webp"
+            width={1024}
+            height={1024}
+            alt={t(copy.plates.computer)}
+            caption={t(copy.praxis.plateComputerCaption)}
+            className="mb-10 max-w-sm"
+          />
+
           <div className="grid md:grid-cols-2 gap-5 items-start">
             {/* The note wraps rather than scrolling: a horizontal scrollbar inside
                 a card hides content, and the French runs longer than the English. */}

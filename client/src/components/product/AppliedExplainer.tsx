@@ -9,6 +9,7 @@ import {
   ClosingCta,
   Etymology,
   Eyebrow,
+  Plate,
 } from "@/components/product/ProductPage";
 import { copy, useT } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
@@ -171,6 +172,15 @@ export function AppliedExplainer() {
         title={t(copy.applied.s4Title)}
         intro={<p>{t(copy.applied.s4Body)}</p>}
       >
+        <Plate
+          src="/artwork/cafe.webp"
+          width={1800}
+          height={1347}
+          alt={t(copy.plates.cafe)}
+          caption={t(copy.applied.plateCafeCaption)}
+          className="mb-10"
+        />
+
         <CardGrid cols={3}>
           {field.map((c) => (
             <FeatureCard key={c.numeral} numeral={c.numeral} title={c.title} qualifier={c.qualifier}>
@@ -188,6 +198,15 @@ export function AppliedExplainer() {
       </Section>
 
       <Section index="05" label={t(copy.applied.s5Label)} title={t(copy.applied.s5Title)}>
+        <Plate
+          src="/artwork/people.webp"
+          width={1024}
+          height={1024}
+          alt={t(copy.plates.people)}
+          caption={t(copy.applied.platePeopleCaption)}
+          className="mb-10 max-w-sm"
+        />
+
         <CardGrid cols={3}>
           {local.map((c) => (
             <FeatureCard key={c.numeral} numeral={c.numeral} title={c.title} qualifier={c.qualifier}>

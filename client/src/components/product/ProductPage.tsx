@@ -112,6 +112,83 @@ export function Section({
   );
 }
 
+/**
+ * A full-width illustrated plate.
+ *
+ * The lettering inside these drawings is part of the drawing, so there is one
+ * file per language rather than one file with text laid over it; the page picks
+ * the file and the alt text carries the same content for a reader who cannot
+ * see it. The intrinsic size is declared so the caption does not jump when the
+ * image lands, and the drawings' paper ground is a shade darker than the page,
+ * so a border seats them without needing a panel behind.
+ */
+export function Plate({
+  src,
+  alt,
+  caption,
+  width,
+  height,
+  className,
+}: {
+  src: string;
+  alt: string;
+  caption?: React.ReactNode;
+  width: number;
+  height: number;
+  /** Constrain the figure — the square spots would swamp a column at full width. */
+  className?: string;
+}) {
+  return (
+    <figure className={cn("my-2", className)}>
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+        className="w-full h-auto rounded-2xl border border-border"
+      />
+      {caption && (
+        <figcaption className="mt-3 max-w-2xl text-sm text-muted-foreground leading-relaxed">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+/** Three plates side by side under one caption — a row of portraits, say. */
+export function PlateRow({
+  items,
+  caption,
+}: {
+  items: { src: string; alt: string }[];
+  caption?: React.ReactNode;
+}) {
+  return (
+    <figure className="my-2">
+      <div className="grid grid-cols-3 gap-4 sm:gap-5">
+        {items.map((item) => (
+          <img
+            key={item.src}
+            src={item.src}
+            alt={item.alt}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-auto rounded-2xl border border-border"
+          />
+        ))}
+      </div>
+      {caption && (
+        <figcaption className="mt-3 max-w-2xl text-sm text-muted-foreground leading-relaxed">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 /** Responsive card grid. */
 export function CardGrid({ cols = 3, children }: { cols?: 2 | 3; children: React.ReactNode }) {
   return (

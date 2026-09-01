@@ -172,6 +172,11 @@ export const copy = {
    * page, since the page also carries the `services` block below it.
    */
   waysIn: {
+    /** Caption for the spot drawing in section 01. */
+    platePeopleCaption: {
+      en: "You are not hiring six specialists. You are writing down what six specialists would know.",
+      fr: "Vous n'embauchez pas six spécialistes. Vous écrivez ce que six spécialistes sauraient.",
+    },
     eyebrow: { en: "How we work", fr: "Notre façon de travailler" },
     title: { en: "Two ways in", fr: "Deux portes d'entrée" },
     lead1: {
@@ -303,6 +308,72 @@ export const copy = {
     /** Labels the arrow under the hero. It used to read "our work", because the
      *  portfolio sat below; what sits below now is the case for the work. */
     scrollHint: { en: "How it works", fr: "En pratique" },
+    /**
+     * Sits under the plate at the top of the page. Short on purpose: the hero
+     * has already made the claim and the explainer below argues it, so this
+     * only has to say what the reader is looking at.
+     */
+    plateSkillsCaption: {
+      en: "Skills are written instructions, not staff — and the model that reads them can be one you run yourself.",
+      fr: "Les skills sont des instructions écrites, pas des salariés — et le modèle qui les lit peut être un modèle que vous faites tourner vous-même.",
+    },
+  },
+
+  /**
+   * Alt text for the drawn plates. It lives here rather than beside a page's
+   * captions because it describes the drawing, not the argument the drawing is
+   * being used for — and the Skills plate now appears on two pages, which is
+   * exactly how a duplicated description starts to drift.
+   */
+  plates: {
+    fourD: {
+      en: "Four pinned notes around a desk: delegation decides what is worth doing together, description makes the picture clear, discernment judges what is true, useful and worth keeping, and diligence plans, executes, checks and improves.",
+      fr: "Quatre notes épinglées autour d'un bureau : la délégation décide de ce qui mérite d'être fait ensemble, la description clarifie la situation, le discernement juge ce qui est vrai, utile et à conserver, et la diligence planifie, exécute, vérifie et améliore.",
+    },
+    flow: {
+      en: "The same request for a weekly update, made twice. Carrying context, skills, connected systems, rules and examples, it arrives as the report that was wanted; missing them, it produces confusing output, misaligned goals and rework.",
+      fr: "La même demande de point hebdomadaire, formulée deux fois. Portant contexte, compétences, systèmes connectés, règles et exemples, elle donne le rapport attendu ; privée de ces éléments, elle produit un résultat confus, des objectifs à côté et des reprises.",
+    },
+    hands: {
+      en: "A woman at the centre of a brain, a mail client, a code editor and a spreadsheet, each joined to her by a single line.",
+      fr: "Une femme au centre d'un cerveau, d'une messagerie, d'un éditeur de code et d'un tableur, chacun relié à elle par un trait.",
+    },
+    computer: {
+      en: "A desk drawn in ink: a lamp, a laptop showing a chart, a calculator, an open notebook and a cup of coffee.",
+      fr: "Un bureau dessiné à l'encre : une lampe, un portable affichant un graphique, une calculatrice, un carnet ouvert et une tasse de café.",
+    },
+    hallucination: {
+      en: "The same Paris street twice. In the first a puzzle piece is missing from the sky, marked with a question mark. In the second the gap has been filled with a hot-air balloon shaped like a beret.",
+      fr: "La même rue parisienne, deux fois. Sur la première, une pièce de puzzle manque dans le ciel, marquée d'un point d'interrogation. Sur la seconde, le trou a été comblé par une montgolfière en forme de béret.",
+    },
+    people: {
+      en: "A basket of drawn faces, one woman at the front and the rest ranged behind her.",
+      fr: "Un panier de visages dessinés, une femme au premier plan et les autres rangés derrière elle.",
+    },
+    portraitA: {
+      en: "A drawn portrait of a man in glasses, a jacket and a tie.",
+      fr: "Portrait dessiné d'un homme à lunettes, en veste et cravate.",
+    },
+    portraitB: {
+      en: "A drawn portrait of a woman in a striped collar, looking straight out.",
+      fr: "Portrait dessiné d'une femme au col rayé, le regard droit.",
+    },
+    portraitC: {
+      en: "A drawn portrait of a woman resting her chin on her hand.",
+      fr: "Portrait dessiné d'une femme, le menton posé sur la main.",
+    },
+    context: {
+      en: "A strip explaining a context window. A brain fills with notes and faces until a gauge reads full and nothing more will go in; then two ways round it — looking things up in an outside store when needed, and summarising old memories to free space.",
+      fr: "Une planche expliquant la fenêtre de contexte. Un cerveau se remplit de notes et de visages jusqu'à ce qu'une jauge affiche « plein » et que plus rien n'entre ; puis deux façons de contourner le problème — aller chercher l'information dans une réserve extérieure au moment voulu, et résumer les anciens souvenirs pour libérer de la place.",
+    },
+    cafe: {
+      en: "A bar owner in a striped shirt and apron, leaning on his counter in front of the bottles, the taps and a handwritten café sign.",
+      fr: "Un patron de bar en marinière et tablier, accoudé à son comptoir devant les bouteilles, les tireuses et une pancarte de café écrite à la main.",
+    },
+    skills: {
+      en: "Claude, Mistral and a code editor on one side, Hugging Face, Kimi and Ollama on the other, around a basket of specialists labelled research, writing, data, automation, design and communication. The banner reads: skills = specialists.",
+      fr: "Claude, Mistral et un éditeur de code d'un côté, Hugging Face, Kimi et Ollama de l'autre, autour d'un panier de spécialistes étiquetés recherche, rédaction, données, automatisation, conception et communication. La banderole indique : skills = spécialistes.",
+    },
   },
 
   praxis: {
@@ -347,6 +418,26 @@ export const copy = {
       fr: "Vous n'avez besoin ni d'une plateforme propriétaire, ni d'un compte chez nous. Le seul abonnement à prendre est celui de l'assistant IA — environ 20 $ par mois — auquel s'ajoute un éditeur de code gratuit. Dirigez les trois vers le même dossier sur votre machine. Ce dossier, et ce qu'il contient, est votre application.",
     },
 
+    /**
+     * Captions for the two drawn plates. They are captions, not descriptions:
+     * each says what the picture is for at that point in the argument, and the
+     * alt text carries the content of the drawing for a reader who cannot see
+     * it. The lettering is inside the artwork, so each plate ships as an English
+     * file and a French one.
+     */
+    plate4dCaption: {
+      en: "Four habits, not four tools. Deciding what is worth handing over, describing it clearly, judging what comes back, and following it through — the session drills all four on your own work, and they outlast whatever the folder ends up doing.",
+      fr: "Quatre réflexes, pas quatre outils. Décider ce qui mérite d'être confié, le décrire clairement, juger ce qui revient, aller au bout — la séance travaille les quatre sur vos propres dossiers, et ils vous restent quoi que fasse le dossier ensuite.",
+    },
+    plateHallucinationCaption: {
+      en: "Why the third of them is discernment. Asked for something it does not have, a model will not leave the gap open: it fills it with whatever fits the shape — plausibly, confidently, and wrong.",
+      fr: "Pourquoi le troisième d'entre eux est le discernement. Sollicité sur ce qu'il n'a pas, un modèle ne laisse pas le trou béant : il le comble avec ce qui en épouse la forme — de façon plausible, assurée, et fausse.",
+    },
+    plateFlowCaption: {
+      en: "The three ingredients above are what you install. This is what you put into a request once they are in place — and what happens to the same request when it goes out without them.",
+      fr: "Les trois ingrédients ci-dessus sont ce que vous installez. Voici ce que vous mettez dans une demande une fois l'installation faite — et ce que devient cette même demande quand elle part sans eux.",
+    },
+
     s2Label: { en: "The ingredients", fr: "Les ingrédients" },
     ing1Title: { en: "The editor", fr: "L'éditeur" },
     ing1Qual: { en: "Where you work · Free", fr: "Votre plan de travail · Gratuit" },
@@ -377,6 +468,14 @@ export const copy = {
     },
 
     s3Label: { en: "The output", fr: "Le résultat" },
+    plateContextCaption: {
+      en: "The assistant's memory is a room, not a warehouse. Fill it and the oldest things fall out — which is why the folder holds the rules on disk, where they are read fresh each time rather than remembered.",
+      fr: "La mémoire de l'assistant est une pièce, pas un entrepôt. Remplissez-la et les plus anciens éléments tombent — d'où les règles conservées sur le disque, relues à chaque fois plutôt que mémorisées.",
+    },
+    plateComputerCaption: {
+      en: "No new software on the machine. The same desk, the same files, one folder more.",
+      fr: "Aucun logiciel de plus sur la machine. Le même bureau, les mêmes fichiers, un dossier de plus.",
+    },
     s3Title: { en: "A folder on disk.", fr: "Un dossier sur le disque." },
     s3Body: {
       en: "Nothing here is exotic. What you leave the session with is four things in a directory, which you can read, edit, copy and back up with tools you already trust.",
@@ -767,6 +866,25 @@ export const copy = {
       fr: "Les données, la machine sur laquelle elles sont traitées, et la décision de ce qu'il advient de l'une comme de l'autre vous appartiennent. Pas une clause dans le contrat d'un tiers ni une case dans son écran de réglages : un fait, qui tient au trajet des câbles.",
     },
 
+    /**
+     * Caption for the drawn plate in this section. The banner in the drawing
+     * says "skills" in both languages on purpose: it names the thing the
+     * assistant actually loads, and "compétences" would send a French reader
+     * looking for a person.
+     */
+    plateSkillsCaption: {
+      en: "The specialists in the basket are skills, not staff: folders of written instructions the assistant picks up when the work calls for them. Which model reads them stays your choice — including open ones running on your own machine, on your own files.",
+      fr: "Les spécialistes du panier sont des skills, pas des salariés : des dossiers d'instructions écrites que l'assistant reprend quand le travail l'exige. Le modèle qui les lit reste votre choix — y compris un modèle ouvert, sur votre machine et sur vos fichiers.",
+    },
+    plateHandsCaption: {
+      en: "One assistant, reaching the things you already use. None of this is a new place to log in.",
+      fr: "Un seul assistant, qui atteint ce que vous utilisez déjà. Rien de tout cela n'est un nouvel endroit où se connecter.",
+    },
+    platePortraitsCaption: {
+      en: "Somebody in accounts, somebody in recruitment, somebody in quality. The six jobs below are theirs, and all six are being done by hand this week.",
+      fr: "Quelqu'un à la comptabilité, quelqu'un au recrutement, quelqu'un à la qualité. Les six tâches ci-dessous sont les leurs, et toutes les six se font à la main cette semaine.",
+    },
+
     s4Label: { en: "Why it runs in your building", fr: "Pourquoi il tourne chez vous" },
     s4Title: {
       en: "Four different reasons, one identical constraint",
@@ -1052,6 +1170,19 @@ export const copy = {
       fr: "Chacun de ces systèmes est présenté plus en détail, captures et exemples d'échanges à l'appui, dans les réalisations.",
     },
 
+    plateCafeCaption: {
+      en: "Not a technology company. The paperwork behind a counter like this one is the work — the orders, the supplier records, the returns nobody has time for.",
+      fr: "Pas une entreprise de technologie. La paperasse derrière un comptoir comme celui-ci, c'est ça le travail — les commandes, les fiches fournisseurs, les déclarations que personne n'a le temps de faire.",
+    },
+    /**
+     * The same drawing carries section 01 of /services, where it argues that the
+     * specialists are written down rather than hired. Here it has to say the
+     * quieter thing: that what is written down sits on your own disk.
+     */
+    platePeopleCaption: {
+      en: "The specialists are skills — folders of written instructions, sitting on a disk you own. Nothing in the basket is a service you rent by the month.",
+      fr: "Les spécialistes sont des skills — des dossiers d'instructions écrites, posés sur un disque qui vous appartient. Rien dans le panier n'est un service qui se loue au mois.",
+    },
     s5Label: { en: "On your own machine", fr: "Sur votre propre machine" },
     s5Title: {
       en: "Local first, and not only for the reason you would guess",

@@ -10,6 +10,8 @@ import {
   PriceRow,
   Etymology,
   ClosingCta,
+  Plate,
+  PlateRow,
 } from "@/components/product/ProductPage";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
@@ -169,6 +171,14 @@ export default function Sovereign() {
         />
 
         <Section index="01" label={t(c.s1Label)}>
+          <Plate
+            src="/artwork/hands.webp"
+            width={1254}
+            height={1254}
+            alt={t(copy.plates.hands)}
+            caption={t(c.plateHandsCaption)}
+            className="mb-10 max-w-sm"
+          />
           <CardGrid cols={3}>
             {what.map((card) => (
               <FeatureCard
@@ -189,6 +199,17 @@ export default function Sovereign() {
           title={t(c.s2Title)}
           intro={<p>{t(c.s2Body)}</p>}
         >
+          <div className="mb-10">
+            <PlateRow
+              items={[
+                { src: "/artwork/woman.webp", alt: t(copy.plates.portraitB) },
+                { src: "/artwork/man.webp", alt: t(copy.plates.portraitA) },
+                { src: "/artwork/woman2.webp", alt: t(copy.plates.portraitC) },
+              ]}
+              caption={t(c.platePortraitsCaption)}
+            />
+          </div>
+
           <CardGrid cols={3}>
             {jobs.map((job) => (
               <div
@@ -283,6 +304,16 @@ export default function Sovereign() {
             <p className="text-muted-foreground leading-relaxed">
               <b className="text-foreground">{t(c.sovereignTitle)}</b> {t(c.sovereignBody)}
             </p>
+          </div>
+
+          <div className="mb-10">
+            <Plate
+              src={`/artwork/skills-${locale === "fr" ? "fr" : "en"}.webp`}
+              width={1672}
+              height={941}
+              alt={t(copy.plates.skills)}
+              caption={t(c.plateSkillsCaption)}
+            />
           </div>
 
           <CardGrid cols={3}>
