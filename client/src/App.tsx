@@ -13,6 +13,7 @@ import About from "@/pages/about";
 import AboutMe from "@/pages/about-me";
 import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
+import UseCase from "@/pages/usecase";
 import Praxis from "@/pages/praxis";
 import PraxisProgramme from "@/pages/praxis-programme";
 import Calendar from "@/pages/calendar";
@@ -51,6 +52,13 @@ function Router() {
         <Route path="/about/me" component={AboutMe} />
         <Route path="/services" component={Services} />
         <Route path="/portfolio" component={Portfolio} />
+        {/* The worked examples were a folder of static files served at
+           /usecase/ before they became a page, so both spellings are routed:
+           the trailing slash is the URL already in the wild, and express.static
+           still redirects /usecase to it while the demo's files sit under
+           public/usecase/. */}
+        <Route path="/usecase" component={UseCase} />
+        <Route path="/usecase/" component={UseCase} />
         <Route path="/praxis" component={Praxis} />
         <Route path="/calendar" component={Calendar} />
         <Route path="/pythia" component={Pythia} />

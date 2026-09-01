@@ -25,18 +25,16 @@ const SESSIONS: { n: string; ord: Leaf; title: Leaf; body: Leaf; free?: boolean 
 ];
 
 /**
- * The Tuesdays each cycle lands on. September runs 1–22 and drops the 29th:
- * a month with five Tuesdays skips the last, so the cycle stays four long.
+ * The Tuesdays each cycle lands on. The run opens in October; a month with
+ * five Tuesdays skips the last, so the cycle stays four long.
  */
 const TUESDAYS: { month: Leaf; days: string[] }[] = [
-  { month: c.sep, days: ["1", "8", "15", "22"] },
   { month: c.oct, days: ["6", "13", "20", "27"] },
   { month: c.nov, days: ["3", "10", "17", "24"] },
 ];
 
 /** Every second Thursday, 20:30–22:00, the same talk in a different commune. */
 const THURSDAYS: { month: Leaf; days: string[] }[] = [
-  { month: c.sep, days: ["10", "24"] },
   { month: c.oct, days: ["8", "22"] },
   { month: c.nov, days: ["5", "19"] },
 ];

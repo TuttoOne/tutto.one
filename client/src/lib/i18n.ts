@@ -27,6 +27,7 @@ export const copy = {
     events: { en: "Events", fr: "Événements" },
     pythia: { en: "Pythia", fr: "Pythia" },
     thinking: { en: "Thinking", fr: "Réflexions" },
+    usecase: { en: "Use cases", fr: "Cas d'usage" },
     contact: { en: "Contact", fr: "Contact" },
     home: { en: "Tutto — home", fr: "Tutto — accueil" },
     menu: { en: "Toggle menu", fr: "Ouvrir le menu" },
@@ -868,8 +869,8 @@ export const copy = {
     ord4: { en: "th", fr: "e" },
     datesLabel: { en: "The Tuesdays", fr: "Les mardis" },
     datesNote: {
-      en: "When a month has five Tuesdays the last one is skipped, so September finishes on the 22nd.",
-      fr: "Quand un mois compte cinq mardis, le dernier saute : septembre s'arrête donc le 22.",
+      en: "The run opens in October. When a month has five Tuesdays the last one is skipped, so the cycle stays four long.",
+      fr: "Le parcours démarre en octobre. Quand un mois compte cinq mardis, le dernier saute, pour que le cycle reste à quatre séances.",
     },
 
     lotTitle: { en: "In the Lot, in person", fr: "Dans le Lot, en présentiel" },
@@ -885,7 +886,6 @@ export const copy = {
 
     tagFree: { en: "Free", fr: "Gratuit" },
 
-    sep: { en: "Sep", fr: "sept." },
     oct: { en: "Oct", fr: "oct." },
     nov: { en: "Nov", fr: "nov." },
     tue: { en: "Tue", fr: "mar." },
@@ -1025,6 +1025,131 @@ export const copy = {
     },
     fromPraxisLink: { en: "See the dates", fr: "Voir les dates" },
   },
+  /**
+   * The worked-examples page. The runs themselves are generated data, so their
+   * French lives in `lib/fr/usecase.ts` keyed on the English; what is here is
+   * the page's own furniture — the opener, the console's controls, and the
+   * argument underneath.
+   *
+   * The pacing sentences are split into parts because a figure sits inside
+   * them. That is the same shape the calendar and home leads use.
+   */
+  usecase: {
+    eyebrow: { en: "A demonstration · applied AI", fr: "Une démonstration · IA appliquée" },
+    title: {
+      en: "What building with AI actually looks like",
+      fr: "À quoi ressemble vraiment un travail construit avec l'IA",
+    },
+    lede: {
+      en: "Three pieces of real work, in three different trades. Messy information goes in, rules somebody wrote get applied, and out comes the format their organisation already expects. Press the button and watch one happen.",
+      fr: "Trois travaux réels, dans trois métiers différents. Des informations en désordre entrent, des règles écrites par quelqu'un s'appliquent, et il en sort le format que son organisation attend déjà. Appuyez sur le bouton et regardez.",
+    },
+
+    /* The console */
+    recorded: { en: "recorded run", fr: "exécution enregistrée" },
+    run: { en: "Run it", fr: "Lancer" },
+    running: { en: "Running", fr: "En cours" },
+    runAgain: { en: "Run it again", fr: "Relancer" },
+    pacingA: { en: "The real run takes", fr: "L'exécution réelle prend" },
+    pacingB: { en: "seconds. Played back over", fr: "secondes. Rejouée sur" },
+    pacingC: {
+      en: "seconds, slowly enough to read what it is doing.",
+      fr: "secondes, assez lentement pour qu'on puisse lire ce qu'elle fait.",
+    },
+    pacingSeconds: { en: "seconds.", fr: "secondes." },
+    pacingDuring: {
+      en: "Reading the data and applying the rules.",
+      fr: "Lecture des données et application des règles.",
+    },
+    finished: { en: "Finished", fr: "Terminé" },
+    finishedSubA: { en: "The run took", fr: "L'exécution a pris" },
+    finishedSubB: {
+      en: "seconds on an ordinary desktop machine.",
+      fr: "secondes sur un ordinateur de bureau ordinaire.",
+    },
+    filesMade: { en: "The files it produced", fr: "Les fichiers produits" },
+    /** File sizes on the download list. */
+    unitKb: { en: "KB", fr: "Ko" },
+    unitMb: { en: "MB", fr: "Mo" },
+
+    /* The argument underneath */
+    shapeKicker: { en: "The shape of it", fr: "La forme de la chose" },
+    shapeTitle: {
+      en: "The same five beats, every time",
+      fr: "Les mêmes cinq temps, à chaque fois",
+    },
+    shapeBody: {
+      en: "Whatever the trade, this work has the same five parts. Once you can see them you start spotting them in your own week, which is the only thing this page is for.",
+      fr: "Quel que soit le métier, ce travail comporte les mêmes cinq parties. Une fois qu'on les voit, on se met à les repérer dans sa propre semaine — et cette page ne sert à rien d'autre.",
+    },
+
+    beat1: { en: "The mess", fr: "Le désordre" },
+    beat1Body: {
+      en: "The real input, at real volume, in the software you already use.",
+      fr: "Les vraies données, au vrai volume, dans les logiciels que vous utilisez déjà.",
+    },
+    beat2: { en: "The rules", fr: "Les règles" },
+    beat2Body: {
+      en: "Written by a person, in their own words, once. Applied to every record, every time.",
+      fr: "Écrites par une personne, avec ses mots, une seule fois. Appliquées à chaque enregistrement, à chaque fois.",
+    },
+    beat3: { en: "The run", fr: "L'exécution" },
+    beat3Body: {
+      en: "On your own machine. Nothing has to leave the building.",
+      fr: "Sur votre propre machine. Rien n'a besoin de sortir des murs.",
+    },
+    beat4: { en: "The catch", fr: "Ce qui est attrapé" },
+    beat4Body: {
+      en: "What it found that a person would have missed, and what it hands back for a decision.",
+      fr: "Ce qu'elle a trouvé et qu'une personne aurait manqué, et ce qu'elle renvoie pour décision.",
+    },
+    beat5: { en: "The output", fr: "Le résultat" },
+    beat5Body: {
+      en: "The format your organisation already expects, with the figures carried through rather than re-typed.",
+      fr: "Le format que votre organisation attend déjà, avec des chiffres repris tels quels plutôt que ressaisis.",
+    },
+
+    figureAlt: {
+      en: "A spreadsheet listing eight rules in plain English, each with what it does, its outcome, and how many records it affected.",
+      fr: "Un tableur listant huit règles en langage clair, chacune avec ce qu'elle fait, son résultat, et le nombre d'enregistrements concernés.",
+    },
+    figureCaption: {
+      en: "The fourth beat is the one that sells, and this is where it lives. Every run prints the rules it applied, in plain English, with what each one caught. Nobody has to take the result on trust, and a new starter can read it.",
+      fr: "Le quatrième temps est celui qui convainc, et c'est ici qu'il se joue. Chaque exécution imprime les règles qu'elle a appliquées, en langage clair, avec ce que chacune a attrapé. Personne n'a à croire le résultat sur parole, et un nouvel arrivant peut le lire.",
+    },
+
+    bringTitle: { en: "What you would need to bring.", fr: "Ce qu'il faudrait apporter." },
+    bringBody: {
+      en: "The work you already repeat, a few examples of it done properly, the software you already licence, and a person who can tell a right answer from a wrong one. That last one does not go away. Checking the output is the new job, and it is the part worth being clear about.",
+      fr: "Le travail que vous répétez déjà, quelques exemples bien faits, les logiciels sous licence que vous avez déjà, et une personne capable de distinguer une bonne réponse d'une mauvaise. Cette dernière ne disparaît pas. Vérifier le résultat est le nouveau métier, et c'est la part sur laquelle il faut être clair.",
+    },
+    inventedTitle: {
+      en: "None of this is anyone's real data.",
+      fr: "Rien ici n'est la vraie donnée de qui que ce soit.",
+    },
+    inventedBody: {
+      en: "Every firm, record and candidate here is invented, generated by code, and reproducible from a fixed starting number. We do not demonstrate on a client's material, and we will not ask for yours until there is an agreement.",
+      fr: "Chaque entreprise, enregistrement et candidat présentés ici sont inventés, générés par du code, et reproductibles à partir d'un nombre de départ fixe. Nous ne faisons pas de démonstration sur le matériel d'un client, et nous ne demanderons pas le vôtre tant qu'il n'y a pas d'accord.",
+    },
+    recordedTitle: {
+      en: "These are recordings of runs that really happened",
+      fr: "Ce sont des enregistrements d'exécutions qui ont réellement eu lieu",
+    },
+    recordedBody: {
+      en: ", captured on 13 August 2026 by the same code that draws the live progress list. The stages, their order, the notes and the files are exactly what those runs produced. The pace is slowed so it can be read, and each demo states what the run really took. The page itself has no backend: it cannot execute anything and there is nowhere to upload a document to. That is deliberate.",
+      fr: ", capturées le 13 août 2026 par le code même qui dessine la liste de progression. Les étapes, leur ordre, les lignes affichées et les fichiers sont exactement ce que ces exécutions ont produit. Le rythme est ralenti pour être lisible, et chaque démonstration indique la durée réelle. La page elle-même n'a pas de serveur : elle ne peut rien exécuter et il n'y a nulle part où déposer un document. C'est délibéré.",
+    },
+
+    ctaTitle: {
+      en: "What is the job that eats your week?",
+      fr: "Quelle est la tâche qui dévore votre semaine ?",
+    },
+    ctaBody: {
+      en: "Bring us the specific one, not the impressive one. Thirty minutes is usually enough to tell you honestly whether this is worth your time.",
+      fr: "Apportez-nous la tâche précise, pas la plus impressionnante. Trente minutes suffisent en général pour vous dire honnêtement si cela vaut votre temps.",
+    },
+  },
+
 } as const;
 
 type Leaf = { en: string; fr: string };

@@ -1,9 +1,0 @@
-/* Webfonts, vendored. The site loads Inter and Roboto from Google; this page
-   carries its own copies instead, because its whole argument is that nothing
-   has to leave the building and a font fetched from a US CDN is an odd way to
-   open that conversation. Same faces either way.
-   Inter: SIL OFL 1.1. Roboto: Apache 2.0. */
-@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;
-  src:url(fonts/inter.woff2) format('woff2')}
-@font-face{font-family:'Roboto';font-style:normal;font-weight:100 900;font-display:swap;
-  src:url(fonts/roboto.woff2) format('woff2')}

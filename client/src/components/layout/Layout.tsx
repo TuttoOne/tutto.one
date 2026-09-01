@@ -11,18 +11,11 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const t = useT();
 
-  /* `external` marks a page that is served as static files from public/ rather
-     than by the router. Those need a real anchor: a wouter Link would try to
-     handle /usecase/ in the client and land on the 404 route. */
   const navItems = [
     { label: t(copy.nav.about), href: "/about" },
     { label: t(copy.nav.services), href: "/services" },
     { label: t(copy.nav.work), href: "/portfolio" },
-    {
-      label: t({ en: "Use cases", fr: "Cas d'usage" }),
-      href: "/usecase/",
-      external: true,
-    },
+    { label: t(copy.nav.usecase), href: "/usecase/" },
     { label: t(copy.nav.praxis), href: "/praxis" },
     { label: t(copy.nav.pythia), href: "/pythia" },
     { label: t(copy.nav.thinking), href: "/blog" },
@@ -58,11 +51,7 @@ export function Header() {
               "text-sm font-medium transition-colors hover:text-primary cursor-pointer whitespace-nowrap",
               location === item.href ? "text-primary" : "text-muted-foreground",
             );
-            return item.external ? (
-              <a key={item.href} href={item.href} className={className}>
-                {item.label}
-              </a>
-            ) : (
+            return (
               <Link key={item.href} href={item.href} className={className}>
                 {item.label}
               </Link>
@@ -97,11 +86,7 @@ export function Header() {
                   ? "text-primary bg-primary/5"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
               );
-              return item.external ? (
-                <a key={item.href} href={item.href} className={className}>
-                  {item.label}
-                </a>
-              ) : (
+              return (
                 <Link
                   key={item.href}
                   href={item.href}
