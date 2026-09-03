@@ -10,6 +10,26 @@
  *
  * Everything on the page is in this file. If a sentence is wrong, it is wrong
  * here and nowhere else.
+ *
+ * ---
+ *
+ * On the voice.
+ *
+ * Short sentences. Full stops where a lesser page would use a comma. Concrete
+ * nouns — documents, folders, hardware, an afternoon — and no abstract ones:
+ * nothing here leverages, transforms, empowers or unlocks. No exclamation
+ * marks, no adjective doing a verb's job, and not one sentence that would
+ * survive being pasted onto a competitor's site.
+ *
+ * The page makes one claim and repeats it in different clothes: the machine
+ * stands in your building, does a job you already hate, and you own it
+ * afterwards. That is the only genuinely remarkable thing here, so it is the
+ * only thing said loudly. Everything else — the training, the diagnosis, the
+ * figures — is evidence for it, set quietly. A page that shouts four things
+ * shouts nothing.
+ *
+ * The rule for edits: if a sentence could be pasted onto a competitor's site
+ * without anybody noticing, it is not finished.
  */
 
 export const landing = {
@@ -21,53 +41,68 @@ export const landing = {
   hero: {
     /** The amber eyebrow the site sets above every page opener. */
     eyebrow: "Applied AI",
+
     /**
-     * What the reader already believes, struck through. Both of these are the
-     * ordinary experience of AI at work, and both are what the page exists to
-     * contradict — so they are on the sheet, crossed out, before the claim.
+     * What the reader already believes, struck through. These are the three
+     * things people actually say out loud about AI at work — written the way
+     * they say them, not the way a brochure would tidy them up — and all three
+     * are what the page exists to contradict.
      */
     struck: [
-      "AI just gives you generic answers.",
-      "We are not allowed to use AI on our data.",
-      "AI is going to replace my job.",
+      "AI gives generic answers.",
+      "We can't put our data in that.",
+      "It's coming for my job.",
     ],
-    /** Short. The whole proposition, and nothing above it competing. It leads
-     *  with the concession — the technology is fine — so the blame lands on
-     *  the thing we actually fix. */
-    title: "Right tech. Wrong setup.",
-    deck: "Built on a machine, living inside your own systems, working through the tasks your week is actually made of. That is a different thing from a chat window, and it takes an afternoon to set up.",
+
+    /**
+     * The reframe. Not "AI is hard" or "AI is powerful", both of which the
+     * reader has heard until they mean nothing — but an accusation about their
+     * actual experience, which is that they have sat through demonstrations
+     * for two years and still do not own a single thing that works.
+     */
+    title: "Everybody shows you AI. Nobody hands you any.",
+
+    /** The offer in one breath: a job, an afternoon, no invoice.
+     *
+     *  It ends on money deliberately, and on the fact that money comes after.
+     *  An earlier draft ended "yours whether or not we ever work together",
+     *  which is a promise about keeping the prototype that nothing else on the
+     *  site makes — check with Daniel before writing that back in. */
+    promise:
+      "Give us one job you hate. In an afternoon, you will watch a machine do it. Free, and before anybody mentions money.",
+
+    /** What makes that possible, said plainly and without a single abstraction. */
+    deck: "Not a chat window you visit. A machine that sits in your building, reads your files where they already are, and works through the jobs your week is actually made of.",
+
     cta: "Book a 30-minute call",
     /** The secondary call. Short on purpose: the footer's fuller wording,
      *  "The long version of this argument", wraps a pill to two lines on a
      *  phone. */
     secondaryCta: "The long version",
-    /**
-     * The promise, and then the explanation of it. These were two boxes either
-     * side of the hero's grid, which read as two unrelated statements rather
-     * than one leading into the other; they are a single column now.
-     */
-    promise:
-      "What you get is a working prototype you can open and click through in hours, not days.",
   },
 
   /**
-   * The five things we do, named. This section used to argue in the abstract
-   * about why we are not the AI you have been sold, which left a reader unable
-   * to tell which of these they were reading about. Naming them lets someone
-   * find themselves on the page and go straight to the right one.
+   * The four things we do.
+   *
+   * Named as verbs, in parallel, so a reader finds themselves on the page in
+   * one pass: we build it, you build it, it never leaves, we look first. The
+   * product name goes in the card's qualifier underneath, because a reader
+   * needs to know what the thing does before they need to know what we call it.
    */
-  offersEyebrow: "What we do",
-  offersLabel: "Name the piece you need.",
+  offersEyebrow: "Four doors",
+  offersLabel: "Pick the one that sounds like your week.",
   offers: [
     {
-      name: "A built solution",
+      name: "We build it.",
+      qualifier: "Built solutions",
       href: "/services",
-      body: "One specific task in your business, done by a system built for it and nothing else. Your data is read where it already sits; nothing is uploaded.",
+      body: "One job. One machine built for that job and nothing else. It reads your data where it already sits. Nothing is uploaded.",
     },
     {
-      name: "Training",
+      name: "You build it.",
+      qualifier: "Training",
       href: "/praxis",
-      body: "Learn to build these yourself, one to one, on your own work rather than on a prepared example. You leave with a working tool, not notes about one.",
+      body: "One to one, on your own work rather than on a prepared example. You leave with a tool that runs, not notes about one.",
     },
     {
       /**
@@ -75,30 +110,40 @@ export const landing = {
        * products; they are one thing described at two altitudes — what it does
        * for you, and what it is built on. One heading, both halves.
        */
-      name: "Sovereign",
+      name: "It never leaves.",
+      qualifier: "Sovereign",
       href: "/sovereign",
-      body: "Everything you hold, made answerable on a machine standing in your building — ask in plain language, and every answer cites the document and page it came from. Open-weight models on hardware you own, nothing leaving the room, no bill per question, and you keep the folder.",
+      body: "Everything you hold, answerable on a machine standing in your building. Every answer cites its document and its page. Open-weight models, your hardware, no bill per question. You keep the folder.",
     },
     {
-      name: "Diagnosis",
+      name: "We look first.",
+      qualifier: "Diagnosis",
       href: "/services",
-      body: "A short look at your real workflows first, so what gets built is what was actually costing you rather than what was easiest to describe.",
+      body: "A short look at what actually eats your week — so we build the thing that was costing you, not the thing that was easiest to describe.",
     },
   ],
 
-  /** Numerals, set large. Every figure here is from delivered work. */
-  proofEyebrow: "Delivered work",
-  proofLabel: "Built, running, in production.",
+  /**
+   * The figures.
+   *
+   * "Already running" is doing the work here: the reader has been shown a lot
+   * of AI that was going to be able to do things. An earlier draft said
+   * "Nothing rounded up", which reads well and which the first figure on the
+   * page visibly breaks — do not claim precision over a number ending in three
+   * zeroes.
+   */
+  proofEyebrow: "Already running",
+  proofLabel: "Three numbers, from systems that are running now.",
   proof: [
     {
       figure: "150,000",
       unit: "documents",
-      body: "A litigation disclosure set, made answerable on a machine standing in the room. Every answer cites the page it came from.",
+      body: "A litigation disclosure set, answerable on a machine standing in the room. Every answer cites the page it came from.",
     },
     {
       figure: "6,675",
       unit: "prospects",
-      body: "Profiled across nine countries on the client's own hardware, with identifying detail held back from anything that left it.",
+      body: "Profiled across nine countries on the client's own hardware. The identifying detail never left it.",
     },
     {
       figure: "0",
@@ -117,7 +162,7 @@ export const landing = {
    *
    * `poster` is what a video shows before it plays, and what anybody who has
    * asked their system for reduced motion sees instead of it. Keep a still
-   * here even once the video lands.
+   * here even once video lands.
    */
   media: {
     src: "/artwork/lawyer.webp",
@@ -127,80 +172,66 @@ export const landing = {
   plateCaption: "Nobody reads 150,000 documents in the time there is.",
 
   /**
-   * Why now. This was three paragraphs about a closing "gap", which named
-   * neither side of the gap and read as cleverness standing in for an argument.
-   * The real reason to move is a competitor, so the section says so.
+   * Why now.
+   *
+   * The honest reason to move is not a closing "gap" or a revolution — it is
+   * one specific competitor who is already doing this and has no reason to
+   * mention it. Urgency that names a rival is worth more than urgency that
+   * names a trend, and the last line is the one meant to keep somebody on the
+   * page: there will be no announcement.
    */
   window: {
-    label: "Why now, and not next year",
-    /* The comma matters: without it, "faster than you using AI" reads as a
-       comparison against you-already-using-AI, which is the opposite claim. */
-    statement:
-      "Someone in your field is about to get much faster than you, using AI.",
+    label: "Why now",
+    statement: "Somebody in your field is quietly getting much faster than you.",
     body: [
-      "Not because they are better at the work. Because they have learned to run a fleet of agents, each one specialised in a single task, covering ground they could not cover before. They turn work around faster, they give their clients more, and some of it is simply better.",
+      "Not because they are cleverer. Because they stopped asking one chat window questions and started running a dozen small machines, each one good at exactly one thing.",
+      "They turn work around faster. They give their clients more. Some of it is simply better. There will be no announcement.",
     ],
   },
 
   /**
-   * The offer and the availability, in one block. The prototype is what earns
-   * the call — something seen working beats a proposal read — and the lead time
-   * is what makes it now.
+   * The offer and the availability.
+   *
+   * "The first one is free" is the business model in five words, and it is the
+   * sentence most likely to be disbelieved — so the paragraph under it spends
+   * its length on what free actually means rather than on adjectives about how
+   * good the work is.
    */
   offer: {
     label: "How this starts",
-    statement: "You see it working before you commit to anything.",
-    body: "The first thing we build is a free prototype: something you can open, click through, and watch do the actual task. Hours, not weeks. Trust comes from seeing it run, not from reading a proposal about it.",
+    statement: "The first one is free.",
+    body: "We build a working prototype before you commit to anything. You open it, you click it, you watch it do the actual job. Hours, not weeks. Trust comes from watching a thing run, not from reading a proposal about it.",
     /**
      * A lead time rather than a named month. Months date the page and go stale
      * the moment one turns; "two weeks ahead" stays true and is the thing a
-     * reader can actually act on.
+     * reader can actually act on. The size of the team is deliberately not
+     * stated — only that it is small enough to run out.
      */
     scarcity:
-      "We are a small, focused team, and every client gets individual attention, so availability is genuinely limited. Try to book at least two weeks ahead. Where there are cancellations we will reach out and slot you in. We look forward to our first conversation.",
+      "We are small on purpose. Every client gets one of us properly, which means we cannot take everybody at once. Book about two weeks out. If somebody cancels, we will come and find you.",
   },
 
   close: {
-    title: "What are the tasks that eat your week?",
-    body: "Bring the specific ones, not the impressive ones. Thirty minutes is usually enough to tell you honestly whether this is worth your time — including when the answer is that it is not.",
+    /**
+     * A question rather than a headline, and one a reader can only answer by
+     * thinking about their own Tuesday. "Hand over" does quiet work too: it
+     * says the job leaves them, not that they leave.
+     */
+    title: "Which job would you hand over first?",
+    body: "Bring the boring one, not the impressive one. Thirty minutes is usually enough to tell you honestly whether this is worth your time — including when the answer is that it is not.",
     cta: "Book a 30-minute call",
     alt: "Or send a message",
-    /** A broadside is signed. Named people are who a reader is dealing with;
-     *  the size of the team is not stated anywhere on the page. */
+    /** Named people are who a reader is dealing with. */
     signature: "Daniel Forsthofer & Roxanne Northover",
-    /* The place is set in the footer, forty pixels below this. Saying it twice
-       made the signature read as a letterhead rather than a signature. */
     signatureNote: "Tutto — Applied AI",
   },
 
   footer: {
-    note: "Built directly with Claude, and its hand shows throughout.",
     /** Where the seven-section version of this argument now lives. */
     longVersion: {
       label: "The long version of this argument",
       href: "/applied",
     },
     place: "France, South Africa & the UK",
-    /**
-     * The whole site, from the front door's foot.
-     *
-     * The page keeps a slim bar with one call in it, so this is the only place
-     * the rest of the site is reachable from — which means it has to be
-     * complete. Labels are written out here rather than read from i18n.ts
-     * because this page is English only; a French label in an English page
-     * would be the one thing on the sheet in the wrong language.
-     */
-    nav: [
-      { label: "About", href: "/about" },
-      { label: "Services", href: "/services" },
-      { label: "Work", href: "/portfolio" },
-      { label: "Use cases", href: "/usecase/" },
-      { label: "Training", href: "/praxis" },
-      { label: "Events", href: "/calendar" },
-      { label: "Sovereign", href: "/sovereign" },
-      { label: "Pythia", href: "/pythia" },
-      { label: "Thinking", href: "/blog" },
-      { label: "Contact", href: "/contact" },
-    ],
   },
 } as const;

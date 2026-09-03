@@ -122,7 +122,7 @@ function Hero() {
       <div className="mt-9 flex flex-col sm:flex-row gap-4">
         <BookButton label={landing.hero.cta} />
         <Link
-          href="/applied"
+          href={landing.footer.longVersion.href}
           className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
         >
           {landing.hero.secondaryCta} <ArrowRight className="w-4 h-4" />
@@ -135,16 +135,21 @@ function Hero() {
 /**
  * The four things we do, named and linked.
  *
- * Two columns rather than three: these are sentences, not features, and at a
- * third of the measure the Sovereign card runs to eleven lines against the
- * Diagnosis card's four.
+ * Two columns rather than three: the bodies are sentences, not feature bullets,
+ * and at a third of the measure the Sovereign card runs to eleven lines against
+ * the Diagnosis card's four.
  */
 function Offers() {
   return (
     <Section label={landing.offersEyebrow} title={landing.offersLabel}>
       <CardGrid cols={2}>
         {landing.offers.map((row) => (
-          <FeatureCard key={row.name} title={row.name} href={row.href}>
+          <FeatureCard
+            key={row.name}
+            title={row.name}
+            qualifier={row.qualifier}
+            href={row.href}
+          >
             {row.body}
           </FeatureCard>
         ))}
