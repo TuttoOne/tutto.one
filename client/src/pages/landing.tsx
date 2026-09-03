@@ -38,7 +38,7 @@ const BOOKING = "https://cal.com/tuttoone/30min";
  */
 export default function Landing() {
   useEffect(() => {
-    document.title = "Tutto — AI that does the job, not AI that describes it";
+    document.title = "Tutto — AI that never leaves the building";
     return () => {
       document.title = SITE_TITLE;
     };

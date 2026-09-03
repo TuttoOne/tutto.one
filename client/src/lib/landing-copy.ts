@@ -13,20 +13,31 @@
  *
  * ---
  *
+ * WHO THIS PAGE IS FOR, which is the only decision on it that matters.
+ *
+ * It is for somebody who has been told no. A compliance officer, a regulator,
+ * a partner, an IT policy — somebody has forbidden them from putting client
+ * files into a cloud AI, and they have spent two years watching everybody else
+ * get faster while their own files stayed exactly where they were.
+ *
+ * That is a small group. It is meant to be. They cannot use what everybody
+ * else uses, they are frustrated about it, and — this is the part that matters
+ * — they talk to each other, because there are not many of them and they meet
+ * at the same conferences. A page that spoke to every business with a busy
+ * week reached all of them weakly and none of them enough to be repeated.
+ *
+ * So the page turns people away on purpose. "If your files can go in the
+ * cloud, use the cloud" is not modesty; it is the sentence that tells the
+ * right reader they have been found. Do not soften it to widen the funnel.
+ * Widening it is what made the previous version forgettable.
+ *
+ * ---
+ *
  * On the voice.
  *
  * Short sentences. Full stops where a lesser page would use a comma. Concrete
  * nouns — documents, folders, hardware, an afternoon — and no abstract ones:
- * nothing here leverages, transforms, empowers or unlocks. No exclamation
- * marks, no adjective doing a verb's job, and not one sentence that would
- * survive being pasted onto a competitor's site.
- *
- * The page makes one claim and repeats it in different clothes: the machine
- * stands in your building, does a job you already hate, and you own it
- * afterwards. That is the only genuinely remarkable thing here, so it is the
- * only thing said loudly. Everything else — the training, the diagnosis, the
- * figures — is evidence for it, set quietly. A page that shouts four things
- * shouts nothing.
+ * nothing here leverages, transforms, empowers or unlocks.
  *
  * The rule for edits: if a sentence could be pasted onto a competitor's site
  * without anybody noticing, it is not finished.
@@ -39,40 +50,36 @@ export const landing = {
   },
 
   hero: {
-    /** The amber eyebrow the site sets above every page opener. */
-    eyebrow: "Applied AI",
+    /** Names the condition rather than the product. A reader who has never
+     *  been blocked will not know what this refers to, which is the point. */
+    eyebrow: "When the cloud is not an option",
 
     /**
-     * What the reader already believes, struck through. These are the three
-     * things people actually say out loud about AI at work — written the way
-     * they say them, not the way a brochure would tidy them up — and all three
-     * are what the page exists to contradict.
+     * What this reader has been told, struck through. Not objections to AI in
+     * general — the three specific sentences somebody says when they have been
+     * refused. A reader who has heard one of these out loud this year knows
+     * within two seconds that the page is about them.
      */
     struck: [
-      "AI gives generic answers.",
-      "We can't put our data in that.",
-      "It's coming for my job.",
+      "We can't put client files in that.",
+      "Legal said no.",
+      "Maybe when the regulator catches up.",
     ],
 
     /**
-     * The reframe. Not "AI is hard" or "AI is powerful", both of which the
-     * reader has heard until they mean nothing — but an accusation about their
-     * actual experience, which is that they have sat through demonstrations
-     * for two years and still do not own a single thing that works.
+     * The concession first. Every competitor tells this reader their fears are
+     * overblown, which is both wrong and insulting: the files really were
+     * being copied to somebody else's computer. Agreeing with them is the
+     * unexpected move, and it buys the right to make the claim underneath.
      */
-    title: "Everybody shows you AI. Nobody hands you any.",
+    title: "Legal said no. They were right.",
 
-    /** The offer in one breath: a job, an afternoon, no invoice.
-     *
-     *  It ends on money deliberately, and on the fact that money comes after.
-     *  An earlier draft ended "yours whether or not we ever work together",
-     *  which is a promise about keeping the prototype that nothing else on the
-     *  site makes — check with Daniel before writing that back in. */
+    /** What was actually wrong, and the one structural difference. */
     promise:
-      "Give us one job you hate. In an afternoon, you will watch a machine do it. Free, and before anybody mentions money.",
+      "Every AI you have been offered copies your clients' files onto somebody else's computer. Ours does not leave the building.",
 
-    /** What makes that possible, said plainly and without a single abstraction. */
-    deck: "Not a chat window you visit. A machine that sits in your building, reads your files where they already are, and works through the jobs your week is actually made of.",
+    /** How that is possible, in concrete nouns. */
+    deck: "A machine that stands in your office and reads your files where they already sit. Every answer cites the document and the page it came from. You own the hardware, there is no bill per question, and when we are finished we go home and it keeps working.",
 
     cta: "Book a 30-minute call",
     /** The secondary call. Short on purpose: the footer's fuller wording,
@@ -82,27 +89,26 @@ export const landing = {
   },
 
   /**
-   * The four things we do.
+   * The four ways in.
    *
-   * Named as verbs, in parallel, so a reader finds themselves on the page in
-   * one pass: we build it, you build it, it never leaves, we look first. The
-   * product name goes in the card's qualifier underneath, because a reader
-   * needs to know what the thing does before they need to know what we call it.
+   * Named as verbs, in parallel, so a reader finds themselves in one pass. The
+   * label underneath does the single job of the whole section: whichever door
+   * they pick, the answer to "but where does the data go" is the same.
    */
   offersEyebrow: "Four doors",
-  offersLabel: "Pick the one that sounds like your week.",
+  offersLabel: "Four ways in. All of them stay in your building.",
   offers: [
     {
       name: "We build it.",
       qualifier: "Built solutions",
       href: "/services",
-      body: "One job. One machine built for that job and nothing else. It reads your data where it already sits. Nothing is uploaded.",
+      body: "One job — the review nobody has time for, the archive nobody has opened. One machine built for that job and nothing else, reading your files where they already sit.",
     },
     {
       name: "You build it.",
       qualifier: "Training",
       href: "/praxis",
-      body: "One to one, on your own work rather than on a prepared example. You leave with a tool that runs, not notes about one.",
+      body: "One to one, on your own files rather than on a prepared example. You leave with a tool that runs inside your own walls, not notes about one.",
     },
     {
       /**
@@ -113,27 +119,25 @@ export const landing = {
       name: "It never leaves.",
       qualifier: "Sovereign",
       href: "/sovereign",
-      body: "Everything you hold, answerable on a machine standing in your building. Every answer cites its document and its page. Open-weight models, your hardware, no bill per question. You keep the folder.",
+      body: "Everything you hold, answerable on a machine standing in your building. Open-weight models, your hardware, no bill per question. You keep the folder.",
     },
     {
       name: "We look first.",
       qualifier: "Diagnosis",
       href: "/services",
-      body: "A short look at what actually eats your week — so we build the thing that was costing you, not the thing that was easiest to describe.",
+      body: "A short look at which of your files are actually the bottleneck, before anybody builds anything or quotes for it.",
     },
   ],
 
   /**
    * The figures.
    *
-   * "Already running" is doing the work here: the reader has been shown a lot
-   * of AI that was going to be able to do things. An earlier draft said
-   * "Nothing rounded up", which reads well and which the first figure on the
-   * page visibly breaks — do not claim precision over a number ending in three
-   * zeroes.
+   * "The last one is the point" sends the eye to the zero. For this reader the
+   * first two numbers are competence and the third is the only one that
+   * decides whether they are allowed to proceed.
    */
   proofEyebrow: "Already running",
-  proofLabel: "Three numbers, from systems that are running now.",
+  proofLabel: "Three numbers. The last one is the point.",
   proof: [
     {
       figure: "150,000",
@@ -172,20 +176,23 @@ export const landing = {
   plateCaption: "Nobody reads 150,000 documents in the time there is.",
 
   /**
-   * Why now.
+   * Who this is not for.
    *
-   * The honest reason to move is not a closing "gap" or a revolution — it is
-   * one specific competitor who is already doing this and has no reason to
-   * mention it. Urgency that names a rival is worth more than urgency that
-   * names a trend, and the last line is the one meant to keep somebody on the
-   * page: there will be no announcement.
+   * The most important section on the page, and the one most likely to be
+   * softened by somebody trying to help. Turning away every reader whose files
+   * could go in the cloud costs almost nothing — they were never going to buy
+   * a machine — and it is the only thing on the sheet that proves to the
+   * remaining reader that the page was written for them specifically.
+   *
+   * The second paragraph is the urgency, and it is aimed at the same person:
+   * their competitor did not get cleverer, they got unblocked.
    */
   window: {
-    label: "Why now",
-    statement: "Somebody in your field is quietly getting much faster than you.",
+    label: "Who this is not for",
+    statement: "If your files can go in the cloud, use the cloud.",
     body: [
-      "Not because they are cleverer. Because they stopped asking one chat window questions and started running a dozen small machines, each one good at exactly one thing.",
-      "They turn work around faster. They give their clients more. Some of it is simply better. There will be no announcement.",
+      "There are good tools, they cost about forty euros a month, and we would be a poor use of your money. We will say so on the call rather than sell you something.",
+      "But somebody in your field has already solved this, and they did not get cleverer — they got unblocked. They are turning work around faster than you now, and there will be no announcement.",
     ],
   },
 
@@ -200,7 +207,7 @@ export const landing = {
   offer: {
     label: "How this starts",
     statement: "The first one is free.",
-    body: "We build a working prototype before you commit to anything. You open it, you click it, you watch it do the actual job. Hours, not weeks. Trust comes from watching a thing run, not from reading a proposal about it.",
+    body: "We build a working prototype before you commit to anything. You open it, you click it, you watch it do the actual job on your actual files. Hours, not weeks. Trust comes from watching a thing run, not from reading a proposal about it.",
     /**
      * A lead time rather than a named month. Months date the page and go stale
      * the moment one turns; "two weeks ahead" stays true and is the thing a
@@ -213,12 +220,12 @@ export const landing = {
 
   close: {
     /**
-     * A question rather than a headline, and one a reader can only answer by
-     * thinking about their own Tuesday. "Hand over" does quiet work too: it
-     * says the job leaves them, not that they leave.
+     * The question this reader has an immediate answer to, because there is a
+     * specific folder they have been staring at for two years. "Not allowed"
+     * rather than "not able": the obstacle was never the technology.
      */
-    title: "Which job would you hand over first?",
-    body: "Bring the boring one, not the impressive one. Thirty minutes is usually enough to tell you honestly whether this is worth your time — including when the answer is that it is not.",
+    title: "What have you not been allowed to do?",
+    body: "Bring the blocked one, not the impressive one — the review nobody has time for, the archive nobody has opened. Thirty minutes is usually enough to tell you honestly whether this is worth your time, including when the answer is that it is not.",
     cta: "Book a 30-minute call",
     alt: "Or send a message",
     /** Named people are who a reader is dealing with. */
