@@ -9,6 +9,7 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PLATE_TILES } from "@/lib/plate-tiles";
 import { copy, useT } from "@/lib/i18n";
 
 /** Small amber eyebrow used above headings. */
@@ -158,6 +159,86 @@ export function Plate({
   );
 }
 
+/**
+ * A wide plate that survives a phone.
+ *
+ * The drawn plates are laid out on a grid and lettered by hand, so shrinking one
+ * to a 342px column puts its labels at four or five pixels. Above `md` the whole
+ * drawing is shown as before; below it the same drawing appears cut along its own
+ * gutters and stacked in reading order, which is what `05-slice.py` produces.
+ *
+ * A cell that is still wide for a phone — the widest here is 939px — gets a
+ * horizontal scroll with a floor on the scale, rather than being shrunk past
+ * legibility or cut through the middle of a drawing. Cells narrower than the
+ * column never scroll, because their floor is below the space available.
+ *
+ * Only one of the two branches is ever displayed, so the alt text sits on
+ * whichever image is showing and a screen reader hears the description once.
+ */
+export function ResponsivePlate({
+  src,
+  tileKey,
+  alt,
+  caption,
+  width,
+  height,
+  floorScale = 0.6,
+}: {
+  src: string;
+  /** Key into the generated tile manifest, e.g. "context-fr". */
+  tileKey: string;
+  alt: string;
+  caption?: React.ReactNode;
+  width: number;
+  height: number;
+  /** Smallest scale a cell is allowed to render at before it scrolls instead. */
+  floorScale?: number;
+}) {
+  const tiles = PLATE_TILES[tileKey] ?? [];
+  if (tiles.length === 0) {
+    return <Plate src={src} alt={alt} caption={caption} width={width} height={height} />;
+  }
+  return (
+    <figure className="my-2">
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+        className="hidden md:block w-full h-auto rounded-2xl border border-border"
+      />
+
+      <div className="md:hidden flex flex-col gap-3">
+        {tiles.map((tile, i) => (
+          // min-w-0: a flex item defaults to min-width:auto, which sizes it to
+          // its content and lets the wide cells push the page sideways instead
+          // of scrolling inside their own box.
+          <div key={tile.src} className="min-w-0 overflow-x-auto rounded-2xl border border-border">
+            <img
+              src={tile.src}
+              alt={i === 0 ? alt : ""}
+              width={tile.w}
+              height={tile.h}
+              loading="lazy"
+              decoding="async"
+              style={{ minWidth: Math.round(tile.w * floorScale) }}
+              className="block w-full h-auto"
+            />
+          </div>
+        ))}
+      </div>
+
+      {caption && (
+        <figcaption className="mt-3 max-w-2xl text-sm text-muted-foreground leading-relaxed">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 /** Three plates side by side under one caption — a row of portraits, say. */
 export function PlateRow({
   items,
@@ -203,26 +284,48 @@ export function CardGrid({ cols = 3, children }: { cols?: 2 | 3; children: React
   );
 }
 
-/** A single feature card: numeral, title, qualifier, body. */
+/**
+ * A single feature card: numeral, title, qualifier, body.
+ *
+ * With `href` the whole card becomes the link rather than just its heading —
+ * a card that names a thing you can go and read is a bigger target than the
+ * three words at the top of it, and on a phone that is the difference between
+ * a tap that works and one that misses.
+ */
 export function FeatureCard({
   numeral,
   title,
   qualifier,
+  href,
   children,
 }: {
   numeral?: string;
   title: string;
   qualifier?: string;
+  href?: string;
   children: React.ReactNode;
 }) {
-  return (
-    <div className="relative bg-card border border-border rounded-2xl p-6">
+  const card = (
+    <div
+      className={cn(
+        "relative bg-card border border-border rounded-2xl p-6 h-full",
+        href && "transition-colors group-hover:border-primary/40",
+      )}
+    >
       {numeral && (
         <span className="absolute top-5 right-6 text-xs font-mono text-muted-foreground/40">
           {numeral}
         </span>
       )}
-      <h3 className="text-lg font-serif font-bold mb-1.5 pr-8">{title}</h3>
+      <h3 className="text-lg font-serif font-bold mb-1.5 pr-8">
+        {title}
+        {href && (
+          <ArrowRight
+            aria-hidden
+            className="inline-block w-4 h-4 ml-1.5 -translate-y-px text-primary opacity-0 transition-opacity group-hover:opacity-100"
+          />
+        )}
+      </h3>
       {qualifier && (
         <p className="text-[11px] uppercase tracking-[0.1em] text-muted-foreground/70 mb-4">
           {qualifier}
@@ -231,14 +334,51 @@ export function FeatureCard({
       <p className="text-sm text-muted-foreground leading-relaxed">{children}</p>
     </div>
   );
+
+  return href ? (
+    <Link href={href} className="group block h-full">
+      {card}
+    </Link>
+  ) : (
+    card
+  );
 }
 
-/** Headline statistic. */
-export function StatCard({ stat, label }: { stat: string; label: string }) {
+/**
+ * Headline statistic.
+ *
+ * `accent` sets the figure in the accent and a size up. It is for the handful
+ * of numbers a page is actually built on — the ones a reader should carry away
+ * — and it stops working the moment every stat on the page asks for it.
+ */
+export function StatCard({
+  stat,
+  label,
+  accent,
+  children,
+}: {
+  stat: string;
+  label: string;
+  accent?: boolean;
+  /** What the figure is, when the number and its unit do not say it alone. */
+  children?: React.ReactNode;
+}) {
   return (
-    <div className="bg-card border border-border rounded-2xl p-6">
-      <p className="text-2xl font-serif font-bold tracking-tight mb-1.5">{stat}</p>
+    <div className="bg-card border border-border rounded-2xl p-6 h-full">
+      <p
+        className={cn(
+          "font-serif font-bold tracking-tight mb-1.5 tabular-nums",
+          accent ? "text-3xl md:text-4xl text-primary" : "text-2xl",
+        )}
+      >
+        {stat}
+      </p>
       <p className="text-sm text-muted-foreground">{label}</p>
+      {children && (
+        <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+          {children}
+        </p>
+      )}
     </div>
   );
 }

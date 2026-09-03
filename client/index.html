@@ -21,14 +21,11 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Source Serif 4 is requested as a weight *range* (300..700) rather than as
-         a list of instances. It used to be pinned to 300/400/600, so every
-         `font-bold` heading on the broadside asked for a 700 that was never
-         loaded and Chrome smeared the 600 master into a synthetic bold — at
-         208px on the front door's numerals, visibly. A range serves one
-         variable file covering every weight in between, which is also fewer
-         bytes than the three static instances it replaces. -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+    <!-- Inter for everything set in sans, Roboto for everything the theme calls
+         serif (`--font-serif`), which is what `h1`-`h6` resolve to. These are
+         the two families the brand uses; the front door briefly set its
+         headings in Source Serif 4 and that has been taken back out. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>

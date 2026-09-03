@@ -19,6 +19,8 @@ export const landing = {
   },
 
   hero: {
+    /** The amber eyebrow the site sets above every page opener. */
+    eyebrow: "Applied AI",
     /**
      * What the reader already believes, struck through. Both of these are the
      * ordinary experience of AI at work, and both are what the page exists to
@@ -35,6 +37,10 @@ export const landing = {
     title: "Right tech. Wrong setup.",
     deck: "Built on a machine, living inside your own systems, working through the tasks your week is actually made of. That is a different thing from a chat window, and it takes an afternoon to set up.",
     cta: "Book a 30-minute call",
+    /** The secondary call. Short on purpose: the footer's fuller wording,
+     *  "The long version of this argument", wraps a pill to two lines on a
+     *  phone. */
+    secondaryCta: "The long version",
     /**
      * The promise, and then the explanation of it. These were two boxes either
      * side of the hero's grid, which read as two unrelated statements rather
@@ -50,6 +56,7 @@ export const landing = {
    * to tell which of these they were reading about. Naming them lets someone
    * find themselves on the page and go straight to the right one.
    */
+  offersEyebrow: "What we do",
   offersLabel: "Name the piece you need.",
   offers: [
     {
@@ -80,6 +87,7 @@ export const landing = {
   ],
 
   /** Numerals, set large. Every figure here is from delivered work. */
+  proofEyebrow: "Delivered work",
   proofLabel: "Built, running, in production.",
   proof: [
     {
