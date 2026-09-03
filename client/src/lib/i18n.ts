@@ -85,12 +85,6 @@ export const copy = {
       en: "30 minutes. We'll tell you honestly what we think.",
       fr: "Trente minutes. Nous vous dirons honnêtement ce que nous en pensons.",
     },
-    personalEyebrow: { en: "The person behind it", fr: "La personne derrière" },
-    personalTitle: { en: "About me", fr: "À propos de moi" },
-    personalBody: {
-      en: "How I got here, how I work, and how to reach me.",
-      fr: "Mon parcours, ma façon de travailler, et comment me joindre.",
-    },
   },
 
   contact: {
