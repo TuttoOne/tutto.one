@@ -13,3 +13,11 @@ vite.config.ts.*
 # the build needs and which is committed. Anchored, or this also swallows
 # client/public/artwork and scripts/artwork.
 /artwork/
+
+# Screenshots and critiques from the designer skill's build/critique loop.
+# Regenerated on demand from a running dev server; never an input to anything.
+.design/
+
+# Keys for image/video generation used by the designer skill, kept apart from
+# the app's own .env so an agent-scoped, spend-limited key stays that way.
+.env.agents

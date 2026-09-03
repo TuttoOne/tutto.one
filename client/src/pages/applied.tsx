@@ -1,12 +1,32 @@
+import { useEffect } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { AppliedExplainer } from "@/components/product/AppliedExplainer";
 import { AnimatedPointer } from "@/components/brand/AnimatedPointer";
 import { Link } from "wouter";
 import { ArrowDown } from "lucide-react";
-import { copy, useT } from "@/lib/i18n";
+import { SITE_TITLE, copy, useT } from "@/lib/i18n";
+import { usePreferences } from "@/lib/preferences";
 
-export default function Home() {
+/**
+ * /applied — the long argument, at length.
+ *
+ * This was the home page until the broadside at `/` took the front door. It
+ * keeps the site's full chrome and the seven-section explainer, and is what
+ * "the long version of this argument" points at from the landing page's foot.
+ */
+export default function Applied() {
   const t = useT();
+  const { locale } = usePreferences();
+
+  useEffect(() => {
+    document.title =
+      locale === "fr"
+        ? "L'IA en pratique | Tutto"
+        : "Applied AI, at length | Tutto";
+    return () => {
+      document.title = SITE_TITLE;
+    };
+  }, [locale]);
 
   return (
     <Layout>

@@ -8,7 +8,11 @@ import { PreferencesProvider } from "@/lib/preferences";
 import NotFound from "@/pages/not-found";
 
 // Primary structure
-import Home from "@/pages/home";
+// The broadside at `/`. It is the site's front door and, for now, its only
+// landing page; the per-offer pages will branch off it.
+import Landing from "@/pages/landing";
+// The long argument, which was the home page until the broadside took `/`.
+import Applied from "@/pages/applied";
 import About from "@/pages/about";
 import AboutMe from "@/pages/about-me";
 import Services from "@/pages/services";
@@ -48,7 +52,10 @@ function Router() {
       <ScrollToTop />
       <Switch>
         {/* Primary structure */}
-        <Route path="/" component={Home} />
+        <Route path="/" component={Landing} />
+        {/* The long-form explainer's own route. The landing page's foot links
+           here as "the long version of this argument". */}
+        <Route path="/applied" component={Applied} />
         <Route path="/about" component={About} />
         <Route path="/about/me" component={AboutMe} />
         <Route path="/services" component={Services} />
@@ -74,9 +81,12 @@ function Router() {
         <Route path="/fiche-capacites" component={FicheCapacites} />
 
         {/* Unlisted */}
-        {/* The explainer had its own page for a day; it now opens the home page.
-            The URL stays alive so anything already shared still lands. */}
-        <Route path="/how-ai-works-here">{() => <Redirect to="/" />}</Route>
+        {/* Both of these were the explainer's address at some point, and it now
+            lives at /applied. The URLs stay alive so anything already shared
+            still lands on the argument rather than on the front door. */}
+        <Route path="/how-ai-works-here">{() => <Redirect to="/applied" />}</Route>
+        {/* The broadside was built and shared at /next before it took `/`. */}
+        <Route path="/next">{() => <Redirect to="/" />}</Route>
         {/* "How we work" was briefly its own page; it is now the top of
            /services, so send anything that points here down to it. */}
         <Route path="/ways-in">{() => <Redirect to="/services" />}</Route>

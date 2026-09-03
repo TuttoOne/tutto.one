@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 import { registerRoutes } from "./routes";
+import { registerMarkupRoutes } from "./markup-routes";
 import { serveStatic } from "./static";
 import { guardPythiaDemo } from "./pythia-demo";
 import { createServer } from "http";
@@ -57,7 +58,11 @@ app.use((req, res, next) => {
       // TOTP secrets, QR codes, or temporary tokens
       const isSensitiveAdminRoute =
         path.startsWith("/api/admin/setup") || path.startsWith("/api/admin/login");
-      if (capturedJsonResponse && !isSensitiveAdminRoute) {
+      // Markup notes carry every point of every pen stroke — hundreds of
+      // coordinate pairs per annotation. Logging the body buries the rest of
+      // the log in numbers and is worth nothing to read.
+      const isNoisyRoute = path.startsWith("/api/markup");
+      if (capturedJsonResponse && !isSensitiveAdminRoute && !isNoisyRoute) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
 
@@ -85,6 +90,10 @@ app.use((req, res, next) => {
   }
 
   await registerRoutes(httpServer, app);
+
+  // Development only, and a no-op in production: lets the markup overlay save a
+  // page's annotations into .design/markup so an agent can read them.
+  registerMarkupRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

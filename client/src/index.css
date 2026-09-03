@@ -122,6 +122,31 @@
   }
 }
 
+/* The landing page at `/`, which is set as a broadside.
+
+   `--font-serif` in @theme resolves to Roboto, so `font-serif` renders as a
+   grotesk everywhere on the site. The rest of the site keeps that; this page
+   wants the serif index.html already loads and nothing else uses. Scoped to
+   `.broadside` so promoting the page changed nothing else's type. */
+.broadside :is(h1, h2, h3, .broadside-serif) {
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+/* Two inks, not one grey.
+
+   The site sets all secondary text in a cool mid-grey, which is a web habit:
+   on paper, body copy is ink. Here the running text takes a warm near-black
+   and the grey is reserved strictly for microcopy — unit labels, the
+   availability line, the colophon — so it gains a level of hierarchy from colour
+   rather than from another type size. */
+.broadside {
+  --muted-foreground: 30 5% 46%;
+}
+
+.broadside .ink {
+  color: hsl(26 14% 13%);
+}
+
 /* Custom Scrollbar for Chat */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
