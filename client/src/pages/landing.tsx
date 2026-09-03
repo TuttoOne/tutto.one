@@ -10,12 +10,12 @@ const BOOKING = "https://cal.com/tuttoone/30min";
 /**
  * The site's front door, at `/` (and still at `/next`, for links already sent).
  *
- * Deliberately not wrapped in <Layout>. The site's header carries nine links,
- * which is nine ways to leave a page whose only job is one booking; this one
- * keeps a wordmark and a single call at the top, routes the four offers from
- * the middle of the sheet, and carries the whole site in its foot. That is the
- * trade a landing page makes when it is also a home page: navigation exists,
- * but it is below the argument rather than above it.
+ * Deliberately not wrapped in <Layout>. The site's header carries nine links
+ * across, which is nine ways to leave a page whose only job is one booking;
+ * this one sets out the call alone and folds the rest of the site behind a
+ * single mark, open at every width. That is the trade a landing page makes when
+ * it is also a home page: navigation is always one press away, but it never
+ * competes with the argument for the reader's first glance.
  *
  * The form is a broadside, and four rules hold it together:
  *
@@ -88,8 +88,12 @@ const RULE_MAJOR = "border-t-2 border-border";
 const H2 =
   "font-bold text-[1.75rem] md:text-[1.9rem] leading-[1.15] tracking-tight";
 const BODY = "text-[17px] ink leading-relaxed";
+/** The house eyebrow, verbatim from the style: `text-xs font-mono uppercase
+ *  tracking-widest`. Every label on the sheet goes through this — two of them
+ *  used to be hand-set at 11px/0.12em, which is a size and a tracking the
+ *  brand does not have. */
 const LABEL =
-  "text-xs font-mono uppercase tracking-[0.1em] text-muted-foreground";
+  "text-xs font-mono uppercase tracking-widest text-muted-foreground";
 
 /**
  * Squared and lettered rather than a pill, and at a size that can hold its own
@@ -136,7 +140,56 @@ function QuietLink({
   );
 }
 
+/**
+ * The menu mark: two rules, at the hairline weight the rest of the sheet is
+ * ruled in, folding into a cross when the panel is open.
+ *
+ * Two strokes rather than the usual three. At this weight a third is noise —
+ * the shape is already unmistakable — and two is what closes cleanly into an
+ * X without a stroke left over to fade out under the other two.
+ */
+function MenuMark({ open }: { open: boolean }) {
+  const bar =
+    "absolute left-0 block h-[1.5px] w-full bg-current transition-transform duration-200 ease-out";
+  return (
+    <span aria-hidden className="relative block h-[9px] w-[19px]">
+      <span
+        className={`${bar} top-0 ${open ? "translate-y-[3.75px] rotate-45" : ""}`}
+      />
+      <span
+        className={`${bar} bottom-0 ${open ? "-translate-y-[3.75px] -rotate-45" : ""}`}
+      />
+    </span>
+  );
+}
+
+/**
+ * The bar: the wordmark, the one call, and the whole site behind one mark.
+ *
+ * The site's own header carries nine links across, which is nine ways to leave
+ * a page whose job is one booking. This keeps that trade — the call is the only
+ * thing set out in the open — while ending the other half of it, which was that
+ * a reader who wanted the site had to reach the foot of a long sheet to find
+ * it. The mark is present at every width, not just below `lg`; the point is
+ * that navigation is always one press away, never that it is responsive.
+ *
+ * The list is `landing.footer.nav`, the same one the colophon sets, so the site
+ * is written down in exactly one place.
+ */
 function Bar() {
+  const [open, setOpen] = useState(false);
+
+  /* Escape closes it. A panel whose only dismissal is a second press on the
+     same 19px target is a trap for anyone not using a mouse. */
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-border">
       <div
@@ -153,10 +206,56 @@ function Bar() {
             Tutto<span className="text-primary">.</span>
           </span>
         </Link>
-        <QuietLink href={BOOKING} external>
-          {landing.bar.cta}
-        </QuietLink>
+
+        <div className="flex items-center gap-5 sm:gap-7">
+          <QuietLink href={BOOKING} external>
+            {landing.bar.cta}
+          </QuietLink>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="landing-menu"
+            aria-label={open ? "Close menu" : "Menu"}
+            className="-mr-1 flex items-center p-1 text-foreground/70 hover:text-foreground transition-colors"
+          >
+            <MenuMark open={open} />
+          </button>
+        </div>
       </div>
+
+      {open && (
+        <nav
+          id="landing-menu"
+          aria-label="Site"
+          className="border-t border-border bg-background"
+        >
+          {/* Set as a ruled table rather than a stack of pills: one rule under
+              each entry, at half the weight of the sheet's own, so the panel
+              belongs to the page it drops over.
+
+              Two columns of five, filled downwards, rather than three filled
+              across. Ten items divide evenly in two, so every rule runs the
+              same length and the block closes on a straight bottom edge; at
+              three the last column ran two short and left the panel ragged.
+              Column flow also puts the reading order and the tab order in the
+              same place, which row flow does not. */}
+          <div
+            className={`${SHEET} grid sm:grid-cols-2 sm:grid-rows-5 sm:grid-flow-col gap-x-10 py-2 sm:py-3`}
+          >
+            {landing.footer.nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="border-b border-border/50 py-2.5 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
@@ -484,7 +583,7 @@ function Close() {
             <p className="broadside-serif text-[1.6rem] md:text-[2rem] leading-tight italic text-foreground">
               {landing.close.signature}
             </p>
-            <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.12em] text-muted-foreground">
+            <p className={`mt-3 ${LABEL}`}>
               {landing.close.signatureNote}
             </p>
           </div>
@@ -523,7 +622,7 @@ function Foot() {
                 Tutto<span className="text-primary">.</span>
               </span>
             </Link>
-            <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.12em] text-muted-foreground">
+            <p className={`mt-3 ${LABEL}`}>
               {landing.footer.place}
             </p>
             <p className="mt-5">
