@@ -125,6 +125,11 @@ export const landing = {
       },
       { name: "TSplus", logo: "/logos/tsplus.png", scale: 0.75 },
       { name: "Opus4Business", logo: "/logos/opus4business.png", scale: 0.95 },
+      /* Supplied as a dark and a white wordmark; the dark one is filed here
+         because the strip sits on the off-white page and the white one would
+         be invisible on it. Trimmed of its transparent margin so it sits on
+         the same optical baseline as the rest. */
+      { name: "RGBC", logo: "/logos/rgbc.png", scale: 1.35 },
     ],
   },
 
