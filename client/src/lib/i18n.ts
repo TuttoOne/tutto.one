@@ -68,6 +68,12 @@ export const copy = {
     bookConversation: { en: "Book a conversation", fr: "Réserver un échange" },
     bookSession: { en: "Book a session", fr: "Réserver une séance" },
     sendMessage: { en: "Send a message", fr: "Envoyer un message" },
+    /**
+     * The same action, short enough to stay on one line inside a pill at 390px.
+     * A hero has the full column to set a label in; a closing panel has the
+     * column less its own padding, and the longer labels wrap there.
+     */
+    bookShort: { en: "Book a call", fr: "Réserver un appel" },
     aboutUs: { en: "About us", fr: "À propos" },
     ourWork: { en: "Our work", fr: "Nos réalisations" },
     seePortfolio: { en: "See the wider portfolio", fr: "Voir l'ensemble des réalisations" },
@@ -687,9 +693,16 @@ export const copy = {
     },
     e2Title: { en: "The build", fr: "La réalisation" },
     e2Price: { en: "From", fr: "À partir de" },
+    /**
+     * The figure above this is an estimate, and the copy has to say so. A
+     * round number beside "From" reads as a rate card, and this is not one:
+     * it is what comparable builds have come to. Saying where it comes from
+     * is what makes it usable — a reader can weigh an estimate drawn from
+     * delivered work, and cannot weigh a number with no provenance.
+     */
     e2Body: {
-      en: "Custom build, scoped after the diagnostic. Excludes hardware. Typically four to eight weeks from sign-off to a system running on your premises.",
-      fr: "Développement sur mesure, cadré après le diagnostic. Hors matériel. Généralement quatre à huit semaines entre la validation et un système en fonctionnement dans vos locaux.",
+      en: "Custom build, scoped after the diagnostic. Excludes hardware. The figure is an estimate based on builds we have already delivered, not a quote. Typically four to eight weeks from sign-off to a system running on your premises.",
+      fr: "Développement sur mesure, cadré après le diagnostic. Hors matériel. Le chiffre est une estimation fondée sur des réalisations déjà livrées, et non un devis. Généralement quatre à huit semaines entre la validation et un système en fonctionnement dans vos locaux.",
     },
     e3Title: { en: "Ongoing", fr: "Suivi" },
     e3Price: { en: "10–20% p.a.", fr: "10–20 % par an" },
@@ -1587,6 +1600,226 @@ export const copy = {
       fr: "Sur une machine présente dans les locaux, qui lit des fichiers qui n'en sortent jamais. C'est un système à part entière, et il a sa propre page.",
     },
     hardwareCta: { en: "Sovereign AI", fr: "L'IA souveraine" },
+  },
+
+  /**
+   * /article-4 — the decision-first page for the AI Act literacy obligation.
+   *
+   * This page sells one thing and asks for one action. It deliberately carries
+   * no portfolio, no architecture and no mention of agents: a reader who wants
+   * any of that has the whole site behind the bar at the top. Everything here
+   * has to survive the question "can you evidence that today?".
+   */
+  article4: {
+    pageTitle: {
+      en: "Article 4 — AI literacy training | Tutto",
+      fr: "Article 4 — Formation IA en entreprise | Tutto",
+    },
+    eyebrow: { en: "Article 4 · EU AI Act", fr: "Article 4 · Règlement européen sur l'IA" },
+    /** The obligation, not the topic. A date, because a date is checkable. */
+    title: {
+      en: "Your staff's AI literacy became your legal obligation in February 2025.",
+      fr: "Depuis février 2025, la formation de vos équipes à l'IA est une obligation légale.",
+    },
+    standfirst: {
+      en: "Article 4 of the EU AI Act requires every employer deploying AI to ensure its people have a sufficient level of AI literacy. Praxis meets it, and ends in the documentation that shows you have.",
+      fr: "L'article 4 du règlement européen sur l'IA impose à tout employeur qui déploie de l'IA de garantir à ses collaborateurs un niveau suffisant de maîtrise de l'IA. Praxis y répond, et se termine par le dossier qui l'atteste.",
+    },
+    meta: {
+      en: "On your site · Six sessions · French or English",
+      fr: "Dans vos locaux · Six séances · Français ou anglais",
+    },
+    /** Short enough to stay on one line inside the pill at 390px. */
+    ctaLabel: {
+      en: "Book a scoping call",
+      fr: "Réserver un appel de cadrage",
+    },
+
+    /** The funding block. The handoff calls this the strongest element here. */
+    fundingLabel: { en: "Funding", fr: "Financement" },
+    fundingTitle: {
+      en: "Six sessions, one cohort, on your site",
+      fr: "Six séances, un groupe, dans vos locaux",
+    },
+    fundingBody: {
+      en: "Fundable through your OPCO, often in full. We prepare and carry the funding file — you sign it.",
+      fr: "Finançable par votre OPCO, souvent en totalité. Nous montons et portons le dossier de financement : vous n'avez qu'à le signer.",
+    },
+    fundingNote: {
+      en: "The price is per cohort, not per head, and covers the on-site delivery and the documentation.",
+      fr: "Le tarif s'entend par groupe et non par participant ; il couvre l'animation sur site et le dossier documentaire.",
+    },
+
+    getLabel: { en: "What you get", fr: "Ce que vous obtenez" },
+    getTitle: {
+      en: "Six sessions, and the file at the end of them.",
+      fr: "Six séances, et le dossier qui les clôt.",
+    },
+    getIntro: {
+      en: "Sessions run on your site, in your language, on your own documents. The sixth produces the record that shows the obligation has been met.",
+      fr: "Les séances se déroulent dans vos locaux, dans votre langue, sur vos propres documents. La sixième produit le dossier qui atteste que l'obligation est remplie.",
+    },
+
+    s1Title: { en: "What AI actually is", fr: "Ce qu'est réellement l'IA" },
+    s1Body: {
+      en: "What the machine is doing when it answers, in plain language and with no jargon. Where the ability comes from, and where it stops.",
+      fr: "Ce que fait réellement la machine lorsqu'elle répond, en langage clair et sans jargon. D'où vient la capacité, et où elle s'arrête.",
+    },
+    s2Title: { en: "What the AI Act asks of you", fr: "Ce que le règlement IA attend de vous" },
+    s2Body: {
+      en: "Article 4 in the words it is written in, what counts as sufficient literacy, and which of your uses fall where in the risk tiers.",
+      fr: "L'article 4 dans les termes où il est écrit, ce qui constitue une maîtrise suffisante, et où se situent vos usages dans les niveaux de risque.",
+    },
+    s3Title: { en: "Your data, and where it goes", fr: "Vos données, et où elles vont" },
+    s3Body: {
+      en: "What leaves the building when someone pastes a document into a chat window, which tools keep it, and how to work without sending it at all.",
+      fr: "Ce qui sort de l'entreprise lorsqu'un document est collé dans une fenêtre de discussion, quels outils le conservent, et comment travailler sans l'envoyer.",
+    },
+    s4Title: { en: "Hands on your own work", fr: "Les mains sur votre propre travail" },
+    s4Body: {
+      en: "Your documents, your process, your machines. Not a demonstration prepared earlier — the tasks your teams actually repeat every week.",
+      fr: "Vos documents, votre processus, vos postes de travail. Pas une démonstration préparée à l'avance : les tâches que vos équipes répètent réellement chaque semaine.",
+    },
+    s5Title: { en: "Where it goes wrong", fr: "Quand cela dérape" },
+    s5Body: {
+      en: "Confident wrong answers, and how to catch them. What has to stay under human review, and how to write that down as a rule rather than a habit.",
+      fr: "Les réponses fausses énoncées avec assurance, et comment les repérer. Ce qui doit rester sous contrôle humain, et comment l'écrire comme une règle plutôt qu'une habitude.",
+    },
+    s6Title: { en: "The file that proves it", fr: "Le dossier qui le prouve" },
+    s6Body: {
+      en: "Attendance, the programme as delivered, the competencies covered and your written internal usage rules — assembled as one document you can hand to an inspector or an auditor.",
+      fr: "Émargement, programme réellement dispensé, compétences couvertes et vos règles internes d'usage écrites — assemblés en un document que vous pouvez présenter à un contrôleur ou à un auditeur.",
+    },
+
+    whyLabel: { en: "Why now", fr: "Pourquoi maintenant" },
+    whyTitle: {
+      en: "Three reasons to act this quarter.",
+      fr: "Trois raisons d'agir ce trimestre.",
+    },
+    urgency1Stat: { en: "02.2025", fr: "02.2025" },
+    urgency1Body: {
+      en: "It is already in force. An obligation, not a project that has to justify itself — there is no return-on-investment argument to win first.",
+      fr: "Elle est déjà en vigueur. Une obligation, et non un projet qui doit se justifier : il n'y a pas de débat sur le retour sur investissement à gagner d'abord.",
+    },
+    urgency2Stat: { en: "31.12", fr: "31.12" },
+    urgency2Body: {
+      en: "OPCO budgets are annual. Whatever is not committed by the end of December is lost rather than carried forward, which makes the fourth quarter the cheapest time to do this.",
+      fr: "Les budgets OPCO sont annuels. Ce qui n'est pas engagé fin décembre est perdu et non reporté, ce qui fait du quatrième trimestre le moment le moins coûteux pour s'y mettre.",
+    },
+    urgency3Body: {
+      en: "Engagements per quarter. I deliver these myself and the training is not subcontracted, so the capacity is one person's — that is the real number.",
+      fr: "Accompagnements par trimestre. J'anime moi-même et la formation n'est pas sous-traitée : la capacité est celle d'une seule personne, et c'est le chiffre réel.",
+    },
+
+    /**
+     * Two lines of background and no more — the handoff is explicit that the
+     * rest of it belongs on the existing site, not on this page.
+     */
+    who: {
+      en: "Delivered by Daniel Forsthofer, in person, in French or English. The person who scopes the course is the person in the room.",
+      fr: "Animé par Daniel Forsthofer, en personne, en français ou en anglais. La personne qui cadre le parcours est celle qui se tient dans la salle.",
+    },
+    ctaTitle: {
+      en: "Thirty minutes is enough to know whether this fits.",
+      fr: "Trente minutes suffisent pour savoir si cela vous convient.",
+    },
+    ctaBody: {
+      en: "Bring your headcount, the tools already in use and the name of your OPCO. That is enough to tell you honestly whether the funding works and when a slot is free.",
+      fr: "Venez avec vos effectifs, les outils déjà en place et le nom de votre OPCO. Cela suffit pour vous dire honnêtement si le financement fonctionne et quand un créneau se libère.",
+    },
+  },
+
+  /**
+   * /souverainete — the diagnostic-only page.
+   *
+   * The full agent offer is deliberately NOT here. It waits on a named
+   * reference workflow with a measured before and after, and on signed hosting
+   * terms. One thing is for sale on this page, and the financing qualifier is
+   * stated in the same size type as the financing itself.
+   */
+  souverainete: {
+    pageTitle: {
+      en: "Sovereignty — diagnostic | Tutto",
+      fr: "Souveraineté — diagnostic | Tutto",
+    },
+    eyebrow: { en: "Sovereignty", fr: "Souveraineté" },
+    title: {
+      en: "Agents that run on hardware you can point at.",
+      fr: "Des agents qui tournent sur une machine que vous pouvez montrer du doigt.",
+    },
+    standfirst: {
+      en: "Not a region setting in someone else's console. A machine, in France, that you own or that is dedicated to you.",
+      fr: "Pas une case « région » dans la console de quelqu'un d'autre. Une machine, en France, que vous possédez ou qui vous est dédiée.",
+    },
+
+    factsLabel: {
+      en: "What sovereign means here",
+      fr: "Ce que souverain veut dire ici",
+    },
+    factsTitle: {
+      en: "Three facts you can check.",
+      fr: "Trois faits vérifiables.",
+    },
+    f1Title: { en: "Your data stays in France", fr: "Vos données restent en France" },
+    f1Body: {
+      en: "No chain of American sub-processors underneath. What goes into the system does not leave the country.",
+      fr: "Aucune chaîne de sous-traitants américains en dessous. Ce qui entre dans le système ne quitte pas le territoire.",
+    },
+    f2Title: { en: "The hardware is yours", fr: "Le matériel est à vous" },
+    f2Body: {
+      en: "You either own it or it is dedicated to you. Either way, nobody else's work is running on it.",
+      fr: "Soit vous en êtes propriétaire, soit il vous est dédié. Dans les deux cas, personne d'autre n'y exécute quoi que ce soit.",
+    },
+    f3Title: { en: "No runaway bill", fr: "Pas de facture qui s'emballe" },
+    f3Body: {
+      en: "The architecture is hybrid: the volume runs locally, and an API is called only where it earns its place. Most of the cost is fixed, so it can be budgeted.",
+      fr: "L'architecture est hybride : le volume s'exécute en local, et une API n'est appelée que là où elle apporte quelque chose. L'essentiel du coût est fixe, donc budgétable.",
+    },
+
+    finLabel: { en: "Financing", fr: "Financement" },
+    finSectionTitle: {
+      en: "There is a loan for this.",
+      fr: "Il existe un prêt pour cela.",
+    },
+    finTitle: { en: "Prêt Boost IA", fr: "Prêt Boost IA" },
+    finBody: {
+      en: "€5,000 to €75,000, with no personal guarantee, an answer in 48 hours, and the first repayment deferred by nine to twelve months.",
+      fr: "De 5 000 € à 75 000 €, sans garantie personnelle, réponse sous 48 heures, et premier remboursement différé de neuf à douze mois.",
+    },
+    /**
+     * Deliberately the same size type as finBody. It is the condition most
+     * likely to kill the loan, and it is better read here than discovered at
+     * signature.
+     */
+    finConditionLabel: { en: "Condition", fr: "Condition" },
+    finQualifier: {
+      en: "It requires an existing bank loan with three or more years left to run. Without one this route is closed, and that is worth knowing now rather than at signature.",
+      fr: "Il faut un prêt bancaire en cours avec au moins trois ans restant à courir. Sans cela, cette voie est fermée — autant le savoir maintenant plutôt qu'à la signature.",
+    },
+
+    offerLabel: { en: "The offer", fr: "L'offre" },
+    holdNote: {
+      en: "The build offer will be published when a named reference workflow, measured before and after, stands behind it. Until then the diagnostic is the only thing on this page.",
+      fr: "L'offre de réalisation sera publiée lorsqu'un processus de référence, mesuré avant et après, se tiendra derrière elle. D'ici là, le diagnostic est la seule chose proposée sur cette page.",
+    },
+    priceTitle: { en: "Sovereignty diagnostic", fr: "Diagnostic de souveraineté" },
+    priceBody: {
+      en: "One workflow you actually run: what it touches, where the data sits, and what it would take to run it on infrastructure you control.",
+      fr: "Un processus que vous exécutez réellement : ce qu'il touche, où se trouvent les données, et ce qu'il faudrait pour le faire tourner sur une infrastructure que vous maîtrisez.",
+    },
+    priceBody2: {
+      en: "You leave with a written answer and a figure. The fee is credited in full against any build that follows.",
+      fr: "Vous repartez avec une réponse écrite et un chiffre. Le montant est intégralement déduit de la réalisation qui suivrait.",
+    },
+
+    ctaTitle: {
+      en: "Is your workflow a candidate?",
+      fr: "Votre processus est-il candidat\u202f?",
+    },
+    ctaBody: {
+      en: "Bring one process you actually run. Thirty minutes is usually enough to say whether it can run on your own infrastructure, and roughly what that would cost.",
+      fr: "Venez avec un processus que vous exécutez réellement. Trente minutes suffisent en général pour dire s'il peut tourner sur votre propre infrastructure, et à peu près à quel coût.",
+    },
   },
 
 } as const;

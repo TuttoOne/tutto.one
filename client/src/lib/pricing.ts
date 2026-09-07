@@ -24,6 +24,14 @@ import type { Currency, Locale } from "./preferences";
 /** Sessions in a full Praxis course. Declared before PRICES, which uses it. */
 const COURSE_SESSIONS_N = 8;
 
+/**
+ * Sessions in the in-company Article 4 engagement. Six, not eight: it is a
+ * different product from the open programme, sold to a compliance obligation
+ * rather than to a curriculum. Named apart from COURSE_SESSIONS_N so the two
+ * cannot be confused at the call site.
+ */
+export const ARTICLE4_SESSIONS = 6;
+
 export type PriceKey =
   // Praxis
   | "sessionStandard"
@@ -31,8 +39,10 @@ export type PriceKey =
   | "toolsMonthly"
   | "eveningClass"
   | "eveningSeries"
+  | "praxisCohort"
   // Engagements
   | "sprint"
+  | "sovereigntyDiagnostic"
   | "scriptBuildFrom"
   | "build"
   | "enablementFrom"
@@ -65,11 +75,19 @@ export const EVENING_CLASSES = 3;
  */
 const EVENING_CLASSES_PAID = 2;
 /**
- * Hours in one scripting engagement, taken from a delivered piece of work
- * rather than estimated. Exported so the figure can be quoted alongside the
- * price instead of being restated in prose that then drifts from it.
+ * Hours in the smallest scripting engagement we will take.
+ *
+ * This is the lever that sets the floor price, and it is set so that floor is
+ * the same €3,000 the landing page quotes for an agent build — the two are the
+ * same offer described to two different readers, and a visitor who compares
+ * them should not find two numbers.
+ *
+ * It moved from 40 to 30 to bring those into line. The alternative was to drop
+ * HOUR from €100 to €75 and keep 40 hours; scope was the honest lever, because
+ * the rate is what was set commercially and the hours are what a "from" price
+ * is a minimum of.
  */
-export const SCRIPT_BUILD_HOURS = 40;
+export const SCRIPT_BUILD_HOURS = 30;
 
 /** Base rates. Everything else on the site is derived from these. */
 export const PRICES: Record<PriceKey, Record<Currency, number>> = {
@@ -87,12 +105,29 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
     EUR: EVENING.EUR * EVENING_CLASSES_PAID,
     ZAR: EVENING.ZAR * EVENING_CLASSES_PAID,
   },
+  /**
+   * The six-session in-company Article 4 engagement, for one cohort on the
+   * client's own site.
+   *
+   * Deliberately NOT derived from the session rate. `sessionStandard` prices an
+   * hour of one-to-one time; this prices six days inside a company, the travel,
+   * the sector re-skin and the compliance documentation that comes out at the
+   * end. Deriving it would make the two move together, and they should not.
+   */
+  praxisCohort: { GBP: 5000, EUR: 6000, ZAR: 120000 },
 
   /**
    * Two-week diagnostic sprint — the data audit and knowledge map. Pythia and
    * the services page quote the same engagement, so they quote the same key.
    */
   sprint: { GBP: 2000, EUR: 2400, ZAR: 48000 },
+  /**
+   * Sovereignty diagnostic — the only thing for sale on /souverainete while the
+   * full agent offer is held back. Credited in full against any build that
+   * follows, which is why it is a separate key from `sprint`: the sprint is
+   * charged and kept.
+   */
+  sovereigntyDiagnostic: { GBP: 1250, EUR: 1500, ZAR: 30000 },
   /**
    * One scripting build: a working solution on infrastructure the client
    * already has. Computed from the hourly rate and the hours, so the two can
@@ -105,10 +140,14 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
     ZAR: HOUR.ZAR * SCRIPT_BUILD_HOURS,
   },
   /**
-   * Pythia build. Excludes hardware. Carried at the exact converted figure
-   * rather than rounded to a tidier number.
+   * Pythia build. Excludes hardware.
+   *
+   * An estimate drawn from builds already delivered, not a quote — which is
+   * what the copy under it now says, and why the figure is a round number
+   * rather than the exact converted 9,850 it used to carry. GBP and ZAR follow
+   * the file's fixed EUR/1.2 and EUR x 20.
    */
-  build: { GBP: 8208, EUR: 9850, ZAR: 197000 },
+  build: { GBP: 5833, EUR: 7000, ZAR: 140000 },
   /**
    * Team enablement IS the training — the same eight sessions as the course,
    * computed from the session rate so the two can never show different prices
@@ -149,9 +188,11 @@ export const ONGOING_MAX_PCT = 20;
 /** Price keys offered in the admin content editor. */
 export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
   { key: "sprint", label: "Diagnostic sprint / data audit (€2,400)" },
-  { key: "scriptBuildFrom", label: "Scripting build, 40h (€4,000)" },
+  { key: "praxisCohort", label: "Praxis in-company, 6 sessions (€6,000)" },
+  { key: "sovereigntyDiagnostic", label: "Sovereignty diagnostic (€1,500)" },
+  { key: "scriptBuildFrom", label: "Scripting build, 30h (€3,000)" },
   { key: "enablementFrom", label: "Team enablement / training (€2,000)" },
-  { key: "build", label: "Pythia build, excl. hardware (€9,850)" },
+  { key: "build", label: "Pythia build, excl. hardware (€7,000)" },
   { key: "sessionStandard", label: "Praxis session, standard (€250)" },
   { key: "sessionPromo", label: "Praxis session, promo (€125)" },
   { key: "spAuditFrom", label: "SharePoint audit (€600)" },
@@ -164,7 +205,7 @@ const SYMBOLS: Record<Currency, string> = { GBP: "£", EUR: "€", ZAR: "R" };
 
 /**
  * Format an amount as a rate-card price: symbol, grouped thousands, no
- * decimals. Intl handles grouping so French renders 9 850, not 9,850.
+ * decimals. Intl handles grouping so French renders 7 000, not 7,000.
  */
 export function formatMoney(amount: number, currency: Currency, locale: Locale): string {
   const grouped = new Intl.NumberFormat(locale === "fr" ? "fr-FR" : "en-GB", {

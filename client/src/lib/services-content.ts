@@ -100,9 +100,11 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
       "Choix et intégration des outils",
     ],
     /**
-     * A stated price, not "custom scoping". One scripting engagement is about
-     * forty hours; the hosting caveat is the only genuine variable, so it is
-     * stated as a caveat rather than smuggled into an open-ended quote.
+     * A stated price, not "custom scoping". The floor is thirty hours, and it
+     * is deliberately the same figure the landing page quotes for an agent
+     * build — same offer, two readers. The hosting caveat is the only genuine
+     * variable, so it is stated as a caveat rather than smuggled into an
+     * open-ended quote.
      */
     note: {
       en: "Priced on deployment to hosting or hardware you specify, where running it costs you nothing further. If we have to host it, that is quoted separately.",

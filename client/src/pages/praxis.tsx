@@ -11,6 +11,7 @@ import {
   ClosingCta,
   Eyebrow,
   Plate,
+  ResponsivePlate,
 } from "@/components/product/ProductPage";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
@@ -124,8 +125,9 @@ export default function Praxis() {
           </div>
 
           <div className="mt-10">
-            <Plate
+            <ResponsivePlate
               src={plate("context")}
+              tileKey={`context-${locale === "fr" ? "fr" : "en"}`}
               width={1740}
               height={904}
               alt={t(copy.plates.context)}

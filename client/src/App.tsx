@@ -31,6 +31,12 @@ import FicheCapacites from "@/pages/fiche-capacites";
 
 // Unlisted: reachable by direct link, deliberately absent from the nav so any
 // URL already shared with a client keeps working.
+// The two decision-first pages. Everything else on the site is depth-first,
+// which is right for a reader who already wants to go deeper; these are for a
+// reader deciding whether to book, and they are pasted into an email rather
+// than found through the bar.
+import Article4 from "@/pages/article4";
+import Souverainete from "@/pages/souverainete";
 import GtmOrchestrator from "@/pages/gtm-orchestrator";
 import BecomeATrainer from "@/pages/become-a-trainer";
 import PraxisLearn from "@/pages/praxis-learn";
@@ -91,6 +97,8 @@ function Router() {
            /services, so send anything that points here down to it. */}
         <Route path="/ways-in">{() => <Redirect to="/services" />}</Route>
         <Route path="/praxis-programme" component={PraxisProgramme} />
+        <Route path="/article-4" component={Article4} />
+        <Route path="/souverainete" component={Souverainete} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
         <Route path="/become-a-trainer" component={BecomeATrainer} />
         <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />

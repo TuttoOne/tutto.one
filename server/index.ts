@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 import { registerRoutes } from "./routes";
 import { registerMarkupRoutes } from "./markup-routes";
+import { registerCopyRoutes } from "./copy-routes";
 import { serveStatic } from "./static";
 import { guardPythiaDemo } from "./pythia-demo";
 import { createServer } from "http";
@@ -94,6 +95,10 @@ app.use((req, res, next) => {
   // Development only, and a no-op in production: lets the markup overlay save a
   // page's annotations into .design/markup so an agent can read them.
   registerMarkupRoutes(app);
+
+  // Development only, and a no-op in production: lets the copy overlay write a
+  // page's reworded sentences back into its source file in client/src/lib.
+  registerCopyRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

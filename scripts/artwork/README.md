@@ -2,7 +2,7 @@
 
 The drawings arrive in `artwork/` as flat PNGs: red as the accent colour, grounds
 ranging from plain white to poster red, and on the French Skills plate a banner
-reading "COMPÉTENCES". Four steps, run from the repo root in order:
+reading "COMPÉTENCES". Five steps, run from the repo root in order:
 
 | step | does |
 | --- | --- |
@@ -10,6 +10,7 @@ reading "COMPÉTENCES". Four steps, run from the repo root in order:
 | `02-background.py` | maps every ground onto `#EADDD3`, the paper of the Skills plate |
 | `03-recolor.py` | moves red to `hsl(32 95% 44%)`, the site's `--primary` |
 | `04-export.py` | writes WebP into `client/public/artwork/`, capped at 1800px wide |
+| `05-slice.py` | cuts the wide plates into their grid cells for phones, and writes the manifest the page component reads |
 
 ```sh
 for s in scripts/artwork/0*.py; do python3 "$s"; done
@@ -49,6 +50,19 @@ If a plate is redrawn they need re-measuring.
 `*-Skills-final.png` arrive already cropped, already headline-free and already
 saying SKILLS in both languages, so they skip step 01. The home page uses those;
 /sovereign uses the full plate, which still needs its banner fixed.
+
+## Phones
+
+At a 390px viewport a 1740px plate renders at about 20% scale, which puts the
+hand lettering at four or five pixels. `05-slice.py` cuts those plates along
+gutters that carry no ink in either language, and `ResponsivePlate` shows the
+whole drawing from `md` up and the stacked cells below it. Each cut is checked
+against both locales before anything is written, so a mis-measured gutter fails
+the build rather than slicing through a drawing.
+
+A cell still wider than the column scrolls inside its own box rather than
+shrinking past legibility — the floor is 60% of the cell's natural width. Only
+the widest cell of the Context plate currently needs it.
 
 `artwork/` holds the originals and should not be edited in place. Everything under
 `artwork/build/`, `artwork/orange/` and `client/public/artwork/` is generated.

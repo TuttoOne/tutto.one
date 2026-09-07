@@ -383,6 +383,57 @@ export function StatCard({
   );
 }
 
+/**
+ * A band of client names, as logos where a clean file exists and as wordmarks
+ * where one does not.
+ *
+ * The wordmark branch is the interesting half. The canonical client wall is a
+ * row of images, and it only works when every image is the same kind of thing:
+ * same optical weight, same background, same clearance. Nine logos gathered
+ * from nine websites are never that, and the fix — nudging each one's size
+ * until the row looks level — is invisible work that comes undone the moment a
+ * tenth is added. Setting the names in one typeface at one size is uniform by
+ * construction, and on a page whose whole argument is written rather than
+ * illustrated it reads as a deliberate choice rather than a missing asset.
+ *
+ * Logos are muted until hovered so the band reads as one texture at a glance,
+ * which is what a client wall is for: the eye should catch one familiar name,
+ * not audit ten.
+ */
+export function LogoWall({
+  items,
+}: {
+  items: readonly { readonly name: string; readonly logo?: string }[];
+}) {
+  return (
+    <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-7">
+      {items.map((item) => (
+        <li
+          key={item.name}
+          /* A floor rather than a fixed height: "Bearstone Private
+             Investigation" takes two lines at this measure and clipping it
+             would be worse than an uneven row. */
+          className="flex min-h-12 items-center justify-center text-center"
+        >
+          {item.logo ? (
+            <img
+              src={item.logo}
+              alt={item.name}
+              loading="lazy"
+              decoding="async"
+              className="max-h-9 w-auto max-w-full object-contain opacity-60 grayscale transition duration-200 hover:opacity-100 hover:grayscale-0"
+            />
+          ) : (
+            <span className="text-[13px] font-medium uppercase leading-snug tracking-[0.12em] text-muted-foreground/80 transition-colors duration-200 hover:text-foreground">
+              {item.name}
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 /** Priced line item. */
 export function PriceRow({
   title,
@@ -465,6 +516,162 @@ export function Etymology({ pull, children }: { pull: string; children: React.Re
   );
 }
 
+/**
+ * Quiet panel.
+ *
+ * The ground `ClosingCta` sits on, available on its own for the one block on a
+ * page that has to be read before anything else — a funding line, or a
+ * condition that would otherwise be discovered at signature. It is a lighter
+ * ground than a card, so it reads as a note the page is making rather than as
+ * another item in a grid; the classes are `ClosingCta`'s so the two cannot
+ * drift apart.
+ */
+export function Panel({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn("bg-secondary/30 rounded-2xl border border-border p-6", className)}>
+      {children}
+    </div>
+  );
+}
+
+/**
+ * The offer, stated at headline scale.
+ *
+ * `PriceRow` is a line item: it sets the figure beside the title, which is
+ * right when a page lists several and wrong when a page lists one. A price set
+ * at body scale next to a heading reads as a right-aligned label, and the eye
+ * slides off it — so on the one block a decision-first page has to sell, the
+ * figure gets a line of its own.
+ *
+ * Nothing here is amber but the eyebrow. The block is already the loudest thing
+ * below the hero by size alone, and the accent is spent on the button.
+ *
+ * It is laid out as a flex column with the note pushed to the foot so two of
+ * these can sit side by side in a grid: grid children stretch to the tallest
+ * in the row, and without `mt-auto` the shorter card ends up with its small
+ * print stranded halfway up a panel of empty space. On a page that shows one
+ * of these full width, height is auto, there is no free space to distribute,
+ * and both rules are inert.
+ */
+export function HeadlinePrice({
+  label,
+  title,
+  price,
+  note,
+  children,
+}: {
+  /** Omitted when the block already sits under a `Section` head. */
+  label?: string;
+  title: string;
+  price: string;
+  /** Set below a hairline, so it reads as a note and not a third paragraph. */
+  note?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <Panel className="flex h-full flex-col p-6 sm:p-8">
+      {label && <Eyebrow className="mb-5">{label}</Eyebrow>}
+      <h2 className="text-lg font-serif font-bold">{title}</h2>
+      <p className="mt-3 mb-7 text-4xl md:text-5xl font-serif font-bold tracking-tight tabular-nums">
+        {price}
+      </p>
+      <div className="mb-6 text-lg text-foreground leading-relaxed max-w-2xl">{children}</div>
+      {note && (
+        <div className="mt-auto pt-5 border-t border-border text-sm text-muted-foreground leading-relaxed max-w-2xl">
+          {note}
+        </div>
+      )}
+    </Panel>
+  );
+}
+
+/**
+ * A numbered document list.
+ *
+ * Six items in six bordered cards is a feature grid, and a curriculum is not a
+ * feature grid: the boxes add five boundaries that carry no meaning, and a
+ * 320px box pushes a title, a taxonomy label and a numeral into the same corner
+ * until none of them can be read. This sets the same content as a list — a
+ * hairline, the number, the title, one paragraph — which is what a course
+ * outline looks like on paper.
+ */
+export function NumberedList({
+  items,
+}: {
+  items: { n?: string; title: string; body: React.ReactNode }[];
+}) {
+  const numbered = items.some((item) => item.n);
+  return (
+    <ol className="border-t border-border">
+      {items.map((item) => (
+        <li
+          key={item.title}
+          /* The last rule is dropped: the next Section draws its own hairline
+             directly below, and the two together read as a mistake. */
+          className={cn(
+            "border-b border-border last:border-b-0 py-6 grid gap-x-6 gap-y-1.5",
+            numbered && "sm:grid-cols-[6rem_1fr]",
+          )}
+        >
+          {numbered && (
+            <span className="text-sm font-mono text-muted-foreground tabular-nums sm:pt-1 sm:text-right">
+              {item.n}
+            </span>
+          )}
+          <div>
+            <h3 className="text-lg font-serif font-bold mb-1.5">{item.title}</h3>
+            {/* ~68ch. The full column at 14px runs to 90 characters, which is
+                what made six items read as one grey slab. */}
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">{item.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/**
+ * Figures set as rows rather than cards.
+ *
+ * Three statistics in three bordered boxes is the canonical generated feature
+ * triplet, and it rags the moment the three bodies are different lengths — two
+ * cards carry dead space so the third can fit. As rows they take the grammar of
+ * The figure sits on the page's body axis with the claim beneath it. It does
+ * NOT share `NumberedList`'s gutter: those numerals are a sequence and line up
+ * as one, while these are a date, a deadline and a count — hung off a common
+ * right edge they read as three misaligned numbers rather than a column. The
+ * claim is a whole sentence, so it needs no caption under the figure.
+ */
+export function FigureRows({
+  items,
+}: {
+  items: { figure: string; body: React.ReactNode }[];
+}) {
+  return (
+    <ol className="border-t border-border">
+      {items.map((item) => (
+        <li
+          key={item.figure}
+          className="border-b border-border last:border-b-0 py-6"
+        >
+          {/* A step below the offer price: three figures at the same size as
+              one price outweigh it, and the price is what the page is for. */}
+          <p className="text-2xl font-serif font-bold tracking-tight tabular-nums mb-2">
+            {item.figure}
+          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">{item.body}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 /** Closing call to action. */
 export function ClosingCta({
   title,
@@ -472,15 +679,35 @@ export function ClosingCta({
   href,
   label,
   messageLabel = "Send a message",
+  footnote,
+  rule,
 }: {
   title: string;
   body: string;
   href: string;
   label: string;
-  messageLabel?: string;
+  /**
+   * `null` drops the secondary link entirely. The decision-first pages are
+   * built on one offer and one action, and a second button on them is not a
+   * convenience but a way out.
+   */
+  messageLabel?: string | null;
+  /**
+   * A byline under the buttons, below a hairline. A line of attribution set
+   * loose on the page between two panels reads as a paragraph someone forgot to
+   * place; inside the panel it reads as a signature.
+   */
+  footnote?: React.ReactNode;
+  /**
+   * Draw the section hairline above the panel. On a page that announces every
+   * other block with a rule, the closing panel arriving without one reads as
+   * the rules having been abandoned two-thirds of the way down.
+   */
+  rule?: boolean;
 }) {
   return (
-    <div className="mt-16 p-8 bg-secondary/30 rounded-2xl border border-border">
+    <div className={cn("mt-16", rule && "border-t border-border pt-10")}>
+      <div className="p-6 sm:p-8 bg-secondary/30 rounded-2xl border border-border">
       <h3 className="text-xl font-serif font-bold mb-2">{title}</h3>
       <p className="text-muted-foreground mb-6 max-w-xl">{body}</p>
       <div className="flex flex-col sm:flex-row gap-4">
@@ -492,12 +719,20 @@ export function ClosingCta({
         >
           {label}
         </a>
-        <Link
-          href="/contact"
-          className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
-        >
-          {messageLabel} <ArrowRight className="w-4 h-4" />
-        </Link>
+        {messageLabel !== null && (
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
+          >
+            {messageLabel} <ArrowRight className="w-4 h-4" />
+          </Link>
+        )}
+      </div>
+      {footnote && (
+        <div className="mt-8 pt-5 border-t border-border">
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">{footnote}</p>
+        </div>
+      )}
       </div>
     </div>
   );

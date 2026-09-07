@@ -1,244 +1,235 @@
 /**
- * Copy for the landing page at `/` — the short argument, against the long one
- * that now lives at /applied.
+ * Copy for the landing page at `/`.
  *
- * Kept here rather than in i18n.ts on purpose. This is the page that will be
- * split into one per offer — training, Sovereign, and the rest — so it should
- * stay rewritable and forkable without touching a file the whole site depends
- * on. It is English only, so the shape is a plain string rather than an
- * { en, fr } pair; French comes when the structure has settled.
- *
- * Everything on the page is in this file. If a sentence is wrong, it is wrong
- * here and nowhere else.
+ * English and French, in `{ en, fr }` leaves, resolved through `useT()` from
+ * i18n.ts. It stays in its own file rather than in i18n.ts because this is the
+ * page most likely to be rewritten wholesale, and it should be rewritable
+ * without touching the file every other page depends on. The French is not a
+ * gloss: prices take French typography (3 000 €, not €3,000) and the sentences
+ * are the ones a French reader would actually be told.
  *
  * ---
  *
- * WHO THIS PAGE IS FOR, which is the only decision on it that matters.
+ * WHAT THIS PAGE SAYS, which is the only decision on it that matters.
  *
- * It is for somebody who has been told no. A compliance officer, a regulator,
- * a partner, an IT policy — somebody has forbidden them from putting client
- * files into a cloud AI, and they have spent two years watching everybody else
- * get faster while their own files stayed exactly where they were.
+ * One thing: we build agents. The page's whole job is to get a reader from
+ * "I have a chat window open and I am not sure why" to "somebody could build
+ * me the thing that does the job", and it does that with a sequence — chat,
+ * then a workspace that remembers, then an agent — because a reader who does
+ * not see the sequence cannot see where they are on it.
  *
- * That is a small group. It is meant to be. They cannot use what everybody
- * else uses, they are frustrated about it, and — this is the part that matters
- * — they talk to each other, because there are not many of them and they meet
- * at the same conferences. A page that spoke to every business with a busy
- * week reached all of them weakly and none of them enough to be repeated.
- *
- * So the page turns people away on purpose. "If your files can go in the
- * cloud, use the cloud" is not modesty; it is the sentence that tells the
- * right reader they have been found. Do not soften it to widen the funnel.
- * Widening it is what made the previous version forgettable.
+ * The previous version sold four offers at once and was forgettable for it.
+ * If a new offer needs a home, give it a page; do not add a fifth door here.
  *
  * ---
  *
- * On the voice.
+ * THE WORD BUDGET IS THE POINT: 400 words per language of rendered prose. It
+ * is short because the reader is deciding whether to spend thirty minutes, not
+ * whether to sign. Adding a paragraph means cutting one.
  *
- * Short sentences. Full stops where a lesser page would use a comma. Concrete
- * nouns — documents, folders, hardware, an afternoon — and no abstract ones:
- * nothing here leverages, transforms, empowers or unlocks.
+ * It started at 350 and was raised once the client band and a longer hero had
+ * earned the room. Two things are outside it, deliberately: the client names,
+ * which are proper nouns in a list a reader scans rather than prose they read,
+ * and any leaf that is not rendered on the page. The live counter in the
+ * browser copy editor is the one that matters — see components/copy.
  *
- * The rule for edits: if a sentence could be pasted onto a competitor's site
- * without anybody noticing, it is not finished.
+ * On the voice: short sentences, concrete nouns, no verb that leverages,
+ * transforms, empowers or unlocks. If a sentence could be pasted onto a
+ * competitor's site without anybody noticing, it is not finished.
  */
 
 export const landing = {
-  /** Slim bar: one call, no links. The site is in the footer instead. */
-  bar: {
-    cta: "Book a call",
-  },
-
   hero: {
-    /** Names the condition rather than the product. A reader who has never
-     *  been blocked will not know what this refers to, which is the point. */
-    eyebrow: "When the cloud is not an option",
+    eyebrow: { en: "What we do", fr: "Ce que nous faisons" },
 
-    /**
-     * What this reader has been told, struck through. Not objections to AI in
-     * general — the three specific sentences somebody says when they have been
-     * refused. A reader who has heard one of these out loud this year knows
-     * within two seconds that the page is about them.
-     */
-    struck: [
-      "We can't put client files in that.",
-      "Legal said no.",
-      "Maybe when the regulator catches up.",
-    ],
+    /** The whole positioning, in three words. Nothing else in the hero is
+     *  allowed to be longer than the sentence it supports. */
+    title: { en: "We build agents.", fr: "Nous construisons des agents." },
 
-    /**
-     * The concession first. Every competitor tells this reader their fears are
-     * overblown, which is both wrong and insulting: the files really were
-     * being copied to somebody else's computer. Agreeing with them is the
-     * unexpected move, and it buys the right to make the claim underneath.
-     */
-    title: "Legal said no. They were right.",
+    promise: {
+      en: "AI is more than an advanced search engine: with tools it can do work. It can read data, create documents and run calculations.",
+      fr: "L'IA est plus qu'un moteur de recherche perfectionné : avec les bons outils, elle travaille. Elle lit vos données, rédige vos documents, fait vos calculs.",
+    },
 
-    /** What was actually wrong, and the one structural difference. */
-    promise:
-      "Every AI you have been offered copies your clients' files onto somebody else's computer. Ours does not leave the building.",
+    deck: {
+      en: "We don't replace people. We help them get the most out of their time with new skills and AI assistants that don't sleep.",
+      fr: "Nous ne remplaçons personne. Nous faisons gagner du temps à vos équipes : de nouvelles compétences, et des assistants IA qui ne dorment jamais.",
+    },
 
-    /** How that is possible, in concrete nouns. */
-    deck: "A machine that stands in your office and reads your files where they already sit. Every answer cites the document and the page it came from. You own the hardware, there is no bill per question, and when we are finished we go home and it keeps working.",
-
-    cta: "Book a 30-minute call",
-    /** The secondary call. Short on purpose: the footer's fuller wording,
-     *  "The long version of this argument", wraps a pill to two lines on a
-     *  phone. */
-    secondaryCta: "The long version",
+    cta: { en: "Book a 90-minute call", fr: "Réserver 90 minutes" },
+    secondaryCta: { en: "The long version", fr: "La version longue" },
   },
 
   /**
-   * The four ways in.
+   * The client band, second on the page.
    *
-   * Named as verbs, in parallel, so a reader finds themselves in one pass. The
-   * label underneath does the single job of the whole section: whichever door
-   * they pick, the answer to "but where does the data go" is the same.
+   * It sits directly under the hero because "we build agents" is a claim and
+   * this is the only thing on the sheet that is evidence. A reader deciding
+   * whether to spend thirty minutes wants to know somebody else already did.
+   *
+   * The names are plain strings, not `{ en, fr }` leaves, for two reasons:
+   * a company name is the same in both languages, and the copy tooling walks
+   * for leaves — so names stay out of the browser editor, out of the markdown
+   * round-trip, and out of the 350-word budget, which is about prose a reader
+   * has to get through rather than a list they scan.
+   *
+   * `logo` is the path to a file in `client/public/logos/`. Where it is absent
+   * the name is set as a wordmark in the site's own type instead. That is a
+   * deliberate fallback, not a placeholder: nine logos scraped from nine
+   * websites arrive at nine different resolutions, aspect ratios and
+   * background colours, and a row of mismatched raster grabs reads as a
+   * template that has been filled in badly. Type is uniform by construction.
+   *
+   * Fill `logo` in only when a clean asset exists — SVG, or PNG on
+   * transparency, supplied by the client. Mixing the two forms in one row is
+   * worse than either: go all images or all type.
    */
-  offersEyebrow: "Four doors",
-  offersLabel: "Four ways in. All of them stay in your building.",
-  offers: [
-    {
-      name: "We build it.",
-      qualifier: "Built solutions",
-      href: "/services",
-      body: "One job — the review nobody has time for, the archive nobody has opened. One machine built for that job and nothing else, reading your files where they already sit.",
-    },
-    {
-      name: "You build it.",
-      qualifier: "Training",
-      href: "/praxis",
-      body: "One to one, on your own files rather than on a prepared example. You leave with a tool that runs inside your own walls, not notes about one.",
-    },
-    {
-      /**
-       * Pythia and the sovereign architecture were two rows, which read as two
-       * products; they are one thing described at two altitudes — what it does
-       * for you, and what it is built on. One heading, both halves.
-       */
-      name: "It never leaves.",
-      qualifier: "Sovereign",
-      href: "/sovereign",
-      body: "Everything you hold, answerable on a machine standing in your building. Open-weight models, your hardware, no bill per question. You keep the folder.",
-    },
-    {
-      name: "We look first.",
-      qualifier: "Diagnosis",
-      href: "/services",
-      body: "A short look at which of your files are actually the bottleneck, before anybody builds anything or quotes for it.",
-    },
-  ],
-
-  /**
-   * The figures.
-   *
-   * "The last one is the point" sends the eye to the zero. For this reader the
-   * first two numbers are competence and the third is the only one that
-   * decides whether they are allowed to proceed.
-   */
-  proofEyebrow: "Already running",
-  proofLabel: "Three numbers. The last one is the point.",
-  proof: [
-    {
-      figure: "150,000",
-      unit: "documents",
-      body: "A litigation disclosure set, answerable on a machine standing in the room. Every answer cites the page it came from.",
-    },
-    {
-      figure: "6,675",
-      unit: "prospects",
-      body: "Profiled across nine countries on the client's own hardware. The identifying detail never left it.",
-    },
-    {
-      figure: "0",
-      unit: "copies that left",
-      body: "Across every system on this page. Local is an architecture, not a checkbox. It is either true of your system or it is not.",
-    },
-  ],
-
-  /**
-   * The one piece of imagery on the sheet.
-   *
-   * `src` may be a still (.webp/.png/.jpg) or a video (.mp4/.webm) — the page
-   * looks at the extension and renders an <img> or a muted, looping, inline
-   * <video> accordingly, so swapping one for the other is this one line. Put
-   * video in `client/public/video/` and reference it as `/video/name.mp4`.
-   *
-   * `poster` is what a video shows before it plays, and what anybody who has
-   * asked their system for reduced motion sees instead of it. Keep a still
-   * here even once video lands.
-   */
-  media: {
-    src: "/artwork/lawyer.webp",
-    poster: "/artwork/lawyer.webp",
-  },
-
-  plateCaption: "Nobody reads 150,000 documents in the time there is.",
-
-  /**
-   * Who this is not for.
-   *
-   * The most important section on the page, and the one most likely to be
-   * softened by somebody trying to help. Turning away every reader whose files
-   * could go in the cloud costs almost nothing — they were never going to buy
-   * a machine — and it is the only thing on the sheet that proves to the
-   * remaining reader that the page was written for them specifically.
-   *
-   * The second paragraph is the urgency, and it is aimed at the same person:
-   * their competitor did not get cleverer, they got unblocked.
-   */
-  window: {
-    label: "Who this is not for",
-    statement: "If your files can go in the cloud, use the cloud.",
-    body: [
-      "There are good tools, they cost about forty euros a month, and we would be a poor use of your money. We will say so on the call rather than sell you something.",
-      "But somebody in your field has already solved this, and they did not get cleverer — they got unblocked. They are turning work around faster than you now, and there will be no announcement.",
+  clients: {
+    label: { en: "16 years of analytics and consulting work for", fr: "16 ans d'analyses et de conseil pour" },
+    items: [
+      { name: "Standard Bank" },
+      { name: "ABI" },
+      { name: "Famous Brands" },
+      { name: "Spur Corporation" },
+      { name: "Probe Battery" },
+      { name: "Probe IMT Mining" },
+      { name: "Bulldog Auto" },
+      { name: "Bearstone Private Investigation" },
+      { name: "Human Factors International" },
+      { name: "TSplus" },
     ],
   },
 
   /**
-   * The offer and the availability.
+   * The sequence, which is the argument.
    *
-   * "The first one is free" is the business model in five words, and it is the
-   * sentence most likely to be disbelieved — so the paragraph under it spends
-   * its length on what free actually means rather than on adjectives about how
-   * good the work is.
+   * Three steps, and the reader is meant to place themselves on step one or
+   * two and see that there is a third. Step two is deliberately described as
+   * where the market currently is: it flatters the reader who has got that
+   * far and it makes step three the unclaimed ground.
    */
-  offer: {
-    label: "How this starts",
-    statement: "The first one is free.",
-    body: "We build a working prototype before you commit to anything. You open it, you click it, you watch it do the actual job on your actual files. Hours, not weeks. Trust comes from watching a thing run, not from reading a proposal about it.",
-    /**
-     * A lead time rather than a named month. Months date the page and go stale
-     * the moment one turns; "two weeks ahead" stays true and is the thing a
-     * reader can actually act on. The size of the team is deliberately not
-     * stated — only that it is small enough to run out.
-     */
-    scarcity:
-      "We are small on purpose. Every client gets one of us properly, which means we cannot take everybody at once. Book about two weeks out. If somebody cancels, we will come and find you.",
+  sequence: {
+    label: { en: "The sequence", fr: "La progression" },
+    title: {
+      en: "Three steps we'll take you through in 90 minutes:",
+      fr: "Trois étapes, parcourues avec vous en 90 minutes :",
+    },
+    steps: [
+      {
+        n: "01",
+        title: { en: "The best setup for your AI", fr: "La bonne configuration pour votre IA" },
+        body: {
+          en: "What the tools can do, where they can help YOU and what to avoid. The basics and some tips and tricks.",
+          fr: "Ce que les outils savent faire, là où ils peuvent VOUS aider, et ce qu'il faut éviter. Les bases, plus quelques astuces.",
+        },
+      },
+      {
+        n: "02",
+        title: { en: "Move it into your work", fr: "Passer dans un environnement de travail" },
+        body: {
+          en: "Move out of the chat box and into an environment. AI needs a place to work — just like you.",
+          fr: "Sortez de la conversation pour un véritable environnement. L'IA a besoin d'un lieu de travail — comme vous.",
+        },
+      },
+      {
+        n: "03",
+        title: { en: "Build the agent", fr: "Construire l'agent" },
+        body: {
+          en: "If you can explain your goal, then it can run jobs itself, on your data, inside your environment.",
+          fr: "Si vous savez expliquer votre objectif, il exécute le travail lui-même, sur vos données, dans votre environnement.",
+        },
+      },
+    ],
+  },
+
+  /**
+   * The two priced things, in the order they are bought: the agent is what we
+   * sell, the class is how a stranger gets to a quote for one. Both figures
+   * are floors — "from" is load-bearing and should survive every edit, because
+   * the number that is actually charged comes out of discovery.
+   */
+  pricing: {
+    label: { en: "What it costs", fr: "Ce que cela coûte" },
+
+    build: {
+      title: {
+        en: "An agent, built and kept running",
+        fr: "Un agent, construit et maintenu",
+      },
+      price: { en: "From €3,000", fr: "À partir de 3 000 €" },
+      body: {
+        en: "Built for one job, in an environment we set up and hand over.",
+        fr: "Construit pour un travail précis, dans un environnement que nous installons et vous remettons.",
+      },
+      note: {
+        en: "Then from €200 a month to keep it running. The real figure depends on the job, which is what discovery is for.",
+        fr: "Puis à partir de 200 € par mois pour le maintenir. Le chiffre dépend du travail : c'est l'objet de la découverte.",
+      },
+    },
+
+    /** The entry point, and the reason it is priced this low: the discovery
+     *  happens inside the session, so one class pays for itself twice. */
+    class: {
+      title: { en: "One guided lesson — 90 minutes", fr: "Une séance accompagnée — 90 minutes" },
+      price: { en: "€100", fr: "100 €" },
+      body: {
+        en: "The sequence above, the tools worth using now, and how to work with them safely.",
+        fr: "La progression ci-dessus, les outils qui comptent, et comment les utiliser sans rien exposer.",
+      },
+      note: {
+        en: "Take a single class and we do the discovery in the same session. You leave knowing whether an agent is worth building for you, and roughly what it would cost. Plus you gain the ability to get the best out of AI and even build agents yourself.",
+        fr: "Prenez une seule séance et nous y faisons la découverte. Vous repartez en sachant si un agent vaut la peine d'être construit, et à quel prix. Et vous savez tirer le meilleur de l'IA, voire construire vos propres agents.",
+      },
+    },
+  },
+
+  /**
+   * The safety half of the class, said out loud on the page because it is the
+   * question that stops people using any of this. Naming the vendors is the
+   * whole value: a reader who has been told "it's secure" by three suppliers
+   * recognises the first page that tells them where the data physically goes.
+   */
+  data: {
+    label: { en: "Where your data goes", fr: "Où vont vos données" },
+    statement: {
+      en: "Claude and OpenAI are American companies.",
+      fr: "Claude et OpenAI sont des entreprises américaines.",
+    },
+    body: {
+      en: "Neither guarantees your data stays out of American data centres. If yours has to stay in the EU, we recommend Mistral if you can use the cloud, otherwise we build a custom system which runs on your own computer or server.",
+      fr: "Ni l'un ni l'autre ne garantit que vos données resteront hors des centres américains. Si les vôtres doivent rester dans l'UE : Mistral si le cloud est permis, sinon un système sur mesure sur votre machine ou votre serveur.",
+    },
   },
 
   close: {
-    /**
-     * The question this reader has an immediate answer to, because there is a
-     * specific folder they have been staring at for two years. "Not allowed"
-     * rather than "not able": the obstacle was never the technology.
-     */
-    title: "What have you not been allowed to do?",
-    body: "Bring the blocked one, not the impressive one — the review nobody has time for, the archive nobody has opened. Thirty minutes is usually enough to tell you honestly whether this is worth your time, including when the answer is that it is not.",
-    cta: "Book a 30-minute call",
-    alt: "Or send a message",
-    /** Named people are who a reader is dealing with. */
-    signature: "Daniel Forsthofer & Roxanne Northover",
-    signatureNote: "Tutto — Applied AI",
+    title: {
+      en: "What do you do by hand?",
+      fr: "Que faites-vous à la main ?",
+    },
+    body: {
+      en: "Let's discuss that task. Ninety minutes is enough to say whether an agent is worth building or not.",
+      fr: "Parlons de cette tâche. Quatre-vingt-dix minutes suffisent pour dire si un agent vaut la peine d'être construit, ou non.",
+    },
+    cta: { en: "Book a 90-minute call", fr: "Réserver 90 minutes" },
+    alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
+    /** Named people are who a reader is dealing with. A leaf like everything
+     *  else, with the same string on both sides, so the browser copy editor
+     *  can reach it — names get corrected too. */
+    signature: {
+      en: "Daniel Forsthofer & Roxanne Northover",
+      fr: "Daniel Forsthofer & Roxanne Northover",
+    },
+    signatureNote: { en: "Tutto — Applied AI", fr: "Tutto — IA appliquée" },
   },
 
   footer: {
-    /** Where the seven-section version of this argument now lives. */
     longVersion: {
-      label: "The long version of this argument",
+      label: { en: "More details (more reading)", fr: "Plus de détails (lecture plus longue)" },
       href: "/applied",
     },
-    place: "France, South Africa & the UK",
+    place: {
+      en: "France, South Africa & the UK",
+      fr: "France, Afrique du Sud & Royaume-Uni",
+    },
   },
 } as const;
