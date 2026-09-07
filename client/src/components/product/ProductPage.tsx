@@ -384,53 +384,112 @@ export function StatCard({
 }
 
 /**
- * A band of client names, as logos where a clean file exists and as wordmarks
- * where one does not.
+ * A continuously looping strip of client logos.
  *
- * The wordmark branch is the interesting half. The canonical client wall is a
- * row of images, and it only works when every image is the same kind of thing:
- * same optical weight, same background, same clearance. Nine logos gathered
- * from nine websites are never that, and the fix — nudging each one's size
- * until the row looks level — is invisible work that comes undone the moment a
- * tenth is added. Setting the names in one typeface at one size is uniform by
- * construction, and on a page whose whole argument is written rather than
- * illustrated it reads as a deliberate choice rather than a missing asset.
+ * WHY IT IS GREYSCALE AND NOT A SILHOUETTE.
  *
- * Logos are muted until hovered so the band reads as one texture at a glance,
- * which is what a client wall is for: the eye should catch one familiar name,
- * not audit ten.
+ * The eleven marks arrive as eleven different objects: white artwork meant for
+ * a dark tile, black artwork meant for a light one, a gold hexagon, and a
+ * spread of brand colours. Dropped on as supplied they fight, so the obvious
+ * move is `brightness(0)` — collapse every opaque pixel to black and let the
+ * alpha channel draw the shape.
+ *
+ * That was tried and it is wrong. Several of these are knockouts: Probe
+ * Batteries is white lettering reversed out of a solid red banner, Opus is a
+ * gold gear on a dark tile. Their alpha is opaque across the whole block, so
+ * a silhouette renders them as a featureless slab — the logo becomes a brick.
+ *
+ * `grayscale` keeps the luminance differences that carry the letterforms, so
+ * a knockout stays readable while the strip still reads as one texture. The
+ * three marks supplied only as white artwork were recoloured in the files
+ * themselves rather than filtered here; see client/public/logos.
+ *
+ * Colour and full opacity return on hover, which is affordable because the
+ * strip also pauses then.
+ *
+ * WHY IT LOOPS THE WAY IT DOES.
+ *
+ * The track holds the sequence twice and slides exactly -50%, so the moment
+ * the first copy leaves the frame the second is sitting precisely where it
+ * started and the jump back to zero is invisible. Any other offset shows a
+ * seam. The duplicate is `aria-hidden`, so a screen reader is read the client
+ * list once rather than twice, and the animation is CSS rather than JS so it
+ * costs nothing on the main thread.
+ *
+ * Motion is a decoration here, not information: `prefers-reduced-motion` stops
+ * it dead and hands the strip back as something that can be scrolled by hand,
+ * rather than freezing it and hiding the logos that happen to be off-frame.
+ * Hovering pauses it, because a name you recognise sliding past is a name you
+ * want to stop and read.
  */
-export function LogoWall({
+export function LogoMarquee({
   items,
+  seconds = 46,
 }: {
-  items: readonly { readonly name: string; readonly logo?: string }[];
+  items: readonly {
+    readonly name: string;
+    readonly logo?: string;
+    /**
+     * Optical size, as a multiplier on the strip's base height.
+     *
+     * A single pixel height is the wrong instrument here: Bearstone is a
+     * wordmark nine times wider than it is tall and Bulldog is a stacked
+     * hexagon barely wider than tall, so setting both to 32px makes one
+     * enormous and the other unreadable. Equal height is not equal presence,
+     * and the correction has to be per mark and judged by eye.
+     */
+    readonly scale?: number;
+  }[];
+  /** One full pass of the list. Longer is slower; this is a texture, not a ride. */
+  seconds?: number;
 }) {
-  return (
-    <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-7">
+  const sequence = (hidden?: boolean) => (
+    <ul
+      aria-hidden={hidden || undefined}
+      className="flex shrink-0 items-center gap-12 pr-12 sm:gap-16 sm:pr-16"
+    >
       {items.map((item) => (
-        <li
-          key={item.name}
-          /* A floor rather than a fixed height: "Bearstone Private
-             Investigation" takes two lines at this measure and clipping it
-             would be worse than an uneven row. */
-          className="flex min-h-12 items-center justify-center text-center"
-        >
+        <li key={item.name} className="flex shrink-0 items-center">
           {item.logo ? (
             <img
               src={item.logo}
-              alt={item.name}
+              alt={hidden ? "" : item.name}
               loading="lazy"
               decoding="async"
-              className="max-h-9 w-auto max-w-full object-contain opacity-60 grayscale transition duration-200 hover:opacity-100 hover:grayscale-0"
+              style={{ height: `calc(var(--logo-h) * ${item.scale ?? 1})` }}
+              className="w-auto max-w-none object-contain opacity-75 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
             />
           ) : (
-            <span className="text-[13px] font-medium uppercase leading-snug tracking-[0.12em] text-muted-foreground/80 transition-colors duration-200 hover:text-foreground">
+            /* The fallback for a client whose artwork has not arrived. Set in
+               the site's own type so a gap reads as a decision rather than a
+               broken image. */
+            <span className="whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.12em] text-muted-foreground/70">
               {item.name}
             </span>
           )}
         </li>
       ))}
     </ul>
+  );
+
+  return (
+    <div
+      className="logo-marquee relative overflow-hidden py-2 [--logo-h:26px] sm:[--logo-h:32px]"
+    >
+      <div
+        className="logo-marquee-track flex w-max"
+        style={{ "--logo-marquee-seconds": `${seconds}s` } as React.CSSProperties}
+      >
+        {sequence()}
+        {sequence(true)}
+      </div>
+
+      {/* The strip runs off both edges rather than stopping at one. Without the
+          fades a logo is guillotined mid-letter at the container boundary,
+          which reads as a layout bug rather than as movement. */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-background to-transparent sm:w-20" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent sm:w-20" />
+    </div>
   );
 }
 

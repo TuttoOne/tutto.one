@@ -6,7 +6,7 @@ import {
   ClosingCta,
   Eyebrow,
   HeadlinePrice,
-  LogoWall,
+  LogoMarquee,
   NumberedList,
   Section,
 } from "@/components/product/ProductPage";
@@ -138,7 +138,7 @@ function Clients() {
 
   return (
     <Section label={t(landing.clients.label)}>
-      <LogoWall items={landing.clients.items} />
+      <LogoMarquee items={landing.clients.items} />
     </Section>
   );
 }

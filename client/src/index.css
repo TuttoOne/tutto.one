@@ -164,3 +164,35 @@
     animation: none;
   }
 }
+
+/* The client logo strip on the landing page. The track carries the list twice
+   and travels exactly half its width, so the reset to zero lands the second
+   copy where the first began and no seam is visible. */
+@keyframes logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-marquee-track {
+  animation: logo-marquee var(--logo-marquee-seconds, 46s) linear infinite;
+}
+
+.logo-marquee:hover .logo-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Stopping the animation alone would hide every logo that happens to be off
+     the right-hand edge, so the strip becomes something the reader can push
+     along themselves instead. */
+  .logo-marquee-track {
+    animation: none;
+  }
+  .logo-marquee {
+    overflow-x: auto;
+  }
+}

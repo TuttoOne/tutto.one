@@ -73,30 +73,58 @@ export const landing = {
    * round-trip, and out of the 350-word budget, which is about prose a reader
    * has to get through rather than a list they scan.
    *
-   * `logo` is the path to a file in `client/public/logos/`. Where it is absent
-   * the name is set as a wordmark in the site's own type instead. That is a
-   * deliberate fallback, not a placeholder: nine logos scraped from nine
-   * websites arrive at nine different resolutions, aspect ratios and
-   * background colours, and a row of mismatched raster grabs reads as a
-   * template that has been filled in badly. Type is uniform by construction.
+   * `logo` is the path to a file in `client/public/logos/`, and every one of
+   * these now has first-party artwork. The strip renders them as a single
+   * monochrome texture rather than in brand colours — see `LogoMarquee` for
+   * why, and for what a new file has to satisfy: real transparency, because
+   * the alpha channel is the only thing separating the mark from its box.
    *
-   * Fill `logo` in only when a clean asset exists — SVG, or PNG on
-   * transparency, supplied by the client. Mixing the two forms in one row is
-   * worse than either: go all images or all type.
+   * Where `logo` is absent the name is set in the site's own type instead, so
+   * a client whose artwork has not arrived reads as a decision rather than a
+   * broken image.
+   *
+   * PROVENANCE AND PERMISSION. Every file here came from a first-party source
+   * — the owner's own site or annual report — assembled and checked on
+   * 7 September 2026. Three were supplied as white artwork for a dark tile and
+   * were recoloured to the site's ink in the files themselves, since the page
+   * is off-white; Standard Bank's blue shield is untouched and only its
+   * wordmark was changed.
+   *
+   * These remain trademarks of their owners, and a downloadable logo is not
+   * permission to imply a client relationship. Spur Corporation and Standard
+   * Bank both require prior permission for use of their marks specifically.
+   * Clear that before this page is public; do not add a twelfth on the
+   * assumption that the first eleven settled the question.
    */
   clients: {
     label: { en: "16 years of analytics and consulting work for", fr: "16 ans d'analyses et de conseil pour" },
     items: [
-      { name: "Standard Bank" },
-      { name: "ABI" },
-      { name: "Famous Brands" },
-      { name: "Spur Corporation" },
-      { name: "Probe Battery" },
-      { name: "Probe IMT Mining" },
-      { name: "Bulldog Auto" },
-      { name: "Bearstone Private Investigation" },
-      { name: "Human Factors International" },
-      { name: "TSplus" },
+      { name: "Standard Bank", logo: "/logos/standard-bank.svg", scale: 1 },
+      { name: "Spur Corporation", logo: "/logos/spur-corporation.png", scale: 1.15 },
+      { name: "Famous Brands", logo: "/logos/famous-brands.png", scale: 1.15 },
+      { name: "Probe Batteries", logo: "/logos/probe-batteries.png", scale: 1 },
+      /* Probe IMT became IMT — Integrated Mining Technologies on 2 August
+         2026. The current mark is used; the pack also carries the legacy Probe
+         IMT artwork if the relationship is better placed under the old name. */
+      { name: "IMT Mining", logo: "/logos/imt-mining.png", scale: 1.1 },
+      { name: "Bulldog Group", logo: "/logos/bulldog-group.png", scale: 1.25 },
+      { name: "Bearstone Global", logo: "/logos/bearstone-global.svg", scale: 0.42 },
+      /* "ABI" here is the Association of British Investigators — not
+         Amalgamated Beverage Industries, which is what a South African list
+         reads it as, and not the Association of British Insurers. Spelled out
+         because the initials alone are actively misleading in this company. */
+      {
+        name: "Association of British Investigators",
+        logo: "/logos/association-of-british-investigators.svg",
+        scale: 1.15,
+      },
+      {
+        name: "Human Factors International",
+        logo: "/logos/human-factors-international.svg",
+        scale: 0.95,
+      },
+      { name: "TSplus", logo: "/logos/tsplus.png", scale: 0.75 },
+      { name: "Opus4Business", logo: "/logos/opus4business.png", scale: 0.95 },
     ],
   },
 
@@ -207,8 +235,8 @@ export const landing = {
       fr: "Que faites-vous à la main ?",
     },
     body: {
-      en: "Let's discuss that task. Ninety minutes is enough to say whether an agent is worth building or not.",
-      fr: "Parlons de cette tâche. Quatre-vingt-dix minutes suffisent pour dire si un agent vaut la peine d'être construit, ou non.",
+      en: "Let's discuss your repetitive tasks. Ninety minutes is enough time to discover whether an agent is worth building or not.",
+      fr: "Parlons de vos tâches répétitives. Quatre-vingt-dix minutes suffisent pour découvrir si un agent vaut la peine d'être construit, ou non.",
     },
     cta: { en: "Book a 90-minute call", fr: "Réserver 90 minutes" },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
