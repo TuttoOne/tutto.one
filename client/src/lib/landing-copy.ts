@@ -90,11 +90,18 @@ export const landing = {
    * is off-white; Standard Bank's blue shield is untouched and only its
    * wordmark was changed.
    *
+   * Santova and Howdens were added on 8 September 2026 from artwork Daniel
+   * supplied, and he confirmed both as cleared on the same terms.
+   *
    * These remain trademarks of their owners, and a downloadable logo is not
-   * permission to imply a client relationship. Spur Corporation and Standard
-   * Bank both require prior permission for use of their marks specifically.
-   * Clear that before this page is public; do not add a twelfth on the
-   * assumption that the first eleven settled the question.
+   * permission to imply a client relationship. Permission for the marks on
+   * this list was confirmed as cleared by Daniel on 7 September 2026 —
+   * including Spur Corporation and Standard Bank, which both require prior
+   * consent for use of their marks specifically.
+   *
+   * That clearance covers the names below and nothing else — the last two
+   * on 8 September 2026, the rest the day before. A logo added later needs
+   * its own; do not read the cleared list as a cleared category.
    */
   clients: {
     label: { en: "16 years of analytics and consulting work for", fr: "16 ans d'analyses et de conseil pour" },
@@ -130,6 +137,21 @@ export const landing = {
          be invisible on it. Trimmed of its transparent margin so it sits on
          the same optical baseline as the rest. */
       { name: "RGBC", logo: "/logos/rgbc.png", scale: 1.35 },
+      /* Supplied as the tagline lockup — the navy block sitting above a white
+         strip carrying "innovative solutions - endless possibilities" in type
+         six pixels tall. Only the block is filed. The strapline is under three
+         pixels at strip height and would have read as smudge, and the white
+         strip behind it is opaque, since the source is a JPEG and has no
+         alpha, so it would have sat on the page as a paler rectangle.
+         Held well below the rest because the block is the widest thing on the
+         strip: at nearly 5:1 it covers twice the ground of Probe's banner at
+         the same height. Sized on the wordmark inside it, not the block. */
+      { name: "Santova", logo: "/logos/santova.png", scale: 0.75 },
+      /* Takes the opposite correction to Santova. It is the stacked mark, so
+         the rooster and the wordmark sit inside a deep red margin and matching
+         the others on height would have left the name small. Scaled up until
+         HOWDENS carries the weight of the wordmarks either side of it. */
+      { name: "Howdens", logo: "/logos/howdens.svg", scale: 1.3 },
     ],
   },
 
