@@ -17,7 +17,10 @@ import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
 
-const BOOKING = "https://cal.com/tuttoone/60-min-meeting";
+/* The free 15-minute intro, not the session itself. Praxis is quoted as a
+   total after a conversation, so there is nothing on this page to pay for at
+   the click — every CTA here opens a conversation rather than selling an hour. */
+const BOOKING = "https://cal.com/tuttoone/15min";
 
 export default function Praxis() {
   const t = useT();
@@ -202,8 +205,7 @@ export default function Praxis() {
             </PriceRow>
             <PriceRow
               title={t(copy.praxis.costSessionTitle)}
-              price={p("sessionPromo")}
-              was={p("sessionStandard")}
+              price={t(copy.praxis.costSessionPrice)}
             >
               {t(copy.praxis.costSession)}
             </PriceRow>

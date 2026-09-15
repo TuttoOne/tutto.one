@@ -15,7 +15,7 @@ import { usePreferences } from "@/lib/preferences";
 import { usePageTr } from "@/lib/page-fr";
 import { GTM_FR } from "@/lib/fr/gtm-orchestrator";
 
-const BOOKING = "https://cal.com/tuttoone/30min";
+const BOOKING = "https://cal.com/tuttoone/15min";
 
 /**
  * Rebuilt on the shared product-page vocabulary so its headings and structure

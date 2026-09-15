@@ -12,12 +12,14 @@ import {
 } from "@/components/product/ProductPage";
 import { SITE_TITLE, useT } from "@/lib/i18n";
 import { landing } from "@/lib/landing-copy";
+import { price } from "@/lib/pricing";
+import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
 
 /* The 90-minute booking, which is the guided lesson this page prices at €100
-   and the sequence describes as taking 90 minutes — not the 30-minute call the
-   other pages book. Both CTA labels and the closing line are worded to match;
+   and the sequence describes as taking 90 minutes — not the 15-minute intro call
+   the other pages book. Both CTA labels and the closing line are worded to match;
    a button that says one duration and books another is the fastest way to lose
    somebody at the last click. */
 const BOOKING = "https://cal.com/tuttoone/90-min-meeting";
@@ -85,8 +87,22 @@ export default function Landing() {
  * a line of air. The classes are `ProductHero`'s otherwise, copied rather than
  * invented, so the two cannot drift apart.
  */
+/**
+ * The session figure, from the price table rather than the copy file.
+ *
+ * It appears three times on this page — both buttons and the rate card — and
+ * it used to be typed into each. `pricing.ts` is the only place it lives now,
+ * so a change there moves all three and the copy editor cannot reach it to
+ * set one of them to something else.
+ */
+function useEntryPrice() {
+  const { locale, currency } = usePreferences();
+  return price("discoverySession", currency, locale);
+}
+
 function Hero() {
   const t = useT();
+  const entryPrice = useEntryPrice();
 
   return (
     <header className="pt-8 pb-4">
@@ -112,7 +128,7 @@ function Hero() {
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
         >
-          {t(landing.hero.cta)}
+          {t(landing.hero.cta)} — {entryPrice}
         </a>
         <Link
           href={landing.footer.longVersion.href}
@@ -181,6 +197,7 @@ function Sequence() {
  */
 function Pricing() {
   const t = useT();
+  const entryPrice = useEntryPrice();
   const { build, class: entry } = landing.pricing;
 
   return (
@@ -196,12 +213,14 @@ function Pricing() {
 
         <HeadlinePrice
           title={t(entry.title)}
-          price={t(entry.price)}
+          price={entryPrice}
           note={t(entry.note)}
         >
           {t(entry.body)}
         </HeadlinePrice>
       </div>
+
+      <p className="mt-4 text-sm text-muted-foreground">{t(landing.pricing.vat)}</p>
     </Section>
   );
 }
@@ -223,6 +242,7 @@ function Data() {
 /** The conversion moment, signed. */
 function Close() {
   const t = useT();
+  const entryPrice = useEntryPrice();
 
   return (
     <ClosingCta
@@ -230,7 +250,7 @@ function Close() {
       title={t(landing.close.title)}
       body={t(landing.close.body)}
       href={BOOKING}
-      label={t(landing.close.cta)}
+      label={`${t(landing.close.cta)} — ${entryPrice}`}
       messageLabel={t(landing.close.alt)}
       footnote={
         <>

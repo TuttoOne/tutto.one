@@ -17,7 +17,7 @@ import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
 
-const BOOKING = "https://cal.com/tuttoone/30min";
+const BOOKING = "https://cal.com/tuttoone/15min";
 
 /**
  * Illustrative exchange, not a transcript of a real matter, so it is shown in

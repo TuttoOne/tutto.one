@@ -12,7 +12,7 @@ import { usePreferences } from "@/lib/preferences";
 import { price } from "@/lib/pricing";
 
 /** The same thirty-minute slot as /article-4. One calendar for both doors. */
-const BOOKING = "https://cal.com/tuttoone/30min";
+const BOOKING = "https://cal.com/tuttoone/15min";
 
 /**
  * /souverainete — the diagnostic-only page.

@@ -36,6 +36,7 @@ export type PriceKey =
   // Praxis
   | "sessionStandard"
   | "sessionPromo"
+  | "discoverySession"
   | "toolsMonthly"
   | "eveningClass"
   | "eveningSeries"
@@ -53,6 +54,17 @@ export type PriceKey =
 
 /** The session rate. Course tuition and team enablement are both eight of these. */
 const SESSION = { GBP: 200, EUR: 250, ZAR: 5000 };
+
+/**
+ * The 90-minute discovery session on the landing page — the one thing a
+ * stranger can buy without talking to us first, and the only lesson price the
+ * site quotes at all. Praxis itself is quoted as a total after discovery, so
+ * this is deliberately the whole of the client-facing session pricing.
+ *
+ * It is the same figure as HOUR rather than a coincidence: the way in is sold
+ * at the build rate, not above it. Stated EX VAT, like every number here.
+ */
+const DISCOVERY = { GBP: 83, EUR: 100, ZAR: 2000 };
 
 /** Build rate per hour. The scripting engagement is a multiple of this. */
 const HOUR = { GBP: 83, EUR: 100, ZAR: 2000 };
@@ -91,9 +103,19 @@ export const SCRIPT_BUILD_HOURS = 30;
 
 /** Base rates. Everything else on the site is derived from these. */
 export const PRICES: Record<PriceKey, Record<Currency, number>> = {
+  /** The landing page's 90-minute way in. The only session price on the site. */
+  discoverySession: DISCOVERY,
   /** Standard one-hour Praxis session. Course tuition is eight of these. */
   sessionStandard: SESSION,
-  /** Promotional session rate — half the standard rate. */
+  /**
+   * Promotional session rate — half the standard rate.
+   *
+   * No longer shown anywhere. Praxis is quoted as a total after discovery, so
+   * the page that used to carry this now says so instead of naming a figure.
+   * Kept defined, and out of SELECTABLE_PRICES, so stored admin content that
+   * still references it resolves rather than throwing — but nothing new can
+   * put a per-session price back on a client-facing page.
+   */
   sessionPromo: { GBP: 100, EUR: 125, ZAR: 2500 },
   /** Third-party AI subscription, approx. Quoted at ~$20/mo at source. */
   toolsMonthly: { GBP: 16, EUR: 19, ZAR: 400 },
@@ -193,8 +215,8 @@ export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
   { key: "scriptBuildFrom", label: "Scripting build, 30h (€3,000)" },
   { key: "enablementFrom", label: "Team enablement / training (€2,000)" },
   { key: "build", label: "Pythia build, excl. hardware (€7,000)" },
+  { key: "discoverySession", label: "Discovery session, 90 min (€100)" },
   { key: "sessionStandard", label: "Praxis session, standard (€250)" },
-  { key: "sessionPromo", label: "Praxis session, promo (€125)" },
   { key: "spAuditFrom", label: "SharePoint audit (€600)" },
   { key: "spBuildFrom", label: "SharePoint build (€6,000)" },
   { key: "spRetainerMonthly", label: "SharePoint retainer (€600/mo)" },

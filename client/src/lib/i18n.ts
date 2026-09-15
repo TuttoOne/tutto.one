@@ -64,9 +64,13 @@ export const copy = {
   },
 
   common: {
-    bookCall: { en: "Book a 30-minute call", fr: "Réserver un appel de 30 minutes" },
+    bookCall: { en: "Book a 15-minute call", fr: "Réserver un appel de 15 minutes" },
     bookConversation: { en: "Book a conversation", fr: "Réserver un échange" },
-    bookSession: { en: "Book a session", fr: "Réserver une séance" },
+    /** Both praxis CTAs use this, and both point at a Cal.com link that takes
+     *  no payment. "Book a session" named the paid product, so a reader was
+     *  offered the programme and given a free slot — the same mismatch between
+     *  button and booking the landing page was fixed for. */
+    bookSession: { en: "Book an introductory call", fr: "Réserver un premier échange" },
     sendMessage: { en: "Send a message", fr: "Envoyer un message" },
     /**
      * The same action, short enough to stay on one line inside a pill at 390px.
@@ -88,8 +92,8 @@ export const copy = {
       fr: "Une petite équipe entièrement concentrée sur vos problèmes.",
     },
     ctaBody: {
-      en: "30 minutes. We'll tell you honestly what we think.",
-      fr: "Trente minutes. Nous vous dirons honnêtement ce que nous en pensons.",
+      en: "Fifteen minutes. We'll tell you honestly what we think.",
+      fr: "Quinze minutes. Nous vous dirons honnêtement ce que nous en pensons.",
     },
   },
 
@@ -275,8 +279,8 @@ export const copy = {
       fr: "Vous ne savez pas dans quelle colonne vous êtes ?",
     },
     ctaBody: {
-      en: "Almost nobody is, at the start. Thirty minutes is usually enough to tell — and we will say so if the honest answer is that you do not need us.",
-      fr: "Au début, presque personne ne le sait. Trente minutes suffisent généralement à le déterminer — et nous vous le dirons si la réponse honnête est que vous n'avez pas besoin de nous.",
+      en: "Almost nobody is, at the start. Fifteen minutes is usually enough to tell — and we will say so if the honest answer is that you do not need us.",
+      fr: "Au début, presque personne ne le sait. Quinze minutes suffisent généralement à le déterminer — et nous vous le dirons si la réponse honnête est que vous n'avez pas besoin de nous.",
     },
   },
 
@@ -390,8 +394,8 @@ export const copy = {
       fr: "Les trente minutes suivantes sont pratiques : sur votre propre ordinateur, avec vos propres fichiers. Vous suivez en direct pendant que nous construisons le système ensemble. Au bout d'une heure, vous disposez d'une installation qui fonctionne et du modèle mental pour aller plus loin.",
     },
     meta: {
-      en: "Teams or Google Meet · One hour · One to one, on your own files",
-      fr: "Teams ou Google Meet · Une heure · En tête-à-tête, sur vos propres fichiers",
+      en: "Teams or Google Meet · Sessions run one hour · One to one, on your own files",
+      fr: "Teams ou Google Meet · Séances d'une heure · En tête-à-tête, sur vos propres fichiers",
     },
     /** What separates this from the group evenings on /calendar. */
     tailoredLabel: { en: "Send your own work first", fr: "Envoyez d'abord votre propre travail" },
@@ -508,10 +512,14 @@ export const copy = {
       en: "A code editor is free. A paid AI assistant subscription is about $20 a month. That is the only recurring cost, and it is not paid to us.",
       fr: "Un éditeur de code est gratuit. Un abonnement payant à un assistant IA coûte environ 20 $ par mois. C'est le seul coût récurrent, et il ne nous est pas versé.",
     },
-    costSessionTitle: { en: "The session", fr: "La séance" },
+    costSessionTitle: { en: "The sessions", fr: "Les séances" },
+    /** No figure. Praxis is quoted as one total after discovery, because the
+     *  number depends on how many sessions the work actually needs — naming a
+     *  per-session rate here invited the reader to multiply it by a guess. */
+    costSessionPrice: { en: "On quotation", fr: "Sur devis" },
     costSession: {
-      en: "One hour: thirty minutes of theory and principles, then thirty minutes hands-on on your own computer. You leave with a working setup.",
-      fr: "Une heure : trente minutes de théorie et de principes, puis trente minutes de pratique sur votre propre ordinateur. Vous repartez avec une installation qui fonctionne.",
+      en: "One hour each: thirty minutes of theory and principles, then thirty minutes hands-on on your own computer. You leave with a working setup. We quote the programme as a single total once we know how many sessions the work needs.",
+      fr: "Une heure chacune : trente minutes de théorie et de principes, puis trente minutes de pratique sur votre propre ordinateur. Vous repartez avec une installation qui fonctionne. Nous chiffrons le programme en un total unique, une fois connu le nombre de séances nécessaires.",
     },
     costSprintTitle: { en: "Diagnostic sprint", fr: "Sprint de diagnostic" },
     costSprint: {
@@ -530,10 +538,12 @@ export const copy = {
       en: "Praxis is the loop of putting theory into practice, then letting what you learn from doing it sharpen the theory.",
       fr: "La praxis est la boucle qui consiste à mettre la théorie en pratique, puis à laisser ce que l'on apprend en faisant affiner la théorie.",
     },
-    ctaTitle: { en: "Ready to see it live?", fr: "Envie de le voir en direct ?" },
+    ctaTitle: { en: "Want to talk it through first?", fr: "Envie d'en parler d'abord ?" },
+    /** Says the call is free and that the programme is quoted, which is what
+     *  section 04 above now promises. The old version sold the session itself. */
     ctaBody: {
-      en: "Book a one-hour Praxis session. Theory first, then hands-on together - on your machine, with your files.",
-      fr: "Réservez une séance Praxis d'une heure. La théorie d'abord, puis la pratique ensemble — sur votre machine, avec vos fichiers.",
+      en: "Book an introductory call — there is no charge for it. We will look at the work you actually do, and if a Praxis programme fits, we will quote it as a single total.",
+      fr: "Réservez un premier échange — il est sans frais. Nous examinons le travail que vous faites réellement et, si un programme Praxis convient, nous le chiffrons en un total unique.",
     },
   },
 
@@ -552,8 +562,8 @@ export const copy = {
       fr: "Le système tourne sur votre matériel. Rien ne sort de vos bureaux. Pas de cloud, pas d'API tierces, aucune exposition.",
     },
     meta: {
-      en: "On-premise · Private · 30 minutes",
-      fr: "Sur site · Confidentiel · 30 minutes",
+      en: "On-premise · Private · 15 minutes",
+      fr: "Sur site · Confidentiel · 15 minutes",
     },
 
     s1Label: { en: "How it works", fr: "Fonctionnement" },
@@ -734,8 +744,8 @@ export const copy = {
     },
     ctaTitle: { en: "Ready to see it in your practice?", fr: "Envie de le voir dans votre cabinet ?" },
     ctaBody: {
-      en: "Book a thirty-minute conversation. We'll walk through your documents and tell you what's possible.",
-      fr: "Réservez un échange de trente minutes. Nous parcourons vos documents et vous disons ce qui est possible.",
+      en: "Book a fifteen-minute conversation. We'll walk through your documents and tell you what's possible.",
+      fr: "Réservez un échange de quinze minutes. Nous parcourons vos documents et vous disons ce qui est possible.",
     },
   },
 
@@ -768,7 +778,7 @@ export const copy = {
       fr: "Pythia lit l'ensemble et répond aux questions à partir de ces documents — sur un ordinateur qui vous appartient, dans vos locaux. Aucun compte en ligne, aucun téléversement, aucun fichier qui s'en va ailleurs. Pour beaucoup d'entreprises, ce n'est pas une préférence. C'est la condition même pour que le travail puisse se faire.",
     },
     meta: {
-      en: "Your hardware · Nothing uploaded · 30 minutes",
+      en: "Your hardware · Nothing uploaded · 15 minutes",
       fr: "Votre matériel · Rien n'est téléversé · 30 minutes",
     },
 

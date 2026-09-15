@@ -497,7 +497,7 @@ export default function UseCase() {
           <p className="mb-6 mt-2 max-w-xl text-muted-foreground">{t(c.ctaBody)}</p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
-              href="https://cal.com/tuttoone/30min"
+              href="https://cal.com/tuttoone/15min"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3

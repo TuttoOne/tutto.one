@@ -20,7 +20,7 @@ import { USE_CASE_RUNS } from "@/lib/usecase-runs";
 import { USECASE_FR } from "@/lib/fr/usecase";
 import { usePageTr } from "@/lib/page-fr";
 
-const BOOKING = "https://cal.com/tuttoone/30min";
+const BOOKING = "https://cal.com/tuttoone/15min";
 
 /**
  * The general front door to Pythia, for a reader who is not a lawyer.

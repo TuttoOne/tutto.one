@@ -17,7 +17,7 @@ import { price } from "@/lib/pricing";
  * a page whose whole argument is "one action" should not invent a second
  * calendar.
  */
-const BOOKING = "https://cal.com/tuttoone/30min";
+const BOOKING = "https://cal.com/tuttoone/15min";
 
 /** Engagements delivered per quarter. One person delivers, so this is capacity. */
 const SLOTS_PER_QUARTER = 3;

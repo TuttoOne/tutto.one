@@ -56,7 +56,7 @@ export const landing = {
       fr: "Nous ne remplaçons personne. Nous faisons gagner du temps à vos équipes : de nouvelles compétences, et des assistants IA qui ne dorment jamais.",
     },
 
-    cta: { en: "Book a 90-minute call", fr: "Réserver 90 minutes" },
+    cta: { en: "Book the 90-minute session", fr: "Réserver la séance de 90 min" },
     secondaryCta: { en: "The long version", fr: "La version longue" },
   },
 
@@ -206,6 +206,24 @@ export const landing = {
   pricing: {
     label: { en: "What it costs", fr: "Ce que cela coûte" },
 
+    /**
+     * The two figures above are sold through different channels and so carry
+     * VAT differently, which is why this is one sentence about each rather
+     * than a single blanket line.
+     *
+     * The session is paid by card at booking, and the card is charged the
+     * figure shown — Cal.com bills one flat amount and cannot add tax for some
+     * buyers and not others. So for the minority of bookers who are UK-based
+     * that figure is VAT-inclusive, and saying "excludes VAT" of a €100 charge
+     * that is exactly €100 would simply be untrue. Build work is invoiced, and
+     * an invoice can carry VAT properly, so it is quoted ex VAT as B2B work
+     * normally is.
+     */
+    vat: {
+      en: "The session is charged in full at booking, and the price includes UK VAT where it applies. Build work is quoted ex VAT and invoiced — EU business clients under reverse charge.",
+      fr: "La séance est réglée intégralement à la réservation, et le prix inclut la TVA britannique le cas échéant. Les projets sont chiffrés hors taxes et facturés — en autoliquidation pour les clients professionnels de l'UE.",
+    },
+
     build: {
       title: {
         en: "An agent, built and kept running",
@@ -226,7 +244,6 @@ export const landing = {
      *  happens inside the session, so one class pays for itself twice. */
     class: {
       title: { en: "One guided lesson — 90 minutes", fr: "Une séance accompagnée — 90 minutes" },
-      price: { en: "€100", fr: "100 €" },
       body: {
         en: "The sequence above, the tools worth using now, and how to work with them safely.",
         fr: "La progression ci-dessus, les outils qui comptent, et comment les utiliser sans rien exposer.",
@@ -265,7 +282,7 @@ export const landing = {
       en: "Let's discuss your repetitive tasks. Ninety minutes is enough time to discover whether an agent is worth building or not.",
       fr: "Parlons de vos tâches répétitives. Quatre-vingt-dix minutes suffisent pour découvrir si un agent vaut la peine d'être construit, ou non.",
     },
-    cta: { en: "Book a 90-minute call", fr: "Réserver 90 minutes" },
+    cta: { en: "Book the 90-minute session", fr: "Réserver la séance de 90 min" },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
     /** Named people are who a reader is dealing with. A leaf like everything
      *  else, with the same string on both sides, so the browser copy editor

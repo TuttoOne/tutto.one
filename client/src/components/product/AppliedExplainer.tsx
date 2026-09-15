@@ -14,7 +14,7 @@ import {
 import { copy, useT } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 
-const BOOKING = "https://cal.com/tuttoone/30min";
+const BOOKING = "https://cal.com/tuttoone/15min";
 
 /**
  * Illustrative exchange, not a transcript of a real engagement, so it is shown
