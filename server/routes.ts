@@ -101,6 +101,14 @@ export async function registerRoutes(
               <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px;">Message</p>
               <p style="color: #1a1a1a; font-size: 14px; line-height: 1.75; margin: 0; white-space: pre-line;">${data.message}</p>
             </div>
+            ${
+              data.trainerCode
+                ? `<div style="background: #fdf6ec; border-radius: 10px; padding: 16px 24px; border: 1px solid #f0d9b0; margin-top: 16px;">
+              <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 6px;">Trainer code</p>
+              <p style="color: #1a1a1a; font-size: 14px; font-weight: 600; margin: 0;">${data.trainerCode}</p>
+            </div>`
+                : ""
+            }
             <p style="color: #a8a092; font-size: 11px; margin: 20px 0 0; text-align: center;">Tutto · tutto.one</p>
           </div>
         `

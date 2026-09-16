@@ -8,6 +8,7 @@ import {
   CardGrid,
   FeatureCard,
   PriceRow,
+  HardwareTiers,
   Etymology,
   ClosingCta,
   Plate,
@@ -15,12 +16,16 @@ import {
 } from "@/components/product/ProductPage";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
-import { price } from "@/lib/pricing";
+import { price, perDay, perMonth } from "@/lib/pricing";
 import { USE_CASE_RUNS } from "@/lib/usecase-runs";
 import { USECASE_FR } from "@/lib/fr/usecase";
 import { usePageTr } from "@/lib/page-fr";
 
-const BOOKING = "https://cal.com/tuttoone/15min";
+/* The thirty-minute slot, not the fifteen. Pythia's first step is a free
+   half-hour conversation and the copy says so throughout, so the link has to
+   book the length being promised — it pointed at /15min while three separate
+   strings on these two pages claimed thirty. */
+const BOOKING = "https://cal.com/tuttoone/30min";
 
 /**
  * The general front door to Pythia, for a reader who is not a lawyer.
@@ -40,6 +45,17 @@ export default function Sovereign() {
   const t = useT();
   const { locale, currency } = usePreferences();
   const p = (k: Parameters<typeof price>[0]) => price(k, currency, locale);
+  /**
+   * Read off the same keys on both pages, so the two cannot drift apart on what
+   * a machine costs. `{price}` carries the currency toggle into copy that is
+   * otherwise a plain sentence.
+   */
+  const hardwareTiers = [
+    { label: t(copy.pythia.hwEntry), body: t(copy.pythia.hwEntryItem).replace("{price}", p("hwMacMini")) },
+    { label: t(copy.pythia.hwStandard), body: t(copy.pythia.hwStandardItem).replace("{price}", p("hwDgxSpark")) },
+    { label: t(copy.pythia.hwMac), body: t(copy.pythia.hwMacItem).replace("{price}", p("hwMacStudio")) },
+  ];
+
 
   useEffect(() => {
     document.title =
@@ -398,7 +414,10 @@ export default function Sovereign() {
             because Pythia's says "for your practice". */}
         <Section index="07" label={t(c.s6Label)} intro={<p>{t(c.s6Body)}</p>}>
           <CardGrid cols={3}>
-            <PriceRow title={t(copy.pythia.e1Title)} price={p("sprint")}>
+            <PriceRow
+              title={t(copy.pythia.e1Title)}
+              price={perDay("diagnosticDay", currency, locale)}
+            >
               {t(c.e1Body)}
             </PriceRow>
             <PriceRow
@@ -408,9 +427,18 @@ export default function Sovereign() {
               {t(copy.pythia.e2Body)}
             </PriceRow>
             <PriceRow title={t(copy.pythia.e3Title)} price={t(copy.pythia.e3Price)}>
-              {t(copy.pythia.e3Body)}
+              {t(copy.pythia.e3Body).replace(
+                "{floor}",
+                perMonth("ongoingMinMonthly", currency, locale),
+              )}
             </PriceRow>
           </CardGrid>
+
+          <HardwareTiers
+            title={t(copy.pythia.hwTitle)}
+            tiers={hardwareTiers}
+            note={t(copy.pythia.hwNote)}
+          />
 
           <Link
             href="/pythia"

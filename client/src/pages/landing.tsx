@@ -12,7 +12,7 @@ import {
 } from "@/components/product/ProductPage";
 import { SITE_TITLE, useT } from "@/lib/i18n";
 import { landing } from "@/lib/landing-copy";
-import { price } from "@/lib/pricing";
+import { price, perMonth } from "@/lib/pricing";
 import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
@@ -197,18 +197,22 @@ function Sequence() {
  */
 function Pricing() {
   const t = useT();
+  const { locale, currency } = usePreferences();
   const entryPrice = useEntryPrice();
   const { build, class: entry } = landing.pricing;
+  const buildPrice = price("agentBuildFrom", currency, locale);
+  const buildMonthly = perMonth("agentMonthly", currency, locale);
 
   return (
     <Section label={t(landing.pricing.label)}>
       <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
         <HeadlinePrice
           title={t(build.title)}
-          price={t(build.price)}
-          note={t(build.note)}
+          price={`${t(build.pricePrefix)} ${buildPrice}`}
+          note={t(build.note).replace("{monthly}", buildMonthly)}
         >
-          {t(build.body)}
+          {t(build.body)}{" "}
+          {t(build.scope).replace("{price}", buildPrice)}
         </HeadlinePrice>
 
         <HeadlinePrice

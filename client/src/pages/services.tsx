@@ -6,7 +6,7 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ClosingCta, Plate, ProductHero, Section } from "@/components/product/ProductPage";
 import { usePreferences } from "@/lib/preferences";
-import { price } from "@/lib/pricing";
+import { price, perDay, praxisEconomics } from "@/lib/pricing";
 import { DEFAULT_SERVICES, localiseService, type ServiceItem } from "@/lib/services-content";
 import { pick, copy, useT, SITE_TITLE } from "@/lib/i18n";
 
@@ -117,7 +117,10 @@ export default function Services() {
     { numeral: "06", quote: t(copy.waysIn.l3Q), body: t(copy.waysIn.l3Body) },
   ];
 
-  const sprint = price("sprint", currency, locale);
+  const diagnostic = perDay("diagnosticDay", currency, locale);
+  /* The referral terms are quoted on the training card, and have to agree with
+     /praxis-programme to the penny — so both read the same derived figures. */
+  const referral = praxisEconomics(currency, locale);
 
   return (
     <Layout>
@@ -169,8 +172,9 @@ export default function Services() {
           intro={
             <>
               {/* The figure is read from the pricing table rather than written
-                  into the sentence, so it follows the currency toggle. */}
-              <p>{t(copy.waysIn.priceBody1).replace("{price}", sprint)}</p>
+                  into the sentence, so it follows the currency toggle, and it
+                  carries its own "per day" so the rate cannot read as a total. */}
+              <p>{t(copy.waysIn.priceBody1).replace("{price}", diagnostic)}</p>
               <p>{t(copy.waysIn.priceBody2)}</p>
             </>
           }
@@ -208,12 +212,14 @@ export default function Services() {
                   <div className="mt-auto">
                     {service.note && (
                       <p className="text-xs text-muted-foreground leading-relaxed mb-4 pt-4 border-t border-border">
-                        {pick(service.note, locale)}
+                        {pick(service.note, locale)
+                          .replace("{credit}", referral.referralCredit)
+                          .replace("{cap}", referral.referralCap)}
                       </p>
                     )}
                     <div className="text-sm font-medium mb-4">
                       {service.priceKey
-                        ? `${service.pricePrefix ? pick(service.pricePrefix, locale) + " " : ""}${price(service.priceKey, currency, locale)}`
+                        ? `${service.pricePrefix ? pick(service.pricePrefix, locale) + " " : ""}${price(service.priceKey, currency, locale)}${service.priceSuffix ? " " + pick(service.priceSuffix, locale) : ""}`
                         : service.priceLabel
                           ? pick(service.priceLabel, locale)
                           : service.price}

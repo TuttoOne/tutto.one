@@ -264,10 +264,10 @@ export const copy = {
 
     s2Label: { en: "What it costs", fr: "Ce que cela coûte" },
     s2Title: { en: "Diagnostic", fr: "Diagnostic" },
-    /** `{price}` is replaced with the two-week diagnostic, in the reader's currency. */
+    /** `{price}` is replaced with the diagnostic day rate, in the reader's currency. */
     priceBody1: {
-      en: "Most engagements start with a two-week diagnostic — {price}. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
-      fr: "La plupart des missions commencent par un diagnostic de deux semaines — {price}. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
+      en: "Most engagements start with a diagnostic — {price}. One to two days for a simple project, longer for a larger one. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
+      fr: "La plupart des missions commencent par un diagnostic — {price}. Un à deux jours pour un projet simple, davantage pour un projet plus important. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
     },
     priceBody2: {
       en: "After that, nothing here is a package. Build work is quoted from the scope the diagnostic found. Training is priced per session. We will tell you on the first call if we think the answer is smaller than you expected.",
@@ -521,10 +521,10 @@ export const copy = {
       en: "One hour each: thirty minutes of theory and principles, then thirty minutes hands-on on your own computer. You leave with a working setup. We quote the programme as a single total once we know how many sessions the work needs.",
       fr: "Une heure chacune : trente minutes de théorie et de principes, puis trente minutes de pratique sur votre propre ordinateur. Vous repartez avec une installation qui fonctionne. Nous chiffrons le programme en un total unique, une fois connu le nombre de séances nécessaires.",
     },
-    costSprintTitle: { en: "Diagnostic sprint", fr: "Sprint de diagnostic" },
+    costSprintTitle: { en: "Diagnostic", fr: "Diagnostic" },
     costSprint: {
-      en: "Two weeks. We look at your real documents and workflows and tell you exactly what is possible.",
-      fr: "Deux semaines. Nous examinons vos documents et vos processus réels et vous disons précisément ce qui est possible.",
+      en: "One to two days for a simple project, longer for a larger one. We look at your real documents and workflows and tell you exactly what is possible.",
+      fr: "Un à deux jours pour un projet simple, davantage pour un projet plus important. Nous examinons vos documents et vos processus réels et vous disons précisément ce qui est possible.",
     },
 
     s5Label: { en: "Before the session", fr: "Avant la séance" },
@@ -562,8 +562,8 @@ export const copy = {
       fr: "Le système tourne sur votre matériel. Rien ne sort de vos bureaux. Pas de cloud, pas d'API tierces, aucune exposition.",
     },
     meta: {
-      en: "On-premise · Private · 15 minutes",
-      fr: "Sur site · Confidentiel · 15 minutes",
+      en: "On-premise · Private · 30 minutes",
+      fr: "Sur site · Confidentiel · 30 minutes",
     },
 
     s1Label: { en: "How it works", fr: "Fonctionnement" },
@@ -696,10 +696,10 @@ export const copy = {
       en: "Three stages, each one a decision point rather than a commitment to the next.",
       fr: "Trois étapes, chacune constituant un point de décision plutôt qu'un engagement pour la suivante.",
     },
-    e1Title: { en: "Diagnostic sprint", fr: "Sprint de diagnostic" },
+    e1Title: { en: "Diagnostic", fr: "Diagnostic" },
     e1Body: {
-      en: "Two weeks. We review your real documents and workflows and tell you exactly what Pythia can do for your practice.",
-      fr: "Deux semaines. Nous examinons vos documents et vos processus réels et vous disons précisément ce que Pythia peut apporter à votre cabinet.",
+      en: "One to two days for a simple project; up to two weeks for a larger build, such as a whole set of chambers. We review your real documents and workflows and tell you exactly what Pythia can do for your practice. Credited in full against the build if you proceed.",
+      fr: "Un à deux jours pour un projet simple ; jusqu'à deux semaines pour un projet plus important, comme un cabinet entier. Nous examinons vos documents et vos processus réels et vous disons précisément ce que Pythia peut apporter à votre cabinet. Intégralement déduit du prix de la construction si vous poursuivez.",
     },
     e2Title: { en: "The build", fr: "La réalisation" },
     e2Price: { en: "From", fr: "À partir de" },
@@ -711,14 +711,46 @@ export const copy = {
      * delivered work, and cannot weigh a number with no provenance.
      */
     e2Body: {
-      en: "Custom build, scoped after the diagnostic. Excludes hardware. The figure is an estimate based on builds we have already delivered, not a quote. Typically four to eight weeks from sign-off to a system running on your premises.",
-      fr: "Développement sur mesure, cadré après le diagnostic. Hors matériel. Le chiffre est une estimation fondée sur des réalisations déjà livrées, et non un devis. Généralement quatre à huit semaines entre la validation et un système en fonctionnement dans vos locaux.",
+      en: "Larger builds, such as a whole set of chambers, are priced well above this. The diagnostic fee is credited against the final build. Custom build, scoped after the diagnostic. Excludes hardware. The figure is an estimate based on builds we have already delivered, not a quote. Typically four to eight weeks from sign-off to a system running on your premises.",
+      fr: "Les projets plus importants, comme un cabinet entier, sont chiffrés nettement au-dessus. Les frais de diagnostic sont déduits du prix final. Développement sur mesure, cadré après le diagnostic. Hors matériel. Le chiffre est une estimation fondée sur des réalisations déjà livrées, et non un devis. Généralement quatre à huit semaines entre la validation et un système en fonctionnement dans vos locaux.",
     },
     e3Title: { en: "Ongoing", fr: "Suivi" },
     e3Price: { en: "10–20% p.a.", fr: "10–20 % par an" },
+    /** `{floor}` is replaced with the monthly minimum, in the reader's currency. */
     e3Body: {
-      en: "Agreed during the project, not fixed up front. Covers ingestion of new matter files, system maintenance, and keeping Pythia current as your work evolves.",
-      fr: "Convenu pendant le projet, et non fixé d'avance. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
+      en: "Of the build price, with a minimum of {floor}. Agreed during the project, not fixed up front. Covers ingestion of new matter files, system maintenance, and keeping Pythia current as your work evolves.",
+      fr: "Du prix de la construction, avec un minimum de {floor}. Convenu pendant le projet, et non fixé d'avance. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
+    },
+
+    /**
+     * The hardware tiers, shown under the three engagement cards on both
+     * /sovereign and /pythia.
+     *
+     * The client buys the machine; we say which one. Naming three means a
+     * reader can place themselves without a call, and the spread between them
+     * is the honest answer to "what does this actually cost to run" — the build
+     * price above excludes hardware, and leaving that unpriced was the question
+     * every first conversation opened with.
+     *
+     * Prices move. `hwNote` carries the date for that reason, and the figures
+     * live in PRICES so the currency toggle reaches them.
+     */
+    hwTitle: {
+      en: "Hardware, bought by you and specified by us",
+      fr: "Matériel, acheté par vous, spécifié par nous",
+    },
+    hwEntry: { en: "Entry", fr: "Entrée de gamme" },
+    hwEntryItem: { en: "Apple Mac mini, from about {price}", fr: "Apple Mac mini, à partir d'environ {price}" },
+    hwStandard: { en: "Standard", fr: "Standard" },
+    hwStandardItem: { en: "NVIDIA DGX Spark, about {price}", fr: "NVIDIA DGX Spark, environ {price}" },
+    hwMac: { en: "Mac alternative", fr: "Alternative Mac" },
+    hwMacItem: {
+      en: "Apple Mac Studio, from about {price}; the memory needed for larger document sets costs considerably more",
+      fr: "Apple Mac Studio, à partir d'environ {price} ; la mémoire nécessaire pour de gros volumes de documents coûte nettement plus",
+    },
+    hwNote: {
+      en: "Indicative retail prices including VAT, checked September 2026. We specify the configuration after the diagnostic.",
+      fr: "Prix de détail indicatifs, TVA comprise, vérifiés en septembre 2026. Nous spécifions la configuration après le diagnostic.",
     },
 
     /**
@@ -744,8 +776,8 @@ export const copy = {
     },
     ctaTitle: { en: "Ready to see it in your practice?", fr: "Envie de le voir dans votre cabinet ?" },
     ctaBody: {
-      en: "Book a fifteen-minute conversation. We'll walk through your documents and tell you what's possible.",
-      fr: "Réservez un échange de quinze minutes. Nous parcourons vos documents et vous disons ce qui est possible.",
+      en: "Book a thirty-minute conversation. We'll walk through your documents and tell you what's possible.",
+      fr: "Réservez un échange de trente minutes. Nous parcourons vos documents et vous disons ce qui est possible.",
     },
   },
 
@@ -778,7 +810,7 @@ export const copy = {
       fr: "Pythia lit l'ensemble et répond aux questions à partir de ces documents — sur un ordinateur qui vous appartient, dans vos locaux. Aucun compte en ligne, aucun téléversement, aucun fichier qui s'en va ailleurs. Pour beaucoup d'entreprises, ce n'est pas une préférence. C'est la condition même pour que le travail puisse se faire.",
     },
     meta: {
-      en: "Your hardware · Nothing uploaded · 15 minutes",
+      en: "Your hardware · Nothing uploaded · 30 minutes",
       fr: "Votre matériel · Rien n'est téléversé · 30 minutes",
     },
 
@@ -1007,8 +1039,8 @@ export const copy = {
     },
     /** The general reading of `pythia.e1Body`, which says "for your practice". */
     e1Body: {
-      en: "Two weeks. We look at your real documents and the way the work actually moves, and tell you what this would and would not do for you.",
-      fr: "Deux semaines. Nous examinons vos documents réels et la façon dont le travail circule vraiment, puis nous vous disons ce que cela ferait — et ne ferait pas — pour vous.",
+      en: "One to two days for a simple project; up to two weeks for a larger build, such as a whole set of chambers. We look at your real documents and the way the work actually moves, and tell you what this would and would not do for you. Credited in full against the build if you proceed.",
+      fr: "Un à deux jours pour un projet simple ; jusqu'à deux semaines pour un projet plus important, comme un cabinet entier. Nous examinons vos documents réels et la façon dont le travail circule, et nous vous disons ce que ce système ferait, et ne ferait pas, pour vous. Intégralement déduit du prix de la construction si vous poursuivez.",
     },
 
     legalTitle: {

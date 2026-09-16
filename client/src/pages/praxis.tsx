@@ -15,7 +15,8 @@ import {
 } from "@/components/product/ProductPage";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
-import { price } from "@/lib/pricing";
+import { useTrainerCode, bookingHref } from "@/lib/trainer-code";
+import { price, perDay } from "@/lib/pricing";
 
 /* The free 15-minute intro, not the session itself. Praxis is quoted as a
    total after a conversation, so there is nothing on this page to pay for at
@@ -26,6 +27,9 @@ export default function Praxis() {
   const t = useT();
   const { locale, currency } = usePreferences();
   const p = (k: Parameters<typeof price>[0]) => price(k, currency, locale);
+  /* Carries the referring trainer's code into the Cal.com booking, so the
+     client is attributed to them rather than to us. */
+  const booking = bookingHref(BOOKING, useTrainerCode());
 
   useEffect(() => {
     document.title =
@@ -71,7 +75,7 @@ export default function Praxis() {
               <p>{t(copy.praxis.lead2)}</p>
             </>
           }
-          primaryCta={{ label: t(copy.common.bookSession), href: BOOKING }}
+          primaryCta={{ label: t(copy.common.bookSession), href: booking }}
           secondaryCta={{ label: t(copy.praxis.ctaSecondary), href: "/contact" }}
           meta={t(copy.praxis.meta)}
         />
@@ -209,7 +213,10 @@ export default function Praxis() {
             >
               {t(copy.praxis.costSession)}
             </PriceRow>
-            <PriceRow title={t(copy.praxis.costSprintTitle)} price={p("sprint")}>
+            <PriceRow
+              title={t(copy.praxis.costSprintTitle)}
+              price={perDay("diagnosticDay", currency, locale)}
+            >
               {t(copy.praxis.costSprint)}
             </PriceRow>
           </CardGrid>
@@ -289,7 +296,7 @@ export default function Praxis() {
         <ClosingCta
           title={t(copy.praxis.ctaTitle)}
           body={t(copy.praxis.ctaBody)}
-          href={BOOKING}
+          href={booking}
           label={t(copy.common.bookSession)}
           messageLabel={t(copy.common.sendMessage)}
         />

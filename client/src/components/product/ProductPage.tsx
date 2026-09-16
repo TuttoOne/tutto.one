@@ -494,6 +494,44 @@ export function LogoMarquee({
 }
 
 /** Priced line item. */
+/**
+ * The hardware tiers that sit under a pricing grid.
+ *
+ * A labelled list rather than three more cards. These are machines the client
+ * buys from Apple or NVIDIA, not things we sell, and giving them the same
+ * weight as the engagement cards above read as though we were quoting for
+ * them. The note carries the date because these prices move — hardware rose
+ * sharply through 2026 — and a dated indicative figure is usable where an
+ * undated one is a hostage.
+ */
+export function HardwareTiers({
+  title,
+  tiers,
+  note,
+}: {
+  title: string;
+  tiers: { label: string; body: string }[];
+  note: string;
+}) {
+  return (
+    <div className="mt-6 bg-secondary/30 border border-border rounded-2xl p-6">
+      <h3 className="text-sm font-serif font-bold text-foreground mb-4">{title}</h3>
+      <ul className="space-y-2.5">
+        {tiers.map((tier) => (
+          <li
+            key={tier.label}
+            className="text-sm text-muted-foreground leading-relaxed flex flex-col sm:flex-row sm:gap-4"
+          >
+            <span className="text-foreground font-medium shrink-0 sm:w-36">{tier.label}</span>
+            <span>{tier.body}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="text-xs text-muted-foreground/70 mt-5 leading-relaxed">{note}</p>
+    </div>
+  );
+}
+
 export function PriceRow({
   title,
   price,

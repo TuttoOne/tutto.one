@@ -27,8 +27,40 @@ export const BECOME_A_TRAINER_FR: FrDict = {
   "One session a week, at the standard Praxis rate. Each session has a specific job.":
     "Une séance par semaine, au tarif Praxis standard. Chaque séance a un objectif précis.",
   "Total to qualify": "Total pour être habilité",
-  "80% yours / 20% mine, on every course you teach.":
-    "80 % pour vous, 20 % pour moi, sur chaque formation que vous animez.",
+
+  // --- How trainers are paid ---
+  "How Trainers Are Paid": "Rémunération des formateurs",
+  "Whoever delivers a session is paid for it.":
+    "Chaque séance est rémunérée à celui ou celle qui l'anime.",
+  "Clients you bring in yourself: you keep 80% of the tuition they pay. A client is yours when their booking carries your trainer code.":
+    "Clients que vous amenez vous-même : vous conservez 80 % des frais de formation payés. Un client est le vôtre lorsque sa réservation porte votre code formateur.",
+  "Clients Tutto brings in: you keep 60% of the tuition they pay.":
+    "Clients amenés par Tutto : vous conservez 60 % des frais de formation payés.",
+  "The intro session is paid to whoever delivered it. Its credit comes off the programme price, and the programme trainer's share is calculated on what is actually paid after that.":
+    "La séance d'introduction est rémunérée à celui ou celle qui l'a animée. Son crédit est déduit du prix du programme, et la part du formateur du programme se calcule sur ce qui est effectivement payé ensuite.",
+  "Referral credits are optional for trainers, and off unless you opt in. If you opt in, your courses offer the credit and your share is calculated after it. If you do not, your courses do not offer it. Referral credits never apply to the trainer track itself.":
+    "Le parrainage est optionnel pour les formateurs, et désactivé sauf adhésion de votre part. Si vous y adhérez, vos cours proposent le crédit et votre part est calculée après celui-ci. Sinon, vos cours ne le proposent pas. Les crédits de parrainage ne s'appliquent jamais au parcours formateur lui-même.",
+
+  // --- Cost cards. These were template literals before, so the French never
+  //     resolved; the figures now arrive as placeholders. ---
+  /** `{n}` sessions at the `{rate}` standard rate. */
+  "{n} sessions at the standard {rate} rate.":
+    "{n} séances au tarif standard de {rate}.",
+  "Praxis ({course}) plus the trainer track ({track}). After that, no further fees.":
+    "Praxis ({course}) plus le parcours formateur ({track}). Ensuite, plus aucun frais.",
+  "Teach {students} students through a full course over a year and that is {tuition} of tuition. On clients you brought in yourself you keep {yours}; on clients I brought you, {mine}. Teach more, earn more. Teach part-time, scale it to fit.":
+    "Formez {students} personnes sur une formation complète en un an et cela représente {tuition} d'honoraires. Sur les clients que vous avez amenés vous-même, vous conservez {yours} ; sur ceux que je vous ai amenés, {mine}. Enseignez davantage, gagnez davantage. Enseignez à temps partiel, ajustez à votre rythme.",
+  "80% yours on the clients you bring in, 60% on the ones I bring you. A client is yours when their booking carries your code.":
+    "80 % pour vous sur les clients que vous amenez, 60 % sur ceux que je vous amène. Un client est le vôtre lorsque sa réservation porte votre code.",
+  "You keep": "Vous conservez",
+  "I keep": "Je conserve",
+  /** `{n}` sessions, `{tuition}` the course fee in the reader's currency. */
+  "Per {n}-session course ({tuition} tuition)":
+    "Pour une formation de {n} séances ({tuition} d'honoraires)",
+  "Per session, your client": "Par séance, votre client",
+  "Per session, my client": "Par séance, mon client",
+  "Per full course, your client": "Par formation complète, votre client",
+  "Per full course, my client": "Par formation complète, mon client",
   "An illustration, not a promise": "Une illustration, pas une promesse",
   "One standard, not a quiz.": "Une exigence, pas un questionnaire.",
 
@@ -54,7 +86,7 @@ export const BECOME_A_TRAINER_FR: FrDict = {
     "Ce n'est ni une franchise, ni un dispositif de revenu passif.",
   "Praxis Trainer Track · tutto.one/become-a-trainer":
     "Parcours formateur Praxis · tutto.one/become-a-trainer",
-  "Four sessions · 80 / 20": "Quatre séances · 80 / 20",
+  "Four sessions · 80 / 60": "Quatre séances · 80 / 60",
 
   // --- The four sessions ---
   "The craft": "Le métier",
@@ -78,11 +110,11 @@ export const BECOME_A_TRAINER_FR: FrDict = {
   "Four sessions and clearing the readiness bar. Most of the timing is down to how much you practise between sessions.":
     "Quatre séances, plus le franchissement de l'exigence d'aptitude. Le délai dépend surtout de ce que vous pratiquez entre les séances.",
   "Do I have to find my own clients?": "Dois-je trouver mes propres clients ?",
-  "No. I find and organise the work with you. You are welcome to bring your own as well, and because you keep 80% of everything, bringing your own simply means you earn more.":
-    "Non. Je trouve et j'organise le travail avec vous. Vous pouvez bien sûr apporter les vôtres : comme vous conservez 80 % de l'ensemble, en apporter revient simplement à gagner davantage.",
-  "What is the 20% actually for?": "À quoi servent réellement les 20 % ?",
-  "Finding and organising your lessons, the method and its ongoing updates, the private kit you teach from, and a hub that picks up the hard builds you escalate.":
-    "À trouver et organiser vos formations, à la méthode et à ses mises à jour continues, au kit privé sur lequel vous enseignez, et à une structure qui prend en charge les réalisations difficiles que vous lui transmettez.",
+  "No. I find and organise the work with you. You are welcome to bring your own as well, and that is where the split moves: you keep 80% of the tuition on clients who come in on your own code, against 60% on clients I bring you. Bringing your own simply means you earn more.":
+    "Non. Je trouve et j'organise le travail avec vous. Vous pouvez bien sûr apporter les vôtres, et c'est là que la répartition change : vous conservez 80 % des honoraires sur les clients qui arrivent avec votre propre code, contre 60 % sur ceux que je vous amène. En apporter revient simplement à gagner davantage.",
+  "What is my share actually for?": "À quoi sert réellement ma part ?",
+  "The method and its ongoing updates, the private kit you teach from, and a hub that picks up the hard builds you escalate. On clients I bring you it also covers finding them, which is why that share is larger.":
+    "À la méthode et à ses mises à jour continues, au kit privé sur lequel vous enseignez, et à une structure qui prend en charge les réalisations difficiles que vous lui transmettez. Sur les clients que je vous amène, elle couvre aussi leur recherche, ce qui explique que cette part soit plus élevée.",
   "What if a client needs something I cannot build?":
     "Et si un client a besoin de quelque chose que je ne sais pas construire ?",
   "You bring it back to the hub. We take on the complex work and support your engagement, and you stay the relationship the client trusts.":
@@ -119,9 +151,9 @@ export const BECOME_A_TRAINER_FR: FrDict = {
   "Start teaching": "Commencer à enseigner",
   "I find and organise your clients, with your help. You deliver the sessions.":
     "Je trouve et j'organise vos clients, avec votre concours. Vous animez les séances.",
-  "You keep 80%": "Vous conservez 80 %",
-  "I keep 20% for finding the work, the method, the materials, and the support behind you. After that there is no fee to me - I earn only when you do.":
-    "Je conserve 20 % pour la recherche du travail, la méthode, les supports et le soutien qui vous épaule. Au-delà, vous ne me devez rien : je ne gagne que lorsque vous gagnez.",
+  "You keep 80%, or 60%": "Vous conservez 80 %, ou 60 %",
+  "Bring the client in yourself and you keep 80% of what they pay. Take a client I found and you keep 60%, because that share also covers finding them. After that there is no fee to me - I earn only when you do.":
+    "Amenez le client vous-même et vous conservez 80 % de ce qu'il paie. Prenez un client que j'ai trouvé et vous en conservez 60 %, cette part couvrant aussi sa recherche. Au-delà, vous ne me devez rien : je ne gagne que lorsque vous gagnez.",
 
   // --- What you get ---
   "The whole method": "La méthode complète",
@@ -131,8 +163,8 @@ export const BECOME_A_TRAINER_FR: FrDict = {
   "Repo access to the living materials, updated as the method improves. Your copy stays current.":
     "L'accès au dépôt des supports vivants, mis à jour à mesure que la méthode s'améliore. Votre exemplaire reste à jour.",
   "Clients, organised": "Des clients, organisés",
-  "I find and arrange the work with you. The more you bring yourself, the more you earn, because you keep 80% of all of it.":
-    "Je trouve et j'organise le travail avec vous. Plus vous en apportez vous-même, plus vous gagnez, puisque vous conservez 80 % de l'ensemble.",
+  "I find and arrange the work with you. The more you bring yourself, the more you earn, because a client on your own code pays you 80% rather than 60%.":
+    "Je trouve et j'organise le travail avec vous. Plus vous en apportez vous-même, plus vous gagnez, puisqu'un client arrivé avec votre propre code vous rapporte 80 % plutôt que 60 %.",
   "A hub behind you": "Une structure derrière vous",
   "When you hit a build or integration you cannot handle, you bring it back. We pick up the hard work and support the engagement, so a roadblock becomes a bigger job rather than a dead end.":
     "Lorsque vous butez sur une réalisation ou une intégration hors de votre portée, vous nous la transmettez. Nous prenons en charge le travail difficile et soutenons la mission : un obstacle devient ainsi une mission plus importante, au lieu d'une impasse.",
@@ -151,12 +183,12 @@ export const BECOME_A_TRAINER_FR: FrDict = {
     "ex. : trois collègues qui ont vu ce que j'ai construit et veulent apprendre. Quelques clients qui me questionnent sans cesse sur les outils d'IA…",
 
   // --- Multi-line blocks ---
-  "Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition.":
-    "Quatre séances supplémentaires après Praxis vous font passer de quelqu'un qui sait construire à quelqu'un qui peut l'enseigner pour en vivre. Vous enseignez, je trouve et j'organise les clients avec vous, et vous conservez 80 % des honoraires.",
+  "Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition on the clients you bring in yourself — 60% on the ones I bring you.":
+    "Quatre séances supplémentaires après Praxis vous font passer de quelqu'un qui sait construire à quelqu'un qui peut l'enseigner pour en vivre. Vous enseignez, je trouve et j'organise les clients avec vous, et vous conservez 80 % des honoraires sur les clients que vous amenez vous-même — 60 % sur ceux que je vous amène.",
   "You have been through Praxis. You can build working tools with an AI assistant, and you have felt how fast the people around you want the same thing.":
     "Vous avez suivi Praxis. Vous savez construire des outils fonctionnels avec un assistant IA, et vous avez mesuré la vitesse à laquelle votre entourage veut la même chose.",
-  "People keep asking you how you did it, and you have started explaining it without being asked. This is how you turn that into an income: four more sessions, a readiness bar to clear, and then you are teaching Praxis under the same name, with clients I find and organise with you, keeping 80% of everything you earn.":
-    "On vous demande sans cesse comment vous avez fait, et vous avez commencé à l'expliquer sans qu'on vous le demande. Voici comment en tirer un revenu : quatre séances de plus, une exigence d'aptitude à franchir, et vous enseignez Praxis sous le même nom, avec des clients que je trouve et organise avec vous, en conservant 80 % de tout ce que vous gagnez.",
+  "People keep asking you how you did it, and you have started explaining it without being asked. This is how you turn that into an income: four more sessions, a readiness bar to clear, and then you are teaching Praxis under the same name, with clients I find and organise with you, and 80% of the tuition on every client you bring in yourself.":
+    "On vous demande sans cesse comment vous avez fait, et vous avez commencé à l'expliquer sans qu'on vous le demande. Voici comment en tirer un revenu : quatre séances de plus, une exigence d'aptitude à franchir, et vous enseignez Praxis sous le même nom, avec des clients que je trouve et organise avec vous, et 80 % des honoraires sur chaque client que vous amenez vous-même.",
   "You will carry the Praxis name, so there is a standard to clear before you teach anyone for money. It is a demonstration: one real session, or a full mock if no client is ready yet, with me watching, then an honest conversation about what worked and what did not.":
     "Vous porterez le nom de Praxis : il y a donc une exigence à franchir avant d'enseigner à qui que ce soit contre rémunération. C'est une démonstration : une séance réelle, ou une simulation complète si aucun client n'est encore prêt, sous mon observation, suivie d'un échange honnête sur ce qui a fonctionné et ce qui n'a pas fonctionné.",
   "This protects you as much as the brand. A trainer who is rushed out before they are ready loses their first clients and their confidence. We would rather get you genuinely ready.":
@@ -165,4 +197,9 @@ export const BECOME_A_TRAINER_FR: FrDict = {
     "Pour être direct : il s'agit de Praxis attestant que vous savez enseigner Praxis à notre niveau d'exigence. Ce n'est pas une certification délivrée par un organisme officiel, et nous ne prétendons pas le contraire. C'est précisément cette honnêteté qui fait que les clients font confiance à ceux qui portent notre nom.",
   "You will do real work with real people. What it gives you is the method, the materials, the clients organised alongside you, and a hub that handles what you cannot. That is a more useful foundation than building from scratch, and it is exactly what it says it is.":
     "Vous ferez un vrai travail avec de vraies personnes. Ce que ce parcours vous apporte, c'est la méthode, les supports, des clients organisés à vos côtés, et une structure qui prend en charge ce que vous ne pouvez pas assurer. C'est une base plus utile que de partir de zéro — et c'est exactement ce qu'elle annonce être.",
+
+  // --- Trainer attribution ---
+  "Trainer code": "Code formateur",
+  "(optional)": "(facultatif)",
+  "If a trainer sent you here": "Si un formateur vous a orienté ici",
 };

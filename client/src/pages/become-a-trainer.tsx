@@ -3,6 +3,7 @@ import { usePageTr } from "@/lib/page-fr";
 import { BECOME_A_TRAINER_FR } from "@/lib/fr/become-a-trainer";
 import { Header } from "@/components/layout/Layout";
 import { usePreferences } from "@/lib/preferences";
+import { useTrainerCode } from "@/lib/trainer-code";
 import { SITE_TITLE } from "@/lib/i18n";
 import {
   trainerEconomics,
@@ -60,11 +61,11 @@ const faqs = [
   },
   {
     q: "Do I have to find my own clients?",
-    a: "No. I find and organise the work with you. You are welcome to bring your own as well, and because you keep 80% of everything, bringing your own simply means you earn more.",
+    a: "No. I find and organise the work with you. You are welcome to bring your own as well, and that is where the split moves: you keep 80% of the tuition on clients who come in on your own code, against 60% on clients I bring you. Bringing your own simply means you earn more.",
   },
   {
-    q: "What is the 20% actually for?",
-    a: "Finding and organising your lessons, the method and its ongoing updates, the private kit you teach from, and a hub that picks up the hard builds you escalate.",
+    q: "What is my share actually for?",
+    a: "The method and its ongoing updates, the private kit you teach from, and a hub that picks up the hard builds you escalate. On clients I bring you it also covers finding them, which is why that share is larger.",
   },
   {
     q: "What if a client needs something I cannot build?",
@@ -80,13 +81,29 @@ export default function BecomeATrainer() {
   const tr = usePageTr(BECOME_A_TRAINER_FR);
   const { locale, currency } = usePreferences();
   const econ = trainerEconomics(currency, locale);
+  /**
+   * Put figures into a sentence at render.
+   *
+   * The cost-card notes used to be template literals handed to `tr()`, which
+   * meant the French lookup could never match its own key and the whole card
+   * fell back to English. Keying on the sentence with `{placeholders}` in it
+   * lets the dictionary hold the French and the pricing table hold the money.
+   */
+  const fill = (en: string, subs: Record<string, string>) =>
+    Object.entries(subs).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), tr(en));
 
   useEffect(() => {
     document.title = "Become a Praxis Trainer - teach it, and earn from it";
     return () => { document.title = SITE_TITLE; };
   }, []);
 
-  const [form, setForm] = useState({ name: "", email: "", context: "" });
+  const [form, setForm] = useState({ name: "", email: "", context: "", trainerCode: "" });
+  const trainerCode = useTrainerCode();
+  // Seed the field from the visit's attribution once it is known, but never
+  // overwrite something the visitor has typed themselves.
+  useEffect(() => {
+    if (trainerCode) setForm(f => (f.trainerCode ? f : { ...f, trainerCode }));
+  }, [trainerCode]);
   const [formState, setFormState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -101,6 +118,7 @@ export default function BecomeATrainer() {
           name: form.name,
           email: form.email,
           message: `Praxis Trainer Track enquiry\n\nWho is already asking them for help: ${form.context}`,
+          trainerCode: form.trainerCode.trim() || null,
         }),
       });
       if (!res.ok) throw new Error();
@@ -136,7 +154,7 @@ export default function BecomeATrainer() {
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Praxis Trainer Track")}</p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Teach Praxis.")}<br />{tr("Earn from it.")}</h2>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition on the clients you bring in yourself — 60% on the ones I bring you.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("You have been through Praxis. You can build working tools with an AI assistant, and you have felt how fast the people around you want the same thing.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
             <a
@@ -164,7 +182,7 @@ export default function BecomeATrainer() {
 
         {/* Intro */}
         <div style={{ maxWidth: 620, marginBottom: 64 }}>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("People keep asking you how you did it, and you have started explaining it without being asked. This is how you turn that into an income: four more sessions, a readiness bar to clear, and then you are teaching Praxis under the same name, with clients I find and organise with you, keeping 80% of everything you earn.")}</p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("People keep asking you how you did it, and you have started explaining it without being asked. This is how you turn that into an income: four more sessions, a readiness bar to clear, and then you are teaching Praxis under the same name, with clients I find and organise with you, and 80% of the tuition on every client you bring in yourself.")}</p>
         </div>
 
         {/* Section 01 - Who this is for */}
@@ -198,7 +216,7 @@ export default function BecomeATrainer() {
               { label: "Do four more sessions", body: "The trainer track teaches you how to teach it, not just how to do it." },
               { label: "Clear the readiness bar", body: "A single real session, or a full mock, with me watching, followed by an honest debrief. One standard to clear before you carry the name." },
               { label: "Start teaching", body: "I find and organise your clients, with your help. You deliver the sessions." },
-              { label: "You keep 80%", body: "I keep 20% for finding the work, the method, the materials, and the support behind you. After that there is no fee to me - I earn only when you do." },
+              { label: "You keep 80%, or 60%", body: "Bring the client in yourself and you keep 80% of what they pay. Take a client I found and you keep 60%, because that share also covers finding them. After that there is no fee to me - I earn only when you do." },
             ].map((item, i) => (
               <div key={item.label} style={{ display: "flex", gap: 20, marginBottom: i < 4 ? 28 : 0 }}>
                 <div style={{ ...MONO, fontSize: 11, color: "#d97706", fontWeight: 700, flexShrink: 0, marginTop: 2, width: 20 }}>
@@ -239,7 +257,7 @@ export default function BecomeATrainer() {
             {[
               { label: "The whole method", body: "The Praxis playbook, the framings that land, the objection answers, the student tutor. You are not starting from a blank page." },
               { label: "The private kit", body: "Repo access to the living materials, updated as the method improves. Your copy stays current." },
-              { label: "Clients, organised", body: "I find and arrange the work with you. The more you bring yourself, the more you earn, because you keep 80% of all of it." },
+              { label: "Clients, organised", body: "I find and arrange the work with you. The more you bring yourself, the more you earn, because a client on your own code pays you 80% rather than 60%." },
               { label: "A hub behind you", body: "When you hit a build or integration you cannot handle, you bring it back. We pick up the hard work and support the engagement, so a roadblock becomes a bigger job rather than a dead end." },
               { label: "A network", body: "Other trainers doing the same thing, sharing what works." },
             ].map((item) => (
@@ -263,12 +281,18 @@ export default function BecomeATrainer() {
               {
                 label: "Trainer track",
                 price: econ.trainerTrack,
-                note: `${TRAINER_TRACK_SESSIONS} sessions at the standard ${econ.sessionStandard} rate.`,
+                note: fill("{n} sessions at the standard {rate} rate.", {
+                  n: String(TRAINER_TRACK_SESSIONS),
+                  rate: econ.sessionStandard,
+                }),
               },
               {
                 label: "All-in to qualify",
                 price: econ.trainerTotal,
-                note: `Praxis (${econ.courseTuition}) plus the trainer track (${econ.trainerTrack}). After that, no further fees.`,
+                note: fill("Praxis ({course}) plus the trainer track ({track}). After that, no further fees.", {
+                  course: econ.courseTuition,
+                  track: econ.trainerTrack,
+                }),
                 highlight: true,
               },
             ].map((p) => (
@@ -287,7 +311,7 @@ export default function BecomeATrainer() {
                 )}
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{tr(p.label)}</p>
                 <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-1px" }}>{p.price}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{tr(p.note)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
               </div>
             ))}
           </div>
@@ -295,12 +319,19 @@ export default function BecomeATrainer() {
           {/* Earnings table */}
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, overflow: "hidden", maxWidth: 600, marginBottom: 24 }}>
             <div style={{ background: "#1a1a1a", padding: "14px 20px" }}>
-              <p style={{ ...CAPS, fontSize: 9, color: "#d97706", margin: 0 }}>Per {COURSE_SESSIONS}-session course ({econ.courseTuition} tuition)</p>
+              <p style={{ ...CAPS, fontSize: 9, color: "#d97706", margin: 0 }}>
+                {fill("Per {n}-session course ({tuition} tuition)", {
+                  n: String(COURSE_SESSIONS),
+                  tuition: econ.courseTuition,
+                })}
+              </p>
             </div>
             <div style={{ background: "#faf8f5" }}>
               {[
-                { label: "Per session", you: econ.sessionYou, daniel: econ.sessionMine },
-                { label: "Per full course", you: econ.courseYou, daniel: econ.courseMine, bold: true },
+                { label: "Per session, your client", you: econ.sessionYouSourced, daniel: econ.sessionMineSourced },
+                { label: "Per session, my client", you: econ.sessionYouTutto, daniel: econ.sessionMineTutto },
+                { label: "Per full course, your client", you: econ.courseYouSourced, daniel: econ.courseMineSourced, bold: true },
+                { label: "Per full course, my client", you: econ.courseYouTutto, daniel: econ.courseMineTutto, bold: true },
               ].map((row) => (
                 <div
                   key={row.label}
@@ -313,12 +344,12 @@ export default function BecomeATrainer() {
                   }}
                 >
                   <p style={{ ...INTER, fontSize: 12, color: "#5a5248", margin: 0, fontWeight: row.bold ? 600 : 400 }}>{tr(row.label)}</p>
-                  <p style={{ ...ROBOTO, fontSize: row.bold ? 16 : 13, fontWeight: row.bold ? 800 : 400, color: "#1a1a1a", margin: 0 }}>You keep {row.you}</p>
-                  <p style={{ ...INTER, fontSize: 12, color: "#a8a092", margin: 0 }}>I keep {row.daniel}</p>
+                  <p style={{ ...ROBOTO, fontSize: row.bold ? 16 : 13, fontWeight: row.bold ? 800 : 400, color: "#1a1a1a", margin: 0 }}>{tr("You keep")} {row.you}</p>
+                  <p style={{ ...INTER, fontSize: 12, color: "#a8a092", margin: 0 }}>{tr("I keep")} {row.daniel}</p>
                 </div>
               ))}
               <div style={{ padding: "12px 20px" }}>
-                <p style={{ ...INTER, fontSize: 11, color: "#7a7568", margin: 0 }}>{tr("80% yours / 20% mine, on every course you teach.")}</p>
+                <p style={{ ...INTER, fontSize: 11, color: "#7a7568", margin: 0 }}>{tr("80% yours on the clients you bring in, 60% on the ones I bring you. A client is yours when their booking carries your code.")}</p>
               </div>
             </div>
           </div>
@@ -327,12 +358,40 @@ export default function BecomeATrainer() {
           <div style={{ padding: "20px 24px", background: "#f0ece6", borderRadius: 8, maxWidth: 600 }}>
             <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>{tr("An illustration, not a promise")}</p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>
-              Teach {EXAMPLE_STUDENTS} students through a full course over a year and that is{" "}
-              {econ.yearTuition} of tuition.{" "}
-              <strong style={{ color: "#1a1a1a" }}>You keep {econ.yearYou}.</strong>{" "}
-              I keep {econ.yearMine} for keeping the clients coming and the method sharp. Teach more, earn more.
-              Teach part-time, scale it to fit.
+              {fill(
+                "Teach {students} students through a full course over a year and that is {tuition} of tuition. On clients you brought in yourself you keep {yours}; on clients I brought you, {mine}. Teach more, earn more. Teach part-time, scale it to fit.",
+                {
+                  students: String(EXAMPLE_STUDENTS),
+                  tuition: econ.yearTuition,
+                  yours: econ.yearYouSourced,
+                  mine: econ.yearYouTutto,
+                },
+              )}
             </p>
+          </div>
+        </div>
+
+        {/* How trainers are paid.
+
+            The split is only half the answer. Who delivered a session, what
+            happens when two trainers share a programme, and whether a trainer
+            offers referral credits at all are the questions that actually come
+            up once someone is teaching, and leaving them to the contract meant
+            answering them one email at a time. */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("How Trainers Are Paid")}</h2>
+          </div>
+          <div style={{ maxWidth: 700 }}>
+            {[
+              "Whoever delivers a session is paid for it.",
+              "Clients you bring in yourself: you keep 80% of the tuition they pay. A client is yours when their booking carries your trainer code.",
+              "Clients Tutto brings in: you keep 60% of the tuition they pay.",
+              "The intro session is paid to whoever delivered it. Its credit comes off the programme price, and the programme trainer's share is calculated on what is actually paid after that.",
+              "Referral credits are optional for trainers, and off unless you opt in. If you opt in, your courses offer the credit and your share is calculated after it. If you do not, your courses do not offer it. Referral credits never apply to the trainer track itself.",
+            ].map((line) => (
+              <p key={line} style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 12, paddingLeft: 16, borderLeft: "2px solid #e8e0d5" }}>{tr(line)}</p>
+            ))}
           </div>
         </div>
 
@@ -401,7 +460,7 @@ export default function BecomeATrainer() {
                     style={INPUT}
                     required
                     placeholder={tr("Jane Smith")}
-                    value={tr(form.name)}
+                    value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   />
                 </div>
@@ -426,6 +485,21 @@ export default function BecomeATrainer() {
                   placeholder={tr("e.g. Three colleagues who saw what I built and want to learn. A few clients who keep asking about AI tools...")}
                   value={form.context}
                   onChange={e => setForm(f => ({ ...f, context: e.target.value }))}
+                />
+              </div>
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>
+                  {tr("Trainer code")}{" "}
+                  <span style={{ textTransform: "none", letterSpacing: 0, color: "rgba(246,241,234,0.25)" }}>{tr("(optional)")}</span>
+                </label>
+                {/* Prefilled from ?trainer= on any page of this visit. Left
+                    editable so somebody handed a code on paper can type it. */}
+                <input
+                  className="bt-input"
+                  style={INPUT}
+                  placeholder={tr("If a trainer sent you here")}
+                  value={form.trainerCode}
+                  onChange={e => setForm(f => ({ ...f, trainerCode: e.target.value }))}
                 />
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
@@ -457,7 +531,7 @@ export default function BecomeATrainer() {
         {/* Doc footer */}
         <div className="bt-footer-bar">
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Praxis Trainer Track · tutto.one/become-a-trainer")}</span>
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Four sessions · 80 / 20")}</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Four sessions · 80 / 60")}</span>
         </div>
 
       </div>

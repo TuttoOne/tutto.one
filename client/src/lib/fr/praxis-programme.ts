@@ -31,7 +31,6 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
 
   "The actual tools you built along the way.":
     "Les outils que vous aurez réellement construits en chemin.",
-  "Best value": "Meilleur rapport",
   "Running the tools you build costs about":
     "Faire tourner les outils que vous construisez coûte environ",
   "for a subscription to a frontier AI system — Claude, Mistral or OpenAI — or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.":
@@ -62,7 +61,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Trainer track": "Parcours formateur",
   "Four sessions": "Quatre séances",
   "You keep": "Vous conservez",
-  "of every course you teach": "de chaque formation que vous animez",
+  "on the clients you bring in yourself": "sur les clients que vous amenez vous-même",
   "See the trainer track →": "Voir le parcours formateur →",
   "Praxis Programme · tutto.one/praxis-programme":
     "Programme Praxis · tutto.one/praxis-programme",
@@ -172,13 +171,26 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "What you need": "Ce qu'il vous faut",
 
   // --- Pricing ---
+  "Intro session": "Séance d'introduction",
+  "Two hours. Credited in full against the full programme.":
+    "Deux heures. Intégralement déduite du programme complet.",
   "Per session": "Par séance",
   "One hour each. Pay as you go, or commit to the full programme.":
     "Une heure chacune. À la carte, ou en vous engageant sur le programme complet.",
-  "All eight sessions. The intro session counts as the first.":
-    "Les huit séances. La séance d'introduction compte comme la première.",
-  "Refer a friend": "Parrainer quelqu'un",
   "Full programme": "Programme complet",
+  /** `{after}` is the programme price less the intro credit, in the reader's currency. */
+  "All eight sessions. {after} after your intro session credit.":
+    "Les huit séances. {after} après déduction de la séance d'introduction.",
+  /** `{credit}` per enrolment, `{cap}` the ceiling on stacked credits. */
+  "Refer a friend: {credit} off your programme for every person you refer who enrols, up to {cap}.":
+    "Parrainage : {credit} de réduction sur votre programme pour chaque personne parrainée qui s'inscrit, jusqu'à {cap}.",
+  "Referral credits apply to courses taught by participating trainers.":
+    "Les crédits de parrainage s'appliquent aux cours animés par des formateurs participants.",
+
+  // --- Trainer attribution ---
+  "Trainer code": "Code formateur",
+  "(optional)": "(facultatif)",
+  "If a trainer sent you here": "Si un formateur vous a orienté ici",
 
   // --- Form placeholders ---
   "Jane Smith": "Marie Dupont",
@@ -192,8 +204,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Un mot de franchise, pour poser la bonne attente : vous ferez vous-même l'essentiel du chemin. Sur tout ce qui est complexe, la dernière portion se termine à la main ou se délègue. Faire déjà l'essentiel du chemin représente une économie considérable par rapport à la façon dont le travail se fait aujourd'hui — et c'est cette économie que nous visons.",
   "Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain language, with someone sitting beside you who has done it before.":
     "Huit séances sur deux mois. Pour celles et ceux qui ont utilisé l'IA dans une fenêtre de discussion et veulent aller plus loin. Vous construirez de petits outils fonctionnels qui prendront en charge vos tâches répétitives, en langage courant, avec à vos côtés quelqu'un qui l'a déjà fait.",
-  "Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on every course you teach. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
-    "Quatre séances supplémentaires vous transforment en formateur. Vous conservez 80 % des honoraires de chaque formation que vous animez. Je trouve et j'organise les clients avec vous, vous assurez les séances, et une structure vous épaule pour les cas difficiles.",
+  "Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
+    "Quatre séances supplémentaires vous transforment en formateur. Clients que vous amenez vous-même : vous conservez 80 % des frais de formation payés. Clients amenés par Tutto : vous en conservez 60 %. Je trouve et j'organise les clients avec vous, vous assurez les séances, et une structure vous épaule pour les cas difficiles.",
   "I will tell you honestly whether this is the right thing for you. The first step is a short call.":
     "Je vous dirai honnêtement si ce programme vous convient. La première étape est un bref échange.",
   "It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.":

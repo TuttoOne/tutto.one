@@ -229,14 +229,26 @@ export const landing = {
         en: "An agent, built and kept running",
         fr: "Un agent, construit et maintenu",
       },
-      price: { en: "From €3,000", fr: "À partir de 3 000 €" },
+      /**
+       * `{price}` and `{monthly}` are filled from the pricing table at render.
+       *
+       * They used to be written into the sentence as euros, which meant a
+       * visitor who switched the toggle to £ read "£83" for the session beside
+       * "From €3,000" for the agent — two currencies in one pricing block.
+       */
+      pricePrefix: { en: "From", fr: "À partir de" },
       body: {
         en: "Built for one job, in an environment we set up and hand over.",
         fr: "Construit pour un travail précis, dans un environnement que nous installons et vous remettons.",
       },
+      /** The scope line: what the "from" figure actually buys. */
+      scope: {
+        en: "From {price} for a simple, single-task agent. Most projects are priced after discovery.",
+        fr: "À partir de {price} pour un agent simple, dédié à une seule tâche. La plupart des projets sont chiffrés après la découverte.",
+      },
       note: {
-        en: "Then from €200 a month to keep it running. The real figure depends on the job, which is what discovery is for.",
-        fr: "Puis à partir de 200 € par mois pour le maintenir. Le chiffre dépend du travail : c'est l'objet de la découverte.",
+        en: "Then from {monthly} to keep it running. The real figure depends on the job, which is what discovery is for.",
+        fr: "Puis à partir de {monthly} pour le maintenir. Le chiffre dépend du travail : c'est l'objet de la découverte.",
       },
     },
 

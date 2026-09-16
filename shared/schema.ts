@@ -8,13 +8,25 @@ export const contactSubmissions = pgTable("contact_submissions", {
   name: text("name").notNull(),
   email: text("email").notNull(),
   message: text("message").notNull(),
+  /**
+   * The trainer whose link brought this visitor in, if any.
+   *
+   * Nullable on purpose: no code means the client is Tutto-sourced, which is
+   * the rule the trainer split turns on. It is the enquiry's attribution, not
+   * the booking's — bookings live in Cal.com — so a sale is still matched back
+   * to this row by email.
+   */
+  trainerCode: text("trainer_code"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+// `.pick()` drops anything not listed here silently, so a field added to the
+// form but forgotten below posts fine and vanishes.
 export const insertContactSubmissionSchema = createInsertSchema(contactSubmissions).pick({
   name: true,
   email: true,
   message: true,
+  trainerCode: true,
 });
 
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;

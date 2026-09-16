@@ -47,15 +47,39 @@ function detectLocale(): Locale {
   return navigator.languages?.some((l) => l.toLowerCase().startsWith("fr")) ? "fr" : "en";
 }
 
+/**
+ * First visit: show a UK reader sterling.
+ *
+ * The rate card is set in euros and EUR stays the default for everybody else,
+ * but a large part of the Pythia audience is English chambers, and quoting them
+ * in a currency they will not be invoiced in made the first number on the page
+ * something to convert rather than something to judge.
+ *
+ * Language and timezone rather than anything sharper: no geolocation, no IP
+ * lookup, nothing that needs consent. Either signal on its own is enough, since
+ * a UK visitor with their browser in another language still bills in sterling.
+ */
+function detectCurrency(): Currency {
+  if (typeof navigator === "undefined") return "EUR";
+  const speaksBritish = navigator.languages?.some((l) => l.toLowerCase() === "en-gb");
+  let inBritain = false;
+  try {
+    inBritain = Intl.DateTimeFormat().resolvedOptions().timeZone === "Europe/London";
+  } catch {
+    /* older engines: fall through to the language signal */
+  }
+  return speaksBritish || inBritain ? "GBP" : "EUR";
+}
+
 export function PreferencesProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(
     () => readStored<Locale>(LOCALE_KEY, ["en", "fr"]) ?? detectLocale(),
   );
   // EUR is the default: it is the currency the rate card is set in, and the
-  // market the site is being pointed at. A returning visitor's own choice still
-  // wins, since that is read first.
+  // market the site is being pointed at. A UK visitor gets sterling instead. A
+  // returning visitor's own choice still wins, since that is read first.
   const [currency, setCurrencyState] = useState<Currency>(
-    () => readStored<Currency>(CURRENCY_KEY, ["GBP", "EUR", "ZAR"]) ?? "EUR",
+    () => readStored<Currency>(CURRENCY_KEY, ["GBP", "EUR", "ZAR"]) ?? detectCurrency(),
   );
 
   // Keep <html lang> honest — it drives screen-reader pronunciation and hyphenation.

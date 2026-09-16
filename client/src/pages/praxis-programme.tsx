@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { usePageTr } from "@/lib/page-fr";
 import { PRAXIS_PROGRAMME_FR } from "@/lib/fr/praxis-programme";
 import { usePreferences } from "@/lib/preferences";
+import { useTrainerCode } from "@/lib/trainer-code";
 import { SITE_TITLE } from "@/lib/i18n";
-import { trainerEconomics, price } from "@/lib/pricing";
+import { praxisEconomics, trainerEconomics, perMonth } from "@/lib/pricing";
 import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -94,18 +95,28 @@ const faqs = [
 export default function PraxisProgramme() {
   const tr = usePageTr(PRAXIS_PROGRAMME_FR);
   const { locale, currency } = usePreferences();
-  const econ = trainerEconomics(currency, locale);
-  const toolsMonthly = `${price("toolsMonthly", currency, locale)}${locale === "fr" ? "/mois" : "/month"}`;
-  const referralNote =
-    locale === "fr"
-      ? `Parrainez une personne qui suit la formation et le tarif tombe à ${econ.courseWithOneReferral}. Parrainez-en deux et la formation ne vous coûte rien : nous vous remboursons intégralement.`
-      : `Refer one person who takes the course and the price drops to ${econ.courseWithOneReferral}. Refer two and the course costs you nothing — we refund it in full.`;
+  const econ = praxisEconomics(currency, locale);
+  const trainer = trainerEconomics(currency, locale);
+  const toolsMonthly = perMonth("toolsMonthly", currency, locale);
+  /**
+   * Figures go into the sentence at render, so the French stays in the
+   * dictionary rather than being branched on in the markup, and the currency
+   * toggle reaches copy that is otherwise a plain sentence.
+   */
+  const fill = (en: string, subs: Record<string, string>) =>
+    Object.entries(subs).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), tr(en));
   useEffect(() => {
     document.title = "Praxis - Learn to Build Your Own Tools with AI";
     return () => { document.title = SITE_TITLE; };
   }, []);
 
-  const [form, setForm] = useState({ name: "", email: "", task: "" });
+  const [form, setForm] = useState({ name: "", email: "", task: "", trainerCode: "" });
+  const trainerCode = useTrainerCode();
+  // Seed the field from the visit's attribution once it is known, but never
+  // overwrite something the visitor has typed themselves.
+  useEffect(() => {
+    if (trainerCode) setForm(f => (f.trainerCode ? f : { ...f, trainerCode }));
+  }, [trainerCode]);
   const [formState, setFormState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -120,6 +131,7 @@ export default function PraxisProgramme() {
           name: form.name,
           email: form.email,
           message: `Praxis Programme enquiry\n\nTask that eats their week: ${form.task}`,
+          trainerCode: form.trainerCode.trim() || null,
         }),
       });
       if (!res.ok) throw new Error();
@@ -326,40 +338,53 @@ export default function PraxisProgramme() {
           <div className="pp-cols-3">
             {[
               {
+                label: "Intro session",
+                price: econ.intro,
+                note: tr("Two hours. Credited in full against the full programme."),
+              },
+              {
                 label: "Per session",
-                price: econ.sessionStandard,
-                note: "One hour each. Pay as you go, or commit to the full programme.",
+                price: econ.session,
+                note: tr("One hour each. Pay as you go, or commit to the full programme."),
               },
               {
                 label: "Full programme",
-                price: econ.courseTuition,
-                note: "All eight sessions. The intro session counts as the first.",
-              },
-              {
-                label: "Refer a friend",
-                price: econ.courseWithOneReferral,
-                note: referralNote,
-                highlight: true,
+                price: econ.course,
+                note: fill("All eight sessions. {after} after your intro session credit.", {
+                  after: econ.courseAfterIntro,
+                }),
               },
             ].map((p) => (
               <div
                 key={tr(p.label)}
                 style={{
-                  border: p.highlight ? "1.5px solid #d97706" : "1px solid #d8d0c5",
+                  border: "1px solid #d8d0c5",
                   borderRadius: 10,
                   padding: "24px 20px",
-                  background: p.highlight ? "#fdf6ec" : "#faf8f5",
+                  background: "#faf8f5",
                   position: "relative",
                 }}
               >
-                {p.highlight && (
-                  <span style={{ ...CAPS, fontSize: 8, color: "#d97706", letterSpacing: "0.12em", position: "absolute", top: -9, left: 16, background: "#fdf6ec", padding: "0 6px" }}>{tr("Best value")}</span>
-                )}
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{tr(p.label)}</p>
                 <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-1px" }}>{p.price}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note === referralNote ? p.note : tr(p.note)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
               </div>
             ))}
+          </div>
+
+          {/* The referral used to be a fourth card with a "best value" badge on
+              it, which sold the discount harder than the programme. It is a
+              term of the programme, so it reads as one. */}
+          <div style={{ marginTop: 20, padding: "16px 20px", border: "1px solid #d8d0c5", borderRadius: 8, maxWidth: 560 }}>
+            <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>
+              {fill(
+                "Refer a friend: {credit} off your programme for every person you refer who enrols, up to {cap}.",
+                { credit: econ.referralCredit, cap: econ.referralCap },
+              )}
+            </p>
+            <p style={{ ...INTER, fontSize: 11, color: "#8a8276", lineHeight: 1.7, marginTop: 8 }}>
+              {tr("Referral credits apply to courses taught by participating trainers.")}
+            </p>
           </div>
           <div style={{ marginTop: 20, padding: "16px 20px", background: "#f0ece6", borderRadius: 8, maxWidth: 560 }}>
             <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>
@@ -451,6 +476,21 @@ export default function PraxisProgramme() {
                   onChange={e => setForm(f => ({ ...f, task: e.target.value }))}
                 />
               </div>
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>
+                  {tr("Trainer code")}{" "}
+                  <span style={{ textTransform: "none", letterSpacing: 0, color: "rgba(246,241,234,0.25)" }}>{tr("(optional)")}</span>
+                </label>
+                {/* Prefilled from ?trainer= on any page of this visit. Left
+                    editable so somebody handed a code on paper can type it. */}
+                <input
+                  className="pp-input"
+                  style={INPUT}
+                  placeholder={tr("If a trainer sent you here")}
+                  value={form.trainerCode}
+                  onChange={e => setForm(f => ({ ...f, trainerCode: e.target.value }))}
+                />
+              </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
                 <p style={{ ...INTER, fontSize: 11, color: "rgba(246,241,234,0.3)", maxWidth: 340 }}>{tr("No marketing. Your details are used only to prepare for and respond to your enquiry.")}</p>
                 <button
@@ -483,18 +523,18 @@ export default function PraxisProgramme() {
           <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "flex-start", justifyContent: "space-between" }}>
             <div style={{ maxWidth: 480 }}>
               <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>{tr("Become a Praxis trainer.")}<br />{tr("Teach it, and earn from it.")}</h3>
-              <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 0 }}>{tr("Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on every course you teach. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.")}</p>
+              <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 0 }}>{tr("Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.")}</p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
               <div style={{ border: "1px solid #f0d9b0", borderRadius: 8, padding: "12px 16px", background: "#fff8ee", minWidth: 160 }}>
                 <p style={{ ...CAPS, fontSize: 8, color: "#a8a092", marginBottom: 6 }}>{tr("Trainer track")}</p>
-                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#1a1a1a", letterSpacing: "-0.5px" }}>{econ.trainerTrack}</p>
+                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#1a1a1a", letterSpacing: "-0.5px" }}>{trainer.trainerTrack}</p>
                 <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>{tr("Four sessions")}</p>
               </div>
               <div style={{ border: "1px solid #f0d9b0", borderRadius: 8, padding: "12px 16px", background: "#fff8ee" }}>
                 <p style={{ ...CAPS, fontSize: 8, color: "#a8a092", marginBottom: 6 }}>{tr("You keep")}</p>
-                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#d97706", letterSpacing: "-0.5px" }}>80%</p>
-                <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>{tr("of every course you teach")}</p>
+                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#d97706", letterSpacing: "-0.5px" }}>{trainer.pctYouSourced}%</p>
+                <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>{tr("on the clients you bring in yourself")}</p>
               </div>
             </div>
           </div>

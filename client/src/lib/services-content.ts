@@ -29,6 +29,8 @@ export interface ServiceItem {
   priceKey?: PriceKey;
   /** Shown before the amount, e.g. "Starts at". */
   pricePrefix?: { en: string; fr: string };
+  /** Unit, for anything sold by the day or the month rather than as a total. */
+  priceSuffix?: { en: string; fr: string };
   /** For cards with no fixed amount, e.g. "Custom scoping". */
   priceLabel?: { en: string; fr: string };
   /** Extra terms shown under the price, e.g. the referral scheme. */
@@ -43,6 +45,8 @@ export interface ServiceItem {
 }
 
 export const STARTS_AT = { en: "Starts at", fr: "À partir de" };
+/** For the diagnostic, which is a rate and reads as a total without this. */
+export const PER_DAY = { en: "per day", fr: "par jour" };
 
 /** Resolve a service's text for the active locale, falling back to English. */
 export function localiseService(s: ServiceItem, locale: Locale) {
@@ -72,8 +76,9 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
       "Évaluation de la maturité des API",
       "Architecture du graphe de connaissances",
     ],
-    priceKey: "sprint",
+    priceKey: "diagnosticDay",
     pricePrefix: STARTS_AT,
+    priceSuffix: PER_DAY,
   },
   {
     /**
@@ -143,8 +148,8 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
      * toggle rather than being written into the copy.
      */
     note: {
-      en: "Every referral who signs up and pays takes 50% off your own fee. Two referrals and the training costs you nothing — we refund it in full.",
-      fr: "Chaque personne que vous parrainez, si elle s'inscrit et règle sa formation, réduit votre propre tarif de 50 %. Deux parrainages et la formation ne vous coûte rien : nous vous remboursons intégralement.",
+      en: "Every person you refer who enrols takes {credit} off your own fee, up to {cap}. Credits apply to courses taught by participating trainers.",
+      fr: "Chaque personne que vous parrainez et qui s'inscrit réduit votre propre tarif de {credit}, jusqu'à {cap}. Les crédits s'appliquent aux cours animés par des formateurs participants.",
     },
     priceKey: "enablementFrom",
     pricePrefix: STARTS_AT,
