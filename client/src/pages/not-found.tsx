@@ -1,21 +1,26 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Layout } from "@/components/layout/Layout";
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
+import { copy, useT } from "@/lib/i18n";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  const t = useT();
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+  return (
+    <Layout>
+      <div className="max-w-3xl mx-auto px-6 py-24 text-center">
+        <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-6">404</p>
+        <h1 className="text-4xl md:text-5xl font-serif font-bold mb-5">{t(copy.notFound.title)}</h1>
+        <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto">
+          {t(copy.notFound.body)}
+        </p>
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
+        >
+          {t(copy.nav.home)} <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
+    </Layout>
   );
 }

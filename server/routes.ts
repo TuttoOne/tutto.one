@@ -4,37 +4,20 @@ import path from "path";
 import { storage } from "./storage";
 import { insertContactSubmissionSchema, insertEmailLeadSchema } from "@shared/schema";
 import { z } from "zod";
-import Anthropic from "@anthropic-ai/sdk";
 import { Resend } from "resend";
 import { registerAdminRoutes } from "./admin-routes";
 
-const anthropic = new Anthropic({
-  apiKey: process.env.AI_INTEGRATIONS_ANTHROPIC_API_KEY,
-  baseURL: process.env.AI_INTEGRATIONS_ANTHROPIC_BASE_URL,
-});
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Constructed lazily. `new Resend(undefined)` throws, and at module scope that
+// crashes the whole server at import time in any environment without the key
+// set — including local development.
+let _resend: Resend | null = null;
+function getResend(): Resend | null {
+  if (!process.env.RESEND_API_KEY) return null;
+  if (!_resend) _resend = new Resend(process.env.RESEND_API_KEY);
+  return _resend;
+}
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
 const FROM_EMAIL = "Tutto <notifications@tutto.one>";
-
-const TUTTO_SYSTEM_PROMPT = `You are Daniel from Tutto, an AI consulting firm that helps businesses become machine-readable in an AI-first economy.
-
-Your rules:
-- NEVER exceed 500 characters in a reply. Keep it short and conversational.
-- Use simple, everyday English. No jargon. Explain things like you're talking to a smart friend who isn't technical.
-- Always be warm, helpful and direct.
-- After answering a question, gently nudge toward booking a 15-minute intro call. Something like "Want to chat about how this applies to your business?" or "I could walk you through this on a quick call."
-- You know about: AI readiness, machine-readable data, unified APIs, AI agents, document repositories, automation, data audits, knowledge mapping, and helping businesses prepare for AI.
-- If someone asks something outside your expertise, briefly acknowledge it and redirect to what Tutto can help with.
-- Never use bullet points or markdown formatting. Write in plain conversational sentences.
-- NEVER include any URLs or links in your replies. No website addresses, no booking links, nothing. The user interface has buttons for booking calls — just suggest they use those buttons instead of providing a link.
-- Tutto's services: Data Audit & Knowledge Mapping, AI Agent Architecture, Team Training & Change Management.
-
-Key concepts explained simply:
-- Machine-readable: Making your business info organized so AI tools can actually understand and use it, like turning a messy filing cabinet into a searchable database.
-- Unified API: One single doorway to access all your company's data instead of having it scattered across dozens of different tools.
-- AI Agent: A piece of software that can do tasks on its own, like a digital employee that follows rules you set up.
-- Document repository: A central place where all your company knowledge lives, organized and searchable, not buried in random Google Docs.`;
 
 // GitHub content cache
 const _ghCache = new Map<string, { data: string; exp: number }>();
@@ -77,6 +60,11 @@ function parseFrontmatter(text: string): { meta: Record<string, any>; content: s
 }
 
 async function sendNotificationEmail(subject: string, html: string) {
+  const resend = getResend();
+  if (!resend) {
+    console.warn(`[email] skipped "${subject}" — RESEND_API_KEY is not set`);
+    return;
+  }
   try {
     await resend.emails.send({
       from: FROM_EMAIL,
@@ -93,34 +81,6 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
-
-  app.post("/api/chat", async (req, res) => {
-    try {
-      const { messages } = req.body;
-      if (!messages || !Array.isArray(messages)) {
-        return res.status(400).json({ error: "Messages array required" });
-      }
-
-      const chatMessages = messages.map((m: { role: string; content: string }) => ({
-        role: m.role as "user" | "assistant",
-        content: m.content,
-      }));
-
-      const response = await anthropic.messages.create({
-        model: "claude-haiku-4-5",
-        max_tokens: 300,
-        system: TUTTO_SYSTEM_PROMPT,
-        messages: chatMessages,
-      });
-
-      const content = response.content[0];
-      const text = content.type === "text" ? content.text : "";
-      res.json({ reply: text });
-    } catch (error) {
-      console.error("Chat error:", error);
-      res.status(500).json({ error: "Failed to get response" });
-    }
-  });
 
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
@@ -141,6 +101,14 @@ export async function registerRoutes(
               <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px;">Message</p>
               <p style="color: #1a1a1a; font-size: 14px; line-height: 1.75; margin: 0; white-space: pre-line;">${data.message}</p>
             </div>
+            ${
+              data.trainerCode
+                ? `<div style="background: #fdf6ec; border-radius: 10px; padding: 16px 24px; border: 1px solid #f0d9b0; margin-top: 16px;">
+              <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 6px;">Trainer code</p>
+              <p style="color: #1a1a1a; font-size: 14px; font-weight: 600; margin: 0;">${data.trainerCode}</p>
+            </div>`
+                : ""
+            }
             <p style="color: #a8a092; font-size: 11px; margin: 20px 0 0; text-align: center;">Tutto · tutto.one</p>
           </div>
         `

@@ -1,0 +1,6 @@
+# The Atelier Vallon demo is a public shop window, so it is findable on purpose.
+# To keep it out of search results instead, replace this file with:
+#   User-agent: *
+#   Disallow: /
+User-agent: *
+Allow: /

@@ -1,5 +1,8 @@
 import { ExternalLink, ChevronLeft, ChevronRight, Plug } from "lucide-react";
 import { useState } from "react";
+import { usePreferences } from "@/lib/preferences";
+import { PORTFOLIO_FR } from "@/lib/portfolio-fr";
+import { copy, useT } from "@/lib/i18n";
 
 import evHome from "@assets/Screenshot_2026-03-17_at_14.14.24_1773753293404.png";
 import evEntities from "@assets/Screenshot_2026-03-17_at_14.13.51_1773753293404.png";
@@ -46,10 +49,10 @@ export const portfolioEntries: PortfolioEntry[] = [
   {
     type: "project",
     name: "Pythia",
-    tagline: "On-Premise AI · Legal Document Intelligence",
+    tagline: "On-Premise AI · Document Intelligence",
     badge: "Client Engagement",
     description:
-      "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design.",
+      "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design. The same applies well beyond litigation: any legal, compliance or commercially sensitive material that has to stay on-premise, or that cannot be sent to a cloud model for AI processing.",
     url: "/pythia",
     urlLabel: "About Pythia",
     capabilities: [
@@ -59,7 +62,7 @@ export const portfolioEntries: PortfolioEntry[] = [
       },
       {
         title: "Semantic Search & RAG Q&A",
-        detail: "Ask questions in plain English. Every answer cites its source document and page number - no hallucination from the AI's own knowledge.",
+        detail: "Ask questions in plain language. Every answer cites its source document and page number - no hallucination from the AI's own knowledge.",
       },
       {
         title: "Interactive Timeline",
@@ -92,8 +95,8 @@ export const portfolioEntries: PortfolioEntry[] = [
     badge: "Client Engagement",
     description:
       "We built an MCP (Model Context Protocol) bridge that gives Claude direct access to a client's SharePoint environment and Power Automate flows. Instead of copy-pasting data into a chat, the team can ask AI to query, create, and update SharePoint records - and diagnose broken automations - through natural conversation.",
-    url: "https://modelcontextprotocol.io",
-    urlLabel: "What is MCP?",
+    url: "/sharepoint",
+    urlLabel: "About the SharePoint Bridge",
     capabilities: [
       {
         title: "SharePoint Lists & Structure",
@@ -124,6 +127,44 @@ export const portfolioEntries: PortfolioEntry[] = [
       {
         user: "Show me the last 5 failed Power Automate runs on 'Invoice Sync'",
         assistant: "Found 5 failed runs. Most recent error: 'Connection timeout to Xero API' - occurred 3 times in the last 24 hours.",
+      },
+    ],
+  },
+  {
+    type: "project",
+    name: "GTM",
+    tagline: "Sales Outreach Engine · On-Premise",
+    badge: "Client Engagement",
+    description:
+      "A custom system that runs B2B prospecting end to end. It researches prospects, writes personalised emails in the sender's voice, schedules and sends safely, and keeps every account moving - with a human reviewing rather than retyping. It runs on an NVIDIA DGX Spark, not rented cloud.",
+    url: "/gtm-orchestrator",
+    urlLabel: "About GTM",
+    capabilities: [
+      {
+        title: "Researches every prospect",
+        detail: "Profiles each company and contact, then writes a structured dossier with a personalisation hook. 6,675 prospects profiled across 9 countries.",
+      },
+      {
+        title: "Writes in the sender's voice",
+        detail: "Automated editorial gates check mechanics, facts and voice-match, and strip the tells that get cold email deleted. Anything that fails is held back.",
+      },
+      {
+        title: "Sends safely and on schedule",
+        detail: "Idempotency keys and fail-closed guards mean nothing double-sends or loops. Every send is logged and auditable.",
+      },
+      {
+        title: "Local by default",
+        detail: "Open-weight models on-device do the bulk of the work. A frontier model is called only across a single auditable boundary, with identifying detail held back.",
+      },
+    ],
+    conversations: [
+      {
+        user: "Which accounts have gone quiet in the last three weeks?",
+        assistant: "12 accounts with no inbound since 20 Jul. Highest value: SSAB (licence renewal, Q3), Eidsiva (pilot scoped 2 Jul). Follow-ups drafted for review.",
+      },
+      {
+        user: "Draft the follow-up for SSAB in my voice",
+        assistant: "Draft ready. Passed mechanics, fact-check and voice-match. Held one claim for review: renewal date cited from CRM, last updated 14 Jul.",
       },
     ],
   },
@@ -160,6 +201,7 @@ function ImageCarousel({
   productName: string;
   cardClass: string;
 }) {
+  const t = useT();
   const [current, setCurrent] = useState(0);
   const prev = () => setCurrent((c) => (c === 0 ? screenshots.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === screenshots.length - 1 ? 0 : c + 1));
@@ -171,13 +213,15 @@ function ImageCarousel({
         <img
           src={screenshots[current]}
           alt={`${productName} - ${labels[current]}`}
+          loading="lazy"
+          decoding="async"
           className="w-full aspect-[16/10] object-cover object-top"
           data-testid={`img-screenshot-${slug}-${current}`}
         />
         <button
           onClick={prev}
           className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border/60 rounded-full p-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-background"
-          aria-label="Previous screenshot"
+          aria-label={t(copy.portfolio.prevShot)}
           data-testid={`button-prev-${slug}`}
         >
           <ChevronLeft className="w-4 h-4" />
@@ -185,7 +229,7 @@ function ImageCarousel({
         <button
           onClick={next}
           className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border/60 rounded-full p-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-background"
-          aria-label="Next screenshot"
+          aria-label={t(copy.portfolio.nextShot)}
           data-testid={`button-next-${slug}`}
         >
           <ChevronRight className="w-4 h-4" />
@@ -212,9 +256,13 @@ function ImageCarousel({
 }
 
 function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass: string }) {
+  const t = useT();
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3">
+      {/* Stacks on phones: two columns left each card about 150px wide, which
+          broke the prose into two or three words a line — worse in French,
+          which runs longer than the English. */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {entry.capabilities.map((cap) => (
           <div
             key={cap.title}
@@ -222,7 +270,7 @@ function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass:
             data-testid={`card-capability-${cap.title.toLowerCase().replace(/\s+/g, "-")}`}
           >
             <p className="text-sm font-semibold text-foreground mb-1">{cap.title}</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">{cap.detail}</p>
+            <p className="text-sm sm:text-xs text-muted-foreground leading-relaxed">{cap.detail}</p>
           </div>
         ))}
       </div>
@@ -231,19 +279,19 @@ function ProjectShowcase({ entry, cardClass }: { entry: ProjectEntry; cardClass:
           <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
           <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
-          <span className="ml-2 text-xs font-mono text-muted-foreground">Example conversations</span>
+          <span className="ml-2 text-xs font-mono text-muted-foreground">{t(copy.portfolio.exampleConversations)}</span>
         </div>
         <div className="p-4 space-y-4">
           {entry.conversations.map((conv, i) => (
             <div key={i} className="space-y-1.5">
               <div className="flex gap-2 items-start">
-                <span className="text-xs font-mono text-muted-foreground shrink-0 mt-0.5">You</span>
+                <span className="text-xs font-mono text-muted-foreground shrink-0 mt-0.5">{t(copy.portfolio.speakerYou)}</span>
                 <p className="text-xs text-foreground bg-primary/8 rounded-lg px-3 py-2 leading-relaxed">
                   {conv.user}
                 </p>
               </div>
               <div className="flex gap-2 items-start">
-                <span className="text-xs font-mono text-primary shrink-0 mt-0.5">AI</span>
+                <span className="text-xs font-mono text-primary shrink-0 mt-0.5">{t(copy.portfolio.speakerAi)}</span>
                 <p className="text-xs text-muted-foreground bg-background/60 rounded-lg px-3 py-2 leading-relaxed">
                   {conv.assistant}
                 </p>
@@ -271,7 +319,18 @@ export function PortfolioDisplay({
   entries?: PortfolioEntry[];
   overrides?: PortfolioTextOverride[];
 }) {
-  const mergedEntries = overrides
+  const { locale } = usePreferences();
+  const t = useT();
+
+  // Admin overrides FIRST, then the French overlay on top.
+  //
+  // The order matters and the obvious one is wrong. Overrides are stored as a
+  // single English string per field, so applying them last silently replaced
+  // every translated tagline and description with English — while leaving the
+  // fields the override does not carry (capabilities, screenshot captions) in
+  // French, which is how the page ended up half-translated. An override edits
+  // the English source; the translation is applied to whatever that source is.
+  const overridden = overrides
     ? entries.map((entry) => {
         const slug = entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-");
         const ov = overrides.find((o) => o.id === slug);
@@ -281,6 +340,42 @@ export function PortfolioDisplay({
         return { ...entry, ...Object.fromEntries(Object.entries(rest).filter(([, v]) => v !== undefined)) };
       })
     : entries;
+
+  const mergedEntries =
+    locale === "fr"
+      ? overridden.map((entry): PortfolioEntry => {
+          // Keyed on the original name, so renaming an entry in the admin
+          // editor does not silently drop its translation.
+          const original = entries.find(
+            (e) =>
+              e.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-") ===
+              entry.name.toLowerCase().replace(/[\s&-]+/g, "-").replace(/-+/g, "-"),
+          );
+          const fr = PORTFOLIO_FR[entry.name] ?? (original ? PORTFOLIO_FR[original.name] : undefined);
+          if (!fr) return entry;
+          const common = {
+            tagline: fr.tagline ?? entry.tagline,
+            description: fr.description ?? entry.description,
+          };
+          // Only project entries carry a badge, capabilities or a link label.
+          return entry.type === "project"
+            ? {
+                ...entry,
+                ...common,
+                badge: fr.badge ?? entry.badge,
+                urlLabel: fr.urlLabel ?? entry.urlLabel,
+                capabilities: entry.capabilities.map((c) => fr.capabilities?.[c.title] ?? c),
+                conversations: entry.conversations.map(
+                  (c) => fr.conversations?.[c.user] ?? c,
+                ),
+              }
+            : {
+                ...entry,
+                ...common,
+                screenshotLabels: fr.screenshotLabels ?? entry.screenshotLabels,
+              };
+        })
+      : overridden;
 
   return (
     <div className="space-y-8">
@@ -332,7 +427,9 @@ export function PortfolioDisplay({
                     className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4 transition-colors"
                     data-testid={`link-visit-${slug}`}
                   >
-                    {entry.type === "project" && entry.urlLabel ? entry.urlLabel : `Visit ${entry.name}`}
+                    {entry.type === "project" && entry.urlLabel
+                      ? entry.urlLabel
+                      : `${t(copy.portfolio.visit)} ${entry.name}`}
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}

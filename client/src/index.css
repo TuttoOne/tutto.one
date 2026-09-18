@@ -99,6 +99,29 @@
   }
 }
 
+/* Print: strip site chrome so document pages (e.g. /fiche-capacites) render as a clean sheet */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  header,
+  footer {
+    display: none !important;
+  }
+  main {
+    padding-top: 0 !important;
+  }
+}
+
 /* Custom Scrollbar for Chat */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -106,4 +129,70 @@
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+/* The /usecase player. Progress bars and printed lines animate from inline
+   durations, so they live here rather than as Tailwind utilities; remounting
+   the element (a changing React key) is what restarts a bar. */
+@keyframes usecase-fill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes usecase-note-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
+.usecase-fill {
+  width: 0;
+  animation-name: usecase-fill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.usecase-note {
+  animation: usecase-note-in 0.34s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .usecase-fill {
+    width: 100%;
+    animation: none;
+  }
+  .usecase-note {
+    animation: none;
+  }
+}
+
+/* The client logo strip on the landing page. The track carries the list twice
+   and travels exactly half its width, so the reset to zero lands the second
+   copy where the first began and no seam is visible. */
+@keyframes logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-marquee-track {
+  animation: logo-marquee var(--logo-marquee-seconds, 46s) linear infinite;
+}
+
+.logo-marquee:hover .logo-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Stopping the animation alone would hide every logo that happens to be off
+     the right-hand edge, so the strip becomes something the reader can push
+     along themselves instead. */
+  .logo-marquee-track {
+    animation: none;
+  }
+  .logo-marquee {
+    overflow-x: auto;
+  }
 }

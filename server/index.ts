@@ -1,9 +1,13 @@
 import express, { type Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 import { registerRoutes } from "./routes";
+import { registerMarkupRoutes } from "./markup-routes";
+import { registerCopyRoutes } from "./copy-routes";
 import { serveStatic } from "./static";
+import { guardPythiaDemo } from "./pythia-demo";
 import { createServer } from "http";
 import { seedBlogPostsIfEmpty } from "./seed-blog";
+import { clearStalePortfolioOverride } from "./cleanup-portfolio-override";
 
 const app = express();
 const httpServer = createServer(app);
@@ -55,7 +59,11 @@ app.use((req, res, next) => {
       // TOTP secrets, QR codes, or temporary tokens
       const isSensitiveAdminRoute =
         path.startsWith("/api/admin/setup") || path.startsWith("/api/admin/login");
-      if (capturedJsonResponse && !isSensitiveAdminRoute) {
+      // Markup notes carry every point of every pen stroke — hundreds of
+      // coordinate pairs per annotation. Logging the body buries the rest of
+      // the log in numbers and is worth nothing to read.
+      const isNoisyRoute = path.startsWith("/api/markup");
+      if (capturedJsonResponse && !isSensitiveAdminRoute && !isNoisyRoute) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
 
@@ -74,7 +82,23 @@ app.use((req, res, next) => {
     console.error("Failed to seed blog posts:", err);
   }
 
+  // One-off: drop a portfolio override that is just a saved copy of the
+  // defaults, so edits in code stop being silently masked. No-op once done.
+  try {
+    await clearStalePortfolioOverride();
+  } catch (err) {
+    console.error("Failed to check the portfolio override:", err);
+  }
+
   await registerRoutes(httpServer, app);
+
+  // Development only, and a no-op in production: lets the markup overlay save a
+  // page's annotations into .design/markup so an agent can read them.
+  registerMarkupRoutes(app);
+
+  // Development only, and a no-op in production: lets the copy overlay write a
+  // page's reworded sentences back into its source file in client/src/lib.
+  registerCopyRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
@@ -89,12 +113,31 @@ app.use((req, res, next) => {
     return res.status(status).json({ message });
   });
 
+  // The Atelier Vallon demo carries its own, much stricter headers. Mounted before the static
+  // handler and before Vite so the headers are set whichever one ends up serving the files.
+  guardPythiaDemo(app);
+
+
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (process.env.NODE_ENV === "production") {
     serveStatic(app);
   } else {
+    // The course library is a folder of static pages, not a React route. In production
+    // express.static resolves /courses to its index.html; Vite's catch-all does not, and
+    // hands back the SPA shell instead. Serve it explicitly in development so the URL the
+    // blog posts link to behaves the same way locally.
+    const path = await import("path");
+    const coursesIndex = path.resolve(
+      process.cwd(),
+      "client",
+      "public",
+      "courses",
+      "index.html",
+    );
+    app.get(["/courses", "/courses/"], (_req, res) => res.sendFile(coursesIndex));
+
     const { setupVite } = await import("./vite");
     await setupVite(httpServer, app);
   }

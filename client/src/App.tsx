@@ -1,17 +1,42 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route, Redirect, useLocation } from "wouter";
 import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { PreferencesProvider } from "@/lib/preferences";
 import NotFound from "@/pages/not-found";
+
+// Primary structure
+// The broadside at `/`. It is the site's front door and, for now, its only
+// landing page; the per-offer pages will branch off it.
+import Landing from "@/pages/landing";
+// The long argument, which was the home page until the broadside took `/`.
+import Applied from "@/pages/applied";
+import About from "@/pages/about";
+import AboutMe from "@/pages/about-me";
+import Services from "@/pages/services";
+import Portfolio from "@/pages/portfolio";
+import UseCase from "@/pages/usecase";
+import Praxis from "@/pages/praxis";
+import PraxisProgramme from "@/pages/praxis-programme";
+import Calendar from "@/pages/calendar";
+import Pythia from "@/pages/pythia";
+import Sovereign from "@/pages/sovereign";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
-import Praxis from "@/pages/praxis";
-import Pythia from "@/pages/pythia";
-import About from "@/pages/about";
-import SecondBrain from "@/pages/second-brain";
-import LegalRag from "@/pages/legalrag";
+import Contact from "@/pages/contact";
+import Sharepoint from "@/pages/sharepoint";
+import FicheCapacites from "@/pages/fiche-capacites";
+
+// Unlisted: reachable by direct link, deliberately absent from the nav so any
+// URL already shared with a client keeps working.
+// The two decision-first pages. Everything else on the site is depth-first,
+// which is right for a reader who already wants to go deeper; these are for a
+// reader deciding whether to book, and they are pasted into an email rather
+// than found through the bar.
+import Article4 from "@/pages/article4";
+import Souverainete from "@/pages/souverainete";
 import GtmOrchestrator from "@/pages/gtm-orchestrator";
 import BecomeATrainer from "@/pages/become-a-trainer";
 import PraxisLearn from "@/pages/praxis-learn";
@@ -33,15 +58,48 @@ function Router() {
     <>
       <ScrollToTop />
       <Switch>
-        <Route path="/" component={About} />
-        <Route path="/blog" component={Blog} />
-        <Route path="/praxis" component={Praxis} />
-        <Route path="/praxis-programme" component={Praxis} />
-        <Route path="/blog/:slug" component={BlogPost} />
-        <Route path="/pythia" component={Pythia} />
+        {/* Primary structure */}
+        <Route path="/" component={Landing} />
+        {/* The long-form explainer's own route. The landing page's foot links
+           here as "the long version of this argument". */}
+        <Route path="/applied" component={Applied} />
         <Route path="/about" component={About} />
-        <Route path="/second-brain" component={SecondBrain} />
-        <Route path="/legalrag" component={LegalRag} />
+        <Route path="/about/me" component={AboutMe} />
+        <Route path="/services" component={Services} />
+        <Route path="/portfolio" component={Portfolio} />
+        {/* The worked examples were a folder of static files served at
+           /usecase/ before they became a page, so both spellings are routed:
+           the trailing slash is the URL already in the wild, and express.static
+           still redirects /usecase to it while the demo's files sit under
+           public/usecase/. */}
+        <Route path="/usecase" component={UseCase} />
+        <Route path="/usecase/" component={UseCase} />
+        <Route path="/praxis" component={Praxis} />
+        <Route path="/calendar" component={Calendar} />
+        {/* The general front door to Pythia, and what the nav now points at.
+           /pythia keeps its own URL and its legal copy: the two pages are
+           the same product written for two different readers. */}
+        <Route path="/sovereign" component={Sovereign} />
+        <Route path="/pythia" component={Pythia} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/blog/:slug" component={BlogPost} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/sharepoint" component={Sharepoint} />
+        <Route path="/fiche-capacites" component={FicheCapacites} />
+
+        {/* Unlisted */}
+        {/* Both of these were the explainer's address at some point, and it now
+            lives at /applied. The URLs stay alive so anything already shared
+            still lands on the argument rather than on the front door. */}
+        <Route path="/how-ai-works-here">{() => <Redirect to="/applied" />}</Route>
+        {/* The broadside was built and shared at /next before it took `/`. */}
+        <Route path="/next">{() => <Redirect to="/" />}</Route>
+        {/* "How we work" was briefly its own page; it is now the top of
+           /services, so send anything that points here down to it. */}
+        <Route path="/ways-in">{() => <Redirect to="/services" />}</Route>
+        <Route path="/praxis-programme" component={PraxisProgramme} />
+        <Route path="/article-4" component={Article4} />
+        <Route path="/souverainete" component={Souverainete} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
         <Route path="/become-a-trainer" component={BecomeATrainer} />
         <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
@@ -49,6 +107,7 @@ function Router() {
         <Route path="/admin" component={AdminDashboard} />
         <Route path="/admin/login" component={AdminLogin} />
         <Route path="/admin/setup" component={AdminSetup} />
+
         <Route component={NotFound} />
       </Switch>
     </>
@@ -58,11 +117,13 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WebmcpProvider />
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <PreferencesProvider>
+        <TooltipProvider>
+          <WebmcpProvider />
+          <Toaster />
+          <Router />
+          </TooltipProvider>
+      </PreferencesProvider>
     </QueryClientProvider>
   );
 }

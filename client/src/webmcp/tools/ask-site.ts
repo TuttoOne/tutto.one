@@ -1,5 +1,5 @@
 import { defineTool } from "@nekuda/webmcp-sdk";
-import { SITE_OFFERINGS } from "../site-index";
+import { SITE_PAGES } from "../site-index";
 
 type AskSiteInput = {
   query: string;
@@ -70,7 +70,7 @@ export const askSite = defineTool({
   name: "ask_site",
   title: "Search Tutto's site content",
   description:
-    "Search Tutto's own site content — published blog posts and the service/programme pages — and return the matching passages with their source paths. Use this to answer any question about what Tutto does, how Praxis works, Pythia, LegalRAG, the GTM Orchestrator, the second-brain approach, or anything Daniel has written. Returns an array of matches, each with a title, a relevant excerpt and the page path; returns an empty list plus a note when nothing on the site matches.",
+    "Search Tutto's own site content — published blog posts and the service, programme and product pages — and return the matching passages with their source paths. Use this to answer any question about what Tutto does, how Praxis works, Pythia and sovereign deployment, the Applied AI evenings, the GTM outreach engine, or anything published on the blog. Returns an array of matches, each with a title, a relevant excerpt and the page path; returns an empty list plus a note when nothing on the site matches.",
   inputSchema: {
     type: "object",
     properties: {
@@ -117,7 +117,7 @@ export const askSite = defineTool({
       }
     }
 
-    for (const page of SITE_OFFERINGS) {
+    for (const page of SITE_PAGES) {
       const rank = score(`${page.name} ${page.summary} ${page.detail}`, page.name, tokens);
       if (rank > 0) {
         scored.push({

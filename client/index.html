@@ -4,18 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-    <meta property="og:title" content="Tutto | AI Consulting" />
-    <meta property="og:description" content="Helping businesses become machine-readable in an AI-first economy." />
+    <title>Tutto | AI that never leaves the building.</title>
+    <meta name="description" content="For work that cannot go in the cloud. We build AI that stands in your own building, reads your files where they already sit, and cites the page every answer came from. You own the hardware. Nothing is uploaded." />
+
+    <meta property="og:title" content="Tutto | Right tech. Wrong setup." />
+    <meta property="og:description" content="Most organisations have the right AI and the wrong setup. We build the systems that put it inside your work — on your own machines, on your own data." />
     <meta property="og:type" content="website" />
+    <!-- metaImagesPlugin rewrites these to an absolute URL at build time; it only
+         replaces tags that already exist, so they have to be declared here. -->
+    <meta property="og:image" content="/opengraph.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@replit" />
-    <meta name="twitter:title" content="Tutto | AI Consulting" />
-    <meta name="twitter:description" content="Helping businesses become machine-readable in an AI-first economy." />
+    <meta name="twitter:image" content="/opengraph.jpg" />
+    <meta name="twitter:title" content="Tutto | Right tech. Wrong setup." />
+    <meta name="twitter:description" content="Most organisations have the right AI and the wrong setup. We build the systems that put it inside your work — on your own machines, on your own data." />
     
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+    <!-- Inter for everything set in sans, Roboto for everything the theme calls
+         serif (`--font-serif`), which is what `h1`-`h6` resolve to. These are
+         the two families the brand uses; the front door briefly set its
+         headings in Source Serif 4 and that has been taken back out. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>

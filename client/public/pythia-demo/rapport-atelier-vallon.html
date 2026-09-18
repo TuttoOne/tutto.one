@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'>
+<title>Atelier Vallon — état du système documentaire</title>
+<style>
+@page {
+  size: A4; margin: 20mm 18mm 18mm 18mm;
+  @bottom-left { content: "Atelier Vallon — entreprise fictive"; font-size: 7pt; color: #888; }
+  @bottom-right { content: "page " counter(page) " / " counter(pages); font-size: 7pt; color: #888; }
+}
+body { font-family: "DejaVu Sans", sans-serif; font-size: 9.5pt; line-height: 1.45; color: #16181d; }
+h1 { font-size: 19pt; margin: 0 0 1mm 0; letter-spacing: -0.2pt; }
+h1 + .sub { font-size: 10pt; color: #555; margin-bottom: 8mm; }
+h2 { font-size: 12pt; margin: 9mm 0 3mm 0; padding-bottom: 1.5mm; border-bottom: 1pt solid #16181d;
+     page-break-after: avoid; }
+h3 { font-size: 10pt; margin: 6mm 0 2mm 0; page-break-after: avoid; }
+p { margin: 0 0 3mm 0; }
+.lead { font-size: 10.5pt; }
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 5mm 0; font-size: 8.5pt;
+        page-break-inside: avoid; }
+th, td { border-bottom: 0.5pt solid #ccc; padding: 1.8mm 2mm; text-align: left; vertical-align: top; }
+th { border-bottom: 1pt solid #16181d; font-size: 7.5pt; text-transform: uppercase;
+     letter-spacing: 0.4pt; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.finding { border-left: 2.5pt solid #7a1420; padding: 2mm 0 2mm 4mm; margin: 4mm 0 6mm 0;
+           page-break-inside: avoid; }
+.finding .clause { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.5pt; color: #7a1420; }
+.finding h3 { margin: 1mm 0 2mm 0; }
+.finding .cites { font-size: 8pt; color: #555; margin-top: 2mm; }
+.finding .cites li { margin-bottom: 0.6mm; }
+.box { background: #f4f4f5; border: 0.5pt solid #d4d4d8; padding: 3mm 4mm; margin: 4mm 0;
+       page-break-inside: avoid; }
+.box.warn { background: #fdf6f6; border-color: #d9b3b3; }
+.kpi { display: flex; gap: 4mm; margin: 4mm 0 6mm 0; }
+.kpi div { flex: 1; border: 0.5pt solid #d4d4d8; padding: 2.5mm 3mm; }
+.kpi .n { font-size: 17pt; font-weight: bold; display: block; line-height: 1.1; }
+.kpi .l { font-size: 7.5pt; color: #555; text-transform: uppercase; letter-spacing: 0.3pt; }
+ul, ol { margin: 0 0 3mm 0; padding-left: 6mm; }
+li { margin-bottom: 1.2mm; }
+.small { font-size: 8pt; color: #555; }
+.flush { margin: 0; }
+.pagebreak { page-break-before: always; }
+.status-partial { color: #7a1420; font-weight: bold; }
+.status-absent { color: #8a5a00; font-weight: bold; }
+.status-evidenced { color: #1c5c2e; }
+.status-non_evalue { color: #666; }
+</style></head><body>
+<h1>État du système documentaire</h1>
+<div class='sub'>Atelier Vallon — <strong>entreprise fictive</strong> — EN 9100:2018 — 10 août 2026</div>
+<h2>1. Objet et méthode</h2>
+<p class='lead'>Ce rapport recense les documents du système qualité de l'atelier, les rapproche des chapitres du référentiel, et indique pour chacun ce que les pièces établissent.</p>
+<p><strong>Méthode.</strong> Chaque fichier du fonds a été ouvert, son type reconnu à partir de son contenu, sa date relevée, et son état de lisibilité mesuré. Les rapprochements entre documents (échéances d'étalonnage contre dates de contrôle, attestations de formation contre visas d'opération, références de procédures contre documents présents) sont calculés, non appréciés. Chaque constat renvoie à un document et à une page.</p>
+<div class='box'><p class='flush'><strong>Ce rapport constate des éléments de preuve documentaire. La décision de conformité appartient à l'entreprise et à son organisme de certification.</strong><br>L'absence de constat ne vaut pas conformité.</p></div>
+<p class='small'>Structure et reformulation propres à Tutto. Le texte du référentiel n'est pas reproduit.</p>
+<h2>2. Le fonds documentaire</h2>
+<div class='kpi'>
+<div><span class='n'>301</span><span class='l'>documents</span></div>
+<div><span class='n'>315</span><span class='l'>pages</span></div>
+<div><span class='n'>40</span><span class='l'>illisibles</span></div>
+<div><span class='n'>9</span><span class='l'>constats</span></div>
+</div>
+<table><thead><tr><th>Classe de document</th><th class='num'>Nombre</th><th>Répartition par année</th></tr></thead><tbody>
+<tr><td>Rapport d'audit interne</td><td class='num'>4</td><td class='small'>2023 : 1, 2024 : 1, 2025 : 2</td></tr>
+<tr><td>Certificat d'étalonnage</td><td class='num'>15</td><td class='small'>2024 : 5, 2025 : 3, 2026 : 7</td></tr>
+<tr><td>Certificat matière ou CoC</td><td class='num'>46</td><td class='small'>2023 : 7, 2024 : 9, 2025 : 19, 2026 : 11</td></tr>
+<tr><td>Évaluation fournisseur</td><td class='num'>10</td><td class='small'>2022 : 4, 2023 : 5, 2024 : 1</td></tr>
+<tr><td>Fiche suiveuse</td><td class='num'>12</td><td class='small'>2023 : 2, 2025 : 4, 2026 : 6</td></tr>
+<tr><td>Attestation de formation</td><td class='num'>25</td><td class='small'>2023 : 17, 2024 : 2, 2025 : 6</td></tr>
+<tr><td>Manuel qualité</td><td class='num'>1</td><td class='small'>2023 : 1</td></tr>
+<tr><td>Fiche de non-conformité</td><td class='num'>20</td><td class='small'>2023 : 5, 2024 : 6, 2025 : 4, 2026 : 5</td></tr>
+<tr><td>Procédure</td><td class='num'>12</td><td class='small'>2023 : 12</td></tr>
+<tr><td>Rapport de contrôle</td><td class='num'>114</td><td class='small'>2023 : 31, 2024 : 35, 2025 : 27, 2026 : 21</td></tr>
+<tr><td>Revue de direction</td><td class='num'>2</td><td class='small'>2023 : 1, 2025 : 1</td></tr>
+</tbody></table>
+<h2>3. Documents qui n'ont pu être lus</h2>
+<div class='box warn'><p class='flush'><strong>40 documents sur 301 (13%) n'ont pu être lus.</strong> Leur contenu ne peut être versé au dossier de preuve, quel qu'il soit. Le périmètre réellement examiné est réduit d'autant, et ce rapport le dit plutôt que de les écarter en silence.</p></div>
+<table><thead><tr><th>Motif</th><th class='num'>Documents</th></tr></thead><tbody><tr><td>aucun contenu extractible</td><td class='num'>20</td></tr><tr><td>trop peu de texte pour être exploitable</td><td class='num'>18</td></tr><tr><td>fichier protégé par mot de passe</td><td class='num'>1</td></tr><tr><td>caractères extraits sans structure de langue</td><td class='num'>1</td></tr></tbody></table>
+<p>Ce point est un constat en soi au titre de la maîtrise des enregistrements : un enregistrement doit rester lisible pendant toute sa durée de conservation.</p>
+<h2 class='pagebreak'>4. Constats</h2>
+<div class='finding'>
+<div class='clause'>Chapitre 7.5.3.2 — constat majeur</div>
+<h3>Documents illisibles</h3>
+<p>40 documents sur 301 n'ont pu être lus : 20 aucun contenu extractible, 18 trop peu de texte pour être exploitable, 1 fichier protégé par mot de passe, 1 caractères extraits sans structure de langue. Leur contenu ne peut être versé au dossier de preuve.</p>
+<p><strong>Ce qui manque.</strong> Ces documents ne peuvent servir de preuve pour aucun chapitre. Le périmètre réellement examiné est réduit d'autant.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>CoC-2024-3010.pdf, page 1 <em>(renvoi à la page)</em></li><li>Copie de MC-2025-3022.pdf, page 1 <em>(renvoi à la page)</em></li><li>Copie de MC-2025-3059.pdf, page 1 <em>(renvoi à la page)</em></li><li>IMG_20240228_119195.jpg, page 1 <em>(renvoi à la page)</em></li><li>MC-2023-3002.pdf, page 1 <em>(renvoi à la page)</em></li><li>MC-2023-3012.pdf, page 1 <em>(renvoi à la page)</em></li><li>MC-2023-3027.pdf, page 1 <em>(renvoi à la page)</em></li><li>MC-2023-3029.pdf, page 1 <em>(renvoi à la page)</em></li><li class='small'>et 32 autres documents concernés, listés en annexe</li></ul></div>
+</div>
+<div class='finding'>
+<div class='clause'>Chapitre 7.1.5.2 — constat</div>
+<h3>Contrôles réalisés avec un instrument hors validité d'étalonnage</h3>
+<p>L'instrument INS-07 (n° de série CO-010-8871) porte une échéance d'étalonnage au 30/09/2025. 3 rapports de contrôle postérieurs à cette date le citent comme moyen de contrôle utilisé.</p>
+<p><strong>Ce qui manque.</strong> Rien n'établit la validité du raccordement métrologique au moment de ces contrôles, ni le statut des pièces libérées sur cette base.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>ETA-2024-6004.pdf, page 1 — « 30/09/2025 »</li><li>Copie de RC-2026-5073.pdf, page 1 — « RC-2026-5073 »</li><li>RC-2026-5007.pdf, page 1 — « RC-2026-5007 »</li><li>Copie de RC-2026-5058.pdf, page 1 — « RC-2026-5058 »</li></ul></div>
+</div>
+<div class='finding'>
+<div class='clause'>Chapitre 7.1.5.2 — constat</div>
+<h3>Contrôles réalisés avec un instrument hors validité d'étalonnage</h3>
+<p>L'instrument INS-03 (n° de série MI-025-3391) porte une échéance d'étalonnage au 30/09/2025. 4 rapports de contrôle postérieurs à cette date le citent comme moyen de contrôle utilisé.</p>
+<p><strong>Ce qui manque.</strong> Rien n'établit la validité du raccordement métrologique au moment de ces contrôles, ni le statut des pièces libérées sur cette base.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>fiche eta 2024 1887.pdf, page 1 — « 30/09/2025 »</li><li>RC-2025-5102 (1).pdf, page 1 — « RC-2025-5102 »</li><li>dossier rc 2025 5096.pdf, page 1 — « RC-2025-5096 »</li><li>RC-2026-5054 (2).pdf, page 1 — « RC-2026-5054 »</li><li>SKM_C250_20260423_005.pdf, page 1 — « RC-2026-5024 »</li></ul></div>
+</div>
+<div class='finding'>
+<div class='clause'>Chapitre 7.1.5.2 — constat</div>
+<h3>Contrôles réalisés avec un instrument hors validité d'étalonnage</h3>
+<p>L'instrument INS-11 (n° de série TL-008-4415) porte une échéance d'étalonnage au 30/09/2025. 2 rapports de contrôle postérieurs à cette date le citent comme moyen de contrôle utilisé.</p>
+<p><strong>Ce qui manque.</strong> Rien n'établit la validité du raccordement métrologique au moment de ces contrôles, ni le statut des pièces libérées sur cette base.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>SKM_C284_20240930_008.pdf, page 1 — « 30/09/2025 »</li><li>RC-2025-5038.pdf, page 1 — « RC-2025-5038 »</li><li>Copie de RC-2026-5119.pdf, page 1 — « RC-2026-5119 »</li></ul></div>
+</div>
+<div class='finding'>
+<div class='clause'>Chapitre 7.2 — constat</div>
+<h3>Opérateur sans attestation de formation au procédé qu'il réalise</h3>
+<p>Damien Cabrit vise des opérations de rectification cylindrique sur une fiche suiveuse. Aucune des 25 attestations de formation du fonds ne mentionne cette personne pour la compétence « Rectification cylindrique » que le manuel qualité associe à ce procédé.</p>
+<p><strong>Ce qui manque.</strong> Rien n'établit l'aptitude de cette personne au procédé, ni l'évaluation de l'acquis avant tenue du poste.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>SKM_C250_20260423_006.pdf, page 1 — « FR-2210-01 »</li></ul></div>
+</div>
+<div class='finding'>
+<div class='clause'>Chapitre 7.2 — constat</div>
+<h3>Opérateur sans attestation de formation au procédé qu'il réalise</h3>
+<p>Jean-Luc Peyrière vise des opérations de rectification cylindrique sur une fiche suiveuse. Aucune des 25 attestations de formation du fonds ne mentionne cette personne pour la compétence « Rectification cylindrique » que le manuel qualité associe à ce procédé.</p>
+<p><strong>Ce qui manque.</strong> Rien n'établit l'aptitude de cette personne au procédé, ni l'évaluation de l'acquis avant tenue du poste.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>Copie de OF-2026-2000.pdf, page 1 — « AV-5218-01 »</li></ul></div>
+</div>
+<div class='finding'>
+<div class='clause'>Chapitre 7.5.3 — constat</div>
+<h3>Procédure citée dans le manuel qualité et absente du fonds</h3>
+<p>Le manuel qualité renvoie à PR-QUA-17. Aucun document portant cette référence n'a été trouvé parmi les 12 procédures du fonds.</p>
+<p><strong>Ce qui manque.</strong> Le document cité n'est pas disponible : la référence renvoie à un document qui n'existe pas, ou qui n'a pas été communiqué.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>fiche mq 01.pdf, page 2 — « PR-QUA-17 »</li></ul></div>
+</div>
+<div class='finding'>
+<div class='clause'>Chapitre 8.4.1 — constat</div>
+<h3>Prestataire externe utilisé avant son évaluation</h3>
+<p>L'évaluation de Métaux Cerdan est datée du 14/06/2024, soit 219 jours après la première commande du 08/11/2023 portée sur le même formulaire. 4 certificats matière de ce prestataire sont antérieurs à la date d'évaluation.</p>
+<p><strong>Ce qui manque.</strong> Rien n'établit que le prestataire ait été évalué et retenu sur des critères définis avant d'être utilisé.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>EF-2024-402.pdf, page 1 — « 14/06/2024 »</li><li>EF-2024-402.pdf, page 1 — « 08/11/2023 »</li><li>Copie de MC-2024-3000.pdf, page 1 — « MC-2024-3000 »</li><li>MC-2024-3001.pdf, page 1 — « MC-2024-3001 »</li><li>SKM_C250_20240214_005.pdf, page 1 — « MC-2024-3007 »</li><li>scan mc 2024 3003.pdf, page 1 — « MC-2024-3003 »</li></ul></div>
+</div>
+<div class='finding'>
+<div class='clause'>Chapitre 8.6 — constat</div>
+<h3>Rapports de contrôle final sans visa de contrôleur</h3>
+<p>15 rapports de contrôle final sur 114 lisibles ne portent aucun visa : la case est imprimée et n'a pas été renseignée. 99 rapports en portent un.</p>
+<p><strong>Ce qui manque.</strong> Rien n'établit qui a autorisé la libération de ces pièces, ni que la personne l'ayant fait était habilitée.</p>
+<div class='cites'><strong>Pièces citées</strong><ul><li>Copie de RC-2023-5034.pdf, page 1 — « Visa contrôleur »</li><li>Copie de RC-2023-5104.pdf, page 1 — « Visa contrôleur »</li><li>Copie de RC-2026-5033.pdf, page 1 — « Visa contrôleur »</li><li>RC-2023-5015.pdf, page 1 — « Visa contrôleur »</li><li>RC-2024-5008.pdf, page 1 — « Visa contrôleur »</li><li>RC-2024-5009 (3).pdf, page 1 — « Visa contrôleur »</li><li class='small'>et 9 autres documents concernés, listés en annexe</li></ul></div>
+</div>
+<h2>Ce qui n'a pas pu être vérifié</h2>
+<ul>
+<li><strong>7.1.5.2 Traçabilité de la mesure.</strong> 5 certificats d'étalonnage n'ont pu être exploités (numéro de série ou échéance non lisibles). Les instruments correspondants n'ont pas été vérifiés.</li>
+</ul>
+<p class='small'>Ces points ne sont ni des constats ni des conformités. Ils délimitent ce que l'examen a réellement couvert.</p>
+<h2 class='pagebreak'>5. Position par chapitre</h2>
+<p>53 chapitres au référentiel. 38 peuvent être examinés sur pièces ; 15 ne peuvent pas l'être et sont signalés comme tels plutôt que comptés comme couverts.</p>
+<table><thead><tr><th>Chapitre</th><th>Intitulé</th><th>Position</th><th class='num'>Pièces</th></tr></thead><tbody>
+<tr><td class='num'>4</td><td>Contexte de l'organisme<br><span class='small'>Nécessite des entretiens, pas seulement des enregistrements.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>4.1</td><td>Compréhension de l'organisme et de son contexte<br><span class='small'>Aucun enregistrement de ce type dans le fonds fourni.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>4.2</td><td>Compréhension des besoins et attentes des parties intéressées<br><span class='small'>Aucun enregistrement de ce type dans le fonds fourni.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>4.3</td><td>Détermination du domaine d'application du système de management de la qualité</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>1</td></tr>
+<tr><td class='num'>4.4</td><td>Système de management de la qualité et ses processus</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>13</td></tr>
+<tr><td class='num'>5</td><td>Leadership<br><span class='small'>S'évalue en entretien avec la direction.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>5.1</td><td>Leadership et engagement<br><span class='small'>S'évalue en entretien avec la direction.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>5.2</td><td>Politique</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>1</td></tr>
+<tr><td class='num'>5.3</td><td>Rôles, responsabilités et autorités</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>13</td></tr>
+<tr><td class='num'>6</td><td>Planification<br><span class='small'>Nécessite les documents de pilotage, absents du fonds fourni.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>6.1</td><td>Actions à mettre en œuvre face aux risques et opportunités<br><span class='small'>Aucune analyse de risques dans le fonds fourni.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>6.2</td><td>Objectifs qualité et planification des actions pour les atteindre</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>3</td></tr>
+<tr><td class='num'>6.3</td><td>Planification des modifications<br><span class='small'>Aucun enregistrement de ce type dans le fonds fourni.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>7</td><td>Support</td><td class='status-absent'>Aucun élément de preuve trouvé</td><td class='num'>—</td></tr>
+<tr><td class='num'>7.1</td><td>Ressources</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>16</td></tr>
+<tr><td class='num'>7.1.5</td><td>Ressources pour la surveillance et la mesure</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>129</td></tr>
+<tr><td class='num'>7.1.5.1</td><td>Aptitude des moyens de surveillance et de mesure</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>15</td></tr>
+<tr><td class='num'>7.1.5.2</td><td>Traçabilité de la mesure</td><td class='status-partial'>Preuve incomplète ou contredite</td><td class='num'>129</td></tr>
+<tr><td class='num'>7.1.6</td><td>Connaissances organisationnelles<br><span class='small'>Aucun enregistrement de ce type dans le fonds fourni.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>7.2</td><td>Compétences</td><td class='status-partial'>Preuve incomplète ou contredite</td><td class='num'>37</td></tr>
+<tr><td class='num'>7.3</td><td>Sensibilisation</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>25</td></tr>
+<tr><td class='num'>7.4</td><td>Communication<br><span class='small'>S'évalue en observation et en entretien.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>7.5</td><td>Informations documentées</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>13</td></tr>
+<tr><td class='num'>7.5.2</td><td>Création et mise à jour</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>13</td></tr>
+<tr><td class='num'>7.5.3</td><td>Maîtrise des informations documentées</td><td class='status-partial'>Preuve incomplète ou contredite</td><td class='num'>13</td></tr>
+<tr><td class='num'>7.5.3.1</td><td>Disponibilité et protection des documents</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>13</td></tr>
+<tr><td class='num'>7.5.3.2</td><td>Maîtrise des enregistrements et lisibilité</td><td class='status-partial'>Preuve incomplète ou contredite</td><td class='num'>220</td></tr>
+<tr><td class='num'>8</td><td>Réalisation des activités opérationnelles</td><td class='status-absent'>Aucun élément de preuve trouvé</td><td class='num'>—</td></tr>
+<tr><td class='num'>8.1</td><td>Planification et maîtrise opérationnelles</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>24</td></tr>
+<tr><td class='num'>8.1.2</td><td>Gestion de la configuration<br><span class='small'>Nécessite l'accès aux données de définition, hors périmètre.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>8.1.3</td><td>Sécurité du produit</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>37</td></tr>
+<tr><td class='num'>8.1.4</td><td>Prévention des pièces, matières et composants suspectés d'être contrefaits</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>71</td></tr>
+<tr><td class='num'>8.2</td><td>Exigences relatives aux produits et services<br><span class='small'>Nécessite les revues de commande, absentes du fonds fourni.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>8.3</td><td>Conception et développement des produits et services<br><span class='small'>Activité non exercée : l'atelier fabrique sur définition client.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>8.4</td><td>Maîtrise des processus, produits et services fournis par des prestataires externes</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>56</td></tr>
+<tr><td class='num'>8.4.1</td><td>Généralités</td><td class='status-partial'>Preuve incomplète ou contredite</td><td class='num'>56</td></tr>
+<tr><td class='num'>8.4.2</td><td>Type et étendue de la maîtrise</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>170</td></tr>
+<tr><td class='num'>8.4.3</td><td>Informations à l'attention des prestataires externes<br><span class='small'>Nécessite les commandes d'achat, absentes du fonds fourni.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>8.5</td><td>Production et prestation de service</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>126</td></tr>
+<tr><td class='num'>8.5.1</td><td>Maîtrise de la production et de la prestation de service</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>138</td></tr>
+<tr><td class='num'>8.5.2</td><td>Identification et traçabilité</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>172</td></tr>
+<tr><td class='num'>8.5.4</td><td>Préservation<br><span class='small'>S'évalue en observation en atelier.</span></td><td class='status-non_evalue'>Non évalué</td><td class='num'>—</td></tr>
+<tr><td class='num'>8.6</td><td>Libération des produits et services</td><td class='status-partial'>Preuve incomplète ou contredite</td><td class='num'>114</td></tr>
+<tr><td class='num'>8.7</td><td>Maîtrise des éléments de sortie non conformes</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>32</td></tr>
+<tr><td class='num'>9</td><td>Évaluation des performances</td><td class='status-absent'>Aucun élément de preuve trouvé</td><td class='num'>—</td></tr>
+<tr><td class='num'>9.1</td><td>Surveillance, mesure, analyse et évaluation</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>116</td></tr>
+<tr><td class='num'>9.1.2</td><td>Satisfaction du client</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>2</td></tr>
+<tr><td class='num'>9.2</td><td>Audit interne</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>16</td></tr>
+<tr><td class='num'>9.3</td><td>Revue de direction</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>2</td></tr>
+<tr><td class='num'>9.3.2</td><td>Sujets à examiner en revue</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>2</td></tr>
+<tr><td class='num'>10</td><td>Amélioration</td><td class='status-absent'>Aucun élément de preuve trouvé</td><td class='num'>—</td></tr>
+<tr><td class='num'>10.2</td><td>Non-conformité et action corrective</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>24</td></tr>
+<tr><td class='num'>10.3</td><td>Amélioration continue</td><td class='status-evidenced'>Éléments de preuve trouvés</td><td class='num'>6</td></tr>
+</tbody></table>
+<h2>6. Ce qui refermerait chaque écart</h2>
+<ol>
+<li><strong>7.1.5.2 Traçabilité de la mesure.</strong> Faire réétalonner les instruments concernés, puis statuer sur les pièces contrôlées hors validité.</li>
+<li><strong>7.2 Compétences.</strong> Former et évaluer les opérateurs concernés, ou retirer leur habilitation au procédé jusqu'à validation.</li>
+<li><strong>7.5.3 Maîtrise des informations documentées.</strong> Rédiger la procédure manquante, ou retirer sa référence du manuel et rééditer le manuel.</li>
+<li><strong>7.5.3.2 Maîtrise des enregistrements et lisibilité.</strong> Retrouver les originaux, les renumériser correctement, et corriger le procédé de numérisation à la source.</li>
+<li><strong>8.4.1 Généralités.</strong> Régulariser l'évaluation par écrit, avec la date réelle, et statuer sur les lots reçus avant évaluation.</li>
+<li><strong>8.6 Libération des produits et services.</strong> Faire viser les enregistrements par la personne habilitée si elle peut l'attester, sinon recontrôler les lots concernés.</li>
+</ol>
+<h2>7. Limites de ce rapport</h2>
+<ul>
+<li>L'examen porte sur les documents communiqués. Un document absent du fonds n'a pas été recherché ailleurs.</li>
+<li>40 documents n'ont pu être lus. Aucun chapitre ne peut être considéré comme entièrement examiné.</li>
+<li>Les relevés portés à la main sur les enregistrements ne sont pas transcrits. Le rapport constate l'existence, la date et le visa d'un enregistrement, jamais la valeur mesurée : la fiabilité de la transcription automatique de ces valeurs est insuffisante pour un dossier qualité, et une valeur fausse serait pire qu'une valeur absente.</li>
+<li>15 chapitres ne s'apprécient pas sur pièces (entretiens, observation en atelier, accès aux systèmes).</li>
+<li>Ce rapport ne constitue pas un avis de conformité et n'émane pas d'un organisme de certification.</li>
+</ul>
+<h3>Traçabilité de l'analyse</h3>
+<table><tbody><tr><td>generated_utc</td><td class='small'>2026-08-10T14:26:40+00:00</td></tr><tr><td>host</td><td class='small'>spark-e991</td></tr><tr><td>python</td><td class='small'>3.12.3</td></tr><tr><td>pymupdf</td><td class='small'>1.28.2:</td></tr><tr><td>extractor</td><td class='small'>legalrag ingest/src/extractor.py</td></tr><tr><td>legalrag_path</td><td class='small'>/home/daniel-tutto/Projects/legalrag-product</td></tr><tr><td>ocr_language</td><td class='small'>fra+eng</td></tr><tr><td>classify_model</td><td class='small'>qwen2.5:14b</td></tr><tr><td>reason_model</td><td class='small'>qwen2.5:32b</td></tr><tr><td>seed</td><td class='small'>42</td></tr></tbody></table>
+<p class='small'>Ce rapport constate des éléments de preuve documentaire. La décision de conformité appartient à l'entreprise et à son organisme de certification. L'absence de constat ne vaut pas conformité.</p>
+</body></html>

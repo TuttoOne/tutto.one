@@ -2,8 +2,13 @@ import { Layout } from "@/components/layout/Layout";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import type { BlogPost } from "@shared/schema";
+import { copy, useT } from "@/lib/i18n";
+import { usePreferences } from "@/lib/preferences";
+import { BLOG_FR } from "@/lib/blog-fr";
 
 export default function Blog() {
+  const t = useT();
+  const { locale } = usePreferences();
   const { data: posts, isLoading, isError } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog"],
   });
@@ -11,9 +16,9 @@ export default function Blog() {
   return (
     <Layout>
       <div className="max-w-3xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-serif font-bold mb-4">Thinking</h1>
+        <h1 className="text-4xl font-serif font-bold mb-4">{t(copy.blog.title)}</h1>
         <p className="text-lg text-muted-foreground mb-12 max-w-xl">
-          Essays on the intersection of organizational knowledge, AI architecture, and the future of work.
+          {t(copy.blog.standfirst)}
         </p>
 
         {isLoading && (
@@ -34,30 +39,35 @@ export default function Blog() {
         )}
 
         {isError && (
-          <p className="text-muted-foreground">Failed to load posts. Please try again.</p>
+          <p className="text-muted-foreground">{t(copy.blog.loadError)}</p>
         )}
 
         {posts && (
           <div className="space-y-12">
-            {posts.map((post) => (
+            {posts.map((post) => {
+              // Posts are database rows, so French comes from an overlay keyed
+              // by slug; anything not translated falls back to the English.
+              const fr = locale === "fr" ? BLOG_FR[post.slug] : undefined;
+              return (
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <article className="group cursor-pointer border-b border-border/40 pb-12 last:border-0">
                   <div className="flex flex-col md:flex-row gap-6 md:items-baseline">
                     <div className="md:w-32 shrink-0 text-sm text-muted-foreground font-mono">
-                      {post.date}
+                      {fr?.date ?? post.date}
                     </div>
                     <div>
                       <h2 className="text-2xl font-serif font-semibold mb-3 group-hover:text-primary transition-colors">
-                        {post.title}
+                        {fr?.title ?? post.title}
                       </h2>
                       <p className="text-muted-foreground leading-relaxed">
-                        {post.excerpt}
+                        {fr?.excerpt ?? post.excerpt}
                       </p>
                     </div>
                   </div>
                 </article>
               </Link>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

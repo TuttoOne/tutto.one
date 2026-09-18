@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react";
+import { usePageTr } from "@/lib/page-fr";
+import { PRAXIS_PROGRAMME_FR } from "@/lib/fr/praxis-programme";
+import { usePreferences } from "@/lib/preferences";
+import { useTrainerCode } from "@/lib/trainer-code";
+import { SITE_TITLE } from "@/lib/i18n";
+import { praxisEconomics, trainerEconomics, perMonth } from "@/lib/pricing";
 import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -25,12 +31,12 @@ const sessions = [
   {
     n: "02",
     title: "The build loop, and capturing your know-how",
-    body: "Describe what you want and watch Claude Code build it. Then write down the rules your work follows, in plain English, so the tool applies them every single time. Build a real tool for your own work.",
+    body: "Describe what you want and watch the assistant build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.",
   },
   {
     n: "03",
     title: "Your tools and surfaces",
-    body: "The Claude app and the move into your own files. Connecting Claude to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.",
+    body: "The assistant's desktop app and the move into your own files. Connecting it to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.",
   },
   {
     n: "04",
@@ -62,7 +68,7 @@ const sessions = [
 const faqs = [
   {
     q: "Do I need to know how to code?",
-    a: "No. You describe what you want in plain English. Claude Code writes the code. We use the time to make sure you understand what you are building and why.",
+    a: "No. You describe what you want in plain language. The assistant writes the code. We use the time to make sure you understand what you are building and why.",
   },
   {
     q: "I have only ever used AI in a chat box. Is this for me?",
@@ -70,7 +76,7 @@ const faqs = [
   },
   {
     q: "Is my data safe?",
-    a: "Your files stay on your own machine. You choose the folder Claude Code works in, and that folder is the boundary. It asks before going any further. For regulated or sensitive work, we map your IT and compliance questions before touching anything.",
+    a: "Your files stay on your own machine. You choose the folder the assistant works in, and that folder is the boundary. It asks before going any further. For regulated or sensitive work, we map your IT and compliance questions before touching anything.",
   },
   {
     q: "What will it cost me to run afterwards?",
@@ -87,12 +93,30 @@ const faqs = [
 ];
 
 export default function PraxisProgramme() {
+  const tr = usePageTr(PRAXIS_PROGRAMME_FR);
+  const { locale, currency } = usePreferences();
+  const econ = praxisEconomics(currency, locale);
+  const trainer = trainerEconomics(currency, locale);
+  const toolsMonthly = perMonth("toolsMonthly", currency, locale);
+  /**
+   * Figures go into the sentence at render, so the French stays in the
+   * dictionary rather than being branched on in the markup, and the currency
+   * toggle reaches copy that is otherwise a plain sentence.
+   */
+  const fill = (en: string, subs: Record<string, string>) =>
+    Object.entries(subs).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), tr(en));
   useEffect(() => {
-    document.title = "Praxis - Learn to Build Your Own Tools with Claude Code";
-    return () => { document.title = "Tutto | AI Consulting"; };
+    document.title = "Praxis - Learn to Build Your Own Tools with AI";
+    return () => { document.title = SITE_TITLE; };
   }, []);
 
-  const [form, setForm] = useState({ name: "", email: "", task: "" });
+  const [form, setForm] = useState({ name: "", email: "", task: "", trainerCode: "" });
+  const trainerCode = useTrainerCode();
+  // Seed the field from the visit's attribution once it is known, but never
+  // overwrite something the visitor has typed themselves.
+  useEffect(() => {
+    if (trainerCode) setForm(f => (f.trainerCode ? f : { ...f, trainerCode }));
+  }, [trainerCode]);
   const [formState, setFormState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -107,6 +131,7 @@ export default function PraxisProgramme() {
           name: form.name,
           email: form.email,
           message: `Praxis Programme enquiry\n\nTask that eats their week: ${form.task}`,
+          trainerCode: form.trainerCode.trim() || null,
         }),
       });
       if (!res.ok) throw new Error();
@@ -143,72 +168,43 @@ export default function PraxisProgramme() {
 
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>
-            The Praxis Programme
-          </p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>
-            Build your own tools<br />
-            with Claude Code.
-          </h2>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>
-            Eight sessions over two months. For people who have used AI in a chat box
-            and want to go further. You will build small, working tools that do your
-            repetitive work for you, in plain English, with someone sitting beside you
-            who has done it before.
-          </p>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>
-            No coding background needed. By the end you will have built something you
-            actually use, and you will know how to keep building on your own.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The Praxis Programme")}</p>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Build your own tools")}<br />{tr("with an AI assistant.")}</h2>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain language, with someone sitting beside you who has done it before.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("No coding background needed. By the end you will have built something you actually use, and you will know how to keep building on your own.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
             <a
               href="#get-started"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em", whiteSpace: "nowrap" }}
-            >
-              Book an intro call →
-            </a>
-            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>
-              One-to-one or small group · Online or in person
-            </span>
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
+            >{tr("Book an intro call →")}</a>
+            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>{tr("One-to-one or small group · Online or in person")}</span>
           </div>
         </div>
 
         {/* Doc header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #1a1a1a", padding: "18px 0", marginBottom: 64 }}>
-          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>Praxis Programme · Eight Sessions · V1</span>
+          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>{tr("Praxis Programme · Eight Sessions · V1")}</span>
           <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>01 / 01</span>
         </div>
 
         {/* Tagline */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <p style={{ ...CAPS, fontSize: 10, letterSpacing: "0.28em", color: "#1a1a1a" }}>
-            B u i l d &nbsp;T h i n g s &nbsp;T h a t &nbsp;W o r k
-          </p>
         </div>
 
         {/* Hero */}
         <div style={{ marginBottom: 28 }}>
-          <h1 style={{ ...ROBOTO, fontSize: "clamp(32px, 5.5vw, 56px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a" }}>
-            You will not learn to code.<br />
-            You will learn to build.
-          </h1>
+          <h1 style={{ ...ROBOTO, fontSize: "clamp(32px, 5.5vw, 56px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a" }}>{tr("You will not learn to code.")}<br />{tr("You will learn to build.")}</h1>
         </div>
 
         {/* Intro */}
         <div style={{ maxWidth: 620, marginBottom: 64 }}>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>
-            You have typed questions into ChatGPT or Claude and got useful answers back. This is the next
-            step: using Claude Code to build small, working tools that do your repetitive work for you.
-            The internet is full of free tutorials. What a video cannot do is see where you are stuck
-            and hear what you are unsure about. That gap - between "I have heard of Claude Code" and
-            "I am building" - is the whole reason this programme exists.
-          </p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("You have typed questions into ChatGPT or Claude and got useful answers back. This is the next step: using an AI assistant to build small, working tools that do your repetitive work for you. The internet is full of free tutorials. What a video cannot do is see where you are stuck and hear what you are unsure about. That gap - between \"I have asked an AI questions\" and \"I am building\" - is the whole reason this programme exists.")}</p>
         </div>
 
         {/* Section 01 - Who this is for */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>01 &nbsp;&nbsp;&nbsp; Who This Is For</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Who This Is For")}</h2>
           </div>
           <div className="pp-cols-2">
             {[
@@ -217,9 +213,9 @@ export default function PraxisProgramme() {
               { label: "Not a developer", body: "You are not trying to become one. You want to make useful things. That is a different goal, and this programme is built around it." },
               { label: "Rather be shown", body: "You would rather be shown than left alone with a pile of conflicting videos. It works for professionals, small teams, and anyone whose week is full of work that repeats." },
             ].map((item) => (
-              <div key={item.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
-                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>{item.label}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+              <div key={tr(item.label)} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
+                <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>{tr(item.label)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(item.body)}</p>
               </div>
             ))}
           </div>
@@ -228,7 +224,7 @@ export default function PraxisProgramme() {
         {/* Section 02 - Why a person */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>02 &nbsp;&nbsp;&nbsp; Why a Person, Not Another Video</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Why a Person, Not Another Video")}</h2>
           </div>
           <div style={{ maxWidth: 700 }}>
             {[
@@ -236,13 +232,13 @@ export default function PraxisProgramme() {
               { label: "We meet you where you are", body: "No burying you in tools you have never heard of to look clever. Every session starts from where you actually are." },
               { label: "The fiddly parts are where a guide earns their keep", body: "Installing the tool, the first setup, the moment something breaks: that is exactly the part the free videos skip, and exactly where most people quietly give up." },
             ].map((item, i) => (
-              <div key={item.label} style={{ display: "flex", gap: 20, marginBottom: i < 2 ? 28 : 0 }}>
+              <div key={tr(item.label)} style={{ display: "flex", gap: 20, marginBottom: i < 2 ? 28 : 0 }}>
                 <div style={{ ...MONO, fontSize: 11, color: "#d97706", fontWeight: 700, flexShrink: 0, marginTop: 2, width: 20 }}>
                   {String(i + 1).padStart(2, "0")}
                 </div>
                 <div>
-                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 }}>{item.label}</p>
-                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 }}>{tr(item.label)}</p>
+                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(item.body)}</p>
                 </div>
               </div>
             ))}
@@ -252,11 +248,11 @@ export default function PraxisProgramme() {
         {/* Section 03 - What you'll be able to do */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>03 &nbsp;&nbsp;&nbsp; What You Will Be Able to Do by the End</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Will Be Able to Do by the End")}</h2>
           </div>
           <div className="pp-cols-2">
             {[
-              { body: "Build small working tools for your own work, by describing what you want in plain English." },
+              { body: "Build small working tools for your own work, by describing what you want in plain language." },
               { body: "Capture your own rules and judgement so a tool works the way you do, every time." },
               { body: "Understand what is safe, what it costs, and what it can and cannot do." },
               { body: "Hand a tool to a colleague or a developer cleanly, with no black box." },
@@ -266,7 +262,7 @@ export default function PraxisProgramme() {
                 <span style={{ ...MONO, fontSize: 9, fontWeight: 700, width: 18, height: 18, borderRadius: "50%", background: "#d97706", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
                   {i + 1}
                 </span>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d", margin: 0 }}>{item.body}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d", margin: 0 }}>{tr(item.body)}</p>
               </div>
             ))}
           </div>
@@ -275,18 +271,15 @@ export default function PraxisProgramme() {
         {/* Section 04 - The eight sessions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>04 &nbsp;&nbsp;&nbsp; The Eight Sessions</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Eight Sessions")}</h2>
           </div>
-          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>
-            Weekly, over roughly two months. The first six get you to a confident, independent builder.
-            The last two take you deeper, into the kind of work that usually needs a developer.
-          </p>
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Weekly, over roughly two months. The first six get you to a confident, independent builder. The last two take you deeper, into the kind of work that usually needs a developer.")}</p>
           <div className="pp-sessions">
             {sessions.map((s) => (
               <div key={s.n} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5", position: "relative" }}>
                 <span style={{ ...MONO, fontSize: 10, color: "#b0a898", position: "absolute", top: 16, right: 18 }}>{s.n}</span>
-                <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "#1a1a1a", marginBottom: 8, paddingRight: 24 }}>{s.title}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{s.body}</p>
+                <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "#1a1a1a", marginBottom: 8, paddingRight: 24 }}>{tr(s.title)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(s.body)}</p>
               </div>
             ))}
           </div>
@@ -295,95 +288,111 @@ export default function PraxisProgramme() {
         {/* Section 05 - What you finish with */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>05 &nbsp;&nbsp;&nbsp; What You Finish With</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Finish With")}</h2>
           </div>
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "32px 28px", background: "#faf8f5", maxWidth: 620 }}>
-            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>
-              The actual tools you built along the way.
-            </p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>
-              A certificate confirming you completed the programme - and, more to the point, the
-              tools you built during it. The certificate records what you made, not just that you
-              turned up. That is the proof that matters.
-            </p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>
-              A note on honesty, because it sets the right expectation: you will get most of the way
-              there yourself. On anything complex, the last stretch you finish by hand or hand off.
-              Even getting most of the way is a large saving on how the work is done today - and that
-              is the saving we are after.
-            </p>
+            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>{tr("The actual tools you built along the way.")}</p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>{tr("A certificate confirming you completed the programme - and, more to the point, the tools you built during it. The certificate records what you made, not just that you turned up. That is the proof that matters.")}</p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>{tr("A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.")}</p>
           </div>
         </div>
 
         {/* Section 06 - How it works */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>06 &nbsp;&nbsp;&nbsp; How It Works</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("How It Works")}</h2>
           </div>
           <div className="pp-cols-2">
             {[
-              { label: "Format", body: "One-to-one or small group. You choose what suits you." },
+              { label: "Format", body: "One-to-one, or a small group of your own people. Either way it is built around you, not around a syllabus." },
+              { label: "Your use cases", body: "Send the work you want to fix when you register - the quote, the report, the weekly export. We learn on your examples from the first session. The group evenings run on generic ones; this does not." },
               { label: "Cadence", body: "One session a week, about an hour each, over roughly two months. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
-              { label: "What you need", body: "A laptop - Mac or Windows. A Claude account. We set up everything else together in the first session." },
+              { label: "What you need", body: "A laptop - Mac or Windows. An account with the AI assistant of your choice. We set up everything else together in the first session." },
             ].map((item) => (
-              <div key={item.label} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
-                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>{item.label}</p>
-                <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{item.body}</p>
+              <div key={tr(item.label)} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5" }}>
+                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>{tr(item.label)}</p>
+                <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(item.body)}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Choice of assistant */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ background: "#f0ece6", borderRadius: 10, padding: "24px 26px", maxWidth: 660 }}>
+            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 10 }}>
+              {tr("On the choice of assistant")}
+            </p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d" }}>
+              {tr("We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine — which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.")}
+            </p>
           </div>
         </div>
 
         {/* Section 07 - Pricing */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>07 &nbsp;&nbsp;&nbsp; What It Costs</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What It Costs")}</h2>
           </div>
           <div className="pp-cols-3">
             {[
               {
+                label: "Intro session",
+                price: econ.intro,
+                note: tr("Two hours. Credited in full against the full programme."),
+              },
+              {
                 label: "Per session",
-                price: "£200",
-                note: "One hour each. Pay as you go, or commit to the full programme.",
+                price: econ.session,
+                note: tr("One hour each. Pay as you go, or commit to the full programme."),
               },
               {
                 label: "Full programme",
-                price: "£1,600",
-                note: "All eight sessions. The intro session counts as the first.",
-              },
-              {
-                label: "Refer a friend",
-                price: "£800",
-                note: "Refer someone who signs up, and the whole course is half price for you - £100 per session.",
-                highlight: true,
+                price: econ.course,
+                note: fill("All eight sessions. {after} after your intro session credit.", {
+                  after: econ.courseAfterIntro,
+                }),
               },
             ].map((p) => (
               <div
-                key={p.label}
+                key={tr(p.label)}
                 style={{
-                  border: p.highlight ? "1.5px solid #d97706" : "1px solid #d8d0c5",
+                  border: "1px solid #d8d0c5",
                   borderRadius: 10,
                   padding: "24px 20px",
-                  background: p.highlight ? "#fdf6ec" : "#faf8f5",
+                  background: "#faf8f5",
                   position: "relative",
                 }}
               >
-                {p.highlight && (
-                  <span style={{ ...CAPS, fontSize: 8, color: "#d97706", letterSpacing: "0.12em", position: "absolute", top: -9, left: 16, background: "#fdf6ec", padding: "0 6px" }}>
-                    Best value
-                  </span>
-                )}
-                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{p.label}</p>
+                <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{tr(p.label)}</p>
                 <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-1px" }}>{p.price}</p>
                 <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
               </div>
             ))}
           </div>
+
+          {/* The referral used to be a fourth card with a "best value" badge on
+              it, which sold the discount harder than the programme. It is a
+              term of the programme, so it reads as one. */}
+          <div style={{ marginTop: 20, padding: "16px 20px", border: "1px solid #d8d0c5", borderRadius: 8, maxWidth: 560 }}>
+            <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>
+              {fill(
+                "Refer a friend: {credit} off your programme for every person you refer who enrols, up to {cap}.",
+                { credit: econ.referralCredit, cap: econ.referralCap },
+              )}
+            </p>
+            <p style={{ ...INTER, fontSize: 11, color: "#8a8276", lineHeight: 1.7, marginTop: 8 }}>
+              {tr("Referral credits apply to courses taught by participating trainers.")}
+            </p>
+          </div>
           <div style={{ marginTop: 20, padding: "16px 20px", background: "#f0ece6", borderRadius: 8, maxWidth: 560 }}>
             <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>
-              Running the tools you build costs about <strong style={{ color: "#1a1a1a" }}>$20/month</strong> for the Claude Code subscription.
-              The tools themselves run on your own machine - no per-use charges.
+              {tr("Running the tools you build costs about")}{" "}
+              <strong style={{ color: "#1a1a1a" }}>{toolsMonthly}</strong>{" "}
+              {tr(
+                "for a subscription to a frontier AI system — Claude, Mistral or OpenAI — or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.",
+              )}
             </p>
           </div>
         </div>
@@ -391,7 +400,7 @@ export default function PraxisProgramme() {
         {/* Section 08 - Common questions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <span style={{ ...CAPS, fontSize: 10 }}>08 &nbsp;&nbsp;&nbsp; Common Questions</span>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Common Questions")}</h2>
           </div>
           <div style={{ maxWidth: 680 }}>
             {faqs.map((faq, i) => (
@@ -408,11 +417,11 @@ export default function PraxisProgramme() {
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   style={{ padding: "18px 0", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}
                 >
-                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0, textAlign: "left" }}>{faq.q}</p>
+                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0, textAlign: "left" }}>{tr(faq.q)}</p>
                   <span style={{ ...MONO, fontSize: 14, color: "#a8a092", flexShrink: 0 }}>{openFaq === i ? "−" : "+"}</span>
                 </button>
                 {openFaq === i && (
-                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d", paddingBottom: 4 }}>{faq.a}</p>
+                  <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d", paddingBottom: 4 }}>{tr(faq.a)}</p>
                 )}
               </div>
             ))}
@@ -421,61 +430,69 @@ export default function PraxisProgramme() {
 
         {/* Get started */}
         <div id="get-started" style={{ marginTop: 64, borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 48px)" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>Get started</p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>
-            Tell me the task that eats your week.
-          </h2>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "rgba(246,241,234,0.65)", marginBottom: 32, maxWidth: 480 }}>
-            I will tell you honestly whether this is the right thing for you. The first step is a
-            short call.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Get started")}</p>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>{tr("Tell me the task that eats your week.")}</h2>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "rgba(246,241,234,0.65)", marginBottom: 32, maxWidth: 480 }}>{tr("I will tell you honestly whether this is the right thing for you. The first step is a short call.")}</p>
 
           {formState === "sent" ? (
             <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "28px 24px", textAlign: "center" }}>
-              <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>Done - we'll be in touch.</p>
-              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>Expect a reply within one working day.</p>
+              <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>{tr("Done - we'll be in touch.")}</p>
+              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>{tr("Expect a reply within one working day.")}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "24px" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
                 <div>
-                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>Name</label>
+                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("Name")}</label>
                   <input
                     className="pp-input"
                     style={INPUT}
                     required
-                    placeholder="Jane Smith"
+                    placeholder={tr("Jane Smith")}
                     value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   />
                 </div>
                 <div>
-                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>Email</label>
+                  <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("Email")}</label>
                   <input
                     className="pp-input"
                     type="email"
                     style={INPUT}
                     required
-                    placeholder="jane@company.com"
+                    placeholder={tr("jane@company.com")}
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   />
                 </div>
               </div>
               <div style={{ marginBottom: 20 }}>
-                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>The task that eats your week</label>
+                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("The task that eats your week")}</label>
                 <textarea
                   className="pp-input"
                   style={{ ...INPUT, resize: "vertical", minHeight: 80 }}
-                  placeholder="e.g. I spend three hours every Monday compiling a report from five different spreadsheets..."
+                  placeholder={tr("e.g. I spend three hours every Monday compiling a report from five different spreadsheets...")}
                   value={form.task}
                   onChange={e => setForm(f => ({ ...f, task: e.target.value }))}
                 />
               </div>
+              <div style={{ marginBottom: 20 }}>
+                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>
+                  {tr("Trainer code")}{" "}
+                  <span style={{ textTransform: "none", letterSpacing: 0, color: "rgba(246,241,234,0.25)" }}>{tr("(optional)")}</span>
+                </label>
+                {/* Prefilled from ?trainer= on any page of this visit. Left
+                    editable so somebody handed a code on paper can type it. */}
+                <input
+                  className="pp-input"
+                  style={INPUT}
+                  placeholder={tr("If a trainer sent you here")}
+                  value={form.trainerCode}
+                  onChange={e => setForm(f => ({ ...f, trainerCode: e.target.value }))}
+                />
+              </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-                <p style={{ ...INTER, fontSize: 11, color: "rgba(246,241,234,0.3)", maxWidth: 340 }}>
-                  No marketing. Your details are used only to prepare for and respond to your enquiry.
-                </p>
+                <p style={{ ...INTER, fontSize: 11, color: "rgba(246,241,234,0.3)", maxWidth: 340 }}>{tr("No marketing. Your details are used only to prepare for and respond to your enquiry.")}</p>
                 <button
                   type="submit"
                   disabled={formState === "sending"}
@@ -485,55 +502,39 @@ export default function PraxisProgramme() {
                 </button>
               </div>
               {formState === "error" && (
-                <p style={{ ...INTER, fontSize: 12, color: "#f87171", marginTop: 10 }}>Something went wrong - please try again or email daniel@tutto.one</p>
+                <p style={{ ...INTER, fontSize: 12, color: "#f87171", marginTop: 10 }}>{tr("Something went wrong - please try again or email daniel@tutto.one")}</p>
               )}
             </form>
           )}
 
-          <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.35)", marginTop: 20 }}>
-            Or email directly: daniel@tutto.one
-          </p>
+          <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.35)", marginTop: 20 }}>{tr("Or email directly: daniel@tutto.one")}</p>
         </div>
 
         {/* Etymology / footer note */}
         <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>On what this will not do</p>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", maxWidth: 620, fontStyle: "italic" }}>
-            It will not make you a software engineer in eight weeks.
-          </p>
-          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>
-            It will make you someone who can build genuinely useful things, and who knows when a job is
-            big enough to call in a developer, and how to brief them when you do. That is a more
-            valuable place to stand than it sounds.
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>{tr("On what this will not do")}</p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", maxWidth: 620, fontStyle: "italic" }}>{tr("It will not make you a software engineer in eight weeks.")}</p>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>{tr("It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.")}</p>
         </div>
 
         {/* Trainer track teaser */}
         <div style={{ marginTop: 64, borderRadius: 12, border: "1.5px solid #d97706", background: "#fdf6ec", padding: "clamp(24px, 4vw, 44px)" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 16 }}>
-            What comes next
-          </p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 16 }}>{tr("What comes next")}</p>
           <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "flex-start", justifyContent: "space-between" }}>
             <div style={{ maxWidth: 480 }}>
-              <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>
-                Become a Praxis trainer.<br />Teach it, and earn from it.
-              </h3>
-              <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 0 }}>
-                Four sessions on top of the programme turn you into a trainer. You keep 80% of the tuition on
-                every course you teach. I find and organise the clients with you, you deliver the sessions, and
-                a hub is behind you for the hard jobs.
-              </p>
+              <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>{tr("Become a Praxis trainer.")}<br />{tr("Teach it, and earn from it.")}</h3>
+              <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 0 }}>{tr("Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.")}</p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>
               <div style={{ border: "1px solid #f0d9b0", borderRadius: 8, padding: "12px 16px", background: "#fff8ee", minWidth: 160 }}>
-                <p style={{ ...CAPS, fontSize: 8, color: "#a8a092", marginBottom: 6 }}>Trainer track</p>
-                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#1a1a1a", letterSpacing: "-0.5px" }}>£800</p>
-                <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>Four sessions</p>
+                <p style={{ ...CAPS, fontSize: 8, color: "#a8a092", marginBottom: 6 }}>{tr("Trainer track")}</p>
+                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#1a1a1a", letterSpacing: "-0.5px" }}>{trainer.trainerTrack}</p>
+                <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>{tr("Four sessions")}</p>
               </div>
               <div style={{ border: "1px solid #f0d9b0", borderRadius: 8, padding: "12px 16px", background: "#fff8ee" }}>
-                <p style={{ ...CAPS, fontSize: 8, color: "#a8a092", marginBottom: 6 }}>You keep</p>
-                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#d97706", letterSpacing: "-0.5px" }}>80%</p>
-                <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>of every course you teach</p>
+                <p style={{ ...CAPS, fontSize: 8, color: "#a8a092", marginBottom: 6 }}>{tr("You keep")}</p>
+                <p style={{ ...ROBOTO, fontSize: 24, fontWeight: 900, color: "#d97706", letterSpacing: "-0.5px" }}>{trainer.pctYouSourced}%</p>
+                <p style={{ ...INTER, fontSize: 11, color: "#7a7568" }}>{tr("on the clients you bring in yourself")}</p>
               </div>
             </div>
           </div>
@@ -541,16 +542,14 @@ export default function PraxisProgramme() {
             <a
               href="/become-a-trainer"
               style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "11px 22px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
-            >
-              See the trainer track →
-            </a>
+            >{tr("See the trainer track →")}</a>
           </div>
         </div>
 
         {/* Doc footer */}
         <div className="pp-footer-bar">
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Praxis Programme · tutto.one/praxis-programme</span>
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>Eight sessions · Two months</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Praxis Programme · tutto.one/praxis-programme")}</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Eight sessions · Two months")}</span>
         </div>
 
       </div>

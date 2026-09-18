@@ -134,7 +134,7 @@ What it cannot do is sit next to you.
 
 ## What Praxis adds
 
-Praxis is built on the Anthropic curriculum. The [course library](https://tutto.one/courses) contains the materials from sixteen of those courses - everything from Claude 101 through to Introduction to Subagents and AI Fluency for Small Businesses - adapted for guided sessions. Every session starts from the theory the Anthropic course establishes and then does one more thing: you build something real with it, in the session, while I watch.
+Praxis is built on the Anthropic curriculum. The [course library](https://tutto.one/courses) contains the materials from seventeen of those courses - everything from First Steps with AI through to Subagents and the specialist sessions - adapted for guided sessions, and every one of them now exists in French as well as English. Every session starts from the theory the Anthropic course establishes and then does one more thing: you build something real with it, in the session, while I watch.
 
 The difference this makes is the same difference Tal and Aman describe in the article. When you are building live - when the tool does something unexpected, or the context runs out, or the first version of the tool does not quite do what you needed - you feel those moments and we work through them together. That is where the understanding actually forms. Not in reading about it, but in hitting the problem and finding your way out of it with someone who has done it before.
 
@@ -146,13 +146,16 @@ Here is the part that I think is genuinely useful: Anthropic offers certificatio
 
 That is the closed loop. Theory, practice, and a credential that means something because it comes from the people who built the model.
 
-The [Praxis course library](https://tutto.one/courses) covers sixteen tracks:
+The [Praxis course library](https://tutto.one/courses) covers seventeen tracks:
 
+- **First Steps with AI** and **Start Here** - the on-ramp, for people who have not used any of this before
 - **Claude 101** and **Claude Code 101** - the foundations, including how the tools work and what they are actually good for
 - **Claude Code in Action** and the **Anthropic API** track - getting into the practical layer, connecting tools, building real things
 - **Model Context Protocol** - how AI connects to the software you already use
 - **Agent Skills** and **Subagents** - how to build things that can take actions, not just answer questions
-- **AI Fluency** tracks for educators, students, small businesses, and nonprofits - the same foundations applied to specific contexts
+- **AI Capabilities and Limitations** - what the models can and cannot do, and how to tell the difference
+- **AI Fluency** tracks for educators and small businesses - the same foundations applied to specific contexts
+- Specialist sessions on **where Claude keeps what it knows**, **what an eval is**, and **measuring extraction** - the deeper material, for people already building
 
 Each of these has a corresponding Praxis session: a guided, practical hour where you work through the material on something from your own work rather than a generic exercise.
 

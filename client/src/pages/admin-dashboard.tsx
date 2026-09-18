@@ -20,6 +20,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Plus, Pencil, Trash2, ArrowLeft, LogOut, FileText, Layout } from "lucide-react";
 import type { BlogPost } from "@shared/schema";
+import { SELECTABLE_PRICES, type PriceKey } from "@/lib/pricing";
+import { DEFAULT_SERVICES, type ServiceItem } from "@/lib/services-content";
 
 // ── API helpers ───────────────────────────────────────────────────────────────
 
@@ -412,33 +414,6 @@ function BlogSection() {
 
 // ── Site Content Editor ────────────────────────────────────────────────────────
 
-interface ServiceItem {
-  title: string;
-  description: string;
-  features: string[];
-  price: string;
-}
-
-const DEFAULT_SERVICES: ServiceItem[] = [
-  {
-    title: "Data Audit & Knowledge Mapping",
-    description: "We audit your existing documentation, databases, and communication channels to create a structured map of your organizational knowledge.",
-    features: ["Audit of Files/CRMs/Software/Drives", "API Readiness Score", "Knowledge Graph Architecture"],
-    price: "Starts at £2k",
-  },
-  {
-    title: "AI Agent Architecture",
-    description: "Design and implement specific agent workflows to automate core business processes using your structured data.",
-    features: ["Custom Agent Workflows", "Human-in-the-loop Design", "Tool Selection & Integration"],
-    price: "Custom Scoping",
-  },
-  {
-    title: "Team Enablement",
-    description: "Workshops and training to help your team understand how to write for machines and manage AI workers.",
-    features: ["Prompt Engineering Training", "Documentation Standards", "AI Governance Frameworks"],
-    price: "Starts at £3.5k",
-  },
-];
 
 function ServiceEditor({
   service,
@@ -479,7 +454,44 @@ function ServiceEditor({
       </div>
       <div className="space-y-2">
         <Label>Price</Label>
-        <Input value={service.price} onChange={setField("price")} placeholder="Starts at £2k" />
+        <select
+          value={service.priceKey ?? ""}
+          onChange={(e) => {
+            const key = e.target.value;
+            onChange(
+              key
+                ? { ...service, priceKey: key as PriceKey, price: undefined, priceLabel: undefined }
+                : { ...service, priceKey: undefined },
+            );
+          }}
+          className="w-full h-9 rounded-md border border-input bg-background px-3 text-sm"
+        >
+          <option value="">No fixed price (use the label below)</option>
+          {SELECTABLE_PRICES.map((o) => (
+            <option key={o.key} value={o.key}>{o.label}</option>
+          ))}
+        </select>
+        {service.priceKey ? (
+          <p className="text-xs text-muted-foreground">
+            Shown as &ldquo;Starts at&rdquo; plus the amount, converted by the site&rsquo;s currency toggle.
+            Change the amounts in <code>client/src/lib/pricing.ts</code>.
+          </p>
+        ) : (
+          <Input
+            value={service.priceLabel?.en ?? service.price ?? ""}
+            onChange={(e) =>
+              onChange({
+                ...service,
+                price: undefined,
+                priceLabel: {
+                  en: e.target.value,
+                  fr: service.priceLabel?.fr || e.target.value,
+                },
+              })
+            }
+            placeholder="Custom scoping"
+          />
+        )}
       </div>
       <div className="space-y-2">
         <Label>Features</Label>
@@ -548,7 +560,7 @@ function ServicesEditor() {
             onChange={(s) => setServices(services.map((sv, idx) => idx === i ? s : sv))}
             onRemove={() => setServices(services.filter((_, idx) => idx !== i))} />
         ))}
-        <Button type="button" variant="outline" onClick={() => setServices([...services, { title: "", description: "", features: [], price: "" }])}>
+        <Button type="button" variant="outline" onClick={() => setServices([...services, { title: "", description: "", features: [] }])}>
           <Plus className="w-4 h-4 mr-1" /> Add Service
         </Button>
       </div>
@@ -567,7 +579,7 @@ interface PortfolioOverride {
 }
 
 const DEFAULT_PORTFOLIO: PortfolioOverride[] = [
-  { id: "pythia", name: "Pythia", tagline: "On-Premise AI · Legal Document Intelligence", description: "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design.", url: "/pythia" },
+  { id: "pythia", name: "Pythia", tagline: "On-Premise AI · Document Intelligence", description: "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design. The same applies well beyond litigation: any legal, compliance or commercially sensitive material that has to stay on-premise, or that cannot be sent to a cloud model for AI processing.", url: "/pythia" },
   { id: "mcp-bridge-sharepoint-power-automate", name: "MCP Bridge - SharePoint & Power Automate", tagline: "Model Context Protocol · Consulting Engagement", description: "We built an MCP (Model Context Protocol) bridge that gives Claude direct access to a client's SharePoint environment and Power Automate flows. Instead of copy-pasting data into a chat, the team can ask AI to query, create, and update SharePoint records - and diagnose broken automations - through natural conversation.", url: "https://modelcontextprotocol.io" },
   { id: "entityvault", name: "EntityVault", tagline: "entityvault.tutto.one", description: "A privacy-first entity management platform with tokenized data storage, collaboration requests, and entity search. Built for organisations that take data privacy seriously.", url: "https://entityvault.tutto.one" },
   { id: "ai-roi-portal", name: "AI ROI Portal", tagline: "tracker.tutto.one", description: "A consulting dashboard for tracking AI adoption ROI, usage metrics, project milestones, and cost savings. Helps teams measure the real impact of automation.", url: "https://tracker.tutto.one" },
