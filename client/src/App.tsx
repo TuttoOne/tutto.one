@@ -43,6 +43,7 @@ import PraxisLearn from "@/pages/praxis-learn";
 import AdminDashboard from "@/pages/admin-dashboard";
 import AdminLogin from "@/pages/admin-login";
 import AdminSetup from "@/pages/admin-setup";
+import { WebmcpProvider } from "@/webmcp/register";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -118,6 +119,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <PreferencesProvider>
         <TooltipProvider>
+          <WebmcpProvider />
           <Toaster />
           <Router />
           </TooltipProvider>
