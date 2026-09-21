@@ -30,6 +30,12 @@ import type { Currency, Locale } from "./preferences";
 const COURSE_SESSIONS_N = 8;
 
 /**
+ * Sessions in Fast track: the private route through the same work as Praxis,
+ * one to one and at the client's pace, in half the sessions.
+ */
+const FAST_TRACK_SESSIONS_N = 4;
+
+/**
  * Sessions in the in-company Article 4 engagement. Six, not eight: it is a
  * different product from the open programme, sold to a compliance obligation
  * rather than to a curriculum. Named apart from COURSE_SESSIONS_N so the two
@@ -42,6 +48,7 @@ export type PriceKey =
   | "sessionStandard"
   | "sessionPromo"
   | "praxisIntro"
+  | "fastTrack"
   | "referralCredit"
   | "discoverySession"
   | "toolsMonthly"
@@ -67,14 +74,17 @@ export type PriceKey =
   | "spBuildFrom"
   | "spRetainerMonthly";
 
-/** The session rate. Course tuition and team enablement are both eight of these. */
+/**
+ * The session rate, for 90 minutes with a group of one to four. Course tuition
+ * and team enablement are both eight of these, and Fast track is four.
+ */
 const SESSION = { GBP: 200, EUR: 250, ZAR: 5000 };
 
 /**
- * The 90-minute discovery session on the landing page — the one thing a
- * stranger can buy without talking to us first, and the only lesson price the
- * site quotes at all. Praxis itself is quoted as a total after discovery, so
- * this is deliberately the whole of the client-facing session pricing.
+ * QuickStart: the 90-minute session on the landing page — the one thing a
+ * stranger can buy without talking to us first. The landing page also names
+ * the Praxis per-session rate beside it, as the way on for a reader who wants
+ * more than a start.
  *
  * It is the same figure as HOUR rather than a coincidence: the way in is sold
  * at the build rate, not above it. Stated EX VAT, like every fee here.
@@ -128,13 +138,27 @@ const DIAGNOSTIC_DAY = { GBP: 500, EUR: 600, ZAR: 12000 };
 
 /** Base rates. Everything else on the site is derived from these. */
 export const PRICES: Record<PriceKey, Record<Currency, number>> = {
-  /** The landing page's 90-minute way in. The only session price on the site. */
+  /**
+   * QuickStart, the landing page's 90-minute way in: discovery, preliminary
+   * setup and training, and the policy and agent scorecard. The only thing on
+   * the site paid by card at booking; everything else is invoiced.
+   */
   discoverySession: DISCOVERY,
-  /** Standard one-hour Praxis session. Course tuition is eight of these. */
+  /** One Praxis session, 90 minutes. Course tuition is eight of these. */
   sessionStandard: SESSION,
+  /** Fast track: four private sessions, computed from the session rate. */
+  fastTrack: {
+    GBP: SESSION.GBP * FAST_TRACK_SESSIONS_N,
+    EUR: SESSION.EUR * FAST_TRACK_SESSIONS_N,
+    ZAR: SESSION.ZAR * FAST_TRACK_SESSIONS_N,
+  },
   /**
    * The Praxis intro session: two hours, credited in full against the
    * programme if the client goes on.
+   *
+   * No longer shown anywhere: QuickStart replaced it as the way in. Kept
+   * defined, and out of SELECTABLE_PRICES, so stored admin content that still
+   * references it resolves rather than throwing.
    *
    * The same figure as SESSION today, and its own key rather than an alias so
    * the credit can be repriced without dragging the hourly rate with it. The
@@ -296,6 +320,8 @@ export const TRAINER_SHARE_SOURCED = 0.8;
 export const TRAINER_SHARE_TUTTO = 0.6;
 /** Sessions in a full Praxis course. Course tuition is this times the rate. */
 export const COURSE_SESSIONS = COURSE_SESSIONS_N;
+/** Sessions in Fast track. Its price is this times the rate. */
+export const FAST_TRACK_SESSIONS = FAST_TRACK_SESSIONS_N;
 /** Sessions in the train-the-trainer track, charged at the standard rate. */
 export const TRAINER_TRACK_SESSIONS = 4;
 /** Students used in the worked annual example on the trainer page. */
@@ -323,9 +349,9 @@ export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
   { key: "scriptBuildFrom", label: "Scripting build, 30h (€3,000)" },
   { key: "enablementFrom", label: "Team enablement / training (€2,000)" },
   { key: "build", label: "Pythia build, excl. hardware (€7,000)" },
-  { key: "discoverySession", label: "Discovery session, 90 min (€100)" },
-  { key: "sessionStandard", label: "Praxis session, standard (€250)" },
-  { key: "praxisIntro", label: "Praxis intro session, 2h (€250)" },
+  { key: "discoverySession", label: "QuickStart, 90 min (€100)" },
+  { key: "sessionStandard", label: "Praxis session, 90 min (€250)" },
+  { key: "fastTrack", label: "Fast track, 4 private sessions (€1,000)" },
   { key: "spAuditFrom", label: "SharePoint audit (€600)" },
   { key: "spBuildFrom", label: "SharePoint build (€6,000)" },
   { key: "spRetainerMonthly", label: "SharePoint retainer (€600/mo)" },
@@ -372,23 +398,23 @@ export function perMonth(key: PriceKey, currency: Currency, locale: Locale): str
 }
 
 /**
- * Praxis tuition, the intro credit and the referral ladder, all derived from
- * the session and intro rates so no two of them can contradict each other.
+ * The training ladder and the referral credit, all derived from the session
+ * and QuickStart rates so no two of them can contradict each other.
  */
 export function praxisEconomics(currency: Currency, locale: Locale) {
   const session = amount("sessionStandard", currency);
-  const intro = amount("praxisIntro", currency);
+  const quickStart = amount("discoverySession", currency);
   const credit = amount("referralCredit", currency);
   const course = session * COURSE_SESSIONS;
   const f = (n: number) => formatMoney(n, currency, locale);
   return {
-    /** Two hours, paid up front, credited against the programme. */
-    intro: f(intro),
+    /** 90 minutes, paid by card at booking. */
+    quickStart: f(quickStart),
     session: f(session),
-    /** Full course, before the intro credit. */
+    /** All eight sessions. */
     course: f(course),
-    /** What is left of the course once the intro has been credited. */
-    courseAfterIntro: f(course - intro),
+    /** Four private sessions. */
+    fastTrack: f(session * FAST_TRACK_SESSIONS_N),
     /** Taken off the client's own fee per referred enrolment. */
     referralCredit: f(credit),
     /** The ceiling on stacked credits. */

@@ -253,16 +253,18 @@ export const landing = {
     },
 
     /** The entry point, and the reason it is priced this low: the discovery
-     *  happens inside the session, so one class pays for itself twice. */
+     *  happens inside the session, so one class pays for itself twice. The
+     *  note also names the way on — Praxis, per session — for a reader who
+     *  wants more than a start. `{session}` is filled from the price table. */
     class: {
-      title: { en: "One guided lesson — 90 minutes", fr: "Une séance accompagnée — 90 minutes" },
+      title: { en: "QuickStart — 90 minutes", fr: "QuickStart — 90 minutes" },
       body: {
-        en: "The sequence above, the tools worth using now, and how to work with them safely.",
-        fr: "La progression ci-dessus, les outils qui comptent, et comment les utiliser sans rien exposer.",
+        en: "For one to four people. The sequence above, the tools worth using now, how to work with them safely — and your AI policy and agent scorecard to keep.",
+        fr: "De une à quatre personnes. La progression ci-dessus, les outils qui comptent, comment les utiliser sans rien exposer — et votre politique IA et grille d'évaluation d'agent, que vous gardez.",
       },
       note: {
-        en: "Take a single class and we do the discovery in the same session. You leave knowing whether an agent is worth building for you, and roughly what it would cost. Plus you gain the ability to get the best out of AI and even build agents yourself.",
-        fr: "Prenez une seule séance et nous y faisons la découverte. Vous repartez en sachant si un agent vaut la peine d'être construit, et à quel prix. Et vous savez tirer le meilleur de l'IA, voire construire vos propres agents.",
+        en: "Part of the session is discovery: the job you want an agent for, whether it is worth building, and roughly what it would cost. The rest is high-level training — enough for a self-starter to get going, with the right resources to follow. To go deeper, and learn how these systems work through your own use case, continue with Praxis at {session} a session.",
+        fr: "Une partie de la séance est consacrée à la découverte : la tâche que vous voulez confier à un agent, si elle vaut la peine, et à quel prix environ. Le reste est une formation d'ensemble — de quoi démarrer seul, avec les bonnes ressources pour la suite. Pour aller plus loin et comprendre ces systèmes à partir de votre propre cas, poursuivez avec Praxis, à {session} la séance.",
       },
     },
   },
@@ -291,8 +293,8 @@ export const landing = {
       fr: "Que faites-vous à la main ?",
     },
     body: {
-      en: "Let's discuss your repetitive tasks. Ninety minutes is enough time to discover whether an agent is worth building or not.",
-      fr: "Parlons de vos tâches répétitives. Quatre-vingt-dix minutes suffisent pour découvrir si un agent vaut la peine d'être construit, ou non.",
+      en: "Let's discuss your repetitive tasks. Ninety minutes is enough time to discover whether an agent is worth building or not. You'll also get foundational training in how to set up and run an agent, which you then take further with some self-study. Or we can take you through it in Praxis: we walk through your actual case with you, and use it to learn how to build systems and agents with AI coding.",
+      fr: "Parlons de vos tâches répétitives. Quatre-vingt-dix minutes suffisent pour découvrir si un agent vaut la peine d'être construit, ou non. Vous recevez aussi une formation de base pour installer et faire tourner un agent, que vous prolongez ensuite en autonomie. Ou nous vous accompagnons dans Praxis : nous parcourons votre cas réel avec vous, et nous nous en servons pour apprendre à construire des systèmes et des agents en codant avec l'IA.",
     },
     cta: { en: "Book the 90-minute session", fr: "Réserver la séance de 90 min" },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },

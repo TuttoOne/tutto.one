@@ -250,8 +250,8 @@ export const copy = {
       fr: "« Je veux vraiment savoir m'en servir. »",
     },
     l2Body: {
-      en: "Praxis. One hour at a time, on your own work, until something you brought with you runs.",
-      fr: "Praxis. Une heure à la fois, sur votre propre travail, jusqu'à ce que ce que vous avez apporté fonctionne.",
+      en: "Praxis. Ninety minutes at a time, on your own work, until something you brought with you runs.",
+      fr: "Praxis. Quatre-vingt-dix minutes à la fois, sur votre propre travail, jusqu'à ce que ce que vous avez apporté fonctionne.",
     },
     l3Q: {
       en: "“I want the whole organisation to be.”",
@@ -382,32 +382,32 @@ export const copy = {
   praxis: {
     eyebrow: { en: "Praxis · Client training", fr: "Praxis · Formation client" },
     title: {
-      en: "A one-hour call that changes how you think about AI.",
-      fr: "Une heure d'échange qui change votre façon de penser l'IA.",
+      en: "Ninety minutes that change how you think about AI.",
+      fr: "Quatre-vingt-dix minutes qui changent votre façon de penser l'IA.",
     },
     lead1: {
-      en: "No technical background needed. The first thirty minutes covers the theory and principles - what AI actually is, how the folder-based system works, and why it changes everything. No jargon.",
-      fr: "Aucune compétence technique n'est requise. Les trente premières minutes portent sur la théorie et les principes : ce qu'est réellement l'IA, comment fonctionne le système fondé sur un simple dossier, et pourquoi cela change tout. Sans jargon.",
+      en: "No technical background needed. The first half covers the theory and principles - what AI actually is, how the folder-based system works, and why it changes everything. No jargon.",
+      fr: "Aucune compétence technique n'est requise. La première moitié porte sur la théorie et les principes : ce qu'est réellement l'IA, comment fonctionne le système fondé sur un simple dossier, et pourquoi cela change tout. Sans jargon.",
     },
     lead2: {
-      en: "The second thirty minutes is practical: on your own computer, with your own files. You follow along live as we build the system together. By the end of the hour you have a working setup and the mental model to take it further.",
-      fr: "Les trente minutes suivantes sont pratiques : sur votre propre ordinateur, avec vos propres fichiers. Vous suivez en direct pendant que nous construisons le système ensemble. Au bout d'une heure, vous disposez d'une installation qui fonctionne et du modèle mental pour aller plus loin.",
+      en: "The second half is practical: on your own computer, with your own files. You follow along live as we build the system together. By the end of the session you have a working setup and the mental model to take it further.",
+      fr: "La seconde moitié est pratique : sur votre propre ordinateur, avec vos propres fichiers. Vous suivez en direct pendant que nous construisons le système ensemble. À la fin de la séance, vous disposez d'une installation qui fonctionne et du modèle mental pour aller plus loin.",
     },
     meta: {
-      en: "Teams or Google Meet · Sessions run one hour · One to one, on your own files",
-      fr: "Teams ou Google Meet · Séances d'une heure · En tête-à-tête, sur vos propres fichiers",
+      en: "Teams or Google Meet · Sessions run 90 minutes · One to four people, on your own files",
+      fr: "Teams ou Google Meet · Séances de 90 minutes · De une à quatre personnes, sur vos propres fichiers",
     },
     /** What separates this from the group evenings on /calendar. */
     tailoredLabel: { en: "Send your own work first", fr: "Envoyez d'abord votre propre travail" },
     tailored: {
-      en: "This is one to one, and it is built on your material. When you book, send the use cases you actually care about — the quote you rewrite every week, the report nobody wants to do — and we learn on those rather than on a demonstration I prepared earlier. The group evenings run on generic examples by design; this does not.",
-      fr: "C'est un tête-à-tête, et il se construit sur vos documents. Au moment de réserver, envoyez les cas d'usage qui comptent vraiment pour vous — le devis que vous réécrivez chaque semaine, le rapport dont personne ne veut — et nous apprenons sur ceux-là plutôt que sur une démonstration préparée à l'avance. Les soirées collectives fonctionnent volontairement sur des exemples génériques ; celle-ci non.",
+      en: "This is private — one to four people — and it is built on your material. When you book, send the use cases you actually care about — the quote you rewrite every week, the report nobody wants to do — and we learn on those rather than on a demonstration I prepared earlier. The group evenings run on generic examples by design; this does not.",
+      fr: "C'est une séance privée — de une à quatre personnes — et elle se construit sur vos documents. Au moment de réserver, envoyez les cas d'usage qui comptent vraiment pour vous — le devis que vous réécrivez chaque semaine, le rapport dont personne ne veut — et nous apprenons sur ceux-là plutôt que sur une démonstration préparée à l'avance. Les soirées collectives fonctionnent volontairement sur des exemples génériques ; celle-ci non.",
     },
     ctaSecondary: { en: "Talk about training a team", fr: "Former une équipe" },
     programmeTitle: { en: "The eight-session programme", fr: "Le programme en huit séances" },
     programmeBody: {
-      en: "The one-hour session is the introduction. The full programme takes it further, over two months.",
-      fr: "La séance d'une heure est l'introduction. Le programme complet va plus loin, sur deux mois.",
+      en: "QuickStart is the introduction. The full programme takes it further over two months, or Fast track in four private sessions.",
+      fr: "QuickStart est l'introduction. Le programme complet va plus loin, sur deux mois, ou la formule accélérée, en quatre séances privées.",
     },
     programmeLink: { en: "See the Praxis Programme", fr: "Voir le programme Praxis" },
 
@@ -507,26 +507,44 @@ export const copy = {
     },
 
     s4Label: { en: "What it costs", fr: "Les tarifs" },
-    costToolsTitle: { en: "The tools", fr: "Les outils" },
     costTools: {
       en: "A code editor is free. A paid AI assistant subscription is about $20 a month. That is the only recurring cost, and it is not paid to us.",
       fr: "Un éditeur de code est gratuit. Un abonnement payant à un assistant IA coûte environ 20 $ par mois. C'est le seul coût récurrent, et il ne nous est pas versé.",
     },
-    costSessionTitle: { en: "The sessions", fr: "Les séances" },
-    /** No figure. Praxis is quoted as one total after discovery, because the
-     *  number depends on how many sessions the work actually needs — naming a
-     *  per-session rate here invited the reader to multiply it by a guess. */
-    costSessionPrice: { en: "On quotation", fr: "Sur devis" },
-    costSession: {
-      en: "One hour each: thirty minutes of theory and principles, then thirty minutes hands-on on your own computer. You leave with a working setup. We quote the programme as a single total once we know how many sessions the work needs.",
-      fr: "Une heure chacune : trente minutes de théorie et de principes, puis trente minutes de pratique sur votre propre ordinateur. Vous repartez avec une installation qui fonctionne. Nous chiffrons le programme en un total unique, une fois connu le nombre de séances nécessaires.",
+    /**
+     * The training ladder, cheapest first. Every paid step is the same €250
+     * per 90 minutes underneath, so the figures come from the price table.
+     */
+    ladderIntro: {
+      en: "We suggest starting with training.",
+      fr: "Nous vous conseillons de commencer par la formation.",
     },
-    costSprintTitle: { en: "Diagnostic", fr: "Diagnostic" },
-    costSprint: {
-      en: "One to two days for a simple project, longer for a larger one. We look at your real documents and workflows and tell you exactly what is possible.",
-      fr: "Un à deux jours pour un projet simple, davantage pour un projet plus important. Nous examinons vos documents et vos processus réels et vous disons précisément ce qui est possible.",
+    freeTitle: { en: "Free sessions", fr: "Séances gratuites" },
+    freePrice: { en: "Free", fr: "Gratuit" },
+    free: {
+      en: "Webinars we run from time to time: getting started, skills, connectors and projects. General rather than built around your use case — worth less to some people, and a good first look for others.",
+      fr: "Des webinaires organisés de temps en temps : premiers pas, compétences, connecteurs et projets. Généraux plutôt que construits autour de votre cas d'usage — moins utiles pour certains, un bon premier aperçu pour d'autres.",
     },
-
+    quickTitle: { en: "QuickStart", fr: "QuickStart" },
+    quick: {
+      en: "90 minutes, one to four people in a private group. Discovery on your use case, first setup and training, and your AI policy and agent scorecard to keep.",
+      fr: "90 minutes, de une à quatre personnes en groupe privé. La découverte de votre cas d'usage, une première installation et une formation, et votre politique IA et grille d'évaluation d'agent, que vous gardez.",
+    },
+    programmeCardTitle: { en: "Praxis", fr: "Praxis" },
+    /** `{session}` is the per-session rate, filled at render. */
+    programmeCard: {
+      en: "Eight 90-minute sessions, one to four people. We take your use case through policy, setup, build, evaluation and hosting options — built and assessed together. Or {session} a session, as you go.",
+      fr: "Huit séances de 90 minutes, de une à quatre personnes. Nous menons votre cas d'usage de la politique à l'installation, la réalisation, l'évaluation et les options d'hébergement — construit et évalué ensemble. Ou {session} la séance, à la carte.",
+    },
+    fastTitle: { en: "Fast track", fr: "Formule accélérée" },
+    fast: {
+      en: "Four 90-minute sessions, private and one to one, at your pace. Your use case, built and assessed together.",
+      fr: "Quatre séances de 90 minutes, privées et en tête-à-tête, à votre rythme. Votre cas d'usage, construit et évalué ensemble.",
+    },
+    billing: {
+      en: "QuickStart is paid by card at booking. Praxis and Fast track are invoiced, ex VAT.",
+      fr: "QuickStart se règle par carte à la réservation. Praxis et la formule accélérée sont facturés hors taxes.",
+    },
     s5Label: { en: "Before the session", fr: "Avant la séance" },
     prereqLabel: { en: "Please set up in advance", fr: "À préparer à l'avance" },
     prereq: {
@@ -1277,8 +1295,8 @@ export const copy = {
     },
     r1Title: { en: "Build it yourself", fr: "Le construire vous-même" },
     r1Body: {
-      en: "Praxis: one to one, on your own use cases, from an hour to eight sessions. You leave with a working tool for your own work, not with notes about one. There are group evenings too, cheaper and more general, if you would rather look before you commit.",
-      fr: "Praxis : en tête-à-tête, sur vos propres cas d'usage, d'une heure à huit séances. Vous repartez avec un outil qui fonctionne pour votre propre travail, et non avec des notes à son sujet. Il existe aussi des soirées collectives, moins chères et plus générales, si vous préférez regarder avant de vous engager.",
+      en: "Praxis: for one to four people, on your own use cases, from a 90-minute QuickStart to eight sessions. You leave with a working tool for your own work, not with notes about one. There are group evenings too, cheaper and more general, if you would rather look before you commit.",
+      fr: "Praxis : de une à quatre personnes, sur vos propres cas d'usage, d'un QuickStart de 90 minutes à huit séances. Vous repartez avec un outil qui fonctionne pour votre propre travail, et non avec des notes à son sujet. Il existe aussi des soirées collectives, moins chères et plus générales, si vous préférez regarder avant de vous engager.",
     },
     r2Title: { en: "Have it built", fr: "Le faire construire" },
     r2Body: {
@@ -1491,8 +1509,8 @@ export const copy = {
 
     programmeTitle: { en: "The Praxis Programme", fr: "Le programme Praxis" },
     programmeBody: {
-      en: "Eight sessions, one to one, built on use cases you send before we start. Where you learn to build rather than to apply. What you pay for these evenings comes off the price.",
-      fr: "Huit séances, en tête-à-tête, construites à partir de cas d'usage que vous envoyez avant de commencer. C'est là que l'on apprend à construire, et non seulement à appliquer. Ce que vous payez pour ces soirées est déduit du prix.",
+      en: "Eight sessions for one to four people, built on use cases you send before we start. Where you learn to build rather than to apply. What you pay for these evenings comes off the price.",
+      fr: "Huit séances, de une à quatre personnes, construites à partir de cas d'usage que vous envoyez avant de commencer. C'est là que l'on apprend à construire, et non seulement à appliquer. Ce que vous payez pour ces soirées est déduit du prix.",
     },
     programmeLink: { en: "See the programme", fr: "Voir le programme" },
 

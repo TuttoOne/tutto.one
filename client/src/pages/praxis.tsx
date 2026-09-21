@@ -16,11 +16,11 @@ import {
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { useTrainerCode, bookingHref } from "@/lib/trainer-code";
-import { price, perDay } from "@/lib/pricing";
+import { price, praxisEconomics } from "@/lib/pricing";
 
-/* The free 15-minute intro, not the session itself. Praxis is quoted as a
-   total after a conversation, so there is nothing on this page to pay for at
-   the click — every CTA here opens a conversation rather than selling an hour. */
+/* The free 15-minute intro, not a paid session. Only QuickStart is paid at
+   booking, and it is sold from the landing page; everything priced here is
+   invoiced, so every CTA on this page opens a conversation. */
 const BOOKING = "https://cal.com/tuttoone/15min";
 
 export default function Praxis() {
@@ -34,8 +34,8 @@ export default function Praxis() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "Praxis — une heure qui change votre façon de penser l'IA | Tutto"
-        : "Praxis — One hour that changes how you think about AI | Tutto";
+        ? "Praxis — 90 minutes qui changent votre façon de penser l'IA | Tutto"
+        : "Praxis — Ninety minutes that change how you think about AI | Tutto";
     return () => {
       document.title = SITE_TITLE;
     };
@@ -203,23 +203,25 @@ export default function Praxis() {
         </Section>
 
         <Section index="04" label={t(copy.praxis.s4Label)}>
-          <CardGrid cols={3}>
-            <PriceRow title={t(copy.praxis.costToolsTitle)} price={`${p("toolsMonthly")}/mo`}>
-              {t(copy.praxis.costTools)}
+          <p className="mb-6 text-lg font-serif font-bold">{t(copy.praxis.ladderIntro)}</p>
+          <CardGrid cols={2}>
+            <PriceRow title={t(copy.praxis.freeTitle)} price={t(copy.praxis.freePrice)}>
+              {t(copy.praxis.free)}
             </PriceRow>
-            <PriceRow
-              title={t(copy.praxis.costSessionTitle)}
-              price={t(copy.praxis.costSessionPrice)}
-            >
-              {t(copy.praxis.costSession)}
+            <PriceRow title={t(copy.praxis.quickTitle)} price={p("discoverySession")}>
+              {t(copy.praxis.quick)}
             </PriceRow>
-            <PriceRow
-              title={t(copy.praxis.costSprintTitle)}
-              price={perDay("diagnosticDay", currency, locale)}
-            >
-              {t(copy.praxis.costSprint)}
+            <PriceRow title={t(copy.praxis.programmeCardTitle)} price={praxisEconomics(currency, locale).course}>
+              {t(copy.praxis.programmeCard).replace("{session}", p("sessionStandard"))}
+            </PriceRow>
+            <PriceRow title={t(copy.praxis.fastTitle)} price={p("fastTrack")}>
+              {t(copy.praxis.fast)}
             </PriceRow>
           </CardGrid>
+          <div className="mt-6 max-w-3xl space-y-2 text-sm text-muted-foreground leading-relaxed">
+            <p>{t(copy.praxis.billing)}</p>
+            <p>{t(copy.praxis.costTools)}</p>
+          </div>
         </Section>
 
         <Section index="05" label={t(copy.praxis.s5Label)}>

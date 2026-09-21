@@ -202,6 +202,7 @@ function Pricing() {
   const { build, class: entry } = landing.pricing;
   const buildPrice = price("agentBuildFrom", currency, locale);
   const buildMonthly = perMonth("agentMonthly", currency, locale);
+  const sessionPrice = price("sessionStandard", currency, locale);
 
   return (
     <Section label={t(landing.pricing.label)}>
@@ -218,7 +219,7 @@ function Pricing() {
         <HeadlinePrice
           title={t(entry.title)}
           price={entryPrice}
-          note={t(entry.note)}
+          note={t(entry.note).replace("{session}", sessionPrice)}
         >
           {t(entry.body)}
         </HeadlinePrice>

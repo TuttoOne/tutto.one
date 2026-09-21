@@ -88,7 +88,7 @@ const faqs = [
   },
   {
     q: "One-to-one or a group?",
-    a: "Both are available. Tell me which suits you and we will shape it accordingly.",
+    a: "Praxis runs for one to four people, so you can bring a few colleagues. Fast track is private: one to one, in four sessions, at your pace.",
   },
 ];
 
@@ -177,7 +177,7 @@ export default function PraxisProgramme() {
               href="#get-started"
               style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
             >{tr("Book an intro call →")}</a>
-            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>{tr("One-to-one or small group · Online or in person")}</span>
+            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>{tr("One to four people · Online or in person")}</span>
           </div>
         </div>
 
@@ -304,9 +304,9 @@ export default function PraxisProgramme() {
           </div>
           <div className="pp-cols-2">
             {[
-              { label: "Format", body: "One-to-one, or a small group of your own people. Either way it is built around you, not around a syllabus." },
+              { label: "Format", body: "Up to four people: on your own, or with a few of your own colleagues. For one to one at your own pace, take Fast track. Either way it is built around your use case, not around a syllabus." },
               { label: "Your use cases", body: "Send the work you want to fix when you register - the quote, the report, the weekly export. We learn on your examples from the first session. The group evenings run on generic ones; this does not." },
-              { label: "Cadence", body: "One session a week, about an hour each, over roughly two months. A short practice task between each session." },
+              { label: "Cadence", body: "One session a week, 90 minutes each, over roughly two months. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
               { label: "What you need", body: "A laptop - Mac or Windows. An account with the AI assistant of your choice. We set up everything else together in the first session." },
             ].map((item) => (
@@ -335,24 +335,27 @@ export default function PraxisProgramme() {
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
             <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What It Costs")}</h2>
           </div>
-          <div className="pp-cols-3">
+          <div className="pp-cols-2">
             {[
               {
-                label: "Intro session",
-                price: econ.intro,
-                note: tr("Two hours. Credited in full against the full programme."),
+                label: "QuickStart",
+                price: econ.quickStart,
+                note: tr("90 minutes, one to four people. Discovery on your use case, first setup and training, and your AI policy and agent scorecard to keep. Paid by card when you book."),
               },
               {
                 label: "Per session",
                 price: econ.session,
-                note: tr("One hour each. Pay as you go, or commit to the full programme."),
+                note: tr("90 minutes each, one to four people. Pay as you go, or commit to the full programme."),
               },
               {
                 label: "Full programme",
                 price: econ.course,
-                note: fill("All eight sessions. {after} after your intro session credit.", {
-                  after: econ.courseAfterIntro,
-                }),
+                note: tr("All eight sessions. We take your use case from policy and setup through to a build, its evaluation and your hosting options — built and assessed together."),
+              },
+              {
+                label: "Fast track",
+                price: econ.fastTrack,
+                note: tr("Four 90-minute sessions, private and one to one, at your pace. Your use case, built and assessed together."),
               },
             ].map((p) => (
               <div
@@ -386,6 +389,11 @@ export default function PraxisProgramme() {
               {tr("Referral credits apply to courses taught by participating trainers.")}
             </p>
           </div>
+          <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 20, maxWidth: 560 }}>
+            {tr("QuickStart is paid by card at booking. Praxis sessions, the full programme and Fast track are invoiced, ex VAT.")}{" "}
+            {tr("We also run free sessions from time to time. They are general rather than built around your use case —")}{" "}
+            <a href="/calendar" style={{ color: "#d97706" }}>{tr("see Events")}</a>.
+          </p>
           <div style={{ marginTop: 20, padding: "16px 20px", background: "#f0ece6", borderRadius: 8, maxWidth: 560 }}>
             <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>
               {tr("Running the tools you build costs about")}{" "}

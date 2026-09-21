@@ -6,14 +6,14 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Build your own tools": "Construisez vos propres outils",
   "with an AI assistant.": "avec un assistant IA.",
   "Book an intro call →": "Réserver un premier échange →",
-  "One-to-one or small group · Online or in person":
-    "En individuel ou en petit groupe · À distance ou sur place",
+  "One to four people · Online or in person":
+    "De une à quatre personnes · À distance ou sur place",
   "Praxis Programme · Eight Sessions · V1": "Programme Praxis · Huit séances · V1",
   "You will not learn to code.": "Vous n'apprendrez pas à coder.",
   "You will learn to build.": "Vous apprendrez à construire.",
 
-  "One-to-one, or a small group of your own people. Either way it is built around you, not around a syllabus.":
-    "En t\u00eate-\u00e0-t\u00eate, ou en petit groupe compos\u00e9 de vos propres collaborateurs. Dans les deux cas, le programme se construit autour de vous, et non autour d'un r\u00e9f\u00e9rentiel.",
+  "Up to four people: on your own, or with a few of your own colleagues. For one to one at your own pace, take Fast track. Either way it is built around your use case, not around a syllabus.":
+    "Jusqu'à quatre personnes : seul, ou avec quelques-uns de vos collaborateurs. Pour un tête-à-tête à votre rythme, choisissez la formule accélérée. Dans les deux cas, tout se construit autour de votre cas d'usage, et non autour d'un référentiel.",
   "Your use cases": "Vos cas d'usage",
   "Send the work you want to fix when you register - the quote, the report, the weekly export. We learn on your examples from the first session. The group evenings run on generic ones; this does not.":
     "Envoyez \u00e0 l'inscription le travail que vous voulez corriger : le devis, le rapport, l'export hebdomadaire. Nous apprenons sur vos exemples d\u00e8s la premi\u00e8re s\u00e9ance. Les soir\u00e9es collectives fonctionnent sur des exemples g\u00e9n\u00e9riques ; ce programme, non.",
@@ -117,8 +117,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "You get a practice task and a clear way to get unstuck. When something breaks, the fix is usually one screenshot away, and learning that habit is part of the programme.":
     "Vous repartez avec un exercice et une marche à suivre claire pour vous débloquer. Quand quelque chose casse, la solution tient le plus souvent à une capture d'écran — et acquérir ce réflexe fait partie du programme.",
   "One-to-one or a group?": "En individuel ou en groupe ?",
-  "Both are available. Tell me which suits you and we will shape it accordingly.":
-    "Les deux sont possibles. Dites-moi ce qui vous convient et nous adapterons le format.",
+  "Praxis runs for one to four people, so you can bring a few colleagues. Fast track is private: one to one, in four sessions, at your pace.":
+    "Praxis accueille de une à quatre personnes : vous pouvez venir avec quelques collègues. La formule accélérée est privée : en tête-à-tête, en quatre séances, à votre rythme.",
 
   // --- Who this is for ---
   "Hit the ceiling": "Vous plafonnez",
@@ -163,24 +163,31 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "One-to-one or small group. You choose what suits you.":
     "En individuel ou en petit groupe. Vous choisissez ce qui vous convient.",
   Cadence: "Rythme",
-  "One session a week, about an hour each, over roughly two months. A short practice task between each session.":
-    "Une séance par semaine, d'environ une heure, sur près de deux mois. Un court exercice entre chaque séance.",
+  "One session a week, 90 minutes each, over roughly two months. A short practice task between each session.":
+    "Une séance par semaine, de 90 minutes, sur près de deux mois. Un court exercice entre chaque séance.",
   Where: "Lieu",
   "Online, via Teams or Google Meet. In person on request.":
     "À distance, via Teams ou Google Meet. Sur place à la demande.",
   "What you need": "Ce qu'il vous faut",
 
   // --- Pricing ---
-  "Intro session": "Séance d'introduction",
-  "Two hours. Credited in full against the full programme.":
-    "Deux heures. Intégralement déduite du programme complet.",
+  QuickStart: "QuickStart",
+  "90 minutes, one to four people. Discovery on your use case, first setup and training, and your AI policy and agent scorecard to keep. Paid by card when you book.":
+    "90 minutes, de une à quatre personnes. La découverte de votre cas d'usage, une première installation et une formation, et votre politique IA et grille d'évaluation d'agent, que vous gardez. Réglée par carte à la réservation.",
   "Per session": "Par séance",
-  "One hour each. Pay as you go, or commit to the full programme.":
-    "Une heure chacune. À la carte, ou en vous engageant sur le programme complet.",
+  "90 minutes each, one to four people. Pay as you go, or commit to the full programme.":
+    "90 minutes chacune, de une à quatre personnes. À la carte, ou en vous engageant sur le programme complet.",
   "Full programme": "Programme complet",
-  /** `{after}` is the programme price less the intro credit, in the reader's currency. */
-  "All eight sessions. {after} after your intro session credit.":
-    "Les huit séances. {after} après déduction de la séance d'introduction.",
+  "All eight sessions. We take your use case from policy and setup through to a build, its evaluation and your hosting options — built and assessed together.":
+    "Les huit séances. Nous menons votre cas d'usage de la politique et de l'installation jusqu'à une réalisation, son évaluation et vos options d'hébergement — construit et évalué ensemble.",
+  "Fast track": "Formule accélérée",
+  "Four 90-minute sessions, private and one to one, at your pace. Your use case, built and assessed together.":
+    "Quatre séances de 90 minutes, privées et en tête-à-tête, à votre rythme. Votre cas d'usage, construit et évalué ensemble.",
+  "QuickStart is paid by card at booking. Praxis sessions, the full programme and Fast track are invoiced, ex VAT.":
+    "QuickStart se règle par carte à la réservation. Les séances Praxis, le programme complet et la formule accélérée sont facturés hors taxes.",
+  "We also run free sessions from time to time. They are general rather than built around your use case —":
+    "Nous organisons aussi, de temps en temps, des séances gratuites. Elles sont générales, et non construites autour de votre cas d'usage —",
+  "see Events": "voir les événements",
   /** `{credit}` per enrolment, `{cap}` the ceiling on stacked credits. */
   "Refer a friend: {credit} off your programme for every person you refer who enrols, up to {cap}.":
     "Parrainage : {credit} de réduction sur votre programme pour chaque personne parrainée qui s'inscrit, jusqu'à {cap}.",
