@@ -7,6 +7,7 @@ import { serveStatic } from "./static";
 import { guardPythiaDemo } from "./pythia-demo";
 import { createServer } from "http";
 import { seedBlogPostsIfEmpty } from "./seed-blog";
+import { ensureSchema } from "./ensure-schema";
 import { clearStalePortfolioOverride } from "./cleanup-portfolio-override";
 
 const app = express();
@@ -75,6 +76,13 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Deploys don't run db:push, so add any new columns before routes use them.
+  try {
+    await ensureSchema();
+  } catch (err) {
+    console.error("Failed to ensure the database schema:", err);
+  }
+
   // Seed blog posts on startup if empty
   try {
     await seedBlogPostsIfEmpty();
