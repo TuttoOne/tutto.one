@@ -36,8 +36,8 @@ export const BECOME_A_TRAINER_FR: FrDict = {
     "Clients que vous amenez vous-même : vous conservez 80 % des frais de formation payés. Un client est le vôtre lorsque sa réservation porte votre code formateur.",
   "Clients Tutto brings in: you keep 60% of the tuition they pay.":
     "Clients amenés par Tutto : vous conservez 60 % des frais de formation payés.",
-  "The intro session is paid to whoever delivered it. Its credit comes off the programme price, and the programme trainer's share is calculated on what is actually paid after that.":
-    "La séance d'introduction est rémunérée à celui ou celle qui l'a animée. Son crédit est déduit du prix du programme, et la part du formateur du programme se calcule sur ce qui est effectivement payé ensuite.",
+  "Fast track is four private sessions at the same rate, so the same split applies. There is no intro credit against the programme, so your share is calculated on the full tuition.":
+    "La formule accélérée compte quatre séances privées au même tarif : la même répartition s'applique. Aucun crédit d'introduction n'est déduit du programme, votre part se calcule donc sur la totalité des frais de formation.",
   "Referral credits are optional for trainers, and off unless you opt in. If you opt in, your courses offer the credit and your share is calculated after it. If you do not, your courses do not offer it. Referral credits never apply to the trainer track itself.":
     "Le parrainage est optionnel pour les formateurs, et désactivé sauf adhésion de votre part. Si vous y adhérez, vos cours proposent le crédit et votre part est calculée après celui-ci. Sinon, vos cours ne le proposent pas. Les crédits de parrainage ne s'appliquent jamais au parcours formateur lui-même.",
 

@@ -387,7 +387,7 @@ export default function BecomeATrainer() {
               "Whoever delivers a session is paid for it.",
               "Clients you bring in yourself: you keep 80% of the tuition they pay. A client is yours when their booking carries your trainer code.",
               "Clients Tutto brings in: you keep 60% of the tuition they pay.",
-              "The intro session is paid to whoever delivered it. Its credit comes off the programme price, and the programme trainer's share is calculated on what is actually paid after that.",
+              "Fast track is four private sessions at the same rate, so the same split applies. There is no intro credit against the programme, so your share is calculated on the full tuition.",
               "Referral credits are optional for trainers, and off unless you opt in. If you opt in, your courses offer the credit and your share is calculated after it. If you do not, your courses do not offer it. Referral credits never apply to the trainer track itself.",
             ].map((line) => (
               <p key={line} style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 12, paddingLeft: 16, borderLeft: "2px solid #e8e0d5" }}>{tr(line)}</p>

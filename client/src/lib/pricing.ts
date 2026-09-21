@@ -198,8 +198,8 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    * The six-session in-company Article 4 engagement, for one cohort on the
    * client's own site.
    *
-   * Deliberately NOT derived from the session rate. `sessionStandard` prices an
-   * hour of one-to-one time; this prices six days inside a company, the travel,
+   * Deliberately NOT derived from the session rate. `sessionStandard` prices 90
+   * minutes with one to four people; this prices six days inside a company, the travel,
    * the sector re-skin and the compliance documentation that comes out at the
    * end. Deriving it would make the two move together, and they should not.
    */
