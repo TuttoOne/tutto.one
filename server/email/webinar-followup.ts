@@ -16,6 +16,8 @@ export type WebinarEmailOptions = {
   replayUrl?: string;
   /** Recipient's first name, if known. */
   firstName?: string;
+  /** False for people who registered but didn't join: they get the "you missed it" opening. */
+  attended?: boolean;
   /** Where the logo image is served from. Defaults to the live site. */
   assetBaseUrl?: string;
 };
@@ -137,8 +139,10 @@ function h2(text: string): string {
 type Copy = {
   label: string;
   headline: string;
+  headlineMissed: string;
   hello: (name?: string) => string;
   thanks: string[];
+  thanksMissed: string[];
   readRecap: string;
   watchReplay: string;
   replayPending: string;
@@ -156,7 +160,12 @@ type Copy = {
 const FR: Copy = {
   label: "Tutto × Altiplane · Webinaire",
   headline: "Merci d'avoir été là !",
+  headlineMissed: "Tout ce que vous avez manqué lundi",
   hello: (name) => (name ? `Bonjour ${name},` : "Bonjour,"),
+  thanksMissed: [
+    "Vous n'avez pas pu être des nôtres lundi soir pour « Aborde ta rentrée IA avec Claude » ? Pas de souci : merci de votre inscription, et voici tout ce que vous avez manqué.",
+    "Le replay complet est en ligne, avec un compte rendu détaillé : chaque étape de la démo en captures d'écran, tous les prompts, les instructions du projet et les deux skills, prêts à copier.",
+  ],
   thanks: [
     "Merci d'avoir participé lundi soir à « Aborde ta rentrée IA avec Claude ». Vos questions ont rendu la session vivante, et elles nous ont donné de quoi préparer la suite.",
     "Comme promis, le compte rendu complet est en ligne : chaque étape de la démo en captures d'écran, tous les prompts, les instructions du projet et les deux skills, prêts à copier.",
@@ -187,7 +196,12 @@ const FR: Copy = {
 const EN: Copy = {
   label: "Tutto × Altiplane · Webinar",
   headline: "Thank you for joining us!",
+  headlineMissed: "Everything you missed on Monday",
   hello: (name) => (name ? `Hi ${name},` : "Hi,"),
+  thanksMissed: [
+    "Couldn't make it to « Aborde ta rentrée IA avec Claude » on Monday evening? No problem: thank you for registering, and here's everything you missed.",
+    "The full replay is online, along with a detailed recap: every step of the demo with screenshots, all the prompts, the project instructions and both skills, ready to copy.",
+  ],
   thanks: [
     "Thank you for joining « Aborde ta rentrée IA avec Claude » on Monday evening. Your questions made the session come alive, and they've given us plenty to build on.",
     "As promised, the full recap is online: every step of the demo with screenshots, all the prompts, the project instructions and both skills, ready to copy.",
@@ -216,6 +230,9 @@ const EN: Copy = {
 };
 
 function sectionHtml(copy: Copy, opts: WebinarEmailOptions): string {
+  const missed = opts.attended === false;
+  const headline = missed ? copy.headlineMissed : copy.headline;
+  const thanks = missed ? copy.thanksMissed : copy.thanks;
   const buttons =
     button(copy.readRecap, opts.blogUrl, true) + (opts.replayUrl ? button(copy.watchReplay, opts.replayUrl, false) : "");
   const replayNote = opts.replayUrl ? "" : `<p style="${P}margin-top:4px;font-size:13px;">${escapeHtml(copy.replayPending)}</p>`;
@@ -223,13 +240,13 @@ function sectionHtml(copy: Copy, opts: WebinarEmailOptions): string {
   return [
     `<tr><td style="background:${NAVY};border-radius:10px;padding:28px;">
       <p style="margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:${ORANGE};">${escapeHtml(copy.label)}</p>
-      <p style="margin:0;font-size:24px;line-height:1.25;font-weight:800;color:${CREAM};">${escapeHtml(copy.headline)}</p>
+      <p style="margin:0;font-size:24px;line-height:1.25;font-weight:800;color:${CREAM};">${escapeHtml(headline)}</p>
     </td></tr>
     <tr><td style="height:20px;line-height:20px;">&nbsp;</td></tr>`,
     card(
       row(
         `<p style="${P}color:${INK};">${escapeHtml(copy.hello(opts.firstName))}</p>` +
-          copy.thanks.map((t) => `<p style="${P}">${escapeHtml(t)}</p>`).join("") +
+          thanks.map((t) => `<p style="${P}">${escapeHtml(t)}</p>`).join("") +
           `<div style="margin-top:8px;">${buttons}</div>${replayNote}`,
       ),
     ),
@@ -253,12 +270,13 @@ function sectionHtml(copy: Copy, opts: WebinarEmailOptions): string {
 }
 
 function sectionText(copy: Copy, opts: WebinarEmailOptions): string {
+  const missed = opts.attended === false;
   return [
-    copy.headline.toUpperCase(),
+    (missed ? copy.headlineMissed : copy.headline).toUpperCase(),
     "",
     copy.hello(opts.firstName),
     "",
-    ...copy.thanks.flatMap((t) => [t, ""]),
+    ...(missed ? copy.thanksMissed : copy.thanks).flatMap((t) => [t, ""]),
     `${copy.readRecap} : ${opts.blogUrl}`,
     opts.replayUrl ? `${copy.watchReplay} : ${opts.replayUrl}` : copy.replayPending,
     "",
@@ -281,6 +299,12 @@ function sectionText(copy: Copy, opts: WebinarEmailOptions): string {
 
 export type EmailLanguage = "both" | "fr" | "en";
 
+const SUBJECTS_MISSED: Record<EmailLanguage, string> = {
+  both: "Le replay et le récap du webinaire « Aborde ta rentrée IA avec Claude »",
+  fr: "Le replay et le récap du webinaire « Aborde ta rentrée IA avec Claude »",
+  en: "The replay and recap of the « Aborde ta rentrée IA avec Claude » webinar",
+};
+
 const SUBJECTS: Record<EmailLanguage, string> = {
   both: "Merci ! Le récap du webinaire « Aborde ta rentrée IA avec Claude »",
   fr: "Merci ! Le récap du webinaire « Aborde ta rentrée IA avec Claude »",
@@ -295,7 +319,7 @@ export function buildWebinarEmail(
   opts: WebinarEmailOptions & { lang?: EmailLanguage },
 ): { subject: string; html: string; text: string } {
   const lang = opts.lang ?? "both";
-  const subject = SUBJECTS[lang];
+  const subject = (opts.attended === false ? SUBJECTS_MISSED : SUBJECTS)[lang];
 
   const logo = `${opts.assetBaseUrl ?? "https://tutto.one"}${LOGO_PATH}`;
   const header = `<tr><td style="padding:4px 0 24px;">

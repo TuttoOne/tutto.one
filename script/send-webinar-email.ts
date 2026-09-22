@@ -3,11 +3,14 @@
  *
  *   npx tsx script/send-webinar-email.ts             dry run: writes webinar-email-preview.html, lists recipients
  *   npx tsx script/send-webinar-email.ts --test      sends one copy to TEST_EMAIL (default daniel@tutto.one)
+ *   npx tsx script/send-webinar-email.ts --rehearse  builds every real email but delivers them to Resend's test inbox
  *   npx tsx script/send-webinar-email.ts --send      sends to everyone in attendees.csv
  *
  * Options: --lang=en or --lang=fr sends one language only (default: French
  * then English); --to=someone@example.com overrides TEST_EMAIL for --test;
- * --name=Franz sets the greeting on a --test send; --joined=yes or --joined=no
+ * --name=Franz sets the greeting on a --test send (--attended=no tests the
+ * "you missed it" version); --plain=Name1,Name2 greets those names with a
+ * plain "Bonjour,"; --joined=yes or --joined=no
  * filters a Luma export on has_joined_event.
  *
  * attendees.csv (not committed): either "email,first name" per line, or an
@@ -33,7 +36,7 @@ const TEST_EMAIL = process.env.TEST_EMAIL ?? "daniel@tutto.one";
 const PREVIEW = "webinar-email-preview.html";
 const BATCH_SIZE = 100; // Resend's batch limit
 
-type Recipient = { email: string; firstName?: string };
+type Recipient = { email: string; firstName?: string; attended?: boolean };
 
 /** Splits CSV text into rows, honouring quoted fields ("Dupont, Jean"). */
 function parseCsv(text: string): string[][] {
@@ -82,7 +85,12 @@ function readAttendees(path: string, joined: "yes" | "no" | "all"): Recipient[] 
     if (joined !== "all" && row[joinedCol]?.trim().toLowerCase() !== joined) continue;
     if (seen.has(email)) continue;
     seen.add(email);
-    out.push({ email, firstName: row[nameCol]?.trim().split(/\s+/)[0] || undefined });
+    const joinedCell = joinedCol >= 0 ? row[joinedCol]?.trim().toLowerCase() : undefined;
+    out.push({
+      email,
+      firstName: row[nameCol]?.trim().split(/\s+/)[0] || undefined,
+      attended: joinedCell === undefined ? undefined : joinedCell === "yes",
+    });
   }
   return out;
 }
@@ -92,13 +100,26 @@ function flag(name: string): string | undefined {
 }
 
 async function main() {
-  const mode = process.argv.includes("--send") ? "send" : process.argv.includes("--test") ? "test" : "dry";
+  const mode = process.argv.includes("--send")
+    ? "send"
+    : process.argv.includes("--rehearse")
+      ? "rehearse"
+      : process.argv.includes("--test")
+        ? "test"
+        : "dry";
   const lang = (flag("lang") ?? "both") as EmailLanguage;
   if (!["both", "fr", "en"].includes(lang)) throw new Error(`--lang must be fr, en or both (got "${lang}").`);
   const joined = (flag("joined") ?? "all") as "yes" | "no" | "all";
   if (!["yes", "no", "all"].includes(joined)) throw new Error(`--joined must be yes, no or all (got "${joined}").`);
   const testTo = flag("to") ?? TEST_EMAIL;
-  const recipients = mode === "test" ? [{ email: testTo, firstName: flag("name") ?? "Daniel" }] : readAttendees(ATTENDEES, joined);
+  // --plain=Vautrin,Toudonou: names that look like surnames get "Bonjour," alone.
+  const plain = new Set((flag("plain") ?? "").split(",").map((n) => n.trim().toLowerCase()).filter(Boolean));
+  const recipients: Recipient[] =
+    mode === "test"
+      ? [{ email: testTo, firstName: flag("name") ?? "Daniel", attended: flag("attended") !== "no" }]
+      : readAttendees(ATTENDEES, joined).map((r) =>
+          r.firstName && plain.has(r.firstName.toLowerCase()) ? { ...r, firstName: undefined } : r,
+        );
 
   const preview = buildWebinarEmail({ blogUrl: BLOG_URL, replayUrl: REPLAY_URL, lang });
   console.log(`Subject:  ${preview.subject}`);
@@ -109,10 +130,13 @@ async function main() {
   console.log(`HTML:     ${(Buffer.byteLength(preview.html) / 1024).toFixed(1)} KB (Gmail clips above ~102 KB)`);
   console.log(`To:       ${recipients.length} recipient(s)`);
 
+  const describe = (r: Recipient) =>
+    `  ${r.email}  ${r.firstName ? `Bonjour ${r.firstName}` : "Bonjour,"}${r.attended === false ? "  [missed it]" : ""}`;
+
   if (mode === "dry") {
     fs.writeFileSync(PREVIEW, preview.html);
     console.log(`\nPreview written to ${PREVIEW}.`);
-    for (const r of recipients) console.log(`  ${r.email}${r.firstName ? ` (${r.firstName})` : ""}`);
+    for (const r of recipients) console.log(describe(r));
     if (recipients.length === 0) console.log(`  No attendees found in ${ATTENDEES}.`);
     console.log("\nNothing sent. Use --test, then --send.");
     return;
@@ -124,9 +148,12 @@ async function main() {
 
   for (let i = 0; i < recipients.length; i += BATCH_SIZE) {
     const chunk = recipients.slice(i, i + BATCH_SIZE);
-    const payload = chunk.map((r) => {
-      const email = buildWebinarEmail({ blogUrl: BLOG_URL, replayUrl: REPLAY_URL, firstName: r.firstName, lang });
-      return { from: FROM_EMAIL, to: r.email, replyTo: REPLY_TO, subject: email.subject, html: email.html, text: email.text };
+    const payload = chunk.map((r, j) => {
+      const email = buildWebinarEmail({ blogUrl: BLOG_URL, replayUrl: REPLAY_URL, firstName: r.firstName, attended: r.attended, lang });
+      // A rehearsal builds every real, personalised email but delivers each one
+      // to Resend's test inbox instead of the person.
+      const to = mode === "rehearse" ? `delivered+${i + j + 1}@resend.dev` : r.email;
+      return { from: FROM_EMAIL, to, replyTo: REPLY_TO, subject: email.subject, html: email.html, text: email.text };
     });
     // The idempotency key stops an accidental second --send (within 24h) from
     // mailing everyone twice. Test sends are left unkeyed so they can repeat.
