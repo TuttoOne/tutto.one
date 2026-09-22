@@ -29,6 +29,20 @@ export interface IStorage {
   upsertSiteContent(key: string, value: string): Promise<SiteContent>;
 }
 
+// Posts carry their publication date as display text ("Sep 22, 2026"), and
+// createdAt only records when a row was seeded, which bunches the originals
+// together. So order by the displayed date, newest first; a date that doesn't
+// parse sinks to the end, and ties fall back to the most recently created.
+function sortNewestFirst(posts: BlogPost[]): BlogPost[] {
+  const time = (p: BlogPost) => {
+    const t = Date.parse(p.date);
+    return Number.isNaN(t) ? -Infinity : t;
+  };
+  return [...posts].sort(
+    (a, b) => time(b) - time(a) || new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+}
+
 export class DatabaseStorage implements IStorage {
   async createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission> {
     const [result] = await db.insert(contactSubmissions).values(submission).returning();
@@ -49,12 +63,10 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllBlogPosts(publishedOnly = false): Promise<BlogPost[]> {
-    if (publishedOnly) {
-      return await db.select().from(blogPosts)
-        .where(eq(blogPosts.published, true))
-        .orderBy(blogPosts.createdAt);
-    }
-    return await db.select().from(blogPosts).orderBy(blogPosts.createdAt);
+    const posts = publishedOnly
+      ? await db.select().from(blogPosts).where(eq(blogPosts.published, true))
+      : await db.select().from(blogPosts);
+    return sortNewestFirst(posts);
   }
 
   async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
