@@ -25,6 +25,7 @@ import { post as importantStepsAiJourney } from "./important-steps-ai-journey";
 import { post as legalragOnPremiseAi } from "./legalrag-on-premise-ai";
 import { post as mcpBridgeSharepoint } from "./mcp-bridge-sharepoint";
 import { post as anthropicLaborMarketResearch } from "./anthropic-labor-market-research";
+import { post as abordeTaRentreeIaAvecClaude } from "./aborde-ta-rentree-ia-avec-claude";
 
 export const POST_FR: Record<string, PostFr> = {
   "the-best-combination": theBestCombination,
@@ -35,4 +36,5 @@ export const POST_FR: Record<string, PostFr> = {
   "legalrag-on-premise-ai": legalragOnPremiseAi,
   "mcp-bridge-sharepoint": mcpBridgeSharepoint,
   "anthropic-labor-market-research": anthropicLaborMarketResearch,
+  "aborde-ta-rentree-ia-avec-claude": abordeTaRentreeIaAvecClaude,
 };

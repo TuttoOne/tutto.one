@@ -1,4 +1,5 @@
 import { storage } from "./storage";
+import { WEBINAR_SLUG, FAQ_EN, faqToMarkdown } from "@shared/webinar-rentree-ia";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // This is the SINGLE source of truth for seeding blog posts into the database.
@@ -151,7 +152,7 @@ The [Praxis course library](https://tutto.one/courses) covers seventeen tracks:
 - **First Steps with AI** and **Start Here** - the on-ramp, for people who have not used any of this before
 - **Claude 101** and **Claude Code 101** - the foundations, including how the tools work and what they are actually good for
 - **Claude Code in Action** and the **Anthropic API** track - getting into the practical layer, connecting tools, building real things
-- **Model Context Protocol** - how AI connects to the software you already use
+- *Model Context Protocol* - how AI connects to the software you already use
 - **Agent Skills** and **Subagents** - how to build things that can take actions, not just answer questions
 - **AI Capabilities and Limitations** - what the models can and cannot do, and how to tell the difference
 - **AI Fluency** tracks for educators and small businesses - the same foundations applied to specific contexts
@@ -682,6 +683,245 @@ The mountain image is the bit I'll keep, though. Not because it's profound - bec
 ---
 
 *Sources: the Zhang Xiaojun podcast interview with Yang Zhilin (published August 2025). Direct transcript access was blocked, so quotes and claims here come from published translations and detailed coverage of the same interview - primarily China Story's translated analysis and The AI Corner's breakdown, plus contextual reporting on Kimi's 2025 user rankings. Quoted lines are translations from Mandarin and vary between sources; treat them as faithful paraphrases rather than verbatim English. Where I've added assessment - the open-source section, the management section, and the closing - that's mine, not his.*`,
+  },
+  {
+    slug: WEBINAR_SLUG,
+    title: "Start the new season with Claude: webinar recap",
+    excerpt: "Connectors, projects, skills and routines, demonstrated live on a real business case. The steps, the prompts to copy, and an FAQ that completes the answers we gave during the session.",
+    date: "Sep 22, 2026",
+    readTime: "16 min read",
+    introCard: JSON.stringify({
+      tagline: "Tutto × Altiplane · Webinar, 21 September 2026",
+      headline: "Start the new season with Claude",
+      sub: "Connectors, projects, skills and routines: the full recap, the prompts we used and answers to your questions.",
+      cobrand: "altiplane",
+    }),
+    published: true,
+    content: `On Monday 21 September, Franz Kubach (Altiplane) and Daniel Forsthofer (Tutto) ran a live webinar (in French) on moving from "I do things with AI" to "AI also does things for me". No lecture: a real-world demo, with its wins, a mistake or two (the educational kind), and plenty of questions. Thank you to everyone who joined.
+
+This post walks through everything we showed, step by step, with the prompts and skills to copy, followed by an FAQ that completes the answers we gave live. The prompts are in English here; the French originals are in the French version of this page.
+
+[VIDEO:]
+
+## The four pillars
+
+By the end of the session, the aim was for you to know how to:
+1. **connect your apps** to Claude (the MCP technology, for Model Context Protocol);
+2. use a **project** to run your business or personal projects from one place;
+3. define **skills** so you never have to make the same request hundreds of times;
+4. automate it all with **routines** that work while you sleep or have a coffee.
+
+Two framing points first. **AI never answers the same way twice**: you can't predict exactly what it will produce, and it will probably get something wrong, even in a live demo. And working with Claude is like welcoming **a new hire**: they don't know your habits, your files or how you work yet. You explain the context, give them the access they need, and check what they do. Today lays the foundations; getting the full value out of AI takes several weeks of building.
+
+## The case study: Torréfaction Belleville
+
+![The thread through the webinar: Torréfaction Belleville, a two-person artisan coffee roaster in Paris.](/blog/rentree-ia/01-cas-pratique.webp)
+
+To make it concrete, Franz played the manager of **Torréfaction Belleville**, a small (fictional) artisan coffee roaster in Paris:
+- **a team of two**: the manager (sales, customers, suppliers) and Karim, the roaster;
+- **a fixed rhythm**: a 30-minute meeting on Monday, roasting on Tuesday and Thursday from 8 to 10;
+- **manual sales tracking**: 9 B2B clients, retail customers, and sales typed by hand into a Google Sheet;
+- **no structured customer service**: everything lands in Gmail (invoices, quotes, complaints, events).
+
+The goal: organise all of this with Claude and start centralising information in Notion (clients, quotes, support tickets, meeting notes, supplier invoices).
+
+It's only an example. Swap the coffee for your own work (a practice, a non-profit, a shop, a personal project) and the method is exactly the same.
+
+## Pillar 1: connect your apps
+
+Why connect Gmail to Claude? So it can **read** your email, calendar and files, **act** (sort, create an event, draft a reply) and **analyse**. And all of it can be **revoked at any time**.
+
+![Customize → Connectors: Google Drive, Gmail, Google Calendar, Microsoft 365, Notion…](/blog/rentree-ia/02-connecteurs.webp)
+
+In the left menu, go to **Customize → Connectors**. Google usually appears among the most used. Connect **Google Drive**, **Gmail**, **Google Calendar**, then **Notion**. Each time, Google explains what Claude will be able to see and do; it won't do anything you don't ask, and you can cut access whenever you like.
+
+### Triage what's urgent
+
+First test, in a plain conversation:
+
+> Look at my email and tell me which messages need quick action from me. I run Torréfaction Belleville, I have no time to waste: I need to know where to act first.
+
+Claude finds the Gmail tool, reads the inbox and surfaces what matters: two customer complaints (stale beans for Julien Vasseur, ground coffee instead of whole beans for Sophie Renaud), a maintenance invoice due in four days, and a supplier, Africa Green Coffee, offering to present its new harvest on Thursday the 24th at 9:30. You can expand the steps to see what it's doing: you don't need to understand all of it, but it helps when a result surprises you.
+
+### Sort with Gmail labels
+
+Labels aren't even an AI feature, but they're perfect for letting an AI sort quickly and well. In Gmail, create your labels (the **+** next to "Labels") and give them a colour (the three dots → label colour). For Belleville: Clients & SAV, Commercial B2B, Équipe & Production, Factures & Compta, Fournisseurs, Presse & Événements, Rapports & Ventes.
+
+> Sort my email into the existing labels: Clients & SAV, Commercial B2B, Équipe & Production, Factures & Compta, Fournisseurs, Presse & Événements, Rapports & Ventes. Don't invent new labels.
+
+![The Gmail inbox sorted by Claude, each email under its coloured label.](/blog/rentree-ia/03-labels-gmail.webp)
+
+Claude first checks the labels exist, then applies them. It missed a few: we simply asked it to sort the remaining ones too. When the **scope is clear** (labels given, nothing to invent), you can let it act without approval, because it won't step outside that frame.
+
+### A co-pilot for the calendar
+
+Africa Green Coffee's slot clashes with Thursday's roasting, and Karim had emailed to say he'd be away on Thursday and Friday.
+
+> Africa Green Coffee is proposing a call on Thursday the 24th at 9:30. Check my calendar and recent emails, tell me whether I'm really free and, if not, suggest a better option.
+
+Claude cross-checks the calendar and the email, spots the clash and Karim's absence, and suggests Wednesday the 23rd at 9:30.
+
+> Yes, draft the reply and block the slot in my calendar.
+
+![The event Claude created in Google Calendar, with all the context of the meeting.](/blog/rentree-ia/04-agenda.webp)
+
+Two good practices here. **Drafts**: Claude sends nothing without your say-so, so you stay in charge. And **context in the calendar**: Claude fills in events far better than we do (subject, contact, notes), which pays off when you check them on your phone. To finish:
+
+> Can you update my calendar with the information in my email? Check existing events, especially the one we just created, avoid duplicates, and update the relevant events rather than recreating them.
+
+It moved the roasting session and added Karim's absence and the invoice due dates. It made a small mistake on one meeting, noticed it and fixed it.
+
+## Pillar 2: the project, so you stop repeating context
+
+Everything so far lived in **a single conversation**. Open a new one and Claude has forgotten it all: you have to explain everything again. When there are two of you running a business, you don't have that time.
+
+![What is a project in Claude? A space that centralises instructions and reference documents.](/blog/rentree-ia/05-projet.webp)
+
+A **project** (which also exists in ChatGPT and Mistral) is a box that holds all your conversations on one theme, with:
+- **permanent context**: files and instructions are added once;
+- **no repetition**: you don't have to explain again;
+- **one project per folder**: a business, a team, a personal project;
+- **history kept**.
+
+There's a lot of talk about building a "second brain" with AI: before creating agents, you need to understand how a project works.
+
+### Create the project and its instructions
+
+New project, with this description:
+
+> I run Torréfaction Belleville, an artisan coffee roaster in Paris. I use this project to centralise my orders, my B2B clients and my exchanges with them, so I get answers and analysis consistent with my business without repeating the context every time.
+
+The **instructions** are what Claude reads before every reply:
+
+![The project instructions: identity, tone, and where to find each Notion database (links hidden).](/blog/rentree-ia/06-instructions.webp)
+
+> You are the assistant for Torréfaction Belleville, an artisan coffee roaster in Paris. Always reply in French, in a warm, professional tone, never robotic.
+> My client CRM is in Notion: [link]. Invoice information goes here: [link]; the link to the email is enough, no need to upload the PDF to Notion. Customer service is here: [link]. Sales reports are here: [link].
+> Quote requests are logged in the Notion "Devis" table: [link]. Check each record's status to tell sent quotes from new requests.
+
+With your apps connected, Claude would find these databases on its own; pointing to them saves time and avoids mistakes.
+
+### Add the context
+
+In the **Context** panel, drop in the reference documents: a **company profile** (identity, brand tone, team, locations, weekly rhythm, clients, suppliers, how invoices and quotes are structured, the statuses used in Notion, customer-service rules: "open, in progress, resolved", and a suitable commercial gesture when a product is faulty), the **price list**, and the **sales export** straight from Google Drive (the **+**, then Drive).
+
+First habit with every new project:
+
+> Read the company profile, the price list and the sales export before we start.
+
+It noticeably improves the quality of the answers. Meanwhile, Claude builds its **memory** of the project over the conversations; you can view it at any time.
+
+### Process invoices into Notion
+
+You can start another conversation in the project while the first one is still running:
+
+> Process the invoices in my email into Notion, even those without an attachment. Use the planned statuses: Direct debit, To pay, Paid, Late. Also check the due dates of existing invoices and flag late ones, without confusing a scheduled direct debit with a confirmed payment.
+
+![The Notion "Supplier invoices" database filled in by Claude: number, date, supplier, amount, status and link to the email.](/blog/rentree-ia/07-factures-notion.webp)
+
+Claude read the invoices in the email bodies, opened the PDFs and filled in the database: number, date, supplier, amount, due date, status. It correctly understood that the electricity bill was paid by direct debit. Tip: **link to the email** rather than importing the PDF, which is more reliable, and one click takes you back to the original. Many small businesses have a dedicated billing address; a single prompt turns that flow into an organised database.
+
+### Analyse sales
+
+> From our September orders, who are our top 3 B2B clients, meaning the ones who generated the most revenue, in descending order? Give the amount for each and suggest actions to keep them loyal.
+
+Claude opened the Google Sheet, filtered on September, produced a small chart and loyalty actions. One chart axis was wrong, which hadn't happened in our tests: AI never answers the same way twice. The figure itself was right: Café Belleville Nord, €374 in September, checked in the file.
+
+### Answer a pricing request
+
+Le Comptoir de Pauline, a client for six months, wants to move from 10 to 15 kg a month and asks for a volume discount.
+
+> Le Comptoir de Pauline wants to move from 10 to 15 kg a month from October and is asking for a volume discount. Look at the price list and their purchase history, suggest a consistent price, and draft a reply.
+
+The point isn't that Claude invents a price: it works from **the existing price list, the company profile and the client's real history**, then writes the reply. It's the project's context that makes the proposal credible.
+
+## Pillar 3: skills, for the method
+
+The project gives the context. For a specific task (handling a complaint, answering a quote request), you want Claude to know **exactly** what to do without bloating the instructions.
+
+![What is a skill? A reusable procedure that guides Claude through a business task.](/blog/rentree-ia/08-skill.webp)
+
+A **skill** is a reusable procedure: a text file that tells Claude **when** to use it and **how** to proceed, step by step, with the expected result. It can come with files or point to tools ("check the sales export, then the calendar"). Customer service, accounting, sales: it's useful everywhere.
+
+Under **Customize → Skills → Add**, there are three options: **import** an existing skill (often a ZIP file, downloaded or shared by your company), **create it with Claude** in a conversation, or **write it by hand**.
+
+### Skill no. 1, written by hand: handle a customer complaint
+
+![Creating the "traiter-reclamation-sav" skill by hand.](/blog/rentree-ia/09-creer-competence.webp)
+
+> **Name:** traiter-reclamation-sav
+> **Description:** Handles a complaint or an order-change request from a customer email for Torréfaction Belleville (finds the order, opens a support ticket in Notion, prepares an empathetic draft reply in Gmail).
+> **Instructions:** When a complaint or order-change email arrives, first identify the type of request, then follow these three steps in order. Check the information available and prepare a reply without automatically offering compensation or confirming anything you haven't verified. Confirm what was done at each step.
+> **1. Find the order.** Look up the order number from the email in the Google Sheet "Export Shopify – Ventes 2026". Note the exact product, quantity and amount.
+> **2. Create the support ticket.** In the Notion database "SAV / Réclamations", check whether the request is already tracked and update the existing record without duplicating it. Otherwise, create an entry with Subject, Client, Order no., Status = Open, and the email's date.
+> **3. Prepare the reply.** Write a draft reply in Gmail: empathetic and professional, acknowledging the problem without minimising it. For a complaint, offer a commercial gesture that matches the severity (free replacement for a simple defect, replacement plus a discount for something more serious). Never send directly; always leave it as a draft. Add a clickable link to the draft in the Notion ticket, labelled "Draft reply". If the direct link isn't available, say so without inventing a URL.
+
+To use it, type **/** and the skill's name:
+
+> /traiter-reclamation-sav Handle everything under the Clients & SAV label: complaints and order changes.
+
+![The tickets created in the Notion "SAV / Réclamations" database, status Open.](/blog/rentree-ia/10-sav-notion.webp)
+
+Claude identified the two complaints (and ignored the third email, a simple stock question), created the tickets with the right order numbers and prepared two drafts. The status stays **Open**: a human closes it once the problem is solved. The tone? Very warm… and a little too generous (20% off the next order). That's exactly what you fix in the skill: skills are **versioned**, and you can edit them by hand or ask Claude to improve them.
+
+### Skill no. 2, created by Claude: handle a quote request
+
+Camille Roy, office manager of a 40-person agency in Paris's 11th arrondissement, is looking for a coffee bean supplier for two automatic machines. This time we let Claude write the skill with **/skill-creator**:
+
+> /skill-creator Create a skill called "traiter-demande-de-devis". It should work in steps: check the client's sales in the sales Google Sheet; if there have been sales, analyse their dates, products, quantities and prices; suggest a consistent price; check whether a client record exists in the Notion CRM, create it if not, otherwise use the existing record without duplicating it; log the request in the Notion "Devis" table; prepare a draft reply.
+
+Claude writes the skill and offers to save it: one click on "Save skill" and it's ready to use straight away, in the same conversation.
+
+## Pillar 4: routines, to automate
+
+A **routine** (or scheduled task) runs by itself at the frequency you choose: every morning for email, every week for a sales report. You create it from the project, under **Scheduled**, or from **Scheduled tasks**: a name, instructions, a frequency and a permission level.
+
+![Creating a scheduled task: name, instructions, frequency and permissions.](/blog/rentree-ia/13-routine.webp)
+
+The four routines prepared for Belleville:
+- **Email sorting**, every hour: "Sort the emails in my inbox into the existing labels on my Gmail account: Clients & SAV, Commercial B2B, Fournisseurs, Factures & Compta, Rapports & Ventes, Presse & Événements."
+- **Process invoices**, every day at 9:00: the same instruction as for invoices above.
+- **Previous week's order analysis**, Monday at 8:00: product and total quantity, most active B2B client, a summary added to Notion, and a summary email sent to the business address.
+- **Quote requests**, Monday at 10:00: "Find new quote requests in my email and use the traiter-demande-de-devis skill."
+
+**Permissions.** If every action needs manual approval, the routine waits until you log in. For sorting email or preparing drafts, auto-approve is reasonable: the scope is clear and nothing goes out to customers. Even in that mode, Claude may refuse an action it judges dangerous. Each run creates a conversation (tagged "scheduled") you can review, and **Run now** lets you test before the first scheduled run. Because the routine lives in the project, it has all the project's context.
+
+### And the live demo stopped… for lack of tokens
+
+That's when the session hit its usage limit: after two skills, searches and dozens of actions there were no credits left, and buying extra credits didn't unlock in time. Frustrating, but instructive: it's exactly what will happen one day in your own work. You see it under **Settings → Usage**, and then you choose: buy credits, switch to a lighter model, or wait for the reset.
+
+![Settings → Usage: session and weekly usage, usage credits and the monthly cap.](/blog/rentree-ia/12-utilisation.webp)
+
+## The debrief, in plain words
+
+![The debrief: connect, use projects, define skills, create routines.](/blog/rentree-ia/14-debrief.webp)
+
+- **Connectors give the tools**: find information in your email, match it with your calendar, prepare an action without retyping everything.
+- **The project gives the context**: who you are, your prices, where your databases live. No more re-explaining in every conversation.
+- **Skills give the method**: you describe the steps once, Claude follows them, you test and improve.
+- **Routines give the schedule**: once a task works, you schedule it and check the result over coffee.
+
+## Where to start
+
+It's Altiplane's founding idea: **get a clear view of your operations before you automate them**. Pick **one task** you know well and keep repeating, a bit tedious, the kind you don't want to do but have to. Give the context, test it on a real case, check the result. Then improve the skill, change it, try again, and widen gradually. Don't try to automate everything at once: that's where mistakes happen and you lose control.
+
+If you're unsure which model to use, here's the comparison we showed during the session:
+
+![The Claude range, from lightest to most capable: Haiku 4.5, Sonnet 5, Opus 5, Fable 5.1, with prices per million tokens.](/blog/rentree-ia/11-modeles.webp)
+
+## Frequently asked questions
+
+${faqToMarkdown(FAQ_EN)}
+
+## Who we are
+
+**Altiplane**, with Franz Kubach, helps French small and mid-sized businesses get a clear view of their operations before automating them: digital and AI audits, custom automations, and workshops that give teams practical, jargon-free foundations. [altiplane.fr](https://altiplane.fr)
+
+**Tutto**, with Daniel Forsthofer, works with businesses adopting AI, from entrepreneurs and founders to organisations of 250 people. Sixteen years in digital transformation, application rollouts of up to 2.5 million users, and a simple approach: listen to your use cases and turn them into tailored coaching, so your teams design and run their own AI systems. [tutto.one](https://tutto.one)
+
+## What's next
+
+More sessions are coming, shorter and more focused, going deeper on the topics you were most interested in: tokens and costs, memory, privacy, and skills shared across a company. And if you'd rather have help with your own tools and your own case, we also run one-to-one and small-group sessions: [book a call with Altiplane](https://altiplane.fr), [write to Tutto](/contact), or see [the calendar of upcoming sessions](/calendar).`,
   },
 ];
 

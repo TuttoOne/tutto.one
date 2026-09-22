@@ -246,6 +246,18 @@ const VISUALS: Record<string, Record<string, React.ReactNode>> = {
   },
 };
 
+// Partner looks for the intro card, taken from the partner's own site.
+const COBRANDS = {
+  altiplane: {
+    background: "#0b2f5c", // Altiplane navy
+    accent: "#ff9e5e", // Altiplane orange
+    text: "#fffef0",
+    subtext: "rgba(255,254,240,0.72)",
+    logo: "/blog/rentree-ia/tutto-x-altiplane-light.png",
+    logoAlt: "Tutto × Altiplane",
+  },
+};
+
 // ── Markdown renderer ────────────────────────────────────────────────────────
 
 function renderMarkdown(content: string, visuals?: Record<string, React.ReactNode>) {
@@ -265,6 +277,66 @@ function renderMarkdown(content: string, visuals?: Record<string, React.ReactNod
           continue;
         }
       }
+    }
+
+    // ![caption](src) on its own line: a screenshot with its caption underneath.
+    const imageMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (imageMatch) {
+      const [, caption, src] = imageMatch;
+      elements.push(
+        <figure key={key++} className="my-8">
+          <img
+            src={src}
+            alt={caption}
+            loading="lazy"
+            className="w-full rounded-xl border border-border/60 shadow-sm"
+          />
+          {caption && (
+            <figcaption className="text-xs text-muted-foreground mt-3 italic font-sans">{caption}</figcaption>
+          )}
+        </figure>
+      );
+      continue;
+    }
+
+    // [VIDEO:url] on its own line: a responsive YouTube or Vimeo embed. With no
+    // URL yet it renders nothing, so the slot can sit in a post before the
+    // video is uploaded.
+    const videoMatch = line.match(/^\[VIDEO:(.*)\]$/);
+    if (videoMatch) {
+      const embed = toEmbedUrl(videoMatch[1].trim());
+      if (embed) {
+        elements.push(
+          <div key={key++} className="my-8 aspect-video w-full overflow-hidden rounded-xl border border-border/60 bg-black">
+            <iframe
+              src={embed}
+              title="Video"
+              className="h-full w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        );
+      }
+      continue;
+    }
+
+    if (line.startsWith("> ")) {
+      const quoted: string[] = [];
+      let j = i;
+      while (j < lines.length && lines[j].startsWith("> ")) {
+        quoted.push(lines[j].slice(2));
+        j++;
+      }
+      elements.push(
+        <blockquote key={key++} className="my-6 rounded-xl border border-border/60 bg-secondary/30 px-5 py-4 font-mono text-sm leading-relaxed text-foreground space-y-2">
+          {quoted.map((q, idx) => (
+            <p key={idx}>{renderInline(q)}</p>
+          ))}
+        </blockquote>
+      );
+      i = j - 1;
+      continue;
     }
 
     if (line.startsWith("## ")) {
@@ -325,6 +397,15 @@ function renderMarkdown(content: string, visuals?: Record<string, React.ReactNod
   }
 
   return elements;
+}
+
+function toEmbedUrl(url: string): string | null {
+  if (!url) return null;
+  const youtube = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/);
+  if (youtube) return `https://www.youtube-nocookie.com/embed/${youtube[1]}`;
+  const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vimeo) return `https://player.vimeo.com/video/${vimeo[1]}`;
+  return null;
 }
 
 function renderInline(text: string): React.ReactNode[] {
@@ -432,6 +513,10 @@ export default function BlogPost() {
   })();
   const visuals = VISUALS[post.slug];
 
+  // A post run with a partner can carry `cobrand` in its intro card: the card
+  // then takes the partner's colours and a joint logo. Only Altiplane so far.
+  const cobrand = introCard?.cobrand === "altiplane" ? COBRANDS.altiplane : null;
+
   const ROBOTO = "'Roboto', -apple-system, sans-serif";
   const INTER = "'Inter', -apple-system, sans-serif";
 
@@ -445,17 +530,20 @@ export default function BlogPost() {
 
         {introCard ? (
           <>
-            <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 40 }}>
+            <div style={{ borderRadius: 12, background: cobrand?.background ?? "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 40 }}>
+              {cobrand && (
+                <img src={cobrand.logo} alt={cobrand.logoAlt} style={{ display: "block", height: "clamp(26px, 4vw, 34px)", width: "auto", maxWidth: "100%", marginBottom: 28 }} />
+              )}
               {introCard.tagline && (
-                <p style={{ fontFamily: INTER, fontSize: 9, textTransform: "uppercase", letterSpacing: "0.14em", color: "#d97706", marginBottom: 18 }}>
+                <p style={{ fontFamily: INTER, fontSize: 9, textTransform: "uppercase", letterSpacing: "0.14em", color: cobrand?.accent ?? "#d97706", marginBottom: 18 }}>
                   {introCard.tagline}
                 </p>
               )}
-              <h1 style={{ fontFamily: ROBOTO, fontSize: "clamp(24px, 4.5vw, 44px)", fontWeight: 900, lineHeight: 1.15, color: "#f6f1ea", letterSpacing: "-0.3px", marginBottom: introCard.sub ? 16 : 0 }}>
+              <h1 style={{ fontFamily: ROBOTO, fontSize: "clamp(24px, 4.5vw, 44px)", fontWeight: 900, lineHeight: 1.15, color: cobrand?.text ?? "#f6f1ea", letterSpacing: "-0.3px", marginBottom: introCard.sub ? 16 : 0 }}>
                 {introCard.headline}
               </h1>
               {introCard.sub && (
-                <p style={{ fontFamily: INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.65)", marginTop: 16, maxWidth: 520 }}>
+                <p style={{ fontFamily: INTER, fontSize: 15, lineHeight: 1.8, color: cobrand?.subtext ?? "rgba(246,241,234,0.65)", marginTop: 16, maxWidth: 520 }}>
                   {introCard.sub}
                 </p>
               )}

@@ -76,4 +76,11 @@ export const BLOG_FR: Record<string, BlogFr> = {
     date: "14 mars 2026",
     readTime: "7 min de lecture",
   },
+  "aborde-ta-rentree-ia-avec-claude": {
+    title: "Aborde ta rentrée IA avec Claude : le compte rendu du webinaire",
+    excerpt:
+      "Connecteurs, projets, skills et routines, démontrés en direct sur un vrai cas d'entreprise. Les étapes, les prompts à copier, et une FAQ qui complète les réponses données pendant le live.",
+    date: "22 septembre 2026",
+    readTime: "18 min de lecture",
+  },
 };
