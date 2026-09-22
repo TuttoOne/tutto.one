@@ -231,6 +231,149 @@ function LegalRagArchitectureDiagram() {
   );
 }
 
+function DecisionModelFlow() {
+  const tr = usePageTr(BLOG_VISUALS_FR);
+  const questions = [
+    { type: "Choice", q: "What kind of email is this?", options: "New enquiry · Support · Invoice · Spam", answer: "Support", conf: 0.94 },
+    { type: "Score", q: "How urgent is it?", options: "1 Can wait · 2 This week · 3 Today · 4 Now", answer: "3 Today", conf: 0.71 },
+    { type: "Noul", q: "Is the sender an existing client?", options: "Yes or no", answer: "Yes", conf: 0.97 },
+  ];
+  const routes = [
+    { range: "0.9 +", label: "Act automatically", color: "border-green-300 bg-green-50 text-green-800" },
+    { range: "0.5 – 0.9", label: "Act, but flag for a check", color: "border-amber-300 bg-amber-50 text-amber-800" },
+    { range: "< 0.5", label: "Hand it to a person", color: "border-border/60 bg-muted/40 text-muted-foreground" },
+  ];
+  return (
+    <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-6 not-prose">
+      <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-5">{tr("One incoming email, three decisions")}</p>
+
+      <div className="rounded-xl border border-border/60 bg-background/60 p-4">
+        <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2">{tr("1 · You send the context")}</p>
+        <p className="text-sm text-foreground leading-relaxed">{tr("The email itself, the sender's address, any attachment names, and a line saying what your business does.")}</p>
+      </div>
+
+      <div className="flex justify-center my-1"><div className="w-px h-4 bg-border/60" /></div>
+
+      <div className="rounded-xl border border-primary/40 bg-primary/5 p-4">
+        <p className="text-xs font-mono uppercase tracking-wider text-primary mb-3">{tr("2 · You ask fixed questions, it picks from your answers")}</p>
+        <div className="space-y-3">
+          {questions.map((q) => (
+            <div key={q.type} className="grid gap-2 sm:grid-cols-[5rem_1fr_auto] sm:items-center">
+              <span className="text-xs font-mono font-semibold text-primary">{q.type}</span>
+              <div>
+                <p className="text-sm font-medium text-foreground">{tr(q.q)}</p>
+                <p className="text-xs text-muted-foreground">{tr(q.options)}</p>
+              </div>
+              <div className="flex items-center gap-2 sm:justify-end">
+                <span className="text-xs font-semibold bg-background border border-primary/30 rounded-lg px-2.5 py-1 text-foreground">{tr(q.answer)}</span>
+                <span className="text-xs font-mono text-muted-foreground w-10 text-right">{q.conf.toFixed(2)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex justify-center my-1"><div className="w-px h-4 bg-border/60" /></div>
+
+      <div className="rounded-xl border border-border/60 bg-background/60 p-4">
+        <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-3">{tr("3 · Your software decides what happens, based on confidence")}</p>
+        <div className="grid gap-2 sm:grid-cols-3">
+          {routes.map((r) => (
+            <div key={r.range} className={`rounded-lg border px-3 py-2 ${r.color}`}>
+              <p className="text-xs font-mono font-semibold">{r.range}</p>
+              <p className="text-xs">{tr(r.label)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <p className="text-xs text-muted-foreground mt-5 italic">{tr("Illustrative example. Answer types and confidence bands follow TypeSafe's documentation; set your own thresholds on your own data.")}</p>
+    </div>
+  );
+}
+
+function FourKindsOfTool() {
+  const tr = usePageTr(BLOG_VISUALS_FR);
+  const kinds = [
+    { name: "Assistant", verb: "Writes", example: "Drafts the reply to a client", highlight: false },
+    { name: "Agent", verb: "Acts", example: "Books the meeting and updates the CRM", highlight: false },
+    { name: "Decision model", verb: "Chooses", example: "Decides which inbox the email belongs in", highlight: true },
+    { name: "Plain code", verb: "Calculates", example: "Adds up the invoice and checks the due date", highlight: false },
+  ];
+  return (
+    <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-6 not-prose">
+      <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-5">{tr("Four jobs, four kinds of tool")}</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {kinds.map((k) => (
+          <div
+            key={k.name}
+            className={`rounded-xl border p-4 ${k.highlight ? "border-primary/50 bg-primary/10" : "border-border/60 bg-background/60"}`}
+          >
+            <p className={`text-2xl font-serif font-bold mb-1 ${k.highlight ? "text-primary" : "text-foreground"}`}>{tr(k.verb)}</p>
+            <p className="text-sm font-semibold text-foreground">{tr(k.name)}</p>
+            <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{tr(k.example)}</p>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-muted-foreground mt-5 italic">{tr("Most useful systems combine all four. The mistake is asking one of them to do another's job.")}</p>
+    </div>
+  );
+}
+
+function SmeFitMap() {
+  const tr = usePageTr(BLOG_VISUALS_FR);
+  const rows = [
+    { task: "Sorting the shared inbox", fit: "Strong", who: "Decision model", tone: "text-green-700 bg-green-50 border-green-200" },
+    { task: "Qualifying website enquiries", fit: "Strong", who: "Decision model", tone: "text-green-700 bg-green-50 border-green-200" },
+    { task: "Matching a question to the right help article", fit: "Strong", who: "Decision model", tone: "text-green-700 bg-green-50 border-green-200" },
+    { task: "Spotting an unusual clause in a supplier contract", fit: "Partial", who: "Decision model flags, a person reads", tone: "text-amber-700 bg-amber-50 border-amber-200" },
+    { task: "Checking an invoice total or VAT", fit: "No", who: "Plain code", tone: "text-muted-foreground bg-muted/40 border-border/60" },
+    { task: "Writing a proposal", fit: "No", who: "Assistant", tone: "text-muted-foreground bg-muted/40 border-border/60" },
+    { task: "Approving a large discount", fit: "No", who: "A person decides", tone: "text-muted-foreground bg-muted/40 border-border/60" },
+  ];
+  return (
+    <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-6 not-prose">
+      <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-5">{tr("Everyday small-business decisions: is a decision model the right tool?")}</p>
+      <div className="divide-y divide-border/50">
+        {rows.map((r) => (
+          <div key={r.task} className="py-3 grid gap-1 sm:grid-cols-[1fr_5.5rem_12rem] sm:items-center sm:gap-4">
+            <p className="text-sm text-foreground">{tr(r.task)}</p>
+            <span className={`justify-self-start text-xs font-semibold border rounded-full px-2.5 py-0.5 ${r.tone}`}>{tr(r.fit)}</span>
+            <p className="text-xs text-muted-foreground">{tr(r.who)}</p>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-muted-foreground mt-5 italic">{tr("Tutto's assessment for typical small-business workflows.")}</p>
+    </div>
+  );
+}
+
+function DecisionModelPitfalls() {
+  const tr = usePageTr(BLOG_VISUALS_FR);
+  const items = [
+    { trap: "Asking it to count, add up or compare dates", fix: "Do the maths in code and send it the result." },
+    { trap: "Sending everything you have", fix: "Send only what a colleague would need. Extra noise lowers accuracy." },
+    { trap: "No way to say \"none of these\"", fix: "Add an \"other\" or \"not sure\" answer so it isn't forced to guess." },
+    { trap: "One question doing two jobs", fix: "Split it into two questions and combine the answers in your software." },
+    { trap: "Copying someone else's thresholds", fix: "Set your own cut-offs on a few hundred of your own labelled examples." },
+    { trap: "Letting the model version float", fix: "Pin the exact version and re-test before you upgrade." },
+  ];
+  return (
+    <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-6 not-prose">
+      <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-5">{tr("Six mistakes to avoid")}</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {items.map((it) => (
+          <div key={it.trap} className="rounded-xl border border-border/60 bg-background/60 p-4">
+            <p className="text-sm font-semibold text-foreground mb-1">{tr(it.trap)}</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">{tr(it.fix)}</p>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-muted-foreground mt-5 italic">{tr("Based on TypeSafe's published notes on where Jev 1.13 is weak, and on our own practice.")}</p>
+    </div>
+  );
+}
+
 const VISUALS: Record<string, Record<string, React.ReactNode>> = {
   "legalrag-on-premise-ai": {
     "legalrag-architecture": <LegalRagArchitectureDiagram />,
@@ -243,6 +386,12 @@ const VISUALS: Record<string, Record<string, React.ReactNode>> = {
     "wage-exposure": <WageExposureChart />,
     "augmentation-split": <AugmentationSplitChart />,
     "capability-gap": <CapabilityGapImage />,
+  },
+  "the-model-that-only-decides": {
+    "decision-flow": <DecisionModelFlow />,
+    "four-kinds-of-tool": <FourKindsOfTool />,
+    "sme-fit-map": <SmeFitMap />,
+    "pitfalls": <DecisionModelPitfalls />,
   },
 };
 

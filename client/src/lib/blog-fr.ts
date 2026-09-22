@@ -83,4 +83,11 @@ export const BLOG_FR: Record<string, BlogFr> = {
     date: "22 septembre 2026",
     readTime: "18 min de lecture",
   },
+  "the-model-that-only-decides": {
+    title: "Le modèle d'IA qui ne sait pas écrire un mot",
+    excerpt:
+      "Jev, un nouveau modèle de TypeSafe AI, ne génère pas de texte. Il ne fait que décider. Pour une petite entreprise, cela compte peut-être plus que le prochain chatbot. Où il a sa place, où il ne l'a pas, et comment l'essayer sans tout miser.",
+    date: "17 septembre 2026",
+    readTime: "6 min de lecture",
+  },
 };

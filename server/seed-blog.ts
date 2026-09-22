@@ -685,6 +685,97 @@ The mountain image is the bit I'll keep, though. Not because it's profound - bec
 *Sources: the Zhang Xiaojun podcast interview with Yang Zhilin (published August 2025). Direct transcript access was blocked, so quotes and claims here come from published translations and detailed coverage of the same interview - primarily China Story's translated analysis and The AI Corner's breakdown, plus contextual reporting on Kimi's 2025 user rankings. Quoted lines are translations from Mandarin and vary between sources; treat them as faithful paraphrases rather than verbatim English. Where I've added assessment - the open-source section, the management section, and the closing - that's mine, not his.*`,
   },
   {
+    slug: "the-model-that-only-decides",
+    title: "The AI model that can't write a word",
+    excerpt: "Jev, a new model from TypeSafe AI, doesn't generate text. It only makes decisions. For a small business that may matter more than the next chatbot. Where it fits, where it doesn't, and how to try it without betting the shop.",
+    date: "Sep 17, 2026",
+    readTime: "6 min read",
+    introCard: null,
+    published: false,
+    content: `This week a former OpenAI researcher, Diogo Almeida, took a model called Jev out of stealth through his company TypeSafe AI. Jev can't write an email. It can't summarise a document or draft a proposal. All it does is choose.
+
+You give it some context and a question with a fixed set of answers. It gives you back one of those answers and a confidence score. That's it.
+
+It sounds like a step backwards. For most small businesses I work with, I think it's the more useful direction.
+
+## Most of your AI work is sorting, not writing
+
+When I map how a small team actually spends its time, the writing is rarely the bottleneck. The sorting is. Which of these forty emails needs me today? Is this invoice complete or missing something? Is this enquiry a real lead, a supplier or spam? Does this support ticket go to billing or to the technician? Is this contract clause standard or unusual?
+
+Each of those is a small judgement. Too fuzzy for a keyword rule, far too simple for a person to spend a minute on, and it comes up hundreds of times a week.
+
+Right now, when people automate these, they usually hand them to a full language model. That works, but it's like hiring a lawyer to open the post. You pay for reasoning you don't use, you wait for it, and you get back a paragraph you then have to parse into a yes or no.
+
+A decision model is built for exactly that job. It answers in one of three shapes: yes or no, one option from a list, or a score on a scale. It can't wander off into prose, so the software around it never has to guess what it meant.
+
+Here's what that looks like for one email landing in a shared inbox:
+
+[VISUAL:decision-flow]
+
+It isn't a replacement for the assistant you already use. It's a different tool for a different job:
+
+[VISUAL:four-kinds-of-tool]
+
+## What it costs
+
+This is the part that got people's attention. TypeSafe lists Jev at $0.042 per million input tokens, and output is free. It answers in 70 to 500 milliseconds, fast enough to sit inside a live form or chat without anyone noticing. A typical decision with a page of context runs to about a thousand tokens. So a thousand decisions cost roughly four cents.
+
+Linas Beliūnas, whose guide I read before writing this, makes the more important point: token price is the smallest part of the maths. The real value is the work you no longer send to the expensive model, the minutes a person no longer spends triaging, and the speed. The real costs are the mistakes, the fallbacks and the time it takes to set up and watch. If the decision was never expensive to begin with, a cheap model doesn't save you much.
+
+## Does your decision fit?
+
+Here is the checklist I'd use before trying it on anything:
+
+- **The answers are known in advance.** You can list every valid outcome before you ask.
+- **It needs understanding, not deep thought.** A keyword filter isn't good enough, but a sensible colleague would decide in seconds.
+- **The evidence is in front of it.** Everything needed to decide is in what you send. It doesn't browse or look anything up.
+- **It happens often.** The savings only add up with volume.
+- **A wrong answer is recoverable.** There's a review step, a fallback or an undo.
+- **You can tell afterwards if it was right.** Otherwise you'll never know how well it's doing.
+
+And one rule that overrides all of them: if plain code can do it, use plain code. Dates, amounts, thresholds, permissions and compliance rules belong in software you can read and audit, not in a model's judgement.
+
+Applied to the kind of decisions I see in small businesses every week:
+
+[VISUAL:sme-fit-map]
+
+## What it doesn't do
+
+The launch marketing says Jev "can't hallucinate". That's true in a narrow sense: it can't return something you didn't ask for. It can still pick the wrong option, and it can still be confidently wrong. A typed answer removes a whole class of formatting failures. It doesn't remove bad judgement.
+
+Security is the clearest example. In one independent test on prompt-injection attacks, Jev scored well when it was told what the application was for, and noticeably worse when it wasn't, because an attack out of context looks like an ordinary request. Treat it as an early warning signal, not as the lock on the door.
+
+The same test shows something useful: what you send matters as much as the model. In a public spam benchmark, simply adding the sender, links and attachment details to each email lifted accuracy from about 94% to 98%, with no change to the question. Most of the gains come from giving it the right context, not a cleverer prompt.
+
+To its credit, TypeSafe publishes where the current version struggles: arithmetic and counting, comparing dates, double negatives, noisy input and deliberately misleading text. Those notes, plus what we've seen in practice, add up to a short list of traps:
+
+[VISUAL:pitfalls]
+
+## How I'd trial it in a small business
+
+1. **List your decisions.** Write down the small, repeated judgements your team makes every week. Most teams find ten or more in an hour.
+2. **Pick one boring, frequent, low-risk one.** Email triage and lead qualification are good first candidates.
+3. **Label a couple of hundred real examples.** What was the right answer each time? That's your test set, and it's the most valuable thing you'll build.
+4. **Compare it with something simple.** Your current rule, or a big model doing the same job. If Jev doesn't clearly beat the simple thing, stop there.
+5. **Run it in the shadow first.** Let it decide alongside your team for a few weeks without acting on anything. Compare.
+6. **Automate only the confident cases.** Let it act when it's sure, and send the rest to a person. The confidence score is what makes that split possible.
+7. **Keep checking.** Your emails, clients and products change. A decision that was right in September can drift by spring.
+
+## Before you plug it in
+
+A few practical cautions. Jev is still in early access: you sign up through TypeSafe's console and wait to be let in. There are Python and JavaScript SDKs, and it can also be reached through Vercel's AI Gateway and OpenRouter, where the integrations are marked experimental. On data, TypeSafe says it doesn't train its models on customer data and offers a data processing agreement, but zero data retention is only for enterprise customers, and it doesn't say where requests are processed. If your data can't leave Switzerland or the EU, ask before you send client data anywhere. Pin the exact model version, so a silent update doesn't change your results. And keep the decision behind your own interface, so you can swap in another provider later. Open alternatives are already close behind.
+
+## The bigger point
+
+For two years the conversation has been about which model writes best. For a small business, the more useful question is quieter: which small decisions are eating my team's day, and which of them could a machine take on reliably, cheaply and with a human still in charge of the edge cases?
+
+A model that only decides forces you to answer that question properly. That alone makes it worth an afternoon.
+
+---
+
+Sources: TypeSafe AI's [launch post](https://typesafe.ai/blog/introducing-system-one-models-and-jev), its [documentation](https://docs.typesafe.ai/) (including the confidence guide and the Jev 1.13 limitations page) and its [legal pages](https://typesafe.ai/legal/privacy-policy), and Linas Beliūnas's guide "How to Use Jev AI" in Linas's Newsletter, which collects the pricing, access options and independent test results quoted here. The checklist, trial plan and diagrams are my own adaptation for small businesses.`,
+  },
+  {
     slug: WEBINAR_SLUG,
     title: "Start the new season with Claude: webinar recap",
     excerpt: "Connectors, projects, skills and routines, demonstrated live on a real business case. The steps, the prompts to copy, and an FAQ that completes the answers we gave during the session.",
