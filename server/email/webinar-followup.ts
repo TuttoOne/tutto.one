@@ -279,8 +279,23 @@ function sectionText(copy: Copy, opts: WebinarEmailOptions): string {
   ].join("\n");
 }
 
-export function buildWebinarEmail(opts: WebinarEmailOptions): { subject: string; html: string; text: string } {
-  const subject = "Merci ! Le récap du webinaire « Aborde ta rentrée IA avec Claude »";
+export type EmailLanguage = "both" | "fr" | "en";
+
+const SUBJECTS: Record<EmailLanguage, string> = {
+  both: "Merci ! Le récap du webinaire « Aborde ta rentrée IA avec Claude »",
+  fr: "Merci ! Le récap du webinaire « Aborde ta rentrée IA avec Claude »",
+  en: "Thank you! Your recap of the « Aborde ta rentrée IA avec Claude » webinar",
+};
+
+const WHY_FR = "Vous recevez ce mail car vous étiez inscrit·e au webinaire du 21 septembre 2026.";
+const WHY_EN = "You're receiving this because you registered for the webinar on 21 September 2026.";
+
+/** French then English by default; `lang` sends a single language instead. */
+export function buildWebinarEmail(
+  opts: WebinarEmailOptions & { lang?: EmailLanguage },
+): { subject: string; html: string; text: string } {
+  const lang = opts.lang ?? "both";
+  const subject = SUBJECTS[lang];
 
   const logo = `${opts.assetBaseUrl ?? "https://tutto.one"}${LOGO_PATH}`;
   const header = `<tr><td style="padding:4px 0 24px;">
@@ -291,19 +306,23 @@ export function buildWebinarEmail(opts: WebinarEmailOptions): { subject: string;
       <p style="margin:0;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:${MUTED};">English version below</p>
     </td></tr>`;
 
+  const sections =
+    lang === "fr" ? sectionHtml(FR, opts)
+    : lang === "en" ? sectionHtml(EN, opts)
+    : `${sectionHtml(FR, opts)}${divider}${sectionHtml(EN, opts)}`;
+  const why = lang === "fr" ? WHY_FR : lang === "en" ? WHY_EN : `${WHY_FR} · ${WHY_EN}`;
+
   const html = `<!DOCTYPE html>
-<html lang="fr">
+<html lang="${lang === "en" ? "en" : "fr"}">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeHtml(subject)}</title></head>
 <body style="margin:0;padding:0;background:${CREAM};">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${CREAM};">
     <tr><td align="center" style="padding:32px 16px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;font-family:${FONT};">
         ${header}
-        ${sectionHtml(FR, opts)}
-        ${divider}
-        ${sectionHtml(EN, opts)}
+        ${sections}
         <tr><td style="padding:8px 0 0;text-align:center;">
-          <p style="margin:0 0 6px;font-size:11px;line-height:1.6;color:${MUTED};">Vous recevez ce mail car vous étiez inscrit·e au webinaire du 21 septembre 2026. · You're receiving this because you registered for the webinar on 21 September 2026.</p>
+          <p style="margin:0 0 6px;font-size:11px;line-height:1.6;color:${MUTED};">${escapeHtml(why)}</p>
           <p style="margin:0;font-size:11px;color:${MUTED};">Tutto × Altiplane · <a href="https://altiplane.fr" style="color:${MUTED};">altiplane.fr</a> · <a href="https://tutto.one" style="color:${MUTED};">tutto.one</a></p>
         </td></tr>
       </table>
@@ -312,15 +331,11 @@ export function buildWebinarEmail(opts: WebinarEmailOptions): { subject: string;
 </body>
 </html>`;
 
-  const text = [
-    sectionText(FR, opts),
-    "",
-    "———————— English version ————————",
-    "",
-    sectionText(EN, opts),
-    "",
-    "Tutto × Altiplane · https://altiplane.fr · https://tutto.one",
-  ].join("\n");
+  const textSections =
+    lang === "fr" ? [sectionText(FR, opts)]
+    : lang === "en" ? [sectionText(EN, opts)]
+    : [sectionText(FR, opts), "", "———————— English version ————————", "", sectionText(EN, opts)];
+  const text = [...textSections, "", "Tutto × Altiplane · https://altiplane.fr · https://tutto.one"].join("\n");
 
   return { subject, html, text };
 }

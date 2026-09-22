@@ -11,7 +11,7 @@ export const post: PostFr = {
 
 Cet article reprend tout ce qui a été montré, étape par étape, avec les prompts et les skills à copier, puis une FAQ qui complète les réponses données pendant le live.
 
-[VIDEO:]
+[VIDEO:https://youtu.be/cM5tb5CBfUA]
 
 ## Les quatre piliers
 

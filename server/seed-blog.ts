@@ -701,7 +701,7 @@ The mountain image is the bit I'll keep, though. Not because it's profound - bec
 
 This post walks through everything we showed, step by step, with the prompts and skills to copy, followed by an FAQ that completes the answers we gave live. The prompts are in English here; the French originals are in the French version of this page.
 
-[VIDEO:]
+[VIDEO:https://youtu.be/cM5tb5CBfUA]
 
 ## The four pillars
 
