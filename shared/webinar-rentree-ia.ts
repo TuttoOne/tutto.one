@@ -7,6 +7,7 @@
  */
 
 export const WEBINAR_SLUG = "aborde-ta-rentree-ia-avec-claude";
+export const WEBINAR_REPLAY_URL = "https://youtu.be/cM5tb5CBfUA";
 
 export type FaqItem = { q: string; a: string };
 

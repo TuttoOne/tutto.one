@@ -1,5 +1,5 @@
 import { storage } from "./storage";
-import { WEBINAR_SLUG, FAQ_EN, faqToMarkdown } from "@shared/webinar-rentree-ia";
+import { WEBINAR_SLUG, WEBINAR_REPLAY_URL, FAQ_EN, faqToMarkdown } from "@shared/webinar-rentree-ia";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // This is the SINGLE source of truth for seeding blog posts into the database.
@@ -701,7 +701,7 @@ The mountain image is the bit I'll keep, though. Not because it's profound - bec
 
 This post walks through everything we showed, step by step, with the prompts and skills to copy, followed by an FAQ that completes the answers we gave live. The prompts are in English here; the French originals are in the French version of this page.
 
-[VIDEO:https://youtu.be/cM5tb5CBfUA]
+[VIDEO:${WEBINAR_REPLAY_URL}]
 
 ## The four pillars
 
@@ -973,6 +973,18 @@ export async function seedBlogPostsIfEmpty() {
       }
     }
     if (added > 0) console.log(`Added ${added} new blog post(s) from seed.`);
+  }
+
+  // One-off: the webinar recap reached production before its replay existed,
+  // so the live row still has an empty video slot. Fill that slot and nothing
+  // else; once the link is in (or the line has been edited in /admin), this
+  // no longer matches and does nothing.
+  const webinar = await storage.getBlogPostBySlug(WEBINAR_SLUG);
+  if (webinar?.content.includes("\n[VIDEO:]\n")) {
+    await storage.updateBlogPost(WEBINAR_SLUG, {
+      content: webinar.content.replace("\n[VIDEO:]\n", `\n[VIDEO:${WEBINAR_REPLAY_URL}]\n`),
+    });
+    console.log("Added the replay link to the webinar recap.");
   }
 
   // Seed default site content if not yet stored
