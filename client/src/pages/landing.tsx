@@ -12,7 +12,7 @@ import {
 } from "@/components/product/ProductPage";
 import { SITE_TITLE, useT } from "@/lib/i18n";
 import { landing } from "@/lib/landing-copy";
-import { price, perMonth } from "@/lib/pricing";
+import { price } from "@/lib/pricing";
 import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
@@ -38,7 +38,7 @@ const BOOKING = "https://cal.com/tuttoone/90-min-meeting";
  * are on, what it costs, and the question they are actually worried about.
  * Nothing here defines its own type, colour or spacing — it is `Layout` for the
  * chrome, `Section` for the ruled heads, `NumberedList` for the sequence and
- * `HeadlinePrice` for the two figures, so the front door moves when the rest of
+ * `HeadlinePrice` for the price, so the front door moves when the rest of
  * the site does. All the words are in `client/src/lib/landing-copy.ts`.
  */
 export default function Landing() {
@@ -183,47 +183,25 @@ function Sequence() {
 }
 
 /**
- * Both figures, stated plainly.
- *
- * The agent first because it is what is being sold, the class second because it
- * is how somebody who is not ready to buy one gets to a number for theirs. Both
- * prices are floors: "from" is doing real work and should survive editing.
- *
- * Side by side rather than stacked. Two prices in a column are read in
- * sequence — the second arrives as an afterthought to the first, a scroll
- * later — and these are meant to be compared: €3,000 for the thing we build
- * against €100 for the way in. Comparison needs them in the eye at once.
- * They stack again below `md`, where a column is the only honest option.
+ * The one price on the front door: the QuickStart, which is the way in. The
+ * agent build is quoted after discovery, so it is not priced here.
  */
 function Pricing() {
   const t = useT();
   const { locale, currency } = usePreferences();
   const entryPrice = useEntryPrice();
-  const { build, class: entry } = landing.pricing;
-  const buildPrice = price("agentBuildFrom", currency, locale);
-  const buildMonthly = perMonth("agentMonthly", currency, locale);
+  const { class: entry } = landing.pricing;
   const sessionPrice = price("sessionStandard", currency, locale);
 
   return (
     <Section label={t(landing.pricing.label)}>
-      <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
-        <HeadlinePrice
-          title={t(build.title)}
-          price={`${t(build.pricePrefix)} ${buildPrice}`}
-          note={t(build.note).replace("{monthly}", buildMonthly)}
-        >
-          {t(build.body)}{" "}
-          {t(build.scope).replace("{price}", buildPrice)}
-        </HeadlinePrice>
-
-        <HeadlinePrice
-          title={t(entry.title)}
-          price={entryPrice}
-          note={t(entry.note).replace("{session}", sessionPrice)}
-        >
-          {t(entry.body)}
-        </HeadlinePrice>
-      </div>
+      <HeadlinePrice
+        title={t(entry.title)}
+        price={entryPrice}
+        note={t(entry.note).replace("{session}", sessionPrice)}
+      >
+        {t(entry.body)}
+      </HeadlinePrice>
 
       <p className="mt-4 text-sm text-muted-foreground">{t(landing.pricing.vat)}</p>
     </Section>

@@ -198,58 +198,22 @@ export const landing = {
   },
 
   /**
-   * The two priced things, in the order they are bought: the agent is what we
-   * sell, the class is how a stranger gets to a quote for one. Both figures
-   * are floors — "from" is load-bearing and should survive every edit, because
-   * the number that is actually charged comes out of discovery.
+   * The one priced thing on the front door: the class, which is how a stranger
+   * gets to a quote for an agent. The agent itself is priced after discovery.
    */
   pricing: {
     label: { en: "What it costs", fr: "Ce que cela coûte" },
 
     /**
-     * The two figures above are sold through different channels and so carry
-     * VAT differently, which is why this is one sentence about each rather
-     * than a single blanket line.
-     *
      * The session is paid by card at booking, and the card is charged the
      * figure shown — Cal.com bills one flat amount and cannot add tax for some
      * buyers and not others. So for the minority of bookers who are UK-based
      * that figure is VAT-inclusive, and saying "excludes VAT" of a €100 charge
-     * that is exactly €100 would simply be untrue. Build work is invoiced, and
-     * an invoice can carry VAT properly, so it is quoted ex VAT as B2B work
-     * normally is.
+     * that is exactly €100 would simply be untrue.
      */
     vat: {
-      en: "The session is charged in full at booking, and the price includes UK VAT where it applies. Build work is quoted ex VAT and invoiced — EU business clients under reverse charge.",
-      fr: "La séance est réglée intégralement à la réservation, et le prix inclut la TVA britannique le cas échéant. Les projets sont chiffrés hors taxes et facturés — en autoliquidation pour les clients professionnels de l'UE.",
-    },
-
-    build: {
-      title: {
-        en: "An agent, built and kept running",
-        fr: "Un agent, construit et maintenu",
-      },
-      /**
-       * `{price}` and `{monthly}` are filled from the pricing table at render.
-       *
-       * They used to be written into the sentence as euros, which meant a
-       * visitor who switched the toggle to £ read "£83" for the session beside
-       * "From €3,000" for the agent — two currencies in one pricing block.
-       */
-      pricePrefix: { en: "From", fr: "À partir de" },
-      body: {
-        en: "Built for one job, in an environment we set up and hand over.",
-        fr: "Construit pour un travail précis, dans un environnement que nous installons et vous remettons.",
-      },
-      /** The scope line: what the "from" figure actually buys. */
-      scope: {
-        en: "From {price} for a simple, single-task agent. Most projects are priced after discovery.",
-        fr: "À partir de {price} pour un agent simple, dédié à une seule tâche. La plupart des projets sont chiffrés après la découverte.",
-      },
-      note: {
-        en: "Then from {monthly} to keep it running. The real figure depends on the job, which is what discovery is for.",
-        fr: "Puis à partir de {monthly} pour le maintenir. Le chiffre dépend du travail : c'est l'objet de la découverte.",
-      },
+      en: "The session is charged in full at booking, and the price includes UK VAT where it applies.",
+      fr: "La séance est réglée intégralement à la réservation, et le prix inclut la TVA britannique le cas échéant.",
     },
 
     /** The entry point, and the reason it is priced this low: the discovery
