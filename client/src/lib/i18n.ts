@@ -159,11 +159,10 @@ export const copy = {
   services: {
     title: { en: "Services", fr: "Prestations" },
     standfirst: {
-      en: "Preparing your organization for the automated workforce.",
-      fr: "Préparer votre organisation à une main-d'œuvre automatisée.",
+      en: "Priced up front. The first step is a free 15-minute call.",
+      fr: "Prix annoncés d'avance. La première étape est un appel gratuit de 15 minutes.",
     },
     inquire: { en: "Inquire", fr: "Nous consulter" },
-    runDiagnostic: { en: "Book a call", fr: "Réserver un appel" },
   },
 
   /**
@@ -182,18 +181,18 @@ export const copy = {
       fr: "La seconde façon d'entrer. Une soirée dans une salle comme celle-ci, c'est là que la plupart découvrent que le travail est plus petit qu'ils ne le craignaient.",
     },
     eyebrow: { en: "How we work", fr: "Notre façon de travailler" },
-    title: { en: "Two ways in", fr: "Deux portes d'entrée" },
+    title: { en: "We build it, or you learn to.", fr: "Nous le construisons, ou vous apprenez à le faire." },
     lead1: {
-      en: "Every engagement is scoped to what you actually want, so this is not a menu. It is the two shapes the work takes.",
-      fr: "Chaque mission est cadrée sur ce que vous voulez vraiment : ceci n'est donc pas un catalogue, mais les deux formes que prend le travail.",
+      en: "Either way it starts in the same order: the rules, a standard for good work, and what to hand over. Skip those and whatever gets built gets redone.",
+      fr: "Dans les deux cas, on commence dans le même ordre : les règles, un standard pour juger le travail, et ce qu'on délègue. Sautez ces étapes et tout ce qui est construit est à refaire.",
     },
     lead2: {
-      en: "We build it, or you learn to build it. Most clients end up doing both.",
-      fr: "Soit nous le construisons, soit vous apprenez à le construire. La plupart de nos clients finissent par faire les deux.",
+      en: "Most clients do both: the team learns in Praxis, and we build what's too big to build in the room.",
+      fr: "La plupart de nos clients font les deux : l'équipe apprend avec Praxis, et nous construisons ce qui est trop gros pour être fait en séance.",
     },
     meta: {
-      en: "Scoped in one call. Nothing here is a package.",
-      fr: "Cadré en un seul appel. Rien de tout ceci n'est un forfait.",
+      en: "One free 15-minute call tells you which.",
+      fr: "Un appel gratuit de 15 minutes vous dit laquelle.",
     },
 
     s1Label: { en: "What you want", fr: "Ce que vous voulez" },
@@ -250,8 +249,8 @@ export const copy = {
       fr: "« Je veux vraiment savoir m'en servir. »",
     },
     l2Body: {
-      en: "Praxis. Ninety minutes at a time, on your own work, until something you brought with you runs.",
-      fr: "Praxis. Quatre-vingt-dix minutes à la fois, sur votre propre travail, jusqu'à ce que ce que vous avez apporté fonctionne.",
+      en: "The AI-Fluent Team: eight sessions on your own work, in order. The rules, a KPI for each job, what to hand over, then the build.",
+      fr: "L'équipe à l'aise avec l'IA : huit séances sur votre propre travail, dans l'ordre. Les règles, un indicateur par tâche, ce qu'on délègue, puis la construction.",
     },
     l3Q: {
       en: "“I want the whole organisation to be.”",
@@ -269,9 +268,10 @@ export const copy = {
       en: "Most engagements start with a diagnostic — {price}. One to two days for a simple project, longer for a larger one. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
       fr: "La plupart des missions commencent par un diagnostic — {price}. Un à deux jours pour un projet simple, davantage pour un projet plus important. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
     },
+    /** `{team}` is the AI-Fluent Team price in the reader's currency. */
     priceBody2: {
-      en: "After that, nothing here is a package. Build work is quoted from the scope the diagnostic found. Training is priced per session. We will tell you on the first call if we think the answer is smaller than you expected.",
-      fr: "Ensuite, rien de tout ceci n'est un forfait. Le développement est chiffré à partir du périmètre révélé par le diagnostic. La formation est facturée à la séance. Nous vous dirons dès le premier appel si nous pensons que la réponse est plus modeste que ce que vous imaginiez.",
+      en: "Build work is quoted from the scope the diagnostic found. Training skips the diagnostic: The AI-Fluent Team is a fixed programme at {team}, with its guarantee on the programme page. If the honest answer is smaller than you expected, we'll say so on the first call.",
+      fr: "Le développement est chiffré à partir du périmètre révélé par le diagnostic. La formation se passe de diagnostic : l'équipe à l'aise avec l'IA est un programme à prix fixe, {team}, avec sa garantie sur la page du programme. Si la réponse honnête est plus modeste que prévu, nous vous le dirons dès le premier appel.",
     },
 
     ctaTitle: {

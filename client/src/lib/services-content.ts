@@ -129,17 +129,19 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
     title: "The AI-Fluent Team",
     titleFr: "L'équipe à l'aise avec l'IA",
     description:
-      "Eight sessions to output you don't rewrite: your team briefs AI well, checks what comes back, and knows what must never go in.",
+      "Eight sessions to stop repeating yourself: the rules, a KPI for each job, what to hand over, then the build. With a guarantee.",
     descriptionFr:
-      "Huit séances pour des résultats que vous ne réécrivez plus : votre équipe sait briefer l'IA, vérifier ce qui revient, et ce qui ne doit jamais y entrer.",
+      "Huit séances pour arrêter de vous répéter : les règles, un indicateur par tâche, ce qu'on délègue, puis la construction. Avec une garantie.",
     features: [
       "AI Use Charter",
       "KPI Scorecard per role",
+      "Hand-over list",
       "Briefing Library and Verification Protocol",
     ],
     featuresFr: [
       "Charte d'usage de l'IA",
       "Grille d'évaluation par rôle",
+      "Liste de délégation",
       "Bibliothèque de consignes et protocole de vérification",
     ],
     /**
@@ -151,8 +153,9 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
       en: "Every person you refer who enrols takes {credit} off your own fee, up to {cap}. Credits apply to courses taught by participating trainers.",
       fr: "Chaque personne que vous parrainez et qui s'inscrit réduit votre propre tarif de {credit}, jusqu'à {cap}. Les crédits s'appliquent aux cours animés par des formateurs participants.",
     },
+    /* A fixed programme, not a floor, so no "Starts at". The figure is the
+       back-to-work price; the regular price is on the programme page. */
     priceKey: "enablementFrom",
-    pricePrefix: STARTS_AT,
     href: "/praxis-programme",
     ctaLabel: { en: "See the programme", fr: "Voir le programme" },
   },

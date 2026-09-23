@@ -9,6 +9,8 @@ import { usePreferences } from "@/lib/preferences";
 import { price, perDay, praxisEconomics } from "@/lib/pricing";
 import { DEFAULT_SERVICES, localiseService, type ServiceItem } from "@/lib/services-content";
 import { pick, copy, useT, SITE_TITLE } from "@/lib/i18n";
+/* The booking label is the home page's, so every page asks the same way. */
+import { landing } from "@/lib/landing-copy";
 
 const BOOKING = "https://cal.com/tuttoone/15min";
 
@@ -89,8 +91,8 @@ export default function Services() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "Prestations — deux portes d'entrée | Tutto"
-        : "Services — two ways in | Tutto";
+        ? "Prestations — nous le construisons, ou vous apprenez | Tutto"
+        : "Services — we build it, or you learn to | Tutto";
     return () => {
       document.title = SITE_TITLE;
     };
@@ -134,7 +136,7 @@ export default function Services() {
               <p>{t(copy.waysIn.lead2)}</p>
             </>
           }
-          primaryCta={{ label: t(copy.common.bookCall), href: BOOKING }}
+          primaryCta={{ label: t(landing.hero.cta), href: BOOKING }}
           secondaryCta={{ label: t(copy.common.sendMessage), href: "/contact" }}
           meta={t(copy.waysIn.meta)}
         />
@@ -175,7 +177,12 @@ export default function Services() {
                   into the sentence, so it follows the currency toggle, and it
                   carries its own "per day" so the rate cannot read as a total. */}
               <p>{t(copy.waysIn.priceBody1).replace("{price}", diagnostic)}</p>
-              <p>{t(copy.waysIn.priceBody2)}</p>
+              <p>
+                {t(copy.waysIn.priceBody2).replace(
+                  "{team}",
+                  referral.specialActive ? referral.course : referral.teamRegular,
+                )}
+              </p>
             </>
           }
         />
@@ -240,7 +247,7 @@ export default function Services() {
           title={t(copy.waysIn.ctaTitle)}
           body={t(copy.waysIn.ctaBody)}
           href={BOOKING}
-          label={t(copy.services.runDiagnostic)}
+          label={t(landing.hero.cta)}
           messageLabel={t(copy.common.sendMessage)}
         />
       </div>

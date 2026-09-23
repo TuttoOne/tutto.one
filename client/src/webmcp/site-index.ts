@@ -32,10 +32,10 @@ export const SITE_PAGES: SitePage[] = [
   },
   {
     path: "/services",
-    name: "Services — two ways in",
+    name: "Services — we build it, or you learn to",
     summary: "How we work, and the priced engagements underneath it.",
     detail:
-      "Opens with how we work and keeps the engagements below it: the data audit and knowledge mapping diagnostic charged by the day, building on your own infrastructure with your choice of models, and team enablement. Each is priced, in the currency the visitor has selected.",
+      "We build it, or your team learns to; either way it starts with the rules, a standard for good work and what to hand over. Below that, the priced engagements: the data audit and knowledge mapping diagnostic charged by the day, building on your own infrastructure with your choice of models, and The AI-Fluent Team training programme at a fixed price. Each is priced in the currency the visitor has selected.",
     offering: true,
   },
   {
