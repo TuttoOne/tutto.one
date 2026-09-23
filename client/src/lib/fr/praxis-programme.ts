@@ -3,20 +3,26 @@ import type { FrDict } from "../page-fr";
 /** French for the Praxis Programme page, keyed on the English string. */
 export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The Praxis Programme": "Le programme Praxis",
-  "Build your own tools": "Construisez vos propres outils",
-  "with an AI assistant.": "avec un assistant IA.",
-  "Book an intro call →": "Réserver un premier échange →",
-  "One to four people · Online or in person":
-    "De une à quatre personnes · À distance ou sur place",
-  "Praxis Programme · Eight Sessions · V1": "Programme Praxis · Huit séances · V1",
-  "You will not learn to code.": "Vous n'apprendrez pas à coder.",
-  "You will learn to build.": "Vous apprendrez à construire.",
+  "Eight sessions.":
+    "Huit séances.",
+  "Your team stops repeating itself.":
+    "Votre équipe arrête de se répéter.",
+  "Sending...": "Envoi…",
+  "Send it →": "Envoyer →",
+  "You and up to four of your team · Online or in person":
+    "Vous et jusqu'à quatre personnes de votre équipe · À distance ou sur place",
+  "The AI-Fluent Team · Eight Sessions":
+    "L'équipe à l'aise avec l'IA · Huit séances",
+  "Most teams start with the tools.":
+    "La plupart des équipes commencent par les outils.",
+  "That's why nothing sticks.":
+    "C'est pour ça que rien ne tient.",
 
-  "Up to four people: on your own, or with a few of your own colleagues. For one to one at your own pace, take Fast track. Either way it is built around your use case, not around a syllabus.":
-    "Jusqu'à quatre personnes : seul, ou avec quelques-uns de vos collaborateurs. Pour un tête-à-tête à votre rythme, choisissez la formule accélérée. Dans les deux cas, tout se construit autour de votre cas d'usage, et non autour d'un référentiel.",
+  "You and up to four of your team. For one to one, take The Owner's Fast Track. Either way it is built on your own work, not a syllabus.":
+    "Vous et jusqu'à quatre personnes de votre équipe. Pour un tête-à-tête, choisissez la formule accélérée du dirigeant. Dans les deux cas, tout se construit sur votre propre travail, pas sur un référentiel.",
   "Your use cases": "Vos cas d'usage",
-  "Send the work you want to fix when you register - the quote, the report, the weekly export. We learn on your examples from the first session. The group evenings run on generic ones; this does not.":
-    "Envoyez \u00e0 l'inscription le travail que vous voulez corriger : le devis, le rapport, l'export hebdomadaire. Nous apprenons sur vos exemples d\u00e8s la premi\u00e8re s\u00e9ance. Les soir\u00e9es collectives fonctionnent sur des exemples g\u00e9n\u00e9riques ; ce programme, non.",
+  "Before we start, send the jobs you keep repeating: the quote, the report, the weekly export. We work on those from the first session. The group evenings use generic examples. This doesn't.":
+    "Avant de commencer, envoyez les tâches que vous répétez sans cesse : le devis, le rapport, l'export hebdomadaire. Nous travaillons dessus dès la première séance. Les soirées collectives utilisent des exemples génériques. Pas ici.",
 
   "Who This Is For": "\u00c0 qui cela s'adresse",
   "Why a Person, Not Another Video":
@@ -29,22 +35,23 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "What It Costs": "Les tarifs",
   "Common Questions": "Questions fr\u00e9quentes",
 
-  "The actual tools you built along the way.":
-    "Les outils que vous aurez réellement construits en chemin.",
+  "The rules, the scorecards, and the jobs handed over.":
+    "Les règles, les grilles, et les tâches déléguées.",
   "Running the tools you build costs about":
     "Faire tourner les outils que vous construisez coûte environ",
   "for a subscription to a frontier AI system — Claude, Mistral or OpenAI — or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.":
     "pour un abonnement à un système d'IA de premier plan — Claude, Mistral ou OpenAI — ou rien du tout si vous exécutez des modèles à poids ouverts sur votre propre matériel. Les outils eux-mêmes tournent sur votre machine, sans facturation à l'usage.",
 
   "Get started": "Commencer",
-  "Tell me the task that eats your week.":
-    "Dites-moi la tâche qui dévore votre semaine.",
+  "Which job do you keep repeating?":
+    "Quelle tâche répétez-vous encore ?",
   "Done - we'll be in touch.": "C'est noté — nous revenons vers vous.",
   "Expect a reply within one working day.":
     "Réponse sous un jour ouvré.",
   Name: "Nom",
   Email: "Courriel",
-  "The task that eats your week": "La tâche qui dévore votre semaine",
+  "The job you keep repeating":
+    "La tâche que vous répétez sans cesse",
   "No marketing. Your details are used only to prepare for and respond to your enquiry.":
     "Aucune prospection. Vos coordonnées servent uniquement à préparer et à répondre à votre demande.",
   "Something went wrong - please try again or email daniel@tutto.one":
@@ -124,18 +131,22 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne. La seule condition : assister aux séances et répondre aux questions.",
 
   // --- Who this is for ---
-  "Hit the ceiling": "Vous plafonnez",
-  "You have used AI as a chat assistant and reached the limit of what copy-and-paste can do.":
-    "Vous avez utilisé l'IA comme assistant conversationnel et vous atteignez la limite du copier-coller.",
-  "A task that repeats": "Une tâche qui revient",
-  "You have a task you do every week that you suspect a machine could do for you.":
-    "Vous avez une tâche hebdomadaire dont vous soupçonnez qu'une machine pourrait s'en charger.",
-  "Not a developer": "Vous n'êtes pas développeur",
-  "You are not trying to become one. You want to make useful things. That is a different goal, and this programme is built around it.":
-    "Et vous ne cherchez pas à le devenir. Vous voulez fabriquer des choses utiles. C'est un objectif différent, et ce programme est bâti autour.",
-  "Rather be shown": "Vous préférez qu'on vous montre",
-  "You would rather be shown than left alone with a pile of conflicting videos. It works for professionals, small teams, and anyone whose week is full of work that repeats.":
-    "Plutôt que d'être laissé seul devant une pile de vidéos contradictoires. Cela convient aux indépendants, aux petites équipes et à quiconque dont la semaine est remplie de tâches répétitives.",
+  "Your team already uses AI":
+    "Votre équipe utilise déjà l'IA",
+  "And it takes as long as before, because every answer gets checked, fixed and asked again.":
+    "Et cela prend autant de temps qu'avant, parce que chaque réponse est vérifiée, corrigée et redemandée.",
+  "A job that repeats":
+    "Une tâche qui revient",
+  "The quote, the report, the weekly export. Work a machine could do, if someone set it up properly.":
+    "Le devis, le rapport, l'export hebdomadaire. Un travail qu'une machine pourrait faire, si quelqu'un l'installait correctement.",
+  "You can't see what goes in":
+    "Vous ne voyez pas ce qui y entre",
+  "Client files and personal data, pasted into tools nobody vetted. You want a rule before it becomes a problem.":
+    "Des dossiers clients et des données personnelles, collés dans des outils que personne n'a vérifiés. Vous voulez une règle avant que cela devienne un problème.",
+  "Nobody needs to code":
+    "Personne n'a besoin de coder",
+  "Nobody on your team has to become a developer. You want the work done once, not a new hobby.":
+    "Personne dans votre équipe n'a à devenir développeur. Vous voulez que le travail soit fait une fois, pas un nouveau passe-temps.",
 
   // --- Why a person ---
   "Tailored to your actual work": "Adapté à votre travail réel",
@@ -150,14 +161,14 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "L'installation, la première configuration, le moment où quelque chose casse : c'est précisément ce que les vidéos gratuites passent sous silence, et précisément là que la plupart des gens abandonnent en silence.",
 
   // --- Outcomes ---
-  "Build small working tools for your own work, by describing what you want in plain language.":
-    "Construire de petits outils fonctionnels pour votre propre activité, en décrivant ce que vous voulez en langage courant.",
-  "Capture your own rules and judgement so a tool works the way you do, every time.":
-    "Consigner vos propres règles et votre jugement pour qu'un outil travaille à votre manière, à chaque fois.",
-  "Understand what is safe, what it costs, and what it can and cannot do.":
-    "Comprendre ce qui est sûr, ce que cela coûte, et ce que l'outil peut ou ne peut pas faire.",
-  "Hand a tool to a colleague or a developer cleanly, with no black box.":
-    "Transmettre proprement un outil à un collègue ou à un développeur, sans boîte noire.",
+  "Set the rules: what goes in, which tools, and what never leaves the building.":
+    "Fixer les règles : ce qui entre, quels outils, et ce qui ne sort jamais de l'entreprise.",
+  "Judge AI output against a KPI for each job, not a feeling.":
+    "Juger le travail de l'IA sur un indicateur par tâche, pas sur une impression.",
+  "Decide which jobs to hand over, and what each needs to run without you.":
+    "Décider quelles tâches déléguer, et ce qu'il faut à chacune pour tourner sans vous.",
+  "Build the tools, skills and automations that do those jobs, by describing them in plain language.":
+    "Construire les outils, les compétences et les automatisations qui font ces tâches, en les décrivant en langage courant.",
   "Keep building on your own after the programme ends.":
     "Continuer à construire seul une fois le programme terminé.",
 
@@ -243,24 +254,24 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "e.g. I spend three hours every Monday compiling a report from five different spreadsheets...":
     "ex. : je passe trois heures chaque lundi à compiler un rapport à partir de cinq tableurs différents…",
 
-  "A certificate confirming you completed the programme - and, more to the point, the tools you built during it. The certificate records what you made, not just that you turned up. That is the proof that matters.":
-    "Une attestation confirmant que vous avez suivi le programme — et, plus important encore, les outils que vous avez construits en chemin. L'attestation consigne ce que vous avez réalisé, et pas seulement votre présence. C'est cette preuve-là qui compte.",
+  "Your charter, a KPI scorecard for each role, standing briefs and checks for your top three jobs, and the tools you built on them. A certificate records what you made, not just that you turned up.":
+    "Votre charte, une grille par rôle, des consignes et contrôles permanents pour vos trois tâches clés, et les outils construits dessus. Une attestation consigne ce que vous avez réalisé, pas seulement votre présence.",
   "A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.":
     "Un mot de franchise, pour poser la bonne attente : vous ferez vous-même l'essentiel du chemin. Sur tout ce qui est complexe, la dernière portion se termine à la main ou se délègue. Faire déjà l'essentiel du chemin représente une économie considérable par rapport à la façon dont le travail se fait aujourd'hui — et c'est cette économie que nous visons.",
-  "Eight sessions over two months. For people who have used AI in a chat box and want to go further. You will build small, working tools that do your repetitive work for you, in plain language, with someone sitting beside you who has done it before.":
-    "Huit séances sur deux mois. Pour celles et ceux qui ont utilisé l'IA dans une fenêtre de discussion et veulent aller plus loin. Vous construirez de petits outils fonctionnels qui prendront en charge vos tâches répétitives, en langage courant, avec à vos côtés quelqu'un qui l'a déjà fait.",
+  "Your staff already use AI, and it saves them nothing: ask, fix, ask again. Over eight sessions we fix it in order, on your own work. The rules, a KPI for each job, what to hand over. Then the tools, skills and automations that do it without you.":
+    "Vos équipes utilisent déjà l'IA, et cela ne leur fait rien gagner : demander, corriger, redemander. En huit séances, nous corrigeons cela dans l'ordre, sur votre propre travail. Les règles, un indicateur par tâche, ce qu'on délègue. Puis les outils, les compétences et les automatisations qui le font sans vous.",
   "Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
     "Quatre séances supplémentaires vous transforment en formateur. Clients que vous amenez vous-même : vous conservez 80 % des frais de formation payés. Clients amenés par Tutto : vous en conservez 60 %. Je trouve et j'organise les clients avec vous, vous assurez les séances, et une structure vous épaule pour les cas difficiles.",
-  "I will tell you honestly whether this is the right thing for you. The first step is a short call.":
-    "Je vous dirai honnêtement si ce programme vous convient. La première étape est un bref échange.",
+  "Tell me here, or bring it to a free 15-minute call. I'll tell you honestly whether this programme is the right fit.":
+    "Dites-le-moi ici, ou venez avec elle à un appel gratuit de 15 minutes. Je vous dirai franchement si ce programme vous convient.",
   "It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.":
     "Il fera de vous quelqu'un capable de construire des choses réellement utiles, qui sait reconnaître quand un chantier justifie l'appel à un développeur, et comment le briefer le cas échéant. C'est une position bien plus précieuse qu'il n'y paraît.",
-  "No coding background needed. By the end you will have built something you actually use, and you will know how to keep building on your own.":
-    "Aucune expérience du code n'est requise. À la fin, vous aurez construit quelque chose que vous utilisez vraiment, et vous saurez continuer à construire par vous-même.",
+  "No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.":
+    "Aucune compétence en code n'est requise. Vous repartez avec la charte, les grilles, les consignes et les contrôles, et les tâches qui se répétaient, déléguées.",
   "Weekly, over roughly two months. The first six get you to a confident, independent builder. The last two take you deeper, into the kind of work that usually needs a developer.":
     "Une séance par semaine, sur près de deux mois. Les six premières vous rendent autonome et sûr de vous. Les deux dernières vous emmènent plus loin, vers le type de travail qui réclame d'ordinaire un développeur.",
-  "You have typed questions into ChatGPT or Claude and got useful answers back. This is the next step: using an AI assistant to build small, working tools that do your repetitive work for you. The internet is full of free tutorials. What a video cannot do is see where you are stuck and hear what you are unsure about. That gap - between \"I have asked an AI questions\" and \"I am building\" - is the whole reason this programme exists.":
-    "Vous avez posé des questions à ChatGPT ou à Claude et obtenu des réponses utiles. Voici l'étape suivante : utiliser un assistant IA pour construire de petits outils fonctionnels qui prennent en charge vos tâches répétitives. Internet regorge de tutoriels gratuits. Ce qu'une vidéo ne peut pas faire, c'est voir où vous bloquez et entendre ce dont vous doutez. C'est précisément cet écart — entre « j'ai posé des questions à une IA » et « je construis » — qui justifie l'existence de ce programme.",
+  "Your staff have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.":
+    "Vos équipes ont posé des questions à ChatGPT ou à Claude. Certaines réponses étaient utiles. La plupart demandaient des corrections, et le temps gagné est parti dans les corrections. Le problème n'est pas l'outil. Personne n'a fixé les règles, défini un bon résultat, ni décidé quoi déléguer. Ce programme fait ces trois choses d'abord, sur votre propre travail, puis construit dessus.",
 
   "On the choice of assistant":
     "Sur le choix de l'assistant",
