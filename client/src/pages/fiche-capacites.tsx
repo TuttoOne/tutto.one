@@ -49,7 +49,8 @@ export function FicheSheet({ showContact = true }: { showContact?: boolean }) {
           Daniel Forsthofer
         </h1>
         <p className="mt-3 print:mt-2 text-xl print:text-[12pt] font-serif text-foreground leading-snug max-w-xl">
-          Je compte et je réduis la charge documentaire des entreprises.
+          Arrêtez de vous répéter. Je fais en sorte que l'IA fasse le travail une fois, et
+          correctement.
         </p>
         {showContact && (
           <p className="mt-5 print:mt-3 text-sm print:text-[9pt] text-muted-foreground">
@@ -68,8 +69,13 @@ export function FicheSheet({ showContact = true }: { showContact?: boolean }) {
           <p>
             Les PME produisent et reproduisent les mêmes documents chaque semaine : devis, dossiers
             qualité, certificats fournisseurs, dossiers de financement, comptes rendus
-            réglementaires. Personne ne compte ce que cela coûte. Je le compte, je dis ce qui peut
-            être allégé, et je construis les systèmes qui l'allègent.
+            réglementaires. Les équipes utilisent déjà l'IA pour cela, et cela ne leur fait rien
+            gagner : demander, corriger, redemander.
+          </p>
+          <p>
+            <strong className="text-foreground font-semibold">Je corrige cela dans l'ordre.</strong> Les règles : ce qui entre, et ce qui ne sort
+            jamais de l'entreprise. Un indicateur par tâche, pour juger le travail sur un standard.
+            Ce qu'on délègue. Puis je construis les systèmes qui font le travail.
           </p>
         </Section>
 
@@ -99,9 +105,15 @@ export function FicheSheet({ showContact = true }: { showContact?: boolean }) {
 
         <Section label="Formation">
           <p>
-            Je forme des dirigeants et des équipes à l'usage professionnel des outils d'IA : non pas
-            une démonstration, mais un travail réel mené en séance, sur leurs propres documents,
-            jusqu'à un résultat qu'ils repartent avec.
+            Huit séances, sur vos propres documents, dans l'ordre : la charte d'usage de l'IA, une
+            grille d'évaluation par rôle, la liste de ce qu'on délègue, puis les outils, les
+            compétences, l'automatisation et les agents. Pas une démonstration : un travail réel,
+            mené en séance.
+          </p>
+          <p>
+            <strong className="text-foreground font-semibold">Garantie.</strong> Choisissez un travail récurrent avant de commencer. Si, à la
+            dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par sa
+            propre grille, je continue sans frais jusqu'à ce qu'elle y parvienne.
           </p>
           <p>
             <strong className="text-foreground font-semibold">
@@ -167,6 +179,21 @@ export function FicheSheet({ showContact = true }: { showContact?: boolean }) {
               </span>
             </li>
           </ul>
+        </Section>
+
+        <Section label="Pour commencer">
+          <p>
+            Un appel gratuit de 15 minutes. Venez avec la tâche que vous répétez sans cesse :{" "}
+            <a
+              href="https://cal.com/tuttoone/15min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              cal.com/tuttoone/15min
+            </a>
+            .
+          </p>
         </Section>
       </div>
     </article>
