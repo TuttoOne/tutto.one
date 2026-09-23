@@ -1024,8 +1024,8 @@ const DEFAULT_PORTFOLIO_JSON = JSON.stringify([
 ]);
 
 const DEFAULT_ABOUT_HERO_JSON = JSON.stringify({
-  headline: "Exploring AI Practically",
-  sub: "Making LLM-based AI systems useful is a very hands-on experience. The technology is new; it's moving very fast and it is extremely powerful if used in the right way. This is an exploration of one step in making all of that possible. I don't pretend to have all the answers, but I trust in the process because I've seen it work over and over again - and I want to share that with you.",
+  headline: "Learn by doing. Stop repeating yourself.",
+  sub: "Most people I meet already use AI, and it saves them nothing: ask, fix, ask again. I don't have all the answers. I've stopped waiting for them, and I teach what works: the rules, the standard, what to hand over, then the build.",
 });
 
 type SeedPost = (typeof BLOG_SEED_DATA)[number];

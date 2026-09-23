@@ -3,6 +3,8 @@ import { Header, Layout } from "@/components/layout/Layout";
 import { useQuery } from "@tanstack/react-query";
 import { usePreferences } from "@/lib/preferences";
 import { SITE_TITLE } from "@/lib/i18n";
+/* The booking label is the home page's, so every page asks the same way. */
+import { landing } from "@/lib/landing-copy";
 import { FicheSheet } from "@/pages/fiche-capacites";
 
 const ROBOTO: React.CSSProperties = {
@@ -17,9 +19,18 @@ const CAPS: React.CSSProperties = {
   letterSpacing: "0.12em",
 };
 
+/** One paragraph of the bio. Declared once so the prose below stays readable. */
+const P: React.CSSProperties = {
+  ...INTER,
+  fontSize: 14,
+  lineHeight: 1.85,
+  color: "#3d3d3d",
+  marginBottom: 22,
+};
+
 const DEFAULT_HERO = {
-  headline: "Learn by doing",
-  sub: "Making AI useful is a hands-on experience. The technology is new, moving fast, and genuinely powerful when used in the right way. Any leap is less daunting when you take the first step with someone beside you who's taken enough scary ones to like them. I don't pretend to have all the answers - I've just stopped waiting for them, and I want to share what I've found.",
+  headline: "Learn by doing. Stop repeating yourself.",
+  sub: "Most people I meet already use AI, and it saves them nothing: ask, fix, ask again. I don't have all the answers. I've stopped waiting for them, and I teach what works: the rules, the standard, what to hand over, then the build.",
 };
 
 export default function About() {
@@ -104,106 +115,44 @@ export default function About() {
         <div className="ab-cols">
           {/* Bio */}
           <div>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-                fontWeight: "normal",
-              }}
-            >
-              My background is in philosophy - not as an academic pursuit, but
-              as the practical foundation for working with technology.
+            <p style={P}>
+              My background is philosophy. Not the academic kind: the practical
+              kind, applied to technology. Four questions:
               <br />
               <br />
-              "What does it mean to use AI systems?"
+              "What does it mean to use AI?"
               <br />
-              "What is the utility / ROI?"
+              "What's the return?"
               <br />
-              "Is AI a good fit for me, for my organisation?"
+              "Is it right for me, or for my firm?"
               <br />
-              "What can we control, and what do we have no say over?"
+              "What can we control, and what can't we?"
             </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-              className="font-bold">
+            <p style={P} className="font-bold">
               Distinguish between what is within your control and what isn't.
               Accept the latter. Act on the former. The rest is noise.
             </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-            >
-              AI falls into the second category. It is not a choice. It is the
-              product of economic, technological, and scientific conditions that
-              are still accelerating, and no individual decision - yours, your
-              company's, your government's - will stop it. That is the part we
-              don't control.
+            <p style={P}>
+              AI is in the second category. It is not a choice. No decision -
+              yours, your company's, your government's - will stop it.
             </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-            >
-              What you do control is whether you understand it, and whether you
-              use it well. Don't bury your head in the sand because you don't
-              like AI, and what it's doing to the world. Try to understand it
-              and how it can be used to improve the world. Even a small action
-              can have a big impact, so lean in!
+            <p style={P}>
+              What you control is whether you use it well. Most don't. They paste
+              in a question, fix the answer, and do it again tomorrow. That isn't
+              a tool problem. It's a management problem: nobody would hand an
+              intern a job without a brief, a standard and a sign-off.
             </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-            >
-              The gap between people who understand these systems and people who
-              don't is going to compound. The people who engage - who learn to
-              work alongside AI rather than around it, who build things that
-              help them rather than waiting for someone else to do it - will be
-              in a different position to those who don't. That is not hype. It
-              is just how tools work.
+            <p style={P}>
+              So I teach it in order. Set the rules: what goes in, and what never
+              leaves the building. Define good: a KPI for each job. Decide what to
+              hand over. Then build: tools, skills, automation, agents. Skip the
+              first three and the fourth never sticks.
             </p>
-            <p
-              style={{
-                ...INTER,
-                fontSize: 14,
-                lineHeight: 1.85,
-                color: "#3d3d3d",
-                marginBottom: 22,
-              }}
-            >
-              Fear is the starting condition here, not the enemy. People fear
-              change and the unknown - so do I, still. The answer isn't bravado;
-              it's a first step, then another. My role is not to be the expert
-              above you, but the experienced first-stepper beside you.
-              <br />
-              <br />
-              I work with businesses and individuals who want to understand what
-              is actually happening: what these systems are, what they are
-              genuinely good at, where they fail, and what a working setup looks
-              like for their specific context. Some want strategy. Most want to
-              build something useful and understand what they have built.
+            <p style={P}>
+              Fear is the starting condition here, not the enemy. I still feel it.
+              The answer isn't bravado; it's a first step, then another. I'm not
+              the expert above you. I'm the one who has taken the first steps,
+              beside you.
             </p>
             <p
               style={{
@@ -212,12 +161,33 @@ export default function About() {
                 lineHeight: 1.85,
                 color: "#1a1a1a",
                 fontWeight: 500,
+                marginBottom: 24,
               }}
             >
-              We learn by doing & AI is a participant.
+              We learn by doing, and AI is a participant.
               <br />
-              You have nothing to lose, everything to gain.
+              Bring the job you keep repeating.
             </p>
+            <a
+              href="https://cal.com/tuttoone/15min"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                ...ROBOTO,
+                display: "inline-flex",
+                alignItems: "center",
+                background: "#d97706",
+                color: "#fff",
+                fontSize: 13,
+                fontWeight: 700,
+                padding: "12px 24px",
+                borderRadius: 6,
+                textDecoration: "none",
+                letterSpacing: "0.04em",
+              }}
+            >
+              {landing.hero.cta.en} →
+            </a>
           </div>
 
           {/* Sidebar */}
@@ -358,6 +328,7 @@ export default function About() {
                 "Philosophy first",
                 "Stoic framework",
                 "Utility over novelty",
+                "Rules before tools",
                 "Practice, don't just teach",
               ].map((item) => (
                 <div
