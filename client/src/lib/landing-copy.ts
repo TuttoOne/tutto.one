@@ -216,12 +216,12 @@ export const landing = {
 
     offer: {
       title: {
-        en: "The AI-Fluent Team — eight sessions to output you don't rewrite",
-        fr: "L'équipe à l'aise avec l'IA — huit séances pour des résultats que vous ne réécrivez plus",
+        en: "The AI-Fluent Team — eight sessions to stop repeating yourself",
+        fr: "L'équipe à l'aise avec l'IA — huit séances pour arrêter de vous répéter",
       },
       body: {
-        en: "You and up to four of your team. Your AI-use charter, a scorecard for each role, standing briefs for your top three jobs, and a way to check the output before it ships — all built on your own work.",
-        fr: "Vous et jusqu'à quatre personnes de votre équipe. Votre charte d'usage de l'IA, une grille d'évaluation par rôle, des consignes permanentes pour vos trois tâches clés, et une méthode pour vérifier le résultat avant qu'il parte — le tout construit sur votre propre travail.",
+        en: "You and up to four of your team. Your use policy, a KPI for each role, the call on what AI takes over, and standing briefs and checks for your top three jobs — built on your own work, so it's done once, not every day.",
+        fr: "Vous et jusqu'à quatre personnes de votre équipe. Votre politique d'usage, un indicateur par rôle, la décision sur ce que l'IA prend en charge, et des consignes et contrôles permanents pour vos trois tâches clés — construits sur votre propre travail, pour le faire une fois, pas tous les jours.",
       },
       special: {
         en: "Back-to-work price until {date}.",
