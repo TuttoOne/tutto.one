@@ -12,17 +12,15 @@ import {
 } from "@/components/product/ProductPage";
 import { SITE_TITLE, useT } from "@/lib/i18n";
 import { landing } from "@/lib/landing-copy";
-import { price } from "@/lib/pricing";
+import { praxisEconomics } from "@/lib/pricing";
 import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
 
-/* The 90-minute booking, which is the guided lesson this page prices at €100
-   and the sequence describes as taking 90 minutes — not the 15-minute intro call
-   the other pages book. Both CTA labels and the closing line are worded to match;
-   a button that says one duration and books another is the fastest way to lose
-   somebody at the last click. */
-const BOOKING = "https://cal.com/tuttoone/90-min-meeting";
+/* The free 15-minute call, the same one every other page books. The paid
+   90-minute QuickStart is no longer linked from the site: it is sent by hand
+   after this call, so nobody pays before they have talked to us. */
+const BOOKING = "https://cal.com/tuttoone/15min";
 
 /**
  * The site's front door, at `/`.
@@ -87,22 +85,8 @@ export default function Landing() {
  * a line of air. The classes are `ProductHero`'s otherwise, copied rather than
  * invented, so the two cannot drift apart.
  */
-/**
- * The session figure, from the price table rather than the copy file.
- *
- * It appears three times on this page — both buttons and the rate card — and
- * it used to be typed into each. `pricing.ts` is the only place it lives now,
- * so a change there moves all three and the copy editor cannot reach it to
- * set one of them to something else.
- */
-function useEntryPrice() {
-  const { locale, currency } = usePreferences();
-  return price("discoverySession", currency, locale);
-}
-
 function Hero() {
   const t = useT();
-  const entryPrice = useEntryPrice();
 
   return (
     <header className="pt-8 pb-4">
@@ -128,7 +112,7 @@ function Hero() {
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
         >
-          {t(landing.hero.cta)} — {entryPrice}
+          {t(landing.hero.cta)}
         </a>
         <Link
           href={landing.footer.longVersion.href}
@@ -183,27 +167,35 @@ function Sequence() {
 }
 
 /**
- * The one price on the front door: the QuickStart, which is the way in. The
- * agent build is quoted after discovery, so it is not priced here.
+ * The one price on the front door: The AI-Fluent Team, with its regular price
+ * struck through while the back-to-work special runs. Everything else — the
+ * stack, the guarantee, Fast Track — is on /praxis-programme, one click on.
  */
 function Pricing() {
   const t = useT();
   const { locale, currency } = usePreferences();
-  const entryPrice = useEntryPrice();
-  const { class: entry } = landing.pricing;
-  const sessionPrice = price("sessionStandard", currency, locale);
+  const econ = praxisEconomics(currency, locale);
+  const { offer } = landing.pricing;
 
   return (
     <Section label={t(landing.pricing.label)}>
       <HeadlinePrice
-        title={t(entry.title)}
-        price={entryPrice}
-        note={t(entry.note).replace("{session}", sessionPrice)}
+        title={t(offer.title)}
+        price={econ.course}
+        was={econ.specialActive ? econ.teamRegular : undefined}
+        note={
+          <>
+            {econ.specialActive && (
+              <>{t(offer.special).replace("{date}", econ.specialEnds)} </>
+            )}
+            <Link href="/praxis-programme" className="text-primary hover:underline">
+              {t(offer.link)} →
+            </Link>
+          </>
+        }
       >
-        {t(entry.body)}
+        {t(offer.body)}
       </HeadlinePrice>
-
-      <p className="mt-4 text-sm text-muted-foreground">{t(landing.pricing.vat)}</p>
     </Section>
   );
 }
@@ -225,7 +217,6 @@ function Data() {
 /** The conversion moment, signed. */
 function Close() {
   const t = useT();
-  const entryPrice = useEntryPrice();
 
   return (
     <ClosingCta
@@ -233,7 +224,7 @@ function Close() {
       title={t(landing.close.title)}
       body={t(landing.close.body)}
       href={BOOKING}
-      label={`${t(landing.close.cta)} — ${entryPrice}`}
+      label={t(landing.close.cta)}
       messageLabel={t(landing.close.alt)}
       footnote={
         <>

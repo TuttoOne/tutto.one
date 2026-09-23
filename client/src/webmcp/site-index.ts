@@ -25,9 +25,9 @@ export const SITE_PAGES: SitePage[] = [
   {
     path: "/",
     name: "Tutto — we build agents",
-    summary: "We build agents. The way in is QuickStart, a 90-minute session.",
+    summary: "We build agents. The way in is a free 15-minute call.",
     detail:
-      "The site's front door. AI is more than an advanced search engine: with tools it can do work. It can read data, create documents and run calculations. We don't replace people. We help them get the most out of their time with new skills and AI assistants that don't sleep. The page walks the reader through the sequence they are on — chat, workspace, agent — and prices QuickStart, the session that starts it. The booking on this page is the 90-minute QuickStart, which is paid, not the free 15-minute intro the other pages book.",
+      "The site's front door. AI is more than an advanced search engine: with tools it can do work. It can read data, create documents and run calculations. We don't replace people. We help them get the most out of their time with new skills and AI assistants that don't sleep. The page walks the reader through the sequence they are on — chat, workspace, agent — and prices one offer, The AI-Fluent Team, at its back-to-work price. Both buttons book the free 15-minute intro call.",
     offering: true,
   },
   {
@@ -59,7 +59,7 @@ export const SITE_PAGES: SitePage[] = [
     name: "Praxis — client training",
     summary: "Ninety minutes that change how you think about AI.",
     detail:
-      "Praxis is Tutto's hands-on training. You don't need a proprietary platform or an account with us — an AI assistant subscription and a free code editor, both pointed at the same folder on your machine. That folder, and what's inside it, is your app. The page lays out the training ladder: free sessions, QuickStart, the eight-session Praxis programme for one to four people, and Fast track, four private sessions. Every CTA on the page opens a conversation rather than selling an hour.",
+      "Praxis is Tutto's hands-on training. You don't need a proprietary platform or an account with us — an AI assistant subscription and a free code editor, both pointed at the same folder on your machine. That folder, and what's inside it, is your app. The page lays out the training ladder: free sessions, The AI-Fluent Team (eight sessions for an owner and up to four staff), and The Owner's Fast Track (four private sessions), both at a back-to-work price with the regular price struck through. Every CTA on the page opens a conversation rather than selling an hour.",
     offering: true,
   },
   {

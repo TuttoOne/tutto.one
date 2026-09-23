@@ -117,8 +117,11 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "You get a practice task and a clear way to get unstuck. When something breaks, the fix is usually one screenshot away, and learning that habit is part of the programme.":
     "Vous repartez avec un exercice et une marche à suivre claire pour vous débloquer. Quand quelque chose casse, la solution tient le plus souvent à une capture d'écran — et acquérir ce réflexe fait partie du programme.",
   "One-to-one or a group?": "En individuel ou en groupe ?",
-  "Praxis runs for one to four people, so you can bring a few colleagues. Fast track is private: one to one, in four sessions, at your pace.":
-    "Praxis accueille de une à quatre personnes : vous pouvez venir avec quelques collègues. La formule accélérée est privée : en tête-à-tête, en quatre séances, à votre rythme.",
+  "The AI-Fluent Team is for you and up to four of your team. The Owner's Fast Track is private: one to one, in four sessions, and credited in full if your team follows.":
+    "L'équipe à l'aise avec l'IA, c'est vous et jusqu'à quatre personnes de votre équipe. La formule accélérée du dirigeant est privée : en tête-à-tête, en quatre séances, et déduite intégralement si votre équipe suit.",
+  "What if it doesn't work for us?": "Et si cela ne fonctionne pas pour nous ?",
+  "Pick one recurring piece of work before we start. If by the last session your team can't produce it with AI to the standard on your own scorecard, I keep working with you at no charge until they can. The only condition is that you attend and answer the questions.":
+    "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne. La seule condition : assister aux séances et répondre aux questions.",
 
   // --- Who this is for ---
   "Hit the ceiling": "Vous plafonnez",
@@ -171,20 +174,55 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "What you need": "Ce qu'il vous faut",
 
   // --- Pricing ---
-  QuickStart: "QuickStart",
-  "90 minutes, one to four people. Discovery on your use case, first setup and training, and your AI policy and agent scorecard to keep. Paid by card when you book.":
-    "90 minutes, de une à quatre personnes. La découverte de votre cas d'usage, une première installation et une formation, et votre politique IA et grille d'évaluation d'agent, que vous gardez. Réglée par carte à la réservation.",
-  "Per session": "Par séance",
-  "90 minutes each, one to four people. Pay as you go, or commit to the full programme.":
-    "90 minutes chacune, de une à quatre personnes. À la carte, ou en vous engageant sur le programme complet.",
-  "Full programme": "Programme complet",
-  "All eight sessions. We take your use case from policy and setup through to a build, its evaluation and your hosting options — built and assessed together.":
-    "Les huit séances. Nous menons votre cas d'usage de la politique et de l'installation jusqu'à une réalisation, son évaluation et vos options d'hébergement — construit et évalué ensemble.",
-  "Fast track": "Formule accélérée",
-  "Four 90-minute sessions, private and one to one, at your pace. Your use case, built and assessed together.":
-    "Quatre séances de 90 minutes, privées et en tête-à-tête, à votre rythme. Votre cas d'usage, construit et évalué ensemble.",
-  "QuickStart is paid by card at booking. Praxis sessions, the full programme and Fast track are invoiced, ex VAT.":
-    "QuickStart se règle par carte à la réservation. Les séances Praxis, le programme complet et la formule accélérée sont facturés hors taxes.",
+  "You leave with: your AI Use Charter": "Vous repartez avec : votre charte d'usage de l'IA",
+  "You leave with: a KPI Scorecard per role": "Vous repartez avec : une grille d'évaluation par rôle",
+  "You leave with: standing briefs for your top three jobs":
+    "Vous repartez avec : des consignes permanentes pour vos trois tâches clés",
+  "You leave with: your Verification Protocol": "Vous repartez avec : votre protocole de vérification",
+
+  "The AI-Fluent Team · what you get": "L'équipe à l'aise avec l'IA · ce que vous obtenez",
+  "AI Use Charter": "Charte d'usage de l'IA",
+  "What may go into the tools, which tools and connections are allowed, and what happens if the rule is broken. Written in session one.":
+    "Ce qui peut entrer dans les outils, quels outils et connexions sont autorisés, et ce qui se passe si la règle n'est pas respectée. Rédigée dès la première séance.",
+  "KPI Scorecard per role": "Grille d'évaluation par rôle",
+  "What good output looks like for each job, written down, so feedback stops being \"make it better\".":
+    "À quoi ressemble un bon résultat pour chaque tâche, par écrit, pour que le retour ne soit plus « fais mieux ».",
+  "Briefing Library": "Bibliothèque de consignes",
+  "Standing instructions for your top three jobs, so nobody writes the same brief twice.":
+    "Des consignes permanentes pour vos trois tâches clés, pour que personne ne réécrive deux fois la même.",
+  "Verification Protocol": "Protocole de vérification",
+  "How output is checked before it ships, and who signs it off.":
+    "Comment le résultat est vérifié avant de partir, et qui le valide.",
+  "Eight live working sessions": "Huit séances de travail en direct",
+  "On your own work, not exercises. Nothing is homework that could be done in the room.":
+    "Sur votre propre travail, pas sur des exercices. Rien n'est laissé en devoir qui pourrait se faire en séance.",
+  "Bonus: The Field Guide": "Bonus : le guide de terrain",
+  "For \"my team won't remember this\": every principle on one page per person.":
+    "Pour « mon équipe ne s'en souviendra pas » : tous les principes sur une page par personne.",
+  "Bonus: 30 days of async review": "Bonus : 30 jours de relecture à distance",
+  "For \"it won't stick once you're gone\": one piece of work a week, reviewed.":
+    "Pour « ça ne tiendra pas une fois que vous serez parti » : un travail par semaine, relu.",
+  "Bonus: 90-day check-in call": "Bonus : un appel de suivi à 90 jours",
+  "For \"we'll drift back in three months\": we look at what slipped and fix it.":
+    "Pour « dans trois mois, on aura tout oublié » : on regarde ce qui a glissé et on le corrige.",
+  "Total stated value": "Valeur totale annoncée",
+  /** `{date}` is the last day of the back-to-work special. */
+  "The 30 days of async review is included for anyone who starts by {date}. After that it is an extra.":
+    "Les 30 jours de relecture à distance sont inclus pour toute inscription avant le {date}. Ensuite, ils sont en supplément.",
+  "The guarantee": "La garantie",
+  "Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard — or I keep working with you at no charge until they do.":
+    "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille — sinon je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
+  "The only condition is that you attend the sessions and answer the questions.":
+    "La seule condition : assister aux séances et répondre aux questions.",
+  "The AI-Fluent Team": "L'équipe à l'aise avec l'IA",
+  "Eight 90-minute sessions for you and up to four of your team. Everything in the stack above.":
+    "Huit séances de 90 minutes pour vous et jusqu'à quatre personnes de votre équipe. Tout ce qui figure ci-dessus.",
+  "The Owner's Fast Track": "La formule accélérée du dirigeant",
+  "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows.":
+    "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si votre équipe suit.",
+  "Back-to-work price until {date}": "Prix de rentrée jusqu'au {date}",
+  "The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.":
+    "La première étape est un appel gratuit de 15 minutes. Les deux programmes sont facturés hors taxes.",
   "We also run free sessions from time to time. They are general rather than built around your use case —":
     "Nous organisons aussi, de temps en temps, des séances gratuites. Elles sont générales, et non construites autour de votre cas d'usage —",
   "see Events": "voir les événements",

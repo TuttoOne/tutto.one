@@ -4,7 +4,7 @@ import { PRAXIS_PROGRAMME_FR } from "@/lib/fr/praxis-programme";
 import { usePreferences } from "@/lib/preferences";
 import { useTrainerCode } from "@/lib/trainer-code";
 import { SITE_TITLE } from "@/lib/i18n";
-import { praxisEconomics, trainerEconomics, perMonth } from "@/lib/pricing";
+import { praxisEconomics, trainerEconomics, perMonth, PRAXIS_STACK, stackValue, type StackKey } from "@/lib/pricing";
 import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -25,16 +25,19 @@ const INPUT: React.CSSProperties = {
 const sessions = [
   {
     n: "01",
+    artefact: "You leave with: your AI Use Charter",
     title: "Foundations and your first build",
     body: "See it work before any theory. Understand where AI is brilliant and where it has to be exact, whether your files are safe, and what it costs. Build your first small working thing, live.",
   },
   {
     n: "02",
+    artefact: "You leave with: a KPI Scorecard per role",
     title: "The build loop, and capturing your know-how",
     body: "Describe what you want and watch the assistant build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.",
   },
   {
     n: "03",
+    artefact: "You leave with: standing briefs for your top three jobs",
     title: "Your tools and surfaces",
     body: "The assistant's desktop app and the move into your own files. Connecting it to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.",
   },
@@ -50,6 +53,7 @@ const sessions = [
   },
   {
     n: "06",
+    artefact: "You leave with: your Verification Protocol",
     title: "Build something real, end to end",
     body: "A full build for your own work, mostly driven by you, with me reading the room. You finish the core programme with a tool you use and a certificate that shows what you built.",
   },
@@ -64,6 +68,46 @@ const sessions = [
     body: "Connect your tool to something else you use. Understand hosting and automation at a level you can act on. Ship your final build.",
   },
 ];
+
+/**
+ * The offer stack, in the order it is read: the core artefacts, then the
+ * bonuses, each bonus named with the objection it answers. Values come from
+ * PRAXIS_STACK in pricing.ts; only the words live here.
+ */
+const STACK_COPY: Record<StackKey, { title: string; body: string }> = {
+  charter: {
+    title: "AI Use Charter",
+    body: "What may go into the tools, which tools and connections are allowed, and what happens if the rule is broken. Written in session one.",
+  },
+  scorecard: {
+    title: "KPI Scorecard per role",
+    body: "What good output looks like for each job, written down, so feedback stops being \"make it better\".",
+  },
+  briefingLibrary: {
+    title: "Briefing Library",
+    body: "Standing instructions for your top three jobs, so nobody writes the same brief twice.",
+  },
+  verification: {
+    title: "Verification Protocol",
+    body: "How output is checked before it ships, and who signs it off.",
+  },
+  sessions: {
+    title: "Eight live working sessions",
+    body: "On your own work, not exercises. Nothing is homework that could be done in the room.",
+  },
+  fieldGuide: {
+    title: "Bonus: The Field Guide",
+    body: "For \"my team won't remember this\": every principle on one page per person.",
+  },
+  asyncReview: {
+    title: "Bonus: 30 days of async review",
+    body: "For \"it won't stick once you're gone\": one piece of work a week, reviewed.",
+  },
+  checkIn: {
+    title: "Bonus: 90-day check-in call",
+    body: "For \"we'll drift back in three months\": we look at what slipped and fix it.",
+  },
+};
 
 const faqs = [
   {
@@ -88,7 +132,11 @@ const faqs = [
   },
   {
     q: "One-to-one or a group?",
-    a: "Praxis runs for one to four people, so you can bring a few colleagues. Fast track is private: one to one, in four sessions, at your pace.",
+    a: "The AI-Fluent Team is for you and up to four of your team. The Owner's Fast Track is private: one to one, in four sessions, and credited in full if your team follows.",
+  },
+  {
+    q: "What if it doesn't work for us?",
+    a: "Pick one recurring piece of work before we start. If by the last session your team can't produce it with AI to the standard on your own scorecard, I keep working with you at no charge until they can. The only condition is that you attend and answer the questions.",
   },
 ];
 
@@ -280,6 +328,9 @@ export default function PraxisProgramme() {
                 <span style={{ ...MONO, fontSize: 10, color: "#b0a898", position: "absolute", top: 16, right: 18 }}>{s.n}</span>
                 <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "#1a1a1a", marginBottom: 8, paddingRight: 24 }}>{tr(s.title)}</p>
                 <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(s.body)}</p>
+                {s.artefact && (
+                  <p style={{ ...INTER, fontSize: 11, fontWeight: 600, color: "#d97706", marginTop: 10 }}>{tr(s.artefact)}</p>
+                )}
               </div>
             ))}
           </div>
@@ -335,31 +386,53 @@ export default function PraxisProgramme() {
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
             <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What It Costs")}</h2>
           </div>
+          {/* Hormozi order: the stack, then the guarantee, then the price — so
+              the number lands after the risk has been taken away. */}
+          <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, background: "#faf8f5", maxWidth: 680 }}>
+            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", padding: "20px 22px 0" }}>{tr("The AI-Fluent Team · what you get")}</p>
+            {PRAXIS_STACK.map((row) => (
+              <div key={row.key} style={{ display: "flex", justifyContent: "space-between", gap: 16, padding: "14px 22px", borderBottom: "1px solid #e8e1d7" }}>
+                <div>
+                  <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: row.bonus ? "#d97706" : "#1a1a1a", marginBottom: 4 }}>{tr(STACK_COPY[row.key].title)}</p>
+                  <p style={{ ...INTER, fontSize: 12, lineHeight: 1.65, color: "#5a5248", margin: 0 }}>{tr(STACK_COPY[row.key].body)}</p>
+                </div>
+                <p style={{ ...MONO, fontSize: 12, color: "#7a7568", whiteSpace: "nowrap", margin: 0 }}>{stackValue(row.key, currency, locale)}</p>
+              </div>
+            ))}
+            <div style={{ display: "flex", justifyContent: "space-between", gap: 16, padding: "16px 22px" }}>
+              <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 800, color: "#1a1a1a", margin: 0 }}>{tr("Total stated value")}</p>
+              <p style={{ ...MONO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0 }}>{econ.stackTotal}</p>
+            </div>
+          </div>
+          {econ.specialActive && (
+            <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 12, maxWidth: 680 }}>
+              {fill("The 30 days of async review is included for anyone who starts by {date}. After that it is an extra.", { date: econ.specialEnds })}
+            </p>
+          )}
+
+          <div style={{ marginTop: 28, marginBottom: 28, borderRadius: 10, background: "#1a1a1a", padding: "24px 26px", maxWidth: 680 }}>
+            <p style={{ ...CAPS, fontSize: 9, color: "#d97706", marginBottom: 12 }}>{tr("The guarantee")}</p>
+            <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, lineHeight: 1.55, color: "#f6f1ea", marginBottom: 10 }}>{tr("Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard — or I keep working with you at no charge until they do.")}</p>
+            <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", margin: 0 }}>{tr("The only condition is that you attend the sessions and answer the questions.")}</p>
+          </div>
+
           <div className="pp-cols-2">
             {[
               {
-                label: "QuickStart",
-                price: econ.quickStart,
-                note: tr("90 minutes, one to four people. Discovery on your use case, first setup and training, and your AI policy and agent scorecard to keep. Paid by card when you book."),
-              },
-              {
-                label: "Per session",
-                price: econ.session,
-                note: tr("90 minutes each, one to four people. Pay as you go, or commit to the full programme."),
-              },
-              {
-                label: "Full programme",
+                label: "The AI-Fluent Team",
+                was: econ.teamRegular,
                 price: econ.course,
-                note: tr("All eight sessions. We take your use case from policy and setup through to a build, its evaluation and your hosting options — built and assessed together."),
+                note: tr("Eight 90-minute sessions for you and up to four of your team. Everything in the stack above."),
               },
               {
-                label: "Fast track",
+                label: "The Owner's Fast Track",
+                was: econ.fastTrackRegular,
                 price: econ.fastTrack,
-                note: tr("Four 90-minute sessions, private and one to one, at your pace. Your use case, built and assessed together."),
+                note: tr("Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows."),
               },
             ].map((p) => (
               <div
-                key={tr(p.label)}
+                key={p.label}
                 style={{
                   border: "1px solid #d8d0c5",
                   borderRadius: 10,
@@ -369,7 +442,17 @@ export default function PraxisProgramme() {
                 }}
               >
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{tr(p.label)}</p>
-                <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-1px" }}>{p.price}</p>
+                <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 4, letterSpacing: "-1px" }}>
+                  {econ.specialActive && (
+                    <s style={{ fontSize: 20, fontWeight: 400, color: "#a8a092", marginRight: 12, letterSpacing: 0 }}>{p.was}</s>
+                  )}
+                  {econ.specialActive ? p.price : p.was}
+                </p>
+                {econ.specialActive && (
+                  <p style={{ ...INTER, fontSize: 11, fontWeight: 600, color: "#d97706", marginBottom: 12 }}>
+                    {fill("Back-to-work price until {date}", { date: econ.specialEnds })}
+                  </p>
+                )}
                 <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
               </div>
             ))}
@@ -390,7 +473,7 @@ export default function PraxisProgramme() {
             </p>
           </div>
           <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 20, maxWidth: 560 }}>
-            {tr("QuickStart is paid by card at booking. Praxis sessions, the full programme and Fast track are invoiced, ex VAT.")}{" "}
+            {tr("The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.")}{" "}
             {tr("We also run free sessions from time to time. They are general rather than built around your use case —")}{" "}
             <a href="/calendar" style={{ color: "#d97706" }}>{tr("see Events")}</a>.
           </p>

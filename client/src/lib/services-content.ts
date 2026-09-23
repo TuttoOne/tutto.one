@@ -119,28 +119,28 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
     pricePrefix: STARTS_AT,
     /**
      * Sends the reader to the page that argues this card at length, the way
-     * Team Enablement below sends them to the programme. Someone weighing up
+     * The AI-Fluent Team below sends them to the programme. Someone weighing up
      * where their data would run wants to see it before enquiring.
      */
     href: "/sovereign",
     ctaLabel: { en: "See how it runs", fr: "Voir comment cela fonctionne" },
   },
   {
-    title: "Team Enablement",
-    titleFr: "Montée en compétence des équipes",
+    title: "The AI-Fluent Team",
+    titleFr: "L'équipe à l'aise avec l'IA",
     description:
-      "Workshops and training to help your team understand how to write for machines and manage AI workers.",
+      "Eight sessions to output you don't rewrite: your team briefs AI well, checks what comes back, and knows what must never go in.",
     descriptionFr:
-      "Ateliers et formations pour apprendre à vos équipes à écrire pour la machine et à encadrer des agents IA.",
+      "Huit séances pour des résultats que vous ne réécrivez plus : votre équipe sait briefer l'IA, vérifier ce qui revient, et ce qui ne doit jamais y entrer.",
     features: [
-      "Prompt Engineering Training",
-      "Documentation Standards",
-      "AI Governance Frameworks",
+      "AI Use Charter",
+      "KPI Scorecard per role",
+      "Briefing Library and Verification Protocol",
     ],
     featuresFr: [
-      "Formation à la rédaction d'instructions",
-      "Normes de documentation",
-      "Cadres de gouvernance de l'IA",
+      "Charte d'usage de l'IA",
+      "Grille d'évaluation par rôle",
+      "Bibliothèque de consignes et protocole de vérification",
     ],
     /**
      * The referral terms belong with the training service. Amounts are

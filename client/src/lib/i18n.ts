@@ -406,8 +406,8 @@ export const copy = {
     ctaSecondary: { en: "Talk about training a team", fr: "Former une équipe" },
     programmeTitle: { en: "The eight-session programme", fr: "Le programme en huit séances" },
     programmeBody: {
-      en: "QuickStart is the introduction. The full programme takes it further over two months, or Fast track in four private sessions.",
-      fr: "QuickStart est l'introduction. Le programme complet va plus loin, sur deux mois, ou la formule accélérée, en quatre séances privées.",
+      en: "The AI-Fluent Team in eight sessions, or The Owner's Fast Track in four private ones. What's in the stack, the guarantee, and the back-to-work price.",
+      fr: "L'équipe à l'aise avec l'IA en huit séances, ou la formule accélérée du dirigeant en quatre séances privées. Le contenu, la garantie, et le prix de rentrée.",
     },
     programmeLink: { en: "See the Praxis Programme", fr: "Voir le programme Praxis" },
 
@@ -525,25 +525,24 @@ export const copy = {
       en: "Webinars we run from time to time: getting started, skills, connectors and projects. General rather than built around your use case — worth less to some people, and a good first look for others.",
       fr: "Des webinaires organisés de temps en temps : premiers pas, compétences, connecteurs et projets. Généraux plutôt que construits autour de votre cas d'usage — moins utiles pour certains, un bon premier aperçu pour d'autres.",
     },
-    quickTitle: { en: "QuickStart", fr: "QuickStart" },
-    quick: {
-      en: "90 minutes, one to four people in a private group. Discovery on your use case, first setup and training, and your AI policy and agent scorecard to keep.",
-      fr: "90 minutes, de une à quatre personnes en groupe privé. La découverte de votre cas d'usage, une première installation et une formation, et votre politique IA et grille d'évaluation d'agent, que vous gardez.",
-    },
-    programmeCardTitle: { en: "Praxis", fr: "Praxis" },
-    /** `{session}` is the per-session rate, filled at render. */
+    programmeCardTitle: { en: "The AI-Fluent Team", fr: "L'équipe à l'aise avec l'IA" },
     programmeCard: {
-      en: "Eight 90-minute sessions, one to four people. We take your use case through policy, setup, build, evaluation and hosting options — built and assessed together. Or {session} a session, as you go.",
-      fr: "Huit séances de 90 minutes, de une à quatre personnes. Nous menons votre cas d'usage de la politique à l'installation, la réalisation, l'évaluation et les options d'hébergement — construit et évalué ensemble. Ou {session} la séance, à la carte.",
+      en: "Eight 90-minute sessions, you and up to four of your team. Your AI-use charter, a scorecard per role, standing briefs for your top three jobs and a check before anything ships — built on your own work.",
+      fr: "Huit séances de 90 minutes, vous et jusqu'à quatre personnes de votre équipe. Votre charte d'usage de l'IA, une grille par rôle, des consignes permanentes pour vos trois tâches clés et une vérification avant tout envoi — construits sur votre propre travail.",
     },
-    fastTitle: { en: "Fast track", fr: "Formule accélérée" },
+    fastTitle: { en: "The Owner's Fast Track", fr: "La formule accélérée du dirigeant" },
     fast: {
-      en: "Four 90-minute sessions, private and one to one, at your pace. Your use case, built and assessed together.",
-      fr: "Quatre séances de 90 minutes, privées et en tête-à-tête, à votre rythme. Votre cas d'usage, construit et évalué ensemble.",
+      en: "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you. Credited in full if your team follows.",
+      fr: "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle. Déduite intégralement si votre équipe suit.",
+    },
+    /** `{date}` is the last day of the back-to-work special. */
+    special: {
+      en: "Back-to-work price until {date}.",
+      fr: "Prix de rentrée jusqu'au {date}.",
     },
     billing: {
-      en: "QuickStart is paid by card at booking. Praxis and Fast track are invoiced, ex VAT.",
-      fr: "QuickStart se règle par carte à la réservation. Praxis et la formule accélérée sont facturés hors taxes.",
+      en: "The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.",
+      fr: "La première étape est un appel gratuit de 15 minutes. Les deux programmes sont facturés hors taxes.",
     },
     s5Label: { en: "Before the session", fr: "Avant la séance" },
     prereqLabel: { en: "Please set up in advance", fr: "À préparer à l'avance" },
@@ -1295,8 +1294,8 @@ export const copy = {
     },
     r1Title: { en: "Build it yourself", fr: "Le construire vous-même" },
     r1Body: {
-      en: "Praxis: for one to four people, on your own use cases, from a 90-minute QuickStart to eight sessions. You leave with a working tool for your own work, not with notes about one. There are group evenings too, cheaper and more general, if you would rather look before you commit.",
-      fr: "Praxis : de une à quatre personnes, sur vos propres cas d'usage, d'un QuickStart de 90 minutes à huit séances. Vous repartez avec un outil qui fonctionne pour votre propre travail, et non avec des notes à son sujet. Il existe aussi des soirées collectives, moins chères et plus générales, si vous préférez regarder avant de vous engager.",
+      en: "Praxis: for one to four people, on your own use cases, from four private sessions to eight with your team. You leave with a working tool for your own work, not with notes about one. There are group evenings too, cheaper and more general, if you would rather look before you commit.",
+      fr: "Praxis : de une à quatre personnes, sur vos propres cas d'usage, de quatre séances privées à huit avec votre équipe. Vous repartez avec un outil qui fonctionne pour votre propre travail, et non avec des notes à son sujet. Il existe aussi des soirées collectives, moins chères et plus générales, si vous préférez regarder avant de vous engager.",
     },
     r2Title: { en: "Have it built", fr: "Le faire construire" },
     r2Body: {

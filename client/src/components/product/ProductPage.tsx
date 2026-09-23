@@ -660,6 +660,7 @@ export function HeadlinePrice({
   label,
   title,
   price,
+  was,
   note,
   children,
 }: {
@@ -667,6 +668,8 @@ export function HeadlinePrice({
   label?: string;
   title: string;
   price: string;
+  /** A regular price, struck through before `price`, while a special runs. */
+  was?: string;
   /** Set below a hairline, so it reads as a note and not a third paragraph. */
   note?: React.ReactNode;
   children: React.ReactNode;
@@ -676,6 +679,9 @@ export function HeadlinePrice({
       {label && <Eyebrow className="mb-5">{label}</Eyebrow>}
       <h2 className="text-lg font-serif font-bold">{title}</h2>
       <p className="mt-3 mb-7 text-4xl md:text-5xl font-serif font-bold tracking-tight tabular-nums">
+        {was && (
+          <s className="mr-4 text-2xl md:text-3xl font-normal text-muted-foreground/60">{was}</s>
+        )}
         {price}
       </p>
       <div className="mb-6 text-lg text-foreground leading-relaxed max-w-2xl">{children}</div>

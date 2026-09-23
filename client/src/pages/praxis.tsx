@@ -16,17 +16,17 @@ import {
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { useTrainerCode, bookingHref } from "@/lib/trainer-code";
-import { price, praxisEconomics } from "@/lib/pricing";
+import { praxisEconomics } from "@/lib/pricing";
 
-/* The free 15-minute intro, not a paid session. Only QuickStart is paid at
-   booking, and it is sold from the landing page; everything priced here is
-   invoiced, so every CTA on this page opens a conversation. */
+/* The free 15-minute intro, not a paid session. Nothing on the site is paid
+   at booking; everything priced here is invoiced, so every CTA on this page
+   opens a conversation. */
 const BOOKING = "https://cal.com/tuttoone/15min";
 
 export default function Praxis() {
   const t = useT();
   const { locale, currency } = usePreferences();
-  const p = (k: Parameters<typeof price>[0]) => price(k, currency, locale);
+  const econ = praxisEconomics(currency, locale);
   /* Carries the referring trainer's code into the Cal.com booking, so the
      client is attributed to them rather than to us. */
   const booking = bookingHref(BOOKING, useTrainerCode());
@@ -208,17 +208,25 @@ export default function Praxis() {
             <PriceRow title={t(copy.praxis.freeTitle)} price={t(copy.praxis.freePrice)}>
               {t(copy.praxis.free)}
             </PriceRow>
-            <PriceRow title={t(copy.praxis.quickTitle)} price={p("discoverySession")}>
-              {t(copy.praxis.quick)}
+            <PriceRow
+              title={t(copy.praxis.programmeCardTitle)}
+              price={econ.course}
+              was={econ.specialActive ? econ.teamRegular : undefined}
+            >
+              {t(copy.praxis.programmeCard)}
             </PriceRow>
-            <PriceRow title={t(copy.praxis.programmeCardTitle)} price={praxisEconomics(currency, locale).course}>
-              {t(copy.praxis.programmeCard).replace("{session}", p("sessionStandard"))}
-            </PriceRow>
-            <PriceRow title={t(copy.praxis.fastTitle)} price={p("fastTrack")}>
+            <PriceRow
+              title={t(copy.praxis.fastTitle)}
+              price={econ.fastTrack}
+              was={econ.specialActive ? econ.fastTrackRegular : undefined}
+            >
               {t(copy.praxis.fast)}
             </PriceRow>
           </CardGrid>
           <div className="mt-6 max-w-3xl space-y-2 text-sm text-muted-foreground leading-relaxed">
+            {econ.specialActive && (
+              <p>{t(copy.praxis.special).replace("{date}", econ.specialEnds)}</p>
+            )}
             <p>{t(copy.praxis.billing)}</p>
             <p>{t(copy.praxis.costTools)}</p>
           </div>

@@ -49,6 +49,8 @@ export type PriceKey =
   | "sessionPromo"
   | "praxisIntro"
   | "fastTrack"
+  | "teamRegular"
+  | "fastTrackRegular"
   | "referralCredit"
   | "discoverySession"
   | "toolsMonthly"
@@ -81,10 +83,11 @@ export type PriceKey =
 const SESSION = { GBP: 200, EUR: 250, ZAR: 5000 };
 
 /**
- * QuickStart: the 90-minute session on the landing page — the one thing a
- * stranger can buy without talking to us first. The landing page also names
- * the Praxis per-session rate beside it, as the way on for a reader who wants
- * more than a start.
+ * QuickStart: the paid 90-minute session. NOT shown on the site, on purpose:
+ * a stranger books the free 15-minute call first, and the Cal.com link for
+ * this (cal.com/tuttoone/90-min-meeting) is sent by hand after it. Kept here
+ * so the figure has one home, and out of SELECTABLE_PRICES so the admin editor
+ * cannot put it back on a page.
  *
  * It is the same figure as HOUR rather than a coincidence: the way in is sold
  * at the build rate, not above it. Stated EX VAT, like every fee here.
@@ -139,9 +142,8 @@ const DIAGNOSTIC_DAY = { GBP: 500, EUR: 600, ZAR: 12000 };
 /** Base rates. Everything else on the site is derived from these. */
 export const PRICES: Record<PriceKey, Record<Currency, number>> = {
   /**
-   * QuickStart, the landing page's 90-minute way in: discovery, preliminary
-   * setup and training, and the policy and agent scorecard. The only thing on
-   * the site paid by card at booking; everything else is invoiced.
+   * QuickStart, 90 minutes: discovery, preliminary setup and training, and the
+   * policy and agent scorecard. Sold privately after a call — see DISCOVERY.
    */
   discoverySession: DISCOVERY,
   /** One Praxis session, 90 minutes. Course tuition is eight of these. */
@@ -152,6 +154,22 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
     EUR: SESSION.EUR * FAST_TRACK_SESSIONS_N,
     ZAR: SESSION.ZAR * FAST_TRACK_SESSIONS_N,
   },
+  /**
+   * The regular prices of the two named Praxis offers — The AI-Fluent Team
+   * (eight sessions, the course) and The Owner's Fast Track. Set commercially
+   * from the offer stack, not derived: the session rate stays where it is
+   * because the trainer split is computed from it.
+   *
+   * Shown struck through while the back-to-work special runs (see
+   * SPECIAL_ENDS); the special IS the computed course and fastTrack figures.
+   * When the special ends these become the only price on the page.
+   *
+   * ZAR follows the file's EUR x 20 rule for now. The playbook wants a
+   * separate South African price, because rand purchasing power will not
+   * clear this one — revisit before selling into SA.
+   */
+  teamRegular: { GBP: 3900, EUR: 4500, ZAR: 90000 },
+  fastTrackRegular: { GBP: 1700, EUR: 2000, ZAR: 40000 },
   /**
    * The Praxis intro session: two hours, credited in full against the
    * programme if the client goes on.
@@ -347,11 +365,12 @@ export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
   { key: "sovereigntyDiagnostic", label: "Sovereignty diagnostic (€1,500)" },
   { key: "agentBuildFrom", label: "Agent build, from (€3,000)" },
   { key: "scriptBuildFrom", label: "Scripting build, 30h (€3,000)" },
-  { key: "enablementFrom", label: "Team enablement / training (€2,000)" },
+  { key: "enablementFrom", label: "AI-Fluent Team, special (€2,000)" },
   { key: "build", label: "Pythia build, excl. hardware (€7,000)" },
-  { key: "discoverySession", label: "QuickStart, 90 min (€100)" },
   { key: "sessionStandard", label: "Praxis session, 90 min (€250)" },
-  { key: "fastTrack", label: "Fast track, 4 private sessions (€1,000)" },
+  { key: "fastTrack", label: "Owner's Fast Track, special (€1,000)" },
+  { key: "teamRegular", label: "AI-Fluent Team, regular (€4,500)" },
+  { key: "fastTrackRegular", label: "Owner's Fast Track, regular (€2,000)" },
   { key: "spAuditFrom", label: "SharePoint audit (€600)" },
   { key: "spBuildFrom", label: "SharePoint build (€6,000)" },
   { key: "spRetainerMonthly", label: "SharePoint retainer (€600/mo)" },
@@ -398,23 +417,91 @@ export function perMonth(key: PriceKey, currency: Currency, locale: Locale): str
 }
 
 /**
+ * The back-to-work special: the two Praxis offers at today's computed prices,
+ * with the regular price struck through beside them. The last day it applies,
+ * inclusive. A real date, because urgency that is not true is the part of the
+ * playbook that reads as an infomercial — when it passes, `specialActive`
+ * turns false and every page drops the strikethrough on its own.
+ */
+export const SPECIAL_ENDS = "2026-10-31";
+
+export function specialActive(today: Date = new Date()): boolean {
+  return today <= new Date(`${SPECIAL_ENDS}T23:59:59`);
+}
+
+/** The special's last day, written the way each language says a date. */
+export function specialEndsLabel(locale: Locale): string {
+  return new Intl.DateTimeFormat(locale === "fr" ? "fr-FR" : "en-GB", {
+    day: "numeric",
+    month: "long",
+  }).format(new Date(`${SPECIAL_ENDS}T12:00:00`));
+}
+
+/**
+ * The AI-Fluent Team stack: what the buyer gets, with a stated value for each.
+ * EUR is set; GBP and ZAR follow the file's EUR/1.2 and EUR x 20, and the total
+ * is summed, never typed, so it cannot disagree with its rows.
+ *
+ * `bonus` rows are the ones that answer a named objection rather than deliver
+ * the core outcome; the page lists them after the core so the stack grows in
+ * front of the reader.
+ */
+export type StackKey =
+  | "charter"
+  | "scorecard"
+  | "briefingLibrary"
+  | "verification"
+  | "sessions"
+  | "fieldGuide"
+  | "asyncReview"
+  | "checkIn";
+
+export const PRAXIS_STACK: { key: StackKey; eur: number; bonus: boolean }[] = [
+  { key: "charter", eur: 1400, bonus: false },
+  { key: "scorecard", eur: 1400, bonus: false },
+  { key: "briefingLibrary", eur: 2300, bonus: false },
+  { key: "verification", eur: 900, bonus: false },
+  { key: "sessions", eur: 3700, bonus: false },
+  { key: "fieldGuide", eur: 200, bonus: true },
+  { key: "asyncReview", eur: 700, bonus: true },
+  { key: "checkIn", eur: 400, bonus: true },
+];
+
+function fromEur(eur: number, currency: Currency): number {
+  if (currency === "GBP") return Math.round(eur / 1.2);
+  if (currency === "ZAR") return eur * 20;
+  return eur;
+}
+
+/** One stack row's stated value, formatted. */
+export function stackValue(key: StackKey, currency: Currency, locale: Locale): string {
+  const row = PRAXIS_STACK.find((r) => r.key === key)!;
+  return formatMoney(fromEur(row.eur, currency), currency, locale);
+}
+
+/**
  * The training ladder and the referral credit, all derived from the session
- * and QuickStart rates so no two of them can contradict each other.
+ * rate so no two of them can contradict each other.
  */
 export function praxisEconomics(currency: Currency, locale: Locale) {
   const session = amount("sessionStandard", currency);
-  const quickStart = amount("discoverySession", currency);
   const credit = amount("referralCredit", currency);
   const course = session * COURSE_SESSIONS;
   const f = (n: number) => formatMoney(n, currency, locale);
+  const stackTotal = PRAXIS_STACK.reduce((sum, r) => sum + fromEur(r.eur, currency), 0);
   return {
-    /** 90 minutes, paid by card at booking. */
-    quickStart: f(quickStart),
     session: f(session),
-    /** All eight sessions. */
+    /** All eight sessions: The AI-Fluent Team at the special price. */
     course: f(course),
-    /** Four private sessions. */
+    /** Four private sessions: The Owner's Fast Track at the special price. */
     fastTrack: f(session * FAST_TRACK_SESSIONS_N),
+    /** Regular prices, struck through while the special runs. */
+    teamRegular: f(amount("teamRegular", currency)),
+    fastTrackRegular: f(amount("fastTrackRegular", currency)),
+    /** Sum of the stated values in PRAXIS_STACK. */
+    stackTotal: f(stackTotal),
+    specialActive: specialActive(),
+    specialEnds: specialEndsLabel(locale),
     /** Taken off the client's own fee per referred enrolment. */
     referralCredit: f(credit),
     /** The ceiling on stacked credits. */
