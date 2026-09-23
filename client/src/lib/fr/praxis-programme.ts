@@ -75,34 +75,32 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Eight sessions · Two months": "Huit séances · Deux mois",
 
   // --- The eight sessions ---
-  "Foundations and your first build": "Les fondations et votre première réalisation",
-  "See it work before any theory. Understand where AI is brilliant and where it has to be exact, whether your files are safe, and what it costs. Build your first small working thing, live.":
-    "Voir le système fonctionner avant toute théorie. Comprendre où l'IA excelle et où elle doit être exacte, si vos fichiers sont en sécurité, et ce que cela coûte. Construire en direct votre première petite réalisation qui fonctionne.",
-  "The build loop, and capturing your know-how":
-    "La boucle de construction, et la mise par écrit de votre savoir-faire",
-  "Describe what you want and watch the assistant build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.":
-    "Décrivez ce que vous voulez et regardez l'assistant le construire. Puis consignez les règles que suit votre travail, en langage courant, pour que l'outil les applique à chaque fois. Construisez un véritable outil pour votre propre activité.",
-  "Your tools and surfaces": "Vos outils et vos interfaces",
-  "The assistant's desktop app and the move into your own files. Connecting it to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.":
-    "L'application de bureau de l'assistant et le passage à vos propres fichiers. Le connecter aux applications que vous utilisez déjà. Le laisser travailler en sécurité pour vous, en gardant la maîtrise de ce à quoi il a accès.",
-  "Keeping versions, and safe handover":
-    "Gérer les versions, et transmettre sans risque",
-  "How to keep versions of your work, hand a tool to a colleague or developer cleanly, and build so it is still changeable in a year rather than a tangle you cannot undo.":
-    "Comment conserver les versions de votre travail, transmettre proprement un outil à un collègue ou à un développeur, et construire de façon à ce que tout reste modifiable dans un an, plutôt que de produire un enchevêtrement irréversible.",
-  "How your tools talk to other software":
-    "Comment vos outils dialoguent avec d'autres logiciels",
-  "What you are paying for and what you are not. What an API is, in plain terms. Keeping everything in one place instead of a knot of half-connected apps. And what 'training an AI' actually means, so you can stop worrying your data is being swallowed.":
-    "Ce que vous payez et ce que vous ne payez pas. Ce qu'est une API, en termes simples. Tout garder au même endroit plutôt qu'un nœud d'applications à moitié reliées. Et ce que « entraîner une IA » veut réellement dire, pour cesser de craindre que vos données soient absorbées.",
-  "Build something real, end to end": "Construire quelque chose de réel, de bout en bout",
-  "A full build for your own work, mostly driven by you, with me reading the room. You finish the core programme with a tool you use and a certificate that shows what you built.":
-    "Une réalisation complète pour votre propre activité, menée essentiellement par vous, pendant que j'observe et j'ajuste. Vous terminez le programme principal avec un outil que vous utilisez et une attestation de ce que vous avez construit.",
-  "Going deeper": "Aller plus loin",
-  "Fixing things when they break. Bigger, multi-part builds. And whichever surface fits your work: design, the web, your documents.":
-    "Réparer ce qui casse. Des réalisations plus vastes, en plusieurs parties. Et l'interface qui correspond à votre travail : la conception, le web, vos documents.",
-  "A first integration, and your final build":
-    "Une première intégration, et votre réalisation finale",
-  "Connect your tool to something else you use. Understand hosting and automation at a level you can act on. Ship your final build.":
-    "Reliez votre outil à un autre service que vous utilisez. Comprenez l'hébergement et l'automatisation à un niveau qui vous permet d'agir. Livrez votre réalisation finale.",
+  "Rules first": "Les règles d'abord",
+  "What goes in, which tools and connections are allowed, what never leaves the building, and what happens when the rule is broken. We set up your assistant safely while we write it.":
+    "Ce qui entre, quels outils et connexions sont autorisés, ce qui ne sort jamais de l'entreprise, et ce qui se passe quand la règle n'est pas respectée. Nous installons votre assistant en sécurité pendant que nous l'écrivons.",
+  "Define good": "Définir le bon résultat",
+  "Pick the jobs that repeat. For each one, write down what good output looks like and how you'd score it. These are your evals: the standard every piece of AI work gets judged against.":
+    "Choisissez les tâches qui se répètent. Pour chacune, écrivez à quoi ressemble un bon résultat et comment vous le noteriez. Ce sont vos évaluations : le standard sur lequel chaque travail de l'IA est jugé.",
+  "Decide what to hand over": "Décider quoi déléguer",
+  "Which jobs AI should do, which it shouldn't, and what each one needs to run without you: the inputs, the rules, the check at the end.":
+    "Les tâches que l'IA doit faire, celles qu'elle ne doit pas faire, et ce qu'il faut à chacune pour tourner sans vous : les entrées, les règles, le contrôle final.",
+  "Brief it once": "La briefer une fois",
+  "Turn each job on the list into standing instructions: the audience, the constraints, an example of good. Written once, read by the assistant every time, so nobody explains the same job twice.":
+    "Transformez chaque tâche de la liste en consignes permanentes : le public, les contraintes, un exemple de bon résultat. Écrites une fois, relues par l'assistant à chaque fois, pour que personne n'explique deux fois la même tâche.",
+  "Tools": "Les outils",
+  "Connect the assistant to your files and the apps you already use. Build the first small tools that do a job end to end, with you in control of what they can touch.":
+    "Connectez l'assistant à vos fichiers et aux applications que vous utilisez déjà. Construisez les premiers petits outils qui font une tâche de bout en bout, en gardant la maîtrise de ce à quoi ils ont accès.",
+  "Check it before it ships": "Le vérifier avant envoi",
+  "Score the output against your KPIs. Where it falls short, fix the brief, not the draft. Agree who signs off and what gets checked before anything leaves.":
+    "Notez le résultat selon vos indicateurs. Là où il est insuffisant, corrigez la consigne, pas le brouillon. Convenez de qui valide et de ce qui est vérifié avant tout envoi.",
+  "Skills and automation": "Compétences et automatisation",
+  "Package what works into skills the whole team can call, and schedule the jobs that should run without anyone asking.":
+    "Transformez ce qui fonctionne en compétences que toute l'équipe peut appeler, et programmez les tâches qui doivent tourner sans que personne ne le demande.",
+  "Agents, and a clean handover": "Les agents, et une transmission propre",
+  "Your first agent: a job that runs on its own, on your data, checked against your scorecard. Then hand it over cleanly, so it is still changeable in a year.":
+    "Votre premier agent : une tâche qui tourne seule, sur vos données, contrôlée par votre grille. Puis une transmission propre, pour qu'il reste modifiable dans un an.",
+  "You leave with: the list of what AI takes over":
+    "Vous repartez avec : la liste de ce que l'IA prend en charge",
 
   // --- FAQ ---
   "Do I need to know how to code?": "Dois-je savoir coder ?",
@@ -268,8 +266,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Il fera de vous quelqu'un capable de construire des choses réellement utiles, qui sait reconnaître quand un chantier justifie l'appel à un développeur, et comment le briefer le cas échéant. C'est une position bien plus précieuse qu'il n'y paraît.",
   "No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.":
     "Aucune compétence en code n'est requise. Vous repartez avec la charte, les grilles, les consignes et les contrôles, et les tâches qui se répétaient, déléguées.",
-  "Weekly, over roughly two months. The first six get you to a confident, independent builder. The last two take you deeper, into the kind of work that usually needs a developer.":
-    "Une séance par semaine, sur près de deux mois. Les six premières vous rendent autonome et sûr de vous. Les deux dernières vous emmènent plus loin, vers le type de travail qui réclame d'ordinaire un développeur.",
+  "Weekly, over roughly two months. The first four set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.":
+    "Une séance par semaine, sur près de deux mois. Les quatre premières posent les fondations : les règles, le standard, les décisions, les consignes. Les quatre dernières construisent dessus.",
   "Your staff have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.":
     "Vos équipes ont posé des questions à ChatGPT ou à Claude. Certaines réponses étaient utiles. La plupart demandaient des corrections, et le temps gagné est parti dans les corrections. Le problème n'est pas l'outil. Personne n'a fixé les règles, défini un bon résultat, ni décidé quoi déléguer. Ce programme fait ces trois choses d'abord, sur votre propre travail, puis construit dessus.",
 

@@ -27,46 +27,47 @@ const sessions = [
   {
     n: "01",
     artefact: "You leave with: your AI Use Charter",
-    title: "Foundations and your first build",
-    body: "See it work before any theory. Understand where AI is brilliant and where it has to be exact, whether your files are safe, and what it costs. Build your first small working thing, live.",
+    title: "Rules first",
+    body: "What goes in, which tools and connections are allowed, what never leaves the building, and what happens when the rule is broken. We set up your assistant safely while we write it.",
   },
   {
     n: "02",
     artefact: "You leave with: a KPI Scorecard per role",
-    title: "The build loop, and capturing your know-how",
-    body: "Describe what you want and watch the assistant build it. Then write down the rules your work follows, in plain language, so the tool applies them every single time. Build a real tool for your own work.",
+    title: "Define good",
+    body: "Pick the jobs that repeat. For each one, write down what good output looks like and how you'd score it. These are your evals: the standard every piece of AI work gets judged against.",
   },
   {
     n: "03",
-    artefact: "You leave with: standing briefs for your top three jobs",
-    title: "Your tools and surfaces",
-    body: "The assistant's desktop app and the move into your own files. Connecting it to the apps you already use. Letting it do safe work for you, with you in control of what it is allowed to touch.",
+    artefact: "You leave with: the list of what AI takes over",
+    title: "Decide what to hand over",
+    body: "Which jobs AI should do, which it shouldn't, and what each one needs to run without you: the inputs, the rules, the check at the end.",
   },
   {
     n: "04",
-    title: "Keeping versions, and safe handover",
-    body: "How to keep versions of your work, hand a tool to a colleague or developer cleanly, and build so it is still changeable in a year rather than a tangle you cannot undo.",
+    artefact: "You leave with: standing briefs for your top three jobs",
+    title: "Brief it once",
+    body: "Turn each job on the list into standing instructions: the audience, the constraints, an example of good. Written once, read by the assistant every time, so nobody explains the same job twice.",
   },
   {
     n: "05",
-    title: "How your tools talk to other software",
-    body: "What you are paying for and what you are not. What an API is, in plain terms. Keeping everything in one place instead of a knot of half-connected apps. And what 'training an AI' actually means, so you can stop worrying your data is being swallowed.",
+    title: "Tools",
+    body: "Connect the assistant to your files and the apps you already use. Build the first small tools that do a job end to end, with you in control of what they can touch.",
   },
   {
     n: "06",
     artefact: "You leave with: your Verification Protocol",
-    title: "Build something real, end to end",
-    body: "A full build for your own work, mostly driven by you, with me reading the room. You finish the core programme with a tool you use and a certificate that shows what you built.",
+    title: "Check it before it ships",
+    body: "Score the output against your KPIs. Where it falls short, fix the brief, not the draft. Agree who signs off and what gets checked before anything leaves.",
   },
   {
     n: "07",
-    title: "Going deeper",
-    body: "Fixing things when they break. Bigger, multi-part builds. And whichever surface fits your work: design, the web, your documents.",
+    title: "Skills and automation",
+    body: "Package what works into skills the whole team can call, and schedule the jobs that should run without anyone asking.",
   },
   {
     n: "08",
-    title: "A first integration, and your final build",
-    body: "Connect your tool to something else you use. Understand hosting and automation at a level you can act on. Ship your final build.",
+    title: "Agents, and a clean handover",
+    body: "Your first agent: a job that runs on its own, on your data, checked against your scorecard. Then hand it over cleanly, so it is still changeable in a year.",
   },
 ];
 
@@ -328,7 +329,7 @@ export default function PraxisProgramme() {
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
             <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Eight Sessions")}</h2>
           </div>
-          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Weekly, over roughly two months. The first six get you to a confident, independent builder. The last two take you deeper, into the kind of work that usually needs a developer.")}</p>
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Weekly, over roughly two months. The first four set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.")}</p>
           <div className="pp-sessions">
             {sessions.map((s) => (
               <div key={s.n} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5", position: "relative" }}>
