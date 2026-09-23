@@ -88,12 +88,12 @@ export const copy = {
   about: {
     title: { en: "About", fr: "À propos" },
     standfirst: {
-      en: "A small team with laser focus on your problems.",
-      fr: "Une petite équipe entièrement concentrée sur vos problèmes.",
+      en: "We fix how your team uses AI. Then we build what's worth building.",
+      fr: "Nous corrigeons la façon dont votre équipe utilise l'IA. Puis nous construisons ce qui mérite de l'être.",
     },
     ctaBody: {
-      en: "Fifteen minutes. We'll tell you honestly what we think.",
-      fr: "Quinze minutes. Nous vous dirons honnêtement ce que nous en pensons.",
+      en: "Fifteen minutes, free. Bring the job you keep repeating, and we'll tell you honestly what we think.",
+      fr: "Quinze minutes, gratuites. Venez avec la tâche que vous répétez sans cesse, et nous vous dirons honnêtement ce que nous en pensons.",
     },
   },
 

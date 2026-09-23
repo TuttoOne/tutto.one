@@ -114,7 +114,7 @@ export const SITE_PAGES: SitePage[] = [
     name: "About Tutto",
     summary: "Who is behind Tutto, and how they work.",
     detail:
-      "Making AI useful is a hands-on experience. The technology is new, moving fast, and genuinely powerful when used in the right way. Any leap is less daunting when you take the first step with someone beside you who's taken enough scary ones to like them.",
+      "Tutto trains teams to use AI properly, then builds what's worth building. Staff already use AI and save nothing with it; Tutto fixes that in order — the rules, a KPI for each job, what to hand over — then builds tools, skills, automation and agents. A small team: Roxanne Northover (operations, process, practical AI) and Daniel Forsthofer (applied AI, architecture, delivery).",
     offering: false,
   },
   {
