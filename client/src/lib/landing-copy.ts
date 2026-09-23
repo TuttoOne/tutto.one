@@ -12,8 +12,8 @@
  *
  * WHAT THIS PAGE SAYS, which is the only decision on it that matters.
  *
- * One thing: the reader's team uses AI and the owner still rewrites the output.
- * The page names that, names the three fixes (brief, check, rule), prices the
+ * One thing: the staff use AI and it saves them nothing. The page names that,
+ * sets out the order that fixes it (rules, KPIs, decisions, then build), prices the
  * programme that installs them, and books a free 15-minute call. It was "we
  * build agents" until September 2026; that is the upsell, not the way in.
  *
@@ -41,18 +41,18 @@ export const landing = {
   hero: {
     eyebrow: { en: "For firms of 5 to 50", fr: "Pour les entreprises de 5 à 50 personnes" },
 
-    /** The reader's own complaint, said back to them. Nothing else in the
-     *  hero is allowed to be longer than the sentence it supports. */
-    title: { en: "Stop rewriting what AI writes.", fr: "Arrêtez de réécrire ce que l'IA écrit." },
+    /** Two meanings, both the pain: the same task done again and again, and
+     *  the same job explained to AI again and again. */
+    title: { en: "Stop repeating yourself.", fr: "Arrêtez de vous répéter." },
 
     promise: {
-      en: "Your team already uses ChatGPT or Claude. You still fix every draft, and you don't know what they paste into it.",
-      fr: "Votre équipe utilise déjà ChatGPT ou Claude. Vous corrigez encore chaque brouillon, et vous ne savez pas ce qu'elle y colle.",
+      en: "Your staff already use AI. Most take just as long as before, and burn tokens doing it.",
+      fr: "Vos équipes utilisent déjà l'IA. La plupart mettent autant de temps qu'avant, et brûlent des tokens au passage.",
     },
 
     deck: {
-      en: "We teach them to brief AI like a good intern, check what comes back, and keep client data where it belongs.",
-      fr: "Nous leur apprenons à briefer l'IA comme un bon stagiaire, à vérifier ce qui revient, et à garder les données clients là où elles doivent rester.",
+      en: "We fix it in order: the rules, a scorecard for good work, what to hand over. Then tools, skills, automation and agents.",
+      fr: "Nous corrigeons cela dans l'ordre : les règles, une grille pour juger le travail, ce qu'on délègue. Puis les outils, les compétences, l'automatisation et les agents.",
     },
 
     cta: {
@@ -158,39 +158,49 @@ export const landing = {
   },
 
   /**
-   * The three things the offer fixes, in the order they bite: the brief, the
-   * check, the rule. Each is one of the artefacts the programme hands over, so
-   * the page and the price card below it describe the same thing.
+   * The order the work happens in, which is the argument: nothing gets built
+   * until there is a rule for what goes in, a standard to judge it by and a
+   * decision about what to hand over. Steps one and two are the charter and
+   * the scorecard the programme hands over, so the page and the price card
+   * below it describe the same thing.
    */
   sequence: {
-    label: { en: "What changes", fr: "Ce qui change" },
+    label: { en: "The order", fr: "L'ordre" },
     title: {
-      en: "Three fixes. Most teams are missing all of them:",
-      fr: "Trois corrections. La plupart des équipes n'en ont aucune :",
+      en: "Four steps. Most teams skip straight to the fourth:",
+      fr: "Quatre étapes. La plupart des équipes sautent directement à la quatrième :",
     },
     steps: [
       {
         n: "01",
-        title: { en: "Brief it properly", fr: "Bien le briefer" },
+        title: { en: "Set the rules", fr: "Fixer les règles" },
         body: {
-          en: "Nobody hands an intern a task on day one and complains when it's wrong. Tell it the audience, the constraints and what good looks like, once, and keep the brief.",
-          fr: "Personne ne confie une tâche à un stagiaire dès le premier jour pour se plaindre ensuite. Donnez-lui le public, les contraintes et ce qu'est un bon résultat, une fois, et gardez la consigne.",
+          en: "A one-page policy: which tools, which data, and what never leaves the building. Written with you, not handed down.",
+          fr: "Une politique d'une page : quels outils, quelles données, et ce qui ne sort jamais de l'entreprise. Écrite avec vous, pas imposée.",
         },
       },
       {
         n: "02",
-        title: { en: "Check it before it ships", fr: "Le vérifier avant envoi" },
+        title: { en: "Define good", fr: "Définir le bon résultat" },
         body: {
-          en: "Confident nonsense reads just like the truth. A scorecard and a short check mean nothing goes out that you haven't signed off.",
-          fr: "Une erreur affirmée avec aplomb ressemble à la vérité. Une grille et une vérification courte : rien ne part sans votre validation.",
+          en: "A KPI for each job, so AI output is judged against a standard, not a feeling. Those are your evals.",
+          fr: "Un indicateur par tâche, pour juger le travail de l'IA sur un standard, pas sur une impression. Ce sont vos évaluations.",
         },
       },
       {
         n: "03",
-        title: { en: "Set the rule on what goes in", fr: "Fixer la règle sur ce qui entre" },
+        title: { en: "Decide what to hand over", fr: "Décider quoi déléguer" },
         body: {
-          en: "A one-page charter: which tools, which data, and what never leaves the building. Written with you, not handed down.",
-          fr: "Une charte d'une page : quels outils, quelles données, et ce qui ne sort jamais de l'entreprise. Écrite avec vous, pas imposée.",
+          en: "Which jobs AI should do, which it shouldn't, and what each one needs to run without you.",
+          fr: "Les tâches que l'IA doit faire, celles qu'elle ne doit pas faire, et ce qu'il faut à chacune pour tourner sans vous.",
+        },
+      },
+      {
+        n: "04",
+        title: { en: "Then build", fr: "Ensuite, construire" },
+        body: {
+          en: "Tools, skills, automation, agents — in that order, on your own work. Built on the first three, so it does the job once and keeps doing it.",
+          fr: "Outils, compétences, automatisation, agents — dans cet ordre, sur votre propre travail. Construits sur les trois premières étapes, pour faire le travail une fois et continuer à le faire.",
         },
       },
     ],
@@ -244,8 +254,8 @@ export const landing = {
 
   close: {
     title: {
-      en: "Which job are you still rewriting?",
-      fr: "Quelle tâche réécrivez-vous encore ?",
+      en: "Which job do you keep repeating?",
+      fr: "Quelle tâche répétez-vous encore ?",
     },
     body: {
       en: "Bring the one job that's bugging you. In fifteen minutes you'll know whether it can be unblocked, how, and what the next step is. No slides, no pitch you didn't ask for.",
