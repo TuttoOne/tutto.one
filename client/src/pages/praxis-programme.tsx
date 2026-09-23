@@ -85,6 +85,10 @@ const STACK_COPY: Record<StackKey, { title: string; body: string }> = {
     title: "KPI Scorecard per role",
     body: "What good output looks like for each job, written down, so feedback stops being \"make it better\".",
   },
+  handoverList: {
+    title: "Hand-over list",
+    body: "Which jobs AI takes over, which it doesn't, and what each one needs to run without you. Decided in session three.",
+  },
   briefingLibrary: {
     title: "Briefing Library",
     body: "Standing instructions for your top three jobs, so nobody writes the same brief twice.",

@@ -456,6 +456,7 @@ export function specialEndsLabel(locale: Locale): string {
 export type StackKey =
   | "charter"
   | "scorecard"
+  | "handoverList"
   | "briefingLibrary"
   | "verification"
   | "sessions"
@@ -466,6 +467,7 @@ export type StackKey =
 export const PRAXIS_STACK: { key: StackKey; eur: number; bonus: boolean }[] = [
   { key: "charter", eur: 1400, bonus: false },
   { key: "scorecard", eur: 1400, bonus: false },
+  { key: "handoverList", eur: 1000, bonus: false },
   { key: "briefingLibrary", eur: 2300, bonus: false },
   { key: "verification", eur: 900, bonus: false },
   { key: "sessions", eur: 3700, bonus: false },

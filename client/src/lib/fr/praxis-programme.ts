@@ -196,6 +196,9 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "KPI Scorecard per role": "Grille d'évaluation par rôle",
   "What good output looks like for each job, written down, so feedback stops being \"make it better\".":
     "À quoi ressemble un bon résultat pour chaque tâche, par écrit, pour que le retour ne soit plus « fais mieux ».",
+  "Hand-over list": "Liste de délégation",
+  "Which jobs AI takes over, which it doesn't, and what each one needs to run without you. Decided in session three.":
+    "Les tâches que l'IA prend en charge, celles qu'elle ne prend pas, et ce qu'il faut à chacune pour tourner sans vous. Décidée en troisième séance.",
   "Briefing Library": "Bibliothèque de consignes",
   "Standing instructions for your top three jobs, so nobody writes the same brief twice.":
     "Des consignes permanentes pour vos trois tâches clés, pour que personne ne réécrive deux fois la même.",
