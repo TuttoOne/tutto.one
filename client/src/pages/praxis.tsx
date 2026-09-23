@@ -14,6 +14,9 @@ import {
   ResponsivePlate,
 } from "@/components/product/ProductPage";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
+/* The booking label is the home page's, read from its copy file so the two
+   pages cannot drift apart. */
+import { landing } from "@/lib/landing-copy";
 import { usePreferences } from "@/lib/preferences";
 import { useTrainerCode, bookingHref } from "@/lib/trainer-code";
 import { praxisEconomics } from "@/lib/pricing";
@@ -72,7 +75,7 @@ export default function Praxis() {
               <p>{t(copy.praxis.lead2)}</p>
             </>
           }
-          primaryCta={{ label: t(copy.common.bookSession), href: booking }}
+          primaryCta={{ label: t(landing.hero.cta), href: booking }}
           secondaryCta={{ label: t(copy.praxis.ctaSecondary), href: "/contact" }}
           meta={t(copy.praxis.meta)}
         />
@@ -304,7 +307,7 @@ export default function Praxis() {
           title={t(copy.praxis.ctaTitle)}
           body={t(copy.praxis.ctaBody)}
           href={booking}
-          label={t(copy.common.bookSession)}
+          label={t(landing.hero.cta)}
           messageLabel={t(copy.common.sendMessage)}
         />
       </div>
