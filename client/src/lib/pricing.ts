@@ -77,10 +77,19 @@ export type PriceKey =
   | "spRetainerMonthly";
 
 /**
+ * Praxis in rand: the file's EUR x 20, then 25% off for South African
+ * purchasing power, rounded to the nearest R50. Only the Praxis offers use it;
+ * the engagements and hardware keep plain EUR x 20.
+ */
+function zarPraxis(eur: number): number {
+  return Math.round((eur * 20 * 0.75) / 50) * 50;
+}
+
+/**
  * The session rate, for 90 minutes with a group of one to four. Course tuition
  * and team enablement are both eight of these, and Fast track is four.
  */
-const SESSION = { GBP: 200, EUR: 250, ZAR: 5000 };
+const SESSION = { GBP: 200, EUR: 250, ZAR: zarPraxis(250) };
 
 /**
  * QuickStart: the paid 90-minute session. NOT shown on the site, on purpose:
@@ -164,12 +173,10 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    * SPECIAL_ENDS); the special IS the computed course and fastTrack figures.
    * When the special ends these become the only price on the page.
    *
-   * ZAR follows the file's EUR x 20 rule for now. The playbook wants a
-   * separate South African price, because rand purchasing power will not
-   * clear this one — revisit before selling into SA.
+   * ZAR is the Praxis rand rule (see zarPraxis), 25% under EUR x 20.
    */
-  teamRegular: { GBP: 3900, EUR: 4500, ZAR: 90000 },
-  fastTrackRegular: { GBP: 1700, EUR: 2000, ZAR: 40000 },
+  teamRegular: { GBP: 3900, EUR: 4500, ZAR: zarPraxis(4500) },
+  fastTrackRegular: { GBP: 1700, EUR: 2000, ZAR: zarPraxis(2000) },
   /**
    * The Praxis intro session: two hours, credited in full against the
    * programme if the client goes on.
@@ -423,7 +430,7 @@ export function perMonth(key: PriceKey, currency: Currency, locale: Locale): str
  * playbook that reads as an infomercial — when it passes, `specialActive`
  * turns false and every page drops the strikethrough on its own.
  */
-export const SPECIAL_ENDS = "2026-10-31";
+export const SPECIAL_ENDS = "2026-11-30";
 
 export function specialActive(today: Date = new Date()): boolean {
   return today <= new Date(`${SPECIAL_ENDS}T23:59:59`);
@@ -439,7 +446,7 @@ export function specialEndsLabel(locale: Locale): string {
 
 /**
  * The AI-Fluent Team stack: what the buyer gets, with a stated value for each.
- * EUR is set; GBP and ZAR follow the file's EUR/1.2 and EUR x 20, and the total
+ * EUR is set; GBP follows the file's EUR/1.2 and ZAR the Praxis rand rule, and the total
  * is summed, never typed, so it cannot disagree with its rows.
  *
  * `bonus` rows are the ones that answer a named objection rather than deliver
@@ -469,7 +476,7 @@ export const PRAXIS_STACK: { key: StackKey; eur: number; bonus: boolean }[] = [
 
 function fromEur(eur: number, currency: Currency): number {
   if (currency === "GBP") return Math.round(eur / 1.2);
-  if (currency === "ZAR") return eur * 20;
+  if (currency === "ZAR") return zarPraxis(eur);
   return eur;
 }
 
