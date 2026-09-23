@@ -380,28 +380,31 @@ export const copy = {
   },
 
   praxis: {
-    eyebrow: { en: "Praxis · Client training", fr: "Praxis · Formation client" },
+    eyebrow: {
+      en: "Praxis · Training for your team",
+      fr: "Praxis · Formation pour vos équipes",
+    },
     title: {
-      en: "Ninety minutes that change how you think about AI.",
-      fr: "Quatre-vingt-dix minutes qui changent votre façon de penser l'IA.",
+      en: "Brief it once. It works every time.",
+      fr: "Briefez-la une fois. Elle fonctionne à chaque fois.",
     },
     lead1: {
-      en: "No technical background needed. The first half covers the theory and principles - what AI actually is, how the folder-based system works, and why it changes everything. No jargon.",
-      fr: "Aucune compétence technique n'est requise. La première moitié porte sur la théorie et les principes : ce qu'est réellement l'IA, comment fonctionne le système fondé sur un simple dossier, et pourquoi cela change tout. Sans jargon.",
+      en: "Most staff use AI like a search box: ask, fix, ask again. It takes as long as doing it by hand, and burns tokens on the way.",
+      fr: "La plupart des équipes utilisent l'IA comme un moteur de recherche : demander, corriger, redemander. Cela prend autant de temps qu'à la main, et brûle des tokens au passage.",
     },
     lead2: {
-      en: "The second half is practical: on your own computer, with your own files. You follow along live as we build the system together. By the end of the session you have a working setup and the mental model to take it further.",
-      fr: "La seconde moitié est pratique : sur votre propre ordinateur, avec vos propres fichiers. Vous suivez en direct pendant que nous construisons le système ensemble. À la fin de la séance, vous disposez d'une installation qui fonctionne et du modèle mental pour aller plus loin.",
+      en: "Praxis fixes it in order, on your own work: the rules, a KPI for each job, what to hand over. Then the tools, skills and automations that do it without you.",
+      fr: "Praxis corrige cela dans l'ordre, sur votre propre travail : les règles, un indicateur par tâche, ce qu'on délègue. Puis les outils, les compétences et les automatisations qui le font sans vous.",
     },
     meta: {
-      en: "Teams or Google Meet · Sessions run 90 minutes · One to four people, on your own files",
-      fr: "Teams ou Google Meet · Séances de 90 minutes · De une à quatre personnes, sur vos propres fichiers",
+      en: "Eight sessions for your team, or four one to one · 90 minutes each · Online or in person",
+      fr: "Huit séances pour votre équipe, ou quatre en tête-à-tête · 90 minutes chacune · À distance ou sur place",
     },
     /** What separates this from the group evenings on /calendar. */
     tailoredLabel: { en: "Send your own work first", fr: "Envoyez d'abord votre propre travail" },
     tailored: {
-      en: "This is private — one to four people — and it is built on your material. When you book, send the use cases you actually care about — the quote you rewrite every week, the report nobody wants to do — and we learn on those rather than on a demonstration I prepared earlier. The group evenings run on generic examples by design; this does not.",
-      fr: "C'est une séance privée — de une à quatre personnes — et elle se construit sur vos documents. Au moment de réserver, envoyez les cas d'usage qui comptent vraiment pour vous — le devis que vous réécrivez chaque semaine, le rapport dont personne ne veut — et nous apprenons sur ceux-là plutôt que sur une démonstration préparée à l'avance. Les soirées collectives fonctionnent volontairement sur des exemples génériques ; celle-ci non.",
+      en: "It runs on your work, not a demo. Before we start, send the jobs you keep repeating — the quote you rewrite every week, the report nobody wants to do — and we build on those. The group evenings use generic examples. This doesn't.",
+      fr: "Tout se fait sur votre travail, pas sur une démo. Avant de commencer, envoyez les tâches que vous répétez sans cesse — le devis que vous réécrivez chaque semaine, le rapport dont personne ne veut — et nous construisons sur celles-là. Les soirées collectives utilisent des exemples génériques. Pas ici.",
     },
     ctaSecondary: { en: "Talk about training a team", fr: "Former une équipe" },
     programmeTitle: { en: "The eight-session programme", fr: "Le programme en huit séances" },
@@ -429,8 +432,8 @@ export const copy = {
      * file and a French one.
      */
     plate4dCaption: {
-      en: "Four habits, not four tools. Deciding what is worth handing over, describing it clearly, judging what comes back, and following it through — the session drills all four on your own work, and they outlast whatever the folder ends up doing.",
-      fr: "Quatre réflexes, pas quatre outils. Décider ce qui mérite d'être confié, le décrire clairement, juger ce qui revient, aller au bout — la séance travaille les quatre sur vos propres dossiers, et ils vous restent quoi que fasse le dossier ensuite.",
+      en: "Four habits, not four tools. Deciding what is worth handing over, describing it clearly, judging what comes back, and following it through. Praxis drills all four on your own work, and they outlast whatever the folder ends up doing.",
+      fr: "Quatre réflexes, pas quatre outils. Décider ce qui mérite d'être confié, le décrire clairement, juger ce qui revient, aller au bout. Praxis travaille les quatre sur vos propres dossiers, et ils vous restent quoi que fasse le dossier ensuite.",
     },
     plateHallucinationCaption: {
       en: "Why the third of them is discernment. Asked for something it does not have, a model will not leave the gap open: it fills it with whatever fits the shape — plausibly, confidently, and wrong.",
@@ -481,8 +484,8 @@ export const copy = {
     },
     s3Title: { en: "A folder on disk.", fr: "Un dossier sur le disque." },
     s3Body: {
-      en: "Nothing here is exotic. What you leave the session with is four things in a directory, which you can read, edit, copy and back up with tools you already trust.",
-      fr: "Rien d'exotique ici. Vous repartez de la séance avec quatre éléments dans un répertoire, que vous pouvez lire, modifier, copier et sauvegarder avec les outils auxquels vous faites déjà confiance.",
+      en: "Nothing here is exotic. What you leave with is four things in a directory, which you can read, edit, copy and back up with tools you already trust.",
+      fr: "Rien d'exotique ici. Vous repartez avec quatre éléments dans un répertoire, que vous pouvez lire, modifier, copier et sauvegarder avec les outils auxquels vous faites déjà confiance.",
     },
     fileA: { en: "the rules · written in plain language", fr: "les règles · en langage courant" },
     fileB: { en: "the script · the work it does", fr: "le script · le travail effectué" },
@@ -516,8 +519,8 @@ export const copy = {
      * per 90 minutes underneath, so the figures come from the price table.
      */
     ladderIntro: {
-      en: "We suggest starting with training.",
-      fr: "Nous vous conseillons de commencer par la formation.",
+      en: "Two ways in. Both start with a free 15-minute call.",
+      fr: "Deux façons de commencer. Les deux débutent par un appel gratuit de 15 minutes.",
     },
     freeTitle: { en: "Free sessions", fr: "Séances gratuites" },
     freePrice: { en: "Free", fr: "Gratuit" },
@@ -544,23 +547,26 @@ export const copy = {
       en: "The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.",
       fr: "La première étape est un appel gratuit de 15 minutes. Les deux programmes sont facturés hors taxes.",
     },
-    s5Label: { en: "Before the session", fr: "Avant la séance" },
+    s5Label: { en: "Before we start", fr: "Avant de commencer" },
     prereqLabel: { en: "Please set up in advance", fr: "À préparer à l'avance" },
     prereq: {
-      en: "The practical half runs on your computer. To get the most from it, have your AI assistant installed with a paid subscription active before we start, and ideally a code editor too. Get in touch and we'll send you exactly what to set up.",
-      fr: "La partie pratique se déroule sur votre ordinateur. Pour en tirer le meilleur parti, installez votre assistant IA avec un abonnement payant actif avant de commencer, et idéalement un éditeur de code. Contactez-nous et nous vous enverrons précisément la liste à préparer.",
+      en: "The work runs on your computer. Have your AI assistant installed with a paid subscription before session one, and ideally a code editor. We'll send you exactly what to set up.",
+      fr: "Le travail se fait sur votre ordinateur. Installez votre assistant IA avec un abonnement payant avant la première séance, et idéalement un éditeur de code. Nous vous enverrons précisément la liste à préparer.",
     },
 
     etymPull: {
       en: "Praxis is the loop of putting theory into practice, then letting what you learn from doing it sharpen the theory.",
       fr: "La praxis est la boucle qui consiste à mettre la théorie en pratique, puis à laisser ce que l'on apprend en faisant affiner la théorie.",
     },
-    ctaTitle: { en: "Want to talk it through first?", fr: "Envie d'en parler d'abord ?" },
-    /** Says the call is free and that the programme is quoted, which is what
-     *  section 04 above now promises. The old version sold the session itself. */
+    ctaTitle: {
+      en: "Which job do you keep repeating?",
+      fr: "Quelle tâche répétez-vous encore ?",
+    },
+    /** The home page's closing question, so the two pages ask the same
+     *  thing, and the free call as the only next step. */
     ctaBody: {
-      en: "Book an introductory call — there is no charge for it. We will look at the work you actually do, and if a Praxis programme fits, we will quote it as a single total.",
-      fr: "Réservez un premier échange — il est sans frais. Nous examinons le travail que vous faites réellement et, si un programme Praxis convient, nous le chiffrons en un total unique.",
+      en: "Bring it to a free 15-minute call. You'll know whether it can be handed over, how, and which programme fits.",
+      fr: "Venez avec elle à un appel gratuit de 15 minutes. Vous saurez si elle peut être déléguée, comment, et quel programme convient.",
     },
   },
 

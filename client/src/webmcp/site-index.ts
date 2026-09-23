@@ -57,7 +57,7 @@ export const SITE_PAGES: SitePage[] = [
   {
     path: "/praxis",
     name: "Praxis — client training",
-    summary: "Ninety minutes that change how you think about AI.",
+    summary: "Brief it once. It works every time. Training in order: rules, KPIs, what to hand over, then build.",
     detail:
       "Praxis is Tutto's hands-on training. You don't need a proprietary platform or an account with us — an AI assistant subscription and a free code editor, both pointed at the same folder on your machine. That folder, and what's inside it, is your app. The page lays out the training ladder: free sessions, The AI-Fluent Team (eight sessions for an owner and up to four staff), and The Owner's Fast Track (four private sessions), both at a back-to-work price with the regular price struck through. Every CTA on the page opens a conversation rather than selling an hour.",
     offering: true,

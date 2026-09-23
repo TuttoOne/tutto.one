@@ -32,10 +32,7 @@ export default function Praxis() {
   const booking = bookingHref(BOOKING, useTrainerCode());
 
   useEffect(() => {
-    document.title =
-      locale === "fr"
-        ? "Praxis — 90 minutes qui changent votre façon de penser l'IA | Tutto"
-        : "Praxis — Ninety minutes that change how you think about AI | Tutto";
+    document.title = `Praxis — ${t(copy.praxis.title).replace(/\.$/, "")} | Tutto`;
     return () => {
       document.title = SITE_TITLE;
     };
