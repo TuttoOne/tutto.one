@@ -25,7 +25,7 @@ const BOOKING = "https://cal.com/tuttoone/15min";
 /**
  * The site's front door, at `/`.
  *
- * It sells one thing — we build agents — and it is 350 words in each language
+ * It sells one thing — output you don't rewrite — and it is 400 words in each language
  * because the reader is deciding whether to give us half an hour, not whether
  * to sign. The version before this one offered four things at once and was
  * forgettable for it; the sequence (chat, workspace, agent) replaced the four
@@ -80,9 +80,9 @@ export default function Landing() {
  * The opener.
  *
  * `ProductHero` would be the straight reuse and is not used, for one reason:
- * this headline is three words and every other page's is a sentence, so the
- * house hero's measure (`max-w-3xl`) leaves "We build agents." floating in half
- * a line of air. The classes are `ProductHero`'s otherwise, copied rather than
+ * this headline is set larger than every other page's, and at that size the
+ * house hero's measure (`max-w-3xl`) breaks it in the wrong place; `max-w-2xl`
+ * gives two even lines. The classes are `ProductHero`'s otherwise, copied rather than
  * invented, so the two cannot drift apart.
  */
 function Hero() {
@@ -92,7 +92,7 @@ function Hero() {
     <header className="pt-8 pb-4">
       <Eyebrow className="mb-5">{t(landing.hero.eyebrow)}</Eyebrow>
 
-      <h1 className="text-5xl md:text-7xl font-serif font-bold leading-[1.05] tracking-tight">
+      <h1 className="max-w-2xl text-5xl md:text-7xl font-serif font-bold leading-[1.05] tracking-tight">
         {t(landing.hero.title)}
       </h1>
 

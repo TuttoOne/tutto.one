@@ -24,10 +24,10 @@ export type SitePage = {
 export const SITE_PAGES: SitePage[] = [
   {
     path: "/",
-    name: "Tutto — we build agents",
-    summary: "We build agents. The way in is a free 15-minute call.",
+    name: "Tutto — stop rewriting what AI writes",
+    summary: "For firms of 5 to 50 whose team uses AI and whose owner still rewrites the output. The way in is a free 15-minute call.",
     detail:
-      "The site's front door. AI is more than an advanced search engine: with tools it can do work. It can read data, create documents and run calculations. We don't replace people. We help them get the most out of their time with new skills and AI assistants that don't sleep. The page walks the reader through the sequence they are on — chat, workspace, agent — and prices one offer, The AI-Fluent Team, at its back-to-work price. Both buttons book the free 15-minute intro call.",
+      "The site's front door. Your team already uses ChatGPT or Claude; you still fix every draft and don't know what goes into it. The page names three fixes — brief it properly, check it before it ships, set the rule on what goes in — and prices one offer, The AI-Fluent Team, at its back-to-work price. Both buttons book the free 15-minute intro call.",
     offering: true,
   },
   {

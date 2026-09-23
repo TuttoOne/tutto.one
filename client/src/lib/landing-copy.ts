@@ -12,11 +12,10 @@
  *
  * WHAT THIS PAGE SAYS, which is the only decision on it that matters.
  *
- * One thing: we build agents. The page's whole job is to get a reader from
- * "I have a chat window open and I am not sure why" to "somebody could build
- * me the thing that does the job", and it does that with a sequence — chat,
- * then a workspace that remembers, then an agent — because a reader who does
- * not see the sequence cannot see where they are on it.
+ * One thing: the reader's team uses AI and the owner still rewrites the output.
+ * The page names that, names the three fixes (brief, check, rule), prices the
+ * programme that installs them, and books a free 15-minute call. It was "we
+ * build agents" until September 2026; that is the upsell, not the way in.
  *
  * The previous version sold four offers at once and was forgettable for it.
  * If a new offer needs a home, give it a page; do not add a fifth door here.
@@ -40,23 +39,26 @@
 
 export const landing = {
   hero: {
-    eyebrow: { en: "What we do", fr: "Ce que nous faisons" },
+    eyebrow: { en: "For firms of 5 to 50", fr: "Pour les entreprises de 5 à 50 personnes" },
 
-    /** The whole positioning, in three words. Nothing else in the hero is
-     *  allowed to be longer than the sentence it supports. */
-    title: { en: "We build agents.", fr: "Nous construisons des agents." },
+    /** The reader's own complaint, said back to them. Nothing else in the
+     *  hero is allowed to be longer than the sentence it supports. */
+    title: { en: "Stop rewriting what AI writes.", fr: "Arrêtez de réécrire ce que l'IA écrit." },
 
     promise: {
-      en: "AI is more than an advanced search engine: with tools it can do work. It can read data, create documents and run calculations.",
-      fr: "L'IA est plus qu'un moteur de recherche perfectionné : avec les bons outils, elle travaille. Elle lit vos données, rédige vos documents, fait vos calculs.",
+      en: "Your team already uses ChatGPT or Claude. You still fix every draft, and you don't know what they paste into it.",
+      fr: "Votre équipe utilise déjà ChatGPT ou Claude. Vous corrigez encore chaque brouillon, et vous ne savez pas ce qu'elle y colle.",
     },
 
     deck: {
-      en: "We don't replace people. We help them get the most out of their time with new skills and AI assistants that don't sleep.",
-      fr: "Nous ne remplaçons personne. Nous faisons gagner du temps à vos équipes : de nouvelles compétences, et des assistants IA qui ne dorment jamais.",
+      en: "We teach them to brief AI like a good intern, check what comes back, and keep client data where it belongs.",
+      fr: "Nous leur apprenons à briefer l'IA comme un bon stagiaire, à vérifier ce qui revient, et à garder les données clients là où elles doivent rester.",
     },
 
-    cta: { en: "Book a 15-minute call", fr: "Réserver un appel de 15 min" },
+    cta: {
+      en: "Bring the job that's bugging you: 15 minutes, free",
+      fr: "Venez avec la tâche qui vous pèse : 15 minutes, gratuit",
+    },
     secondaryCta: { en: "The long version", fr: "La version longue" },
   },
 
@@ -156,42 +158,39 @@ export const landing = {
   },
 
   /**
-   * The sequence, which is the argument.
-   *
-   * Three steps, and the reader is meant to place themselves on step one or
-   * two and see that there is a third. Step two is deliberately described as
-   * where the market currently is: it flatters the reader who has got that
-   * far and it makes step three the unclaimed ground.
+   * The three things the offer fixes, in the order they bite: the brief, the
+   * check, the rule. Each is one of the artefacts the programme hands over, so
+   * the page and the price card below it describe the same thing.
    */
   sequence: {
-    label: { en: "The sequence", fr: "La progression" },
+    label: { en: "What changes", fr: "Ce qui change" },
     title: {
-      en: "Three steps. The call tells you where you are on them:",
-      fr: "Trois étapes. L'appel vous dit où vous en êtes :",
+      en: "Three fixes. Most teams are missing all of them:",
+      fr: "Trois corrections. La plupart des équipes n'en ont aucune :",
     },
     steps: [
       {
         n: "01",
-        title: { en: "The best setup for your AI", fr: "La bonne configuration pour votre IA" },
+        title: { en: "Brief it properly", fr: "Bien le briefer" },
         body: {
-          en: "What the tools can do, where they can help YOU and what to avoid. The basics and some tips and tricks.",
-          fr: "Ce que les outils savent faire, là où ils peuvent VOUS aider, et ce qu'il faut éviter. Les bases, plus quelques astuces.",
+          en: "Nobody hands an intern a task on day one and complains when it's wrong. Tell it the audience, the constraints and what good looks like, once, and keep the brief.",
+          fr: "Personne ne confie une tâche à un stagiaire dès le premier jour pour se plaindre ensuite. Donnez-lui le public, les contraintes et ce qu'est un bon résultat, une fois, et gardez la consigne.",
         },
       },
       {
         n: "02",
-        title: { en: "Move it into your work", fr: "Passer dans un environnement de travail" },
+        title: { en: "Check it before it ships", fr: "Le vérifier avant envoi" },
         body: {
-          en: "Move out of the chat box and into an environment. AI needs a place to work — just like you.",
-          fr: "Sortez de la conversation pour un véritable environnement. L'IA a besoin d'un lieu de travail — comme vous.",
+          en: "Confident nonsense reads just like the truth. A scorecard and a short check mean nothing goes out that you haven't signed off.",
+          fr: "Une erreur affirmée avec aplomb ressemble à la vérité. Une grille et une vérification courte : rien ne part sans votre validation.",
         },
       },
       {
         n: "03",
-        title: { en: "Build the agent", fr: "Construire l'agent" },
+        title: { en: "Set the rule on what goes in", fr: "Fixer la règle sur ce qui entre" },
         body: {
-          en: "If you can explain your goal, then it can run jobs itself, on your data, inside your environment.",
-          fr: "Si vous savez expliquer votre objectif, il exécute le travail lui-même, sur vos données, dans votre environnement.",
+          en: "A one-page charter: which tools, which data, and what never leaves the building. Written with you, not handed down.",
+          fr: "Une charte d'une page : quels outils, quelles données, et ce qui ne sort jamais de l'entreprise. Écrite avec vous, pas imposée.",
         },
       },
     ],
@@ -245,14 +244,17 @@ export const landing = {
 
   close: {
     title: {
-      en: "What do you do by hand?",
-      fr: "Que faites-vous à la main ?",
+      en: "Which job are you still rewriting?",
+      fr: "Quelle tâche réécrivez-vous encore ?",
     },
     body: {
       en: "Bring the one job that's bugging you. In fifteen minutes you'll know whether it can be unblocked, how, and what the next step is. No slides, no pitch you didn't ask for.",
       fr: "Venez avec la tâche qui vous pèse. En quinze minutes, vous saurez si elle peut être débloquée, comment, et quelle est la suite. Pas de présentation, pas de discours commercial non sollicité.",
     },
-    cta: { en: "Book a 15-minute call", fr: "Réserver un appel de 15 min" },
+    cta: {
+      en: "Bring the job that's bugging you: 15 minutes, free",
+      fr: "Venez avec la tâche qui vous pèse : 15 minutes, gratuit",
+    },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
     /** Named people are who a reader is dealing with. A leaf like everything
      *  else, with the same string on both sides, so the browser copy editor
