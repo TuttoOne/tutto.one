@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction to Agent Skills — deck commenté</title>
+<title>Praxis · Introduction to Agent Skills : deck commenté</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -856,7 +856,7 @@ th {
 <section class="deck-slide title active">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · deck commenté</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — construit à partir de Introduction to Agent Skills d'Anthropic</span>
+    <span class="eyebrow">Praxis : construit à partir de Introduction to Agent Skills d'Anthropic</span>
     <h1>Apprenez quelque chose<br>à Claude Code une fois. Il<br>s'en souvient quand<br>ça compte.</h1>
     <p class="lead">Six idées, une par écran. Chacune est un point à montrer pendant que vous expliquez. Le spectacle est dans l'observation : prenez les silences.</p>
   </div>
@@ -906,7 +906,7 @@ th {
 <section class="deck-slide">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 1 · Ce que c'est</span></div>
   <div class="stage">
-    <span class="eyebrow">Leçon 1 — si vous ne retenez qu'une chose</span>
+    <span class="eyebrow">Leçon 1 : si vous ne retenez qu'une chose</span>
     <h2>Si vous devez l'expliquer à chaque fois, écrivez-le une bonne fois</h2>
     <p class="lead">Un skill est un dossier d'instructions. Claude ne garde que sa description d'une ligne, jusqu'à ce que votre demande corresponde : il charge alors le reste.</p>
     <div class="diagram">
@@ -1031,11 +1031,11 @@ th {
         <!-- supporting files -->
         <rect x="500" y="44" width="460" height="52" rx="10" class="box"/>
         <text x="520" y="68" class="t-mono s-amber" style="font-weight:600">scripts/</text>
-        <text x="520" y="86" class="t-tiny">exécutez-le — seule la sortie coûte du contexte, pas le code source</text>
+        <text x="520" y="86" class="t-tiny">exécutez-le : seule la sortie coûte du contexte, pas le code source</text>
 
         <rect x="500" y="108" width="460" height="52" rx="10" class="box"/>
         <text x="520" y="132" class="t-mono s-amber" style="font-weight:600">references/</text>
-        <text x="520" y="150" class="t-tiny">docs complémentaires — lues seulement quand la question se pose</text>
+        <text x="520" y="150" class="t-tiny">docs complémentaires, lues seulement quand la question se pose</text>
 
         <rect x="500" y="172" width="460" height="52" rx="10" class="box"/>
         <text x="520" y="196" class="t-mono s-amber" style="font-weight:600">assets/</text>
@@ -1045,7 +1045,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap"><code>allowed-tools</code> délimite un skill — indiquez <code>Read, Grep, Glob, Bash</code> uniquement — pour du travail en lecture seule ou sensible. Et dites à Claude d' <i>exécuter</i> un script, pas de le lire : le code source n'entre jamais dans le contexte, seul le résultat y entre.</p>
+    <p class="cap"><code>allowed-tools</code> délimite un skill (indiquez <code>Read, Grep, Glob, Bash</code> uniquement) pour du travail en lecture seule ou sensible. Et dites à Claude d' <i>exécuter</i> un script, pas de le lire : le code source n'entre jamais dans le contexte, seul le résultat y entre.</p>
   </div>
   <span class="slide-counter">05</span>
 </section>
@@ -1056,10 +1056,10 @@ th {
   <div class="stage">
     <span class="eyebrow">Leçon 4</span>
     <h2>Cinq outils, cinq rôles</h2>
-    <p class="lead">Les skills se chargent à la demande quand votre demande correspond. Les quatre autres résolvent d'autres problèmes — choisissez selon le moment où chacun se déclenche.</p>
+    <p class="lead">Les skills se chargent à la demande quand votre demande correspond. Les quatre autres résolvent d'autres problèmes : choisissez selon le moment où chacun se déclenche.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 200" role="img" aria-label="Skills compared to CLAUDE.md, subagents, hooks and MCP">
-        <text x="8" y="32" class="t-sub">Chacun se déclenche à un moment différent — combinez-les, ne forcez pas tout dans un seul.</text>
+        <text x="8" y="32" class="t-sub">Chacun se déclenche à un moment différent : combinez-les, ne forcez pas tout dans un seul.</text>
 
         <rect x="8"   y="50" width="180" height="130" rx="14" class="box"/>
         <text x="98"  y="92"  text-anchor="middle" class="t-lbl" style="font-size:16px">CLAUDE.md</text>
@@ -1097,7 +1097,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 5 · Ajuster et livrer</span></div>
   <div class="stage">
     <span class="eyebrow">Leçon 5</span>
-    <h2>Trois façons de partager — la plus large en dernier</h2>
+    <h2>Trois façons de partager : la plus large en dernier</h2>
     <p class="lead">Committez dans le dépôt pour votre équipe, publiez un plugin pour la communauté, ou déployez des réglages gérés en entreprise pour toute l'organisation.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 242" role="img" aria-label="Sharing skills by reach: repo, plugin, enterprise">
@@ -1171,7 +1171,7 @@ th {
         <text x="524" y="248" class="t-tiny">dépendances installées · chmod +x sur les scripts · barres obliques</text>
       </svg>
     </div>
-    <p class="cap">Testez les formulations exactes que vous taperiez — « pourquoi c'est lent », « rends ça plus rapide » — et ajoutez à la description celles qui échouent. Ce seul correctif règle la plupart des problèmes de déclenchement. Lancez <code>claude --debug</code> pour voir les erreurs de chargement, nommées.</p>
+    <p class="cap">Testez les formulations exactes que vous taperiez (« pourquoi c'est lent », « rends ça plus rapide ») et ajoutez à la description celles qui échouent. Ce seul correctif règle la plupart des problèmes de déclenchement. Lancez <code>claude --debug</code> pour voir les erreurs de chargement, nommées.</p>
   </div>
   <span class="slide-counter">08</span>
 </section>
@@ -1182,7 +1182,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Tout ça, en une ligne</span>
     <h1>Écrivez-le une fois.<br>Décrivez-le bien.<br>Laissez Claude le charger<br>quand c'est le moment.</h1>
-    <p class="lead">Un dossier et un SKILL.md transforment une consigne répétée en expertise automatique et partageable — construite sobrement, placée parmi les autres outils, corrigée par sa description.</p>
+    <p class="lead">Un dossier et un SKILL.md transforment une consigne répétée en expertise automatique et partageable : construite sobrement, placée parmi les autres outils, corrigée par sa description.</p>
     <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
   </div>
   <span class="slide-counter">09</span>

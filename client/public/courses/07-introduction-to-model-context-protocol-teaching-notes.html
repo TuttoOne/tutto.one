@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction to Model Context Protocol — teaching notes</title>
+<title>Praxis · Introduction to Model Context Protocol: teaching notes</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -862,53 +862,53 @@ th {
 </div>
 <main>
   <div class="guide-head">
-    <h1>Introduction to Model Context Protocol — teaching notes</h1>
-    <p class="lead">Side-by-side notes for <code>07-praxis-introduction-to-model-context-protocol.html</code> (14 slides). This is the most technical course in the set: it is built for engineers wiring MCP servers, clients, tools, resources and prompts. Our job is to teach the <em>idea</em> to the nine non-technical archetypes without selling them the plumbing. Keep the framing on "what this means for your data and your tools", not the JSON-RPC. Course 01 slide 10 (Connectors / MCP) and course 02 slide 13 (MCP) already pitch MCP to these learners — match that framing, this is the longer version. The deck is what the room looks at; this is what you say, where you stop, and how each idea lands for the person in front of you. Written from the deck and the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
+    <h1>Introduction to Model Context Protocol: teaching notes</h1>
+    <p class="lead">Side-by-side notes for <code>07-praxis-introduction-to-model-context-protocol.html</code> (14 slides). This is the most technical course in the set: it is built for engineers wiring MCP servers, clients, tools, resources and prompts. Our job is to teach the <em>idea</em> to the nine non-technical archetypes without selling them the plumbing. Keep the framing on "what this means for your data and your tools", not the JSON-RPC. Course 01 slide 10 (Connectors / MCP) and course 02 slide 13 (MCP) already pitch MCP to these learners. Match that framing; this is the longer version. The deck is what the room looks at; this is what you say, where you stop, and how each idea lands for the person in front of you. Written from the deck and the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
     <details class="howto" open><summary>How to use these notes</summary><ul><li>These are guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
 <li><strong>By background</strong> gives you a line per archetype (from <code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in the room and ignore the rest. They are a palette, not a checklist to read out.</li>
-<li>This course is heavy on protocol mechanics (servers, clients, transports, decorators). Several slides do not vary by professional domain — where that is true, the note says so and gives one shared example rather than nine contrived ones. Don't read code aloud (<code>framings.md</code> — voice); the point of every slide is the outcome, not the syntax.</li>
-<li>The one thing every non-technical learner must leave with: <strong>MCP is the single standard that plugs Claude into the tools you already use; it sees only what you can see; it is scoped and revocable.</strong> Data-safety is the spine of this course for these rooms. It comes up earliest and hardest on slides 3, 8 and 13 — slow down there.</li>
-<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only — <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
+<li>This course is heavy on protocol mechanics (servers, clients, transports, decorators). Several slides do not vary by professional domain. Where that is true, the note says so and gives one shared example rather than nine contrived ones. Don't read code aloud (<code>framings.md</code>: voice); the point of every slide is the outcome, not the syntax.</li>
+<li>The one thing every non-technical learner must leave with: <strong>MCP is the single standard that plugs Claude into the tools you already use; it sees only what you can see; it is scoped and revocable.</strong> Data-safety is the spine of this course for these rooms. It comes up earliest and hardest on slides 3, 8 and 13, so slow down there.</li>
+<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only: <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
 <li>Run the intake first (<code>train-the-trainer.md</code>) so you know which background you're teaching to. If the room hasn't done courses 01 and 02, plant the bridge: the connectors and MCP they met there are what this course opens up.</li></ul></details>
   </div>
   <section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>One protocol, so any AI app can reach any tool or data source</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Set the frame: eleven ideas, one per screen, and the watching is the lesson. This course explains the wiring under "connect your tools" — but for these learners the takeaway is not how to build it, it's what it is and why it's safe.</p>
+<p>Set the frame: eleven ideas, one per screen, and the watching is the lesson. This course explains the wiring under "connect your tools", but for these learners the takeaway is not how to build it, it's what it is and why it's safe.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Eleven ideas, one screen each. In Claude 101 we said Claude can plug into the tools you already use. This is the one standard that makes that work — what it is, and the part everyone actually worries about, what it can and can't see. I'll show you each piece, then stop and ask where it touches your work."</p>
+<p>"Eleven ideas, one screen each. In Claude 101 we said Claude can plug into the tools you already use. This is the one standard that makes that work: what it is, and the part everyone actually worries about, what it can and can't see. I'll show you each piece, then stop and ask where it touches your work."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Open with</span></div>
-<p>The intake answer: the tool or system where their real work lives — the case store, the inbox, the CRM, the drive. Name it, and promise you'll come back to it: by the end they'll know exactly what connecting it does and doesn't expose.</p>
+<p>The intake answer: the tool or system where their real work lives: the case store, the inbox, the CRM, the drive. Name it, and promise you'll come back to it: by the end they'll know exactly what connecting it does and doesn't expose.</p>
 </div></div></section>
 <section class="card" id="slide-2" data-slide="2"><header class="card-head"><span class="badge">2</span><div><span class="eyebrow">Spine</span><h2>The whole course on one screen</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Four moves: grasp what MCP is, then its three primitives — tools, resources, prompts — one at a time, server side and client side. Show the shape so the terms don't feel like a pile-up later.</p>
+<p>Four moves: grasp what MCP is, then its three primitives (tools, resources, prompts) one at a time, server side and client side. Show the shape so the terms don't feel like a pile-up later.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the whole thing on one screen. First, what MCP is and why it exists. Then its three pieces — tools, resources, prompts — each twice: how it's built, and how you'd use it. If a word lands and you've lost where it sits, this slide is the map back."</p>
+<p>"Here's the whole thing on one screen. First, what MCP is and why it exists. Then its three pieces (tools, resources, prompts), each twice: how it's built, and how you'd use it. If a word lands and you've lost where it sits, this slide is the map back."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Cue</span></div>
 <p>Don't teach the spine, just orient. The centrepiece is slide 13, three primitives and three owners; everything else serves it. For a non-technical room, say plainly that the middle slides are the engineering and you'll keep them light. Twenty seconds, then move.</p>
 </div></div></section>
 <section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Lesson 1 · Foundation</span><h2>M×N integrations become M+N</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Without a standard, every app wires up to every tool by hand — the tangle grows with both sides. MCP is the standard connector ("USB-C for AI"): build to it once and every compliant tool just works. M×N custom integrations become M+N.</p>
+<p>Without a standard, every app wires up to every tool by hand, and the tangle grows with both sides. MCP is the standard connector ("USB-C for AI"): build to it once and every compliant tool just works. M×N custom integrations become M+N.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Before this, every AI app had to be wired by hand to every tool — your email, your drive, your tracker — over and over, a tangle that grows with both sides. MCP is one standard, like USB-C for AI: build to it once and every tool that speaks it just works. That's why connecting things to Claude stopped being a custom job." (Mirrors course 01 slide 10 — connectors, the one standard behind them.)</p>
+<p>"Before this, every AI app had to be wired by hand to every tool (your email, your drive, your tracker) over and over, a tangle that grows with both sides. MCP is one standard, like USB-C for AI: build to it once and every tool that speaks it just works. That's why connecting things to Claude stopped being a custom job." (Mirrors course 01 slide 10: connectors, the one standard behind them.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Think of the tools you use that don't talk to each other today — where do you do the carrying by hand between them?"</li>
+<li>"Think of the tools you use that don't talk to each other today? Where do you do the carrying by hand between them?"</li>
 <li>"If those tools all spoke one language, which connection would you want first?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the tool they'd plug in first — the connector that earns its place, mirroring course 01 slide 10)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the tool they'd plug in first: the connector that earns its place, mirroring course 01 slide 10)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the document store where case files live — after the IT conversation.</dd>
+<dt>Investigator</dt><dd>the document store where case files live, after the IT conversation.</dd>
 <dt>Analyst</dt><dd>the warehouse or drive holding vendor responses.</dd>
 <dt>Designer</dt><dd>the design tools, plus the drive for brand assets.</dd>
 <dt>Knowledge worker</dt><dd>the email and drive where invoices land.</dd>
@@ -920,25 +920,25 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>The data-safety fear surfaces the instant they picture connecting their email or their case store. Name it now, don't wait: a standard for <em>connecting</em> is not a standard for <em>exposing</em>. Promise you'll show exactly what it can see on slide 8 and again at the recap. (<code>objections.md</code> — IT/compliance/privacy; "where is the AI".)</p>
+<p>The data-safety fear surfaces the instant they picture connecting their email or their case store. Name it now, don't wait: a standard for <em>connecting</em> is not a standard for <em>exposing</em>. Promise you'll show exactly what it can see on slide 8 and again at the recap. (<code>objections.md</code>: IT/compliance/privacy; "where is the AI".)</p>
 </div></div></section>
 <section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Lesson 2 · Foundation</span><h2>Host, client, server: one client per server</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The app you use is the host (Claude Code, Desktop, Cursor). Inside it, each client holds one connection to one server, and the server wraps the real tool or data. Messages travel as JSON-RPC over a transport — stdio for local, HTTP for remote.</p>
+<p>The app you use is the host (Claude Code, Desktop, Cursor). Inside it, each client holds one connection to one server, and the server wraps the real tool or data. Messages travel as JSON-RPC over a transport: stdio for local, HTTP for remote.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Three words worth knowing, because the rest hangs off them. The <em>host</em> is the app you're in — Claude Code, the desktop app. The <em>server</em> is the thing that wraps a real tool or data source, your drive or your tracker. And a <em>client</em> is one private line between them, one client to one server. The host can hold many of these lines at once." (Don't dwell on JSON-RPC or transports — name them once, on the caption, and move. They don't change anything for a non-technical learner.)</p>
+<p>"Three words worth knowing, because the rest hangs off them. The <em>host</em> is the app you're in: Claude Code, the desktop app. The <em>server</em> is the thing that wraps a real tool or data source, your drive or your tracker. And a <em>client</em> is one private line between them, one client to one server. The host can hold many of these lines at once." (Don't dwell on JSON-RPC or transports. Name them once, on the caption, and move. They don't change anything for a non-technical learner.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"How many separate systems would you want Claude to reach in a normal week — one, or several at once?"</li>
+<li>"How many separate systems would you want Claude to reach in a normal week: one, or several at once?"</li>
 <li>"Which of those would you trust it to read, and which would you want to keep walled off?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the systems that would each be a server, one line each)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the case store, plus a sanctions/screening source — separate lines.</dd>
+<dt>Investigator</dt><dd>the case store, plus a sanctions/screening source, separate lines.</dd>
 <dt>Analyst</dt><dd>the responses drive and the data warehouse, kept distinct.</dd>
 <dt>Designer</dt><dd>the design tool and the brand-asset drive, two connections.</dd>
 <dt>Knowledge worker</dt><dd>the inbox and the accounts drive.</dd>
@@ -946,24 +946,24 @@ th {
 <dt>Content</dt><dd>the CMS and the analytics source.</dd>
 <dt>Form-filler</dt><dd>the receipts drive and the filing system.</dd>
 <dt>Outreach</dt><dd>the CRM and the mailbox.</dd>
-<dt>Exec</dt><dd>the board drive, the chat and the finance source — several lines at once.</dd>
+<dt>Exec</dt><dd>the board drive, the chat and the finance source, several lines at once.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"One client per server" is the seed of the safety point: each connection is separate and named, so you grant and revoke them one at a time. You don't open a floodgate, you run individual lines you control. (Sets up slide 13 — scoped and revocable.) Keep the transport detail off the floor unless a technical person asks. (<code>objections.md</code> — server / "where does it live": a server is just a computer somewhere; the line is what you control.)</p>
+<p>"One client per server" is the seed of the safety point: each connection is separate and named, so you grant and revoke them one at a time. You don't open a floodgate, you run individual lines you control. (Sets up slide 13: scoped and revocable.) Keep the transport detail off the floor unless a technical person asks. (<code>objections.md</code>: server / "where does it live": a server is just a computer somewhere; the line is what you control.)</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">If asked — server vs client, the one-line difference (technical reference)</span></div>
+<div class="block-head"><span class="block-label">If asked: server vs client, the one-line difference (technical reference)</span></div>
 <p>It's</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">provider vs consumer</span></div>
-<p>. The <strong>server offers the capabilities</strong> — it's where the tools, resources and prompts live; it wraps a real system (a drive, a tracker) and waits for requests. The <strong>client is the communication bridge</strong>: a protocol connection that reaches one server, discovers what it offers, calls it on the model's behalf, and relays results back to the host. Two sharpenings on the plain version: the server "contains" the three primitives in the sense that it <em>offers/serves</em> them; and the bridge isn't one shared pipe — it's <strong>one client per server</strong>, so the host opens a separate, named line to each. The reason the protocol splits them: any compliant client can talk to any compliant server, so a server built once works in every MCP-aware host. <em>Verification: matches the course spine (host/client/server, "one client per server") and the MCP architecture docs; course 07 is video-only in our capture, confirmed against primary docs (June 2026).</em></p>
+<p>. The <strong>server offers the capabilities</strong>. It's where the tools, resources and prompts live; it wraps a real system (a drive, a tracker) and waits for requests. The <strong>client is the communication bridge</strong>: a protocol connection that reaches one server, discovers what it offers, calls it on the model's behalf, and relays results back to the host. Two sharpenings on the plain version: the server "contains" the three primitives in the sense that it <em>offers/serves</em> them; and the bridge isn't one shared pipe; it's <strong>one client per server</strong>, so the host opens a separate, named line to each. The reason the protocol splits them: any compliant client can talk to any compliant server, so a server built once works in every MCP-aware host. <em>Verification: matches the course spine (host/client/server, "one client per server") and the MCP architecture docs; course 07 is video-only in our capture, confirmed against primary docs (June 2026).</em></p>
 </div></div></section>
 <section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Lesson 3 · Foundation</span><h2>A server is a few lines to start</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The Python SDK's FastMCP does the protocol plumbing. You create a server, register capabilities with decorators, and run it over a transport (stdio local, HTTP remote). Same server code either way — the transport is just how messages travel.</p>
+<p>The Python SDK's FastMCP does the protocol plumbing. You create a server, register capabilities with decorators, and run it over a transport (stdio local, HTTP remote). Same server code either way; the transport is just how messages travel.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"This slide is for the builders in the room: standing up a server is small. The SDK handles the protocol; you write a few ordinary functions and mark them as capabilities. For everyone else, the takeaway is only this — the people who make these connections do it in a handful of lines, which is why so many tools already have one." (One shared example below; this is a mechanics slide, it does not vary by domain.)</p>
+<p>"This slide is for the builders in the room: standing up a server is small. The SDK handles the protocol; you write a few ordinary functions and mark them as capabilities. For everyone else, the takeaway is only this: the people who make these connections do it in a handful of lines, which is why so many tools already have one." (One shared example below; this is a mechanics slide, it does not vary by domain.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -972,50 +972,50 @@ th {
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span></div>
-<p>This is a purely mechanical slide — building a server does not vary by profession, so don't force nine. One shared framing for the room: <em>"Whatever your tool, the connector is small to build and many already exist. Your job isn't to build it; it's to know which one you want and what it should be allowed to see."</em> Then move on.</p>
+<p>This is a purely mechanical slide. Building a server does not vary by profession, so don't force nine. One shared framing for the room: <em>"Whatever your tool, the connector is small to build and many already exist. Your job isn't to build it; it's to know which one you want and what it should be allowed to see."</em> Then move on.</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Don't get drawn into <code>uv</code>, FastMCP, stdio vs HTTP with a non-technical room — it's noise to them and the slide is inferred from the course title, not captured prose (sanity-check against the video for a technical audience). Keep it to "small to build, many already exist" and move. For the IT-restricted: a <em>local</em> server (stdio) runs on your own machine, nothing leaves it — that's the privacy ceiling in miniature. (<code>objections.md</code> — IT/compliance: local model, nothing leaves your network.)</p>
+<p>Don't get drawn into <code>uv</code>, FastMCP, stdio vs HTTP with a non-technical room. It's noise to them and the slide is inferred from the course title, not captured prose (sanity-check against the video for a technical audience). Keep it to "small to build, many already exist" and move. For the IT-restricted: a <em>local</em> server (stdio) runs on your own machine, nothing leaves it. That's the privacy ceiling in miniature. (<code>objections.md</code>: IT/compliance, local model, nothing leaves your network.)</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">If asked — what "transport-agnostic" means (technical reference)</span></div>
-<p>MCP separates <em>what</em> is communicated from <em>how</em> it's carried. The <strong>protocol layer</strong> — the JSON-RPC messages for discovering and calling capabilities — is fixed and identical; the <strong>transport layer</strong> (the pipe the bytes travel through) is swappable. So the same <code>tools/call</code> request looks the same whether it went over <strong>stdio</strong> (the client launches the server as a local subprocess, talking over stdin/stdout) or <strong>HTTP</strong> (Streamable HTTP, for remote/hosted servers). The payoff: you write the server's tools, resources and prompts once against the protocol and <strong>swap the transport, not the logic</strong>, to move from local to remote — and a client that speaks MCP can reach a server over any supported transport without special-casing each one. In a line: MCP fixes the language, not the channel. <em>Verification: matches the course's "same server code either way, the transport is just how messages travel" and the MCP transports docs (stdio + Streamable HTTP, which replaced the older HTTP+SSE); course 07 is video-only in our capture, confirmed against primary docs (June 2026).</em></p>
+<div class="block-head"><span class="block-label">If asked: what "transport-agnostic" means (technical reference)</span></div>
+<p>MCP separates <em>what</em> is communicated from <em>how</em> it's carried. The <strong>protocol layer</strong> (the JSON-RPC messages for discovering and calling capabilities) is fixed and identical; the <strong>transport layer</strong> (the pipe the bytes travel through) is swappable. So the same <code>tools/call</code> request looks the same whether it went over <strong>stdio</strong> (the client launches the server as a local subprocess, talking over stdin/stdout) or <strong>HTTP</strong> (Streamable HTTP, for remote/hosted servers). The payoff: you write the server's tools, resources and prompts once against the protocol and <strong>swap the transport, not the logic</strong>, to move from local to remote, and a client that speaks MCP can reach a server over any supported transport without special-casing each one. In a line: MCP fixes the language, not the channel. <em>Verification: matches the course's "same server code either way, the transport is just how messages travel" and the MCP transports docs (stdio + Streamable HTTP, which replaced the older HTTP+SSE); course 07 is video-only in our capture, confirmed against primary docs (June 2026).</em></p>
 </div></div></section>
 <section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Lesson 4 · Tools</span><h2>Actions the model can choose to call</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>A tool is a function the server exposes; its name, description and typed arguments become a schema the model reads, and the model decides when to call it. Tools are the verbs — they <em>do</em> things, they have side effects. Model-controlled: the model picks the moment, not the app or the user.</p>
+<p>A tool is a function the server exposes; its name, description and typed arguments become a schema the model reads, and the model decides when to call it. Tools are the verbs: they <em>do</em> things, they have side effects. Model-controlled: the model picks the moment, not the app or the user.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"The first of three pieces. A <em>tool</em> is an action Claude can take — send the email, run the search, update the record. The verbs. The key word is who decides: Claude does. It reads what each tool is for and chooses when to use it, the way a capable colleague decides which step to take next. That's why we call tools model-controlled." (Pairs with course 02 slide 3 — an agent acts, it doesn't just hand you text. A tool is how it acts.)</p>
+<p>"The first of three pieces. A <em>tool</em> is an action Claude can take: send the email, run the search, update the record. The verbs. The key word is who decides: Claude does. It reads what each tool is for and chooses when to use it, the way a capable colleague decides which step to take next. That's why we call tools model-controlled." (Pairs with course 02 slide 3: an agent acts, it doesn't just hand you text. A tool is how it acts.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"What's an action — not a lookup, an action — that you'd be comfortable letting it take on your behalf?"</li>
+<li>"What's an action (not a lookup, an action) that you'd be comfortable letting it take on your behalf?"</li>
 <li>"And what's one you'd want to keep your hand on, every time?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the action they'd expose as a tool)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>run a sanctions/PEP screen on a named subject — read-only, low risk.</dd>
+<dt>Investigator</dt><dd>run a sanctions/PEP screen on a named subject, read-only, low risk.</dd>
 <dt>Analyst</dt><dd>pull a fresh figure from the warehouse into the comparison.</dd>
 <dt>Designer</dt><dd>push an export to the asset library under the naming convention.</dd>
 <dt>Knowledge worker</dt><dd>file an extracted invoice into the accounts system.</dd>
 <dt>Reporter</dt><dd>post the finished briefing to the team channel.</dd>
 <dt>Content</dt><dd>schedule a draft into the CMS as unpublished.</dd>
 <dt>Form-filler</dt><dd>write an allocation back to the filing record.</dd>
-<dt>Outreach</dt><dd>create a draft email per customer — drafted, never auto-sent.</dd>
+<dt>Outreach</dt><dd>create a draft email per customer, drafted, never auto-sent.</dd>
 <dt>Exec</dt><dd>log a renewal decision against the account.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Tools <em>do</em> things and have side effects — this is exactly where "what if it does something I don't want?" lives. The answer is the permission model from course 02 slide 6 (<code>Shift + Tab</code>, approval first): the model can <em>choose</em> to call a tool, but you decide whether it's allowed to. Draft, don't auto-send, until trust is earned. (<code>objections.md</code> — permission / "scary to let it".)</p>
+<p>Tools <em>do</em> things and have side effects. This is exactly where "what if it does something I don't want?" lives. The answer is the permission model from course 02 slide 6 (<code>Shift + Tab</code>, approval first): the model can <em>choose</em> to call a tool, but you decide whether it's allowed to. Draft, don't auto-send, until trust is earned. (<code>objections.md</code>: permission / "scary to let it".)</p>
 </div></div></section>
 <section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Lesson 5 · Tools</span><h2>Test the server before wiring it to an app</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>The Inspector connects straight to your server with no model involved. List what it exposes, call each tool by hand, read the raw response. Debug the server in isolation first; if it lists and calls cleanly, a later problem is in the client wiring.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"This is a builder's slide: before you let Claude near a new connection, you test it on its own — does it list its tools, does each one return cleanly. A plain quality check on the plumbing. For everyone else, the point is reassuring: connections get tested in isolation before they're trusted, the same way you'd test a new process on dummy data before you run it for real."</p>
+<p>"This is a builder's slide: before you let Claude near a new connection, you test it on its own: does it list its tools, does each one return cleanly. A plain quality check on the plumbing. For everyone else, the point is reassuring: connections get tested in isolation before they're trusted, the same way you'd test a new process on dummy data before you run it for real."</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1024,28 +1024,28 @@ th {
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span></div>
-<p>A mechanics slide — testing a server doesn't vary by profession. One shared framing: <em>"Whatever the connection, it gets proven in isolation before it touches your real work — the discipline you'd want anyway."</em> Tie it back to the Praxis habit they'll recognise from the demo: test on dummy data, then run for real. Don't force nine.</p>
+<p>A mechanics slide. Testing a server doesn't vary by profession. One shared framing: <em>"Whatever the connection, it gets proven in isolation before it touches your real work, the discipline you'd want anyway."</em> Tie it back to the Praxis habit they'll recognise from the demo: test on dummy data, then run for real. Don't force nine.</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Inferred slide (video-only source) — the Inspector detail is from canonical MCP teaching, not captured prose; verify for a technical room. For non-technical learners, keep it to "connections are tested before they're trusted" and move. Resist the urge to demo the Inspector UI; it adds nothing for this audience.</p>
+<p>Inferred slide (video-only source). The Inspector detail is from canonical MCP teaching, not captured prose; verify for a technical room. For non-technical learners, keep it to "connections are tested before they're trusted" and move. Resist the urge to demo the Inspector UI; it adds nothing for this audience.</p>
 </div></div></section>
 <section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Lesson 6 · Tools</span><h2>The client feeds tools to the model, in a loop</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The client lists the server's tools, hands their schemas to Claude, runs whatever Claude asks for, and feeds the result back — looping until there's an answer. This is the same agentic loop a plain chat window doesn't have; MCP is just how the tools reach it.</p>
+<p>The client lists the server's tools, hands their schemas to Claude, runs whatever Claude asks for, and feeds the result back, looping until there's an answer. This is the same agentic loop a plain chat window doesn't have; MCP is just how the tools reach it.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the loop you saw in Claude Code 101, now with MCP feeding it. Claude is offered the tools, asks for one, the server runs it, the result comes back, and it goes round again until the job's done. A chat window can't do that — it answers and waits. MCP is simply how the tools get into that loop." (Mirrors course 02 slide 4 — the agentic loop; this is the loop reaching outside the folder.)</p>
+<p>"Here's the loop you saw in Claude Code 101, now with MCP feeding it. Claude is offered the tools, asks for one, the server runs it, the result comes back, and it goes round again until the job's done. A chat window can't do that: it answers and waits. MCP is simply how the tools get into that loop." (Mirrors course 02 slide 4: the agentic loop; this is the loop reaching outside the folder.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Where in your week are you the courier — taking a result out of one tool, doing a step, carrying it into another?"</li>
+<li>"Where in your week are you the courier, taking a result out of one tool, doing a step, carrying it into another?"</li>
 <li>"What would change if that middle carrying just happened, across both tools at once?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the carrying the loop removes)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>pull the filing, screen the name, drop both into the report — one pass.</dd>
+<dt>Investigator</dt><dd>pull the filing, screen the name, drop both into the report, in one pass.</dd>
 <dt>Analyst</dt><dd>read each response, fetch the matching warehouse figure, build the row.</dd>
 <dt>Designer</dt><dd>read the brief, check the spec source, write the manifest line.</dd>
 <dt>Knowledge worker</dt><dd>open the invoice, look up the supplier record, write the CSV row.</dd>
@@ -1057,14 +1057,14 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Inferred slide (video-only source) — verify the loop detail for a technical room. The risk for non-technical learners is hearing "loops on its own" and picturing runaway autonomy. Anchor it: the loop still runs under the permission model (course 02 slide 6), and the tools it can reach are only the ones you connected. It loops within the fence you set. (<code>objections.md</code> — permission.)</p>
+<p>Inferred slide (video-only source). Verify the loop detail for a technical room. The risk for non-technical learners is hearing "loops on its own" and picturing runaway autonomy. Anchor it: the loop still runs under the permission model (course 02 slide 6), and the tools it can reach are only the ones you connected. It loops within the fence you set. (<code>objections.md</code>: permission.)</p>
 </div></div></section>
 <section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Lesson 7 · Resources &amp; prompts</span><h2>Data to pull in, addressed by URI</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>A resource is read-only data the server exposes at an address (a URI like <code>docs://documents</code>). No side effects: think GET, not POST. Direct resources return a collection; templated ones take a parameter to fetch exactly one item.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"The second piece. Where a tool <em>does</em> something, a <em>resource</em> just <em>provides</em> something — a document, a record, a list — at a named address, read-only. Nothing changes when you load it; it's safe to read any time. The whole list, or one item by name. Think of it as the read-only side: fetching, never altering." (Contrast it explicitly with the tools slides — same server, but a resource only reads.)</p>
+<p>"The second piece. Where a tool <em>does</em> something, a <em>resource</em> just <em>provides</em> something (a document, a record, a list) at a named address, read-only. Nothing changes when you load it; it's safe to read any time. The whole list, or one item by name. Think of it as the read-only side: fetching, never altering." (Contrast it explicitly with the tools slides: same server, but a resource only reads.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1075,7 +1075,7 @@ th {
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the read-only data they'd expose as a resource)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the case file set, and any one document by reference — read, never edit.</dd>
+<dt>Investigator</dt><dd>the case file set, and any one document by reference: read, never edit.</dd>
 <dt>Analyst</dt><dd>the full set of vendor responses, or one provider's by name.</dd>
 <dt>Designer</dt><dd>the brief set and the brand-token sheet, read-only.</dd>
 <dt>Knowledge worker</dt><dd>the inbox of invoices, or one invoice by number.</dd>
@@ -1087,25 +1087,25 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Read-only is a safety point worth naming: a resource cannot alter your data, only surface it. For regulated rooms this is the comfortable on-ramp — connect the read side first, before any tool that <em>does</em> things. Don't drown them in URI syntax; "a named address, read-only" is enough. (<code>objections.md</code> — IT/compliance: start with what only reads.)</p>
+<p>Read-only is a safety point worth naming: a resource cannot alter your data, only surface it. For regulated rooms this is the comfortable on-ramp: connect the read side first, before any tool that <em>does</em> things. Don't drown them in URI syntax; "a named address, read-only" is enough. (<code>objections.md</code>: IT/compliance, start with what only reads.)</p>
 </div></div></section>
 <section class="card" id="slide-10" data-slide="10"><header class="card-head"><span class="badge">10</span><div><span class="eyebrow">Lesson 8 · Resources &amp; prompts</span><h2>The app decides which resources to load</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Unlike tools, the model doesn't reach for resources. The application — often the user — chooses what context to bring in, usually surfaced as @-mentions you pick from. Application-controlled. Same server, two different control models: a tool is the model's to call, a resource is the app's to load.</p>
+<p>Unlike tools, the model doesn't reach for resources. The application (often the user) chooses what context to bring in, usually surfaced as @-mentions you pick from. Application-controlled. Same server, two different control models: a tool is the model's to call, a resource is the app's to load.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the difference that matters for trust. A tool, Claude chooses to use. A <em>resource</em>, you choose to bring in — usually by picking it from a list, an @-mention. Claude doesn't go rummaging through your data; it sees a resource only when you, or the app, hand it over. Same connection, but you hold the gate on what's read." (This is the heart of the safety story — say it slowly.)</p>
+<p>"Here's the difference that matters for trust. A tool, Claude chooses to use. A <em>resource</em>, you choose to bring in, usually by picking it from a list, an @-mention. Claude doesn't go rummaging through your data; it sees a resource only when you, or the app, hand it over. Same connection, but you hold the gate on what's read." (This is the heart of the safety story; say it slowly.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"How would you feel about deciding, each time, exactly which document Claude gets to see — rather than it deciding?"</li>
+<li>"How would you feel about deciding, each time, exactly which document Claude gets to see, rather than it deciding?"</li>
 <li>"Which of your sources would you only ever hand over deliberately, one item at a time?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(what they'd hand over deliberately, never auto-loaded)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the specific subject's file for this matter — chosen, not browsed.</dd>
+<dt>Investigator</dt><dd>the specific subject's file for this matter: chosen, not browsed.</dd>
 <dt>Analyst</dt><dd>the one provider's response under review this session.</dd>
 <dt>Designer</dt><dd>the brief for the campaign in hand.</dd>
 <dt>Knowledge worker</dt><dd>the month's invoice folder, picked when they start the batch.</dd>
@@ -1117,21 +1117,21 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the single most reassuring slide for an IT-restricted or regulated room: the model does not help itself to your data — you, or your app, decide what it sees, item by item. This is "it sees only what you can see" made concrete: it sees what you <em>hand</em> it. Pair with the floor/ceiling for banks and firms — web with no install at the floor, a local model at the ceiling — and frame connecting anything as the IT-discovery conversation, not a switch you flip alone. (<code>objections.md</code> — IT/compliance/privacy; <code>train-the-trainer.md</code> — module 2.)</p>
+<p>This is the single most reassuring slide for an IT-restricted or regulated room: the model does not help itself to your data. You, or your app, decide what it sees, item by item. This is "it sees only what you can see" made concrete: it sees what you <em>hand</em> it. Pair with the floor/ceiling for banks and firms (web with no install at the floor, a local model at the ceiling) and frame connecting anything as the IT-discovery conversation, not a switch you flip alone. (<code>objections.md</code>: IT/compliance/privacy; <code>train-the-trainer.md</code>: module 2.)</p>
 </div></div></section>
 <section class="card" id="slide-11" data-slide="11"><header class="card-head"><span class="badge">11</span><div><span class="eyebrow">Lesson 9 · Resources &amp; prompts</span><h2>Reusable templates the author ships</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>A prompt is a tested, parameterized template the server exposes, so the right wording is baked in instead of reinvented each time. The author tunes it once; everyone else just calls it and gets the good version. Hard-won phrasing moves out of people's heads and into the server.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"The third piece. A <em>prompt</em> here isn't what you type — it's a tested template someone wrote once and packaged, so the good wording is built in. The expert tunes it; everyone else just runs it and gets their standard. If that sounds familiar, it's the same idea as the skill file: the rules that lived in your best person's head, written down so the work comes out their way every time." (<code>framings.md</code> — skill file as institutional memory: <em>"those rules lived in your senior person's head and walked out the door at six o'clock; this pulls them onto disk so a new joiner writes the same kind of work on day one."</em> Adapt the role to the room.)</p>
+<p>"The third piece. A <em>prompt</em> here isn't what you type. It's a tested template someone wrote once and packaged, so the good wording is built in. The expert tunes it; everyone else just runs it and gets their standard. If that sounds familiar, it's the same idea as the skill file: the rules that lived in your best person's head, written down so the work comes out their way every time." (<code>framings.md</code>: skill file as institutional memory: <em>"those rules lived in your senior person's head and walked out the door at six o'clock; this pulls them onto disk so a new joiner writes the same kind of work on day one."</em> Adapt the role to the room.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
 <li>"What's a task you do the same way every time, where the 'right way' lives in someone's head?"</li>
 <li>"If that wording were written down once and everyone could just run it, what would stop drifting?"</li>
 </ul>
-<p class="wait">(wait — this lands hard in regulated and professional rooms.)</p>
+<p class="wait">(wait: this lands hard in regulated and professional rooms.)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the packaged prompt they'd ship)</span></div>
 <dl class="bg">
@@ -1147,57 +1147,57 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Don't conflate this MCP "prompt" with what they type in chat, and don't conflate it with the plain-English skill file from courses 01/02 — they're cousins, not the same thing. The MCP prompt is a packaged template a server ships; the skill file is the rules file you write in Claude Code, which is the centre of our method. Name the kinship, then keep the skill file as the headline. (<code>train-the-trainer.md</code> — the skill file is the heart of what we teach.)</p>
+<p>Don't conflate this MCP "prompt" with what they type in chat, and don't conflate it with the plain-English skill file from courses 01/02. They're cousins, not the same thing. The MCP prompt is a packaged template a server ships; the skill file is the rules file you write in Claude Code, which is the centre of our method. Name the kinship, then keep the skill file as the headline. (<code>train-the-trainer.md</code>: the skill file is the heart of what we teach.)</p>
 </div></div></section>
 <section class="card" id="slide-12" data-slide="12"><header class="card-head"><span class="badge">12</span><div><span class="eyebrow">Lesson 10 · Resources &amp; prompts</span><h2>Prompts surface as slash commands</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>The client lists the server's prompts and offers them to the user; pick one, fill the arguments, and it expands into the full message. User-controlled: the user triggers it deliberately, not the model and not the app. If you've used a slash command in Claude Code, you've used an MCP prompt.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"And this is how you reach one: it shows up as a slash command. You type the slash, pick the one you want, answer a question or two, and it expands into the full expert wording, ready to run. You're in control — you trigger it, deliberately. If you've ever used a slash command in Claude Code, that's exactly this." (Tie to their own experience: the <code>/plato</code> they ran to get here is a prompt surfaced as a slash command.)</p>
+<p>"And this is how you reach one: it shows up as a slash command. You type the slash, pick the one you want, answer a question or two, and it expands into the full expert wording, ready to run. You're in control: you trigger it, deliberately. If you've ever used a slash command in Claude Code, that's exactly this." (Tie to their own experience: the <code>/plato</code> they ran to get here is a prompt surfaced as a slash command.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"If your team's best version of a task were one keystroke away — a slash and a name — which task would you want it to be?"</li>
+<li>"If your team's best version of a task were one keystroke away (a slash and a name), which task would you want it to be?"</li>
 <li>"Who on your team reinvents that wording every time today?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the slash command they'd want first)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd><code>/background-report</code> — the eight-section report, on the named subject.</dd>
-<dt>Analyst</dt><dd><code>/compare</code> — the vendor table, fixed columns, on the responses in hand.</dd>
-<dt>Designer</dt><dd><code>/manifest</code> — the full asset list from the briefs.</dd>
-<dt>Knowledge worker</dt><dd><code>/extract</code> — the month's invoices into the CSV.</dd>
-<dt>Reporter</dt><dd><code>/briefing</code> — this week's five-section briefing.</dd>
-<dt>Content</dt><dd><code>/draft</code> — a post in house voice from the back catalogue.</dd>
-<dt>Form-filler</dt><dd><code>/allocate</code> — this period's receipts into the template.</dd>
-<dt>Outreach</dt><dd><code>/proposal</code> — one per customer, fixed sections.</dd>
-<dt>Exec</dt><dd><code>/brief</code> — the one-page board brief from the inputs.</dd>
+<dt>Investigator</dt><dd><code>/background-report</code>: the eight-section report, on the named subject.</dd>
+<dt>Analyst</dt><dd><code>/compare</code>: the vendor table, fixed columns, on the responses in hand.</dd>
+<dt>Designer</dt><dd><code>/manifest</code>: the full asset list from the briefs.</dd>
+<dt>Knowledge worker</dt><dd><code>/extract</code>: the month's invoices into the CSV.</dd>
+<dt>Reporter</dt><dd><code>/briefing</code>: this week's five-section briefing.</dd>
+<dt>Content</dt><dd><code>/draft</code>: a post in house voice from the back catalogue.</dd>
+<dt>Form-filler</dt><dd><code>/allocate</code>: this period's receipts into the template.</dd>
+<dt>Outreach</dt><dd><code>/proposal</code>: one per customer, fixed sections.</dd>
+<dt>Exec</dt><dd><code>/brief</code>: the one-page board brief from the inputs.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Three owners, made vivid across the last three slides: tools the model triggers, resources the app loads, prompts the <em>user</em> triggers with a slash command. This is the one that's most in the user's hands — lean on it to reassure a control-anxious room. Keep it to the outcome (one keystroke to the standard version), not the mechanics of argument filling.</p>
+<p>Three owners, made vivid across the last three slides: tools the model triggers, resources the app loads, prompts the <em>user</em> triggers with a slash command. This is the one that's most in the user's hands, so lean on it to reassure a control-anxious room. Keep it to the outcome (one keystroke to the standard version), not the mechanics of argument filling.</p>
 </div></div></section>
 <section class="card" id="slide-13" data-slide="13"><header class="card-head"><span class="badge">13</span><div><span class="eyebrow">Lesson 11 · Recap</span><h2>Three primitives, three owners</h2></div></header><div class="card-body"><p class="slide-sub"><em>The centrepiece. If they take one thing away, it's this.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The whole protocol in one picture: tools (model-controlled, actions the model calls), resources (application-controlled, data the app loads), prompts (user-controlled, templates the user triggers) — all exposed by a server, reached by a client inside your host, over JSON-RPC on stdio (local) or HTTP (remote). Get the owners straight and the rest follows.</p>
+<p>The whole protocol in one picture: tools (model-controlled, actions the model calls), resources (application-controlled, data the app loads), prompts (user-controlled, templates the user triggers), all exposed by a server, reached by a client inside your host, over JSON-RPC on stdio (local) or HTTP (remote). Get the owners straight and the rest follows.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"If you keep one thing today, keep this. MCP exposes three things, and the only thing you really need to remember is who controls each. Tools — actions — the model chooses to call. Resources — data — you or the app choose to load. Prompts — templates — you trigger, deliberately. One standard, three pieces, three owners. And the reassurance under all of it: every connection is one you grant, scoped to what you can already see, and you can revoke it." (Mirrors course 01 slide 10 and course 02 slide 13 — the one standard, scoped and revocable, it sees only what you can see.)</p>
+<p>"If you keep one thing today, keep this. MCP exposes three things, and the only thing you really need to remember is who controls each. Tools (actions) the model chooses to call. Resources (data) you or the app choose to load. Prompts (templates) you trigger, deliberately. One standard, three pieces, three owners. And the reassurance under all of it: every connection is one you grant, scoped to what you can already see, and you can revoke it." (Mirrors course 01 slide 10 and course 02 slide 13: the one standard, scoped and revocable, it sees only what you can see.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Of those three — actions Claude takes, data you hand it, templates you run — which feels most useful in your work, and which feels like the one to be careful with?"</li>
-<li>"Knowing it sees only what you hand it and you can revoke any connection — does that change which tool you'd connect first?"</li>
+<li>"Of those three (actions Claude takes, data you hand it, templates you run), which feels most useful in your work, and which feels like the one to be careful with?"</li>
+<li>"Knowing it sees only what you hand it and you can revoke any connection, does that change which tool you'd connect first?"</li>
 </ul>
-<p class="wait">(wait — their answer is the use case you build the next conversation around.)</p>
+<p class="wait">(wait: their answer is the use case you build the next conversation around.)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(which of the three owners they reach for first)</span></div>
 <dl class="bg">
 <dt>Investigator</dt><dd>resources first (read the file, change nothing), tools later, after IT.</dd>
 <dt>Analyst</dt><dd>resources to read responses; a tool to pull a live figure once trusted.</dd>
-<dt>Designer</dt><dd>prompts — the manifest command — over the brief set as resources.</dd>
+<dt>Designer</dt><dd>prompts (the manifest command) over the brief set as resources.</dd>
 <dt>Knowledge worker</dt><dd>resources (the inbox) plus the <code>/extract</code> prompt.</dd>
 <dt>Reporter</dt><dd>resources (the updates) and the <code>/briefing</code> prompt.</dd>
 <dt>Content</dt><dd>resources (back catalogue) and the house-voice <code>/draft</code> prompt.</dd>
@@ -1207,17 +1207,17 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the data-safety gate for almost everyone — the slide where the whole worry resolves. Slow right down. Three sentences earn the room: it sees only what you can see, every connection is scoped, every connection is revocable. For banks and firms, frame it as the IT-discovery conversation with floor and ceiling (web at the floor, a local model at the ceiling), not a yes/no you decide alone. (<code>objections.md</code> — IT/compliance/privacy; <code>train-the-trainer.md</code> — module 2.)</p>
+<p>This is the data-safety gate for almost everyone: the slide where the whole worry resolves. Slow right down. Three sentences earn the room: it sees only what you can see, every connection is scoped, every connection is revocable. For banks and firms, frame it as the IT-discovery conversation with floor and ceiling (web at the floor, a local model at the ceiling), not a yes/no you decide alone. (<code>objections.md</code>: IT/compliance/privacy; <code>train-the-trainer.md</code>: module 2.)</p>
 </div></div></section>
 <section class="card" id="slide-14" data-slide="14"><header class="card-head"><span class="badge">14</span><div><span class="eyebrow">Close</span><h2>One protocol. Three primitives. Any tool, any app.</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The whole course in one line: tools, resources and prompts, exposed by a server and reached by a client inside your host — so context and capability plug in once instead of being rebuilt every time.</p>
+<p>The whole course in one line: tools, resources and prompts, exposed by a server and reached by a client inside your host, so context and capability plug in once instead of being rebuilt every time.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"If you keep one thing: MCP is the one standard that lets Claude reach the tools and data you already use, in three shapes — actions it takes, data you give it, templates you run — and it only ever sees what you hand it. Everything else today was the wiring under that. You don't build it; you choose what to connect and what it's allowed to see."</p>
+<p>"If you keep one thing: MCP is the one standard that lets Claude reach the tools and data you already use, in three shapes (actions it takes, data you give it, templates you run), and it only ever sees what you hand it. Everything else today was the wiring under that. You don't build it; you choose what to connect and what it's allowed to see."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Close with</span></div>
-<p>Their tool from intake, and the next concrete step: "Next time we look at connecting the one you named — and the discovery questions to put to your IT team before we do." Then the session-improvement habit: <em>"at the end of any session, tell it to look back at what went badly and save how you fixed it."</em> (<code>patterns.md</code> — close every session by teaching the system to improve. <code>framings.md</code> — cost: about twenty dollars a month, and stop.)</p>
+<p>Their tool from intake, and the next concrete step: "Next time we look at connecting the one you named, and the discovery questions to put to your IT team before we do." Then the session-improvement habit: <em>"at the end of any session, tell it to look back at what went badly and save how you fixed it."</em> (<code>patterns.md</code>: close every session by teaching the system to improve. <code>framings.md</code>: cost, about twenty dollars a month, and stop.)</p>
 </div></div></section>
 </main>
 <script>

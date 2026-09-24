@@ -12,7 +12,7 @@ export const submitEnquiry = defineTool({
   name: "submit_enquiry",
   title: "Send an enquiry to Tutto",
   description:
-    "Send an enquiry to Tutto on the visitor's behalf — the same intake the forms on the Praxis and trainer pages use. Use this when the visitor wants Daniel to get in touch, asks to be contacted, or wants to apply to a programme. Requires their real name, email and a message describing what they want; ask them for these rather than inventing them. This delivers the message to Tutto immediately and cannot be unsent. Returns a confirmation.",
+    "Send an enquiry to Tutto on the visitor's behalf, the same intake the forms on the Praxis and trainer pages use. Use this when the visitor wants Daniel to get in touch, asks to be contacted, or wants to apply to a programme. Requires their real name, email and a message describing what they want; ask them for these rather than inventing them. This delivers the message to Tutto immediately and cannot be unsent. Returns a confirmation.",
   inputSchema: {
     type: "object",
     properties: {
@@ -20,7 +20,7 @@ export const submitEnquiry = defineTool({
       email: { type: "string", description: "The visitor's email address.", format: "email" },
       message: {
         type: "string",
-        description: "What the visitor wants — their question, context, or which programme they are asking about.",
+        description: "What the visitor wants: their question, context, or which programme they are asking about.",
         minLength: 1,
       },
     },

@@ -49,17 +49,17 @@ export const USECASE_FR: FrDict = {
     "Pondérée du risque £16,001,104,374 (79.0% du brut)",
   "Building the Excel return pack": "Construction du classeur Excel de déclaration",
   "Regulatory_Return_Pack.xlsx (18 KB) - 7 sheets":
-    "Regulatory_Return_Pack.xlsx (18 Ko) — 7 feuilles",
+    "Regulatory_Return_Pack.xlsx (18 Ko), 7 feuilles",
   "Reading the figures back out of the workbook": "Relecture des chiffres depuis le classeur",
-  "Read 'Return Summary' - tiles and position": "Lecture de « Return Summary » — vignettes et position",
-  "Read 'Regional Summary' - 4 regions": "Lecture de « Regional Summary » — 4 régions",
-  "Read 'Product Summary' - 6 products": "Lecture de « Product Summary » — 6 produits",
-  "Read 'Exposure Trend' - 12 periods": "Lecture de « Exposure Trend » — 12 périodes",
+  "Read 'Return Summary' - tiles and position": "Lecture de « Return Summary » : vignettes et position",
+  "Read 'Regional Summary' - 4 regions": "Lecture de « Regional Summary » : 4 régions",
+  "Read 'Product Summary' - 6 products": "Lecture de « Product Summary » : 6 produits",
+  "Read 'Exposure Trend' - 12 periods": "Lecture de « Exposure Trend » : 12 périodes",
   "return_values.json written - every board figure comes from here":
-    "return_values.json écrit — chaque chiffre du conseil vient d'ici",
+    "return_values.json écrit : chaque chiffre du conseil vient d'ici",
   "Building the board pack": "Construction du dossier pour le conseil",
   "Board_Exposure_Report.pptx (49 KB) - 5 slides":
-    "Board_Exposure_Report.pptx (49 Ko) — 5 diapositives",
+    "Board_Exposure_Report.pptx (49 Ko), 5 diapositives",
 
   "Records reported": "Enregistrements déclarés",
   "62,267 of 62,400": "62,267 sur 62,400",
@@ -102,15 +102,15 @@ export const USECASE_FR: FrDict = {
   "top 6 per role shortlisted, 36 people in total":
     "6 meilleurs par poste retenus, 36 personnes au total",
   "Building the Excel shortlist pack": "Construction du classeur Excel de présélection",
-  "Shortlist_Pack.xlsx (19 KB) - 6 sheets": "Shortlist_Pack.xlsx (19 Ko) — 6 feuilles",
+  "Shortlist_Pack.xlsx (19 KB) - 6 sheets": "Shortlist_Pack.xlsx (19 Ko), 6 feuilles",
   "Read 'Screening Summary' - tiles and totals":
-    "Lecture de « Screening Summary » — vignettes et totaux",
-  "Read 'Role Summary' - 6 roles": "Lecture de « Role Summary » — 6 postes",
+    "Lecture de « Screening Summary » : vignettes et totaux",
+  "Read 'Role Summary' - 6 roles": "Lecture de « Role Summary » : 6 postes",
   "shortlist_values.json written - every slide figure comes from here":
-    "shortlist_values.json écrit — chaque chiffre des diapositives vient d'ici",
+    "shortlist_values.json écrit : chaque chiffre des diapositives vient d'ici",
   "Building the hiring manager pack": "Construction du dossier pour le manager",
   "Hiring_Manager_Pack.pptx (41 KB) - 4 slides":
-    "Hiring_Manager_Pack.pptx (41 Ko) — 4 diapositives",
+    "Hiring_Manager_Pack.pptx (41 Ko), 4 diapositives",
 
   Applications: "Candidatures",
   "Not progressed": "Non retenues",
@@ -124,7 +124,7 @@ export const USECASE_FR: FrDict = {
   "One brief, fifty-nine sizes, five channels":
     "Un brief, cinquante-neuf formats, cinq canaux",
   "One campaign has to ship in fifty-nine sizes across five channels. Every retailer sent their spec differently and half of them spell the channel another way. Seven rules carry the studio's standards, the ones that used to live in one person's head and get applied differently at eleven at night.":
-    "Une campagne doit sortir en cinquante-neuf formats sur cinq canaux. Chaque distributeur a envoyé son cahier des charges à sa façon, et la moitié orthographie le canal autrement. Sept règles portent les standards du studio — ceux qui vivaient dans la tête d'une seule personne et s'appliquaient autrement à onze heures du soir.",
+    "Une campagne doit sortir en cinquante-neuf formats sur cinq canaux. Chaque distributeur a envoyé son cahier des charges à sa façon, et la moitié orthographie le canal autrement. Sept règles portent les standards du studio, ceux qui vivaient dans la tête d'une seule personne et s'appliquaient autrement à onze heures du soir.",
   "Seven formats were not built, and that is the useful part. One frame was so wide the product would have been cropped out of it. Two asked for type below the size anyone can read. Three headlines went to a copywriter, because that is a writing job, not a resizing job.":
     "Sept formats n'ont pas été produits, et c'est là le plus utile. Un cadre était si large que le produit en aurait été recadré. Deux demandaient un corps de texte en dessous du lisible. Trois accroches sont parties chez un rédacteur, parce que c'est un travail d'écriture, pas de redimensionnement.",
 
@@ -149,15 +149,15 @@ export const USECASE_FR: FrDict = {
   "5 channels, 64.8 megapixels rendered": "5 canaux, 64.8 mégapixels rendus",
   "contact_sheet.png (591 KB)": "contact_sheet.png (591 Ko)",
   "Building the Excel register": "Construction du registre Excel",
-  "Format_Register.xlsx (16 KB) - 6 sheets": "Format_Register.xlsx (16 Ko) — 6 feuilles",
+  "Format_Register.xlsx (16 KB) - 6 sheets": "Format_Register.xlsx (16 Ko), 6 feuilles",
   "Read 'Build Summary' - tiles and totals":
-    "Lecture de « Build Summary » — vignettes et totaux",
-  "Read 'Channel Summary' - 5 channels": "Lecture de « Channel Summary » — 5 canaux",
+    "Lecture de « Build Summary » : vignettes et totaux",
+  "Read 'Channel Summary' - 5 channels": "Lecture de « Channel Summary » : 5 canaux",
   "format_values.json written - every slide figure comes from here":
-    "format_values.json écrit — chaque chiffre des diapositives vient d'ici",
+    "format_values.json écrit : chaque chiffre des diapositives vient d'ici",
   "Building the studio pack": "Construction du dossier studio",
   "Studio_Handover_Pack.pptx (40 KB) - 4 slides":
-    "Studio_Handover_Pack.pptx (40 Ko) — 4 diapositives",
+    "Studio_Handover_Pack.pptx (40 Ko), 4 diapositives",
 
   "Formats briefed": "Formats briefés",
   "Assets built": "Visuels produits",

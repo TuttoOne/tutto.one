@@ -92,7 +92,7 @@ export function FicheSheet({ showContact = true }: { showContact?: boolean }) {
             <strong className="text-foreground font-semibold">
               L'ensemble fonctionne sur des modèles locaux, sur site.
             </strong>{" "}
-            Aucun document ne quitte le réseau du client — le secret professionnel l'interdit.
+            Aucun document ne quitte le réseau du client : le secret professionnel l'interdit.
           </p>
           <p>
             <strong className="text-foreground font-semibold">
@@ -174,7 +174,7 @@ export function FicheSheet({ showContact = true }: { showContact?: boolean }) {
                 <strong className="text-foreground font-semibold">
                   Je m'appuie largement sur l'IA pour mes traductions
                 </strong>{" "}
-                — c'est précisément le métier que j'exerce. La qualité du travail, elle, ne dépend
+                : c'est précisément le métier que j'exerce. La qualité du travail, elle, ne dépend
                 pas de la langue.
               </span>
             </li>

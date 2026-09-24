@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Claude Code in Action — teaching notes</title>
+<title>Praxis · Claude Code in Action: teaching notes</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -862,13 +862,13 @@ th {
 </div>
 <main>
   <div class="guide-head">
-    <h1>Claude Code in Action — teaching notes</h1>
-    <p class="lead">Side-by-side notes for <code>04-praxis-claude-code-in-action.html</code> (17 slides). This is the applied course: a real session start to finish — install, point it at a project, make changes and review the diff, then drive and customise it (context control, custom commands, MCP, GitHub) and lock in the must-haves with hooks, ending at the SDK. Course 02 (Claude Code 101) gave the concepts; this one shows them working. Keep the framing on "what this means for your world", not the engineering. The deck is what the room looks at; this is what you say, where you stop, and how each idea lands for the person in front of you. The source is mostly video, so these notes lean on the deck spine plus the four text lessons (setup, project setup, hook gotchas, useful hooks) plus cross-references to course 02 — slides built that way are flagged. Written against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
+    <h1>Claude Code in Action: teaching notes</h1>
+    <p class="lead">Side-by-side notes for <code>04-praxis-claude-code-in-action.html</code> (17 slides). This is the applied course: a real session start to finish: install, point it at a project, make changes and review the diff, then drive and customise it (context control, custom commands, MCP, GitHub) and lock in the must-haves with hooks, ending at the SDK. Course 02 (Claude Code 101) gave the concepts; this one shows them working. Keep the framing on "what this means for your world", not the engineering. The deck is what the room looks at; this is what you say, where you stop, and how each idea lands for the person in front of you. The source is mostly video, so these notes lean on the deck spine plus the four text lessons (setup, project setup, hook gotchas, useful hooks) plus cross-references to course 02. Slides built that way are flagged. Written against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
     <details class="howto" open><summary>How to use these notes</summary><ul><li>These are guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
 <li><strong>By background</strong> gives you a line per archetype (from <code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in the room and ignore the rest. They are a palette, not a checklist to read out.</li>
-<li>This course names commands and files (<code>@file</code>, <code>CLAUDE.md</code>, <code>/clear</code>, <code>/compact</code>, <code>/context</code>, <code>/mcp</code>, <code>settings.json</code>, <code>PreToolUse</code>). Say them; do not read code or JSON aloud (<code>framings.md</code> — voice). The point of every command is the outcome, not the keystroke.</li>
-<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only — <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
+<li>This course names commands and files (<code>@file</code>, <code>CLAUDE.md</code>, <code>/clear</code>, <code>/compact</code>, <code>/context</code>, <code>/mcp</code>, <code>settings.json</code>, <code>PreToolUse</code>). Say them; do not read code or JSON aloud (<code>framings.md</code>: voice). The point of every command is the outcome, not the keystroke.</li>
+<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only: <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
 <li>Run the intake first (<code>train-the-trainer.md</code>) so you know which background you're teaching to. This course assumes course 02 has landed; if it hasn't, plant the bridge fast: this is the agent acting in your own files, the durable on-disk version of the browser Claude.</li></ul></details>
   </div>
   <section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>Watch Claude Code actually do the work</h2></div></header><div class="card-body"><div class="block block--idea">
@@ -876,7 +876,7 @@ th {
 <p>Set the frame: fourteen ideas, one per screen, install to hooks. Course 02 explained the agent; this one shows it working. The watching is the lesson, so you show, you don't lecture.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Fourteen ideas, one screen each. Last time we talked about what this thing is. Today you watch it actually do the work — installed, pointed at real files, making changes you review, then locked down so the things that must happen always happen. I'll show each piece, then stop and ask where it fits your week."</p>
+<p>"Fourteen ideas, one screen each. Last time we talked about what this thing is. Today you watch it actually do the work: installed, pointed at real files, making changes you review, then locked down so the things that must happen always happen. I'll show each piece, then stop and ask where it fits your week."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Open with</span></div>
 <p>The task they named in intake: the recurring grind across many files. Promise you'll come back to it on the make-changes slide and again on hooks, because that is the shape of doing it once and guaranteeing it forever.</p>
@@ -886,7 +886,7 @@ th {
 <p>Four moves: see what the agent is, get it running, drive it day to day, then make the must-haves guaranteed. Show the shape so nobody feels lost once the terms start coming.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the whole thing on one screen. We see what the agent is, we get it running, we drive it day to day — making changes, controlling what it sees, connecting it out — then we make the must-haves guaranteed with hooks, and finish with the SDK. If a word lands and you've no idea where it sits, this slide is the map back."</p>
+<p>"Here's the whole thing on one screen. We see what the agent is, we get it running, we drive it day to day (making changes, controlling what it sees, connecting it out), then we make the must-haves guaranteed with hooks, and finish with the SDK. If a word lands and you've no idea where it sits, this slide is the map back."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Cue</span></div>
 <p>Don't teach the spine, just orient. The centrepiece is slide 13, the prompt-versus- hook idea; everything before it builds toward making the work reliable. Twenty seconds, then move.</p>
@@ -896,11 +896,11 @@ th {
 <p>Coding assistants sit on a spectrum. Autocomplete guesses your next line; a chat assistant answers and you copy it across; an agent reads your project and does the work itself. Claude Code is the agent end.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"There's a spectrum here. At one end, autocomplete — it finishes your line. In the middle, a chat assistant — it answers, and you carry the answer across yourself. At the far end is Claude Code: it reads your files, edits across them, runs the commands, and decides what to do next. Same intelligence you know from the browser, but now it has hands." (Pairs with <code>framings.md</code> — the folder is the memory: the work moves out of a chat you lose and into a place that persists.)</p>
+<p>"There's a spectrum here. At one end, autocomplete: it finishes your line. In the middle, a chat assistant: it answers, and you carry the answer across yourself. At the far end is Claude Code: it reads your files, edits across them, runs the commands, and decides what to do next. Same intelligence you know from the browser, but now it has hands." (Pairs with <code>framings.md</code>, the folder is the memory: the work moves out of a chat you lose and into a place that persists.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Where in your week are you the courier — copying something out of one tool, doing a step, pasting the result back?"</li>
+<li>"Where in your week are you the courier: copying something out of one tool, doing a step, pasting the result back?"</li>
 <li>"What would change if that middle carrying step just happened?"</li>
 </ul>
 <p class="wait">(wait)</p>
@@ -919,14 +919,14 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"Is my data safe once it's <em>in</em> my files?" surfaces the moment they picture it acting. Don't wave it away. The files exist with or without Claude; it sits dormant until you summon it, and it sees only that folder and below. (<code>objections.md</code> — "where is the AI"; full treatment on the MCP slide.)</p>
+<p>"Is my data safe once it's <em>in</em> my files?" surfaces the moment they picture it acting. Don't wave it away. The files exist with or without Claude; it sits dormant until you summon it, and it sees only that folder and below. (<code>objections.md</code>: "where is the AI"; full treatment on the MCP slide.)</p>
 </div></div></section>
 <section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Lesson 2 · Foundation</span><h2>What a session actually looks like</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + course 02 slides 3–4.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The whole shape of a session in one loop: you ask in plain English, Claude reads the relevant files, makes the edits, runs them to check, and shows the result back for you to review and refine. The course demos this on a small sample app, but nothing is special about it — you can follow on your own files.</p>
+<p>The whole shape of a session in one loop: you ask in plain English, Claude reads the relevant files, makes the edits, runs them to check, and shows the result back for you to review and refine. The course demos this on a small sample app, but nothing is special about it. You can follow on your own files.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"This is what a session looks like, top to bottom. You ask in plain English. It finds the files that matter, edits across them, runs them to check its own work, and shows you the result. You look, you refine, it goes round again. The demo uses a little sample app, but that's just so everyone has the same thing to point at — your own folder works exactly the same." (<code>patterns.md</code> — the 80/20 expectation: set it here, before any live run, "you'll get ninety percent of the way; you finish the last ten, and even eighty percent is an enormous cut".)</p>
+<p>"This is what a session looks like, top to bottom. You ask in plain English. It finds the files that matter, edits across them, runs them to check its own work, and shows you the result. You look, you refine, it goes round again. The demo uses a little sample app, but that's just so everyone has the same thing to point at. Your own folder works exactly the same." (<code>patterns.md</code>, the 80/20 expectation: set it here, before any live run, "you'll get ninety percent of the way; you finish the last ten, and even eighty percent is an enormous cut".)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -949,44 +949,44 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>They'll expect a finished thing first try and be disappointed. The review- and-refine loop <em>is</em> the method, not a sign it failed. Set 80/20 before anything runs live. (<code>patterns.md</code> — the 80/20 expectation.)</p>
+<p>They'll expect a finished thing first try and be disappointed. The review- and-refine loop <em>is</em> the method, not a sign it failed. Set 80/20 before anything runs live. (<code>patterns.md</code>: the 80/20 expectation.)</p>
 </div></div></section>
 <section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Lesson 3 · Foundation</span><h2>One command to install</h2></div></header><div class="card-body"><p class="slide-sub"><em>Source: text lesson "Claude Code setup" (the one well-documented slide in this course).</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>One line in your terminal, whatever the platform, then run <code>claude</code>, pick a theme, sign in with your claude.ai account. The docs' troubleshooting page is the first stop for errors; Bedrock, Vertex or Foundry have their own setup.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Installing is one line, and which line depends only on your machine — Mac, Linux, Windows. Then you type <code>claude</code>, pick a colour theme, sign in with the account you already have. The fastest way through it, honestly, is to ask Claude itself to walk you through the install — that's how most people get over the line." (<code>framings.md</code> — ask Claude to install Claude: <em>"I'm going to be using Claude Code on my command line to control one of my folders. How do I set that up?"</em>)</p>
+<p>"Installing is one line, and which line depends only on your machine: Mac, Linux, Windows. Then you type <code>claude</code>, pick a colour theme, sign in with the account you already have. The fastest way through it, honestly, is to ask Claude itself to walk you through the install. That's how most people get over the line." (<code>framings.md</code>, ask Claude to install Claude: <em>"I'm going to be using Claude Code on my command line to control one of my folders. How do I set that up?"</em>)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Which machine would you run this on — and is anything on it locked down by IT?"</li>
+<li>"Which machine would you run this on, and is anything on it locked down by IT?"</li>
 <li>"Who else on your team would you want to get installed once you've seen it work?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the one install gate that matters to them)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>likely a managed device — this is the IT-discovery conversation, not a dead end.</dd>
+<dt>Investigator</dt><dd>likely a managed device; this is the IT-discovery conversation, not a dead end.</dd>
 <dt>Analyst</dt><dd>regulated environment; check the install policy before the room, not during.</dd>
-<dt>Designer</dt><dd>usually their own machine — install is a five-minute non-event.</dd>
+<dt>Designer</dt><dd>usually their own machine; install is a five-minute non-event.</dd>
 <dt>Knowledge worker</dt><dd>their own laptop; the "ask Claude to install" route fits perfectly.</dd>
 <dt>Reporter</dt><dd>their work machine; the desktop app is the gentlest first surface.</dd>
 <dt>Content</dt><dd>their own machine; quick.</dd>
 <dt>Form-filler</dt><dd>their own laptop; quick.</dd>
 <dt>Outreach</dt><dd>their work machine; check whether the CRM is on the same device.</dd>
-<dt>Exec</dt><dd>they won't install it themselves — but the team they sponsor will, with one line.</dd>
+<dt>Exec</dt><dd>they won't install it themselves, but the team they sponsor will, with one line.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"It won't install on my work machine." For banks and firms this is the IT-discovery conversation, not a no: floor is Claude on the web with no install, ceiling is a local model where nothing leaves the network. (<code>objections.md</code> — IT/compliance; "won't let me install".) For everyone else, a "command not found" or permissions error goes to the docs' troubleshoot page first.</p>
+<p>"It won't install on my work machine." For banks and firms this is the IT-discovery conversation, not a no: floor is Claude on the web with no install, ceiling is a local model where nothing leaves the network. (<code>objections.md</code>: IT/compliance; "won't let me install".) For everyone else, a "command not found" or permissions error goes to the docs' troubleshoot page first.</p>
 </div></div></section>
 <section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Lesson 4 · Get going</span><h2>Point it at a real project</h2></div></header><div class="card-body"><p class="slide-sub"><em>Source: text lesson "Project setup". Mechanics are sample-specific; keep the teaching on the principle.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Claude Code is more interesting with something to work on. The course ships a small sample app you download, set up and run — but the real lesson is the principle: you point it at a folder of real work. Node is the one prerequisite; the API key is optional and only powers the sample app's own feature, not Claude Code.</p>
+<p>Claude Code is more interesting with something to work on. The course ships a small sample app you download, set up and run, but the real lesson is the principle: you point it at a folder of real work. Node is the one prerequisite; the API key is optional and only powers the sample app's own feature, not Claude Code.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"The course gives you a little app to play with so nobody starts from a blank screen. You download it, run one setup command, and it's live. But don't fixate on the sample — the point is you can point Claude Code at any folder of your own work and start there instead. That folder is the project." (<code>framings.md</code> — the folder is the memory: "you've now put it in your files; the folder is the memory".)</p>
+<p>"The course gives you a little app to play with so nobody starts from a blank screen. You download it, run one setup command, and it's live. But don't fixate on the sample. The point is you can point Claude Code at any folder of your own work and start there instead. That folder is the project." (<code>framings.md</code>, the folder is the memory: "you've now put it in your files; the folder is the memory".)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -997,7 +997,7 @@ th {
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the folder they'd point it at)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the case-file folder for one live matter — after the IT conversation.</dd>
+<dt>Investigator</dt><dd>the case-file folder for one live matter, after the IT conversation.</dd>
 <dt>Analyst</dt><dd>the folder of this quarter's vendor responses.</dd>
 <dt>Designer</dt><dd>one campaign's brief folder.</dd>
 <dt>Knowledge worker</dt><dd>the inbox folder where this month's invoices land.</dd>
@@ -1009,14 +1009,14 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Don't let the room get lost in the sample app's setup steps — Node, the optional key, the SQLite database are sample plumbing, not the lesson. The transferable idea is "a folder of real work is the project". (<code>objections.md</code> — "real files / doesn't apply to my actual files": the dummy files are plain text for legibility; the pattern transfers to Word, Excel, PDFs.)</p>
+<p>Don't let the room get lost in the sample app's setup steps. Node, the optional key, the SQLite database are sample plumbing, not the lesson. The transferable idea is "a folder of real work is the project". (<code>objections.md</code>, "real files / doesn't apply to my actual files": the dummy files are plain text for legibility; the pattern transfers to Word, Excel, PDFs.)</p>
 </div></div></section>
 <section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Lesson 5 · Get going</span><h2>Context in: how Claude learns your project</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + course 02 slides 5 and 8.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Claude only knows what's in its context window. You get the right things in before you ask: name a file or folder with <code>@file</code>, paste in errors or logs or images, keep standing rules in <code>CLAUDE.md</code> (read every session), and let it search the repo itself. Be specific — the less it has to guess, the less it wanders and the less each run costs.</p>
+<p>Claude only knows what's in its context window. You get the right things in before you ask: name a file or folder with <code>@file</code>, paste in errors or logs or images, keep standing rules in <code>CLAUDE.md</code> (read every session), and let it search the repo itself. Be specific: the less it has to guess, the less it wanders and the less each run costs.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Claude knows exactly what's in front of it and nothing more. So before you ask, you put the right things in front of it: point at a file with the @ sign, paste in an error or a screenshot, keep your standing rules in a file it reads every time, and let it search the folder when it needs to. The skill is being specific — vague prompts cost you, because it goes wandering to fill the gap." (<code>framings.md</code> — context window: the browser chat forgets the beginning once it runs long; here the memory is bounded by your disk, and the rules file keeps working across every file you drop in.)</p>
+<p>"Claude knows exactly what's in front of it and nothing more. So before you ask, you put the right things in front of it: point at a file with the @ sign, paste in an error or a screenshot, keep your standing rules in a file it reads every time, and let it search the folder when it needs to. The skill is being specific. Vague prompts cost you, because it goes wandering to fill the gap." (<code>framings.md</code>, context window: the browser chat forgets the beginning once it runs long; here the memory is bounded by your disk, and the rules file keeps working across every file you drop in.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1039,19 +1039,19 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"Does it forget like ChatGPT?" A long chat does — which is exactly why the durable rules go in a file, not the conversation. Worth saying: a vague prompt costs <em>more</em> context, not less. (<code>objections.md</code> — browser / why not ChatGPT.)</p>
+<p>"Does it forget like ChatGPT?" A long chat does, which is exactly why the durable rules go in a file, not the conversation. Worth saying: a vague prompt costs <em>more</em> context, not less. (<code>objections.md</code>: browser / why not ChatGPT.)</p>
 </div></div></section>
 <section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Lesson 6 · Get going</span><h2>Making changes: describe it, review the diff</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + course 02 slides 6–7.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>You say what you want in plain English; Claude edits across the files and shows you a diff — exactly what changed. You approve or refine, go round again, and only commit when it's right. You stay in control: every edit is reviewable, and you can steer, undo or redirect before anything lands.</p>
+<p>You say what you want in plain English; Claude edits across the files and shows you a diff: exactly what changed. You approve or refine, go round again, and only commit when it's right. You stay in control: every edit is reviewable, and you can steer, undo or redirect before anything lands.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the part people worry about, and it's the part you have the most control over. You describe the change. It makes the edits and shows you a diff — a side-by-side of exactly what it changed, nothing hidden. You approve, or you correct it and it goes again. Nothing gets locked in until you say so. You're never handing it the keys; you're reviewing every change before it lands." (<code>objections.md</code> — permission: confirm-each- step first, you always check the end, switch to faster modes once the pattern is familiar.)</p>
+<p>"Here's the part people worry about, and it's the part you have the most control over. You describe the change. It makes the edits and shows you a diff: a side-by-side of exactly what it changed, nothing hidden. You approve, or you correct it and it goes again. Nothing gets locked in until you say so. You're never handing it the keys; you're reviewing every change before it lands." (<code>objections.md</code>, permission: confirm-each- step first, you always check the end, switch to faster modes once the pattern is familiar.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
 <li>"On a task that matters to you, would you rather approve each step, or see the finished result and check it?"</li>
-<li>"Take the task you named in intake — what would 'done right' have to include for you to trust the change?"</li>
+<li>"Take the task you named in intake, what would 'done right' have to include for you to trust the change?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
@@ -1069,14 +1069,14 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>The diff is the trust mechanism — name it. People hear "it edits my files" and picture losing control; the reality is the opposite, you see every change before it's committed. Iterate one change at a time, or they lose track of which note did what.</p>
+<p>The diff is the trust mechanism; name it. People hear "it edits my files" and picture losing control; the reality is the opposite, you see every change before it's committed. Iterate one change at a time, or they lose track of which note did what.</p>
 </div></div></section>
 <section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Lesson 7 · Drive &amp; customise</span><h2>Controlling context: keep the window lean</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + course 02 slide 8.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>A long session fills the context window. Three commands keep it focused on what matters now: <code>/clear</code> (wipe it for a new, unrelated task), <code>/compact</code> (summarise but keep the thread on the same task), <code>/context</code> (see what's filling it). Near the limit it auto-compacts; answers drifting is usually a full window.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Think of its working memory as a desk. Every file it reads, every command it runs, lands on the desk, and the desk has an edge. When you start something unrelated, <code>/clear</code> wipes it clean. When you're mid-task and it's running long, <code>/compact</code> tidies up but keeps the thread. And <code>/context</code> shows you what's taking the space. If answers start drifting, that's usually a full desk." (<code>framings.md</code> — context window: here the memory is bounded by your disk, not a chat that forgets the beginning.)</p>
+<p>"Think of its working memory as a desk. Every file it reads, every command it runs, lands on the desk, and the desk has an edge. When you start something unrelated, <code>/clear</code> wipes it clean. When you're mid-task and it's running long, <code>/compact</code> tidies up but keeps the thread. And <code>/context</code> shows you what's taking the space. If answers start drifting, that's usually a full desk." (<code>framings.md</code>, context window: here the memory is bounded by your disk, not a chat that forgets the beginning.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1099,51 +1099,51 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Don't over-teach the commands; the takeaway is "if it starts drifting, the window's full — clear or compact". The durable stuff that should survive every session goes in a file, not the conversation — that's the bridge to context-in (slide 7) and to MCP.</p>
+<p>Don't over-teach the commands; the takeaway is "if it starts drifting, the window's full: clear or compact". The durable stuff that should survive every session goes in a file, not the conversation. That's the bridge to context-in (slide 7) and to MCP.</p>
 </div></div></section>
 <section class="card" id="slide-10" data-slide="10"><header class="card-head"><span class="badge">10</span><div><span class="eyebrow">Lesson 8 · Drive &amp; customise</span><h2>Custom commands: save a prompt you reuse</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + general Claude Code knowledge.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>A prompt you type often becomes a slash command: a plain Markdown file in <code>.claude/commands/</code> that Claude runs on demand when you type <code>/name</code>. Pass arguments with a placeholder. Keep the commands in the repo and the whole team gets the same shortcuts.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Anything you find yourself typing over and over — a review checklist, a release routine, the way you want a report formatted — you write down once as a command. After that you just type a slash and its name, and the whole long prompt expands. Put it in the shared folder and everyone on the team has the same shortcut, the same way, every time." (<code>framings.md</code> — skill file as institutional memory: "those rules lived in your senior person's head and walked out the door at six o'clock; this pulls them onto disk so a new joiner does the work the same way on day one". Adapt the role to the room.)</p>
+<p>"Anything you find yourself typing over and over (a review checklist, a release routine, the way you want a report formatted), you write down once as a command. After that you just type a slash and its name, and the whole long prompt expands. Put it in the shared folder and everyone on the team has the same shortcut, the same way, every time." (<code>framings.md</code>, skill file as institutional memory: "those rules lived in your senior person's head and walked out the door at six o'clock; this pulls them onto disk so a new joiner does the work the same way on day one". Adapt the role to the room.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
 <li>"What's the long instruction you re-type to AI most often?"</li>
 <li>"If your whole team could run that exact instruction with one word, what would it be?"</li>
 </ul>
-<p class="wait">(wait — this is where "AI tool" becomes "team standard".)</p>
+<p class="wait">(wait: this is where "AI tool" becomes "team standard".)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the command they'd save and share)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd><code>/report</code> — the eight-section background report, run the same every matter.</dd>
-<dt>Analyst</dt><dd><code>/compare</code> — the fixed-column vendor table with the "no data" rule.</dd>
-<dt>Designer</dt><dd><code>/manifest</code> — read the briefs, list every asset variant.</dd>
-<dt>Knowledge worker</dt><dd><code>/extract</code> — invoices to the CSV schema, blanks left blank.</dd>
-<dt>Reporter</dt><dd><code>/briefing</code> — the five-section weekly briefing.</dd>
-<dt>Content</dt><dd><code>/draft</code> — a post in house voice, referencing one past piece.</dd>
-<dt>Form-filler</dt><dd><code>/allocate</code> — receipts to the template, nothing dropped.</dd>
-<dt>Outreach</dt><dd><code>/proposal</code> — one per customer, fixed five sections.</dd>
-<dt>Exec</dt><dd><code>/brief</code> — revenue, at-risk, decisions, steady, one page.</dd>
+<dt>Investigator</dt><dd><code>/report</code>: the eight-section background report, run the same every matter.</dd>
+<dt>Analyst</dt><dd><code>/compare</code>: the fixed-column vendor table with the "no data" rule.</dd>
+<dt>Designer</dt><dd><code>/manifest</code>: read the briefs, list every asset variant.</dd>
+<dt>Knowledge worker</dt><dd><code>/extract</code>: invoices to the CSV schema, blanks left blank.</dd>
+<dt>Reporter</dt><dd><code>/briefing</code>: the five-section weekly briefing.</dd>
+<dt>Content</dt><dd><code>/draft</code>: a post in house voice, referencing one past piece.</dd>
+<dt>Form-filler</dt><dd><code>/allocate</code>: receipts to the template, nothing dropped.</dd>
+<dt>Outreach</dt><dd><code>/proposal</code>: one per customer, fixed five sections.</dd>
+<dt>Exec</dt><dd><code>/brief</code>: revenue, at-risk, decisions, steady, one page.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the same idea as <code>CLAUDE.md</code> and skills from course 02 — your method, captured once, reused — just packaged as a slash command. Name the family resemblance or they'll file it as a separate trick. The win is "the team works the same way", not the syntax of a Markdown file.</p>
+<p>This is the same idea as <code>CLAUDE.md</code> and skills from course 02 (your method, captured once, reused), just packaged as a slash command. Name the family resemblance or they'll file it as a separate trick. The win is "the team works the same way", not the syntax of a Markdown file.</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — runtime parameters in a custom command</span> <span class="block-note">Verified against the official Claude Code slash-command docs (June 2026). Not the spoken script; for a room that wants the syntax. File goes in <code>.claude/commands/&lt;name&gt;.md</code> (project, shared) or <code>~/.claude/commands/&lt;name&gt;.md</code> (user, every project); the filename is the command, subfolders namespace it (<code>git/commit.md</code> → <code>/git:commit</code>). The body is a <strong>prompt template</strong>; the <code>$</code> placeholders are the fill-ins. Two ways to take input</span></div>
-<p>Add a changelog entry for version $1, of type "$2", with the message: "$3". ``<code> </code>/changelog 1.4.0 fixed "Handle null user"<code> fills </code>$1<code>/</code>$2<code>/</code>$3<code> and injects the git log. (Note: the Praxis commands in this repo's own </code>.claude/commands/<code> — </code>/plato<code>, </code>/demo<code>, </code>/socrates` — are exactly this pattern.)</p>
+<div class="block-head"><span class="block-label">Key concept: runtime parameters in a custom command</span> <span class="block-note">Verified against the official Claude Code slash-command docs (June 2026). Not the spoken script; for a room that wants the syntax. File goes in <code>.claude/commands/&lt;name&gt;.md</code> (project, shared) or <code>~/.claude/commands/&lt;name&gt;.md</code> (user, every project); the filename is the command, subfolders namespace it (<code>git/commit.md</code> → <code>/git:commit</code>). The body is a <strong>prompt template</strong>; the <code>$</code> placeholders are the fill-ins. Two ways to take input</span></div>
+<p>Add a changelog entry for version $1, of type "$2", with the message: "$3". ``<code> </code>/changelog 1.4.0 fixed "Handle null user"<code> fills </code>$1<code>/</code>$2<code>/</code>$3<code> and injects the git log. (Note: the Praxis commands in this repo's own </code>.claude/commands/<code>, </code>/plato<code>, </code>/demo<code>, </code>/socrates`, are exactly this pattern.)</p>
 <ul>
-<li><strong><code>$ARGUMENTS</code></strong> — everything the user typed, as one blob. <code>/fix-issue 1234</code> → <code>1234</code>. Use when you just forward whatever they passed.</li>
-<li><strong><code>$1</code>, <code>$2</code>, <code>$3</code>…</strong> — positional args for distinct roles. <code>/open-pr feature/login main</code> → <code>$1</code>=<code>feature/login</code>, <code>$2</code>=<code>main</code>. Supporting pieces: <code>argument-hint:</code> frontmatter shows expected args in autocomplete; `<code> !</code>command<code> </code><code> runs a shell command and inlines its output at invocation (needs </code>allowed-tools<code> for that Bash call); </code>@path/to/file<code> pulls a file's contents in. Other frontmatter: </code>description<code>, </code>allowed-tools<code>, </code>model<code>. Worked example: </code>``markdown</li>
+<li><strong><code>$ARGUMENTS</code></strong>: everything the user typed, as one blob. <code>/fix-issue 1234</code> → <code>1234</code>. Use when you just forward whatever they passed.</li>
+<li><strong><code>$1</code>, <code>$2</code>, <code>$3</code>…</strong>: positional args for distinct roles. <code>/open-pr feature/login main</code> → <code>$1</code>=<code>feature/login</code>, <code>$2</code>=<code>main</code>. Supporting pieces: <code>argument-hint:</code> frontmatter shows expected args in autocomplete; `<code> !</code>command<code> </code><code> runs a shell command and inlines its output at invocation (needs </code>allowed-tools<code> for that Bash call); </code>@path/to/file<code> pulls a file's contents in. Other frontmatter: </code>description<code>, </code>allowed-tools<code>, </code>model<code>. Worked example: </code>``markdown</li>
 </ul>
 </div></div></section>
 <section class="card" id="slide-11" data-slide="11"><header class="card-head"><span class="badge">11</span><div><span class="eyebrow">Lesson 9 · Drive &amp; customise</span><h2>MCP: reach the tools outside your code</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + course 02 slide 13.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Most of what you need lives in other systems — issues, docs, databases, repos. MCP is one open standard that connects Claude Code to them as tools. Scope it local, user or project (<code>.mcp.json</code> in the repo). Watch the cost: every server loads its tool definitions whether you use them or not, so add what you need and disable the rest.</p>
+<p>Most of what you need lives in other systems: issues, docs, databases, repos. MCP is one open standard that connects Claude Code to them as tools. Scope it local, user or project (<code>.mcp.json</code> in the repo). Watch the cost: every server loads its tool definitions whether you use them or not, so add what you need and disable the rest.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Your real context doesn't all live in one folder — it's in your email, your project tracker, your databases. MCP is the one standard that plugs those in, so Claude Code can reach your actual data instead of starting cold. One thing to know: each connection costs a little memory up front whether you use it or not, so you turn off what you don't need." (<code>objections.md</code> — IT/compliance: it sees only what <em>you</em> can see; connecting your email doesn't expose anyone else's, and you can revoke it.)</p>
+<p>"Your real context doesn't all live in one folder. It's in your email, your project tracker, your databases. MCP is the one standard that plugs those in, so Claude Code can reach your actual data instead of starting cold. One thing to know: each connection costs a little memory up front whether you use it or not, so you turn off what you don't need." (<code>objections.md</code>, IT/compliance: it sees only what <em>you</em> can see; connecting your email doesn't expose anyone else's, and you can revoke it.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1154,7 +1154,7 @@ th {
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the connection that earns its place)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the document store where case files live — after the IT conversation.</dd>
+<dt>Investigator</dt><dd>the document store where case files live, after the IT conversation.</dd>
 <dt>Analyst</dt><dd>the warehouse or drive holding vendor responses.</dd>
 <dt>Designer</dt><dd>the design tools, plus the drive for brand assets.</dd>
 <dt>Knowledge worker</dt><dd>the email and drive where invoices land.</dd>
@@ -1166,20 +1166,20 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the data-safety gate for almost everyone. Slow down. Give the floor (Claude on the web, no install) and the ceiling (a local model, nothing leaves your network), and for banks and firms frame it as the IT-discovery conversation, not a yes/no. (<code>objections.md</code> — IT/compliance/privacy.) On cost: prune unused servers, or the context fills before you've asked anything.</p>
+<p>This is the data-safety gate for almost everyone. Slow down. Give the floor (Claude on the web, no install) and the ceiling (a local model, nothing leaves your network), and for banks and firms frame it as the IT-discovery conversation, not a yes/no. (<code>objections.md</code>: IT/compliance/privacy.) On cost: prune unused servers, or the context fills before you've asked anything.</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — MCP servers in GitHub Actions</span></div>
-<p>Verified against the official docs (<code>code.claude.com/docs/en/github-actions</code> and <code>anthropics/claude-code-action</code> <code>docs/configuration.md</code>, June 2026). Not in the spoken script; for the rare room that runs MCP in CI. There's a <strong>two-level permission model and both levels are required</strong>: 1. <strong>Configure the server</strong> via <code>--mcp-config</code> inside <code>claude_args</code> (inline JSON or a file path). 2. <strong>Allow-list each tool</strong> in <code>--allowedTools</code> using the <code>mcp__&lt;server-name&gt;__&lt;tool-name&gt;</code> pattern; the prefix <code>mcp__&lt;server&gt;__*</code> allows every tool from that server. Defining the server alone does nothing — a tool not named in <code>--allowedTools</code> can't be called. That's deliberate defense-in-depth: a misconfigured or hostile server still can't act without explicit per-tool permission. ```yaml</p>
+<div class="block-head"><span class="block-label">Key concept: MCP servers in GitHub Actions</span></div>
+<p>Verified against the official docs (<code>code.claude.com/docs/en/github-actions</code> and <code>anthropics/claude-code-action</code> <code>docs/configuration.md</code>, June 2026). Not in the spoken script; for the rare room that runs MCP in CI. There's a <strong>two-level permission model and both levels are required</strong>: 1. <strong>Configure the server</strong> via <code>--mcp-config</code> inside <code>claude_args</code> (inline JSON or a file path). 2. <strong>Allow-list each tool</strong> in <code>--allowedTools</code> using the <code>mcp__&lt;server-name&gt;__&lt;tool-name&gt;</code> pattern; the prefix <code>mcp__&lt;server&gt;__*</code> allows every tool from that server. Defining the server alone does nothing: a tool not named in <code>--allowedTools</code> can't be called. That's deliberate defense-in-depth: a misconfigured or hostile server still can't act without explicit per-tool permission. ```yaml</p>
 <ul>
 <li>uses: anthropics/claude-code-action@v1 with: anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }} claude_args: | --mcp-config '{"mcpServers": {"sequential-thinking": {"command": "npx", "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]}}}' --allowedTools mcp__sequential-thinking__sequentialthinking ``<code> Supporting requirements: a workflow </code>permissions:<code> block (</code>contents<code>, </code>issues<code>, </code>pull-requests<code>, plus </code>id-token: write<code> for Bedrock/Vertex OIDC) and the </code>ANTHROPIC_API_KEY<code> secret. Migration note: the beta </code>allowed_tools<code> input moved to </code>claude_args: --allowedTools` in v1.</li>
 </ul>
 </div></div></section>
-<section class="card" id="slide-12" data-slide="12"><header class="card-head"><span class="badge">12</span><div><span class="eyebrow">Lesson 10 · Drive &amp; customise</span><h2>GitHub: from local change to pull request</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + general Claude Code knowledge. Most technical/team-scale slide so far — keep it conceptual for non-technical rooms.</em></p><div class="block block--idea">
+<section class="card" id="slide-12" data-slide="12"><header class="card-head"><span class="badge">12</span><div><span class="eyebrow">Lesson 10 · Drive &amp; customise</span><h2>GitHub: from local change to pull request</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + general Claude Code knowledge. Most technical/team-scale slide so far. Keep it conceptual for non-technical rooms.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>Two halves. Top row is you, locally: Claude Code drives the version-control tooling to commit, push and open a pull request in one flow. Bottom row is hands-off: tag <code>@claude</code> on an issue or PR and the GitHub app runs Claude Code on a server to triage, review or implement, then reports back to the PR.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Two things on this slide. The top half is you on your own machine — once a change is right, one flow commits it, pushes it, and opens it for review. The bottom half is where it gets interesting for a team: you can tag Claude on a piece of work, and it goes off and does it on a server, then comes back with the result for someone to review. That's the same agent you've been driving, now working while you're not watching." (Adapt to their world: this is the colleague who picks up the ticket, does the first pass, and leaves it ready for your sign-off.)</p>
+<p>"Two things on this slide. The top half is you on your own machine: once a change is right, one flow commits it, pushes it, and opens it for review. The bottom half is where it gets interesting for a team: you can tag Claude on a piece of work, and it goes off and does it on a server, then comes back with the result for someone to review. That's the same agent you've been driving, now working while you're not watching." (Adapt to their world: this is the colleague who picks up the ticket, does the first pass, and leaves it ready for your sign-off.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1202,21 +1202,21 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is genuinely technical and team-scale — most solo, non-technical learners won't wire up the <code>@claude</code> half on day one. Keep it conceptual: the value is "work gets done and comes back ready for review". Name it as where this goes once a team adopts it, then move on; don't get lost in version-control mechanics.</p>
+<p>This is genuinely technical and team-scale. Most solo, non-technical learners won't wire up the <code>@claude</code> half on day one. Keep it conceptual: the value is "work gets done and comes back ready for review". Name it as where this goes once a team adopts it, then move on; don't get lost in version-control mechanics.</p>
 </div></div></section>
 <section class="card" id="slide-13" data-slide="13"><header class="card-head"><span class="badge">13</span><div><span class="eyebrow">Lesson 11 · Hooks &amp; SDK</span><h2>A prompt is a request. A hook is a guarantee.</h2></div></header><div class="card-body"><p class="slide-sub"><em>The centrepiece of this course. If they take one thing away, it's this.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Asking Claude to "always run the formatter" is a request it might forget — it sometimes runs, sometimes gets skipped. A hook is a command the harness runs every time at a fixed point, no exceptions. Prompts are probabilistic; hooks are deterministic. If something must happen every single time, don't put it in a prompt, put it in a hook.</p>
+<p>Asking Claude to "always run the formatter" is a request it might forget: it sometimes runs, sometimes gets skipped. A hook is a command the harness runs every time at a fixed point, no exceptions. Prompts are probabilistic; hooks are deterministic. If something must happen every single time, don't put it in a prompt, put it in a hook.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Everything else this session is something you <em>ask</em> for, and usually get. A hook is something that <em>always</em> happens — no asking, no exceptions. The reason it's reliable is that it's run by the machinery around Claude, not by Claude deciding to remember. Format every file. Log every action for compliance. Block a dangerous step before it runs. The rule of thumb: if it has to happen every single time without fail, it doesn't belong in a prompt, it belongs in a hook." (For these learners the headline is the guarantee, not the syntax: some rules are too important to leave to "usually".)</p>
+<p>"Everything else this session is something you <em>ask</em> for, and usually get. A hook is something that <em>always</em> happens, no asking, no exceptions. The reason it's reliable is that it's run by the machinery around Claude, not by Claude deciding to remember. Format every file. Log every action for compliance. Block a dangerous step before it runs. The rule of thumb: if it has to happen every single time without fail, it doesn't belong in a prompt, it belongs in a hook." (For these learners the headline is the guarantee, not the syntax: some rules are too important to leave to "usually".)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"What's a rule in your work that has to hold every time — no exceptions, no 'usually'?"</li>
+<li>"What's a rule in your work that has to hold every time, no exceptions, no 'usually'?"</li>
 <li>"Where has 'someone forgot the last step' actually cost you?"</li>
 </ul>
-<p class="wait">(wait — making the always-rule explicit is the lesson.)</p>
+<p class="wait">(wait: making the always-rule explicit is the lesson.)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the always-rule they'd guarantee)</span></div>
 <dl class="bg">
@@ -1232,17 +1232,17 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the conceptual peak of the course, and the one most non-technical learners won't set up alone on day one. That's fine — the value is grasping "guaranteed, not suggested". This is where the system becomes trustworthy at team scale. Don't read JSON aloud; teach the guarantee. (Mirrors course 02 slide 14.)</p>
+<p>This is the conceptual peak of the course, and the one most non-technical learners won't set up alone on day one. That's fine: the value is grasping "guaranteed, not suggested". This is where the system becomes trustworthy at team scale. Don't read JSON aloud; teach the guarantee. (Mirrors course 02 slide 14.)</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — the primary purpose of hooks</span></div>
-<p>To <strong>turn what you'd ask Claude to do into what always happens</strong> — convert a probabilistic request into a deterministic guarantee. Prompts are run by the model (it usually complies, but "usually" isn't "always"); hooks are run by the harness at a fixed lifecycle point, every time, no exceptions. Rule of thumb: if it must happen every single time without fail, it doesn't belong in a prompt, it belongs in a hook. Three shapes it takes: <strong>guarantee an action</strong> (format every file, log every call — <code>PostToolUse</code>), <strong>block a dangerous one</strong> (stop an <code>rm -rf</code>, a commit to <code>main</code>, a read of <code>.env</code> — <code>PreToolUse</code>), <strong>inject standing context</strong> (<code>SessionStart</code>, <code>UserPromptSubmit</code>). The deeper payoff and the reason this is the course's peak: it's what moves a team from "we'll review it after" to "it can't happen in the first place" — the trust that makes unsupervised work safe.</p>
+<div class="block-head"><span class="block-label">Key concept: the primary purpose of hooks</span></div>
+<p>To <strong>turn what you'd ask Claude to do into what always happens</strong>, convert a probabilistic request into a deterministic guarantee. Prompts are run by the model (it usually complies, but "usually" isn't "always"); hooks are run by the harness at a fixed lifecycle point, every time, no exceptions. Rule of thumb: if it must happen every single time without fail, it doesn't belong in a prompt, it belongs in a hook. Three shapes it takes: <strong>guarantee an action</strong> (format every file, log every call: <code>PostToolUse</code>), <strong>block a dangerous one</strong> (stop an <code>rm -rf</code>, a commit to <code>main</code>, a read of <code>.env</code>: <code>PreToolUse</code>), <strong>inject standing context</strong> (<code>SessionStart</code>, <code>UserPromptSubmit</code>). The deeper payoff and the reason this is the course's peak: it's what moves a team from "we'll review it after" to "it can't happen in the first place", the trust that makes unsupervised work safe.</p>
 </div></div></section>
 <section class="card" id="slide-14" data-slide="14"><header class="card-head"><span class="badge">14</span><div><span class="eyebrow">Lesson 12 · Hooks &amp; SDK</span><h2>Defining a hook: event → matcher → command</h2></div></header><div class="card-body"><p class="slide-sub"><em>Source: text lesson "Gotchas around hooks" + deck slide. The most technical slide in the course; for non-technical rooms teach the shape, not the syntax.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>A hook is three things in a settings file: which lifecycle event (e.g. before a tool runs), which tool it matches, and the command to run. A <code>PreToolUse</code> hook that exits with a block code stops the action before it happens — that's how you stop a dangerous delete or a commit to the main branch <em>before</em> it lands, not after. Use absolute paths for the script.</p>
+<p>A hook is three things in a settings file: which lifecycle event (e.g. before a tool runs), which tool it matches, and the command to run. A <code>PreToolUse</code> hook that exits with a block code stops the action before it happens. That's how you stop a dangerous delete or a commit to the main branch <em>before</em> it lands, not after. Use absolute paths for the script.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"A hook is three simple decisions. When does it fire — for instance, just before a tool runs. What does it apply to. And what command should run. The powerful case is the 'before' hook: it can look at what's about to happen and stop it. So a dangerous delete, or a change to something protected, gets caught before it happens, not cleaned up afterwards. You're moving from 'we'll review it after' to 'it can't happen in the first place'." (Keep it conceptual; this concept does not vary much by domain — see the shared example below.)</p>
+<p>"A hook is three simple decisions. When does it fire, for instance, just before a tool runs. What does it apply to. And what command should run. The powerful case is the 'before' hook: it can look at what's about to happen and stop it. So a dangerous delete, or a change to something protected, gets caught before it happens, not cleaned up afterwards. You're moving from 'we'll review it after' to 'it can't happen in the first place'." (Keep it conceptual; this concept does not vary much by domain; see the shared example below.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1251,24 +1251,24 @@ th {
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">By background — one shared example (this slide's mechanic genuinely doesn't vary by domain)</span></div>
-<p>The universal version: a "before" hook that blocks the irreversible mistake — deleting the wrong folder, overwriting the master file, sending before a check passes. For any of the nine, the picture is the same: the thing you most fear doing by accident, made impossible rather than merely discouraged. Reach for their own near-miss if they named one in the pause; otherwise the master-file overwrite lands for everyone.</p>
+<div class="block-head"><span class="block-label">By background: one shared example (this slide's mechanic genuinely doesn't vary by domain)</span></div>
+<p>The universal version: a "before" hook that blocks the irreversible mistake: deleting the wrong folder, overwriting the master file, sending before a check passes. For any of the nine, the picture is the same: the thing you most fear doing by accident, made impossible rather than merely discouraged. Reach for their own near-miss if they named one in the pause; otherwise the master-file overwrite lands for everyone.</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Do not get lost in the settings file. The teachable idea is the <em>gate</em>: some actions should be impossible, not just reviewed. Name absolute paths once (it's a security recommendation) and move on. The how-to-share-it problem is the next slide.</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — which hook blocks a tool call</span> <span class="block-note">Verified against the official Claude Code hooks docs (June 2026). The blocking hook is <strong><code>PreToolUse</code></strong> — it's the only one that runs <em>before</em> a tool executes, so it's the only one positioned to stop it. (<code>PostToolUse</code> runs after; <code>UserPromptSubmit</code>, <code>Stop</code>, <code>Notification</code>, <code>SessionStart</code> fire at unrelated points.) It receives the tool name and its input, so you gate on conditions — match <code>Bash</code> against a deny-list, block any <code>Edit</code>/<code>Write</code> touching <code>.env</code>, secrets, or prod paths. Two ways to block</span></div>
+<div class="block-head"><span class="block-label">Key concept: which hook blocks a tool call</span> <span class="block-note">Verified against the official Claude Code hooks docs (June 2026). The blocking hook is <strong><code>PreToolUse</code></strong>. It's the only one that runs <em>before</em> a tool executes, so it's the only one positioned to stop it. (<code>PostToolUse</code> runs after; <code>UserPromptSubmit</code>, <code>Stop</code>, <code>Notification</code>, <code>SessionStart</code> fire at unrelated points.) It receives the tool name and its input, so you gate on conditions: match <code>Bash</code> against a deny-list, block any <code>Edit</code>/<code>Write</code> touching <code>.env</code>, secrets, or prod paths. Two ways to block</span></div>
 <ul>
 <li><strong>Exit code 2</strong> → tool call blocked; the hook's stderr is returned to Claude as the reason.</li>
 <li><strong>JSON</strong> on stdout with a permission decision (the structured form the slide doesn't show): ``<code>json { "hookSpecificOutput": { "hookEventName": "PreToolUse", "permissionDecision": "deny", "permissionDecisionReason": "Editing of .env files is not allowed" } } </code>`<code> </code>"allow"<code> auto-approves, </code>"deny"<code> blocks, </code>"ask"` prompts the user.</li>
 </ul>
 </div></div></section>
-<section class="card" id="slide-15" data-slide="15"><header class="card-head"><span class="badge">15</span><div><span class="eyebrow">Lesson 13 · Hooks &amp; SDK</span><h2>Hooks in practice: share them, debug them</h2></div></header><div class="card-body"><p class="slide-sub"><em>Source: text lessons "Gotchas around hooks" + "Useful hooks!". Two real, concrete problems — keep them grounded.</em></p><div class="block block--idea">
+<section class="card" id="slide-15" data-slide="15"><header class="card-head"><span class="badge">15</span><div><span class="eyebrow">Lesson 13 · Hooks &amp; SDK</span><h2>Hooks in practice: share them, debug them</h2></div></header><div class="card-body"><p class="slide-sub"><em>Source: text lessons "Gotchas around hooks" + "Useful hooks!". Two real, concrete problems. Keep them grounded.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Two practical problems the course solves. One — sharing hooks across machines: absolute paths are recommended for security, but your path isn't my path, so the project ships an example settings file with a <code>$PWD</code> placeholder that the setup step expands into real local paths. Two — knowing what a hook actually receives: the input on stdin changes per event and per tool, so log it first with a simple command before you write the real one. There are nine lifecycle events in all.</p>
+<p>Two practical problems the course solves. One, sharing hooks across machines: absolute paths are recommended for security, but your path isn't my path, so the project ships an example settings file with a <code>$PWD</code> placeholder that the setup step expands into real local paths. Two, knowing what a hook actually receives: the input on stdin changes per event and per tool, so log it first with a simple command before you write the real one. There are nine lifecycle events in all.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Two real-world snags. First, sharing: the secure way to write a hook uses the full path to a script, but my full path won't match yours, so the project uses a placeholder that gets filled in automatically when each person sets up. That's how a team shares the same guarantees without hand-editing paths. Second, debugging: a hook gets fed information, and the shape of it changes depending on what triggered it — so the trick is to log it first and look, then write the real rule against what you actually saw." (Concrete, not abstract: this is the "measure twice, cut once" of hooks.)</p>
+<p>"Two real-world snags. First, sharing: the secure way to write a hook uses the full path to a script, but my full path won't match yours, so the project uses a placeholder that gets filled in automatically when each person sets up. That's how a team shares the same guarantees without hand-editing paths. Second, debugging: a hook gets fed information, and the shape of it changes depending on what triggered it, so the trick is to log it first and look, then write the real rule against what you actually saw." (Concrete, not abstract: this is the "measure twice, cut once" of hooks.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1277,18 +1277,18 @@ th {
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">By background — one shared example (this is tooling hygiene, not domain logic)</span></div>
-<p>The shared picture: a team wants the same guarantee on every machine — say, "every output gets logged for the audit trail" — and the placeholder-and-setup trick is what lets one person write it and everyone inherit it without breaking on their own paths. For a regulated room (Investigator, Analyst, Exec) lean on the audit-trail framing; for the rest, "everyone gets the same safety rail" carries it. The debugging half is the same for all nine: look before you build.</p>
+<div class="block-head"><span class="block-label">By background: one shared example (this is tooling hygiene, not domain logic)</span></div>
+<p>The shared picture: a team wants the same guarantee on every machine (say, "every output gets logged for the audit trail"), and the placeholder-and-setup trick is what lets one person write it and everyone inherit it without breaking on their own paths. For a regulated room (Investigator, Analyst, Exec) lean on the audit-trail framing; for the rest, "everyone gets the same safety rail" carries it. The debugging half is the same for all nine: look before you build.</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the most "engineering" of the hook slides. Most non-technical learners won't author this themselves — and that's the honest reason a Praxis trainer or a developer sets the shared settings up once, after which the team just inherits it. Frame it as "this is the part someone does for the team, once" rather than a day-one solo task.</p>
+<p>This is the most "engineering" of the hook slides. Most non-technical learners won't author this themselves, and that's the honest reason a Praxis trainer or a developer sets the shared settings up once, after which the team just inherits it. Frame it as "this is the part someone does for the team, once" rather than a day-one solo task.</p>
 </div></div></section>
-<section class="card" id="slide-16" data-slide="16"><header class="card-head"><span class="badge">16</span><div><span class="eyebrow">Lesson 14 · Hooks &amp; SDK</span><h2>The SDK: Claude Code as a building block</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + general Claude Code knowledge. Furthest from the nine non-technical archetypes — keep it brief and conceptual.</em></p><div class="block block--idea">
+<section class="card" id="slide-16" data-slide="16"><header class="card-head"><span class="badge">16</span><div><span class="eyebrow">Lesson 14 · Hooks &amp; SDK</span><h2>The SDK: Claude Code as a building block</h2></div></header><div class="card-body"><p class="slide-sub"><em>Flagged: source is video-only; built from the deck slide + general Claude Code knowledge. Furthest from the nine non-technical archetypes. Keep it brief and conceptual.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The same agent you run in the terminal — the loop, the tools, the context, the permissions — can be embedded inside your own software through the SDK (TypeScript or Python). That turns Claude Code from a thing you sit at into a component you build on: code-review bots, batch refactors, custom agents in your pipeline.</p>
+<p>The same agent you run in the terminal (the loop, the tools, the context, the permissions) can be embedded inside your own software through the SDK (TypeScript or Python). That turns Claude Code from a thing you sit at into a component you build on: code-review bots, batch refactors, custom agents in your pipeline.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Last idea, and it's a horizon, not a homework. Everything you've watched Claude Code do at the terminal can also be wired <em>inside</em> other software — so instead of you sitting and driving it, it runs as a part of a bigger system you build. That's how your one repeatable workflow could eventually run on a schedule, or on every new file, with nobody at the keyboard. You don't need this today; it's where the road goes." (Hold the one term: it's <strong>Claude Code</strong>, and the SDK is the same agent as a library.)</p>
+<p>"Last idea, and it's a horizon, not a homework. Everything you've watched Claude Code do at the terminal can also be wired <em>inside</em> other software, so instead of you sitting and driving it, it runs as a part of a bigger system you build. That's how your one repeatable workflow could eventually run on a schedule, or on every new file, with nobody at the keyboard. You don't need this today; it's where the road goes." (Hold the one term: it's <strong>Claude Code</strong>, and the SDK is the same agent as a library.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -1311,17 +1311,17 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the only slide that points squarely at developers, and it's the farthest from a non-technical learner's day one. Don't oversell it. Frame it as the ceiling — the same workflow they'll build by hand can later run itself — then bring them back to the one task they'll actually do this week. (Points to the deeper SDK material if a technical person in the room wants it.)</p>
+<p>This is the only slide that points squarely at developers, and it's the farthest from a non-technical learner's day one. Don't oversell it. Frame it as the ceiling (the same workflow they'll build by hand can later run itself), then bring them back to the one task they'll actually do this week. (Points to the deeper SDK material if a technical person in the room wants it.)</p>
 </div></div></section>
 <section class="card" id="slide-17" data-slide="17"><header class="card-head"><span class="badge">17</span><div><span class="eyebrow">Close</span><h2>See it act. Drive it daily. Make it guaranteed.</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>The whole course in three lines: you saw the agent act (install, point it at a project, change and review), you drove it daily (control context, custom commands, MCP, GitHub), and you made the must-haves guaranteed (hooks), with the SDK as where it goes next.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"If you keep one thing, keep the shape: you watched it act, you learned to drive it day to day, and you learned how to make the things that must happen always happen. The durable version of your task isn't a chat you lose — it's a folder, a set of reusable commands, and a guarantee or two that hold every single time."</p>
+<p>"If you keep one thing, keep the shape: you watched it act, you learned to drive it day to day, and you learned how to make the things that must happen always happen. The durable version of your task isn't a chat you lose; it's a folder, a set of reusable commands, and a guarantee or two that hold every single time."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Close with</span></div>
-<p>Their task from intake, and the next concrete step: "Next time we open your real folder and build the workflow for the one you named — and decide which one rule is important enough to make a guarantee." Then the session-improvement habit: <em>"at the end of any session, tell it to look back at what went badly and save how you fixed it, so it's better next time."</em> (<code>patterns.md</code> — close every session by teaching the system to improve. <code>framings.md</code> — cost: about twenty dollars a month, and stop.)</p>
+<p>Their task from intake, and the next concrete step: "Next time we open your real folder and build the workflow for the one you named, and decide which one rule is important enough to make a guarantee." Then the session-improvement habit: <em>"at the end of any session, tell it to look back at what went badly and save how you fixed it, so it's better next time."</em> (<code>patterns.md</code>: close every session by teaching the system to improve. <code>framings.md</code>, cost: about twenty dollars a month, and stop.)</p>
 </div></div></section>
 </main>
 <script>

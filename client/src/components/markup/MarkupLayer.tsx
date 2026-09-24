@@ -92,7 +92,7 @@ function readable(items: MarkupItem[], docW: number): string[] {
     const where = it.section ? ` [in: ${it.section}]` : "";
     const over = it.anchor ? ` (over: "${it.anchor}")` : "";
     const at = `x=${Math.round(it.x)} y=${Math.round(it.y)} of ${docW}px wide`;
-    const said = it.text?.trim() ? ` — "${it.text.trim()}"` : " — (no text)";
+    const said = it.text?.trim() ? `: "${it.text.trim()}"` : ": (no text)";
     if (it.kind === "arrow") {
       return `${i + 1}. ARROW from ${at}${over} to x=${Math.round(it.x2 ?? 0)} y=${Math.round(
         it.y2 ?? 0,
@@ -723,7 +723,7 @@ function Toolbar({
                 <kbd className="font-mono text-[10px] bg-white/15 rounded px-1">
                   {t.key}
                 </kbd>{" "}
-                <strong className="text-white">{t.label}</strong> — {t.hint}
+                <strong className="text-white">{t.label}</strong>: {t.hint}
               </li>
             ))}
             <li className="pt-1 border-t border-white/15 mt-1">
@@ -767,7 +767,7 @@ function Toolbar({
               <button
                 key={t.tool}
                 onClick={() => setTool(t.tool)}
-                title={`${t.label} (${t.key}) — ${t.hint}`}
+                title={`${t.label} (${t.key}): ${t.hint}`}
                 className={`rounded-full px-2.5 py-1.5 text-xs transition-colors ${
                   tool === t.tool
                     ? "bg-white text-neutral-900 font-semibold"

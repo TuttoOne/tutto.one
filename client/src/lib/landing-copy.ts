@@ -222,8 +222,8 @@ export const landing = {
         n: "04",
         title: { en: "Then build", fr: "Ensuite, construire" },
         body: {
-          en: "Tools, skills, automation, agents — in that order, on your own work. Built on the first three, so it does the job once and keeps doing it.",
-          fr: "Outils, compétences, automatisation, agents — dans cet ordre, sur votre propre travail. Construits sur les trois premières étapes, pour faire le travail une fois et continuer à le faire.",
+          en: "Tools, skills, automation, agents, in that order, on your own work. Built on the first three, so it does the job once and keeps doing it.",
+          fr: "Outils, compétences, automatisation, agents, dans cet ordre, sur votre propre travail. Construits sur les trois premières étapes, pour faire le travail une fois et continuer à le faire.",
         },
       },
     ],
@@ -239,12 +239,12 @@ export const landing = {
 
     offer: {
       title: {
-        en: "The AI-Fluent Team — eight sessions to stop repeating yourself",
-        fr: "L'équipe à l'aise avec l'IA — huit séances pour arrêter de vous répéter",
+        en: "The AI-Fluent Team",
+        fr: "L'équipe à l'aise avec l'IA",
       },
       body: {
-        en: "You and up to four of your team. Your use policy, a KPI for each role, the call on what AI takes over, and standing briefs and checks for your top three jobs — built on your own work, so it's done once, not every day.",
-        fr: "Vous et jusqu'à quatre personnes de votre équipe. Votre politique d'usage, un indicateur par rôle, la décision sur ce que l'IA prend en charge, et des consignes et contrôles permanents pour vos trois tâches clés — construits sur votre propre travail, pour le faire une fois, pas tous les jours.",
+        en: "We optimise your setup together, create your use policy, set up KPIs for your agents and make sure your whole team knows how to manage the change. We build it together so your systems work every day.",
+        fr: "Nous optimisons votre configuration ensemble, rédigeons votre politique d'usage, définissons des indicateurs pour vos agents et veillons à ce que toute votre équipe sache accompagner le changement. Nous le construisons ensemble pour que vos systèmes fonctionnent au quotidien.",
       },
       special: {
         en: "Back-to-work price until {date}.",
@@ -271,7 +271,7 @@ export const landing = {
       fr: "Réserver la séance de 60 min, gratuite",
     },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
-    signatureNote: { en: "Tutto — Applied AI", fr: "Tutto — IA appliquée" },
+    signatureNote: { en: "Tutto, Applied AI", fr: "Tutto, IA appliquée" },
   },
 
   footer: {

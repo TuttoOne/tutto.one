@@ -139,7 +139,7 @@ export default function About() {
                 Nous le faisons donc dans cet ordre. <strong className="text-foreground font-semibold">Les règles</strong> : ce qui entre, et ce
                 qui ne sort jamais de l'entreprise. <strong className="text-foreground font-semibold">Un indicateur par tâche</strong>, pour juger
                 le travail sur un standard. <strong className="text-foreground font-semibold">Ce qu'on délègue</strong>. Puis la construction :
-                outils, compétences, automatisation et agents — d'une passerelle MCP vers SharePoint
+                outils, compétences, automatisation et agents, d'une passerelle MCP vers SharePoint
                 à une plateforme documentaire qui passe en revue 150 000 documents couverts par le
                 secret professionnel sans qu'un seul octet ne quitte le bâtiment.
               </p>
@@ -150,7 +150,7 @@ export default function About() {
               <p>
                 La plupart des problèmes d'IA ne sont pas des problèmes d'IA. Ce sont des problèmes
                 de management. Personne ne confierait une tâche à un stagiaire sans consigne, sans
-                standard et sans validation — et c'est exactement ainsi que la plupart des équipes
+                standard et sans validation. Et c'est exactement ainsi que la plupart des équipes
                 confient le travail à l'IA.
               </p>
               <p>
@@ -190,14 +190,14 @@ export default function About() {
                 So we do it in that order. <strong className="text-foreground font-semibold">The rules</strong>: what goes in, and what never
                 leaves the building. <strong className="text-foreground font-semibold">A KPI for each job</strong>, so output is judged against a
                 standard. <strong className="text-foreground font-semibold">What to hand over</strong>. Then the build: tools, skills, automation
-                and agents — from an MCP bridge into SharePoint to a document platform that reviews
+                and agents, from an MCP bridge into SharePoint to a document platform that reviews
                 150,000 privileged files without a single byte leaving the building.
               </p>
 
               <h2 className="text-2xl font-serif font-bold text-foreground pt-6">What we believe</h2>
               <p>
                 Most AI problems aren't AI problems. They're management problems. Nobody would hand
-                an intern a job without a brief, a standard and a sign-off — and that's exactly how
+                an intern a job without a brief, a standard and a sign-off. And that's exactly how
                 most teams hand work to AI.
               </p>
               <p>
@@ -248,7 +248,7 @@ export default function About() {
                 <>
                   <p>
                     Rox travaille avec nous sur chaque mission. Son parcours : gestion de projet,
-                    analyse métier, opérations et amélioration des processus — le tout adossé à un{" "}
+                    analyse métier, opérations et amélioration des processus, le tout adossé à un{" "}
                     <strong className="text-foreground font-semibold">Master en droit</strong>, qui
                     lui donne un socle solide en recherche, gouvernance et risque.
                   </p>
@@ -257,7 +257,7 @@ export default function About() {
                     entreprise est censée fonctionner et la façon dont le travail se fait réellement :
                     la direction décrit un processus pendant que les personnes qui l'exécutent chaque
                     jour tiennent avec des tableurs, des boîtes mail et des contournements que
-                    personne n'a jamais écrits. Le droit lui a appris la même leçon très tôt — ce
+                    personne n'a jamais écrits. Le droit lui a appris la même leçon très tôt : ce
                     qu'un système est censé produire et ce qu'il produit en pratique sont deux sujets
                     distincts.
                   </p>
@@ -283,7 +283,7 @@ export default function About() {
                   </p>
                   <p>
                     What she sees better than anyone is the gap between how a business is supposed to
-                    run and how the work actually happens — leadership describing one process while
+                    run and how the work actually happens: leadership describing one process while
                     the people doing it every day get by on spreadsheets, inboxes and workarounds
                     nobody ever wrote down. Law taught her the same lesson early: what a system is
                     meant to do and what it does in practice are two different subjects.
@@ -316,7 +316,7 @@ export default function About() {
                 <>
                   <p>
                     Daniel a fondé Tutto. Sa formation est la{" "}
-                    <strong className="text-foreground font-semibold">philosophie</strong> — non comme
+                    <strong className="text-foreground font-semibold">philosophie</strong>, non comme
                     discipline académique, mais comme socle pratique pour travailler avec la
                     technologie : qu'est-ce que cela signifie vraiment d'utiliser ces systèmes, quelle
                     en est l'utilité réelle, et sur quoi avons-nous prise ?
@@ -331,13 +331,13 @@ export default function About() {
                   </p>
                   <p>
                     Et il construit. La plupart des missions se terminent par quelque chose qui tourne
-                    en production — une passerelle vers SharePoint ou Salesforce, une plateforme
+                    en production : une passerelle vers SharePoint ou Salesforce, une plateforme
                     documentaire qui ne quitte jamais le bâtiment, un processus qui n'a plus besoin de
                     quelqu'un pour le porter. Livrer une chose qui marche, plutôt que présenter le
                     plan d'une chose qui marcherait.
                   </p>
                   <p>
-                    La peur est ici la condition de départ, pas l'ennemi — il la ressent encore. La
+                    La peur est ici la condition de départ, pas l'ennemi. Il la ressent encore. La
                     réponse n'est pas la bravade : c'est un premier pas, puis un autre. Son rôle n'est
                     pas d'être l'expert au-dessus de vous, mais celui qui a déjà fait les premiers
                     pas, à côté de vous.
@@ -347,13 +347,13 @@ export default function About() {
                 <>
                   <p>
                     Daniel founded Tutto. His background is{" "}
-                    <strong className="text-foreground font-semibold">philosophy</strong> — not as an
+                    <strong className="text-foreground font-semibold">philosophy</strong>, not as an
                     academic pursuit but as the practical grounding for working with technology: what
                     does it actually mean to use these systems, what is the return, and what is in
                     our control?
                   </p>
                   <p>
-                    That last question does most of the work. AI is not a choice — it is the product
+                    That last question does most of the work. AI is not a choice. It is the product
                     of economic and scientific conditions that no single decision will stop. What is a
                     choice is whether you understand it and whether you use it well. He works with
                     people who want to know what is actually happening: what these systems are, what
@@ -361,13 +361,13 @@ export default function About() {
                     in their context.
                   </p>
                   <p>
-                    And he builds. Most engagements end with something running in production — a
+                    And he builds. Most engagements end with something running in production: a
                     bridge into SharePoint or Salesforce, a document platform that never leaves the
                     building, a process that stopped needing someone to shepherd it. Ship the working
                     thing rather than present the plan for one.
                   </p>
                   <p>
-                    Fear is the starting condition here, not the enemy — he still feels it. The answer
+                    Fear is the starting condition here, not the enemy. He still feels it. The answer
                     isn't bravado; it's a first step, then another. His role is not the expert above
                     you but the experienced first-stepper beside you.
                   </p>

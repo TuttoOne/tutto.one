@@ -60,8 +60,8 @@ export default function Sovereign() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "IA souveraine — Pythia | Tutto"
-        : "Sovereign AI — Pythia | Tutto";
+        ? "IA souveraine | Pythia | Tutto"
+        : "Sovereign AI | Pythia | Tutto";
     return () => {
       document.title = SITE_TITLE;
     };

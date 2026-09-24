@@ -185,7 +185,7 @@ export default function PraxisProgramme() {
   const fill = (en: string, subs: Record<string, string>) =>
     Object.entries(subs).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), tr(en));
   useEffect(() => {
-    document.title = "The AI-Fluent Team — Praxis | Tutto";
+    document.title = "The AI-Fluent Team | Praxis | Tutto";
     return () => { document.title = SITE_TITLE; };
   }, []);
 
@@ -432,7 +432,7 @@ export default function PraxisProgramme() {
               {tr("On the choice of assistant")}
             </p>
             <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d" }}>
-              {tr("We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine — which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.")}
+              {tr("We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine, which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.")}
             </p>
           </div>
         </div>
@@ -469,7 +469,7 @@ export default function PraxisProgramme() {
 
           <div style={{ marginTop: 28, marginBottom: 28, borderRadius: 10, background: "#1a1a1a", padding: "24px 26px", maxWidth: 680 }}>
             <p style={{ ...CAPS, fontSize: 9, color: "#d97706", marginBottom: 12 }}>{tr("The guarantee")}</p>
-            <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, lineHeight: 1.55, color: "#f6f1ea", marginBottom: 10 }}>{tr("Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard — or I keep working with you at no charge until they do.")}</p>
+            <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, lineHeight: 1.55, color: "#f6f1ea", marginBottom: 10 }}>{tr("Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard, or I keep working with you at no charge until they do.")}</p>
             <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", margin: 0 }}>{tr("The only condition is that you attend the sessions and answer the questions.")}</p>
           </div>
 
@@ -539,7 +539,7 @@ export default function PraxisProgramme() {
           </div>
           <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 20, maxWidth: 560 }}>
             {tr("Start with the free 60-minute session: proof on one of your own jobs before you spend anything. When you book the course, a 15-minute call to say hello and set the dates comes with it. Both programmes are invoiced, ex VAT.")}{" "}
-            {tr("We also run free sessions from time to time. They are general rather than built around your use case —")}{" "}
+            {tr("We also run free sessions from time to time. They are general rather than built around your use case:")}{" "}
             <a href="/calendar" style={{ color: "#d97706" }}>{tr("see Events")}</a>.
           </p>
           <div style={{ marginTop: 20, padding: "16px 20px", background: "#f0ece6", borderRadius: 8, maxWidth: 560 }}>
@@ -547,7 +547,7 @@ export default function PraxisProgramme() {
               {tr("Running the tools you build costs about")}{" "}
               <strong style={{ color: "#1a1a1a" }}>{toolsMonthly}</strong>{" "}
               {tr(
-                "for a subscription to a frontier AI system — Claude, Mistral or OpenAI — or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.",
+                "for a subscription to a frontier AI system (Claude, Mistral or OpenAI), or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.",
               )}
             </p>
           </div>

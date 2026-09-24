@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Claude with the Anthropic API — teaching notes</title>
+<title>Praxis · Claude with the Anthropic API: teaching notes</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -862,41 +862,41 @@ th {
 </div>
 <main>
   <div class="guide-head">
-    <h1>Claude with the Anthropic API — teaching notes</h1>
+    <h1>Claude with the Anthropic API: teaching notes</h1>
     <p class="lead">Side-by-side notes for <code>06-praxis-claude-with-the-anthropic-api.html</code> (14 slides). This is the developer course: the layer Claude Code and every other app sits on. The source <code>06-...-lessons.txt</code> is video-only (the captures are unprocessed players, no transcript), so the depth here comes from the deck's leads and captions, read against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
     <details class="howto" open><summary>How to use these notes</summary><ul><li>Guidance, not a script. Teach the person, not the slides.</li>
 <li><strong>This is genuinely developer territory, and most of your room is not developers.</strong> The job here is not to teach them to code. It is to show them what the machinery under Claude Code actually is, so they can brief a developer, judge what they're handed, and recognise the concepts they already met as students (the system prompt is the skill file; an eval is "how would I know the output is right"; tool use is letting it <em>act</em>, not just answer). Translate every slide to their world at least once, then move on.</li>
 <li>Several slides are purely mechanical and do not vary by domain (the request shape, streaming, prompt caching, MCP plumbing). Where that's true these notes give <strong>one shared example and say so</strong>, rather than forcing nine. Use that collapse more freely here than on the fluency courses. Where a concept <em>does</em> land differently by role (system prompt, evals, tool use, RAG, workflow-vs-agent), the nine are there.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Don't fill the silence. If they freeze: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
-<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term — <strong>Claude Code</strong>. <strong>Do not read code aloud</strong> (<code>framings.md</code> — voice). Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
-<li>Know who's in the room before slide 1. A technical peer wants the mechanism; a non-technical operator wants the "so what". Most rooms are mixed — pitch to the operator, let the developer overhear.</li></ul></details>
+<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term: <strong>Claude Code</strong>. <strong>Do not read code aloud</strong> (<code>framings.md</code>: voice). Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
+<li>Know who's in the room before slide 1. A technical peer wants the mechanism; a non-technical operator wants the "so what". Most rooms are mixed: pitch to the operator, let the developer overhear.</li></ul></details>
   </div>
   <section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>Building with the API underneath the chat window</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>Set the frame: this is the layer everything else sits on. Eleven ideas, one screen each. The chat window and Claude Code are conveniences built on top of one plain request. By the end they'll know what that request is and what you can do with it.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Everything you've used so far — the chat, Claude Code, the desktop app — sits on one thing: a request you send to the API. Eleven ideas, one screen each. You don't have to be able to write the request to understand it. The point is that you'll know what's under the floor, so you can brief whoever builds on it and judge what they hand back."</p>
+<p>"Everything you've used so far (the chat, Claude Code, the desktop app) sits on one thing: a request you send to the API. Eleven ideas, one screen each. You don't have to be able to write the request to understand it. The point is that you'll know what's under the floor, so you can brief whoever builds on it and judge what they hand back."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Open with</span></div>
-<p>If the room is non-technical, name it straight: "Some of this is for the developer in your life, not for you to type. I'll tell you which parts those are. Your job is to recognise the ideas — most of them you've already met by another name."</p>
+<p>If the room is non-technical, name it straight: "Some of this is for the developer in your life, not for you to type. I'll tell you which parts those are. Your job is to recognise the ideas; most of them you've already met by another name."</p>
 </div></div></section>
 <section class="card" id="slide-2" data-slide="2"><header class="card-head"><span class="badge">2</span><div><span class="eyebrow">Spine</span><h2>The whole course on one screen</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>Four moves: make the call, make it reliable, extend its reach, then compose the pieces into systems. Show the shape so nobody feels lost in the machinery.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the whole thing on one screen. First we make a single call. Then we make it reliable — testing and clearer instructions. Then we extend its reach — tools, knowledge, more than text. Then we compose those pieces into real systems. If you lose the thread, this is the map back."</p>
+<p>"Here's the whole thing on one screen. First we make a single call. Then we make it reliable: testing and clearer instructions. Then we extend its reach: tools, knowledge, more than text. Then we compose those pieces into real systems. If you lose the thread, this is the map back."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Cue</span></div>
 <p>Don't teach the spine, just orient. Twenty seconds. Tool use (slide 7) is the heart of the back half; everything after it builds on that one mechanism.</p>
 </div></div></section>
 <section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Lesson 1 · Make the call</span><h2>One request, and the API forgets you</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>A single API call is the whole unit: you send a model, an optional system line, and the entire message list; it replies once and remembers nothing. A "conversation" is just that loop run by hand — you append the reply and send everything again. The growing message list <em>is</em> the memory.</p>
+<p>A single API call is the whole unit: you send a model, an optional system line, and the entire message list; it replies once and remembers nothing. A "conversation" is just that loop run by hand: you append the reply and send everything again. The growing message list <em>is</em> the memory.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Underneath the chat, there's no conversation. There's one request, one reply, and then it forgets you completely. What looks like a conversation is the program quietly re-sending the whole history every single time. The list of messages <em>is</em> the memory — there's nowhere else it's kept." (This is the API-level version of <code>framings.md</code> — the folder is the memory: nothing persists unless something holds it.)</p>
+<p>"Underneath the chat, there's no conversation. There's one request, one reply, and then it forgets you completely. What looks like a conversation is the program quietly re-sending the whole history every single time. The list of messages <em>is</em> the memory; there's nowhere else it's kept." (This is the API-level version of <code>framings.md</code>, the folder is the memory: nothing persists unless something holds it.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -906,26 +906,26 @@ th {
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span></div>
-<p>this one is mechanical and shared — the request shape is the same whatever your work is. One example for everyone: <em>the chat window you already use is this loop running invisibly; every time you send a message it re-sends the lot.</em> Then connect it once to their world: this is exactly why a Claude Code folder beats a browser chat — the folder is a durable place to hold the history, instead of a chat that forgets when it gets long. (<code>framings.md</code> — context window; why the folder beats the browser.)</p>
+<p>this one is mechanical and shared; the request shape is the same whatever your work is. One example for everyone: <em>the chat window you already use is this loop running invisibly; every time you send a message it re-sends the lot.</em> Then connect it once to their world: this is exactly why a Claude Code folder beats a browser chat; the folder is a durable place to hold the history, instead of a chat that forgets when it gets long. (<code>framings.md</code>: context window; why the folder beats the browser.)</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"So it doesn't remember me at all?" Right — and that's reassuring, not alarming, on the data question: the model holds nothing of yours between calls. Anything that persists is held by <em>your</em> system, in <em>your</em> control. (<code>objections.md</code> — IT/compliance.)</p>
+<p>"So it doesn't remember me at all?" Right, and that's reassuring, not alarming, on the data question: the model holds nothing of yours between calls. Anything that persists is held by <em>your</em> system, in <em>your</em> control. (<code>objections.md</code>: IT/compliance.)</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — the minimum request, and where the key lives</span></div>
-<p>Verified against the course's <code>02_messages_format</code> and <code>01_getting_started</code> notebooks. The minimum a request needs is three fields in the body — <strong><code>model</code>, <code>messages</code>, and <code>max_tokens</code></strong> — plus your API key in the headers. The <code>messages</code> list: each entry has a <code>role</code> and <code>content</code>, the list starts with a <code>user</code> message and alternates user/assistant. (<code>max_tokens</code> is easy to forget but the API rejects the call without it.) On the key: the course teaches <strong>don't hardcode it</strong> — keep it in a <code>.env</code> file loaded with <code>python-dotenv</code>, and the SDK auto-reads the <code>ANTHROPIC_API_KEY</code> environment variable. Extension for a <em>web app</em> (beyond the course): the key lives on your</p>
+<div class="block-head"><span class="block-label">Key concept: the minimum request, and where the key lives</span></div>
+<p>Verified against the course's <code>02_messages_format</code> and <code>01_getting_started</code> notebooks. The minimum a request needs is three fields in the body (<strong><code>model</code>, <code>messages</code>, and <code>max_tokens</code></strong>) plus your API key in the headers. The <code>messages</code> list: each entry has a <code>role</code> and <code>content</code>, the list starts with a <code>user</code> message and alternates user/assistant. (<code>max_tokens</code> is easy to forget but the API rejects the call without it.) On the key: the course teaches <strong>don't hardcode it</strong>: keep it in a <code>.env</code> file loaded with <code>python-dotenv</code>, and the SDK auto-reads the <code>ANTHROPIC_API_KEY</code> environment variable. Extension for a <em>web app</em> (beyond the course): the key lives on your</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">server only</span></div>
-<p>— never ship it to the browser; the browser calls your backend, your backend calls Claude.</p>
+<p>Never ship it to the browser; the browser calls your backend, your backend calls Claude.</p>
 </div></div></section>
 <section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Lesson 2 · Make the call</span><h2>Four dials on the same request</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>You change behaviour without changing the model — you turn four dials.</p>
+<p>You change behaviour without changing the model: you turn four dials.</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">System</span></div>
-<p>sets the role, rules and tone (it does the heavy lifting). <strong>Temperature</strong> trades reliability for variety (0 steady, higher looser). <strong>Streaming</strong> is about feel — tokens arrive as they're made. <strong>Structured output</strong> forces clean JSON a program can parse, not prose.</p>
+<p>sets the role, rules and tone (it does the heavy lifting). <strong>Temperature</strong> trades reliability for variety (0 steady, higher looser). <strong>Streaming</strong> is about feel: tokens arrive as they're made. <strong>Structured output</strong> forces clean JSON a program can parse, not prose.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Same model, four dials. The big one is the <em>system</em> prompt — the standing instructions for who it should be and what rules it follows. Temperature is how adventurous you let it be: zero for steady and repeatable, higher for variety. Streaming is just feel — words appear as they're written instead of all at once. Structured output is when you need clean data a program can read, not a paragraph."</p>
+<p>"Same model, four dials. The big one is the <em>system</em> prompt, the standing instructions for who it should be and what rules it follows. Temperature is how adventurous you let it be: zero for steady and repeatable, higher for variety. Streaming is just feel: words appear as they're written instead of all at once. Structured output is when you need clean data a program can read, not a paragraph."</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -934,28 +934,28 @@ th {
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the system prompt is the standing rules in your skill file — name it that)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the system prompt is the standing rules in your skill file; name it that)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the report rules — cite every source, classify primary vs reported, never infer conduct. Temperature at zero: the report reads the same way every time.</dd>
-<dt>Analyst</dt><dd>the column set and the "no data, never infer" rule. Zero temperature — a comparison you can defend, identical on re-run.</dd>
-<dt>Designer</dt><dd>the brand voice and tone for campaign copy. Higher temperature here is a feature — you <em>want</em> varied options to choose from.</dd>
+<dt>Investigator</dt><dd>the report rules: cite every source, classify primary vs reported, never infer conduct. Temperature at zero: the report reads the same way every time.</dd>
+<dt>Analyst</dt><dd>the column set and the "no data, never infer" rule. Zero temperature: a comparison you can defend, identical on re-run.</dd>
+<dt>Designer</dt><dd>the brand voice and tone for campaign copy. Higher temperature here is a feature: you <em>want</em> varied options to choose from.</dd>
 <dt>Knowledge worker</dt><dd>the extraction schema and "leave blanks blank". Zero temperature, so the same invoice yields the same row.</dd>
 <dt>Reporter</dt><dd>the five-section briefing format and attribution rule. Steady, not creative.</dd>
 <dt>Content</dt><dd>the house voice as the system prompt; higher temperature to draft several angles, then you curate.</dd>
-<dt>Form-filler</dt><dd>the template's sections and the allocation rules. Zero temperature — a receipt lands in the same box every time.</dd>
+<dt>Form-filler</dt><dd>the template's sections and the allocation rules. Zero temperature: a receipt lands in the same box every time.</dd>
 <dt>Outreach</dt><dd>the five-section proposal format and "no invented numbers". Some variety in phrasing is fine; the facts stay fixed.</dd>
-<dt>Exec</dt><dd>"my analyst, facts not editorial, one page" — that's the system prompt. Zero temperature for a brief you'd stand behind at the board.</dd>
+<dt>Exec</dt><dd>"my analyst, facts not editorial, one page". That's the system prompt. Zero temperature for a brief you'd stand behind at the board.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Streaming and structured-output are developer concerns, not theirs. Don't labour them. The one to land hard is the system prompt: it is the same object as the skill file they wrote as students, just lower in the stack. (<code>framings.md</code> — skill file as institutional memory.)</p>
+<p>Streaming and structured-output are developer concerns, not theirs. Don't labour them. The one to land hard is the system prompt: it is the same object as the skill file they wrote as students, just lower in the stack. (<code>framings.md</code>: skill file as institutional memory.)</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — getting clean JSON (no prose to strip)</span></div>
-<p>Verified against the course's <code>tool_use/03_structured_outputs</code> notebook. The API course's method is <strong>forced tool use</strong>: define a tool whose <code>input_schema</code> is the JSON shape you want, then force it with <code>tool_choice</code>. Claude returns the data as a validated object in the <code>tool_use</code> block — there's no prose to parse, because the structure isn't text Claude narrates. This is the robust path for an app. A lighter alternative (taught in Anthropic's <em>prompt-engineering</em> tutorial, a different course): <strong>prefill</strong> the assistant turn with <code>{</code> so Claude can't write a preamble, optionally clamping the end with <code>stop_sequences: ["}"]</code> — then re-add both braces when you parse. The prefill+stop-sequence combo only works for <strong>flat</strong> JSON; nested objects trip the first <code>}</code>. Lead with <code>tool_choice</code>; reach for prefill only when you want minimal plumbing.</p>
+<div class="block-head"><span class="block-label">Key concept: getting clean JSON (no prose to strip)</span></div>
+<p>Verified against the course's <code>tool_use/03_structured_outputs</code> notebook. The API course's method is <strong>forced tool use</strong>: define a tool whose <code>input_schema</code> is the JSON shape you want, then force it with <code>tool_choice</code>. Claude returns the data as a validated object in the <code>tool_use</code> block. There's no prose to parse, because the structure isn't text Claude narrates. This is the robust path for an app. A lighter alternative (taught in Anthropic's <em>prompt-engineering</em> tutorial, a different course): <strong>prefill</strong> the assistant turn with <code>{</code> so Claude can't write a preamble, optionally clamping the end with <code>stop_sequences: ["}"]</code>, then re-add both braces when you parse. The prefill+stop-sequence combo only works for <strong>flat</strong> JSON; nested objects trip the first <code>}</code>. Lead with <code>tool_choice</code>; reach for prefill only when you want minimal plumbing.</p>
 </div></div></section>
 <section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Lesson 3 · Make it reliable</span><h2>Stop guessing whether a prompt is good</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>An eval is a test suite for prompts: a set of cases, run automatically, graded, scored to one number. Change the prompt, re-run, watch the number move. Two ways to grade —</p>
+<p>An eval is a test suite for prompts: a set of cases, run automatically, graded, scored to one number. Change the prompt, re-run, watch the number move. Two ways to grade:</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">code-based</span></div>
 <p>for anything exact (is it valid JSON? does it contain the answer?) and</p>
@@ -964,14 +964,14 @@ th {
 <p>for judgement (is it tactful? on-topic?), where you ask another Claude call to score it against a rubric.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"How do you know a prompt is actually good, not just good on the one example you tried? You build an eval — a set of test cases, run automatically and scored to a single number. Then when you change the wording, you re-run and watch the number move. Two ways to grade: by code, for anything you can check exactly, and by model, where you ask another Claude to judge it against a rubric — the same way you'd ask a second person to mark it." (This is the API-level form of the student question <em>"how would I know the output is right?"</em> — <code>05-ai-fluency</code> slide 12, Discernment, made measurable.)</p>
+<p>"How do you know a prompt is actually good, not just good on the one example you tried? You build an eval: a set of test cases, run automatically and scored to a single number. Then when you change the wording, you re-run and watch the number move. Two ways to grade: by code, for anything you can check exactly, and by model, where you ask another Claude to judge it against a rubric, the same way you'd ask a second person to mark it." (This is the API-level form of the student question <em>"how would I know the output is right?"</em>, <code>05-ai-fluency</code> slide 12, Discernment, made measurable.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"How do you know, today, whether an AI output is good — beyond eyeballing one example?"</li>
+<li>"How do you know, today, whether an AI output is good, beyond eyeballing one example?"</li>
 <li>"What does 'right' actually mean for your task, specifically enough that a test could check it?"</li>
 </ul>
-<p class="wait">(wait — their answer to the second is the grading rubric.)</p>
+<p class="wait">(wait: their answer to the second is the grading rubric.)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(what their eval would check)</span></div>
 <dl class="bg">
@@ -987,64 +987,64 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Non-technical people hear "test suite" and check out. Reframe: this is just writing down what "good" means and checking against it automatically — the thing they already do by hand, every time, when they review an output. The value is that it scales: you can change a rule and instantly see whether it helped or hurt across a hundred cases.</p>
+<p>Non-technical people hear "test suite" and check out. Reframe: this is just writing down what "good" means and checking against it automatically, the thing they already do by hand, every time, when they review an output. The value is that it scales: you can change a rule and instantly see whether it helped or hurt across a hundred cases.</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — grading is the step after generation, and one grader is itself an AI</span></div>
-<p>Verified against the course's <code>01_intro_to_evals</code>. The eval loop is: build test cases (input + golden answer) → run the prompt so Claude <strong>generates responses</strong> → <strong>grade</strong> each against the golden answer → roll up to a <strong>score</strong> → change the prompt, re-run, watch the number move. So the step right after generating responses is <strong>grading</strong>. Two ways to grade: <strong>code-based</strong> for anything exact (valid JSON? contains the answer?), and <strong>model-based</strong>, which uses <strong>another model call to judge</strong> — see below.</p>
+<div class="block-head"><span class="block-label">Key concept: grading is the step after generation, and one grader is itself an AI</span></div>
+<p>Verified against the course's <code>01_intro_to_evals</code>. The eval loop is: build test cases (input + golden answer) → run the prompt so Claude <strong>generates responses</strong> → <strong>grade</strong> each against the golden answer → roll up to a <strong>score</strong> → change the prompt, re-run, watch the number move. So the step right after generating responses is <strong>grading</strong>. Two ways to grade: <strong>code-based</strong> for anything exact (valid JSON? contains the answer?), and <strong>model-based</strong>, which uses <strong>another model call to judge</strong>; see below.</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — what model-based grading is (it uses another AI)</span></div>
-<p>It's the second of the two grading methods on this slide: instead of checking the output in code, you hand it to <strong>another model call (often Claude) to score against a rubric</strong> — "rate this reply 1–5 on whether it resolves the issue and stays polite; return the number and a one-line reason." Use it for the open-ended qualities code can't check exactly: tone, relevance, helpfulness, "did it actually answer". It scales human-like judgement across a whole test set without a person reading every output. The grader is itself a model, so it can be wrong — good practice: a <strong>clear, specific rubric</strong>, ask for a <strong>reason alongside the score</strong>, and</p>
+<div class="block-head"><span class="block-label">Key concept: what model-based grading is (it uses another AI)</span></div>
+<p>It's the second of the two grading methods on this slide: instead of checking the output in code, you hand it to <strong>another model call (often Claude) to score against a rubric</strong>: "rate this reply 1–5 on whether it resolves the issue and stays polite; return the number and a one-line reason." Use it for the open-ended qualities code can't check exactly: tone, relevance, helpfulness, "did it actually answer". It scales human-like judgement across a whole test set without a person reading every output. The grader is itself a model, so it can be wrong. Good practice: a <strong>clear, specific rubric</strong>, ask for a <strong>reason alongside the score</strong>, and</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">validate the grader against human judgement</span></div>
 <p>on a sample before trusting it at scale. <em>Verification: the code-based-vs-model-based split is straight from this slide and the <code>prompt_evaluations</code> course; the rubric/reason/validate practice is standard eval guidance, framed here as practice, not as quotable course text.</em></p>
 </div></div></section>
 <section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Lesson 4 · Make it reliable</span><h2>Four techniques, in order of leverage</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>When the output is wrong you rarely need a bigger model — you need a clearer prompt. Reach for four things, in order of leverage: be <strong>clear and direct</strong>, be <strong>specific</strong>, use <strong>XML tags</strong> to label the parts, and — the big one — give <strong>examples</strong>. A couple of worked input→output pairs teach format and edge cases that paragraphs of instruction can't.</p>
+<p>When the output is wrong you rarely need a bigger model; you need a clearer prompt. Reach for four things, in order of leverage: be <strong>clear and direct</strong>, be <strong>specific</strong>, use <strong>XML tags</strong> to label the parts, and, the big one, give <strong>examples</strong>. A couple of worked input→output pairs teach format and edge cases that paragraphs of instruction can't.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"When it gets something wrong, the instinct is 'I need a smarter model'. Almost always you need a clearer instruction. Four moves, weakest to strongest: say exactly what you want; spell out the details; label the parts cleanly; and the one that moves quality most — show it a worked example. One good before-and-after teaches it more than a page of rules." (This is the same lesson as Claude 101 slide 5 and the AI Fluency prompting slide, here at the API level: <em>when it's off, it's almost always fixable</em>.)</p>
+<p>"When it gets something wrong, the instinct is 'I need a smarter model'. Almost always you need a clearer instruction. Four moves, weakest to strongest: say exactly what you want; spell out the details; label the parts cleanly; and the one that moves quality most: show it a worked example. One good before-and-after teaches it more than a page of rules." (This is the same lesson as Claude 101 slide 5 and the AI Fluency prompting slide, here at the API level: <em>when it's off, it's almost always fixable</em>.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"When AI has disappointed you, was it really the model — or was the brief vague?"</li>
+<li>"When AI has disappointed you, was it really the model, or was the brief vague?"</li>
 <li>"What's one finished example of 'good' you could hand it, instead of describing what you want?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the example they'd show — the highest-leverage move for each)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the example they'd show, the highest-leverage move for each)</span></div>
 <dl class="bg">
 <dt>Investigator</dt><dd>one past background report in the house format; the structure carries everything.</dd>
 <dt>Analyst</dt><dd>one filled comparison table, so the columns and "no data" handling are shown, not described.</dd>
 <dt>Designer</dt><dd>one finished asset spec, so it copies the shape rather than guessing it.</dd>
 <dt>Knowledge worker</dt><dd>one correctly-extracted invoice row, blanks and all.</dd>
 <dt>Reporter</dt><dd>one past briefing in the five-section format.</dd>
-<dt>Content</dt><dd>two past posts as the voice sample — show, don't tell.</dd>
+<dt>Content</dt><dd>two past posts as the voice sample; show, don't tell.</dd>
 <dt>Form-filler</dt><dd>one correctly-allocated receipt, including an edge case.</dd>
 <dt>Outreach</dt><dd>one proposal you'd actually send, as the template.</dd>
 <dt>Exec</dt><dd>one past one-page brief in the four-section shape.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>The XML-tags point is genuinely technical — Claude is trained to respect <code>&lt;document&gt;...&lt;/document&gt;</code> over loose quoting. Don't dwell on it for a non-technical room; just note that giving each part a clear label helps, and move to examples, which is the move that pays.</p>
+<p>The XML-tags point is genuinely technical: Claude is trained to respect <code>&lt;document&gt;...&lt;/document&gt;</code> over loose quoting. Don't dwell on it for a non-technical room; just note that giving each part a clear label helps, and move to examples, which is the move that pays.</p>
 </div></div></section>
 <section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Lesson 5 · Extend its reach</span><h2>Tool use is a round trip you complete</h2></div></header><div class="card-body"><p class="slide-sub"><em>The centrepiece of the back half. If they take one thing away, it's this.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>Claude can't <em>run</em> anything. It can only <em>ask</em>. You describe the tools; it replies "call this, with these arguments" (stop_reason: tool_use); you run the real function and hand back the result; it continues. The loop can repeat across several turns. This one mechanism is what every agent is built on: the model proposes, your environment executes, the result comes back.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the thing that changes everything: Claude on its own can't <em>do</em> anything. It can't check your calendar, hit your database, send an email. All it can do is say 'I'd like to call this tool, with these inputs'. Your system runs it for real and hands the answer back, and it carries on. That round trip — it asks, you act, you return the result — is the whole basis of letting AI <em>act</em>, not just answer. Every agent you've heard of is built on exactly this." (This is the under-the-floor version of letting it act: augmentation becomes agency — <code>05-ai-fluency</code> slide 4 — through one mechanism.)</p>
+<p>"Here's the thing that changes everything: Claude on its own can't <em>do</em> anything. It can't check your calendar, hit your database, send an email. All it can do is say 'I'd like to call this tool, with these inputs'. Your system runs it for real and hands the answer back, and it carries on. That round trip (it asks, you act, you return the result) is the whole basis of letting AI <em>act</em>, not just answer. Every agent you've heard of is built on exactly this." (This is the under-the-floor version of letting it act: augmentation becomes agency, <code>05-ai-fluency</code> slide 4, through one mechanism.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"What does it change for you that the AI never acts directly — it only ever <em>requests</em>, and your system decides whether to run it?"</li>
+<li>"What does it change for you that the AI never acts directly; it only ever <em>requests</em>, and your system decides whether to run it?"</li>
 <li>"In your work, what's something you'd want it to <em>do</em>, not just tell you about?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the action they'd let it take — the tool they'd want defined)</span></div>
+<div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the action they'd let it take, the tool they'd want defined)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>look up a name in Companies House or a sanctions list, then fold the result into the report — grounded in real records, not its memory.</dd>
+<dt>Investigator</dt><dd>look up a name in Companies House or a sanctions list, then fold the result into the report, grounded in real records, not its memory.</dd>
 <dt>Analyst</dt><dd>query the live pricing or the warehouse, so the comparison uses today's numbers, not a guess.</dd>
 <dt>Designer</dt><dd>pull the exact retailer spec sheet for each channel before listing variants.</dd>
 <dt>Knowledge worker</dt><dd>look up a supplier's standing PO number from the master list while extracting.</dd>
@@ -1056,65 +1056,65 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is where the autonomy fear lives — "so it can just <em>do</em> things?" Answer it on the diagram: no. It only ever <em>asks</em>; your system is the gate. That's the same confirm-each-step-then-auto control they met as students, now visible in the mechanism. The model never has its hand on the lever. (<code>objections.md</code> — permission/auto.)</p>
+<p>This is where the autonomy fear lives: "so it can just <em>do</em> things?" Answer it on the diagram: no. It only ever <em>asks</em>; your system is the gate. That's the same confirm-each-step-then-auto control they met as students, now visible in the mechanism. The model never has its hand on the lever. (<code>objections.md</code>: permission/auto.)</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">If asked — is a "tool" a function, an Anthropic endpoint, or a config file (technical reference)</span></div>
-<p>It's a <strong>plain function that runs in your own code</strong> when Claude needs information or an action — the correct framing, and the one to give if someone offers the other two. <em>Not</em> a special Anthropic-hosted endpoint: tool use all goes through the one Messages API endpoint, and the tool's logic lives on your side; the model only returns a <code>tool_use</code> request (a name plus arguments) and waits for you to send back the result. <em>Not</em> a config file that defines Claude's behaviour: what you send in the request's <code>tools</code> array is just a <strong>declaration</strong> — name, description, input schema — telling Claude what's <em>available</em> to call, not how to behave. Hold the distinction: the <strong>declaration</strong> is the interface; the</p>
+<div class="block-head"><span class="block-label">If asked: is a "tool" a function, an Anthropic endpoint, or a config file (technical reference)</span></div>
+<p>It's a <strong>plain function that runs in your own code</strong> when Claude needs information or an action, the correct framing, and the one to give if someone offers the other two. <em>Not</em> a special Anthropic-hosted endpoint: tool use all goes through the one Messages API endpoint, and the tool's logic lives on your side; the model only returns a <code>tool_use</code> request (a name plus arguments) and waits for you to send back the result. <em>Not</em> a config file that defines Claude's behaviour: what you send in the request's <code>tools</code> array is just a <strong>declaration</strong> (name, description, input schema) telling Claude what's <em>available</em> to call, not how to behave. Hold the distinction: the <strong>declaration</strong> is the interface; the</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">function</span></div>
-<p>(your code) is what actually runs. <em>Verification: matches the <code>tool_use</code> course (<code>anthropics/courses</code>) and the official tool-use docs — Claude returns <code>tool_use</code>, you execute and return a <code>tool_result</code> (June 2026).</em></p>
+<p>(your code) is what actually runs. <em>Verification: matches the <code>tool_use</code> course (<code>anthropics/courses</code>) and the official tool-use docs: Claude returns <code>tool_use</code>, you execute and return a <code>tool_result</code> (June 2026).</em></p>
 </div></div></section>
 <section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Lesson 6 · Extend its reach</span><h2>Some tools you don't have to build</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Most tools are yours to implement. A few ship with the API — you switch them on and Anthropic runs them server-side: a <strong>text editor</strong> (edits files in place), <strong>web search</strong> (live, cited results), <strong>code execution</strong> (runs Python in a sandbox). The text editor and code execution are exactly what powers Claude Code and the analysis features. The Files API lets a request reference an uploaded file without re-sending it every call.</p>
+<p>Most tools are yours to implement. A few ship with the API; you switch them on and Anthropic runs them server-side: a <strong>text editor</strong> (edits files in place), <strong>web search</strong> (live, cited results), <strong>code execution</strong> (runs Python in a sandbox). The text editor and code execution are exactly what powers Claude Code and the analysis features. The Files API lets a request reference an uploaded file without re-sending it every call.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Most tools, your developer builds. A handful, Anthropic already built — you just switch them on. A text editor that changes files, web search that comes back with cited results, and a code sandbox that runs Python. Worth knowing because these aren't abstract: the text editor and the sandbox are literally what's running when you use Claude Code. You've been using these tools without knowing their names."</p>
+<p>"Most tools, your developer builds. A handful, Anthropic already built; you just switch them on. A text editor that changes files, web search that comes back with cited results, and a code sandbox that runs Python. Worth knowing because these aren't abstract: the text editor and the sandbox are literally what's running when you use Claude Code. You've been using these tools without knowing their names."</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Knowing that web search and a code sandbox are built in — what's a job that needs <em>live</em> facts plus a calculation, that you'd hand to it?"</li>
+<li>"Knowing that web search and a code sandbox are built in, what's a job that needs <em>live</em> facts plus a calculation, that you'd hand to it?"</li>
 <li>"How does it sit with you that the Claude Code you've used is these same pieces, switched on?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span></div>
-<p>mostly shared and mechanical — these are the same three built-in tools for everyone. Give one shared framing: <em>web search for current facts, the sandbox for any real calculation or chart, the text editor for working on real files — and you've already met all three inside Claude Code.</em> Then land it once per likely room: the <strong>Analyst</strong> and</p>
+<p>mostly shared and mechanical; these are the same three built-in tools for everyone. Give one shared framing: <em>web search for current facts, the sandbox for any real calculation or chart, the text editor for working on real files, and you've already met all three inside Claude Code.</em> Then land it once per likely room: the <strong>Analyst</strong> and</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Exec</span></div>
 <p>care most about the code sandbox (real numbers, real charts, not a plausible-looking figure); the <strong>Investigator</strong>, <strong>Reporter</strong> and <strong>Outreach</strong> care most about cited web search (live, attributable, not from memory). Don't force all nine here.</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"Runs Python in a sandbox" can spook a regulated room. Reassure: the sandbox is isolated and the web-search results come back <em>with citations</em>, which is the opposite of "trust me". This connects to the same floor-and-ceiling data conversation. (<code>objections.md</code> — IT/compliance; hallucinate.)</p>
+<p>"Runs Python in a sandbox" can spook a regulated room. Reassure: the sandbox is isolated and the web-search results come back <em>with citations</em>, which is the opposite of "trust me". This connects to the same floor-and-ceiling data conversation. (<code>objections.md</code>: IT/compliance; hallucinate.)</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — the code execution tool's limit, and the Files API</span></div>
-<p>Verified against the official Files-API and code-execution docs. The code execution tool runs <strong>Python in an Anthropic-hosted sandbox with no network access</strong> — that isolation is the key limitation (no outbound calls, no internet <code>pip install</code>, no fetching URLs) and also the safety feature. It's not JavaScript-only, you don't supply your own environment, and it handles data/images, not just text. Data goes in and out through the <strong>Files API</strong>: a create-once / use-many store where you upload a file, get a <code>file_id</code>, and reference it across requests without re-sending it — and where you download outputs (e.g. charts) the tool produces. Two jobs for the Files API: stop re-uploading the same document, and serve as the input/output channel for code execution. (You can only download files Claude <em>created</em>; ones you uploaded can't be downloaded back.)</p>
+<div class="block-head"><span class="block-label">Key concept: the code execution tool's limit, and the Files API</span></div>
+<p>Verified against the official Files-API and code-execution docs. The code execution tool runs <strong>Python in an Anthropic-hosted sandbox with no network access</strong>; that isolation is the key limitation (no outbound calls, no internet <code>pip install</code>, no fetching URLs) and also the safety feature. It's not JavaScript-only, you don't supply your own environment, and it handles data/images, not just text. Data goes in and out through the <strong>Files API</strong>: a create-once / use-many store where you upload a file, get a <code>file_id</code>, and reference it across requests without re-sending it, and where you download outputs (e.g. charts) the tool produces. Two jobs for the Files API: stop re-uploading the same document, and serve as the input/output channel for code execution. (You can only download files Claude <em>created</em>; ones you uploaded can't be downloaded back.)</p>
 </div></div></section>
 <section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Lesson 7 · Extend its reach</span><h2>RAG: give it knowledge it was never trained on</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>You can't fit a whole knowledge base in one prompt, so you index it once, then for each question retrieve only the few chunks that question needs and paste them in. Two indexes do best together: <strong>embeddings</strong> catch meaning ("car" finds "vehicle"); <strong>BM25</strong> catches exact terms (an error code, a part number). Production RAG runs both and merges.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Claude was trained on the public internet up to a point in time. It was never trained on <em>your</em> documents. RAG is how you give it those: you index everything once, then for each question you pull only the handful of passages that matter and hand them over. Two ways to find the right passages — one that understands meaning, so 'car' also finds 'vehicle', and one that nails exact terms like a part number or an error code. The good systems use both." (This is the engine-room version of the Claude 101 connectors and Enterprise Search slides: <em>work with your actual data, not a cold start.</em>)</p>
+<p>"Claude was trained on the public internet up to a point in time. It was never trained on <em>your</em> documents. RAG is how you give it those: you index everything once, then for each question you pull only the handful of passages that matter and hand them over. Two ways to find the right passages: one that understands meaning, so 'car' also finds 'vehicle', and one that nails exact terms like a part number or an error code. The good systems use both." (This is the engine-room version of the Claude 101 connectors and Enterprise Search slides: <em>work with your actual data, not a cold start.</em>)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
 <li>"What's the body of knowledge that's yours, that no general AI would ever have seen?"</li>
-<li>"When you search it today, do you search by <em>meaning</em> or by <em>exact term</em> — or both?"</li>
+<li>"When you search it today, do you search by <em>meaning</em> or by <em>exact term</em>, or both?"</li>
 </ul>
-<p class="wait">(wait — the answer tells them which index matters for their work.)</p>
+<p class="wait">(wait: the answer tells them which index matters for their work.)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the knowledge base they'd index, and which index bites)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the firm's past case files and house precedents — exact-term search matters (names, company numbers, sanctions codes).</dd>
-<dt>Analyst</dt><dd>historic vendor responses and methodology notes — meaning-search to find comparable answers worded differently.</dd>
-<dt>Designer</dt><dd>the brand guidelines and retailer spec library — exact-term for spec codes and dimensions.</dd>
-<dt>Knowledge worker</dt><dd>the supplier master and past invoices — exact-term for PO and supplier IDs.</dd>
-<dt>Reporter</dt><dd>past briefings and the project archive — meaning-search to surface related prior updates.</dd>
-<dt>Content</dt><dd>the back catalogue of posts — meaning-search to find what's already been said on a topic.</dd>
-<dt>Form-filler</dt><dd>the rules and category definitions for the template — exact-term for section codes and statute references.</dd>
-<dt>Outreach</dt><dd>the knowledge base and past proposals — both: meaning for the angle, exact for product names and figures.</dd>
-<dt>Exec</dt><dd>the retainer book, board packs and KPI definitions — exact-term for client names and metric names.</dd>
+<dt>Investigator</dt><dd>the firm's past case files and house precedents; exact-term search matters (names, company numbers, sanctions codes).</dd>
+<dt>Analyst</dt><dd>historic vendor responses and methodology notes; meaning-search to find comparable answers worded differently.</dd>
+<dt>Designer</dt><dd>the brand guidelines and retailer spec library; exact-term for spec codes and dimensions.</dd>
+<dt>Knowledge worker</dt><dd>the supplier master and past invoices; exact-term for PO and supplier IDs.</dd>
+<dt>Reporter</dt><dd>past briefings and the project archive; meaning-search to surface related prior updates.</dd>
+<dt>Content</dt><dd>the back catalogue of posts; meaning-search to find what's already been said on a topic.</dd>
+<dt>Form-filler</dt><dd>the rules and category definitions for the template; exact-term for section codes and statute references.</dd>
+<dt>Outreach</dt><dd>the knowledge base and past proposals; both: meaning for the angle, exact for product names and figures.</dd>
+<dt>Exec</dt><dd>the retainer book, board packs and KPI definitions; exact-term for client names and metric names.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
@@ -1122,24 +1122,24 @@ th {
 </div></div></section>
 <section class="card" id="slide-10" data-slide="10"><header class="card-head"><span class="badge">10</span><div><span class="eyebrow">Lesson 8 · Extend its reach</span><h2>The same API takes more than text</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Four capabilities ride on the request they already know — two change what goes in, two change what comes out. <strong>Images</strong> (read charts, screenshots, photos) and <strong>PDFs</strong> (text and layout, page by page) are richer inputs. <strong>Extended thinking</strong> (reasons first, then answers) and <strong>citations</strong> (points to the source a claim came from) are richer outputs. Thinking gives room to work through hard problems; citations turn "trust me" into "here's the passage".</p>
+<p>Four capabilities ride on the request they already know: two change what goes in, two change what comes out. <strong>Images</strong> (read charts, screenshots, photos) and <strong>PDFs</strong> (text and layout, page by page) are richer inputs. <strong>Extended thinking</strong> (reasons first, then answers) and <strong>citations</strong> (points to the source a claim came from) are richer outputs. Thinking gives room to work through hard problems; citations turn "trust me" into "here's the passage".</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"The same request takes more than typed text. On the way in: images, so it can read a chart or a screenshot, and PDFs, page by page with the layout intact. On the way out: it can think through a hard problem before committing to an answer, and it can point at the exact source it drew a claim from. That last one — citations — is the backbone of any answer a business has to be able to stand behind." (Citations are the API-level answer to <em>"what if it makes things up?"</em> — <code>objections.md</code> — hallucinate.)</p>
+<p>"The same request takes more than typed text. On the way in: images, so it can read a chart or a screenshot, and PDFs, page by page with the layout intact. On the way out: it can think through a hard problem before committing to an answer, and it can point at the exact source it drew a claim from. That last one, citations, is the backbone of any answer a business has to be able to stand behind." (Citations are the API-level answer to <em>"what if it makes things up?"</em>, <code>objections.md</code>: hallucinate.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"How much of your real source material is <em>not</em> typed text — it's PDFs, scans, charts, screenshots?"</li>
+<li>"How much of your real source material is <em>not</em> typed text; it's PDFs, scans, charts, screenshots?"</li>
 <li>"Where would 'here's the exact passage I got this from' change whether you could use the output at all?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the input that matters, and why citations land)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>PDF court judgments and scanned filings in; every claim cited back to a filename — non-negotiable for a defensible report.</dd>
+<dt>Investigator</dt><dd>PDF court judgments and scanned filings in; every claim cited back to a filename, non-negotiable for a defensible report.</dd>
 <dt>Analyst</dt><dd>vendor responses arrive as PDFs and screenshots; citations make the comparison auditable.</dd>
 <dt>Designer</dt><dd>reads a reference image or a screenshot of a layout you like, and works from it.</dd>
-<dt>Knowledge worker</dt><dd>invoices and receipts are images and PDFs, not text — this is the step that makes the real files work.</dd>
+<dt>Knowledge worker</dt><dd>invoices and receipts are images and PDFs, not text; this is the step that makes the real files work.</dd>
 <dt>Reporter</dt><dd>consolidates from PDF reports and chart screenshots; attribution stays intact.</dd>
 <dt>Content</dt><dd>reads a competitor's published PDF or a screenshot for reference.</dd>
 <dt>Form-filler</dt><dd>the receipts <em>are</em> photos and scanned PDFs; reading them is the whole job.</dd>
@@ -1148,73 +1148,73 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>This is the slide that answers "but my real files are Word, Excel, PDFs, scans" (<code>objections.md</code> — Word/Excel/PDF). The dummy text files in the student courses were for ease of reading together; the real machinery handles the real formats. Say so plainly.</p>
+<p>This is the slide that answers "but my real files are Word, Excel, PDFs, scans" (<code>objections.md</code>: Word/Excel/PDF). The dummy text files in the student courses were for ease of reading together; the real machinery handles the real formats. Say so plainly.</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — PDF vs image: the main difference</span></div>
+<div class="block-head"><span class="block-label">Key concept: PDF vs image: the main difference</span></div>
 <p>Verified against the official PDF-support docs. A <strong>PDF is processed as both text and images</strong>: each page is rendered as an image <em>and</em> its text is extracted, so Claude reads the words <em>and</em> sees charts, tables, and layout. An</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">image is vision-only</span></div>
-<p>— pixels, no separate text layer. That difference drives the rest: in the request a PDF uses a <code>document</code> block with <code>media_type: application/pdf</code> (an image uses an <code>image</code> block); <strong>citations</strong> are available for PDFs but not images; and a PDF costs more per page (billed as text tokens <em>and</em> image tokens). So PDFs give the richer, dual understanding plus citations, at more tokens; images are cheaper, vision-only, no citations. Common distractors to reject: PDFs are <em>not</em> text-only, and they need <em>no</em> special permissions (just a standard, unencrypted PDF).</p>
+<p>Pixels, no separate text layer. That difference drives the rest: in the request a PDF uses a <code>document</code> block with <code>media_type: application/pdf</code> (an image uses an <code>image</code> block); <strong>citations</strong> are available for PDFs but not images; and a PDF costs more per page (billed as text tokens <em>and</em> image tokens). So PDFs give the richer, dual understanding plus citations, at more tokens; images are cheaper, vision-only, no citations. Common distractors to reject: PDFs are <em>not</em> text-only, and they need <em>no</em> special permissions (just a standard, unencrypted PDF).</p>
 </div></div></section>
 <section class="card" id="slide-11" data-slide="11"><header class="card-head"><span class="badge">11</span><div><span class="eyebrow">Lesson 9 · Extend its reach</span><h2>Pay for the long part once</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Most prompts start with the same big block — a system prompt, tool definitions, a document. Cache that prefix and later calls read it instead of re-paying for it. The rule: only an <em>exact, unchanged prefix</em> is reused, so put everything stable first and the variable part last. Cache lifetimes are short (minutes), so it pays off across a burst of related calls.</p>
+<p>Most prompts start with the same big block: a system prompt, tool definitions, a document. Cache that prefix and later calls read it instead of re-paying for it. The rule: only an <em>exact, unchanged prefix</em> is reused, so put everything stable first and the variable part last. Cache lifetimes are short (minutes), so it pays off across a burst of related calls.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Remember slide 3 — every call re-sends the whole history. If that history starts with the same big block every time, a long document, a fat set of rules, you'd be paying for it again and again. Caching lets you pay for that stable part once and have later calls read it cheaply. It's a cost-and-speed optimisation, not a new capability."</p>
+<p>"Remember slide 3: every call re-sends the whole history. If that history starts with the same big block every time, a long document, a fat set of rules, you'd be paying for it again and again. Caching lets you pay for that stable part once and have later calls read it cheaply. It's a cost-and-speed optimisation, not a new capability."</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
 <li>"What does it mean to you that the expensive part of running this is the <em>repeated</em> context, not the question?"</li>
-<li>"How does this apply to your work — is the big, unchanging part of your job the documents, or the rules?"</li>
+<li>"How does this apply to your work: is the big, unchanging part of your job the documents, or the rules?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span></div>
-<p>mechanical and shared — a developer turns this on; it doesn't change what the tool does for any one role. One shared example: <em>if you ask twenty questions of the same hundred-page contract, caching means you pay for the contract once, not twenty times.</em> Then connect it once to the cost framing they care about — this is part of why running a built workflow is cheap. Hold the line: <em>"about twenty dollars a month"</em> and stop. Don't invent a larger figure. (<code>framings.md</code> — cost model. <code>objections.md</code> — burning through tokens.)</p>
+<p>mechanical and shared; a developer turns this on; it doesn't change what the tool does for any one role. One shared example: <em>if you ask twenty questions of the same hundred-page contract, caching means you pay for the contract once, not twenty times.</em> Then connect it once to the cost framing they care about; this is part of why running a built workflow is cheap. Hold the line: <em>"about twenty dollars a month"</em> and stop. Don't invent a larger figure. (<code>framings.md</code>: cost model. <code>objections.md</code>: burning through tokens.)</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Don't let this become a pricing rabbit-hole. The honest, calm version: the marginal cost of re-running a built system is small, and caching is one of the reasons. Move on before someone asks you to model their bill.</p>
 </div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept — the minimum requirement for caching to work</span></div>
+<div class="block-head"><span class="block-label">Key concept: the minimum requirement for caching to work</span></div>
 <p>Verified against the official prompt-caching docs. Two things must both hold: (1) you mark the block with <code>cache_control: {"type": "ephemeral"}</code>, and (2) the cached prefix clears your model's</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">minimum cacheable length</span></div>
-<p>— roughly <strong>1,024 tokens on Sonnet 4.x</strong>, <strong>4,096 tokens on Opus 4.5+ and Haiku 4.5</strong>. Below the threshold it <strong>silently runs uncached — no error</strong>. So a short system prompt marked for caching just won't cache. Confirm it worked via the response <code>usage</code>: <code>cache_creation_input_tokens</code> &gt; 0 (written) or <code>cache_read_input_tokens</code> &gt; 0 (hit); both 0 means no caching. And remember the rule from this slide: only an <em>exact, unchanged prefix</em> is reused, so put the stable content first.</p>
+<p>Roughly <strong>1,024 tokens on Sonnet 4.x</strong>, <strong>4,096 tokens on Opus 4.5+ and Haiku 4.5</strong>. Below the threshold it <strong>silently runs uncached, no error</strong>. So a short system prompt marked for caching just won't cache. Confirm it worked via the response <code>usage</code>: <code>cache_creation_input_tokens</code> &gt; 0 (written) or <code>cache_read_input_tokens</code> &gt; 0 (hit); both 0 means no caching. And remember the rule from this slide: only an <em>exact, unchanged prefix</em> is reused, so put the stable content first.</p>
 </div></div></section>
 <section class="card" id="slide-12" data-slide="12"><header class="card-head"><span class="badge">12</span><div><span class="eyebrow">Lesson 10 · Build systems</span><h2>MCP: one standard plug for tools and data</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Without a standard, every app wires up every integration by hand. With MCP, a server exposes its capabilities once and any client can connect. A server publishes three things — <strong>tools</strong> (actions to call), <strong>resources</strong> (data to read), <strong>prompts</strong> (ready-made flows) — and an inspector lets you test it before wiring it to a client. Build the integration once; plug it into Claude Code, your own app, or anyone else's.</p>
+<p>Without a standard, every app wires up every integration by hand. With MCP, a server exposes its capabilities once and any client can connect. A server publishes three things: <strong>tools</strong> (actions to call), <strong>resources</strong> (data to read), <strong>prompts</strong> (ready-made flows), and an inspector lets you test it before wiring it to a client. Build the integration once; plug it into Claude Code, your own app, or anyone else's.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"MCP is the standard plug. Before it, connecting Claude to your CRM, your drive, your database meant a custom wire for each, for each app. With MCP you build the connection once and any tool that speaks the standard can use it. You've heard 'USB-C for AI' — that's it. Build once, plug in everywhere." (This is the engine-room version of the Claude 101 connectors slide — same idea, one layer down: <em>one standard behind every integration</em>.)</p>
+<p>"MCP is the standard plug. Before it, connecting Claude to your CRM, your drive, your database meant a custom wire for each, for each app. With MCP you build the connection once and any tool that speaks the standard can use it. You've heard 'USB-C for AI'; that's it. Build once, plug in everywhere." (This is the engine-room version of the Claude 101 connectors slide, same idea, one layer down: <em>one standard behind every integration</em>.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"What tools and data does your work live in, that you'd want Claude to reach — and reach the same way from every app?"</li>
+<li>"What tools and data does your work live in, that you'd want Claude to reach, and reach the same way from every app?"</li>
 <li>"What does 'build the connection once, use it everywhere' mean for how your team would share it?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span></div>
-<p>the <em>mechanism</em> is shared; what varies is the connector that earns its place — and that's the same list as the Claude 101 connectors slide. Don't re-run all nine here; point at it: <em>whatever tool you said earns its place as a connector — the CRM, Drive, the warehouse — MCP is how that connection actually gets built and shared.</em> Land it once for the room you have: for a team, the payoff is that one person builds the connector and everyone plugs in; for a solo operator, it's that the connector outlives any single app.</p>
+<p>the <em>mechanism</em> is shared; what varies is the connector that earns its place, and that's the same list as the Claude 101 connectors slide. Don't re-run all nine here; point at it: <em>whatever tool you said earns its place as a connector (the CRM, Drive, the warehouse), MCP is how that connection actually gets built and shared.</em> Land it once for the room you have: for a team, the payoff is that one person builds the connector and everyone plugs in; for a solo operator, it's that the connector outlives any single app.</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>"Resources, tools, prompts, inspector" is developer vocabulary. Don't drill it. The one durable takeaway for a non-technical room: this is why the connectors they liked aren't bespoke magic — they're a standard, which means portable and shareable.</p>
+<p>"Resources, tools, prompts, inspector" is developer vocabulary. Don't drill it. The one durable takeaway for a non-technical room: this is why the connectors they liked aren't bespoke magic; they're a standard, which means portable and shareable.</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">If asked — the three primitives, who controls each, and what each is for (technical reference)</span> <span class="block-note">The "three primitives, three owners" framing is straight from the MCP course spine (<code>07 · Introduction to Model Context Protocol</code>, "MCP review"). Match the job to the primitive</span></div>
+<div class="block-head"><span class="block-label">If asked: the three primitives, who controls each, and what each is for (technical reference)</span> <span class="block-note">The "three primitives, three owners" framing is straight from the MCP course spine (<code>07 · Introduction to Model Context Protocol</code>, "MCP review"). Match the job to the primitive</span></div>
 <ul>
-<li><strong>Tools — model-controlled. Use for actions Claude performs.</strong> The model decides to call them (verbs, side effects). <em>Reading a document on the model's own initiative is a tool.</em></li>
-<li><strong>Resources — application-controlled. Use for exposing data Claude can read.</strong> Read-only content addressed by a URI (e.g. <code>file:///docs/report.md</code>); the app/user decides what to pull in. <strong>Exposing document <em>contents</em> is a resource.</strong></li>
-<li><strong>Prompts — user-controlled. Use for pre-tested, reusable instructions.</strong> Vetted templates the user invokes (often as slash commands), can take arguments. <strong>Pre-tested formatting instructions are a prompt.</strong></li>
+<li><strong>Tools: model-controlled. Use for actions Claude performs.</strong> The model decides to call them (verbs, side effects). <em>Reading a document on the model's own initiative is a tool.</em></li>
+<li><strong>Resources: application-controlled. Use for exposing data Claude can read.</strong> Read-only content addressed by a URI (e.g. <code>file:///docs/report.md</code>); the app/user decides what to pull in. <strong>Exposing document <em>contents</em> is a resource.</strong></li>
+<li><strong>Prompts: user-controlled. Use for pre-tested, reusable instructions.</strong> Vetted templates the user invokes (often as slash commands), can take arguments. <strong>Pre-tested formatting instructions are a prompt.</strong></li>
 </ul>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">If asked — how to define a tool in the Python SDK (technical reference)</span></div>
-<p>The easiest way is the <strong><code>@mcp.tool()</code> decorator</strong> from <code>FastMCP</code>. Write a normal Python function and decorate it — the function name becomes the tool name, the docstring becomes the description, and the type hints become the input schema. No hand-written JSON Schema, no separate list/call handlers. ```python from mcp.server.fastmcp import FastMCP mcp = FastMCP("docs-server")</p>
+<div class="block-head"><span class="block-label">If asked: how to define a tool in the Python SDK (technical reference)</span></div>
+<p>The easiest way is the <strong><code>@mcp.tool()</code> decorator</strong> from <code>FastMCP</code>. Write a normal Python function and decorate it: the function name becomes the tool name, the docstring becomes the description, and the type hints become the input schema. No hand-written JSON Schema, no separate list/call handlers. ```python from mcp.server.fastmcp import FastMCP mcp = FastMCP("docs-server")</p>
 <p>@mcp.tool() def read_document(path: str) -&gt; str: """Read and return the contents of a document.""" with open(path) as f: return f.read() ``<code> The lower-level path (implement </code>list_tools()<code>/</code>call_tool()` and write the schema by hand) works but is the harder route.</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">If asked — how server and client connect during development (technical reference)</span></div>
-<p>The most common dev-time transport is <strong>stdio</strong> (standard input/output): the client launches the server as a subprocess and they exchange JSON-RPC over stdin/stdout — no ports, no network, no auth. The alternative is <strong>HTTP</strong> (Streamable HTTP, which replaced the older HTTP+SSE transport), used when the server runs as a separate or remote service.</p>
+<div class="block-head"><span class="block-label">If asked: how server and client connect during development (technical reference)</span></div>
+<p>The most common dev-time transport is <strong>stdio</strong> (standard input/output): the client launches the server as a subprocess and they exchange JSON-RPC over stdin/stdout, no ports, no network, no auth. The alternative is <strong>HTTP</strong> (Streamable HTTP, which replaced the older HTTP+SSE transport), used when the server runs as a separate or remote service.</p>
 <p><em>Verification: the primitive/owner mapping is from the course spine. The <code>@mcp.tool()</code> decorator and stdio specifics match the official MCP Python SDK docs and quickstart; course 07 is video-only, so these aren't quotable from our capture but are confirmed against primary docs (June 2026).</em></p>
 </div></div></section>
 <section class="card" id="slide-13" data-slide="13"><header class="card-head"><span class="badge">13</span><div><span class="eyebrow">Lesson 11 · Build systems</span><h2>Workflows vs agents: who decides the path</h2></div></header><div class="card-body"><div class="block block--idea">
@@ -1222,46 +1222,46 @@ th {
 <p>Both chain LLM calls. The difference is control. In a <strong>workflow</strong> you wire the steps in advance (chain, route, parallel). In an <strong>agent</strong> the model chooses the steps as it goes (think, act, observe, loop). Choose by predictability: if you can draw the steps ahead of time, a workflow is cheaper and more reliable; if the path depends on what's found along the way, you need an agent. Claude Code is an agent. Most production systems mix both.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Two ways to build something real, and the difference is who's driving. In a workflow, <em>you</em> fix the steps in advance — do this, then this, then this. In an agent, the model decides the path as it goes, looping until it's done. Pick by how predictable the job is. If you could draw the steps on a whiteboard beforehand, build a workflow — it's cheaper and steadier. If the right next step depends on what it finds, you need an agent. Claude Code is one." (This is automation versus agency from <code>05-ai-fluency</code> slide 4, made concrete: a fixed task you define versus a system that decides for itself.)</p>
+<p>"Two ways to build something real, and the difference is who's driving. In a workflow, <em>you</em> fix the steps in advance: do this, then this, then this. In an agent, the model decides the path as it goes, looping until it's done. Pick by how predictable the job is. If you could draw the steps on a whiteboard beforehand, build a workflow; it's cheaper and steadier. If the right next step depends on what it finds, you need an agent. Claude Code is one." (This is automation versus agency from <code>05-ai-fluency</code> slide 4, made concrete: a fixed task you define versus a system that decides for itself.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>"Think of one task you'd hand over. Could you write the steps down in advance — or does the next step depend on what it finds?"</li>
-<li>"Which feels right for your work — a fixed recipe, or something that figures out the path?"</li>
+<li>"Think of one task you'd hand over. Could you write the steps down in advance, or does the next step depend on what it finds?"</li>
+<li>"Which feels right for your work: a fixed recipe, or something that figures out the path?"</li>
 </ul>
-<p class="wait">(wait — their answer is the workflow-vs-agent call for their first build.)</p>
+<p class="wait">(wait: their answer is the workflow-vs-agent call for their first build.)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(workflow if the steps are fixed, agent if the path is discovered)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>mostly <strong>agent</strong> — what to chase next depends on what the file reveals; a fixed recipe can't anticipate the gaps.</dd>
-<dt>Analyst</dt><dd><strong>workflow</strong> — read each submission, tabulate, flag gaps. The steps are the same every quarter.</dd>
-<dt>Designer</dt><dd><strong>workflow</strong> — read each brief, check the spec, list the variants. Predictable shape.</dd>
-<dt>Knowledge worker</dt><dd><strong>workflow</strong> — read, extract, validate, flag. The most fixed recipe of all.</dd>
-<dt>Reporter</dt><dd><strong>workflow</strong> — collect updates, sort into five sections, attribute. Same every week.</dd>
-<dt>Content</dt><dd><strong>workflow</strong> with a creative step — gather references, draft to the pattern, check voice.</dd>
-<dt>Form-filler</dt><dd><strong>workflow</strong> — read, classify, allocate, reconcile. Deterministic by design.</dd>
-<dt>Outreach</dt><dd><strong>workflow</strong> — one proposal per customer, fixed sections. The loop is the same per file.</dd>
+<dt>Investigator</dt><dd>mostly <strong>agent</strong>: what to chase next depends on what the file reveals; a fixed recipe can't anticipate the gaps.</dd>
+<dt>Analyst</dt><dd><strong>workflow</strong>: read each submission, tabulate, flag gaps. The steps are the same every quarter.</dd>
+<dt>Designer</dt><dd><strong>workflow</strong>: read each brief, check the spec, list the variants. Predictable shape.</dd>
+<dt>Knowledge worker</dt><dd><strong>workflow</strong>: read, extract, validate, flag. The most fixed recipe of all.</dd>
+<dt>Reporter</dt><dd><strong>workflow</strong>: collect updates, sort into five sections, attribute. Same every week.</dd>
+<dt>Content</dt><dd><strong>workflow</strong> with a creative step: gather references, draft to the pattern, check voice.</dd>
+<dt>Form-filler</dt><dd><strong>workflow</strong>: read, classify, allocate, reconcile. Deterministic by design.</dd>
+<dt>Outreach</dt><dd><strong>workflow</strong>: one proposal per customer, fixed sections. The loop is the same per file.</dd>
 <dt>Exec</dt><dd><strong>workflow</strong> for the recurring brief; lean <strong>agent</strong> when the question is open ("what happened while I was out, and what should I worry about?").</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>The honest framing: most of what your room does is a <em>workflow</em>, and that's the good news — workflows are cheaper, steadier, and easier to trust. Don't oversell "agents". The recurring deliverable they each named in the student courses is almost always a workflow. (<code>framings.md</code> — the Excel-formula route: you write the recipe once, it runs the same every time.)</p>
+<p>The honest framing: most of what your room does is a <em>workflow</em>, and that's the good news: workflows are cheaper, steadier, and easier to trust. Don't oversell "agents". The recurring deliverable they each named in the student courses is almost always a workflow. (<code>framings.md</code>, the Excel-formula route: you write the recipe once, it runs the same every time.)</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">If asked — what gives an agent the most flexibility for unexpected requests (technical reference)</span></div>
-<p>Grounded in Anthropic's "Building Effective Agents" guidance, the source behind lessons 76–82 (video-only in our capture); conceptual, matches the slide. The flexible move is to give Claude a few <strong>general, composable tools</strong> and let the agent loop decide which to call — not a narrow, single-purpose tool for every case you anticipated. General tools (run a query, read a file, search) recombine into behaviours you never scripted; narrow tools only cover the exact paths you foresaw. The catch is the slide's own point: an agent is less predictable and costs more tokens, so for a job you can draw on a whiteboard in advance, a workflow still wins. Flexibility and control trade off — you don't get both.</p>
+<div class="block-head"><span class="block-label">If asked: what gives an agent the most flexibility for unexpected requests (technical reference)</span></div>
+<p>Grounded in Anthropic's "Building Effective Agents" guidance, the source behind lessons 76–82 (video-only in our capture); conceptual, matches the slide. The flexible move is to give Claude a few <strong>general, composable tools</strong> and let the agent loop decide which to call, not a narrow, single-purpose tool for every case you anticipated. General tools (run a query, read a file, search) recombine into behaviours you never scripted; narrow tools only cover the exact paths you foresaw. The catch is the slide's own point: an agent is less predictable and costs more tokens, so for a job you can draw on a whiteboard in advance, a workflow still wins. Flexibility and control trade off; you don't get both.</p>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">If asked — Claude keeps ignoring rules in one long, overloaded prompt (technical reference)</span></div>
-<p>The fix is <strong>prompt chaining</strong> (lesson 78, "Chaining workflows"): break the one over-stuffed prompt into a short chain of focused steps, each handling a few rules and passing its output to the next. A single call carrying fifteen requirements overloads one inference and some instructions get dropped; a chain gives each step less to hold, and you can check the output between steps — a gate — before moving on. Note what it isn't: making the prompt louder ("IMPORTANT!!!") doesn't lighten the load; routing picks a path but doesn't reduce what's on it; parallelisation runs independent sub-tasks at once, which helps coverage, not instruction-following on a sequential job.</p>
+<div class="block-head"><span class="block-label">If asked: Claude keeps ignoring rules in one long, overloaded prompt (technical reference)</span></div>
+<p>The fix is <strong>prompt chaining</strong> (lesson 78, "Chaining workflows"): break the one over-stuffed prompt into a short chain of focused steps, each handling a few rules and passing its output to the next. A single call carrying fifteen requirements overloads one inference and some instructions get dropped; a chain gives each step less to hold, and you can check the output between steps, a gate, before moving on. Note what it isn't: making the prompt louder ("IMPORTANT!!!") doesn't lighten the load; routing picks a path but doesn't reduce what's on it; parallelisation runs independent sub-tasks at once, which helps coverage, not instruction-following on a sequential job.</p>
 </div></div></section>
 <section class="card" id="slide-14" data-slide="14"><header class="card-head"><span class="badge">14</span><div><span class="eyebrow">Close</span><h2>Make the call. Trust it. Give it reach. Compose it into systems.</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>The whole course in one line. A stateless request is the unit. Evals and prompting make it reliable; tools, RAG and the model's own capabilities give it reach; MCP and the workflow-vs-agent choice are how you build something real that lasts.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Four moves. Make the call — one stateless request, the unit everything's built from. Make it reliable — test it, and brief it clearly. Give it reach — tools, your own knowledge, more than text. Then compose those into a system. If you keep one thing: nothing here is magic, it's all the same request with more switched on."</p>
+<p>"Four moves. Make the call: one stateless request, the unit everything's built from. Make it reliable: test it, and brief it clearly. Give it reach: tools, your own knowledge, more than text. Then compose those into a system. If you keep one thing: nothing here is magic, it's all the same request with more switched on."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Close with</span></div>
-<p>Bring it back to them. For a non-technical room: "You don't have to build any of this. But now when a developer says 'eval' or 'tool use' or 'agent', you know exactly what they mean — and you can tell them what 'good' looks like for your work, which is the part only you can do." Then point forward: the durable, plain-English version of all of it — the system prompt as a skill file, the workflow as a script in a folder — is the Praxis method, and that's where they already started.</p>
+<p>Bring it back to them. For a non-technical room: "You don't have to build any of this. But now when a developer says 'eval' or 'tool use' or 'agent', you know exactly what they mean, and you can tell them what 'good' looks like for your work, which is the part only you can do." Then point forward: the durable, plain-English version of all of it (the system prompt as a skill file, the workflow as a script in a folder) is the Praxis method, and that's where they already started.</p>
 </div></div></section>
 </main>
 <script>

@@ -35,7 +35,7 @@ export const browseOfferings = defineTool({
   name: "browse_offerings",
   title: "Browse Tutto's services and programmes",
   description:
-    "List what Tutto sells — the services with their prices, plus the programme and product pages such as Praxis training, the trainer track, Pythia and the Applied AI evenings — each with a summary and the page path. Use this first when a visitor asks what Tutto offers, what it costs, or which option fits them, then use ask_site for detail on one of them. Returns services with price and features, and pages with a summary, all with paths.",
+    "List what Tutto sells: the services with their prices, plus the programme and product pages such as Praxis training, the trainer track, Pythia and the Applied AI evenings, each with a summary and the page path. Use this first when a visitor asks what Tutto offers, what it costs, or which option fits them, then use ask_site for detail on one of them. Returns services with price and features, and pages with a summary, all with paths.",
   inputSchema: {
     type: "object",
     properties: {},

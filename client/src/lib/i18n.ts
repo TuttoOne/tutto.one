@@ -47,7 +47,7 @@ export const copy = {
     thinking: { en: "Thinking", fr: "Réflexions" },
     usecase: { en: "Use cases", fr: "Cas d'usage" },
     contact: { en: "Contact", fr: "Contact" },
-    home: { en: "Tutto — home", fr: "Tutto — accueil" },
+    home: { en: "Tutto, home", fr: "Tutto, accueil" },
     menu: { en: "Toggle menu", fr: "Ouvrir le menu" },
   },
 
@@ -58,8 +58,8 @@ export const copy = {
      * so length is what would make it tiresome.
      */
     builtWith: {
-      en: "This site — its systems, copy and design — is built directly with Claude, and its hand shows throughout.",
-      fr: "Ce site — ses systèmes, ses textes et son design — est construit directement avec Claude, dont la main se voit partout.",
+      en: "This site (its systems, copy and design) is built directly with Claude, and its hand shows throughout.",
+      fr: "Ce site (ses systèmes, ses textes et son design) est construit directement avec Claude, dont la main se voit partout.",
     },
   },
 
@@ -135,7 +135,7 @@ export const copy = {
     title: { en: "Portfolio", fr: "Réalisations" },
     standfirst: {
       en: "Systems we've designed and built - from concept to production.",
-      fr: "Des systèmes que nous avons conçus et construits — du concept à la production.",
+      fr: "Des systèmes que nous avons conçus et construits, du concept à la production.",
     },
     badgeClientEngagement: { en: "Client Engagement", fr: "Mission client" },
     exampleConversations: { en: "Example conversations", fr: "Exemples d'échanges" },
@@ -226,16 +226,16 @@ export const copy = {
       fr: "« Je veux qu'il tranche, pas seulement qu'il déplace des données. »",
     },
     b2Body: {
-      en: "A front end your team actually uses, with a model in the loop at the point where the decision is — triggered by the work itself, not by someone remembering to open a chat window.",
-      fr: "Une interface que votre équipe utilise vraiment, avec un modèle dans la boucle là où se prend la décision — déclenché par le travail lui-même, et non parce que quelqu'un a pensé à ouvrir une fenêtre de conversation.",
+      en: "A front end your team actually uses, with a model in the loop at the point where the decision is, triggered by the work itself, not by someone remembering to open a chat window.",
+      fr: "Une interface que votre équipe utilise vraiment, avec un modèle dans la boucle là où se prend la décision, déclenché par le travail lui-même, et non parce que quelqu'un a pensé à ouvrir une fenêtre de conversation.",
     },
     b3Q: {
       en: "“I want it wired into what we already pay for.”",
       fr: "« Je veux que ce soit branché sur ce que nous payons déjà. »",
     },
     b3Body: {
-      en: "API and MCP work. Your CRM, your SharePoint, your finance system — reachable by the AI your team already has open, instead of copy-pasted into it.",
-      fr: "Travail d'API et de MCP. Votre CRM, votre SharePoint, votre outil comptable — accessibles à l'IA que votre équipe a déjà ouverte, au lieu d'y être recopiés à la main.",
+      en: "API and MCP work. Your CRM, your SharePoint, your finance system: reachable by the AI your team already has open, instead of copy-pasted into it.",
+      fr: "Travail d'API et de MCP. Votre CRM, votre SharePoint, votre outil comptable : accessibles à l'IA que votre équipe a déjà ouverte, au lieu d'y être recopiés à la main.",
     },
 
     l1Q: {
@@ -267,8 +267,8 @@ export const copy = {
     s2Title: { en: "Diagnostic", fr: "Diagnostic" },
     /** `{price}` is replaced with the diagnostic day rate, in the reader's currency. */
     priceBody1: {
-      en: "Most engagements start with a diagnostic — {price}. One to two days for a simple project, longer for a larger one. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
-      fr: "La plupart des missions commencent par un diagnostic — {price}. Un à deux jours pour un projet simple, davantage pour un projet plus important. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
+      en: "Most engagements start with a diagnostic: {price}. One to two days for a simple project, longer for a larger one. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
+      fr: "La plupart des missions commencent par un diagnostic : {price}. Un à deux jours pour un projet simple, davantage pour un projet plus important. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
     },
     /** `{team}` is the AI-Fluent Team price in the reader's currency. */
     priceBody2: {
@@ -281,8 +281,8 @@ export const copy = {
       fr: "Vous ne savez pas dans quelle colonne vous êtes ?",
     },
     ctaBody: {
-      en: "Almost nobody is, at the start. Fifteen minutes is usually enough to tell — and we will say so if the honest answer is that you do not need us.",
-      fr: "Au début, presque personne ne le sait. Quinze minutes suffisent généralement à le déterminer — et nous vous le dirons si la réponse honnête est que vous n'avez pas besoin de nous.",
+      en: "Almost nobody is, at the start. Fifteen minutes is usually enough to tell, and we will say so if the honest answer is that you do not need us.",
+      fr: "Au début, presque personne ne le sait. Quinze minutes suffisent généralement à le déterminer, et nous vous le dirons si la réponse honnête est que vous n'avez pas besoin de nous.",
     },
   },
 
@@ -293,7 +293,7 @@ export const copy = {
   },
 
   notFound: {
-    title: { en: "404 — page not found", fr: "404 — page introuvable" },
+    title: { en: "404: page not found", fr: "404 : page introuvable" },
     body: {
       en: "That page does not exist. Try the navigation above.",
       fr: "Cette page n'existe pas. Utilisez la navigation ci-dessus.",
@@ -368,8 +368,8 @@ export const copy = {
       fr: "Portrait dessiné d'une femme, le menton posé sur la main.",
     },
     context: {
-      en: "A strip explaining a context window. A brain fills with notes and faces until a gauge reads full and nothing more will go in; then two ways round it — looking things up in an outside store when needed, and summarising old memories to free space.",
-      fr: "Une planche expliquant la fenêtre de contexte. Un cerveau se remplit de notes et de visages jusqu'à ce qu'une jauge affiche « plein » et que plus rien n'entre ; puis deux façons de contourner le problème — aller chercher l'information dans une réserve extérieure au moment voulu, et résumer les anciens souvenirs pour libérer de la place.",
+      en: "A strip explaining a context window. A brain fills with notes and faces until a gauge reads full and nothing more will go in; then two ways round it: looking things up in an outside store when needed, and summarising old memories to free space.",
+      fr: "Une planche expliquant la fenêtre de contexte. Un cerveau se remplit de notes et de visages jusqu'à ce qu'une jauge affiche « plein » et que plus rien n'entre ; puis deux façons de contourner le problème : aller chercher l'information dans une réserve extérieure au moment voulu, et résumer les anciens souvenirs pour libérer de la place.",
     },
     lawyer: {
       en: "Seen from behind, someone in an orange jumper at a desk buried in paper: stacks either side, an open book, a typewriter, and pages pinned across the bookshelves and hanging from the ceiling.",
@@ -405,8 +405,8 @@ export const copy = {
     /** What separates this from the group evenings on /calendar. */
     tailoredLabel: { en: "Send your own work first", fr: "Envoyez d'abord votre propre travail" },
     tailored: {
-      en: "It runs on your work, not a demo. Before we start, send the jobs you keep repeating — the quote you rewrite every week, the report nobody wants to do — and we build on those. The group evenings use generic examples. This doesn't.",
-      fr: "Tout se fait sur votre travail, pas sur une démo. Avant de commencer, envoyez les tâches que vous répétez sans cesse — le devis que vous réécrivez chaque semaine, le rapport dont personne ne veut — et nous construisons sur celles-là. Les soirées collectives utilisent des exemples génériques. Pas ici.",
+      en: "It runs on your work, not a demo. Before we start, send the jobs you keep repeating (the quote you rewrite every week, the report nobody wants to do) and we build on those. The group evenings use generic examples. This doesn't.",
+      fr: "Tout se fait sur votre travail, pas sur une démo. Avant de commencer, envoyez les tâches que vous répétez sans cesse (le devis que vous réécrivez chaque semaine, le rapport dont personne ne veut) et nous construisons sur celles-là. Les soirées collectives utilisent des exemples génériques. Pas ici.",
     },
     programmeTitle: { en: "The eight-session programme", fr: "Le programme en huit séances" },
     programmeBody: {
@@ -422,7 +422,7 @@ export const copy = {
     },
     s1Body: {
       en: "You don't need a proprietary platform, or an account with us. The only thing you'll subscribe to is the AI assistant - about $20 a month - plus a free code editor. Point all three at the same folder on your machine. That folder, and what's inside it, is your app.",
-      fr: "Vous n'avez besoin ni d'une plateforme propriétaire, ni d'un compte chez nous. Le seul abonnement à prendre est celui de l'assistant IA — environ 20 $ par mois — auquel s'ajoute un éditeur de code gratuit. Dirigez les trois vers le même dossier sur votre machine. Ce dossier, et ce qu'il contient, est votre application.",
+      fr: "Vous n'avez besoin ni d'une plateforme propriétaire, ni d'un compte chez nous. Le seul abonnement à prendre est celui de l'assistant IA (environ 20 $ par mois) auquel s'ajoute un éditeur de code gratuit. Dirigez les trois vers le même dossier sur votre machine. Ce dossier, et ce qu'il contient, est votre application.",
     },
 
     /**
@@ -437,12 +437,12 @@ export const copy = {
       fr: "Quatre réflexes, pas quatre outils. Décider ce qui mérite d'être confié, le décrire clairement, juger ce qui revient, aller au bout. Praxis travaille les quatre sur vos propres dossiers, et ils vous restent quoi que fasse le dossier ensuite.",
     },
     plateHallucinationCaption: {
-      en: "Why the third of them is discernment. Asked for something it does not have, a model will not leave the gap open: it fills it with whatever fits the shape — plausibly, confidently, and wrong.",
-      fr: "Pourquoi le troisième d'entre eux est le discernement. Sollicité sur ce qu'il n'a pas, un modèle ne laisse pas le trou béant : il le comble avec ce qui en épouse la forme — de façon plausible, assurée, et fausse.",
+      en: "Why the third of them is discernment. Asked for something it does not have, a model will not leave the gap open: it fills it with whatever fits the shape, plausibly, confidently, and wrong.",
+      fr: "Pourquoi le troisième d'entre eux est le discernement. Sollicité sur ce qu'il n'a pas, un modèle ne laisse pas le trou béant : il le comble avec ce qui en épouse la forme, de façon plausible, assurée, et fausse.",
     },
     plateFlowCaption: {
-      en: "The three ingredients above are what you install. This is what you put into a request once they are in place — and what happens to the same request when it goes out without them.",
-      fr: "Les trois ingrédients ci-dessus sont ce que vous installez. Voici ce que vous mettez dans une demande une fois l'installation faite — et ce que devient cette même demande quand elle part sans eux.",
+      en: "The three ingredients above are what you install. This is what you put into a request once they are in place, and what happens to the same request when it goes out without them.",
+      fr: "Les trois ingrédients ci-dessus sont ce que vous installez. Voici ce que vous mettez dans une demande une fois l'installation faite, et ce que devient cette même demande quand elle part sans eux.",
     },
 
     s2Label: { en: "The ingredients", fr: "Les ingrédients" },
@@ -450,7 +450,7 @@ export const copy = {
     ing1Qual: { en: "Where you work · Free", fr: "Votre plan de travail · Gratuit" },
     ing1Body: {
       en: "An open code editor of your choice - these are usually free. It shows the files and lets you edit, search, and talk to your assistant in normal language. Nothing magical: the workshop bench.",
-      fr: "Un éditeur de code ouvert, à votre choix — ils sont généralement gratuits. Il affiche les fichiers et vous permet de modifier, chercher et dialoguer avec votre assistant en langage courant. Rien de magique : c'est l'établi.",
+      fr: "Un éditeur de code ouvert, à votre choix. Ils sont généralement gratuits. Il affiche les fichiers et vous permet de modifier, chercher et dialoguer avec votre assistant en langage courant. Rien de magique : c'est l'établi.",
     },
     ing2Title: { en: "The assistant", fr: "L'assistant" },
     ing2Qual: { en: "The intelligence · ~$20/mo", fr: "L'intelligence · ~20 $/mois" },
@@ -462,12 +462,12 @@ export const copy = {
     ing3Qual: { en: "What you already own", fr: "Ce que vous possédez déjà" },
     ing3Body: {
       en: "Plain folders, plain files, on the computer you already own. No cloud, no database, no proprietary format. The same disk you have been using for years - the thing that makes it yours.",
-      fr: "Des dossiers ordinaires, des fichiers ordinaires, sur l'ordinateur que vous possédez déjà. Pas de cloud, pas de base de données, pas de format propriétaire. Le même disque que vous utilisez depuis des années — c'est ce qui fait qu'il vous appartient.",
+      fr: "Des dossiers ordinaires, des fichiers ordinaires, sur l'ordinateur que vous possédez déjà. Pas de cloud, pas de base de données, pas de format propriétaire. Le même disque que vous utilisez depuis des années : c'est ce qui fait qu'il vous appartient.",
     },
     toolingNoteLabel: { en: "On the choice of assistant", fr: "Sur le choix de l'assistant" },
     toolingNote: {
-      en: "We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine — which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.",
-      fr: "Nous enseignons avec Claude comme exemple, parce que c'est celui avec lequel la plupart des gens arrivent. Ce n'est pas une obligation. La même méthode fonctionne avec Mistral, avec OpenAI, ou avec des modèles à poids ouverts exécutés entièrement sur votre propre machine — ce qui est la bonne réponse lorsque le travail ne peut pas sortir de vos locaux. Vous choisissez l'assistant ; nous l'installons avec vous dès la première séance.",
+      en: "We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine, which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.",
+      fr: "Nous enseignons avec Claude comme exemple, parce que c'est celui avec lequel la plupart des gens arrivent. Ce n'est pas une obligation. La même méthode fonctionne avec Mistral, avec OpenAI, ou avec des modèles à poids ouverts exécutés entièrement sur votre propre machine, ce qui est la bonne réponse lorsque le travail ne peut pas sortir de vos locaux. Vous choisissez l'assistant ; nous l'installons avec vous dès la première séance.",
     },
     ingFoot: {
       en: "Point all three at the same folder.",
@@ -476,8 +476,8 @@ export const copy = {
 
     s3Label: { en: "The output", fr: "Le résultat" },
     plateContextCaption: {
-      en: "The assistant's memory is a room, not a warehouse. Fill it and the oldest things fall out — which is why the folder holds the rules on disk, where they are read fresh each time rather than remembered.",
-      fr: "La mémoire de l'assistant est une pièce, pas un entrepôt. Remplissez-la et les plus anciens éléments tombent — d'où les règles conservées sur le disque, relues à chaque fois plutôt que mémorisées.",
+      en: "The assistant's memory is a room, not a warehouse. Fill it and the oldest things fall out, which is why the folder holds the rules on disk, where they are read fresh each time rather than remembered.",
+      fr: "La mémoire de l'assistant est une pièce, pas un entrepôt. Remplissez-la et les plus anciens éléments tombent, d'où les règles conservées sur le disque, relues à chaque fois plutôt que mémorisées.",
     },
     plateFileOnDiskCaption: {
       en: "This is the whole artefact. Not an account and not a platform: a folder you can copy, back up, and open on any machine you own.",
@@ -526,13 +526,13 @@ export const copy = {
     freeTitle: { en: "Free sessions", fr: "Séances gratuites" },
     freePrice: { en: "Free", fr: "Gratuit" },
     free: {
-      en: "Webinars we run from time to time: getting started, skills, connectors and projects. General rather than built around your use case — worth less to some people, and a good first look for others.",
-      fr: "Des webinaires organisés de temps en temps : premiers pas, compétences, connecteurs et projets. Généraux plutôt que construits autour de votre cas d'usage — moins utiles pour certains, un bon premier aperçu pour d'autres.",
+      en: "Webinars we run from time to time: getting started, skills, connectors and projects. General rather than built around your use case. Worth less to some people, and a good first look for others.",
+      fr: "Des webinaires organisés de temps en temps : premiers pas, compétences, connecteurs et projets. Généraux plutôt que construits autour de votre cas d'usage. Moins utiles pour certains, un bon premier aperçu pour d'autres.",
     },
     programmeCardTitle: { en: "The AI-Fluent Team", fr: "L'équipe à l'aise avec l'IA" },
     programmeCard: {
-      en: "Eight 90-minute sessions, you and up to four of your team. Your AI-use charter, a scorecard per role, standing briefs for your top three jobs and a check before anything ships — built on your own work.",
-      fr: "Huit séances de 90 minutes, vous et jusqu'à quatre personnes de votre équipe. Votre charte d'usage de l'IA, une grille par rôle, des consignes permanentes pour vos trois tâches clés et une vérification avant tout envoi — construits sur votre propre travail.",
+      en: "Eight 90-minute sessions, you and up to four of your team. Your AI-use charter, a scorecard per role, standing briefs for your top three jobs and a check before anything ships. Built on your own work.",
+      fr: "Huit séances de 90 minutes, vous et jusqu'à quatre personnes de votre équipe. Votre charte d'usage de l'IA, une grille par rôle, des consignes permanentes pour vos trois tâches clés et une vérification avant tout envoi. Construits sur votre propre travail.",
     },
     fastTitle: { en: "The Owner's Fast Track", fr: "La formule accélérée du dirigeant" },
     fast: {
@@ -579,7 +579,7 @@ export const copy = {
     },
     lead1: {
       en: "Juniors spend days reading. Partners wait. The thing you miss is the thing that loses the case. Pythia reads everything - every file, every footnote - and lets you ask questions the way you'd brief a junior.",
-      fr: "Les collaborateurs passent des journées à lire. Les associés attendent. Ce qui vous échappe est précisément ce qui fait perdre le dossier. Pythia lit tout — chaque fichier, chaque note de bas de page — et vous laisse poser vos questions comme vous les poseriez à un collaborateur.",
+      fr: "Les collaborateurs passent des journées à lire. Les associés attendent. Ce qui vous échappe est précisément ce qui fait perdre le dossier. Pythia lit tout (chaque fichier, chaque note de bas de page) et vous laisse poser vos questions comme vous les poseriez à un collaborateur.",
     },
     lead2: {
       en: "It runs on your hardware. Nothing leaves your office. No cloud, no third-party APIs, no exposure.",
@@ -633,18 +633,18 @@ export const copy = {
       fr: "Décrivez une tâche juridique en langage courant. Le système l'oriente vers les compétences pertinentes, rédige à partir du corpus et vérifie chaque affirmation par rapport à sa source citée.",
     },
     shot2: {
-      en: "Corpus readiness across a 234,000-document estate — what is ingested, embedded, classified and summarised, and what is not yet.",
-      fr: "État de préparation du corpus sur un fonds de 234 000 documents : ce qui est intégré, vectorisé, classé et résumé — et ce qui ne l'est pas encore.",
+      en: "Corpus readiness across a 234,000-document estate: what is ingested, embedded, classified and summarised, and what is not yet.",
+      fr: "État de préparation du corpus sur un fonds de 234 000 documents : ce qui est intégré, vectorisé, classé et résumé, et ce qui ne l'est pas encore.",
     },
     demoTitle: { en: "Try it yourself", fr: "Essayez par vous-même" },
     demoBody: {
-      en: "The Atelier Vallon demonstration is open — the same system, on the fictional corpus, with nothing to install and no sign-up. It is in French.",
+      en: "The Atelier Vallon demonstration is open: the same system, on the fictional corpus, with nothing to install and no sign-up. It is in French.",
       fr: "La démonstration Atelier Vallon est ouverte à tous : le même système, sur le corpus fictif, sans rien à installer ni inscription.",
     },
     demoCta: { en: "Open the demonstration", fr: "Ouvrir la démonstration" },
     fitLabel: { en: "Where it fits", fr: "À qui cela s'adresse" },
     fitBody: {
-      en: "Pythia suits anything legal, regulatory or commercially sensitive that cannot be sent to a cloud service or a US-hosted model — privileged material, regulated records, contractual or export-controlled data. The constraint is the same wherever it comes from: the documents cannot leave. Everything runs on hardware you control.",
+      en: "Pythia suits anything legal, regulatory or commercially sensitive that cannot be sent to a cloud service or a US-hosted model: privileged material, regulated records, contractual or export-controlled data. The constraint is the same wherever it comes from: the documents cannot leave. Everything runs on hardware you control.",
       fr: "Pythia convient à tout ce qui relève du juridique, du réglementaire ou du secret des affaires et ne peut être transmis à un service en cloud ou à un modèle hébergé aux États-Unis : pièces couvertes par le secret professionnel, données réglementées, informations contractuelles ou sous contrôle export. La contrainte est la même quelle qu'en soit l'origine : les documents ne peuvent pas sortir. Tout s'exécute sur du matériel que vous maîtrisez.",
     },
     languageNote: {
@@ -652,8 +652,8 @@ export const copy = {
       fr: "Nous travaillons en français comme en anglais. L'écran ci-dessus montre l'interface française ; les missions, les séances et les livrables écrits sont assurés dans l'une ou l'autre langue.",
     },
     shot4: {
-      en: "The knowledge map, built on Atelier Vallon — a fictional workshop made for demonstration, so no client document is ever used. Documents rarely cite each other; they connect through an instrument, a part, a person, a procedure.",
-      fr: "La carte des connaissances, sur l'Atelier Vallon — un atelier fictif conçu pour la démonstration, afin qu'aucun document de client ne soit jamais utilisé. Les documents ne se citent pas entre eux : ils se rejoignent par un instrument, une pièce, une personne, une procédure.",
+      en: "The knowledge map, built on Atelier Vallon, a fictional workshop made for demonstration, so no client document is ever used. Documents rarely cite each other; they connect through an instrument, a part, a person, a procedure.",
+      fr: "La carte des connaissances, sur l'Atelier Vallon, un atelier fictif conçu pour la démonstration, afin qu'aucun document de client ne soit jamais utilisé. Les documents ne se citent pas entre eux : ils se rejoignent par un instrument, une pièce, une personne, une procédure.",
     },
     shot3: {
       en: "Statistical checks over the disclosure list: numbering gaps, doc-type droughts and volume cliffs, each with wording to put to the other side.",
@@ -674,7 +674,7 @@ export const copy = {
     },
     s3Body: {
       en: "Litigation is the hardest version of the problem: high volume, high stakes, and a privilege requirement that rules out the cloud entirely. Solve it there and it transfers. The same system runs over operations, research, compliance or engineering records - a private second brain that acts, on your hardware.",
-      fr: "Le contentieux est la version la plus exigeante du problème : gros volumes, enjeux élevés, et une exigence de confidentialité qui exclut totalement le cloud. Résolu là, le problème est résolu ailleurs. Le même système s'applique aux données d'exploitation, de recherche, de conformité ou d'ingénierie — un second cerveau privé capable d'agir, sur votre matériel.",
+      fr: "Le contentieux est la version la plus exigeante du problème : gros volumes, enjeux élevés, et une exigence de confidentialité qui exclut totalement le cloud. Résolu là, le problème est résolu ailleurs. Le même système s'applique aux données d'exploitation, de recherche, de conformité ou d'ingénierie : un second cerveau privé capable d'agir, sur votre matériel.",
     },
     b1Title: { en: "A hierarchy of knowledge", fr: "Une hiérarchie de la connaissance" },
     b1Qual: { en: "Structured · Searchable · Yours", fr: "Structurée · Interrogeable · La vôtre" },
@@ -792,7 +792,7 @@ export const copy = {
 
     etymPull: {
       en: "The Pythia was the Oracle at Delphi - the one you consulted when you needed an answer from everything that had been heard.",
-      fr: "La Pythie était l'oracle de Delphes — celle que l'on consultait lorsqu'on voulait une réponse tirée de tout ce qui avait été entendu.",
+      fr: "La Pythie était l'oracle de Delphes, celle que l'on consultait lorsqu'on voulait une réponse tirée de tout ce qui avait été entendu.",
     },
     etymBody: {
       en: "Pythia was the title given to the high priestess of the Temple of Apollo at Delphi, who served as its oracle. The name derives from Python, the serpent Apollo slew at Delphi. To put a question to the Pythia was not to ask for a guess - it was to receive the distilled answer from everything the oracle had witnessed and absorbed. That is the model: every document, read; every question, answered from the record itself.",
@@ -830,8 +830,8 @@ export const copy = {
       fr: "Toute entreprise conserve plus d'écrits que personne ne peut en lire. Factures, CV, certificats fournisseurs, contrats, bons de livraison signés, photographies de documents papier, quinze ans de courriels. Les réponses s'y trouvent. Aller en chercher une, c'est l'après-midi de quelqu'un, à chaque fois.",
     },
     lead2: {
-      en: "Pythia reads all of it and answers questions from it — and it runs on a computer you own, in your building. No cloud account, no upload, no file going anywhere. For a lot of businesses that is not a preference. It is the condition of doing the work at all.",
-      fr: "Pythia lit l'ensemble et répond aux questions à partir de ces documents — sur un ordinateur qui vous appartient, dans vos locaux. Aucun compte en ligne, aucun téléversement, aucun fichier qui s'en va ailleurs. Pour beaucoup d'entreprises, ce n'est pas une préférence. C'est la condition même pour que le travail puisse se faire.",
+      en: "Pythia reads all of it and answers questions from it, and it runs on a computer you own, in your building. No cloud account, no upload, no file going anywhere. For a lot of businesses that is not a preference. It is the condition of doing the work at all.",
+      fr: "Pythia lit l'ensemble et répond aux questions à partir de ces documents, sur un ordinateur qui vous appartient, dans vos locaux. Aucun compte en ligne, aucun téléversement, aucun fichier qui s'en va ailleurs. Pour beaucoup d'entreprises, ce n'est pas une préférence. C'est la condition même pour que le travail puisse se faire.",
     },
     meta: {
       en: "Your hardware · Nothing uploaded · 30 minutes",
@@ -842,8 +842,8 @@ export const copy = {
     c1Title: { en: "A machine that has read everything", fr: "Une machine qui a tout lu" },
     c1Qual: { en: "Your files · Not the internet", fr: "Vos fichiers · Pas l'internet" },
     c1Body: {
-      en: "Point it at your shared drive, your accounting system, your email archive. It reads what is there — including the scans and the photographs of paper — and it answers from those files rather than from whatever a model happens to know.",
-      fr: "On le branche sur votre disque partagé, votre logiciel comptable, vos archives de courriels. Il lit ce qui s'y trouve — y compris les documents scannés et les photographies de papier — et répond à partir de ces fichiers, non de ce qu'un modèle sait par ailleurs.",
+      en: "Point it at your shared drive, your accounting system, your email archive. It reads what is there, including the scans and the photographs of paper, and it answers from those files rather than from whatever a model happens to know.",
+      fr: "On le branche sur votre disque partagé, votre logiciel comptable, vos archives de courriels. Il lit ce qui s'y trouve, y compris les documents scannés et les photographies de papier, et répond à partir de ces fichiers, non de ce qu'un modèle sait par ailleurs.",
     },
     c2Title: { en: "A box in your building", fr: "Une machine dans vos murs" },
     c2Qual: { en: "Your hardware · Your network", fr: "Votre matériel · Votre réseau" },
@@ -934,7 +934,7 @@ export const copy = {
 
     sovereignTitle: { en: "What sovereign means here.", fr: "Ce que « souverain » veut dire ici." },
     sovereignBody: {
-      en: "The data, the machine it runs on, and the decision about what happens to either one all belong to you. Not a clause in somebody's contract and not a setting in somebody's preferences page — a fact about where the wires go.",
+      en: "The data, the machine it runs on, and the decision about what happens to either one all belong to you. Not a clause in somebody's contract and not a setting in somebody's preferences page. A fact about where the wires go.",
       fr: "Les données, la machine sur laquelle elles sont traitées, et la décision de ce qu'il advient de l'une comme de l'autre vous appartiennent. Pas une clause dans le contrat d'un tiers ni une case dans son écran de réglages : un fait, qui tient au trajet des câbles.",
     },
 
@@ -945,8 +945,8 @@ export const copy = {
      * looking for a person.
      */
     plateSkillsCaption: {
-      en: "The specialists in the basket are skills, not staff: folders of written instructions the assistant picks up when the work calls for them. Which model reads them stays your choice — including open ones running on your own machine, on your own files.",
-      fr: "Les spécialistes du panier sont des skills, pas des salariés : des dossiers d'instructions écrites que l'assistant reprend quand le travail l'exige. Le modèle qui les lit reste votre choix — y compris un modèle ouvert, sur votre machine et sur vos fichiers.",
+      en: "The specialists in the basket are skills, not staff: folders of written instructions the assistant picks up when the work calls for them. Which model reads them stays your choice, including open ones running on your own machine, on your own files.",
+      fr: "Les spécialistes du panier sont des skills, pas des salariés : des dossiers d'instructions écrites que l'assistant reprend quand le travail l'exige. Le modèle qui les lit reste votre choix, y compris un modèle ouvert, sur votre machine et sur vos fichiers.",
     },
     platePortraitsCaption: {
       en: "Somebody in accounts, somebody in recruitment, somebody in quality. The six jobs below are theirs, and all six are being done by hand this week.",
@@ -978,8 +978,8 @@ export const copy = {
       fr: "L'IA en nuage se facture à la question : mieux elle vous sert, plus vous en achetez. Le matériel que vous possédez se paie une fois.",
     },
     wMore: {
-      en: "That case is made properly on the home page, along with what running a model on your own machine actually involves — trade-offs included.",
-      fr: "Cet argument est développé comme il se doit sur la page d'accueil, avec ce qu'implique réellement l'exécution d'un modèle sur votre propre machine — arbitrages compris.",
+      en: "That case is made properly on the home page, along with what running a model on your own machine actually involves, trade-offs included.",
+      fr: "Cet argument est développé comme il se doit sur la page d'accueil, avec ce qu'implique réellement l'exécution d'un modèle sur votre propre machine, arbitrages compris.",
     },
     wMoreCta: { en: "The longer argument", fr: "L'argument développé" },
 
@@ -996,8 +996,8 @@ export const copy = {
     },
     h3Title: { en: "Or somewhere else entirely", fr: "Ou bien tout ailleurs" },
     h3Body: {
-      en: "A private cloud, or a machine we host. The same system either way, and the choice is yours — which is what Your Infrastructure, Your Models already promises on the services page.",
-      fr: "Un nuage privé, ou une machine que nous hébergeons. Le même système dans tous les cas, et le choix vous revient — c'est ce que promet déjà « Votre infrastructure, vos modèles » sur la page des prestations.",
+      en: "A private cloud, or a machine we host. The same system either way, and the choice is yours, which is what Your Infrastructure, Your Models already promises on the services page.",
+      fr: "Un nuage privé, ou une machine que nous hébergeons. Le même système dans tous les cas, et le choix vous revient : c'est ce que promet déjà « Votre infrastructure, vos modèles » sur la page des prestations.",
     },
     modelTitle: {
       en: "And the model is a component, not the commitment.",
@@ -1028,8 +1028,8 @@ export const copy = {
       fr: "Contentieux · La version la plus exigeante",
     },
     ev2Body: {
-      en: "High volume, high stakes, and a privilege requirement that rules out the cloud entirely — the version of this problem where sending a file outside ends a career. It was built there first, which is why the rest of this page is not a promise.",
-      fr: "Gros volumes, enjeux élevés, et une exigence de secret professionnel qui exclut totalement le nuage — la version du problème où envoyer un fichier au-dehors met fin à une carrière. C'est là qu'il a d'abord été construit, et c'est pourquoi le reste de cette page n'est pas une promesse.",
+      en: "High volume, high stakes, and a privilege requirement that rules out the cloud entirely: the version of this problem where sending a file outside ends a career. It was built there first, which is why the rest of this page is not a promise.",
+      fr: "Gros volumes, enjeux élevés, et une exigence de secret professionnel qui exclut totalement le nuage : la version du problème où envoyer un fichier au-dehors met fin à une carrière. C'est là qu'il a d'abord été construit, et c'est pourquoi le reste de cette page n'est pas une promesse.",
     },
     ev3Title: { en: "Bomza", fr: "Bomza" },
     ev3Qual: {
@@ -1052,7 +1052,7 @@ export const copy = {
 
     bringLabel: { en: "What you would need to bring", fr: "Ce qu'il faudrait apporter" },
     bringBody: {
-      en: "The work you already repeat. A few examples of it done properly. The software you already licence. And a person who can tell a right answer from a wrong one — that last one does not go away. Checking the output is the new job, and it is the part worth being clear about.",
+      en: "The work you already repeat. A few examples of it done properly. The software you already licence. And a person who can tell a right answer from a wrong one. That last one does not go away. Checking the output is the new job, and it is the part worth being clear about.",
       fr: "Le travail que vous répétez déjà. Quelques exemples bien faits. Les logiciels sous licence que vous avez déjà. Et une personne capable de distinguer une bonne réponse d'une mauvaise : celle-là ne disparaît pas. Vérifier le résultat est le nouveau métier, et c'est la part sur laquelle il faut être clair.",
     },
 
@@ -1072,7 +1072,7 @@ export const copy = {
       fr: "Si votre contrainte est le secret professionnel",
     },
     legalBody: {
-      en: "There is a page written for litigation in particular — disclosure sets, cited answers, and the audit checks that go with them.",
+      en: "There is a page written for litigation in particular: disclosure sets, cited answers, and the audit checks that go with them.",
       fr: "Une page est écrite pour le contentieux en particulier : fonds de pièces, réponses sourcées, et les contrôles qui les accompagnent.",
     },
     legalCta: { en: "Read the Pythia page", fr: "Lire la page Pythia" },
@@ -1122,11 +1122,11 @@ export const copy = {
     },
     lead1: {
       en: "Most people have met AI as a chat window. You ask a question, you get an answer, you copy it somewhere useful. That is real, and it is the smallest thing this technology does.",
-      fr: "La plupart des gens ont rencontré l'IA sous la forme d'une fenêtre de conversation. On pose une question, on obtient une réponse, on la recopie quelque part. C'est utile — et c'est la plus petite chose que cette technologie sache faire.",
+      fr: "La plupart des gens ont rencontré l'IA sous la forme d'une fenêtre de conversation. On pose une question, on obtient une réponse, on la recopie quelque part. C'est utile, et c'est la plus petite chose que cette technologie sache faire.",
     },
     lead2: {
-      en: "The systems on this site differ in one specific way. The AI goes to your files, your database, your machine, and does the particular job your work is actually made of — on the first of every month, or every time a document lands, without being asked again.",
-      fr: "Les systèmes présentés ici fonctionnent autrement, sur un point précis. L'IA vient à vos fichiers, à votre base de données, à votre machine, et y accomplit la tâche dont votre métier est réellement fait — le premier de chaque mois, ou à chaque document reçu, sans qu'on ait à le redemander.",
+      en: "The systems on this site differ in one specific way. The AI goes to your files, your database, your machine, and does the particular job your work is actually made of, on the first of every month, or every time a document lands, without being asked again.",
+      fr: "Les systèmes présentés ici fonctionnent autrement, sur un point précis. L'IA vient à vos fichiers, à votre base de données, à votre machine, et y accomplit la tâche dont votre métier est réellement fait, le premier de chaque mois, ou à chaque document reçu, sans qu'on ait à le redemander.",
     },
     meta: {
       en: "Written for anyone who has used ChatGPT and wondered what else there was. No technical background assumed.",
@@ -1139,8 +1139,8 @@ export const copy = {
       fr: "Tout le métier d'un pointer consiste à trouver ce que vous cherchez et à le désigner sans détour.",
     },
     nameBody1: {
-      en: "That is step one, and it is step one of everything on this page. Out of all the material you are sitting on — the files, the database, fifteen years of email — the first useful thing anyone can do is find what matters and show you exactly where it is. Nothing else can start until that has happened.",
-      fr: "C'est la première étape, et c'est la première étape de tout ce que décrit cette page. De toute la matière dont vous disposez — les fichiers, la base de données, quinze ans de courriels — la première chose utile à faire est de trouver ce qui compte et de vous montrer exactement où cela se trouve. Rien d'autre ne peut commencer avant cela.",
+      en: "That is step one, and it is step one of everything on this page. Out of all the material you are sitting on (the files, the database, fifteen years of email), the first useful thing anyone can do is find what matters and show you exactly where it is. Nothing else can start until that has happened.",
+      fr: "C'est la première étape, et c'est la première étape de tout ce que décrit cette page. De toute la matière dont vous disposez (les fichiers, la base de données, quinze ans de courriels), la première chose utile à faire est de trouver ce qui compte et de vous montrer exactement où cela se trouve. Rien d'autre ne peut commencer avant cela.",
     },
     nameBody2: {
       en: "Step two is how far you let it carry you. Some stop at the finding, which is already most of the value. Others let the scripts run the rest of the way: the report assembled, the rule applied, the work done before anybody thinks to ask for it. Where you draw that line is yours to decide.",
@@ -1162,8 +1162,8 @@ export const copy = {
       fr: "Le rapport que personne n'a le temps de produire",
     },
     s2Body1: {
-      en: "Almost every organisation is sitting on a database — the system that records the orders, or the patients, or the cases, or the stock. Almost none of them can ask it a question. So somebody exports it to a spreadsheet once a month and rebuilds the same charts by hand, and the answer to anything urgent is: give me two days.",
-      fr: "Presque toutes les organisations disposent d'une base de données — le système qui enregistre les commandes, les patients, les dossiers, les stocks. Presque aucune ne sait lui poser une question. Alors quelqu'un l'exporte vers un tableur une fois par mois et reconstruit les mêmes graphiques à la main, et la réponse à toute urgence devient : donnez-moi deux jours.",
+      en: "Almost every organisation is sitting on a database: the system that records the orders, or the patients, or the cases, or the stock. Almost none of them can ask it a question. So somebody exports it to a spreadsheet once a month and rebuilds the same charts by hand, and the answer to anything urgent is: give me two days.",
+      fr: "Presque toutes les organisations disposent d'une base de données : le système qui enregistre les commandes, les patients, les dossiers, les stocks. Presque aucune ne sait lui poser une question. Alors quelqu'un l'exporte vers un tableur une fois par mois et reconstruit les mêmes graphiques à la main, et la réponse à toute urgence devient : donnez-moi deux jours.",
     },
     s2Body2: {
       en: "Point an assistant at that database and the two days become one afternoon, once. It reads the shape of the tables. You describe the report the way you would describe it to a new colleague. It writes the queries, runs them against the real data, checks the totals against a month whose answer you already know, and tells you where they disagree rather than papering over it. Then you tell it to do that on the first of every month, and it does.",
@@ -1174,8 +1174,8 @@ export const copy = {
       fr: "Remarquez ce qui n'a pas eu lieu. Rien n'a été téléversé. Les requêtes ont été exécutées sur votre base, là où elle se trouve déjà. L'assistant a écrit les instructions ; c'est votre machine qui a fait le travail.",
     },
     sessionCaption: {
-      en: "illustrative session — a database the assistant has not seen before",
-      fr: "échange illustratif — une base que l'assistant découvre",
+      en: "illustrative session: a database the assistant has not seen before",
+      fr: "échange illustratif : une base que l'assistant découvre",
     },
     stat1: { en: "Nothing uploaded", fr: "Rien n'est téléversé" },
     stat1Label: {
@@ -1203,8 +1203,8 @@ export const copy = {
       fr: "Un produit d'IA généraliste est conçu pour la moyenne du travail de tout le monde, ce qui revient à dire qu'il n'est conçu pour celui de personne en particulier. Les tâches qui dévorent réellement votre semaine sont celles pour lesquelles aucun produit n'a jamais été fait : le rapprochement que seul votre cabinet pratique, la déclaration dans la présentation exacte qu'exige votre régulateur, le contrôle qui n'existe que parce que quelque chose a mal tourné en 2019 et ne doit jamais se reproduire.",
     },
     s3Body2: {
-      en: "None of those were ever worth building software for. The market for each one is a single company, sometimes a single department, occasionally a single person. That arithmetic is what has changed. Work that would once have justified a fortnight of a developer's time now justifies an afternoon of yours — which puts the long tail of small, specific, unglamorous work within reach for the first time.",
-      fr: "Aucune n'a jamais justifié le développement d'un logiciel. Le marché de chacune se compte en une entreprise, parfois un service, parfois une seule personne. C'est cette arithmétique qui a changé. Ce qui aurait autrefois exigé quinze jours de développement n'exige plus qu'un de vos après-midi — ce qui rend accessible, pour la première fois, toute la longue traîne des travaux modestes, spécifiques et sans prestige.",
+      en: "None of those were ever worth building software for. The market for each one is a single company, sometimes a single department, occasionally a single person. That arithmetic is what has changed. Work that would once have justified a fortnight of a developer's time now justifies an afternoon of yours, which puts the long tail of small, specific, unglamorous work within reach for the first time.",
+      fr: "Aucune n'a jamais justifié le développement d'un logiciel. Le marché de chacune se compte en une entreprise, parfois un service, parfois une seule personne. C'est cette arithmétique qui a changé. Ce qui aurait autrefois exigé quinze jours de développement n'exige plus qu'un de vos après-midi, ce qui rend accessible, pour la première fois, toute la longue traîne des travaux modestes, spécifiques et sans prestige.",
     },
     n1Title: { en: "One firm's format", fr: "Le format d'une seule maison" },
     n1Qual: { en: "Returns and submissions", fr: "Déclarations et dépôts" },
@@ -1215,8 +1215,8 @@ export const copy = {
     n2Title: { en: "One team's judgement", fr: "Le jugement d'une seule équipe" },
     n2Qual: { en: "Rules that live in someone's head", fr: "Des règles qui vivent dans une tête" },
     n2Body: {
-      en: "The reasons a claim gets flagged. The tells that make a supplier worth a second look. Written down once in plain language, then applied identically every time — including on the Friday afternoon when nobody is concentrating.",
-      fr: "Les motifs pour lesquels un dossier est signalé. Les indices qui rendent un fournisseur digne d'un second examen. Consignés une fois en langage courant, puis appliqués à l'identique chaque fois — y compris le vendredi après-midi, quand plus personne n'est concentré.",
+      en: "The reasons a claim gets flagged. The tells that make a supplier worth a second look. Written down once in plain language, then applied identically every time, including on the Friday afternoon when nobody is concentrating.",
+      fr: "Les motifs pour lesquels un dossier est signalé. Les indices qui rendent un fournisseur digne d'un second examen. Consignés une fois en langage courant, puis appliqués à l'identique chaque fois, y compris le vendredi après-midi, quand plus personne n'est concentré.",
     },
     n3Title: { en: "One person's week", fr: "La semaine d'une seule personne" },
     n3Qual: { en: "The work between the systems", fr: "Le travail entre les systèmes" },
@@ -1249,8 +1249,8 @@ export const copy = {
     f3Title: { en: "The SharePoint bridge", fr: "Le pont SharePoint" },
     f3Qual: { en: "Microsoft 365", fr: "Microsoft 365" },
     f3Body: {
-      en: "SharePoint records queried, created and corrected by asking, rather than by clicking through lists — and broken Power Automate flows diagnosed in conversation rather than by trawling run histories.",
-      fr: "Des enregistrements SharePoint interrogés, créés et corrigés en le demandant, plutôt qu'en parcourant des listes — et des flux Power Automate défaillants diagnostiqués par la conversation plutôt qu'en dépouillant les historiques d'exécution.",
+      en: "SharePoint records queried, created and corrected by asking, rather than by clicking through lists, and broken Power Automate flows diagnosed in conversation rather than by trawling run histories.",
+      fr: "Des enregistrements SharePoint interrogés, créés et corrigés en le demandant, plutôt qu'en parcourant des listes, et des flux Power Automate défaillants diagnostiqués par la conversation plutôt qu'en dépouillant les historiques d'exécution.",
     },
     portfolioNote: {
       en: "Each of these has a fuller account, with screenshots and example sessions, in the portfolio.",
@@ -1259,8 +1259,8 @@ export const copy = {
 
     /** Sits above section 03. Short: the section heading below does the arguing. */
     plateSkillsCaption: {
-      en: "Skills are written instructions, not staff — and the model that reads them can be one you run yourself.",
-      fr: "Les skills sont des instructions écrites, pas des salariés — et le modèle qui les lit peut être un modèle que vous faites tourner vous-même.",
+      en: "Skills are written instructions, not staff, and the model that reads them can be one you run yourself.",
+      fr: "Les skills sont des instructions écrites, pas des salariés, et le modèle qui les lit peut être un modèle que vous faites tourner vous-même.",
     },
     plateLawyerCaption: {
       en: "One of those rooms. A disclosure set runs to 150,000 documents and nobody can read it in the time there is, so the work is not reading faster: it is making the pile answerable.",
@@ -1304,13 +1304,13 @@ export const copy = {
       fr: "On nous demande quelle IA nous utilisons comme si la réponse réglait tout. Elle règle moins qu'on ne l'imagine. Nous construisons le plus souvent avec Claude, parce qu'il est aujourd'hui le meilleur pour écrire et réparer le code.",
     },
     s6Body2: {
-      en: "But what you are handed at the end is a folder: your instructions in plain language, the scripts that do the work, your data. Mistral will run it. So will an open-weight model on hardware in your own building, with nothing leaving the room. The choice is yours, and — this is the part that matters — it stays reversible.",
-      fr: "Mais ce qu'on vous remet au bout du compte est un dossier : vos instructions en langage courant, les scripts qui font le travail, vos données. Mistral saura les exécuter. Un modèle à poids ouverts sur du matériel installé chez vous aussi, sans que rien ne sorte de la pièce. Le choix vous appartient et — c'est là l'essentiel — il reste réversible.",
+      en: "But what you are handed at the end is a folder: your instructions in plain language, the scripts that do the work, your data. Mistral will run it. So will an open-weight model on hardware in your own building, with nothing leaving the room. The choice is yours, and (this is the part that matters) it stays reversible.",
+      fr: "Mais ce qu'on vous remet au bout du compte est un dossier : vos instructions en langage courant, les scripts qui font le travail, vos données. Mistral saura les exécuter. Un modèle à poids ouverts sur du matériel installé chez vous aussi, sans que rien ne sorte de la pièce. Le choix vous appartient et (c'est là l'essentiel) il reste réversible.",
     },
     localLabel: { en: "On running a model locally", fr: "Sur l'exécution d'un modèle en local" },
     localBody: {
-      en: "Running a model locally means downloading its weights — the file that is the model — and running it on hardware you own. No account, no charge per question, no network call. It is a genuine trade rather than a free lunch: open-weight models trail the frontier ones, and a machine able to run a large one is a real purchase. The useful pattern is usually both, with the local model doing the volume and a frontier model called deliberately for the few steps that need the extra capability, across a boundary you can audit. We will tell you which parts of your work fall on which side before you buy anything.",
-      fr: "Exécuter un modèle en local, c'est télécharger ses poids — le fichier qui constitue le modèle — et le faire tourner sur du matériel qui vous appartient. Pas de compte, pas de facturation à la question, aucun appel réseau. C'est un vrai arbitrage et non un repas gratuit : les modèles à poids ouverts restent en retrait des modèles de premier plan, et une machine capable d'en faire tourner un grand représente un achat réel. Le schéma le plus utile combine généralement les deux : le modèle local traite le volume, un modèle de premier plan n'est appelé délibérément que pour les rares étapes qui exigent davantage, à travers une frontière que vous pouvez auditer. Nous vous dirons de quel côté tombe chaque partie de votre travail avant que vous n'achetiez quoi que ce soit.",
+      en: "Running a model locally means downloading its weights (the file that is the model) and running it on hardware you own. No account, no charge per question, no network call. It is a genuine trade rather than a free lunch: open-weight models trail the frontier ones, and a machine able to run a large one is a real purchase. The useful pattern is usually both, with the local model doing the volume and a frontier model called deliberately for the few steps that need the extra capability, across a boundary you can audit. We will tell you which parts of your work fall on which side before you buy anything.",
+      fr: "Exécuter un modèle en local, c'est télécharger ses poids (le fichier qui constitue le modèle) et le faire tourner sur du matériel qui vous appartient. Pas de compte, pas de facturation à la question, aucun appel réseau. C'est un vrai arbitrage et non un repas gratuit : les modèles à poids ouverts restent en retrait des modèles de premier plan, et une machine capable d'en faire tourner un grand représente un achat réel. Le schéma le plus utile combine généralement les deux : le modèle local traite le volume, un modèle de premier plan n'est appelé délibérément que pour les rares étapes qui exigent davantage, à travers une frontière que vous pouvez auditer. Nous vous dirons de quel côté tombe chaque partie de votre travail avant que vous n'achetiez quoi que ce soit.",
     },
 
     s7Label: { en: "Where to start", fr: "Par où commencer" },
@@ -1330,8 +1330,8 @@ export const copy = {
     },
     r3Title: { en: "See a whole system", fr: "Voir un système entier" },
     r3Body: {
-      en: "Pythia in full — a system that reads everything you hold and answers from it, on a machine you own. What it does, what it costs, and an open demonstration you can click through without speaking to anybody.",
-      fr: "Pythia en entier — un système qui lit tout ce que vous conservez et répond à partir de là, sur une machine qui vous appartient. Ce qu'il fait, ce qu'il coûte, et une démonstration ouverte que vous pouvez parcourir sans parler à personne.",
+      en: "Pythia in full: a system that reads everything you hold and answers from it, on a machine you own. What it does, what it costs, and an open demonstration you can click through without speaking to anybody.",
+      fr: "Pythia en entier : un système qui lit tout ce que vous conservez et répond à partir de là, sur une machine qui vous appartient. Ce qu'il fait, ce qu'il coûte, et une démonstration ouverte que vous pouvez parcourir sans parler à personne.",
     },
 
     ctaTitle: {
@@ -1541,12 +1541,12 @@ export const copy = {
 
     /** Card on /praxis pointing here. Its job is to draw the contrast. */
     fromPraxisTitle: {
-      en: "Applied AI Evenings — the group version",
-      fr: "Les soirées IA appliquée — la version collective",
+      en: "Applied AI Evenings: the group version",
+      fr: "Les soirées IA appliquée : la version collective",
     },
     fromPraxisBody: {
-      en: "The same four sessions online every month — the first free — and an evening in the Lot every fortnight. In a group, on generic examples, and pitched higher: applying rather than building. The one to one on this page is the tailored version.",
-      fr: "Les quatre mêmes séances en ligne chaque mois — la première gratuite — et une soirée dans le Lot tous les quinze jours. En groupe, sur des exemples génériques, et à un niveau plus élevé : appliquer plutôt que construire. Le tête-à-tête présenté sur cette page en est la version sur mesure.",
+      en: "The same four sessions online every month (the first free) and an evening in the Lot every fortnight. In a group, on generic examples, and pitched higher: applying rather than building. The one to one on this page is the tailored version.",
+      fr: "Les quatre mêmes séances en ligne chaque mois (la première gratuite) et une soirée dans le Lot tous les quinze jours. En groupe, sur des exemples génériques, et à un niveau plus élevé : appliquer plutôt que construire. Le tête-à-tête présenté sur cette page en est la version sur mesure.",
     },
     fromPraxisLink: { en: "See the dates", fr: "Voir les dates" },
   },
@@ -1605,7 +1605,7 @@ export const copy = {
     },
     shapeBody: {
       en: "Whatever the trade, this work has the same five parts. Once you can see them you start spotting them in your own week, which is the only thing this page is for.",
-      fr: "Quel que soit le métier, ce travail comporte les mêmes cinq parties. Une fois qu'on les voit, on se met à les repérer dans sa propre semaine — et cette page ne sert à rien d'autre.",
+      fr: "Quel que soit le métier, ce travail comporte les mêmes cinq parties. Une fois qu'on les voit, on se met à les repérer dans sa propre semaine, et cette page ne sert à rien d'autre.",
     },
 
     beat1: { en: "The mess", fr: "Le désordre" },
@@ -1697,8 +1697,8 @@ export const copy = {
    */
   article4: {
     pageTitle: {
-      en: "Article 4 — AI literacy training | Tutto",
-      fr: "Article 4 — Formation IA en entreprise | Tutto",
+      en: "Article 4: AI literacy training | Tutto",
+      fr: "Article 4 : Formation IA en entreprise | Tutto",
     },
     eyebrow: { en: "Article 4 · EU AI Act", fr: "Article 4 · Règlement européen sur l'IA" },
     /** The obligation, not the topic. A date, because a date is checkable. */
@@ -1727,7 +1727,7 @@ export const copy = {
       fr: "Six séances, un groupe, dans vos locaux",
     },
     fundingBody: {
-      en: "Fundable through your OPCO, often in full. We prepare and carry the funding file — you sign it.",
+      en: "Fundable through your OPCO, often in full. We prepare and carry the funding file. You sign it.",
       fr: "Finançable par votre OPCO, souvent en totalité. Nous montons et portons le dossier de financement : vous n'avez qu'à le signer.",
     },
     fundingNote: {
@@ -1762,7 +1762,7 @@ export const copy = {
     },
     s4Title: { en: "Hands on your own work", fr: "Les mains sur votre propre travail" },
     s4Body: {
-      en: "Your documents, your process, your machines. Not a demonstration prepared earlier — the tasks your teams actually repeat every week.",
+      en: "Your documents, your process, your machines. Not a demonstration prepared earlier: the tasks your teams actually repeat every week.",
       fr: "Vos documents, votre processus, vos postes de travail. Pas une démonstration préparée à l'avance : les tâches que vos équipes répètent réellement chaque semaine.",
     },
     s5Title: { en: "Where it goes wrong", fr: "Quand cela dérape" },
@@ -1772,8 +1772,8 @@ export const copy = {
     },
     s6Title: { en: "The file that proves it", fr: "Le dossier qui le prouve" },
     s6Body: {
-      en: "Attendance, the programme as delivered, the competencies covered and your written internal usage rules — assembled as one document you can hand to an inspector or an auditor.",
-      fr: "Émargement, programme réellement dispensé, compétences couvertes et vos règles internes d'usage écrites — assemblés en un document que vous pouvez présenter à un contrôleur ou à un auditeur.",
+      en: "Attendance, the programme as delivered, the competencies covered and your written internal usage rules, assembled as one document you can hand to an inspector or an auditor.",
+      fr: "Émargement, programme réellement dispensé, compétences couvertes et vos règles internes d'usage écrites, assemblés en un document que vous pouvez présenter à un contrôleur ou à un auditeur.",
     },
 
     whyLabel: { en: "Why now", fr: "Pourquoi maintenant" },
@@ -1783,7 +1783,7 @@ export const copy = {
     },
     urgency1Stat: { en: "02.2025", fr: "02.2025" },
     urgency1Body: {
-      en: "It is already in force. An obligation, not a project that has to justify itself — there is no return-on-investment argument to win first.",
+      en: "It is already in force. An obligation, not a project that has to justify itself: there is no return-on-investment argument to win first.",
       fr: "Elle est déjà en vigueur. Une obligation, et non un projet qui doit se justifier : il n'y a pas de débat sur le retour sur investissement à gagner d'abord.",
     },
     urgency2Stat: { en: "31.12", fr: "31.12" },
@@ -1792,7 +1792,7 @@ export const copy = {
       fr: "Les budgets OPCO sont annuels. Ce qui n'est pas engagé fin décembre est perdu et non reporté, ce qui fait du quatrième trimestre le moment le moins coûteux pour s'y mettre.",
     },
     urgency3Body: {
-      en: "Engagements per quarter. I deliver these myself and the training is not subcontracted, so the capacity is one person's — that is the real number.",
+      en: "Engagements per quarter. I deliver these myself and the training is not subcontracted, so the capacity is one person's. That is the real number.",
       fr: "Accompagnements par trimestre. J'anime moi-même et la formation n'est pas sous-traitée : la capacité est celle d'une seule personne, et c'est le chiffre réel.",
     },
 
@@ -1824,8 +1824,8 @@ export const copy = {
    */
   souverainete: {
     pageTitle: {
-      en: "Sovereignty — diagnostic | Tutto",
-      fr: "Souveraineté — diagnostic | Tutto",
+      en: "Sovereignty: diagnostic | Tutto",
+      fr: "Souveraineté : diagnostic | Tutto",
     },
     eyebrow: { en: "Sovereignty", fr: "Souveraineté" },
     title: {
@@ -1879,7 +1879,7 @@ export const copy = {
     finConditionLabel: { en: "Condition", fr: "Condition" },
     finQualifier: {
       en: "It requires an existing bank loan with three or more years left to run. Without one this route is closed, and that is worth knowing now rather than at signature.",
-      fr: "Il faut un prêt bancaire en cours avec au moins trois ans restant à courir. Sans cela, cette voie est fermée — autant le savoir maintenant plutôt qu'à la signature.",
+      fr: "Il faut un prêt bancaire en cours avec au moins trois ans restant à courir. Sans cela, cette voie est fermée. Autant le savoir maintenant plutôt qu'à la signature.",
     },
 
     offerLabel: { en: "The offer", fr: "L'offre" },

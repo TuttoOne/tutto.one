@@ -5,7 +5,7 @@ export const post: PostFr = {
 
 Ce billet porte sur ce qu'il a construit, sur l'importance de ces principes, et sur le lien direct avec ce qu'enseigne Praxis.
 
-## Ce qu'est brianmadden.ai — et ce qu'il n'est pas
+## Ce qu'est brianmadden.ai, et ce qu'il n'est pas
 
 La foire aux questions du site de Brian est le meilleur point de départ, et elle mérite une lecture attentive. Les distinctions qu'il pose sont précises, et chacune écarte un malentendu différent.
 
@@ -19,11 +19,11 @@ Non. Un jumeau numérique simule une personne. Ceci rend accessible une pensée 
 
 **D'où cela vient-il ?**
 
-Brian entretient un système de connaissances personnel assisté par IA — ce que l'on appelle parfois un second cerveau — et c'est ainsi qu'il utilise l'IA au quotidien. Ce système contient tout ce dont il a besoin pour travailler : contenus, idées, liste de tâches, réflexions, comptes rendus de réunion, documents, plans. [brianmadden.ai](https://brianmadden.ai) est un sous-ensemble de ce système privé, mis à jour chaque jour. Les contenus passent du système privé au dépôt public selon des principes de publication explicites.
+Brian entretient un système de connaissances personnel assisté par IA (ce que l'on appelle parfois un second cerveau), et c'est ainsi qu'il utilise l'IA au quotidien. Ce système contient tout ce dont il a besoin pour travailler : contenus, idées, liste de tâches, réflexions, comptes rendus de réunion, documents, plans. [brianmadden.ai](https://brianmadden.ai) est un sous-ensemble de ce système privé, mis à jour chaque jour. Les contenus passent du système privé au dépôt public selon des principes de publication explicites.
 
 **Dans quelle mesure est-ce à jour ?**
 
-Le fichier de « pensée actuelle » est mis à jour fréquemment. La synthèse l'est à chaque nouvelle publication. Point essentiel : l'IA signale les contenus périmés plutôt que de présenter une pensée ancienne comme actuelle — un choix de conception que la plupart des systèmes de connaissances ne font pas.
+Le fichier de « pensée actuelle » est mis à jour fréquemment. La synthèse l'est à chaque nouvelle publication. Point essentiel : l'IA signale les contenus périmés plutôt que de présenter une pensée ancienne comme actuelle, un choix de conception que la plupart des systèmes de connaissances ne font pas.
 
 **Peut-on le dupliquer ?**
 
@@ -39,13 +39,13 @@ La solution n'est pas un meilleur modèle. C'est un savoir mieux structuré : ex
 
 ## Pourquoi Praxis enseigne cette méthode
 
-Praxis est le programme qui vous apprend à bâtir cette structure pour votre propre travail. Le fichier de compétences — l'élément central de chaque séance Praxis — est la mise en œuvre concrète de cette idée : un savoir professionnel consigné en langage courant, structuré de sorte qu'un script puisse le lire et l'appliquer de la même manière, à chaque fois.
+Praxis est le programme qui vous apprend à bâtir cette structure pour votre propre travail. Le fichier de compétences, l'élément central de chaque séance Praxis, est la mise en œuvre concrète de cette idée : un savoir professionnel consigné en langage courant, structuré de sorte qu'un script puisse le lire et l'appliquer de la même manière, à chaque fois.
 
-Les supports de cours Praxis reposent eux-mêmes sur ce principe. Le contenu est tenu comme un dépôt de connaissances structuré — un dossier de fichiers markdown, organisés par thème, écrits pour être lus aussi bien par des humains que par une IA. Vous pouvez le parcourir dans la [bibliothèque de cours Praxis](https://tutto.one/praxis/learn/praxis-foundations).
+Les supports de cours Praxis reposent eux-mêmes sur ce principe. Le contenu est tenu comme un dépôt de connaissances structuré : un dossier de fichiers markdown, organisés par thème, écrits pour être lus aussi bien par des humains que par une IA. Vous pouvez le parcourir dans la [bibliothèque de cours Praxis](https://tutto.one/praxis/learn/praxis-foundations).
 
 ## À qui revient le mérite
 
-L'idée de publier un système de connaissances personnel sous forme de dépôt GitHub — ouvert, partageable et duplicable par quiconque — est une initiative de Brian, et je tiens à la lui attribuer directement.
+L'idée de publier un système de connaissances personnel sous forme de dépôt GitHub (ouvert, partageable et duplicable par quiconque) est une initiative de Brian, et je tiens à la lui attribuer directement.
 
 Si ce cadre vous est utile, son site est l'endroit où approfondir.
 

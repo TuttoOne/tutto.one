@@ -173,7 +173,7 @@ export function CopyEditor({ copy, name, rootSelector = "main" }: Props) {
       span.setAttribute("spellcheck", "true");
       span.title =
         paths.length > 1
-          ? `${paths.join(", ")} — the same words in ${paths.length} places; editing changes all of them`
+          ? `${paths.join(", ")}: the same words in ${paths.length} places; editing changes all of them`
           : paths[0];
       span.textContent = text;
       node.parentNode?.replaceChild(span, node);

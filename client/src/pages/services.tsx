@@ -91,8 +91,8 @@ export default function Services() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "Prestations — nous le construisons, ou vous apprenez | Tutto"
-        : "Services — we build it, or you learn to | Tutto";
+        ? "Prestations : nous le construisons, ou vous apprenez | Tutto"
+        : "Services: we build it, or you learn to | Tutto";
     return () => {
       document.title = SITE_TITLE;
     };

@@ -83,8 +83,8 @@ export default function Pythia() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "Pythia — intelligence documentaire sur site | Tutto"
-        : "Pythia — On-premise document intelligence | Tutto";
+        ? "Pythia : intelligence documentaire sur site | Tutto"
+        : "Pythia: On-premise document intelligence | Tutto";
     return () => {
       document.title = SITE_TITLE;
     };
@@ -110,7 +110,7 @@ export default function Pythia() {
 
   const applied = [
     {
-      name: "Bomza — SANS 10400",
+      name: "Bomza: SANS 10400",
       domain: t(copy.pythia.app1Domain),
       body: t(copy.pythia.app1Body),
       href: "https://bomza.tutto.one/",

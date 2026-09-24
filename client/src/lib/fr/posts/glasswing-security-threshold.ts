@@ -1,7 +1,7 @@
 import type { PostFr } from "./index";
 
 export const post: PostFr = {
-  content: `Anthropic a publié cette semaine un premier point d'étape sur le [projet Glasswing](https://www.anthropic.com/research/glasswing-initial-update). Il s'agit, sur le papier, de l'annonce d'une initiative de sécurité. Ce que le document décrit en réalité, c'est le franchissement d'un seuil — et la plupart des organisations n'en ont pas mesuré les conséquences.
+  content: `Anthropic a publié cette semaine un premier point d'étape sur le [projet Glasswing](https://www.anthropic.com/research/glasswing-initial-update). Il s'agit, sur le papier, de l'annonce d'une initiative de sécurité. Ce que le document décrit en réalité, c'est le franchissement d'un seuil, et la plupart des organisations n'en ont pas mesuré les conséquences.
 
 ## Ce qu'est Glasswing
 
@@ -13,7 +13,7 @@ Le cadrage affiché est défensif : nous utilisons l'IA pour protéger les infra
 
 Ces derniers mois, Mythos Preview a analysé plus de 1 000 projets open source. Il y a relevé 23 019 vulnérabilités au total, dont 6 202 classées de gravité élevée ou critique.
 
-Anthropic a ensuite soumis 1 752 de ces constats élevés ou critiques à six cabinets indépendants de recherche en sécurité. 90,6 % — soit 1 587 — ont été confirmés comme de véritables positifs. 62,4 % ont été confirmés de gravité élevée ou critique.
+Anthropic a ensuite soumis 1 752 de ces constats élevés ou critiques à six cabinets indépendants de recherche en sécurité. 90,6 % (soit 1 587) ont été confirmés comme de véritables positifs. 62,4 % ont été confirmés de gravité élevée ou critique.
 
 Faites le calcul. À ce taux de vrais positifs, Mythos Preview a mis au jour près de 3 900 vulnérabilités réelles, élevées ou critiques, dans du code open source, au terme d'une analyse qui a pris des mois et non des années. Ce chiffre continuera de croître : Anthropic annonce vouloir poursuivre les analyses.
 
@@ -21,7 +21,7 @@ L'échelle n'est pas le sujet. Le taux l'est. Un taux de 90 % de vrais positifs 
 
 ## Le point de saturation des référentiels
 
-Anthropic note que Mythos Preview a progressé au point de « saturer pour l'essentiel les référentiels existants » de découverte de vulnérabilités. Anthropic a donc soutenu la création de deux nouveaux référentiels — ExploitBench et ExploitGym — précisément pour suivre à l'avenir les capacités des modèles de pointe en matière de développement d'exploits.
+Anthropic note que Mythos Preview a progressé au point de « saturer pour l'essentiel les référentiels existants » de découverte de vulnérabilités. Anthropic a donc soutenu la création de deux nouveaux référentiels, ExploitBench et ExploitGym, précisément pour suivre à l'avenir les capacités des modèles de pointe en matière de développement d'exploits.
 
 Lorsqu'un modèle sature un référentiel, celui-ci cesse d'être informatif. Ce qui le remplace, ce sont les essais en conditions réelles : c'est exactement ce qu'est Glasswing. Le passage des référentiels à l'analyse en production n'est pas un choix de méthode. C'est la reconnaissance que la capacité a dépassé la mesure.
 

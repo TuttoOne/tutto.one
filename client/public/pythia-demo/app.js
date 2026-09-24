@@ -24,7 +24,7 @@ const state = {
 };
 
 const fmt = {
-  date: (iso) => (iso ? iso.split('-').reverse().join('/') : '—'),
+  date: (iso) => (iso ? iso.split('-').reverse().join('/') : 's.o.'),
   bytes: (n) => (n > 1e6 ? (n / 1e6).toFixed(1) + ' Mo' : Math.round(n / 1024) + ' ko'),
   clock: (ms) => {
     const s = Math.floor(ms / 1000);
@@ -123,7 +123,7 @@ function renderCorpus() {
   const unreadable = rows.filter((d) => !d.lisible).length;
   $('#count').textContent =
     `${rows.length} document${rows.length > 1 ? 's' : ''} sur ${state.corpus.length}` +
-    (unreadable ? ` — ${unreadable} illisible${unreadable > 1 ? 's' : ''}` : '');
+    (unreadable ? `, ${unreadable} illisible${unreadable > 1 ? 's' : ''}` : '');
 
   $('#corpus tbody').innerHTML = rows
     .map((d) => {
@@ -138,8 +138,8 @@ function renderCorpus() {
         <td class="folder">${esc(d.folder)}</td>
         <td>${classeCell}</td>
         <td>${fmt.date(d.date)}</td>
-        <td class="num">${d.pages || '—'}</td>
-        <td>${d.langue ? (d.langue === 'fr' ? 'FR' : 'EN') : '—'}</td>
+        <td class="num">${d.pages || 's.o.'}</td>
+        <td>${d.langue ? (d.langue === 'fr' ? 'FR' : 'EN') : 's.o.'}</td>
         <td>${etatCell}</td>
       </tr>`;
     })
@@ -237,7 +237,7 @@ function applyEvent(e) {
     const d = e.data || {};
     run.exceptions += 1;
     $('#excount').textContent = String(run.exceptions);
-    push('#exceptions', `${esc(shortPath(d.path))} <span class="why">— ${esc(d.reason_fr || d.reason || '')}</span>`);
+    push('#exceptions', `${esc(shortPath(d.path))} <span class="why">: ${esc(d.reason_fr || d.reason || '')}</span>`);
     return;
   }
 
@@ -334,7 +334,7 @@ function renderFinding() {
         <td class="num">${esc(c.clause)}</td>
         <td>${esc(c.titre)}${note}</td>
         <td><span class="tag ${STATUS_CLASS[c.status] || ''}">${esc(c.status_fr)}</span></td>
-        <td class="num">${c.coverage.considered || '—'}</td>
+        <td class="num">${c.coverage.considered || 's.o.'}</td>
       </tr>`;
     })
     .join('');
@@ -360,7 +360,7 @@ function renderOneFinding(f) {
     .join('');
   const more = extra > 0 ? `<span class="morecites">et ${extra} autres documents concernés</span>` : '';
   return `<div class="finding">
-    <div class="clause">Chapitre ${esc(f.clause)} — ${esc(f.severity)}</div>
+    <div class="clause">Chapitre ${esc(f.clause)} : ${esc(f.severity)}</div>
     <h3>${esc(f.title_fr)}</h3>
     <p>${esc(f.statement_fr)}</p>
     <p class="missing"><strong>Ce qui manque.</strong> ${esc(f.missing_fr)}</p>
@@ -414,8 +414,8 @@ function gotoPage(page) {
     $('#v-note').innerHTML = `<h3>Ce document n'a pas pu être lu</h3>
       <p>${esc(doc.motif_fr || 'Motif non déterminé')}.</p>
       <p class="small">Aucune image de page ne peut être produite. Son contenu ne peut être versé
-      au dossier de preuve, quel qu'il soit — c'est le constat lui-même, pas une limite de cet écran.</p>`;
-    $('#v-page').textContent = '—';
+      au dossier de preuve, quel qu'il soit. C'est le constat lui-même, pas une limite de cet écran.</p>`;
+    $('#v-page').textContent = 's.o.';
     $('#v-prev').disabled = $('#v-next').disabled = true;
     return;
   }
@@ -580,8 +580,8 @@ function renderMap() {
     `${g.counts.documents} documents, ${g.counts.entities} entités, ${g.counts.edges} liens. ` +
     `${g.counts.unlinked_documents} documents ne se rattachent à rien : ` +
     `${g.counts.unlinked_because_unreadable} illisibles, ` +
-    `${g.counts.unlinked_because_no_field} lisibles mais sans champ exploitable — ` +
-    `sur un formulaire numérisé, la structure du tableau ne survit pas toujours à la lecture.`;
+    `${g.counts.unlinked_because_no_field} lisibles mais sans champ exploitable. ` +
+    `Sur un formulaire numérisé, la structure du tableau ne survit pas toujours à la lecture.`;
 
   wireMap();
   applyMapFilter();
@@ -732,7 +732,7 @@ function showTip(node, event) {
   const bits = [`<strong>${esc(node.label)}</strong>`, `<span class="t-sub">${esc(kindLabel)}</span>`];
   if (node.kind === 'document' && node.date) bits.push(`<span class="t-sub">${fmt.date(node.date)}</span>`);
   if (node.kind !== 'document') bits.push(`<span class="t-sub">${node.degree} documents</span>`);
-  if (node.isolement) bits.push(`<span class="t-flag">sans lien — ${esc(node.isolement)}</span>`);
+  if (node.isolement) bits.push(`<span class="t-flag">sans lien : ${esc(node.isolement)}</span>`);
   if (node.constats) bits.push(`<span class="t-flag">constat ${node.constats.join(', ')}</span>`);
   tip.innerHTML = bits.join('<br>');
   tip.hidden = false;
@@ -788,7 +788,7 @@ function openPanel(node) {
       grouped.get(label).push({ other, constats: link.constats });
     }
     for (const [label, items] of grouped) {
-      parts.push(`<h4>${esc(label)} — ${items.length}</h4><ul>`);
+      parts.push(`<h4>${esc(label)} (${items.length})</h4><ul>`);
       for (const { other, constats } of items.slice(0, 40)) {
         const open = other.kind === 'document' && other.path
           ? `<button data-open="${esc(state.byPath.get(other.path)?.id || '')}">${esc(other.label)}</button>`

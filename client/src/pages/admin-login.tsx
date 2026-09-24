@@ -75,7 +75,7 @@ export default function AdminLogin() {
             <form onSubmit={handlePasswordSubmit} className="space-y-4">
               <div className="flex items-center gap-2 mb-4">
                 <Lock className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium">Step 1 — Password</span>
+                <span className="text-sm font-medium">Step 1: Password</span>
               </div>
 
               <div className="space-y-2">
@@ -109,7 +109,7 @@ export default function AdminLogin() {
             <form onSubmit={handleTotpSubmit} className="space-y-4">
               <div className="flex items-center gap-2 mb-4">
                 <KeyRound className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium">Step 2 — Authenticator Code</span>
+                <span className="text-sm font-medium">Step 2: Authenticator Code</span>
               </div>
 
               <div className="space-y-2">

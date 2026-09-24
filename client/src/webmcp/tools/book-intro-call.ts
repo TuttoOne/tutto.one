@@ -8,7 +8,7 @@ export const bookIntroCall = defineTool({
   name: "book_intro_call",
   title: "Open the intro call booking page",
   description:
-    "Open Tutto's booking page for a free 15-minute intro call with Daniel. Use this when the visitor wants to talk to someone, book time, or asks how to get started. The visitor picks the slot and confirms on the booking page themselves — this tool only opens it, in the current tab. Returns the booking URL.",
+    "Open Tutto's booking page for a free 15-minute intro call with Daniel. Use this when the visitor wants to talk to someone, book time, or asks how to get started. The visitor picks the slot and confirms on the booking page themselves. This tool only opens it, in the current tab. Returns the booking URL.",
   inputSchema: {
     type: "object",
     properties: {},

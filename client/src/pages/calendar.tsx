@@ -99,8 +99,8 @@ export default function Calendar() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "Les soirées IA appliquée — Praxis | Tutto"
-        : "Applied AI Evenings — Praxis | Tutto";
+        ? "Les soirées IA appliquée | Praxis | Tutto"
+        : "Applied AI Evenings | Praxis | Tutto";
     return () => {
       document.title = SITE_TITLE;
     };

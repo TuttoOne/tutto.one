@@ -2,7 +2,7 @@
 <html lang="fr" class="light"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Claude avec l'API Anthropic — deck parlé</title>
+<title>Praxis · Claude avec l'API Anthropic : deck parlé</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -861,7 +861,7 @@ th {
 <section class="deck-slide title">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · deck parlé</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — construit à partir de « Claude with the Anthropic API » d'Anthropic</span>
+    <span class="eyebrow">Praxis : construit à partir de « Claude with the Anthropic API » d'Anthropic</span>
     <h1 class="">Construire avec<br>l'API sous<br>la fenêtre de chat.</h1>
     <p class="lead">Onze idées, une par écran. C'est la couche sur laquelle reposent Claude Code et toutes les autres applications. Chaque slide est un point d'appui pendant que vous expliquez : prenez les silences.</p>
   </div>
@@ -1044,7 +1044,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Deux façons de noter : <b>par code</b> pour tout ce qui est exact (est-ce du JSON valide ? contient-il la réponse ?), <b>par modèle</b> pour le jugement (est-ce diplomate ? est-ce dans le sujet ?) — vous demandez à un autre appel Claude de le noter selon une grille.</p>
+    <p class="cap">Deux façons de noter : <b>par code</b> pour tout ce qui est exact (est-ce du JSON valide ? contient-il la réponse ?), <b>par modèle</b> pour le jugement (est-ce diplomate ? est-ce dans le sujet ?) : vous demandez à un autre appel Claude de le noter selon une grille.</p>
     <div class="keynote"><p><span class="kn-label">Concept clé</span>La boucle d'éval : construire des cas de test → Claude génère des réponses → <strong>les noter</strong> → score → affiner et relancer. L'étape après la génération, c'est la notation ; la notation par modèle utilise <em>une autre IA</em> pour juger. <span class="kn-see">→ notes du formateur.</span></p></div>
     <div class="qa">
       <p><span>Qu'est-ce qu'un « correcteur modèle » ?</span> La moitié « par modèle » : un autre appel Claude qui <strong>note une sortie selon une grille</strong>. La solution quand « juste » relève du jugement (ton, pertinence, utilité), ce que le code ne peut pas vérifier exactement.</p>
@@ -1089,7 +1089,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Ce sont les exemples (few-shot) qui font le plus bouger la qualité : deux ou trois paires entrée→sortie traitées enseignent le format et les cas limites que des paragraphes de consignes n'atteignent pas. Les balises XML comptent parce que Claude est entraîné à les respecter — <code>&lt;document&gt;…&lt;/document&gt;</code> se lit mieux que des guillemets.</p>
+    <p class="cap">Ce sont les exemples (few-shot) qui font le plus bouger la qualité : deux ou trois paires entrée→sortie traitées enseignent le format et les cas limites que des paragraphes de consignes n'atteignent pas. Les balises XML comptent parce que Claude est entraîné à les respecter : <code>&lt;document&gt;…&lt;/document&gt;</code> se lit mieux que des guillemets.</p>
   </div>
   <span class="slide-counter">06</span>
 </section>
@@ -1098,7 +1098,7 @@ th {
 <section class="deck-slide">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 5 · Étendre sa portée</span></div>
   <div class="stage">
-    <span class="eyebrow">Leçon 5 — si vous ne retenez qu'une chose</span>
+    <span class="eyebrow">Leçon 5 : si vous ne retenez qu'une chose</span>
     <h2 class="">L'usage d'outils est un aller-retour que vous complétez</h2>
     <p class="lead">Claude ne peut rien exécuter. Il peut seulement <em>demander</em>. Vous décrivez les outils ; il répond « appelle ceci, avec ces arguments » ; vous l'exécutez et lui rendez le résultat ; il continue.</p>
     <div class="diagram">
@@ -1180,7 +1180,7 @@ th {
         <text x="866" y="100" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">exécution de code</text>
         <text x="866" y="120" text-anchor="middle" class="t-tiny">exécute Python en bac à sable</text>
 
-        <text x="400" y="170" class="t-tiny">L'appel d'outils à granularité fine transmet les arguments au fur et à mesure —</text>
+        <text x="400" y="170" class="t-tiny">L'appel d'outils à granularité fine transmet les arguments au fur et à mesure :</text>
         <text x="400" y="190" class="t-tiny">vous pouvez agir avant la fin de la requête.</text>
       </svg>
     </div>
@@ -1195,12 +1195,12 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 7 · Étendre sa portée</span></div>
   <div class="stage">
     <span class="eyebrow">Leçon 7</span>
-    <h2 class="">RAG — lui donner des connaissances qu'il n'a jamais apprises</h2>
+    <h2 class="">RAG : lui donner des connaissances qu'il n'a jamais apprises</h2>
     <p class="lead">Une base de connaissances entière ne tient pas dans un prompt. On l'indexe donc une fois, puis on ne récupère que les quelques passages utiles à chaque question et on les insère.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 260" role="img" aria-label="The RAG pipeline">
         <!-- ingest row -->
-        <text x="20" y="36" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Une fois — construire l'index</text>
+        <text x="20" y="36" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Une fois : construire l'index</text>
         <rect x="20" y="52" width="150" height="52" rx="10" class="box"></rect>
         <text x="95" y="84" text-anchor="middle" class="t-tiny s-ink">documents</text>
         <rect x="210" y="52" width="150" height="52" rx="10" class="box"></rect>
@@ -1214,7 +1214,7 @@ th {
         <line x1="550" y1="78" x2="588" y2="78" class="l-ink" stroke-width="2" marker-end="url(#l7a)"></line>
 
         <!-- query row -->
-        <text x="20" y="150" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">À chaque question — retrouver et répondre</text>
+        <text x="20" y="150" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">À chaque question : retrouver et répondre</text>
         <rect x="20" y="166" width="150" height="52" rx="10" class="box"></rect>
         <text x="95" y="198" text-anchor="middle" class="t-tiny s-ink">question</text>
         <rect x="210" y="166" width="150" height="52" rx="10" class="box-amber"></rect>
@@ -1304,7 +1304,7 @@ th {
         <!-- first call -->
         <text x="20" y="44" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Premier appel · écrit le cache</text>
         <rect x="20" y="58" width="640" height="48" rx="8" class="box-amber"></rect>
-        <text x="320" y="87" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">préfixe stable — system, outils, documents (mis en cache ici)</text>
+        <text x="320" y="87" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">préfixe stable : system, outils, documents (mis en cache ici)</text>
         <rect x="668" y="58" width="200" height="48" rx="8" class="box"></rect>
         <text x="768" y="87" text-anchor="middle" class="t-tiny s-ink">la question du jour</text>
         <line x1="660" y1="115" x2="660" y2="58" class="l-ink" stroke-width="1.5" stroke-dasharray="3 3"></line>
@@ -1313,7 +1313,7 @@ th {
         <!-- later calls -->
         <text x="20" y="178" class="t-sub" style="fill:hsl(var(--primary));font-weight:600">Appels suivants · lisent le cache</text>
         <rect x="20" y="192" width="640" height="48" rx="8" class="box" fill="hsl(var(--primary) / 0.06)" stroke-dasharray="5 4"></rect>
-        <text x="320" y="221" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">même préfixe — lu depuis le cache, bien moins cher et plus rapide</text>
+        <text x="320" y="221" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">même préfixe : lu depuis le cache, bien moins cher et plus rapide</text>
         <rect x="668" y="192" width="200" height="48" rx="8" class="box"></rect>
         <text x="768" y="221" text-anchor="middle" class="t-tiny s-ink">question suivante</text>
 
@@ -1323,7 +1323,7 @@ th {
         <defs></defs>
       </svg>
     </div>
-    <p class="cap">La règle : seul un <em>préfixe exact et inchangé</em> est réutilisé. Mettez donc tout ce qui est stable en premier et la partie variable en dernier. La durée de vie du cache est courte (quelques minutes) : le gain se fait sur une série d'appels rapprochés — le cœur de toute application réactive à contexte répété.</p>
+    <p class="cap">La règle : seul un <em>préfixe exact et inchangé</em> est réutilisé. Mettez donc tout ce qui est stable en premier et la partie variable en dernier. La durée de vie du cache est courte (quelques minutes) : le gain se fait sur une série d'appels rapprochés, le cœur de toute application réactive à contexte répété.</p>
     <div class="keynote"><p><span class="kn-label">Concept clé</span>Le cache demande deux choses : marquer le bloc <code>cache_control: ephemeral</code> <em>et</em> atteindre la longueur minimale (~1 024 tokens sur Sonnet 4.x, ~4 096 sur Opus 4.5+). En dessous du minimum, l'appel passe sans cache, sans erreur. <span class="kn-see">→ notes du formateur.</span></p></div>
   </div>
   <span class="slide-counter">11</span>
@@ -1334,7 +1334,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 10 · Construire des systèmes</span></div>
   <div class="stage">
     <span class="eyebrow">Leçon 10</span>
-    <h2 class="">MCP — une prise standard pour les outils et les données</h2>
+    <h2 class="">MCP : une prise standard pour les outils et les données</h2>
     <p class="lead">Sans lui, chaque application câble chaque intégration à la main. Avec lui, un serveur expose ses capacités une fois et n'importe quel client s'y connecte.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="MCP client server architecture">
@@ -1356,23 +1356,23 @@ th {
         <rect x="720" y="40" width="240" height="180" rx="14" class="box-amber"></rect>
         <text x="840" y="70" text-anchor="middle" class="t-lbl s-amber">Un serveur expose</text>
         <rect x="744" y="86" width="192" height="36" rx="8" class="box"></rect>
-        <text x="840" y="110" text-anchor="middle" class="t-tiny s-ink">des tools — actions à appeler</text>
+        <text x="840" y="110" text-anchor="middle" class="t-tiny s-ink">des tools : actions à appeler</text>
         <rect x="744" y="128" width="192" height="36" rx="8" class="box"></rect>
-        <text x="840" y="152" text-anchor="middle" class="t-tiny s-ink">des resources — données à lire</text>
+        <text x="840" y="152" text-anchor="middle" class="t-tiny s-ink">des resources : données à lire</text>
         <rect x="744" y="170" width="192" height="36" rx="8" class="box"></rect>
-        <text x="840" y="194" text-anchor="middle" class="t-tiny s-ink">des prompts — flux tout prêts</text>
+        <text x="840" y="194" text-anchor="middle" class="t-tiny s-ink">des prompts : flux tout prêts</text>
         <line x1="560" y1="133" x2="718" y2="133" class="l-amber" stroke-width="2.5" marker-end="url(#l10a)"></line>
         <defs>
           <marker id="l10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">Un serveur publie trois choses — tools, resources, prompts — et l'inspecteur vous permet de le tester avant de le brancher à un client. Vous construisez l'intégration une fois ; vous la branchez à Claude Code, à votre propre client, ou à celui de n'importe qui d'autre.</p>
+    <p class="cap">Un serveur publie trois choses (tools, resources, prompts) et l'inspecteur vous permet de le tester avant de le brancher à un client. Vous construisez l'intégration une fois ; vous la branchez à Claude Code, à votre propre client, ou à celui de n'importe qui d'autre.</p>
     <div class="qa">
-      <p><span>Exposer le contenu de documents ?</span> C'est une <strong>resource</strong> — des données en lecture seule que Claude peut récupérer. <strong>Les actions</strong> qu'il effectue sont des tools ; <strong>les instructions pré-testées</strong> (un formateur, par exemple) sont des prompts.</p>
-      <p><span>Définir un tool en Python ?</span> Le plus simple, c'est le décorateur <strong><code>@mcp.tool()</code></strong> (FastMCP). Le nom de la fonction, sa docstring et ses annotations de type deviennent le tool — aucun schéma à écrire à la main.</p>
-      <p><span>Comment client et serveur se parlent-ils en <br>développement ?</span> Presque toujours en <strong>stdio</strong> — le client lance le serveur comme sous-processus via stdin/stdout. Pas de ports, pas d'authentification. HTTP, c'est pour le distant.</p>
-      <p><span>Pourquoi trois primitives, et pas une seule ?</span> Des propriétaires différents. <strong>Le modèle</strong> choisit les outils, l' <strong>application</strong> charge les ressources, l' <strong>utilisateur</strong> invoque les prompts — chacun est donc proposé de la bonne façon.</p>
+      <p><span>Exposer le contenu de documents ?</span> C'est une <strong>resource</strong> : des données en lecture seule que Claude peut récupérer. <strong>Les actions</strong> qu'il effectue sont des tools ; <strong>les instructions pré-testées</strong> (un formateur, par exemple) sont des prompts.</p>
+      <p><span>Définir un tool en Python ?</span> Le plus simple, c'est le décorateur <strong><code>@mcp.tool()</code></strong> (FastMCP). Le nom de la fonction, sa docstring et ses annotations de type deviennent le tool : aucun schéma à écrire à la main.</p>
+      <p><span>Comment client et serveur se parlent-ils en <br>développement ?</span> Presque toujours en <strong>stdio</strong> : le client lance le serveur comme sous-processus via stdin/stdout. Pas de ports, pas d'authentification. HTTP, c'est pour le distant.</p>
+      <p><span>Pourquoi trois primitives, et pas une seule ?</span> Des propriétaires différents. <strong>Le modèle</strong> choisit les outils, l' <strong>application</strong> charge les ressources, l' <strong>utilisateur</strong> invoque les prompts. Chacun est donc proposé de la bonne façon.</p>
     </div>
   </div>
   <span class="slide-counter">12</span>
@@ -1383,12 +1383,12 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 11 · Construire des systèmes</span></div>
   <div class="stage">
     <span class="eyebrow">Leçon 11</span>
-    <h2 class="">Workflows ou agents — qui décide du chemin</h2>
+    <h2 class="">Workflows ou agents : qui décide du chemin</h2>
     <p class="lead">Les deux enchaînent des appels au LLM. La différence, c'est le contrôle : dans un workflow, vous câblez les étapes ; dans un agent, le modèle les choisit au fur et à mesure.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Workflows versus agents">
         <!-- workflows side -->
-        <text x="20" y="34" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Workflows — vous fixez le chemin</text>
+        <text x="20" y="34" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Workflows : vous fixez le chemin</text>
         <!-- chain -->
         <rect x="20" y="56" width="56" height="34" rx="7" class="box"></rect>
         <rect x="96" y="56" width="56" height="34" rx="7" class="box"></rect>
@@ -1417,7 +1417,7 @@ th {
         <line x1="500" y1="24" x2="500" y2="226" class="l-faint" stroke-width="1" stroke-dasharray="4 5"></line>
 
         <!-- agent side -->
-        <text x="540" y="34" class="t-sub" style="fill:hsl(var(--primary));font-weight:600">Agent — le modèle décide du chemin</text>
+        <text x="540" y="34" class="t-sub" style="fill:hsl(var(--primary));font-weight:600">Agent : le modèle décide du chemin</text>
         <rect x="600" y="70" width="150" height="50" rx="11" class="box-amber"></rect>
         <text x="675" y="100" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">penser</text>
         <rect x="790" y="70" width="150" height="50" rx="11" class="box-amber"></rect>
@@ -1434,10 +1434,10 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Choisissez selon la prévisibilité. Si vous pouvez dessiner les étapes à l'avance, un workflow coûte moins cher et reste plus fiable. Si le chemin dépend de ce que l'on trouve en route, il vous faut un agent — Claude Code en est un. La plupart des systèmes en production mélangent les deux.</p>
+    <p class="cap">Choisissez selon la prévisibilité. Si vous pouvez dessiner les étapes à l'avance, un workflow coûte moins cher et reste plus fiable. Si le chemin dépend de ce que l'on trouve en route, il vous faut un agent ; Claude Code en est un. La plupart des systèmes en production mélangent les deux.</p>
     <div class="qa">
-      <p><span>Vous voulez qu'il gère l'imprévu ?</span> Donnez à l'agent quelques <strong>outils généraux</strong> et laissez-le choisir — pas un outil étroit par cas que vous aviez prévu. Les outils généraux se recombinent en chemins que vous n'avez jamais écrits.</p>
-      <p><span>Un long prompt qu'il n'applique qu'à moitié ?</span> <strong>Enchaînez</strong> -le. Répartissez les règles sur quelques petites étapes, pour que chaque appel en porte moins — et vérifiez le résultat entre chacune.</p>
+      <p><span>Vous voulez qu'il gère l'imprévu ?</span> Donnez à l'agent quelques <strong>outils généraux</strong> et laissez-le choisir, pas un outil étroit par cas que vous aviez prévu. Les outils généraux se recombinent en chemins que vous n'avez jamais écrits.</p>
+      <p><span>Un long prompt qu'il n'applique qu'à moitié ?</span> <strong>Enchaînez</strong> -le. Répartissez les règles sur quelques petites étapes, pour que chaque appel en porte moins, et vérifiez le résultat entre chacune.</p>
     </div>
   </div>
   <span class="slide-counter">13</span>

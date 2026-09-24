@@ -1,7 +1,7 @@
 import type { PostFr } from "./index";
 
 export const post: PostFr = {
-  content: `La plupart des organisations abordent l'IA à l'envers. Elles commencent par les outils — quel modèle, quelle plateforme, quelle interface de discussion — puis s'étonnent que les résultats manquent de constance et que les gains de productivité soient inférieurs aux attentes.
+  content: `La plupart des organisations abordent l'IA à l'envers. Elles commencent par les outils (quel modèle, quelle plateforme, quelle interface de discussion), puis s'étonnent que les résultats manquent de constance et que les gains de productivité soient inférieurs aux attentes.
 
 Les outils ne sont pas en cause. Le problème, c'est qu'ils n'ont rien de solide sur quoi travailler. De bons résultats supposent de bonnes entrées : une documentation claire, des processus cartographiés, des règles explicites. La plupart des organisations n'en disposent pas. Non par manque d'efforts, mais parce que jusqu'ici rien n'imposait une telle précision.
 
@@ -25,7 +25,7 @@ L'erreur, ici, est de se précipiter vers l'automatisation avant de disposer d'u
 
 Cette description devient le fichier de compétences : la spécification, en langage courant, qui régit ce que fait l'agent. L'agent applique les mêmes règles aux mêmes entrées et produit le même résultat, à chaque fois.
 
-C'est là que la plupart des organisations ralentissent. Rendre explicite un savoir tacite — extraire les règles de la tête des gens pour les coucher sur le papier — est plus difficile qu'il n'y paraît, et plus précieux qu'il n'en a l'air.
+C'est là que la plupart des organisations ralentissent. Rendre explicite un savoir tacite (extraire les règles de la tête des gens pour les coucher sur le papier) est plus difficile qu'il n'y paraît, et plus précieux qu'il n'en a l'air.
 
 ## Développer la compétence dans vos équipes
 

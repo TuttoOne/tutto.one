@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction to Subagents — teaching notes</title>
+<title>Praxis · Introduction to Subagents: teaching notes</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -862,43 +862,43 @@ th {
 </div>
 <main>
   <div class="guide-head">
-    <h1>Introduction to Subagents — teaching notes</h1>
-    <p class="lead">Side-by-side notes for <code>09-praxis-introduction-to-subagents.html</code> (7 slides). This is a technical course with one plain-English heart: <strong>delegation</strong>. A subagent is a bounded job handed to a focused junior who goes away, works in their own space, and brings back the answer — not the mess. That translates cleanly for non-technical people, so keep the framing on the supervisor mindset, not the engineering. This is the first taste of the Praxis "Frontier" idea: managing a small team of agents instead of doing every step yourself. The deck is what the room looks at; this is what you say, where you stop, and how each idea lands for the person in front of you. Written from the deck and <code>09-introduction-to-subagents-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
+    <h1>Introduction to Subagents: teaching notes</h1>
+    <p class="lead">Side-by-side notes for <code>09-praxis-introduction-to-subagents.html</code> (7 slides). This is a technical course with one plain-English heart: <strong>delegation</strong>. A subagent is a bounded job handed to a focused junior who goes away, works in their own space, and brings back the answer, not the mess. That translates cleanly for non-technical people, so keep the framing on the supervisor mindset, not the engineering. This is the first taste of the Praxis "Frontier" idea: managing a small team of agents instead of doing every step yourself. The deck is what the room looks at; this is what you say, where you stop, and how each idea lands for the person in front of you. Written from the deck and <code>09-introduction-to-subagents-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
     <details class="howto" open><summary>How to use these notes</summary><ul><li>These are guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
 <li><strong>By background</strong> gives you a line per archetype (from <code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in the room and ignore the rest. They are a palette, not a checklist to read out.</li>
-<li>The backbone question for the whole course is the same one every time: <em>"what would you send a subagent to go and do?"</em> Keep returning to it. The whole course is one act of judgment — what to delegate, and what to keep in your own hands.</li>
-<li>This course names a command (<code>/agents</code>) and a config file. Say them; do not read the YAML aloud (<code>framings.md</code> — voice). The point of every line is the outcome, not the keystroke.</li>
+<li>The backbone question for the whole course is the same one every time: <em>"what would you send a subagent to go and do?"</em> Keep returning to it. The whole course is one act of judgment: what to delegate, and what to keep in your own hands.</li>
+<li>This course names a command (<code>/agents</code>) and a config file. Say them; do not read the YAML aloud (<code>framings.md</code>: voice). The point of every line is the outcome, not the keystroke.</li>
 <li>Slide 4 (the config file) is mechanical and the same for everyone, so it carries <strong>one shared example</strong>, not nine. Said so on the slide.</li>
-<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only — <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
-<li>This sits downstream of <strong>Claude Code 101</strong> (course 02, slide 11 introduced subagents in one line). If the room has done it, this is the deep dive on that slide. If not, plant the bridge: you already keep a clean desk by sending the digging elsewhere — here's how.</li></ul></details>
+<li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only: <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
+<li>This sits downstream of <strong>Claude Code 101</strong> (course 02, slide 11 introduced subagents in one line). If the room has done it, this is the deep dive on that slide. If not, plant the bridge: you already keep a clean desk by sending the digging elsewhere; here's how.</li></ul></details>
   </div>
   <section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>Send the heavy lifting to a subagent</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Set the frame: four ideas, one per screen, and the watching is the lesson. The whole course is about one managerial instinct — knowing what to hand off. You are not going to lecture; you are going to show, then hand it back to them.</p>
+<p>Set the frame: four ideas, one per screen, and the watching is the lesson. The whole course is about one managerial instinct: knowing what to hand off. You are not going to lecture; you are going to show, then hand it back to them.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Four ideas, one screen each. The whole thing is about delegation — the oldest management skill there is, now pointed at a tool. You learn what to send away, how to brief it, and when not to bother. I'll show you each piece, then stop and ask where it fits your work."</p>
+<p>"Four ideas, one screen each. The whole thing is about delegation, the oldest management skill there is, now pointed at a tool. You learn what to send away, how to brief it, and when not to bother. I'll show you each piece, then stop and ask where it fits your work."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Open with</span></div>
-<p>The task they named in intake, and the moment in it where they go <em>digging</em> — opening file after file, tab after tab, to surface one fact. That digging is what a subagent is for. Promise you'll come back to it on the decision slide.</p>
+<p>The task they named in intake, and the moment in it where they go <em>digging</em>: opening file after file, tab after tab, to surface one fact. That digging is what a subagent is for. Promise you'll come back to it on the decision slide.</p>
 </div></div></section>
 <section class="card" id="slide-2" data-slide="2"><header class="card-head"><span class="badge">2</span><div><span class="eyebrow">Spine</span><h2>The whole course on one screen</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>Four moves: understand what a subagent is, build one, design it well, then judge when to reach for it at all. The last move is the one that matters; the rest serve it.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the whole thing on one screen. We meet the idea, we build one, we make it sharp, then we learn the judgment call — when it actually helps and when it gets in the way. If you lose the thread, this is the map back."</p>
+<p>"Here's the whole thing on one screen. We meet the idea, we build one, we make it sharp, then we learn the judgment call: when it actually helps and when it gets in the way. If you lose the thread, this is the map back."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Cue</span></div>
 <p>Don't teach the spine, just orient. The centrepiece is slide 6, the decision rule. Twenty seconds, then move.</p>
 </div></div></section>
 <section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Lesson 1 · Concept</span><h2>A subagent works in its own context</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>A subagent is a focused helper that gets a role and a task, does the messy work out of sight in its own memory, and hands back only the answer. The intermediate steps — the file reads, the searches — stay isolated and never clutter your main thread. The tradeoff: you lose sight of how it got there.</p>
+<p>A subagent is a focused helper that gets a role and a task, does the messy work out of sight in its own memory, and hands back only the answer. The intermediate steps (the file reads, the searches) stay isolated and never clutter your main thread. The tradeoff: you lose sight of how it got there.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Picture asking a researcher to go find one thing. They open twenty tabs, read for an hour, then come back and tell you the answer in a sentence. You never see the twenty tabs. That's a subagent — it goes off into its own space, does the digging, and brings back just the result. Your own desk stays clear." (Plain framing carried over from <code>02-claude-code-101-teaching-notes.md</code> slide 11: a researcher who returns one paragraph, not their twenty open tabs. Pairs with <code>framings.md</code> — context window: your working memory has an edge, and this is how you keep the noise off it.)</p>
+<p>"Picture asking a researcher to go find one thing. They open twenty tabs, read for an hour, then come back and tell you the answer in a sentence. You never see the twenty tabs. That's a subagent: it goes off into its own space, does the digging, and brings back just the result. Your own desk stays clear." (Plain framing carried over from <code>02-claude-code-101-teaching-notes.md</code> slide 11: a researcher who returns one paragraph, not their twenty open tabs. Pairs with <code>framings.md</code>: context window: your working memory has an edge, and this is how you keep the noise off it.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -909,39 +909,39 @@ th {
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>"find every mention of this entity across the whole file set" — the hits, not the reading.</dd>
-<dt>Analyst</dt><dd>"which of these responses left the pricing question blank?" — the list, not the trawl.</dd>
-<dt>Designer</dt><dd>"scan competitor campaigns before this pitch" — the summary, not the tabs.</dd>
-<dt>Knowledge worker</dt><dd>"which suppliers in this folder use a non-standard invoice format?" — just the answer.</dd>
-<dt>Reporter</dt><dd>"who hasn't filed an update this week?" — the names, not the inbox sweep.</dd>
-<dt>Content</dt><dd>"what have we already published on this topic?" — the shortlist, cited.</dd>
-<dt>Form-filler</dt><dd>"which receipts don't match any section of the template?" — the flagged set.</dd>
-<dt>Outreach</dt><dd>"pull the latest on this prospect before I write" — the brief, not the search history.</dd>
-<dt>Exec</dt><dd>"which retainers come up for renewal this quarter?" — the list, sourced.</dd>
+<dt>Investigator</dt><dd>"find every mention of this entity across the whole file set": the hits, not the reading.</dd>
+<dt>Analyst</dt><dd>"which of these responses left the pricing question blank?": the list, not the trawl.</dd>
+<dt>Designer</dt><dd>"scan competitor campaigns before this pitch": the summary, not the tabs.</dd>
+<dt>Knowledge worker</dt><dd>"which suppliers in this folder use a non-standard invoice format?": just the answer.</dd>
+<dt>Reporter</dt><dd>"who hasn't filed an update this week?": the names, not the inbox sweep.</dd>
+<dt>Content</dt><dd>"what have we already published on this topic?": the shortlist, cited.</dd>
+<dt>Form-filler</dt><dd>"which receipts don't match any section of the template?": the flagged set.</dd>
+<dt>Outreach</dt><dd>"pull the latest on this prospect before I write": the brief, not the search history.</dd>
+<dt>Exec</dt><dd>"which retainers come up for renewal this quarter?": the list, sourced.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Name the tradeoff honestly — you get the answer without the journey, which also means you don't see <em>how</em> it got there. For high-stakes work, that's the reason you later ask it to cite sources and you verify the load-bearing facts. (<code>objections.md</code> — hallucinate / make stuff up: the answer comes back, you still check the claims that matter.) The built-in helpers are worth naming once: a <strong>general-purpose</strong> agent, <strong>Explore</strong> for fast search, <strong>Plan</strong> for plan-mode research. You may already be using them without knowing it.</p>
+<p>Name the tradeoff honestly: you get the answer without the journey, which also means you don't see <em>how</em> it got there. For high-stakes work, that's the reason you later ask it to cite sources and you verify the load-bearing facts. (<code>objections.md</code>: hallucinate / make stuff up: the answer comes back, you still check the claims that matter.) The built-in helpers are worth naming once: a <strong>general-purpose</strong> agent, <strong>Explore</strong> for fast search, <strong>Plan</strong> for plan-mode research. You may already be using them without knowing it.</p>
 </div></div></section>
 <section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Lesson 2 · Build</span><h2>Make one with <code>/agents</code>, Claude writes the file</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>You don't hand-code a subagent. You run <code>/agents</code>, describe what you want, and Claude generates it: a name, a description, the tools it can touch, the model, and a system prompt that is just plain-English instructions. It's a Markdown file with a short header. Scope it to one project or to everything you do.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"You build one by talking, not by coding. You run <code>/agents</code>, say 'I want a helper that reviews my work for X', and Claude writes the whole setup for you. The one part worth understanding is the <em>description</em> — that's the line that tells Claude when to reach for this helper and what to tell it. Get that sharp and the rest follows." (Don't read the file aloud — <code>framings.md</code> voice. The mechanic mirrors building a skill file in course 02: capability built by describing it, no code.)</p>
+<p>"You build one by talking, not by coding. You run <code>/agents</code>, say 'I want a helper that reviews my work for X', and Claude writes the whole setup for you. The one part worth understanding is the <em>description</em>. That's the line that tells Claude when to reach for this helper and what to tell it. Get that sharp and the rest follows." (Don't read the file aloud (<code>framings.md</code>, voice). The mechanic mirrors building a skill file in course 02: capability built by describing it, no code.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
 <li>"When you delegate to a person, how do you describe the job so they know exactly when it's theirs to pick up and when it isn't?"</li>
-<li>"What's the one helper you'd want sitting ready — the job you'd most like to never do by hand again?"</li>
+<li>"What's the one helper you'd want sitting ready, the job you'd most like to never do by hand again?"</li>
 </ul>
 <p class="wait">(wait)</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">A shared example (this slide doesn't vary by domain)</span></div>
-<p>The config file is the same shape for everyone, so teach it once with a single example rather than nine contrived ones — say so in the room. The example on the deck is a <strong>code reviewer</strong>: its file holds a <em>name</em> (how you summon it), a <em>description</em> (the line that controls when Claude uses it), a short <em>tools</em> list (only what the job needs), a <em>model</em> choice, and a body that is its standing instructions. For your learner, translate the <em>shape</em>, not the code: "a helper has a name, a one-line rule for when it runs, the few tools it's allowed to touch, and a paragraph of instructions — and Claude writes all of that from your sentence."</p>
+<p>The config file is the same shape for everyone, so teach it once with a single example rather than nine contrived ones, and say so in the room. The example on the deck is a <strong>code reviewer</strong>: its file holds a <em>name</em> (how you summon it), a <em>description</em> (the line that controls when Claude uses it), a short <em>tools</em> list (only what the job needs), a <em>model</em> choice, and a body that is its standing instructions. For your learner, translate the <em>shape</em>, not the code: "a helper has a name, a one-line rule for when it runs, the few tools it's allowed to touch, and a paragraph of instructions, and Claude writes all of that from your sentence."</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>One trick worth saying out loud: put the word <strong>"proactively"</strong> in the description and Claude will delegate to it without being asked. And the scope choice is plain — <strong>project-level</strong> for one body of work, <strong>user-level</strong> to have it everywhere. Don't dwell on YAML; the takeaway is "you describe it, Claude builds it, the description is the steering wheel."</p>
+<p>One trick worth saying out loud: put the word <strong>"proactively"</strong> in the description and Claude will delegate to it without being asked. And the scope choice is plain: <strong>project-level</strong> for one body of work, <strong>user-level</strong> to have it everywhere. Don't dwell on YAML; the takeaway is "you describe it, Claude builds it, the description is the steering wheel."</p>
 </div></div></section>
 <section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Lesson 3 · Design</span><h2>Four things separate a worker from a wanderer</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
@@ -954,7 +954,7 @@ th {
 <p>(it touches only what the job needs). The output format is the single biggest win.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Same as briefing a person. A good brief says exactly when this is your job, gives you a template to fill so you know when you're done, asks you to flag anything that got in the way, and hands you only the tools the task needs. A vague brief gets you a wanderer who reads everything and reports nothing useful. The biggest single improvement is telling it the <em>shape</em> of the answer you want back." (<code>framings.md</code> — brief it like a junior on their first day: be explicit, give the template, don't assume. The mistake is being too economical with the words.)</p>
+<p>"Same as briefing a person. A good brief says exactly when this is your job, gives you a template to fill so you know when you're done, asks you to flag anything that got in the way, and hands you only the tools the task needs. A vague brief gets you a wanderer who reads everything and reports nothing useful. The biggest single improvement is telling it the <em>shape</em> of the answer you want back." (<code>framings.md</code>: brief it like a junior on their first day: be explicit, give the template, don't assume. The mistake is being too economical with the words.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
@@ -965,33 +965,33 @@ th {
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the output format they'd define)</span></div>
 <dl class="bg">
-<dt>Investigator</dt><dd>the eight report sections — subject, structure, litigation, sanctions, property, media, associates, evidence gaps — and "cite every source, never infer".</dd>
+<dt>Investigator</dt><dd>the eight report sections (subject, structure, litigation, sanctions, property, media, associates, evidence gaps) and "cite every source, never infer".</dd>
 <dt>Analyst</dt><dd>a table with the fixed columns and a "data gaps" section; mark a missing answer "no data", never guess it.</dd>
-<dt>Designer</dt><dd>a manifest row per asset — filename, dimensions, format, copy, compliance flag — and "ask client" where a brief is silent.</dd>
+<dt>Designer</dt><dd>a manifest row per asset (filename, dimensions, format, copy, compliance flag) and "ask client" where a brief is silent.</dd>
 <dt>Knowledge worker</dt><dd>the CSV columns plus a "needs review" flag for anything ambiguous, and "leave absent fields blank".</dd>
-<dt>Reporter</dt><dd>the five sections — wins, in-flight, blockers, decisions needed, asks — and a "no update received" line for anyone who didn't file.</dd>
+<dt>Reporter</dt><dd>the five sections (wins, in-flight, blockers, decisions needed, asks) and a "no update received" line for anyone who didn't file.</dd>
 <dt>Content</dt><dd>hook, problem, three-part argument, close, plus a "style notes" section listing any house-voice rule the draft might have stretched.</dd>
 <dt>Form-filler</dt><dd>the template's sections in order, one section per receipt, and a "to allocate" appendix so nothing is silently dropped.</dd>
 <dt>Outreach</dt><dd>the fixed five-section proposal, every claim sourced to a file, no invented numbers.</dd>
-<dt>Exec</dt><dd>the four-part brief — where revenue is, what's at risk, what needs a decision, what's steady — one page, risks stated factually.</dd>
+<dt>Exec</dt><dd>the four-part brief (where revenue is, what's at risk, what needs a decision, what's steady), one page, risks stated factually.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>The description does double duty: it decides <em>when</em> the helper launches and it shapes the <em>task</em> the main agent writes for it. Vague in, vague out. The fix in practice is the same instinct as the skill file — the rules a good person carries get written down so the work comes back their way every time. (<code>framings.md</code> — skill file as institutional memory; adapt the role to the room.) Obstacle reporting is the quiet one: tell it to flag what got in its way, or the next run rediscovers the same wall.</p>
+<p>The description does double duty: it decides <em>when</em> the helper launches and it shapes the <em>task</em> the main agent writes for it. Vague in, vague out. The fix in practice is the same instinct as the skill file: the rules a good person carries get written down so the work comes back their way every time. (<code>framings.md</code>: skill file as institutional memory; adapt the role to the room.) Obstacle reporting is the quiet one: tell it to flag what got in its way, or the next run rediscovers the same wall.</p>
 </div></div></section>
 <section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Lesson 4 · Judgment</span><h2>Does the intermediate work matter?</h2></div></header><div class="card-body"><p class="slide-sub"><em>The centrepiece. If they take one thing away, it's this.</em></p><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>One question decides whether to delegate: does the intermediate work matter to you? If you just need the result and don't care about the journey, send it to a subagent. If each step depends on what the last one found, and you need to see and react along the way, keep it in your own thread. Good fits: research and exploration, code review, anything that wants a fresh perspective. Anti-patterns: claiming an "expert persona", multi-step dependent pipelines, and running tests where you need the full output.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"Here's the whole judgment call in one question: does the journey matter, or just the destination? If you only need the answer — go research this, go check this — delegate it and keep your desk clear. If you need to watch it unfold and steer at each turn, do it yourself. Delegating a job where every step depends on the last just loses information in the handoff." (This is the supervisor's instinct made concrete — the Praxis "Frontier" idea of running a small team of agents rather than doing every step by hand.)</p>
+<p>"Here's the whole judgment call in one question: does the journey matter, or just the destination? If you only need the answer (go research this, go check this), delegate it and keep your desk clear. If you need to watch it unfold and steer at each turn, do it yourself. Delegating a job where every step depends on the last just loses information in the handoff." (This is the supervisor's instinct made concrete: the Praxis "Frontier" idea of running a small team of agents rather than doing every step by hand.)</p>
 </div><div class="block block--ask">
 <div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
 <li>"Take the task you named earlier. Which parts are 'just bring me the answer', and which parts do you need to watch and steer?"</li>
 <li>"Where have you delegated to a person, lost the thread in the handoff, and wished you'd kept it yourself?"</li>
 </ul>
-<p class="wait">(wait — sorting their own work into 'journey matters' vs 'only the result' is the lesson.)</p>
+<p class="wait">(wait: sorting their own work into 'journey matters' vs 'only the result' is the lesson.)</p>
 </div><div class="block block--grid">
 <div class="block-head"><span class="block-label">By background</span> <span class="block-note">(the clean delegate vs the keep-it-yourself)</span></div>
 <dl class="bg">
@@ -1007,17 +1007,17 @@ th {
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>The deck's caption is worth saying: code review makes the list because Claude critiques work more honestly when it didn't write it — a fresh-context reviewer beats asking the thread that built the thing. The everyday version: a second, unbiased pair of eyes catches what the author can't. (Mirror of <code>02-claude-code-101-teaching-notes.md</code> slide 9 — fresh eyes before you push.) On the anti-patterns: "you are an expert" adds nothing, Claude already knows; and a step-by-step pipeline where each stage needs the last is exactly the work to keep in your own hands.</p>
+<p>The deck's caption is worth saying: code review makes the list because Claude critiques work more honestly when it didn't write it. A fresh-context reviewer beats asking the thread that built the thing. The everyday version: a second, unbiased pair of eyes catches what the author can't. (Mirror of <code>02-claude-code-101-teaching-notes.md</code> slide 9: fresh eyes before you push.) On the anti-patterns: "you are an expert" adds nothing, Claude already knows; and a step-by-step pipeline where each stage needs the last is exactly the work to keep in your own hands.</p>
 </div></div></section>
 <section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Close</span><h2>Isolate the work. Shape the output. Delegate by judgment.</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
 <p>The whole course in three lines: a subagent runs in its own context and returns a summary; you build it with <code>/agents</code> and steer it with a sharp description and an output format; and you reach for it only when the journey doesn't matter.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"If you keep one thing: delegate by judgment. A helper goes off, works in its own space, and brings back just the answer — and you only send it when you don't need to watch the journey. Build it by describing it, steer it with a clear brief and a fixed shape for the answer. That's the start of managing a team of these, not doing every step yourself."</p>
+<p>"If you keep one thing: delegate by judgment. A helper goes off, works in its own space, and brings back just the answer, and you only send it when you don't need to watch the journey. Build it by describing it, steer it with a clear brief and a fixed shape for the answer. That's the start of managing a team of these, not doing every step yourself."</p>
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">Close with</span></div>
-<p>Their task from intake, and the next concrete step: "Next time we open your real folder and build the one helper you'd most like to stop doing by hand." Then the session-improvement habit: <em>"at the end of any session, tell it to look back at what went badly and save how you fixed it."</em> (<code>patterns.md</code> — close every session by teaching the system to improve. <code>framings.md</code> — cost: about twenty dollars a month, and stop.)</p>
+<p>Their task from intake, and the next concrete step: "Next time we open your real folder and build the one helper you'd most like to stop doing by hand." Then the session-improvement habit: <em>"at the end of any session, tell it to look back at what went badly and save how you fixed it."</em> (<code>patterns.md</code>: close every session by teaching the system to improve. <code>framings.md</code>: cost, about twenty dollars a month, and stop.)</p>
 </div></div></section>
 </main>
 <script>

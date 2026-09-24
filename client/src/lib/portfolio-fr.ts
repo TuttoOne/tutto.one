@@ -37,7 +37,7 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
       "Semantic Search & RAG Q&A": {
         title: "Recherche sémantique et questions-réponses",
         detail:
-          "Posez vos questions en langage courant. Chaque réponse cite le document source et le numéro de page — aucune invention tirée des connaissances propres du modèle.",
+          "Posez vos questions en langage courant. Chaque réponse cite le document source et le numéro de page : aucune invention tirée des connaissances propres du modèle.",
       },
       "Interactive Timeline": {
         title: "Chronologie interactive",
@@ -73,7 +73,7 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
     tagline: "Model Context Protocol · Mission de conseil",
     badge: "Mission client",
     description:
-      "Nous avons construit une passerelle MCP (Model Context Protocol) qui donne à Claude un accès direct à l'environnement SharePoint et aux flux Power Automate d'un client. Au lieu de copier-coller des données dans une conversation, l'équipe peut demander à l'IA d'interroger, de créer et de mettre à jour des enregistrements SharePoint — et de diagnostiquer les automatisations défaillantes — en langage naturel.",
+      "Nous avons construit une passerelle MCP (Model Context Protocol) qui donne à Claude un accès direct à l'environnement SharePoint et aux flux Power Automate d'un client. Au lieu de copier-coller des données dans une conversation, l'équipe peut demander à l'IA d'interroger, de créer et de mettre à jour des enregistrements SharePoint, et de diagnostiquer les automatisations défaillantes, en langage naturel.",
     urlLabel: "En savoir plus sur la passerelle SharePoint",
     capabilities: {
       "SharePoint Lists & Structure": {
@@ -94,7 +94,7 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
       "Live Documentation": {
         title: "Documentation à jour",
         detail:
-          "L'IA consulte la documentation Microsoft en vigueur avant de répondre — pas de conseils d'API périmés ou inventés.",
+          "L'IA consulte la documentation Microsoft en vigueur avant de répondre : pas de conseils d'API périmés ou inventés.",
       },
     },
     conversations: {
@@ -111,7 +111,7 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
       "Show me the last 5 failed Power Automate runs on 'Invoice Sync'": {
         user: "Montre-moi les 5 dernières exécutions en échec du flux « Invoice Sync »",
         assistant:
-          "5 exécutions en échec trouvées. Erreur la plus récente : « délai de connexion dépassé vers l'API Xero » — survenue 3 fois au cours des dernières 24 heures.",
+          "5 exécutions en échec trouvées. Erreur la plus récente : « délai de connexion dépassé vers l'API Xero », survenue 3 fois au cours des dernières 24 heures.",
       },
     },
   },
@@ -132,7 +132,7 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
     tagline: "Moteur de prospection commerciale · Sur site",
     badge: "Mission client",
     description:
-      "Un système sur mesure qui mène la prospection B2B de bout en bout. Il étudie les prospects, rédige des courriels personnalisés dans la voix de l'expéditeur, planifie et envoie en toute sûreté, et fait avancer chaque compte — l'humain relisant plutôt que ressaisissant. Il tourne sur un NVIDIA DGX Spark, et non sur du cloud loué.",
+      "Un système sur mesure qui mène la prospection B2B de bout en bout. Il étudie les prospects, rédige des courriels personnalisés dans la voix de l'expéditeur, planifie et envoie en toute sûreté, et fait avancer chaque compte, l'humain relisant plutôt que ressaisissant. Il tourne sur un NVIDIA DGX Spark, et non sur du cloud loué.",
     urlLabel: "En savoir plus sur GTM",
     capabilities: {
       "Researches every prospect": {

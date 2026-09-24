@@ -1,4 +1,4 @@
-# Use-case demo — the files behind /usecase
+# Use-case demo: the files behind /usecase
 
 The page itself is no longer here. It used to be a standalone static site with
 its own copy of the header, its own CSS and its own English-only copy, which
@@ -8,7 +8,7 @@ the French translation. It is now an ordinary React route like every other page:
 | Where | What |
 |---|---|
 | `client/src/pages/usecase.tsx` | The page. Copy, tabs, and the player. |
-| `client/src/lib/usecase-runs.ts` | The three recorded runs, typed. **Generated — do not hand-edit.** |
+| `client/src/lib/usecase-runs.ts` | The three recorded runs, typed. **Generated: do not hand-edit.** |
 | `client/src/lib/fr/usecase.ts` | French for everything the runs print, keyed on the English. |
 | `client/src/lib/i18n.ts` | French for the page's own copy, under `copy.usecase`. |
 | `client/src/index.css` | The two keyframes the progress bars and printed lines animate on. |
@@ -31,7 +31,7 @@ asks where their data would go. Do not add a form or an endpoint.
 and the downloadable files are exactly what three real runs produced. Only the
 speed is changed, and each panel says what the run actually took. If you edit
 that copy, keep it true. The French keeps every figure exactly as the run printed
-it — "62,400", not "62 400" — for the same reason.
+it ("62,400", not "62 400") for the same reason.
 
 ## Regenerating
 
@@ -43,7 +43,7 @@ From `marketing/use-case-videos` on the workstation:
 
 That re-runs all three builds, re-records them, and refuses to publish a run
 that failed. **Take `data.js` and the files under `files/` from the rebuild, and
-ignore whatever else it emits** — the generator still writes the old standalone
+ignore whatever else it emits**. The generator still writes the old standalone
 `index.html`, `app.css`, `fonts.css` and `player.js`, and those are dead now.
 
 Then, back here:

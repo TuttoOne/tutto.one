@@ -1,7 +1,7 @@
 import type { PostFr } from "./index";
 
 export const post: PostFr = {
-  content: `Anthropic a récemment publié l'une des analyses les plus détaillées de l'usage réel de l'IA. En étudiant plus d'un million de conversations avec Claude — avec le consentement des utilisateurs — l'entreprise a cartographié les métiers, les tâches et les secteurs les plus exposés dès aujourd'hui à l'assistance de l'IA. Les résultats sont frappants, et ils ont des conséquences directes pour toute entreprise qui prépare un avenir où l'IA occupe une place centrale.
+  content: `Anthropic a récemment publié l'une des analyses les plus détaillées de l'usage réel de l'IA. En étudiant plus d'un million de conversations avec Claude (avec le consentement des utilisateurs), l'entreprise a cartographié les métiers, les tâches et les secteurs les plus exposés dès aujourd'hui à l'assistance de l'IA. Les résultats sont frappants, et ils ont des conséquences directes pour toute entreprise qui prépare un avenir où l'IA occupe une place centrale.
 
 ## Les catégories de tâches les plus fréquentes
 
@@ -9,15 +9,15 @@ Ce qui saute d'abord aux yeux, c'est la répartition du temps passé avec l'IA. 
 
 [VISUAL:task-breakdown]
 
-Ce n'est pas seulement un instantané de « ce que font les utilisateurs de Claude ». C'est un indicateur avancé de là où la capacité de l'IA est la plus profonde, et de là où les entreprises ont le plus à gagner — ou le plus à s'adapter.
+Ce n'est pas seulement un instantané de « ce que font les utilisateurs de Claude ». C'est un indicateur avancé de là où la capacité de l'IA est la plus profonde, et de là où les entreprises ont le plus à gagner, ou le plus à s'adapter.
 
 ## L'inversion de l'exposition selon les salaires
 
-L'un des résultats les plus contre-intuitifs de l'étude : l'exposition à l'IA est la plus forte chez les travailleurs à hauts revenus, et non chez ceux à bas revenus. Les métiers les plus susceptibles de comporter des tâches assistables par l'IA sont ceux d'ingénieur logiciel, d'avocat, d'analyste financier — des fonctions situées dans le quartile supérieur des rémunérations.
+L'un des résultats les plus contre-intuitifs de l'étude : l'exposition à l'IA est la plus forte chez les travailleurs à hauts revenus, et non chez ceux à bas revenus. Les métiers les plus susceptibles de comporter des tâches assistables par l'IA sont ceux d'ingénieur logiciel, d'avocat, d'analyste financier : des fonctions situées dans le quartile supérieur des rémunérations.
 
 [VISUAL:wage-exposure]
 
-Cela inverse le récit habituel de l'automatisation. Les vagues précédentes — les chaînes de montage, les premiers logiciels — ont déplacé un travail routinier et moins rémunéré. La vague actuelle touche d'abord le travail intellectuel situé en haut de la distribution des revenus. Les conséquences, pour les politiques publiques comme pour les entreprises, diffèrent de ce que l'on imagine généralement.
+Cela inverse le récit habituel de l'automatisation. Les vagues précédentes (les chaînes de montage, les premiers logiciels) ont déplacé un travail routinier et moins rémunéré. La vague actuelle touche d'abord le travail intellectuel situé en haut de la distribution des revenus. Les conséquences, pour les politiques publiques comme pour les entreprises, diffèrent de ce que l'on imagine généralement.
 
 ## Assistance ou automatisation
 
@@ -33,7 +33,7 @@ La visualisation sans doute la plus frappante de l'étude montre l'écart entre 
 
 [VISUAL:capability-gap]
 
-Pour la plupart des métiers, l'usage observé est nettement inférieur à la couverture théorique. Les gens utilisent l'IA pour une fraction de ce qu'elle pourrait faire dans leur fonction. La capacité est là. L'adoption — et la maturité organisationnelle nécessaire pour s'en servir — ne l'est pas.
+Pour la plupart des métiers, l'usage observé est nettement inférieur à la couverture théorique. Les gens utilisent l'IA pour une fraction de ce qu'elle pourrait faire dans leur fonction. La capacité est là. L'adoption, et la maturité organisationnelle nécessaire pour s'en servir, ne l'est pas.
 
 ## Ce que cela signifie pour votre entreprise
 

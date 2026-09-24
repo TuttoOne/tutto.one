@@ -71,13 +71,13 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Les règles, les grilles, et les tâches déléguées.",
   "Running the tools you build costs about":
     "Faire tourner les outils que vous construisez coûte environ",
-  "for a subscription to a frontier AI system — Claude, Mistral or OpenAI — or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.":
-    "pour un abonnement à un système d'IA de premier plan — Claude, Mistral ou OpenAI — ou rien du tout si vous exécutez des modèles à poids ouverts sur votre propre matériel. Les outils eux-mêmes tournent sur votre machine, sans facturation à l'usage.",
+  "for a subscription to a frontier AI system (Claude, Mistral or OpenAI), or nothing at all if you run open-weight models on your own hardware. The tools themselves run on your machine, with no per-use charges.":
+    "pour un abonnement à un système d'IA de premier plan (Claude, Mistral ou OpenAI) ou rien du tout si vous exécutez des modèles à poids ouverts sur votre propre matériel. Les outils eux-mêmes tournent sur votre machine, sans facturation à l'usage.",
 
   "Get started": "Commencer",
   "Which job do you keep repeating?":
     "Quelle tâche répétez-vous encore ?",
-  "Done - we'll be in touch.": "C'est noté — nous revenons vers vous.",
+  "Done - we'll be in touch.": "C'est noté. Nous revenons vers vous.",
   "Expect a reply within one working day.":
     "Réponse sous un jour ouvré.",
   Name: "Nom",
@@ -87,7 +87,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "No marketing. Your details are used only to prepare for and respond to your enquiry.":
     "Aucune prospection. Vos coordonnées servent uniquement à préparer et à répondre à votre demande.",
   "Something went wrong - please try again or email daniel@tutto.one":
-    "Une erreur est survenue — réessayez ou écrivez à daniel@tutto.one",
+    "Une erreur est survenue. Réessayez ou écrivez à daniel@tutto.one",
   "Or email directly: daniel@tutto.one":
     "Ou écrivez directement : daniel@tutto.one",
 
@@ -152,7 +152,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "What if I get stuck between sessions?":
     "Et si je bloque entre deux séances ?",
   "You get a practice task and a clear way to get unstuck. When something breaks, the fix is usually one screenshot away, and learning that habit is part of the programme.":
-    "Vous repartez avec un exercice et une marche à suivre claire pour vous débloquer. Quand quelque chose casse, la solution tient le plus souvent à une capture d'écran — et acquérir ce réflexe fait partie du programme.",
+    "Vous repartez avec un exercice et une marche à suivre claire pour vous débloquer. Quand quelque chose casse, la solution tient le plus souvent à une capture d'écran, et acquérir ce réflexe fait partie du programme.",
   "One-to-one or a group?": "En individuel ou en groupe ?",
   "The AI-Fluent Team is for you and up to four of your team. The Owner's Fast Track is private: one to one, in four sessions, and credited in full if your team follows.":
     "L'équipe à l'aise avec l'IA, c'est vous et jusqu'à quatre personnes de votre équipe. La formule accélérée du dirigeant est privée : en tête-à-tête, en quatre séances, et déduite intégralement si votre équipe suit.",
@@ -254,8 +254,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The 30 days of async review is included for anyone who starts by {date}. After that it is an extra.":
     "Les 30 jours de relecture à distance sont inclus pour toute inscription avant le {date}. Ensuite, ils sont en supplément.",
   "The guarantee": "La garantie",
-  "Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard — or I keep working with you at no charge until they do.":
-    "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille — sinon je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
+  "Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard, or I keep working with you at no charge until they do.":
+    "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille ; sinon je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
   "The only condition is that you attend the sessions and answer the questions.":
     "La seule condition : assister aux séances et répondre aux questions.",
   "The AI-Fluent Team": "L'équipe à l'aise avec l'IA",
@@ -267,8 +267,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Back-to-work price until {date}": "Prix de rentrée jusqu'au {date}",
   "The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.":
     "La première étape est un appel gratuit de 15 minutes. Les deux programmes sont facturés hors taxes.",
-  "We also run free sessions from time to time. They are general rather than built around your use case —":
-    "Nous organisons aussi, de temps en temps, des séances gratuites. Elles sont générales, et non construites autour de votre cas d'usage —",
+  "We also run free sessions from time to time. They are general rather than built around your use case:":
+    "Nous organisons aussi, de temps en temps, des séances gratuites. Elles sont générales, et non construites autour de votre cas d'usage ;",
   "see Events": "voir les événements",
   /** `{credit}` per enrolment, `{cap}` the ceiling on stacked credits. */
   "Refer a friend: {credit} off your programme for every person you refer who enrols, up to {cap}.":
@@ -290,7 +290,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Your charter, a KPI scorecard for each role, standing briefs and checks for your top three jobs, and the tools you built on them. A certificate records what you made, not just that you turned up.":
     "Votre charte, une grille par rôle, des consignes et contrôles permanents pour vos trois tâches clés, et les outils construits dessus. Une attestation consigne ce que vous avez réalisé, pas seulement votre présence.",
   "A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.":
-    "Un mot de franchise, pour poser la bonne attente : vous ferez vous-même l'essentiel du chemin. Sur tout ce qui est complexe, la dernière portion se termine à la main ou se délègue. Faire déjà l'essentiel du chemin représente une économie considérable par rapport à la façon dont le travail se fait aujourd'hui — et c'est cette économie que nous visons.",
+    "Un mot de franchise, pour poser la bonne attente : vous ferez vous-même l'essentiel du chemin. Sur tout ce qui est complexe, la dernière portion se termine à la main ou se délègue. Faire déjà l'essentiel du chemin représente une économie considérable par rapport à la façon dont le travail se fait aujourd'hui, et c'est cette économie que nous visons.",
   "Your staff already use AI, and it saves them nothing: ask, fix, ask again. Over eight sessions we fix it in order, on your own work. The rules, a KPI for each job, what to hand over. Then the tools, skills and automations that do it without you.":
     "Vos équipes utilisent déjà l'IA, et cela ne leur fait rien gagner : demander, corriger, redemander. En huit séances, nous corrigeons cela dans l'ordre, sur votre propre travail. Les règles, un indicateur par tâche, ce qu'on délègue. Puis les outils, les compétences et les automatisations qui le font sans vous.",
   "Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
@@ -308,8 +308,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
 
   "On the choice of assistant":
     "Sur le choix de l'assistant",
-  "We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine — which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.":
-    "Nous enseignons avec Claude comme exemple, parce que c'est celui avec lequel la plupart des gens arrivent. Ce n'est pas une obligation. La même méthode fonctionne avec Mistral, avec OpenAI, ou avec des modèles à poids ouverts exécutés entièrement sur votre propre machine — ce qui est la bonne réponse lorsque le travail ne peut pas sortir de vos locaux. Vous choisissez l'assistant ; nous l'installons avec vous dès la première séance.",
+  "We teach with Claude as the worked example, because it is the one most people arrive with. It is not a requirement. The same method works with Mistral, with OpenAI, or with open-weight models running entirely on your own machine, which is the right answer when the work cannot leave the building. You choose the assistant; we set it up with you in the first session.":
+    "Nous enseignons avec Claude comme exemple, parce que c'est celui avec lequel la plupart des gens arrivent. Ce n'est pas une obligation. La même méthode fonctionne avec Mistral, avec OpenAI, ou avec des modèles à poids ouverts exécutés entièrement sur votre propre machine, ce qui est la bonne réponse lorsque le travail ne peut pas sortir de vos locaux. Vous choisissez l'assistant ; nous l'installons avec vous dès la première séance.",
   "A laptop - Mac or Windows. An account with the AI assistant of your choice. We set up everything else together in the first session.":
     "Un ordinateur portable, Mac ou Windows. Un compte auprès de l'assistant IA de votre choix. Nous installons tout le reste ensemble lors de la première séance.",
 };

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Claude with the Anthropic API — talking deck</title>
+<title>Praxis · Claude with the Anthropic API: talking deck</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -862,9 +862,9 @@ th {
 <section class="deck-slide title active">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · talking deck</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — built from Anthropic's Claude with the Anthropic API</span>
+    <span class="eyebrow">Praxis: built from Anthropic's Claude with the Anthropic API</span>
     <h1>Building with the<br>API underneath<br>the chat window.</h1>
-    <p class="lead">Eleven ideas, one per screen. This is the layer Claude Code and every other app sits on. Each slide is a thing to point at while you explain — take the silences.</p>
+    <p class="lead">Eleven ideas, one per screen. This is the layer Claude Code and every other app sits on. Each slide is a thing to point at while you explain. Take the silences.</p>
   </div>
   <span class="slide-counter">01</span>
 </section>
@@ -919,7 +919,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 1</span>
     <h2>One request, and the API forgets you</h2>
-    <p class="lead">You send a model, an optional system line, and the whole message list. It replies once. There's no memory — to continue, you append the reply and send it all again.</p>
+    <p class="lead">You send a model, an optional system line, and the whole message list. It replies once. There's no memory. To continue, you append the reply and send it all again.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 270" role="img" aria-label="Anatomy of an API request">
         <!-- request box -->
@@ -946,7 +946,7 @@ th {
 
         <!-- stateless loop back -->
         <path d="M 815 160 C 815 244, 170 244, 170 222" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#l1amber)"/>
-        <text x="492" y="262" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">stateless — append the reply to messages[] and send the whole thing again</text>
+        <text x="492" y="262" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">stateless: append the reply to messages[] and send the whole thing again</text>
         <defs>
           <marker id="l1a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
           <marker id="l1amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
@@ -993,7 +993,7 @@ th {
         <text x="859" y="166" text-anchor="middle" class="t-tiny">output you can parse</text>
       </svg>
     </div>
-    <p class="cap">The system prompt does the heavy lifting — it's where the role and rules live. Temperature trades reliability for variety; streaming is about feel; structured output is how you get data a program can actually use.</p>
+    <p class="cap">The system prompt does the heavy lifting. It's where the role and rules live. Temperature trades reliability for variety; streaming is about feel; structured output is how you get data a program can actually use.</p>
     <div class="keynote"><p><span class="kn-label">Key concept</span>For clean JSON with no prose to strip, use <strong>forced tool use</strong> (<code>tool_choice</code>): define a tool whose schema is the shape you want, read back the validated object. <span class="kn-see">→ teacher notes (prefill+stop-sequences is the lighter, flat-JSON alternative).</span></p></div>
   </div>
   <span class="slide-counter">04</span>
@@ -1045,7 +1045,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Two ways to grade: <b>code-based</b> for anything exact (is it valid JSON? does it contain the answer?), <b>model-based</b> for judgement (is this tactful? is it on-topic?) — you ask another Claude call to score it against a rubric.</p>
+    <p class="cap">Two ways to grade: <b>code-based</b> for anything exact (is it valid JSON? does it contain the answer?), <b>model-based</b> for judgement (is this tactful? is it on-topic?): you ask another Claude call to score it against a rubric.</p>
     <div class="keynote"><p><span class="kn-label">Key concept</span>The eval loop: build test cases → Claude generates responses → <strong>grade</strong> them → score → refine and re-run. The step after generation is grading; model-based grading uses <em>another AI</em> to judge. <span class="kn-see">→ teacher notes.</span></p></div>
     <div class="qa">
       <p><span>What's a "model grader"?</span> The model-based half: another Claude call that <strong>scores an output against a rubric</strong>. The go-to when "right" is a judgement (tone, relevance, helpfulness) that code can't check exactly.</p>
@@ -1090,7 +1090,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Examples (few-shot) move quality the most: a couple of worked input→output pairs teach format and edge cases that paragraphs of instruction can't. XML tags matter because Claude is trained to respect them — <code>&lt;document&gt;…&lt;/document&gt;</code> reads cleaner than quotes.</p>
+    <p class="cap">Examples (few-shot) move quality the most: a couple of worked input→output pairs teach format and edge cases that paragraphs of instruction can't. XML tags matter because Claude is trained to respect them: <code>&lt;document&gt;…&lt;/document&gt;</code> reads cleaner than quotes.</p>
   </div>
   <span class="slide-counter">06</span>
 </section>
@@ -1099,7 +1099,7 @@ th {
 <section class="deck-slide">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 5 · Extend its reach</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 5 — if you take one thing away</span>
+    <span class="eyebrow">Lesson 5: if you take one thing away</span>
     <h2>Tool use is a round trip you complete</h2>
     <p class="lead">Claude can't run anything. It can only <em>ask</em>. You describe the tools; it replies "call this, with these arguments"; you run it and hand back the result; it continues.</p>
     <div class="diagram">
@@ -1137,10 +1137,10 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">The loop can repeat — Claude can call several tools across several turns before it answers. This single mechanism is what every agent is built on: the model proposes, your environment executes, the result comes back.</p>
+    <p class="cap">The loop can repeat. Claude can call several tools across several turns before it answers. This single mechanism is what every agent is built on: the model proposes, your environment executes, the result comes back.</p>
     <div class="qa">
       <p><span>So a tool is a special Anthropic endpoint?</span> No. There's one Messages endpoint. A tool is a <strong>plain function in your own code</strong>; Claude only ever returns a request to call it (name + arguments) and waits for your result.</p>
-      <p><span>Is it a config file that sets Claude's behaviour?</span> No. A tool is your code, plus a <strong>declaration</strong> (name, description, input schema) that tells Claude the function is <em>available</em> — not how it should behave.</p>
+      <p><span>Is it a config file that sets Claude's behaviour?</span> No. A tool is your code, plus a <strong>declaration</strong> (name, description, input schema) that tells Claude the function is <em>available</em>, not how it should behave.</p>
     </div>
   </div>
   <span class="slide-counter">07</span>
@@ -1152,7 +1152,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 6</span>
     <h2>Some tools you don't have to build</h2>
-    <p class="lead">Most tools are yours to implement. A few ship with the API — you switch them on and Anthropic runs them server-side.</p>
+    <p class="lead">Most tools are yours to implement. A few ship with the API. You switch them on and Anthropic runs them server-side.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Your tools versus Anthropic's built-in tools">
         <!-- your tools -->
@@ -1181,7 +1181,7 @@ th {
         <text x="866" y="100" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">code execution</text>
         <text x="866" y="120" text-anchor="middle" class="t-tiny">runs Python in a sandbox</text>
 
-        <text x="400" y="170" class="t-tiny">Fine-grained tool calling streams the arguments as they're generated —</text>
+        <text x="400" y="170" class="t-tiny">Fine-grained tool calling streams the arguments as they're generated,</text>
         <text x="400" y="190" class="t-tiny">you can start acting before the full request is finished.</text>
       </svg>
     </div>
@@ -1196,12 +1196,12 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 7 · Extend its reach</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 7</span>
-    <h2>RAG — give it knowledge it was never trained on</h2>
+    <h2>RAG: give it knowledge it was never trained on</h2>
     <p class="lead">You can't fit a whole knowledge base in one prompt. So you index it once, then retrieve only the few chunks each question needs and paste them in.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 260" role="img" aria-label="The RAG pipeline">
         <!-- ingest row -->
-        <text x="20" y="36" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Once — build the index</text>
+        <text x="20" y="36" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Once: build the index</text>
         <rect x="20"  y="52" width="150" height="52" rx="10" class="box"/>
         <text x="95"  y="84" text-anchor="middle" class="t-tiny s-ink">documents</text>
         <rect x="210" y="52" width="150" height="52" rx="10" class="box"/>
@@ -1215,7 +1215,7 @@ th {
         <line x1="550" y1="78" x2="588" y2="78" class="l-ink" stroke-width="2" marker-end="url(#l7a)"/>
 
         <!-- query row -->
-        <text x="20" y="150" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Per question — retrieve &amp; answer</text>
+        <text x="20" y="150" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Per question: retrieve &amp; answer</text>
         <rect x="20"  y="166" width="150" height="52" rx="10" class="box"/>
         <text x="95"  y="198" text-anchor="middle" class="t-tiny s-ink">question</text>
         <rect x="210" y="166" width="150" height="52" rx="10" class="box-amber"/>
@@ -1245,7 +1245,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Embeddings catch meaning ("car" finds "vehicle"); BM25 catches exact terms (an error code, a part number). A multi-index pipeline runs both and merges the hits — that's what production RAG actually does.</p>
+    <p class="cap">Embeddings catch meaning ("car" finds "vehicle"); BM25 catches exact terms (an error code, a part number). A multi-index pipeline runs both and merges the hits. That's what production RAG actually does.</p>
   </div>
   <span class="slide-counter">09</span>
 </section>
@@ -1256,7 +1256,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 8</span>
     <h2>The same API takes more than text</h2>
-    <p class="lead">Four capabilities ride on the request you already know — two change what goes in, two change what comes out.</p>
+    <p class="lead">Four capabilities ride on the request you already know: two change what goes in, two change what comes out.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 230" role="img" aria-label="Multimodal inputs and richer outputs">
         <!-- inputs side -->
@@ -1287,7 +1287,7 @@ th {
         <text x="855" y="138" text-anchor="middle" class="t-tiny">it drew the claim from</text>
       </svg>
     </div>
-    <p class="cap">Extended thinking gives the model room to work through hard problems before committing to an answer. Citations turn "trust me" into "here's the passage" — the backbone of any answer a business has to stand behind.</p>
+    <p class="cap">Extended thinking gives the model room to work through hard problems before committing to an answer. Citations turn "trust me" into "here's the passage", the backbone of any answer a business has to stand behind.</p>
     <div class="keynote"><p><span class="kn-label">Key concept</span>PDF vs image: a PDF is read as <strong>text and images</strong> (a <code>document</code> block, supports citations); an image is <strong>vision-only</strong>. PDFs cost more per page but give the richer, citable understanding. <span class="kn-see">→ teacher notes.</span></p></div>
   </div>
   <span class="slide-counter">10</span>
@@ -1299,13 +1299,13 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 9</span>
     <h2>Pay for the long part once</h2>
-    <p class="lead">Most prompts start with the same big block — a system prompt, tool definitions, a document. Cache that prefix and later calls read it instead of re-paying for it.</p>
+    <p class="lead">Most prompts start with the same big block: a system prompt, tool definitions, a document. Cache that prefix and later calls read it instead of re-paying for it.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Prompt caching reuses the stable prefix">
         <!-- first call -->
         <text x="20" y="44" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">First call · writes the cache</text>
         <rect x="20" y="58" width="640" height="48" rx="8" class="box-amber"/>
-        <text x="320" y="87" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">stable prefix — system, tools, documents (cached here)</text>
+        <text x="320" y="87" text-anchor="middle" class="t-tiny s-ink" style="font-weight:600">stable prefix: system, tools, documents (cached here)</text>
         <rect x="668" y="58" width="200" height="48" rx="8" class="box"/>
         <text x="768" y="87" text-anchor="middle" class="t-tiny s-ink">today's question</text>
         <line x1="660" y1="115" x2="660" y2="58" class="l-ink" stroke-width="1.5" stroke-dasharray="3 3"/>
@@ -1314,7 +1314,7 @@ th {
         <!-- later calls -->
         <text x="20" y="178" class="t-sub" style="fill:hsl(var(--primary));font-weight:600">Later calls · read the cache</text>
         <rect x="20" y="192" width="640" height="48" rx="8" class="box" fill="hsl(var(--primary) / 0.06)" stroke-dasharray="5 4"/>
-        <text x="320" y="221" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">same prefix — read from cache, far cheaper &amp; faster</text>
+        <text x="320" y="221" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">same prefix: read from cache, far cheaper &amp; faster</text>
         <rect x="668" y="192" width="200" height="48" rx="8" class="box"/>
         <text x="768" y="221" text-anchor="middle" class="t-tiny s-ink">next question</text>
 
@@ -1324,8 +1324,8 @@ th {
         <defs></defs>
       </svg>
     </div>
-    <p class="cap">The rule: only an <em>exact, unchanged prefix</em> is reused, so put everything stable first and the variable part last. Cache lifetimes are short (minutes), so it pays off across a burst of related calls — the heart of any responsive, repeated-context app.</p>
-    <div class="keynote"><p><span class="kn-label">Key concept</span>Caching needs two things: mark the block <code>cache_control: ephemeral</code> <em>and</em> clear the minimum length (~1,024 tokens on Sonnet 4.x, ~4,096 on Opus 4.5+). Under the minimum it silently runs uncached — no error. <span class="kn-see">→ teacher notes.</span></p></div>
+    <p class="cap">The rule: only an <em>exact, unchanged prefix</em> is reused, so put everything stable first and the variable part last. Cache lifetimes are short (minutes), so it pays off across a burst of related calls, the heart of any responsive, repeated-context app.</p>
+    <div class="keynote"><p><span class="kn-label">Key concept</span>Caching needs two things: mark the block <code>cache_control: ephemeral</code> <em>and</em> clear the minimum length (~1,024 tokens on Sonnet 4.x, ~4,096 on Opus 4.5+). Under the minimum it silently runs uncached, with no error. <span class="kn-see">→ teacher notes.</span></p></div>
   </div>
   <span class="slide-counter">11</span>
 </section>
@@ -1335,7 +1335,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 10 · Build systems</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 10</span>
-    <h2>MCP — one standard plug for tools and data</h2>
+    <h2>MCP: one standard plug for tools and data</h2>
     <p class="lead">Without it, every app wires up every integration by hand. With it, a server exposes its capabilities once and any client can connect.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="MCP client server architecture">
@@ -1357,23 +1357,23 @@ th {
         <rect x="720" y="40" width="240" height="180" rx="14" class="box-amber"/>
         <text x="840" y="70" text-anchor="middle" class="t-lbl s-amber">A server exposes</text>
         <rect x="744" y="86"  width="192" height="36" rx="8" class="box"/>
-        <text x="840" y="110" text-anchor="middle" class="t-tiny s-ink">tools — actions to call</text>
+        <text x="840" y="110" text-anchor="middle" class="t-tiny s-ink">tools: actions to call</text>
         <rect x="744" y="128" width="192" height="36" rx="8" class="box"/>
-        <text x="840" y="152" text-anchor="middle" class="t-tiny s-ink">resources — data to read</text>
+        <text x="840" y="152" text-anchor="middle" class="t-tiny s-ink">resources: data to read</text>
         <rect x="744" y="170" width="192" height="36" rx="8" class="box"/>
-        <text x="840" y="194" text-anchor="middle" class="t-tiny s-ink">prompts — ready-made flows</text>
+        <text x="840" y="194" text-anchor="middle" class="t-tiny s-ink">prompts: ready-made flows</text>
         <line x1="560" y1="133" x2="718" y2="133" class="l-amber" stroke-width="2.5" marker-end="url(#l10a)"/>
         <defs>
           <marker id="l10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
         </defs>
       </svg>
     </div>
-    <p class="cap">A server publishes three things — tools, resources, prompts — and the inspector lets you test it before wiring it to a client. Build the integration once; plug it into Claude Code, your own client, or anyone else's.</p>
+    <p class="cap">A server publishes three things (tools, resources, prompts) and the inspector lets you test it before wiring it to a client. Build the integration once; plug it into Claude Code, your own client, or anyone else's.</p>
     <div class="qa">
-      <p><span>Exposing document contents?</span> That's a <strong>resource</strong> — read-only data Claude can pull in. <strong>Actions</strong> it performs are tools; <strong>pre-tested instructions</strong> (like a formatter) are prompts.</p>
-      <p><span>Defining a tool in Python?</span> Easiest way is the <strong><code>@mcp.tool()</code></strong> decorator (FastMCP). The function's name, docstring and type hints become the tool — no schema by hand.</p>
-      <p><span>How do client and server talk in dev?</span> Almost always <strong>stdio</strong> — the client runs the server as a subprocess over stdin/stdout. No ports, no auth. HTTP is for remote.</p>
-      <p><span>Why three primitives, not one?</span> Different owners. <strong>Model</strong> picks tools, the <strong>app</strong> loads resources, the <strong>user</strong> invokes prompts — so each is offered the right way.</p>
+      <p><span>Exposing document contents?</span> That's a <strong>resource</strong>: read-only data Claude can pull in. <strong>Actions</strong> it performs are tools; <strong>pre-tested instructions</strong> (like a formatter) are prompts.</p>
+      <p><span>Defining a tool in Python?</span> Easiest way is the <strong><code>@mcp.tool()</code></strong> decorator (FastMCP). The function's name, docstring and type hints become the tool, no schema by hand.</p>
+      <p><span>How do client and server talk in dev?</span> Almost always <strong>stdio</strong>: the client runs the server as a subprocess over stdin/stdout. No ports, no auth. HTTP is for remote.</p>
+      <p><span>Why three primitives, not one?</span> Different owners. <strong>Model</strong> picks tools, the <strong>app</strong> loads resources, the <strong>user</strong> invokes prompts, so each is offered the right way.</p>
     </div>
   </div>
   <span class="slide-counter">12</span>
@@ -1384,12 +1384,12 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 11 · Build systems</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 11</span>
-    <h2>Workflows vs agents — who decides the path</h2>
+    <h2>Workflows vs agents: who decides the path</h2>
     <p class="lead">Both chain LLM calls. The difference is control: in a workflow you wire the steps; in an agent the model chooses them as it goes.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Workflows versus agents">
         <!-- workflows side -->
-        <text x="20" y="34" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Workflows — you fix the path</text>
+        <text x="20" y="34" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Workflows: you fix the path</text>
         <!-- chain -->
         <rect x="20"  y="56" width="56" height="34" rx="7" class="box"/>
         <rect x="96"  y="56" width="56" height="34" rx="7" class="box"/>
@@ -1418,7 +1418,7 @@ th {
         <line x1="500" y1="24" x2="500" y2="226" class="l-faint" stroke-width="1" stroke-dasharray="4 5"/>
 
         <!-- agent side -->
-        <text x="540" y="34" class="t-sub" style="fill:hsl(var(--primary));font-weight:600">Agent — the model decides the path</text>
+        <text x="540" y="34" class="t-sub" style="fill:hsl(var(--primary));font-weight:600">Agent: the model decides the path</text>
         <rect x="600" y="70" width="150" height="50" rx="11" class="box-amber"/>
         <text x="675" y="100" text-anchor="middle" class="t-lbl s-amber" style="font-size:16px">think</text>
         <rect x="790" y="70" width="150" height="50" rx="11" class="box-amber"/>
@@ -1435,10 +1435,10 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Choose by predictability. If you can draw the steps in advance, a workflow is cheaper and more reliable. If the path depends on what's found along the way, you need an agent — Claude Code is one. Most production systems mix both.</p>
+    <p class="cap">Choose by predictability. If you can draw the steps in advance, a workflow is cheaper and more reliable. If the path depends on what's found along the way, you need an agent. Claude Code is one. Most production systems mix both.</p>
     <div class="qa">
-      <p><span>Want it to handle the unexpected?</span> Give the agent a few <strong>general tools</strong> and let it pick — not one narrow tool per case you predicted. General tools recombine into paths you never scripted.</p>
-      <p><span>One long prompt it keeps half-ignoring?</span> <strong>Chain</strong> it. Split the rules across a few small steps so each call holds less — and check the output between them.</p>
+      <p><span>Want it to handle the unexpected?</span> Give the agent a few <strong>general tools</strong> and let it pick, not one narrow tool per case you predicted. General tools recombine into paths you never scripted.</p>
+      <p><span>One long prompt it keeps half-ignoring?</span> <strong>Chain</strong> it. Split the rules across a few small steps so each call holds less, and check the output between them.</p>
     </div>
   </div>
   <span class="slide-counter">13</span>

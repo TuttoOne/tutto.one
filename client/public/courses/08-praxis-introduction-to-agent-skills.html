@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction to Agent Skills — talking deck</title>
+<title>Praxis · Introduction to Agent Skills: talking deck</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -856,7 +856,7 @@ th {
 <section class="deck-slide title active">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · talking deck</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — built from Anthropic's Introduction to Agent Skills</span>
+    <span class="eyebrow">Praxis: built from Anthropic's Introduction to Agent Skills</span>
     <h1>Teach Claude Code<br>something once. It<br>remembers when<br>it matters.</h1>
     <p class="lead">Six ideas, one per screen. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.</p>
   </div>
@@ -906,9 +906,9 @@ th {
 <section class="deck-slide">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 1 · What it is</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 1 — if you take one thing away</span>
+    <span class="eyebrow">Lesson 1: if you take one thing away</span>
     <h2>If you keep explaining it, write it down once</h2>
-    <p class="lead">A skill is a folder of instructions. Claude holds only its one-line description until your request matches — then it loads the rest.</p>
+    <p class="lead">A skill is a folder of instructions. Claude holds only its one-line description until your request matches, then it loads the rest.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="A skill: description matches, body loads on demand">
         <!-- request -->
@@ -932,7 +932,7 @@ th {
         <text x="720" y="124" class="t-tiny">steps · scripts · examples</text>
         <text x="720" y="144" class="t-tiny s-amber">loaded only now</text>
         <!-- contrast strip -->
-        <text x="20" y="208" class="t-tiny">Unlike CLAUDE.md, which loads every conversation, and slash commands, which you type — a skill activates itself.</text>
+        <text x="20" y="208" class="t-tiny">Unlike CLAUDE.md, which loads every conversation, and slash commands, which you type, a skill activates itself.</text>
         <defs>
           <marker id="s1a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
         </defs>
@@ -996,7 +996,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Claude loads only names and descriptions at startup, then asks you to confirm before pulling the full skill into context. If two skills share a name, priority decides — so keep names distinct.</p>
+    <p class="cap">Claude loads only names and descriptions at startup, then asks you to confirm before pulling the full skill into context. If two skills share a name, priority decides, so keep names distinct.</p>
   </div>
   <span class="slide-counter">04</span>
 </section>
@@ -1006,7 +1006,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 3 · Build one</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 3</span>
-    <h2>Keep SKILL.md lean — split the rest out</h2>
+    <h2>Keep SKILL.md lean: split the rest out</h2>
     <p class="lead">Two fields are required, two optional. Past about 500 lines, move detail into supporting files Claude opens only when it needs them.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Progressive disclosure: SKILL.md plus supporting files">
@@ -1031,11 +1031,11 @@ th {
         <!-- supporting files -->
         <rect x="500" y="44" width="460" height="52" rx="10" class="box"/>
         <text x="520" y="68" class="t-mono s-amber" style="font-weight:600">scripts/</text>
-        <text x="520" y="86" class="t-tiny">run it — only the output costs context, not the source</text>
+        <text x="520" y="86" class="t-tiny">run it: only the output costs context, not the source</text>
 
         <rect x="500" y="108" width="460" height="52" rx="10" class="box"/>
         <text x="520" y="132" class="t-mono s-amber" style="font-weight:600">references/</text>
-        <text x="520" y="150" class="t-tiny">extra docs — read only when the question comes up</text>
+        <text x="520" y="150" class="t-tiny">extra docs, read only when the question comes up</text>
 
         <rect x="500" y="172" width="460" height="52" rx="10" class="box"/>
         <text x="520" y="196" class="t-mono s-amber" style="font-weight:600">assets/</text>
@@ -1045,7 +1045,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap"><code>allowed-tools</code> fences a skill — say <code>Read, Grep, Glob, Bash</code> only — for read-only or sensitive work. And tell Claude to <i>run</i> a script, not read it: the source never enters context, only the result does.</p>
+    <p class="cap"><code>allowed-tools</code> fences a skill (say <code>Read, Grep, Glob, Bash</code> only) for read-only or sensitive work. And tell Claude to <i>run</i> a script, not read it: the source never enters context, only the result does.</p>
   </div>
   <span class="slide-counter">05</span>
 </section>
@@ -1056,10 +1056,10 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 4</span>
     <h2>Five tools, five jobs</h2>
-    <p class="lead">Skills load on demand when your request matches. The other four solve different problems — pick by when each one fires.</p>
+    <p class="lead">Skills load on demand when your request matches. The other four solve different problems. Pick by when each one fires.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 200" role="img" aria-label="Skills compared to CLAUDE.md, subagents, hooks and MCP">
-        <text x="8" y="32" class="t-sub">Each fires at a different moment — combine them, don't force everything into one.</text>
+        <text x="8" y="32" class="t-sub">Each fires at a different moment: combine them, don't force everything into one.</text>
 
         <rect x="8"   y="50" width="180" height="130" rx="14" class="box"/>
         <text x="98"  y="92"  text-anchor="middle" class="t-lbl" style="font-size:16px">CLAUDE.md</text>
@@ -1097,7 +1097,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 5 · Fit &amp; ship</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 5</span>
-    <h2>Three ways to share — widest reach last</h2>
+    <h2>Three ways to share: widest reach last</h2>
     <p class="lead">Commit to the repo for your team, publish a plugin for the community, or push enterprise-managed settings for the whole organisation.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 242" role="img" aria-label="Sharing skills by reach: repo, plugin, enterprise">
@@ -1140,11 +1140,11 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 6</span>
     <h2>When it breaks, it's one of five things</h2>
-    <p class="lead">Run the validator first. Then match the symptom to its fix — most "won't trigger" problems are just the description.</p>
+    <p class="lead">Run the validator first. Then match the symptom to its fix. Most "won't trigger" problems are just the description.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 260" role="img" aria-label="Troubleshooting checklist: symptom to fix">
         <rect x="20" y="24" width="940" height="44" rx="10" class="box-amber"/>
-        <text x="490" y="51" text-anchor="middle" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Run the skills validator first — it catches structure before you debug logic.</text>
+        <text x="490" y="51" text-anchor="middle" class="t-sub" style="fill:hsl(var(--foreground));font-weight:600">Run the skills validator first: it catches structure before you debug logic.</text>
 
         <text x="44"  y="98" class="t-sub s-ink" style="font-weight:600">Symptom</text>
         <text x="524" y="98" class="t-sub s-ink" style="font-weight:600">Fix</text>
@@ -1164,14 +1164,14 @@ th {
 
         <circle cx="32" cy="214" r="3" class="s-amber"/>
         <text x="44"  y="218" class="t-tiny s-amber" style="font-weight:600">Being shadowed</text>
-        <text x="524" y="218" class="t-tiny">priority clash — rename, or ask your admin</text>
+        <text x="524" y="218" class="t-tiny">priority clash: rename, or ask your admin</text>
 
         <circle cx="32" cy="244" r="3" class="s-amber"/>
         <text x="44"  y="248" class="t-tiny s-amber" style="font-weight:600">Runtime error</text>
         <text x="524" y="248" class="t-tiny">deps installed · chmod +x scripts · forward slashes</text>
       </svg>
     </div>
-    <p class="cap">Test the exact phrases you'd type — "why is this slow", "make this faster" — and add any that fail to the description. That single fix solves most triggering problems. Run <code>claude --debug</code> to see loading errors by name.</p>
+    <p class="cap">Test the exact phrases you'd type ("why is this slow", "make this faster") and add any that fail to the description. That single fix solves most triggering problems. Run <code>claude --debug</code> to see loading errors by name.</p>
   </div>
   <span class="slide-counter">08</span>
 </section>
@@ -1182,7 +1182,7 @@ th {
   <div class="stage">
     <span class="eyebrow">The whole thing, in one line</span>
     <h1>Write it once.<br>Describe it well.<br>Let Claude load it<br>when it fits.</h1>
-    <p class="lead">A folder and a SKILL.md turn a repeated instruction into automatic, shareable expertise — built lean, placed among the other tools, fixed by its description.</p>
+    <p class="lead">A folder and a SKILL.md turn a repeated instruction into automatic, shareable expertise: built lean, placed among the other tools, fixed by its description.</p>
     <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
   </div>
   <span class="slide-counter">09</span>

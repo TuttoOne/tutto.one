@@ -74,7 +74,7 @@ export default function AdminSetup() {
             <ShieldCheck className="w-6 h-6 text-primary" />
           </div>
           <h1 className="text-2xl font-serif font-bold">Admin Setup</h1>
-          <p className="text-sm text-muted-foreground mt-1">One-time configuration — done once, locked forever.</p>
+          <p className="text-sm text-muted-foreground mt-1">One-time configuration: done once, locked forever.</p>
         </div>
 
         <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm">

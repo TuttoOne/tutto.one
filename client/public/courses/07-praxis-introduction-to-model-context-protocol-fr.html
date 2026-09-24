@@ -2,7 +2,7 @@
 <html lang="fr" class="light"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction à MCP — deck commenté</title>
+<title>Praxis · Introduction à MCP : deck commenté</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -859,7 +859,7 @@ th {
 <section class="deck-slide title">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · deck commenté</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — construit à partir de « Introduction to Model Context Protocol » d'Anthropic</span>
+    <span class="eyebrow">Praxis : construit à partir de « Introduction to Model Context Protocol » d'Anthropic</span>
     <h1 class="">Un protocole, pour que<br>toute application IA atteigne<br>n'importe quel outil ou source de données.</h1>
     <p class="lead">Onze idées, une par écran. Chacune est un point à montrer pendant que vous expliquez. Tout se joue dans le regard, alors prenez les silences.</p>
   </div>
@@ -872,7 +872,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Où nous allons</span>
     <h2 class="">Tout le cours sur un écran</h2>
-    <p class="lead">Quatre étapes : saisir ce qu'est MCP, puis apprendre ses trois primitives — outils, ressources, prompts — une par une, côté serveur et côté client.</p>
+    <p class="lead">Quatre étapes : saisir ce qu'est MCP, puis apprendre ses trois primitives (outils, ressources, prompts) une par une, côté serveur et côté client.</p>
     <div class="spine">
       <div class="grp">
         <h4>Les fondations</h4>
@@ -1011,7 +1011,7 @@ th {
     <p class="cap">Les messages circulent en JSON-RPC sur un transport : stdio pour un serveur local, HTTP pour un serveur distant. L'hôte peut tenir plusieurs clients à la fois, mais chaque client parle à un seul serveur.</p>
     <div class="qa">
       <p><span>Que détient chaque côté ?</span> Le <strong>serveur offre les capacités</strong> : outils, ressources, prompts. Le <strong>le client est la connexion</strong> qui atteint un serveur et le met à disposition de l'hôte. Fournisseur contre connecteur.</p>
-      <p><span>Le client est-il un tuyau unique et partagé ?</span> Non — <strong>un client par serveur</strong>. L'hôte ouvre une ligne distincte et nommée vers chaque serveur : vous les accordez et les révoquez un par un.</p>
+      <p><span>Le client est-il un tuyau unique et partagé ?</span> Non : <strong>un client par serveur</strong>. L'hôte ouvre une ligne distincte et nommée vers chaque serveur : vous les accordez et les révoquez un par un.</p>
     </div>
   </div>
   <span class="slide-counter">04</span>
@@ -1065,7 +1065,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 4 · Tools</span></div>
   <div class="stage">
     <span class="eyebrow">Leçon 4</span>
-    <h2 class="">Tools — des actions que le modèle peut choisir d'appeler</h2>
+    <h2 class="">Tools : des actions que le modèle peut choisir d'appeler</h2>
     <p class="lead">Décorez une fonction : son nom, sa docstring et ses arguments typés deviennent un schéma que le modèle lit. C'est le modèle qui décide quand l'utiliser.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 240" role="img" aria-label="Defining a tool the model calls">
@@ -1075,7 +1075,7 @@ th {
         <text x="40" y="108" class="t-mono" style="font-size:13px">def get_weather(city):</text>
         <text x="40" y="132" class="t-tiny s-ink">nom · description · schéma d'entrée</text>
         <line x1="40" y1="148" x2="320" y2="148" class="l-faint" stroke-width="1"></line>
-        <text x="40" y="172" class="t-tiny">les verbes — ils agissent, ils ont des effets</text>
+        <text x="40" y="172" class="t-tiny">les verbes : ils agissent, ils ont des effets</text>
 
         <!-- exposes -->
         <line x1="340" y1="120" x2="440" y2="120" class="l-amber" stroke-width="2.5" marker-end="url(#l4a)"></line>
@@ -1179,9 +1179,9 @@ th {
         <line x1="430" y1="102" x2="478" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"></line>
         <line x1="660" y1="102" x2="708" y2="102" class="l-ink" stroke-width="2" marker-end="url(#l6a)"></line>
 
-        <!-- loop back: server result -> claude --&gt;
+        <!-- loop back: server result -> claude -->
         <path d="M 570 134 C 570 200, 340 200, 340 136" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#l6amber)"/>
-        <text x="455" y="194" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">résultat renvoyé à Claude — la boucle tourne jusqu'à ce que la tâche soit finie</text>
+        <text x="455" y="194" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">résultat renvoyé à Claude : la boucle tourne jusqu'à ce que la tâche soit finie</text>
         <defs>
           <marker id="l6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
           <marker id="l6amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
@@ -1198,19 +1198,19 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 7 · Resources et prompts</span></div>
   <div class="stage">
     <span class="eyebrow">Leçon 7</span>
-    <h2 class="">Resources — des données à charger, adressées par URI</h2>
+    <h2 class="">Resources : des données à charger, adressées par URI</h2>
     <p class="lead">Des données en lecture seule que le serveur expose à une adresse. Aucun effet de bord : pensez GET, pas POST.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 240" role="img" aria-label="Defining direct and templated resources">
         <!-- direct -->
         <rect x="20" y="50" width="430" height="74" rx="12" class="box-amber"></rect>
         <text x="40" y="80" class="t-mono s-amber" style="font-weight:600">@mcp.resource("docs://documents")</text>
-        <text x="40" y="106" class="t-tiny s-ink">direct — renvoie la liste entière</text>
+        <text x="40" y="106" class="t-tiny s-ink">direct : renvoie la liste entière</text>
 
         <!-- templated -->
         <rect x="20" y="140" width="430" height="74" rx="12" class="box"></rect>
         <text x="40" y="170" class="t-mono s-amber" style="font-weight:600">docs://documents/{id}</text>
-        <text x="40" y="196" class="t-tiny s-ink">avec gabarit — un paramètre choisit un élément</text>
+        <text x="40" y="196" class="t-tiny s-ink">avec gabarit : un paramètre choisit un élément</text>
 
         <!-- arrow to data -->
         <line x1="450" y1="132" x2="560" y2="132" class="l-amber" stroke-width="2.5" marker-end="url(#l7a)"></line>
@@ -1330,7 +1330,7 @@ th {
         <text x="820" y="128" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">déployé, prêt à tourner</text>
 
         <text x="20" y="196" class="t-tiny s-ink" style="font-weight:600">Contrôlé par l'utilisateur :</text>
-        <text x="160" y="196" class="t-tiny">c'est l'utilisateur qui le déclenche, délibérément — pas le modèle, pas l'application.</text>
+        <text x="160" y="196" class="t-tiny">c'est l'utilisateur qui le déclenche, délibérément, pas le modèle, pas l'application.</text>
         <defs>
           <marker id="l10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"></path></marker>
         </defs>
@@ -1345,7 +1345,7 @@ th {
 <section class="deck-slide">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Leçon 11 · Récapitulatif</span></div>
   <div class="stage">
-    <span class="eyebrow">Leçon 11 — si vous ne retenez qu'une chose</span>
+    <span class="eyebrow">Leçon 11 : si vous ne retenez qu'une chose</span>
     <h2 class="">Trois primitives, trois propriétaires</h2>
     <p class="lead">Tout le protocole en une image : ce que le serveur expose, et qui a le droit de déclencher quoi.</p>
     <div class="diagram">

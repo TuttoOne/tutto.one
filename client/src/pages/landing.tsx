@@ -47,7 +47,7 @@ export default function Landing() {
      no second sentence to keep in step with the first. */
   const title = `${t(landing.hero.title)} ${t(landing.hero.titleSecond)}`.replace(/\.$/, "");
   useEffect(() => {
-    document.title = `Tutto — ${title}`;
+    document.title = `Tutto | ${title}`;
     return () => {
       document.title = SITE_TITLE;
     };

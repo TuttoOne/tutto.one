@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Introduction to MCP — talking deck</title>
+<title>Praxis · Introduction to MCP: talking deck</title>
 <style>
 /* ============================================================
    Praxis / Tutto — Design System
@@ -860,7 +860,7 @@ th {
 <section class="deck-slide title active">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · talking deck</span></div>
   <div class="stage">
-    <span class="eyebrow">Praxis — built from Anthropic's Introduction to Model Context Protocol</span>
+    <span class="eyebrow">Praxis: built from Anthropic's Introduction to Model Context Protocol</span>
     <h1>One protocol, so any<br>AI app can reach any<br>tool or data source.</h1>
     <p class="lead">Eleven ideas, one per screen. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.</p>
   </div>
@@ -873,7 +873,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Where we're going</span>
     <h2>The whole course on one screen</h2>
-    <p class="lead">Four moves: grasp what MCP is, then learn its three primitives — tools, resources, prompts — one at a time, server side and client side.</p>
+    <p class="lead">Four moves: grasp what MCP is, then learn its three primitives (tools, resources, prompts) one at a time, server side and client side.</p>
     <div class="spine">
       <div class="grp">
         <h4>Foundation</h4>
@@ -958,7 +958,7 @@ th {
         <text x="738" y="238" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">6 connections to one standard</text>
       </svg>
     </div>
-    <p class="cap">MCP is a standard, like USB-C for AI: build to the protocol once and every compliant tool just works. It also splits the work — app builders on one side, tool builders on the other.</p>
+    <p class="cap">MCP is a standard, like USB-C for AI: build to the protocol once and every compliant tool just works. It also splits the work: app builders on one side, tool builders on the other.</p>
   </div>
   <span class="slide-counter">03</span>
 </section>
@@ -968,7 +968,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 2 · Foundation</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 2</span>
-    <h2>Host, client, server — one client per server</h2>
+    <h2>Host, client, server: one client per server</h2>
     <p class="lead">The app you use is the host. Inside it, each client holds one connection to one server, and the server wraps the real tool or data.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Host client server architecture">
@@ -1011,8 +1011,8 @@ th {
     </div>
     <p class="cap">Messages travel as JSON-RPC over a transport: stdio for a local server, HTTP for a remote one. The host can hold many clients at once, but each client talks to exactly one server.</p>
     <div class="qa">
-      <p><span>What does each side hold?</span> The <strong>server offers the capabilities</strong> — tools, resources, prompts. The <strong>client is the connection</strong> that reaches one server and brokers them to the host. Supplier vs. connector.</p>
-      <p><span>Is the client one shared pipe?</span> No — <strong>one client per server</strong>. The host opens a separate, named line to each server, so you grant and revoke them one at a time.</p>
+      <p><span>What does each side hold?</span> The <strong>server offers the capabilities</strong>: tools, resources, prompts. The <strong>client is the connection</strong> that reaches one server and brokers them to the host. Supplier vs. connector.</p>
+      <p><span>Is the client one shared pipe?</span> No: <strong>one client per server</strong>. The host opens a separate, named line to each server, so you grant and revoke them one at a time.</p>
     </div>
   </div>
   <span class="slide-counter">04</span>
@@ -1052,9 +1052,9 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">stdio runs the server as a local subprocess of the host; HTTP exposes it as a remote service. Same server code either way — the transport is just how messages travel.</p>
+    <p class="cap">stdio runs the server as a local subprocess of the host; HTTP exposes it as a remote service. Same server code either way; the transport is just how messages travel.</p>
     <div class="qa">
-      <p><span>What does "transport-agnostic" mean?</span> MCP fixes the <strong>language, not the channel</strong>. The JSON-RPC messages are identical whether they ride a local stdio pipe or an HTTP connection — neither side's logic changes.</p>
+      <p><span>What does "transport-agnostic" mean?</span> MCP fixes the <strong>language, not the channel</strong>. The JSON-RPC messages are identical whether they ride a local stdio pipe or an HTTP connection; neither side's logic changes.</p>
       <p><span>Rewrite the server to go remote?</span> No. Its tools, resources and prompts stay the same; you <strong>swap the transport</strong> (stdio → HTTP), not the code.</p>
     </div>
   </div>
@@ -1066,7 +1066,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 4 · Tools</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 4</span>
-    <h2>Tools — actions the model can choose to call</h2>
+    <h2>Tools: actions the model can choose to call</h2>
     <p class="lead">Decorate a function and its name, docstring and typed arguments become a schema the model reads. The model decides when to use it.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 240" role="img" aria-label="Defining a tool the model calls">
@@ -1076,7 +1076,7 @@ th {
         <text x="40" y="108" class="t-mono" style="font-size:13px">def get_weather(city):</text>
         <text x="40" y="132" class="t-tiny s-ink">name · description · input schema</text>
         <line x1="40" y1="148" x2="320" y2="148" class="l-faint" stroke-width="1"/>
-        <text x="40" y="172" class="t-tiny">the verbs — they do things, have side effects</text>
+        <text x="40" y="172" class="t-tiny">the verbs: they do things, have side effects</text>
 
         <!-- exposes -->
         <line x1="340" y1="120" x2="440" y2="120" class="l-amber" stroke-width="2.5" marker-end="url(#l4a)"/>
@@ -1113,7 +1113,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 5</span>
     <h2>Test the server before wiring it to an app</h2>
-    <p class="lead">The Inspector connects straight to your server — no LLM involved. List what it exposes, call each tool by hand, read the raw response.</p>
+    <p class="lead">The Inspector connects straight to your server, no LLM involved. List what it exposes, call each tool by hand, read the raw response.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 240" role="img" aria-label="MCP Inspector connected to a server">
         <!-- inspector -->
@@ -1146,7 +1146,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">Debug the server on its own first. If the Inspector can list and call everything cleanly, the problem later is in the client wiring — not the server.</p>
+    <p class="cap">Debug the server on its own first. If the Inspector can list and call everything cleanly, the problem later is in the client wiring, not the server.</p>
   </div>
   <span class="slide-counter">07</span>
 </section>
@@ -1157,7 +1157,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 6</span>
     <h2>The client feeds tools to the model, in a loop</h2>
-    <p class="lead">Your client lists the server's tools, hands their schemas to Claude, runs whatever Claude asks for, and feeds the result back — until it has an answer.</p>
+    <p class="lead">Your client lists the server's tools, hands their schemas to Claude, runs whatever Claude asks for, and feeds the result back, until it has an answer.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 250" role="img" aria-label="Client tool-use loop">
         <rect x="20"  y="70" width="180" height="64" rx="12" class="box"/>
@@ -1182,7 +1182,7 @@ th {
 
         <!-- loop back: server result -> claude -->
         <path d="M 570 134 C 570 200, 340 200, 340 136" class="l-amber" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#l6amber)"/>
-        <text x="455" y="194" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">result back to Claude — loop until the task is done</text>
+        <text x="455" y="194" text-anchor="middle" class="t-tiny s-amber" style="font-weight:600">result back to Claude: loop until the task is done</text>
         <defs>
           <marker id="l6a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--foreground))"/></marker>
           <marker id="l6amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
@@ -1199,19 +1199,19 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 7 · Resources &amp; prompts</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 7</span>
-    <h2>Resources — data to pull in, addressed by URI</h2>
+    <h2>Resources: data to pull in, addressed by URI</h2>
     <p class="lead">Read-only data the server exposes at an address. No side effects: think GET, not POST.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 240" role="img" aria-label="Defining direct and templated resources">
         <!-- direct -->
         <rect x="20" y="50" width="430" height="74" rx="12" class="box-amber"/>
         <text x="40" y="80" class="t-mono s-amber" style="font-weight:600">@mcp.resource("docs://documents")</text>
-        <text x="40" y="106" class="t-tiny s-ink">direct — returns the whole list</text>
+        <text x="40" y="106" class="t-tiny s-ink">direct: returns the whole list</text>
 
         <!-- templated -->
         <rect x="20" y="140" width="430" height="74" rx="12" class="box"/>
         <text x="40" y="170" class="t-mono s-amber" style="font-weight:600">docs://documents/{id}</text>
-        <text x="40" y="196" class="t-tiny s-ink">templated — a parameter picks one item</text>
+        <text x="40" y="196" class="t-tiny s-ink">templated: a parameter picks one item</text>
 
         <!-- arrow to data -->
         <line x1="450" y1="132" x2="560" y2="132" class="l-amber" stroke-width="2.5" marker-end="url(#l7a)"/>
@@ -1228,7 +1228,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">A URI scheme like <code>docs://</code> names the data. Direct resources return a collection; templated ones take a parameter to fetch exactly one — a single document, a single record.</p>
+    <p class="cap">A URI scheme like <code>docs://</code> names the data. Direct resources return a collection; templated ones take a parameter to fetch exactly one: a single document, a single record.</p>
   </div>
   <span class="slide-counter">09</span>
 </section>
@@ -1239,7 +1239,7 @@ th {
   <div class="stage">
     <span class="eyebrow">Lesson 8</span>
     <h2>The app decides which resources to load</h2>
-    <p class="lead">Unlike tools, the model doesn't reach for resources. The application — often the user — chooses what context to bring in.</p>
+    <p class="lead">Unlike tools, the model doesn't reach for resources. The application (often the user) chooses what context to bring in.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 240" role="img" aria-label="Accessing resources via at-mention">
         <!-- user @-mention -->
@@ -1266,7 +1266,7 @@ th {
         </defs>
       </svg>
     </div>
-    <p class="cap">That's the difference from a tool: a tool is the model's to call, a resource is the app's to load. Same server, two different control models — which is the heart of MCP.</p>
+    <p class="cap">That's the difference from a tool: a tool is the model's to call, a resource is the app's to load. Same server, two different control models, which is the heart of MCP.</p>
   </div>
   <span class="slide-counter">10</span>
 </section>
@@ -1276,7 +1276,7 @@ th {
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 9 · Resources &amp; prompts</span></div>
   <div class="stage">
     <span class="eyebrow">Lesson 9</span>
-    <h2>Prompts — reusable templates the author ships</h2>
+    <h2>Prompts: reusable templates the author ships</h2>
     <p class="lead">A tested, parameterized prompt the server exposes, so the right wording is baked in instead of reinvented every time.</p>
     <div class="diagram">
       <svg viewBox="0 0 980 230" role="img" aria-label="Defining a prompt template">
@@ -1331,7 +1331,7 @@ th {
         <text x="820" y="128" text-anchor="middle" class="t-tiny" style="fill:hsl(40 10% 80%)">expanded, ready to run</text>
 
         <text x="20" y="196" class="t-tiny s-ink" style="font-weight:600">User-controlled:</text>
-        <text x="160" y="196" class="t-tiny">the user triggers it deliberately — not the model, not the app.</text>
+        <text x="160" y="196" class="t-tiny">the user triggers it deliberately, not the model, not the app.</text>
         <defs>
           <marker id="l10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="hsl(var(--primary))"/></marker>
         </defs>
@@ -1346,7 +1346,7 @@ th {
 <section class="deck-slide">
   <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Lesson 11 · Recap</span></div>
   <div class="stage">
-    <span class="eyebrow">Lesson 11 — if you take one thing away</span>
+    <span class="eyebrow">Lesson 11: if you take one thing away</span>
     <h2>Three primitives, three owners</h2>
     <p class="lead">The whole protocol, in one picture: what the server exposes, and who gets to trigger each one.</p>
     <div class="diagram">
@@ -1385,7 +1385,7 @@ th {
   <div class="stage">
     <span class="eyebrow">The whole thing, in one line</span>
     <h1>One protocol.<br>Three primitives.<br>Any tool, any app.</h1>
-    <p class="lead">Tools, resources and prompts, exposed by a server and reached by a client inside your host — so context and capability plug in once instead of being rebuilt every time.</p>
+    <p class="lead">Tools, resources and prompts, exposed by a server and reached by a client inside your host, so context and capability plug in once instead of being rebuilt every time.</p>
     <p class="lead" style="margin-top:var(--space-6);color:hsl(var(--primary))">tutto.one/praxis · daniel@tutto.one</p>
   </div>
   <span class="slide-counter">14</span>

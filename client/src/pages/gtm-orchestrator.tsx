@@ -30,8 +30,8 @@ export default function GtmOrchestrator() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "GTM — moteur de prospection sur site | Tutto"
-        : "GTM — On-premise sales outreach engine | Tutto";
+        ? "GTM : moteur de prospection sur site | Tutto"
+        : "GTM: On-premise sales outreach engine | Tutto";
     return () => {
       document.title = SITE_TITLE;
     };
@@ -47,15 +47,15 @@ export default function GtmOrchestrator() {
 
   const capabilityBodies: Record<string, string> = {
     "Researches every prospect automatically":
-      "A research engine profiles each company and contact — what they do, their tech stack, competitive replacement signals, country-specific buying culture — and writes a structured dossier with a personalisation hook. 45 deep-research reports generated; 6,675 prospects profiled across 9 countries.",
+      "A research engine profiles each company and contact (what they do, their tech stack, competitive replacement signals, country-specific buying culture) and writes a structured dossier with a personalisation hook. 45 deep-research reports generated; 6,675 prospects profiled across 9 countries.",
     "Writes in the sender's voice, not AI voice":
-      "A multi-stage writing pipeline drafts each message, then runs it through automated editorial gates — mechanics, fact-checking, voice-match, and an 'AI-tell' detector that strips the giveaways that get cold email deleted. Anything that fails is held back rather than sent.",
+      "A multi-stage writing pipeline drafts each message, then runs it through automated editorial gates: mechanics, fact-checking, voice-match, and an 'AI-tell' detector that strips the giveaways that get cold email deleted. Anything that fails is held back rather than sent.",
     "Sends safely and on schedule":
-      "A sequence scheduler enrols prospects into multi-step campaigns with a send-claim architecture — idempotency keys and fail-closed guards so nothing double-sends or loops. Every send is logged and auditable. 670 emails drafted, 482 sent, across 11 campaign types.",
+      "A sequence scheduler enrols prospects into multi-step campaigns with a send-claim architecture: idempotency keys and fail-closed guards so nothing double-sends or loops. Every send is logged and auditable. 670 emails drafted, 482 sent, across 11 campaign types.",
     "Connects without API access":
       "Reverse-engineered session-replay integrations for HubSpot CRM, Apollo.io, and a licence portal where no developer API was available. Live CRM, enrichment and licensing data surfaces directly into the workflow. Website-visitor signals (790 companies tracked) feed warm leads in automatically.",
     "Keeps the pipeline warm on its own":
-      "Daily automations graduate new prospects into campaigns, draft follow-ups for deals that go quiet, and send a morning briefing — so accounts keep moving without manual chasing. Live opportunities at SSAB, Eidsiva, GleSYS, Vektus and others sourced through the system.",
+      "Daily automations graduate new prospects into campaigns, draft follow-ups for deals that go quiet, and send a morning briefing, so accounts keep moving without manual chasing. Live opportunities at SSAB, Eidsiva, GleSYS, Vektus and others sourced through the system.",
   };
 
   const stats = [
@@ -75,7 +75,7 @@ export default function GtmOrchestrator() {
     "Local-model generation":
       "Open-weight models running on the DGX Spark do the bulk of the drafting, research and editorial work. Prospect data is processed on-device and never transmitted.",
     "Controlled frontier escalation":
-      "When a task genuinely needs frontier reasoning, Claude (Opus) is called across a single, deliberate boundary — and only the minimum, abstracted context crosses it. Customer-identifying detail is held back on the device.",
+      "When a task genuinely needs frontier reasoning, Claude (Opus) is called across a single, deliberate boundary, and only the minimum, abstracted context crosses it. Customer-identifying detail is held back on the device.",
   };
 
   const differentiators = [
@@ -89,13 +89,13 @@ export default function GtmOrchestrator() {
     "Frontier where it counts, local everywhere else":
       "Open-weight models handle volume and routine reasoning on-device; Opus is reserved for the hardest judgement calls. Cost and exposure both scale with how rarely the boundary is crossed.",
     "One egress chokepoint":
-      "A single LLM client mediates every model call. The routing rule — local by default, frontier only when required, sensitive data never raw — is enforced in one place and is auditable.",
+      "A single LLM client mediates every model call. The routing rule (local by default, frontier only when required, sensitive data never raw) is enforced in one place and is auditable.",
   };
 
   const stack = [
-    { key: "Hardware", body: "NVIDIA DGX Spark — GB10 Superchip, 128GB unified memory, NVMe storage. Runs entirely on-device." },
+    { key: "Hardware", body: "NVIDIA DGX Spark: GB10 Superchip, 128GB unified memory, NVMe storage. Runs entirely on-device." },
     { key: "AI Models", body: "Open-weight models locally for drafting, research, and editorial gates. Claude (Opus) reached headlessly only when frontier reasoning is required." },
-    { key: "Orchestration", body: "Claude running headlessly as the orchestrator — routes each step to a local model or the frontier model through a single LLM client." },
+    { key: "Orchestration", body: "Claude running headlessly as the orchestrator. It routes each step to a local model or the frontier model through a single LLM client." },
     { key: "Backend", body: "Python (FastAPI) services, a sequence scheduler with send-claim/idempotency architecture, and a React dashboard." },
     { key: "Integrations", body: "Reverse-engineered session-replay bridges to HubSpot CRM, Apollo.io where no developer API exists." },
     { key: "Security", body: "Hardened Linux, TOTP-gated administrative access, least-privilege read-only roles, and full audit logging of sends and model egress." },
@@ -140,12 +140,12 @@ export default function GtmOrchestrator() {
             <>
               <p>
                 {tr(
-                  "A custom system designed and built to run B2B prospecting end-to-end. Researches prospects, writes personalised emails in the sender's voice, schedules and sends safely, and keeps every account moving — with a human reviewing, not retyping.",
+                  "A custom system designed and built to run B2B prospecting end-to-end. Researches prospects, writes personalised emails in the sender's voice, schedules and sends safely, and keeps every account moving, with a human reviewing, not retyping.",
                 )}
               </p>
               <p>
                 {tr(
-                  "Running outreach across the Nordics, Baltics and Netherlands — thousands of prospects, dozens of live accounts, and a CRM that does not research, write, or follow up on its own. Done manually, true personalisation does not scale. Done with templates, response rates collapse. This system eliminates that trade-off.",
+                  "Running outreach across the Nordics, Baltics and Netherlands: thousands of prospects, dozens of live accounts, and a CRM that does not research, write, or follow up on its own. Done manually, true personalisation does not scale. Done with templates, response rates collapse. This system eliminates that trade-off.",
                 )}
               </p>
             </>
@@ -171,7 +171,7 @@ export default function GtmOrchestrator() {
           intro={
             <p>
               {tr(
-                "Figures pulled live from the system's database. Conversion and reply rates are deliberately omitted — not yet reliably tracked. The honest proof point: sourced live deals including SSAB, Eidsiva and GleSYS.",
+                "Figures pulled live from the system's database. Conversion and reply rates are deliberately omitted, as they are not yet reliably tracked. The honest proof point: sourced live deals including SSAB, Eidsiva and GleSYS.",
               )}
             </p>
           }
@@ -195,7 +195,7 @@ export default function GtmOrchestrator() {
           intro={
             <p>
               {tr(
-                "The system runs on an NVIDIA DGX Spark — not on rented cloud infrastructure. Prospect records, CRM data, and licensing information live on the device and stay there. There are three data paths, separated by design.",
+                "The system runs on an NVIDIA DGX Spark, not on rented cloud infrastructure. Prospect records, CRM data, and licensing information live on the device and stay there. There are three data paths, separated by design.",
               )}
             </p>
           }

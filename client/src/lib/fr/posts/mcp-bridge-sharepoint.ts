@@ -1,7 +1,7 @@
 import type { PostFr } from "./index";
 
 export const post: PostFr = {
-  content: `Un même schéma frustrant se répète dans presque tous les déploiements d'IA que nous voyons. L'équipe découvre que Claude ou ChatGPT peut l'aider dans son travail. Elle se met à copier-coller des données dans la fenêtre de discussion. L'IA donne des conseils utiles. Puis chacun reporte manuellement ces conseils dans SharePoint, Salesforce ou le système qu'il utilisait. Cela fonctionne. Mais c'est de la friction — et c'est dans la friction que meurt l'adoption.
+  content: `Un même schéma frustrant se répète dans presque tous les déploiements d'IA que nous voyons. L'équipe découvre que Claude ou ChatGPT peut l'aider dans son travail. Elle se met à copier-coller des données dans la fenêtre de discussion. L'IA donne des conseils utiles. Puis chacun reporte manuellement ces conseils dans SharePoint, Salesforce ou le système qu'il utilisait. Cela fonctionne. Mais c'est de la friction. Et c'est dans la friction que meurt l'adoption.
 
 Nous venons d'achever une mission qui supprime entièrement cette friction. Voici comment elle fonctionne, et pourquoi la technologie sous-jacente constitue l'un des basculements discrets les plus importants de l'écosystème de l'IA aujourd'hui.
 
@@ -17,7 +17,7 @@ Il existe déjà plus de 500 serveurs MCP couvrant des plateformes comme Slack, 
 
 ## La mission : SharePoint et Power Automate
 
-L'équipe opérationnelle de notre client gérait un enchevêtrement de listes SharePoint, de relations de recherche et de flux Power Automate. Elle consacrait un temps considérable à des tâches de gestion de données — interroger des enregistrements, créer et mettre à jour des éléments, dépanner des automatisations défaillantes — que l'IA pouvait traiter en quelques secondes si elle y avait un accès direct.
+L'équipe opérationnelle de notre client gérait un enchevêtrement de listes SharePoint, de relations de recherche et de flux Power Automate. Elle consacrait un temps considérable à des tâches de gestion de données (interroger des enregistrements, créer et mettre à jour des éléments, dépanner des automatisations défaillantes) que l'IA pouvait traiter en quelques secondes si elle y avait un accès direct.
 
 Nous avons construit une passerelle MCP qui donne précisément cet accès à Claude. Quatre domaines de capacité :
 
@@ -34,13 +34,13 @@ Nous avons construit une passerelle MCP qui donne précisément cet accès à Cl
 Voici une version condensée d'un échange réel issu de la mission :
 
 *« Liste toutes les listes SharePoint de mon site. »*
-Claude renvoie un tableau net : 8 listes trouvées — Tâches, Clients, Projets, Factures, Contacts, Documents, Actifs, Paramètres.
+Claude renvoie un tableau net : 8 listes trouvées : Tâches, Clients, Projets, Factures, Contacts, Documents, Actifs, Paramètres.
 
 *« Ajoute une colonne de recherche sur Tâches pointant vers la liste Clients. »*
 Claude construit le bon appel à l'API Graph, l'exécute et confirme : « Colonne "Client" (recherche → Clients) ajoutée à la liste Tâches. »
 
 *« Montre-moi les 5 dernières exécutions en échec du flux Invoice Sync. »*
-Claude extrait l'historique : 5 échecs, l'erreur la plus récente étant un délai de connexion dépassé vers l'API Xero — survenue 3 fois au cours des dernières 24 heures.
+Claude extrait l'historique : 5 échecs, l'erreur la plus récente étant un délai de connexion dépassé vers l'API Xero, survenue 3 fois au cours des dernières 24 heures.
 
 La session entière prend quelques minutes. Le travail équivalent, via l'interface de SharePoint et les journaux de Power Automate, aurait occupé une bonne partie d'un après-midi.
 

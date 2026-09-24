@@ -69,7 +69,7 @@ export const BECOME_A_TRAINER_FR: FrDict = {
     "Dites-moi qui vous demande déjà de l'aide.",
   "We will map your path to teaching. The first step is a short call.":
     "Nous tracerons ensemble votre chemin vers l'enseignement. La première étape est un bref échange.",
-  "Done - we'll be in touch.": "C'est noté — nous revenons vers vous.",
+  "Done - we'll be in touch.": "C'est noté. Nous revenons vers vous.",
   "Expect a reply within one working day.": "Réponse sous un jour ouvré.",
   Name: "Nom",
   Email: "Courriel",
@@ -78,7 +78,7 @@ export const BECOME_A_TRAINER_FR: FrDict = {
   "No marketing. Your details are used only to prepare for and respond to your enquiry.":
     "Aucune prospection. Vos coordonnées servent uniquement à préparer et à répondre à votre demande.",
   "Something went wrong - please try again or email daniel@tutto.one":
-    "Une erreur est survenue — réessayez ou écrivez à daniel@tutto.one",
+    "Une erreur est survenue. Réessayez ou écrivez à daniel@tutto.one",
   "Or email directly: daniel@tutto.one": "Ou écrivez directement : daniel@tutto.one",
 
   "On what this is not": "Ce que ce parcours n'est pas",
@@ -183,8 +183,8 @@ export const BECOME_A_TRAINER_FR: FrDict = {
     "ex. : trois collègues qui ont vu ce que j'ai construit et veulent apprendre. Quelques clients qui me questionnent sans cesse sur les outils d'IA…",
 
   // --- Multi-line blocks ---
-  "Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition on the clients you bring in yourself — 60% on the ones I bring you.":
-    "Quatre séances supplémentaires après Praxis vous font passer de quelqu'un qui sait construire à quelqu'un qui peut l'enseigner pour en vivre. Vous enseignez, je trouve et j'organise les clients avec vous, et vous conservez 80 % des honoraires sur les clients que vous amenez vous-même — 60 % sur ceux que je vous amène.",
+  "Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, I find and organise the clients with you, and you keep 80% of the tuition on the clients you bring in yourself, and 60% on the ones I bring you.":
+    "Quatre séances supplémentaires après Praxis vous font passer de quelqu'un qui sait construire à quelqu'un qui peut l'enseigner pour en vivre. Vous enseignez, je trouve et j'organise les clients avec vous, et vous conservez 80 % des honoraires sur les clients que vous amenez vous-même, 60 % sur ceux que je vous amène.",
   "You have been through Praxis. You can build working tools with an AI assistant, and you have felt how fast the people around you want the same thing.":
     "Vous avez suivi Praxis. Vous savez construire des outils fonctionnels avec un assistant IA, et vous avez mesuré la vitesse à laquelle votre entourage veut la même chose.",
   "People keep asking you how you did it, and you have started explaining it without being asked. This is how you turn that into an income: four more sessions, a readiness bar to clear, and then you are teaching Praxis under the same name, with clients I find and organise with you, and 80% of the tuition on every client you bring in yourself.":
@@ -196,7 +196,7 @@ export const BECOME_A_TRAINER_FR: FrDict = {
   "To be straight about it: this is Praxis confirming you can teach Praxis to our standard. It is not an accredited qualification from an exam board, and we do not pretend otherwise. The honesty is the point, and it is exactly why clients trust the people who carry our name.":
     "Pour être direct : il s'agit de Praxis attestant que vous savez enseigner Praxis à notre niveau d'exigence. Ce n'est pas une certification délivrée par un organisme officiel, et nous ne prétendons pas le contraire. C'est précisément cette honnêteté qui fait que les clients font confiance à ceux qui portent notre nom.",
   "You will do real work with real people. What it gives you is the method, the materials, the clients organised alongside you, and a hub that handles what you cannot. That is a more useful foundation than building from scratch, and it is exactly what it says it is.":
-    "Vous ferez un vrai travail avec de vraies personnes. Ce que ce parcours vous apporte, c'est la méthode, les supports, des clients organisés à vos côtés, et une structure qui prend en charge ce que vous ne pouvez pas assurer. C'est une base plus utile que de partir de zéro — et c'est exactement ce qu'elle annonce être.",
+    "Vous ferez un vrai travail avec de vraies personnes. Ce que ce parcours vous apporte, c'est la méthode, les supports, des clients organisés à vos côtés, et une structure qui prend en charge ce que vous ne pouvez pas assurer. C'est une base plus utile que de partir de zéro, et c'est exactement ce qu'elle annonce être.",
 
   // --- Trainer attribution ---
   "Trainer code": "Code formateur",

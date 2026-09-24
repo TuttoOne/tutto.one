@@ -76,7 +76,7 @@ export const SHAREPOINT_FR: FrDict = {
     "Forfait mensuel couvrant la mise à jour des modèles, les montées de version, le suivi des usages et la formation des équipes, à mesure que votre SharePoint et votre socle IA évoluent.",
 
   "SharePoint MCP Bridge - Interactive Demo":
-    "Passerelle MCP SharePoint — démonstration interactive",
+    "Passerelle MCP SharePoint : démonstration interactive",
   "you@company.com": "vous@entreprise.fr",
 
   "The SharePoint Bridge connects Claude directly to your SharePoint Online environment - search documents, read pages, and surface institutional knowledge without copy-pasting or manual lookups. Just ask.":

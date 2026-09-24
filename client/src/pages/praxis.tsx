@@ -54,7 +54,7 @@ export default function Praxis() {
   const booking = bookingHref(BOOKING, useTrainerCode());
 
   useEffect(() => {
-    document.title = `Praxis — ${t(copy.praxis.title).replace(/\.$/, "")} | Tutto`;
+    document.title = `Praxis: ${t(copy.praxis.title).replace(/\.$/, "")} | Tutto`;
     return () => {
       document.title = SITE_TITLE;
     };
@@ -310,14 +310,14 @@ export default function Praxis() {
           {locale === "fr" ? (
             <p>
               Praxis désigne la connaissance éprouvée par l'action. Le mot vient du grec{" "}
-              <em>prâxis</em> — l'action dont la finalité réside dans l'action elle-même. Aristote la
+              <em>prâxis</em> : l'action dont la finalité réside dans l'action elle-même. Aristote la
               distinguait de la <em>theoria</em> (la contemplation) et de la <em>poiesis</em> (la
               fabrication, qui produit un objet extérieur à elle). L'usage moderne, après Freire, y
               voit la boucle théorie, action, réflexion, théorie affinée.
             </p>
           ) : (
             <p>
-              Praxis means knowledge proven by doing. It comes from the Greek <em>prâxis</em> —
+              Praxis means knowledge proven by doing. It comes from the Greek <em>prâxis</em>:
               action whose purpose lies in the action itself. Aristotle separated it from{" "}
               <em>theoria</em> (contemplation) and <em>poiesis</em> (making, which produces an object
               outside itself). Modern usage, after Freire, treats it as the loop of theory, action,

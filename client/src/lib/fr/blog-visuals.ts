@@ -17,7 +17,7 @@ export const BLOG_VISUALS_FR: FrDict = {
   "Business & Finance": "Gestion et finance",
   Other: "Autres",
   "Source: Anthropic Economic Index - approximate shares based on published research":
-    "Source : Anthropic Economic Index — parts approximatives, d'après les travaux publiés",
+    "Source : Anthropic Economic Index, parts approximatives, d'après les travaux publiés",
 
   // Wage exposure
   "AI exposure index by wage quartile (higher = more exposure)":
@@ -31,7 +31,7 @@ export const BLOG_VISUALS_FR: FrDict = {
   "Admin assistants, sales reps": "Assistants administratifs, commerciaux",
   "Retail, food service, manual labour": "Commerce, restauration, travail manuel",
   "Source: Anthropic Economic Index - index values are illustrative of relative ordering reported in research":
-    "Source : Anthropic Economic Index — valeurs indicatives, illustrant l'ordre relatif rapporté par l'étude",
+    "Source : Anthropic Economic Index, valeurs indicatives, illustrant l'ordre relatif rapporté par l'étude",
 
   // Augmentation vs automation
   "How AI is being used: augmentation vs automation":
@@ -43,13 +43,13 @@ export const BLOG_VISUALS_FR: FrDict = {
   "AI handles the task end-to-end with minimal ongoing human direction":
     "L'IA traite la tâche de bout en bout, avec une intervention humaine minimale",
   "Source: Anthropic Economic Index - based on task classification across sampled conversations":
-    "Source : Anthropic Economic Index — d'après la classification des tâches sur un échantillon de conversations",
+    "Source : Anthropic Economic Index, d'après la classification des tâches sur un échantillon de conversations",
 
   // Capability gap
   "Radar chart: Theoretical AI capability vs observed AI usage by occupational category":
     "Graphique en radar : capacité théorique de l'IA comparée à son usage observé, par catégorie professionnelle",
   "Source: Anthropic Economic Index - theoretical AI coverage (blue) vs observed AI usage (red) by occupational category":
-    "Source : Anthropic Economic Index — couverture théorique de l'IA (en bleu) comparée à l'usage observé (en rouge), par catégorie professionnelle",
+    "Source : Anthropic Economic Index, couverture théorique de l'IA (en bleu) comparée à l'usage observé (en rouge), par catégorie professionnelle",
 
   // MCP architecture
   "How MCP connects AI to your business tools":
@@ -61,7 +61,7 @@ export const BLOG_VISUALS_FR: FrDict = {
 
   // LegalRAG architecture
   "System architecture - everything runs on-premise":
-    "Architecture du système — tout s'exécute sur site",
+    "Architecture du système : tout s'exécute sur site",
   "Zero data leaves the device": "Aucune donnée ne quitte l'appareil",
   "Each client receives their own DGX Spark unit, deployed and configured on-premises by Tutto":
     "Chaque client reçoit son propre appareil DGX Spark, déployé et configuré sur site par Tutto",

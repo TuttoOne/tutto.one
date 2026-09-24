@@ -29,7 +29,7 @@ const SESSION_EN = [
   },
   {
     tag: "B",
-    q: "Build the monthly margin report we do by hand — revenue, cost and margin by product category, last 24 months.",
+    q: "Build the monthly margin report we do by hand: revenue, cost and margin by product category, last 24 months.",
     a: "Query written and run against the live database. 24 months x 9 categories. Cross-checked June against your finance export: revenue matches to the penny, margin differs by 0.3%. Your export excludes freight. Flagging rather than reconciling silently.",
   },
   {
@@ -47,7 +47,7 @@ const SESSION_FR = [
   },
   {
     tag: "B",
-    q: "Construis le rapport de marge mensuel que nous faisons à la main — chiffre d'affaires, coût et marge par catégorie, sur 24 mois.",
+    q: "Construis le rapport de marge mensuel que nous faisons à la main : chiffre d'affaires, coût et marge par catégorie, sur 24 mois.",
     a: "Requête écrite et exécutée sur la base en production. 24 mois x 9 catégories. Contrôle croisé de juin avec votre export comptable : le chiffre d'affaires concorde au centime, la marge diffère de 0,3 %. Votre export exclut le fret. Je le signale plutôt que de rapprocher en silence.",
   },
   {
