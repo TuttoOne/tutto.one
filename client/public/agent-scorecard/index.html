@@ -243,7 +243,7 @@ legend{font:500 var(--text-xs)/1 var(--font-sans);letter-spacing:var(--tracking-
     </div>
     <div class="right">
       <div class="startfrom"><label for="ex-select">Start from</label><select id="ex-select"></select></div>
-      <div class="seg" role="group" id="view-seg" hidden aria-label="View">
+      <div class="seg" role="group" id="view-seg" aria-label="View">
         <button data-act="view" data-view="employee" aria-pressed="true">Employee view</button>
         <button data-act="view" data-view="admin" aria-pressed="false">Admin view</button>
       </div>
@@ -686,8 +686,6 @@ function lint(s){
 
 /* ---------- app state ---------- */
 const KEY='praxis-agent-scorecard-v2';
-/* The public page shows the employee view only; ?admin reveals the contract editor. */
-const ADMIN_OK=new URLSearchParams(location.search).has('admin');
 let S,cur=0,view='employee',packTab='brief',expTab='md',undoState=null;
 const openCards=new Set();
 function save(){try{localStorage.setItem(KEY,JSON.stringify({S,cur,view,packTab,expTab}))}catch(e){}}
@@ -1351,9 +1349,8 @@ document.addEventListener('click',e=>{
 
 /* ---------- boot ---------- */
 (function boot(){
-  if(ADMIN_OK)$('#view-seg').hidden=false;
   const d=restore();
-  if(d){S=d.S;cur=Math.min(d.cur||0,STEPS.length-1);view=ADMIN_OK&&d.view==='admin'?'admin':'employee';packTab=d.packTab||'brief';expTab=d.expTab||'md';}
+  if(d){S=d.S;cur=Math.min(d.cur||0,STEPS.length-1);view=d.view==='admin'?'admin':'employee';packTab=d.packTab||'brief';expTab=d.expTab||'md';}
   else S=example('social');
   render();
 })();
