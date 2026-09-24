@@ -90,4 +90,11 @@ export const BLOG_FR: Record<string, BlogFr> = {
     date: "17 septembre 2026",
     readTime: "6 min de lecture",
   },
+  "the-map-never-said-it-wasnt-sure": {
+    title: "La carte n'a jamais dit qu'elle n'était pas sûre",
+    excerpt:
+      "À dotAI, à Paris, la semaine dernière, Aygalic Jara a montré qu'un modèle de langage sait souvent quand il invente, et ne vous le dit jamais. Pourquoi c'est la première chose à apprendre sur l'IA, et comment Praxis apprend à une équipe à vérifier sans tout relire deux fois.",
+    date: "24 septembre 2026",
+    readTime: "6 min de lecture",
+  },
 };

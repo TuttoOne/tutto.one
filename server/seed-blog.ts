@@ -776,6 +776,78 @@ A model that only decides forces you to answer that question properly. That alon
 Sources: TypeSafe AI's [launch post](https://typesafe.ai/blog/introducing-system-one-models-and-jev), its [documentation](https://docs.typesafe.ai/) (including the confidence guide and the Jev 1.13 limitations page) and its [legal pages](https://typesafe.ai/legal/privacy-policy), and Linas Beliūnas's guide "How to Use Jev AI" in Linas's Newsletter, which collects the pricing, access options and independent test results quoted here. The checklist, trial plan and diagrams are my own adaptation for small businesses.`,
   },
   {
+    // Written up from Aygalic Jara's lightning talk at dotAI 2026 (Paris,
+    // 17 Sep 2026), "Hallucinations: Harvesting Uncertainty". Filed as a draft.
+    slug: "the-map-never-said-it-wasnt-sure",
+    title: "The map never said it wasn't sure",
+    excerpt: "At dotAI in Paris last week, Aygalic Jara showed that a language model often knows when it is making things up, and never tells you. Why that is the first thing to learn about AI, and how Praxis teaches a team to check without reading everything twice.",
+    date: "Sep 24, 2026",
+    readTime: "6 min read",
+    introCard: null,
+    published: false,
+    content: `Two hikers, eighteen and nineteen, planned their first real mountain trip this July. A night in a refuge, a lake on the way, a route that would look good in the family photos. They did what most of us would do: they asked an AI to plan it. It did, with a map.
+
+They got lost. A park ranger found them and asked to see the map. The lake was in the wrong valley. The walking times came from nowhere. In his words, nothing on it was right.
+
+And the map never said it wasn't sure. It just drew a line.
+
+That story opened Aygalic Jara's talk at dotAI in Paris last week. Aygalic is a PhD researcher at Université Paris-Saclay and a consultant at SCIAM, and his lightning talk was called "Hallucinations: Harvesting Uncertainty". It was nine minutes long. It is the clearest explanation I have heard of the one thing every team should understand before it trusts AI with real work.
+
+![Aygalic Jara at dotAI 2026, Paris.](/blog/confidence-probes/aygalic-jara.webp)
+
+## Nothing broke
+
+The point he made first is the one people miss. When the hikers' map went wrong, nothing failed. No outage, no error message, no broken file. The model did exactly what it was built to do: produce the most plausible next thing. Plausible and true are different, and the model has no way of telling you which one you got.
+
+That is not a bug someone forgot to fix. It is how these models are trained. They learn to predict the next word from text like Wikipedia, and Wikipedia never says "I don't know". It just gives the answer. So the model learns to give the answer too.
+
+You can train some doubt back in, but push too far and the model starts refusing questions it could have answered. And benchmarks reward a confident guess over an honest "not sure", so there is little incentive to try. The industry's fix has been better guessing: web search, retrieval over your documents, better instructions. Aygalic was fair to them. They work. They lower the error rate. But, as he put it, they don't flag the error. The wrong answer arrives in exactly the same confident voice as the right one.
+
+## The model often knows
+
+The hopeful part of the talk is this. Statistics used to give us error bars. Deep learning took them away, and generative AI made it worse. But the model does carry a signal about whether it is on solid ground. It just doesn't say it out loud.
+
+The obvious place to look, the probability of each word, turns out to be noisy. A model that hesitates between "roughly", "about" and "approximately two hours" looks uncertain, but it is unsure about the wording, not the fact. The useful signal sits deeper, in the model's internal state while it writes.
+
+His team reads that signal with something almost embarrassingly simple: a logistic regression, one of the oldest tools in statistics. You ask the model thousands of questions with known answers, record its internal state each time, mark each answer right or wrong, and train the probe to tell the two apart. The result is a cheap, fairly reliable estimate, taken from inside the model, of whether the answer it is about to give is correct.
+
+In their newest work the probe points at the exact words that are invented, and says what kind of error it is. One example from the test set: asked for the name of the building outside a window, a model answered "Starbucks", then doubled down, describing the logo it could "clearly" see on the facade. There was no name on the building. The probe flagged it.
+
+The same trick is already used to make models faster, by throwing away drafted words the model doesn't trust before the expensive check. And Aygalic's closing example needs no explanation: the search summary that told someone to add glue to their pizza sauce. A probe would have caught how little the model believed what it was writing.
+
+His last line: you don't have to trust an AI that doesn't believe in itself.
+
+## Why this is the first thing to learn
+
+Most people's first months with AI follow the same arc. The early answers are impressive, so they trust it. Then one goes badly wrong in front of a client, so they stop trusting it and start checking everything. Checking everything is where the time goes. It is the reason so many teams tell me AI saves them nothing: Claude writes in minutes, and checking it still takes an hour.
+
+Aygalic's talk explains why neither reaction works. Fluency tells you nothing. A correct answer and an invented one read the same. So the skill to learn is not "trust" or "don't trust". It is knowing where the checks go, so a person looks at the few places that need it instead of rereading every line.
+
+There is a catch for the rest of us. The probes he described read a model's internal state. Researchers and the labs can do that. You, typing into Claude or ChatGPT, cannot. And asking the model "how confident are you?" is not the same thing: that answer is more generated text, produced the same way as the mistake.
+
+So a team has to build its error bars from the outside.
+
+## What Praxis does about it
+
+Praxis is built around that problem, and the method maps closely onto what Aygalic described.
+
+His probe is trained on questions with known answers. In Praxis, the first thing a team does after setting its rules is the same move at team scale: pick the jobs that repeat, and write down what a good output looks like and how you would score it. That scorecard is your set of known answers. Without it, nobody can say whether the AI was right, only whether it sounded right.
+
+His probe flags the specific words that are wrong, not the whole answer. In Praxis, the assistant checks its own draft against your scorecard, with a source for every claim, before anyone opens it. Your team reviews the flags, not the whole document. A claim with no source, or a figure that doesn't match the file it came from, is the outside-in version of a low confidence score.
+
+His point that search and retrieval lower the error rate but don't flag the error is why we connect the assistant to your files and still keep the check. Connecting your documents makes the draft better. The scorecard is what tells you where it is still wrong.
+
+And his hikers are the reason we decide early which jobs AI should not do on its own, and who signs off before anything leaves the building. Some mistakes are a lost afternoon. Some are the wrong valley.
+
+None of this needs a research lab. It needs a written standard, a habit of asking for sources, and a clear line between what the machine drafts and what a person approves. That is teachable in a few sessions, on your own work, and it is the part the free videos skip.
+
+If your team is at the "check everything" stage, the free 60-minute session is the place to start: bring one job, and we build its first scorecard together.
+
+---
+
+Sources: Aygalic Jara, "Hallucinations: Harvesting Uncertainty", lightning talk at [dotAI 2026](https://www.dotai.io/), Paris, 17 September 2026. I worked from an automatic transcript of the talk, so his words are paraphrased rather than quoted. The comparison with Praxis is mine, not his.`,
+  },
+  {
     slug: WEBINAR_SLUG,
     title: "Start the new season with Claude: webinar recap",
     excerpt: "Connectors, projects, skills and routines, demonstrated live on a real business case. The steps, the prompts to copy, and an FAQ that completes the answers we gave during the session.",

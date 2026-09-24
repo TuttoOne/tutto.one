@@ -27,6 +27,7 @@ import { post as mcpBridgeSharepoint } from "./mcp-bridge-sharepoint";
 import { post as anthropicLaborMarketResearch } from "./anthropic-labor-market-research";
 import { post as abordeTaRentreeIaAvecClaude } from "./aborde-ta-rentree-ia-avec-claude";
 import { post as theModelThatOnlyDecides } from "./the-model-that-only-decides";
+import { post as theMapNeverSaidItWasntSure } from "./the-map-never-said-it-wasnt-sure";
 
 export const POST_FR: Record<string, PostFr> = {
   "the-best-combination": theBestCombination,
@@ -39,4 +40,5 @@ export const POST_FR: Record<string, PostFr> = {
   "anthropic-labor-market-research": anthropicLaborMarketResearch,
   "aborde-ta-rentree-ia-avec-claude": abordeTaRentreeIaAvecClaude,
   "the-model-that-only-decides": theModelThatOnlyDecides,
+  "the-map-never-said-it-wasnt-sure": theMapNeverSaidItWasntSure,
 };
