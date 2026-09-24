@@ -23,6 +23,25 @@ const INPUT: React.CSSProperties = {
   ...INTER,
 };
 
+const CTA_PRIMARY: React.CSSProperties = {
+  display: "inline-flex", alignItems: "center", gap: 8,
+  background: "#d97706", color: "#fff", border: "1px solid #d97706",
+  ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px",
+  borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em",
+};
+const CTA_SECONDARY: React.CSSProperties = {
+  ...CTA_PRIMARY, background: "transparent", color: "#1a1a1a", borderColor: "#1a1a1a",
+};
+
+const LABEL: React.CSSProperties = {
+  ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6,
+};
+
+const FIGURE: React.CSSProperties = {
+  display: "block", width: "100%", height: "auto",
+  borderRadius: 10, border: "1px solid #d8d0c5",
+};
+
 const sessions = [
   {
     n: "01",
@@ -146,6 +165,12 @@ const faqs = [
   },
 ];
 
+/** Prefills the Cal.com booking with what the form already asked for. */
+function withContact(href: string, name: string, email: string): string {
+  const sep = href.includes("?") ? "&" : "?";
+  return `${href}${sep}name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+}
+
 export default function PraxisProgramme() {
   const tr = usePageTr(PRAXIS_PROGRAMME_FR);
   const { locale, currency } = usePreferences();
@@ -164,12 +189,17 @@ export default function PraxisProgramme() {
     return () => { document.title = SITE_TITLE; };
   }, []);
 
-  const [form, setForm] = useState({ name: "", email: "", task: "", trainerCode: "" });
+  const [form, setForm] = useState({
+    name: "", email: "", company: "", teamSize: "", programme: "team", task: "", trainerCode: "",
+  });
   const trainerCode = useTrainerCode();
   const t = useT();
-  /* The free 15-minute call, labelled as on the home page, carrying the
-     referring trainer's code like every other booking link. */
-  const booking = bookingHref("https://cal.com/tuttoone/15min", trainerCode);
+  /* Two steps, in this order. The free 60-minute session is the proof, the
+     same offer and label as the home page. Booking the course comes after:
+     a short form, then the 15-minute call to say hello and set dates, which
+     is offered once the form is in. Both carry the referring trainer's code. */
+  const proofSession = bookingHref("https://cal.com/tuttoone/60-min-meeting", trainerCode);
+  const greetingCall = bookingHref("https://cal.com/tuttoone/15min", trainerCode);
   // Seed the field from the visit's attribution once it is known, but never
   // overwrite something the visitor has typed themselves.
   useEffect(() => {
@@ -188,7 +218,14 @@ export default function PraxisProgramme() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          message: `Praxis Programme enquiry\n\nTask that eats their week: ${form.task}`,
+          message: [
+            "Praxis Programme: course booking",
+            `Programme: ${form.programme === "fastTrack" ? "The Owner's Fast Track" : "The AI-Fluent Team"}`,
+            `Company: ${form.company || "-"}`,
+            `Team size: ${form.teamSize || "-"}`,
+            "",
+            `The job they keep repeating: ${form.task || "-"}`,
+          ].join("\n"),
           trainerCode: form.trainerCode.trim() || null,
         }),
       });
@@ -212,10 +249,19 @@ export default function PraxisProgramme() {
         .pp-cols-2 { display: grid; grid-template-columns: 1fr; gap: 14px; }
         @media (min-width: 680px) { .pp-cols-2 { grid-template-columns: 1fr 1fr; gap: 16px; } }
 
+        .pp-split { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
+        @media (min-width: 760px) { .pp-split { grid-template-columns: 1.25fr 1fr; gap: 36px; } }
+
+        @media (min-width: 680px) { .pp-fill { height: 0 !important; min-height: max(100%, 230px); object-fit: cover; object-position: center 30%; } }
+
         .pp-sessions { display: grid; grid-template-columns: 1fr; gap: 12px; }
         @media (min-width: 680px) { .pp-sessions { grid-template-columns: 1fr 1fr; gap: 14px; } }
 
         .pp-footer-bar { display: flex; justify-content: space-between; align-items: center; border-top: 1.5px solid #1a1a1a; margin-top: 48px; padding-top: 14px; gap: 8px; flex-wrap: wrap; }
+
+        .pp-form-row { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 12px; }
+        @media (min-width: 520px) { .pp-form-row { grid-template-columns: 1fr 1fr; } }
+        .pp-input option { color: #1a1a1a; }
 
         .pp-input::placeholder { color: rgba(246,241,234,0.3); }
         .pp-input:focus { border-color: rgba(217,119,6,0.6) !important; }
@@ -229,16 +275,13 @@ export default function PraxisProgramme() {
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The Praxis Programme")}</p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Eight sessions.")}<br />{tr("Your team stops repeating itself.")}</h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Your staff already use AI, and it saves them nothing: ask, fix, ask again. Over eight sessions we fix it in order, on your own work. The rules, a KPI for each job, what to hand over. Then the tools, skills and automations that do it without you.")}</p>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 20, maxWidth: 560 }}>{tr("No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.7, fontWeight: 600, color: "#f6f1ea", marginBottom: 24, maxWidth: 560 }}>{t(landing.close.body)}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-            <a
-              href={booking}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
-            >{t(landing.introCall)} →</a>
-            <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>{tr("You and up to four of your team · Online or in person")}</span>
+            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{t(landing.hero.cta)} →</a>
+            <a href="#get-started" style={{ ...CTA_SECONDARY, color: "#f6f1ea", borderColor: "rgba(246,241,234,0.3)" }}>{tr("Book your first course")}</a>
           </div>
+          <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)", marginTop: 16 }}>{tr("You and up to four of your team · Online or in person")}</p>
         </div>
 
         {/* Doc header */}
@@ -247,18 +290,14 @@ export default function PraxisProgramme() {
           <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>01 / 01</span>
         </div>
 
-        {/* Tagline */}
-        <div style={{ textAlign: "center", marginBottom: 40 }}>
-        </div>
-
-        {/* Hero */}
-        <div style={{ marginBottom: 28 }}>
-          <h1 style={{ ...ROBOTO, fontSize: "clamp(32px, 5.5vw, 56px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a" }}>{tr("Most teams start with the tools.")}<br />{tr("That's why nothing sticks.")}</h1>
-        </div>
-
-        {/* Intro */}
-        <div style={{ maxWidth: 620, marginBottom: 64 }}>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("Your staff have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.")}</p>
+        {/* The problem, then the picture of it: the reader should recognise
+            their own team before being told who the programme is for. */}
+        <div className="pp-split" style={{ marginBottom: 64 }}>
+          <div>
+            <h1 style={{ ...ROBOTO, fontSize: "clamp(30px, 4.6vw, 46px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a", marginBottom: 24 }}>{tr("Most teams start with the tools.")}<br />{tr("That's why nothing sticks.")}</h1>
+            <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("Your staff have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.")}</p>
+          </div>
+          <img src="/artwork/team-at-screens.webp" width={1400} height={1048} loading="lazy" alt={tr("A small team around a desk of screens, working through AI output together")} style={FIGURE} />
         </div>
 
         {/* Section 01 - Who this is for */}
@@ -281,7 +320,65 @@ export default function PraxisProgramme() {
           </div>
         </div>
 
-        {/* Section 02 - Why a person */}
+        {/* Section 02 - What you'll be able to do */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Will Be Able to Do by the End")}</h2>
+          </div>
+          <div className="pp-cols-2">
+            {[
+              { body: "Set the rules: what goes in, which tools, and what never leaves the building." },
+              { body: "Judge AI output against a KPI for each job, not a feeling." },
+              { body: "Decide which jobs to hand over, and what each needs to run without you." },
+              { body: "Build the tools, skills and automations that do those jobs, by describing them in plain language." },
+              { body: "Keep building on your own after the programme ends." },
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", border: "1px solid #d8d0c5", borderRadius: 10, padding: "18px 20px", background: "#faf8f5" }}>
+                <span style={{ ...MONO, fontSize: 9, fontWeight: 700, width: 18, height: 18, borderRadius: "50%", background: "#d97706", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                  {i + 1}
+                </span>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d", margin: 0 }}>{tr(item.body)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Section 03 - The eight sessions */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Eight Sessions")}</h2>
+          </div>
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Weekly, over roughly two months. The first four set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.")}</p>
+          <div className="pp-sessions">
+            {sessions.map((s) => (
+              <div key={s.n} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5", position: "relative" }}>
+                <span style={{ ...MONO, fontSize: 10, color: "#b0a898", position: "absolute", top: 16, right: 18 }}>{s.n}</span>
+                <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "#1a1a1a", marginBottom: 8, paddingRight: 24 }}>{tr(s.title)}</p>
+                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(s.body)}</p>
+                {s.artefact && (
+                  <p style={{ ...INTER, fontSize: 11, fontWeight: 600, color: "#d97706", marginTop: 10 }}>{tr(s.artefact)}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Section 04 - What you finish with */}
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Finish With")}</h2>
+          </div>
+          <div className="pp-split">
+          <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "32px 28px", background: "#faf8f5" }}>
+            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>{tr("The rules, the scorecards, and the jobs handed over.")}</p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>{tr("Your charter, a KPI scorecard for each role, standing briefs and checks for your top three jobs, and the tools you built on them. A certificate records what you made, not just that you turned up.")}</p>
+            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>{tr("A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.")}</p>
+          </div>
+          <img src="/artwork/agent-scorecard.webp" width={1400} height={1048} loading="lazy" alt={tr("An agent scorecard on a clipboard, filled in by hand next to a laptop and a calculator")} style={FIGURE} />
+          </div>
+        </div>
+
+        {/* Section 05 - Why a person, placed after the deliverables and before the price */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
             <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Why a Person, Not Another Video")}</h2>
@@ -305,61 +402,6 @@ export default function PraxisProgramme() {
           </div>
         </div>
 
-        {/* Section 03 - What you'll be able to do */}
-        <div style={{ marginBottom: 56 }}>
-          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Will Be Able to Do by the End")}</h2>
-          </div>
-          <div className="pp-cols-2">
-            {[
-              { body: "Set the rules: what goes in, which tools, and what never leaves the building." },
-              { body: "Judge AI output against a KPI for each job, not a feeling." },
-              { body: "Decide which jobs to hand over, and what each needs to run without you." },
-              { body: "Build the tools, skills and automations that do those jobs, by describing them in plain language." },
-              { body: "Keep building on your own after the programme ends." },
-            ].map((item, i) => (
-              <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", border: "1px solid #d8d0c5", borderRadius: 10, padding: "18px 20px", background: "#faf8f5" }}>
-                <span style={{ ...MONO, fontSize: 9, fontWeight: 700, width: 18, height: 18, borderRadius: "50%", background: "#d97706", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                  {i + 1}
-                </span>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d", margin: 0 }}>{tr(item.body)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Section 04 - The eight sessions */}
-        <div style={{ marginBottom: 56 }}>
-          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
-            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Eight Sessions")}</h2>
-          </div>
-          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Weekly, over roughly two months. The first four set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.")}</p>
-          <div className="pp-sessions">
-            {sessions.map((s) => (
-              <div key={s.n} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5", position: "relative" }}>
-                <span style={{ ...MONO, fontSize: 10, color: "#b0a898", position: "absolute", top: 16, right: 18 }}>{s.n}</span>
-                <p style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, color: "#1a1a1a", marginBottom: 8, paddingRight: 24 }}>{tr(s.title)}</p>
-                <p style={{ ...INTER, fontSize: 12, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(s.body)}</p>
-                {s.artefact && (
-                  <p style={{ ...INTER, fontSize: 11, fontWeight: 600, color: "#d97706", marginTop: 10 }}>{tr(s.artefact)}</p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Section 05 - What you finish with */}
-        <div style={{ marginBottom: 56 }}>
-          <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What You Finish With")}</h2>
-          </div>
-          <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "32px 28px", background: "#faf8f5", maxWidth: 620 }}>
-            <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 800, color: "#1a1a1a", marginBottom: 14, letterSpacing: "-0.2px" }}>{tr("The rules, the scorecards, and the jobs handed over.")}</p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 16 }}>{tr("Your charter, a KPI scorecard for each role, standing briefs and checks for your top three jobs, and the tools you built on them. A certificate records what you made, not just that you turned up.")}</p>
-            <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#5a5248" }}>{tr("A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.")}</p>
-          </div>
-        </div>
-
         {/* Section 06 - How it works */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
@@ -378,6 +420,8 @@ export default function PraxisProgramme() {
                 <p style={{ ...INTER, fontSize: 13, lineHeight: 1.75, color: "#3d3d3d" }}>{tr(item.body)}</p>
               </div>
             ))}
+            {/* Five cards leave the grid one short; the repeating job fills it. */}
+            <img src="/artwork/weekly-desk-job.webp" width={1400} height={1048} loading="lazy" alt={tr("A desk with the weekly report on screen, a calculator, and a red thread running between them")} className="pp-fill" style={FIGURE} />
           </div>
         </div>
 
@@ -396,8 +440,9 @@ export default function PraxisProgramme() {
         {/* Section 07 - Pricing */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("What It Costs")}</h2>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Everything You Get, and What It's Worth")}</h2>
           </div>
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Each piece priced as if you bought it on its own. Then the guarantee, then what you actually pay.")}</p>
           {/* Hormozi order: the stack, then the guarantee, then the price — so
               the number lands after the risk has been taken away. */}
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, background: "#faf8f5", maxWidth: 680 }}>
@@ -428,6 +473,7 @@ export default function PraxisProgramme() {
             <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", margin: 0 }}>{tr("The only condition is that you attend the sessions and answer the questions.")}</p>
           </div>
 
+          <p style={{ ...CAPS, fontSize: 10, color: "#1a1a1a", marginBottom: 14 }}>{tr("What you pay")}</p>
           <div className="pp-cols-2">
             {[
               {
@@ -470,6 +516,13 @@ export default function PraxisProgramme() {
             ))}
           </div>
 
+          {/* Ask for the call while the price and the guarantee are on screen,
+              rather than only at the foot of the page after the questions. */}
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center", marginTop: 24 }}>
+            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{t(landing.hero.cta)} →</a>
+            <a href="#get-started" style={CTA_SECONDARY}>{tr("Book your first course")}</a>
+          </div>
+
           {/* The referral used to be a fourth card with a "best value" badge on
               it, which sold the discount harder than the programme. It is a
               term of the programme, so it reads as one. */}
@@ -485,7 +538,7 @@ export default function PraxisProgramme() {
             </p>
           </div>
           <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 20, maxWidth: 560 }}>
-            {tr("The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.")}{" "}
+            {tr("Start with the free 60-minute session: proof on one of your own jobs before you spend anything. When you book the course, a 15-minute call to say hello and set the dates comes with it. Both programmes are invoiced, ex VAT.")}{" "}
             {tr("We also run free sessions from time to time. They are general rather than built around your use case —")}{" "}
             <a href="/calendar" style={{ color: "#d97706" }}>{tr("see Events")}</a>.
           </p>
@@ -531,20 +584,28 @@ export default function PraxisProgramme() {
           </div>
         </div>
 
+        {/* Etymology / footer note */}
+        <div style={{ marginBottom: 8, paddingTop: 8 }}>
+          <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>{tr("On what this will not do")}</p>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", maxWidth: 620, fontStyle: "italic" }}>{tr("It will not make you a software engineer in eight weeks.")}</p>
+          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>{tr("It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.")}</p>
+        </div>
+
         {/* Get started */}
         <div id="get-started" style={{ marginTop: 64, borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 48px)" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Get started")}</p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>{tr("Which job do you keep repeating?")}</h2>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "rgba(246,241,234,0.65)", marginBottom: 32, maxWidth: 480 }}>{tr("Tell me here, or bring it to a free 15-minute call. I'll tell you honestly whether this programme is the right fit.")}</p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Book your first course")}</p>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>{tr("Tell me about your team. Then we pick the dates.")}</h2>
+          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "rgba(246,241,234,0.65)", marginBottom: 32, maxWidth: 480 }}>{tr("A few details so the first session starts on your work, not on introductions. Once they're in, you book a 15-minute call to say hello and set the dates.")}</p>
 
           {formState === "sent" ? (
             <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "28px 24px", textAlign: "center" }}>
-              <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>{tr("Done - we'll be in touch.")}</p>
-              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.5)" }}>{tr("Expect a reply within one working day.")}</p>
+              <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>{tr("Got it. One step left.")}</p>
+              <p style={{ ...INTER, fontSize: 13, color: "rgba(246,241,234,0.6)", marginBottom: 20 }}>{tr("Pick a time for the 15-minute call: we say hello, check the fit, and set the dates.")}</p>
+              <a href={withContact(greetingCall, form.name, form.email)} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{tr("Book the 15-minute call")} →</a>
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "24px" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+              <div className="pp-form-row">
                 <div>
                   <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("Name")}</label>
                   <input
@@ -569,8 +630,59 @@ export default function PraxisProgramme() {
                   />
                 </div>
               </div>
+              <div className="pp-form-row">
+                <div>
+                  <label style={LABEL}>{tr("Company")}</label>
+                  <input
+                    className="pp-input"
+                    style={INPUT}
+                    required
+                    placeholder={tr("Company name")}
+                    value={form.company}
+                    onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label style={LABEL}>{tr("Who takes part")}</label>
+                  <select
+                    className="pp-input"
+                    style={INPUT}
+                    required
+                    value={form.teamSize}
+                    onChange={e => setForm(f => ({ ...f, teamSize: e.target.value }))}
+                  >
+                    <option value="" disabled>{tr("Choose")}</option>
+                    <option value="Just me">{tr("Just me")}</option>
+                    <option value="2-3 people">{tr("2 to 3 people")}</option>
+                    <option value="4-5 people">{tr("4 to 5 people")}</option>
+                    <option value="More than 5">{tr("More than 5")}</option>
+                  </select>
+                </div>
+              </div>
+              <div style={{ marginBottom: 12 }}>
+                <label style={LABEL}>{tr("Programme")}</label>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {[
+                    { value: "team", label: "The AI-Fluent Team" },
+                    { value: "fastTrack", label: "The Owner's Fast Track" },
+                  ].map((o) => (
+                    <button
+                      key={o.value}
+                      type="button"
+                      aria-pressed={form.programme === o.value}
+                      onClick={() => setForm(f => ({ ...f, programme: o.value }))}
+                      style={{
+                        ...INTER, fontSize: 13, padding: "9px 14px", borderRadius: 6, cursor: "pointer",
+                        background: form.programme === o.value ? "rgba(217,119,6,0.18)" : "rgba(255,255,255,0.07)",
+                        border: `1px solid ${form.programme === o.value ? "#d97706" : "rgba(255,255,255,0.15)"}`,
+                        color: "#f6f1ea",
+                      }}
+                    >{tr(o.label)}</button>
+                  ))}
+                </div>
+              </div>
               <div style={{ marginBottom: 20 }}>
-                <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("The job you keep repeating")}</label>
+                <label style={LABEL}>{tr("The job you keep repeating")}</label>
                 <textarea
                   className="pp-input"
                   style={{ ...INPUT, resize: "vertical", minHeight: 80 }}
@@ -601,7 +713,7 @@ export default function PraxisProgramme() {
                   disabled={formState === "sending"}
                   style={{ ...ROBOTO, fontSize: 13, fontWeight: 700, background: formState === "sending" ? "rgba(255,255,255,0.1)" : "#d97706", color: "#fff", border: "none", borderRadius: 6, padding: "10px 22px", cursor: formState === "sending" ? "default" : "pointer", whiteSpace: "nowrap" }}
                 >
-                  {formState === "sending" ? tr("Sending...") : tr("Send it →")}
+                  {formState === "sending" ? tr("Sending...") : tr("Next: pick a call time →")}
                 </button>
               </div>
               {formState === "error" && (
@@ -610,14 +722,10 @@ export default function PraxisProgramme() {
             </form>
           )}
 
-          <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.35)", marginTop: 20 }}>{tr("Or email directly: daniel@tutto.one")}</p>
-        </div>
-
-        {/* Etymology / footer note */}
-        <div style={{ marginTop: 56, paddingTop: 40, borderTop: "1px solid #d8d0c5" }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 20 }}>{tr("On what this will not do")}</p>
-          <p style={{ ...INTER, fontSize: 14, lineHeight: 1.8, color: "#3d3d3d", maxWidth: 620, fontStyle: "italic" }}>{tr("It will not make you a software engineer in eight weeks.")}</p>
-          <p style={{ ...INTER, fontSize: 13, lineHeight: 1.85, color: "#7a7568", maxWidth: 620, marginTop: 8 }}>{tr("It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.")}</p>
+          <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.35)", marginTop: 20 }}>{tr("Not ready to book?")}{" "}
+            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={{ color: "#d97706" }}>{t(landing.hero.cta)}</a>
+            {" · "}{tr("Or email directly: daniel@tutto.one")}
+          </p>
         </div>
 
         {/* Trainer track teaser */}

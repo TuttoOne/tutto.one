@@ -17,6 +17,38 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "La plupart des équipes commencent par les outils.",
   "That's why nothing sticks.":
     "C'est pour ça que rien ne tient.",
+  "A small team around a desk of screens, working through AI output together":
+    "Une petite équipe autour d'un bureau couvert d'écrans, qui passe en revue le travail de l'IA",
+  "An agent scorecard on a clipboard, filled in by hand next to a laptop and a calculator":
+    "Une grille d'évaluation d'agent sur un porte-bloc, remplie à la main à côté d'un ordinateur et d'une calculatrice",
+  "A desk with the weekly report on screen, a calculator, and a red thread running between them":
+    "Un bureau avec le rapport hebdomadaire à l'écran, une calculatrice, et un fil rouge qui les relie",
+  "Book your first course": "Réserver votre première formation",
+  "Everything You Get, and What It's Worth": "Tout ce que vous obtenez, et ce que cela vaut",
+  "Each piece priced as if you bought it on its own. Then the guarantee, then what you actually pay.":
+    "Chaque élément chiffré comme s'il était acheté seul. Puis la garantie, puis ce que vous payez réellement.",
+  "What you pay": "Ce que vous payez",
+  "Start with the free 60-minute session: proof on one of your own jobs before you spend anything. When you book the course, a 15-minute call to say hello and set the dates comes with it. Both programmes are invoiced, ex VAT.":
+    "Commencez par la séance gratuite de 60 minutes : la preuve sur l'une de vos propres tâches, avant de dépenser quoi que ce soit. Quand vous réservez la formation, un appel de 15 minutes pour faire connaissance et fixer les dates suit. Les deux programmes sont facturés, hors TVA.",
+  "Tell me about your team. Then we pick the dates.":
+    "Parlez-moi de votre équipe. Ensuite, on fixe les dates.",
+  "A few details so the first session starts on your work, not on introductions. Once they're in, you book a 15-minute call to say hello and set the dates.":
+    "Quelques informations pour que la première séance commence sur votre travail, pas sur les présentations. Ensuite, vous réservez un appel de 15 minutes pour faire connaissance et fixer les dates.",
+  "Got it. One step left.": "C'est noté. Plus qu'une étape.",
+  "Pick a time for the 15-minute call: we say hello, check the fit, and set the dates.":
+    "Choisissez un créneau pour l'appel de 15 minutes : on fait connaissance, on vérifie que cela vous convient, et on fixe les dates.",
+  "Book the 15-minute call": "Réserver l'appel de 15 minutes",
+  "Company": "Entreprise",
+  "Company name": "Nom de l'entreprise",
+  "Who takes part": "Qui participe",
+  "Choose": "Choisir",
+  "Just me": "Moi seul·e",
+  "2 to 3 people": "2 à 3 personnes",
+  "4 to 5 people": "4 à 5 personnes",
+  "More than 5": "Plus de 5",
+  "Programme": "Programme",
+  "Next: pick a call time →": "Suite : choisir un créneau →",
+  "Not ready to book?": "Pas encore prêt à réserver ?",
 
   "You and up to four of your team. For one to one, take The Owner's Fast Track. Either way it is built on your own work, not a syllabus.":
     "Vous et jusqu'à quatre personnes de votre équipe. Pour un tête-à-tête, choisissez la formule accélérée du dirigeant. Dans les deux cas, tout se construit sur votre propre travail, pas sur un référentiel.",
