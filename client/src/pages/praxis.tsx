@@ -75,7 +75,7 @@ export default function Praxis() {
               <p>{t(copy.praxis.lead2)}</p>
             </>
           }
-          primaryCta={{ label: t(landing.hero.cta), href: booking }}
+          primaryCta={{ label: t(landing.introCall), href: booking }}
           secondaryCta={{ label: t(copy.praxis.ctaSecondary), href: "/contact" }}
           meta={t(copy.praxis.meta)}
         />
@@ -307,7 +307,7 @@ export default function Praxis() {
           title={t(copy.praxis.ctaTitle)}
           body={t(copy.praxis.ctaBody)}
           href={booking}
-          label={t(landing.hero.cta)}
+          label={t(landing.introCall)}
           messageLabel={t(copy.common.sendMessage)}
         />
       </div>

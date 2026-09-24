@@ -186,7 +186,7 @@ export default function About() {
                 letterSpacing: "0.04em",
               }}
             >
-              {landing.hero.cta.en} →
+              {landing.introCall.en} →
             </a>
           </div>
 

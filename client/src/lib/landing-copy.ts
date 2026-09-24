@@ -38,26 +38,47 @@
  */
 
 export const landing = {
+  /**
+   * The label every OTHER page uses for the free 15-minute intro call. Kept
+   * here so they all ask the same way; the home page itself books the
+   * 30-minute session instead (see hero.cta).
+   */
+  introCall: {
+    en: "Bring the job that's bugging you: 15 minutes, free",
+    fr: "Venez avec la tâche qui vous pèse : 15 minutes, gratuit",
+  },
+
   hero: {
     eyebrow: { en: "For firms of 5 to 50", fr: "Pour les entreprises de 5 à 50 personnes" },
 
-    /** Two meanings, both the pain: the same task done again and again, and
-     *  the same job explained to AI again and again. */
-    title: { en: "Stop repeating yourself.", fr: "Arrêtez de vous répéter." },
+    /** The pain in the reader's own units: minutes to write, an hour to
+     *  check. The page sells the checking, because that is where the time goes. */
+    title: {
+      en: "Claude writes in minutes. Checking it still takes an hour.",
+      fr: "Claude rédige en quelques minutes. Le vérifier prend encore une heure.",
+    },
 
     promise: {
-      en: "Your staff already use AI. Most take just as long as before, and burn tokens doing it.",
-      fr: "Vos équipes utilisent déjà l'IA. La plupart mettent autant de temps qu'avant, et brûlent des tokens au passage.",
+      en: "Your reviewers reread everything because nothing tells them where to look.",
+      fr: "Vos relecteurs relisent tout, parce que rien ne leur dit où regarder.",
     },
 
     deck: {
-      en: "We fix it in order: the rules, a scorecard for good work, what to hand over. Then tools, skills, automation and agents.",
-      fr: "Nous corrigeons cela dans l'ordre : les règles, une grille pour juger le travail, ce qu'on délègue. Puis les outils, les compétences, l'automatisation et les agents.",
+      en: "We write your standards down once, then build the scorecard Claude checks itself against, with sources, before anyone opens the draft. Your team reviews the flags, not the whole thing.",
+      fr: "Nous écrivons vos standards une fois, puis construisons la grille sur laquelle Claude se vérifie lui-même, sources à l'appui, avant que quiconque n'ouvre le brouillon. Votre équipe relit les alertes, pas tout le document.",
     },
 
+    /** What the reader brings, and what they leave with. Set apart from the
+     *  deck because it is the offer, not the argument. */
+    offer: {
+      en: "Bring me one document your team spends too long checking. In 30 minutes we'll build the scorecard, run it on that document, and time the review.",
+      fr: "Apportez-moi un document que votre équipe met trop de temps à vérifier. En 30 minutes, nous construisons la grille, l'appliquons à ce document, et chronométrons la relecture.",
+    },
+
+    /** Books the free 30-minute session the offer line describes. */
     cta: {
-      en: "Bring the job that's bugging you: 15 minutes, free",
-      fr: "Venez avec la tâche qui vous pèse : 15 minutes, gratuit",
+      en: "Book the 30-minute session, free",
+      fr: "Réserver la séance de 30 min, gratuite",
     },
     secondaryCta: { en: "The long version", fr: "La version longue" },
   },
@@ -234,45 +255,20 @@ export const landing = {
     },
   },
 
-  /**
-   * The safety half of the class, said out loud on the page because it is the
-   * question that stops people using any of this. Naming the vendors is the
-   * whole value: a reader who has been told "it's secure" by three suppliers
-   * recognises the first page that tells them where the data physically goes.
-   */
-  data: {
-    label: { en: "Where your data goes", fr: "Où vont vos données" },
-    statement: {
-      en: "Claude and OpenAI are American companies.",
-      fr: "Claude et OpenAI sont des entreprises américaines.",
-    },
-    body: {
-      en: "Neither guarantees your data stays out of American data centres. If yours has to stay in the EU, we recommend Mistral if you can use the cloud, otherwise we build a custom system which runs on your own computer or server.",
-      fr: "Ni l'un ni l'autre ne garantit que vos données resteront hors des centres américains. Si les vôtres doivent rester dans l'UE : Mistral si le cloud est permis, sinon un système sur mesure sur votre machine ou votre serveur.",
-    },
-  },
-
   close: {
     title: {
       en: "Which job do you keep repeating?",
       fr: "Quelle tâche répétez-vous encore ?",
     },
     body: {
-      en: "Bring the one job that's bugging you. In fifteen minutes you'll know whether it can be unblocked, how, and what the next step is. No slides, no pitch you didn't ask for.",
-      fr: "Venez avec la tâche qui vous pèse. En quinze minutes, vous saurez si elle peut être débloquée, comment, et quelle est la suite. Pas de présentation, pas de discours commercial non sollicité.",
+      en: "Bring the one job that's bugging you. In thirty minutes we'll build its scorecard, run it, and time the review. No slides, no pitch you didn't ask for.",
+      fr: "Venez avec la tâche qui vous pèse. En trente minutes, nous construisons sa grille, l'appliquons, et chronométrons la relecture. Pas de présentation, pas de discours commercial non sollicité.",
     },
     cta: {
-      en: "Bring the job that's bugging you: 15 minutes, free",
-      fr: "Venez avec la tâche qui vous pèse : 15 minutes, gratuit",
+      en: "Book the 30-minute session, free",
+      fr: "Réserver la séance de 30 min, gratuite",
     },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
-    /** Named people are who a reader is dealing with. A leaf like everything
-     *  else, with the same string on both sides, so the browser copy editor
-     *  can reach it — names get corrected too. */
-    signature: {
-      en: "Daniel Forsthofer & Roxanne Northover",
-      fr: "Daniel Forsthofer & Roxanne Northover",
-    },
     signatureNote: { en: "Tutto — Applied AI", fr: "Tutto — IA appliquée" },
   },
 

@@ -17,10 +17,11 @@ import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
 
-/* The free 15-minute call, the same one every other page books. The paid
-   90-minute QuickStart is no longer linked from the site: it is sent by hand
-   after this call, so nobody pays before they have talked to us. */
-const BOOKING = "https://cal.com/tuttoone/15min";
+/* The free 30-minute session the hero offer describes: bring one document,
+   build its scorecard, run it, time the review. Other pages book the
+   15-minute intro call. The paid 90-minute QuickStart is not linked from the
+   site: it is sent by hand after a call. */
+const BOOKING = "https://cal.com/tuttoone/30min";
 
 /**
  * The site's front door, at `/`.
@@ -32,8 +33,8 @@ const BOOKING = "https://cal.com/tuttoone/15min";
  * doors because a reader cannot see what to buy until they can see where they
  * currently are.
  *
- * Four blocks, in the order somebody decides in: what we do, the sequence they
- * are on, what it costs, and the question they are actually worried about.
+ * Blocks in the order somebody decides in: the pain and the offer, the
+ * evidence, the order the work happens in, what it costs, and the call.
  * Nothing here defines its own type, colour or spacing — it is `Layout` for the
  * chrome, `Section` for the ruled heads, `NumberedList` for the sequence and
  * `HeadlinePrice` for the price, so the front door moves when the rest of
@@ -59,7 +60,6 @@ export default function Landing() {
         <Clients />
         <Sequence />
         <Pricing />
-        <Data />
         <Close />
       </div>
 
@@ -102,6 +102,9 @@ function Hero() {
         </p>
         <p className="text-lg text-muted-foreground leading-relaxed">
           {t(landing.hero.deck)}
+        </p>
+        <p className="text-lg text-foreground font-medium leading-relaxed">
+          {t(landing.hero.offer)}
         </p>
       </div>
 
@@ -200,21 +203,7 @@ function Pricing() {
   );
 }
 
-/** The question that stops people using any of this, answered with vendor
- *  names rather than reassurance. */
-function Data() {
-  const t = useT();
-
-  return (
-    <Section
-      label={t(landing.data.label)}
-      title={t(landing.data.statement)}
-      intro={<p>{t(landing.data.body)}</p>}
-    />
-  );
-}
-
-/** The conversion moment, signed. */
+/** The conversion moment. */
 function Close() {
   const t = useT();
 
@@ -228,10 +217,6 @@ function Close() {
       messageLabel={t(landing.close.alt)}
       footnote={
         <>
-          <span className="font-serif font-bold text-foreground">
-            {t(landing.close.signature)}
-          </span>
-          {" — "}
           {t(landing.close.signatureNote)}, {t(landing.footer.place)}
         </>
       }

@@ -136,7 +136,7 @@ export default function Services() {
               <p>{t(copy.waysIn.lead2)}</p>
             </>
           }
-          primaryCta={{ label: t(landing.hero.cta), href: BOOKING }}
+          primaryCta={{ label: t(landing.introCall), href: BOOKING }}
           secondaryCta={{ label: t(copy.common.sendMessage), href: "/contact" }}
           meta={t(copy.waysIn.meta)}
         />
@@ -247,7 +247,7 @@ export default function Services() {
           title={t(copy.waysIn.ctaTitle)}
           body={t(copy.waysIn.ctaBody)}
           href={BOOKING}
-          label={t(landing.hero.cta)}
+          label={t(landing.introCall)}
           messageLabel={t(copy.common.sendMessage)}
         />
       </div>

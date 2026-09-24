@@ -236,7 +236,7 @@ export default function PraxisProgramme() {
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
-            >{t(landing.hero.cta)} →</a>
+            >{t(landing.introCall)} →</a>
             <span style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)" }}>{tr("You and up to four of your team · Online or in person")}</span>
           </div>
         </div>
