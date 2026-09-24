@@ -1095,6 +1095,21 @@ export const copy = {
    * it goes and does not reach the client systems until the idea has landed.
    */
   applied: {
+    /** The last thing on /applied: every road ends at Praxis. */
+    praxisLinkTitle: {
+      en: "Learn to do it right, the first time.",
+      fr: "Apprenez à bien faire, du premier coup.",
+    },
+    praxisLinkBody: {
+      en: "Praxis: training on your own documents and process. The rules, a scorecard for each job, what to hand over, then the build.",
+      fr: "Praxis : une formation sur vos propres documents et processus. Les règles, une grille par tâche, ce qu'on délègue, puis la construction.",
+    },
+    praxisLinkCta: { en: "Book training", fr: "Réserver une formation" },
+    /** The link at the top of /about to the long argument. */
+    aboutLongStory: {
+      en: "The long story: what applied AI means, and how we work",
+      fr: "La version longue : ce que veut dire l'IA appliquée, et notre façon de travailler",
+    },
     eyebrow: { en: "The applied view", fr: "L'IA en pratique" },
     title: {
       en: "AI that runs where your work already is.",

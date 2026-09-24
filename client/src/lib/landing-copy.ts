@@ -76,7 +76,8 @@ export const landing = {
       en: "Book the 60-minute session, free",
       fr: "Réserver la séance de 60 min, gratuite",
     },
-    secondaryCta: { en: "The long version", fr: "La version longue" },
+    /** Goes to /praxis, where the training is laid out and booked. */
+    secondaryCta: { en: "Book training", fr: "Réserver une formation" },
 
     /** Small print under the first button: what the hour actually is, so
      *  nobody books expecting the training itself. */
@@ -276,9 +277,11 @@ export const landing = {
   },
 
   footer: {
+    /** Where the hero's second button goes. The long argument at /applied is
+     *  reached from the top of /about instead, and ends at /praxis too. */
     longVersion: {
-      label: { en: "More details (more reading)", fr: "Plus de détails (lecture plus longue)" },
-      href: "/applied",
+      label: { en: "Book training", fr: "Réserver une formation" },
+      href: "/praxis",
     },
     place: {
       en: "France, South Africa & the UK",

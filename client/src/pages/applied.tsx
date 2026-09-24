@@ -3,7 +3,7 @@ import { Layout } from "@/components/layout/Layout";
 import { AppliedExplainer } from "@/components/product/AppliedExplainer";
 import { AnimatedPointer } from "@/components/brand/AnimatedPointer";
 import { Link } from "wouter";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import { SITE_TITLE, copy, useT } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 
@@ -11,8 +11,8 @@ import { usePreferences } from "@/lib/preferences";
  * /applied — the long argument, at length.
  *
  * This was the home page until the broadside at `/` took the front door. It
- * keeps the site's full chrome and the seven-section explainer, and is what
- * "the long version of this argument" points at from the landing page's foot.
+ * keeps the site's full chrome and the seven-section explainer. It is reached
+ * from the link at the top of /about, and ends with a link to /praxis.
  */
 export default function Applied() {
   const t = useT();
@@ -73,6 +73,26 @@ export default function Applied() {
         </div>
 
         <AppliedExplainer />
+
+        {/* Every road ends at Praxis: the last thing on the long argument is
+            the way into the training. */}
+        <Link
+          href="/praxis"
+          className="mt-16 group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 sm:p-8 bg-card border border-primary/40 rounded-2xl hover:border-primary transition-colors"
+          data-testid="link-praxis-foot"
+        >
+          <div>
+            <p className="font-serif text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+              {t(copy.applied.praxisLinkTitle)}
+            </p>
+            <p className="text-sm text-muted-foreground mt-2 max-w-xl leading-relaxed">
+              {t(copy.applied.praxisLinkBody)}
+            </p>
+          </div>
+          <span className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full text-sm font-medium">
+            {t(copy.applied.praxisLinkCta)} <ArrowRight className="w-4 h-4" />
+          </span>
+        </Link>
       </div>
     </Layout>
   );

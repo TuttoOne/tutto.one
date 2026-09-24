@@ -111,7 +111,15 @@ export default function About() {
     <Layout>
       <div className="max-w-3xl mx-auto px-6 py-12">
         <h1 className="text-4xl font-serif font-bold mb-4">{t(copy.about.title)}</h1>
-        <p className="text-xl text-muted-foreground mb-16 max-w-xl">{t(copy.about.standfirst)}</p>
+        <p className="text-xl text-muted-foreground mb-6 max-w-xl">{t(copy.about.standfirst)}</p>
+        {/* The long argument that used to be the home page. It ends at /praxis. */}
+        <Link
+          href="/applied"
+          className="mb-16 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+          data-testid="link-long-story"
+        >
+          {t(copy.applied.aboutLongStory)} <ArrowRight className="w-4 h-4" />
+        </Link>
 
         <div className="font-serif text-[17px] space-y-6 text-muted-foreground leading-relaxed">
           {isFr ? (
