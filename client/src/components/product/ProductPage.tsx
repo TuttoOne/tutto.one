@@ -816,8 +816,8 @@ export function ClosingCta({
       <div className="flex flex-col sm:flex-row gap-4">
         <a
           href={href}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={href.startsWith("http") ? "_blank" : undefined}
+          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
           className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
         >
           {label}

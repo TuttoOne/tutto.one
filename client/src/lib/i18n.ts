@@ -65,6 +65,8 @@ export const copy = {
 
   common: {
     bookCall: { en: "Book a 15-minute call", fr: "Réserver un appel de 15 minutes" },
+    /** Every "Book training" button opens /praxis-programme. */
+    bookTraining: { en: "Book training", fr: "Réserver une formation" },
     bookConversation: { en: "Book a conversation", fr: "Réserver un échange" },
     /** Both praxis CTAs use this, and both point at a Cal.com link that takes
      *  no payment. "Book a session" named the paid product, so a reader was
@@ -406,7 +408,6 @@ export const copy = {
       en: "It runs on your work, not a demo. Before we start, send the jobs you keep repeating — the quote you rewrite every week, the report nobody wants to do — and we build on those. The group evenings use generic examples. This doesn't.",
       fr: "Tout se fait sur votre travail, pas sur une démo. Avant de commencer, envoyez les tâches que vous répétez sans cesse — le devis que vous réécrivez chaque semaine, le rapport dont personne ne veut — et nous construisons sur celles-là. Les soirées collectives utilisent des exemples génériques. Pas ici.",
     },
-    ctaSecondary: { en: "Talk about training a team", fr: "Former une équipe" },
     programmeTitle: { en: "The eight-session programme", fr: "Le programme en huit séances" },
     programmeBody: {
       en: "The AI-Fluent Team in eight sessions, or The Owner's Fast Track in four private ones. What's in the stack, the guarantee, and the back-to-work price.",
@@ -565,8 +566,8 @@ export const copy = {
     /** The home page's closing question, so the two pages ask the same
      *  thing, and the free call as the only next step. */
     ctaBody: {
-      en: "Bring it to a free 15-minute call. You'll know whether it can be handed over, how, and which programme fits.",
-      fr: "Venez avec elle à un appel gratuit de 15 minutes. Vous saurez si elle peut être déléguée, comment, et quel programme convient.",
+      en: "The programme page has the eight sessions, what you leave with, the guarantee and the back-to-work price.",
+      fr: "La page du programme présente les huit séances, ce avec quoi vous repartez, la garantie et le prix de rentrée.",
     },
   },
 
@@ -1095,7 +1096,7 @@ export const copy = {
    * it goes and does not reach the client systems until the idea has landed.
    */
   applied: {
-    /** The last thing on /applied: every road ends at Praxis. */
+    /** The last thing on /applied: every road ends at the Praxis programme. */
     praxisLinkTitle: {
       en: "Learn to do it right, the first time.",
       fr: "Apprenez à bien faire, du premier coup.",
@@ -1104,8 +1105,12 @@ export const copy = {
       en: "Praxis: training on your own documents and process. The rules, a scorecard for each job, what to hand over, then the build.",
       fr: "Praxis : une formation sur vos propres documents et processus. Les règles, une grille par tâche, ce qu'on délègue, puis la construction.",
     },
-    praxisLinkCta: { en: "Book training", fr: "Réserver une formation" },
     /** The link at the top of /about to the long argument. */
+    /** The band in the middle of /praxis, above its button to the programme. */
+    praxisMidBand: {
+      en: "That's the method. The programme is where your team learns it, on your own work.",
+      fr: "Voilà la méthode. Le programme, c'est là que votre équipe l'apprend, sur son propre travail.",
+    },
     aboutLongStory: {
       en: "The long story: what applied AI means, and how we work",
       fr: "La version longue : ce que veut dire l'IA appliquée, et notre façon de travailler",

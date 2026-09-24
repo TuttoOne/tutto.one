@@ -12,7 +12,7 @@ import { usePreferences } from "@/lib/preferences";
  *
  * This was the home page until the broadside at `/` took the front door. It
  * keeps the site's full chrome and the seven-section explainer. It is reached
- * from the link at the top of /about, and ends with a link to /praxis.
+ * from the link at the top of /about, and ends with a link to /praxis-programme.
  */
 export default function Applied() {
   const t = useT();
@@ -77,7 +77,7 @@ export default function Applied() {
         {/* Every road ends at Praxis: the last thing on the long argument is
             the way into the training. */}
         <Link
-          href="/praxis"
+          href="/praxis-programme"
           className="mt-16 group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 sm:p-8 bg-card border border-primary/40 rounded-2xl hover:border-primary transition-colors"
           data-testid="link-praxis-foot"
         >
@@ -90,7 +90,7 @@ export default function Applied() {
             </p>
           </div>
           <span className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full text-sm font-medium">
-            {t(copy.applied.praxisLinkCta)} <ArrowRight className="w-4 h-4" />
+            {t(copy.common.bookTraining)} <ArrowRight className="w-4 h-4" />
           </span>
         </Link>
       </div>

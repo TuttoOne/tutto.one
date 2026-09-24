@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import {
   ProductHero,
@@ -25,6 +26,24 @@ import { praxisEconomics } from "@/lib/pricing";
    at booking; everything priced here is invoiced, so every CTA on this page
    opens a conversation. */
 const BOOKING = "https://cal.com/tuttoone/15min";
+
+/** Where every "Book training" button on this page goes: top, middle, bottom. */
+const PROGRAMME = "/praxis-programme";
+
+/** A full-width band with one bold button to the programme. */
+function ProgrammeBand({ text, label }: { text: string; label: string }) {
+  return (
+    <div className="mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 sm:p-8 rounded-2xl bg-primary/[0.06] border border-primary/40">
+      <p className="font-serif text-xl font-bold text-foreground max-w-xl">{text}</p>
+      <Link
+        href={PROGRAMME}
+        className="shrink-0 inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
+      >
+        {label} <ArrowRight className="w-4 h-4" />
+      </Link>
+    </div>
+  );
+}
 
 export default function Praxis() {
   const t = useT();
@@ -75,8 +94,8 @@ export default function Praxis() {
               <p>{t(copy.praxis.lead2)}</p>
             </>
           }
-          primaryCta={{ label: t(landing.introCall), href: booking }}
-          secondaryCta={{ label: t(copy.praxis.ctaSecondary), href: "/contact" }}
+          primaryCta={{ label: t(copy.common.bookTraining), href: PROGRAMME }}
+          secondaryCta={{ label: t(landing.introCall), href: booking }}
           meta={t(copy.praxis.meta)}
         />
 
@@ -142,6 +161,10 @@ export default function Praxis() {
             />
           </div>
         </Section>
+
+        {/* The middle of the three buttons to the programme: this page explains
+            how we work, and the programme page is where it is bought. */}
+        <ProgrammeBand text={t(copy.applied.praxisMidBand)} label={t(copy.common.bookTraining)} />
 
         <Section
           index="03"
@@ -306,8 +329,8 @@ export default function Praxis() {
         <ClosingCta
           title={t(copy.praxis.ctaTitle)}
           body={t(copy.praxis.ctaBody)}
-          href={booking}
-          label={t(landing.introCall)}
+          href={PROGRAMME}
+          label={t(copy.common.bookTraining)}
           messageLabel={t(copy.common.sendMessage)}
         />
       </div>
