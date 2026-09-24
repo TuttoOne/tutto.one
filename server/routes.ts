@@ -272,6 +272,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "agent-scorecard", "index.html"));
   });
 
+  // Praxis AI charter wizard — same arrangement as the scorecard: link only, not indexed.
+  // Its scripts and styles are plain static files under /ai-charter/.
+  app.get(["/ai-charter", "/ai-charter/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "ai-charter", "index.html"));
+  });
+
   // Register admin routes
   registerAdminRoutes(app);
 
