@@ -191,8 +191,8 @@ export const landing = {
   sequence: {
     label: { en: "The order", fr: "L'ordre" },
     title: {
-      en: "Four steps. Most teams skip straight to the fourth:",
-      fr: "Quatre étapes. La plupart des équipes sautent directement à la quatrième :",
+      en: "Four steps to professional AI work:",
+      fr: "Quatre étapes vers un travail professionnel avec l'IA :",
     },
     steps: [
       {
