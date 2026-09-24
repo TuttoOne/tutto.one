@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import {
   ClosingCta,
-  Eyebrow,
   HeadlinePrice,
   LogoMarquee,
   NumberedList,
@@ -91,7 +90,6 @@ function Hero() {
 
   return (
     <header className="pt-8 pb-4">
-      <Eyebrow className="mb-5">{t(landing.hero.eyebrow)}</Eyebrow>
 
       {/* One sentence per line, kept whole from `sm` up. The sizes are set so
           the longest line (the French second sentence, about 16em) fits the

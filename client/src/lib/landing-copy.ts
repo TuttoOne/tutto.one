@@ -49,8 +49,6 @@ export const landing = {
   },
 
   hero: {
-    eyebrow: { en: "For firms of 5 to 50", fr: "Pour les entreprises de 5 à 50 personnes" },
-
     /** The pain in the reader's own units: minutes to write, an hour to
      *  check. Two sentences, set one per line, so it is two leaves rather
      *  than one string the browser breaks wherever it likes. */
