@@ -66,11 +66,6 @@ export const landing = {
       fr: "Apprenez à bien faire, du premier coup.",
     },
 
-    promise: {
-      en: "Your reviewers reread everything because nothing tells them where to look.",
-      fr: "Vos relecteurs relisent tout, parce que rien ne leur dit où regarder.",
-    },
-
     deck: {
       en: "We teach your team on your own documents and process: write your standards down once, then build the scorecard Claude checks itself against, with sources, before anyone opens the draft. Your team reviews the flags, not the whole thing.",
       fr: "Nous formons votre équipe sur vos propres documents et processus : écrire vos standards une fois, puis construire la grille sur laquelle Claude se vérifie lui-même, sources à l'appui, avant que quiconque n'ouvre le brouillon. Votre équipe relit les alertes, pas tout le document.",

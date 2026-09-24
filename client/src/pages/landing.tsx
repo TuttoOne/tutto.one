@@ -106,9 +106,6 @@ function Hero() {
 
       <div className="mt-6 max-w-2xl space-y-4">
         <p className="text-xl text-foreground leading-relaxed">
-          {t(landing.hero.promise)}
-        </p>
-        <p className="text-lg text-muted-foreground leading-relaxed">
           {t(landing.hero.deck)}
         </p>
         <p className="text-lg text-foreground font-medium leading-relaxed">
