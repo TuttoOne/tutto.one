@@ -793,7 +793,7 @@ And the map never said it wasn't sure. It just drew a line.
 
 That story opened Aygalic Jara's talk at dotAI in Paris last week. Aygalic is a PhD researcher at Université Paris-Saclay and a consultant at SCIAM, and his lightning talk was called "Hallucinations: Harvesting Uncertainty". It was nine minutes long. It is the clearest explanation I have heard of the one thing every team should understand before it trusts AI with real work.
 
-![Aygalic Jara at dotAI 2026, Paris.](/blog/confidence-probes/aygalic-jara.webp)
+![Aygalic Jara, speaker at dotAI 2026 in Paris. Photo: dotAI.](/blog/confidence-probes/aygalic-jara.webp)
 
 ## Nothing broke
 

@@ -9,7 +9,7 @@ Et la carte n'a jamais dit qu'elle n'était pas sûre. Elle a simplement tracé 
 
 C'est avec cette histoire qu'Aygalic Jara a ouvert son intervention à dotAI, à Paris, la semaine dernière. Aygalic est doctorant à l'Université Paris-Saclay et consultant chez SCIAM, et son lightning talk s'intitulait « Hallucinations: Harvesting Uncertainty ». Neuf minutes. C'est l'explication la plus claire que j'aie entendue de la chose que toute équipe devrait comprendre avant de confier du vrai travail à l'IA.
 
-![Aygalic Jara à dotAI 2026, Paris.](/blog/confidence-probes/aygalic-jara.webp)
+![Aygalic Jara, intervenant à dotAI 2026 à Paris. Photo : dotAI.](/blog/confidence-probes/aygalic-jara.webp)
 
 ## Rien n'a cassé
 
