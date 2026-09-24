@@ -24,10 +24,10 @@ export type SitePage = {
 export const SITE_PAGES: SitePage[] = [
   {
     path: "/",
-    name: "Tutto — Claude writes in minutes, checking it takes an hour",
+    name: "Tutto — Claude works fast, now checking takes hours",
     summary: "For teams whose AI drafts are fast but slow to check. The way in is a free 60-minute session.",
     detail:
-      "The site's front door. Claude writes in minutes; checking it still takes an hour, because reviewers reread everything. Tutto teaches the team to do it right the first time, on their own documents and process: write the standards down once and build the scorecard Claude checks itself against, with sources, so reviewers look at the flags rather than the whole draft. The way in is a free 60-minute session: a short introduction, then getting started with Tutto's scorecard and policy tools; the visitor leaves with a first artefact and books formal training. The page also prices The AI-Fluent Team at its back-to-work price.",
+      "The site's front door. Claude works fast; now checking takes hours. Tutto teaches a better setup: 3 steps for all AI-based work, drawn from tried and tested management principles, worked through on the visitor's own setup, files and tasks, explaining at each step how and why it is optimised. The visitor sets up their own systems, with Tutto alongside. The way in is a free 60-minute session: a short introduction, then getting started with Tutto's scorecard and policy tools; the visitor leaves with a first artefact and books formal training. The page also prices The AI-Fluent Team at its back-to-work price.",
     offering: true,
   },
   {

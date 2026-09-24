@@ -49,24 +49,24 @@ export const landing = {
   },
 
   hero: {
-    /** The pain in the reader's own units: minutes to write, an hour to
-     *  check. Two sentences, set one per line, so it is two leaves rather
-     *  than one string the browser breaks wherever it likes. */
-    title: { en: "Claude writes in minutes.", fr: "Claude rédige en quelques minutes." },
+    /** Three short sentences, set big and bold: the first two as the
+     *  headline, one per line, the third as the line under it. Separate
+     *  leaves so the browser never breaks a sentence wherever it likes. */
+    title: { en: "Claude works fast.", fr: "Claude travaille vite." },
     titleSecond: {
-      en: "Checking it still takes an hour.",
-      fr: "Le vérifier prend encore une heure.",
+      en: "Now checking takes hours.",
+      fr: "Mais vérifier prend des heures.",
     },
 
-    /** What we sell, as the third line: teaching, by doing it properly. */
+    /** What we sell, as the third line. */
     subtitle: {
-      en: "Learn to do it right, the first time.",
-      fr: "Apprenez à bien faire, du premier coup.",
+      en: "Learn a better setup.",
+      fr: "Apprenez une meilleure méthode.",
     },
 
     deck: {
-      en: "We teach your team on your own documents and process: write your standards down once, then build the scorecard Claude checks itself against, with sources, before anyone opens the draft. Your team reviews the flags, not the whole thing.",
-      fr: "Nous formons votre équipe sur vos propres documents et processus : écrire vos standards une fois, puis construire la grille sur laquelle Claude se vérifie lui-même, sources à l'appui, avant que quiconque n'ouvre le brouillon. Votre équipe relit les alertes, pas tout le document.",
+      en: "We teach you 3 steps you can apply to all your AI based work based on tried and tested management principles. The best results come when we work through your setup, your files, your tasks and at each step explain how and why we optimise the way we do. Your systems, you set it up, we're with you every step of the way.",
+      fr: "Nous vous apprenons 3 étapes applicables à tout votre travail avec l'IA, fondées sur des principes de management éprouvés. Les meilleurs résultats viennent quand nous travaillons sur votre configuration, vos fichiers, vos tâches, en expliquant à chaque étape comment et pourquoi nous optimisons ainsi. Vos systèmes, c'est vous qui les mettez en place ; nous vous accompagnons à chaque étape.",
     },
 
     /** Books the free 60-minute session the offer line describes. */
