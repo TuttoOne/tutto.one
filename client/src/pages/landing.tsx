@@ -17,8 +17,9 @@ import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
 
-/* The free 60-minute session the hero offer describes: bring one document,
-   build its scorecard, run it, time the review. Other pages book the
+/* The free 60-minute session described under the hero button: an
+   introduction, a start on the scorecard and policy tools, a first artefact,
+   and formal training booked. Other pages book the
    15-minute intro call. The paid 90-minute QuickStart is not linked from the
    site: it is sent by hand after a call. */
 const BOOKING = "https://cal.com/tuttoone/60-min-meeting";
@@ -108,9 +109,6 @@ function Hero() {
         <p className="text-xl text-foreground leading-relaxed">
           {t(landing.hero.deck)}
         </p>
-        <p className="text-lg text-foreground font-medium leading-relaxed">
-          {t(landing.hero.offer)}
-        </p>
       </div>
 
       <div className="mt-9 flex flex-col sm:flex-row gap-4">
@@ -129,6 +127,9 @@ function Hero() {
           {t(landing.hero.secondaryCta)} <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
+      <p className="mt-4 max-w-xl text-sm text-muted-foreground leading-relaxed">
+        {t(landing.hero.ctaNote)}
+      </p>
     </header>
   );
 }

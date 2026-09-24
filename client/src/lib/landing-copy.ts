@@ -71,19 +71,19 @@ export const landing = {
       fr: "Nous formons votre équipe sur vos propres documents et processus : écrire vos standards une fois, puis construire la grille sur laquelle Claude se vérifie lui-même, sources à l'appui, avant que quiconque n'ouvre le brouillon. Votre équipe relit les alertes, pas tout le document.",
     },
 
-    /** What the reader brings, and what they leave with. Set apart from the
-     *  deck because it is the offer, not the argument. */
-    offer: {
-      en: "Bring me one document your team spends too long checking. In 60 minutes we'll build the scorecard, run it on that document, and time the review.",
-      fr: "Apportez-moi un document que votre équipe met trop de temps à vérifier. En 60 minutes, nous construisons la grille, l'appliquons à ce document, et chronométrons la relecture.",
-    },
-
     /** Books the free 60-minute session the offer line describes. */
     cta: {
       en: "Book the 60-minute session, free",
       fr: "Réserver la séance de 60 min, gratuite",
     },
     secondaryCta: { en: "The long version", fr: "La version longue" },
+
+    /** Small print under the first button: what the hour actually is, so
+     *  nobody books expecting the training itself. */
+    ctaNote: {
+      en: "60 minutes, free: a short introduction, then I'll show you how to get started with our scorecard and policy tools. You leave with your first artefact, and we book your formal training.",
+      fr: "60 minutes, gratuites : une courte présentation, puis je vous montre comment démarrer avec nos outils de grille d'évaluation et de politique d'usage. Vous repartez avec votre premier livrable, et nous planifions votre formation.",
+    },
   },
 
   /**
@@ -264,8 +264,8 @@ export const landing = {
       fr: "Quelle tâche répétez-vous encore ?",
     },
     body: {
-      en: "Bring the one job that's bugging you. In an hour we'll build its scorecard, run it, and time the review. No slides, no pitch you didn't ask for.",
-      fr: "Venez avec la tâche qui vous pèse. En une heure, nous construisons sa grille, l'appliquons, et chronométrons la relecture. Pas de présentation, pas de discours commercial non sollicité.",
+      en: "Bring the one job that's bugging you. In an hour you'll get started with our scorecard and policy tools, and leave with your first artefact. No slides, no pitch you didn't ask for.",
+      fr: "Venez avec la tâche qui vous pèse. En une heure, vous démarrez avec nos outils de grille et de politique d'usage, et repartez avec votre premier livrable. Pas de diaporama, pas de discours commercial non sollicité.",
     },
     cta: {
       en: "Book the 60-minute session, free",
