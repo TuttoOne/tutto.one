@@ -17,11 +17,11 @@ import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
 
-/* The free 30-minute session the hero offer describes: bring one document,
+/* The free 60-minute session the hero offer describes: bring one document,
    build its scorecard, run it, time the review. Other pages book the
    15-minute intro call. The paid 90-minute QuickStart is not linked from the
    site: it is sent by hand after a call. */
-const BOOKING = "https://cal.com/tuttoone/30min";
+const BOOKING = "https://cal.com/tuttoone/60-min-meeting";
 
 /**
  * The site's front door, at `/`.

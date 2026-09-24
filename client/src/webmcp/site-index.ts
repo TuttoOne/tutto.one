@@ -25,9 +25,9 @@ export const SITE_PAGES: SitePage[] = [
   {
     path: "/",
     name: "Tutto — Claude writes in minutes, checking it takes an hour",
-    summary: "For teams whose AI drafts are fast but slow to check. The way in is a free 30-minute session.",
+    summary: "For teams whose AI drafts are fast but slow to check. The way in is a free 60-minute session.",
     detail:
-      "The site's front door. Claude writes in minutes; checking it still takes an hour, because reviewers reread everything. Tutto writes the team's standards down once and builds the scorecard Claude checks itself against, with sources, so reviewers look at the flags rather than the whole draft. The offer: bring one document your team spends too long checking, and in 30 minutes build the scorecard, run it on that document and time the review. The page also prices The AI-Fluent Team at its back-to-work price.",
+      "The site's front door. Claude writes in minutes; checking it still takes an hour, because reviewers reread everything. Tutto writes the team's standards down once and builds the scorecard Claude checks itself against, with sources, so reviewers look at the flags rather than the whole draft. The offer: bring one document your team spends too long checking, and in 60 minutes build the scorecard, run it on that document and time the review. The page also prices The AI-Fluent Team at its back-to-work price.",
     offering: true,
   },
   {

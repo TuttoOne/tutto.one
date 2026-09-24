@@ -41,7 +41,7 @@ export const landing = {
   /**
    * The label every OTHER page uses for the free 15-minute intro call. Kept
    * here so they all ask the same way; the home page itself books the
-   * 30-minute session instead (see hero.cta).
+   * 60-minute session instead (see hero.cta).
    */
   introCall: {
     en: "Bring the job that's bugging you: 15 minutes, free",
@@ -71,14 +71,14 @@ export const landing = {
     /** What the reader brings, and what they leave with. Set apart from the
      *  deck because it is the offer, not the argument. */
     offer: {
-      en: "Bring me one document your team spends too long checking. In 30 minutes we'll build the scorecard, run it on that document, and time the review.",
-      fr: "Apportez-moi un document que votre équipe met trop de temps à vérifier. En 30 minutes, nous construisons la grille, l'appliquons à ce document, et chronométrons la relecture.",
+      en: "Bring me one document your team spends too long checking. In 60 minutes we'll build the scorecard, run it on that document, and time the review.",
+      fr: "Apportez-moi un document que votre équipe met trop de temps à vérifier. En 60 minutes, nous construisons la grille, l'appliquons à ce document, et chronométrons la relecture.",
     },
 
-    /** Books the free 30-minute session the offer line describes. */
+    /** Books the free 60-minute session the offer line describes. */
     cta: {
-      en: "Book the 30-minute session, free",
-      fr: "Réserver la séance de 30 min, gratuite",
+      en: "Book the 60-minute session, free",
+      fr: "Réserver la séance de 60 min, gratuite",
     },
     secondaryCta: { en: "The long version", fr: "La version longue" },
   },
@@ -261,12 +261,12 @@ export const landing = {
       fr: "Quelle tâche répétez-vous encore ?",
     },
     body: {
-      en: "Bring the one job that's bugging you. In thirty minutes we'll build its scorecard, run it, and time the review. No slides, no pitch you didn't ask for.",
-      fr: "Venez avec la tâche qui vous pèse. En trente minutes, nous construisons sa grille, l'appliquons, et chronométrons la relecture. Pas de présentation, pas de discours commercial non sollicité.",
+      en: "Bring the one job that's bugging you. In an hour we'll build its scorecard, run it, and time the review. No slides, no pitch you didn't ask for.",
+      fr: "Venez avec la tâche qui vous pèse. En une heure, nous construisons sa grille, l'appliquons, et chronométrons la relecture. Pas de présentation, pas de discours commercial non sollicité.",
     },
     cta: {
-      en: "Book the 30-minute session, free",
-      fr: "Réserver la séance de 30 min, gratuite",
+      en: "Book the 60-minute session, free",
+      fr: "Réserver la séance de 60 min, gratuite",
     },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
     signatureNote: { en: "Tutto — Applied AI", fr: "Tutto — IA appliquée" },
