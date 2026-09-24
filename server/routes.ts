@@ -265,6 +265,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, `praxisfrance-${lang}.html`));
   });
 
+  // Praxis agent scorecard — a standalone tool shared by link only. It is kept out of the
+  // navigation, the sitemap and the WebMCP site index, and asks search engines not to index it.
+  app.get(["/agent-scorecard", "/agent-scorecard/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "agent-scorecard", "index.html"));
+  });
+
   // Register admin routes
   registerAdminRoutes(app);
 

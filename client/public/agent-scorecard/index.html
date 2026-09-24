@@ -1,0 +1,1362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Set up an AI agent like a new starter, and finish with a weekly scorecard you can download.">
+<title>Agent Scorecard · Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/agent-scorecard/praxis.css">
+<style>
+[hidden]:not([hidden=until-found i]){display:none!important}
+img{max-width:100%}
+/* Theme bridge: Praxis uses .dark/.light, the artifact viewer stamps data-theme */
+:root{--good:145 42% 31%;--warn:44 88% 36%;--bad:4 68% 46%}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--good:145 40% 55%;--warn:44 85% 55%;--bad:4 75% 65%}}
+:root[data-theme="light"]{
+  --background:40 10% 98%;--foreground:0 0% 12%;--card:0 0% 100%;--card-foreground:0 0% 12%;
+  --muted:40 5% 90%;--muted-foreground:220 9% 46%;--border:220 13% 91%;
+  --good:145 42% 31%;--warn:44 88% 36%;--bad:4 68% 46%}
+:root[data-theme="dark"]{
+  --background:20 14% 4%;--foreground:40 10% 98%;--card:20 14% 8%;--card-foreground:40 10% 98%;
+  --muted:20 14% 12%;--muted-foreground:220 9% 60%;--border:20 14% 16%;
+  --good:145 40% 55%;--warn:44 85% 55%;--bad:4 75% 65%}
+body{background:hsl(var(--background));color:hsl(var(--foreground))}
+.shell{max-width:84rem;margin:0 auto;padding-inline:20px;padding-block:20px 72px}
+p{max-width:44rem}
+
+/* header */
+.topbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;padding-bottom:var(--space-4);border-bottom:1px solid hsl(var(--border))}
+.topbar .left{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.topbar .meta{font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+.topbar .right{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.seg{display:inline-flex;border:1px solid hsl(var(--border));border-radius:999px;padding:3px;background:hsl(var(--card))}
+.seg button{border:0;background:transparent;border-radius:999px;padding:6px 14px;font:500 var(--text-sm)/1 var(--font-sans);color:hsl(var(--muted-foreground));cursor:pointer}
+.seg button[aria-pressed="true"]{background:hsl(var(--foreground));color:hsl(var(--background))}
+.startfrom{display:flex;align-items:center;gap:8px;font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+.startfrom select{width:auto}
+.hero{padding-block:var(--space-10) var(--space-8)}
+.hero h1{font-size:clamp(2rem,4.5vw,3rem);margin:0 0 var(--space-4);line-height:1.08}
+.hero h1 em{font-family:var(--font-editorial);font-weight:400;font-style:italic}
+.hero .lead{margin:0}
+.admin-banner{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:var(--space-3) var(--space-4);border:1px dashed hsl(var(--border));border-radius:var(--radius);margin-top:var(--space-6);font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+
+/* controls */
+input,textarea,select{font:inherit;font-size:var(--text-sm);color:hsl(var(--foreground));background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:var(--radius-sm);padding:9px 11px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:64px;line-height:1.5}
+input::placeholder,textarea::placeholder{color:hsl(var(--muted-foreground))}
+input:focus,textarea:focus,select:focus{outline:none;border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--primary)/.15)}
+:focus-visible{outline:2px solid hsl(var(--primary));outline-offset:2px}
+button{font:inherit}
+.btn{font-size:var(--text-sm);padding:9px 18px}
+.btn-sm{padding:6px 12px;font-size:var(--text-sm)}
+.icon-btn{border:1px solid transparent;background:transparent;color:hsl(var(--muted-foreground));border-radius:var(--radius-sm);width:34px;height:38px;font-size:18px;line-height:1;flex:none;cursor:pointer}
+.icon-btn:hover{color:hsl(var(--bad));border-color:hsl(var(--border))}
+.add-btn{align-self:flex-start;border:1px dashed hsl(var(--border));background:transparent;color:hsl(var(--primary));border-radius:var(--radius-sm);padding:7px 12px;font-size:var(--text-sm);font-weight:500;cursor:pointer}
+.add-btn:hover{border-color:hsl(var(--primary))}
+.field label,.field .lbl{display:block;font-weight:600;font-size:var(--text-sm);margin-bottom:6px}
+.field .hint{font-size:var(--text-xs);color:hsl(var(--muted-foreground));margin-top:5px;line-height:1.45}
+.field.wide{grid-column:1/-1}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 22px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px 16px}
+.cbx{display:flex;gap:10px;align-items:flex-start;font-size:var(--text-sm);cursor:pointer}
+.cbx input{width:16px;height:16px;margin-top:3px;flex:none;accent-color:hsl(var(--primary))}
+.cbx small{display:block;color:hsl(var(--muted-foreground));font-size:var(--text-xs)}
+.list{display:flex;flex-direction:column;gap:8px}
+.list-row{display:flex;gap:6px;align-items:center}
+.list-row .n{font:500 var(--text-xs)/1 var(--font-display);color:hsl(var(--muted-foreground));width:22px;flex:none;text-align:right}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips button{border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:999px;padding:5px 12px;font-size:var(--text-xs);color:hsl(var(--muted-foreground));cursor:pointer}
+.chips button:hover{border-color:hsl(var(--primary));color:hsl(var(--primary))}
+
+/* layout */
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr) 300px;gap:28px;align-items:start}
+@media (max-width:1180px){.layout{grid-template-columns:210px minmax(0,1fr)}.aside{grid-column:1/-1;position:static!important}}
+@media (max-width:800px){.layout{grid-template-columns:minmax(0,1fr)}}
+
+/* step rail */
+.rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.rail li{margin:0}
+.rail button{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;padding:10px 10px;border-radius:var(--radius-sm);border:0;background:transparent;color:hsl(var(--foreground));text-align:left;cursor:pointer}
+.rail button:hover{background:hsl(var(--muted)/.6)}
+.rail button[aria-current="step"]{background:hsl(var(--card));box-shadow:var(--shadow-sm)}
+.rail .num{font:300 var(--text-xs)/1 var(--font-display);letter-spacing:var(--tracking-wider);color:hsl(var(--muted-foreground))}
+.rail button[aria-current="step"] .num{color:hsl(var(--primary));font-weight:500}
+.rail .t{display:block;font-weight:500;font-size:var(--text-sm);line-height:1.3}
+.rail .ok{width:8px;height:8px;border-radius:50%;background:hsl(var(--border))}
+.rail .ok.on{background:hsl(var(--good))}
+@media (max-width:800px){.rail ol{flex-direction:row;overflow-x:auto;padding-bottom:6px}.rail li{flex:none}.rail button{grid-template-columns:24px auto auto;width:auto}}
+
+/* panel */
+.panel{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:var(--radius);padding:30px 32px 22px;box-shadow:var(--shadow-sm);min-width:0}
+@media (max-width:560px){.panel{padding:20px 16px 16px}}
+.panel h2{font-size:var(--text-3xl);margin:0 0 var(--space-3)}
+.panel .lead{font-size:var(--text-lg);margin-bottom:var(--space-6)}
+.panel .section-head{margin:var(--space-10) 0 var(--space-5)}
+.panel .section-head:first-child{margin-top:0}
+.tip{font-family:var(--font-editorial);font-style:italic;font-size:var(--text-base);color:hsl(var(--muted-foreground));border-left:2px solid hsl(var(--primary));padding:2px 0 2px 14px;margin:0 0 var(--space-6);max-width:44rem}
+.panel-foot{display:flex;justify-content:space-between;gap:10px;margin-top:var(--space-10);padding-top:var(--space-5);border-top:1px solid hsl(var(--border))}
+
+/* goal picker */
+.goal-group{margin-bottom:var(--space-6)}
+.goal-group h3{font-size:var(--text-base);margin:0 0 var(--space-3)}
+.goal-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.goal-opt{display:flex;flex-direction:column;gap:4px;text-align:left;border:1px solid hsl(var(--border));background:hsl(var(--background));border-radius:var(--radius-sm);padding:12px 14px;cursor:pointer;color:hsl(var(--foreground))}
+.goal-opt:hover{border-color:hsl(var(--muted-foreground))}
+.goal-opt[aria-pressed="true"]{border-color:hsl(var(--primary));box-shadow:0 0 0 1px hsl(var(--primary));background:hsl(var(--primary)/.06)}
+.goal-opt b{font-weight:600;font-size:var(--text-sm)}
+.goal-opt span{font-size:var(--text-xs);color:hsl(var(--muted-foreground));line-height:1.4}
+.goal-opt[aria-pressed="true"] b::after{content:"  ✓";color:hsl(var(--primary))}
+.goal{border:1px solid hsl(var(--border));border-radius:var(--radius);padding:18px 18px 16px;margin-bottom:12px;background:hsl(var(--background))}
+.goal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.goal-head h3{font-size:var(--text-lg);margin:0}
+.goal-head p{margin:2px 0 0;font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+.goal .trial{font-size:var(--text-xs);color:hsl(var(--warn));margin-top:10px}
+.honest{border:1px solid hsl(var(--primary)/.35);background:hsl(var(--primary)/.06);border-radius:var(--radius);padding:14px 16px;margin:0 0 var(--space-6)}
+.honest .eyebrow{margin-bottom:6px}
+.honest p{margin:0 0 8px;font-size:var(--text-sm)}
+.honest p:last-child{margin-bottom:0}
+.honest button{border:0;background:none;color:hsl(var(--primary));font-weight:600;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:.15em}
+
+/* trust ladder */
+.ladder{display:flex;flex-direction:column;gap:8px}
+.rung{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:center;border:1px solid hsl(var(--border));border-radius:var(--radius-sm);padding:12px 14px;cursor:pointer;background:hsl(var(--background))}
+.rung input{position:absolute;opacity:0;pointer-events:none}
+.rung .step{font:300 var(--text-xs)/1 var(--font-display);color:hsl(var(--muted-foreground));letter-spacing:var(--tracking-wider)}
+.rung strong{display:block;font-size:var(--text-sm)}
+.rung small{display:block;font-size:var(--text-xs);color:hsl(var(--muted-foreground))}
+.rung:has(input:checked){border-color:hsl(var(--primary));box-shadow:0 0 0 1px hsl(var(--primary));background:hsl(var(--primary)/.06)}
+.rung:has(input:checked) .step{color:hsl(var(--primary));font-weight:500}
+.rung:has(input:focus-visible){outline:2px solid hsl(var(--primary));outline-offset:2px}
+
+/* aside */
+.aside{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px}
+.aside .card{padding:18px 20px}
+.aside h3{font-size:var(--text-base);margin:0 0 4px}
+.strength{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:6px}
+.strength b{font:700 var(--text-2xl)/1.1 var(--font-display)}
+.strength span{font-size:var(--text-xs);color:hsl(var(--muted-foreground))}
+.meter{display:grid;grid-auto-flow:column;gap:3px;margin:12px 0 14px}
+.meter i{height:6px;border-radius:2px;background:hsl(var(--muted))}
+.meter i.on{background:hsl(var(--primary))}
+.todo{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.todo li{margin:0}
+.todo button{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;width:100%;text-align:left;border:0;background:transparent;border-radius:var(--radius-sm);padding:6px 6px;font-size:var(--text-sm);line-height:1.4;color:hsl(var(--foreground));cursor:pointer}
+.todo button:hover{background:hsl(var(--muted)/.6)}
+.todo .mk{width:14px;height:14px;margin-top:3px;border-radius:50%;border:1.5px solid hsl(var(--muted-foreground))}
+.todo .done .mk{border-color:hsl(var(--good));background:hsl(var(--good))}
+.todo .done span:last-child{color:hsl(var(--muted-foreground))}
+.todo .soft .mk{border-style:dashed}
+.issues .mk.block{border-radius:2px;border-color:hsl(var(--bad));background:hsl(var(--bad))}
+.issues .mk.warn{border-color:hsl(var(--warn))}
+.todo em{display:block;font-style:normal;font-size:var(--text-xs);color:hsl(var(--muted-foreground))}
+
+/* tabs and outputs */
+.tabs{display:flex;flex-wrap:wrap;gap:2px;border-bottom:1px solid hsl(var(--border))}
+.tabs button{border:0;background:transparent;padding:10px 14px;font:500 var(--text-sm)/1.2 var(--font-sans);color:hsl(var(--muted-foreground));border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:hsl(var(--foreground));border-bottom-color:hsl(var(--primary))}
+.out-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 0}
+.out-bar p{margin:0;font-size:var(--text-sm);color:hsl(var(--muted-foreground));max-width:36rem}
+.out-bar .btns{display:flex;gap:8px}
+.paper{background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:var(--radius-sm);padding:36px 40px;overflow-x:auto}
+@media (max-width:560px){.paper{padding:22px 18px}}
+.paper .doc-header{margin-bottom:var(--space-8)}
+.paper .brief-title{font-size:var(--text-4xl);font-weight:900;margin:0 0 var(--space-4)}
+.paper .section-head{margin:var(--space-10) 0 var(--space-4)}
+.paper .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 24px;margin:var(--space-6) 0 0}
+.paper .facts div{font-size:var(--text-sm)}
+.paper .facts b{display:block;font:500 var(--text-xs)/1.4 var(--font-sans);text-transform:uppercase;letter-spacing:var(--tracking-wider);color:hsl(var(--muted-foreground))}
+.paper .doc-footer{margin-top:var(--space-10)}
+.paper table{margin:var(--space-3) 0}
+.paper td.box{min-width:64px;border-left:1px solid hsl(var(--border))}
+.band{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:0}
+.band.g{background:hsl(var(--good))}.band.w{background:hsl(var(--warn))}.band.b{background:hsl(var(--bad))}
+pre.code{margin:0;max-height:560px;white-space:pre-wrap;font-size:12.5px;line-height:1.6;border:1px solid hsl(var(--border))}
+pre.code.nowrap{white-space:pre}
+
+/* admin: KPI cards and instrument */
+.kpi{border:1px solid hsl(var(--border));border-radius:var(--radius);background:hsl(var(--background));margin-bottom:12px}
+.kpi summary{list-style:none;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:14px 16px;cursor:pointer}
+.kpi summary::-webkit-details-marker{display:none}
+.kpi summary::before{content:"";width:7px;height:7px;border-right:1.5px solid hsl(var(--muted-foreground));border-bottom:1.5px solid hsl(var(--muted-foreground));transform:rotate(-45deg);transition:transform .15s;flex:none}
+.kpi[open] summary::before{transform:rotate(45deg)}
+.kpi-name{font-weight:600}
+.kpi-state{margin-left:auto}
+.kpi-body{padding:16px;border-top:1px solid hsl(var(--border));display:grid;gap:22px}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+legend{font:500 var(--text-xs)/1 var(--font-sans);letter-spacing:var(--tracking-widest);text-transform:uppercase;color:hsl(var(--muted-foreground));margin-bottom:12px;padding:0}
+.kpi-actions{display:flex;gap:8px;justify-content:flex-end}
+.pill{display:inline-flex;font:500 var(--text-xs)/1 var(--font-sans);padding:5px 9px;border-radius:999px;white-space:nowrap}
+.pill.good{background:hsl(var(--good)/.14);color:hsl(var(--good))}
+.pill.warn{background:hsl(var(--warn)/.16);color:hsl(var(--warn))}
+.pill.bad{background:hsl(var(--bad)/.14);color:hsl(var(--bad))}
+.instrument{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:18px 26px;align-items:center;padding:16px 18px;border-radius:var(--radius-sm);background:hsl(var(--muted)/.5)}
+@media (max-width:700px){.instrument{grid-template-columns:minmax(0,1fr)}}
+.formula{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:13px/1.35 var(--font-mono)}
+.frac{display:inline-flex;flex-direction:column;text-align:center;max-width:100%}
+.frac .num{padding:0 4px 5px;border-bottom:1.5px solid hsl(var(--foreground))}
+.frac .den{padding:5px 4px 0}
+.formula .op{color:hsl(var(--muted-foreground))}
+.tbar{position:relative;height:8px;border-radius:4px;background:hsl(var(--border));margin:30px 6px 32px}
+.zone{position:absolute;top:0;bottom:0}
+.zone.red{background:hsl(var(--bad))}.zone.amber{background:hsl(var(--warn))}.zone.green{background:hsl(var(--good))}
+.zone:first-child{border-radius:4px 0 0 4px}.zone:last-child{border-radius:0 4px 4px 0}
+.mark{position:absolute;top:50%;width:14px;height:14px;transform:translate(-50%,-50%)}
+.mark.base{border-radius:50%;background:hsl(var(--card));border:2.5px solid hsl(var(--foreground))}
+.mark.tgt{width:12px;height:12px;background:hsl(var(--foreground));border:2px solid hsl(var(--card));transform:translate(-50%,-50%) rotate(45deg)}
+.mlabel{position:absolute;font:500 11px/1 var(--font-mono);white-space:nowrap;transform:translateX(-50%)}
+.mlabel.l{transform:none}.mlabel.r{transform:translateX(-100%)}
+.mlabel.above{bottom:16px}.mlabel.below{top:16px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font:11.5px/1.4 var(--font-mono);color:hsl(var(--muted-foreground))}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}
+.ac{display:grid;grid-template-columns:44px repeat(3,minmax(0,1fr)) 34px;gap:8px;align-items:start;padding:10px 0;border-bottom:1px solid hsl(var(--border))}
+.ac .tag{align-self:center}
+.ac .part span{display:block;font:500 var(--text-xs)/1 var(--font-sans);text-transform:uppercase;letter-spacing:var(--tracking-wider);color:hsl(var(--muted-foreground));margin-bottom:5px}
+@media (max-width:760px){.ac{grid-template-columns:minmax(0,1fr) 34px}.ac .part{grid-column:1}}
+.tablewrap{overflow-x:auto}
+.admin-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.admin-tools select{width:auto;max-width:100%}
+
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:hsl(var(--foreground));color:hsl(var(--background));padding:10px 16px;border-radius:var(--radius-sm);font-size:var(--text-sm);display:flex;gap:14px;align-items:center;z-index:10;max-width:calc(100% - 32px)}
+#toast[hidden]{display:none}
+.paper .scorecard td:nth-child(2){white-space:nowrap}
+.paper .scorecard td:nth-child(3){min-width:190px}
+#toast button{border:0;background:none;color:hsl(var(--background));font-weight:600;text-decoration:underline;padding:0;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  body *{visibility:hidden}
+  #print-area,#print-area *{visibility:visible}
+  #print-area{position:absolute;left:0;top:0;width:100%;border:0;padding:0}
+}
+.download{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:space-between;border:1px solid hsl(var(--primary)/.35);background:hsl(var(--primary)/.06);border-radius:var(--radius);padding:18px 20px;margin:0 0 var(--space-8)}
+.download h3{margin:0 0 4px;font-size:var(--text-lg)}
+.download p{margin:0;font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="left">
+      <span class="brand">Tutto<span class="dot">.</span></span>
+      <span class="meta">Praxis · Agent scorecard</span>
+    </div>
+    <div class="right">
+      <div class="startfrom"><label for="ex-select">Start from</label><select id="ex-select"></select></div>
+      <div class="seg" role="group" id="view-seg" hidden aria-label="View">
+        <button data-act="view" data-view="employee" aria-pressed="true">Employee view</button>
+        <button data-act="view" data-view="admin" aria-pressed="false">Admin view</button>
+      </div>
+    </div>
+  </header>
+  <section class="hero" id="hero"></section>
+  <div class="layout" id="layout">
+    <nav class="rail" aria-label="Steps"><ol id="nav"></ol></nav>
+    <main id="panel" class="panel" aria-live="polite"></main>
+    <aside class="aside" id="aside"></aside>
+  </div>
+</div>
+<div id="toast" role="status" hidden></div>
+
+<script>
+/* ---------- reference data ---------- */
+const STEPS=[
+  {id:'role',title:'The role'},
+  {id:'great',title:'What great looks like'},
+  {id:'scorecard',title:'The scorecard'},
+  {id:'rules',title:'House rules'},
+  {id:'checkin',title:'When to check in'},
+  {id:'reviews',title:'Reviews'},
+  {id:'pack',title:'Your agent pack'}
+];
+const TRACKS={marketing:'Brand and marketing',ops:'Operations',general:'Something else',coding:'Software engineering',research:'Research and analysis',support:'Customer support'};
+const EMP_TRACKS=['marketing','ops','general'];
+const LADDER=[
+  ['L1','Helps when I ask','It suggests. I do the work.','Only act when I ask. Suggest, don’t do.'],
+  ['L2','Works alongside me','We do it together, step by step.','We work on this together. Propose each step and wait for my go-ahead.'],
+  ['L3','Leads, asks my opinion','It runs the job and checks its approach with me.','Lead the work, but check your approach with me before you start and at any real decision.'],
+  ['L4','Works alone, I approve big decisions','It gets on with it. I sign off anything important.','Work on your own, but get my approval before anything important or hard to undo.'],
+  ['L5','Works alone, I keep an eye on it','Fully hands-off. I watch the results.','Work on your own. I will keep an eye on the results and step in if needed.']
+];
+const CHECKS=[['human','I or a colleague review it'],['telemetry','The system counts it for us'],['code','An automatic check (word count, link check, a rule)'],['judge','A second AI checks it against our rules']];
+const CADENCE_PLAIN=[['weekly','Every week'],['fortnightly','Every two weeks'],['monthly','Every month']];
+const GROUPS=[['right','Is the work right?'],['effort','Is it saving effort?'],['safe','Does it stay safe?'],['people','Are people happy?']];
+/* Plain-language face of each catalogue KPI. style: tenths | hours | minutes | money | count */
+const PLAIN={
+  first_pass_accept:{label:'Right first time',blurb:'You accept the work without having to edit it.',phrase:'accepted without edits',group:'right',style:'tenths',pair:'rework_rate',risk:'get waved through without a proper look'},
+  task_success:{label:'Does the whole job',blurb:'Every point on your great-work list is met.',phrase:'meet every point on the great-work list',group:'right',style:'tenths',pair:'rework_rate',risk:'tick the boxes on easy jobs and skip hard ones'},
+  pass_k:{label:'Same quality every time',blurb:'Give it the same job three times and all three come back good.',phrase:'jobs done well on every try',group:'right',style:'tenths',risk:'look good on a lucky day'},
+  grounded_claims:{label:'Facts are real',blurb:'Every fact, figure and quote can be traced to a source.',phrase:'facts traceable to a source',group:'right',style:'tenths',risk:'leave out anything hard to check'},
+  on_brand_rate:{label:'Sounds like us',blurb:'Work passes your brand and tone-of-voice check.',phrase:'pass the brand check',group:'right',style:'tenths',pair:'first_pass_accept',risk:'play it so safe it says nothing'},
+  rework_rate:{label:'Rarely comes back for fixing',blurb:'Work you sign off stays signed off.',phrase:'come back for fixing',group:'right',style:'tenths',risk:'hide problems until later'},
+  hours_saved:{label:'Saves you time',blurb:'Hours a week you get back, after checking its work.',phrase:'hours saved a week',group:'effort',style:'hours',pair:'first_pass_accept',risk:'hand back drafts that need a full rewrite'},
+  time_p95:{label:'Quick turnaround',blurb:'How long it takes to hand work back.',phrase:'minutes to hand work back',group:'effort',style:'minutes',pair:'first_pass_accept',risk:'rush'},
+  cost_per_success:{label:'Worth the cost',blurb:'What each piece of good work costs to produce.',phrase:'per piece of good work',group:'effort',style:'money',pair:'task_success',risk:'cut corners to save money'},
+  intervention_rate:{label:'Needs you less over time',blurb:'How often you have to step in to finish a job.',phrase:'jobs where you had to step in',group:'effort',style:'tenths',pair:'missed_escalations',risk:'guess instead of asking'},
+  constraint_violations:{label:'Stays within the rules',blurb:'It never breaks a house rule.',phrase:'house-rule breaks a month',group:'safe',style:'count',risk:''},
+  missed_escalations:{label:'Knows when to ask',blurb:'It stops and checks with you when it should.',phrase:'tricky cases where it pressed on instead of asking',group:'safe',style:'tenths',pair:'intervention_rate',risk:'ask about everything'},
+  csat:{label:'Happy reviewers or customers',blurb:'People rate the work 4 or 5 stars.',phrase:'rate it 4 or 5 stars',group:'people',style:'tenths',risk:'only get rated on easy jobs'}
+};
+const SUGGEST={marketing:['first_pass_accept','on_brand_rate','hours_saved','constraint_violations'],ops:['task_success','missed_escalations','hours_saved','constraint_violations'],general:['first_pass_accept','hours_saved','constraint_violations']};
+const PRESETS={
+  never:{marketing:['Never publish or schedule anything; drafts only','Never invent statistics, quotes or product claims','Never mention competitors by name','Never use customer names or data without permission'],
+    ops:['Never send emails or messages; drafts only','Never agree prices, dates or penalties','Never delete or overwrite records','Never share data outside the team'],
+    general:['Never send or publish anything without my approval','Never make up facts or figures','Never share personal or customer data']},
+  deal:['Publishing or sending anything without approval','Making up a fact, figure or quote','Sharing confidential or personal data'],
+  ask:['The request is unclear or missing information','It would cost money or commit us to something','It involves legal, pricing or health claims','It is not sure it has permission']
+};
+const CURRENCY='£';
+const DIMENSIONS={
+  outcome:{label:'Outcome',map:'Scorecard KPI 1 · Intent & Scope'},
+  verification:{label:'Verification',map:'Scorecard KPI 2 · Verification'},
+  quality:{label:'Quality',map:'Scorecard KPI 3 · Artifact Quality'},
+  reliability:{label:'Reliability',map:'New · consistency across repeated trials'},
+  autonomy:{label:'Autonomy',map:'Scorecard KPI 4 · Autonomy'},
+  communication:{label:'Communication',map:'Scorecard KPI 5 · Communication'},
+  efficiency:{label:'Efficiency',map:'Scorecard KPI 6 · Tool Economy, cost, latency'},
+  safety:{label:'Safety',map:'Scorecard critical gates'}
+};
+const GRADERS={code:'Code check',telemetry:'System telemetry',judge:'LLM judge',human:'Human review'};
+const GRADER_HINT={code:'Tests, exit codes, state checks, regex. Cheapest and most objective; prefer it.',telemetry:'Numbers the platform already records, e.g. ~/.hermes/state.db sessions and messages.',judge:'Another model grades against a pass/fail rubric. Needs calibration against human labels.',human:'Gold standard but slow. Use for acceptance and for calibrating judges.'};
+const UNITS=[['%','% (rate)'],['ratio','ratio'],['$','currency'],['h','hours'],['min','minutes'],['s','seconds'],['count','count']];
+const CADENCES=['per run','daily','weekly','per release','per deliverable','monthly'];
+const AUTONOMY=[
+  ['L1','Operator','You drive; the agent helps when asked.'],
+  ['L2','Collaborator','You and the agent plan and execute together.'],
+  ['L3','Consultant','The agent leads and asks you for expertise and preferences.'],
+  ['L4','Approver','The agent acts alone; you approve high-risk steps.'],
+  ['L5','Observer','Fully autonomous; you monitor and can stop it.']
+];
+const RELIABILITY=[['pass^k','pass^k: every one of k trials must pass'],['pass@k','pass@k: at least one of k trials passes'],['single','Single run, no repeated trials']];
+
+const CATALOGUE=[
+ {id:'task_success',name:'Task success rate',dimension:'outcome',indicator:'lagging',tracks:['marketing','coding','research','ops','support','general'],
+  description:'Share of runs where every acceptance criterion in the definition of done passes.',
+  numerator:'runs where all acceptance criteria pass',denominator:'runs attempted',unit:'%',direction:'higher',
+  grader:'code',graderDetail:'Acceptance checks scripted as tests or state checks; delegate_task status must be "completed"',
+  dataSource:'delegate_task results + acceptance test log',sample:'every run',target:'85',green:'85',red:'70',cadence:'weekly',
+  counter:'rework_rate',gaming:'Agent narrows the task, or weakens or skips tests so checks pass',breach:'Drop autonomy one level and review the failed transcripts'},
+ {id:'first_pass_accept',name:'First-pass acceptance rate',dimension:'outcome',indicator:'lagging',tracks:['marketing','coding','research','general'],
+  description:'Outputs the reviewer accepts without edits.',
+  numerator:'outputs accepted without edits',denominator:'outputs reviewed',unit:'%',direction:'higher',
+  grader:'human',graderDetail:'Reviewer marks accept / edit / reject on each output',
+  dataSource:'Review log (PR approvals, document sign-off)',sample:'all outputs',target:'80',green:'80',red:'60',cadence:'weekly',
+  counter:'rework_rate',gaming:'Reviewer fatigue: approving without reading',breach:'Blind re-review of 10 accepted outputs'},
+ {id:'rework_rate',name:'Rework rate',dimension:'quality',indicator:'lagging',tracks:['marketing','coding','ops','general'],
+  description:'Work that had to be redone after it was marked done.',
+  numerator:'tasks reopened, reverted or patched within 14 days',denominator:'tasks marked done',unit:'%',direction:'lower',
+  grader:'telemetry',graderDetail:'Revert/fixup commits or reopened tickets linked to the task',
+  dataSource:'git history / issue tracker',sample:'rolling 14 days',target:'10',green:'10',red:'20',cadence:'weekly',
+  counter:'task_success',gaming:'Fixes filed as new tasks instead of reopening the old one',breach:'Root-cause review of every reopened task'},
+ {id:'verified_claims',name:'Verified-claim rate',dimension:'verification',indicator:'leading',tracks:['coding','ops','research','general'],
+  description:'Completion claims backed by real tool output in the transcript.',
+  numerator:'completion claims with matching command or test output',denominator:'completion claims in final reports',unit:'%',direction:'higher',
+  grader:'judge',graderDetail:'Binary judge per claim: "Does tool output in the transcript prove this claim?" yes / no / unknown',
+  dataSource:'~/.hermes/state.db messages (tool results) + final report',sample:'20 runs per week',target:'98',green:'98',red:'90',cadence:'weekly',
+  counter:'cost_per_success',gaming:'Running trivial commands (echo, ls) to look verified',breach:'Any fabricated output is a zero-tolerance incident'},
+ {id:'pass_k',name:'Consistency (pass^k)',dimension:'reliability',indicator:'leading',tracks:['marketing','coding','support','ops','general'],
+  description:'Eval tasks the agent solves in every one of k repeated trials.',
+  numerator:'eval tasks passing in all k trials',denominator:'eval tasks',unit:'%',direction:'higher',
+  grader:'code',graderDetail:'Re-run the eval set k times (k from the Autonomy step); a task counts only if every trial passes',
+  dataSource:'Eval set of 20–50 real tasks drawn from past failures',sample:'full eval set',target:'70',green:'70',red:'50',cadence:'per release',
+  counter:'cost_per_success',gaming:'Eval set drifts toward easy tasks',breach:'Block the release or config change until above red'},
+ {id:'intervention_rate',name:'Human intervention rate',dimension:'autonomy',indicator:'leading',tracks:['marketing','coding','ops','research','general'],
+  description:'Runs that needed unplanned human help to finish.',
+  numerator:'runs with an unplanned clarify, interrupt or manual fix',denominator:'runs',unit:'%',direction:'lower',
+  grader:'telemetry',graderDetail:'Count clarify calls and interrupted sessions outside the planned checkpoints',
+  dataSource:'~/.hermes/state.db sessions.end_reason + messages where tool_name = clarify',sample:'every run',target:'15',green:'15',red:'30',cadence:'weekly',
+  counter:'missed_escalations',gaming:'Agent guesses instead of asking, so the rate drops while quality falls',breach:'Fix the top 3 causes with context, skills or permissions'},
+ {id:'missed_escalations',name:'Missed-escalation rate',dimension:'safety',indicator:'lagging',tracks:['marketing','support','ops','coding','general'],
+  description:'Runs where the agent should have stopped and asked but pressed on.',
+  numerator:'runs that hit an escalation trigger without escalating',denominator:'runs reviewed',unit:'%',direction:'lower',
+  grader:'judge',graderDetail:'Binary judge on the transcript against the escalation-trigger list',
+  dataSource:'Transcript sample',sample:'20 runs per week',target:'0',green:'0',red:'5',cadence:'weekly',
+  counter:'intervention_rate',gaming:'Triggers written so vaguely nothing ever matches',breach:'Tighten autonomy to L3 until two clean weeks'},
+ {id:'cost_per_success',name:'Cost per successful task',dimension:'efficiency',indicator:'lagging',tracks:['marketing','coding','research','ops','support','general'],
+  description:'Total spend divided by successful runs, so failed runs count as cost.',
+  numerator:'total model + tool spend, including child sessions',denominator:'successful runs',unit:'$',direction:'lower',
+  grader:'telemetry',graderDetail:'Sum sessions.estimated_cost_usd, joining children via parent_session_id',
+  dataSource:'~/.hermes/state.db sessions / hermes insights',sample:'weekly total',target:'1.00',green:'1.00',red:'2.00',cadence:'weekly',
+  counter:'task_success',gaming:'Cheaper model or skipped verification: cost drops, quality drops',breach:'Check model routing and max_iterations against task success'},
+ {id:'time_p95',name:'Time to complete (P95)',dimension:'efficiency',indicator:'lagging',tracks:['marketing','coding','research','ops','support','general'],
+  description:'95th-percentile wall-clock time from start to final report. Report P50 alongside.',
+  numerator:'P95 of (ended_at − started_at)',denominator:'completed runs',unit:'min',direction:'lower',
+  grader:'telemetry',graderDetail:'Session timestamps',
+  dataSource:'~/.hermes/state.db sessions',sample:'weekly',target:'20',green:'20',red:'45',cadence:'weekly',
+  counter:'task_success',gaming:'Skipping verification to finish faster',breach:'Profile the slowest runs for tool loops'},
+ {id:'tool_error_rate',name:'Tool-call error rate',dimension:'efficiency',indicator:'leading',tracks:['coding','ops','general'],
+  description:'Tool calls that failed or used bad arguments. Track wrong-tool and bad-argument errors separately.',
+  numerator:'tool calls returning an error',denominator:'tool calls',unit:'%',direction:'lower',
+  grader:'telemetry',graderDetail:'Parse messages.tool_calls and the matching tool results',
+  dataSource:'~/.hermes/state.db messages',sample:'every run',target:'5',green:'5',red:'12',cadence:'weekly',
+  counter:'task_success',gaming:'Avoiding tools and answering from memory',breach:'Fix docs, skill or permissions for the top failing tool'},
+ {id:'constraint_violations',name:'Hard-constraint violations',dimension:'safety',indicator:'lagging',tracks:['marketing','coding','research','ops','support','general'],
+  description:'Breaches of any hard constraint or zero-tolerance rule.',
+  numerator:'runs breaching a hard constraint',denominator:'per week',unit:'count',direction:'lower',
+  grader:'code',graderDetail:'Path and diff checks, secret scanning, plus judge review of sampled transcripts',
+  dataSource:'git diff, secret scanner, transcript review',sample:'every run',target:'0',green:'0',red:'1',cadence:'per run',
+  counter:'',gaming:'Violations hidden where the checks do not scan',breach:'Pause the agent; incident review before resuming'},
+ {id:'report_compliance',name:'Report format compliance',dimension:'communication',indicator:'leading',tracks:['coding','ops','research','general'],
+  description:'Final reports that meet the delivery format, with real evidence and absolute paths.',
+  numerator:'reports with schema_valid = true and every evidence field filled',denominator:'final reports',unit:'%',direction:'higher',
+  grader:'code',graderDetail:'delegate_task output_schema validation (schema_valid) plus a path-exists check',
+  dataSource:'delegate_task results',sample:'every run',target:'95',green:'95',red:'80',cadence:'weekly',
+  counter:'verified_claims',gaming:'Evidence fields filled with paraphrase instead of real output',breach:'Tighten output_schema; add an example report to the skill'},
+ {id:'grounded_claims',name:'Grounded-claim rate',dimension:'quality',indicator:'leading',tracks:['marketing','research','support'],
+  description:'Factual claims backed by a cited, reachable source.',
+  numerator:'claims with a supporting source quote',denominator:'factual claims in the deliverable',unit:'%',direction:'higher',
+  grader:'judge',graderDetail:'Split the deliverable into atomic claims; binary judge per claim against the cited source',
+  dataSource:'Deliverable + cited URLs',sample:'10 deliverables per month',target:'95',green:'95',red:'85',cadence:'per deliverable',
+  counter:'question_coverage',gaming:'Dropping hard claims so the rest is easy to source',breach:'Reject the deliverable and re-run with stricter sourcing'},
+ {id:'question_coverage',name:'Question coverage',dimension:'outcome',indicator:'lagging',tracks:['research'],
+  description:'Key questions from the brief that the deliverable actually answers.',
+  numerator:'key questions answered with evidence',denominator:'key questions in the brief',unit:'%',direction:'higher',
+  grader:'human',graderDetail:'Checklist of brief questions; reviewer marks answered / not answered',
+  dataSource:'Brief + deliverable',sample:'every deliverable',target:'90',green:'90',red:'70',cadence:'per deliverable',
+  counter:'grounded_claims',gaming:'Hedged non-answers counted as answers',breach:'Return to the agent with the unanswered list'},
+ {id:'containment',name:'Resolved without handoff',dimension:'autonomy',indicator:'lagging',tracks:['support'],
+  description:'Conversations the agent resolves without a human, and that are not reopened within 7 days.',
+  numerator:'conversations resolved without handoff and not reopened in 7 days',denominator:'conversations',unit:'%',direction:'higher',
+  grader:'telemetry',graderDetail:'Handoff and reopen events from the support platform',
+  dataSource:'Support platform + reopen log',sample:'every conversation',target:'60',green:'60',red:'40',cadence:'weekly',
+  counter:'csat',gaming:'Deflecting or stalling until the customer gives up',breach:'Review a sample of contained conversations for real resolution'},
+ {id:'csat',name:'Customer satisfaction',dimension:'outcome',indicator:'lagging',tracks:['marketing','support'],
+  description:'Customers rating the interaction 4 or 5 out of 5.',
+  numerator:'ratings of 4 or 5',denominator:'ratings received',unit:'%',direction:'higher',
+  grader:'human',graderDetail:'Post-conversation survey',
+  dataSource:'Survey tool',sample:'all responses',target:'85',green:'85',red:'70',cadence:'weekly',
+  counter:'containment',gaming:'Surveying only easy conversations',breach:'Read every 1–2 rating that week'},
+ {id:'safe_change_rate',name:'Safe-change rate',dimension:'safety',indicator:'leading',tracks:['ops'],
+  description:'State-changing operations done with a backup, a pre-flight check and a rollback note.',
+  numerator:'state changes with backup + pre-flight + rollback note',denominator:'state-changing operations',unit:'%',direction:'higher',
+  grader:'judge',graderDetail:'Binary checklist per change, judged on the transcript',
+  dataSource:'Transcript + change log',sample:'every change',target:'100',green:'100',red:'95',cadence:'per run',
+  counter:'time_p95',gaming:'Rollback notes pasted as boilerplate',breach:'Revoke unattended write access until fixed'},
+ {id:'on_brand_rate',name:'On-brand rate',dimension:'quality',indicator:'leading',tracks:['marketing','general'],
+  description:'Outputs that pass the brand and tone-of-voice checklist.',
+  numerator:'outputs passing every point on the brand checklist',denominator:'outputs reviewed',unit:'%',direction:'higher',
+  grader:'judge',graderDetail:'Binary checklist per output against the brand guide: tone, banned words, claims, length',
+  dataSource:'Brand guide + review log',sample:'10 outputs per week',target:'90',green:'90',red:'70',cadence:'weekly',
+  counter:'first_pass_accept',gaming:'Bland, safe copy that passes the checklist but says nothing',breach:'Add fresh good and bad examples to the agent’s instructions'},
+ {id:'hours_saved',name:'Hours saved per week',dimension:'efficiency',indicator:'lagging',tracks:['marketing','ops','general','coding','research','support'],
+  description:'Manual hours the agent gives back each week, after review time.',
+  numerator:'hours the task used to take minus review time',denominator:'per week',unit:'h',direction:'higher',
+  grader:'human',graderDetail:'Owner logs volume × old time per item, minus time spent reviewing and fixing',
+  dataSource:'Weekly owner log',sample:'weekly',target:'4',green:'4',red:'1',cadence:'weekly',
+  counter:'first_pass_accept',gaming:'Counting drafts that later needed a full rewrite',breach:'Check review time: the agent may be creating work, not saving it'}
+];
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone=o=>JSON.parse(JSON.stringify(o));
+let uidN=0;const uid=()=>'k'+Date.now().toString(36)+(uidN++);
+const num=v=>{if(v===''||v==null)return NaN;const s=String(v).replace(/[^0-9.\-]/g,'');return s===''?NaN:parseFloat(s);};
+const today=()=>new Date().toISOString().slice(0,10);
+const round=x=>Math.round(x*100)/100;
+
+function fromCat(id,over={}){
+  const c=clone(CATALOGUE.find(x=>x.id===id));delete c.tracks;
+  return Object.assign(c,{uid:uid(),baseline:'',baselineSource:'',targetBy:'',owner:'',rubricBinary:c.grader==='judge',calibrated:false,autoThresholds:true},over);
+}
+function blankKpi(n){
+  return {uid:uid(),id:'kpi_'+n,name:'',dimension:'outcome',indicator:'lagging',description:'',numerator:'',denominator:'',unit:'%',direction:'higher',
+    grader:'human',graderDetail:'',dataSource:'',sample:'',baseline:'',baselineSource:'',target:'',targetBy:'',green:'',red:'',cadence:'weekly',
+    owner:'',counter:'',gaming:'',breach:'',rubricBinary:false,calibrated:false,autoThresholds:true};
+}
+function blank(){
+  return {meta:{name:'',agent:'',track:'marketing',version:'1.0',owner:'',sample:false},
+    objective:{statement:'',beneficiary:'',why:'',input:'',output:'',customerFacing:false},
+    done:[{given:'',when:'',then:''},{given:'',when:'',then:''},{given:'',when:'',then:''}],grading:{outcome:true,artifact:true,trajectory:false},
+    kpis:[],guardrails:{constraints:[''],zeroTolerance:['']},
+    run:{autonomy:'L3',trials:'3',reliability:'pass@k',maxIterations:'40',strategies:'2',escalateWhen:[''],checkpoints:['']},
+    governance:{reviewCadence:'weekly',reviewBy:'',deliveryFormat:'',evidence:['']}};
+}
+/* Green = target; red = today's level if worse, else a step back from target. Admin edits switch this off. */
+function deriveThresholds(k){
+  if(k.autoThresholds===false)return;
+  const t=num(k.target),b=num(k.baseline);
+  if(!isFinite(t)){k.green='';k.red='';return;}
+  const hi=k.direction==='higher';
+  const scale=k.unit==='%'?100:Math.max(Math.abs(t),isFinite(b)?Math.abs(b):0,1);
+  let r;
+  if(hi)r=(isFinite(b)&&b<t)?b:Math.max(0,t-0.2*scale);
+  else r=(isFinite(b)&&b>t)?b:(k.unit==='count'?t+1:t+0.2*scale);
+  if(k.unit==='%')r=Math.min(100,Math.max(0,r));
+  k.green=String(round(t));k.red=String(round(r));
+}
+const thens=(v)=>v.map(t=>({given:'',when:'',then:t}));
+function example(kind){
+  if(['coding','research','support'].includes(kind))return techExample(kind);
+  const s=blank();s.meta.sample=true;
+  if(kind==='social'){
+    const O='Brand manager',by='2026-11-30';
+    Object.assign(s.meta,{name:'Social post drafter',agent:'Claude project or Hermes agent',track:'marketing',owner:O});
+    Object.assign(s.objective,{statement:'Turn each campaign brief into three on-brand post options for LinkedIn and Instagram, ready for my approval within a day.',beneficiary:'The brand team',input:'A campaign brief, our tone-of-voice guide and any approved links or images',output:'Three post options per channel, each with a one-line note on its angle',why:'Drafting posts takes about six hours a week, and freelance first drafts need heavy editing.',customerFacing:true});
+    s.done=thens(['Matches our tone-of-voice guide: warm, plain English, no jargon','Stays within each channel’s length limit','Includes the approved link and call to action from the brief','Makes no claim that is not in the brief','Offers three genuinely different angles, not three rewrites of one']);
+    s.kpis=[
+      fromCat('first_pass_accept',{owner:O,baseline:'40',target:'70',targetBy:by,counter:'grounded_claims',baselineSource:'Freelance drafts, last month'}),
+      fromCat('on_brand_rate',{owner:O,target:'90',targetBy:by}),
+      fromCat('hours_saved',{owner:O,baseline:'0',target:'4',targetBy:by}),
+      fromCat('grounded_claims',{owner:O,baseline:'80',target:'100',targetBy:by,grader:'human',counter:'first_pass_accept'}),
+      fromCat('constraint_violations',{owner:O,baseline:'0',target:'0',targetBy:by})];
+    s.guardrails={constraints:['Never publish or schedule anything; drafts only','Never invent statistics, quotes or product claims','Never mention competitors by name'],zeroTolerance:['Publishing or sending anything without approval','Using a customer’s name or data without permission']};
+    s.run={autonomy:'L4',trials:'3',reliability:'pass^k',maxIterations:'30',strategies:'2',escalateWhen:['The brief is missing a link or call to action','A post touches pricing, legal or health claims','It is not sure an image is approved'],checkpoints:['Anything is posted, scheduled or shared']};
+    s.governance={reviewCadence:'weekly',reviewBy:'2026-10-02',deliveryFormat:'One short document: three options per channel, each with a line on its angle',evidence:['The brief it worked from','Which lines came from the brief and which are new']};
+  }
+  if(kind==='reporter'){
+    const O='Marketing operations lead',by='2026-11-15';
+    Object.assign(s.meta,{name:'Weekly campaign reporter',agent:'Claude project or Hermes scheduled job',track:'marketing',owner:O});
+    Object.assign(s.objective,{statement:'Every Monday by 9am, turn last week’s campaign numbers into a one-page summary of what changed and why, so the team starts the week on the same page.',beneficiary:'The marketing team',input:'Exports from the ad platforms and web analytics',output:'A one-page summary: key numbers table and three talking points',why:'The report takes half of Monday and often lands after the team meeting.',customerFacing:false});
+    s.done=thens(['Every number matches the source export','Shows the change against the previous week','Explains the three biggest movements in plain English','Flags tracking gaps instead of guessing','Is ready by 9am on Monday']);
+    s.kpis=[
+      fromCat('grounded_claims',{owner:O,baseline:'85',target:'100',targetBy:by,grader:'code',graderDetail:'Script compares each number in the report with the source export',counter:'first_pass_accept'}),
+      fromCat('first_pass_accept',{owner:O,baseline:'50',target:'80',targetBy:by,counter:'grounded_claims'}),
+      fromCat('time_p95',{owner:O,baseline:'240',target:'30',targetBy:by,counter:'grounded_claims',description:'Minutes from the data landing to the summary being ready.'}),
+      fromCat('hours_saved',{owner:O,baseline:'0',target:'3',targetBy:by}),
+      fromCat('constraint_violations',{owner:O,baseline:'0',target:'0',targetBy:by})];
+    s.guardrails={constraints:['Never send the report outside the team','Never change campaign settings or budgets','Never fill gaps with estimates unless they are labelled'],zeroTolerance:['A number in the report that does not match the source']};
+    s.run={autonomy:'L4',trials:'1',reliability:'single',maxIterations:'40',strategies:'2',escalateWhen:['A source export is missing or looks incomplete','A number moves by more than half week on week'],checkpoints:['It goes to the team channel']};
+    s.governance={reviewCadence:'weekly',reviewBy:'2026-10-05',deliveryFormat:'One page: key numbers table, three talking points, data gaps',evidence:['Links to the source exports','A note of anything it could not check']};
+  }
+  if(kind==='supplier'){
+    const O='Operations manager',by='2026-11-30';
+    Object.assign(s.meta,{name:'Supplier follow-up assistant',agent:'Hermes agent with email drafts and the tracker',track:'ops',owner:O});
+    Object.assign(s.objective,{statement:'Chase overdue supplier deliveries by drafting polite follow-up emails and updating the tracker, so no order slips more than two days without a nudge.',beneficiary:'The operations team',input:'The purchase-order tracker and the approved supplier contact list',output:'Draft emails ready to send, and an updated tracker',why:'Late deliveries are noticed a week late because nobody has time to chase them.',customerFacing:false});
+    s.done=thens(['Picks up every order more than two days overdue','Uses the right contact and the order reference','Keeps a polite, firm tone','Records the chase date in the tracker','Leaves anything unusual for me instead of guessing']);
+    s.kpis=[
+      fromCat('task_success',{owner:O,baseline:'50',target:'90',targetBy:by,counter:'missed_escalations'}),
+      fromCat('missed_escalations',{owner:O,target:'0',targetBy:by}),
+      fromCat('intervention_rate',{owner:O,baseline:'40',target:'20',targetBy:by}),
+      fromCat('hours_saved',{owner:O,baseline:'0',target:'3',targetBy:by,counter:'task_success'}),
+      fromCat('constraint_violations',{owner:O,baseline:'0',target:'0',targetBy:by})];
+    s.guardrails={constraints:['Never send emails; drafts only','Never agree new prices, dates or penalties','Never contact a supplier who is not on the approved list'],zeroTolerance:['Emailing the wrong supplier about an order']};
+    s.run={autonomy:'L4',trials:'3',reliability:'pass^k',maxIterations:'40',strategies:'2',escalateWhen:['A supplier disputes the order or the price','An order is more than two weeks late','The tracker and the email history disagree'],checkpoints:['Any email is sent (I send them myself)']};
+    s.governance={reviewCadence:'weekly',reviewBy:'2026-10-02',deliveryFormat:'A list of drafts with order number, supplier and days overdue',evidence:['The tracker rows it changed','Anything it left for me, and why']};
+  }
+  s.kpis.forEach(deriveThresholds);
+  return s;
+}
+function techExample(kind){
+  const s=blank();s.meta.sample=true;const O='Project owner';
+  if(kind==='coding'){
+    Object.assign(s.meta,{name:'Hermes coding subagent: feature work',agent:'Hermes delegate_task child (file + terminal toolsets)',track:'coding',owner:O});
+    Object.assign(s.objective,{statement:'Ship small, scoped feature changes in the project repo that pass the full test suite and merge without rework, as measured by task success ≥ 85% and rework ≤ 10% over 4 weeks.',beneficiary:'The project owner who reviews and merges the changes',why:'Review time is the bottleneck: in the pilot, about half of agent diffs needed manual fixes before merge.'});
+    s.done=[
+      {given:'a task with a written spec',when:'the agent reports done',then:'the full test suite passes (pytest -q exits 0) and the new behaviour has at least one new test'},
+      {given:'the final diff',when:'it is checked against the allowed paths',then:'no file outside src/ and tests/ is modified'},
+      {given:'the final report',when:'it is read',then:'it lists absolute paths of changed files and pastes the real test output'},
+      {given:'a blocker that survives 3 distinct strategies',when:'the agent cannot proceed',then:'it stops and escalates with the error and what it tried'}];
+    s.grading={outcome:true,artifact:true,trajectory:false};
+    const b={owner:O,targetBy:'2026-10-30'};
+    s.kpis=[
+      fromCat('task_success',{...b,baseline:'52',baselineSource:'Pilot: 25 tasks re-run from last month'}),
+      fromCat('rework_rate',{...b,baseline:'18',baselineSource:'git reverts, last 30 days'}),
+      fromCat('verified_claims',{...b,baseline:'81',baselineSource:'Judge on 25 pilot transcripts',calibrated:true}),
+      fromCat('pass_k',{...b,baseline:'40',baselineSource:'Pilot eval set, k = 3'}),
+      fromCat('intervention_rate',{...b,baseline:'22',baselineSource:'Pilot'}),
+      fromCat('cost_per_success',{...b,baseline:'1.80',baselineSource:'hermes insights, last 30 days',target:'1.20',green:'1.20',red:'2.00'}),
+      fromCat('constraint_violations',{...b,baseline:'2',baselineSource:'Last 30 days'}),
+      fromCat('report_compliance',{...b,baseline:'64',baselineSource:'Pilot'})];
+    s.guardrails={constraints:['Do not modify files outside src/ and tests/','Do not add dependencies without approval','Never commit secrets, keys or connection strings'],
+      zeroTolerance:['Reporting success when a command exited non-zero','Stubs or mocks where a working implementation was requested','Deleting user code or configuration without replacement']};
+    s.run={autonomy:'L4',trials:'3',reliability:'pass^k',maxIterations:'60',strategies:'3',
+      escalateWhen:['Same error after 3 distinct strategies','The change would touch a public API or database schema','Tests were already failing before the change'],
+      checkpoints:['Approve the plan before edits that touch more than 5 files','Approve before any git push']};
+    s.governance={reviewCadence:'weekly',reviewBy:'2026-10-16',deliveryFormat:'Plain-text summary: what changed, how it was verified, absolute file paths',
+      evidence:['Test command and its full output','git diff --stat','Each acceptance criterion with pass/fail and proof']};
+  }
+  if(kind==='research'){
+    Object.assign(s.meta,{name:'Research subagent: market briefs',agent:'Hermes delegate_task child (web toolset)',track:'research',owner:O});
+    Object.assign(s.objective,{statement:'Produce decision-ready market briefs where every figure is sourced, answering at least 90% of the brief’s key questions within one working day.',beneficiary:'The person deciding on market entry',why:'Briefs today mix sourced facts with guesses, so each one needs a manual fact-check.'});
+    s.done=[
+      {given:'a brief with 5–10 key questions',when:'the report is delivered',then:'every question has a direct answer or an explicit “not found” with what was searched'},
+      {given:'any number or statistic',when:'it is checked',then:'it has a primary-source URL and an extraction quote'},
+      {given:'sources that disagree',when:'the finding is summarised',then:'the brief separates consensus, competing claims and speculation'}];
+    s.grading={outcome:false,artifact:true,trajectory:false};
+    const b={owner:O,targetBy:'2026-11-30'};
+    s.kpis=[
+      fromCat('question_coverage',{...b,baseline:'72',baselineSource:'Last 6 briefs'}),
+      fromCat('grounded_claims',{...b,baseline:'88',baselineSource:'Manual check of 6 briefs',calibrated:true}),
+      fromCat('first_pass_accept',{...b,baseline:'50',baselineSource:'Last 6 briefs'}),
+      fromCat('cost_per_success',{...b,baseline:'4.20',baselineSource:'hermes insights',target:'3.00',green:'3.00',red:'6.00',denominator:'accepted briefs'}),
+      fromCat('time_p95',{...b,baseline:'300',baselineSource:'Session timestamps',target:'240',green:'240',red:'480'}),
+      fromCat('constraint_violations',{...b,baseline:'1',baselineSource:'One invented URL found last month'})];
+    s.guardrails={constraints:['Cite only sources actually opened in this run','Quote paywalled content only briefly'],zeroTolerance:['Invented URLs, quotes or statistics']};
+    s.run={autonomy:'L4',trials:'1',reliability:'single',maxIterations:'80',strategies:'3',
+      escalateWhen:['Fewer than 2 independent sources for a key figure','Brief questions are ambiguous or contradict each other'],
+      checkpoints:['Approve the source plan for briefs with more than 10 questions']};
+    s.governance={reviewCadence:'monthly',reviewBy:'2026-11-01',deliveryFormat:'Executive summary, then key findings, then evidence table',
+      evidence:['Source list with URLs and extraction quotes','Unanswered questions with the search log']};
+  }
+  if(kind==='support'){
+    Object.assign(s.meta,{name:'Support agent: billing questions',agent:'Hermes gateway agent (customer chat)',track:'support',owner:'Support lead'});
+    Object.assign(s.objective,{statement:'Resolve tier-1 billing questions end to end, with at least 60% resolved without handoff while keeping CSAT at or above 85% and zero policy breaches.',beneficiary:'Customers with billing questions, and the support team',why:'Billing questions are 40% of volume and mostly answered by existing help-centre articles.',customerFacing:true});
+    s.done=[
+      {given:'a billing question covered by the help centre',when:'the agent replies',then:'the answer matches the current policy article and links to it'},
+      {given:'a refund request above the agent’s limit',when:'it is detected',then:'the agent hands off to a human with a summary and promises no outcome'},
+      {given:'the conversation ends',when:'the ticket is closed',then:'it is tagged with outcome and handoff reason'}];
+    s.grading={outcome:true,artifact:false,trajectory:true};
+    const b={owner:'Support lead',targetBy:'2026-12-15'};
+    s.kpis=[
+      fromCat('containment',{...b,baseline:'48',baselineSource:'4-week shadow pilot'}),
+      fromCat('csat',{...b,baseline:'82',baselineSource:'Human agents, same queue'}),
+      fromCat('pass_k',{...b,baseline:'55',baselineSource:'40 scripted billing scenarios, k = 5'}),
+      fromCat('missed_escalations',{...b,baseline:'3',baselineSource:'Shadow pilot review'}),
+      fromCat('time_p95',{...b,baseline:'11',baselineSource:'Shadow pilot',target:'8',green:'8',red:'15',description:'95th-percentile time from first message to resolution or handoff.'}),
+      fromCat('constraint_violations',{...b,baseline:'0',baselineSource:'Shadow pilot'})];
+    s.guardrails={constraints:['Never issue refunds above the configured limit','Never ask for full card numbers or passwords'],zeroTolerance:['Promising refunds or credits outside policy','Revealing another customer’s data']};
+    s.run={autonomy:'L4',trials:'5',reliability:'pass^k',maxIterations:'30',strategies:'2',
+      escalateWhen:['Refund above the limit','The customer asks for a human','Legal, chargeback or complaint language'],
+      checkpoints:['A human approves any credit']};
+    s.governance={reviewCadence:'weekly',reviewBy:'2026-10-09',deliveryFormat:'Customer reply plus an internal ticket note',
+      evidence:['Policy article cited in the reply','Handoff summary when escalated']};
+  }
+  s.kpis.forEach(k=>{k.autoThresholds=false});return s;
+}
+/* ---------- field builders ---------- */
+const pid=p=>'f-'+p.replace(/\./g,'-');
+const hintHtml=h=>h?`<div class="hint">${h}</div>`:'';
+function inp(p,label,o={}){const v=getPath(S,p)??'';return `<div class="field ${o.cls||''}"><label for="${pid(p)}">${label}</label><input id="${pid(p)}" type="${o.type||'text'}" ${o.mode?`inputmode="${o.mode}"`:''} data-bind="${p}" value="${esc(v)}" placeholder="${esc(o.ph||'')}">${hintHtml(o.hint)}</div>`;}
+function ta(p,label,o={}){const v=getPath(S,p)??'';return `<div class="field ${o.cls||''}"><label for="${pid(p)}">${label}</label><textarea id="${pid(p)}" rows="${o.rows||3}" data-bind="${p}" placeholder="${esc(o.ph||'')}">${esc(v)}</textarea>${hintHtml(o.hint)}</div>`;}
+function sel(p,label,opts,o={}){const v=getPath(S,p)??'';return `<div class="field ${o.cls||''}"><label for="${pid(p)}">${label}</label><select id="${pid(p)}" data-bind="${p}">${opts.map(([k,l])=>`<option value="${esc(k)}"${String(k)===String(v)?' selected':''}>${esc(l)}</option>`).join('')}</select>${hintHtml(o.hint)}</div>`;}
+function cbx(p,label,small=''){return `<label class="cbx" for="${pid(p)}"><input type="checkbox" id="${pid(p)}" data-bind="${p}"${getPath(S,p)?' checked':''}><span>${label}${small?`<small>${small}</small>`:''}</span></label>`;}
+function listEd(p,ph){const items=getPath(S,p);return `<div class="list">${items.map((v,i)=>`<div class="list-row"><input id="${pid(p)}-${i}" data-bind="${p}.${i}" value="${esc(v)}" placeholder="${esc(ph)}" aria-label="${esc(ph)}"><button class="icon-btn" data-act="del-list" data-path="${p}" data-i="${i}" aria-label="Remove">×</button></div>`).join('')}<button class="add-btn" data-act="add-list" data-path="${p}">+ Add</button></div>`;}
+const tip=(html)=>`<p class="tip">${html}</p>`;
+const counterOpts=(k)=>[['','None (safety guardrail)'],...S.kpis.filter(x=>x.uid!==k.uid&&x.id).map(x=>[x.id,`${x.name||x.id} (${x.id})`])];
+
+/* ---------- lint ---------- */
+const VAGUE=/\b(good|better|best|proper(ly)?|quality|fast(er)?|efficient(ly)?|nice|robust|optimal|well|improve[ds]?|great|seamless(ly)?)\b/i;
+function lint(s){
+  const issues=[];let total=0,passed=0;
+  const chk=(ok,sev,step,msg,fix,kpi)=>{const w=sev==='block'?3:1;total+=w;if(ok)passed+=w;else issues.push({sev,step,msg,fix,kpi});};
+  const o=s.objective;
+  chk(o.statement.trim().length>=20,'block','objective','Objective is missing or too short.','One sentence: what changes, for whom, measured by what.');
+  chk(!(VAGUE.test(o.statement)&&!/\d/.test(o.statement)),'warn','objective','Objective uses vague words and no number.','Add “as measured by …” with at least one figure (OKR form).');
+  chk(s.meta.name.trim(),'warn','objective','Contract has no name.','Name it after the agent and the job.');
+  const ac=s.done.filter(d=>(d.given+d.when+d.then).trim());
+  chk(ac.length>=3,ac.length?'warn':'block','done',ac.length?`Only ${ac.length} acceptance criteri${ac.length===1?'on':'a'}.`:'No acceptance criteria.','Aim for 3–7 checks two reviewers would grade the same way.');
+  chk(ac.length<=7,'warn','done','More than 7 acceptance criteria.','Split the contract, or move detail into constraints.');
+  chk(ac.every(d=>d.then.trim()),'warn','done','A criterion has no Then.','Given and When default to “a request” / “the agent hands back work”; the Then is the check.');
+  chk(s.grading.outcome||s.grading.artifact,'warn','done','Only the trajectory is graded.','Grade the outcome first; there is usually more than one valid path.');
+  const ks=s.kpis;const ids=ks.map(k=>(k.id||'').trim());
+  chk(ks.length>0,'block','kpis','No KPIs defined.','Add at least one outcome KPI from the catalogue.');
+  if(ks.length){
+    chk(ks.some(k=>k.dimension==='outcome'),'block','kpis','No outcome KPI.','Add task success, first-pass acceptance or similar.');
+    chk(ks.some(k=>k.dimension==='efficiency'),'warn','kpis','Nothing measures cost or speed.','Add cost per successful task or time to complete.');
+    chk(ks.some(k=>k.indicator==='leading'),'warn','kpis','Every KPI is lagging.','Add a leading indicator (verified claims, tool errors) to catch problems early.');
+    chk(ks.length<=10,'warn','kpis','More than 10 KPIs.','Keep the vital few; move the rest to diagnostics.');
+    chk(new Set(ids).size===ids.length&&ids.every(Boolean),'block','kpis','KPI IDs are missing or duplicated.','Give every KPI a unique snake_case ID.');
+    ks.forEach((k,i)=>{
+      const n=k.name||`KPI ${i+1}`;const ratio=['%','ratio','$'].includes(k.unit);
+      chk(k.numerator.trim()&&(!ratio||k.denominator.trim()),'block','kpis',`${n}: formula incomplete.`,'State the numerator and the denominator.',i);
+      chk(k.dataSource.trim(),'block','kpis',`${n}: no data source.`,'Say where the numbers come from (state.db, test log, survey).',i);
+      const t=num(k.target),g=num(k.green),r=num(k.red),b=num(k.baseline);
+      chk(isFinite(t),'block','kpis',`${n}: no target.`,'Set the value to reach and the date.',i);
+      chk(isFinite(g)&&isFinite(r),'warn','kpis',`${n}: thresholds not set.`,'Set green and red; amber is the band between.',i);
+      if(isFinite(g)&&isFinite(r))chk(k.direction==='higher'?g>r:g<r,'block','kpis',`${n}: thresholds run the wrong way.`,k.direction==='higher'?'Higher is better, so green must sit above red.':'Lower is better, so green must sit below red.',i);
+      if(k.dimension!=='safety'){
+        chk(isFinite(b),'warn','kpis',`${n}: no baseline.`,'Measure today’s level first, e.g. a pilot of 20–50 real tasks.',i);
+        if(!isFinite(b)&&k.unit==='%'&&k.direction==='higher'&&t>=99)chk(false,'warn','kpis',`${n}: ${t}% target with no baseline.`,'Near-perfect targets need evidence they are reachable.',i);
+        chk(k.counter&&ids.includes(k.counter),'warn','guardrails',`${n}: no counter-metric.`,'Pair it with a KPI that exposes gaming (Goodhart’s law).',i);
+      }
+      chk(k.owner.trim(),'warn','kpis',`${n}: no owner.`,'Name who acts when it goes red.',i);
+      chk(k.breach.trim(),'warn','kpis',`${n}: no breach action.`,'Decide now what red triggers: alert, pause, roll back.',i);
+      if(k.grader==='judge'){
+        chk(k.rubricBinary,'warn','kpis',`${n}: judge rubric isn’t pass/fail.`,'Use binary checks, one criterion per judge.',i);
+        chk(k.calibrated,'warn','kpis',`${n}: judge not calibrated.`,'Compare against human labels on 50–100 samples first.',i);
+      }
+      if(k.unit==='$')chk(!/attempt/i.test(k.denominator),'warn','kpis',`${n}: cost divided by attempts.`,'Divide by successful tasks so failures count as cost.',i);
+    });
+  }
+  const cons=s.guardrails.constraints.filter(x=>x.trim()),zt=s.guardrails.zeroTolerance.filter(x=>x.trim());
+  chk(cons.length||zt.length,'block','guardrails','No hard constraints.','List what the agent must never do.');
+  chk(zt.length,'warn','guardrails','No zero-tolerance failures.','Name failures that fail a run whatever the score.');
+  chk(ks.some(k=>k.dimension==='safety'),'warn','guardrails','No safety KPI tracks the constraints.','Add hard-constraint violations with a target of 0.');
+  const r=s.run;
+  chk(r.escalateWhen.some(x=>x.trim()),'warn','autonomy','No escalation triggers.','Say exactly when the agent must stop and ask.');
+  chk(isFinite(num(r.maxIterations)),'warn','autonomy','No iteration limit.','Cap iterations so a stuck agent stops (Hermes default: 250).');
+  if(o.customerFacing)chk(r.reliability==='pass^k'&&num(r.trials)>=3,'warn','autonomy','Customer-facing, but reliability isn’t pass^k with k ≥ 3.','Every trial must succeed when customers see the result.');
+  chk(s.meta.owner.trim(),'warn','governance','Contract has no owner.','Name the person accountable for the targets.');
+  chk(s.governance.reviewBy,'warn','governance','No review date.','Set the date you will revisit the targets.');
+  chk(s.governance.evidence.some(x=>x.trim()),'warn','governance','No required evidence.','List the proof the agent must attach.');
+  return {issues,score:total?Math.round(passed/total*100):0,blocks:issues.filter(x=>x.sev==='block').length,warns:issues.filter(x=>x.sev==='warn').length};
+}
+
+
+/* ---------- app state ---------- */
+const KEY='praxis-agent-scorecard-v2';
+/* The public page shows the employee view only; ?admin reveals the contract editor. */
+const ADMIN_OK=new URLSearchParams(location.search).has('admin');
+let S,cur=0,view='employee',packTab='brief',expTab='md',undoState=null;
+const openCards=new Set();
+function save(){try{localStorage.setItem(KEY,JSON.stringify({S,cur,view,packTab,expTab}))}catch(e){}}
+function restore(){try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d&&d.S&&Array.isArray(d.S.kpis)){d.S.kpis.forEach(k=>{k.uid=k.uid||uid()});return d;}}catch(e){}return null;}
+function getPath(o,p){return p.split('.').reduce((a,k)=>a==null?a:a[k],o);}
+function setPath(o,p,v){const ks=p.split('.');let a=o;for(let i=0;i<ks.length-1;i++)a=a[ks[i]];a[ks[ks.length-1]]=v;}
+
+/* ---------- plain-language values ---------- */
+const plainOf=k=>PLAIN[k.id]||{label:k.name||'Goal',blurb:k.description||'',phrase:k.name||'',group:'right',style:k.unit==='%'?'tenths':k.unit==='h'?'hours':k.unit==='min'?'minutes':k.unit==='$'?'money':'count',risk:''};
+const tenth=v=>{const n=Math.round(num(v)/10*10)/10;return Number.isInteger(n)?String(n):n.toFixed(1);};
+function plainVal(k,v,withPhrase=true){
+  const n=num(v);if(!isFinite(n))return 'not set';const P=plainOf(k);const ph=withPhrase?' '+P.phrase:'';
+  switch(P.style){
+    case 'tenths':return `${tenth(n)} out of 10${ph}`;
+    case 'money':return `${CURRENCY}${n.toFixed(2)}${ph}`;
+    case 'hours':return withPhrase?`${n} ${P.phrase}`:`${n} hours`;
+    case 'minutes':return withPhrase?`${n} ${P.phrase}`:`${n} minutes`;
+    default:return `${n}${ph}`;
+  }
+}
+function plainBands(k){
+  const g=num(k.green),r=num(k.red);if(!isFinite(g)||!isFinite(r))return null;
+  const P=plainOf(k);
+  const u={tenths:' out of 10',hours:' hours',minutes:' minutes'}[P.style]||'';
+  const v=x=>P.style==='tenths'?tenth(x):P.style==='money'?CURRENCY+x.toFixed(2):String(round(x));
+  if(P.style==='count'&&k.direction==='lower')return {ok:g===0?'None':`${v(g)} or fewer`,watch:r-g>1?`${v(g+1)} to ${v(r-1)}`:'—',act:`${v(r)} or more`};
+  const best=(P.style==='tenths'&&((k.direction==='higher'&&g>=100)||(k.direction==='lower'&&g<=0)));
+  return {ok:best?`${v(g)}${u}`:`${v(g)}${u} or better`,watch:`between ${v(Math.min(g,r))} and ${v(Math.max(g,r))}${u}`,act:`${v(r)}${u} or worse`};
+}
+const fmtDate=d=>{if(!d)return '';const t=new Date(d+'T00:00:00');return isNaN(t)?d:t.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});};
+const clean=a=>a.map(x=>x.trim()).filter(Boolean);
+const greatList=s=>clean(s.done.map(d=>d.then));
+
+/* ---------- plain health check (employee sidebar) ---------- */
+function plainHealth(s){
+  const items=[];const add=(ok,step,text,soft=false)=>items.push({ok:!!ok,step,text,soft});
+  const nG=s.kpis.length;
+  add(s.meta.name.trim(),'role','Give your agent a name');
+  add(s.objective.statement.trim().length>=20,'role','Describe the job in one sentence');
+  const g=greatList(s).length;
+  add(g>=3,'great',g>=3?`${g} signs of great work`:`Add ${3-g} more sign${3-g>1?'s':''} of great work`);
+  add(nG>=3&&nG<=5,'scorecard',nG>5?'Trim to 5 goals or fewer; more gets ignored':nG>=3?`${nG} goals picked`:nG?`Pick ${3-nG} more goal${3-nG>1?'s':''} (3 to 5 works best)`:'Pick 3 to 5 goals');
+  if(nG)add(s.kpis.every(k=>isFinite(num(k.target))),'scorecard','Set an aim for every goal');
+  const unknown=s.kpis.filter(k=>k.dimension!=='safety'&&!isFinite(num(k.baseline)));
+  if(nG)add(!unknown.length,'scorecard',unknown.length?`Not sure where “${plainOf(unknown[0]).label}” starts? Plan a trial run on 20 real examples first`:'You know where each goal starts',true);
+  const eff=s.kpis.some(k=>k.dimension==='efficiency'),qual=s.kpis.some(k=>['outcome','quality','reliability'].includes(k.dimension));
+  if(eff)add(qual,'scorecard','Balance speed or cost with a quality goal');
+  add(clean(s.guardrails.constraints).length+clean(s.guardrails.zeroTolerance).length>0,'rules','Add at least one house rule');
+  add(clean(s.run.escalateWhen).length>0,'checkin','Say when it must stop and ask you');
+  add(s.meta.owner.trim()&&s.governance.reviewBy,'reviews','Name a manager and a first review date');
+  const hard=items.filter(i=>!i.soft),done=hard.filter(i=>i.ok).length;
+  const label=done===hard.length?'Ready to go':done>=hard.length/2?'Nearly there':'Just started';
+  return {items,done,total:hard.length,label};
+}
+function honestTips(s){
+  const have=new Set(s.kpis.map(k=>k.id));const tips=[];
+  s.kpis.forEach(k=>{const P=PLAIN[k.id];const c=P&&P.pair;
+    if(!c||!P.risk||have.has(c)||(k.counter&&have.has(k.counter)))return;
+    if(!tips.some(t=>t.id===c))tips.push({id:c,text:`You’re tracking “${P.label}”. Add “${PLAIN[c].label}” so it can’t ${P.risk} and still look good.`});});
+  return tips.slice(0,3);
+}
+
+/* ---------- employee views ---------- */
+const E={};
+const chipsFor=(path,vals)=>{const have=new Set(getPath(S,path).map(x=>x.trim()));const left=vals.filter(v=>!have.has(v));return left.length?`<div class="chips">${left.map(v=>`<button data-act="preset" data-path="${path}" data-val="${esc(v)}">+ ${esc(v)}</button>`).join('')}</div>`:'';};
+E.role=()=>`
+  <h2>The role</h2>
+  <p class="lead">Think of this as hiring someone new. Before they start, they need a job title, a clear job and to know who they work for.</p>
+  <div class="grid2">
+    ${inp('meta.name','What will you call your agent?',{ph:'e.g. Social post drafter'})}
+    ${sel('meta.track','Which team is it joining?',[...EMP_TRACKS,...(EMP_TRACKS.includes(S.meta.track)?[]:[S.meta.track])].map(t=>[t,TRACKS[t]]))}
+    ${ta('objective.statement','What is the job, in one sentence?',{cls:'wide',rows:2,ph:'e.g. Turn each campaign brief into three post options, ready for my approval within a day',hint:'Say what it does, for whom, and how quickly or how often.'})}
+    ${inp('objective.beneficiary','Who does it work for?',{ph:'e.g. The brand team'})}
+    ${inp('objective.why','Why now?',{ph:'e.g. Drafting takes six hours a week'})}
+    ${inp('objective.input','What will you give it?',{ph:'e.g. The brief and our tone-of-voice guide'})}
+    ${inp('objective.output','What should it hand back?',{ph:'e.g. Three post options per channel'})}
+    <div class="field wide">${cbx('objective.customerFacing','Its work goes straight to customers or the public','If so, it has to be good every time, not just most of the time.')}</div>
+  </div>`;
+E.great=()=>`
+  <h2>What great work looks like</h2>
+  <p class="lead">Picture the perfect piece of work landing on your desk. What is always true about it?</p>
+  ${tip('Write each point so that you and a colleague would agree, without discussing it, whether it was met. “Sounds good” fails that test. “Stays under 150 words” passes.')}
+  <div class="field"><span class="lbl">A finished piece of work always…</span>
+  <div class="list">${S.done.map((d,i)=>`<div class="list-row"><span class="n">${i+1}</span><input id="f-done-${i}-then" data-bind="done.${i}.then" value="${esc(d.then)}" placeholder="${['e.g. Matches our tone-of-voice guide','e.g. Stays within the length limit','e.g. Includes the link from the brief'][i%3]}" aria-label="Sign of great work ${i+1}"><button class="icon-btn" data-act="del-done" data-i="${i}" aria-label="Remove">×</button></div>`).join('')}
+  <button class="add-btn" data-act="add-done">+ Add another</button></div></div>
+  <p class="hint" style="margin-top:14px;font-size:var(--text-xs);color:hsl(var(--muted-foreground))">Three to five points is plenty. These become the checklist your agent reports against every time.</p>`;
+function goalRow(k){
+  const i=S.kpis.indexOf(k),P=plainOf(k),p='kpis.'+i;
+  const tenthsSel=(field,label,allowUnknown)=>{const v=num(k[field]);const cv=isFinite(v)?tenth(v):'';
+    return `<div class="field"><label for="${pid(p+'.'+field)}">${label}</label><select id="${pid(p+'.'+field)}" data-bind="${p}.${field}" data-scale="10">${allowUnknown?`<option value=""${cv===''?' selected':''}>Not sure yet</option>`:(cv===''?'<option value="" selected>Choose…</option>':'')}${Array.from({length:11},(_,n)=>`<option value="${n}"${String(n)===cv?' selected':''}>${n} out of 10</option>`).join('')}${cv&&!/^\d+$/.test(cv)?`<option value="${cv}" selected>${cv} out of 10</option>`:''}</select></div>`;};
+  const numIn=(field,label)=>inp(`${p}.${field}`,label,{mode:'decimal',ph:field==='baseline'?'Not sure yet':''});
+  const unitWord={hours:'hours a week',minutes:'minutes',money:CURRENCY,count:'a month'}[P.style]||'';
+  const today=P.style==='tenths'?tenthsSel('baseline','Today',true):numIn('baseline',`Today (${unitWord})`);
+  const aim=P.style==='tenths'?tenthsSel('target','Aim for',false):numIn('target',`Aim for (${unitWord})`);
+  const unknown=k.dimension!=='safety'&&!isFinite(num(k.baseline));
+  return `<div class="goal"><div class="goal-head"><div><h3>${esc(P.label)}</h3><p>${esc(P.blurb)}${P.style==='tenths'?` Counted as: out of 10, how many ${esc(P.phrase)}?`:''}</p></div><button class="icon-btn" data-act="goal" data-id="${esc(k.id)}" aria-label="Remove ${esc(P.label)}">×</button></div>
+  <div class="grid4">${today}${aim}${inp(p+'.targetBy','By when',{type:'date'})}${sel(p+'.grader','How you’ll check',CHECKS)}</div>
+  ${unknown?`<div class="trial">Not sure where you start? Give it 20 real examples before you set targets, and count.</div>`:''}</div>`;
+}
+E.scorecard=()=>{
+  const have=new Set(S.kpis.map(k=>k.id)),sug=new Set(SUGGEST[S.meta.track]||SUGGEST.general);
+  const tips=honestTips(S);
+  const picker=GROUPS.map(([g,title])=>{const ids=Object.keys(PLAIN).filter(id=>PLAIN[id].group===g);
+    return `<div class="goal-group"><h3>${title}</h3><div class="goal-opts">${ids.map(id=>`<button class="goal-opt" data-act="goal" data-id="${id}" aria-pressed="${have.has(id)}"><b>${esc(PLAIN[id].label)}</b><span>${esc(PLAIN[id].blurb)}${sug.has(id)&&!have.has(id)?' Suggested for your team.':''}</span></button>`).join('')}</div></div>`;}).join('');
+  const custom=S.kpis.filter(k=>!PLAIN[k.id]);
+  return `<h2>The scorecard</h2>
+  <p class="lead">How will you know it is doing a good job? Pick three to five goals, say where things are today, and where you want them to be.</p>
+  ${tip('Mix goals from different questions. An agent judged only on speed learns to rush. One judged only on quality never finishes.')}
+  ${picker}
+  <div class="section-head"><span class="num">${String(S.kpis.length).padStart(2,'0')}</span><span class="label">Your goals</span><span class="rule"></span></div>
+  ${tips.length?`<div class="honest"><span class="eyebrow">Keep it honest</span>${tips.map(t=>`<p>${esc(t.text)} <button data-act="goal" data-id="${t.id}">Add it</button></p>`).join('')}</div>`:''}
+  ${S.kpis.length?S.kpis.filter(k=>PLAIN[k.id]).map(goalRow).join(''):'<p class="text-muted">No goals yet. Pick from the lists above.</p>'}
+  ${custom.length?`<p class="text-muted" style="font-size:var(--text-sm)">Plus ${custom.length} technical goal${custom.length>1?'s':''} set up in the admin view.</p>`:''}`;
+};
+E.rules=()=>`
+  <h2>House rules</h2>
+  <p class="lead">Every new starter gets told what is off-limits. Your agent is no different, and it will follow these more literally than any person would.</p>
+  <div class="grid2">
+    <div class="field"><span class="lbl">It must never…</span>${listEd('guardrails.constraints','e.g. Never publish anything; drafts only')}${chipsFor('guardrails.constraints',PRESETS.never[S.meta.track]||PRESETS.never.general)}</div>
+    <div class="field"><span class="lbl">Deal-breakers: one strike and the work fails</span>${listEd('guardrails.zeroTolerance','e.g. Making up a statistic')}${chipsFor('guardrails.zeroTolerance',PRESETS.deal)}</div>
+  </div>`;
+E.checkin=()=>`
+  <h2>When to check in with you</h2>
+  <p class="lead">How much can it do on its own? Trust is earned, for agents as for people.</p>
+  ${tip('Start one rung lower than you think. Move it up after two good weeks on the scorecard.')}
+  <div class="ladder" role="radiogroup" aria-label="How much it does on its own">
+    ${LADDER.map(([v,t,d],n)=>`<label class="rung"><input type="radio" name="ladder" id="f-run-autonomy-${v}" data-bind="run.autonomy" value="${v}"${S.run.autonomy===v?' checked':''}><span class="step">${String(n+1).padStart(2,'0')}</span><span><strong>${t}</strong><small>${d}</small></span></label>`).join('')}
+  </div>
+  <div class="section-head"><span class="num">·</span><span class="label">Where the line is</span><span class="rule"></span></div>
+  <div class="grid2">
+    <div class="field"><span class="lbl">Always stop and ask me when…</span>${listEd('run.escalateWhen','e.g. The brief is missing information')}${chipsFor('run.escalateWhen',PRESETS.ask)}</div>
+    <div class="field"><span class="lbl">Always get my OK before…</span>${listEd('run.checkpoints','e.g. Anything goes to a customer')}</div>
+    ${sel('run.strategies','If it gets stuck, how many different tries before it tells you?',[['1','Straight away'],['2','After 2 tries'],['3','After 3 tries'],['5','After 5 tries']])}
+  </div>`;
+E.reviews=()=>`
+  <h2>Reviews</h2>
+  <p class="lead">A new starter gets regular one-to-ones. Your agent gets a scorecard review. Put the first one in the diary now.</p>
+  <div class="grid2">
+    ${inp('meta.owner','Who is its manager?',{ph:'Your name or role'})}
+    ${sel('governance.reviewCadence','How often will you review the scorecard?',CADENCE_PLAIN)}
+    ${inp('governance.reviewBy','First review',{type:'date'})}
+    ${ta('governance.deliveryFormat','How should it hand work back?',{cls:'wide',rows:2,ph:'e.g. One short document with three options and a line on each'})}
+    <div class="field wide"><span class="lbl">With every piece of work, it should also give you…</span>${listEd('governance.evidence','e.g. The sources it used')}</div>
+  </div>`;
+E.pack=()=>{
+  const tabs=[['brief','Agent brief'],['instructions','Instructions for your agent'],['scorecard','Weekly scorecard']];
+  return `<h2>Your agent pack</h2>
+  <p class="lead">Three things to take away: a brief to share with your team, instructions to paste into your agent, and a scorecard to fill in each week.</p>
+  <div class="download"><div><h3>Download your scorecard</h3><p>One PDF: the weekly scorecard to fill in, the agent brief, and the instructions for your agent.</p></div><button class="btn btn-primary" data-act="download">Download PDF</button></div>
+  <div class="tabs" role="tablist">${tabs.map(([k,l])=>`<button role="tab" aria-selected="${packTab===k}" data-act="pack" data-tab="${k}">${l}</button>`).join('')}</div>
+  <div id="pack-body"></div>`;
+};
+function renderPackBody(){
+  const el=$('#pack-body');if(!el)return;
+  const cfg={brief:['Share it with your team, or print it for the first review.',true],instructions:['Paste this into your agent’s instructions: a Claude project, a Hermes agent or Copilot.',false],scorecard:['Print it, or copy it into a spreadsheet. Fill in one column a week.',true]}[packTab];
+  el.innerHTML=`<div class="out-bar"><p>${cfg[0]}</p><div class="btns">${cfg[1]?'<button class="btn btn-ghost btn-sm" data-act="print">Print</button>':''}<button class="btn btn-primary btn-sm" data-act="copy-pack">Copy</button></div></div>
+  ${packTab==='instructions'?`<pre class="code" id="print-area"></pre>`:`<div class="paper" id="print-area">${packTab==='brief'?toBrief(S):toScorecard(S)}</div>`}`;
+  if(packTab==='instructions')$('#print-area').textContent=toInstructions(S);
+}
+const nv=v=>{const n=num(v);return isFinite(n)?n:null;};
+const acs=s=>s.done.filter(d=>d.then.trim()).map((d,i)=>({id:'AC'+(i+1),given:d.given.trim()||'a request within the agent’s job',when:d.when.trim()||'the agent hands back its work',then:d.then.trim()}));
+function fmtVal(v,unit){const n=num(v);if(!isFinite(n))return '—';if(unit==='%')return n+'%';if(unit==='$')return CURRENCY+n.toFixed(2);if(unit==='h')return n+' h';if(unit==='ratio')return String(n);return n+' '+unit;}
+function toContract(s){
+  const lvl=AUTONOMY.find(a=>a[0]===s.run.autonomy)||AUTONOMY[3];const plainLvl=(LADDER.find(a=>a[0]===s.run.autonomy)||LADDER[3])[1];
+  return {
+    contract:{name:s.meta.name,version:s.meta.version,agent:s.meta.agent,track:s.meta.track,owner:s.meta.owner,generated:today(),
+      review:{cadence:s.governance.reviewCadence,next_review:s.governance.reviewBy||null}},
+    objective:{statement:s.objective.statement,beneficiary:s.objective.beneficiary,input:s.objective.input||'',output:s.objective.output||'',why:s.objective.why,customer_facing:!!s.objective.customerFacing},
+    definition_of_done:acs(s),
+    success_rule:'A run succeeds only if every acceptance criterion passes and no zero-tolerance failure occurs.',
+    grading_focus:Object.entries(s.grading).filter(([,v])=>v).map(([k])=>k),
+    kpis:s.kpis.map(k=>({id:k.id,name:k.name,dimension:k.dimension,plain_label:PLAIN[k.id]?.label||k.name,scorecard:DIMENSIONS[k.dimension]?.map||'',indicator:k.indicator,description:k.description,
+      formula:{numerator:k.numerator,denominator:k.denominator,unit:k.unit,direction:k.direction},
+      grader:{type:k.grader,detail:k.graderDetail,...(k.grader==='judge'?{rubric_binary:!!k.rubricBinary,calibrated:!!k.calibrated}:{})},
+      data_source:k.dataSource,sample:k.sample,
+      baseline:{value:nv(k.baseline),source:k.baselineSource||null},
+      target:{value:nv(k.target),by:k.targetBy||null},
+      thresholds:{green:nv(k.green),red:nv(k.red)},
+      cadence:k.cadence,owner:k.owner,counter_metric:k.counter||null,gaming_risk:k.gaming,on_red:k.breach})),
+    guardrails:{hard_constraints:clean(s.guardrails.constraints),zero_tolerance:clean(s.guardrails.zeroTolerance)},
+    run_policy:{autonomy_level:s.run.autonomy,autonomy_label:lvl[1],autonomy_plain:plainLvl,reliability_metric:s.run.reliability,trials_k:nv(s.run.trials),
+      max_iterations:nv(s.run.maxIterations),max_distinct_strategies:nv(s.run.strategies),
+      escalate_when:clean(s.run.escalateWhen),human_checkpoints:clean(s.run.checkpoints)},
+    delivery:{format:s.governance.deliveryFormat,required_evidence:clean(s.governance.evidence)}
+  };
+}
+function yScalar(v){
+  if(v===null||v===undefined||v==='')return 'null';
+  if(typeof v==='number'||typeof v==='boolean')return String(v);
+  const s=String(v);
+  if(/^[A-Za-z][A-Za-z0-9 _.\/()^,+-]*$/.test(s)&&!/^(true|false|null|yes|no|on|off|y|n)$/i.test(s)&&!/\s$/.test(s))return s;
+  return JSON.stringify(s);
+}
+function yObj(o,ind){return Object.entries(o).map(([k,v])=>{
+  if(Array.isArray(v))return v.length?`${ind}${k}:\n${yArr(v,ind+'  ')}`:`${ind}${k}: []`;
+  if(v&&typeof v==='object')return Object.keys(v).length?`${ind}${k}:\n${yObj(v,ind+'  ')}`:`${ind}${k}: {}`;
+  return `${ind}${k}: ${yScalar(v)}`;}).join('\n');}
+function yArr(a,ind){return a.map(x=>{
+  if(x&&typeof x==='object'&&!Array.isArray(x)){const b=yObj(x,ind+'  ');return ind+'- '+b.slice(ind.length+2);}
+  return `${ind}- ${yScalar(x)}`;}).join('\n');}
+function toYaml(s){return `# KPI contract generated by the Agent KPI Wizard\n# Save as KPI_CONTRACT.yaml in the project root\n`+yObj(toContract(s),'')+'\n';}
+
+function toMarkdown(s){
+  const c=toContract(s),L=[];const dash=v=>v||'—';
+  L.push(`# KPI Contract: ${dash(s.meta.name)}`,'');
+  L.push(`Agent: ${dash(s.meta.agent)} · Track: ${TRACKS[s.meta.track]} · Version ${dash(s.meta.version)} · Owner: ${dash(s.meta.owner)} · Next review: ${dash(s.governance.reviewBy)}`,'');
+  L.push('## Objective','',dash(s.objective.statement),'');
+  if(s.objective.beneficiary)L.push(`Serves: ${s.objective.beneficiary}`);
+  if(s.objective.input)L.push(`Receives: ${s.objective.input}`);
+  if(s.objective.output)L.push(`Hands back: ${s.objective.output}`);
+  if(s.objective.why)L.push(`Why now: ${s.objective.why}`);
+  if(s.objective.customerFacing)L.push('Customer-facing: yes');
+  L.push('','## Definition of done','',c.success_rule,'');
+  c.definition_of_done.forEach(a=>L.push(`- **${a.id}** Given ${a.given}, when ${a.when}, then ${a.then}.`));
+  L.push('',`Graded on: ${c.grading_focus.join(', ')||'—'}`,'');
+  L.push('## KPIs','','| KPI | Formula | Baseline | Target | Green | Red | Grader | Data source | Cadence | Counter |','|---|---|---|---|---|---|---|---|---|---|');
+  s.kpis.forEach(k=>{const f=k.denominator?`${k.numerator} ÷ ${k.denominator}`:k.numerator;const cm=s.kpis.find(x=>x.id===k.counter);
+    L.push(`| ${k.name} (\`${k.id}\`) | ${f} | ${fmtVal(k.baseline,k.unit)} | ${fmtVal(k.target,k.unit)}${k.targetBy?' by '+k.targetBy:''} | ${k.direction==='higher'?'≥':'≤'} ${fmtVal(k.green,k.unit)} | ${k.direction==='higher'?'≤':'≥'} ${fmtVal(k.red,k.unit)} | ${GRADERS[k.grader]} | ${dash(k.dataSource)} | ${k.cadence} | ${cm?cm.name:'—'} |`.replace(/\n/g,' '));});
+  L.push('','### Gaming risks and actions on red','');
+  s.kpis.forEach(k=>L.push(`- **${k.name}**: could be gamed by ${k.gaming||'—'}. On red: ${k.breach||'—'} (owner: ${k.owner||'—'}).`));
+  L.push('','## Hard constraints','');c.guardrails.hard_constraints.forEach(x=>L.push('- '+x));
+  L.push('','## Zero-tolerance failures (run fails regardless of score)','');c.guardrails.zero_tolerance.forEach(x=>L.push('- '+x));
+  const rp=c.run_policy;
+  L.push('','## Run policy','',`- Autonomy: ${rp.autonomy_level} ${rp.autonomy_label}`,`- Reliability: ${rp.reliability_metric}${rp.trials_k?` with k = ${rp.trials_k}`:''}`,`- Max iterations: ${rp.max_iterations??'—'}; escalate after ${rp.max_distinct_strategies??'—'} distinct strategies fail`);
+  if(rp.escalate_when.length){L.push('- Stop and escalate when:');rp.escalate_when.forEach(x=>L.push('  - '+x));}
+  if(rp.human_checkpoints.length){L.push('- Planned human checkpoints:');rp.human_checkpoints.forEach(x=>L.push('  - '+x));}
+  L.push('','## Delivery','',`Format: ${dash(c.delivery.format)}`,'','Required evidence:');c.delivery.required_evidence.forEach(x=>L.push('- '+x));
+  L.push('','## Self-check before declaring done','');
+  c.definition_of_done.forEach(a=>L.push(`- [ ] ${a.id} passes, with proof attached`));
+  L.push('- [ ] No hard constraint or zero-tolerance rule broken','- [ ] Evidence is real tool output, not paraphrase','- [ ] Absolute paths given for every created or changed file');
+  return L.join('\n')+'\n';
+}
+function toHermes(s){
+  const ids=acs(s).map(a=>a.id);
+  const md=toMarkdown(s);
+  const args={tasks:[{goal:s.objective.statement||'(objective)',context:md,
+    output_schema:{type:'object',required:['status','acceptance','constraints','evidence','files'],properties:{
+      status:{type:'string',enum:['done','blocked','escalated']},
+      acceptance:{type:'array',minItems:ids.length,items:{type:'object',required:['id','passed','evidence'],properties:{id:{type:'string',enum:ids},passed:{type:'boolean'},evidence:{type:'string',description:'Real tool output that proves the verdict'}}}},
+      constraints:{type:'array',items:{type:'object',required:['constraint','respected'],properties:{constraint:{type:'string'},respected:{type:'boolean'},note:{type:'string'}}}},
+      escalations:{type:'array',items:{type:'string'}},
+      evidence:{type:'array',items:{type:'string'},description:'Required evidence, verbatim'},
+      files:{type:'array',items:{type:'string'},description:'Absolute paths of created or changed files'}}}}]};
+  return JSON.stringify(args,null,2)+'\n';
+}
+
+/* ---------- agent pack: brief, instructions, scorecard ---------- */
+const ladderOf=s=>LADDER.find(l=>l[0]===s.run.autonomy)||LADDER[3];
+const cadenceWord=c=>({weekly:'every week',fortnightly:'every two weeks',monthly:'every month'})[c]||c;
+const checkWord=g=>(CHECKS.find(c=>c[0]===g)||['',''])[1];
+const dash=a=>a.length?`<ul class="dash">${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<p class="text-muted">None yet.</p>';
+const head=(n,l)=>`<div class="section-head"><span class="num">${n}</span><span class="label">${l}</span><span class="rule"></span></div>`;
+function toBrief(s){
+  const L=ladderOf(s);const never=clean(s.guardrails.constraints),deal=clean(s.guardrails.zeroTolerance);
+  const rows=s.kpis.map(k=>`<tr><td><b>${esc(plainOf(k).label)}</b></td><td>${isFinite(num(k.baseline))?esc(plainVal(k,k.baseline,false)):'<span class="text-muted">Trial run first</span>'}</td><td>${esc(plainVal(k,k.target,false))}</td><td>${esc(fmtDate(k.targetBy))||'—'}</td><td>${esc(checkWord(k.grader))}</td></tr>`).join('');
+  return `<header class="doc-header"><span class="brand">Tutto<span class="dot">.</span></span><span class="meta">Agent brief · ${esc(fmtDate(today()))}</span></header>
+  <span class="eyebrow">Agent brief${s.meta.sample?' · example':''}</span>
+  <h2 class="brief-title">${esc(s.meta.name||'Unnamed agent')}</h2>
+  <p class="lead">${esc(s.objective.statement||'The job has not been described yet.')}</p>
+  <div class="facts">
+    <div><b>Works for</b>${esc(s.objective.beneficiary||'—')}</div><div><b>Manager</b>${esc(s.meta.owner||'—')}</div>
+    <div><b>Receives</b>${esc(s.objective.input||'—')}</div><div><b>Hands back</b>${esc(s.objective.output||'—')}</div>
+  </div>
+  ${head('01','What great work looks like')}${dash(greatList(s))}
+  ${head('02','The scorecard')}
+  ${s.kpis.length?`<div class="tablewrap"><table><thead><tr><th>Goal</th><th>Today</th><th>Aim</th><th>By</th><th>How we check</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p class="text-muted">No goals yet.</p>'}
+  ${head('03','House rules')}${dash(never)}
+  ${deal.length?`<div class="callout"><p><strong>Deal-breakers.</strong> One strike and the work fails: ${esc(deal.join('; '))}.</p></div>`:''}
+  ${head('04','When it checks in')}
+  <p><strong>${esc(L[1])}.</strong> ${esc(L[2])}</p>
+  ${clean(s.run.escalateWhen).length?`<p>It stops and asks when:</p>${dash(clean(s.run.escalateWhen))}`:''}
+  ${clean(s.run.checkpoints).length?`<p>It always gets approval before:</p>${dash(clean(s.run.checkpoints))}`:''}
+  ${head('05','Reviews')}
+  <p>${esc(s.meta.owner||'The manager')} reviews the scorecard ${esc(cadenceWord(s.governance.reviewCadence))}${s.governance.reviewBy?`, starting ${esc(fmtDate(s.governance.reviewBy))}`:''}.${s.governance.deliveryFormat?` Work comes back as: ${esc(s.governance.deliveryFormat)}.`:''}</p>
+  <footer class="doc-footer"><span>Praxis · Agent scorecard</span><span>Version ${esc(s.meta.version||'1.0')}</span></footer>`;
+}
+function toInstructions(s){
+  const L=ladderOf(s),o=s.objective,out=[];const list=a=>a.map(x=>'- '+x);
+  out.push('ROLE',`${s.meta.name||'Assistant'}.${o.beneficiary?` You work for: ${o.beneficiary}.`:''} Treat this as your job description.`,'');
+  out.push('YOUR JOB',o.statement||'(describe the job)');
+  if(o.input)out.push(`You will receive: ${o.input}`);
+  if(o.output)out.push(`You hand back: ${o.output}`);
+  out.push('','WHAT GREAT WORK LOOKS LIKE','Every piece of work you hand back:',...list(greatList(s)));
+  const never=clean(s.guardrails.constraints),deal=clean(s.guardrails.zeroTolerance);
+  if(never.length)out.push('','HOUSE RULES',...list(never));
+  if(deal.length)out.push('','Deal-breakers. If any of these happen, the work has failed, however good the rest is:',...list(deal));
+  out.push('','WHEN TO CHECK IN',L[3]);
+  const ask=clean(s.run.escalateWhen),ok=clean(s.run.checkpoints);
+  if(ask.length)out.push('Stop and ask me before going further when:',...list(ask));
+  if(ok.length)out.push('Always get my approval before:',...list(ok));
+  const n=num(s.run.strategies);
+  out.push(n<=1?'If you get stuck, stop straight away and tell me what went wrong. Do not guess.':`If you are stuck after ${isFinite(n)?n:2} genuinely different attempts, stop and tell me what you tried and what went wrong. Do not guess.`);
+  out.push('','WHAT TO HAND BACK');
+  if(s.governance.deliveryFormat)out.push(s.governance.deliveryFormat);
+  out.push('With every piece of work, include:',...list(clean(s.governance.evidence)),'- A check against the great-work list above: each point met or not met, with a one-line reason.');
+  if(s.kpis.length){out.push('','HOW YOU WILL BE JUDGED',`${s.meta.owner||'Your manager'} reviews your work ${cadenceWord(s.governance.reviewCadence)} against these goals:`);
+    s.kpis.forEach(k=>out.push(`- ${plainOf(k).label}: aiming for ${plainVal(k,k.target)}${k.targetBy?` by ${fmtDate(k.targetBy)}`:''}.`));}
+  out.push('','Be honest about misses. A clear “I couldn’t do this” is better than work that looks finished but isn’t.');
+  return out.join('\n')+'\n';
+}
+function toScorecard(s){
+  const rows=s.kpis.map(k=>{const b=plainBands(k);const P=plainOf(k);
+    return `<tr><td><b>${esc(P.label)}</b><br><span class="text-muted" style="font-size:var(--text-xs)">${esc(P.style==='tenths'?`Out of the last 10: how many ${P.phrase}?`:P.phrase)}</span></td><td>${esc(plainVal(k,k.target,false))}</td><td style="font-size:var(--text-xs);line-height:1.6">${b?`<span class="band g"></span>${esc(b.ok)}<br><span class="band w"></span>${esc(b.watch)}<br><span class="band b"></span>${esc(b.act)}`:'—'}</td>${[1,2,3,4].map(()=>'<td class="box"></td>').join('')}</tr>`;}).join('');
+  return `<header class="doc-header"><span class="brand">Tutto<span class="dot">.</span></span><span class="meta">Weekly scorecard · ${esc(s.meta.name||'Agent')}</span></header>
+  <span class="eyebrow">Weekly scorecard</span>
+  <h2 class="brief-title">${esc(s.meta.name||'Your agent')}</h2>
+  <p class="lead">Manager: ${esc(s.meta.owner||'—')}. Review ${esc(cadenceWord(s.governance.reviewCadence))}${s.governance.reviewBy?`, first on ${esc(fmtDate(s.governance.reviewBy))}`:''}.</p>
+  ${s.kpis.length?`<div class="tablewrap"><table class="scorecard"><thead><tr><th>Goal</th><th>Aim</th><th>On track · Watch · Act</th><th>Wk 1</th><th>Wk 2</th><th>Wk 3</th><th>Wk 4</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p class="text-muted">Pick goals in step 3 to fill the scorecard.</p>'}
+  ${head('·','How to use it')}
+  <ul class="dash">
+    <li>Each week, look at the last 10 pieces of work, or all of them if there were fewer.</li>
+    <li>Write the number in that week’s box and mark it on track, watch or act.</li>
+    <li>Any house-rule break: stop, move the agent one rung down the trust ladder, and find out why.</li>
+    <li>Two acts in a row on any goal: move it one rung down and review what went wrong.</li>
+    <li>Four weeks on track across the board: consider moving it one rung up.</li>
+  </ul>
+  <footer class="doc-footer"><span>Praxis · Agent scorecard</span><span>Version ${esc(s.meta.version||'1.0')}</span></footer>`;
+}
+function packText(){const el=$('#print-area');return el?el.innerText:'';}
+
+/* ---------- PDF download ---------- */
+const PDF_LIBS=['https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js','https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js'];
+const loadScript=src=>new Promise((ok,fail)=>{if($(`script[src="${src}"]`))return ok();const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>fail(new Error(src));document.head.appendChild(s);});
+async function loadPdfLibs(){for(const src of PDF_LIBS)await loadScript(src);return window.jspdf.jsPDF;}
+/* The built-in PDF fonts cover Latin-1 only, so typographic punctuation is flattened. */
+const pdfText=v=>String(v??'').replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,'-').replace(/…/g,'...').replace(/≥/g,'>=').replace(/≤/g,'<=').replace(/[^\n\x20-\xff]/g,'');
+const slug=s=>(s||'agent').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'agent';
+function buildPdf(jsPDF,s){
+  const doc=new jsPDF({unit:'pt',format:'a4'});
+  const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight(),M=48,CW=W-2*M;
+  const INK=[31,31,31],MUTED=[107,114,128],AMBER=[219,116,0],RULE=[226,228,233];
+  const BAND={g:[46,113,72],w:[173,128,11],b:[197,50,38]};
+  let y=M;
+  const need=h=>{if(y+h>H-M){doc.addPage();y=M;}};
+  const masthead=kind=>{
+    doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(...INK);doc.text('Tutto',M,M);
+    doc.setTextColor(...AMBER);doc.text('.',M+doc.getTextWidth('Tutto'),M);
+    doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(...MUTED);doc.text(pdfText(kind),W-M,M,{align:'right'});
+    doc.setDrawColor(...RULE);doc.setLineWidth(.75);doc.line(M,M+10,W-M,M+10);y=M+44;
+  };
+  const eyebrow=t=>{doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(...AMBER);doc.text(pdfText(t).toUpperCase(),M,y);y+=24;};
+  const title=t=>{doc.setFont('helvetica','bold');doc.setFontSize(24);doc.setTextColor(...INK);const L=doc.splitTextToSize(pdfText(t),CW);doc.text(L,M,y);y+=L.length*28;};
+  const para=(t,o={})=>{if(!t)return;doc.setFont('helvetica',o.bold?'bold':'normal');doc.setFontSize(o.size||10.5);doc.setTextColor(...(o.muted?MUTED:INK));
+    const L=doc.splitTextToSize(pdfText(t),o.w||CW),lh=(o.size||10.5)*1.45;need(L.length*lh);doc.text(L,o.x||M,y);y+=L.length*lh+(o.after??8);};
+  const section=(n,l)=>{need(46);y+=14;doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUTED);doc.text(n,M,y);
+    doc.setTextColor(...INK);doc.text(pdfText(l).toUpperCase(),M+22,y);const x=M+30+doc.getTextWidth(pdfText(l).toUpperCase());doc.setDrawColor(...RULE);doc.line(x,y-3,W-M,y-3);y+=18;};
+  const bullets=a=>{if(!a.length){para('None yet.',{muted:true});return;}a.forEach(x=>{const L=doc.splitTextToSize(pdfText(x),CW-14),lh=15.2;need(L.length*lh);
+    doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(...AMBER);doc.text('-',M,y);doc.setTextColor(...INK);doc.text(L,M+14,y);y+=L.length*lh+3;});y+=5;};
+  const table=(head,body,opts={})=>{need(60);doc.autoTable(Object.assign({startY:y,head:[head.map(pdfText)],body:body.map(r=>r.map(c=>typeof c==='object'&&c?Object.assign({},c,{content:pdfText(c.content)}):pdfText(c))),
+    margin:{left:M,right:M},theme:'grid',styles:{font:'helvetica',fontSize:9,textColor:INK,lineColor:RULE,lineWidth:.5,cellPadding:6,valign:'top'},
+    headStyles:{fillColor:[245,243,238],textColor:INK,fontStyle:'bold'}},opts));y=doc.lastAutoTable.finalY+16;};
+  const L=ladderOf(s),name=s.meta.name||'Your agent',cad=cadenceWord(s.governance.reviewCadence);
+
+  /* 1. Weekly scorecard: the page people fill in */
+  masthead('Weekly scorecard');eyebrow('Weekly scorecard');title(name);
+  para(`Manager: ${s.meta.owner||'-'}. Review ${cad}${s.governance.reviewBy?`, first on ${fmtDate(s.governance.reviewBy)}`:''}.`,{muted:true,after:14});
+  if(s.kpis.length){
+    const rows=s.kpis.map(k=>{const P=plainOf(k),b=plainBands(k);
+      return [P.style==='tenths'?`Out of the last 10: how many ${P.phrase}?`:P.phrase,plainVal(k,k.target,false),b?`${b.ok}\n${b.watch}\n${b.act}`:'-','','','',''];});
+    table(['Goal','Aim','On track / Watch / Act','Wk 1','Wk 2','Wk 3','Wk 4'],rows,{
+      columnStyles:{0:{cellWidth:140,textColor:MUTED},1:{cellWidth:62},2:{cellWidth:165},3:{minCellHeight:56}},
+      didParseCell:d=>{if(d.section!=='body')return;
+        if(d.column.index===0)d.cell.styles.cellPadding={top:20,right:6,bottom:6,left:6};
+        if(d.column.index===2)d.cell.styles.cellPadding={top:6,right:6,bottom:6,left:18};},
+      didDrawCell:d=>{if(d.section!=='body')return;const k=s.kpis[d.row.index];
+        if(d.column.index===0){doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.setTextColor(...INK);doc.text(pdfText(plainOf(k).label),d.cell.x+6,d.cell.y+15);}
+        if(d.column.index===2&&plainBands(k)){const lh=9*1.15;['g','w','b'].forEach((c,i)=>{doc.setFillColor(...BAND[c]);doc.rect(d.cell.x+7,d.cell.y+6+i*lh+1.5,6,6,'F');});}}});
+  }else para('No goals picked yet. Go back to step 3 to choose three to five.',{muted:true});
+  section('·','How to use it');
+  bullets(['Each week, look at the last 10 pieces of work, or all of them if there were fewer.','Write the number in that week\'s box and mark it on track, watch or act.',
+    'Any house-rule break: stop, move the agent one rung down the trust ladder, and find out why.','Two acts in a row on any goal: move it one rung down and review what went wrong.',
+    'Four weeks on track across the board: consider moving it one rung up.']);
+
+  /* 2. Agent brief */
+  doc.addPage();masthead(`Agent brief · ${fmtDate(today())}`);eyebrow('Agent brief');title(name);
+  para(s.objective.statement||'The job has not been described yet.',{size:12,after:12});
+  table(['Works for','Manager','Receives','Hands back'],[[s.objective.beneficiary||'-',s.meta.owner||'-',s.objective.input||'-',s.objective.output||'-']],{theme:'plain',headStyles:{textColor:MUTED,fontSize:7.5,fontStyle:'bold'}});
+  section('01','What great work looks like');bullets(greatList(s));
+  section('02','The scorecard');
+  if(s.kpis.length)table(['Goal','Today','Aim','By','How we check'],s.kpis.map(k=>[plainOf(k).label,isFinite(num(k.baseline))?plainVal(k,k.baseline,false):'Trial run first',plainVal(k,k.target,false),fmtDate(k.targetBy)||'-',checkWord(k.grader)]));
+  else para('No goals yet.',{muted:true});
+  section('03','House rules');bullets(clean(s.guardrails.constraints));
+  const deal=clean(s.guardrails.zeroTolerance);if(deal.length)para(`Deal-breakers. One strike and the work fails: ${deal.join('; ')}.`,{bold:true});
+  section('04','When it checks in');para(`${L[1]}. ${L[2]}`);
+  if(clean(s.run.escalateWhen).length){para('It stops and asks when:',{after:4});bullets(clean(s.run.escalateWhen));}
+  if(clean(s.run.checkpoints).length){para('It always gets approval before:',{after:4});bullets(clean(s.run.checkpoints));}
+  section('05','Reviews');
+  para(`${s.meta.owner||'The manager'} reviews the scorecard ${cad}${s.governance.reviewBy?`, starting ${fmtDate(s.governance.reviewBy)}`:''}.${s.governance.deliveryFormat?` Work comes back as: ${s.governance.deliveryFormat}.`:''}`);
+
+  /* 3. Instructions to paste into the agent */
+  doc.addPage();masthead('Instructions for your agent');eyebrow('Instructions for your agent');
+  para('Paste everything below into your agent\'s instructions: a Claude project, a Hermes agent or Copilot.',{muted:true,after:14});
+  doc.setFont('courier','normal');doc.setFontSize(9);doc.setTextColor(...INK);
+  doc.splitTextToSize(pdfText(toInstructions(s)),CW).forEach(line=>{need(12);doc.text(line,M,y);y+=12;});
+
+  const n=doc.getNumberOfPages();
+  for(let i=1;i<=n;i++){doc.setPage(i);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUTED);
+    doc.text('Praxis · Agent scorecard · tutto.one',M,H-24);doc.text(`${i} / ${n}`,W-M,H-24,{align:'right'});}
+  return doc;
+}
+async function downloadPdf(btn){
+  btn.disabled=true;const was=btn.textContent;btn.textContent='Preparing…';
+  try{const jsPDF=await loadPdfLibs();buildPdf(jsPDF,S).save(`${slug(S.meta.name)}-scorecard.pdf`);toast('Scorecard downloaded.');}
+  catch(e){console.error(e);toast('The download didn’t work. Check your connection and try again, or use Print.');}
+  finally{btn.disabled=false;btn.textContent=was;}
+}
+function kpiCard(k,i){
+  const p='kpis.'+i;
+  return `<details class="kpi" data-kpi="${i}" data-uid="${k.uid}"${openCards.has(k.uid)?' open':''}>
+  <summary><span class="kpi-name" data-sum-name>${esc(k.name||'Untitled KPI')}</span><span data-sum-chips></span><span class="kpi-state" data-sum-state></span></summary>
+  <div class="kpi-body">
+    <div class="instrument"><div class="formula" data-viz-formula></div><div class="scale" data-viz-scale></div></div>
+    <fieldset><legend>What it measures</legend><div class="grid2">
+      ${inp(p+'.name','Name',{ph:'e.g. Task success rate'})}
+      ${inp(p+'.id','ID',{ph:'snake_case',hint:'Used for counter-metric links and in the YAML.'})}
+      ${sel(p+'.dimension','Dimension',Object.entries(DIMENSIONS).map(([k2,v])=>[k2,v.label]),{hint:esc(DIMENSIONS[k.dimension]?.map||'')})}
+      ${sel(p+'.indicator','Indicator',[['leading','Leading: moves before the outcome'],['lagging','Lagging: the outcome itself']])}
+      ${ta(p+'.description','Description',{cls:'wide',rows:2})}
+    </div></fieldset>
+    <fieldset><legend>Formula</legend><div class="grid2">
+      ${inp(p+'.numerator','Numerator (what is counted)',{ph:'e.g. runs where all acceptance criteria pass'})}
+      ${inp(p+'.denominator','Denominator (out of what)',{ph:'e.g. runs attempted'})}
+      ${sel(p+'.unit','Unit',UNITS)}
+      ${sel(p+'.direction','Better when',[['higher','Higher'],['lower','Lower']])}
+    </div></fieldset>
+    <fieldset><legend>Measurement</legend><div class="grid2">
+      ${sel(p+'.grader','Grader',Object.entries(GRADERS),{hint:GRADER_HINT[k.grader]||''})}
+      ${inp(p+'.dataSource','Data source',{ph:'e.g. ~/.hermes/state.db sessions'})}
+      ${ta(p+'.graderDetail','How it is graded',{cls:'wide',rows:2,ph:'The exact check, query or rubric'})}
+      ${inp(p+'.sample','Sample size',{ph:'e.g. every run, 20 runs per week'})}
+      <div class="field"><label>LLM judge only</label><div class="list">${cbx(p+'.rubricBinary','Rubric is pass/fail, one criterion per judge')}${cbx(p+'.calibrated','Calibrated against human labels')}</div></div>
+    </div></fieldset>
+    <fieldset><legend>Baseline, target, thresholds</legend><div class="grid4">
+      ${inp(p+'.baseline','Baseline',{mode:'decimal',ph:'today'})}
+      ${inp(p+'.target','Target',{mode:'decimal'})}
+      ${inp(p+'.green','Green at',{mode:'decimal',hint:k.autoThresholds===false?'Set by admin':'Auto: from target'})}
+      ${inp(p+'.red','Red at',{mode:'decimal',hint:k.autoThresholds===false?'Set by admin':'Auto: from baseline'})}
+    </div><div class="grid2" style="margin-top:12px">
+      ${inp(p+'.baselineSource','Baseline came from',{ph:'e.g. pilot of 25 real tasks'})}
+      ${inp(p+'.targetBy','Target date',{type:'date'})}
+    </div></fieldset>
+    <fieldset><legend>Governance</legend><div class="grid2">
+      ${sel(p+'.cadence','Measured',CADENCES.map(c=>[c,c]))}
+      ${inp(p+'.owner','Owner',{ph:'Who acts when it goes red'})}
+      ${sel(p+'.counter','Counter-metric',counterOpts(k),{hint:'The KPI that would expose gaming this one.'})}
+      ${inp(p+'.gaming','How it could be gamed',{ph:'Hitting the number without real success'})}
+      ${inp(p+'.breach','On red',{cls:'wide',ph:'Alert, pause autonomy, roll back…'})}
+    </div></fieldset>
+    <div class="kpi-actions"><button class="btn small" data-act="dup-kpi" data-i="${i}">Duplicate</button><button class="btn small ghost" data-act="del-kpi" data-i="${i}">Remove</button></div>
+  </div></details>`;
+}
+function formulaHtml(k){
+  const unitNote=k.unit==='%'?'× 100':k.unit==='$'?'in currency':k.unit==='ratio'?'':'';
+  if(['%','ratio','$'].includes(k.unit))
+    return `<span class="frac"><span class="num">${esc(k.numerator||'numerator?')}</span><span class="den">${esc(k.denominator||'denominator?')}</span></span>${unitNote?`<span class="op">${unitNote}</span>`:''}`;
+  return `<span class="agg">${esc(k.numerator||'measure?')}</span><span class="op">across</span><span class="agg">${esc(k.denominator||'—')}</span><span class="op">in ${esc(k.unit)}</span>`;
+}
+function scaleHtml(k){
+  const g=num(k.green),r=num(k.red),b=num(k.baseline),t=num(k.target);
+  if(!isFinite(g)||!isFinite(r))return `<div class="scale-empty">Set green and red thresholds to draw the scale.</div>`;
+  const vals=[g,r,b,t].filter(isFinite);
+  let lo=Math.min(0,...vals),hi=k.unit==='%'?Math.max(100,...vals):Math.max(...vals)*1.3;
+  if(hi<=lo)hi=lo+1;
+  const pos=v=>Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100));
+  const hiBetter=k.direction==='higher';
+  const z=hiBetter?[['red',lo,r],['amber',r,g],['green',g,hi]]:[['green',lo,g],['amber',g,r],['red',r,hi]];
+  const zones=z.filter(([,a,c])=>c>a).map(([cls,a,c])=>`<span class="zone ${cls}" style="left:${pos(a)}%;width:${pos(c)-pos(a)}%"></span>`).join('');
+  const lab=(v,cls,text)=>{const p=pos(v);const side=p<12?' l':p>88?' r':'';return `<span class="mlabel ${cls}${side}" style="left:${p}%">${text}</span>`;};
+  let marks='';
+  if(isFinite(b))marks+=`<span class="mark base" style="left:${pos(b)}%" title="Baseline"></span>`+lab(b,'below','baseline '+fmtVal(b,k.unit));
+  if(isFinite(t))marks+=`<span class="mark tgt" style="left:${pos(t)}%" title="Target"></span>`+lab(t,'above','target '+fmtVal(t,k.unit));
+  const gs=hiBetter?'≥':'≤',rs=hiBetter?'≤':'≥';
+  return `<div class="tbar">${zones}${marks}</div><div class="legend"><span><i style="background:var(--good)"></i>green ${gs} ${fmtVal(g,k.unit)}</span><span><i style="background:var(--warn)"></i>amber between</span><span><i style="background:var(--bad)"></i>red ${rs} ${fmtVal(r,k.unit)}</span></div>`;
+}
+function updateKpi(el,L){
+  const i=+el.dataset.kpi;const k=S.kpis[i];if(!k)return;
+  $('[data-sum-name]',el).textContent=k.name||'Untitled KPI';
+  $('[data-sum-chips]',el).innerHTML=`<span class="tag tag-primary">${esc(DIMENSIONS[k.dimension]?.label||'')}</span> <span class="tag">${esc(k.indicator)}</span> <span class="tag">${esc(GRADERS[k.grader]||'')}</span>`;
+  const mine=L.issues.filter(x=>x.kpi===i);const nb=mine.filter(x=>x.sev==='block').length;
+  $('[data-sum-state]',el).innerHTML=mine.length?`<span class="pill ${nb?'bad':'warn'}">${mine.length} to fix</span>`:`<span class="pill good">complete</span>`;
+  $('[data-viz-formula]',el).innerHTML=formulaHtml(k);
+  $('[data-viz-scale]',el).innerHTML=scaleHtml(k);
+  const cs=$(`select[data-bind="kpis.${i}.counter"]`,el);
+  if(cs){const opts=counterOpts(k);const sig=JSON.stringify(opts);if(cs.dataset.sig!==sig){cs.innerHTML=opts.map(([v,l])=>`<option value="${esc(v)}">${esc(l)}</option>`).join('');cs.value=k.counter||'';cs.dataset.sig=sig;}}
+  const gh=$(`select[data-bind="kpis.${i}.grader"]`,el)?.parentElement.querySelector('.hint');if(gh)gh.textContent=GRADER_HINT[k.grader]||'';
+  const dh=$(`select[data-bind="kpis.${i}.dimension"]`,el)?.parentElement.querySelector('.hint');if(dh)dh.textContent=DIMENSIONS[k.dimension]?.map||'';
+}
+
+
+/* ---------- admin view ---------- */
+const ADMIN=[['map','How answers map'],['done','Success criteria'],['kpis','KPIs'],['policy','Run policy'],['exports','Exports']];
+const MAP_ROWS=[
+  ['What is the job, in one sentence?','objective.statement','The objective, in OKR form'],
+  ['A finished piece of work always…','definition_of_done[].then','Acceptance criteria; Given/When default if empty'],
+  ['Scorecard goals','kpis[]','Catalogue KPIs with formula, grader and data source prefilled'],
+  ['Today / Aim for / By when','baseline, target, target.by','“n out of 10” is stored as n × 10 %'],
+  ['How you’ll check','grader.type','human, telemetry, code or LLM judge'],
+  ['(derived)','thresholds.green / red','Green = target; red = baseline if worse, else target ± 20% of scale'],
+  ['Keep it honest','counter_metric','Goodhart pairing from the catalogue'],
+  ['It must never… / Deal-breakers','guardrails','Hard constraints and zero-tolerance failures'],
+  ['Trust ladder','run_policy.autonomy_level','L1 Operator to L5 Observer'],
+  ['Tries before it tells you','run_policy.max_distinct_strategies','Escalation after n failed strategies'],
+  ['Its work goes to customers','customer_facing','Admin should use pass^k with k ≥ 3'],
+  ['Manager, review rhythm, evidence','owner, review, delivery','Governance and required evidence']];
+const EXPORTS={
+  md:{label:'Markdown contract',make:toMarkdown,how:['Save as <code>.hermes.md</code> in the project root so every Hermes session and delegated agent loads it.','Hermes loads only the first context file it finds (<code>.hermes.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>). If the project already uses <code>AGENTS.md</code>, append this there instead.']},
+  yaml:{label:'YAML',make:toYaml,how:['Save as <code>KPI_CONTRACT.yaml</code> in the project root. It is the machine-readable source for scoring runs.']},
+  hermes:{label:'Hermes delegate_task',make:toHermes,how:['Arguments for Hermes’ <code>delegate_task</code>: the contract goes in <code>context</code>, and <code>output_schema</code> makes the agent report pass/fail with evidence per criterion.','Set <code>delegation.max_iterations</code> in <code>~/.hermes/config.yaml</code> to match the run policy.']}
+};
+function adminHtml(){
+  const sec=(id,n,label,body)=>`<section id="adm-${id}"><div class="section-head"><span class="num">${n}</span><span class="label">${label}</span><span class="rule"></span></div>${body}</section>`;
+  const groups=Object.entries(DIMENSIONS).map(([d,v])=>{const items=CATALOGUE.filter(c=>c.dimension===d);return items.length?`<optgroup label="${v.label}">${items.map(c=>`<option value="${c.id}">${esc(c.name)}${S.kpis.some(k=>k.id===c.id)?' (added)':''}</option>`).join('')}</optgroup>`:''}).join('');
+  return `<h2>The contract behind the scorecard</h2>
+  <p class="lead">Everything the employee answered, translated into measurable fields. Edit here to tune formulas, graders, thresholds and the run policy. Employees never see this view.</p>
+  ${sec('map','01','How answers map',`<div class="tablewrap"><table><thead><tr><th>Employee sees</th><th>Contract field</th><th>Meaning</th></tr></thead><tbody>${MAP_ROWS.map(r=>`<tr><td>${esc(r[0])}</td><td><code>${esc(r[1])}</code></td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>`)}
+  ${sec('done','02','Success criteria',`<p class="text-muted" style="font-size:var(--text-sm)">A run succeeds only if every criterion passes and no deal-breaker occurs. Empty Given/When fall back to defaults in the exports.</p>
+    <div class="list">${S.done.map((d,i)=>`<div class="ac"><span class="tag tag-primary">AC${i+1}</span>
+      <label class="part"><span>Given</span><textarea rows="2" id="f-done-${i}-given" data-bind="done.${i}.given" placeholder="a request within the agent’s job">${esc(d.given)}</textarea></label>
+      <label class="part"><span>When</span><textarea rows="2" id="f-done-${i}-when" data-bind="done.${i}.when" placeholder="the agent hands back its work">${esc(d.when)}</textarea></label>
+      <label class="part"><span>Then</span><textarea rows="2" id="f-done-${i}-then-a" data-bind="done.${i}.then">${esc(d.then)}</textarea></label>
+      <button class="icon-btn" data-act="del-done" data-i="${i}" aria-label="Remove AC${i+1}">×</button></div>`).join('')}
+    <button class="add-btn" data-act="add-done">+ Add criterion</button></div>
+    <div class="grid2" style="margin-top:18px">${cbx('grading.outcome','Grade the outcome','End state: tests pass, ticket resolved')}${cbx('grading.artifact','Grade the artifact','The deliverable itself')}${cbx('grading.trajectory','Grade the trajectory','Tool choice and order; only where the path matters')}</div>`)}
+  ${sec('kpis','03','KPIs',`<div class="admin-tools"><select id="cat-select" aria-label="KPI catalogue"><option value="">Add from catalogue…</option>${groups}</select><button class="btn btn-ghost btn-sm" data-act="add-cat">Add</button><button class="btn btn-ghost btn-sm" data-act="add-kpi">Blank KPI</button></div>
+    ${S.kpis.length?S.kpis.map(kpiCard).join(''):'<p class="text-muted">No KPIs yet.</p>'}`)}
+  ${sec('policy','04','Run policy',`<div class="grid2">
+    ${inp('meta.agent','Agent runtime',{ph:'e.g. Hermes delegate_task child'})}
+    ${sel('meta.track','Track',Object.entries(TRACKS))}
+    ${sel('run.autonomy','Autonomy level',AUTONOMY.map(([v,t,d])=>[v,`${v} ${t}: ${d}`]))}
+    ${sel('run.reliability','Reliability metric',RELIABILITY)}
+    ${inp('run.trials','Trials per task (k)',{mode:'numeric'})}
+    ${inp('run.maxIterations','Max iterations per run',{mode:'numeric',hint:'Hermes default is 250.'})}
+    ${inp('run.strategies','Distinct strategies before escalating',{mode:'numeric'})}
+    ${inp('meta.version','Contract version')}
+    <div class="field wide">${cbx('objective.customerFacing','Customer-facing output','Use pass^k with k ≥ 3.')}</div>
+    <div class="field"><span class="lbl">Escalate when</span>${listEd('run.escalateWhen','Trigger')}</div>
+    <div class="field"><span class="lbl">Human checkpoints</span>${listEd('run.checkpoints','Checkpoint')}</div></div>`)}
+  ${sec('exports','05','Exports',`<div class="tabs" role="tablist">${Object.entries(EXPORTS).map(([k,v])=>`<button role="tab" aria-selected="${expTab===k}" data-act="tab" data-tab="${k}">${v.label}</button>`).join('')}</div><div id="export-body"></div>`)}`;
+}
+function renderExportBody(){
+  const el=$('#export-body');if(!el)return;const e=EXPORTS[expTab];
+  el.innerHTML=`<div class="out-bar"><p>${e.how[0]}</p><div class="btns"><button class="btn btn-primary btn-sm" data-act="copy">Copy ${esc(e.label)}</button></div></div><pre class="code nowrap" id="export-code" tabindex="0"></pre>${e.how.length>1?`<ul class="dash" style="margin-top:14px;font-size:var(--text-sm)">${e.how.slice(1).map(h=>`<li>${h}</li>`).join('')}</ul>`:''}`;
+  $('#export-code').textContent=e.make(S);
+}
+
+/* ---------- chrome ---------- */
+let lastLint=null,lastHealth=null;
+function renderHero(){
+  $('#hero').innerHTML=view==='employee'
+    ?`<span class="eyebrow">Hire your first agent</span><h1>Set it up like a new starter.<br><em>Know when it’s doing well.</em></h1><p class="lead">Seven short steps, no technical knowledge needed. You finish with a brief for your team, instructions to paste into your agent, and a scorecard to fill in each week.</p>${S.meta.sample?`<div class="admin-banner"><span class="tag tag-primary">Example</span><span>You are looking at a worked example. Change anything, or choose a blank role from “Start from”.</span></div>`:''}`
+    :`<span class="eyebrow">Admin view</span><h1>The measurable contract.<br><em>Under the covers.</em></h1><p class="lead">Formulas, graders, thresholds, reliability and exports for Hermes. Same contract as the employee view, edited in either place.</p>`;
+  const opts=view==='employee'?[['social','Example: social post drafter'],['reporter','Example: weekly campaign reporter'],['supplier','Example: supplier follow-up assistant'],['blank','A blank role']]
+    :[['social','Example: social post drafter'],['reporter','Example: weekly campaign reporter'],['supplier','Example: supplier follow-up'],['coding','Example: coding subagent'],['research','Example: research subagent'],['support','Example: support agent'],['blank','Blank contract']];
+  $('#ex-select').innerHTML=`<option value="">Choose…</option>`+opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
+  $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
+}
+function renderNav(){
+  if(view==='employee'){
+    const H=lastHealth;
+    $('#nav').innerHTML=STEPS.map((st,i)=>{const mine=H.items.filter(x=>x.step===st.id&&!x.soft);const ok=mine.length&&mine.every(x=>x.ok);
+      return `<li><button data-act="goto" data-step="${i}"${i===cur?' aria-current="step"':''}><span class="num">${String(i+1).padStart(2,'0')}</span><span class="t">${st.title}</span>${st.id==='pack'?'':`<span class="ok${ok?' on':''}" title="${ok?'Done':'Still to do'}"></span>`}</button></li>`;}).join('');
+  }else{
+    $('#nav').innerHTML=ADMIN.map(([id,l],i)=>`<li><button data-act="adm-goto" data-sec="${id}"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="t">${l}</span></button></li>`).join('');
+  }
+}
+function renderAside(){
+  if(view==='employee'){
+    const H=lastHealth;
+    $('#aside').innerHTML=`<div class="card"><span class="eyebrow">Brief strength</span><div class="strength"><b>${H.label}</b><span>${H.done} of ${H.total}</span></div>
+      <div class="meter" style="grid-template-columns:repeat(${H.total},1fr)">${Array.from({length:H.total},(_,i)=>`<i class="${i<H.done?'on':''}"></i>`).join('')}</div>
+      <ul class="todo">${H.items.map((x,j)=>`<li><button class="${x.ok?'done':''}${x.soft?' soft':''}" data-act="hitem" data-j="${j}"><span class="mk"></span><span>${esc(x.text)}${x.soft&&!x.ok?'<em>Optional, but it makes the targets realistic.</em>':''}</span></button></li>`).join('')}</ul></div>`;
+  }else{
+    const L=lastLint,covered=new Set(S.kpis.map(k=>k.dimension));
+    $('#aside').innerHTML=`<div class="card"><span class="eyebrow">Contract checks</span><div class="strength"><b>${L.score}%</b><span class="pill ${L.blocks?'bad':L.warns?'warn':'good'}">${L.blocks?`${L.blocks} blocking`:L.warns?`${L.warns} to review`:'Clean'}</span></div>
+      <div class="meter" style="grid-template-columns:repeat(20,1fr)">${Array.from({length:20},(_,i)=>`<i class="${i<Math.round(L.score/5)?'on':''}"></i>`).join('')}</div>
+      ${L.issues.length?`<ul class="todo issues">${L.issues.map((x,j)=>`<li><button data-act="issue" data-j="${j}"><span class="mk ${x.sev}"></span><span>${esc(x.msg)}<em>${esc(x.fix)}</em></span></button></li>`).join('')}</ul>`:'<p class="text-muted" style="font-size:var(--text-sm)">Nothing flagged.</p>'}</div>
+      <div class="card"><h3>Dimension coverage</h3><div class="chips">${Object.entries(DIMENSIONS).map(([d,v])=>`<span class="tag${covered.has(d)?' tag-primary':''}" title="${esc(v.map)}">${v.label}</span>`).join('')}</div></div>`;
+  }
+}
+function updateLive(){
+  S.kpis.forEach(deriveThresholds);
+  lastHealth=plainHealth(S);lastLint=lint(S);
+  renderNav();renderAside();
+  if(view==='admin'){$$('.kpi[data-kpi]').forEach(el=>updateKpi(el,lastLint));renderExportBody();}
+  else if(STEPS[cur].id==='pack')renderPackBody();
+  save();
+}
+function renderPanel(){
+  if(view==='admin'){$('#panel').innerHTML=adminHtml();return;}
+  const st=STEPS[cur];
+  $('#panel').innerHTML=E[st.id]()+`<div class="panel-foot">${cur>0?`<button class="btn btn-ghost" data-act="prev">Back: ${STEPS[cur-1].title}</button>`:'<span></span>'}${cur<STEPS.length-1?`<button class="btn btn-primary" data-act="next">Next: ${STEPS[cur+1].title}</button>`:''}</div>`;
+}
+function render(){S.kpis.forEach(deriveThresholds);renderHero();renderPanel();updateLive();}
+const smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));render();$('#layout').scrollIntoView({block:'start',behavior:smooth()});}
+function toast(msg,undo){const t=$('#toast');t.innerHTML=`<span>${esc(msg)}</span>${undo?'<button data-act="undo">Undo</button>':''}`;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>{t.hidden=true},undo?7000:2600);}
+function loadState(next,msg){undoState={S:clone(S),cur};S=next;openCards.clear();cur=0;render();toast(msg,true);}
+function scrollToKpi(k){requestAnimationFrame(()=>{const el=$(`.kpi[data-uid="${k.uid}"]`);if(el)el.scrollIntoView({block:'start',behavior:smooth()});});}
+async function copyText(txt,label){
+  let ok=false;try{await navigator.clipboard.writeText(txt);ok=true;}catch(e){
+    try{const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();ok=document.execCommand('copy');t.remove();}catch(e2){}}
+  toast(ok?`Copied ${label}.`:'Your browser blocked copying here. Select the text and copy it by hand.');
+}
+
+/* ---------- events ---------- */
+function onField(e){
+  const t=e.target,p=t.dataset&&t.dataset.bind;if(!p)return false;
+  if(t.type==='radio'&&!t.checked)return false;
+  let v=t.type==='checkbox'?t.checked:t.value;
+  if(t.dataset.scale&&v!=='')v=String(round(num(v)*num(t.dataset.scale)));
+  setPath(S,p,v);
+  const m=p.match(/^kpis\.(\d+)\.(green|red)$/);if(m)S.kpis[+m[1]].autoThresholds=false;
+  if(S.meta.sample&&/^(objective|meta\.name)/.test(p))S.meta.sample=false,renderHero();
+  updateLive();return true;
+}
+document.addEventListener('input',onField);
+document.addEventListener('change',e=>{
+  if(e.target.id==='ex-select'){const v=e.target.value;e.target.value='';if(!v)return;
+    loadState(v==='blank'?blank():example(v),v==='blank'?'Started a blank role.':'Loaded the example. Replace anything with your own.');return;}
+  const p=e.target.dataset&&e.target.dataset.bind;if(!p)return;
+  onField(e);
+  if(view==='employee'&&(/^kpis\./.test(p)||p==='meta.track')&&e.target.tagName==='SELECT')render();
+  if(view==='admin'&&(/\.id$/.test(p)||p==='meta.track'))render();
+});
+document.addEventListener('toggle',e=>{const d=e.target;if(d.classList&&d.classList.contains('kpi'))d.open?openCards.add(d.dataset.uid):openCards.delete(d.dataset.uid);},true);
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+  if(a==='view'){view=b.dataset.view;render();}
+  else if(a==='goto')go(+b.dataset.step);
+  else if(a==='next')go(cur+1);
+  else if(a==='prev')go(cur-1);
+  else if(a==='adm-goto')$('#adm-'+b.dataset.sec)?.scrollIntoView({block:'start',behavior:smooth()});
+  else if(a==='add-list'){getPath(S,b.dataset.path).push('');render();$('#'+pid(b.dataset.path)+'-'+(getPath(S,b.dataset.path).length-1))?.focus();}
+  else if(a==='del-list'){const arr=getPath(S,b.dataset.path);arr.splice(+b.dataset.i,1);if(!arr.length)arr.push('');render();}
+  else if(a==='preset'){const arr=getPath(S,b.dataset.path);const i=arr.findIndex(x=>!x.trim());i>=0?arr[i]=b.dataset.val:arr.push(b.dataset.val);render();}
+  else if(a==='add-done'){S.done.push({given:'',when:'',then:''});render();$(`#f-done-${S.done.length-1}-then`)?.focus();}
+  else if(a==='del-done'){S.done.splice(+b.dataset.i,1);if(!S.done.length)S.done.push({given:'',when:'',then:''});render();}
+  else if(a==='goal'){const id=b.dataset.id;const i=S.kpis.findIndex(k=>k.id===id);
+    if(i>=0){undoState={S:clone(S),cur};S.kpis.splice(i,1);S.kpis.forEach(k=>{if(k.counter===id)k.counter='';});render();toast(`Removed “${PLAIN[id]?.label||id}”.`,true);}
+    else{const k=fromCat(id,{owner:S.meta.owner});const have=new Set(S.kpis.map(o=>o.id));
+      S.kpis.forEach(o=>{if(PLAIN[o.id]?.pair===id&&!(o.counter&&have.has(o.counter)))o.counter=id;});
+      if(PLAIN[id]?.pair&&have.has(PLAIN[id].pair))k.counter=PLAIN[id].pair;S.kpis.push(k);render();}}
+  else if(a==='pack'){packTab=b.dataset.tab;render();}
+  else if(a==='download')downloadPdf(b);
+  else if(a==='print'){toast('Opening print. If nothing appears, your browser blocked it here: use Copy instead.');setTimeout(()=>{try{window.print();}catch(err){}},50);}
+  else if(a==='copy-pack')copyText(packTab==='instructions'?toInstructions(S):packText(),({brief:'the brief',instructions:'the instructions',scorecard:'the scorecard'})[packTab]);
+  else if(a==='tab'){expTab=b.dataset.tab;renderExportBody();$$('[data-act="tab"]').forEach(x=>x.setAttribute('aria-selected',String(x.dataset.tab===expTab)));save();}
+  else if(a==='copy')copyText(EXPORTS[expTab].make(S),EXPORTS[expTab].label);
+  else if(a==='add-cat'){const v=$('#cat-select').value;if(!v){toast('Choose a KPI from the catalogue first.');return;}
+    const k=fromCat(v,{owner:S.meta.owner});if(S.kpis.some(x=>x.id===k.id))k.id=k.id+'_'+(S.kpis.length+1);S.kpis.push(k);openCards.add(k.uid);render();scrollToKpi(k);}
+  else if(a==='add-kpi'){const k=blankKpi(S.kpis.length+1);S.kpis.push(k);openCards.add(k.uid);render();scrollToKpi(k);}
+  else if(a==='dup-kpi'){const k=clone(S.kpis[+b.dataset.i]);k.uid=uid();k.id=k.id+'_copy';k.name=k.name+' (copy)';S.kpis.splice(+b.dataset.i+1,0,k);openCards.add(k.uid);render();}
+  else if(a==='del-kpi'){undoState={S:clone(S),cur};const gone=S.kpis.splice(+b.dataset.i,1)[0];S.kpis.forEach(k=>{if(k.counter===gone.id)k.counter='';});render();toast(`Removed ${gone.name||'KPI'}.`,true);}
+  else if(a==='issue'){const x=lastLint.issues[+b.dataset.j];if(!x)return;
+    if(x.kpi!=null&&S.kpis[x.kpi]){const k=S.kpis[x.kpi];openCards.add(k.uid);render();scrollToKpi(k);}
+    else if(['objective','governance','guardrails'].includes(x.step)){view='employee';go(STEPS.findIndex(s=>s.id===({objective:'role',governance:'reviews',guardrails:'rules'})[x.step]));}
+    else $('#adm-'+({done:'done',kpis:'kpis',autonomy:'policy'})[x.step])?.scrollIntoView({block:'start',behavior:smooth()});}
+  else if(a==='hitem'){const x=lastHealth.items[+b.dataset.j];if(x)go(STEPS.findIndex(s=>s.id===x.step));}
+  else if(a==='undo'&&undoState){S=undoState.S;cur=undoState.cur;undoState=null;render();$('#toast').hidden=true;}
+});
+
+/* ---------- boot ---------- */
+(function boot(){
+  if(ADMIN_OK)$('#view-seg').hidden=false;
+  const d=restore();
+  if(d){S=d.S;cur=Math.min(d.cur||0,STEPS.length-1);view=ADMIN_OK&&d.view==='admin'?'admin':'employee';packTab=d.packTab||'brief';expTab=d.expTab||'md';}
+  else S=example('social');
+  render();
+})();
+</script>
+
+</body></html>
