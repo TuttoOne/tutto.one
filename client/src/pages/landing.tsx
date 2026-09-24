@@ -45,7 +45,7 @@ export default function Landing() {
 
   /* The tab title is the headline, so it is translated for free and there is
      no second sentence to keep in step with the first. */
-  const title = t(landing.hero.title).replace(/\.$/, "");
+  const title = `${t(landing.hero.title)} ${t(landing.hero.titleSecond)}`.replace(/\.$/, "");
   useEffect(() => {
     document.title = `Tutto — ${title}`;
     return () => {
@@ -92,9 +92,17 @@ function Hero() {
     <header className="pt-8 pb-4">
       <Eyebrow className="mb-5">{t(landing.hero.eyebrow)}</Eyebrow>
 
-      <h1 className="max-w-2xl text-5xl md:text-7xl font-serif font-bold leading-[1.05] tracking-tight">
-        {t(landing.hero.title)}
+      {/* One sentence per line, kept whole from `sm` up. The sizes are set so
+          the longest line (the French second sentence, about 16em) fits the
+          container at each breakpoint; on a phone the lines wrap instead of
+          shrinking to fit. */}
+      <h1 className="text-4xl sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3.5rem] font-serif font-bold leading-[1.1] tracking-tight">
+        <span className="block sm:whitespace-nowrap">{t(landing.hero.title)}</span>
+        <span className="block sm:whitespace-nowrap">{t(landing.hero.titleSecond)}</span>
       </h1>
+      <p className="mt-4 text-2xl sm:text-3xl font-serif font-bold tracking-tight text-primary">
+        {t(landing.hero.subtitle)}
+      </p>
 
       <div className="mt-6 max-w-2xl space-y-4">
         <p className="text-xl text-foreground leading-relaxed">

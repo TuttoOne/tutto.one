@@ -52,10 +52,18 @@ export const landing = {
     eyebrow: { en: "For firms of 5 to 50", fr: "Pour les entreprises de 5 à 50 personnes" },
 
     /** The pain in the reader's own units: minutes to write, an hour to
-     *  check. The page sells the checking, because that is where the time goes. */
-    title: {
-      en: "Claude writes in minutes. Checking it still takes an hour.",
-      fr: "Claude rédige en quelques minutes. Le vérifier prend encore une heure.",
+     *  check. Two sentences, set one per line, so it is two leaves rather
+     *  than one string the browser breaks wherever it likes. */
+    title: { en: "Claude writes in minutes.", fr: "Claude rédige en quelques minutes." },
+    titleSecond: {
+      en: "Checking it still takes an hour.",
+      fr: "Le vérifier prend encore une heure.",
+    },
+
+    /** What we sell, as the third line: teaching, by doing it properly. */
+    subtitle: {
+      en: "Learn to do it right, the first time.",
+      fr: "Apprenez à bien faire, du premier coup.",
     },
 
     promise: {
@@ -64,8 +72,8 @@ export const landing = {
     },
 
     deck: {
-      en: "We write your standards down once, then build the scorecard Claude checks itself against, with sources, before anyone opens the draft. Your team reviews the flags, not the whole thing.",
-      fr: "Nous écrivons vos standards une fois, puis construisons la grille sur laquelle Claude se vérifie lui-même, sources à l'appui, avant que quiconque n'ouvre le brouillon. Votre équipe relit les alertes, pas tout le document.",
+      en: "We teach your team on your own documents and process: write your standards down once, then build the scorecard Claude checks itself against, with sources, before anyone opens the draft. Your team reviews the flags, not the whole thing.",
+      fr: "Nous formons votre équipe sur vos propres documents et processus : écrire vos standards une fois, puis construire la grille sur laquelle Claude se vérifie lui-même, sources à l'appui, avant que quiconque n'ouvre le brouillon. Votre équipe relit les alertes, pas tout le document.",
     },
 
     /** What the reader brings, and what they leave with. Set apart from the
