@@ -347,7 +347,7 @@ function sel(p,label,opts){const v=getPath(S,p)??'';return `<div class="field"><
 function cbx(p){const f=FLAGS[p];return `<label class="cbx" for="${pid(p)}"><input type="checkbox" id="${pid(p)}" data-bind="${p}"${getPath(S,p)?' checked':''}><span>${f.label}${f.small?`<small>${f.small}</small>`:''}</span></label>`;}
 function choice(p){
   const q=Q[p],v=getPath(S,p);
-  return `<div class="q" id="q-${pid(p)}"><span class="lbl" id="l-${pid(p)}">${q.label}</span>
+  return `<div class="q" id="q-${pid(p)}"><h3 id="l-${pid(p)}">${q.label}</h3>
     ${view==='admin'?`<p class="qhint">${esc(q.why)}<br><span class="src">${srcLinks(q.src)}</span></p>`:''}
     <div class="opts" role="group" aria-labelledby="l-${pid(p)}">${q.o.map(([k,l,d])=>`<button class="opt" data-act="pick" data-path="${p}" data-val="${k}" aria-pressed="${v===k}"><b>${esc(l)}</b>${d?`<span>${esc(d)}</span>`:''}</button>`).join('')}</div></div>`;
 }
@@ -390,7 +390,7 @@ E.risk=()=>`<h2>What goes wrong</h2>
 E.data=()=>`<h2>Data and safety</h2>
   <p class="lead">What the job can see and what it can do outside the business.</p>
   ${choice('data.kind')}
-  <div class="q"><span class="lbl">Tick all that apply</span>
+  <div class="q"><h3>Tick all that apply</h3>
     ${view==='admin'?`<p class="qhint">All three together is the lethal trifecta: a hidden instruction in outside content can make an AI leak private data. Remove one of the three.<br><span class="src">${srcLinks(['willison','owasp06'])}</span></p>`:''}
     <div class="list">${Object.keys(FLAGS).map(cbx).join('')}</div></div>
   ${choice('data.fresh')}`;
@@ -400,39 +400,50 @@ E.run=()=>`<h2>Running without you</h2>
 E.card=()=>{
   const c=last;
   const missing=STEPS.filter(st=>st.qs.some(p=>getPath(S,p)===''));
-  if(!c.verdict)return `<h2>Your hand-over card</h2><p class="lead">A few answers are still missing. The card fills in once the job is described.</p>
+  if(!c.verdict)return `<h2>Your hand-over card</h2><p class="lead">A few answers are still missing. The card fills in once you’ve said how the job works today.</p>
     <ul class="todo">${missing.map(st=>`<li><button data-act="goto" data-step="${STEPS.indexOf(st)}"><span class="mk"></span><span>${st.title}</span></button></li>`).join('')}</ul>`;
-  const tabs=[['card','Card'],['checklist','Checklist'],...(view==='admin'?[['evidence','Evidence']]:[])];
+  const tabs=[['card','Hand-over card'],['checklist','Checklist'],...(view==='admin'?[['evidence','Evidence']]:[])];
   if(!tabs.some(t=>t[0]===cardTab))cardTab='card';
+  const bar={card:'Share it with the job’s owner, or keep it with your hand-over list.',checklist:'Work through it before the job runs without you.',evidence:'Every rule we checked, what fired and where each one comes from.'}[cardTab];
   return `<h2>Your hand-over card</h2>
-  ${missing.length?`<p class="tip">Still unanswered: ${missing.map(st=>st.title.toLowerCase()).join(', ')}. The card may change when you fill them in.</p>`:''}
-  <div class="download"><div><h3>Take it with you</h3><p>A PDF with the card, the checklist${view==='admin'?' and the evidence':''}. Or copy it as text.</p></div>
-    <div class="io"><button class="btn btn-primary" data-act="download">Download PDF</button><button class="btn btn-ghost" data-act="copy">Copy as text</button></div></div>
+  <p class="lead">Two things to take away: a card that says what happens to this job and why, and the checklist to work through before it runs without you.</p>
+  ${missing.length?tip(`Still unanswered: ${missing.map(st=>st.title.toLowerCase()).join(', ')}. The card may change when you fill them in.`):''}
+  <div class="download"><div><h3>Download your hand-over card</h3><p>One PDF: the card, the checklist${view==='admin'?' and the evidence behind the verdict':''}.</p></div><button class="btn btn-primary" data-act="download">Download PDF</button></div>
   <div class="tabs" role="tablist">${tabs.map(([k,l])=>`<button role="tab" aria-selected="${cardTab===k}" data-act="cardtab" data-tab="${k}">${l}</button>`).join('')}</div>
-  <div style="padding-top:var(--space-6)" id="print-area">${cardTab==='card'?cardHtml(c):cardTab==='checklist'?checklistHtml(c):evidenceHtml(c)}</div>
-  <div class="io" style="margin-top:var(--space-8)"><button class="btn btn-ghost btn-sm" data-act="export">Save answers (JSON)</button><button class="btn btn-ghost btn-sm" data-act="import">Load answers</button></div>`;
+  <div class="out-bar"><p>${bar}</p><div class="btns"><button class="btn btn-primary btn-sm" data-act="copy">Copy</button></div></div>
+  <div class="paper" id="print-area">${cardTab==='card'?cardHtml(c):cardTab==='checklist'?checklistHtml(c):evidenceHtml(c)}</div>
+  <div class="out-bar"><p>Save your answers to come back to this job later, or to keep one file per job.</p><div class="btns"><button class="btn btn-ghost btn-sm" data-act="export">Save answers</button><button class="btn btn-ghost btn-sm" data-act="import">Load answers</button></div></div>`;
 };
 const vName=c=>c.verdict==='DONT'?DONT_KIND[c.kind].name:VERDICTS[c.verdict].name;
 const vLead=c=>c.verdict==='DONT'?DONT_KIND[c.kind].lead:VERDICTS[c.verdict].lead;
+const head=(n,l)=>`<div class="section-head"><span class="num">${String(n).padStart(2,'0')}</span><span class="label">${l}</span><span class="rule"></span></div>`;
+const srcLine=ids=>view==='admin'?`<span class="src">${srcLinks(ids)}</span>`:'';
+const dashList=items=>items.length?`<ul class="dash">${items.map(([t,src])=>`<li>${esc(t)}${src?srcLine(src):''}</li>`).join('')}</ul>`:'<p class="text-muted">None yet.</p>';
+const docHead=kind=>`<header class="doc-header"><span class="brand">Tutto<span class="dot">.</span></span><span class="meta">${kind} · ${esc(fmtDate(today()))}</span></header>
+  <span class="eyebrow">${kind}${S.sample?' · example':''}</span><h2 class="brief-title">${esc(S.job.name||'Unnamed job')}</h2>`;
+const docFoot=`<footer class="doc-footer"><span>Praxis · Hand-over check</span><span>Session three</span></footer>`;
+const orNA=v=>v?esc(v):'<span class="text-muted">Not filled in yet</span>';
 function cardHtml(c){
-  const J=S.job,Qd=QUAD[c.quad];
-  return `<div class="verdict ${c.verdict==='DONT'?'v-dont':c.verdict==='AUGMENT'?'v-augment':''}">
-    <span class="eyebrow">${esc(J.name||'This job')}</span><p class="v-name">${esc(vName(c))}</p><p>${esc(vLead(c))}</p></div>
-  <h3>Why</h3>
-  <ol class="reasons">${c.reasons.slice(0,view==='admin'?9:3).map(r=>`<li>${esc(r.text)}${view==='admin'?`<br><span class="src">${srcLinks(r.src)}</span>`:''}</li>`).join('')}</ol>
-  ${c.conds.length?`<h3>On these conditions</h3><ul class="gates">${c.conds.map(r=>`<li><span class="pill warn">Must</span><span>${esc(r.text(S,c))}${view==='admin'?`<br><span class="src">${srcLinks(r.src)}</span>`:''}</span></li>`).join('')}</ul>`:''}
-  <h3>Worth it against effort</h3>
-  <div class="matrix">${matrixSvg(c)}<div>
-    <p style="margin:0 0 12px"><b>${Qd[0]}.</b> ${Qd[1]}</p>
-    ${bar('Value',c.value)}${bar('Ease',c.feas)}
-    <p class="src" style="margin-top:8px">${c.hours>0?`${fmtHours(c.hours)} a year today.`:''}</p></div></div>
-  <h3>What it needs to run without you</h3>
-  <div class="grid2" style="margin-bottom:var(--space-6)">
-    ${fact('What comes in',J.inputs)}${fact('What goes out',J.output)}${fact('The rules',J.rules)}${fact('The check at the end',J.check)}${fact('Owner',J.owner)}${fact('Team',J.team)}
+  const J=S.job,Qd=QUAD[c.quad];let n=0;
+  return `${docHead('Hand-over card')}
+  <div class="callout verdict-call ${c.verdict==='DONT'?'v-dont':c.verdict==='AUGMENT'?'v-augment':''}"><p class="v-name">${esc(vName(c))}</p><p>${esc(vLead(c))}</p></div>
+  <div class="facts">
+    <div><b>Team</b>${orNA(J.team)}</div><div><b>Owner</b>${orNA(J.owner)}</div>
+    <div><b>What comes in</b>${orNA(J.inputs)}</div><div><b>What goes out</b>${orNA(J.output)}</div>
   </div>
-  <p class="src">Full list on the Checklist tab.</p>`;
+  ${head(++n,'Why')}${dashList(c.reasons.slice(0,view==='admin'?9:3).map(r=>[r.text,r.src]))}
+  ${c.conds.length?`${head(++n,'On these conditions')}${dashList(c.conds.map(r=>[r.text(S,c),r.src]))}`:''}
+  ${head(++n,'Worth it against effort')}
+  <div class="matrix">${matrixSvg(c)}<div>
+    <p><strong>${Qd[0]}.</strong> ${Qd[1]}</p>
+    ${bar('Value',c.value)}${bar('Ease',c.feas)}
+    ${c.hours>0?`<p class="text-muted" style="font-size:var(--text-sm);margin-top:var(--space-3)">About ${fmtHours(c.hours)} a year today.</p>`:''}</div></div>
+  ${head(++n,'How it runs')}
+  <p><strong>The rules.</strong> ${orNA(J.rules)}</p>
+  <p><strong>The check at the end.</strong> ${orNA(J.check)}</p>
+  <p class="text-muted" style="font-size:var(--text-sm)">What it needs before it runs without you is on the Checklist tab.</p>
+  ${docFoot}`;
 }
-const fact=(l,v)=>`<div><span class="eyebrow" style="color:hsl(var(--muted-foreground));margin-bottom:4px">${l}</span><div style="font-size:var(--text-sm)">${v?esc(v):'<span class="text-muted">Not filled in yet</span>'}</div></div>`;
 const bar=(l,v)=>`<div class="scorebar"><span>${l}</span><i><b style="width:${v}%"></b></i><span>${v}</span></div>`;
 function matrixSvg(c){
   const P=20,W=220,x=P+c.feas/100*W,y=P+(1-c.value/100)*W,h=W/2,L=CONFIG.quadrantLine/100*W;
@@ -447,34 +458,37 @@ function matrixSvg(c){
     <text x="10" y="${P+h}" transform="rotate(-90 10 ${P+h})" text-anchor="middle">Value</text>
     <circle class="dot" cx="${x}" cy="${y}" r="8"/></svg>`;
 }
+const checkList=items=>`<ul class="checklist">${items.map(([t,d,src])=>`<li><div><b>${esc(t)}</b>${d?`<span>${esc(d)}</span>`:''}${src?srcLine(src):''}</div></li>`).join('')}</ul>`;
 function checklistHtml(c){
-  const items=checklist(c);
-  return `<p class="lead" style="margin-bottom:var(--space-6)">${c.verdict==='DONT'?'What to do instead.':'Tick these off before it runs without you.'}</p>
-  ${c.conds.length?`<h3>From your answers</h3><ul class="checklist" style="margin-bottom:var(--space-6)">${c.conds.map(r=>`<li><div><b>${esc(r.text(S,c))}</b>${view==='admin'?`<span class="src">${srcLinks(r.src)}</span>`:''}</div></li>`).join('')}</ul>`:''}
-  <h3>${c.verdict==='DONT'?'Next step':'For every job like this'}</h3>
-  <ul class="checklist">${items.map(r=>`<li><div><b>${esc(r.t)}</b><span>${esc(r.d)}</span>${view==='admin'?`<br><span class="src">${srcLinks(r.src)}</span>`:''}</div></li>`).join('')}</ul>`;
+  let n=0;
+  return `${docHead('Checklist')}
+  <p class="lead">${c.verdict==='DONT'?'What to do instead.':`Before it runs without you. Verdict: ${esc(vName(c))}.`}</p>
+  ${c.conds.length?`${head(++n,'From your answers')}${checkList(c.conds.map(r=>[r.text(S,c),'',r.src]))}`:''}
+  ${head(++n,c.verdict==='DONT'?'Next step':'For every job like this')}${checkList(checklist(c).map(r=>[r.t,r.d,r.src]))}
+  ${docFoot}`;
 }
 function evidenceHtml(c){
-  const row=(r,on,effect)=>`<tr><td><span class="pill ${on?(r.layer==='knock'?'bad':'warn'):'good'}">${on?'Fired':'Clear'}</span></td><td><code>${r.id}</code></td><td>${effect}</td><td>${on?esc(r.text(S,c)):''}<div class="src">${srcLinks(r.src)}</div></td></tr>`;
   const fired=new Set([...c.knock,...c.caps,...c.conds].map(r=>r.id));
-  const eff=r=>r.layer==='knock'?`Leave it for now (${DONT_KIND[r.kind].name.toLowerCase()})`:r.layer==='cap'?'Caps at AI helps, you decide':'Condition';
+  const eff=r=>r.layer==='knock'?`Leave it for now (${DONT_KIND[r.kind].name.toLowerCase()})`:r.layer==='cap'?'Drops to AI helps, you decide':'Condition';
+  const row=(state,cls,id,effect,why,src)=>`<tr><td><span class="pill ${cls}">${state}</span></td><td><code>${id}</code></td><td>${effect}</td><td>${why?esc(why):''}<div class="src">${srcLinks(src)}</div></td></tr>`;
   const used=new Set([...ARCH,...RULES,...READY].flatMap(r=>r.src).concat(ALL_Q.flatMap(p=>Q[p].src)));
-  return `<h3>How the verdict was reached</h3>
-  <p style="font-size:var(--text-sm)">Architecture: ${c.arch?`<b>${esc(VERDICTS[c.arch].name)}</b> (rule <code>${c.archRule.id}</code>).`:'not decided yet.'} ${c.knock.length?`Knock-outs: ${c.knock.length}, so the verdict is <b>${esc(vName(c))}</b>.`:c.caps.length?`Caps: ${c.caps.length}, so the verdict drops to <b>${esc(VERDICTS.AUGMENT.name)}</b>.`:'No knock-outs or caps.'} We pick the least complex option that fits.</p>
+  return `${docHead('Evidence')}
+  <p class="lead">Architecture: ${c.arch?`<strong>${esc(VERDICTS[c.arch].name)}</strong>`:'not decided yet'}. ${c.knock.length?`${c.knock.length} knock-out${c.knock.length>1?'s':''}, so the verdict is <strong>${esc(vName(c))}</strong>.`:c.caps.length?`${c.caps.length} cap${c.caps.length>1?'s':''}, so the verdict drops to <strong>${esc(VERDICTS.AUGMENT.name)}</strong>.`:'No knock-outs or caps.'} We pick the least complex option that fits.</p>
   <p class="src">${srcLinks(['anthropic_agents','ms_orch'])}</p>
-  <div class="tablewrap"><table class="trace"><thead><tr><th></th><th>Rule</th><th>Effect</th><th>Why</th></tr></thead><tbody>
-  ${ARCH.map(r=>`<tr><td><span class="pill ${r===c.archRule?'warn':'good'}">${r===c.archRule?'Chosen':'Skipped'}</span></td><td><code>${r.id}</code></td><td>Architecture: ${esc(VERDICTS[r.to].name)}</td><td>${r===c.archRule?esc(r.text(S,c)):''}<div class="src">${srcLinks(r.src)}</div></td></tr>`).join('')}
-  ${RULES.map(r=>row(r,fired.has(r.id),eff(r))).join('')}</tbody></table></div>
-  <h3 style="margin-top:var(--space-8)">Scores</h3>
-  <p style="font-size:var(--text-sm)">Value ${c.value}: hours a year ${c.valueParts.hours} of 60 (log scale, 2,000 hours tops out), errors today ${c.valueParts.errors} of 20, timing ${c.valueParts.sla} of 20.<br>
-  Ease ${c.feas}: 100 minus ${c.feasTrace.length?c.feasTrace.map(([p,d])=>`${d} for ${Q[p].label.toLowerCase().replace(/\?$/,'')}`).join(', '):'nothing'}.<br>
-  The line between quadrants is ${CONFIG.quadrantLine}. The weights are ours, loosely after these two.</p>
+  ${head(1,'Every rule we checked')}
+  <div class="tablewrap"><table><thead><tr><th></th><th>Rule</th><th>Effect</th><th>Why</th></tr></thead><tbody>
+  ${ARCH.map(r=>row(r===c.archRule?'Chosen':'Skipped',r===c.archRule?'warn':'good',r.id,`Architecture: ${esc(VERDICTS[r.to].name)}`,r===c.archRule?r.text(S,c):'',r.src)).join('')}
+  ${RULES.map(r=>{const on=fired.has(r.id);return row(on?'Fired':'Clear',on?(r.layer==='knock'?'bad':'warn'):'good',r.id,eff(r),on?r.text(S,c):'',r.src);}).join('')}</tbody></table></div>
+  ${head(2,'Scores')}
+  <p>Value ${c.value}: hours a year ${c.valueParts.hours} of 60 (log scale, 2,000 hours tops out), errors today ${c.valueParts.errors} of 20, timing ${c.valueParts.sla} of 20.</p>
+  <p>Ease ${c.feas}: 100 minus ${c.feasTrace.length?c.feasTrace.map(([p,d])=>`${d} for ${Q[p].label.toLowerCase().replace(/\?$/,'')}`).join(', '):'nothing'}.</p>
+  <p>The line between quadrants is ${CONFIG.quadrantLine}. The weights are ours, loosely after these two.</p>
   <p class="src">${srcLinks(['uipath','leshob'])}</p>
-  <h3 style="margin-top:var(--space-8)">Sources</h3>
-  <ul class="checklist">${Object.keys(SRC).filter(k=>used.has(k)).map(k=>`<li><div>${srcLinks([k])}</div></li>`).join('')}</ul>
-  <p class="src">Vendor guides sell the thing they describe, so weigh them with that in mind. Practitioner thresholds are rules of thumb, and the settings at the top of the script let you change them.</p>`;
+  ${head(3,'Sources')}
+  <ul class="dash">${Object.keys(SRC).filter(k=>used.has(k)).map(k=>`<li>${srcLinks([k])}</li>`).join('')}</ul>
+  <p class="text-muted" style="font-size:var(--text-sm)">Vendor guides sell the thing they describe, so weigh them with that in mind. Practitioner thresholds are rules of thumb, and the settings at the top of the script let you change them.</p>
+  ${docFoot}`;
 }
-
 /* ---------- text export ---------- */
 function toText(c){
   const J=S.job,L=[];
@@ -562,7 +576,7 @@ function merge(d){const b=blank();Object.keys(b).forEach(k=>{if(typeof b[k]==='o
 
 function renderHero(){
   $('#hero').innerHTML=view==='employee'
-    ?`<span class="eyebrow">Session three · Decide what to hand over</span><h1>One job at a time.<br><em>What AI takes over, and what it needs to run without you.</em></h1><p class="lead">Six short steps about one job your team does again and again. You finish with a hand-over card that says what does the job and why, plus what to tick off before it runs on its own.</p>${S.sample?`<div class="admin-banner"><span class="tag tag-primary">Example</span><span>You are looking at a worked example. Change anything, or choose a blank job from “Start from”.</span></div>`:''}`
+    ?`<span class="eyebrow">Session three · Your hand-over list</span><h1>One job at a time.<br><em>Decide what AI takes over.</em></h1><p class="lead">Six short steps about one job your team does again and again. You finish with a hand-over card that says what does the job and why, plus what to tick off before it runs on its own.</p>${S.sample?`<div class="admin-banner"><span class="tag tag-primary">Example</span><span>You are looking at a worked example. Change anything, or choose a blank job from “Start from”.</span></div>`:''}`
     :`<span class="eyebrow">Admin view</span><h1>The same check.<br><em>With the working shown.</em></h1><p class="lead">Every question shows why it’s asked and where that comes from. The card shows every rule that fired, the scores and the sources.</p>`;
   $('#ex-select').innerHTML=`<option value="">Choose…</option>`+Object.entries(EXAMPLES).map(([k,e])=>`<option value="${k}">${esc(e.label)}</option>`).join('')+'<option value="blank">A blank job</option>';
   $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
@@ -571,15 +585,15 @@ function stepDone(st){return st.id==='job'?!!S.job.name.trim():st.id==='value'?l
 function renderNav(){
   $('#nav').innerHTML=STEPS.map((st,i)=>`<li><button data-act="goto" data-step="${i}"${i===cur?' aria-current="step"':''}><span class="num">${String(i+1).padStart(2,'0')}</span><span class="t">${st.title}</span>${st.id==='card'?'':`<span class="ok${stepDone(st)?' on':''}" title="${stepDone(st)?'Done':'Still to do'}"></span>`}</button></li>`).join('');
 }
+const STEP_TODO={job:'Name the job and say what comes in',value:'Rough numbers for how many and how long',how:'Say how it works today',risk:'Say what happens when it goes wrong',data:'Say what data it touches',run:'Say who looks after it'};
 function renderAside(){
-  const c=last;
-  const gates=[...c.knock.map(r=>['bad','Stop',r]),...c.caps.map(r=>['warn','Person',r]),...(view==='admin'?c.conds.map(r=>['good','Must',r]):[])];
+  const c=last,todo=STEPS.filter(st=>STEP_TODO[st.id]),done=todo.filter(stepDone).length;
+  const gates=[...c.knock.map(r=>['block','Stops it',r]),...c.caps.map(r=>['warn','Keeps a person in',r]),...(view==='admin'?c.conds.map(r=>['','Condition',r]):[])];
   $('#aside').innerHTML=`<div class="card"><span class="eyebrow">Verdict so far</span>
-    <div class="vs">${c.verdict?esc(vName(c)):'Not enough answers yet'}</div>
-    <p class="src" style="margin:0">${c.verdict?esc(c.verdict==='DONT'?DONT_KIND[c.kind].lead:VERDICTS[c.verdict].short):'Answer how it works today and this fills in.'}</p>
-    <div class="meter" style="grid-template-columns:repeat(${c.total},1fr)">${Array.from({length:c.total},(_,i)=>`<i class="${i<c.answered?'on':''}"></i>`).join('')}</div>
-    <p class="src" style="margin:0">${c.answered} of ${c.total} answered</p>
-    ${gates.length?`<ul class="gatelist">${gates.map(([k,l,r])=>`<li><span class="pill ${k}">${l}</span><span>${esc(r.text(S,c))}</span></li>`).join('')}</ul>`:''}</div>
+    <div class="strength"><b>${c.verdict?esc(vName(c)):'Not yet'}</b><span>${done} of ${todo.length}</span></div>
+    <div class="meter" style="grid-template-columns:repeat(${todo.length},1fr)">${todo.map(st=>`<i class="${stepDone(st)?'on':''}"></i>`).join('')}</div>
+    <ul class="todo">${todo.map(st=>`<li><button class="${stepDone(st)?'done':''}" data-act="goto" data-step="${STEPS.indexOf(st)}"><span class="mk"></span><span>${STEP_TODO[st.id]}</span></button></li>`).join('')}</ul></div>
+    ${gates.length?`<div class="card"><h3>What shapes the verdict</h3><ul class="todo issues">${gates.map(([k,l,r])=>`<li><button data-act="goto" data-step="${STEPS.length-1}"><span class="mk ${k}"></span><span>${esc(r.text(S,c))}<em>${l}</em></span></button></li>`).join('')}</ul></div>`:''}
     ${view==='admin'&&c.arch?`<div class="card"><h3>Scores</h3>${bar('Value',c.value)}${bar('Ease',c.feas)}<p class="src" style="margin:6px 0 0">${QUAD[c.quad][0]}. Architecture before caps: ${esc(VERDICTS[c.arch].name)}.</p></div>`:''}`;
 }
 function renderPanel(){
@@ -628,7 +642,7 @@ document.addEventListener('click',e=>{
     $$(`.opt[data-path="${p}"]`).forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.val===getPath(S,p))));updateLive();}
   else if(a==='cardtab'){cardTab=b.dataset.tab;renderPanel();save();}
   else if(a==='download')downloadPdf(b);
-  else if(a==='copy')copyText(toText(last),'the card');
+  else if(a==='copy')copyText(cardTab==='card'?toText(last):($('#print-area')?.innerText||''),({card:'the card',checklist:'the checklist',evidence:'the evidence'})[cardTab]);
   else if(a==='export')exportJson();
   else if(a==='import')$('#import-file').click();
   else if(a==='undo'&&undoState){S=undoState.S;cur=undoState.cur;undoState=null;render();$('#toast').hidden=true;}
