@@ -18,7 +18,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Plus, Pencil, Trash2, ArrowLeft, LogOut, FileText, Layout } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, LogOut, FileText, Layout, Wrench, ExternalLink } from "lucide-react";
 import type { BlogPost } from "@shared/schema";
 import { SELECTABLE_PRICES, type PriceKey } from "@/lib/pricing";
 import { DEFAULT_SERVICES, type ServiceItem } from "@/lib/services-content";
@@ -729,6 +729,54 @@ function SiteContentSection() {
   );
 }
 
+// ── Tools ─────────────────────────────────────────────────────────────────────
+
+// The link-only workshop tools. Each is a static page under client/public,
+// served by server/routes.ts with noindex, so this list is the one place
+// they are gathered. Each opens in a new tab; use its own "Admin view"
+// toggle for the working and sources.
+const TOOLS = [
+  {
+    name: "AI charter",
+    href: "/ai-charter",
+    what: "The policy tool. Builds a firm's AI charter step by step and downloads it as Markdown, PDF or a save file.",
+  },
+  {
+    name: "Agent scorecard",
+    href: "/agent-scorecard",
+    what: "The KPI tool. Sets the measures an AI agent is judged on, with targets, counter-metrics and an agent pack.",
+  },
+  {
+    name: "Hand-over check",
+    href: "/handover-list",
+    what: "Praxis session three. Takes one job through six steps and says what should do it: automation, AI or a person.",
+  },
+];
+
+function ToolsSection() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {TOOLS.map((tool) => (
+        <a
+          key={tool.href}
+          href={tool.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid={`tool-${tool.href.slice(1)}`}
+          className="group block rounded-lg border border-border/60 bg-card p-5 hover:border-primary/60 transition-colors"
+        >
+          <div className="flex items-center justify-between gap-2">
+            <span className="font-serif font-bold">{tool.name}</span>
+            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{tool.what}</p>
+          <p className="mt-3 text-xs text-muted-foreground/70 font-mono">{tool.href}</p>
+        </a>
+      ))}
+    </div>
+  );
+}
+
 // ── Main Dashboard ────────────────────────────────────────────────────────────
 
 export default function AdminDashboard() {
@@ -799,6 +847,10 @@ export default function AdminDashboard() {
               <Layout className="w-4 h-4 mr-2" />
               Site Content
             </TabsTrigger>
+            <TabsTrigger data-testid="tab-tools" value="tools">
+              <Wrench className="w-4 h-4 mr-2" />
+              Tools
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="blog">
@@ -807,6 +859,10 @@ export default function AdminDashboard() {
 
           <TabsContent value="content">
             <SiteContentSection />
+          </TabsContent>
+
+          <TabsContent value="tools">
+            <ToolsSection />
           </TabsContent>
         </Tabs>
       </main>

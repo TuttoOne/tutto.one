@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn } from "lucide-react";
 import { PointerMark } from "@/components/brand/PointerMark";
 import { LanguageToggle, CurrencyToggle } from "@/components/layout/PreferenceToggles";
 import { copy, useT } from "@/lib/i18n";
@@ -59,21 +59,35 @@ export function Header() {
           })}
         </nav>
 
-        {/* Toggles need room; below xl they move into the menu. */}
-        <div className="hidden xl:flex items-center gap-2 shrink-0">
-          <LanguageToggle />
-          <CurrencyToggle />
-        </div>
+        <div className="flex items-center gap-1 shrink-0">
+          {/* Toggles need room; below xl they move into the menu. */}
+          <div className="hidden xl:flex items-center gap-2 mr-1">
+            <LanguageToggle />
+            <CurrencyToggle />
+          </div>
 
-        <button
-          className="xl:hidden p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          data-testid="button-mobile-menu"
-          aria-label={t(copy.nav.menu)}
-          aria-expanded={mobileOpen}
-        >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+          {/* The way into /admin, far right at every width. /admin sends anyone
+              not signed in to /admin/login. */}
+          <a
+            href="/admin"
+            aria-label={t(copy.nav.admin)}
+            title={t(copy.nav.admin)}
+            data-testid="link-admin"
+            className="p-2 text-muted-foreground hover:text-primary transition-colors xl:-mr-2"
+          >
+            <LogIn className="w-4 h-4" />
+          </a>
+
+          <button
+            className="xl:hidden p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            data-testid="button-mobile-menu"
+            aria-label={t(copy.nav.menu)}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {mobileOpen && (
