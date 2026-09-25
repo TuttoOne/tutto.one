@@ -279,6 +279,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "ai-charter", "index.html"));
   });
 
+  // Praxis hand-over check (session three): same arrangement, link only, not indexed.
+  // Its script and styles are plain static files under /handover-list/.
+  app.get(["/handover-list", "/handover-list/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "handover-list", "index.html"));
+  });
+
   // Register admin routes
   registerAdminRoutes(app);
 

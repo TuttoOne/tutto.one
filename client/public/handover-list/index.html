@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Take one job through the questions that decide whether AI takes it over, helps with it or leaves it alone, and what it needs to run without you.">
+<title>Hand-over Check · Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/handover-list/praxis.css">
+<link rel="stylesheet" href="/handover-list/app.css">
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="left">
+      <span class="brand">Tutto<span class="dot">.</span></span>
+      <span class="meta">Praxis · Hand-over check</span>
+    </div>
+    <div class="right">
+      <div class="startfrom"><label for="ex-select">Start from</label><select id="ex-select"></select></div>
+      <div class="seg" role="group" id="view-seg" aria-label="View">
+        <button data-act="view" data-view="employee" aria-pressed="true">Employee view</button>
+        <button data-act="view" data-view="admin" aria-pressed="false">Admin view</button>
+      </div>
+    </div>
+  </header>
+  <section class="hero" id="hero"></section>
+  <div class="layout" id="layout">
+    <nav class="rail" aria-label="Steps"><ol id="nav"></ol></nav>
+    <main id="panel" class="panel" aria-live="polite"></main>
+    <aside class="aside" id="aside"></aside>
+  </div>
+</div>
+<div id="toast" role="status" hidden></div>
+<input type="file" id="import-file" accept="application/json,.json" hidden>
+<script src="/handover-list/app.js"></script>
+</body>
+</html>
