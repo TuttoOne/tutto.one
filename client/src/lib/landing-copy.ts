@@ -54,8 +54,8 @@ export const landing = {
      *  leaves so the browser never breaks a sentence wherever it likes. */
     title: { en: "Claude works fast.", fr: "Claude travaille vite." },
     titleSecond: {
-      en: "Now checking takes hours.",
-      fr: "Mais vérifier prend des heures.",
+      en: "Refining takes hours.",
+      fr: "Mais peaufiner prend des heures.",
     },
 
     /** What we sell, as the third line. */
