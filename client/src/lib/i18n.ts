@@ -416,8 +416,8 @@ export const copy = {
     },
     programmeTitle: { en: "The eight-session programme", fr: "Le programme en huit séances" },
     programmeBody: {
-      en: "The AI-Fluent Team in eight sessions, or The Owner's Fast Track in four private ones. What's in the stack, the guarantee, and the back-to-work price.",
-      fr: "L'équipe à l'aise avec l'IA en huit séances, ou la formule accélérée du dirigeant en quatre séances privées. Le contenu, la garantie, et le prix de rentrée.",
+      en: "The AI-Fluent Team in eight sessions, or The Solo Fast Track in four private ones. What's in the stack, the guarantee, and the back-to-work price.",
+      fr: "L'équipe à l'aise avec l'IA en huit séances, ou la formule accélérée en solo en quatre séances privées. Le contenu, la garantie, et le prix de rentrée.",
     },
     programmeLink: { en: "See the Praxis Programme", fr: "Voir le programme Praxis" },
 
@@ -540,7 +540,7 @@ export const copy = {
       en: "Eight 90-minute sessions, you and up to four of your team. Your AI-use charter, a scorecard per role, standing briefs for your top three jobs and a check before anything ships. Built on your own work.",
       fr: "Huit séances de 90 minutes, vous et jusqu'à quatre personnes de votre équipe. Votre charte d'usage de l'IA, une grille par rôle, des consignes permanentes pour vos trois tâches clés et une vérification avant tout envoi. Construits sur votre propre travail.",
     },
-    fastTitle: { en: "The Owner's Fast Track", fr: "La formule accélérée du dirigeant" },
+    fastTitle: { en: "The Solo Fast Track", fr: "La formule accélérée en solo" },
     fast: {
       en: "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you. Credited in full if your team follows.",
       fr: "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle. Déduite intégralement si votre équipe suit.",

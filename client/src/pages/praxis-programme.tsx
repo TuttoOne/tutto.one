@@ -157,7 +157,7 @@ const faqs = [
   },
   {
     q: "One-to-one or a group?",
-    a: "The AI-Fluent Team is for you and up to four of your team. The Owner's Fast Track is private: one to one, in four sessions, and credited in full if your team follows.",
+    a: "The AI-Fluent Team is for you and up to four of your team. The Solo Fast Track is private: one to one, in four sessions, and credited in full if your team follows.",
   },
   {
     q: "What if it doesn't work for us?",
@@ -197,9 +197,16 @@ export default function PraxisProgramme() {
   /* Two steps, in this order. The free 60-minute session is the proof, the
      same offer and label as the home page. Booking the course comes after:
      a short form, then the 15-minute call to say hello and set dates, which
-     is offered once the form is in. Both carry the referring trainer's code. */
+     is offered once the form is in. Both carry the referring trainer's code.
+     Each programme has its own 15-minute event in Cal.com, so the booking
+     lands on the right track; the Fast Track one redirects to Stripe. */
   const proofSession = bookingHref("https://cal.com/tuttoone/60-min-meeting", trainerCode);
-  const greetingCall = bookingHref("https://cal.com/tuttoone/15min", trainerCode);
+  const greetingCall = bookingHref(
+    form.programme === "fastTrack"
+      ? "https://cal.com/tuttoone/15-min-fast-track-scheduling-call"
+      : "https://cal.com/tuttoone/15-min-team-track-scheduling-call",
+    trainerCode,
+  );
   // Seed the field from the visit's attribution once it is known, but never
   // overwrite something the visitor has typed themselves.
   useEffect(() => {
@@ -220,7 +227,7 @@ export default function PraxisProgramme() {
           email: form.email,
           message: [
             "Praxis Programme: course booking",
-            `Programme: ${form.programme === "fastTrack" ? "The Owner's Fast Track" : "The AI-Fluent Team"}`,
+            `Programme: ${form.programme === "fastTrack" ? "The Solo Fast Track" : "The AI-Fluent Team"}`,
             `Company: ${form.company || "-"}`,
             `Team size: ${form.teamSize || "-"}`,
             "",
@@ -409,7 +416,7 @@ export default function PraxisProgramme() {
           </div>
           <div className="pp-cols-2">
             {[
-              { label: "Format", body: "You and up to four of your team. For one to one, take The Owner's Fast Track. Either way it is built on your own work, not a syllabus." },
+              { label: "Format", body: "You and up to four of your team. For one to one, take The Solo Fast Track. Either way it is built on your own work, not a syllabus." },
               { label: "Your use cases", body: "Before we start, send the jobs you keep repeating: the quote, the report, the weekly export. We work on those from the first session. The group evenings use generic examples. This doesn't." },
               { label: "Cadence", body: "One session a week, 90 minutes each, over roughly two months. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
@@ -483,7 +490,7 @@ export default function PraxisProgramme() {
                 note: tr("Eight 90-minute sessions for you and up to four of your team. Everything in the stack above."),
               },
               {
-                label: "The Owner's Fast Track",
+                label: "The Solo Fast Track",
                 was: econ.fastTrackRegular,
                 price: econ.fastTrack,
                 note: tr("Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows."),
@@ -664,7 +671,7 @@ export default function PraxisProgramme() {
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {[
                     { value: "team", label: "The AI-Fluent Team" },
-                    { value: "fastTrack", label: "The Owner's Fast Track" },
+                    { value: "fastTrack", label: "The Solo Fast Track" },
                   ].map((o) => (
                     <button
                       key={o.value}

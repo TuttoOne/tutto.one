@@ -165,7 +165,7 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
   },
   /**
    * The regular prices of the two named Praxis offers — The AI-Fluent Team
-   * (eight sessions, the course) and The Owner's Fast Track. Set commercially
+   * (eight sessions, the course) and The Solo Fast Track. Set commercially
    * from the offer stack, not derived: the session rate stays where it is
    * because the trainer split is computed from it.
    *
@@ -375,9 +375,9 @@ export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
   { key: "enablementFrom", label: "AI-Fluent Team, special (€2,000)" },
   { key: "build", label: "Pythia build, excl. hardware (€7,000)" },
   { key: "sessionStandard", label: "Praxis session, 90 min (€250)" },
-  { key: "fastTrack", label: "Owner's Fast Track, special (€1,000)" },
+  { key: "fastTrack", label: "Solo Fast Track, special (€1,000)" },
   { key: "teamRegular", label: "AI-Fluent Team, regular (€4,500)" },
-  { key: "fastTrackRegular", label: "Owner's Fast Track, regular (€2,000)" },
+  { key: "fastTrackRegular", label: "Solo Fast Track, regular (€2,000)" },
   { key: "spAuditFrom", label: "SharePoint audit (€600)" },
   { key: "spBuildFrom", label: "SharePoint build (€6,000)" },
   { key: "spRetainerMonthly", label: "SharePoint retainer (€600/mo)" },
@@ -502,7 +502,7 @@ export function praxisEconomics(currency: Currency, locale: Locale) {
     session: f(session),
     /** All eight sessions: The AI-Fluent Team at the special price. */
     course: f(course),
-    /** Four private sessions: The Owner's Fast Track at the special price. */
+    /** Four private sessions: The Solo Fast Track at the special price. */
     fastTrack: f(session * FAST_TRACK_SESSIONS_N),
     /** Regular prices, struck through while the special runs. */
     teamRegular: f(amount("teamRegular", currency)),

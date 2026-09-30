@@ -50,8 +50,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Next: pick a call time →": "Suite : choisir un créneau →",
   "Not ready to book?": "Pas encore prêt à réserver ?",
 
-  "You and up to four of your team. For one to one, take The Owner's Fast Track. Either way it is built on your own work, not a syllabus.":
-    "Vous et jusqu'à quatre personnes de votre équipe. Pour un tête-à-tête, choisissez la formule accélérée du dirigeant. Dans les deux cas, tout se construit sur votre propre travail, pas sur un référentiel.",
+  "You and up to four of your team. For one to one, take The Solo Fast Track. Either way it is built on your own work, not a syllabus.":
+    "Vous et jusqu'à quatre personnes de votre équipe. Pour un tête-à-tête, choisissez la formule accélérée en solo. Dans les deux cas, tout se construit sur votre propre travail, pas sur un référentiel.",
   "Your use cases": "Vos cas d'usage",
   "Before we start, send the jobs you keep repeating: the quote, the report, the weekly export. We work on those from the first session. The group evenings use generic examples. This doesn't.":
     "Avant de commencer, envoyez les tâches que vous répétez sans cesse : le devis, le rapport, l'export hebdomadaire. Nous travaillons dessus dès la première séance. Les soirées collectives utilisent des exemples génériques. Pas ici.",
@@ -154,8 +154,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "You get a practice task and a clear way to get unstuck. When something breaks, the fix is usually one screenshot away, and learning that habit is part of the programme.":
     "Vous repartez avec un exercice et une marche à suivre claire pour vous débloquer. Quand quelque chose casse, la solution tient le plus souvent à une capture d'écran, et acquérir ce réflexe fait partie du programme.",
   "One-to-one or a group?": "En individuel ou en groupe ?",
-  "The AI-Fluent Team is for you and up to four of your team. The Owner's Fast Track is private: one to one, in four sessions, and credited in full if your team follows.":
-    "L'équipe à l'aise avec l'IA, c'est vous et jusqu'à quatre personnes de votre équipe. La formule accélérée du dirigeant est privée : en tête-à-tête, en quatre séances, et déduite intégralement si votre équipe suit.",
+  "The AI-Fluent Team is for you and up to four of your team. The Solo Fast Track is private: one to one, in four sessions, and credited in full if your team follows.":
+    "L'équipe à l'aise avec l'IA, c'est vous et jusqu'à quatre personnes de votre équipe. La formule accélérée en solo est privée : en tête-à-tête, en quatre séances, et déduite intégralement si votre équipe suit.",
   "What if it doesn't work for us?": "Et si cela ne fonctionne pas pour nous ?",
   "Pick one recurring piece of work before we start. If by the last session your team can't produce it with AI to the standard on your own scorecard, I keep working with you at no charge until they can. The only condition is that you attend and answer the questions.":
     "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne. La seule condition : assister aux séances et répondre aux questions.",
@@ -261,7 +261,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The AI-Fluent Team": "L'équipe à l'aise avec l'IA",
   "Eight 90-minute sessions for you and up to four of your team. Everything in the stack above.":
     "Huit séances de 90 minutes pour vous et jusqu'à quatre personnes de votre équipe. Tout ce qui figure ci-dessus.",
-  "The Owner's Fast Track": "La formule accélérée du dirigeant",
+  "The Solo Fast Track": "La formule accélérée en solo",
   "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows.":
     "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si votre équipe suit.",
   "Back-to-work price until {date}": "Prix de rentrée jusqu'au {date}",
