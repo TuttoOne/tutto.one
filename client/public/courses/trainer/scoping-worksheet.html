@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis | Scoping worksheet</title>
+<link rel="stylesheet" href="praxis.css">
+<style>
+  /* Printable A4 worksheet, three pages. Built on Praxis tokens.
+     Adapted from Roxanne Northover's Claude Academy scoping worksheet. */
+  body { background: hsl(var(--muted) / 0.5); margin: 0; font-family: var(--font-sans); color: hsl(var(--foreground)); }
+  .bar { max-width: 210mm; margin: 0 auto; padding: 18px 0 0; display: flex; gap: 12px; align-items: center; font-size: var(--text-sm); color: hsl(var(--muted-foreground)); }
+  .bar a { color: hsl(var(--primary)); }
+  .bar button { margin-left: auto; font: inherit; cursor: pointer; border: 1px solid hsl(var(--border)); background: hsl(var(--card)); border-radius: var(--radius-sm); padding: 6px 12px; }
+
+  .page { width: 210mm; min-height: 297mm; box-sizing: border-box; margin: 18px auto; padding: 14mm 14mm 12mm; background: #fff; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+  .page > .foot { margin-top: auto; padding-top: 8mm; display: flex; justify-content: space-between; font-size: 9pt; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+  .masthead { background: hsl(var(--foreground)); color: hsl(var(--background)); padding: 8mm 9mm 7mm; border-radius: var(--radius); display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; }
+  .masthead .wm { font-family: var(--font-display); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); font-size: 15pt; }
+  .masthead .wm .dot { color: hsl(var(--primary)); }
+  .masthead .kicker { display: block; margin-top: 5mm; font-size: 8pt; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: hsl(var(--primary)); }
+  .masthead h1 { font-family: var(--font-display); font-size: 24pt; margin: 1mm 0 1mm; color: hsl(var(--background)); }
+  .masthead p { margin: 0; font-size: 10pt; color: hsl(40 10% 80%); }
+  .masthead .pg { font-size: 8.5pt; letter-spacing: var(--tracking-wider); color: hsl(40 8% 60%); white-space: nowrap; }
+  .masthead.slim { padding: 5mm 9mm; }
+  .masthead.slim h1 { font-size: 13pt; margin: 0; }
+
+  h2.sec { font-family: var(--font-display); font-size: 15pt; margin: 8mm 0 1mm; padding-bottom: 1.5mm; border-bottom: 1.5px solid hsl(var(--foreground)); }
+  h2.sec .n { font-family: var(--font-mono); font-size: 9pt; color: hsl(var(--primary)); margin-right: 2.5mm; vertical-align: 2px; }
+  h2.sec em { font-style: normal; color: hsl(var(--primary)); }
+  .intro { font-size: 9.5pt; color: hsl(var(--muted-foreground)); margin: 1.5mm 0 3mm; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  th { text-align: left; font-size: 7.5pt; letter-spacing: var(--tracking-wider); text-transform: uppercase; background: hsl(var(--muted) / 0.6); padding: 2mm 2.5mm; border: 1px solid hsl(var(--border)); }
+  td { border: 1px solid hsl(var(--border)); padding: 2mm 2.5mm; vertical-align: top; }
+  td.fill { height: 10mm; }
+  td.tall { height: 16mm; }
+  td.lbl { width: 32%; font-weight: var(--weight-semibold); background: hsl(var(--muted) / 0.35); }
+  td.lbl small { display: block; font-weight: 400; color: hsl(var(--muted-foreground)); margin-top: 1mm; }
+  td.hint { color: hsl(var(--muted-foreground)); font-style: italic; }
+  td.box { width: 12mm; text-align: center; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .cols .col { border: 1px solid hsl(var(--border)); border-radius: var(--radius-sm); min-height: 52mm; padding: 3mm; font-size: 9pt; }
+  .cols .col h3 { margin: 0 0 1.5mm; font-size: 8pt; letter-spacing: var(--tracking-wider); text-transform: uppercase; }
+  .cols .col.ai h3 { color: hsl(var(--primary)); }
+  .cols .col p { margin: 0; color: hsl(var(--muted-foreground)); font-style: italic; font-size: 8.5pt; }
+
+  .card { border: 2px solid hsl(var(--foreground)); border-radius: var(--radius); overflow: hidden; }
+  .card .sentence { background: hsl(var(--primary) / 0.08); border-bottom: 1px solid hsl(var(--primary) / 0.4); padding: 5mm; font-family: var(--font-editorial); font-size: 13pt; line-height: 2.1; }
+  .card .sentence u { text-decoration: none; display: inline-block; min-width: 38mm; border-bottom: 1px solid hsl(var(--foreground)); }
+  .card table td { border-left: 0; border-right: 0; }
+
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { background: #fff; }
+    .bar { display: none; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <a href="../index.html">Library</a> <span>·</span> <a href="t1-running-the-discovery-session-teaching-notes.html">T1 teaching notes</a>
+  <button onclick="window.print()">Print or save as PDF</button>
+</div>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page">
+  <header class="masthead">
+    <div>
+      <span class="wm">Tutto<span class="dot">.</span> Praxis</span>
+      <span class="kicker">Discovery session</span>
+      <h1>Scoping worksheet</h1>
+      <p>Choose one real work task that is useful, concrete and safe enough to learn with.</p>
+    </div>
+    <span class="pg">PAGE 1 / 3</span>
+  </header>
+
+  <table style="margin-top:6mm">
+    <tr><th>Name</th><th>Role / team</th><th>Date</th><th>Group</th></tr>
+    <tr><td class="fill"></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2 class="sec"><span class="n">01</span>What eats your week?</h2>
+  <p class="intro">List the recurring tasks that take time, cause friction or feel more manual than they should. Don't worry yet about whether AI is the answer.</p>
+  <table>
+    <tr><th style="width:34%">Recurring task</th><th style="width:14%">How often?</th><th style="width:14%">Time each time</th><th>What makes it slow or painful?</th></tr>
+    <tr><td class="tall"></td><td></td><td></td><td></td></tr>
+    <tr><td class="tall"></td><td></td><td></td><td></td></tr>
+    <tr><td class="tall"></td><td></td><td></td><td></td></tr>
+    <tr><td class="tall"></td><td></td><td></td><td></td></tr>
+    <tr><td class="tall"></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2 class="sec"><span class="n">02</span>Pick <em>one</em> task and make it concrete</h2>
+  <p class="intro">Choose a task you do yourself. A good first use case has a clear start, a clear output and someone who can judge whether the result is good.</p>
+  <table>
+    <tr><td class="lbl">Task in one sentence</td><td class="fill"></td></tr>
+    <tr><td class="lbl">What starts it?<small>A date, a request, an email, a meeting</small></td><td class="fill"></td></tr>
+    <tr><td class="lbl">Inputs<small>Files, systems, data, notes</small></td><td class="tall"></td></tr>
+    <tr><td class="lbl">Output<small>What you hand over at the end</small></td><td class="fill"></td></tr>
+    <tr><td class="lbl">Who uses or reviews it?</td><td class="fill"></td></tr>
+    <tr><td class="lbl">Where is judgement needed?</td><td class="tall"></td></tr>
+  </table>
+
+  <div class="foot"><span>Tutto Praxis · Scoping worksheet</span><span>tutto.one/praxis</span></div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <header class="masthead slim">
+    <h1>Test the task, split the work, set what success means</h1>
+    <span class="pg">PAGE 2 / 3</span>
+  </header>
+
+  <h2 class="sec"><span class="n">03</span>Is this a good first AI use case?</h2>
+  <p class="intro">You're looking for a task that matters enough to be worth it and is small enough to learn from. The most impressive one can wait.</p>
+  <table>
+    <tr><th>Check</th><th class="box">Yes</th><th class="box">No / unsure</th><th style="width:34%">What to note</th></tr>
+    <tr><td>I can describe the task in one or two sentences.</td><td></td><td></td><td class="hint">If not, narrow it.</td></tr>
+    <tr><td>The inputs and the expected output are reasonably clear.</td><td></td><td></td><td class="hint">Vague in, vague out.</td></tr>
+    <tr><td>I do this often enough for an improvement to matter.</td><td></td><td></td><td class="hint">One-off tasks are harder to learn from.</td></tr>
+    <tr><td>A person can review the result before it's used.</td><td></td><td></td><td class="hint">Accountability stays with a person.</td></tr>
+    <tr><td>The task isn't mainly a high-stakes decision.</td><td></td><td></td><td class="hint">Start with help on the work, leave the final call to people.</td></tr>
+    <tr><td>I can tell what "good" looks like.</td><td></td><td></td><td class="hint">You need a quality target.</td></tr>
+  </table>
+
+  <h2 class="sec"><span class="n">04</span>Split the work: AI helps, you own it</h2>
+  <p class="intro">A good use case rarely hands the whole task over. Decide where AI can help and where judgement and accountability stay with you.</p>
+  <div class="cols">
+    <div class="col ai"><h3>AI could help with</h3><p>For example: summarise, compare, sort, extract, draft, reformat, brainstorm, spot patterns.</p></div>
+    <div class="col"><h3>I still have to</h3><p>For example: give the business context, check facts and figures, decide, approve, handle the exceptions, take responsibility.</p></div>
+  </div>
+
+  <h2 class="sec"><span class="n">05</span>Quick risk check</h2>
+  <p class="intro">A "yes" doesn't rule the task out. It may mean a narrower task, safer data, a stronger review or a different place to start.</p>
+  <table>
+    <tr><th>Does this task involve</th><th class="box">Y / N</th><th style="width:42%">Safeguard needed</th></tr>
+    <tr><td>Confidential, personal or commercially sensitive information</td><td></td><td></td></tr>
+    <tr><td>Financial figures, exact calculations, dates or citations that must be right</td><td></td><td></td></tr>
+    <tr><td>A legal, HR, safety, regulatory or other high-stakes decision</td><td></td><td></td></tr>
+    <tr><td>Communication with customers or the public that could affect your reputation</td><td></td><td></td></tr>
+    <tr><td>A result that's hard to check independently</td><td></td><td></td></tr>
+    <tr><td>An action AI should never take without a person's approval</td><td></td><td></td></tr>
+  </table>
+
+  <h2 class="sec"><span class="n">06</span>What would success look like?</h2>
+  <p class="intro">"Make it better" and "save time" aren't enough. Describe a result you'd recognise and could compare.</p>
+  <table>
+    <tr><td class="lbl">Today<small>This task takes or needs...</small></td><td class="fill"></td></tr>
+    <tr><td class="lbl">Target<small>With AI, I'd like to...</small></td><td class="fill"></td></tr>
+    <tr><td class="lbl">Quality bar<small>The output is good enough when...</small></td><td class="fill"></td></tr>
+    <tr><td class="lbl">Checks<small>Before I use it, I'll check...</small></td><td class="fill"></td></tr>
+    <tr><td class="lbl">Value<small>If this works, we get...</small></td><td class="fill"></td></tr>
+  </table>
+
+  <div class="foot"><span>Tutto Praxis · Scoping worksheet</span><span>tutto.one/praxis</span></div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page">
+  <header class="masthead slim">
+    <h1>Your Use Case Card</h1>
+    <span class="pg">PAGE 3 / 3</span>
+  </header>
+
+  <p class="intro" style="margin-top:6mm">Pull what you decided on the last two pages onto one card. This is the use case you carry through the programme and keep improving as you learn.</p>
+
+  <div class="card">
+    <div class="sentence">When <u>&nbsp;</u> happens, I need to <u>&nbsp;</u> using <u>&nbsp;</u> to produce <u>&nbsp;</u>.</div>
+    <table>
+      <tr><td class="lbl">Why this task?<small>It's worth improving because today it...</small></td><td class="tall"></td></tr>
+      <tr><td class="lbl">What AI does<small>AI could help by...</small></td><td class="tall"></td></tr>
+      <tr><td class="lbl">What I do<small>I still provide, check, decide or approve...</small></td><td class="tall"></td></tr>
+      <tr><td class="lbl">Checks and safeguards<small>Before I use the result, I will...</small></td><td class="tall"></td></tr>
+      <tr><td class="lbl">Success looks like<small>I'll know this is useful when...</small></td><td class="tall"></td></tr>
+      <tr><td class="lbl">First experiment<small>The smallest version I can test is...</small></td><td class="tall"></td></tr>
+    </table>
+  </div>
+
+  <table style="margin-top:8mm">
+    <tr><th colspan="2">For the trainer</th></tr>
+    <tr><td class="lbl">Risk flags to carry into the charter</td><td class="fill"></td></tr>
+    <tr><td class="lbl">Success measure to carry into the scorecard</td><td class="fill"></td></tr>
+    <tr><td class="lbl">Systems and files it touches<small>Feeds the provider choice</small></td><td class="fill"></td></tr>
+  </table>
+
+  <div class="foot"><span>Tutto Praxis · Scoping worksheet</span><span>Adapted from Roxanne Northover's Claude Academy worksheet</span></div>
+</section>
+
+</body>
+</html>

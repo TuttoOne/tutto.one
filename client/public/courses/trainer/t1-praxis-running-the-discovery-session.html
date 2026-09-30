@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis · Course library</title>
+<title>Praxis Trainer | T1 · Running the discovery session: talking deck</title>
 <style>
 /* ============================================================
-   Praxis / Tutto — Design System
+   Praxis / Tutto: Design System
    Source: tutto.one/praxis (extracted 2026-05-13)
    ------------------------------------------------------------
    Drop this file next to any HTML doc and link it:
@@ -16,9 +16,9 @@
    ============================================================ */
 
 /* --- Fonts ----------------------------------------------------
-   Inter      — body, UI, default
-   Roboto     — display / headings (the site aliases this as "serif")
-   Source Serif 4 — long-form editorial (essays, quotes, callouts)
+   Inter     : body, UI, default
+   Roboto    : display / headings (the site aliases this as "serif")
+   Source Serif 4: long-form editorial (essays, quotes, callouts)
    The site loads all three; we keep the same set so any doc
    matches the website even when mixing display modes.
    ------------------------------------------------------------ */
@@ -26,14 +26,14 @@
 
 /* --- Tokens (light, default) -------------------------------- */
 :root {
-  /* Brand colors — HSL parts as the site uses, plus resolved hex for reference */
-  --background:        40 10% 98%;   /* #FAF9F6 — warm off-white */
-  --foreground:        0 0% 12%;     /* #1F1F1F — near-black */
+  /* Brand colors: HSL parts as the site uses, plus resolved hex for reference */
+  --background:        40 10% 98%;   /* #FAF9F6: warm off-white */
+  --foreground:        0 0% 12%;     /* #1F1F1F: near-black */
   --card:              0 0% 100%;    /* #FFFFFF */
   --card-foreground:   0 0% 12%;
   --muted:             40 5% 90%;    /* warm grey panel */
   --muted-foreground:  220 9% 46%;   /* cool slate body-secondary */
-  --primary:           32 95% 44%;   /* #DB7400 — warm amber accent */
+  --primary:           32 95% 44%;   /* #DB7400: warm amber accent */
   --primary-foreground: 0 0% 100%;
   --accent:            32 95% 44%;
   --accent-foreground: 0 0% 100%;
@@ -70,7 +70,7 @@
   --leading-normal:   1.5;
   --leading-relaxed:  1.625;
 
-  /* Spacing — base unit 0.25rem (4px), Tailwind-compatible */
+  /* Spacing: base unit 0.25rem (4px), Tailwind-compatible */
   --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
   --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
   --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
@@ -87,8 +87,8 @@
   --shadow:    0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
 
   /* Containers */
-  --content-width: 42rem;   /* 672px — comfortable reading column */
-  --page-width:    56rem;   /* 896px — wider page max */
+  --content-width: 42rem;   /* 672px: comfortable reading column */
+  --page-width:    56rem;   /* 896px: wider page max */
 
   /* Font stacks */
   --font-sans:      'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -139,7 +139,7 @@ html {
 body {
   margin: 0;
   font-weight: var(--weight-regular);
-  font-feature-settings: 'cv11', 'ss01';  /* Inter alternates — subtle, on the website */
+  font-feature-settings: 'cv11', 'ss01';  /* Inter alternates: subtle, on the website */
 }
 
 /* --- Headings ------------------------------------------------
@@ -198,14 +198,14 @@ ul, ol { margin: 0 0 var(--space-4); padding-left: var(--space-6); }
 li { margin-bottom: var(--space-2); }
 li > ul, li > ol { margin-top: var(--space-2); margin-bottom: 0; }
 
-/* Dash-style list (signature site pattern: "Term — explanation") */
+/* Dash-style list (signature site pattern: "Term: explanation") */
 ul.dash { list-style: none; padding-left: 0; }
 ul.dash > li {
   position: relative;
   padding-left: var(--space-6);
 }
 ul.dash > li::before {
-  content: '—';
+  content: '\00B7';
   position: absolute;
   left: 0;
   color: hsl(var(--primary));
@@ -463,7 +463,7 @@ th {
 }
 
 /* ============================================================
-   Patterns — borrowed from the training one-pager
+   Patterns: borrowed from the training one-pager
    ------------------------------------------------------------
    These are heavier, more editorial blocks. Use for training
    handouts, mental-model one-pagers, and anything that needs
@@ -713,41 +713,102 @@ th {
   .slide { page: slide; height: 100vh; padding: 18mm 22mm; }
 }
 
-/* --- index-specific --- */
-body { background: hsl(var(--background)); }
-main { max-width: 50rem; margin: 0 auto; padding: var(--space-16) var(--space-6) var(--space-24); }
-.wm { font-family: var(--font-display); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); font-size: var(--text-lg); }
-.wm .dot { color: hsl(var(--primary)); }
-h1 { margin-top: var(--space-4); margin-bottom: var(--space-3); }
-.sub { color: hsl(var(--muted-foreground)); font-size: var(--text-lg); max-width: 58ch; margin: 0 0 var(--space-12); }
-ol.lib { list-style: none; margin: 0; padding: 0; }
-ol.lib li { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4) 0; border-top: 1px solid hsl(var(--border)); }
-ol.lib li:last-child { border-bottom: 1px solid hsl(var(--border)); }
-.lib .n { font-family: var(--font-mono); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); width: 2.5em; flex: none; }
-.lib .name { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-xl); flex: 1; }
-.lib .links { display: flex; gap: var(--space-2); flex: none; }
-.lib .links a { text-decoration: none; font-size: var(--text-sm); font-weight: var(--weight-medium); padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); white-space: nowrap; }
-.lib .links a.primary { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); border-color: hsl(var(--primary)); }
-.lib .links a:hover { border-color: hsl(var(--primary)); }
-footer { margin-top: var(--space-10); color: hsl(var(--muted-foreground)); font-size: var(--text-sm); }
-h2 { font-family: var(--font-display); margin: var(--space-10) 0 var(--space-2); font-size: var(--text-lg); }
-h2.spec { margin-top: var(--space-16); }
-.seclead { color: hsl(var(--muted-foreground)); font-size: var(--text-sm); margin: 0 0 var(--space-3); }
-.lib .links .none { font-size: var(--text-sm); color: hsl(var(--muted-foreground)); opacity: .7; }
-.langbar { display: flex; align-items: center; gap: var(--space-3); margin: 0 0 var(--space-8); }
-.langbar .seg { display: inline-flex; border: 1px solid hsl(var(--border)); border-radius: var(--radius-sm); overflow: hidden; }
-.langbar button { font: inherit; font-size: var(--text-sm); font-weight: var(--weight-medium); cursor: pointer; border: 0; padding: var(--space-2) var(--space-4); background: transparent; color: hsl(var(--muted-foreground)); }
-.langbar button[aria-pressed="true"] { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
-.langbar .hint { font-size: var(--text-sm); color: hsl(var(--muted-foreground)); }
-body[data-lang="en"] .lang-fr, body[data-lang="fr"] .lang-en { display: none; }
-@media (max-width: 640px) { ol.lib li { flex-wrap: wrap; } .lib .name { flex-basis: 100%; } }
+</style>
+<style>
+  /* ===== On-screen presentation harness =====================
+     One slide per screen. Arrow keys or space to advance,
+     F11 for fullscreen. Built on Praxis tokens from praxis.css.
+     ========================================================= */
+  html, body { height: 100%; margin: 0; }
+  body { background: hsl(var(--background)); overflow: hidden; }
+
+  .deck-slide {
+    position: fixed; inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5vh 6vw 7vh;
+    background: hsl(var(--background));
+  }
+  .deck-slide.active { display: flex; }
+
+  .stage { width: 100%; max-width: 1180px; margin: 0 auto; }
+
+  /* slide chrome */
+  .chrome {
+    position: fixed; top: 3.2vh; left: 6vw; right: 6vw;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: var(--text-sm); color: hsl(var(--muted-foreground));
+  }
+  .chrome .wm { font-family: var(--font-display); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); color: hsl(var(--foreground)); }
+  .chrome .wm .dot { color: hsl(var(--primary)); }
+
+  .deck-slide .eyebrow { margin-bottom: var(--space-2); }
+  .deck-slide h2 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); margin: 0 0 var(--space-2); }
+  .deck-slide .lead { max-width: 60ch; margin-bottom: var(--space-6); }
+
+  /* diagram canvas */
+  .diagram { width: 100%; margin-top: var(--space-2); }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .cap { margin-top: var(--space-4); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); max-width: 70ch; }
+  .cap code { font-size: 0.85em; }
+
+  /* SVG shared styles */
+  svg text { font-family: var(--font-sans); fill: hsl(var(--foreground)); }
+  .s-ink   { fill: hsl(var(--foreground)); }
+  .s-amber { fill: hsl(var(--primary)); }
+  .s-muted { fill: hsl(var(--muted-foreground)); }
+  .l-ink   { stroke: hsl(var(--foreground)); fill: none; }
+  .l-amber { stroke: hsl(var(--primary)); fill: none; }
+  .l-faint { stroke: hsl(var(--border)); fill: none; }
+  .box     { fill: #fff; stroke: hsl(var(--border)); }
+  .box-amber { fill: hsl(var(--primary) / 0.08); stroke: hsl(var(--primary)); }
+  .box-ink   { fill: hsl(var(--foreground)); stroke: hsl(var(--foreground)); }
+  .t-lbl   { font-size: 19px; font-weight: 600; }
+  .t-sub   { font-size: 14px; fill: hsl(var(--muted-foreground)); }
+  .t-tiny  { font-size: 12.5px; fill: hsl(var(--muted-foreground)); }
+  .t-mono  { font-family: var(--font-mono); font-size: 14px; }
+  .t-white { fill: hsl(var(--background)); }
+
+  /* title / closing slides: dark */
+  .deck-slide.title { background: hsl(var(--foreground)); justify-content: flex-end; }
+  .deck-slide.title h1 { color: hsl(var(--background)); font-size: clamp(2.6rem, 6vw, 4.2rem); margin-bottom: var(--space-4); }
+  .deck-slide.title .eyebrow { color: hsl(var(--primary)); }
+  .deck-slide.title .lead { color: hsl(40 10% 80%); }
+  .deck-slide.title .chrome .wm { color: hsl(var(--background)); }
+  .deck-slide.title .chrome { color: hsl(40 8% 60%); }
+
+  /* agenda groups */
+  .spine { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); margin-top: var(--space-6); }
+  .spine .grp h4 { margin: 0 0 var(--space-3); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: hsl(var(--primary)); }
+  .spine ol { list-style: none; margin: 0; padding: 0; }
+  .spine li { font-size: var(--text-base); margin-bottom: var(--space-2); display: flex; gap: var(--space-2); line-height: var(--leading-snug); }
+  .spine li .n { font-family: var(--font-mono); font-size: var(--text-xs); color: hsl(var(--muted-foreground)); padding-top: 0.2em; min-width: 1.2em; }
+
+  /* nav UI */
+  .slide-counter { position: fixed; bottom: 3.2vh; right: 6vw; font-size: var(--text-xs); letter-spacing: var(--tracking-wider); color: hsl(var(--muted-foreground)); }
+  .deck-slide.title .slide-counter { color: hsl(40 8% 55%); }
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: hsl(var(--primary)); transition: width 0.2s ease; z-index: 10; }
+  .hint { position: fixed; bottom: 3.2vh; left: 6vw; font-size: var(--text-xs); color: hsl(var(--muted-foreground)); opacity: 0.7; }
+
+  @media print {
+    body { overflow: visible; }
+    @page { size: A4 landscape; margin: 0; }
+    .deck-slide { position: relative; inset: auto; display: flex !important; height: 100vh; page-break-after: always; }
+    .progress, .hint, .slide-counter { display: none; }
+  }
 </style>
 </head>
-<body data-lang="en">
+<body>
 
 <nav id="psn" class="no-print" style="position:fixed;top:0;left:0;right:0;z-index:9999;height:44px;display:flex;align-items:center;gap:0;padding:0 18px;background:rgba(250,249,246,0.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid hsl(220,13%,91%);box-sizing:border-box;">
   <a href="/" style="font-family:'Roboto',-apple-system,sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:-0.025em;color:#1f1f1f;text-decoration:none;white-space:nowrap;flex-shrink:0;">Tutto<span style="color:#db7400;">.</span></a>
-    <div style="flex:1;"></div>
+  <span style="width:1px;height:18px;background:hsl(220,13%,88%);margin:0 14px;flex-shrink:0;"></span>
+  <a id="psn-lib" href="../index.html" style="font-size:0.8125rem;font-weight:500;color:#6b7280;text-decoration:none;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;padding:6px 10px;border:1px solid hsl(220,13%,91%);border-radius:6px;background:hsl(220,13%,97%);">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Library
+  </a>
+  <div style="flex:1;"></div>
   <button onclick="var d=document.getElementById('psn-dd');d.style.display=d.style.display==='block'?'none':'block';" style="background:none;border:1px solid hsl(220,13%,91%);border-radius:6px;cursor:pointer;padding:5px 10px;font-size:0.875rem;color:#1f1f1f;font-family:'Inter',-apple-system,sans-serif;height:32px;display:flex;align-items:center;gap:5px;white-space:nowrap;" id="psn-btn">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     tutto.one
@@ -778,77 +839,291 @@ body[data-lang="en"] .lang-fr, body[data-lang="fr"] .lang-en { display: none; }
 </script>
 
 <style id="psn-overrides">
-  main { padding-top: calc(var(--space-16, 4rem) + 44px) !important; }
-  /* hide the standalone .wm span since Tutto. is now in nav */
-  main > .wm:first-child { display: none !important; }
+  /* push slide deck below nav bar */
+  .deck-slide { top: 44px !important; left: 0 !important; right: 0 !important; bottom: 0 !important; }
+  /* push chrome (top bar of slide) down */
+  .chrome { top: calc(3.2vh + 44px) !important; }
+  /* hide duplicate Tutto. in chrome since it's now in nav */
+  .chrome .wm { display: none !important; }
+  .chrome > span:first-child + * { display: none !important; }
+  body { padding-top: 0; }
 </style>
 
-<main>
-  <span class="wm">Tutto<span class="dot">.</span></span>
-  <h1>Praxis course library</h1>
-  <p class="sub">Anthropic's courses, rebuilt as Praxis talking decks, each paired with a
-  trainer's teaching guide. Open the deck on the screen the room sees; keep the teaching
-  notes open beside it.</p>
-  <div class="langbar">
-    <span class="seg">
-      <button id="l-en" aria-pressed="true">English</button>
-      <button id="l-fr" aria-pressed="false">Fran&ccedil;ais</button>
-    </span>
-    <span class="hint" id="l-hint">Showing English decks and notes.</span>
+
+<style>
+  .tiles { display: grid; grid-template-columns: repeat(var(--c, 3), 1fr); gap: var(--space-4); margin-top: var(--space-4); }
+  .tile { background: #fff; border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .tile.amber { background: hsl(var(--primary) / 0.08); border-color: hsl(var(--primary)); }
+  .tile.ink { background: hsl(var(--foreground)); border-color: hsl(var(--foreground)); }
+  .tile.ink h4, .tile.ink p { color: hsl(var(--background)); }
+  .tile h4 { margin: 0 0 var(--space-1); font-size: var(--text-lg); line-height: var(--leading-snug); }
+  .tile p { margin: 0; font-size: var(--text-sm); color: hsl(var(--muted-foreground)); line-height: var(--leading-snug); }
+  .tile .k { display: block; font-family: var(--font-mono); font-size: var(--text-xs); color: hsl(var(--primary)); margin-bottom: 6px; letter-spacing: var(--tracking-wider); text-transform: uppercase; }
+  table.ex { width: 100%; border-collapse: collapse; font-size: var(--text-sm); background: #fff; margin-top: var(--space-4); }
+  table.ex th, table.ex td { border: 1px solid hsl(var(--border)); padding: 8px 12px; text-align: left; vertical-align: top; }
+  table.ex th { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-wider); background: hsl(var(--muted) / 0.6); }
+  table.ex td.y { color: hsl(var(--primary)); font-weight: 600; }
+  .sentence { font-family: var(--font-editorial); font-size: clamp(1.2rem, 2.2vw, 1.7rem); line-height: 1.6; background: hsl(var(--primary) / 0.08); border-left: 4px solid hsl(var(--primary)); padding: var(--space-5) var(--space-6); margin-top: var(--space-4); }
+  .sentence b { color: hsl(var(--primary)); font-weight: 600; }
+  .example-tag { display: inline-block; font-size: var(--text-xs); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: hsl(var(--muted-foreground)); border: 1px solid hsl(var(--border)); border-radius: 999px; padding: 2px 10px; margin-top: var(--space-4); }
+  @media (max-width: 800px) { .tiles { grid-template-columns: 1fr 1fr; } }
+</style>
+
+<div class="progress" id="progress"></div>
+
+<!-- ============ 1 · START WITH YOUR WEEK. ============ -->
+<section class="deck-slide title active">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis · discovery session</span></div>
+  <div class="stage">
+    <span class="eyebrow">Praxis: discovery session</span>
+    <h1>Start with<br>your week.</h1>
+    <p class="lead">90 minutes and one worksheet. You leave with one task of your own that's worth handing part of to AI, and a clear idea of what good looks like.</p>
+    
+    
   </div>
-  <h2>First steps</h2>
-  <p class="seclead">For someone who wants to understand AI before touching any tool. No terminal, nothing to install, nothing to build.</p>
-  <ol class="lib">
-    <li><span class="n">00</span><span class="name">First steps with AI</span><span class="links lang-en"><a href="first-steps/00-praxis-first-steps-with-ai.html">Deck</a><a class="primary" href="first-steps/00-first-steps-with-ai-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="first-steps/00-praxis-first-steps-with-ai-fr.html">Deck</a><a class="primary" href="first-steps/00-first-steps-with-ai-teaching-notes-fr.html">Notes du formateur</a></span></li>
-  </ol>
-  <h2 class="spec">Core track</h2>
-  <ol class="lib">
-    <li><span class="n">00</span><span class="name">Start Here</span><span class="links lang-en"><a href="00-praxis-start-here.html">Deck</a><a class="primary" href="00-start-here-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="00-praxis-start-here-fr.html">Deck</a></span></li>
-    <li><span class="n">01</span><span class="name">Claude 101</span><span class="links lang-en"><a href="01-praxis-claude-101.html">Deck</a><a class="primary" href="01-claude-101-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="01-praxis-claude-101-fr.html">Deck</a></span></li>
-    <li><span class="n">02</span><span class="name">Claude Code 101</span><span class="links lang-en"><a href="02-praxis-claude-code-101.html">Deck</a><a class="primary" href="02-claude-code-101-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="02-praxis-claude-code-101-fr.html">Deck</a></span></li>
-    <li><span class="n">03</span><span class="name">Claude Cowork</span><span class="links lang-en"><a href="03-praxis-introduction-to-claude-cowork.html">Deck</a><a class="primary" href="03-introduction-to-claude-cowork-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="03-praxis-introduction-to-claude-cowork-fr.html">Deck</a></span></li>
-    <li><span class="n">04</span><span class="name">Claude Code in Action</span><span class="links lang-en"><a href="04-praxis-claude-code-in-action.html">Deck</a><a class="primary" href="04-claude-code-in-action-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="04-praxis-claude-code-in-action-fr.html">Deck</a></span></li>
-    <li><span class="n">05</span><span class="name">AI Fluency: Framework &amp; Foundations</span><span class="links lang-en"><a href="05-praxis-ai-fluency-framework-foundations.html">Deck</a><a class="primary" href="05-ai-fluency-framework-foundations-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="05-praxis-ai-fluency-framework-foundations-fr.html">Deck</a></span></li>
-    <li><span class="n">06</span><span class="name">Claude with the Anthropic API</span><span class="links lang-en"><a href="06-praxis-claude-with-the-anthropic-api.html">Deck</a><a class="primary" href="06-claude-with-the-anthropic-api-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="06-praxis-claude-with-the-anthropic-api-fr.html">Deck</a></span></li>
-    <li><span class="n">07</span><span class="name">Introduction to MCP</span><span class="links lang-en"><a href="07-praxis-introduction-to-model-context-protocol.html">Deck</a><a class="primary" href="07-introduction-to-model-context-protocol-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="07-praxis-introduction-to-model-context-protocol-fr.html">Deck</a></span></li>
-    <li><span class="n">08</span><span class="name">Introduction to Agent Skills</span><span class="links lang-en"><a href="08-praxis-introduction-to-agent-skills.html">Deck</a><a class="primary" href="08-introduction-to-agent-skills-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="08-praxis-introduction-to-agent-skills-fr.html">Deck</a></span></li>
-    <li><span class="n">09</span><span class="name">Introduction to Subagents</span><span class="links lang-en"><a href="09-praxis-introduction-to-subagents.html">Deck</a><a class="primary" href="09-introduction-to-subagents-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="09-praxis-introduction-to-subagents-fr.html">Deck</a></span></li>
-    <li><span class="n">10</span><span class="name">AI Capabilities &amp; Limitations</span><span class="links lang-en"><a href="10-praxis-ai-capabilities-and-limitations.html">Deck</a><a class="primary" href="10-ai-capabilities-and-limitations-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="10-praxis-ai-capabilities-and-limitations-fr.html">Deck</a></span></li>
-  </ol>
-  <h2 class="spec">Specialist</h2>
-  <p class="seclead">Audience- and platform-specific courses, kept separate from the core track.</p>
-  <ol class="lib">
-    <li><span class="n">11</span><span class="name">AI Fluency for small businesses</span><span class="links lang-en"><a href="specialist/11-praxis-ai-fluency-for-small-businesses.html">Deck</a><a class="primary" href="specialist/11-ai-fluency-for-small-businesses-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="specialist/11-praxis-ai-fluency-for-small-businesses-fr.html">Deck</a></span></li>
-    <li><span class="n">12</span><span class="name">AI Fluency for Educators</span><span class="links lang-en"><a href="specialist/12-praxis-ai-fluency-for-educators.html">Deck</a><a class="primary" href="specialist/12-ai-fluency-for-educators-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="specialist/12-praxis-ai-fluency-for-educators-fr.html">Deck</a></span></li>
-    <li><span class="n">17</span><span class="name">Where Claude keeps what it knows</span><span class="links lang-en"><a href="specialist/17-praxis-where-claude-keeps-what-it-knows.html">Deck</a></span><span class="links lang-fr"><a href="specialist/17-praxis-where-claude-keeps-what-it-knows-fr.html">Deck</a></span></li>
-    <li><span class="n">18</span><span class="name">What an eval is</span><span class="links lang-en"><a href="specialist/18-praxis-what-an-eval-is.html">Deck</a></span><span class="links lang-fr"><a href="specialist/18-praxis-what-an-eval-is-fr.html">Deck</a></span></li>
-    <li><span class="n">19</span><span class="name">Measuring extraction</span><span class="links lang-en"><a href="specialist/19-praxis-measuring-extraction.html">Deck</a><a class="primary" href="specialist/19-measuring-extraction-teaching-notes.html">Teaching notes</a></span><span class="links lang-fr"><a href="specialist/19-praxis-measuring-extraction-fr.html">Deck</a></span></li>
-  </ol>
-  <h2 class="spec">Trainer track</h2>
-  <p class="seclead">For consultants becoming Praxis trainers. Each deck is the one you run with a client, and the teaching notes show you how to run it.</p>
-  <ol class="lib">
-    <li><span class="n">T1</span><span class="name">Running the discovery session</span><span class="links lang-en"><a href="trainer/t1-praxis-running-the-discovery-session.html">Deck</a><a class="primary" href="trainer/t1-running-the-discovery-session-teaching-notes.html">Teaching notes</a><a href="trainer/scoping-worksheet.html">Worksheet</a></span><span class="links lang-fr"><a href="trainer/t1-praxis-running-the-discovery-session.html">Deck (English only)</a><a class="primary" href="trainer/t1-running-the-discovery-session-teaching-notes.html">Teaching notes</a><a href="trainer/scoping-worksheet.html">Worksheet</a></span></li>
-  </ol>
-  <footer>18 course(s) live. More are added as their teaching guides are built.</footer>
-</main>
+  <span class="slide-counter">01</span>
+</section>
+
+<!-- ============ 2 · SEVEN STEPS, ONE WORKSHEET ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>The plan</span></div>
+  <div class="stage">
+    <span class="eyebrow">How the 90 minutes go</span>
+    <h2>Seven steps, one worksheet</h2>
+    <p class="lead">We fill in the worksheet together, a section at a time. By step seven each person has their own Use Case Card.</p>
+    <div class="tiles" style="--c:4">
+  <div class="tile"><span class="k">01 · 15 min</span><h4>What eats your week</h4><p>List the tasks that take the time</p></div>
+  <div class="tile"><span class="k">02 · 15 min</span><h4>Pick one</h4><p>Make it concrete: start, inputs, output</p></div>
+  <div class="tile"><span class="k">03 · 10 min</span><h4>Six checks</h4><p>Is it a sensible first use case?</p></div>
+  <div class="tile"><span class="k">04 · 10 min</span><h4>Split the work</h4><p>What AI does, what you keep</p></div>
+  <div class="tile"><span class="k">05 · 10 min</span><h4>Risk check</h4><p>Six flags and the safeguard for each</p></div>
+  <div class="tile"><span class="k">06 · 10 min</span><h4>Success</h4><p>A result you'd recognise</p></div>
+  <div class="tile amber"><span class="k">07 · 10 min</span><h4>Use Case Card</h4><p>Everything on one card</p></div>
+  <div class="tile ink"><span class="k" style="color:hsl(var(--primary))">10 min</span><h4>Welcome</h4><p>Why we start with your week</p></div>
+</div>
+    
+  </div>
+  <span class="slide-counter">02</span>
+</section>
+
+<!-- ============ 3 · THE TASK DECIDES THE TOOL ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Why we start here</span></div>
+  <div class="stage">
+    <span class="eyebrow">Why the tool comes last</span>
+    <h2>The task decides the tool</h2>
+    <p class="lead">People usually start by asking which AI to buy. We start with the work, because the task decides what you need: which files, which systems, which safeguards.</p>
+    <div class="tiles" style="--c:4">
+  <div class="tile"><span class="k">Today</span><h4>Your week</h4><p>Everything that takes your time</p></div>
+  <div class="tile"><span class="k">Today</span><h4>One task</h4><p>Concrete, frequent, checkable</p></div>
+  <div class="tile amber"><span class="k">Today</span><h4>Use Case Card</h4><p>What AI does, what you own, what success is</p></div>
+  <div class="tile ink"><span class="k" style="color:hsl(var(--primary))">Next sessions</span><h4>Policy, scorecard, setup</h4><p>All built from your cards</p></div>
+</div>
+    <p class="cap">Your cards feed everything that follows: the risks become your AI policy, the success measures become your scorecard, and the inputs tell us which provider fits.</p>
+  </div>
+  <span class="slide-counter">03</span>
+</section>
+
+<!-- ============ 4 · WHAT EATS YOUR WEEK? ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Step 01</span></div>
+  <div class="stage">
+    <span class="eyebrow">01 · 15 minutes</span>
+    <h2>What eats your week?</h2>
+    <p class="lead">List the recurring tasks that take time, cause friction or feel more manual than they should. Don't worry yet about whether AI is the answer.</p>
+    <table class="ex">
+  <tr><th style="width:34%">Recurring task</th><th>How often</th><th>Time</th><th>What makes it slow</th></tr>
+  <tr><td>Landlord statement pack</td><td>Monthly</td><td>1.5 days</td><td>Ledger export, invoices and a cover note per landlord, all put together by hand</td></tr>
+  <tr><td>Chasing contractor quotes</td><td>Weekly</td><td>3 hours</td><td>Emails back and forth, quotes arrive in different formats</td></tr>
+  <tr><td>Answering tenant FAQs</td><td>Daily</td><td>45 min</td><td>Same 20 questions, answers scattered across old emails</td></tr>
+</table>
+<span class="example-tag">Example: Ana, operations lead at a lettings agency</span>
+    
+  </div>
+  <span class="slide-counter">04</span>
+</section>
+
+<!-- ============ 5 · PICK ONE TASK AND MAKE IT CONCRETE ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Step 02</span></div>
+  <div class="stage">
+    <span class="eyebrow">02 · 15 minutes</span>
+    <h2>Pick one task and make it concrete</h2>
+    <p class="lead">Choose a task you do yourself. A good first one has a clear start, a clear output and someone who can say whether the result is good.</p>
+    <table class="ex">
+  <tr><th style="width:26%">Task in one sentence</th><td>Produce the monthly statement pack for each landlord</td></tr>
+  <tr><th>What starts it</th><td>Month-end close in the property software, first working day of the month</td></tr>
+  <tr><th>Inputs</th><td>Rent ledger export (Excel), maintenance invoices (PDF), last month's notes</td></tr>
+  <tr><th>Output</th><td>One PDF per landlord: statement plus a short cover note explaining anything unusual</td></tr>
+  <tr><th>Who reviews it</th><td>Ana, then the branch manager for anything over £1,000</td></tr>
+  <tr><th>Where judgement is needed</th><td>Deciding what counts as "unusual" and how to explain it to each landlord</td></tr>
+</table>
+<span class="example-tag">Example: Ana, operations lead at a lettings agency</span>
+    
+  </div>
+  <span class="slide-counter">05</span>
+</section>
+
+<!-- ============ 6 · IS THIS A GOOD FIRST USE CASE? ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Step 03</span></div>
+  <div class="stage">
+    <span class="eyebrow">03 · 10 minutes</span>
+    <h2>Is this a good first use case?</h2>
+    <p class="lead">You're looking for a task that matters enough to be worth it and is small enough to learn from. The impressive one can wait.</p>
+    <table class="ex">
+  <tr><th>Check</th><th style="width:12%">Ana</th><th style="width:34%">If it's a no</th></tr>
+  <tr><td>I can describe it in one or two sentences</td><td class="y">Yes</td><td>Narrow it</td></tr>
+  <tr><td>Inputs and output are reasonably clear</td><td class="y">Yes</td><td>Vague in, vague out</td></tr>
+  <tr><td>I do it often enough for it to matter</td><td class="y">Yes</td><td>One-off tasks are harder to learn from</td></tr>
+  <tr><td>A person reviews the result before it's used</td><td class="y">Yes</td><td>Add a review step first</td></tr>
+  <tr><td>It isn't mainly a high-stakes decision</td><td class="y">Yes</td><td>Start with the prep work around the decision</td></tr>
+  <tr><td>I can tell what "good" looks like</td><td class="y">Yes</td><td>Write down one good example first</td></tr>
+</table>
+    
+  </div>
+  <span class="slide-counter">06</span>
+</section>
+
+<!-- ============ 7 · AI HELPS. YOU OWN IT. ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Step 04</span></div>
+  <div class="stage">
+    <span class="eyebrow">04 · 10 minutes</span>
+    <h2>AI helps. You own it.</h2>
+    <p class="lead">A good use case rarely hands over the whole task. Decide where AI helps and where judgement and accountability stay with you.</p>
+    <div class="tiles" style="--c:2">
+  <div class="tile amber"><span class="k">AI could help with</span><h4>Reading the ledger export and invoices, spotting anything over £250 that changed from last month, drafting the cover note</h4><p>Summarise, compare, sort, extract, draft, reformat, spot patterns</p></div>
+  <div class="tile"><span class="k">Ana still has to</span><h4>Check every figure against the ledger, decide what to say about disputes, approve and send</h4><p>Give context, check facts, decide, approve, handle exceptions, take responsibility</p></div>
+</div>
+    
+  </div>
+  <span class="slide-counter">07</span>
+</section>
+
+<!-- ============ 8 · QUICK RISK CHECK ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Step 05</span></div>
+  <div class="stage">
+    <span class="eyebrow">05 · 10 minutes</span>
+    <h2>Quick risk check</h2>
+    <p class="lead">Six flags. A "yes" doesn't rule the task out. It tells you which safeguard you need.</p>
+    <table class="ex">
+  <tr><th>Does the task involve</th><th style="width:8%">Ana</th><th style="width:40%">Safeguard</th></tr>
+  <tr><td>Confidential or personal information</td><td class="y">Yes</td><td>Business plan with training off. Tenant names only where needed.</td></tr>
+  <tr><td>Figures, dates or citations that must be right</td><td class="y">Yes</td><td>Figures come straight from the ledger. AI writes words, you check every total.</td></tr>
+  <tr><td>A legal, HR, safety or regulatory decision</td><td>No</td><td></td></tr>
+  <tr><td>Communication with customers or the public</td><td class="y">Yes</td><td>Nothing goes to a landlord without Ana reading it.</td></tr>
+  <tr><td>A result that's hard to check</td><td>No</td><td></td></tr>
+  <tr><td>An action AI must never take alone</td><td class="y">Yes</td><td>AI never sends. Ana sends.</td></tr>
+</table>
+    
+  </div>
+  <span class="slide-counter">08</span>
+</section>
+
+<!-- ============ 9 · WHAT WOULD SUCCESS LOOK LIKE? ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Step 06</span></div>
+  <div class="stage">
+    <span class="eyebrow">06 · 10 minutes</span>
+    <h2>What would success look like?</h2>
+    <p class="lead">"Save time" isn't enough. Describe a result you'd recognise and could compare.</p>
+    <table class="ex">
+  <tr><th style="width:22%">Today</th><td>1.5 days a month. Notes go out on day 4 or 5.</td></tr>
+  <tr><th>Target</th><td>Half a day. Notes out by day 2.</td></tr>
+  <tr><th>Quality bar</th><td>Every figure matches the ledger. Every change over £250 is explained in plain English.</td></tr>
+  <tr><th>Checks</th><td>Totals reconcile to the ledger export before anything is sent.</td></tr>
+  <tr><th>Value</th><td>A day a month back, and landlords stop ringing to ask what a charge was.</td></tr>
+</table>
+    
+  </div>
+  <span class="slide-counter">09</span>
+</section>
+
+<!-- ============ 10 · YOUR USE CASE CARD ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Step 07</span></div>
+  <div class="stage">
+    <span class="eyebrow">07 · 10 minutes</span>
+    <h2>Your Use Case Card</h2>
+    <p class="lead">Everything from the last six steps on one card. This is the task you carry through the programme.</p>
+    <div class="sentence">When <b>the month closes</b>, I need to <b>write each landlord's statement note</b> using <b>the ledger export and maintenance invoices</b> to produce <b>a statement pack ready for my review</b>.</div>
+<div class="tiles" style="--c:3">
+  <div class="tile"><span class="k">AI does</span><p>Reads the export, flags changes over £250, drafts each note</p></div>
+  <div class="tile"><span class="k">Ana does</span><p>Checks totals, edits the notes, approves and sends</p></div>
+  <div class="tile amber"><span class="k">First experiment</span><p>Three landlords from last month, drafted side by side with what she sent</p></div>
+</div>
+    
+  </div>
+  <span class="slide-counter">10</span>
+</section>
+
+<!-- ============ 11 · YOUR CARD IS THE BRIEF FOR WHAT COMES NEXT ============ -->
+<section class="deck-slide">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>What happens next</span></div>
+  <div class="stage">
+    <span class="eyebrow">Where your card goes</span>
+    <h2>Your card is the brief for what comes next</h2>
+    <p class="lead">Each part of the card feeds the next sessions, so nothing we did today is wasted.</p>
+    <div class="tiles" style="--c:3">
+  <div class="tile"><span class="k">Risk check</span><h4>AI policy</h4><p>Your flags and safeguards become the company charter</p></div>
+  <div class="tile"><span class="k">Success</span><h4>Scorecard</h4><p>Your targets and quality bars become the KPIs</p></div>
+  <div class="tile amber"><span class="k">Inputs</span><h4>Setup</h4><p>Your files and systems decide which provider and plan fit</p></div>
+</div>
+    <p class="cap">Before next time: run your first experiment and bring the result, good or bad.</p>
+  </div>
+  <span class="slide-counter">11</span>
+</section>
+
+<!-- ============ 12 · ONE TASK. ONE CARD. YOUR FIRST EXPERIMENT. ============ -->
+<section class="deck-slide title">
+  <div class="chrome"><span class="wm">Tutto<span class="dot">.</span></span><span>Praxis</span></div>
+  <div class="stage">
+    <span class="eyebrow">Today, in one line</span>
+    <h1>One task.<br>One card.<br>Your first<br>experiment.</h1>
+    <p class="lead">Next session we turn your risks into a policy and your targets into a scorecard.<br><span style="color:hsl(var(--primary))">tutto.one/praxis</span></p>
+    
+    
+  </div>
+  <span class="slide-counter">12</span>
+</section>
+
+<div class="slide-counter" style="display:none"></div>
+<div class="hint" id="hint">← → or space · F11 fullscreen</div>
+
 <script>
-(function(){
-  var b=document.body,hint=document.getElementById("l-hint");
-  var en=document.getElementById("l-en"),fr=document.getElementById("l-fr");
-  function set(l){
-    b.dataset.lang=l;
-    en.setAttribute("aria-pressed",l==="en");
-    fr.setAttribute("aria-pressed",l==="fr");
-    hint.textContent = l==="fr"
-      ? "Showing French decks and notes. Courses without a translation are marked English only."
-      : "Showing English decks and notes.";
-    try{localStorage.setItem("praxis-lang",l)}catch(e){}
+  const slides = Array.from(document.querySelectorAll('.deck-slide'));
+  const progress = document.getElementById('progress');
+  const hint = document.getElementById('hint');
+  let i = 0;
+
+  // restore position from hash (#7) so reloads don't lose your place
+  const fromHash = parseInt(location.hash.slice(1), 10);
+  if (!isNaN(fromHash) && fromHash >= 1 && fromHash <= slides.length) i = fromHash - 1;
+
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    history.replaceState(null, '', '#' + (i + 1));
   }
-  en.onclick=function(){set("en")};
-  fr.onclick=function(){set("fr")};
-  var saved;try{saved=localStorage.getItem("praxis-lang")}catch(e){}
-  set(saved==="fr"?"fr":"en");
-})();
+  function next() { show(i + 1); }
+  function prev() { show(i - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+  });
+  // Click-to-advance removed: it fires on any stray click, which makes editing
+  // and simply reading a slide unpleasant. Arrow keys, space and the toolbar
+  // arrows still advance.
+  // fade the hint after a few seconds
+  setTimeout(() => { if (hint) hint.style.opacity = '0'; }, 4000);
+
+  show(i);
 </script>
 </body>
 </html>
