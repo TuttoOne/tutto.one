@@ -791,6 +791,23 @@ th {
   .block--key { background: hsl(var(--primary) / 0.06); border: 1px solid hsl(var(--primary) / 0.3); border-left: 4px solid hsl(var(--primary)); border-radius: 0 var(--radius) var(--radius) 0; padding: var(--space-3) var(--space-4); }
   .block--key .block-label { color: hsl(var(--primary)); }
   .block--key .block-label::before { content: "\2691  "; }
+  /* T0 delivery blocks (see trainer/t0-how-we-teach-praxis.html) */
+  .block--card { background: hsl(var(--card)); border: 2px dashed hsl(var(--primary) / 0.55); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .block--card .block-label { color: hsl(var(--primary)); }
+  .block--card .block-label::before { content: "\25A2  "; }
+  .block--card ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+  .block--card li { margin-bottom: var(--space-2); font-size: var(--text-lg); }
+  .block--card .wait { margin-top: var(--space-2); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+  .block--brief { background: hsl(var(--foreground) / 0.04); border-left: 3px solid hsl(var(--foreground) / 0.6); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: var(--space-3) var(--space-5); }
+  .block--brief .block-label { color: hsl(var(--foreground)); }
+  .block--brief .block-label::before { content: "\201C  "; }
+  .block--brief p.line { font-family: var(--font-editorial); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .block--live { border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: var(--space-3) var(--space-5); background: hsl(var(--muted) / 0.35); }
+  .block--live .block-label { color: hsl(var(--foreground)); }
+  .block--live .block-label::before { content: "\25B6  "; color: hsl(var(--primary)); }
+  .block--live dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-2) 0 0; }
+  .block--live dt { font-weight: var(--weight-semibold); }
+  .block--live dd { margin: 0; color: hsl(var(--muted-foreground)); }
 
   code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
   a { color: hsl(var(--primary)); }
@@ -864,7 +881,8 @@ th {
   <div class="guide-head">
     <h1>Introduction to Agent Skills: teaching notes</h1>
     <p class="lead">Side-by-side notes for <code>08-praxis-introduction-to-agent-skills.html</code> (9 slides). This is the deep dive on the idea Praxis calls the heart of the method: the plain-English skill file as institutional memory (<code>framings.md</code>: skill file as institutional memory; <code>patterns.md</code>). Claude 101 (course 02) and AI Fluency (course 05) both point here. The deck is a developer course; these notes hold the framing for the nine non-technical archetypes, because the plain-English SKILL.md is exactly what makes Skills land for them. Written from the deck and <code>08-introduction-to-agent-skills-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
-    <details class="howto" open><summary>How to use these notes</summary><ul><li>Guidance, not a script. Teach the person, not the slides.</li>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>Blocks marked <em>Back to your card</em>, <em>Brief it like a new hire</em> and <em>Run it live</em> are the three moves from <a href="trainer/t0-how-we-teach-praxis.html">T0, how we teach Praxis</a>. Use the names and tasks on the group's Use Case Cards wherever you see [name].</li>
+<li>Guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
 <li><strong>By background</strong> gives a line per archetype (<code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in front of you and ignore the rest. A palette, not a checklist.</li>
 <li>This is the most technical course in the set. Two confusions are near-certain and the notes flag them: the "I can't read code / what is it doing" fear (<code>objections.md</code>: can't read code), and conflating the Claude Code <em>skill</em> taught here with the app <em>skill</em> from Claude 101. The cure for both is the same: the intelligence lives in the plain-English SKILL.md, not in any code.</li>
@@ -917,6 +935,15 @@ th {
 <dt>Outreach</dt><dd>the proposal method: five sections, one per customer, no invented numbers.</dd>
 <dt>Exec</dt><dd>the exec-brief method: revenue, at-risk, decisions, steady; facts not editorial.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: the written procedure you hand a new starter for a job that comes back every week. If you keep explaining it, write it down once.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>What's the part of your card's task you'd explain every single time? That's your first skill.</li>
+<li>[name], explain to [name] how that's different from putting the same instructions in a Project.</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Two confusions. First, the caption's point: a skill is not CLAUDE.md (which loads every conversation) and not a slash command (which you type). A skill activates itself on a match. Name that difference. Second, this is the Claude Code skill, the plain-English SKILL.md you write, not the built-in app skill from Claude 101 that made you a spreadsheet. If they sat course 02, say so out loud or they'll merge the two (<code>train-the-trainer.md</code>: module 6 vs module 14).</p>
@@ -946,6 +973,14 @@ th {
 <dt>Form-filler</dt><dd>"...allocating a folder of receipts to the filing template."</dd>
 <dt>Outreach</dt><dd>"...drafting one proposal per customer from their file."</dd>
 <dt>Exec</dt><dd>"...turning the board inputs into a one-page brief."</dd>
+</dl>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Build a skill for one card: make the folder, write SKILL.md with the group, restart, then ask for the task.</dd>
+<dt>Expect</dt><dd>About five minutes.</dd>
+<dt>While it runs</dt><dd>Get the group to write the one-line description. Point out the moment Claude picks the skill up.</dd>
+<dt>When it lands</dt><dd>Ask for the task a second way and see if it still triggers.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
@@ -977,6 +1012,11 @@ th {
 <dt>Outreach</dt><dd>the proposal format in SKILL.md; the knowledge base as a reference.</dd>
 <dt>Exec</dt><dd>the brief format in SKILL.md; the KPI definitions in a reference.</dd>
 </dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>For your card, what's the one-page summary and what's the thick reference you'd only open for the odd case?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>This is the slide where "I can't read code" surfaces: frontmatter, YAML, allowed-tools all look like gibberish. Head it off: "Don't read the code. The intelligence lives in the plain-English skill file. The rest is enforcement, and Claude writes and maintains it." (<code>objections.md</code>: can't read code; what is it doing.) Some technical slides here (the exact metadata fields) genuinely don't vary by domain; give the one shared example and don't force nine.</p>
@@ -1067,6 +1107,12 @@ th {
 <dt>Outreach</dt><dd>"write proposals for these customers", "draft outreach", "one per account".</dd>
 <dt>Exec</dt><dd>"give me the board brief", "one-pager from these inputs", "what needs a decision".</dd>
 </dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>[name], read your skill's description out.</li>
+<li>Group, give three ways you'd actually ask for this task. Would it trigger for each?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>This is the slide that most invites "what is it doing under the hood". Redirect every time: the description is plain English, the validator and <code>claude --debug</code> report by name, and if you want to change behaviour you change the skill file in English, not the code (<code>objections.md</code>: can't read code; what is it doing). The runtime-error row (deps, chmod, slashes) is genuinely developer territory and doesn't vary by domain; flag it as "your developer's department, not yours" and move on rather than forcing nine examples.</p>

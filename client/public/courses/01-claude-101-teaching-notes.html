@@ -791,6 +791,23 @@ th {
   .block--key { background: hsl(var(--primary) / 0.06); border: 1px solid hsl(var(--primary) / 0.3); border-left: 4px solid hsl(var(--primary)); border-radius: 0 var(--radius) var(--radius) 0; padding: var(--space-3) var(--space-4); }
   .block--key .block-label { color: hsl(var(--primary)); }
   .block--key .block-label::before { content: "\2691  "; }
+  /* T0 delivery blocks (see trainer/t0-how-we-teach-praxis.html) */
+  .block--card { background: hsl(var(--card)); border: 2px dashed hsl(var(--primary) / 0.55); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .block--card .block-label { color: hsl(var(--primary)); }
+  .block--card .block-label::before { content: "\25A2  "; }
+  .block--card ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+  .block--card li { margin-bottom: var(--space-2); font-size: var(--text-lg); }
+  .block--card .wait { margin-top: var(--space-2); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+  .block--brief { background: hsl(var(--foreground) / 0.04); border-left: 3px solid hsl(var(--foreground) / 0.6); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: var(--space-3) var(--space-5); }
+  .block--brief .block-label { color: hsl(var(--foreground)); }
+  .block--brief .block-label::before { content: "\201C  "; }
+  .block--brief p.line { font-family: var(--font-editorial); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .block--live { border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: var(--space-3) var(--space-5); background: hsl(var(--muted) / 0.35); }
+  .block--live .block-label { color: hsl(var(--foreground)); }
+  .block--live .block-label::before { content: "\25B6  "; color: hsl(var(--primary)); }
+  .block--live dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-2) 0 0; }
+  .block--live dt { font-weight: var(--weight-semibold); }
+  .block--live dd { margin: 0; color: hsl(var(--muted-foreground)); }
 
   code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
   a { color: hsl(var(--primary)); }
@@ -864,7 +881,8 @@ th {
   <div class="guide-head">
     <h1>Claude 101: teaching notes</h1>
     <p class="lead">Side-by-side notes for <code>01-praxis-claude-101.html</code> (15 slides). The deck is what the room looks at; this is what you say, where you stop, and how you make each idea land for the person in front of you. Written from the deck and <code>01-claude-101-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
-    <details class="howto" open><summary>How to use these notes</summary><ul><li>These are guidance, not a script. Teach the person, not the slides.</li>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>Blocks marked <em>Back to your card</em>, <em>Brief it like a new hire</em> and <em>Run it live</em> are the three moves from <a href="trainer/t0-how-we-teach-praxis.html">T0, how we teach Praxis</a>. Use the names and tasks on the group's Use Case Cards wherever you see [name].</li>
+<li>These are guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
 <li><strong>By background</strong> gives you a line per archetype (from <code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in the room and ignore the rest. They are a palette, not a checklist to read out.</li>
 <li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only: <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
@@ -916,6 +934,10 @@ th {
 <dt>Outreach</dt><dd>sharpening the angle for one specific client, then drafting together.</dd>
 <dt>Exec</dt><dd>stress-testing the board narrative against the numbers before the meeting.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: this is the new hire. Very quick, has read almost everything, has never met your clients. Set the frame here and come back to it on every slide.</p>
+<p class="line">"Think of it as someone you've just taken on. They know a lot in general and nothing about your company yet. What would they need from you on their first morning?"</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>The "is my data safe?" fear often surfaces here, the moment they picture working <em>with</em> it. Don't wave it away. Name it and say you'll cover exactly what it can see on the connectors slide. (<code>objections.md</code>: IT/compliance, "where is the AI".)</p>
@@ -945,6 +967,21 @@ th {
 <dt>Form-filler</dt><dd>"You're my tax-prep assistant; allocate each receipt to the template's sections; never drop one."</dd>
 <dt>Outreach</dt><dd>"You're my BD lead; one proposal per customer; only use numbers that are in the file."</dd>
 <dt>Exec</dt><dd>"You're my analyst; one page: where revenue is, what's at risk, what needs a decision."</dd>
+</dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>[name], read out the "I need to" line on your card. Now brief it to me out loud: stage, task, rules.</li>
+<li>Everyone else, you're the new hire. What don't you know yet?</li>
+</ul>
+<p class="wait">(write their questions up, then sort them with the group into stage, task and rules)</p>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Take the best brief from the room. Run the one-line version first, then the full brief, in two chats side by side.</dd>
+<dt>Expect</dt><dd>Under a minute each. Say so before you press enter.</dd>
+<dt>While it runs</dt><dd>Ask the group which will be better and why. Point out what the one-line version has to guess.</dd>
+<dt>When it lands</dt><dd>Compare the two against the card's idea of success. Ask what's still missing from the better one.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
@@ -976,6 +1013,12 @@ th {
 <dt>Outreach</dt><dd>generic proposal → feed the customer file, forbid invented numbers.</dd>
 <dt>Exec</dt><dd>editorialised a risk → tell it to state facts, not "at risk".</dd>
 </dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>Look at the "to produce" line on your card. Which of the four is it most likely to get wrong?</li>
+<li>[name], what would you add to your brief to stop that happening?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>"What if it just makes things up?" is the real fear under this slide. Answer it straight: ask for sources, verify the high-stakes facts, and later the skill file makes "cite a source, never infer" a standing rule. (<code>objections.md</code>: hallucinate / make stuff up.)</p>
@@ -1036,6 +1079,15 @@ th {
 <dt>Outreach</dt><dd>the knowledge base and the proposal format, shared with the team.</dd>
 <dt>Exec</dt><dd>the retainer book and the KPI definitions, so each board prep starts warm.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: the briefing pack and the shared folder. You wouldn't make a new starter ask for the same files every morning.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>What would go in the Project for your card? Name three files and one rule.</li>
+<li>[name], explain to the group how that's different from attaching the files to one chat.</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>"Does it forget like ChatGPT does?" Yes, a chat does; a project doesn't, and a folder in Claude Code really doesn't. This is the cleanest place to plant why the folder beats the browser. (<code>objections.md</code>: browser / why not ChatGPT.)</p>
@@ -1096,6 +1148,16 @@ th {
 <dt>Outreach</dt><dd>a proposal skill, one per customer, in a fixed five sections.</dd>
 <dt>Exec</dt><dd>an exec-brief skill: revenue, at-risk, decisions, steady.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: the written procedure for a job that comes back every week, so the new starter does it your way without asking.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>Is there a skill in your card? What would its first three steps be?</li>
+<li>[name], tell [name] what goes in your Project and what goes in your skill. Group, do you agree?</li>
+</ul>
+<p class="wait">(projects hold the what, skills hold the how. Let them find that before you say it)</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Don't conflate two different things both called "skills". The app <em>skill</em> here is one thing; the plain-English <em>skill file</em> you write in Claude Code (course 02, and the deep-dive "Introduction to Agent Skills") is the heart of our method. The deck itself points to that course. Name the difference or they'll merge them. (<code>train-the-trainer.md</code>: module 6 vs module 14.)</p>
@@ -1125,6 +1187,22 @@ th {
 <dt>Form-filler</dt><dd>Drive or email where receipts arrive.</dd>
 <dt>Outreach</dt><dd>the CRM and Gmail for customer context.</dd>
 <dt>Exec</dt><dd>Drive, Slack and email for the board-pack inputs.</dd>
+</dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: logins and keys. Which systems would you let a new starter into in their first week, and could they change things or only read?</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>Which connector does your card need? Read only, or does it need to write?</li>
+</ul>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Connect one tool on your own account (Drive or Gmail) and ask a question only that source can answer.</dd>
+<dt>Expect</dt><dd>A minute to connect, under a minute to answer.</dd>
+<dt>While it runs</dt><dd>Stay on the permissions screen and read out what it's asking for. That's the data-safety answer, shown rather than told.</dd>
+<dt>When it lands</dt><dd>Open what it cited. Show it only reached what your account can see.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
@@ -1185,6 +1263,14 @@ th {
 <dt>Form-filler</dt><dd>checking the current thresholds or allowances before a filing.</dd>
 <dt>Outreach</dt><dd>a prospect or company brief before writing the proposal.</dd>
 <dt>Exec</dt><dd>a market or competitor brief for the board, with citations.</dd>
+</dl>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Start a Research run on a question from someone's card.</dd>
+<dt>Expect</dt><dd>Five to fifteen minutes. Tell the group before you start.</dd>
+<dt>While it runs</dt><dd>Stay on the plan for the first minute and read it out. Then carry on with the next slide and come back when it lands.</dd>
+<dt>When it lands</dt><dd>Open two of the citations with the group and check them. Tie it back to slide 5.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>

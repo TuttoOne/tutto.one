@@ -791,6 +791,23 @@ th {
   .block--key { background: hsl(var(--primary) / 0.06); border: 1px solid hsl(var(--primary) / 0.3); border-left: 4px solid hsl(var(--primary)); border-radius: 0 var(--radius) var(--radius) 0; padding: var(--space-3) var(--space-4); }
   .block--key .block-label { color: hsl(var(--primary)); }
   .block--key .block-label::before { content: "\2691  "; }
+  /* T0 delivery blocks (see trainer/t0-how-we-teach-praxis.html) */
+  .block--card { background: hsl(var(--card)); border: 2px dashed hsl(var(--primary) / 0.55); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .block--card .block-label { color: hsl(var(--primary)); }
+  .block--card .block-label::before { content: "\25A2  "; }
+  .block--card ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+  .block--card li { margin-bottom: var(--space-2); font-size: var(--text-lg); }
+  .block--card .wait { margin-top: var(--space-2); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+  .block--brief { background: hsl(var(--foreground) / 0.04); border-left: 3px solid hsl(var(--foreground) / 0.6); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: var(--space-3) var(--space-5); }
+  .block--brief .block-label { color: hsl(var(--foreground)); }
+  .block--brief .block-label::before { content: "\201C  "; }
+  .block--brief p.line { font-family: var(--font-editorial); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .block--live { border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: var(--space-3) var(--space-5); background: hsl(var(--muted) / 0.35); }
+  .block--live .block-label { color: hsl(var(--foreground)); }
+  .block--live .block-label::before { content: "\25B6  "; color: hsl(var(--primary)); }
+  .block--live dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-2) 0 0; }
+  .block--live dt { font-weight: var(--weight-semibold); }
+  .block--live dd { margin: 0; color: hsl(var(--muted-foreground)); }
 
   code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
   a { color: hsl(var(--primary)); }
@@ -864,7 +881,8 @@ th {
   <div class="guide-head">
     <h1>Introduction to Model Context Protocol: teaching notes</h1>
     <p class="lead">Side-by-side notes for <code>07-praxis-introduction-to-model-context-protocol.html</code> (14 slides). This is the most technical course in the set: it is built for engineers wiring MCP servers, clients, tools, resources and prompts. Our job is to teach the <em>idea</em> to the nine non-technical archetypes without selling them the plumbing. Keep the framing on "what this means for your data and your tools", not the JSON-RPC. Course 01 slide 10 (Connectors / MCP) and course 02 slide 13 (MCP) already pitch MCP to these learners. Match that framing; this is the longer version. The deck is what the room looks at; this is what you say, where you stop, and how each idea lands for the person in front of you. Written from the deck and the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
-    <details class="howto" open><summary>How to use these notes</summary><ul><li>These are guidance, not a script. Teach the person, not the slides.</li>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>Blocks marked <em>Back to your card</em>, <em>Brief it like a new hire</em> and <em>Run it live</em> are the three moves from <a href="trainer/t0-how-we-teach-praxis.html">T0, how we teach Praxis</a>. Use the names and tasks on the group's Use Case Cards wherever you see [name].</li>
+<li>These are guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
 <li><strong>By background</strong> gives you a line per archetype (from <code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in the room and ignore the rest. They are a palette, not a checklist to read out.</li>
 <li>This course is heavy on protocol mechanics (servers, clients, transports, decorators). Several slides do not vary by professional domain. Where that is true, the note says so and gives one shared example rather than nine contrived ones. Don't read code aloud (<code>framings.md</code>: voice); the point of every slide is the outcome, not the syntax.</li>
@@ -918,6 +936,14 @@ th {
 <dt>Outreach</dt><dd>the CRM and email for customer context.</dd>
 <dt>Exec</dt><dd>the drive, chat and email for the board-pack inputs.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: connectors are the logins you give a new starter. MCP is the standard that means each login is set up once and works in every app.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>Which two tools on your card do you carry things between by hand today?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>The data-safety fear surfaces the instant they picture connecting their email or their case store. Name it now, don't wait: a standard for <em>connecting</em> is not a standard for <em>exposing</em>. Promise you'll show exactly what it can see on slide 8 and again at the recap. (<code>objections.md</code>: IT/compliance/privacy; "where is the AI".)</p>
@@ -1006,6 +1032,14 @@ th {
 <dt>Outreach</dt><dd>create a draft email per customer, drafted, never auto-sent.</dd>
 <dt>Exec</dt><dd>log a renewal decision against the account.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: a tool is something the new hire is allowed to do, like sending an email or updating a record. You decide the list. They decide when.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>What's one action on your card you'd let Claude take, and one you'd keep for yourself?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Tools <em>do</em> things and have side effects. This is exactly where "what if it does something I don't want?" lives. The answer is the permission model from course 02 slide 6 (<code>Shift + Tab</code>, approval first): the model can <em>choose</em> to call a tool, but you decide whether it's allowed to. Draft, don't auto-send, until trust is earned. (<code>objections.md</code>: permission / "scary to let it".)</p>
@@ -1055,6 +1089,14 @@ th {
 <dt>Outreach</dt><dd>read the customer record, pull market context, draft the proposal.</dd>
 <dt>Exec</dt><dd>gather the inputs across drive, chat and finance, write the one-page brief.</dd>
 </dl>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>A task in Claude Desktop or Claude Code that needs a connected tool, with the tool calls visible.</dd>
+<dt>Expect</dt><dd>Under a minute.</dd>
+<dt>While it runs</dt><dd>Read each tool call out as it happens: listing, reading, writing. That's the loop on the slide.</dd>
+<dt>When it lands</dt><dd>Count the trips it made that you'd have made by hand.</dd>
+</dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Inferred slide (video-only source). Verify the loop detail for a technical room. The risk for non-technical learners is hearing "loops on its own" and picturing runaway autonomy. Anchor it: the loop still runs under the permission model (course 02 slide 6), and the tools it can reach are only the ones you connected. It loops within the fence you set. (<code>objections.md</code>: permission.)</p>
@@ -1085,6 +1127,9 @@ th {
 <dt>Outreach</dt><dd>the customer records and the knowledge base.</dd>
 <dt>Exec</dt><dd>the board-pack inputs, or one retainer letter by client.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: a resource is the reference binder you hand the new hire. They can read it. They can't change it.</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Read-only is a safety point worth naming: a resource cannot alter your data, only surface it. For regulated rooms this is the comfortable on-ramp: connect the read side first, before any tool that <em>does</em> things. Don't drown them in URI syntax; "a named address, read-only" is enough. (<code>objections.md</code>: IT/compliance, start with what only reads.)</p>
@@ -1205,6 +1250,12 @@ th {
 <dt>Outreach</dt><dd>resources (customer records) and the <code>/proposal</code> prompt; tools last.</dd>
 <dt>Exec</dt><dd>resources (board inputs) and the <code>/brief</code> prompt; a logging tool eventually.</dd>
 </dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>[name], take your card. Give one example each of a tool, a resource and a prompt it would use.</li>
+<li>Group, did they get the owners right? Who decides when each one is used?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>This is the data-safety gate for almost everyone: the slide where the whole worry resolves. Slow right down. Three sentences earn the room: it sees only what you can see, every connection is scoped, every connection is revocable. For banks and firms, frame it as the IT-discovery conversation with floor and ceiling (web at the floor, a local model at the ceiling), not a yes/no you decide alone. (<code>objections.md</code>: IT/compliance/privacy; <code>train-the-trainer.md</code>: module 2.)</p>

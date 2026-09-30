@@ -791,6 +791,23 @@ th {
   .block--key { background: hsl(var(--primary) / 0.06); border: 1px solid hsl(var(--primary) / 0.3); border-left: 4px solid hsl(var(--primary)); border-radius: 0 var(--radius) var(--radius) 0; padding: var(--space-3) var(--space-4); }
   .block--key .block-label { color: hsl(var(--primary)); }
   .block--key .block-label::before { content: "\2691  "; }
+  /* T0 delivery blocks (see trainer/t0-how-we-teach-praxis.html) */
+  .block--card { background: hsl(var(--card)); border: 2px dashed hsl(var(--primary) / 0.55); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .block--card .block-label { color: hsl(var(--primary)); }
+  .block--card .block-label::before { content: "\25A2  "; }
+  .block--card ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+  .block--card li { margin-bottom: var(--space-2); font-size: var(--text-lg); }
+  .block--card .wait { margin-top: var(--space-2); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+  .block--brief { background: hsl(var(--foreground) / 0.04); border-left: 3px solid hsl(var(--foreground) / 0.6); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: var(--space-3) var(--space-5); }
+  .block--brief .block-label { color: hsl(var(--foreground)); }
+  .block--brief .block-label::before { content: "\201C  "; }
+  .block--brief p.line { font-family: var(--font-editorial); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .block--live { border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: var(--space-3) var(--space-5); background: hsl(var(--muted) / 0.35); }
+  .block--live .block-label { color: hsl(var(--foreground)); }
+  .block--live .block-label::before { content: "\25B6  "; color: hsl(var(--primary)); }
+  .block--live dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-2) 0 0; }
+  .block--live dt { font-weight: var(--weight-semibold); }
+  .block--live dd { margin: 0; color: hsl(var(--muted-foreground)); }
 
   code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
   a { color: hsl(var(--primary)); }
@@ -864,7 +881,8 @@ th {
   <div class="guide-head">
     <h1>Introduction to Claude Cowork: teaching notes</h1>
     <p class="lead">Side-by-side notes for <code>03-praxis-introduction-to-claude-cowork.html</code> (16 slides). The deck is what the room looks at; this is what you say, where you stop, and how you make each idea land for the person in front of you. Cowork is the delegation surface: you hand Claude an outcome, it plans, acts across your files and tools, and brings back a finished deliverable. It is the desktop sibling of everything <code>/plato</code> builds in Claude Code. Written from the deck and <code>03-introduction-to-claude-cowork-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
-    <details class="howto" open><summary>How to use these notes</summary><ul><li>These are guidance, not a script. Teach the person, not the slides.</li>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>Blocks marked <em>Back to your card</em>, <em>Brief it like a new hire</em> and <em>Run it live</em> are the three moves from <a href="trainer/t0-how-we-teach-praxis.html">T0, how we teach Praxis</a>. Use the names and tasks on the group's Use Case Cards wherever you see [name].</li>
+<li>These are guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
 <li><strong>By background</strong> gives you a line per archetype (from <code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in the room and ignore the rest. They are a palette, not a checklist to read out.</li>
 <li>Hold the voice (<code>train-the-trainer.md</code> Part 4): no "great question", no emoji, one term only: <strong>Claude Code</strong>. Underclaim. Cost is <em>"about twenty dollars a month"</em> and stop.</li>
@@ -947,6 +965,14 @@ th {
 <dt>Outreach</dt><dd>the customers folder and the knowledge base, not the full CRM dump.</dd>
 <dt>Exec</dt><dd>the board-prep inputs folder, not the company-wide finance share.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: the shared folder. A new starter gets one folder with what they need in it. You don't hand them the whole drive on day one.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>What's the one folder for your card? What's in it that shouldn't be?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>The data-safety gate for almost everyone. Name the floor and the ceiling: Claude sees only what you can see, connectors are often read-only, and the folder bounds the rest. For banks and firms this is the IT/compliance discovery conversation, and the floor is Claude on the web with no install. (<code>objections.md</code>: IT/compliance/privacy; permission/auto.)</p>
@@ -1006,6 +1032,20 @@ th {
 <dt>Form-filler</dt><dd>"deliverable: the filled template; inputs: this period's receipts; nuance: one section per receipt, drop nothing, totals must reconcile."</dd>
 <dt>Outreach</dt><dd>"deliverable: one proposal per customer; inputs: the customers folder and knowledge base; nuance: only numbers from the file."</dd>
 <dt>Exec</dt><dd>"deliverable: a one-page brief; inputs: the board-prep folder; nuance: facts not editorial, every decision has an owner and a date."</dd>
+</dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>[name], read out your card. Now brief Cowork on it out loud: the deliverable, the inputs and the one bit of nuance nobody could guess.</li>
+<li>Group, you're the new hire. Ask what you'd need to know before you start.</li>
+</ul>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Paste the brief from the room into Cowork, pointed at a test folder.</dd>
+<dt>Expect</dt><dd>A few minutes, and it usually asks clarifying questions first.</dd>
+<dt>While it runs</dt><dd>Answer its questions with the group. Read the plan out before you approve it.</dd>
+<dt>When it lands</dt><dd>Review it like a colleague's draft. Name one thing you'd steer next time.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
@@ -1067,6 +1107,14 @@ th {
 <dt>Outreach</dt><dd>a project per segment, remembering each customer's situation and last contact.</dd>
 <dt>Exec</dt><dd>a project for the board cycle, carrying KPI definitions and standing decisions.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: global instructions are what you'd tell any new starter about how you work. A Project is the handover notes for one client or one report.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>For your card, what goes in your global instructions and what belongs only in its Project?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>"Does it forget like ChatGPT does?" A bare chat does; a project doesn't, it builds memory as you go. This is the cleanest place to plant why standing context beats re-uploading files into a browser tab. (<code>objections.md</code>: browser / why not ChatGPT.)</p>
@@ -1105,6 +1153,12 @@ th {
 <dt>Outreach</dt><dd>a proposal skill, one per customer, five fixed sections.</dd>
 <dt>Exec</dt><dd>an exec-brief skill, revenue, at-risk, decisions, steady, on one page.</dd>
 </dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>Is there a skill hidden in your card? What would the first three lines of SKILL.md say?</li>
+<li>[name], how is that different from what you'd put in the Project?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>"I can't read code" arrives when they see a script in the skill folder. Answer straight: don't read the code, the intelligence is in the SKILL.md in plain English; the script just enforces the repeatable part the same way every time. (<code>objections.md</code>: can't read code.)</p>
@@ -1164,6 +1218,14 @@ th {
 <dt>Form-filler</dt><dd>a tax or filing portal with no export.</dd>
 <dt>Outreach</dt><dd>the CRM web app behind single sign-on.</dd>
 <dt>Exec</dt><dd>the finance or KPI dashboard checked every Monday.</dd>
+</dl>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Ask Claude in Chrome to read a figure from a dashboard or portal you're signed in to.</dd>
+<dt>Expect</dt><dd>A minute or two.</dd>
+<dt>While it runs</dt><dd>Narrate what it clicks and reads. Ask the group what they'd check.</dd>
+<dt>When it lands</dt><dd>Check it read the right numbers from the right page.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
@@ -1225,6 +1287,14 @@ th {
 <dt>Outreach</dt><dd>draft-only, "don't message anyone", until you trust the per-customer output.</dd>
 <dt>Exec</dt><dd>anything customer- or board-facing, Claude prepares, you ship.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: what you'd let a new starter do unsupervised in their first week. Draft only until you trust them is how you'd treat a person too.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>For your card: which actions would you allow, which need your OK first and which never?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>"What if it does something I didn't want?" lives here. Give the controls before the capability: ask-before-acting is the default, always-asks-before-deleting is the floor, and you check the end. The honest line: Cowork isn't the tool for anything you wouldn't hand a quick colleague to do unsupervised, or for regulated work that needs an audit trail. (<code>objections.md</code>: permission/auto.)</p>
@@ -1254,6 +1324,14 @@ th {
 <dt>Form-filler</dt><dd>a receipt that fits two sections, does it pick the more specific and footnote the other?</dd>
 <dt>Outreach</dt><dd>a customer file missing a number, does it refuse to invent one?</dd>
 <dt>Exec</dt><dd>a long input, does the brief still fit one page and lead with the decision?</dd>
+</dl>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Run the same prompt twice, with the skill and without it.</dd>
+<dt>Expect</dt><dd>A couple of minutes each.</dd>
+<dt>While it runs</dt><dd>Ask the group to predict where the two will differ.</dd>
+<dt>When it lands</dt><dd>Put them side by side and agree which cases the skill really handles better.</dd>
 </dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>

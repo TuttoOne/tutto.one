@@ -791,6 +791,23 @@ th {
   .block--key { background: hsl(var(--primary) / 0.06); border: 1px solid hsl(var(--primary) / 0.3); border-left: 4px solid hsl(var(--primary)); border-radius: 0 var(--radius) var(--radius) 0; padding: var(--space-3) var(--space-4); }
   .block--key .block-label { color: hsl(var(--primary)); }
   .block--key .block-label::before { content: "\2691  "; }
+  /* T0 delivery blocks (see trainer/t0-how-we-teach-praxis.html) */
+  .block--card { background: hsl(var(--card)); border: 2px dashed hsl(var(--primary) / 0.55); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .block--card .block-label { color: hsl(var(--primary)); }
+  .block--card .block-label::before { content: "\25A2  "; }
+  .block--card ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+  .block--card li { margin-bottom: var(--space-2); font-size: var(--text-lg); }
+  .block--card .wait { margin-top: var(--space-2); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
+  .block--brief { background: hsl(var(--foreground) / 0.04); border-left: 3px solid hsl(var(--foreground) / 0.6); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: var(--space-3) var(--space-5); }
+  .block--brief .block-label { color: hsl(var(--foreground)); }
+  .block--brief .block-label::before { content: "\201C  "; }
+  .block--brief p.line { font-family: var(--font-editorial); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+  .block--live { border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: var(--space-3) var(--space-5); background: hsl(var(--muted) / 0.35); }
+  .block--live .block-label { color: hsl(var(--foreground)); }
+  .block--live .block-label::before { content: "\25B6  "; color: hsl(var(--primary)); }
+  .block--live dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-2) 0 0; }
+  .block--live dt { font-weight: var(--weight-semibold); }
+  .block--live dd { margin: 0; color: hsl(var(--muted-foreground)); }
 
   code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
   a { color: hsl(var(--primary)); }
@@ -864,7 +881,8 @@ th {
   <div class="guide-head">
     <h1>Introduction to Subagents: teaching notes</h1>
     <p class="lead">Side-by-side notes for <code>09-praxis-introduction-to-subagents.html</code> (7 slides). This is a technical course with one plain-English heart: <strong>delegation</strong>. A subagent is a bounded job handed to a focused junior who goes away, works in their own space, and brings back the answer, not the mess. That translates cleanly for non-technical people, so keep the framing on the supervisor mindset, not the engineering. This is the first taste of the Praxis "Frontier" idea: managing a small team of agents instead of doing every step yourself. The deck is what the room looks at; this is what you say, where you stop, and how each idea lands for the person in front of you. Written from the deck and <code>09-introduction-to-subagents-lessons.txt</code>, against the Praxis teaching library. Method: <code>teaching-notes-method.md</code>.</p>
-    <details class="howto" open><summary>How to use these notes</summary><ul><li>These are guidance, not a script. Teach the person, not the slides.</li>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>Blocks marked <em>Back to your card</em>, <em>Brief it like a new hire</em> and <em>Run it live</em> are the three moves from <a href="trainer/t0-how-we-teach-praxis.html">T0, how we teach Praxis</a>. Use the names and tasks on the group's Use Case Cards wherever you see [name].</li>
+<li>These are guidance, not a script. Teach the person, not the slides.</li>
 <li>Each teaching slide has a <strong>Pause, then ask</strong> block. Put the question, then stop. Do not fill the silence. If they freeze, one line: <em>"Take your time, type anything when you're ready, including 'I don't know'."</em> Then wait again.</li>
 <li><strong>By background</strong> gives you a line per archetype (from <code>tutor/scenarios.md</code>). Reach for the one that matches whoever is in the room and ignore the rest. They are a palette, not a checklist to read out.</li>
 <li>The backbone question for the whole course is the same one every time: <em>"what would you send a subagent to go and do?"</em> Keep returning to it. The whole course is one act of judgment: what to delegate, and what to keep in your own hands.</li>
@@ -919,6 +937,14 @@ th {
 <dt>Outreach</dt><dd>"pull the latest on this prospect before I write": the brief, not the search history.</dd>
 <dt>Exec</dt><dd>"which retainers come up for renewal this quarter?": the list, sourced.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: the new hire bringing in their own helper for the digging. The helper works at their own desk and brings back one page. You don't see their notes.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>Which part of your card is "read twenty things, one line matters"?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>Name the tradeoff honestly: you get the answer without the journey, which also means you don't see <em>how</em> it got there. For high-stakes work, that's the reason you later ask it to cite sources and you verify the load-bearing facts. (<code>objections.md</code>: hallucinate / make stuff up: the answer comes back, you still check the claims that matter.) The built-in helpers are worth naming once: a <strong>general-purpose</strong> agent, <strong>Explore</strong> for fast search, <strong>Plan</strong> for plan-mode research. You may already be using them without knowing it.</p>
@@ -939,6 +965,14 @@ th {
 </div><div class="block block--cue">
 <div class="block-head"><span class="block-label">A shared example (this slide doesn't vary by domain)</span></div>
 <p>The config file is the same shape for everyone, so teach it once with a single example rather than nine contrived ones, and say so in the room. The example on the deck is a <strong>code reviewer</strong>: its file holds a <em>name</em> (how you summon it), a <em>description</em> (the line that controls when Claude uses it), a short <em>tools</em> list (only what the job needs), a <em>model</em> choice, and a body that is its standing instructions. For your learner, translate the <em>shape</em>, not the code: "a helper has a name, a one-line rule for when it runs, the few tools it's allowed to touch, and a paragraph of instructions, and Claude writes all of that from your sentence."</p>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Run /agents and describe a helper for the digging on one card.</dd>
+<dt>Expect</dt><dd>A minute or two for Claude to write the file.</dd>
+<dt>While it runs</dt><dd>Open the generated file with the group and read the description and instructions out.</dd>
+<dt>When it lands</dt><dd>Run it and look at what comes back. Is it the one page you asked for?</dd>
+</dl>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>One trick worth saying out loud: put the word <strong>"proactively"</strong> in the description and Claude will delegate to it without being asked. And the scope choice is plain: <strong>project-level</strong> for one body of work, <strong>user-level</strong> to have it everywhere. Don't dwell on YAML; the takeaway is "you describe it, Claude builds it, the description is the steering wheel."</p>
@@ -975,6 +1009,11 @@ th {
 <dt>Outreach</dt><dd>the fixed five-section proposal, every claim sourced to a file, no invented numbers.</dd>
 <dt>Exec</dt><dd>the four-part brief (where revenue is, what's at risk, what needs a decision, what's steady), one page, risks stated factually.</dd>
 </dl>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>Brief the helper the way you'd brief a temp for a half-day job: what it's for, what done looks like, what they can touch and when to stop.</p>
+<p class="line">"[name], you're sending a temp to do the digging on your card. Say the brief out loud."</p>
+<p>Then to the group: "You're the temp. What's missing?"</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>The description does double duty: it decides <em>when</em> the helper launches and it shapes the <em>task</em> the main agent writes for it. Vague in, vague out. The fix in practice is the same instinct as the skill file: the rules a good person carries get written down so the work comes back their way every time. (<code>framings.md</code>: skill file as institutional memory; adapt the role to the room.) Obstacle reporting is the quiet one: tell it to flag what got in its way, or the next run rediscovers the same wall.</p>
@@ -1005,6 +1044,12 @@ th {
 <dt>Outreach</dt><dd>delegate "pull the prospect brief"; keep the angle for the specific client.</dd>
 <dt>Exec</dt><dd>delegate "which retainers renew this quarter"; keep the board narrative you're building.</dd>
 </dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>Swap cards with your neighbour. Decide for their task: which parts go to a subagent and which stay in the main thread?</li>
+<li>Now compare with what they decided for themselves. Where do you disagree?</li>
+</ul>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
 <p>The deck's caption is worth saying: code review makes the list because Claude critiques work more honestly when it didn't write it. A fresh-context reviewer beats asking the thread that built the thing. The everyday version: a second, unbiased pair of eyes catches what the author can't. (Mirror of <code>02-claude-code-101-teaching-notes.md</code> slide 9: fresh eyes before you push.) On the anti-patterns: "you are an expert" adds nothing, Claude already knows; and a step-by-step pipeline where each stage needs the last is exactly the work to keep in your own hands.</p>
