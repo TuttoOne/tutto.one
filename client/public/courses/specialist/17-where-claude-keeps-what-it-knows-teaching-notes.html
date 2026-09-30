@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Praxis Trainer | T0 · How we teach Praxis</title>
+<title>Praxis · Where Claude keeps what it knows: teaching notes</title>
 <style>
 /* ============================================================
    Praxis / Tutto: Design System
@@ -791,35 +791,23 @@ th {
   .block--key { background: hsl(var(--primary) / 0.06); border: 1px solid hsl(var(--primary) / 0.3); border-left: 4px solid hsl(var(--primary)); border-radius: 0 var(--radius) var(--radius) 0; padding: var(--space-3) var(--space-4); }
   .block--key .block-label { color: hsl(var(--primary)); }
   .block--key .block-label::before { content: "\2691  "; }
-
-  /* T0 delivery blocks: hand the concept back to the group */
+  /* T0 delivery blocks (see trainer/t0-how-we-teach-praxis.html) */
   .block--card { background: hsl(var(--card)); border: 2px dashed hsl(var(--primary) / 0.55); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
   .block--card .block-label { color: hsl(var(--primary)); }
   .block--card .block-label::before { content: "\25A2  "; }
   .block--card ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
   .block--card li { margin-bottom: var(--space-2); font-size: var(--text-lg); }
   .block--card .wait { margin-top: var(--space-2); font-size: var(--text-sm); color: hsl(var(--muted-foreground)); font-style: italic; }
-
   .block--brief { background: hsl(var(--foreground) / 0.04); border-left: 3px solid hsl(var(--foreground) / 0.6); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: var(--space-3) var(--space-5); }
   .block--brief .block-label { color: hsl(var(--foreground)); }
   .block--brief .block-label::before { content: "\201C  "; }
   .block--brief p.line { font-family: var(--font-editorial); font-size: var(--text-lg); line-height: var(--leading-relaxed); }
-
   .block--live { border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: var(--space-3) var(--space-5); background: hsl(var(--muted) / 0.35); }
   .block--live .block-label { color: hsl(var(--foreground)); }
   .block--live .block-label::before { content: "\25B6  "; color: hsl(var(--primary)); }
   .block--live dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-2) 0 0; }
   .block--live dt { font-weight: var(--weight-semibold); }
   .block--live dd { margin: 0; color: hsl(var(--muted-foreground)); }
-
-  .block--story { border-top: 1px solid hsl(var(--border)); padding-top: var(--space-3); }
-  .block--story .block-label { color: hsl(var(--primary)); }
-  .block--story .src { font-size: var(--text-sm); color: hsl(var(--muted-foreground)); }
-  .draft { display: inline-block; font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: hsl(var(--primary)); border: 1px solid hsl(var(--primary) / 0.5); border-radius: 999px; padding: 0 var(--space-2); margin-left: var(--space-2); vertical-align: middle; }
-
-  table.map { width: 100%; margin-top: var(--space-3); font-size: var(--text-sm); }
-  table.map td:first-child { font-weight: var(--weight-semibold); white-space: nowrap; }
-  pre.snippet { font-family: var(--font-mono); font-size: var(--text-xs); background: hsl(var(--muted) / 0.6); padding: var(--space-3) var(--space-4); border-radius: var(--radius-sm); overflow-x: auto; white-space: pre-wrap; }
 
   code { font-family: var(--font-mono); font-size: 0.85em; background: hsl(var(--muted) / 0.6); padding: 1px 4px; border-radius: var(--radius-sm); }
   a { color: hsl(var(--primary)); }
@@ -882,222 +870,240 @@ th {
 
 <div class="guide-bar">
   <span class="wm">Tutto<span class="dot">.</span></span>
-  <span style="color:hsl(var(--muted-foreground))">How we teach</span>
+  <span style="color:hsl(var(--muted-foreground))">Teaching notes</span>
   <div class="tracker">
-    <button id="prev" title="Previous part (&larr;)">&larr;</button>
-    <select id="jump" title="Jump to part"><option value="0">Top</option><option value="1">1. You're briefing a new hire</option><option value="2">2. The map</option><option value="3">3. Hand it back to their card</option><option value="4">4. Say the brief out loud</option><option value="5">5. Run it live and stay on the screen</option><option value="6">6. One sentence, then a card</option><option value="7">7. Read the room</option><option value="8">8. Videos and recorded demos</option><option value="9">9. The story bank</option><option value="10">10. After the session</option><option value="11">11. Adding this to a deck's notes</option></select>
-    <button id="next" title="Next part (&rarr;)">&rarr;</button>
-    <span class="count">part <b id="cur">&ndash;</b> / 11</span>
+    <button id="prev" title="Previous slide (&larr;)">&larr;</button>
+    <select id="jump" title="Jump to slide"><option value="0">Top</option><option value="1">1. Where Claude keeps what it knows</option><option value="2">2. The whole thing on one screen</option><option value="3">3. Everything is a file</option><option value="4">4. They all live in one folder</option><option value="5">5. This is what it actually looks like</option><option value="6">6. The same folder, in the repository</option><option value="7">7. One folder name, four depths</option><option value="8">8. Not all of it loads at once</option><option value="9">9. Skills use the same four places</option><option value="10">10. Instructions advise. Settings enforce.</option><option value="11">11. Where it sits decides who it applies to</option></select>
+    <button id="next" title="Next slide (&rarr;)">&rarr;</button>
+    <span class="count">slide <b id="cur">&ndash;</b> / 11</span>
   </div>
 </div>
 <main>
   <div class="guide-head">
-    <h1>T0 · How we teach Praxis</h1>
-    <p class="lead">Read this before you run any Praxis session, and come back to it before each one. The decks and teaching notes tell you what to cover. This page is about how we run the room: who does the talking, when you stop, what you show live and which stories you tell. It's the same method in every session, so a group that has had three trainers still feels like it has had one.</p>
-    <details class="howto" open><summary>How to use these notes</summary><ul><li>There's no deck for T0. It's the method you bring to every other deck, starting with <a href="t1-running-the-discovery-session-teaching-notes.html">T1, the discovery session</a>.</li>
-<li>Part 2, the map, is the one to know by heart. Every feature in the course comes back to it.</li>
-<li>Parts 3 to 5 are the three moves you make in every session: hand it back, say it out loud, run it live. Parts 6 and 7 are about timing and reading the group.</li>
-<li>The stories in part 9 are drafts marked <span class="draft">Draft</span> until Daniel has checked them. Tell them in your own words. A story you've lived yourself is always better, so add yours.</li>
-<li>Part 10 is the debrief you do after every session, on your own or with the trainer who watched you.</li>
-<li><strong>Your assignment:</strong> take the teaching notes for one core deck (01 Claude 101 is a good start) and mark three places to hand the concept back to a card, one brief to say out loud and one thing to run live. Then run one of those moments with a practice group and write half a page using the debrief questions in part 10. Your tutor marks it within 48 hours against the rubric in T9.</li></ul></details>
+    <h1>Where Claude keeps what it knows: teaching notes</h1>
+    <p class="lead">Notes for <code>17-praxis-where-claude-keeps-what-it-knows.html</code> (11 slides). This deck explains how Claude Code is put together: what it remembers, where those files sit and who each one applies to. It builds one picture a layer at a time, and it ends on the distinction that saves teams the most trouble: an instruction is advice, a setting is a control. People leave knowing where to put a rule so it reaches the right people.</p>
+    <details class="howto" open><summary>How to use these notes</summary><ul><li>For groups already using Claude Code, or about to roll it out to a team. It follows 02 (Claude Code 101) and 08 (Agent Skills), and it's the deck to use when someone asks "where did it get that from?" or "why didn't it follow the rule?"</li>
+<li>Plan on 30 to 45 minutes, depending on how many hand-backs you do. Every slide adds one thing to the last picture, so don't skip ahead. The build is the lesson.</li>
+<li>Have Claude Code open on your own machine with a real repository. Slides 3, 5 and 8 are much stronger when you show the actual files.</li>
+<li>Blocks marked <em>Back to your card</em>, <em>Brief it like a new hire</em> and <em>Run it live</em> are the three moves from <a href="../trainer/t0-how-we-teach-praxis.html">T0, how we teach Praxis</a>. Use the names and tasks on the group's Use Case Cards wherever you see [name].</li>
+<li>The new hire map carries this whole deck. Claude's memory is the new starter's handbook, notebook and filing cabinet. The four depths are company policy, your own way of working, the team's rules and a note on your own desk.</li></ul></details>
   </div>
 
-<section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">The frame</span><h2>You're briefing a new hire</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-1" data-slide="1"><header class="card-head"><span class="badge">1</span><div><span class="eyebrow">Title</span><h2>Where Claude keeps what it knows</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>Everything in Praxis gets easier to explain if the group thinks of AI as someone they've just taken on: a new hire, a temp or a subcontractor. Everyone in the room has handed work to another person. They know you have to explain the job, give them what they need to read, let them into the right systems and check what comes back before it goes to a client. That's exactly what working well with Claude looks like.</p>
-<p>The frame also answers the question people don't ask out loud: "whose fault is it when the output is bad?" If a new hire gets it wrong on day one, you look at your briefing first. Same here.</p>
+<p>Three stores, four depths, one folder name. People who use Claude Code every day often can't say where its rules and memory come from. By the end they can, and they can check it themselves.</p>
 </div><div class="block block--say">
 <div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"For the rest of the programme, think of AI as someone you've just hired. Very quick, has read almost everything, knows nothing about your company and forgets the conversation the moment it ends. Your job is to brief them well and check their work. Most of what we teach you is how to do those two things."</p>
-</div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Cue</span></div>
-<p>Set this up in the first session and then keep coming back to it. By session three the group should be using the frame themselves ("so that's like giving them the login"). When they do, say so out loud. It means it's landed.</p>
-</div></div></section>
-
-<section class="card" id="slide-2" data-slide="2"><header class="card-head"><span class="badge">2</span><div><span class="eyebrow">The map</span><h2>Every feature is something you'd give a new hire</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>Each time you introduce a feature, place it on this map before you explain how it works. The group then has somewhere to put it, and they can work out the details from what they already know about managing people.</p>
-<table class="map">
-<thead><tr><th>In the course</th><th>For a new hire</th><th>Ask the group</th></tr></thead>
-<tbody>
-<tr><td>The prompt</td><td>Explaining the task on their first morning</td><td>"What would you say to them before they start?"</td></tr>
-<tr><td>Context, files, Projects</td><td>The briefing pack and the shared folder</td><td>"What would you give them to read first?"</td></tr>
-<tr><td>Context window</td><td>How much they can keep in their head in one sitting</td><td>"When would you tell them to write it down and start again tomorrow?"</td></tr>
-<tr><td>Skills</td><td>The written procedure for a job that comes back every week</td><td>"What do you find yourself explaining every single time?"</td></tr>
-<tr><td>Connectors</td><td>Logins and keys to your systems</td><td>"Which systems would you let them into? Read only, or can they change things?"</td></tr>
-<tr><td>Subagents</td><td>Them bringing in their own helpers for part of the job</td><td>"Which bit would you be happy for them to pass on?"</td></tr>
-<tr><td>Checking the output</td><td>Reviewing their work before it goes to a client</td><td>"How would you know it's right without doing it again yourself?"</td></tr>
-</tbody></table>
-</div><div class="block block--key">
-<div class="block-head"><span class="block-label">Key concept</span></div>
-<p>The map is a way in. It isn't exact. A new hire remembers yesterday and Claude doesn't, unless you give it memory or a Project. When someone pushes on the map ("but a person would remember that"), that's a good question. Answer it: the gap between the person and the tool is often the thing worth teaching.</p>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Trainers who explain the feature first and add the map at the end as a summary. Do it the other way round. The map goes first, the detail second.</p>
-</div></div></section>
-
-<section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Move one</span><h2>Hand it back to their card</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>Every participant leaves T1 with a Use Case Card: one task of their own. From then on, every time a new idea goes on screen, stop and ask someone to explain it using their card. What does a skill mean for their task? How would they start writing one? How is it different from a Project or a connector?</p>
-<p>When you explain the slide yourself, the group listens (or doesn't, and you can't tell). When a participant explains it in their own words, three things happen. Everyone stays alert because they could be next. The person talking has to process it the way a teacher does, which is how it sticks. And the others start to disagree, which is where the real learning is. Then you correct them and fill in what's missing.</p>
-</div><div class="block block--card">
-<div class="block-head"><span class="block-label">Back to your card</span></div>
-<ul>
-<li>"Sophie, your card is the weekly client report. What would a skill be for that? What would you put in it?"</li>
-<li>"Who has a card where a skill wouldn't help at all? Why not?"</li>
-<li>"Marc, explain to Sophie how that's different from putting the files in a Project."</li>
-</ul>
-<p class="wait">(names are examples. Use the names on the cards in front of you)</p>
-</div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Cue</span></div>
-<p>Keep the cards visible: on the table, on a shared board or as a list of tasks and names on your second screen. Aim for at least one hand-back for every new idea. Start with people who are confident, and bring in the quiet ones on a smaller question ("yes or no, would a skill help yours?").</p>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>A group that goes quiet during the slides. It usually means they've stopped processing and are waiting for the practical bit. That's your signal to hand back sooner. Don't read silence as understanding.</p>
-</div></div></section>
-
-<section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Move two</span><h2>Say the brief out loud</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>People think they know how to explain their task until they have to do it out loud. A short role play shows the gaps faster than any slide. One person briefs, the group plays the new hire and asks the questions a new hire would ask. Everything they ask is something that belongs in the prompt, the Project or the skill.</p>
+<p>"Today is about where Claude Code keeps what it knows about you, your team and your project. It sounds technical. It's actually one simple pattern, and once you see it you'll know where to put every rule you want it to follow."</p>
 </div><div class="block block--brief">
 <div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
-<p class="line">"You've just hired an assistant to help with the task on your card. It's their first morning. Tell them what to do. Actually say the words, as if they're sitting next to you."</p>
-<p>Then to the group: "You're the new hire. What don't you know yet?"</p>
-</div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Cue</span></div>
-<p>Write the new hire's questions up as they come. At the end, sort them with the group: which go in the prompt, which are files to share, which are rules for a skill, which need a connector. That list is the start of their brief, and it ties the theory to their own task in a few minutes.</p>
-</div><div class="block block--watch">
-<div class="block-head"><span class="block-label">Watch for</span></div>
-<p>People who describe the task ("I'd tell them about the report") instead of saying the words. Stop them kindly and ask for the actual first sentence. The gap between the two is the whole lesson.</p>
+<p>Set the frame early. When you take someone on, some of what they know comes from the company handbook, some from their manager, some from the notes they take themselves. Claude is the same, and this deck shows where each of those lives.</p>
+<p class="line">"Think about the last person who joined your team. Where did they learn how things are done? Which parts were written down, and which did they just pick up?"</p>
 </div></div></section>
 
-<section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Move three</span><h2>Run it live and stay on the screen</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-2" data-slide="2"><header class="card-head"><span class="badge">2</span><div><span class="eyebrow">Spine</span><h2>The whole thing on one screen</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>When you type a prompt and then jump to a finished result, the group learns what the output looks like. When you type the prompt, set it going and stay on that screen, they learn how long it actually takes, what Claude does while it works and when it goes off track. That sets their expectations for their own work, and it's the part people can't get from a video.</p>
-<p>Use both. Cutting to a result you prepared earlier is fine for long jobs. For at least one task per session, let it run in front of them.</p>
+<p>Seven steps in three groups: what exists, where it sits and why it matters. Each picture is the one before with one thing added.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"We'll build this up one layer at a time. First what exists, then where it sits, then why that matters for you and your team. If you only remember one slide, it's step 4."</p>
+</div><div class="block block--cue">
+<div class="block-head"><span class="block-label">Cue</span></div>
+<p>Twenty seconds here. Point at step 4 and step 7 so people know where the two big ideas are.</p>
+</div></div></section>
+
+<section class="card" id="slide-3" data-slide="3"><header class="card-head"><span class="badge">3</span><div><span class="eyebrow">Step 1 · What exists</span><h2>Everything is a file</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>There's no hidden memory database. Three things get called memory and each has a different author. You write CLAUDE.md. Claude writes the memory folder as it works. The tool writes the transcripts. All three are plain text on your own machine.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"When people say Claude 'remembers', they mean one of three things. The rules you've written for it. The notes it's written for itself. And the log of what was said. All three are text files. You can open them, read them, change them and delete them."</p>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: CLAUDE.md is the handbook you give the new starter. The memory folder is the notebook they keep. The transcripts are a recording of every conversation you've had with them.</p>
 </div><div class="block block--live">
 <div class="block-head"><span class="block-label">Run it live</span></div>
 <dl>
-<dt>Kick off</dt><dd>A real task from someone's card, or the session's running example. Say the prompt out loud as you type it.</dd>
-<dt>Expect</dt><dd>Say roughly how long it will take before you press enter ("this usually takes about two minutes").</dd>
-<dt>While it runs</dt><dd>Narrate what it's doing (reading files, searching, drafting). Ask the group to predict the result. Ask what they'd check first when it lands.</dd>
-<dt>When it lands</dt><dd>Check it together against the card's idea of success. Find one thing to fix.</dd>
+<dt>Kick off</dt><dd>In a real repository, type <code>/memory</code>, then open one of the files it lists in a text editor.</dd>
+<dt>Expect</dt><dd>A few seconds.</dd>
+<dt>While it runs</dt><dd>Ask the group to guess what's in the file before you open it.</dd>
+<dt>When it lands</dt><dd>Read out a couple of lines. Point out that it's ordinary text anyone could edit.</dd>
 </dl>
-</div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Cue</span></div>
-<p>If it fails live, stay with it. A task that stalls, runs out of room or gets something wrong teaches more than one that works. Say what happened and what you'd change in the brief.</p>
-</div></div></section>
-
-<section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Timing</span><h2>One sentence, then a card</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>The slides carry more than you need to say. Pick the one sentence each slide exists for, say it, place it on the map and get to a card within a couple of minutes. The detail comes out when you correct what participants say, and it lands better there because it's attached to their task.</p>
-</div><div class="block block--say">
-<div class="block-head"><span class="block-label">Say it like this</span></div>
-<p>"A skill is the written procedure for a job that keeps coming back, so you don't explain it every time. Julie, what's the bit of your task you explain every time?"</p>
-</div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Cue</span></div>
-<p>Before the session, go through the deck and write the one sentence for each slide in the margin of your notes. If you can't find it, that slide is a candidate to skip.</p>
+</div><div class="block block--key">
+<div class="block-head"><span class="block-label">Key concept</span></div>
+<p>Local storage doesn't mean local processing. The files live on the workstation, but when a session loads one, its contents go to the API as part of the prompt, the same as any source file Claude reads. Say this plainly. It's the first thing IT will ask.</p>
 </div><div class="block block--watch">
 <div class="block-head"><span class="block-label">Watch for</span></div>
-<p>Yourself reading the slide out. If you catch yourself doing it, stop and ask a question instead.</p>
+<p>"So my data never leaves my laptop?" That's the misreading the key concept above is there to prevent. Correct it on the spot.</p>
 </div></div></section>
 
-<section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Reading the room</span><h2>Two speeds of group</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-4" data-slide="4"><header class="card-head"><span class="badge">4</span><div><span class="eyebrow">Step 2 · What exists</span><h2>They all live in one folder</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The three moves are the same for every group. How hard you push them depends on who's in the room.</p>
-</div><div class="block block--grid">
-<div class="block-head"><span class="block-label">By group</span></div>
-<dl class="bg">
-<dt>New or quiet</dt><dd>Smaller questions, more often. Let people talk in pairs for a minute before anyone speaks to the room. Start hand-backs with yes or no questions. Run more of the live work yourself.</dd>
-<dt>Fast or experienced</dt><dd>Ask them to share their screens and show their working. Use the card to probe deeper ("what would go wrong if it had write access?"). Push them to do the thinking their task needs, and don't do it for them. More role play, and let the group challenge each other before you step in.</dd>
-</dl>
-</div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Cue</span></div>
-<p>A group can change speed during the programme, or even during a session. The quiet group from session two is often the one sharing screens by session five. Move them along with it.</p>
-</div></div></section>
-
-<section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Showing the craft</span><h2>Videos and recorded demos</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>Short edited sequences with a voiceover work well, and making them with Claude is itself worth showing: the group sees how quickly you can produce one. Use them for things that take too long to run live or that need a clean example.</p>
-<p>A video is something to watch. It doesn't replace the moves in parts 3 to 5. After each one, hand it back: "which bit of that would you use for your card?"</p>
-</div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Cue</span></div>
-<p>Keep them under three minutes. If you made it with Claude, say so and say roughly how long it took.</p>
-</div></div></section>
-
-<section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Stories</span><h2>The story bank</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>People remember a story long after they've forgotten the slide. There's one story here for each line of the map. Tell them in your own words, at the moment each one is marked for. These are drafted from our blog and client work and marked <span class="draft">Draft</span> until Daniel has checked them.</p>
-</div><div class="block block--story">
-<div class="block-head"><span class="block-label">The prompt: the first go is often rubbish</span><span class="draft">Draft</span></div>
-<p>A lot of people try AI once, get generic slop back and write the whole thing off. Fair enough, the first go often is rubbish. But generic results usually mean the steering was off. If a new hire handed you something that bland on their first morning, you'd look at what you told them first.</p>
-<p class="src">Tell it when someone says "I tried it and it was useless". From the blog post "It's never just one reason".</p>
-</div><div class="block block--story">
-<div class="block-head"><span class="block-label">Context: the gap is in the briefing pack</span><span class="draft">Draft</span></div>
-<p>Brian Madden keeps his whole working life in a folder that AI can read: his notes, ideas, plans and current thinking, updated daily. He publishes part of it so anyone's AI can draw on it. The lesson we took from it: the gap between "AI gives good answers" and "AI does my actual work" is almost always what it's been given to read, and much less the model.</p>
-<p class="src">Tell it when you introduce Projects and files. From "Making Knowledge Machine-Readable".</p>
-</div><div class="block block--story">
-<div class="block-head"><span class="block-label">Context window: knowing it versus feeling it</span><span class="draft">Draft</span></div>
-<p>Most AI training leaves people knowing what a context window is without ever feeling it run out on a real task. Coding tools show you: you watch it fill up, and you hit the same wall engineers hit. The new hire version: after a long day of instructions, the first things you said are the ones they've half forgotten. Write it down, start fresh.</p>
-<p class="src">Tell it when a long chat starts to drift. From "The Podcast That Clarified Why Praxis Exists". This one needs a story of your own: a real long conversation that went off track.</p>
-</div><div class="block block--story">
-<div class="block-head"><span class="block-label">Skills: the complaint that got 20% off</span><span class="draft">Draft</span></div>
-<p>In our September webinar we wrote a skill by hand to handle customer complaints and ran it live. Claude found the two complaints, ignored the stock question in the third email, opened the tickets with the right order numbers and drafted two replies. The tone was very warm and a bit too generous: it offered 20% off the next order. That's exactly what you fix in the skill, the way you'd correct a new hire's procedure after the first week.</p>
-<p class="src">Tell it when you introduce skills. From the webinar recap "Start the new season with Claude".</p>
-</div><div class="block block--story">
-<div class="block-head"><span class="block-label">Connectors: carrying paper between desks</span><span class="draft">Draft</span></div>
-<p>A client's operations team was copying data into the chat, getting good advice and then carrying it back into SharePoint by hand. Like a new hire with no logins who has to walk every piece of paper to someone else's desk. Once we gave Claude a connector to their SharePoint and Power Automate, listing their lists, adding a column and finding the last five failed runs of a flow took minutes. Through the usual screens it took most of an afternoon.</p>
-<p class="src">Tell it when you introduce connectors. From "How We Gave Claude Direct Access to a Client's SharePoint".</p>
-</div><div class="block block--story">
-<div class="block-head"><span class="block-label">Subagents: a lawyer to open the post</span><span class="draft">Draft</span></div>
-<p>Most of a small team's AI work is sorting: which emails need me today, is this invoice complete, is this a lead or spam. Sending all of that to the biggest model is like hiring a lawyer to open the post. A good new hire passes the sorting to someone suited to it and keeps the judgement for themselves.</p>
-<p class="src">Tell it when you introduce subagents or choosing a model. From "The AI model that can't write a word".</p>
-</div><div class="block block--story">
-<div class="block-head"><span class="block-label">Checking: the map never said it wasn't sure</span><span class="draft">Draft</span></div>
-<p>Two young hikers asked an AI to plan their first mountain trip. It drew them a map. They got lost, and the ranger who found them said nothing on it was right: the lake was in the wrong valley. The map never said it wasn't sure. It just drew a line. A correct answer and an invented one read the same, so you decide in advance where the checks go.</p>
-<p class="src">Tell it when you introduce checking the output or the scorecard. From "The map never said it wasn't sure".</p>
-</div><div class="block block--story">
-<div class="block-head"><span class="block-label">Running live: the demo that ran out</span><span class="draft">Draft</span></div>
-<p>In the same webinar, after two skills, some searches and dozens of actions, the live demo hit its usage limit and stopped. Frustrating at the time. It's also exactly what will happen to the group one day, and they saw it happen and saw what we did about it.</p>
-<p class="src">Tell it when something fails in front of the group. From the webinar recap.</p>
-</div></div></section>
-
-<section class="card" id="slide-10" data-slide="10"><header class="card-head"><span class="badge">10</span><div><span class="eyebrow">After the session</span><h2>The debrief</h2></div></header><div class="card-body"><div class="block block--idea">
-<div class="block-head"><span class="block-label">The idea</span></div>
-<p>It's hard to tell during the slides what's landing and what isn't. The debrief is where you find out. Do it the same day, on your own or with the trainer who watched you, and write down one thing to change for next time.</p>
+<p>In your home directory there's a folder called <code>.claude</code>. It holds your own CLAUDE.md, your personal skills and the memory Claude keeps, one folder per repository. Every checkout of the same repository shares one memory, and two developers on the same codebase build separate memories that neither can see.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Everything personal sits in one folder in your home directory. Your preferences, your procedures and Claude's notes on each project. Those notes are yours. If a colleague works on the same code, Claude keeps a separate set of notes for them."</p>
 </div><div class="block block--ask">
-<div class="block-head"><span class="block-label">Ask yourself</span></div>
+<div class="block-head"><span class="block-label">Pause, then ask</span></div>
 <ul>
-<li>Where did the group go quiet? What was on screen at the time?</li>
-<li>How many times did I hand an idea back to someone's card? Who never got asked?</li>
-<li>Did anyone say a brief out loud? What did the new hire's questions show?</li>
-<li>Did I run at least one task live and stay on the screen? Did they get a sense of how long it took?</li>
-<li>Which slide did I explain in detail that I could have said in one sentence?</li>
-<li>Which story did I tell, and did it land?</li>
-<li>What's different about the next group, and how does that change what I do?</li>
+<li>"If Claude learns something useful while working with you, does your colleague benefit? What would you have to do so they did?"</li>
 </ul>
-</div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Giving feedback to another trainer</span></div>
-<p>Start with what worked, and be specific about the moment. Then pick the one or two moments where the group could have done more of the talking, and name the move you'd use there next time (a hand-back, a brief out loud, a live run). Finish with what that means for their next group. Keep it to things they can try in the next session.</p>
+<p class="wait">(wait: the answer is that it has to be written into a shared file, which is where slide 6 goes)</p>
 </div></div></section>
 
-<section class="card" id="slide-11" data-slide="11"><header class="card-head"><span class="badge">11</span><div><span class="eyebrow">For authors</span><h2>Adding this to a deck's notes</h2></div></header><div class="card-body"><div class="block block--idea">
+<section class="card" id="slide-5" data-slide="5"><header class="card-head"><span class="badge">5</span><div><span class="eyebrow">Step 2 · On a real machine</span><h2>This is what it actually looks like</h2></div></header><div class="card-body"><div class="block block--idea">
 <div class="block-head"><span class="block-label">The idea</span></div>
-<p>The teaching notes for each deck will carry the three moves at the slides where they belong, so trainers don't have to work them out on the day. There are three block types for that, alongside the ones the notes already use (idea, say, ask, watch, cue, key). The markup follows the same pattern, and the CSS is at the top of this page.</p>
+<p>The same thing as a directory listing from a working laptop. Nothing on the previous slide is abstract, and there's one new file here: <code>settings.json</code>, which comes back on slide 10.</p>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Open your own <code>~/.claude</code> folder in the file browser or run <code>ls ~/.claude</code> in a terminal. Check beforehand that nothing private is on show.</dd>
+<dt>Expect</dt><dd>Instant.</dd>
+<dt>While it runs</dt><dd>Match each folder on your screen to a line on the slide.</dd>
+<dt>When it lands</dt><dd>Ask the people with Claude Code installed to open theirs. Someone always finds a memory folder they didn't know about.</dd>
+</dl>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>People who are surprised or uneasy about the transcripts. That's fair. Say they're plain files they can read and delete, and that the retention settings are something to agree with IT.</p>
+</div></div></section>
+
+<section class="card" id="slide-6" data-slide="6"><header class="card-head"><span class="badge">6</span><div><span class="eyebrow">Step 3 · Where it sits</span><h2>The same folder, in the repository</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>A second <code>.claude</code> folder and CLAUDE.md live in the codebase itself, and they're committed. That's the difference between a habit you have and a standard your team has. The repository is drawn inside your home folder because it reaches fewer people, even though it doesn't sit there on disk.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Your home folder is you, on every project. The repository is everyone who works on this project. Put a rule in your home folder and it's your habit. Commit it to the repository and it's the team's standard."</p>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: your home folder is the way you personally like things done. The repository is the team handbook that every new starter on this project gets on day one.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>"[name], take your card. Name one rule that's your own preference and one that everyone on the task should follow."</li>
+<li>"Where does each one go?"</li>
+</ul>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>People reading the nested boxes as folders inside folders on disk. Say it straight away: the nesting shows who a file reaches.</p>
+</div></div></section>
+
+<section class="card" id="slide-7" data-slide="7"><header class="card-head"><span class="badge">7</span><div><span class="eyebrow">Step 4 · If you take one thing away</span><h2>One folder name, four depths</h2></div></header><div class="card-body"><p class="slide-sub">The centrepiece. If they take one thing away, it's this.</p><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Two more layers: one outside yours, set for the whole machine by IT, and one inside the repository, <code>CLAUDE.local.md</code>, which stays out of version control and is just you on this project. Four layers in total. They add up rather than replace each other, read from the outside in.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"There are four places a CLAUDE.md can sit. The machine, set by IT for everyone. Your home folder, for you on every project. The repository, for everyone on this project. And a local file in the repository that's just for you, just here. Claude reads all four and adds them together. Where you put a rule decides who it applies to."</p>
+</div><div class="block block--key">
+<div class="block-head"><span class="block-label">Key concept</span></div>
+<p>Where a file sits decides who it applies to. Same folder name, four audiences. Everything else in the deck follows from this.</p>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: company policy from head office, your own way of working, the team handbook for this project and a sticky note on your own desk. A new starter follows all four at once.</p>
+<p class="line">"You're the new hire. Head office says one thing, the team handbook says another. Which do you follow, and who do you ask?"</p>
+<p>Use this to show why layers that contradict each other cause trouble. They add up, so conflicting rules leave Claude to choose.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>"[name], take one rule from your card. Which of the four layers does it belong in, and why that one?"</li>
+<li>"[name], do you agree? Who would miss out if it went one layer further in?"</li>
+</ul>
+<p class="wait">(go round two or three cards. The debate about which layer is the lesson)</p>
 </div><div class="block block--grid">
-<div class="block-head"><span class="block-label">The blocks</span></div>
+<div class="block-head"><span class="block-label">By role</span><span class="block-note"> (the layer they'll care about most)</span></div>
 <dl class="bg">
-<dt><code>block--card</code></dt><dd>"Back to your card": the hand-back questions for this slide, using the Use Case Cards.</dd>
-<dt><code>block--brief</code></dt><dd>"Brief it like a new hire": where this slide sits on the map, and a role-play prompt.</dd>
-<dt><code>block--live</code></dt><dd>"Run it live": what to kick off, how long it takes, what to say while it runs.</dd>
+<dt>Developer</dt><dd>The repository CLAUDE.md, and CLAUDE.local.md for their own shortcuts.</dd>
+<dt>Team lead</dt><dd>The repository layer: it's where the team's standard lives and gets reviewed like code.</dd>
+<dt>IT or admin</dt><dd>The machine layer, deployed to everyone, for the rules that can't vary by team.</dd>
+<dt>Consultant or contractor</dt><dd>Their home folder, so their way of working travels with them from client to client.</dd>
+</dl>
+</div></div></section>
+
+<section class="card" id="slide-8" data-slide="8"><header class="card-head"><span class="badge">8</span><div><span class="eyebrow">Step 5 · Where it sits</span><h2>Not all of it loads at once</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Some files load at the start of every session and use up context whether they're relevant or not: all four CLAUDE.md layers, the first 200 lines of MEMORY.md and the unscoped rules. The rest wait on disk until Claude reaches for them: skills, memory topics and path-scoped rules. A skill costs only its one-line description until it's used.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Everything in CLAUDE.md is read before you've typed a word, every session. That's space in its working memory you've spent up front. Skills are different: Claude only sees their one-line description until it needs one. So keep CLAUDE.md short and put the long procedures in skills."</p>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: CLAUDE.md is what the new starter reads every single morning before they begin. The skills are binders in the filing cabinet that they open when a job calls for one. You wouldn't make them reread the whole cabinet every day.</p>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Start a fresh session in your repository and type <code>/context</code> before anything else.</dd>
+<dt>Expect</dt><dd>A few seconds.</dd>
+<dt>While it runs</dt><dd>Ask the group to guess how much is used before the first prompt.</dd>
+<dt>When it lands</dt><dd>Point to the memory and instructions lines. That's what CLAUDE.md costs on every session.</dd>
+</dl>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>"For your card, what does Claude need to know every time, and what only once in a while?"</li>
+<li>"[name], which of those belongs in CLAUDE.md and which in a skill?"</li>
+</ul>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>The CLAUDE.md that has grown to hundreds of lines. Someone in the room has one. Ask them how many of those lines matter on a normal day.</p>
+</div></div></section>
+
+<section class="card" id="slide-9" data-slide="9"><header class="card-head"><span class="badge">9</span><div><span class="eyebrow">Step 6 · Why it matters</span><h2>Skills use the same four places</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>A skill is a folder with a SKILL.md in it: a written procedure. It goes in the same four places as everything else: managed for the whole organisation, personal in your home folder, project in the repository or inside a plugin. If the same name is in two places, the outer one wins. Where you put it is how you share it.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"There's nothing new to learn about where skills go. Put a procedure in the repository and everyone who clones it has it. Put the same file in your home folder and it helps just you. That choice is how you share it."</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>"Is there a procedure in your card that the whole team should run the same way? Where would you put it?"</li>
+<li>"[name], and one that's just your own way of doing things?"</li>
+</ul>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>"Why isn't my project skill working?" when there's one with the same name further out. The outer one wins. Tie back to deck 08, where this is one of the five things that go wrong.</p>
+</div></div></section>
+
+<section class="card" id="slide-10" data-slide="10"><header class="card-head"><span class="badge">10</span><div><span class="eyebrow">Step 7 · Why it matters</span><h2>Instructions advise. Settings enforce.</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>Both live in the same four folders, and only one is a control. CLAUDE.md and rules are context: Claude reads them and follows them, most of the time. <code>settings.json</code> and hooks run whatever Claude decides: they block a command or a path, or run a check at a fixed moment. If something has to be impossible, a written instruction isn't enough.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"Writing 'never touch the production database' in CLAUDE.md is advice. Claude will follow it nine times out of ten. If it has to be ten out of ten, it goes in settings, where it's blocked whatever Claude decides."</p>
+</div><div class="block block--brief">
+<div class="block-head"><span class="block-label">Brief it like a new hire</span></div>
+<p>On the map: telling the new starter "don't touch payroll" is an instruction. Not giving them the key to payroll is a setting. You'd do both for anything that matters.</p>
+<p class="line">"[name], you've just hired someone to help with your card. What's the one thing you'd tell them never to do? Would you trust them to remember, or would you take away the key?"</p>
+</div><div class="block block--key">
+<div class="block-head"><span class="block-label">Key concept</span></div>
+<p>People reach for an instruction when they need a control, then wonder why it held nine times out of ten. This is the slide that stops real incidents. Make sure every person can say which of their rules are advice and which have to be enforced.</p>
+</div><div class="block block--card">
+<div class="block-head"><span class="block-label">Back to your card</span></div>
+<ul>
+<li>"Go through the rules on your card. Mark each one: advice or control?"</li>
+<li>"[name], read out one you marked as a control. Group, do you agree it can't be left to judgement?"</li>
+</ul>
+</div><div class="block block--watch">
+<div class="block-head"><span class="block-label">Watch for</span></div>
+<p>Compliance rules written only in CLAUDE.md. That's the most common version of this mistake. For regulated clients, turn it into a to-do: move the must-never rules into settings with IT.</p>
+</div></div></section>
+
+<section class="card" id="slide-11" data-slide="11"><header class="card-head"><span class="badge">11</span><div><span class="eyebrow">Close</span><h2>Where it sits decides who it applies to</h2></div></header><div class="card-body"><div class="block block--idea">
+<div class="block-head"><span class="block-label">The idea</span></div>
+<p>The whole deck in one line: everything is a file, and where it sits decides who it applies to. Three commands let them check it themselves: <code>/memory</code> lists the files, <code>/context</code> shows what loaded and <code>/doctor</code> explains why something isn't taking effect.</p>
+</div><div class="block block--say">
+<div class="block-head"><span class="block-label">Say it like this</span></div>
+<p>"If you remember one thing: it's all files, and where a file sits decides who it applies to. And when something isn't working the way you expect, you don't have to guess. Three commands tell you what's going on."</p>
+</div><div class="block block--live">
+<div class="block-head"><span class="block-label">Run it live</span></div>
+<dl>
+<dt>Kick off</dt><dd>Run <code>/doctor</code> in your repository.</dd>
+<dt>Expect</dt><dd>A few seconds.</dd>
+<dt>While it runs</dt><dd>Ask which of the three commands they'd reach for first when a rule is being ignored.</dd>
+<dt>When it lands</dt><dd>Read any warning out and say which slide it relates to.</dd>
 </dl>
 </div><div class="block block--cue">
-<div class="block-head"><span class="block-label">Markup</span></div>
-<pre class="snippet">&lt;div class="block block--card"&gt;
-&lt;div class="block-head"&gt;&lt;span class="block-label"&gt;Back to your card&lt;/span&gt;&lt;/div&gt;
-&lt;ul&gt;&lt;li&gt;"..."&lt;/li&gt;&lt;/ul&gt;
-&lt;/div&gt;</pre>
-<p>Put at least one of the three on every slide that introduces something new. Decks 01, 03, 07, 08, 09 and 17 already have them at the slides that cover prompts, Projects, skills, connectors, subagents and where Claude keeps what it knows.</p>
+<div class="block-head"><span class="block-label">After the session</span></div>
+<p>Ask each person to go back to their card and write, for each rule, where it lives and whether it's advice or a control. That list is what you check at the start of the next session.</p>
 </div></div></section>
 </main>
 <script>
