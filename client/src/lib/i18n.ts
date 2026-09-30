@@ -98,6 +98,11 @@ export const copy = {
       en: "Fifteen minutes, free. Bring the job you keep repeating, and we'll tell you honestly what we think.",
       fr: "Quinze minutes, gratuites. Venez avec la tâche que vous répétez sans cesse, et nous vous dirons honnêtement ce que nous en pensons.",
     },
+    /** Short on purpose: the paragraph above already says free and what to bring. */
+    ctaButton: {
+      en: "Book a 15-minute meeting",
+      fr: "Réserver un échange de 15 minutes",
+    },
   },
 
   contact: {

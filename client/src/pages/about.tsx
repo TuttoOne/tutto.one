@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import { usePreferences } from "@/lib/preferences";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 /* The booking label is the home page's, so every page asks the same way. */
-import { landing } from "@/lib/landing-copy";
 
 /**
  * A portrait for the people section. The image is a drop-in — if the file is
@@ -380,14 +379,14 @@ export default function About() {
         <div className="mt-10 p-8 bg-secondary/30 rounded-2xl border border-border">
           <h3 className="text-xl font-serif font-bold mb-2">{t(copy.common.readyToTalk)}</h3>
           <p className="text-muted-foreground mb-6">{t(copy.about.ctaBody)}</p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center items-start gap-4">
             <a
               href="https://cal.com/tuttoone/15min"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
             >
-              {t(landing.introCall)}
+              {t(copy.about.ctaButton)}
             </a>
             <Link
               href="/contact"
