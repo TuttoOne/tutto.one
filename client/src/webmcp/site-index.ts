@@ -24,10 +24,10 @@ export type SitePage = {
 export const SITE_PAGES: SitePage[] = [
   {
     path: "/",
-    name: "Tutto: lean in and learn Claude",
+    name: "Tutto: where to start with Claude",
     summary: "For people overwhelmed by what they hear about Claude. Two tracks: For Work and For Life.",
     detail:
-      "The site's front door. People say Claude is amazing, scary, expensive, that it hallucinates, is a sycophant, will steal their data or take their job. The page invites the visitor to lean in and learn. Tutto works with the visitor through their own systems, tasks and ideas. Together they create a way of working that they can repeat with all their AI. If they hit a wall, Tutto is there to help push through until it's right. The page sets out 4 steps to top AI work. The page leads to two tracks that follow the same system with different content: For Work, the professional track at /praxis-programme, and For Life, the general track, which goes straight to the peer groups at /peer-groups. The page also prices The AI-Fluent Team at its back-to-work price.",
+      "The site's front door. People say Claude is amazing, scary, expensive, that it hallucinates, is a sycophant, will steal their data or take their job. The page tells a visitor who feels left behind that it is still early, and invites them to start together. AI is new and can seem complex, but the visitor knows their own work, interests and life inside out, so Tutto starts there. It is done in a small group, through rich conversations and worked examples. At the end the visitor can navigate all of it and create anything they can describe. Tutto teaches, but the visitor does most of the talking, making and refining, and teaching it back to the group is how they come to understand it. The page sets out 4 steps to top AI work. The page leads to two tracks that follow the same system with different content: For Work, the professional track at /praxis-programme, and For Life, the general track, which goes straight to the peer groups at /peer-groups. The page also prices The AI-Fluent Team at its back-to-work price.",
     offering: true,
   },
   {

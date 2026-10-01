@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Quote } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
@@ -38,7 +38,7 @@ export default function Landing() {
 
   /* The tab title is the second line of the headline, so it is translated for
      free. The first line cycles, which a tab title cannot. */
-  const title = t(landing.hero.titleSecond).replace(/\.$/, "");
+  const title = t(landing.hero.titleSecond).replace(/\n/g, " ");
   useEffect(() => {
     document.title = `Tutto | ${title}`;
     return () => {
@@ -48,7 +48,7 @@ export default function Landing() {
 
   return (
     <Layout>
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto px-6 pt-6 pb-12">
         <Hero />
         <Clients />
         <Sequence />
@@ -80,20 +80,40 @@ export default function Landing() {
  */
 function Hero() {
   const t = useT();
+  const second = t(landing.hero.titleSecond);
+  const third = t(landing.hero.titleThird);
+  const headline = useFittedHeadline(
+    t(landing.hero.title),
+    landing.hero.titleCycle.map((w) => t(w)),
+    [second, third],
+  );
 
   return (
-    <header className="pt-8 pb-4">
+    <header>
 
-      {/* "Claude" stays put and the rest of the line is typed out. The line never
-          wraps, so the type scales with the viewport: the longest line
-          ("Claude peut tout construire" in French, about 11.6em) has to fit a phone, and
-          the size is capped at the old headline size from `lg` up. The second
-          line is fixed. */}
-      <h1 className="text-[clamp(1.3rem,7vw,3.5rem)] font-serif font-bold leading-[1.1] tracking-tight">
+      {/* "Claude" stays put and the rest of the line is typed out. The second
+          and third lines are fixed.
+
+          From `sm` up it is three lines, none of which wraps, and the type is
+          sized so the longest one runs the full width, to the right edge of
+          the testimonial. On a phone each line folds in two at a hand-set
+          break (the typed words drop under "Claude"), which lets the type be
+          larger and leaves no single word on a line of its own.
+
+          The size comes from `useFittedHeadline`. The class is only what
+          shows before it has run. */}
+      <h1
+        ref={headline}
+        className="text-[clamp(1.3rem,7vw,3.5rem)] font-serif font-bold leading-[1.05] tracking-tight"
+      >
         <span className="block whitespace-nowrap">
-          {t(landing.hero.title)} <TypedWords />
+          {t(landing.hero.title)}{" "}
+          <span className="block sm:inline">
+            <TypedWords />
+          </span>
         </span>
-        <span className="block whitespace-nowrap">{t(landing.hero.titleSecond)}</span>
+        <span className="block whitespace-pre-line sm:whitespace-nowrap">{second}</span>
+        <span className="block whitespace-pre-line sm:whitespace-nowrap">{third}</span>
       </h1>
 
       {/* Two columns from `lg` up: the deck and the tracks on the left, the
@@ -101,37 +121,47 @@ function Hero() {
           width, because its first line is too long to share a row. Below `lg`
           the testimonial drops under the tracks, so the buttons stay first.
 
-          Side by side, both columns are justified and end on the same line:
-          the grid stretches the left column to the foot of the card and the
-          spare height is shared between the deck, the buttons and the note.
-          The deck gives up its hand-set line breaks there, because a line
-          that ends on a forced break cannot be justified. */}
-      <div className="mt-3 lg:grid lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-10">
+          Side by side, both columns are justified and start and end on the
+          same lines. The card's width and padding and the deck's type size are
+          picked so the columns come out close to each other in both languages.
+          The grid stretches the shorter one, and the spare height goes between
+          the deck's two paragraphs and the buttons (their wrapper steps aside
+          at `lg` so all three share it), or above the card's signature. */}
+      <div className="mt-3 lg:grid lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-10">
         <div className="lg:flex lg:flex-col lg:justify-between">
-          <div className="max-w-2xl space-y-4">
-            <p className="text-xl text-foreground leading-relaxed sm:whitespace-pre-line lg:whitespace-normal lg:text-justify">
+          <div className="max-w-2xl space-y-4 lg:contents">
+            <p className="text-[0.9375rem] lg:text-sm text-foreground leading-relaxed lg:leading-relaxed text-justify">
               {t(landing.hero.deck)}
+            </p>
+            <p className="text-[0.9375rem] lg:text-sm text-foreground leading-relaxed lg:leading-relaxed text-justify">
+              {t(landing.hero.deckTeach)}
             </p>
           </div>
 
-          {/* The two tracks. Every button on this page goes to one or the other. */}
-          <div className="mt-9 flex flex-col sm:flex-row gap-4">
+          {/* The two tracks. Every button on this page goes to one or the other.
+              They are stacked, the same width, each with what it is beside it.
+              On a phone the note drops under its button, centred like the
+              button's own label. */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-[auto_minmax(0,1fr)] gap-x-5 gap-y-2 sm:gap-y-3 sm:items-center">
             <Link
               href={landing.tracks.work.href}
-              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
+              className="flex items-center justify-center gap-2 px-8 py-2.5 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
             >
               {t(landing.tracks.work.label)} <ArrowRight className="w-4 h-4" />
             </Link>
+            <p className="text-sm text-muted-foreground leading-relaxed text-center sm:text-left">
+              {t(landing.tracks.work.note)}
+            </p>
             <Link
               href={landing.tracks.life.href}
-              className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
+              className="mt-3 sm:mt-0 flex items-center justify-center gap-2 px-8 py-2.5 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
             >
               {t(landing.tracks.life.label)} <ArrowRight className="w-4 h-4" />
             </Link>
+            <p className="text-sm text-muted-foreground leading-relaxed text-center sm:text-left">
+              {t(landing.tracks.life.note)}
+            </p>
           </div>
-          <p className="mt-4 max-w-xl text-sm text-muted-foreground leading-relaxed lg:text-justify">
-            {t(landing.hero.tracksNote)}
-          </p>
         </div>
 
         <Testimonial />
@@ -140,29 +170,114 @@ function Hero() {
   );
 }
 
+/** The caret after the typed words: its width and margin in `.hero-caret`. */
+const CARET_EM = 0.12;
+
+/** The largest the headline goes on a phone, where each line is folded in two.
+ *  Just under `sm` the halves are short for the width, and without a cap the
+ *  type would be far larger than it is on the other side of the breakpoint. */
+const FOLDED_MAX_PX = 48;
+
+/**
+ * Sizes the headline so its longest line runs the full width of the hero.
+ *
+ * Which line is longest depends on the language and on how the lines are
+ * folded, so it is measured here; a size written into the class would be
+ * right for one language at one width. From `sm` up the lines are "Claude"
+ * with each typed phrase, and each fixed line whole. On a phone they are
+ * "Claude", each typed phrase, and each half of each fixed line.
+ *
+ * It measures on a canvas, in the headline's own font, so nothing is added to
+ * the page for the copy editor to trip over. Returns the ref for the `h1`.
+ */
+function useFittedHeadline(lead: string, typed: string[], fixed: string[]) {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const lines = [lead, ...typed, ...fixed].join("|");
+
+  useEffect(() => {
+    const h1 = ref.current;
+    const pen = document.createElement("canvas").getContext("2d");
+    if (!h1 || !pen) return;
+    const whole = window.matchMedia("(min-width: 640px)");
+
+    const fit = () => {
+      const style = getComputedStyle(h1);
+      const tracking = parseFloat(style.letterSpacing) / parseFloat(style.fontSize) || 0;
+      pen.font = `${style.fontWeight} 100px ${style.fontFamily}`;
+      const em = (s: string, extra = 0) =>
+        pen.measureText(s).width / 100 + s.length * tracking + extra;
+
+      const widths = whole.matches
+        ? [
+            ...typed.map((w) => em(`${lead} ${w}`, CARET_EM)),
+            ...fixed.map((l) => em(l.replace(/\n/g, " "))),
+          ]
+        : [
+            em(lead),
+            ...typed.map((w) => em(w, CARET_EM)),
+            ...fixed.flatMap((l) => l.split("\n").map((half) => em(half))),
+          ];
+
+      /* A hair under the full width, so a rounding error cannot push the
+         longest line past the edge. */
+      const size = (h1.clientWidth / Math.max(...widths)) * 0.995;
+      h1.style.fontSize = `${whole.matches ? size : Math.min(size, FOLDED_MAX_PX)}px`;
+    };
+
+    fit();
+    /* The first measure can be in the fallback font. */
+    document.fonts.ready.then(fit);
+
+    /* Refit when the width changes, and only then: a new size changes the
+       headline's height, which the observer also reports, and resizing from
+       inside its own callback is a "ResizeObserver loop" error. So the work
+       is put off to the next frame and a report with the same width is
+       dropped. */
+    let width = h1.clientWidth;
+    let frame = 0;
+    const watch = new ResizeObserver(() => {
+      if (h1.clientWidth === width) return;
+      width = h1.clientWidth;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(fit);
+    });
+    watch.observe(h1);
+    whole.addEventListener("change", fit);
+    return () => {
+      watch.disconnect();
+      cancelAnimationFrame(frame);
+      whole.removeEventListener("change", fit);
+    };
+    /* `lines` stands in for the three arguments, which are new arrays on
+       every render. */
+  }, [lines]);
+
+  return ref;
+}
+
 /**
  * One client, in their own words, beside the hero.
  *
- * `Panel`'s ground, so it reads as a note on the page rather than a third
- * button. The only amber is the quote mark.
+ * White on black, the one dark block on the page, so it is read as somebody
+ * else's voice. The only amber is the quote mark. It keeps a border in dark
+ * mode, where the page is nearly as dark as the card.
  *
- * From `lg` up it is pulled up beside the headline's second line, which is
- * short and fixed. It stays clear of the first line, which runs wider than
- * the column. If the second line gets longer than the left column, drop the
- * `lg:-mt-14`. The left column stretches to the foot of the card either way.
+ * From `lg` up it starts level with the deck and ends level with the second
+ * button. The quote is set a touch larger than the deck there, which is what
+ * brings the two columns out at the same height.
  */
 function Testimonial() {
   const t = useT();
 
   return (
-    <figure className="mt-10 lg:-mt-14 max-w-2xl bg-secondary/30 rounded-2xl border border-border p-6">
+    <figure className="mt-10 lg:mt-0 max-w-2xl bg-neutral-900 rounded-2xl border border-neutral-900 dark:border-neutral-700 p-6 lg:flex lg:flex-col">
       <Quote className="w-6 h-6 text-primary" aria-hidden="true" />
-      <blockquote className="mt-4 text-base text-foreground leading-relaxed text-justify">
+      <blockquote className="mt-4 text-sm lg:text-[0.9375rem] text-white leading-relaxed lg:leading-relaxed text-justify">
         {t(testimonial.quote)}
       </blockquote>
-      <figcaption className="mt-5 text-sm">
-        <span className="font-medium text-foreground">{testimonial.name}</span>
-        <span className="text-muted-foreground">, {t(testimonial.place)}</span>
+      <figcaption className="mt-5 lg:mt-auto lg:pt-5 text-sm">
+        <span className="font-medium text-white">{testimonial.name}</span>
+        <span className="text-white/60">, {t(testimonial.place)}</span>
       </figcaption>
     </figure>
   );
@@ -237,12 +352,15 @@ function TypedWords() {
  * a claim and this is the only evidence on the sheet. It carries no heading of
  * its own beyond the section label — a client wall that has to explain itself
  * is not working.
+ *
+ * `tight`, and the hero above is kept short, so the logos are on screen
+ * before the reader scrolls on a laptop.
  */
 function Clients() {
   const t = useT();
 
   return (
-    <Section label={t(landing.clients.label)}>
+    <Section tight label={t(landing.clients.label)}>
       <LogoMarquee items={landing.clients.items} />
     </Section>
   );

@@ -67,26 +67,39 @@ export const landing = {
       { en: "is expensive", fr: "coûte cher" },
     ],
 
-    /** The second line: what to do about all of that. It is also the tab
-     *  title. */
+    /** The second line: the fear the reader is left with after hearing all
+     *  of that. It is also the tab title.
+     *
+     *  The line break in this one and the next is where the line folds on a
+     *  phone, set by hand so no single word is left on a line of its own.
+     *  From `sm` up each is one line and the break reads as a space. Keep the
+     *  two halves about the same length. */
     titleSecond: {
-      en: "Let's lean in & learn.",
-      fr: "Allons-y et apprenons.",
+      en: "Feel like you've been\nleft behind?",
+      fr: "L'impression d'avoir\npris du retard ?",
     },
 
-    /** Six short lines. The line breaks are kept on a tablet. They are dropped
-     *  on a phone, where the lines are too long to hold, and from `lg` up,
-     *  where the deck is justified beside the testimonial. */
+    /** The third line: the answer to the fear, and what we do about it. */
+    titleThird: {
+      en: "It's still early.\nLet's start together.",
+      fr: "Il est encore tôt.\nAllons-y ensemble.",
+    },
+
+    /** The first paragraph of the deck: why the reader would want in. The
+     *  technology is new and seems complex, their own work and life are what
+     *  they know best, and a small group gets from the one to the other. */
     deck: {
-      en: "We'll work with you, through\nyour systems, your tasks and your ideas.\nWe create a way of working together,\nthat you can repeat with all your AI.\nAnd if you hit a wall, we'll be there too\nto help push through, until it's right.",
-      fr: "Nous travaillons avec vous, sur\nvos systèmes, vos tâches et vos idées.\nNous créons ensemble une façon de travailler,\nque vous pouvez répéter avec toutes vos IA.\nEt si vous butez sur un mur, nous serons là aussi\npour vous aider à passer, jusqu'à ce que ce soit bon.",
+      en: "AI is new and it can seem complex, but your work, your interests and your life are something you know inside out. That's where we start. We do it in a small group through rich conversations and worked examples. At the end, you'll be able to navigate all of it and create anything you can describe.",
+      fr: "L'IA est nouvelle et peut sembler complexe, mais votre travail, vos centres d'intérêt et votre vie, vous les connaissez sur le bout des doigts. C'est par là que nous commençons. Nous le faisons en petit groupe, par des conversations riches et des exemples concrets. À la fin, vous saurez vous y retrouver et créer tout ce que vous savez décrire.",
     },
 
-    /** Small print under the two track buttons: what separates them. */
-    tracksNote: {
-      en: "Both follow the same system. For Work is built around your business and your team. For Life is a group of four people like you, on whatever you want to use AI for.",
-      fr: "Les deux suivent la même méthode. Pour le travail : construit autour de votre entreprise et de votre équipe. Pour la vie : un groupe de quatre personnes qui vous ressemblent, sur ce que vous voulez faire avec l'IA.",
+    /** The second paragraph of the deck: how the teaching works. We teach,
+     *  the reader does the work and teaches it back. */
+    deckTeach: {
+      en: "Yes, Tutto will teach you, but you'll do most of the talking, making and refining. Teaching it back to our small group makes you understand it so much better.",
+      fr: "Oui, Tutto vous forme, mais c'est vous qui parlez, fabriquez et affinez le plus. L'enseigner à votre tour à notre petit groupe vous le fait comprendre bien mieux.",
     },
+
   },
 
   /**
@@ -100,10 +113,19 @@ export const landing = {
     work: {
       label: { en: "For Work", fr: "Pour le travail" },
       href: "/praxis-programme",
+      /** Beside the button in the hero: what this track is. */
+      note: {
+        en: "Built around your business and your team.",
+        fr: "Construit autour de votre entreprise et de votre équipe.",
+      },
     },
     life: {
       label: { en: "For Life", fr: "Pour la vie" },
       href: "/peer-groups",
+      note: {
+        en: "With a group of four people like you.",
+        fr: "Avec quatre personnes comme vous.",
+      },
     },
   },
 

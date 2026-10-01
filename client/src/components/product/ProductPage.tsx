@@ -78,23 +78,26 @@ export function ProductHero({
   );
 }
 
-/** Numbered section with a ruled header, matching the document feel of the originals. */
+/** Numbered section with a ruled header, matching the document feel of the originals.
+ *  `tight` closes it up to the block above and brings its content up under the label. */
 export function Section({
   index,
   label,
   title,
   intro,
+  tight,
   children,
 }: {
   index?: string;
   label: string;
   title?: React.ReactNode;
   intro?: React.ReactNode;
+  tight?: boolean;
   children?: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-border pt-6 mt-16 first:mt-0">
-      <div className="flex items-baseline gap-4 mb-8">
+    <section className={`border-t border-border first:mt-0 ${tight ? "pt-5 mt-8" : "pt-6 mt-16"}`}>
+      <div className={`flex items-baseline gap-4 ${tight ? "mb-5" : "mb-8"}`}>
         {index && (
           <span className="text-[11px] font-mono text-muted-foreground/60 tabular-nums">{index}</span>
         )}
