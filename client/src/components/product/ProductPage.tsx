@@ -781,6 +781,7 @@ export function ClosingCta({
   body,
   href,
   label,
+  secondary,
   messageLabel = "Send a message",
   footnote,
   rule,
@@ -789,6 +790,12 @@ export function ClosingCta({
   body: string;
   href: string;
   label: string;
+  /**
+   * A second button beside the first, for a page that ends on a choice of two.
+   * The message link then drops to a text link, so the panel still carries
+   * two buttons and no more.
+   */
+  secondary?: { href: string; label: string };
   /**
    * `null` drops the secondary link entirely. The decision-first pages are
    * built on one offer and one action, and a second button on them is not a
@@ -813,7 +820,7 @@ export function ClosingCta({
       <div className="p-6 sm:p-8 bg-secondary/30 rounded-2xl border border-border">
       <h3 className="text-xl font-serif font-bold mb-2">{title}</h3>
       <p className="text-muted-foreground mb-6 max-w-xl">{body}</p>
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <a
           href={href}
           target={href.startsWith("http") ? "_blank" : undefined}
@@ -822,7 +829,23 @@ export function ClosingCta({
         >
           {label}
         </a>
-        {messageLabel !== null && (
+        {secondary && (
+          <Link
+            href={secondary.href}
+            className="inline-flex items-center justify-center px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
+          >
+            {secondary.label}
+          </Link>
+        )}
+        {messageLabel !== null && secondary && (
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center gap-2 text-sm font-medium text-primary hover:underline sm:ml-2"
+          >
+            {messageLabel} <ArrowRight className="w-4 h-4" />
+          </Link>
+        )}
+        {messageLabel !== null && !secondary && (
           <Link
             href="/contact"
             className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"

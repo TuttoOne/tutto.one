@@ -3,8 +3,7 @@ import { usePageTr } from "@/lib/page-fr";
 import { PRAXIS_PROGRAMME_FR } from "@/lib/fr/praxis-programme";
 import { usePreferences } from "@/lib/preferences";
 import { useTrainerCode, bookingHref } from "@/lib/trainer-code";
-import { landing } from "@/lib/landing-copy";
-import { SITE_TITLE, useT } from "@/lib/i18n";
+import { SITE_TITLE } from "@/lib/i18n";
 import { praxisEconomics, trainerEconomics, perMonth, PRAXIS_STACK, stackValue, type StackKey } from "@/lib/pricing";
 import { Header } from "@/components/layout/Layout";
 
@@ -193,9 +192,8 @@ export default function PraxisProgramme() {
     name: "", email: "", company: "", teamSize: "", programme: "team", task: "", trainerCode: "",
   });
   const trainerCode = useTrainerCode();
-  const t = useT();
-  /* Two steps, in this order. The free 60-minute session is the proof, the
-     same offer and label as the home page. Booking the course comes after:
+  /* Two steps, in this order. The free 60-minute session is the proof, and
+     this page is the only one that books it. Booking the course comes after:
      a short form, then the 15-minute call to say hello and set dates, which
      is offered once the form is in. Both carry the referring trainer's code.
      Each programme has its own 15-minute event in Cal.com, so the booking
@@ -283,9 +281,9 @@ export default function PraxisProgramme() {
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Eight sessions.")}<br />{tr("Your team stops repeating itself.")}</h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Your staff already use AI, and it saves them nothing: ask, fix, ask again. Over eight sessions we fix it in order, on your own work. The rules, a KPI for each job, what to hand over. Then the tools, skills and automations that do it without you.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 20, maxWidth: 560 }}>{tr("No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.")}</p>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.7, fontWeight: 600, color: "#f6f1ea", marginBottom: 24, maxWidth: 560 }}>{t(landing.close.body)}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.7, fontWeight: 600, color: "#f6f1ea", marginBottom: 24, maxWidth: 560 }}>{tr("Bring the one job that's bugging you. In an hour you'll get started with our scorecard and policy tools, and leave with your first artefact. No slides, no pitch you didn't ask for.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{t(landing.hero.cta)} →</a>
+            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{tr("Book the 60-minute session, free")} →</a>
             <a href="#get-started" style={{ ...CTA_SECONDARY, color: "#f6f1ea", borderColor: "rgba(246,241,234,0.3)" }}>{tr("Book your first course")}</a>
           </div>
           <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.4)", marginTop: 16 }}>{tr("You and up to four of your team · Online or in person")}</p>
@@ -522,15 +520,22 @@ export default function PraxisProgramme() {
               </div>
             ))}
           </div>
-          <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 14, maxWidth: 560 }}>
-            {tr("On your own, and you'd rather learn with people like you? Take the Fast Track in a group of four:")}{" "}
-            <a href="/peer-groups" style={{ color: "#d97706" }}>{tr("see the peer groups")}</a>.
-          </p>
+          {/* The peer track, as a block of its own under the two prices. */}
+          <a
+            href="/peer-groups"
+            style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", marginTop: 16, padding: "20px", border: "1px solid #d8d0c5", borderRadius: 10, background: "#faf8f5", textDecoration: "none" }}
+          >
+            <span style={{ display: "block", maxWidth: 480 }}>
+              <span style={{ ...ROBOTO, display: "block", fontSize: 16, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 }}>{tr("On your own, and you'd rather learn with people like you?")}</span>
+              <span style={{ ...INTER, display: "block", fontSize: 13, lineHeight: 1.7, color: "#5a5248" }}>{tr("Take the Fast Track in a group of four.")}</span>
+            </span>
+            <span style={{ ...CTA_SECONDARY, whiteSpace: "nowrap" }}>{tr("See the peer groups")} →</span>
+          </a>
 
           {/* Ask for the call while the price and the guarantee are on screen,
               rather than only at the foot of the page after the questions. */}
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center", marginTop: 24 }}>
-            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{t(landing.hero.cta)} →</a>
+            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{tr("Book the 60-minute session, free")} →</a>
             <a href="#get-started" style={CTA_SECONDARY}>{tr("Book your first course")}</a>
           </div>
 
@@ -734,7 +739,7 @@ export default function PraxisProgramme() {
           )}
 
           <p style={{ ...INTER, fontSize: 12, color: "rgba(246,241,234,0.35)", marginTop: 20 }}>{tr("Not ready to book?")}{" "}
-            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={{ color: "#d97706" }}>{t(landing.hero.cta)}</a>
+            <a href={proofSession} target="_blank" rel="noopener noreferrer" style={{ color: "#d97706" }}>{tr("Book the 60-minute session, free")}</a>
             {" · "}{tr("Or email directly: daniel@tutto.one")}
           </p>
         </div>

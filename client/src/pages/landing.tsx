@@ -11,17 +11,10 @@ import {
 } from "@/components/product/ProductPage";
 import { SITE_TITLE, useT } from "@/lib/i18n";
 import { landing } from "@/lib/landing-copy";
-import { praxisEconomics } from "@/lib/pricing";
+import { praxisEconomics, price } from "@/lib/pricing";
 import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
-
-/* The free 60-minute session described under the hero button: an
-   introduction, a start on the scorecard and policy tools, a first artefact,
-   and formal training booked. Other pages book the
-   15-minute intro call. The paid 90-minute QuickStart is not linked from the
-   site: it is sent by hand after a call. */
-const BOOKING = "https://cal.com/tuttoone/60-min-meeting";
 
 /**
  * The site's front door, at `/`.
@@ -33,8 +26,8 @@ const BOOKING = "https://cal.com/tuttoone/60-min-meeting";
  * doors because a reader cannot see what to buy until they can see where they
  * currently are.
  *
- * Blocks in the order somebody decides in: the pain and the offer, the
- * evidence, the order the work happens in, what it costs, and the call.
+ * Blocks in the order somebody decides in: the pain and the two tracks, the
+ * evidence, the order the work happens in, what it costs, and the tracks again.
  * Nothing here defines its own type, colour or spacing — it is `Layout` for the
  * chrome, `Section` for the ruled heads, `NumberedList` for the sequence and
  * `HeadlinePrice` for the price, so the front door moves when the rest of
@@ -109,24 +102,23 @@ function Hero() {
         </p>
       </div>
 
+      {/* The two tracks. Every button on this page goes to one or the other. */}
       <div className="mt-9 flex flex-col sm:flex-row gap-4">
-        <a
-          href={BOOKING}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
-        >
-          {t(landing.hero.cta)}
-        </a>
         <Link
-          href={landing.footer.longVersion.href}
+          href={landing.tracks.work.href}
+          className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
+        >
+          {t(landing.tracks.work.label)} <ArrowRight className="w-4 h-4" />
+        </Link>
+        <Link
+          href={landing.tracks.life.href}
           className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
         >
-          {t(landing.hero.secondaryCta)} <ArrowRight className="w-4 h-4" />
+          {t(landing.tracks.life.label)} <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
       <p className="mt-4 max-w-xl text-sm text-muted-foreground leading-relaxed">
-        {t(landing.hero.ctaNote)}
+        {t(landing.hero.tracksNote)}
       </p>
     </header>
   );
@@ -177,12 +169,13 @@ function Sequence() {
  * The one price on the front door: The AI-Fluent Team, with its regular price
  * struck through while the back-to-work special runs. Everything else — the
  * stack, the guarantee, Fast Track — is on /praxis-programme, one click on.
+ * Under it, the For Life track as a block of its own, to /peer-groups.
  */
 function Pricing() {
   const t = useT();
   const { locale, currency } = usePreferences();
   const econ = praxisEconomics(currency, locale);
-  const { offer } = landing.pricing;
+  const { offer, peer } = landing.pricing;
 
   return (
     <Section label={t(landing.pricing.label)}>
@@ -198,19 +191,32 @@ function Pricing() {
             <Link href="/praxis-programme" className="text-primary hover:underline">
               {t(offer.link)} →
             </Link>
-            <Link href="/peer-groups" className="mt-1 block text-primary hover:underline">
-              {t(offer.peer)} →
-            </Link>
           </>
         }
       >
         {t(offer.body)}
       </HeadlinePrice>
+      <Link
+        href={landing.tracks.life.href}
+        className="mt-4 group flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
+      >
+        <div>
+          <p className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+            {t(peer.title)}
+          </p>
+          <p className="text-sm text-muted-foreground mt-1 max-w-xl">
+            {t(peer.body).replace("{price}", price("peerGroupSeat", currency, locale))}
+          </p>
+        </div>
+        <span className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-full text-sm font-medium shrink-0">
+          {t(peer.link)} <ArrowRight className="w-4 h-4" />
+        </span>
+      </Link>
     </Section>
   );
 }
 
-/** The conversion moment. */
+/** The conversion moment: the same two tracks as the hero. */
 function Close() {
   const t = useT();
 
@@ -219,8 +225,9 @@ function Close() {
       rule
       title={t(landing.close.title)}
       body={t(landing.close.body)}
-      href={BOOKING}
-      label={t(landing.close.cta)}
+      href={landing.tracks.work.href}
+      label={t(landing.tracks.work.label)}
+      secondary={{ href: landing.tracks.life.href, label: t(landing.tracks.life.label) }}
       messageLabel={t(landing.close.alt)}
       footnote={
         <>

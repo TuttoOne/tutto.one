@@ -86,8 +86,8 @@ export const PEER_GROUPS_FR: FrDict = {
   "The {deposit} deposit holds your seat and comes off the price. If no group forms within {weeks} weeks you get it back in full.":
     "L'acompte de {deposit} réserve votre place et il est déduit du prix. Si aucun groupe ne se forme sous {weeks} semaines, il vous est remboursé intégralement.",
   "Pay the {deposit} deposit": "Régler l'acompte de {deposit}",
-  "Then pick a time for the 15-minute call, so we can say hello and I can tell you which group I have in mind:":
-    "Choisissez ensuite un créneau pour l'appel de 15 minutes, pour faire connaissance et pour que je vous dise à quel groupe je pense :",
+  "Then pick a time for the 15-minute call, so we can say hello and I can tell you which group I have in mind.":
+    "Choisissez ensuite un créneau pour l'appel de 15 minutes, pour faire connaissance et pour que je vous dise à quel groupe je pense.",
   "Next: hold your seat →": "Suite : réserver votre place →",
   "You're on the list. One step left.": "Vous êtes sur la liste. Plus qu'une étape.",
   "Pick a time for the 15-minute call: we say hello, check the fit and I tell you which group I have in mind.":

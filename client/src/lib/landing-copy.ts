@@ -13,8 +13,9 @@
  * WHAT THIS PAGE SAYS, which is the only decision on it that matters.
  *
  * One thing: the staff use AI and it saves them nothing. The page names that,
- * sets out the order that fixes it (rules, KPIs, decisions, then build), prices the
- * programme that installs them, and books a free 15-minute call. It was "we
+ * sets out the order that fixes it (rules, scorecards, decisions, then build), prices the
+ * programme that installs them, and sends the reader down one of two tracks:
+ * For Work (/praxis-programme) or For Life (/peer-groups). It was "we
  * build agents" until September 2026; that is the upsell, not the way in.
  *
  * The previous version sold four offers at once and was forgettable for it.
@@ -40,8 +41,8 @@
 export const landing = {
   /**
    * The label every OTHER page uses for the free 15-minute intro call. Kept
-   * here so they all ask the same way; the home page itself books the
-   * 60-minute session instead (see hero.cta).
+   * here so they all ask the same way; the home page itself books nothing and
+   * sends the reader to a track instead (see `tracks`).
    */
   introCall: {
     en: "Bring the job that's bugging you: 15 minutes, free",
@@ -69,19 +70,28 @@ export const landing = {
       fr: "Nous vous apprenons 3 étapes applicables à tout votre travail avec l'IA, fondées sur des principes de management éprouvés. Les meilleurs résultats viennent quand nous travaillons sur votre configuration, vos fichiers, vos tâches, en expliquant à chaque étape comment et pourquoi nous optimisons ainsi. Vos systèmes, c'est vous qui les mettez en place ; nous vous accompagnons à chaque étape.",
     },
 
-    /** Books the free 60-minute session the offer line describes. */
-    cta: {
-      en: "Book the 60-minute session, free",
-      fr: "Réserver la séance de 60 min, gratuite",
+    /** Small print under the two track buttons: what separates them. */
+    tracksNote: {
+      en: "Both follow the same system. For Work is built around your business and your team. For Life is a group of four people like you, on whatever you want to use AI for.",
+      fr: "Les deux suivent la même méthode. Pour le travail : construit autour de votre entreprise et de votre équipe. Pour la vie : un groupe de quatre personnes qui vous ressemblent, sur ce que vous voulez faire avec l'IA.",
     },
-    /** Goes to /praxis-programme, where the training is laid out and booked. */
-    secondaryCta: { en: "Book training", fr: "Réserver une formation" },
+  },
 
-    /** Small print under the first button: what the hour actually is, so
-     *  nobody books expecting the training itself. */
-    ctaNote: {
-      en: "60 minutes, free: a short introduction, then I'll show you how to get started with our scorecard and policy tools. You leave with your first artefact, and we book your formal training.",
-      fr: "60 minutes, gratuites : une courte présentation, puis je vous montre comment démarrer avec nos outils de grille d'évaluation et de politique d'usage. Vous repartez avec votre premier livrable, et nous planifions votre formation.",
+  /**
+   * The two tracks, and the only two places a button on this page goes.
+   * For Work is the professional track, laid out and booked on
+   * /praxis-programme. For Life is the general one and goes straight to
+   * /peer-groups, where the peer sessions are booked. The same system in
+   * both, with different content.
+   */
+  tracks: {
+    work: {
+      label: { en: "For Work", fr: "Pour le travail" },
+      href: "/praxis-programme",
+    },
+    life: {
+      label: { en: "For Life", fr: "Pour la vie" },
+      href: "/peer-groups",
     },
   },
 
@@ -206,8 +216,8 @@ export const landing = {
         n: "02",
         title: { en: "Define good", fr: "Définir le bon résultat" },
         body: {
-          en: "A KPI for each job, so AI output is judged against a standard, not a feeling. Those are your evals.",
-          fr: "Un indicateur par tâche, pour juger le travail de l'IA sur un standard, pas sur une impression. Ce sont vos évaluations.",
+          en: "A scorecard for each job, so AI output is judged against a standard, not a feeling. Those are your evals.",
+          fr: "Une grille par tâche, pour juger le travail de l'IA sur un standard, pas sur une impression. Ce sont vos évaluations.",
         },
       },
       {
@@ -243,8 +253,8 @@ export const landing = {
         fr: "L'équipe à l'aise avec l'IA",
       },
       body: {
-        en: "We optimise your setup together, create your use policy, set up KPIs for your agents and make sure your whole team knows how to manage the change. We build it together so your systems work every day.",
-        fr: "Nous optimisons votre configuration ensemble, rédigeons votre politique d'usage, définissons des indicateurs pour vos agents et veillons à ce que toute votre équipe sache accompagner le changement. Nous le construisons ensemble pour que vos systèmes fonctionnent au quotidien.",
+        en: "We optimise your setup together, create your use policy, set up a scorecard for your agents and make sure your whole team knows how to manage the change. We build it together so your systems work every day.",
+        fr: "Nous optimisons votre configuration ensemble, rédigeons votre politique d'usage, définissons une grille d'évaluation pour vos agents et veillons à ce que toute votre équipe sache accompagner le changement. Nous le construisons ensemble pour que vos systèmes fonctionnent au quotidien.",
       },
       special: {
         en: "Back-to-work price until {date}.",
@@ -254,12 +264,20 @@ export const landing = {
         en: "What's included, and the guarantee",
         fr: "Ce qui est inclus, et la garantie",
       },
-      /** A link, on purpose: the peer groups have their own page at
-       *  /peer-groups and the front door still carries one price. */
-      peer: {
+    },
+
+    /** The For Life block under the price: the peer groups have their own
+     *  page at /peer-groups. `{price}` is one seat, from pricing.ts. */
+    peer: {
+      title: {
         en: "On your own? Learn it in a group of four",
         fr: "Vous êtes seul ? Apprenez-le en groupe de quatre",
       },
+      body: {
+        en: "The same system with three people like you, on your own tasks. {price} per person.",
+        fr: "La même méthode avec trois personnes qui vous ressemblent, sur vos propres tâches. {price} par personne.",
+      },
+      link: { en: "See the peer groups", fr: "Voir les groupes de pairs" },
     },
   },
 
@@ -269,24 +287,14 @@ export const landing = {
       fr: "Quelle tâche répétez-vous encore ?",
     },
     body: {
-      en: "Bring the one job that's bugging you. In an hour you'll get started with our scorecard and policy tools, and leave with your first artefact. No slides, no pitch you didn't ask for.",
-      fr: "Venez avec la tâche qui vous pèse. En une heure, vous démarrez avec nos outils de grille et de politique d'usage, et repartez avec votre premier livrable. Pas de diaporama, pas de discours commercial non sollicité.",
-    },
-    cta: {
-      en: "Book the 60-minute session, free",
-      fr: "Réserver la séance de 60 min, gratuite",
+      en: "Bring the one job that's bugging you. Both tracks work through it the same way, on your own files and your own tasks. Choose For Work if it's for your business, or For Life if it's for you.",
+      fr: "Venez avec la tâche qui vous pèse. Les deux parcours la traitent de la même façon, sur vos propres fichiers et vos propres tâches. Choisissez Pour le travail si c'est pour votre entreprise, Pour la vie si c'est pour vous.",
     },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
     signatureNote: { en: "Tutto, Applied AI", fr: "Tutto, IA appliquée" },
   },
 
   footer: {
-    /** Where the hero's second button goes. The long argument at /applied is
-     *  reached from the top of /about instead, and ends at the programme too. */
-    longVersion: {
-      label: { en: "Book training", fr: "Réserver une formation" },
-      href: "/praxis-programme",
-    },
     place: {
       en: "France, South Africa & the UK",
       fr: "France, Afrique du Sud & Royaume-Uni",

@@ -265,9 +265,15 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows.":
     "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si votre équipe suit.",
   "Back-to-work price until {date}": "Prix de rentrée jusqu'au {date}",
-  "On your own, and you'd rather learn with people like you? Take the Fast Track in a group of four:":
-    "Vous êtes seul, et vous préférez apprendre avec des personnes qui vous ressemblent ? Suivez la formule accélérée en groupe de quatre :",
-  "see the peer groups": "voir les groupes de pairs",
+  "On your own, and you'd rather learn with people like you?":
+    "Vous êtes seul, et vous préférez apprendre avec des personnes qui vous ressemblent ?",
+  "Take the Fast Track in a group of four.": "Suivez la formule accélérée en groupe de quatre.",
+  "See the peer groups": "Voir les groupes de pairs",
+  /* The free 60-minute session: the proof before the course. This page is
+     the only one that books it. */
+  "Book the 60-minute session, free": "Réserver la séance de 60 min, gratuite",
+  "Bring the one job that's bugging you. In an hour you'll get started with our scorecard and policy tools, and leave with your first artefact. No slides, no pitch you didn't ask for.":
+    "Venez avec la tâche qui vous pèse. En une heure, vous démarrez avec nos outils de grille et de politique d'usage, et repartez avec votre premier livrable. Pas de diaporama, pas de discours commercial non sollicité.",
   "The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.":
     "La première étape est un appel gratuit de 15 minutes. Les deux programmes sont facturés hors taxes.",
   "We also run free sessions from time to time. They are general rather than built around your use case:":

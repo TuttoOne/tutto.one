@@ -298,9 +298,9 @@ export default function PeerGroups() {
               <p style={{ ...CAPS, fontSize: 10, color: "#a8a092", marginBottom: 12 }}>{tr("The sessions")}</p>
               <p style={BODY}>{tr("The same four sessions as The Solo Fast Track, on your own work. You leave with your AI Use Charter, your scorecard, your hand-over list, your briefs and your checks.")}</p>
               <p style={{ ...BODY, marginTop: 12 }}>
-                {tr("No coding background needed.")}{" "}
-                <a href="/praxis-programme" style={{ color: "#d97706" }}>{tr("See the programme in full")}</a>.
+                {tr("No coding background needed.")}
               </p>
+              <a href="/praxis-programme" style={{ ...CTA_PRIMARY, background: "transparent", borderColor: "#1a1a1a", color: "#1a1a1a", marginTop: 16 }}>{tr("See the programme in full")} →</a>
             </div>
             <div style={CARD}>
               <p style={{ ...CAPS, fontSize: 10, color: "#a8a092", marginBottom: 12 }}>{tr("A seat in a group")}</p>
@@ -330,10 +330,10 @@ export default function PeerGroups() {
                 {fill("The {deposit} deposit holds your seat and comes off the price. If no group forms within {weeks} weeks you get it back in full.", terms)}
               </p>
               <a href={depositHref} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{fill("Pay the {deposit} deposit", terms)} →</a>
-              <p style={{ ...INTER, fontSize: 14, color: "rgba(246,241,234,0.6)", marginTop: 22 }}>
-                {tr("Then pick a time for the 15-minute call, so we can say hello and I can tell you which group I have in mind:")}{" "}
-                <a href={withContact(call, form.name, form.email)} target="_blank" rel="noopener noreferrer" style={{ color: "#d97706" }}>{tr("Book the 15-minute call")}</a>
+              <p style={{ ...INTER, fontSize: 15, lineHeight: 1.7, color: "rgba(246,241,234,0.7)", margin: "26px auto 16px", maxWidth: 520 }}>
+                {tr("Then pick a time for the 15-minute call, so we can say hello and I can tell you which group I have in mind.")}
               </p>
+              <a href={withContact(call, form.name, form.email)} target="_blank" rel="noopener noreferrer" style={{ ...CTA_PRIMARY, background: "transparent", borderColor: "rgba(246,241,234,0.3)", color: "#f6f1ea" }}>{tr("Book the 15-minute call")} →</a>
             </div>
           ) : formState === "sent" ? (
             /* Only a proposed time: nothing to hold yet, so it is the call alone. */

@@ -246,9 +246,12 @@ export default function Praxis() {
               {t(copy.praxis.fast)}
             </PriceRow>
             <PriceRow title={t(copy.praxis.peerTitle)} price={price("peerGroupSeat", currency, locale)}>
-              {t(copy.praxis.peer)}{" "}
-              <Link href="/peer-groups" className="text-primary hover:underline">
-                {t(copy.praxis.peerLink)} →
+              {t(copy.praxis.peer)}
+              <Link
+                href="/peer-groups"
+                className="mt-4 flex w-fit items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
+              >
+                {t(copy.praxis.peerLink)} <ArrowRight className="w-4 h-4" />
               </Link>
             </PriceRow>
           </CardGrid>
