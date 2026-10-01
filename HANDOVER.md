@@ -73,6 +73,7 @@ A personal site / consulting portfolio for Daniel Forsthofer at `tutto.one`.
 | `/gtm-orchestrator` | `gtm-orchestrator.tsx` | GTM Orchestrator product page |
 | `/second-brain` | `second-brain.tsx` | Second Brain infographic |
 | `/become-a-trainer` | `become-a-trainer.tsx` | Trainer recruitment page |
+| `/peer-groups` | `peer-groups.tsx` | Solo Fast Track in groups of four. Times, group size and call link are in `client/src/lib/peer-groups.ts` |
 | `/blog/:slug` | `blog-post.tsx` | Individual blog posts |
 | `/cv.pdf` | `client/public/cv.pdf` | CV — served directly as PDF |
 

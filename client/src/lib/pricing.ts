@@ -51,6 +51,8 @@ export type PriceKey =
   | "fastTrack"
   | "teamRegular"
   | "fastTrackRegular"
+  | "peerGroupSeat"
+  | "peerGroupDeposit"
   | "referralCredit"
   | "discoverySession"
   | "toolsMonthly"
@@ -177,6 +179,25 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    */
   teamRegular: { GBP: 3900, EUR: 4500, ZAR: zarPraxis(4500) },
   fastTrackRegular: { GBP: 1700, EUR: 2000, ZAR: zarPraxis(2000) },
+  /**
+   * One seat in a peer group: the Fast track's four sessions, taken by four
+   * solo people matched by background (see peer-groups.ts). Half the private
+   * price per person, computed from it so the two cannot drift apart.
+   */
+  peerGroupSeat: {
+    GBP: (SESSION.GBP * FAST_TRACK_SESSIONS_N) / 2,
+    EUR: (SESSION.EUR * FAST_TRACK_SESSIONS_N) / 2,
+    ZAR: (SESSION.ZAR * FAST_TRACK_SESSIONS_N) / 2,
+  },
+  /**
+   * Holds a peer-group seat while the group forms. Part of the seat price,
+   * not on top of it, and refunded in full if no group forms in time.
+   *
+   * Set at a round 100 in both GBP and EUR rather than by the EUR/1.2 rule:
+   * it is a holding amount that comes off the seat price, so a figure that
+   * reads as a decision matters more than an exact conversion.
+   */
+  peerGroupDeposit: { GBP: 100, EUR: 100, ZAR: zarPraxis(100) },
   /**
    * The Praxis intro session: two hours, credited in full against the
    * programme if the client goes on.

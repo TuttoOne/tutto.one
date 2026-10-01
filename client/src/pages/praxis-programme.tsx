@@ -522,6 +522,10 @@ export default function PraxisProgramme() {
               </div>
             ))}
           </div>
+          <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 14, maxWidth: 560 }}>
+            {tr("On your own, and you'd rather learn with people like you? Take the Fast Track in a group of four:")}{" "}
+            <a href="/peer-groups" style={{ color: "#d97706" }}>{tr("see the peer groups")}</a>.
+          </p>
 
           {/* Ask for the call while the price and the guarantee are on screen,
               rather than only at the foot of the page after the questions. */}

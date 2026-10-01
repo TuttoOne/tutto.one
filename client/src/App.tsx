@@ -39,6 +39,7 @@ import Article4 from "@/pages/article4";
 import Souverainete from "@/pages/souverainete";
 import GtmOrchestrator from "@/pages/gtm-orchestrator";
 import BecomeATrainer from "@/pages/become-a-trainer";
+import PeerGroups from "@/pages/peer-groups";
 import PraxisLearn from "@/pages/praxis-learn";
 import AdminDashboard from "@/pages/admin-dashboard";
 import AdminLogin from "@/pages/admin-login";
@@ -102,6 +103,7 @@ function Router() {
         <Route path="/souverainete" component={Souverainete} />
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
         <Route path="/become-a-trainer" component={BecomeATrainer} />
+        <Route path="/peer-groups" component={PeerGroups} />
         <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
         <Route path="/praxis/learn/:course" component={PraxisLearn} />
         <Route path="/admin" component={AdminDashboard} />

@@ -79,6 +79,14 @@ export const SITE_PAGES: SitePage[] = [
     offering: true,
   },
   {
+    path: "/peer-groups",
+    name: "Praxis Peer Groups",
+    summary: "The Solo Fast Track in a group of four people with a similar background.",
+    detail:
+      "For people who ran a company and now work on their own. We put you in a group of four people with a similar background, so you work through your own tasks and hear how the others are thinking about theirs. The same four 90-minute sessions as The Solo Fast Track, online, at fixed weekly times. You put your name on the list with the times that suit you, book a 15-minute call, and a deposit holds your seat. The deposit is refunded in full if no group forms in time, and a group starts with three if the last seat stays open.",
+    offering: true,
+  },
+  {
     path: "/gtm-orchestrator",
     name: "GTM: on-premise sales outreach engine",
     summary: "A custom system that runs B2B prospecting end-to-end.",
