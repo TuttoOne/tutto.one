@@ -20,7 +20,7 @@ import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { landing } from "@/lib/landing-copy";
 import { usePreferences } from "@/lib/preferences";
 import { useTrainerCode, bookingHref } from "@/lib/trainer-code";
-import { praxisEconomics } from "@/lib/pricing";
+import { praxisEconomics, price } from "@/lib/pricing";
 
 /* The free 15-minute intro, not a paid session. Nothing on the site is paid
    at booking; everything priced here is invoiced, so every CTA on this page
@@ -244,6 +244,12 @@ export default function Praxis() {
               was={econ.specialActive ? econ.fastTrackRegular : undefined}
             >
               {t(copy.praxis.fast)}
+            </PriceRow>
+            <PriceRow title={t(copy.praxis.peerTitle)} price={price("peerGroupSeat", currency, locale)}>
+              {t(copy.praxis.peer)}{" "}
+              <Link href="/peer-groups" className="text-primary hover:underline">
+                {t(copy.praxis.peerLink)} →
+              </Link>
             </PriceRow>
           </CardGrid>
           <div className="mt-6 max-w-3xl space-y-2 text-sm text-muted-foreground leading-relaxed">

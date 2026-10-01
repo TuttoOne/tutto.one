@@ -254,6 +254,12 @@ export const landing = {
         en: "What's included, and the guarantee",
         fr: "Ce qui est inclus, et la garantie",
       },
+      /** A link, on purpose: the peer groups have their own page at
+       *  /peer-groups and the front door still carries one price. */
+      peer: {
+        en: "On your own? Learn it in a group of four",
+        fr: "Vous êtes seul ? Apprenez-le en groupe de quatre",
+      },
     },
   },
 

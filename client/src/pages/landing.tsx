@@ -198,6 +198,9 @@ function Pricing() {
             <Link href="/praxis-programme" className="text-primary hover:underline">
               {t(offer.link)} →
             </Link>
+            <Link href="/peer-groups" className="mt-1 block text-primary hover:underline">
+              {t(offer.peer)} →
+            </Link>
           </>
         }
       >

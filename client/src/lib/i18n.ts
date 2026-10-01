@@ -545,6 +545,16 @@ export const copy = {
       en: "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you. Credited in full if your team follows.",
       fr: "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle. Déduite intégralement si votre équipe suit.",
     },
+    /** The Fast Track taken with three peers. Its page is /peer-groups. */
+    peerTitle: {
+      en: "The Fast Track, in a group of four",
+      fr: "La formule accélérée, en groupe de quatre",
+    },
+    peer: {
+      en: "Per person. The same four sessions, with three people who have a similar background. You choose a time and a deposit holds your seat.",
+      fr: "Par personne. Les quatre mêmes séances, avec trois personnes au parcours proche du vôtre. Vous choisissez un créneau et un acompte réserve votre place.",
+    },
+    peerLink: { en: "See the peer groups", fr: "Voir les groupes de pairs" },
     /** `{date}` is the last day of the back-to-work special. */
     special: {
       en: "Back-to-work price until {date}.",
