@@ -6,6 +6,7 @@ import { insertContactSubmissionSchema, insertEmailLeadSchema } from "@shared/sc
 import { z } from "zod";
 import { Resend } from "resend";
 import { registerAdminRoutes } from "./admin-routes";
+import { enquiryMessageHtml, escapeHtml } from "./email/enquiry-message";
 
 // Constructed lazily. `new Resend(undefined)` throws, and at module scope that
 // crashes the whole server at import time in any environment without the key
@@ -94,18 +95,17 @@ export async function registerRoutes(
           <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px; background: #f6f1ea;">
             <div style="background: #1a1a1a; border-radius: 10px; padding: 28px; margin-bottom: 24px;">
               <p style="color: #d97706; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 8px;">New Tutto Enquiry</p>
-              <h2 style="color: #f6f1ea; font-size: 22px; margin: 0;">${data.name}</h2>
-              <p style="color: rgba(246,241,234,0.5); font-size: 13px; margin: 4px 0 0;">${data.email}</p>
+              <h2 style="color: #f6f1ea; font-size: 22px; margin: 0;">${escapeHtml(data.name)}</h2>
+              <p style="color: rgba(246,241,234,0.5); font-size: 13px; margin: 4px 0 0;">${escapeHtml(data.email)}</p>
             </div>
-            <div style="background: #fff; border-radius: 10px; padding: 24px; border: 1px solid #d8d0c5;">
-              <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px;">Message</p>
-              <p style="color: #1a1a1a; font-size: 14px; line-height: 1.75; margin: 0; white-space: pre-line;">${data.message}</p>
+            <div style="background: #fff; border-radius: 10px; padding: 24px 24px 8px; border: 1px solid #d8d0c5;">
+              ${enquiryMessageHtml(data.message)}
             </div>
             ${
               data.trainerCode
                 ? `<div style="background: #fdf6ec; border-radius: 10px; padding: 16px 24px; border: 1px solid #f0d9b0; margin-top: 16px;">
               <p style="color: #a8a092; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 6px;">Trainer code</p>
-              <p style="color: #1a1a1a; font-size: 14px; font-weight: 600; margin: 0;">${data.trainerCode}</p>
+              <p style="color: #1a1a1a; font-size: 14px; font-weight: 600; margin: 0;">${escapeHtml(data.trainerCode)}</p>
             </div>`
                 : ""
             }
