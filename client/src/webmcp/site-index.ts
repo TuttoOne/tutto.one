@@ -24,10 +24,10 @@ export type SitePage = {
 export const SITE_PAGES: SitePage[] = [
   {
     path: "/",
-    name: "Tutto: Claude works fast, refining takes hours",
-    summary: "For people whose AI drafts are fast but slow to check. Two tracks: For Work and For Life.",
+    name: "Tutto: lean in and learn Claude",
+    summary: "For people overwhelmed by what they hear about Claude. Two tracks: For Work and For Life.",
     detail:
-      "The site's front door. Claude works fast; refining takes hours. Tutto teaches a better setup: 3 steps for all AI-based work, drawn from tried and tested management principles, worked through on the visitor's own setup, files and tasks, explaining at each step how and why it is optimised. The visitor sets up their own systems, with Tutto alongside. The page leads to two tracks that follow the same system with different content: For Work, the professional track at /praxis-programme, and For Life, the general track, which goes straight to the peer groups at /peer-groups. The page also prices The AI-Fluent Team at its back-to-work price.",
+      "The site's front door. People say Claude is amazing, scary, expensive, that it hallucinates, only agrees with them, will steal their data or take their job. The page invites the visitor to lean in and learn. Tutto works with the visitor through their own systems, tasks and ideas. Together they create a way of working that they can repeat with all their AI. If they hit a wall, Tutto is there to help push through until it's right. The page sets out 4 steps to top AI work. The page leads to two tracks that follow the same system with different content: For Work, the professional track at /praxis-programme, and For Life, the general track, which goes straight to the peer groups at /peer-groups. The page also prices The AI-Fluent Team at its back-to-work price.",
     offering: true,
   },
   {

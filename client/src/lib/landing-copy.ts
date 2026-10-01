@@ -50,24 +50,36 @@ export const landing = {
   },
 
   hero: {
-    /** Three short sentences, set big and bold: the first two as the
-     *  headline, one per line, the third as the line under it. Separate
-     *  leaves so the browser never breaks a sentence wherever it likes. */
-    title: { en: "Claude works fast.", fr: "Claude travaille vite." },
+    /** The headline is one line: the word "Claude", which stays put, and the
+     *  things people say about it, typed out one at a time, rubbed out and
+     *  replaced. Keep
+     *  each one short. The line never wraps, so the longest one sets the type
+     *  size on a phone (see `Hero` in pages/landing.tsx). */
+    title: { en: "Claude", fr: "Claude" },
+    titleCycle: [
+      { en: "is amazing", fr: "est génial" },
+      { en: "is scary", fr: "fait peur" },
+      { en: "hallucinates", fr: "hallucine" },
+      { en: "only agrees with me", fr: "dit oui à tout" },
+      { en: "is a sycophant", fr: "est un flatteur" },
+      { en: "will steal my data", fr: "vole mes données" },
+      { en: "can build anything", fr: "peut tout construire" },
+      { en: "will take my job", fr: "va prendre mon job" },
+      { en: "is expensive", fr: "coûte cher" },
+    ],
+
+    /** The second line: what to do about all of that. It is also the tab
+     *  title. */
     titleSecond: {
-      en: "Refining takes hours.",
-      fr: "Mais peaufiner prend des heures.",
+      en: "Let's lean in & learn.",
+      fr: "Allons-y et apprenons.",
     },
 
-    /** What we sell, as the third line. */
-    subtitle: {
-      en: "Learn a better setup.",
-      fr: "Apprenez une meilleure méthode.",
-    },
-
+    /** Six short lines. The line breaks are kept from `sm` up and dropped on
+     *  a phone, where the lines are too long to hold. */
     deck: {
-      en: "We teach you 3 steps you can apply to all your AI based work based on tried and tested management principles. The best results come when we work through your setup, your files, your tasks and at each step explain how and why we optimise the way we do. Your systems, you set it up, we're with you every step of the way.",
-      fr: "Nous vous apprenons 3 étapes applicables à tout votre travail avec l'IA, fondées sur des principes de management éprouvés. Les meilleurs résultats viennent quand nous travaillons sur votre configuration, vos fichiers, vos tâches, en expliquant à chaque étape comment et pourquoi nous optimisons ainsi. Vos systèmes, c'est vous qui les mettez en place ; nous vous accompagnons à chaque étape.",
+      en: "We'll work with you, through\nyour systems, your tasks and your ideas.\nWe create a way of working together,\nthat you can repeat with all your AI.\nAnd if you hit a wall, we'll be there too\nto help push through, until it's right.",
+      fr: "Nous travaillons avec vous, sur\nvos systèmes, vos tâches et vos idées.\nNous créons ensemble une façon de travailler,\nque vous pouvez répéter avec toutes vos IA.\nEt si vous butez sur un mur, nous serons là aussi\npour vous aider à passer, jusqu'à ce que ce soit bon.",
     },
 
     /** Small print under the two track buttons: what separates them. */
@@ -200,8 +212,8 @@ export const landing = {
   sequence: {
     label: { en: "The order", fr: "L'ordre" },
     title: {
-      en: "Four steps to professional AI work:",
-      fr: "Quatre étapes vers un travail professionnel avec l'IA :",
+      en: "4 steps to top AI work",
+      fr: "4 étapes vers un excellent travail avec l'IA",
     },
     steps: [
       {
@@ -253,8 +265,8 @@ export const landing = {
         fr: "L'équipe à l'aise avec l'IA",
       },
       body: {
-        en: "We optimise your setup together, create your use policy, set up a scorecard for your agents and make sure your whole team knows how to manage the change. We build it together so your systems work every day.",
-        fr: "Nous optimisons votre configuration ensemble, rédigeons votre politique d'usage, définissons une grille d'évaluation pour vos agents et veillons à ce que toute votre équipe sache accompagner le changement. Nous le construisons ensemble pour que vos systèmes fonctionnent au quotidien.",
+        en: "We optimise your setup together, create your use policy, set up a scorecard for your agents and make sure you / your whole team knows how to manage the change. We build it together so your systems work every day.",
+        fr: "Nous optimisons votre configuration ensemble, rédigeons votre politique d'usage, définissons une grille d'évaluation pour vos agents et veillons à ce que vous / toute votre équipe sachiez accompagner le changement. Nous le construisons ensemble pour que vos systèmes fonctionnent au quotidien.",
       },
       special: {
         en: "Back-to-work price until {date}.",

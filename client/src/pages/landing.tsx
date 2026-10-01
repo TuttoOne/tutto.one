@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
@@ -36,9 +36,9 @@ import { CopyEditor } from "@/components/copy/CopyEditor";
 export default function Landing() {
   const t = useT();
 
-  /* The tab title is the headline, so it is translated for free and there is
-     no second sentence to keep in step with the first. */
-  const title = `${t(landing.hero.title)} ${t(landing.hero.titleSecond)}`.replace(/\.$/, "");
+  /* The tab title is the second line of the headline, so it is translated for
+     free. The first line cycles, which a tab title cannot. */
+  const title = t(landing.hero.titleSecond).replace(/\.$/, "");
   useEffect(() => {
     document.title = `Tutto | ${title}`;
     return () => {
@@ -84,20 +84,20 @@ function Hero() {
   return (
     <header className="pt-8 pb-4">
 
-      {/* One sentence per line, kept whole from `sm` up. The sizes are set so
-          the longest line (the French second sentence, about 16em) fits the
-          container at each breakpoint; on a phone the lines wrap instead of
-          shrinking to fit. */}
-      <h1 className="text-4xl sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3.5rem] font-serif font-bold leading-[1.1] tracking-tight">
-        <span className="block sm:whitespace-nowrap">{t(landing.hero.title)}</span>
-        <span className="block sm:whitespace-nowrap">{t(landing.hero.titleSecond)}</span>
+      {/* "Claude" stays put and the rest of the line is typed out. The line never
+          wraps, so the type scales with the viewport: the longest line
+          ("Claude only agrees with me", about 11.7em) has to fit a phone, and
+          the size is capped at the old headline size from `lg` up. The second
+          line is fixed. */}
+      <h1 className="text-[clamp(1.3rem,7vw,3.5rem)] font-serif font-bold leading-[1.1] tracking-tight">
+        <span className="block whitespace-nowrap">
+          {t(landing.hero.title)} <TypedWords />
+        </span>
+        <span className="block whitespace-nowrap">{t(landing.hero.titleSecond)}</span>
       </h1>
-      <p className="mt-4 text-2xl sm:text-3xl font-serif font-bold tracking-tight text-primary">
-        {t(landing.hero.subtitle)}
-      </p>
 
-      <div className="mt-6 max-w-2xl space-y-4">
-        <p className="text-xl text-foreground leading-relaxed">
+      <div className="mt-3 max-w-2xl space-y-4">
+        <p className="text-xl text-foreground leading-relaxed sm:whitespace-pre-line">
           {t(landing.hero.deck)}
         </p>
       </div>
@@ -121,6 +121,68 @@ function Hero() {
         {t(landing.hero.tracksNote)}
       </p>
     </header>
+  );
+}
+
+/** The pace of the headline's first line: a letter typed, a letter rubbed
+ *  out, and how long a finished phrase stays up before it goes. */
+const TYPE_MS = 60;
+const RUB_OUT_MS = 30;
+const HOLD_MS = 1600;
+
+/**
+ * The cycling half of the headline, one of `hero.titleCycle` at a time: the
+ * phrase is typed out, held, rubbed out a letter at a time and replaced by
+ * the next.
+ *
+ * It stops while the copy editor is open, because the editor wraps text nodes
+ * underneath React and a re-render would undo that. With reduced motion the
+ * phrases swap whole, with no typing. A screen reader gets the first one and
+ * no updates.
+ */
+function TypedWords() {
+  const t = useT();
+  const words = landing.hero.titleCycle.map((w) => t(w));
+  const [i, setI] = useState(0);
+  const [shown, setShown] = useState(words[0].length);
+  const [rubbing, setRubbing] = useState(false);
+
+  const word = words[i % words.length];
+  const full = shown >= word.length;
+
+  useEffect(() => {
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const next = () => {
+      if (document.body.classList.contains("copy-editing")) return;
+      if (still) {
+        setI((n) => (n + 1) % words.length);
+        setShown(Infinity);
+      } else if (rubbing && shown <= 0) {
+        setI((n) => (n + 1) % words.length);
+        setRubbing(false);
+      } else if (rubbing) {
+        setShown(Math.min(shown, word.length) - 1);
+      } else if (full) {
+        setRubbing(true);
+      } else {
+        setShown(shown + 1);
+      }
+    };
+    const wait = full && !rubbing ? HOLD_MS : rubbing ? RUB_OUT_MS : TYPE_MS;
+    /* An interval, so a tick skipped while the copy editor is open is tried
+       again; every other tick changes state and so restarts the effect. */
+    const id = window.setInterval(next, wait);
+    return () => window.clearInterval(id);
+  }, [shown, rubbing, full, word.length, words.length]);
+
+  return (
+    <>
+      <span className="sr-only">{words[0]}</span>
+      <span aria-hidden="true" className="text-primary">
+        {word.slice(0, Math.max(shown, 0))}
+        <span className="hero-caret" />
+      </span>
+    </>
   );
 }
 

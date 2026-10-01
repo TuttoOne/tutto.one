@@ -165,6 +165,27 @@
   }
 }
 
+/* The cursor after the phrase being typed in the landing headline. */
+@keyframes hero-caret-blink {
+  50% { opacity: 0; }
+}
+
+.hero-caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.85em;
+  margin-left: 0.06em;
+  vertical-align: -0.08em;
+  background: currentColor;
+  animation: hero-caret-blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-caret {
+    display: none;
+  }
+}
+
 /* The client logo strip on the landing page. The track carries the list twice
    and travels exactly half its width, so the reset to zero lands the second
    copy where the first began and no seam is visible. */
