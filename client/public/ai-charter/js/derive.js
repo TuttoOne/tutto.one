@@ -2,7 +2,7 @@
 // A suggestion is written into the state only while the person has not touched that path.
 
 import { state, get, setIn, isTouched } from './state.js';
-import { ROLES, PRINCIPLES, STAKEHOLDERS, PARTICIPATION_METHODS, COMMUNICATION, FREQUENCIES, labelOf, MODELS } from './schema.js';
+import { ROLES, PRINCIPLES, STAKEHOLDERS, PARTICIPATION_METHODS, COMMUNICATION, FREQUENCIES, labelOf, MODELS, ME_NEVER, ME_NOGO, CHECK_QUESTIONS } from './schema.js';
 
 export let suggestions = {};
 
@@ -234,11 +234,92 @@ function compute(s) {
   return out;
 }
 
+// --- Just me: suggestions for the personal charter -------------------------------------
+
+const USES = {
+  work: ['First drafts of emails, letters and proposals', 'Summaries of long documents, which I still read myself'],
+  board: ['Summaries of board papers, which I still read myself', 'Questions to ask before a meeting'],
+  volunteer: ['Newsletters, notices and minutes for the group'],
+  writing: ['Feedback on my own drafts', 'Finding sources, which I then check'],
+  paperwork: ['Explaining a letter, a bill or a form in plain words'],
+  health: ['Understanding a medical term and preparing questions for my doctor'],
+  family: ['Planning trips, meals and events'],
+  learning: ['Explaining something new, step by step'],
+};
+
+function computeMe(s) {
+  const out = {};
+  const me = s.me;
+  const w = me.where || [];
+  const outward = has(w, 'work', 'board', 'volunteer');
+
+  out['me.title'] = 'My AI Use Charter';
+  out['me.date'] = today();
+  if (!w.length && !me.maturity) return out;
+
+  // What it's for
+  out['me.statement'] = `${me.maturity === 'none' ? 'I want to use AI' : 'I use AI'} to get through reading and writing faster and to think things through. I check what it gives me, and the decisions stay mine.`;
+  const uses = [...new Set(w.flatMap(v => USES[v] || []))].slice(0, 6);
+  out['me.uses'] = uses.length ? uses : ['First drafts of emails and letters', 'Summaries of long documents, which I still read myself', 'Explaining something new, step by step'];
+  out['me.principles'] = ['purpose', 'check', 'mine', 'private', 'open', ...(outward ? ['fair'] : [])];
+
+  // Where the line is
+  out['me.never'] = ME_NEVER.map(o => o.value).filter(v => v !== 'confidential' || outward);
+  const noGo = ['health', 'money', 'unread'];
+  if (outward) noGo.push('judge');
+  if (has(w, 'writing')) noGo.push('ownwork');
+  out['me.noGo'] = ME_NOGO.map(o => o.value).filter(v => noGo.includes(v));
+  out['me.checks'] = ['read', 'facts', 'source'];
+
+  // Who to ask
+  const chosen = isTouched('me.noGo') ? me.noGo || [] : out['me.noGo'];
+  const ask = [];
+  if (chosen.includes('health')) ask.push({ who: 'My doctor or pharmacist', about: 'Anything about health or medicines' });
+  if (chosen.includes('money')) ask.push({ who: 'My accountant, bank or solicitor', about: 'Money, tax and anything I sign' });
+  if (has(w, 'board')) ask.push({ who: 'The chair or the secretary', about: 'What I may share from board papers' });
+  ask.push({ who: 'My peer group', about: 'Whether AI is right for the job' });
+  out['me.askWho'] = ask;
+  out['me.wrong'] = 'If I’ve put something into a tool that shouldn’t be there, I delete the conversation, change any password involved and tell the person it concerns. If I’ve passed on something that turned out to be wrong, I correct it with everyone who received it.';
+
+  // Keeping it current
+  out['me.frequency'] = 'half';
+  out['me.triggers'] = ['newtool', 'incident', 'role', 'group'];
+  out['me.shared'] = true;
+  return out;
+}
+
+// --- Just me: "Can I use AI for this?" ----------------------------------------------------
+// Each rule that fires gives a reason. The verdict is the strictest one: stop, ask, check, then go.
+
+const CHECK_RULES = [
+  { to: 'stop', when: c => c.never === 'needs', text: 'It needs something from your never list. Do it without AI, or find a version of the job that works without that information.' },
+  { to: 'stop', when: c => c.harm === 'yes' && c.verify === 'no' && c.undo === 'no', text: 'Someone could be hurt or lose money, you can’t check the answer and it can’t be taken back.' },
+  { to: 'ask', when: c => c.person === 'yes', text: 'It decides something about another person. A person makes that call and has to be able to explain it.' },
+  { to: 'ask', when: c => c.harm === 'yes' && c.verify === 'no' && c.undo !== 'no', text: 'Someone could be hurt or lose money and you can’t check the answer yourself. Ask someone who can.' },
+  { to: 'ask', when: c => c.harm === 'yes' && c.undo === 'no' && c.verify !== 'no', text: 'Someone could be hurt or lose money and it can’t be undone. Get a second pair of eyes on it before it goes.' },
+  { to: 'ask', when: c => c.open === 'no', text: 'You wouldn’t be happy to say you used AI for it. Work out why with someone before you go on.' },
+  { to: 'check', when: c => c.never === 'remove', text: 'Take out the names, numbers and details from your never list before you put anything in.' },
+  { to: 'check', when: c => c.harm === 'yes' && c.verify !== 'no' && c.undo !== 'no', text: 'Someone could be hurt or lose money if it’s wrong, so check the result against another source before you act on it.' },
+  { to: 'check', when: c => c.verify === 'effort', text: 'Checking takes some work. Do it for the parts that matter.' },
+  { to: 'check', when: c => c.verify === 'no' && c.harm !== 'yes', text: 'You can’t check it yourself, so treat the answer as a starting point and don’t pass it on as fact.' },
+  { to: 'check', when: c => c.undo === 'no' && c.harm !== 'yes', text: 'It can’t be undone, so read it once more before it goes.' },
+];
+const SEVERITY = ['go', 'check', 'ask', 'stop'];
+
+export function assessCheck(check = state.me.check) {
+  const keys = CHECK_QUESTIONS.map(q => q.path.split('.').at(-1));
+  const answered = keys.filter(k => check[k]).length;
+  if (answered < keys.length) return { verdict: null, answered, total: keys.length, reasons: [] };
+  const fired = CHECK_RULES.filter(r => r.when(check));
+  const verdict = fired.reduce((v, r) => (SEVERITY.indexOf(r.to) > SEVERITY.indexOf(v) ? r.to : v), 'go');
+  return { verdict, answered, total: keys.length, reasons: fired.map(r => r.text) };
+}
+
 // Apply suggestions in two passes, so ones that depend on other suggestions settle.
 export function applySuggestions() {
   let changed = false;
   for (let pass = 0; pass < 2; pass++) {
-    suggestions = compute(state);
+    suggestions = { ...compute(state), ...computeMe(state) };
     for (const [path, value] of Object.entries(suggestions)) {
       if (isTouched(path)) continue;
       if (JSON.stringify(get(path)) !== JSON.stringify(value)) {

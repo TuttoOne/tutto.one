@@ -1,5 +1,8 @@
 // Option lists, reference content and step definitions.
 // Values are short ids; labels are what people see and what the charter prints.
+// There are two sets of steps: STEPS for an organisation and PERSONAL_STEPS for one person.
+
+import { state } from './state.js';
 
 export const CHARTER_TYPES = [
   { value: 'strategy', label: 'Our organisation’s AI strategy', hint: 'Why and how the whole organisation uses AI.' },
@@ -277,7 +280,8 @@ export const principleOf = value => PRINCIPLES.find(p => p.value === value);
 
 export const STEPS = [
   {
-    id: 'start', title: 'Start', eyebrow: 'Step 0',
+    id: 'start', title: 'Start',
+    todo: 'Say what the charter covers',
     heading: 'Start with what you already have',
     lead: 'Pull in your organisation’s details from the French company register, or skip ahead and type them in. You can check every value before it is used.',
     fields: [
@@ -285,7 +289,8 @@ export const STEPS = [
     ],
   },
   {
-    id: 'organisation', title: 'Your organisation', eyebrow: 'Step 1',
+    id: 'organisation', title: 'Your organisation',
+    todo: 'Describe your organisation',
     heading: 'Your organisation',
     lead: 'The basics. Later steps use these answers to suggest sensible defaults.',
     fields: [
@@ -308,7 +313,8 @@ export const STEPS = [
     ],
   },
   {
-    id: 'vision', title: 'Vision and principles', eyebrow: 'Step 2',
+    id: 'vision', title: 'Vision and principles',
+    todo: 'Write the vision and choose principles',
     heading: 'Vision and principles',
     lead: 'Why you use AI, and the principles you hold yourselves to. The seven standard principles follow Capgemini’s Code of Ethics for AI and the EU guidelines for trustworthy AI.',
     fields: [
@@ -327,7 +333,8 @@ export const STEPS = [
     ],
   },
   {
-    id: 'governance', title: 'People and governance', eyebrow: 'Step 3',
+    id: 'governance', title: 'People and governance',
+    todo: 'Decide who decides',
     heading: 'People and governance',
     lead: 'Who was involved, who decides, and which frameworks you align with. The recommendation is based on your type, size and regulation.',
     fields: [
@@ -347,7 +354,8 @@ export const STEPS = [
     ],
   },
   {
-    id: 'commitments', title: 'Commitments and rollout', eyebrow: 'Step 4',
+    id: 'commitments', title: 'Commitments and rollout',
+    todo: 'Say what you commit to',
     heading: 'Commitments and rollout',
     lead: 'What you promise to do, and how the charter reaches everyone it covers.',
     fields: [
@@ -369,7 +377,8 @@ export const STEPS = [
     ],
   },
   {
-    id: 'upkeep', title: 'Keeping it current', eyebrow: 'Step 5',
+    id: 'upkeep', title: 'Keeping it current',
+    todo: 'Decide how it stays current',
     heading: 'Keeping it current',
     lead: 'AI, the law and your organisation will change. Decide now how the charter keeps up.',
     fields: [
@@ -383,17 +392,244 @@ export const STEPS = [
     ],
   },
   {
-    id: 'check', title: 'Check and export', eyebrow: 'Step 6',
-    heading: 'Check your answers',
-    lead: 'Change anything that is not right, then download the charter.',
+    id: 'check', title: 'Your charter', output: true,
+    heading: 'Your charter',
+    lead: 'Read it through and change anything that isn’t right, then download it and share it with the people it affects.',
     fields: [],
   },
 ];
 
-export const stepById = id => STEPS.find(s => s.id === id);
+// --- Just me ------------------------------------------------------------
+// The same decisions as the organisation charter, for one person: what AI is for, what matters,
+// where the lines are, who to ask and when to look again. Options are written in the first person
+// because they print on the sheet as they are.
+
+export const ME_MATURITY = [
+  { value: 'none', label: 'Not using it yet' },
+  { value: 'tried', label: 'Tried it a few times' },
+  { value: 'weekly', label: 'Use it most weeks' },
+  { value: 'daily', label: 'Use it every day' },
+];
+
+export const ME_WHERE = [
+  { value: 'work', label: 'Paid or freelance work' },
+  { value: 'board', label: 'Board, trustee or committee work' },
+  { value: 'volunteer', label: 'Volunteering, a club or an association' },
+  { value: 'writing', label: 'Writing or research' },
+  { value: 'paperwork', label: 'Money and paperwork at home' },
+  { value: 'health', label: 'Health questions' },
+  { value: 'family', label: 'Family and everyday life' },
+  { value: 'learning', label: 'Learning something new' },
+];
+
+// The seven principles of the organisation charter, in the words one person would use.
+export const ME_PRINCIPLES = [
+  { value: 'purpose', label: 'I know what I’m using it for', description: 'Before I start I can say in a sentence what I want from it.' },
+  { value: 'check', label: 'I check before I rely on it', description: 'AI can be wrong and still sound sure. Anything that matters gets checked against another source.' },
+  { value: 'mine', label: 'The decision stays mine', description: 'AI suggests and I decide. I answer for what I send, sign or pass on.' },
+  { value: 'private', label: 'Other people’s information stays private', description: 'I don’t put someone else’s private details into a tool unless they’ve agreed.' },
+  { value: 'open', label: 'I say when AI helped', description: 'If someone would want to know AI was involved, I tell them.' },
+  { value: 'fair', label: 'I look twice at anything about a person', description: 'AI repeats the bias in what it learned from, so I don’t let it judge someone for me.' },
+  { value: 'enough', label: 'I use as much AI as the job needs', description: 'A quick question gets a quick tool. I don’t run AI for the sake of it.' },
+];
+
+export const ME_NEVER = [
+  { value: 'passwords', label: 'Passwords, PINs and security codes' },
+  { value: 'bank', label: 'Bank and card details' },
+  { value: 'id', label: 'Passport, ID and tax or social security numbers' },
+  { value: 'medical', label: 'Medical records and test results with a name on them' },
+  { value: 'others', label: 'Other people’s private details' },
+  { value: 'confidential', label: 'Confidential papers from a board, a client or an employer' },
+  { value: 'secret', label: 'Anything I’ve agreed to keep to myself' },
+];
+
+export const ME_NOGO = [
+  { value: 'health', label: 'Deciding about my health or my medicines without a doctor or pharmacist' },
+  { value: 'money', label: 'Deciding about money, tax or legal matters without someone qualified' },
+  { value: 'unread', label: 'Sending or signing anything I haven’t read myself' },
+  { value: 'judge', label: 'Judging a person on what AI says alone' },
+  { value: 'ownwork', label: 'Presenting AI’s work as all my own where that matters' },
+];
+
+export const ME_CHECKS = [
+  { value: 'read', label: 'Read it all the way through' },
+  { value: 'facts', label: 'Check facts, figures, names and dates against another source' },
+  { value: 'source', label: 'Ask where it got that, and look at the source' },
+  { value: 'wrong', label: 'Ask it what could be wrong with its answer' },
+  { value: 'sleep', label: 'Leave anything important until the next day' },
+];
+
+export const ME_FREQUENCIES = [
+  { value: 'quarter', label: 'Every 3 months' },
+  { value: 'half', label: 'Every 6 months' },
+  { value: 'annual', label: 'Every year' },
+  { value: 'triggered', label: 'Only when something changes' },
+];
+
+export const ME_TRIGGERS = [
+  { value: 'newtool', label: 'I start using a new AI tool' },
+  { value: 'terms', label: 'A tool changes its terms or what it can do' },
+  { value: 'incident', label: 'Something went wrong' },
+  { value: 'role', label: 'I take on a new role or a new kind of work' },
+  { value: 'group', label: 'Someone in my group suggests a change' },
+];
+
+// "Can I use AI for this?" Six questions about one use. `sheet` is how each one prints on the sheet,
+// as a question to yourself and what to do about the answer. The rules are in derive.js (assessCheck).
+export const CHECK_QUESTIONS = [
+  {
+    path: 'me.check.never', label: 'Does it need anything from your never list?',
+    options: [
+      { value: 'no', label: 'No' },
+      { value: 'remove', label: 'Yes, but I can take it out', hint: 'Names, numbers or details the job works without' },
+      { value: 'needs', label: 'Yes, and it won’t work without it' },
+    ],
+    sheet: ['Does it need anything from my never list?', 'If it does, I take that out first. If the job doesn’t work without it, I do it without AI.'],
+  },
+  {
+    path: 'me.check.harm', label: 'If the answer is wrong, could someone be hurt or lose money?',
+    options: [
+      { value: 'no', label: 'No', hint: 'The worst case is some wasted time' },
+      { value: 'yes', label: 'Yes' },
+    ],
+    sheet: ['Could someone be hurt or lose money if the answer is wrong?', 'If so, I check the result against another source before I act on it.'],
+  },
+  {
+    path: 'me.check.verify', label: 'Can you check the answer yourself?',
+    options: [
+      { value: 'easy', label: 'Yes, quickly' },
+      { value: 'effort', label: 'Yes, with some work' },
+      { value: 'no', label: 'No', hint: 'I’d have to take its word for it' },
+    ],
+    sheet: ['Can I check the answer myself?', 'If I can’t, I treat it as a starting point. If someone could be hurt as well, I ask first.'],
+  },
+  {
+    path: 'me.check.undo', label: 'Can it be undone?',
+    options: [
+      { value: 'yes', label: 'Yes' },
+      { value: 'no', label: 'No', hint: 'Once it’s sent, paid or signed, it’s done' },
+    ],
+    sheet: ['Can it be undone?', 'If it can’t, I read it once more before it goes. If someone could be hurt as well, I ask first.'],
+  },
+  {
+    path: 'me.check.person', label: 'Does it judge or decide something about another person?',
+    options: [
+      { value: 'no', label: 'No' },
+      { value: 'yes', label: 'Yes', hint: 'A reference, a complaint, who gets a place or a job' },
+    ],
+    sheet: ['Does it judge or decide something about another person?', 'If it does, I ask first. A person makes that call.'],
+  },
+  {
+    path: 'me.check.open', label: 'Would you be happy to say you used AI for it?',
+    options: [
+      { value: 'yes', label: 'Yes' },
+      { value: 'no', label: 'No' },
+    ],
+    sheet: ['Would I be happy to say I used AI for it?', 'If I wouldn’t, I ask first and work out why.'],
+  },
+];
+
+export const VERDICTS = {
+  go: { name: 'Go ahead', lead: 'Nothing here needs more than your usual checks.' },
+  check: { name: 'Go ahead, and check it', lead: 'Use AI for it, then check the result before you rely on it.' },
+  ask: { name: 'Ask first', lead: 'Talk it through with someone you trust before you use AI for this.' },
+  stop: { name: 'Leave this one', lead: 'Do this one without AI, or change the job so the problem goes away.' },
+};
+
+export const PERSONAL_STEPS = [
+  {
+    id: 'you', title: 'About you',
+    todo: 'Say who you are and where you use AI',
+    heading: 'About you',
+    lead: 'A few basics. The next steps use them to suggest a starting point, and you can change every suggestion.',
+    fields: [
+      { path: 'me.name', type: 'text', label: 'Your name', required: true, error: 'Enter your name', autocomplete: 'name' },
+      { path: 'me.maturity', type: 'select', label: 'Where are you with AI today?', options: ME_MATURITY, required: true, error: 'Choose where you are with AI today' },
+      { path: 'me.where', type: 'checkboxes', label: 'Where do you use AI, or want to?', options: ME_WHERE, columns: 2, required: true, error: 'Choose at least one place you use AI, or want to' },
+      { path: 'me.tools', type: 'text', label: 'Which AI tools do you use?', hint: 'For example Claude, ChatGPT, Copilot or Gemini. Leave it empty if you haven’t chosen yet.', wide: true },
+      { path: 'me.why', type: 'textarea', label: 'Why you’re writing this now', rows: 2, more: true },
+      { path: 'me.title', type: 'text', label: 'Title of your sheet', more: true },
+      { path: 'me.date', type: 'date', label: 'Date', more: true },
+    ],
+  },
+  {
+    id: 'purpose', title: 'What it’s for',
+    todo: 'Say what it’s for and what matters to you',
+    heading: 'What it’s for',
+    lead: 'What you want AI to do for you, and what matters to you while you use it.',
+    fields: [
+      { path: 'me.statement', type: 'textarea', label: 'What do you want AI to do for you?', hint: 'One or two sentences. They go at the top of your sheet.', required: true, error: 'Say what you want AI to do for you', rows: 3 },
+      { path: 'me.uses', type: 'list', label: 'What you’re happy to use it for', addLabel: 'Add a use', item: { type: 'text', placeholder: 'e.g. First drafts of letters' } },
+      { path: 'me.principles', type: 'checkboxes', label: 'What matters to you', options: ME_PRINCIPLES, required: true, error: 'Choose at least one thing that matters to you', describe: true },
+    ],
+  },
+  {
+    id: 'lines', title: 'Where you draw the line',
+    todo: 'Say what stays out and what you check',
+    heading: 'Where you draw the line',
+    lead: 'What stays out of AI tools, what you keep for yourself and what you check every time.',
+    fields: [
+      { path: 'me.never', type: 'checkboxes', label: 'What never goes into an AI tool', options: ME_NEVER, columns: 2 },
+      { path: 'me.noGo', type: 'checkboxes', label: 'What you don’t use AI for', options: ME_NOGO },
+      { path: 'me.checks', type: 'checkboxes', label: 'What you do before you rely on an answer', options: ME_CHECKS },
+      { path: 'me.neverOther', type: 'list', label: 'Anything else that stays out', more: true, addLabel: 'Add something', item: { type: 'text', placeholder: 'e.g. Photos of my grandchildren' } },
+      { path: 'me.rules', type: 'list', label: 'Your own rules', more: true, addLabel: 'Add a rule', item: { fields: [
+        { key: 'title', type: 'text', label: 'Rule' },
+        { key: 'description', type: 'textarea', label: 'Detail', rows: 2 },
+      ] } },
+    ],
+  },
+  {
+    id: 'unsure', title: 'When you’re not sure',
+    todo: 'Name who you ask',
+    heading: 'When you’re not sure',
+    lead: 'Decide now who you ask and what you do if something goes wrong, so you have it written down when you need it.',
+    fields: [
+      { path: 'me.askWho', type: 'list', label: 'Who you ask', hint: 'A person you trust for each kind of question. Put their names in.', addLabel: 'Add a person', item: { fields: [
+        { key: 'who', type: 'text', label: 'Who' },
+        { key: 'about', type: 'text', label: 'About what' },
+      ] } },
+      { path: 'me.wrong', type: 'textarea', label: 'If something goes wrong', rows: 4 },
+    ],
+  },
+  {
+    id: 'review', title: 'Keeping it current',
+    todo: 'Decide when you look at it again',
+    heading: 'Keeping it current',
+    lead: 'The tools change quickly, and so does what you use them for. Decide when you look at this sheet again.',
+    fields: [
+      { path: 'me.frequency', type: 'select', label: 'How often do you look at it again?', options: ME_FREQUENCIES },
+      { path: 'me.triggers', type: 'checkboxes', label: 'What else makes you look again?', options: ME_TRIGGERS, columns: 2 },
+      { path: 'me.shared', type: 'toggle', label: 'I’ll go through this sheet with someone I trust' },
+    ],
+  },
+  {
+    id: 'try', title: 'Check a use', tool: true,
+    heading: 'Can I use AI for this?',
+    lead: 'Six questions about one thing you want to do. Come back here whenever you’re not sure.',
+    fields: [
+      { path: 'me.check.use', type: 'text', label: 'What do you want to use AI for?', placeholder: 'e.g. Summarise the board papers for Thursday', wide: true },
+      ...CHECK_QUESTIONS.map(q => ({ path: q.path, type: 'cards', label: q.label, options: q.options })),
+      { type: 'verdict' },
+    ],
+  },
+  {
+    id: 'sheet', title: 'Your sheet', output: true,
+    heading: 'Your sheet',
+    lead: 'Print it and keep it where you work. When you’re not sure if AI is right for something, the six questions on it tell you what to do.',
+    fields: [],
+  },
+];
+
+// The steps for the charter on screen.
+export const activeSteps = () => (state.mode === 'me' ? PERSONAL_STEPS : STEPS);
+// The steps that count towards "done": everything except the check tool and the last page.
+export const formSteps = () => activeSteps().filter(s => !s.tool && !s.output);
+
+export const stepById = id => activeSteps().find(s => s.id === id);
 
 export function fieldByPath(path) {
-  for (const step of STEPS) {
+  for (const step of [...STEPS, ...PERSONAL_STEPS]) {
     const f = step.fields.find(f => f.path === path);
     if (f) return { step, field: f };
   }

@@ -238,21 +238,21 @@ function reviewHtml() {
   const rows = proposals.items.map((it, i) => {
     const current = currentDisplay(it);
     const own = current && isTouched(it.path) && !state.provenance[it.path];
-    return `<div class="review-row"><label class="check"><input type="checkbox" data-af-item="${i}"${own ? '' : ' checked'}>` +
+    return `<div class="review-row"><label class="cbx"><input type="checkbox" data-af-item="${i}"${own ? '' : ' checked'}>` +
       `<span><span class="review-label">${esc(it.label)} <span class="tag">${it.basis === 'inferred' ? 'Inferred' : 'Stated'}</span></span>` +
       `<span class="review-value">${esc(it.display)}</span>` +
       (current && current !== String(it.display) ? `<span class="review-current">Currently: ${esc(current)}</span>` : '') +
       (it.quote ? `<span class="review-quote">“${esc(it.quote)}”</span>` : '') +
       '</span></label></div>';
   }).join('');
-  return `<section class="review card" id="review" aria-labelledby="review-title">
+  return `<section class="review note" id="review" aria-labelledby="review-title">
     <span class="eyebrow">Check before using</span>
-    <h2 id="review-title">Found in ${esc(proposals.sourceLabel)}</h2>
+    <h3 id="review-title" class="note-title">Found in ${esc(proposals.sourceLabel)}</h3>
     ${proposals.note ? `<p class="review-quote">${esc(proposals.note)}</p>` : ''}
-    <p class="field-hint">Untick anything that is wrong. Values marked inferred were worked out rather than stated. You can change everything later.</p>
+    <p class="hint">Untick anything that is wrong. Values marked inferred were worked out rather than stated. You can change everything later.</p>
     <div class="review-rows">${rows}</div>
-    <div class="actions"><button type="button" class="btn btn-primary" data-af="accept">Use selected values</button>
-    <button type="button" class="btn btn-ghost" data-af="discard">Discard</button></div>
+    <div class="actions"><button type="button" class="btn btn-primary btn-sm" data-af="accept">Use selected values</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-af="discard">Discard</button></div>
   </section>`;
 }
 
@@ -266,29 +266,29 @@ function resultsHtml() {
 export function sourcesHtml() {
   const off = mode === 'none';
   const offNote = off
-    ? `<p class="field-hint">${hosted ? 'Claude is not available in this view.' : 'Needs the local server with Claude set up. See the README.'}</p>`
+    ? `<p class="hint">${hosted ? 'Claude is not available in this view.' : 'Needs the local server with Claude set up. See the README.'}</p>`
     : '';
-  const register = hosted ? '' : `<div class="source card">
-      <h2 class="source-title">Company register</h2>
-      <p class="field-hint">French organisations. Name, SIREN or SIRET. Free and runs in your browser.</p>
+  const register = hosted ? '' : `<div class="source">
+      <h3>Company register</h3>
+      <p class="hint">French organisations. Name, SIREN or SIRET. Free and runs in your browser.</p>
       <form data-af-form="register" class="inline-form"><label class="sr-only" for="af-q">Organisation name or SIREN</label>
         <input id="af-q" type="search" placeholder="Organisation name or SIREN" autocomplete="organization">
-        <button class="btn btn-ghost" type="submit"${busy ? ' disabled' : ''}>Search</button></form>
+        <button class="btn btn-ghost btn-sm" type="submit"${busy ? ' disabled' : ''}>Search</button></form>
       ${resultsHtml()}
     </div>`;
-  const website = mode === 'sample' || (hosted && off) ? `<div class="source card${off ? ' is-disabled' : ''}">
-      <h2 class="source-title">Your website</h2>
-      <p class="field-hint">Paste the text of your about or mission page. Claude suggests answers from it.</p>
+  const website = mode === 'sample' || (hosted && off) ? `<div class="source${off ? ' is-disabled' : ''}">
+      <h3>Your website</h3>
+      <p class="hint">Paste the text of your about or mission page. Claude suggests answers from it.</p>
       <form data-af-form="paste" class="inline-form"><label class="sr-only" for="af-paste">Text from your website</label>
         <textarea id="af-paste" rows="4" placeholder="Paste text here"${off ? ' disabled' : ''}></textarea>
-        <button class="btn btn-ghost" type="submit"${busy || off ? ' disabled' : ''}>Read text</button></form>
+        <button class="btn btn-ghost btn-sm" type="submit"${busy || off ? ' disabled' : ''}>Read text</button></form>
       ${offNote}
-    </div>` : `<div class="source card${off ? ' is-disabled' : ''}">
-      <h2 class="source-title">Your website</h2>
-      <p class="field-hint">Claude reads your home, about and mission pages and suggests answers.</p>
+    </div>` : `<div class="source${off ? ' is-disabled' : ''}">
+      <h3>Your website</h3>
+      <p class="hint">Claude reads your home, about and mission pages and suggests answers.</p>
       <form data-af-form="url" class="inline-form"><label class="sr-only" for="af-url">Website address</label>
         <input id="af-url" type="url" placeholder="https://example.org" value="${esc(state.org.website)}"${off ? ' disabled' : ''}>
-        <button class="btn btn-ghost" type="submit"${busy || off ? ' disabled' : ''}>Read site</button></form>
+        <button class="btn btn-ghost btn-sm" type="submit"${busy || off ? ' disabled' : ''}>Read site</button></form>
       ${offNote}
     </div>`;
   // On the website there is no Claude behind the page: offer the register search only.
@@ -298,12 +298,12 @@ export function sourcesHtml() {
   return `<div class="sources">
     ${register}
     ${website}
-    <div class="source card${off ? ' is-disabled' : ''}">
-      <h2 class="source-title">Your documents</h2>
-      <p class="field-hint">An existing policy, staff handbook or annual report. PDF, Word, text or Markdown, up to 5 files.</p>
+    <div class="source${off ? ' is-disabled' : ''}">
+      <h3>Your documents</h3>
+      <p class="hint">An existing policy, staff handbook or annual report. PDF, Word, text or Markdown, up to 5 files.</p>
       <form data-af-form="docs" class="inline-form"><label class="sr-only" for="af-files">Documents</label>
         <input id="af-files" type="file" multiple accept=".pdf,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown"${off ? ' disabled' : ''}>
-        <button class="btn btn-ghost" type="submit"${busy || off ? ' disabled' : ''}>Read documents</button></form>
+        <button class="btn btn-ghost btn-sm" type="submit"${busy || off ? ' disabled' : ''}>Read documents</button></form>
       ${offNote}
     </div>
   </div>

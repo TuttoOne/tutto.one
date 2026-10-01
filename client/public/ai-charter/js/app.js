@@ -1,5 +1,5 @@
-import { state, load, edit, markVisited, onChange, exportJSON, importJSON, clearAll, saveNow } from './state.js';
-import { STEPS, stepById } from './schema.js';
+import { state, load, edit, markVisited, onChange, exportJSON, importJSON, clearAll, saveNow, setMode } from './state.js';
+import { stepById, activeSteps, formSteps, fieldByPath } from './schema.js';
 import { applySuggestions } from './derive.js';
 import {
   esc, stepFieldsHtml, trackMore, syncFields, readInput, handleAction, missingRequired, errorSummary, setErrors,
@@ -9,14 +9,14 @@ import { buildCharter, toMarkdown, toHtml } from './charter.js';
 import { mountSources } from './autofill.js';
 import { hosted, saveFile, pageCss } from './host.js';
 
-const mount = document.getElementById('step');
-const tasklist = document.getElementById('tasklist');
-const toastEl = document.getElementById('toast');
-const navSummary = document.querySelector('.nav-toggle > summary');
-// On phones the step list starts folded away.
-if (matchMedia('(max-width: 56rem)').matches) document.querySelector('.nav-toggle').open = false;
+const $ = (s, r = document) => r.querySelector(s);
+const mount = $('#panel');
+const toastEl = $('#toast');
 let current = 'start';
 let fromCheck = false;
+let outTab = 'doc';
+const me = () => state.mode === 'me';
+const outputStep = () => activeSteps().at(-1);
 
 // --- Routing -----------------------------------------------------------------------------
 
@@ -27,105 +27,129 @@ function parseHash() {
 }
 
 function go(id, opts = {}) {
-  const hash = `#/${id}${opts.from ? `?from=${opts.from}` : ''}`;
+  const query = [opts.from && `from=${opts.from}`, opts.field && `field=${opts.field}`].filter(Boolean).join('&');
+  const hash = `#/${id}${query ? `?${query}` : ''}`;
   if (location.hash !== hash) location.hash = hash;
   else route();
 }
 
+let booted = false;
 function route() {
   const { id, from, field } = parseHash();
   const next = id || firstUnfinished();
   if (next !== current) { setErrors({}); window.__errors = {}; }
   current = next;
   fromCheck = from === 'check';
+  if (fromCheck) outTab = 'answers';
   markVisited(current);
-  render({ focusHeading: !field, focusField: field });
+  render({ focusHeading: !field && booted, focusField: field });
+  booted = true;
 }
 
 window.addEventListener('hashchange', route);
 
 function firstUnfinished() {
-  if (!state.visited.start) return 'start';
-  const s = STEPS.find(st => st.id !== 'start' && st.id !== 'check' && status(st) !== 'Done');
-  return s ? s.id : 'check';
+  const steps = formSteps();
+  if (!state.visited[steps[0].id]) return steps[0].id;
+  const s = steps.find(st => !stepDone(st));
+  return s ? s.id : outputStep().id;
 }
 
-// --- Task list ------------------------------------------------------------------------------
+// --- Progress ------------------------------------------------------------------------------
 
-function status(step) {
-  if (step.id === 'check') return allMissing().length ? 'Cannot start yet' : 'Ready';
-  const missing = Object.keys(missingRequired(step)).length;
-  if (!state.visited[step.id]) return 'Not started';
-  return missing ? 'In progress' : 'Done';
-}
+const stepDone = step => !!state.visited[step.id] && !Object.keys(missingRequired(step)).length;
 
-function renderTasklist() {
-  const i = STEPS.findIndex(st => st.id === current);
-  navSummary.textContent = `Step ${i} of ${STEPS.length - 1}: ${STEPS[i].title}`;
-  tasklist.innerHTML = STEPS.map(step => {
-    const st = step.id === 'start' ? (state.visited.start ? 'Done' : 'Not started') : status(step);
-    const cls = st.toLowerCase().replace(/\s+/g, '-');
-    return `<li class="task${step.id === current ? ' is-current' : ''}"><a href="#/${step.id}"${step.id === current ? ' aria-current="step"' : ''}>` +
-      `<span class="task-num">${step.id === 'start' ? '00' : String(STEPS.indexOf(step)).padStart(2, '0')}</span>` +
-      `<span class="task-title">${esc(step.title)}</span><span class="task-status status-${cls}">${esc(st)}</span></a></li>`;
+function renderNav() {
+  $('#nav').innerHTML = activeSteps().map((step, i) => {
+    const done = stepDone(step);
+    const dot = step.output || step.tool ? '' : `<span class="ok${done ? ' on' : ''}" title="${done ? 'Done' : 'Still to do'}"></span>`;
+    return `<li><button type="button" data-goto="${step.id}"${step.id === current ? ' aria-current="step"' : ''}>` +
+      `<span class="num">${String(i + 1).padStart(2, '0')}</span><span class="t">${esc(step.title)}</span>${dot}</button></li>`;
   }).join('');
+  // On a phone the rail scrolls sideways: keep the step you are on in view.
+  const ol = $('#nav'), here = $('#nav [aria-current]');
+  if (here && ol.scrollWidth > ol.clientWidth) ol.scrollLeft = here.offsetLeft - ol.offsetLeft - 16;
+}
+
+function renderAside() {
+  const steps = formSteps();
+  const done = steps.filter(stepDone).length;
+  const label = done === steps.length ? 'Ready' : done ? 'In progress' : 'Not started';
+  const missing = allMissing().filter(m => state.visited[m.step.id]);
+  $('#aside').innerHTML = `<div class="card"><span class="eyebrow">${me() ? 'Your sheet so far' : 'Charter so far'}</span>
+    <div class="strength"><b>${label}</b><span>${done} of ${steps.length}</span></div>
+    <div class="meter" style="grid-template-columns:repeat(${steps.length},1fr)">${steps.map(st => `<i class="${stepDone(st) ? 'on' : ''}"></i>`).join('')}</div>
+    <ul class="todo">${steps.map(st => `<li><button type="button" class="${stepDone(st) ? 'done' : ''}" data-goto="${st.id}"><span class="mk"></span><span>${esc(st.todo)}</span></button></li>`).join('')}</ul>
+    <p class="saved">Your answers are saved in this browser as you type.</p></div>
+    ${missing.length ? `<div class="card"><h3>Still missing</h3><ul class="todo issues">${missing.map(m => `<li><button type="button" data-goto="${m.step.id}" data-field="${idFor(m.path)}"><span class="mk warn"></span><span>${esc(m.msg)}<em>${esc(m.step.title)}</em></span></button></li>`).join('')}</ul></div>` : ''}
+    ${me() ? `<div class="card"><h3>Not sure about something?</h3><p>Six questions about one thing you want to do, and you know if AI is right for it.</p><button type="button" class="btn btn-ghost btn-sm" data-goto="try">Check a use</button></div>` : ''}`;
+}
+
+function renderHero() {
+  $('#hero').innerHTML = me()
+    ? `<span class="eyebrow">Session one · Your AI Use Charter</span><h1>Your own rules for AI.<br><em>And a sheet for when you’re not sure.</em></h1><p class="lead">Five short steps about what you use AI for, what stays out of it and who you ask. Most answers are suggested for you, and you can change every one. You finish with a sheet to print and keep, with six questions on it for the days you wonder if AI is right for the job.</p><button type="button" class="btn btn-ghost" data-goto="try">Not sure about something? Check it now</button>`
+    : `<span class="eyebrow">Session one · Your AI Use Charter</span><h1>Rules first.<br><em>Then the tools.</em></h1><p class="lead">Six short steps about why you use AI, the principles you hold yourselves to, who decides and how the charter stays current. Most answers are suggested from the first few, and you can change every one. You finish with a charter to download and share.</p>`;
+  document.querySelectorAll('#mode-seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === state.mode)));
+  $('#credit').textContent = me()
+    ? 'The six questions and the rules behind them are Tutto’s. The principles follow Capgemini’s Code of Ethics for AI and the EU guidelines for trustworthy AI.'
+    : 'After the Café IA co-design method and Capgemini’s Code of Ethics for AI.';
 }
 
 // --- Step rendering --------------------------------------------------------------------------------
 
-function navHtml(step) {
-  const i = STEPS.indexOf(step);
-  const prev = STEPS[i - 1];
-  const next = STEPS[i + 1];
+function footHtml(step) {
+  const steps = activeSteps();
+  const i = steps.indexOf(step);
+  const prev = steps[i - 1];
+  const next = steps[i + 1];
   if (fromCheck) {
-    return `<div class="step-nav"><button type="button" class="btn btn-primary" data-nav="check">Save and return to check your answers</button></div>`;
+    return `<div class="panel-foot"><span></span><button type="button" class="btn btn-primary" data-nav="check">Save and go back to ${me() ? 'your sheet' : 'your charter'}</button></div>`;
   }
-  return `<div class="step-nav">
-    ${next ? `<button type="button" class="btn btn-primary" data-nav="next">Continue to ${esc(next.title.toLowerCase())}</button>` : ''}
-    ${prev ? `<a class="back-link" href="#/${prev.id}">Back to ${esc(prev.title.toLowerCase())}</a>` : ''}
+  return `<div class="panel-foot">
+    ${prev ? `<button type="button" class="btn btn-ghost" data-goto="${prev.id}">Back: ${esc(prev.title)}</button>` : '<span></span>'}
+    ${next ? `<button type="button" class="btn btn-primary" data-nav="next">Next: ${esc(next.title)}</button>` : ''}
   </div>`;
 }
 
-function checkPageHtml() {
+function outputHtml() {
   const missing = allMissing();
-  const doc = buildCharter();
-  return `${missing.length ? `<div class="callout callout-warn"><p><strong>${missing.length} required ${missing.length === 1 ? 'answer is' : 'answers are'} missing.</strong> You can still preview and download, but the charter will have gaps.</p><ul class="dash">${missing.map(m => `<li><a href="#/${m.step.id}?from=check&field=${idFor(m.path)}">${esc(m.msg)}</a></li>`).join('')}</ul></div>` : ''}
-    ${checkAnswersHtml()}
-    <section class="export" aria-labelledby="export-title">
-      <span class="eyebrow">Your charter</span>
-      <h2 id="export-title">Download</h2>
-      <div class="actions">
-        <button type="button" class="btn btn-primary" data-export="md">Download Markdown</button>
-        ${hosted
-          ? '<button type="button" class="btn btn-ghost" data-export="html">Download printable page</button>'
-          : '<button type="button" class="btn btn-ghost" data-export="print">Print or save as PDF</button>'}
-        <button type="button" class="btn btn-ghost" data-export="json">Download save file</button>
-        <label class="btn btn-ghost file-btn">Open save file<input type="file" accept=".json,application/json" data-export="import" class="sr-only"></label>
-      </div>
-      <p class="field-hint">The save file keeps every answer. Open it here later, on any computer, to carry on.</p>
-    </section>
-    <section class="preview" aria-label="Charter preview">${toHtml(doc)}</section>
-    <p><button type="button" class="link-btn danger" data-export="clear">Clear all answers and start again</button></p>`;
+  const what = me() ? 'sheet' : 'charter';
+  const tabs = [['doc', me() ? 'Your sheet' : 'Charter'], ['answers', 'Your answers']];
+  const bar = outTab === 'doc'
+    ? (me() ? 'Keep it where you work and go through it with your group.' : 'Share it with the people it affects before you adopt it.')
+    : 'Every answer behind it. Change one and it’s updated straight away.';
+  return `${missing.length ? `<p class="tip">Still missing: ${missing.map(m => `<a href="#/${m.step.id}?from=check&field=${idFor(m.path)}">${esc(fieldByPath(m.path)?.field.label || m.msg)}</a>`).join(', ')}. You can download it as it is, with gaps.</p>` : ''}
+    <div class="download"><div><h3>Download your ${what}</h3><p>${hosted ? 'A page you can open anywhere and print.' : 'Print it, or choose “Save as PDF” in the print window.'}</p></div>
+      <div class="btns">${hosted
+        ? '<button type="button" class="btn btn-primary" data-export="html">Download printable page</button>'
+        : '<button type="button" class="btn btn-primary" data-export="print">Print or save as PDF</button>'}</div></div>
+    <div class="tabs" role="tablist">${tabs.map(([k, l]) => `<button type="button" role="tab" aria-selected="${outTab === k}" data-tab="${k}">${l}</button>`).join('')}</div>
+    <div class="out-bar"><p>${bar}</p>${outTab === 'doc' ? `<div class="btns"><button type="button" class="btn btn-primary btn-sm" data-export="copy">Copy</button><button type="button" class="btn btn-ghost btn-sm" data-export="md">Download Markdown</button></div>` : ''}</div>
+    <div class="paper">${outTab === 'doc' ? toHtml(buildCharter()) : checkAnswersHtml()}</div>
+    <div class="out-bar"><p>Save your answers to carry on later, on this computer or another one.</p><div class="btns"><button type="button" class="btn btn-ghost btn-sm" data-export="json">Save answers</button><label class="btn btn-ghost btn-sm file-btn">Load answers<input type="file" accept=".json,application/json" data-export="import" class="sr-only"></label></div></div>
+    <p><button type="button" class="link-btn danger" data-export="clear">Clear these answers and start again</button></p>`;
 }
+
+const smooth = () => (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth');
 
 function render({ focusHeading = false, focusField = null, keepFocus = null } = {}) {
   const step = stepById(current);
   const errs = window.__errors || {};
   let body;
-  if (step.id === 'check') body = checkPageHtml();
-  else body = `<div class="step-form">${step.id === 'start' ? '<div id="sources"></div>' : ''}${stepFieldsHtml(step)}${navHtml(step)}</div>`;
+  if (step.output) body = outputHtml();
+  else body = `${step.id === 'start' ? '<div id="sources"></div>' : ''}${stepFieldsHtml(step)}${footHtml(step)}`;
 
-  mount.innerHTML = `<div class="step-head"><span class="eyebrow">${esc(step.eyebrow)}</span>
-    <h1 tabindex="-1">${esc(step.heading)}</h1><p class="lead">${esc(step.lead)}</p></div>
-    ${errorSummary(errs)}${body}`;
+  mount.innerHTML = `<h2 tabindex="-1">${esc(step.heading)}</h2><p class="lead">${esc(step.lead)}</p>${errorSummary(errs)}${body}`;
 
   trackMore(mount);
   if (step.id === 'start') mountSources(mount.querySelector('#sources'), n => {
     toast(n ? `${n} answer${n === 1 ? '' : 's'} filled in. Check them below.` : 'Nothing was filled in.');
     go('organisation');
   });
-  renderTasklist();
-  document.title = `${step.title} · AI charter · Tutto`;
+  renderHero();
+  renderNav();
+  renderAside();
+  document.title = `${step.title} · AI Charter · Tutto`;
 
   if (keepFocus) {
     const el = mount.querySelector(keepFocus);
@@ -141,7 +165,10 @@ function render({ focusHeading = false, focusField = null, keepFocus = null } = 
     }
   }
   if (Object.keys(errs).length) { mount.querySelector('.error-summary')?.focus(); return; }
-  if (focusHeading) { mount.querySelector('h1').focus({ preventScroll: true }); window.scrollTo(0, 0); }
+  if (focusHeading) {
+    mount.querySelector('h2').focus({ preventScroll: true });
+    $('#layout').scrollIntoView({ block: 'start', behavior: smooth() });
+  }
 }
 
 // A selector that finds the same control again after a re-render.
@@ -187,11 +214,26 @@ mount.addEventListener('click', e => {
     return;
   }
   if (btn.dataset.nav) return navigate(btn.dataset.nav);
-  if (btn.dataset.export) return exportAction(btn.dataset.export);
+  if (btn.dataset.tab) { outTab = btn.dataset.tab; return render(); }
+  if (btn.dataset.export) return exportAction(btn.dataset.export, btn);
   if (btn.dataset.action) {
     const res = handleAction(btn);
     if (res) rerender(res.focus || null);
   }
+});
+
+// The rail, the progress card, the hero and the Back button all move without checking the step first.
+document.addEventListener('click', e => {
+  const seg = e.target.closest('#mode-seg button');
+  if (seg) {
+    if (seg.dataset.mode === state.mode) return;
+    // The switch wins over a ?for= link, so a reload stays where the person put it.
+    if (location.search) history.replaceState(null, '', location.pathname + location.hash);
+    setMode(seg.dataset.mode);
+    return;
+  }
+  const btn = e.target.closest('[data-goto]');
+  if (btn) go(btn.dataset.goto, { field: btn.dataset.field });
 });
 
 function navigate(dir) {
@@ -205,8 +247,9 @@ function navigate(dir) {
   }
   window.__errors = {};
   setErrors({});
-  if (dir === 'check') return go('check');
-  const next = STEPS[STEPS.indexOf(step) + 1];
+  if (dir === 'check') return go(outputStep().id);
+  const steps = activeSteps();
+  const next = steps[steps.indexOf(step) + 1];
   if (next) go(next.id);
 }
 
@@ -223,10 +266,14 @@ function rerender(keep) {
 
 onChange(meta => {
   applySuggestions();
+  if (meta.source === 'mode') {
+    setErrors({}); window.__errors = {}; outTab = 'doc';
+    return go(firstUnfinished());
+  }
   if (meta.source === 'replace') { current = firstUnfinished(); return render({ focusHeading: true }); }
   if (meta.source === 'sync') {
     // Another tab changed the answers: refresh unless the person is typing here.
-    if (!document.activeElement?.dataset?.path) render();
+    if (!document.activeElement?.dataset?.path) { if (!stepById(current)) current = firstUnfinished(); render(); }
     return;
   }
   if (meta.source === 'autofill') return;
@@ -236,9 +283,10 @@ onChange(meta => {
     pending = true;
     queueMicrotask(() => {
       pending = false;
-      if (stepById(current).id === 'check') return;
+      if (stepById(current).output) return;
       if (!syncFields(mount)) rerender(focusKey(document.activeElement));
-      renderTasklist();
+      renderNav();
+      renderAside();
     });
     return;
   }
@@ -247,7 +295,10 @@ onChange(meta => {
 
 // --- Export ----------------------------------------------------------------------------------------------
 
-const slug = () => (state.org.name || 'ai-charter').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'ai-charter';
+const slug = () => {
+  const name = (me() ? state.me.name : state.org.name) || '';
+  return name.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || (me() ? 'my' : 'our');
+};
 
 const SAVE_COPY = { busy: 'A save is already waiting for you to confirm.', unavailable: 'Saving files is not available here.' };
 
@@ -262,61 +313,77 @@ function charterPage() {
   const doc = buildCharter();
   return `<!DOCTYPE html>\n<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">` +
     `<title>${esc(doc.title)}</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">` +
-    `<style>${pageCss()}\nbody{display:block;padding:2rem 1rem}.charter{max-width:56rem;margin:0 auto}</style></head><body>${toHtml(doc)}</body></html>`;
+    `<style>${pageCss()}\nbody{display:block;padding:2rem 1rem}.paper{max-width:56rem;margin:0 auto}@media print{body>*:not(.print-root){display:block!important}.paper{border:0;padding:0}}</style></head><body><div class="paper">${toHtml(doc)}</div></body></html>`;
 }
 
+async function copyText(text) {
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; } catch {
+    try {
+      const t = Object.assign(document.createElement('textarea'), { value: text });
+      t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select(); ok = document.execCommand('copy'); t.remove();
+    } catch { /* blocked */ }
+  }
+  toast(ok ? `Copied the ${me() ? 'sheet' : 'charter'}.` : 'Your browser blocked copying here. Download the Markdown file instead.');
+}
+
+let clearConfirmArmed = false;
 function exportAction(kind) {
   saveNow();
   if (kind === 'md') offer(`${slug()}-ai-charter.md`, toMarkdown(), 'text/markdown;charset=utf-8', 'Markdown saved.');
-  if (kind === 'json') offer(`${slug()}-charter-save.json`, exportJSON(), 'application/json', 'Save file saved.');
+  if (kind === 'copy') copyText(toMarkdown());
+  if (kind === 'json') offer(`${slug()}-charter-answers.json`, exportJSON(), 'application/json', 'Answers saved.');
   if (kind === 'html') offer(`${slug()}-ai-charter.html`, charterPage(), 'text/html;charset=utf-8', 'Printable page saved. Open it and print to PDF.');
   if (kind === 'print') {
-    document.getElementById('print-root').innerHTML = toHtml(buildCharter());
+    $('#print-root').innerHTML = toHtml(buildCharter());
     window.print();
   }
   if (kind === 'clear') {
     if (!clearConfirmArmed) {
       clearConfirmArmed = true;
-      toast('Select “Clear all answers” again within five seconds to confirm.');
+      toast('Select “Clear these answers” again within five seconds to confirm.');
       setTimeout(() => { clearConfirmArmed = false; }, 5000);
       return;
     }
     clearConfirmArmed = false;
-    clearAll();
+    clearAll(activeSteps().map(s => s.id));
     applySuggestions();
-    go('start');
-    toast('All answers cleared.');
+    go(formSteps()[0].id);
+    toast('Answers cleared.');
   }
 }
-let clearConfirmArmed = false;
 
 async function importFile(input) {
   const file = input.files?.[0];
   if (!file) return;
   try {
     importJSON(await file.text());
-    toast('Save file opened.');
-    go('check');
+    toast('Your saved answers are loaded.');
+    go(outputStep().id);
   } catch (err) {
     toast(err.message || 'Could not open that file.');
   }
 }
 
-window.addEventListener('afterprint', () => { document.getElementById('print-root').innerHTML = ''; });
+window.addEventListener('afterprint', () => { $('#print-root').innerHTML = ''; });
 
 // --- Toast ----------------------------------------------------------------------------------------------
 
 let toastTimer;
 function toast(msg) {
-  toastEl.textContent = msg;
-  toastEl.classList.add('is-visible');
+  toastEl.innerHTML = `<span>${esc(msg)}</span>`;
+  toastEl.hidden = false;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 4000);
+  toastTimer = setTimeout(() => { toastEl.hidden = true; }, 4000);
 }
 
 // --- Start ------------------------------------------------------------------------------------------------
 
 const how = load();
+// A link can open the charter for one person or for an organisation: /ai-charter?for=me
+const wanted = new URLSearchParams(location.search).get('for');
+if (wanted === 'me' || wanted === 'org') state.mode = wanted;
 applySuggestions();
 saveNow();
 if (how === 'migrated') setTimeout(() => toast('Your answers from the previous version of the wizard have been carried over.'), 300);

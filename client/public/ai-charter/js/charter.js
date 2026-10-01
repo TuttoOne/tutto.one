@@ -1,10 +1,12 @@
 // Builds the charter once as a list of blocks, then renders it to Markdown or to HTML.
 // User text is escaped for HTML; nothing is parsed back out of Markdown.
+// buildCharter() picks the organisation charter or the personal sheet from the mode.
 
 import { state } from './state.js';
 import {
   ORG_TYPES, ORG_SIZES, MATURITY, SCOPES, STAKEHOLDERS, VALUES, PRINCIPLES, MODELS, FRAMEWORKS,
   PARTICIPATION_METHODS, COMMITMENT_AREAS, APPROACHES, RESOURCES, COMMUNICATION, FREQUENCIES, TRIGGERS, CHARTER_TYPES, labelOf,
+  ME_PRINCIPLES, ME_NEVER, ME_NOGO, ME_CHECKS, ME_FREQUENCIES, ME_TRIGGERS, CHECK_QUESTIONS,
 } from './schema.js';
 import { recommendModel, today } from './derive.js';
 import { esc, customKey } from './render.js';
@@ -21,7 +23,14 @@ const COVERS = {
   governance: 'how we govern and oversee artificial intelligence',
 };
 
-export function buildCharter(s = state) {
+const fmtDate = d => {
+  const t = new Date(`${d}T00:00:00`);
+  return isNaN(t) ? d : t.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+};
+
+export const buildCharter = (s = state) => (s.mode === 'me' ? buildPersonal(s) : buildOrganisation(s));
+
+function buildOrganisation(s) {
   const org = s.org;
   const name = clean(org.name) || 'Our organisation';
   const sections = [];
@@ -141,13 +150,81 @@ export function buildCharter(s = state) {
     title: clean(s.meta.title) || `${name} AI charter`,
     org: name,
     lead: clean(s.vision.statement),
-    kind: labelOf(CHARTER_TYPES, s.charterType),
+    eyebrow: `AI charter${labelOf(CHARTER_TYPES, s.charterType) ? ` · ${labelOf(CHARTER_TYPES, s.charterType)}` : ''}`,
+    version: clean(s.meta.version) || '1.0',
+    toc: true,
+    credit: 'Drafted with the Tutto AI charter wizard, after the Café IA method and Capgemini’s Code of Ethics for AI.',
     meta: [
       ['Organisation', clean(org.name)],
       ['Version', clean(s.meta.version) || '1.0'],
-      ['Effective', clean(s.meta.date) || today()],
+      ['Effective', fmtDate(clean(s.meta.date) || today())],
       ['Contact', clean(org.contact)],
       ['Website', clean(org.website)],
+    ].filter(([, v]) => v),
+    sections,
+  };
+}
+
+// --- Just me: the sheet to come back to -----------------------------------------------------
+
+function buildPersonal(s) {
+  const me = s.me;
+  const sections = [];
+  const section = (title, blocks) => {
+    const b = blocks.filter(Boolean).filter(x => !(x.items && !x.items.length));
+    if (b.length) sections.push({ title, blocks: b });
+  };
+  const p = text => (clean(text) ? { type: 'p', text: clean(text) } : null);
+  const h = text => ({ type: 'h3', text });
+  const ul = items => ({ type: 'ul', items: items.map(clean).filter(Boolean) });
+  const defs = pairs => ({ type: 'defs', items: pairs.filter(([k, v]) => clean(k) && clean(v)).map(([k, v]) => [clean(k), clean(v)]) });
+
+  section('What I use AI for', [p(me.why), ul(me.uses || [])]);
+
+  section('What matters to me', [
+    { type: 'numbered', items: ME_PRINCIPLES.filter(x => (me.principles || []).includes(x.value)).map(x => [x.label, x.description]) },
+  ]);
+
+  section('What never goes into an AI tool', [ul([...labels(ME_NEVER, me.never), ...(me.neverOther || [])])]);
+
+  section('What I don’t use AI for', [ul(labels(ME_NOGO, me.noGo))]);
+
+  const rules = (me.rules || []).filter(r => clean(r.title));
+  section('Before I rely on an answer', [
+    ul(labels(ME_CHECKS, me.checks)),
+    ...(rules.length ? [h('My own rules'), { type: 'numbered', items: rules.map(r => [clean(r.title), clean(r.description)]) }] : []),
+  ]);
+
+  section('Not sure? Six questions', [
+    p('When I’m not sure if AI is right for something, I go through these in order.'),
+    { type: 'numbered', items: CHECK_QUESTIONS.map(q => q.sheet) },
+    p('If nothing comes up, I go ahead and do my usual checks.'),
+  ]);
+
+  const ask = (me.askWho || []).filter(r => clean(r.who));
+  section('Who I ask', [
+    defs(ask.map(r => [r.about || 'Anything', r.who])),
+    ...(clean(me.wrong) ? [h('If something goes wrong'), p(me.wrong)] : []),
+  ]);
+
+  section('Looking at this again', [
+    defs([['I read this sheet again', labelOf(ME_FREQUENCIES, me.frequency)]]),
+    ...((me.triggers || []).length ? [h('And when'), ul(labels(ME_TRIGGERS, me.triggers))] : []),
+    me.shared ? p('I go through it with someone I trust.') : null,
+  ]);
+
+  return {
+    title: clean(me.title) || 'My AI Use Charter',
+    org: clean(me.name),
+    lead: clean(me.statement),
+    eyebrow: 'AI Use Charter · A sheet to come back to',
+    version: '',
+    toc: false,
+    credit: 'Drafted with the Tutto AI charter wizard.',
+    meta: [
+      ['Name', clean(me.name)],
+      ['Date', fmtDate(clean(me.date) || today())],
+      ['Tools', clean(me.tools)],
     ].filter(([, v]) => v),
     sections,
   };
@@ -172,12 +249,12 @@ export function toMarkdown(doc = buildCharter()) {
   const out = [`# ${mdEscape(doc.title)}`, ''];
   if (doc.lead) out.push(`*${mdEscape(doc.lead)}*`, '');
   out.push(doc.meta.map(([k, v]) => `**${k}:** ${mdEscape(v)}`).join('  \n'), '', '---', '');
-  out.push('## Contents', '', ...doc.sections.map((s, i) => `${i + 1}. ${s.title}`), '', '---', '');
+  if (doc.toc) out.push('## Contents', '', ...doc.sections.map((s, i) => `${i + 1}. ${s.title}`), '', '---', '');
   doc.sections.forEach((s, i) => {
     out.push(`## ${i + 1}. ${s.title}`, '');
     s.blocks.forEach(b => { const md = blockToMd(b); if (md) out.push(md, ''); });
   });
-  out.push('---', '', `*${mdEscape(doc.title)}, version ${doc.meta.find(m => m[0] === 'Version')?.[1] || '1.0'}. Drafted with the Tutto AI charter wizard, after the Café IA method and Capgemini’s Code of Ethics for AI.*`, '');
+  out.push('---', '', `*${mdEscape(doc.title)}${doc.version ? `, version ${doc.version}` : ''}. ${doc.credit}*`, '');
   return out.join('\n');
 }
 
@@ -194,16 +271,16 @@ function blockToHtml(b) {
   }
 }
 
+// Same document furniture as the scorecard pack and the hand-over card: masthead, numbered section heads, footer.
 export function toHtml(doc = buildCharter()) {
   return `<article class="charter">
-  <header class="charter-cover">
-    <span class="eyebrow">AI charter${doc.kind ? ` · ${esc(doc.kind)}` : ''}</span>
-    <h1>${esc(doc.title)}</h1>
-    ${doc.lead ? `<p class="lead">${esc(doc.lead)}</p>` : ''}
-    <dl class="charter-meta">${doc.meta.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-  </header>
-  <nav class="charter-toc" aria-label="Charter contents"><h2>Contents</h2><ol>${doc.sections.map(s => `<li>${esc(s.title)}</li>`).join('')}</ol></nav>
-  ${doc.sections.map((s, i) => `<section class="charter-section"><span class="eyebrow">${String(i + 1).padStart(2, '0')}</span><h2>${esc(s.title)}</h2>${s.blocks.map(blockToHtml).join('')}</section>`).join('')}
-  <footer class="doc-footer"><span>${esc(doc.title)}</span><span>Drafted with <span class="brand brand-sm">Tutto<span class="dot">.</span></span></span></footer>
+  <header class="doc-header"><span class="brand">Tutto<span class="dot">.</span></span><span class="meta">AI charter · ${esc(fmtDate(today()))}</span></header>
+  <span class="eyebrow">${esc(doc.eyebrow)}</span>
+  <h2 class="brief-title">${esc(doc.title)}</h2>
+  ${doc.lead ? `<p class="lead">${esc(doc.lead)}</p>` : ''}
+  <div class="facts">${doc.meta.map(([k, v]) => `<div><b>${esc(k)}</b>${esc(v)}</div>`).join('')}</div>
+  ${doc.toc ? `<ol class="charter-toc" aria-label="Charter contents">${doc.sections.map(s => `<li>${esc(s.title)}</li>`).join('')}</ol>` : ''}
+  ${doc.sections.map((s, i) => `<div class="section-head"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="label">${esc(s.title)}</span><span class="rule"></span></div>${s.blocks.map(blockToHtml).join('')}`).join('')}
+  <footer class="doc-footer"><span>Praxis · AI charter</span><span>Session one</span></footer>
 </article>`;
 }

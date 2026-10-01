@@ -1,14 +1,19 @@
 // One state object, saved to localStorage on every change.
 // `touched` records paths the person has edited, so suggestions never overwrite them.
 // `provenance` records paths filled from the register, a website or a document.
+// `mode` says who the charter is for: 'org' (an organisation) or 'me' (one person). Each keeps its own answers.
 
 export const STORAGE_KEY = 'praxis_charter_v2';
 const LEGACY_KEY = 'ai_charter_wizard_data';
 const LEGACY_GOV_KEY = 'ai_charter_governance_design';
 
+// One run of "Can I use AI for this?" in the personal charter.
+export const emptyCheck = () => ({ use: '', never: '', harm: '', verify: '', undo: '', person: '', open: '' });
+
 export function emptyState() {
   return {
     version: 2,
+    mode: 'org',
     charterType: 'strategy',
     org: {
       name: '', type: '', typeOther: '', size: '', maturity: '', contact: '', stakeholders: [],
@@ -23,6 +28,14 @@ export function emptyState() {
     commitments: { statement: '', areas: [], items: [] },
     rollout: { approach: '', approachOther: '', phases: [], resources: [], communication: [] },
     upkeep: { frequency: '', triggers: [], changeProposal: '', changeApproval: '', versioning: '', updateCommunication: '', coDesign: false },
+    me: {
+      name: '', maturity: '', where: [], tools: '', why: '', title: '', date: '',
+      statement: '', uses: [], principles: [],
+      never: [], neverOther: [], noGo: [], checks: [], rules: [],
+      askWho: [], wrong: '',
+      frequency: '', triggers: [], shared: false,
+      check: emptyCheck(),
+    },
     touched: {},
     provenance: {},
     visited: {},
@@ -95,6 +108,12 @@ export function markVisited(stepId) {
   save();
 }
 
+export function setMode(mode) {
+  state.mode = mode === 'me' ? 'me' : 'org';
+  save();
+  notify({ source: 'mode' });
+}
+
 export function commit(meta = { source: 'internal' }) {
   save();
   notify(meta);
@@ -124,6 +143,8 @@ function normalise(data) {
   for (const [k, v] of Object.entries(base)) {
     if (v && typeof v === 'object' && !Array.isArray(v)) out[k] = { ...v, ...(data?.[k] || {}) };
   }
+  out.me.check = { ...base.me.check, ...(data?.me?.check || {}) };
+  out.mode = out.mode === 'me' ? 'me' : 'org';
   out.version = 2;
   return out;
 }
@@ -146,13 +167,25 @@ export function replace(data) {
   notify({ source: 'replace' });
 }
 
-export function clearAll() {
-  state = emptyState();
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem(LEGACY_KEY);
-    localStorage.removeItem(LEGACY_GOV_KEY);
-  } catch { /* ignore */ }
+// Clear the answers for the charter on screen and leave the other one alone.
+// `stepIds` are the steps of the charter being cleared, so its progress resets too.
+export function clearAll(stepIds = []) {
+  const base = emptyState();
+  const mine = p => p === 'me' || p.startsWith('me.');
+  const keep = (obj, test) => Object.fromEntries(Object.entries(obj).filter(([k]) => test(k)));
+  if (state.mode === 'me') {
+    state.me = base.me;
+    state.touched = keep(state.touched, p => !mine(p));
+    state.provenance = keep(state.provenance, p => !mine(p));
+  } else {
+    state = { ...base, mode: 'org', me: state.me, touched: keep(state.touched, mine), provenance: {}, visited: state.visited };
+    try {
+      localStorage.removeItem(LEGACY_KEY);
+      localStorage.removeItem(LEGACY_GOV_KEY);
+    } catch { /* ignore */ }
+  }
+  state.visited = keep(state.visited, id => !stepIds.includes(id));
+  saveNow();
   notify({ source: 'replace' });
 }
 

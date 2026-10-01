@@ -1,9 +1,11 @@
 // Renders a step from the schema. Every input carries data-path; one delegated
 // listener on the mount writes changes into the state, so added rows save like any field.
+// The markup uses the shared wizard classes (field, cbx, opt, list, add-btn) so the charter
+// looks like the agent scorecard and the hand-over check.
 
-import { state, get, isTouched, edit, resetToSuggestion } from './state.js';
-import { STEPS, PRINCIPLES, MODELS, FRAMEWORKS, labelOf, principleOf, stepById } from './schema.js';
-import { isSuggested, hasSuggestion, suggestions, recommendModel, leadershipName, modelLabel } from './derive.js';
+import { state, get, isTouched, edit, resetToSuggestion, emptyCheck } from './state.js';
+import { STEPS, PERSONAL_STEPS, PRINCIPLES, MODELS, FRAMEWORKS, VERDICTS, labelOf, principleOf, stepById, activeSteps } from './schema.js';
+import { isSuggested, hasSuggestion, suggestions, recommendModel, leadershipName, modelLabel, assessCheck } from './derive.js';
 
 export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const idFor = path => 'f-' + path.replace(/[^a-zA-Z0-9]+/g, '-');
@@ -27,14 +29,12 @@ export function tagsFor(path) {
   return out.join(' ');
 }
 
-function labelRow(f, forId, legend = false) {
-  const req = f.required ? '' : ' <span class="optional">(optional)</span>';
-  const tag = legend ? 'legend' : 'label';
-  const forAttr = legend ? '' : ` for="${forId}"`;
-  return `<div class="field-head"><${tag} class="field-label"${forAttr}>${esc(f.label)}${f.required ? '' : req}</${tag}>` +
-    `<span class="field-tags" data-tags="${esc(f.path || '')}">${tagsFor(f.path)}</span></div>` +
-    (f.hint ? `<p class="field-hint" id="${forId}-hint">${esc(f.hint)}</p>` : '') +
-    (errors[f.path] ? `<p class="field-error" id="${forId}-error">${esc(errors[f.path])}</p>` : '');
+// Label, tags, hint and error for one field. A group (tick list, cards, rows) gets a heading instead of a label.
+function head(f, id, group = false) {
+  const label = group ? `<h3 id="${id}-label">${esc(f.label)}</h3>` : `<label for="${id}">${esc(f.label)}</label>`;
+  return `<div class="field-head">${label}<span class="field-tags" data-tags="${esc(f.path || '')}">${tagsFor(f.path)}</span></div>` +
+    (f.hint ? `<div class="hint" id="${id}-hint">${esc(f.hint)}</div>` : '') +
+    (errors[f.path] ? `<p class="field-error" id="${id}-error">${esc(errors[f.path])}</p>` : '');
 }
 
 function describedBy(f, id) {
@@ -42,12 +42,16 @@ function describedBy(f, id) {
   return ids.length ? ` aria-describedby="${ids.join(' ')}"` : '';
 }
 
+const fieldClass = (f, extra = '') => `field${extra}${errors[f.path] ? ' has-error' : ''}`;
+const groupOpen = (f, id, path = f.path) =>
+  `<div class="${fieldClass({ path }, ' wide group')}" data-field="${esc(path)}" id="${id}" role="group" aria-labelledby="${id}-label"`;
+
 // --- Field renderers ------------------------------------------------------------
 
 function textInput(f) {
   const id = idFor(f.path);
   const type = { email: 'email', url: 'url', date: 'date' }[f.type] || 'text';
-  return `<div class="field${errors[f.path] ? ' has-error' : ''}" data-field="${esc(f.path)}">${labelRow(f, id)}` +
+  return `<div class="${fieldClass(f, f.wide ? ' wide' : '')}" data-field="${esc(f.path)}">${head(f, id)}` +
     `<input id="${id}" type="${type}" data-path="${esc(f.path)}" value="${esc(get(f.path))}"` +
     `${f.placeholder ? ` placeholder="${esc(f.placeholder)}"` : ''}${f.autocomplete ? ` autocomplete="${f.autocomplete}"` : ''}` +
     `${f.required ? ' aria-required="true"' : ''}${describedBy(f, id)}></div>`;
@@ -55,7 +59,7 @@ function textInput(f) {
 
 function textarea(f) {
   const id = idFor(f.path);
-  return `<div class="field${errors[f.path] ? ' has-error' : ''}" data-field="${esc(f.path)}">${labelRow(f, id)}` +
+  return `<div class="${fieldClass(f, ' wide')}" data-field="${esc(f.path)}">${head(f, id)}` +
     `<textarea id="${id}" rows="${f.rows || 4}" data-path="${esc(f.path)}"${f.required ? ' aria-required="true"' : ''}${describedBy(f, id)}>${esc(get(f.path))}</textarea></div>`;
 }
 
@@ -64,7 +68,7 @@ function select(f) {
   const value = get(f.path) || '';
   const opts = [`<option value="">Choose…</option>`, ...f.options.map(o =>
     `<option value="${esc(o.value)}"${o.value === value ? ' selected' : ''}>${esc(o.label)}</option>`)].join('');
-  let html = `<div class="field${errors[f.path] ? ' has-error' : ''}" data-field="${esc(f.path)}">${labelRow(f, id)}` +
+  let html = `<div class="${fieldClass(f)}" data-field="${esc(f.path)}">${head(f, id)}` +
     `<select id="${id}" data-path="${esc(f.path)}"${f.required ? ' aria-required="true"' : ''}${describedBy(f, id)}>${opts}</select>`;
   if (f.other && value === 'other') {
     const oid = idFor(f.other);
@@ -76,16 +80,15 @@ function select(f) {
 function checkboxes(f) {
   const id = idFor(f.path);
   const values = get(f.path) || [];
-  const items = f.options.map(o => `<label class="check"><input type="checkbox" data-path="${esc(f.path)}" data-multi value="${esc(o.value)}"${values.includes(o.value) ? ' checked' : ''}>` +
-    `<span><span class="check-label">${esc(o.label)}</span>${f.describe && o.description ? `<span class="check-desc">${esc(o.description)}</span>` : ''}</span></label>`).join('');
-  return `<fieldset class="field${errors[f.path] ? ' has-error' : ''}" data-field="${esc(f.path)}" id="${id}">${labelRow(f, id, true)}` +
-    `<div class="checks cols-${f.columns || 1}">${items}</div></fieldset>`;
+  const items = f.options.map(o => `<label class="cbx"><input type="checkbox" data-path="${esc(f.path)}" data-multi value="${esc(o.value)}"${values.includes(o.value) ? ' checked' : ''}>` +
+    `<span>${esc(o.label)}${f.describe && o.description ? `<small>${esc(o.description)}</small>` : ''}</span></label>`).join('');
+  return `${groupOpen(f, id)}>${head(f, id, true)}<div class="checks cols-${f.columns || 1}">${items}</div></div>`;
 }
 
 function toggle(f) {
   const id = idFor(f.path);
-  return `<div class="field" data-field="${esc(f.path)}"><label class="check" for="${id}"><input id="${id}" type="checkbox" data-path="${esc(f.path)}" data-bool${get(f.path) ? ' checked' : ''}>` +
-    `<span class="check-label">${esc(f.label)}</span></label> <span class="field-tags" data-tags="${esc(f.path)}">${tagsFor(f.path)}</span></div>`;
+  return `<div class="field wide" data-field="${esc(f.path)}"><label class="cbx" for="${id}"><input id="${id}" type="checkbox" data-path="${esc(f.path)}" data-bool${get(f.path) ? ' checked' : ''}>` +
+    `<span>${esc(f.label)} <span class="field-tags" data-tags="${esc(f.path)}">${tagsFor(f.path)}</span></span></label></div>`;
 }
 
 function cards(f) {
@@ -95,23 +98,23 @@ function cards(f) {
   const rec = f.describe === 'model' ? recommendModel()?.model : null;
   const items = f.options.map(o => {
     const checked = multi ? (value || []).includes(o.value) : value === o.value;
-    let body = `<span class="card-title">${esc(o.label)}</span>`;
+    let body = `<b>${esc(o.label)}</b>`;
     if (f.describe === 'model' && o.bestFor) {
-      body += `<span class="card-meta">Best for: ${esc(o.bestFor)}</span><span class="card-meta">For: ${esc(o.pros)} Against: ${esc(o.cons)}</span>`;
+      body += `<span>Best for: ${esc(o.bestFor)}</span><span>For: ${esc(o.pros)} Against: ${esc(o.cons)}</span>`;
     } else if (f.describe === 'framework') {
-      body += `<span class="card-status">${esc(o.status)}</span><span class="card-meta">${esc(o.bestFor)}</span>`;
+      body += `<span class="opt-status">${esc(o.status)}</span><span>${esc(o.bestFor)}</span>`;
     } else if (o.hint) {
-      body += `<span class="card-meta">${esc(o.hint)}</span>`;
+      body += `<span>${esc(o.hint)}</span>`;
     }
-    if (o.value === rec) body += '<span class="tag tag-primary card-badge">Recommended</span>';
-    return `<label class="choice${checked ? ' is-checked' : ''}"><input type="${multi ? 'checkbox' : 'radio'}" name="${esc(f.path)}" data-path="${esc(f.path)}"${multi ? ' data-multi' : ''} value="${esc(o.value)}"${checked ? ' checked' : ''}>${body}</label>`;
+    if (o.value === rec) body += '<span class="tag tag-primary">Recommended</span>';
+    return `<label class="opt"><input type="${multi ? 'checkbox' : 'radio'}" name="${esc(f.path)}" data-path="${esc(f.path)}"${multi ? ' data-multi' : ''} value="${esc(o.value)}"${checked ? ' checked' : ''}>${body}</label>`;
   }).join('');
-  let html = `<fieldset class="field${errors[f.path] ? ' has-error' : ''}" data-field="${esc(f.path)}" id="${id}">${labelRow(f, id, true)}<div class="choices">${items}</div>`;
+  let html = `${groupOpen(f, id)}>${head(f, id, true)}<div class="opts">${items}</div>`;
   if (f.other && value === 'other') {
     const oid = idFor(f.other);
-    html += `<label class="field-label small" for="${oid}">Describe your model</label><input id="${oid}" class="other-input" type="text" data-path="${esc(f.other)}" value="${esc(get(f.other))}">`;
+    html += `<label class="sr-only" for="${oid}">Describe your model</label><input id="${oid}" class="other-input" type="text" data-path="${esc(f.other)}" value="${esc(get(f.other))}" placeholder="Describe your model">`;
   }
-  return html + '</fieldset>';
+  return html + '</div>';
 }
 
 function list(f, path = f.path, label = f.label) {
@@ -120,10 +123,10 @@ function list(f, path = f.path, label = f.label) {
   const simple = !f.item.fields;
   const itemsHtml = rows.map((row, i) => {
     const rowLabel = `${label} ${i + 1}`;
-    const remove = `<button type="button" class="icon-btn" data-action="remove" data-path="${esc(path)}" data-index="${i}" aria-label="Remove ${esc(rowLabel)}">Remove</button>`;
+    const remove = `<button type="button" class="icon-btn" data-action="remove" data-path="${esc(path)}" data-index="${i}" aria-label="Remove ${esc(rowLabel)}" title="Remove">×</button>`;
     if (simple) {
       const iid = `${id}-${i}`;
-      return `<div class="row row-simple"><label class="sr-only" for="${iid}">${esc(rowLabel)}</label><input id="${iid}" type="text" data-path="${esc(path)}.${i}" value="${esc(row)}" placeholder="${esc(f.item.placeholder || '')}">${remove}</div>`;
+      return `<div class="list-row"><span class="n">${i + 1}</span><label class="sr-only" for="${iid}">${esc(rowLabel)}</label><input id="${iid}" type="text" data-path="${esc(path)}.${i}" value="${esc(row)}" placeholder="${esc(f.item.placeholder || '')}">${remove}</div>`;
     }
     const inner = f.item.fields.map(sf => {
       const iid = `${id}-${i}-${sf.key}`;
@@ -131,13 +134,13 @@ function list(f, path = f.path, label = f.label) {
       const input = sf.type === 'textarea'
         ? `<textarea id="${iid}" rows="${sf.rows || 2}" data-path="${esc(p)}">${esc(row?.[sf.key])}</textarea>`
         : `<input id="${iid}" type="text" data-path="${esc(p)}" value="${esc(row?.[sf.key])}">`;
-      return `<div class="row-field row-${sf.key}"><label class="field-label small" for="${iid}">${esc(sf.label)}</label>${input}</div>`;
+      return `<div class="row-field"><label for="${iid}">${esc(sf.label)}</label>${input}</div>`;
     }).join('');
-    return `<div class="row card">${inner}<div class="row-actions">${remove}</div></div>`;
+    return `<div class="row-card">${inner}${remove}</div>`;
   }).join('');
-  return `<fieldset class="field" data-field="${esc(path)}" data-count="${rows.length}" id="${id}">${labelRow({ ...f, path, label }, id, true)}` +
-    `<div class="rows">${itemsHtml || '<p class="field-hint">Nothing here yet.</p>'}</div>` +
-    `<button type="button" class="btn btn-ghost btn-sm" data-action="add" data-path="${esc(path)}">${esc(f.addLabel || 'Add')}</button></fieldset>`;
+  return `${groupOpen(f, id, path)} data-count="${rows.length}">${head({ ...f, path, label }, id, true)}` +
+    `<div class="list">${itemsHtml || '<p class="empty">Nothing here yet.</p>'}` +
+    `<button type="button" class="add-btn" data-action="add" data-path="${esc(path)}">+ ${esc(f.addLabel || 'Add')}</button></div></div>`;
 }
 
 const CHALLENGE_ITEM = { fields: [
@@ -153,8 +156,8 @@ function challenges(f) {
     ...PRINCIPLES.filter(p => state.principles.selected.includes(p.value)).map(p => ({ key: p.value, name: p.label })),
     ...state.principles.custom.filter(c => c.name?.trim()).map(c => ({ key: customKey(c.name), name: c.name })),
   ];
-  const body = chosen.map(p => `<div class="challenge-group"><h3>${esc(p.name)}</h3>${list({ item: CHALLENGE_ITEM, addLabel: 'Add a challenge', label: 'Challenge' }, `challenges.${p.key}`, 'Challenge')}</div>`).join('');
-  return `<section class="field challenges"><div class="field-head"><h3 class="field-label">${esc(f.label)}</h3></div><p class="field-hint">${esc(f.hint)}</p>${body || '<p class="field-hint">Select principles first.</p>'}</section>`;
+  const body = chosen.map(p => list({ item: CHALLENGE_ITEM, addLabel: 'Add a challenge', label: p.name }, `challenges.${p.key}`, p.name)).join('');
+  return `<section class="field wide group challenges"><div class="field-head"><h3>${esc(f.label)}</h3></div><div class="hint">${esc(f.hint)}</div>${body || '<p class="empty">Select principles first.</p>'}</section>`;
 }
 
 // --- Governance recommendation and org chart -----------------------------------------
@@ -177,13 +180,37 @@ export function orgChart(model, type) {
 
 function recommendation() {
   const rec = recommendModel();
-  if (!rec) return '<div class="callout"><p>Answer the questions about your organisation in step 1 to get a recommended governance model.</p></div>';
+  if (!rec) return '<div class="field wide"><p class="tip">Answer the questions under Your organisation to get a recommended governance model.</p></div>';
   const chosen = state.governance.model;
   const differs = chosen && chosen !== rec.model;
-  return `<div class="callout recommendation"><span class="eyebrow">Recommended for you</span>` +
-    `<p class="rec-model">${esc(modelLabel(rec.model))}</p><p>${esc(rec.reason)}</p>` +
+  return `<div class="field wide note"><span class="eyebrow">Recommended for you</span>` +
+    `<p class="note-title">${esc(modelLabel(rec.model))}</p><p>${esc(rec.reason)}</p>` +
     (differs ? `<p><button type="button" class="btn btn-ghost btn-sm" data-action="use-model" data-value="${esc(rec.model)}">Use the recommended model</button></p>` : '') +
-    `</div>${chosen && chosen !== 'other' ? `<div class="field"><p class="field-label">How it fits together</p>${orgChart(chosen, state.org.type)}</div>` : ''}`;
+    `</div>${chosen && chosen !== 'other' ? `<div class="field wide group"><div class="field-head"><h3>How it fits together</h3></div>${orgChart(chosen, state.org.type)}</div>` : ''}`;
+}
+
+// --- Just me: the verdict on one use --------------------------------------------------------
+
+const lowerFirst = t => (/^[A-Z][a-z]/.test(t) ? t.charAt(0).toLowerCase() + t.slice(1) : t);
+
+export function askList() {
+  return (state.me.askWho || []).filter(r => r.who?.trim()).map(r => (r.about?.trim() ? `${r.who.trim()} (${lowerFirst(r.about.trim())})` : r.who.trim()));
+}
+
+function verdict() {
+  const c = assessCheck();
+  if (!c.verdict) {
+    return `<div class="field wide"><p class="tip">${c.answered ? `${c.total - c.answered} more to answer and you get the verdict.` : 'Answer the six questions and you get a verdict: go ahead, check it, ask first or leave it.'}</p></div>`;
+  }
+  const v = VERDICTS[c.verdict];
+  const use = state.me.check.use.trim();
+  const who = askList();
+  return `<div class="field wide"><div class="callout verdict-call v-${c.verdict}" role="status">` +
+    (use ? `<span class="eyebrow">${esc(use)}</span>` : '') +
+    `<p class="v-name">${esc(v.name)}</p><p>${esc(v.lead)}</p>` +
+    (c.reasons.length ? `<ul class="dash">${c.reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul>` : '') +
+    (c.verdict === 'ask' ? `<p class="who">${who.length ? `<strong>Who you ask:</strong> ${esc(who.join(', '))}.` : 'You haven’t named anyone to ask yet. Add them under When you’re not sure.'}</p>` : '') +
+    `<p><button type="button" class="btn btn-ghost btn-sm" data-action="clear-check">Check something else</button></p></div></div>`;
 }
 
 // --- Step rendering -------------------------------------------------------------------
@@ -199,6 +226,7 @@ function renderField(f) {
     case 'list': return list(f);
     case 'challenges': return challenges(f);
     case 'recommendation': return recommendation();
+    case 'verdict': return verdict();
     default: return '';
   }
 }
@@ -208,9 +236,9 @@ export function stepFieldsHtml(step) {
   const more = step.fields.filter(f => f.more);
   const moreOpen = openMore.has(step.id) || more.some(f => errors[f.path]);
   const moreHtml = more.length
-    ? `<details class="more" data-more="${step.id}"${moreOpen ? ' open' : ''}><summary>More detail <span class="more-count">${more.length} optional ${more.length === 1 ? 'question' : 'questions'}, mostly filled in for you</span></summary><div class="more-body">${more.map(renderField).join('')}</div></details>`
+    ? `<details class="more" data-more="${step.id}"${moreOpen ? ' open' : ''}><summary>More detail <span class="more-count">${more.length} optional ${more.length === 1 ? 'question' : 'questions'}, mostly filled in for you</span></summary><div class="more-body"><div class="fields">${more.map(renderField).join('')}</div></div></details>`
     : '';
-  return main + moreHtml;
+  return `<div class="fields">${main}${moreHtml}</div>`;
 }
 
 export function trackMore(root) {
@@ -270,12 +298,13 @@ export function handleAction(btn) {
   }
   if (action === 'reset') { resetToSuggestion(path); return {}; }
   if (action === 'use-model') { edit('governance.model', value); return {}; }
+  if (action === 'clear-check') { edit('me.check', emptyCheck()); return { focus: '[data-path="me.check.use"]' }; }
   return null;
 }
 
 function listFieldFor(path) {
   if (path.startsWith('challenges.')) return { item: CHALLENGE_ITEM };
-  for (const s of STEPS) for (const f of s.fields) if (f.path === path) return f;
+  for (const s of [...STEPS, ...PERSONAL_STEPS]) for (const f of s.fields) if (f.path === path) return f;
   return null;
 }
 
@@ -299,11 +328,11 @@ export function missingRequired(step) {
 export function errorSummary(errs) {
   const entries = Object.entries(errs);
   if (!entries.length) return '';
-  return `<div class="error-summary" role="alert" tabindex="-1"><h2 class="error-title">There is a problem</h2><ul>` +
+  return `<div class="error-summary" role="alert" tabindex="-1"><h3>There is a problem</h3><ul>` +
     entries.map(([p, msg]) => `<li><a href="#${idFor(p)}" data-focus="${idFor(p)}">${esc(msg)}</a></li>`).join('') + '</ul></div>';
 }
 
-// --- Check your answers ---------------------------------------------------------------------
+// --- Your answers -----------------------------------------------------------------------------
 
 function displayValue(f) {
   const v = get(f.path);
@@ -316,7 +345,7 @@ function displayValue(f) {
   if (f.type === 'list') {
     const rows = v || [];
     if (!rows.length) return '';
-    return rows.map(r => esc(typeof r === 'string' ? r : (r.name || r.title || '(untitled)'))).join('<br>');
+    return rows.map(r => esc(typeof r === 'string' ? r : (r.name || r.title || r.who || '(untitled)'))).join('<br>');
   }
   if (f.type === 'challenges') {
     const n = Object.values(state.challenges).reduce((a, l) => a + (l?.length || 0), 0);
@@ -327,7 +356,7 @@ function displayValue(f) {
 }
 
 export function checkAnswersHtml() {
-  return STEPS.filter(s => s.fields.length && s.id !== 'start').map(step => {
+  return activeSteps().filter(s => s.fields.length && s.id !== 'start' && !s.tool).map(step => {
     const rows = step.fields.filter(f => f.path || f.type === 'challenges').map(f => {
       const value = displayValue(f);
       const missing = !value && f.required;
@@ -337,13 +366,13 @@ export function checkAnswersHtml() {
         `<dd>${value || (missing ? '<span class="missing">Not answered yet</span>' : '<span class="text-muted">Not included</span>')}</dd>` +
         `<dd class="summary-action"><a href="${href}">${value ? 'Change' : 'Add'}<span class="sr-only"> ${esc(f.label.toLowerCase())}</span></a></dd></div>`;
     }).join('');
-    return `<section class="summary-section"><h2>${esc(step.title)}</h2><dl class="summary">${rows}</dl></section>`;
+    return `<section class="summary-section"><h3>${esc(step.title)}</h3><dl class="summary">${rows}</dl></section>`;
   }).join('');
 }
 
 export function allMissing() {
   const out = [];
-  for (const step of STEPS) for (const [p, msg] of Object.entries(missingRequired(step))) out.push({ step, path: p, msg });
+  for (const step of activeSteps()) for (const [p, msg] of Object.entries(missingRequired(step))) out.push({ step, path: p, msg });
   return out;
 }
 
