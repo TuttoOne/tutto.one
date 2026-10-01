@@ -60,7 +60,6 @@ export const landing = {
       { en: "is amazing", fr: "est génial" },
       { en: "is scary", fr: "fait peur" },
       { en: "hallucinates", fr: "hallucine" },
-      { en: "only agrees with me", fr: "dit oui à tout" },
       { en: "is a sycophant", fr: "est un flatteur" },
       { en: "will steal my data", fr: "vole mes données" },
       { en: "can build anything", fr: "peut tout construire" },

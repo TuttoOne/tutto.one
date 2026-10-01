@@ -86,7 +86,7 @@ function Hero() {
 
       {/* "Claude" stays put and the rest of the line is typed out. The line never
           wraps, so the type scales with the viewport: the longest line
-          ("Claude only agrees with me", about 11.7em) has to fit a phone, and
+          ("Claude peut tout construire" in French, about 11.6em) has to fit a phone, and
           the size is capped at the old headline size from `lg` up. The second
           line is fixed. */}
       <h1 className="text-[clamp(1.3rem,7vw,3.5rem)] font-serif font-bold leading-[1.1] tracking-tight">
