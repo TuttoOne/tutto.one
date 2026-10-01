@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Quote } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import {
   ClosingCta,
@@ -10,7 +10,7 @@ import {
   Section,
 } from "@/components/product/ProductPage";
 import { SITE_TITLE, useT } from "@/lib/i18n";
-import { landing } from "@/lib/landing-copy";
+import { landing, testimonial } from "@/lib/landing-copy";
 import { praxisEconomics, price } from "@/lib/pricing";
 import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
@@ -96,31 +96,75 @@ function Hero() {
         <span className="block whitespace-nowrap">{t(landing.hero.titleSecond)}</span>
       </h1>
 
-      <div className="mt-3 max-w-2xl space-y-4">
-        <p className="text-xl text-foreground leading-relaxed sm:whitespace-pre-line">
-          {t(landing.hero.deck)}
-        </p>
-      </div>
+      {/* Two columns from `lg` up: the deck and the tracks on the left, the
+          testimonial on the right. The headline stays above both at full
+          width, because its first line is too long to share a row. Below `lg`
+          the testimonial drops under the tracks, so the buttons stay first.
 
-      {/* The two tracks. Every button on this page goes to one or the other. */}
-      <div className="mt-9 flex flex-col sm:flex-row gap-4">
-        <Link
-          href={landing.tracks.work.href}
-          className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
-        >
-          {t(landing.tracks.work.label)} <ArrowRight className="w-4 h-4" />
-        </Link>
-        <Link
-          href={landing.tracks.life.href}
-          className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
-        >
-          {t(landing.tracks.life.label)} <ArrowRight className="w-4 h-4" />
-        </Link>
+          Side by side, both columns are justified and end on the same line:
+          the grid stretches the left column to the foot of the card and the
+          spare height is shared between the deck, the buttons and the note.
+          The deck gives up its hand-set line breaks there, because a line
+          that ends on a forced break cannot be justified. */}
+      <div className="mt-3 lg:grid lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-10">
+        <div className="lg:flex lg:flex-col lg:justify-between">
+          <div className="max-w-2xl space-y-4">
+            <p className="text-xl text-foreground leading-relaxed sm:whitespace-pre-line lg:whitespace-normal lg:text-justify">
+              {t(landing.hero.deck)}
+            </p>
+          </div>
+
+          {/* The two tracks. Every button on this page goes to one or the other. */}
+          <div className="mt-9 flex flex-col sm:flex-row gap-4">
+            <Link
+              href={landing.tracks.work.href}
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-colors"
+            >
+              {t(landing.tracks.work.label)} <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href={landing.tracks.life.href}
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
+            >
+              {t(landing.tracks.life.label)} <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <p className="mt-4 max-w-xl text-sm text-muted-foreground leading-relaxed lg:text-justify">
+            {t(landing.hero.tracksNote)}
+          </p>
+        </div>
+
+        <Testimonial />
       </div>
-      <p className="mt-4 max-w-xl text-sm text-muted-foreground leading-relaxed">
-        {t(landing.hero.tracksNote)}
-      </p>
     </header>
+  );
+}
+
+/**
+ * One client, in their own words, beside the hero.
+ *
+ * `Panel`'s ground, so it reads as a note on the page rather than a third
+ * button. The only amber is the quote mark.
+ *
+ * From `lg` up it is pulled up beside the headline's second line, which is
+ * short and fixed. It stays clear of the first line, which runs wider than
+ * the column. If the second line gets longer than the left column, drop the
+ * `lg:-mt-14`. The left column stretches to the foot of the card either way.
+ */
+function Testimonial() {
+  const t = useT();
+
+  return (
+    <figure className="mt-10 lg:-mt-14 max-w-2xl bg-secondary/30 rounded-2xl border border-border p-6">
+      <Quote className="w-6 h-6 text-primary" aria-hidden="true" />
+      <blockquote className="mt-4 text-base text-foreground leading-relaxed text-justify">
+        {t(testimonial.quote)}
+      </blockquote>
+      <figcaption className="mt-5 text-sm">
+        <span className="font-medium text-foreground">{testimonial.name}</span>
+        <span className="text-muted-foreground">, {t(testimonial.place)}</span>
+      </figcaption>
+    </figure>
   );
 }
 

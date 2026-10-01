@@ -74,8 +74,9 @@ export const landing = {
       fr: "Allons-y et apprenons.",
     },
 
-    /** Six short lines. The line breaks are kept from `sm` up and dropped on
-     *  a phone, where the lines are too long to hold. */
+    /** Six short lines. The line breaks are kept on a tablet. They are dropped
+     *  on a phone, where the lines are too long to hold, and from `lg` up,
+     *  where the deck is justified beside the testimonial. */
     deck: {
       en: "We'll work with you, through\nyour systems, your tasks and your ideas.\nWe create a way of working together,\nthat you can repeat with all your AI.\nAnd if you hit a wall, we'll be there too\nto help push through, until it's right.",
       fr: "Nous travaillons avec vous, sur\nvos systèmes, vos tâches et vos idées.\nNous créons ensemble une façon de travailler,\nque vous pouvez répéter avec toutes vos IA.\nEt si vous butez sur un mur, nous serons là aussi\npour vous aider à passer, jusqu'à ce que ce soit bon.",
@@ -311,4 +312,24 @@ export const landing = {
       fr: "France, Afrique du Sud & Royaume-Uni",
     },
   },
+} as const;
+
+/**
+ * The testimonial beside the hero.
+ *
+ * It is a separate export, outside `landing`, on purpose: the copy editor and
+ * its word count walk `landing`, and these are a client's words. They are not
+ * ours to edit in the browser and they do not come out of the 400-word budget,
+ * for the same reason the client names don't.
+ *
+ * The English is what Michael wrote, word for word. The French is a
+ * translation. Change either only if he sends a new one.
+ */
+export const testimonial = {
+  quote: {
+    en: "I'd been standing on the threshold of AI for a while, frustrated and unsure where to even begin. Daniel changed that fast. His teaching is clear, patient and down to earth, and he has a real knack for making something that feels complicated seem simple. Within a short time I was up and running with my own local setup, and today I use the method every single day. If you've been wondering where to start, start with Tutto.",
+    fr: "J'étais depuis un moment au seuil de l'IA, frustré et sans savoir par où commencer. Daniel a changé ça, et vite. Son enseignement est clair, patient et terre à terre, et il a un vrai talent pour rendre simple ce qui paraît compliqué. En peu de temps, ma propre installation locale tournait, et aujourd'hui j'utilise la méthode tous les jours. Si vous vous demandez par où commencer, commencez par Tutto.",
+  },
+  name: "Michael",
+  place: { en: "Malmö", fr: "Malmö" },
 } as const;
