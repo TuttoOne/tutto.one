@@ -849,16 +849,16 @@ Sources: Aygalic Jara, "Hallucinations: Harvesting Uncertainty", lightning talk 
   },
   {
     // Written up from Céline Chantry-Daron's talk on AI bias, gender and
-    // diversity (Toulouse, 2 Oct 2026). Filed as a draft. Source notes are in
-    // blog/Who is missing from the room/. Check the spelling of her name (it
-    // comes from an automatic transcript) before publishing.
+    // diversity (Toulouse, 2 Oct 2026). Published 2 Oct 2026 on Daniel's go.
+    // Source notes are in blog/Who is missing from the room/. Her name comes
+    // from an automatic transcript, so the spelling is unconfirmed.
     slug: "who-is-missing-from-the-room",
     title: "Who is missing from the room?",
     excerpt: "In Toulouse this morning, Céline Chantry-Daron showed how a gap in the data ends up as a wrong decision on a screen. Medicine makes it easy to see. The same thing happens in any company where a few people build the second brain for everyone else.",
     date: "Oct 2, 2026",
     readTime: "6 min read",
     introCard: null,
-    published: false,
+    published: true,
     content: `A Saturday, 6pm. A woman of 52, in good health, arrives at A&E with heavy fatigue, nausea and pain between her shoulder blades. The software that helps with the decision calculates her cardiovascular risk. 12%, low. The doctor thinks stomach, prescribes an antacid and sends her home. Six hours later she has a heart attack.
 
 That is how Céline Chantry-Daron opened her talk in Toulouse this morning. She is a scientific director in MedTech, and she told us straight away that the story is made up but it could happen today. Nearly one woman in two under 60 who has a heart attack doesn't get the symptoms we all know from films, the chest pain that runs down the left arm. Those are the symptoms seen in men, and they are the ones the medical records describe best.
@@ -1232,10 +1232,11 @@ export async function seedBlogPostsIfEmpty() {
     console.log("Added the replay link to the webinar recap.");
   }
 
-  // One-off: the bias post was seeded before its two visuals existed, and
-  // seeding never touches an existing row. Add the markers after their
-  // paragraphs if the live draft has none yet. Once they are in, or the
-  // paragraphs have been reworded in /admin, this does nothing.
+  // One-off: the bias post was first seeded as a draft, before its two visuals
+  // existed, and seeding never touches an existing row. If the live row is
+  // still that first draft (no markers yet), add the markers after their
+  // paragraphs and publish it. Once the markers are in this does nothing, so a
+  // later unpublish in /admin sticks.
   const biasPost = await storage.getBlogPostBySlug(BIAS_SLUG);
   if (biasPost && !biasPost.content.includes("[VISUAL:")) {
     let content = biasPost.content;
@@ -1243,8 +1244,8 @@ export async function seedBlogPostsIfEmpty() {
       content = content.replace(`${anchor}\n`, `${anchor}\n\n[VISUAL:${visual}]\n`);
     }
     if (content !== biasPost.content) {
-      await storage.updateBlogPost(BIAS_SLUG, { content });
-      console.log("Added the visuals to the bias post.");
+      await storage.updateBlogPost(BIAS_SLUG, { content, published: true });
+      console.log("Added the visuals to the bias post and published it.");
     }
   }
 
