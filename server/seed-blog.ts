@@ -879,6 +879,8 @@ Medicine sheds a bright light on this because the cost is a person. But her next
 
 Amazon, 2015 to 2018: a CV sorting tool trained on ten years of mostly male applications marked women down. Skin cancer models trained on light skin do worse on dark skin. Face recognition got 0.8% of light-skinned men wrong and 34.7% of dark-skinned women (the Gender Shades study at MIT, 2018).
 
+[VISUAL:not-an-isolated-case]
+
 And the people building these systems look a lot like the data. 89% of AI researchers are men. You don't test for a case you never imagined.
 
 The two quick fixes people suggest don't hold up either. Take the gender column out, and the postcode, the job, the income and the medical history still carry it, and now you can't measure the gap at all. Correct the data, and you still don't know it worked if all you look at is the average. A model can look excellent overall and be wrong for the same group of people every time.
@@ -904,6 +906,8 @@ Then set goals, write down what good work looks like and verify that what you've
 Céline's three questions for tomorrow morning fit here too. If you build a system, break the results down by group and ask who it works least well for. If you buy one, ask who it was validated on, what its limits are and which uses are excluded. If you decide, ask who signs, who can say no and who is responsible when the system gets it wrong.
 
 There is a deadline as well. Her slide on the AI Act: transparency obligations already apply since 2 August 2026, high-risk systems in employment, education and credit follow on 2 December 2027, and AI inside regulated products such as some medical devices on 2 August 2028. Anything you design today will be in use by then, so you build compliance in from the design.
+
+[VISUAL:ai-act-deadlines]
 
 And it pays. She quoted research showing diverse tech teams earn 45% of their revenue from innovation, against 26% for teams where everyone is alike.
 
@@ -1172,6 +1176,12 @@ const DEFAULT_ABOUT_HERO_JSON = JSON.stringify({
   sub: "Most people I meet already use AI, and it saves them nothing: ask, fix, ask again. I don't have all the answers. I've stopped waiting for them, and I teach what works: the rules, the standard, what to hand over, then the build.",
 });
 
+const BIAS_SLUG = "who-is-missing-from-the-room";
+const BIAS_VISUAL_ANCHORS = [
+  ["(the Gender Shades study at MIT, 2018).", "not-an-isolated-case"],
+  ["so you build compliance in from the design.", "ai-act-deadlines"],
+] as const;
+
 type SeedPost = (typeof BLOG_SEED_DATA)[number];
 
 async function createSeedPost(post: SeedPost) {
@@ -1220,6 +1230,22 @@ export async function seedBlogPostsIfEmpty() {
       content: webinar.content.replace("\n[VIDEO:]\n", `\n[VIDEO:${WEBINAR_REPLAY_URL}]\n`),
     });
     console.log("Added the replay link to the webinar recap.");
+  }
+
+  // One-off: the bias post was seeded before its two visuals existed, and
+  // seeding never touches an existing row. Add the markers after their
+  // paragraphs if the live draft has none yet. Once they are in, or the
+  // paragraphs have been reworded in /admin, this does nothing.
+  const biasPost = await storage.getBlogPostBySlug(BIAS_SLUG);
+  if (biasPost && !biasPost.content.includes("[VISUAL:")) {
+    let content = biasPost.content;
+    for (const [anchor, visual] of BIAS_VISUAL_ANCHORS) {
+      content = content.replace(`${anchor}\n`, `${anchor}\n\n[VISUAL:${visual}]\n`);
+    }
+    if (content !== biasPost.content) {
+      await storage.updateBlogPost(BIAS_SLUG, { content });
+      console.log("Added the visuals to the bias post.");
+    }
   }
 
   // Seed default site content if not yet stored

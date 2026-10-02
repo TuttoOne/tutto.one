@@ -21,6 +21,8 @@ La médecine éclaire vivement le sujet parce que le coût, c'est une personne. 
 
 Amazon, de 2015 à 2018 : un outil de tri de CV entraîné sur dix ans de candidatures majoritairement masculines pénalisait les femmes. Les modèles de détection du cancer de la peau entraînés sur peaux claires sont moins performants sur peaux foncées. La reconnaissance faciale se trompait pour 0,8 % des hommes à peau claire et pour 34,7 % des femmes à peau foncée (l'étude Gender Shades au MIT, 2018).
 
+[VISUAL:not-an-isolated-case]
+
 Et les personnes qui construisent ces systèmes ressemblent beaucoup aux données. 89 % des chercheurs en IA sont des hommes. On ne teste pas un cas qu'on n'a jamais imaginé.
 
 Les deux corrections rapides que l'on propose ne tiennent pas non plus. Retirez la colonne genre : le code postal, la profession, les revenus et l'historique médical la portent toujours, et vous ne pouvez plus du tout mesurer l'écart. Corrigez les données : vous ne savez toujours pas si cela a marché tant que vous ne regardez que la moyenne. Un modèle peut sembler excellent dans l'ensemble et se tromper chaque fois pour le même groupe de personnes.
@@ -46,6 +48,8 @@ Ensuite, fixez des objectifs, écrivez ce qu'est un bon travail et vérifiez que
 Les trois questions de Céline pour demain matin ont leur place ici. Si vous construisez un système, déclinez les résultats par groupe et demandez-vous pour qui il fonctionne le moins bien. Si vous en achetez un, demandez sur quelle population il a été validé, quelles sont ses limites et quels usages sont exclus. Si vous décidez, demandez qui signe, qui peut dire non et qui porte la responsabilité quand le système se trompe.
 
 Il y a aussi une échéance. Sa diapositive sur l'AI Act : les obligations de transparence s'appliquent déjà depuis le 2 août 2026, les systèmes à haut risque dans l'emploi, l'éducation et le crédit suivent le 2 décembre 2027, et l'IA intégrée à des produits réglementés, dont certains dispositifs médicaux, le 2 août 2028. Tout ce que vous concevez aujourd'hui sera en service d'ici là, donc la conformité se construit dès la conception.
+
+[VISUAL:ai-act-deadlines]
 
 Et c'est rentable. Elle a cité une étude montrant que les équipes tech diverses tirent 45 % de leurs revenus de l'innovation, contre 26 % pour les équipes homogènes.
 

@@ -374,6 +374,64 @@ function DecisionModelPitfalls() {
   );
 }
 
+function BiasNotIsolated() {
+  const tr = usePageTr(BLOG_VISUALS_FR);
+  const cases = [
+    { sector: "Recruitment", figure: "10 years", text: "of mostly male CVs trained Amazon's sorting tool. It marked women's applications down (2015 to 2018)." },
+    { sector: "Dermatology", figure: "Light skin", text: "is what skin cancer models learned from. They do worse on dark skin (Daneshjou et al., 2021)." },
+    { sector: "Face recognition", figure: "0.8% and 34.7%", text: "The error rate for light-skinned men and for dark-skinned women (Gender Shades, MIT, 2018)." },
+    { sector: "Diagnosis", figure: "22%", text: "of cases where GPT-4o was less accurate for women, across 10,000 clinical prompts (2025 study)." },
+  ];
+  return (
+    <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-6 not-prose">
+      <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-5">{tr("Four sectors, the same gap in the data")}</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {cases.map((c) => (
+          <div key={c.sector} className="rounded-xl border border-border/60 bg-background/60 p-4">
+            <p className="text-xs font-mono uppercase tracking-wider text-primary mb-2">{tr(c.sector)}</p>
+            <p className="text-2xl font-serif font-bold text-foreground mb-1">{tr(c.figure)}</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">{tr(c.text)}</p>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-muted-foreground mt-5 italic">{tr("Figures as presented by Céline Chantry-Daron, Toulouse, 2 October 2026.")}</p>
+    </div>
+  );
+}
+
+function AiActDeadlines() {
+  const tr = usePageTr(BLOG_VISUALS_FR);
+  const steps = [
+    { date: "2 August 2026", title: "Transparency", text: "Obligations for certain AI systems and for content generated or changed by AI (Article 50).", live: true },
+    { date: "2 December 2026", title: "End of the transition", text: "Article 50(2) for systems already on the market, and the new prohibitions in Article 5.", live: false },
+    { date: "2 December 2027", title: "High risk, Annex III", text: "Biometrics, critical infrastructure, education, employment, essential services including credit, law enforcement, migration and justice.", live: false },
+    { date: "2 August 2028", title: "High risk, Annex I", text: "AI built into products that are already regulated, including some medical devices.", live: false },
+  ];
+  return (
+    <div className="my-8 rounded-2xl border border-border/60 bg-secondary/20 p-6 not-prose">
+      <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-5">{tr("AI Act: the next deadlines")}</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {steps.map((s) => (
+          <div
+            key={s.date}
+            className={`rounded-xl border p-4 ${s.live ? "border-primary/50 bg-primary/10" : "border-border/60 bg-background/60"}`}
+          >
+            <p className={`text-xl font-serif font-bold mb-1 ${s.live ? "text-primary" : "text-foreground"}`}>{tr(s.date)}</p>
+            {s.live && (
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50 border border-green-200 rounded-full px-2.5 py-0.5 mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />{tr("Already applies")}</span>
+            )}
+            <p className="text-sm font-semibold text-foreground">{tr(s.title)}</p>
+            <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{tr(s.text)}</p>
+          </div>
+        ))}
+      </div>
+      <p className="text-sm font-medium text-foreground mt-5">{tr("Compliance is built in from the design, long before the date it applies.")}</p>
+      <p className="text-xs text-muted-foreground mt-2 italic">{tr("Dates from the speaker's slide: Article 113 of the AI Act, as amended by Regulation (EU) 2026/1744 of 8 July 2026 (the Digital Omnibus on AI).")}</p>
+    </div>
+  );
+}
+
 const VISUALS: Record<string, Record<string, React.ReactNode>> = {
   "legalrag-on-premise-ai": {
     "legalrag-architecture": <LegalRagArchitectureDiagram />,
@@ -392,6 +450,10 @@ const VISUALS: Record<string, Record<string, React.ReactNode>> = {
     "four-kinds-of-tool": <FourKindsOfTool />,
     "sme-fit-map": <SmeFitMap />,
     "pitfalls": <DecisionModelPitfalls />,
+  },
+  "who-is-missing-from-the-room": {
+    "not-an-isolated-case": <BiasNotIsolated />,
+    "ai-act-deadlines": <AiActDeadlines />,
   },
 };
 

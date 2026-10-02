@@ -150,4 +150,49 @@ export const BLOG_VISUALS_FR: FrDict = {
     "Figez la version exacte et refaites vos tests avant de passer à la suivante.",
   "Based on TypeSafe's published notes on where Jev 1.13 is weak, and on our own practice.":
     "D'après les notes publiées par TypeSafe sur les points faibles de Jev 1.13, et notre propre pratique.",
+
+  // Bias: not an isolated case
+  "Four sectors, the same gap in the data": "Quatre secteurs, le même manque dans les données",
+  Recruitment: "Recrutement",
+  Dermatology: "Dermatologie",
+  "Face recognition": "Reconnaissance faciale",
+  Diagnosis: "Diagnostic",
+  "10 years": "10 ans",
+  "Light skin": "Peaux claires",
+  "0.8% and 34.7%": "0,8 % et 34,7 %",
+  "22%": "22 %",
+  "of mostly male CVs trained Amazon's sorting tool. It marked women's applications down (2015 to 2018).":
+    "de CV majoritairement masculins ont entraîné l'outil de tri d'Amazon. Il pénalisait les candidatures féminines (2015 à 2018).",
+  "is what skin cancer models learned from. They do worse on dark skin (Daneshjou et al., 2021).":
+    "c'est sur elles que les modèles de détection du cancer de la peau ont appris. Ils sont moins performants sur peaux foncées (Daneshjou et al., 2021).",
+  "The error rate for light-skinned men and for dark-skinned women (Gender Shades, MIT, 2018).":
+    "Le taux d'erreur pour les hommes à peau claire et pour les femmes à peau foncée (Gender Shades, MIT, 2018).",
+  "of cases where GPT-4o was less accurate for women, across 10,000 clinical prompts (2025 study).":
+    "des cas où GPT-4o était moins précis pour les femmes, sur 10 000 prompts cliniques (étude de 2025).",
+  "Figures as presented by Céline Chantry-Daron, Toulouse, 2 October 2026.":
+    "Chiffres présentés par Céline Chantry-Daron, Toulouse, 2 octobre 2026.",
+
+  // Bias: AI Act deadlines
+  "AI Act: the next deadlines": "AI Act : les prochaines échéances",
+  "2 August 2026": "2 août 2026",
+  "2 December 2026": "2 décembre 2026",
+  "2 December 2027": "2 décembre 2027",
+  "2 August 2028": "2 août 2028",
+  "Already applies": "Déjà applicable",
+  Transparency: "Transparence",
+  "End of the transition": "Fin de la transition",
+  "High risk, Annex III": "Haut risque, annexe III",
+  "High risk, Annex I": "Haut risque, annexe I",
+  "Obligations for certain AI systems and for content generated or changed by AI (Article 50).":
+    "Obligations pour certains systèmes d'IA et pour les contenus générés ou modifiés par IA (article 50).",
+  "Article 50(2) for systems already on the market, and the new prohibitions in Article 5.":
+    "Article 50(2) pour les systèmes déjà sur le marché, et les nouvelles interdictions de l'article 5.",
+  "Biometrics, critical infrastructure, education, employment, essential services including credit, law enforcement, migration and justice.":
+    "Biométrie, infrastructures critiques, éducation, emploi, services essentiels dont le crédit, forces de l'ordre, migration et justice.",
+  "AI built into products that are already regulated, including some medical devices.":
+    "IA intégrée à des produits déjà réglementés, dont certains dispositifs médicaux.",
+  "Compliance is built in from the design, long before the date it applies.":
+    "La conformité se construit dès la conception, bien avant la date d'application.",
+  "Dates from the speaker's slide: Article 113 of the AI Act, as amended by Regulation (EU) 2026/1744 of 8 July 2026 (the Digital Omnibus on AI).":
+    "Dates tirées de la diapositive de l'intervenante : article 113 de l'AI Act, tel que modifié par le règlement (UE) 2026/1744 du 8 juillet 2026 (le Digital Omnibus on AI).",
 };
