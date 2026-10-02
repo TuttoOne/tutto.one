@@ -924,6 +924,85 @@ Things are moving quickly, but we are still early. We must build this future tog
 Sources: Céline Chantry-Daron, talk on AI bias, gender and diversity, Toulouse, 2 October 2026. I worked from an automatic transcript and two photos of her slides, so her words are paraphrased and the figures are the ones she presented. Studies named on her slides: Gender Shades (Buolamwini and Gebru, MIT, 2018) and Daneshjou et al. (2021). The part about second brains and what a team can do is mine.`,
   },
   {
+    // How-to on writing an AI charter through a Café IA, from a session on
+    // Café IA in Occitanie (Toulouse, 28 Sep 2026) and cafeia.org. Published
+    // 2 Oct 2026 on Daniel's go. Source notes are in
+    // blog/A conversation with some structure/.
+    // It links to /ai-charter, which is otherwise link-only.
+    slug: "a-conversation-with-some-structure",
+    title: "A conversation with some structure",
+    excerpt: "Every association and organisation that uses AI should write down how. With the Café IA method that takes an hour, a circle of chairs and a few good questions. Here is how to run one and turn it into your AI charter, with tips for getting moving.",
+    date: "Oct 2, 2026",
+    readTime: "7 min read",
+    introCard: null,
+    published: true,
+    content: `"I can trust AI."
+
+That was the first statement put to a room in Toulouse on Monday. Hands up if you disagree completely: most of the room. Hands up if you're not sure: a few. Hands up if you agree: two people.
+
+Then the hosts asked people why. One man said it sometimes does something other than what he asked, so he can't trust it until he has set the rules it works within. Someone else said trust means knowing where an answer comes from, and sometimes the source turns out to be one stranger on a Reddit thread. Another man said it's a very good companion for understanding a problem and he would never let it decide for him. Someone who had hesitated said it depends on the subject. For her work she finds it reliable. For questions about health she isn't sure.
+
+Twenty minutes, no slides. If you had been taking notes, you would have the first half of an AI policy: set the frame before you start, check the sources, a person makes the decision and take extra care with health.
+
+That is a Café IA. It's just a conversation with some structure, and I think every association and organisation should run one.
+
+## What Café IA is
+
+Café IA started in 2024 at France's Conseil national du numérique and is now hosted by the Direction générale des entreprises at the Ministry of the Economy. In its own words, it is a moment where people learn, experiment and debate so they can decide how they use digital tools "with, without or on AI". A session lasts an hour to an hour and a half. The method, the games and the guides are all free on [cafeia.org](https://cafeia.org/).
+
+Monday's session was about Occitanie, where a group of partners including the Sicoval and the Haute-Garonne department has been running pilot cafés. The Sicoval has held about twenty since the start of the year: in a neighbourhood association, in the town hall of a small commune with ten residents round the table, with its own staff and at an after-work where people from small businesses compared notes with people from large ones.
+
+The speakers kept coming back to one idea. AI shouldn't stay a matter for experts. Everyone should understand enough to say what they want, what they don't want and what they will do with it. They also see that people who have tried it and understood how it works are much less afraid of it.
+
+## Why write it down
+
+In the teams I work with, people already use AI. The rules exist, but they live in each person's head and they are all different. One person pastes client emails into ChatGPT, another won't touch it and nobody has said which of them is right.
+
+A charter settles that. Café IA has a page on [designing your AI charter](https://cafeia.org/concevoir-sa-charte-de-lia/), and we used it as the basis for our own charter tool, together with Capgemini's Code of Ethics for AI and the EU guidelines for trustworthy AI. Its argument is simple. A charter written by one person in an office is disconnected from what happens on the ground. A charter written with the people it affects, including the ones who disagree, is better accepted and better applied because it describes their work.
+
+The same page quotes an analysis from the Centre d'études de l'emploi et du travail: fewer than 1 in 1,000 French company agreements signed between 2017 and 2024 mention AI. So if you haven't written yours down, you are in good company. We are still early.
+
+If only a few people write the rules, everyone else's view is left out. That is the problem I wrote about in [Who is missing from the room?](/blog/who-is-missing-from-the-room), and a Café IA is the most practical answer to it I have found.
+
+## How to run one
+
+1. Decide what the charter covers. Café IA lists five kinds: how individuals use AI, a service you offer to others, your overall position, how you build AI systems and how you govern them. For a first one, pick how people use AI in their daily work.
+2. Invite the people it affects. Between 4 and 20, and mix them on purpose: the keen ones, the sceptics, people who have never opened it, someone who can approve the result and your staff representatives if you have them.
+3. Book an hour, or an hour and a half if you are more than 15. You need chairs in a circle, sticky notes, pens and a wall.
+4. Set the frame (5 to 10 minutes). Say why you are there and that there are no right or wrong answers. Go round the circle with one easy question, such as "AI in one word?".
+5. Let everyone think alone (5 to 10 minutes). One idea per sticky note: a use, a fear, a question, something they saw this week. One colour for what helps and another for what worries them.
+6. Talk (30 minutes). People read out their notes and the others react. You group the notes on the wall by theme and make sure the people who haven't spoken get a turn. Write down where people disagree.
+7. Close with what happens next (5 to 10 minutes). Sum up what you heard, name who writes the first draft and set the date the group sees it.
+8. Write the draft within the week. The themes on the wall become the sections: what AI is for here, the principles you hold to, who decides and who to ask, what you commit to and when you look at it again.
+9. Bring it back to the same people, change what they tell you to change, then share it with everyone it covers.
+
+Steps 4 to 7 are Café IA's own recipe, which they call the [recette inratable](https://cafeia.org/recette-inratable/), the one that can't go wrong.
+
+For step 8 we built a tool. The [AI charter wizard](/ai-charter) asks those questions in order, suggests a starting point from your type and size of organisation and ends with a charter you can download and come back to. There is a "Just me" version too, for freelancers and peer groups.
+
+## Tips for getting moving
+
+- You don't need to be an AI expert to host. Café IA says so itself. Your job is to pass the conversation round, and you can say "I don't know, let's find out".
+- Open with statements and a show of hands. The three used on Monday were "I can trust AI", "AI is creative" and "AI serves the environmental transition".
+- Keep the words vague on purpose. Someone on Monday objected that nobody had defined "creative". The host said that was deliberate. Working out what each of you means is the conversation.
+- If people are shy, hand out roles. Half the room defends AI and half attacks it, so nobody has to own an opinion in front of their manager.
+- Bring real work. "Can I put a member's file into ChatGPT?" gets you further than "What about ethics?".
+- Go to where people are. In Occitanie the cafés are moving out of libraries and into everyday places, with partners like SNCF and La Poste. In a company that means the workshop floor and the shift handover as well as the meeting room.
+- Keep the first version to one page. You will learn more from using it for three months than from polishing it.
+- Put a review date on it. The tools, the law and your organisation will all change.
+- Start small if you have to. Three people over lunch is a Café IA. Their own advice is "L'essentiel, c'est de se lancer": the main thing is to start.
+
+## We can do the first one together
+
+The host closed Monday's session by telling the room to go and have this conversation with the people around them, because that is how we stay human.
+
+In Praxis, setting the rules is the first thing a team does, before we build anything. This is how we do it. If you would like help with your first one, in your team, your association or your peer group, reach out. I'd be glad to host it with you.
+
+---
+
+Sources: a session on Café IA in Occitanie, Toulouse, 28 September 2026. I worked from an automatic transcript, so the speakers and the people in the room are paraphrased. From [cafeia.org](https://cafeia.org/): [C'est quoi exactement Café IA ?](https://cafeia.org/cest-quoi-cafe-ia/), [Concevoir sa charte de l'IA](https://cafeia.org/concevoir-sa-charte-de-lia/), [La recette inratable](https://cafeia.org/recette-inratable/), [Organiser un Café IA en 4 étapes](https://cafeia.org/organiser-un-cafe-ia-en-4-etapes/) and [Organiser un Café IA au travail](https://cafeia.org/organiser-un-cafe-ia-au-travail). Steps 1, 2, 8 and 9 and the link from sticky notes to charter sections are how we work at Tutto.`,
+  },
+  {
     slug: WEBINAR_SLUG,
     title: "Start the new season with Claude: webinar recap",
     excerpt: "Connectors, projects, skills and routines, demonstrated live on a real business case. The steps, the prompts to copy, and an FAQ that completes the answers we gave during the session.",

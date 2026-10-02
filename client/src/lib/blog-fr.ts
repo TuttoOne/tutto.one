@@ -104,4 +104,11 @@ export const BLOG_FR: Record<string, BlogFr> = {
     date: "2 octobre 2026",
     readTime: "6 min de lecture",
   },
+  "a-conversation-with-some-structure": {
+    title: "Une conversation avec un peu de structure",
+    excerpt:
+      "Chaque association et chaque organisation qui utilise l'IA devrait écrire comment. Avec la méthode Café IA, il suffit d'une heure, d'un cercle de chaises et de quelques bonnes questions. Voici comment en organiser un et en tirer votre charte IA, avec des conseils pour se lancer.",
+    date: "2 octobre 2026",
+    readTime: "7 min de lecture",
+  },
 };
