@@ -848,6 +848,78 @@ If your team is at the "check everything" stage, the free 60-minute session is t
 Sources: Aygalic Jara, "Hallucinations: Harvesting Uncertainty", lightning talk at [dotAI 2026](https://www.dotai.io/), Paris, 17 September 2026. I worked from an automatic transcript of the talk, so his words are paraphrased rather than quoted. The comparison with Praxis is mine, not his.`,
   },
   {
+    // Written up from Céline Chantry-Daron's talk on AI bias, gender and
+    // diversity (Toulouse, 2 Oct 2026). Filed as a draft. Source notes are in
+    // blog/Who is missing from the room/. Check the spelling of her name (it
+    // comes from an automatic transcript) before publishing.
+    slug: "who-is-missing-from-the-room",
+    title: "Who is missing from the room?",
+    excerpt: "In Toulouse this morning, Céline Chantry-Daron showed how a gap in the data ends up as a wrong decision on a screen. Medicine makes it easy to see. The same thing happens in any company where a few people build the second brain for everyone else.",
+    date: "Oct 2, 2026",
+    readTime: "6 min read",
+    introCard: null,
+    published: false,
+    content: `A Saturday, 6pm. A woman of 52, in good health, arrives at A&E with heavy fatigue, nausea and pain between her shoulder blades. The software that helps with the decision calculates her cardiovascular risk. 12%, low. The doctor thinks stomach, prescribes an antacid and sends her home. Six hours later she has a heart attack.
+
+That is how Céline Chantry-Daron opened her talk in Toulouse this morning. She is a scientific director in MedTech, and she told us straight away that the story is made up but it could happen today. Nearly one woman in two under 60 who has a heart attack doesn't get the symptoms we all know from films, the chest pain that runs down the left arm. Those are the symptoms seen in men, and they are the ones the medical records describe best.
+
+## Nothing was broken
+
+The part I want to keep from her talk is this. The low score was the system working. AI has no intention and no prejudice. It does what it is built to do, which is work on the data we give it.
+
+She walked through where the gap gets in, and it is long before the algorithm. Women's symptoms were studied less in the real world. So women were diagnosed later or differently. That is what the records show. Those records become the labels a model learns from, what data scientists call the ground truth. Then someone picks a single threshold, tuned on the whole population. Then a number appears on a screen, and it has authority because it was calculated.
+
+She called it a product bug. The code is fine. The product was built on data that leaves people out.
+
+Two figures from her slides stayed with me. A 2025 study put 10,000 clinical prompts to GPT-4o, all based on real patient cases. In 22% of them the diagnosis was less accurate for women. And in 93% of the conditions studied, women were under-represented in the training data.
+
+## It shows up everywhere
+
+Medicine sheds a bright light on this because the cost is a person. But her next slide was titled "And this is not an isolated case".
+
+Amazon, 2015 to 2018: a CV sorting tool trained on ten years of mostly male applications marked women down. Skin cancer models trained on light skin do worse on dark skin. Face recognition got 0.8% of light-skinned men wrong and 34.7% of dark-skinned women (the Gender Shades study at MIT, 2018).
+
+And the people building these systems look a lot like the data. 89% of AI researchers are men. You don't test for a case you never imagined.
+
+The two quick fixes people suggest don't hold up either. Take the gender column out, and the postcode, the job, the income and the medical history still carry it, and now you can't measure the gap at all. Correct the data, and you still don't know it worked if all you look at is the average. A model can look excellent overall and be wrong for the same group of people every time.
+
+## The same thing is happening in your company
+
+This is where it comes home for me. We are all building now. Second brains, scripts that assess our data, small applications for one job, in our businesses and in our personal lives.
+
+In the teams I work with it usually starts with a few people. A few people get trained, a few people use it and those same few supply the files, the notes and the examples that everything else is built on. What goes into the company's second brain is their view of how the company works.
+
+So what about all the people who aren't taking part? The person who answers the phone and knows why customers leave. The person in the workshop who knows which step in the process nobody follows. If they are not in it, their perspective is left out. The likely outcome is the one Céline described: a picture of the company that misrepresents it, and errors that look right because a machine produced them.
+
+Nobody decides to do that. It happens because the tool works on what it is given. So it's up to us to make sure perspectives are not left out of what we build, in the same way that bias has already been noted in the models.
+
+## What to do about it
+
+We encourage as much inclusion, discussion and exploration as possible, in a way that is safe for both the business and the individual.
+
+First, learn. Part of learning is to define what acceptable use looks like for you, then refine it, write it down and keep checking that the definition still fits.
+
+Then set goals, write down what good work looks like and verify that what you've built works without disrupting the systems you already have in place. That last check is a job for your IT department, or for an outside agency if you don't have one.
+
+Céline's three questions for tomorrow morning fit here too. If you build a system, break the results down by group and ask who it works least well for. If you buy one, ask who it was validated on, what its limits are and which uses are excluded. If you decide, ask who signs, who can say no and who is responsible when the system gets it wrong.
+
+There is a deadline as well. Her slide on the AI Act: transparency obligations already apply since 2 August 2026, high-risk systems in employment, education and credit follow on 2 December 2027, and AI inside regulated products such as some medical devices on 2 August 2028. Anything you design today will be in use by then, so you build compliance in from the design.
+
+And it pays. She quoted research showing diverse tech teams earn 45% of their revenue from innovation, against 26% for teams where everyone is alike.
+
+## We are still early
+
+Her talk was about women, who are half of humanity and still treated as a minority in AI. She was clear the reasoning goes further: people with disabilities, people from other backgrounds, patients, users, the people who do the job every day.
+
+She closed with an image. AI is a mirror. It reflects the data we feed it and the choices of the people who build it. For it to reflect all of humanity, all of humanity has to be in the room.
+
+Things are moving quickly, but we are still early. We must build this future together, and it's key that we don't leave any perspectives out. If this is a question in your team or your peer group, reach out. I'd be glad to help.
+
+---
+
+Sources: Céline Chantry-Daron, talk on AI bias, gender and diversity, Toulouse, 2 October 2026. I worked from an automatic transcript and two photos of her slides, so her words are paraphrased and the figures are the ones she presented. Studies named on her slides: Gender Shades (Buolamwini and Gebru, MIT, 2018) and Daneshjou et al. (2021). The part about second brains and what a team can do is mine.`,
+  },
+  {
     slug: WEBINAR_SLUG,
     title: "Start the new season with Claude: webinar recap",
     excerpt: "Connectors, projects, skills and routines, demonstrated live on a real business case. The steps, the prompts to copy, and an FAQ that completes the answers we gave during the session.",

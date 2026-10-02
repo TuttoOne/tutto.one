@@ -97,4 +97,11 @@ export const BLOG_FR: Record<string, BlogFr> = {
     date: "24 septembre 2026",
     readTime: "6 min de lecture",
   },
+  "who-is-missing-from-the-room": {
+    title: "Qui manque dans la pièce ?",
+    excerpt:
+      "À Toulouse ce matin, Céline Chantry-Daron a montré comment un manque dans les données finit en mauvaise décision sur un écran. La médecine le rend facile à voir. La même chose arrive dans toute entreprise où quelques personnes construisent le second cerveau pour toutes les autres.",
+    date: "2 octobre 2026",
+    readTime: "6 min de lecture",
+  },
 };

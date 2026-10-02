@@ -28,6 +28,7 @@ import { post as anthropicLaborMarketResearch } from "./anthropic-labor-market-r
 import { post as abordeTaRentreeIaAvecClaude } from "./aborde-ta-rentree-ia-avec-claude";
 import { post as theModelThatOnlyDecides } from "./the-model-that-only-decides";
 import { post as theMapNeverSaidItWasntSure } from "./the-map-never-said-it-wasnt-sure";
+import { post as whoIsMissingFromTheRoom } from "./who-is-missing-from-the-room";
 
 export const POST_FR: Record<string, PostFr> = {
   "the-best-combination": theBestCombination,
@@ -41,4 +42,5 @@ export const POST_FR: Record<string, PostFr> = {
   "aborde-ta-rentree-ia-avec-claude": abordeTaRentreeIaAvecClaude,
   "the-model-that-only-decides": theModelThatOnlyDecides,
   "the-map-never-said-it-wasnt-sure": theMapNeverSaidItWasntSure,
+  "who-is-missing-from-the-room": whoIsMissingFromTheRoom,
 };
