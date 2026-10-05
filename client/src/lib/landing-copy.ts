@@ -81,16 +81,16 @@ export const landing = {
 
     /** The third line: the answer to the fear, and what we do about it. */
     titleThird: {
-      en: "It's still early.\nLet's start together.",
-      fr: "Il est encore tôt.\nAllons-y ensemble.",
+      en: "It's still early.\nGet ahead together.",
+      fr: "Il est encore tôt.\nPrenons de l'avance.",
     },
 
     /** The first paragraph of the deck: why the reader would want in. The
      *  technology is new and seems complex, their own work and life are what
      *  they know best, and a small group gets from the one to the other. */
     deck: {
-      en: "AI is new and it can seem complex, but your work, your interests and your life are something you know inside out. That's where we start. We do it in a small group through rich conversations and worked examples. At the end, you'll be able to navigate all of it and create anything you can describe.",
-      fr: "L'IA est nouvelle et peut sembler complexe, mais votre travail, vos centres d'intérêt et votre vie, vous les connaissez sur le bout des doigts. C'est par là que nous commençons. Nous le faisons en petit groupe, par des conversations riches et des exemples concrets. À la fin, vous saurez vous y retrouver et créer tout ce que vous savez décrire.",
+      en: "AI is new and it can seem complex, but your work, your interests and your life are something you know inside out. That's where we start. First we set up your AI around what you know. Then we build on that setup together, in a small group, through rich conversations and worked examples. At the end, you'll be able to navigate all of it and create anything you can describe.",
+      fr: "L'IA est nouvelle et peut sembler complexe, mais votre travail, vos centres d'intérêt et votre vie, vous les connaissez sur le bout des doigts. C'est par là que nous commençons. D'abord, nous configurons votre IA autour de ce que vous connaissez. Ensuite, nous construisons sur cette base ensemble, en petit groupe, par des conversations riches et des exemples concrets. À la fin, vous saurez vous y retrouver et créer tout ce que vous savez décrire.",
     },
 
     /** The second paragraph of the deck: how the teaching works. We teach,
