@@ -90,9 +90,7 @@ async function loadDashboard(student: Student) {
     .orderBy(asc(cohortSessions.startsAt));
   const progress = await db.select().from(studentProgress).where(eq(studentProgress.studentId, student.id));
   const programme = getProgramme(cohort.programmeKey);
-  const isDraft = cohort.status === "draft";
-
-  const modules: ModuleView[] = isDraft ? [] : (programme?.modules ?? []).map((m) => {
+  const modules: ModuleView[] = (programme?.modules ?? []).map((m) => {
     const s = sessions.find((x) => x.moduleNumber === m.number && !x.isSpare);
     const p = progress.find((x) => x.moduleNumber === m.number);
     return {
@@ -112,9 +110,9 @@ async function loadDashboard(student: Student) {
       programmeName: programme?.name ?? cohort.name,
       timezone: cohort.timezone,
       sessionMinutes: cohort.sessionMinutes,
-      meetUrl: isDraft ? null : cohort.meetUrl,
+      meetUrl: cohort.meetUrl,
     },
-    spares: isDraft ? [] : sessions.filter((s) => s.isSpare).map((s) => ({ startsAt: s.startsAt.toISOString(), endsAt: s.endsAt.toISOString() })),
+    spares: sessions.filter((s) => s.isSpare).map((s) => ({ startsAt: s.startsAt.toISOString(), endsAt: s.endsAt.toISOString() })),
     modules,
   };
 }
@@ -211,7 +209,7 @@ export function registerLearnRoutes(app: Express) {
       // Someone in two cohorts gets the most recent one.
       const student = matches.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())[0];
       if (student) {
-        // A draft cohort can still sign in: the dashboard tells them it opens once we've been paid.
+        // A draft cohort (not paid yet) can still sign in and see the programme, read-only.
         const [cohort] = await db.select().from(cohorts).where(eq(cohorts.id, student.cohortId));
         if (cohort) {
           const token = await issueToken(student.id, SIGN_IN_MINUTES);
@@ -287,7 +285,7 @@ export function registerLearnRoutes(app: Express) {
   app.put("/api/learn/progress/:module", requireStudent, async (req, res) => {
     try {
       const [cohort] = await db.select({ status: cohorts.status }).from(cohorts).where(eq(cohorts.id, req.student!.cohortId));
-      if (cohort?.status === "draft") return res.status(403).json({ error: "Your programme isn't open yet." });
+      if (cohort?.status === "draft") return res.status(403).json({ error: "Your account isn't active yet." });
       const moduleNumber = z.coerce.number().int().positive().parse(req.params.module);
       const { status, practiceNote } = z.object({
         status: z.enum(["not_started", "in_progress", "done"]),

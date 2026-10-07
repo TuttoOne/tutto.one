@@ -29,7 +29,8 @@ type SeedCohort = {
 
 const SEED: SeedCohort[] = [
   {
-    // Quote 00103, signed 6 October 2026. Wednesdays 10:00 to 11:00 Milan time.
+    // Quote 00103, signed 6 October 2026; INV-0005 due 13 October. Draft (read-only
+    // dashboard) until it's paid, then set to active in admin. Wednesdays 10:00 to 11:00 Milan time.
     slug: "background-italia-2026",
     name: "Background Italia",
     organisation: "Background Italia S.r.l.",
@@ -37,7 +38,7 @@ const SEED: SeedCohort[] = [
     timezone: "Europe/Rome",
     sessionMinutes: 60,
     meetUrl: "https://meet.google.com/epd-krnx-ujn",
-    status: "active",
+    status: "draft",
     sessions: [
       { module: 1, start: "2026-10-14T10:00:00+02:00" },
       { module: 2, start: "2026-10-21T10:00:00+02:00" },
@@ -77,8 +78,8 @@ const SEED: SeedCohort[] = [
     students: [{ name: "Alex Boshoff", email: "aboshoff@me.com" }],
   },
   {
-    // Quote QUO0013536, sent 7 October 2026 and not yet signed. Draft until it is:
-    // a draft cohort can't be invited and its students can't sign in.
+    // Quote QUO0013536, sent 7 October 2026 and not yet signed. Draft until it's
+    // signed and paid: a draft cohort can't be invited and its dashboard is read-only.
     slug: "health-science-academy-2026",
     name: "Health Science Academy",
     organisation: "Health Science Academy",

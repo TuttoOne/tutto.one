@@ -83,7 +83,7 @@ type StudentView = {
 type Me = {
   student: StudentView;
   cohort: {
-    /** "draft" until we've been paid: the dashboard shows a holding screen. */
+    /** "draft" until we've been paid: the dashboard is read-only. */
     status: "draft" | "active" | "done";
     name: string;
     organisation: string | null;
@@ -278,7 +278,7 @@ function StepCard({ n, title, done, children }: { n: number; title: string; done
   );
 }
 
-function ModuleCard({ m, timezone, past }: { m: ModuleView; timezone: string; past: boolean }) {
+function ModuleCard({ m, timezone, past, locked }: { m: ModuleView; timezone: string; past: boolean; locked: boolean }) {
   const qc = useQueryClient();
   const [open, setOpen] = useState(!past && m.progress.status !== "done");
   const save = useMutation({
@@ -339,7 +339,9 @@ function ModuleCard({ m, timezone, past }: { m: ModuleView; timezone: string; pa
             </div>
           )}
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {done ? (
+            {locked ? (
+              <p style={{ margin: 0, fontSize: 13, color: MUTED }}>You can mark sessions as done once your account is active.</p>
+            ) : done ? (
               <button type="button" style={BUTTON_QUIET} onClick={() => save.mutate("in_progress")} disabled={save.isPending}>
                 Mark as not done
               </button>
@@ -373,14 +375,11 @@ export function LearnDashboard() {
     return <div style={PAGE}><Header /><div style={WRAP}><p>{error?.message ?? "Something went wrong."}</p></div></div>;
   }
 
-  if (me.cohort.status === "draft") {
-    return <NotActiveYet me={me} onSignOut={() => logout.mutate()} />;
-  }
-
   const now = Date.now();
   const next = me.modules.find((m) => m.session && new Date(m.session.endsAt).getTime() > now);
   const doneCount = me.modules.filter((m) => m.progress.status === "done").length;
   const profileDone = !!me.student.profileCompletedAt;
+  const notActive = me.cohort.status === "draft";
   const first = me.student.name.split(" ")[0];
 
   return (
@@ -394,6 +393,16 @@ export function LearnDashboard() {
         <p style={{ margin: "0 0 32px", fontSize: 16, lineHeight: 1.6, color: MUTED }}>
           Everything for your sessions is here: the dates, what we cover each time, the reading and a short task in between.
         </p>
+
+        {notActive && (
+          <div style={{ ...CARD, borderColor: AMBER, marginBottom: 32 }}>
+            <span style={{ ...CAPS, fontSize: 10, color: AMBER, display: "block", marginBottom: 8 }}>Account status</span>
+            <h2 style={H2}>Your account isn't active yet</h2>
+            <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: MUTED }}>
+              It opens as soon as we've received payment. Until then you can look through the sessions and fill in your profile, and you'll be able to tick sessions off once it's active.
+            </p>
+          </div>
+        )}
 
         {/* Next session */}
         <div style={{ background: INK, color: BG, borderRadius: 10, padding: 24, marginBottom: 32 }}>
@@ -462,6 +471,7 @@ export function LearnDashboard() {
               m={m}
               timezone={me.cohort.timezone}
               past={!!m.session && new Date(m.session.endsAt).getTime() < now}
+              locked={notActive}
             />
           ))}
         </div>
@@ -474,35 +484,6 @@ export function LearnDashboard() {
         <div style={{ marginTop: 48, paddingTop: 24, borderTop: `1px solid ${RULE}`, display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 13, color: MUTED }}>
           <span>Questions? Email <a href="mailto:daniel@tutto.one" style={{ color: INK }}>daniel@tutto.one</a></span>
           <button type="button" onClick={() => logout.mutate()} style={{ background: "none", border: 0, color: MUTED, cursor: "pointer", fontSize: 13, textDecoration: "underline" }}>
-            Sign out
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** A student whose cohort is still a draft: signed in, but nothing opens until we've been paid. */
-function NotActiveYet({ me, onSignOut }: { me: Me; onSignOut: () => void }) {
-  const first = me.student.name.split(" ")[0];
-  return (
-    <div style={PAGE}>
-      <Header />
-      <div style={WRAP}>
-        <span style={{ ...CAPS, fontSize: 11, color: AMBER }}>
-          {me.cohort.programmeName}{me.cohort.organisation ? ` · ${me.cohort.organisation}` : ""}
-        </span>
-        <h1 style={{ ...H1, marginTop: 8 }}>Hi {first}</h1>
-        <div style={{ ...CARD, marginTop: 24 }}>
-          <span style={{ ...CAPS, fontSize: 10, color: MUTED, display: "block", marginBottom: 8 }}>Account status</span>
-          <h2 style={H2}>Your account isn't active yet</h2>
-          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: MUTED }}>
-            It opens as soon as we've received payment. Then you'll find your dates, what we cover in each session and your profile here. We'll email you when it's ready.
-          </p>
-        </div>
-        <div style={{ marginTop: 48, paddingTop: 24, borderTop: `1px solid ${RULE}`, display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 13, color: MUTED }}>
-          <span>Questions? Email <a href="mailto:daniel@tutto.one" style={{ color: INK }}>daniel@tutto.one</a></span>
-          <button type="button" onClick={onSignOut} style={{ background: "none", border: 0, color: MUTED, cursor: "pointer", fontSize: 13, textDecoration: "underline" }}>
             Sign out
           </button>
         </div>
@@ -542,10 +523,6 @@ export function LearnProfile() {
   const qc = useQueryClient();
   const { data: me } = useMe();
   const [form, setForm] = useState<ProfileForm | null>(null);
-
-  useEffect(() => {
-    if (me?.cohort.status === "draft") navigate("/learn/dashboard", { replace: true });
-  }, [me, navigate]);
 
   useEffect(() => {
     if (me && !form) {
