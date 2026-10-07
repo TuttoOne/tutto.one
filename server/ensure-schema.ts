@@ -19,3 +19,74 @@ export async function ensureSchema(): Promise<void> {
     sql`ALTER TABLE contact_submissions ADD COLUMN IF NOT EXISTS trainer_code text`,
   );
 }
+
+/**
+ * The /learn tables. Created here rather than by db:push for the same reason
+ * as the column above: nothing else would create them in production.
+ */
+export async function ensureLearnSchema(): Promise<void> {
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS cohorts (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    slug text NOT NULL UNIQUE,
+    name text NOT NULL,
+    organisation text,
+    programme_key text NOT NULL,
+    timezone text NOT NULL DEFAULT 'Europe/London',
+    session_minutes integer NOT NULL DEFAULT 90,
+    meet_url text,
+    language text NOT NULL DEFAULT 'en',
+    status text NOT NULL DEFAULT 'draft',
+    created_at timestamp NOT NULL DEFAULT now()
+  )`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS cohort_sessions (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    cohort_id integer NOT NULL,
+    module_number integer,
+    starts_at timestamptz NOT NULL,
+    ends_at timestamptz NOT NULL,
+    title_override text,
+    status text NOT NULL DEFAULT 'scheduled',
+    is_spare boolean NOT NULL DEFAULT false
+  )`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS students (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    cohort_id integer NOT NULL,
+    name text NOT NULL,
+    email text NOT NULL,
+    job_title text,
+    linkedin_url text,
+    background text,
+    current_accounts text,
+    task_to_bring text,
+    setup_notes text,
+    alt_contact_name text,
+    alt_contact_email text,
+    alt_contact_phone text,
+    about_blurb text,
+    invited_at timestamp,
+    profile_completed_at timestamp,
+    last_login_at timestamp,
+    created_at timestamp NOT NULL DEFAULT now()
+  )`);
+  await db.execute(
+    sql`CREATE UNIQUE INDEX IF NOT EXISTS students_cohort_email_idx ON students (cohort_id, email)`,
+  );
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS student_progress (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    student_id integer NOT NULL,
+    module_number integer NOT NULL,
+    status text NOT NULL DEFAULT 'not_started',
+    practice_note text,
+    updated_at timestamp NOT NULL DEFAULT now()
+  )`);
+  await db.execute(
+    sql`CREATE UNIQUE INDEX IF NOT EXISTS student_progress_student_module_idx ON student_progress (student_id, module_number)`,
+  );
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS login_tokens (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    student_id integer NOT NULL,
+    token_hash text NOT NULL UNIQUE,
+    expires_at timestamp NOT NULL,
+    used_at timestamp
+  )`);
+}

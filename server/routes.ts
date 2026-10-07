@@ -4,19 +4,11 @@ import path from "path";
 import { storage } from "./storage";
 import { insertContactSubmissionSchema, insertEmailLeadSchema } from "@shared/schema";
 import { z } from "zod";
-import { Resend } from "resend";
-import { registerAdminRoutes } from "./admin-routes";
+import { registerAdminRoutes, requireAdmin } from "./admin-routes";
 import { enquiryMessageHtml, escapeHtml } from "./email/enquiry-message";
+import { getResend } from "./email/resend";
+import { registerLearnRoutes } from "./learn-routes";
 
-// Constructed lazily. `new Resend(undefined)` throws, and at module scope that
-// crashes the whole server at import time in any environment without the key
-// set — including local development.
-let _resend: Resend | null = null;
-function getResend(): Resend | null {
-  if (!process.env.RESEND_API_KEY) return null;
-  if (!_resend) _resend = new Resend(process.env.RESEND_API_KEY);
-  return _resend;
-}
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
 const FROM_EMAIL = "Tutto <notifications@tutto.one>";
 
@@ -125,8 +117,8 @@ export async function registerRoutes(
     }
   });
 
-  // Get all contact submissions (for admin view - would add auth in production)
-  app.get("/api/contact", async (req, res) => {
+  // Every enquiry ever sent, names and emails included, so admin only.
+  app.get("/api/contact", requireAdmin, async (req, res) => {
     try {
       const submissions = await storage.getAllContactSubmissions();
       res.json(submissions);
@@ -288,6 +280,9 @@ export async function registerRoutes(
 
   // Register admin routes
   registerAdminRoutes(app);
+
+  // Student sign-in, dashboard and the admin side of cohorts (/learn)
+  registerLearnRoutes(app);
 
   return httpServer;
 }

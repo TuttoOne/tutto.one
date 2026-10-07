@@ -7,7 +7,8 @@ import { serveStatic } from "./static";
 import { guardPythiaDemo } from "./pythia-demo";
 import { createServer } from "http";
 import { seedBlogPostsIfEmpty } from "./seed-blog";
-import { ensureSchema } from "./ensure-schema";
+import { ensureSchema, ensureLearnSchema } from "./ensure-schema";
+import { seedLearnCohorts } from "./seed-learn";
 import { clearStalePortfolioOverride } from "./cleanup-portfolio-override";
 
 const app = express();
@@ -83,6 +84,15 @@ app.use((req, res, next) => {
     console.error("Failed to ensure the database schema:", err);
   }
 
+  // The /learn tables and the first cohorts. Separate from ensureSchema so a
+  // failure here can't stop the enquiry forms' column from being added.
+  try {
+    await ensureLearnSchema();
+    await seedLearnCohorts();
+  } catch (err) {
+    console.error("Failed to set up the learn tables:", err);
+  }
+
   // Seed blog posts on startup if empty
   try {
     await seedBlogPostsIfEmpty();
@@ -97,6 +107,13 @@ app.use((req, res, next) => {
   } catch (err) {
     console.error("Failed to check the portfolio override:", err);
   }
+
+  // Student pages are private: keep them out of search whichever handler
+  // ends up serving the SPA shell.
+  app.use(["/learn", "/api/learn"], (_req, res, next) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    next();
+  });
 
   await registerRoutes(httpServer, app);
 

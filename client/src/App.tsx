@@ -41,6 +41,9 @@ import GtmOrchestrator from "@/pages/gtm-orchestrator";
 import BecomeATrainer from "@/pages/become-a-trainer";
 import PeerGroups from "@/pages/peer-groups";
 import PraxisLearn from "@/pages/praxis-learn";
+// Students' private area: sign-in, dashboard and profile. Noindex, and kept
+// out of the nav and the WebMCP site index.
+import { LearnLogin, LearnAuth, LearnDashboard, LearnProfile } from "@/pages/learn";
 import AdminDashboard from "@/pages/admin-dashboard";
 import AdminLogin from "@/pages/admin-login";
 import AdminSetup from "@/pages/admin-setup";
@@ -106,6 +109,10 @@ function Router() {
         <Route path="/peer-groups" component={PeerGroups} />
         <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
         <Route path="/praxis/learn/:course" component={PraxisLearn} />
+        <Route path="/learn" component={LearnLogin} />
+        <Route path="/learn/auth" component={LearnAuth} />
+        <Route path="/learn/dashboard" component={LearnDashboard} />
+        <Route path="/learn/profile" component={LearnProfile} />
         <Route path="/admin" component={AdminDashboard} />
         <Route path="/admin/login" component={AdminLogin} />
         <Route path="/admin/setup" component={AdminSetup} />

@@ -18,7 +18,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Plus, Pencil, Trash2, ArrowLeft, LogOut, FileText, Layout, Wrench, ExternalLink } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, LogOut, FileText, Layout, Wrench, ExternalLink, GraduationCap } from "lucide-react";
+import { StudentsSection } from "@/components/admin/StudentsSection";
 import type { BlogPost } from "@shared/schema";
 import { SELECTABLE_PRICES, type PriceKey } from "@/lib/pricing";
 import { DEFAULT_SERVICES, type ServiceItem } from "@/lib/services-content";
@@ -847,6 +848,10 @@ export default function AdminDashboard() {
               <Layout className="w-4 h-4 mr-2" />
               Site Content
             </TabsTrigger>
+            <TabsTrigger data-testid="tab-students" value="students">
+              <GraduationCap className="w-4 h-4 mr-2" />
+              Students
+            </TabsTrigger>
             <TabsTrigger data-testid="tab-tools" value="tools">
               <Wrench className="w-4 h-4 mr-2" />
               Tools
@@ -859,6 +864,10 @@ export default function AdminDashboard() {
 
           <TabsContent value="content">
             <SiteContentSection />
+          </TabsContent>
+
+          <TabsContent value="students">
+            <StudentsSection />
           </TabsContent>
 
           <TabsContent value="tools">

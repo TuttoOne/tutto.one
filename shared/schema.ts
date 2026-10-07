@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, boolean as pgBoolean } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, boolean as pgBoolean, uniqueIndex } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -111,4 +111,109 @@ export const messages = pgTable("messages", {
   role: text("role").notNull(),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+// ── Learn: cohorts, students and their progress ──────────────────────────────
+//
+// The modules themselves are not in the database. They live in
+// shared/learn-programmes.ts, keyed by `programmeKey`, so the copy is edited
+// like the rest of the site. A cohort only carries what is particular to one
+// client: its dates, its timezone, its call link.
+//
+// Deploys don't run db:push, so every table here is also created in
+// server/ensure-schema.ts.
+
+export const cohorts = pgTable("cohorts", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  slug: text("slug").notNull().unique(),
+  name: text("name").notNull(),
+  organisation: text("organisation"),
+  programmeKey: text("programme_key").notNull(),
+  timezone: text("timezone").notNull().default("Europe/London"),
+  sessionMinutes: integer("session_minutes").notNull().default(90),
+  meetUrl: text("meet_url"),
+  language: text("language").notNull().default("en"),
+  /** draft: set up, nobody contacted yet. active: running. done: finished. */
+  status: text("status").notNull().default("draft"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type Cohort = typeof cohorts.$inferSelect;
+
+export const cohortSessions = pgTable("cohort_sessions", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  cohortId: integer("cohort_id").notNull(),
+  /** Which module this session teaches. Null for a spare date. */
+  moduleNumber: integer("module_number"),
+  startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
+  endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
+  /** The client's own wording for this session, if it differs from the programme's. */
+  titleOverride: text("title_override"),
+  /** scheduled, done or moved. */
+  status: text("status").notNull().default("scheduled"),
+  isSpare: pgBoolean("is_spare").notNull().default(false),
+});
+
+export type CohortSession = typeof cohortSessions.$inferSelect;
+
+export const students = pgTable("students", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  cohortId: integer("cohort_id").notNull(),
+  name: text("name").notNull(),
+  /** Stored lower-case. Unique within a cohort, so one person can join two. */
+  email: text("email").notNull(),
+  jobTitle: text("job_title"),
+  linkedinUrl: text("linkedin_url"),
+  background: text("background"),
+  currentAccounts: text("current_accounts"),
+  taskToBring: text("task_to_bring"),
+  setupNotes: text("setup_notes"),
+  altContactName: text("alt_contact_name"),
+  altContactEmail: text("alt_contact_email"),
+  altContactPhone: text("alt_contact_phone"),
+  /** Written by us after reading the profile. Never shown to other students. */
+  aboutBlurb: text("about_blurb"),
+  invitedAt: timestamp("invited_at"),
+  profileCompletedAt: timestamp("profile_completed_at"),
+  lastLoginAt: timestamp("last_login_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, (t) => [uniqueIndex("students_cohort_email_idx").on(t.cohortId, t.email)]);
+
+export type Student = typeof students.$inferSelect;
+
+/** What a student may change about themselves. Everything else is ours. */
+export const studentProfileSchema = z.object({
+  name: z.string().trim().min(1).max(200),
+  jobTitle: z.string().trim().max(200).optional().default(""),
+  linkedinUrl: z.string().trim().max(500).optional().default(""),
+  background: z.string().trim().max(5000).optional().default(""),
+  currentAccounts: z.string().trim().max(1000).optional().default(""),
+  taskToBring: z.string().trim().max(3000).optional().default(""),
+  setupNotes: z.string().trim().max(2000).optional().default(""),
+  altContactName: z.string().trim().max(200).optional().default(""),
+  altContactEmail: z.string().trim().max(200).optional().default(""),
+  altContactPhone: z.string().trim().max(100).optional().default(""),
+});
+
+export type StudentProfile = z.infer<typeof studentProfileSchema>;
+
+export const studentProgress = pgTable("student_progress", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  studentId: integer("student_id").notNull(),
+  moduleNumber: integer("module_number").notNull(),
+  /** not_started, in_progress or done. */
+  status: text("status").notNull().default("not_started"),
+  practiceNote: text("practice_note"),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (t) => [uniqueIndex("student_progress_student_module_idx").on(t.studentId, t.moduleNumber)]);
+
+export type StudentProgress = typeof studentProgress.$inferSelect;
+
+export const loginTokens = pgTable("login_tokens", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  studentId: integer("student_id").notNull(),
+  /** sha256 of the token in the link. The token itself is never stored. */
+  tokenHash: text("token_hash").notNull().unique(),
+  expiresAt: timestamp("expires_at").notNull(),
+  usedAt: timestamp("used_at"),
 });
