@@ -263,7 +263,7 @@ const STATUS_LABEL: Record<ProgressStatus, string> = {
 };
 
 // The scoping worksheet from the discovery session. Opened with ?card=, it saves to the student's account.
-const WORKSHEET = "/courses/trainer/scoping-worksheet.html";
+const WORKSHEET = "/use-case-card";
 
 function StepCard({ n, title, done, children }: { n: number; title: string; done?: boolean; children: React.ReactNode }) {
   return (

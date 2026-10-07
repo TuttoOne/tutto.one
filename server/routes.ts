@@ -278,6 +278,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "handover-list", "index.html"));
   });
 
+  // Praxis use case card (the T1 scoping worksheet): same arrangement, link only, not indexed.
+  // Opened from /learn with ?card=, it saves to the student's account.
+  app.get(["/use-case-card", "/use-case-card/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "use-case-card", "index.html"));
+  });
+
   // Register admin routes
   registerAdminRoutes(app);
 

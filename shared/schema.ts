@@ -211,7 +211,7 @@ export type StudentProgress = typeof studentProgress.$inferSelect;
 
 /**
  * A student's use case cards: each one is a whole scoping worksheet
- * (client/public/courses/trainer/scoping-worksheet.html), saved as the page keeps it.
+ * (client/public/use-case-card/index.html, served at /use-case-card), saved as the page keeps it.
  * `title` is the card's sentence, or the task, so lists don't have to open the JSON.
  */
 export const useCaseCards = pgTable("use_case_cards", {

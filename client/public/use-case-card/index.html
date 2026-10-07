@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Choose one real work task step by step and finish with your use case card, ready to print or save as a PDF.">
+<meta name="robots" content="noindex,nofollow">
+<title>Use Case Card · Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/use-case-card/praxis.css">
+<style>
+/* A step-by-step wizard for the T1 discovery session. Same look and pattern as
+   /agent-scorecard. The answers fill in the four-page A4 worksheet, adapted
+   from Roxanne Northover's Claude Academy scoping worksheet. */
+[hidden]:not([hidden=until-found i]){display:none!important}
+/* Theme bridge: Praxis uses .dark/.light, the artifact viewer stamps data-theme */
+:root{--good:145 42% 31%;--warn:44 88% 36%;--bad:4 68% 46%}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--good:145 40% 55%;--warn:44 85% 55%;--bad:4 75% 65%}}
+:root[data-theme="light"]{
+  --background:40 10% 98%;--foreground:0 0% 12%;--card:0 0% 100%;--card-foreground:0 0% 12%;
+  --muted:40 5% 90%;--muted-foreground:220 9% 46%;--border:220 13% 91%;
+  --good:145 42% 31%;--warn:44 88% 36%;--bad:4 68% 46%}
+:root[data-theme="dark"]{
+  --background:20 14% 4%;--foreground:40 10% 98%;--card:20 14% 8%;--card-foreground:40 10% 98%;
+  --muted:20 14% 12%;--muted-foreground:220 9% 60%;--border:20 14% 16%;
+  --good:145 40% 55%;--warn:44 85% 55%;--bad:4 75% 65%}
+body{background:hsl(var(--background));color:hsl(var(--foreground))}
+.shell{max-width:84rem;margin:0 auto;padding-inline:20px;padding-block:20px 72px}
+p{max-width:44rem}
+
+/* header */
+.topbar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;padding-bottom:var(--space-4);border-bottom:1px solid hsl(var(--border))}
+.topbar .left{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.topbar .meta{font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+.topbar .meta a{color:hsl(var(--muted-foreground))}
+.topbar .right{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.startfrom{display:flex;align-items:center;gap:8px;font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+.startfrom select{width:auto}
+.hero{padding-block:var(--space-10) var(--space-8)}
+.hero h1{font-size:clamp(2rem,4.5vw,3rem);margin:0 0 var(--space-4);line-height:1.08}
+.hero h1 em{font-family:var(--font-editorial);font-weight:400;font-style:italic}
+.hero .lead{margin:0}
+.admin-banner{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:var(--space-3) var(--space-4);border:1px dashed hsl(var(--border));border-radius:var(--radius);margin-top:var(--space-6);font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+
+/* controls */
+input,textarea,select{font:inherit;font-size:var(--text-sm);color:hsl(var(--foreground));background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:var(--radius-sm);padding:9px 11px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:64px;line-height:1.5}
+input::placeholder,textarea::placeholder{color:hsl(var(--muted-foreground))}
+input:focus,textarea:focus,select:focus{outline:none;border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--primary)/.15)}
+:focus-visible{outline:2px solid hsl(var(--primary));outline-offset:2px}
+button{font:inherit}
+.btn{font-size:var(--text-sm);padding:9px 18px}
+.btn-sm{padding:6px 12px;font-size:var(--text-sm)}
+.icon-btn{border:1px solid transparent;background:transparent;color:hsl(var(--muted-foreground));border-radius:var(--radius-sm);width:34px;height:38px;font-size:18px;line-height:1;flex:none;cursor:pointer}
+.icon-btn:hover{color:hsl(var(--bad));border-color:hsl(var(--border))}
+.add-btn{align-self:flex-start;border:1px dashed hsl(var(--border));background:transparent;color:hsl(var(--primary));border-radius:var(--radius-sm);padding:7px 12px;font-size:var(--text-sm);font-weight:500;cursor:pointer}
+.add-btn:hover{border-color:hsl(var(--primary))}
+.field label,.field .lbl{display:block;font-weight:600;font-size:var(--text-sm);margin-bottom:6px}
+.field .hint{font-size:var(--text-xs);color:hsl(var(--muted-foreground));margin-top:5px;line-height:1.45}
+.field.wide{grid-column:1/-1}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 22px}
+.list{display:flex;flex-direction:column;gap:8px}
+.list-row{display:flex;gap:6px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips button{border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:999px;padding:5px 12px;font-size:var(--text-xs);color:hsl(var(--muted-foreground));cursor:pointer}
+.chips button:hover{border-color:hsl(var(--primary));color:hsl(var(--primary))}
+.seg{display:inline-flex;border:1px solid hsl(var(--border));border-radius:999px;padding:3px;background:hsl(var(--card));flex:none}
+.seg button{border:0;background:transparent;border-radius:999px;padding:6px 14px;font:500 var(--text-sm)/1 var(--font-sans);color:hsl(var(--muted-foreground));cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:hsl(var(--foreground));color:hsl(var(--background))}
+
+/* layout */
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr) 300px;gap:28px;align-items:start}
+@media (max-width:1180px){.layout{grid-template-columns:210px minmax(0,1fr)}.aside{grid-column:1/-1;position:static!important}}
+@media (max-width:800px){.layout{grid-template-columns:minmax(0,1fr)}}
+
+/* step rail */
+.rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.rail li{margin:0}
+.rail button{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;padding:10px 10px;border-radius:var(--radius-sm);border:0;background:transparent;color:hsl(var(--foreground));text-align:left;cursor:pointer}
+.rail button:hover{background:hsl(var(--muted)/.6)}
+.rail button[aria-current="step"]{background:hsl(var(--card));box-shadow:var(--shadow-sm)}
+.rail .num{font:300 var(--text-xs)/1 var(--font-display);letter-spacing:var(--tracking-wider);color:hsl(var(--muted-foreground))}
+.rail button[aria-current="step"] .num{color:hsl(var(--primary));font-weight:500}
+.rail .t{display:block;font-weight:500;font-size:var(--text-sm);line-height:1.3}
+.rail .ok{width:8px;height:8px;border-radius:50%;background:hsl(var(--border))}
+.rail .ok.on{background:hsl(var(--good))}
+@media (max-width:800px){.rail ol{flex-direction:row;overflow-x:auto;padding-bottom:6px}.rail li{flex:none}.rail button{grid-template-columns:24px auto auto;width:auto}}
+
+/* panel */
+.panel{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:var(--radius);padding:30px 32px 22px;box-shadow:var(--shadow-sm);min-width:0}
+@media (max-width:560px){.panel{padding:20px 16px 16px}}
+.panel h2{font-size:var(--text-3xl);margin:0 0 var(--space-3)}
+.panel .lead{font-size:var(--text-lg);margin-bottom:var(--space-6)}
+.panel .section-head{margin:var(--space-10) 0 var(--space-5)}
+.panel .section-head:first-child{margin-top:0}
+.tip{font-family:var(--font-editorial);font-style:italic;font-size:var(--text-base);color:hsl(var(--muted-foreground));border-left:2px solid hsl(var(--primary));padding:2px 0 2px 14px;margin:0 0 var(--space-6);max-width:44rem}
+.panel-foot{display:flex;justify-content:space-between;gap:10px;margin-top:var(--space-10);padding-top:var(--space-5);border-top:1px solid hsl(var(--border))}
+.honest{border:1px solid hsl(var(--primary)/.35);background:hsl(var(--primary)/.06);border-radius:var(--radius);padding:14px 16px;margin:var(--space-6) 0 0}
+.honest .eyebrow{margin-bottom:6px}
+.honest p{margin:0;font-size:var(--text-sm)}
+
+/* week tasks */
+.wk{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) 34px;gap:10px 12px;align-items:end;border:1px solid hsl(var(--border));border-radius:var(--radius);padding:14px 14px 16px;margin-bottom:10px;background:hsl(var(--background))}
+.wk .pain{grid-column:1/4}
+.wk .icon-btn{grid-row:1;grid-column:4}
+@media (max-width:640px){.wk{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 34px}.wk .task{grid-column:1/3}.wk .pain{grid-column:1/3}.wk .icon-btn{grid-column:3}}
+
+/* task picker */
+.goal-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:var(--space-8)}
+.goal-opt{display:flex;flex-direction:column;gap:4px;text-align:left;border:1px solid hsl(var(--border));background:hsl(var(--background));border-radius:var(--radius-sm);padding:12px 14px;cursor:pointer;color:hsl(var(--foreground))}
+.goal-opt:hover{border-color:hsl(var(--muted-foreground))}
+.goal-opt[aria-pressed="true"]{border-color:hsl(var(--primary));box-shadow:0 0 0 1px hsl(var(--primary));background:hsl(var(--primary)/.06)}
+.goal-opt b{font-weight:600;font-size:var(--text-sm)}
+.goal-opt span{font-size:var(--text-xs);color:hsl(var(--muted-foreground));line-height:1.4}
+.goal-opt[aria-pressed="true"] b::after{content:"  ✓";color:hsl(var(--primary))}
+
+/* yes / no questions */
+.q{border:1px solid hsl(var(--border));border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;background:hsl(var(--background))}
+.q-head{display:flex;justify-content:space-between;gap:12px 16px;align-items:center;flex-wrap:wrap}
+.q-head strong{display:block;font-size:var(--text-sm);font-weight:600}
+.q-head small{display:block;font-size:var(--text-xs);color:hsl(var(--muted-foreground));margin-top:2px}
+.q-head > div{flex:1 1 260px}
+.q input{margin-top:12px}
+
+/* use case sentence */
+.sentence-preview{font-family:var(--font-editorial);font-size:var(--text-xl);line-height:1.6;background:hsl(var(--primary)/.06);border:1px solid hsl(var(--primary)/.35);border-radius:var(--radius);padding:16px 18px;margin:0 0 var(--space-5);max-width:none}
+.sentence-preview .gap{color:hsl(var(--muted-foreground))}
+.sentence-preview b{font-weight:600}
+
+/* aside */
+.aside{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px}
+.aside .card{padding:18px 20px}
+.strength{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:6px}
+.strength b{font:700 var(--text-2xl)/1.1 var(--font-display)}
+.strength span{font-size:var(--text-xs);color:hsl(var(--muted-foreground))}
+.meter{display:grid;grid-auto-flow:column;gap:3px;margin:12px 0 14px}
+.meter i{height:6px;border-radius:2px;background:hsl(var(--muted))}
+.meter i.on{background:hsl(var(--primary))}
+.todo{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.todo li{margin:0}
+.todo button{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;width:100%;text-align:left;border:0;background:transparent;border-radius:var(--radius-sm);padding:6px 6px;font-size:var(--text-sm);line-height:1.4;color:hsl(var(--foreground));cursor:pointer}
+.todo button:hover{background:hsl(var(--muted)/.6)}
+.todo .mk{width:14px;height:14px;margin-top:3px;border-radius:50%;border:1.5px solid hsl(var(--muted-foreground))}
+.todo .done .mk{border-color:hsl(var(--good));background:hsl(var(--good))}
+.todo .done span:last-child{color:hsl(var(--muted-foreground))}
+.aside .privacy{font-size:var(--text-xs);color:hsl(var(--muted-foreground));margin:0}
+
+/* final step */
+.download{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:space-between;border:1px solid hsl(var(--primary)/.35);background:hsl(var(--primary)/.06);border-radius:var(--radius);padding:18px 20px;margin:0 0 var(--space-6)}
+.download h3{margin:0 0 4px;font-size:var(--text-lg)}
+.download p{margin:0;font-size:var(--text-sm);color:hsl(var(--muted-foreground))}
+.download .btns{display:flex;flex-wrap:wrap;gap:8px}
+.sheet-view{background:hsl(var(--muted)/.5);border-radius:var(--radius-sm);padding:8px;overflow:hidden}
+
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:hsl(var(--foreground));color:hsl(var(--background));padding:10px 16px;border-radius:var(--radius-sm);font-size:var(--text-sm);display:flex;gap:14px;align-items:center;z-index:10;max-width:calc(100% - 32px)}
+#toast[hidden]{display:none}
+#toast button{border:0;background:none;color:hsl(var(--background));font-weight:600;text-decoration:underline;padding:0;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- the printable worksheet: A4, three pages, always light ---------- */
+.ws{--background:40 10% 98%;--foreground:0 0% 12%;--card:0 0% 100%;--card-foreground:0 0% 12%;--muted:40 5% 90%;--muted-foreground:220 9% 46%;--border:220 13% 91%;color:hsl(var(--foreground));font-family:var(--font-sans)}
+.ws .sheet-page{width:210mm;min-height:297mm;box-sizing:border-box;margin:0 auto 12px;padding:14mm 14mm 12mm;background:#fff;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+.ws .sheet-page:last-child{margin-bottom:0}
+.ws .foot{margin-top:auto;padding-top:8mm;display:flex;justify-content:space-between;font-size:9pt;letter-spacing:var(--tracking-wider);text-transform:uppercase;color:hsl(var(--muted-foreground))}
+.ws .masthead{background:hsl(var(--foreground));color:hsl(var(--background));padding:8mm 9mm 7mm;border-radius:var(--radius);display:flex;justify-content:space-between;align-items:flex-end;gap:8mm}
+.ws .masthead .wm{font-family:var(--font-display);font-weight:var(--weight-black);letter-spacing:var(--tracking-tight);font-size:15pt}
+.ws .masthead .wm .dot{color:hsl(var(--primary))}
+.ws .masthead .kicker{display:block;margin-top:5mm;font-size:8pt;letter-spacing:var(--tracking-wider);text-transform:uppercase;color:hsl(var(--primary))}
+.ws .masthead h1{font-family:var(--font-display);font-size:24pt;margin:1mm 0 1mm;color:hsl(var(--background))}
+.ws .masthead p{margin:0;font-size:10pt;color:hsl(40 10% 80%)}
+.ws .masthead .pg{font-size:8.5pt;letter-spacing:var(--tracking-wider);color:hsl(40 8% 60%);white-space:nowrap}
+.ws .masthead.slim{padding:5mm 9mm}
+.ws .masthead.slim h1{font-size:13pt;margin:0}
+.ws h2.sec{font-family:var(--font-display);font-size:15pt;margin:6mm 0 1mm;padding-bottom:1.5mm;border-bottom:1.5px solid hsl(var(--foreground))}
+.ws h2.sec .n{font-family:var(--font-mono);font-size:9pt;color:hsl(var(--primary));margin-right:2.5mm;vertical-align:2px}
+.ws h2.sec em{font-style:normal;color:hsl(var(--primary))}
+.ws .intro{font-size:9.5pt;color:hsl(var(--muted-foreground));margin:1.5mm 0 3mm;max-width:none}
+.ws table{width:100%;border-collapse:collapse;font-size:9pt;margin:0}
+.ws th{text-align:left;font-size:7.5pt;letter-spacing:var(--tracking-wider);text-transform:uppercase;background:hsl(var(--muted)/.6);padding:2mm 2.5mm;border:1px solid hsl(var(--border))}
+.ws td{border:1px solid hsl(var(--border));padding:2mm 2.5mm;vertical-align:top}
+.ws td.fill{height:10mm}
+.ws td.tall{height:13mm}
+.ws td.lbl{width:32%;font-weight:var(--weight-semibold);background:hsl(var(--muted)/.35)}
+.ws td.lbl small{display:block;font-weight:400;color:hsl(var(--muted-foreground));margin-top:1mm}
+.ws td.hint{color:hsl(var(--muted-foreground));font-style:italic}
+.ws td.box{width:12mm;text-align:center;font-weight:700}
+.ws .v{font-family:var(--font-editorial);font-size:10pt;line-height:1.4}
+.ws tr.picked td{background:hsl(var(--primary)/.08)}
+.ws .cols{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.ws .cols .col{border:1px solid hsl(var(--border));border-radius:var(--radius-sm);min-height:52mm;padding:3mm;font-size:9pt}
+.ws .cols .col h3{margin:0 0 1.5mm;font-size:8pt;letter-spacing:var(--tracking-wider);text-transform:uppercase}
+.ws .cols .col.ai h3{color:hsl(var(--primary))}
+.ws .cols .col p{margin:0;color:hsl(var(--muted-foreground));font-style:italic;font-size:8.5pt}
+.ws .cols .col ul{margin:0;padding-left:4.5mm}
+.ws .cols .col li{margin:0 0 1mm}
+.ws .uc{border:2px solid hsl(var(--foreground));border-radius:var(--radius);overflow:hidden}
+.ws .uc .sentence{background:hsl(var(--primary)/.08);border-bottom:1px solid hsl(var(--primary)/.4);padding:5mm;font-family:var(--font-editorial);font-size:13pt;line-height:2.1;max-width:none;margin:0}
+.ws .uc .sentence u{text-decoration:none;border-bottom:1px solid hsl(var(--foreground));padding:0 1mm}
+.ws .uc .sentence u.gap{display:inline-block;min-width:38mm}
+.ws .uc table{margin:0}
+.ws .uc table td{border-left:0;border-right:0}
+#print-root{display:none}
+
+@media print{
+  @page{size:A4;margin:0}
+  body{background:#fff}
+  .shell,#toast{display:none!important}
+  #print-root{display:block}
+  .ws .sheet-page{margin:0;box-shadow:none;break-after:page;page-break-after:always}
+  .ws .sheet-page:last-child{break-after:auto;page-break-after:auto}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="left">
+      <span class="brand">Tutto<span class="dot">.</span></span>
+      <span class="meta">Praxis · Use case card</span>
+    </div>
+    <div class="right">
+      <div class="startfrom"><label for="ex-select">Start from</label><select id="ex-select"></select></div>
+    </div>
+  </header>
+  <section class="hero" id="hero"></section>
+  <div class="layout" id="layout">
+    <nav class="rail" aria-label="Steps"><ol id="nav"></ol></nav>
+    <main id="panel" class="panel" aria-live="polite"></main>
+    <aside class="aside" id="aside"></aside>
+  </div>
+</div>
+<div id="toast" role="status" hidden></div>
+<div id="print-root" class="ws"></div>
+
+<datalist id="often-list"><option value="Daily"><option value="A few times a week"><option value="Weekly"><option value="Every two weeks"><option value="Monthly"><option value="Quarterly"></datalist>
+
+<script>
+/* ---------- reference data ---------- */
+const STEPS=[
+  {id:'you',title:'About you'},
+  {id:'week',title:'What eats your week'},
+  {id:'task',title:'Pick one task'},
+  {id:'test',title:'Test the task'},
+  {id:'split',title:'Split the work'},
+  {id:'risk',title:'Quick risk check'},
+  {id:'success',title:'What success looks like'},
+  {id:'card',title:'Your use case card'},
+  {id:'sheet',title:'Your worksheet'}
+];
+/* Section 03: [check, what to note] */
+const CHECKS=[
+  ['I can describe the task in one or two sentences.','If not, narrow it.'],
+  ['The inputs and the expected output are reasonably clear.','Vague in, vague out.'],
+  ['I do this often enough for an improvement to matter.','One-off tasks are harder to learn from.'],
+  ['A person can review the result before it’s used.','Accountability stays with a person.'],
+  ['The task isn’t mainly a high-stakes decision.','Start with help on the work, leave the final call to people.'],
+  ['I can tell what “good” looks like.','You need a quality target.']
+];
+/* Section 05: [question, short name for the trainer's notes] */
+const RISKS=[
+  ['Confidential, personal or commercially sensitive information','Sensitive information'],
+  ['Financial figures, exact calculations, dates or citations that must be right','Figures that must be right'],
+  ['A legal, HR, safety, regulatory or other high-stakes decision','High-stakes decision'],
+  ['Communication with customers or the public that could affect your reputation','Customer or public communication'],
+  ['A result that’s hard to check independently','Hard to check'],
+  ['An action AI should never take without a person’s approval','Needs a person’s approval']
+];
+const AI_CHIPS=['Summarise','Compare','Sort','Extract','Draft','Reformat','Brainstorm','Spot patterns'];
+const ME_CHIPS=['Give the business context','Check facts and figures','Decide','Approve','Handle the exceptions','Take responsibility'];
+const SUCCESS=[
+  ['today','Today','This task takes or needs…','e.g. 2 hours every Monday, and I still make copying mistakes'],
+  ['target','Target','With AI, I’d like to…','e.g. Have a draft in 20 minutes that I check and send'],
+  ['quality','Quality bar','The output is good enough when…','e.g. The totals match the till report'],
+  ['checks','Checks','Before I use it, I’ll check…','e.g. Every figure against the source export'],
+  ['value','Value','If this works, we get…','e.g. Most of Monday morning back']
+];
+const CARD=[
+  ['why','Why this task?','It’s worth improving because today it…'],
+  ['ai','What AI does','AI could help by…'],
+  ['me','What I do','I still provide, check, decide or approve…'],
+  ['checks','Checks and safeguards','Before I use the result, I will…'],
+  ['success','Success looks like','I’ll know this is useful when…'],
+  ['first','First experiment','The smallest version I can test is…']
+];
+const TRAINER=[
+  ['risks','Risk flags to carry into the charter',''],
+  ['measure','Success measure to carry into the scorecard',''],
+  ['systems','Systems and files it touches','Feeds the provider choice']
+];
+
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone=o=>JSON.parse(JSON.stringify(o));
+const today=()=>new Date().toISOString().slice(0,10);
+const clean=a=>a.map(x=>String(x).trim()).filter(Boolean);
+const has=v=>!!String(v??'').trim();
+const lcFirst=s=>{s=String(s||'').trim();return /^(?!I\b)[A-Z](?![A-Z])/.test(s)?s[0].toLowerCase()+s.slice(1):s;};
+const fmtDate=d=>{if(!d)return '';const t=new Date(d+'T12:00:00');return isNaN(t)?d:t.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});};
+const row=()=>({task:'',often:'',time:'',pain:''});
+
+function blank(){
+  return {sample:false,
+    who:{name:'',role:'',date:today(),group:''},
+    week:[row(),row(),row()],pick:-1,
+    task:{sentence:'',trigger:'',inputs:'',output:'',reviewer:'',judgement:''},
+    checks:CHECKS.map(()=>({a:'',note:''})),
+    split:{ai:[''],me:['']},
+    risks:RISKS.map(()=>({a:'',guard:''})),
+    success:{today:'',target:'',quality:'',checks:'',value:''},
+    card:{when:'',need:'',using:'',produce:'',why:'',ai:'',me:'',checks:'',success:'',first:''},
+    trainer:{risks:'',measure:'',systems:''}};
+}
+function example(){
+  const s=blank();s.sample=true;
+  s.who={name:'Sam Carter',role:'Operations manager',date:today(),group:'Group B'};
+  s.week=[
+    {task:'Chasing suppliers for delivery dates',often:'Daily',time:'40 min',pain:'The details are spread across emails and the order spreadsheet.'},
+    {task:'Weekly sales summary for the directors',often:'Weekly',time:'2 hours',pain:'Copying figures from three exports into one sheet, and it’s easy to slip.'},
+    {task:'Answering routine customer questions about orders',often:'Daily',time:'1 hour',pain:'The same questions every day, and I have to look up each order.'},
+    {task:'Writing up meeting notes and actions',often:'A few times a week',time:'30 min',pain:'My notes are scrappy and actions get lost.'}];
+  s.pick=1;
+  s.task={sentence:'Turn the three Monday exports into the weekly sales summary the directors read.',trigger:'Monday morning, once the weekend’s sales are in',
+    inputs:'Till system export, web shop export, last week’s summary and the directors’ template',output:'A one-page summary with totals, the top lines and three things to look at',
+    reviewer:'The two directors, at the Tuesday meeting',judgement:'Picking the three things worth their attention, and spotting figures that look wrong'};
+  s.checks=[{a:'yes',note:''},{a:'yes',note:''},{a:'yes',note:'Every Monday'},{a:'yes',note:'I read it before it goes'},{a:'yes',note:''},{a:'yes',note:'Last month’s summaries are the benchmark'}];
+  s.split={ai:['Combine the three exports','Work out totals and week-on-week change','Draft the three talking points','Put it into the directors’ template'],
+    me:['Check the totals against the till report','Choose the talking points that matter','Add what the data doesn’t show','Send it']};
+  s.risks=[{a:'y',guard:'Use the approved tool and leave customer names out'},{a:'y',guard:'Check totals against the till report every time'},{a:'n',guard:''},{a:'n',guard:''},{a:'n',guard:''},{a:'y',guard:'I send it myself, never the AI'}];
+  s.success={today:'2 hours every Monday, and I still make copying mistakes',target:'Have a draft in 20 minutes that I check and send',quality:'The totals match the till report and the talking points are ones I’d have picked',checks:'Every figure against the source export',value:'Most of Monday morning back, and fewer mistakes in front of the directors'};
+  fillCard(s,true);s.card.first='Run last week’s exports through it and compare the result with the summary I sent.';
+  return s;
+}
+
+/* The card and the trainer's notes are drawn from the earlier answers. */
+function derived(s){
+  const w=s.week[s.pick],yes=RISKS.map((r,i)=>({r,x:s.risks[i]})).filter(o=>o.x.a==='y');
+  return {card:{when:s.task.trigger.trim(),need:lcFirst(s.task.sentence.trim().replace(/\.$/,'')),using:lcFirst(s.task.inputs),produce:lcFirst(s.task.output.trim()),
+      why:w?clean([w.pain,has(w.often)||has(w.time)?clean([w.often,has(w.time)?w.time+' each time':'']).join(', ')+'.':'']).join(' '):'',
+      ai:clean(s.split.ai).join('\n'),me:clean(s.split.me).join('\n'),
+      checks:clean([s.success.checks,...yes.map(o=>o.x.guard)]).join('\n'),
+      success:clean([s.success.target,s.success.quality]).join('\n'),first:''},
+    trainer:{risks:yes.map(o=>o.r[1]+(has(o.x.guard)?': '+o.x.guard.trim():'')).join('\n'),measure:s.success.target.trim(),systems:s.task.inputs.trim()}};
+}
+function fillCard(s,all){
+  const d=derived(s);
+  for(const k in d.card)if(all||!has(s.card[k]))s.card[k]=d.card[k]||s.card[k];
+  for(const k in d.trainer)if(all||!has(s.trainer[k]))s.trainer[k]=d.trainer[k]||s.trainer[k];
+}
+
+/* ---------- field builders ---------- */
+const pid=p=>'f-'+p.replace(/\./g,'-');
+const hintHtml=h=>h?`<div class="hint">${h}</div>`:'';
+function inp(p,label,o={}){const v=getPath(S,p)??'';return `<div class="field ${o.cls||''}"><label for="${pid(p)}">${label}</label><input id="${pid(p)}" type="${o.type||'text'}" ${o.list?`list="${o.list}"`:''} data-bind="${p}" value="${esc(v)}" placeholder="${esc(o.ph||'')}">${hintHtml(o.hint)}</div>`;}
+function ta(p,label,o={}){const v=getPath(S,p)??'';return `<div class="field ${o.cls||''}"><label for="${pid(p)}">${label}</label><textarea id="${pid(p)}" rows="${o.rows||2}" data-bind="${p}" placeholder="${esc(o.ph||'')}">${esc(v)}</textarea>${hintHtml(o.hint)}</div>`;}
+function listEd(p,ph){const items=getPath(S,p);return `<div class="list">${items.map((v,i)=>`<div class="list-row"><input id="${pid(p)}-${i}" data-bind="${p}.${i}" value="${esc(v)}" placeholder="${esc(ph)}" aria-label="${esc(ph)}"><button class="icon-btn" data-act="del-list" data-path="${p}" data-i="${i}" aria-label="Remove">×</button></div>`).join('')}<button class="add-btn" data-act="add-list" data-path="${p}">+ Add</button></div>`;}
+const chipsFor=(path,vals)=>{const have=new Set(getPath(S,path).map(x=>x.trim()));const left=vals.filter(v=>!have.has(v));return left.length?`<div class="chips">${left.map(v=>`<button data-act="preset" data-path="${path}" data-val="${esc(v)}">+ ${esc(v)}</button>`).join('')}</div>`:'';};
+const seg=(p,opts,label)=>{const v=getPath(S,p);return `<div class="seg" role="group" aria-label="${esc(label)}">${opts.map(([k,l])=>`<button data-act="ans" data-path="${p}" data-val="${k}" aria-pressed="${v===k}">${l}</button>`).join('')}</div>`;};
+const tip=html=>`<p class="tip">${html}</p>`;
+
+/* ---------- progress ---------- */
+function health(s){
+  const items=[];const add=(ok,step,text)=>items.push({ok:!!ok,step,text});
+  const n=s.week.filter(w=>has(w.task)).length;
+  add(has(s.who.name),'you','Add your name');
+  add(n>=3,'week',n>=3?`${n} tasks listed`:`List ${3-n} more task${3-n>1?'s':''} that eat${3-n>1?'':'s'} your week`);
+  add(s.pick>=0&&has(s.week[s.pick]?.task)&&s.task.sentence.trim().length>=10,'task','Pick one task and say it in a sentence');
+  add(has(s.task.inputs)&&has(s.task.output),'task','Name its inputs and its output');
+  const c=s.checks.filter(x=>x.a).length;
+  add(c===CHECKS.length,'test',c===CHECKS.length?'All six checks answered':`Answer ${CHECKS.length-c} more check${CHECKS.length-c>1?'s':''}`);
+  add(clean(s.split.ai).length&&clean(s.split.me).length,'split','Split the work between AI and you');
+  const r=s.risks.filter(x=>x.a).length,unguarded=s.risks.filter(x=>x.a==='y'&&!has(x.guard)).length;
+  add(r===RISKS.length&&!unguarded,'risk',r<RISKS.length?`Answer ${RISKS.length-r} more risk question${RISKS.length-r>1?'s':''}`:unguarded?`Add a safeguard for each yes (${unguarded} to go)`:'Risks checked, safeguards set');
+  add(has(s.success.today)&&has(s.success.target),'success','Say where it is today and where you want it');
+  add(['when','need','using','produce'].every(k=>has(s.card[k])),'card','Complete the use case sentence');
+  add(has(s.card.first),'card','Choose a first experiment');
+  const done=items.filter(i=>i.ok).length;
+  return {items,done,total:items.length,label:done===items.length?'Ready to print':done>=items.length/2?'Nearly there':'Just started'};
+}
+
+/* ---------- app state ---------- */
+const KEY='praxis-scoping-worksheet-v1';
+let S,cur=0,undoState=null,lastHealth;
+function save(){if(LEARN){learnSave();return;}try{localStorage.setItem(KEY,JSON.stringify({S,cur}))}catch(e){}}
+function restore(){try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d&&d.S&&Array.isArray(d.S.week)&&d.S.card)return d;}catch(e){}return null;}
+function getPath(o,p){return p.split('.').reduce((a,k)=>a==null?a:a[k],o);}
+function setPath(o,p,v){const ks=p.split('.');let a=o;for(let i=0;i<ks.length-1;i++)a=a[ks[i]];a[ks[ks.length-1]]=v;}
+
+/* ---------- steps ---------- */
+const E={};
+E.you=()=>`
+  <h2>About you</h2>
+  <p class="lead">Start with who’s filling this in. At the end, your answers fill in the printable worksheet for you.</p>
+  <div class="grid2">
+    ${inp('who.name','Your name',{ph:'e.g. Sam Carter'})}
+    ${inp('who.role','Role or team',{ph:'e.g. Operations manager'})}
+    ${inp('who.date','Date',{type:'date'})}
+    ${inp('who.group','Group',{ph:'e.g. Group B',hint:'If your trainer has put you in a group, its name or number. Otherwise leave it blank.'})}
+  </div>`;
+E.week=()=>`
+  <h2>What eats your week?</h2>
+  <p class="lead">List the recurring tasks that take time, cause friction or feel more manual than they should. Don’t worry yet about whether AI is the answer.</p>
+  ${tip('Think about last week. What did you do more than once that you’d happily never do by hand again?')}
+  ${S.week.map((w,i)=>`<div class="wk">
+    <div class="field task"><label for="f-week-${i}-task">Recurring task ${i+1}</label><input id="f-week-${i}-task" data-bind="week.${i}.task" value="${esc(w.task)}" placeholder="${['e.g. Weekly sales summary for the directors','e.g. Chasing suppliers for delivery dates','e.g. Writing up meeting notes'][i%3]}"></div>
+    ${inp(`week.${i}.often`,'How often?',{list:'often-list',ph:'e.g. Weekly'})}
+    ${inp(`week.${i}.time`,'Time each time',{ph:'e.g. 2 hours'})}
+    <button class="icon-btn" data-act="del-week" data-i="${i}" aria-label="Remove task ${i+1}">×</button>
+    ${inp(`week.${i}.pain`,'What makes it slow or painful?',{cls:'pain',ph:'e.g. Copying figures from three exports into one sheet'})}
+  </div>`).join('')}
+  ${S.week.length<8?`<button class="add-btn" data-act="add-week">+ Add a task</button>`:''}
+  <p style="margin-top:14px;font-size:var(--text-xs);color:hsl(var(--muted-foreground))">Three to five is plenty. If your trainer sent you this before the session, this is the only step to fill in. Stop here and bring it with you.</p>`;
+E.task=()=>{
+  const opts=S.week.map((w,i)=>[w,i]).filter(([w])=>has(w.task));
+  return `<h2>Pick <em style="font-style:normal;color:hsl(var(--primary))">one</em> task and make it concrete</h2>
+  <p class="lead">Choose a task you do yourself. A good first use case has a clear start, a clear output and someone who can judge whether the result is good.</p>
+  ${opts.length?`<div class="field"><span class="lbl">Which one?</span></div><div class="goal-opts">${opts.map(([w,i])=>`<button class="goal-opt" data-act="pick" data-i="${i}" aria-pressed="${S.pick===i}"><b>${esc(w.task)}</b><span>${esc(clean([w.often,w.time]).join(', ')||'No time noted yet')}</span></button>`).join('')}</div>`:`<p class="text-muted" style="font-size:var(--text-sm)">List a few tasks in step 2 first, then pick one here.</p>`}
+  <div class="grid2">
+    ${ta('task.sentence','Task in one sentence',{cls:'wide',ph:'e.g. Turn the three Monday exports into the weekly sales summary the directors read.'})}
+    ${inp('task.trigger','What starts it?',{ph:'e.g. Monday morning, once the sales are in',hint:'A date, a request, an email, a meeting.'})}
+    ${inp('task.output','Output',{ph:'e.g. A one-page summary',hint:'What you hand over at the end.'})}
+    ${ta('task.inputs','Inputs',{cls:'wide',ph:'e.g. Till export, web shop export, last week’s summary',hint:'Files, systems, data, notes.'})}
+    ${inp('task.reviewer','Who uses or reviews it?',{ph:'e.g. The two directors'})}
+    ${inp('task.judgement','Where is judgement needed?',{ph:'e.g. Picking what’s worth their attention'})}
+  </div>`;
+};
+E.test=()=>{
+  const no=S.checks.filter(x=>x.a==='no').length;
+  return `<h2>Is this a good first AI use case?</h2>
+  <p class="lead">You’re looking for a task that matters enough to be worth it and is small enough to learn from. The most impressive one can wait.</p>
+  ${CHECKS.map(([q,h],i)=>`<div class="q"><div class="q-head"><div><strong>${esc(q)}</strong><small>${esc(h)}</small></div>${seg(`checks.${i}.a`,[['yes','Yes'],['no','No or unsure']],q)}</div>
+    <input id="f-checks-${i}-note" data-bind="checks.${i}.note" value="${esc(S.checks[i].note)}" placeholder="What to note (optional)" aria-label="Note for: ${esc(q)}"></div>`).join('')}
+  ${no?`<div class="honest"><span class="eyebrow">Worth a second look</span><p>You said no or unsure to ${no===1?'one check':no+' checks'}. That usually means the task is too big. Go back a step and narrow it to one part you could describe in a sentence, then try these again.</p></div>`:''}`;
+};
+E.split=()=>`
+  <h2>Split the work: AI helps, you own it</h2>
+  <p class="lead">A good use case rarely hands the whole task over. Decide where AI can help and where judgement and accountability stay with you.</p>
+  <div class="grid2">
+    <div class="field"><span class="lbl">AI could help with…</span>${listEd('split.ai','e.g. Combine the three exports')}${chipsFor('split.ai',AI_CHIPS)}</div>
+    <div class="field"><span class="lbl">I still have to…</span>${listEd('split.me','e.g. Check the totals')}${chipsFor('split.me',ME_CHIPS)}</div>
+  </div>`;
+E.risk=()=>`
+  <h2>Quick risk check</h2>
+  <p class="lead">Does this task involve any of these? A “yes” doesn’t rule the task out. It may mean a narrower task, safer data, a stronger review or a different place to start.</p>
+  ${RISKS.map(([q],i)=>`<div class="q"><div class="q-head"><div><strong>${esc(q)}</strong></div>${seg(`risks.${i}.a`,[['y','Yes'],['n','No']],q)}</div>
+    ${S.risks[i].a==='y'?`<input id="f-risks-${i}-guard" data-bind="risks.${i}.guard" value="${esc(S.risks[i].guard)}" placeholder="Safeguard needed, e.g. I check every figure before it goes" aria-label="Safeguard for: ${esc(q)}">`:''}</div>`).join('')}`;
+E.success=()=>`
+  <h2>What would success look like?</h2>
+  <p class="lead">“Make it better” and “save time” aren’t enough. Describe a result you’d recognise and could compare.</p>
+  <div class="grid2">${SUCCESS.map(([k,l,h,ph])=>ta('success.'+k,l,{cls:'wide',ph,hint:h})).join('')}</div>`;
+const sentenceHtml=s=>{const g=(v,w)=>has(v)?`<b>${esc(v)}</b>`:`<span class="gap">${w}</span>`;
+  return `When ${g(s.card.when,'[what starts it]')} happens, I need to ${g(s.card.need,'[do the task]')} using ${g(s.card.using,'[inputs]')} to produce ${g(s.card.produce,'[output]')}.`;};
+E.card=()=>`
+  <h2>Your use case card</h2>
+  <p class="lead">This is the use case you carry through the programme and keep improving as you learn. It’s filled in from your answers so far. Change anything that doesn’t read right.</p>
+  <p class="sentence-preview" id="sentence-preview">${sentenceHtml(S)}</p>
+  <div class="grid2">
+    ${inp('card.when','When…',{ph:'e.g. Monday morning, once the sales are in'})}
+    ${inp('card.need','…happens, I need to…',{ph:'e.g. turn the exports into the weekly summary'})}
+    ${inp('card.using','…using…',{ph:'e.g. the till and web shop exports'})}
+    ${inp('card.produce','…to produce…',{ph:'e.g. a one-page summary for the directors'})}
+  </div>
+  <div class="section-head"><span class="num">·</span><span class="label">The card</span><span class="rule"></span></div>
+  <div class="grid2">${CARD.map(([k,l,h])=>ta('card.'+k,l,{cls:'wide',hint:h,ph:k==='first'?'e.g. Run last week’s files through it and compare with what I sent':''})).join('')}</div>
+  <div class="section-head"><span class="num">·</span><span class="label">For the trainer</span><span class="rule"></span></div>
+  <div class="grid2">${TRAINER.map(([k,l,h])=>ta('trainer.'+k,l,{cls:'wide',hint:h})).join('')}</div>
+  <p style="margin-top:18px"><button class="btn btn-ghost btn-sm" data-act="refill">Refill the card from my answers</button></p>`;
+E.sheet=()=>`
+  <h2>Your worksheet</h2>
+  <p class="lead">All four pages, filled in with your answers. Print it, or save it as a PDF and bring it to the session.</p>
+  <div class="download"><div><h3>Print or save as PDF</h3><p>In the print window, choose “Save as PDF” to keep a copy. Set the paper to A4.</p></div>
+    <div class="btns"><button class="btn btn-ghost btn-sm" data-act="print-blank">Print a blank copy</button><button class="btn btn-primary" data-act="print">Print or save as PDF</button></div></div>
+  <div class="sheet-view" id="sheet-view"><div class="ws" id="sheet-zoom">${wsHtml(S,false)}</div></div>`;
+
+/* ---------- the worksheet itself ---------- */
+function wsHtml(s,blank){
+  const v=x=>blank||!has(x)?'':`<span class="v">${esc(String(x).trim()).replace(/\n/g,'<br>')}</span>`;
+  const foot=r=>`<div class="foot"><span>Tutto Praxis · Scoping worksheet</span><span>${r||'tutto.one/praxis'}</span></div>`;
+  const week=blank?[]:s.week.filter(w=>has(w.task)||has(w.pain));
+  const rows=[...week,...Array(Math.max(0,5-week.length)).fill(null)];
+  const pickedRow=blank?null:s.week[s.pick];
+  const uu=x=>blank||!has(x)?'<u class="gap">&nbsp;</u>':`<u>${esc(x.trim())}</u>`;
+  const list=(a,ex)=>{const c=blank?[]:clean(a);return c.length?`<ul class="v">${c.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:`<p>${ex}</p>`;};
+  return `
+<section class="sheet-page">
+  <header class="masthead"><div><span class="wm">Tutto<span class="dot">.</span> Praxis</span><span class="kicker">Discovery session</span><h1>Scoping worksheet</h1><p>Choose one real work task that is useful, concrete and safe enough to learn with.</p></div><span class="pg">PAGE 1 / 4</span></header>
+  <table style="margin-top:6mm"><tr><th>Name</th><th>Role / team</th><th>Date</th><th>Group</th></tr>
+    <tr><td class="fill">${v(s.who.name)}</td><td>${v(s.who.role)}</td><td>${v(fmtDate(s.who.date))}</td><td>${v(s.who.group)}</td></tr></table>
+  <h2 class="sec"><span class="n">01</span>What eats your week?</h2>
+  <p class="intro">List the recurring tasks that take time, cause friction or feel more manual than they should. Don’t worry yet about whether AI is the answer.</p>
+  <table><tr><th style="width:34%">Recurring task</th><th style="width:14%">How often?</th><th style="width:14%">Time each time</th><th>What makes it slow or painful?</th></tr>
+    ${rows.map(w=>w?`<tr${w===pickedRow?' class="picked"':''}><td class="tall">${v(w.task)}</td><td>${v(w.often)}</td><td>${v(w.time)}</td><td>${v(w.pain)}</td></tr>`:'<tr><td class="tall"></td><td></td><td></td><td></td></tr>').join('')}</table>
+  <h2 class="sec"><span class="n">02</span>Pick <em>one</em> task and make it concrete</h2>
+  <p class="intro">Choose a task you do yourself. A good first use case has a clear start, a clear output and someone who can judge whether the result is good.</p>
+  <table>
+    <tr><td class="lbl">Task in one sentence</td><td class="fill">${v(s.task.sentence)}</td></tr>
+    <tr><td class="lbl">What starts it?<small>A date, a request, an email, a meeting</small></td><td class="fill">${v(s.task.trigger)}</td></tr>
+    <tr><td class="lbl">Inputs<small>Files, systems, data, notes</small></td><td class="tall">${v(s.task.inputs)}</td></tr>
+    <tr><td class="lbl">Output<small>What you hand over at the end</small></td><td class="fill">${v(s.task.output)}</td></tr>
+    <tr><td class="lbl">Who uses or reviews it?</td><td class="fill">${v(s.task.reviewer)}</td></tr>
+    <tr><td class="lbl">Where is judgement needed?</td><td class="tall">${v(s.task.judgement)}</td></tr>
+  </table>
+  ${foot()}
+</section>
+<section class="sheet-page">
+  <header class="masthead slim"><h1>Test the task and split the work</h1><span class="pg">PAGE 2 / 4</span></header>
+  <h2 class="sec"><span class="n">03</span>Is this a good first AI use case?</h2>
+  <p class="intro">You’re looking for a task that matters enough to be worth it and is small enough to learn from. The most impressive one can wait.</p>
+  <table><tr><th>Check</th><th class="box">Yes</th><th class="box">No / unsure</th><th style="width:34%">What to note</th></tr>
+    ${CHECKS.map(([q,h],i)=>{const x=s.checks[i];const note=!blank&&has(x.note);
+      return `<tr><td>${esc(q)}</td><td class="box">${!blank&&x.a==='yes'?'✓':''}</td><td class="box">${!blank&&x.a==='no'?'✓':''}</td><td class="${note?'':'hint'}">${note?v(x.note):esc(h)}</td></tr>`;}).join('')}</table>
+  <h2 class="sec"><span class="n">04</span>Split the work: AI helps, you own it</h2>
+  <p class="intro">A good use case rarely hands the whole task over. Decide where AI can help and where judgement and accountability stay with you.</p>
+  <div class="cols">
+    <div class="col ai"><h3>AI could help with</h3>${list(s.split.ai,'For example: summarise, compare, sort, extract, draft, reformat, brainstorm, spot patterns.')}</div>
+    <div class="col"><h3>I still have to</h3>${list(s.split.me,'For example: give the business context, check facts and figures, decide, approve, handle the exceptions, take responsibility.')}</div>
+  </div>
+  ${foot()}
+</section>
+<section class="sheet-page">
+  <header class="masthead slim"><h1>Check the risks and set what success means</h1><span class="pg">PAGE 3 / 4</span></header>
+  <h2 class="sec"><span class="n">05</span>Quick risk check</h2>
+  <p class="intro">A “yes” doesn’t rule the task out. It may mean a narrower task, safer data, a stronger review or a different place to start.</p>
+  <table><tr><th>Does this task involve</th><th class="box">Y / N</th><th style="width:42%">Safeguard needed</th></tr>
+    ${RISKS.map(([q],i)=>{const x=s.risks[i];return `<tr><td>${esc(q)}</td><td class="box">${blank?'':x.a==='y'?'Y':x.a==='n'?'N':''}</td><td>${x.a==='y'?v(x.guard):''}</td></tr>`;}).join('')}</table>
+  <h2 class="sec"><span class="n">06</span>What would success look like?</h2>
+  <p class="intro">“Make it better” and “save time” aren’t enough. Describe a result you’d recognise and could compare.</p>
+  <table>${SUCCESS.map(([k,l,h])=>`<tr><td class="lbl">${l}<small>${h.replace('…','...')}</small></td><td class="fill">${v(s.success[k])}</td></tr>`).join('')}</table>
+  ${foot()}
+</section>
+<section class="sheet-page">
+  <header class="masthead slim"><h1>Your Use Case Card</h1><span class="pg">PAGE 4 / 4</span></header>
+  <p class="intro" style="margin-top:6mm">Pull what you decided on the last three pages onto one card. This is the use case you carry through the programme and keep improving as you learn.</p>
+  <div class="uc">
+    <p class="sentence">When ${uu(s.card.when)} happens, I need to ${uu(s.card.need)} using ${uu(s.card.using)} to produce ${uu(s.card.produce)}.</p>
+    <table>${CARD.map(([k,l,h])=>`<tr><td class="lbl">${l}<small>${h.replace('…','...')}</small></td><td class="tall">${v(s.card[k])}</td></tr>`).join('')}</table>
+  </div>
+  <table style="margin-top:8mm"><tr><th colspan="2">For the trainer</th></tr>
+    ${TRAINER.map(([k,l,h])=>`<tr><td class="lbl">${l}${h?`<small>${h}</small>`:''}</td><td class="fill">${v(s.trainer[k])}</td></tr>`).join('')}</table>
+  ${foot('Adapted from Roxanne Northover’s Claude Academy worksheet')}
+</section>`;
+}
+
+/* ---------- render ---------- */
+function renderHero(){
+  $('#hero').innerHTML=`<span class="eyebrow">Praxis · Use case card</span><h1>Choose one real task.<br><em>Leave with a use case card.</em></h1><p class="lead">Pick a task that’s useful, concrete and safe enough to learn with. Nine short steps, then your answers fill in the worksheet, ready to print or save as a PDF.</p>${S.sample?`<div class="admin-banner"><span class="tag tag-primary">Example</span><span>You’re looking at a worked example. Change anything, or choose a blank worksheet from “Start from”.</span></div>`:''}`;
+  $('#ex-select').innerHTML=`<option value="">Choose…</option><option value="example">Worked example: weekly sales summary</option><option value="blank">A blank worksheet</option>`;
+}
+function renderNav(){
+  const H=lastHealth;
+  $('#nav').innerHTML=STEPS.map((st,i)=>{const mine=H.items.filter(x=>x.step===st.id);const ok=mine.length&&mine.every(x=>x.ok);
+    return `<li><button data-act="goto" data-step="${i}"${i===cur?' aria-current="step"':''}><span class="num">${String(i+1).padStart(2,'0')}</span><span class="t">${st.title}</span>${mine.length?`<span class="ok${ok?' on':''}" title="${ok?'Done':'Still to do'}"></span>`:''}</button></li>`;}).join('');
+}
+function renderAside(){
+  const H=lastHealth;
+  $('#aside').innerHTML=`<div class="card"><span class="eyebrow">Your worksheet</span><div class="strength"><b>${H.label}</b><span>${H.done} of ${H.total}</span></div>
+    <div class="meter" style="grid-template-columns:repeat(${H.total},1fr)">${Array.from({length:H.total},(_,i)=>`<i class="${i<H.done?'on':''}"></i>`).join('')}</div>
+    <ul class="todo">${H.items.map((x,j)=>`<li><button class="${x.ok?'done':''}" data-act="hitem" data-j="${j}"><span class="mk"></span><span>${esc(x.text)}</span></button></li>`).join('')}</ul></div>
+    <p class="privacy">Your answers are saved in this browser only. Nothing is sent to us.</p>`;
+}
+/* A page that runs longer than A4 is shrunk to fit, so it prints on one sheet.
+   Measured on the hidden print copy, then applied to the preview as well. */
+const MM=96/25.4;
+function fitPages(){
+  const root=$('#print-root'),pages=$$('.sheet-page',root);root.style.display='block';
+  pages.forEach(p=>{p.style.zoom='';});
+  const f=pages.map(p=>Math.min(1,297*MM/p.offsetHeight));
+  root.style.display='';
+  pages.forEach((p,i)=>{p.style.zoom=f[i]<1?String(f[i]):'';});
+  $$('#sheet-zoom .sheet-page').forEach((p,i)=>{p.style.zoom=f[i]<1?String(f[i]):'';});
+}
+function fitSheet(){const view=$('#sheet-view'),z=$('#sheet-zoom');if(!view||!z)return;z.style.zoom=String(Math.min(1,(view.clientWidth-16)/(210*MM)));fitPages();}
+function updateLive(){
+  lastHealth=health(S);renderNav();renderAside();
+  const sp=$('#sentence-preview');if(sp)sp.innerHTML=sentenceHtml(S);
+  $('#print-root').innerHTML=wsHtml(S,false);fitPages();
+  save();
+}
+function renderPanel(){
+  const st=STEPS[cur];
+  $('#panel').innerHTML=E[st.id]()+`<div class="panel-foot">${cur>0?`<button class="btn btn-ghost" data-act="prev">Back: ${STEPS[cur-1].title}</button>`:'<span></span>'}${cur<STEPS.length-1?`<button class="btn btn-primary" data-act="next">Next: ${STEPS[cur+1].title}</button>`:''}</div>`;
+  fitSheet();
+}
+function render(){renderHero();renderPanel();updateLive();}
+const smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));if(STEPS[cur].id==='card')fillCard(S,false);render();$('#layout').scrollIntoView({block:'start',behavior:smooth()});}
+function toast(msg,undo){const t=$('#toast');t.innerHTML=`<span>${esc(msg)}</span>${undo?'<button data-act="undo">Undo</button>':''}`;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>{t.hidden=true},undo?7000:2600);}
+function loadState(next,msg){undoState={S:clone(S),cur};S=next;cur=0;render();toast(msg,true);}
+function doPrint(blankCopy){
+  if(blankCopy){$('#print-root').innerHTML=wsHtml(S,true);fitPages();}
+  toast('Opening print. If nothing appears, your browser blocked it here: try Ctrl+P or Cmd+P.');
+  setTimeout(()=>{try{window.print();}catch(err){}if(blankCopy)setTimeout(()=>{$('#print-root').innerHTML=wsHtml(S,false);fitPages();},500);},50);
+}
+
+/* ---------- events ---------- */
+function onField(e){
+  const t=e.target,p=t.dataset&&t.dataset.bind;if(!p)return false;
+  setPath(S,p,t.type==='checkbox'?t.checked:t.value);
+  if(S.sample)S.sample=false,renderHero();
+  updateLive();return true;
+}
+document.addEventListener('input',onField);
+document.addEventListener('change',e=>{
+  if(e.target.id==='ex-select'){const v=e.target.value;e.target.value='';if(!v)return;
+    loadState(v==='blank'?blank():example(),v==='blank'?'Started a blank worksheet.':'Loaded the worked example. Replace anything with your own.');}
+});
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+  if(a==='goto')go(+b.dataset.step);
+  else if(a==='next')go(cur+1);
+  else if(a==='prev')go(cur-1);
+  else if(a==='add-list'){getPath(S,b.dataset.path).push('');render();$('#'+pid(b.dataset.path)+'-'+(getPath(S,b.dataset.path).length-1))?.focus();}
+  else if(a==='del-list'){const arr=getPath(S,b.dataset.path);arr.splice(+b.dataset.i,1);if(!arr.length)arr.push('');render();}
+  else if(a==='preset'){const arr=getPath(S,b.dataset.path);const i=arr.findIndex(x=>!x.trim());i>=0?arr[i]=b.dataset.val:arr.push(b.dataset.val);render();}
+  else if(a==='add-week'){S.week.push(row());render();$(`#f-week-${S.week.length-1}-task`)?.focus();}
+  else if(a==='del-week'){const i=+b.dataset.i;undoState={S:clone(S),cur};S.week.splice(i,1);
+    if(S.pick===i)S.pick=-1;else if(S.pick>i)S.pick--;if(!S.week.length)S.week.push(row());render();toast('Removed the task.',true);}
+  else if(a==='pick'){const i=+b.dataset.i;S.pick=i;if(!has(S.task.sentence))S.task.sentence=S.week[i].task;S.sample=false;render();}
+  else if(a==='ans'){const p=b.dataset.path;setPath(S,p,getPath(S,p)===b.dataset.val?'':b.dataset.val);S.sample=false;render();}
+  else if(a==='refill'){undoState={S:clone(S),cur};fillCard(S,true);render();toast('Refilled the card from your answers.',true);}
+  else if(a==='print')doPrint(false);
+  else if(a==='print-blank')doPrint(true);
+  else if(a==='hitem'){const x=lastHealth.items[+b.dataset.j];if(x)go(STEPS.findIndex(s=>s.id===x.step));}
+  else if(a==='undo'&&undoState){S=undoState.S;cur=undoState.cur;undoState=null;render();$('#toast').hidden=true;}
+});
+window.addEventListener('resize',fitSheet);
+
+/* ---------- boot ---------- */
+/* ---------- saving to a student's account ----------
+   Opened from the /learn dashboard as ?card=new or ?card=<id>, the worksheet saves to
+   the student's account (and not this browser), so we can read it before the next session. */
+const LEARN=new URLSearchParams(location.search).get('card');
+let learnId=LEARN&&LEARN!=='new'?LEARN:null,learnTimer=null,learnPending=null,learnState='';
+function learnStatus(t){learnState=t;const el=$('#learn-status');if(el)el.textContent=t;}
+async function learnFetch(method,url,body,keepalive){
+  const r=await fetch(url,{method,headers:body?{'Content-Type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined,credentials:'same-origin',keepalive:!!keepalive});
+  if(r.status===401){location.href='/learn';throw new Error('signed out');}
+  if(!r.ok)throw new Error('save failed');
+  return r.json();
+}
+async function learnFlush(keepalive){
+  clearTimeout(learnTimer);learnTimer=null;
+  if(learnPending)await learnPending.catch(()=>{});
+  const body={data:{S,cur}};
+  learnPending=(async()=>{
+    if(learnId)await learnFetch('PUT','/api/learn/cards/'+learnId,body,keepalive);
+    else{const r=await learnFetch('POST','/api/learn/cards',body,keepalive);learnId=String(r.id);history.replaceState(null,'','?card='+learnId);}
+  })();
+  try{await learnPending;learnStatus('Saved to your account');}catch(e){learnStatus('Not saved. Check your connection.');}
+}
+function learnSave(){if(!learnBooted)return;learnStatus('Saving…');clearTimeout(learnTimer);learnTimer=setTimeout(()=>learnFlush(false),800);}
+let learnBooted=false;
+addEventListener('pagehide',()=>{if(learnTimer)learnFlush(true);});
+
+(async function boot(){
+  if(LEARN){
+    $('.topbar .meta').innerHTML='Praxis · Use case card · <a href="/learn/dashboard">Back to your dashboard</a> · <span id="learn-status"></span>';
+    try{
+      if(learnId){const r=await learnFetch('GET','/api/learn/cards/'+learnId);S=r.data.S||blank();cur=Math.min(r.data.cur||0,STEPS.length-1);}
+      else{S=blank();const me=await learnFetch('GET','/api/learn/me');S.who.name=me.student.name||'';S.who.role=me.student.jobTitle||'';}
+    }catch(e){if(e.message==='signed out')return;S=blank();learnId=null;history.replaceState(null,'','?card=new');}
+    render();learnBooted=true;learnStatus(learnId?'Saved to your account':'Saves as you type');
+    return;
+  }
+  const d=restore();
+  if(d){S=d.S;cur=Math.min(d.cur||0,STEPS.length-1);}else S=blank();
+  render();
+})();
+</script>
+</body>
+</html>
