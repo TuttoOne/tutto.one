@@ -57,16 +57,12 @@ app.use((req, res, next) => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      // Never log response bodies for admin auth/setup routes — they may contain
-      // TOTP secrets, QR codes, or temporary tokens
-      const isSensitiveAdminRoute =
-        path.startsWith("/api/admin/setup") || path.startsWith("/api/admin/login");
-      // Markup notes carry every point of every pen stroke — hundreds of
-      // coordinate pairs per annotation. Logging the body buries the rest of
-      // the log in numbers and is worth nothing to read.
-      const isNoisyRoute = path.startsWith("/api/markup");
-      if (capturedJsonResponse && !isSensitiveAdminRoute && !isNoisyRoute) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      // Response bodies stay out of the log: they carry students' profiles, enquiries
+      // and admin secrets, and the log is kept by Replit where we can't delete from it.
+      // A failed request logs only its error message.
+      const body = capturedJsonResponse as Record<string, any> | undefined;
+      if (res.statusCode >= 400 && typeof body?.error === "string") {
+        logLine += ` :: ${body.error}`;
       }
 
       log(logLine);
