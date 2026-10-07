@@ -173,6 +173,13 @@ function downloadCalendar(me: Me) {
 
 export function LearnLogin() {
   useTitle("Sign in");
+  const [, navigate] = useLocation();
+  // Already signed in: the sign-in button in the header goes straight to the dashboard.
+  useEffect(() => {
+    fetch("/api/learn/me", { credentials: "same-origin" })
+      .then((r) => { if (r.ok) navigate("/learn/dashboard", { replace: true }); })
+      .catch(() => {});
+  }, [navigate]);
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const send = useMutation({
@@ -219,6 +226,9 @@ export function LearnLogin() {
             </p>
           </form>
         )}
+        <p style={{ fontSize: 12, color: MUTED, marginTop: 24, textAlign: "center" }}>
+          Tutto team? <a href="/admin" style={{ color: MUTED }}>Admin sign-in</a>
+        </p>
       </div>
     </div>
   );

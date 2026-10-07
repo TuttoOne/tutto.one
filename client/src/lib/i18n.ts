@@ -49,7 +49,7 @@ export const copy = {
     contact: { en: "Contact", fr: "Contact" },
     home: { en: "Tutto, home", fr: "Tutto, accueil" },
     menu: { en: "Toggle menu", fr: "Ouvrir le menu" },
-    admin: { en: "Admin sign-in", fr: "Connexion admin" },
+    admin: { en: "Sign in to your sessions", fr: "Accéder à vos sessions" },
   },
 
   footer: {

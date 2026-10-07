@@ -66,10 +66,10 @@ export function Header() {
             <CurrencyToggle />
           </div>
 
-          {/* The way into /admin, far right at every width. /admin sends anyone
-              not signed in to /admin/login. */}
+          {/* Sign-in, far right at every width. Learners land on /learn (an emailed
+              link, no password); the admin sign-in is linked from there. */}
           <a
-            href="/admin"
+            href="/learn"
             aria-label={t(copy.nav.admin)}
             title={t(copy.nav.admin)}
             data-testid="link-admin"
