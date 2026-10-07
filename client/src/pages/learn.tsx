@@ -92,6 +92,8 @@ type Me = {
     sessionMinutes: number;
     meetUrl: string | null;
   };
+  /** Use case cards: each is a scoping worksheet saved to their account. */
+  cards: { id: number; title: string; updatedAt: string }[];
   spares: { startsAt: string; endsAt: string }[];
   modules: ModuleView[];
 };
@@ -259,6 +261,9 @@ const STATUS_LABEL: Record<ProgressStatus, string> = {
   in_progress: "In progress",
   done: "Done",
 };
+
+// The scoping worksheet from the discovery session. Opened with ?card=, it saves to the student's account.
+const WORKSHEET = "/courses/trainer/scoping-worksheet.html";
 
 function StepCard({ n, title, done, children }: { n: number; title: string; done?: boolean; children: React.ReactNode }) {
   return (
@@ -449,10 +454,25 @@ export function LearnDashboard() {
               {profileDone ? "Edit my profile" : "Fill in my profile"}
             </Link>
           </StepCard>
-          <StepCard n={2} title="Your use cases">
-            <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: MUTED }}>
-              Next, we write up the jobs you want AI to help with, one card each. We'll open this step once your profile is in.
+          <StepCard n={2} title="Your use cases" done={me.cards.length > 0}>
+            <p style={{ margin: "0 0 12px", fontSize: 14, lineHeight: 1.6, color: MUTED }}>
+              {me.cards.length
+                ? "Your cards are saved to your account, so we can read them before we meet. Open one to change it."
+                : "Pick one real task from your week and write it up as a use case card: what starts it, what goes in, what comes out, what AI does and what you keep. It takes about 20 minutes and saves as you type."}
             </p>
+            {me.cards.length > 0 && (
+              <ul style={{ margin: "0 0 12px", padding: 0, listStyle: "none", display: "grid", gap: 6 }}>
+                {me.cards.map((c) => (
+                  <li key={c.id} style={{ fontSize: 14 }}>
+                    <a href={`${WORKSHEET}?card=${c.id}`} style={{ color: INK, fontWeight: 600 }}>{c.title || "Untitled card"}</a>
+                    <span style={{ color: MUTED, fontSize: 12 }}> · updated {new Date(c.updatedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <a href={`${WORKSHEET}?card=new`} style={me.cards.length ? BUTTON_QUIET : BUTTON}>
+              {me.cards.length ? "Add another card" : "Start your use case card"}
+            </a>
           </StepCard>
         </div>
 

@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, boolean as pgBoolean, uniqueIndex } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, boolean as pgBoolean, uniqueIndex, jsonb, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -208,6 +208,22 @@ export const studentProgress = pgTable("student_progress", {
 }, (t) => [uniqueIndex("student_progress_student_module_idx").on(t.studentId, t.moduleNumber)]);
 
 export type StudentProgress = typeof studentProgress.$inferSelect;
+
+/**
+ * A student's use case cards: each one is a whole scoping worksheet
+ * (client/public/courses/trainer/scoping-worksheet.html), saved as the page keeps it.
+ * `title` is the card's sentence, or the task, so lists don't have to open the JSON.
+ */
+export const useCaseCards = pgTable("use_case_cards", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  studentId: integer("student_id").notNull(),
+  title: text("title").notNull().default(""),
+  data: jsonb("data").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (t) => [index("use_case_cards_student_idx").on(t.studentId)]);
+
+export type UseCaseCard = typeof useCaseCards.$inferSelect;
 
 export const loginTokens = pgTable("login_tokens", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),

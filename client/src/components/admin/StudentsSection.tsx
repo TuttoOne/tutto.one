@@ -2,8 +2,8 @@
  * The admin's Students tab: cohorts, their dates, the people in them and how
  * far each has got. Talks to /api/admin/learn/* in server/learn-routes.ts.
  *
- * A draft cohort is one that hasn't signed: it can be set up in full, but the
- * server refuses to invite anyone in it and its students can't sign in.
+ * A draft cohort is one that hasn't paid: it can be set up in full, but the
+ * server refuses to invite anyone in it and its students get a read-only dashboard.
  */
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -12,10 +12,37 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ExternalLink, Mail, Trash2, UserPlus, ChevronDown, ChevronRight, Plus } from "lucide-react";
-import type { Cohort, CohortSession, Student, StudentProgress } from "@shared/schema";
+import type { Cohort, CohortSession, Student, StudentProgress, UseCaseCard } from "@shared/schema";
 import { PROGRAMMES, type Programme } from "@shared/learn-programmes";
 
-type AdminStudent = Student & { progress: StudentProgress[] };
+type AdminStudent = Student & { progress: StudentProgress[]; cards: UseCaseCard[] };
+
+// The card part of a scoping worksheet, as the worksheet saves it under data.S.card.
+const CARD_FIELDS: [string, string][] = [
+  ["why", "Why it matters"], ["ai", "What AI does"], ["me", "What they keep"],
+  ["checks", "How they check it"], ["success", "Success looks like"], ["first", "First experiment"],
+];
+
+function CardView({ card }: { card: UseCaseCard }) {
+  const c = ((card.data as { S?: { card?: Record<string, string> } })?.S?.card) ?? {};
+  const has = (k: string) => !!String(c[k] ?? "").trim();
+  return (
+    <div className="rounded-md border border-border/60 p-3 text-sm space-y-2">
+      <p className="font-medium">{card.title || "Untitled card"} <span className="text-xs text-muted-foreground font-normal">· updated {shortDate(card.updatedAt)}</span></p>
+      {["when", "need", "using", "produce"].every(has) && (
+        <p className="italic">When {c.when} happens, I need to {c.need} using {c.using} to produce {c.produce}.</p>
+      )}
+      <dl className="grid sm:grid-cols-[140px_1fr] gap-x-4 gap-y-1">
+        {CARD_FIELDS.filter(([k]) => has(k)).map(([k, l]) => (
+          <div key={k} className="contents">
+            <dt className="text-muted-foreground">{l}</dt>
+            <dd className="whitespace-pre-wrap break-words">{c[k]}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
 type AdminCohort = Cohort & { programme: Programme | null; sessions: CohortSession[]; students: AdminStudent[] };
 
 const KEY = ["/api/admin/learn/cohorts"];
@@ -97,7 +124,7 @@ function StudentRow({ s, cohort, total }: { s: AdminStudent; cohort: AdminCohort
         </span>
         <span className="text-muted-foreground hidden sm:block">{s.invitedAt ? `Invited ${shortDate(s.invitedAt)}` : "Not invited"}</span>
         <span className="text-muted-foreground hidden sm:block">{s.lastLoginAt ? `Seen ${shortDate(s.lastLoginAt)}` : "Never signed in"}</span>
-        <span className="text-muted-foreground hidden sm:block">{done}/{total}</span>
+        <span className="text-muted-foreground hidden sm:block">{done}/{total} · {s.cards.length} {s.cards.length === 1 ? "card" : "cards"}</span>
       </button>
 
       {open && (
@@ -110,6 +137,12 @@ function StudentRow({ s, cohort, total }: { s: AdminStudent; cohort: AdminCohort
               </div>
             ))}
           </dl>
+          <div className="space-y-2">
+            <p className="text-sm text-muted-foreground">Use case cards</p>
+            {s.cards.length
+              ? s.cards.map((card) => <CardView key={card.id} card={card} />)
+              : <p className="text-sm text-muted-foreground/60">None yet</p>}
+          </div>
           <div>
             <Label htmlFor={`blurb-${s.id}`}>About {s.name.split(" ")[0]} (our notes, never shown to them)</Label>
             <Textarea id={`blurb-${s.id}`} rows={4} value={blurb} onChange={(e) => setBlurb(e.target.value)} className="mt-1" />

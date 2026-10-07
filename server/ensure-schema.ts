@@ -82,6 +82,15 @@ export async function ensureLearnSchema(): Promise<void> {
   await db.execute(
     sql`CREATE UNIQUE INDEX IF NOT EXISTS student_progress_student_module_idx ON student_progress (student_id, module_number)`,
   );
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS use_case_cards (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    student_id integer NOT NULL,
+    title text NOT NULL DEFAULT '',
+    data jsonb NOT NULL,
+    created_at timestamp NOT NULL DEFAULT now(),
+    updated_at timestamp NOT NULL DEFAULT now()
+  )`);
+  await db.execute(sql`CREATE INDEX IF NOT EXISTS use_case_cards_student_idx ON use_case_cards (student_id)`);
   await db.execute(sql`CREATE TABLE IF NOT EXISTS login_tokens (
     id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     student_id integer NOT NULL,

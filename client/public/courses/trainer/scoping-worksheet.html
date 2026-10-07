@@ -381,7 +381,7 @@ function health(s){
 /* ---------- app state ---------- */
 const KEY='praxis-scoping-worksheet-v1';
 let S,cur=0,undoState=null,lastHealth;
-function save(){try{localStorage.setItem(KEY,JSON.stringify({S,cur}))}catch(e){}}
+function save(){if(LEARN){learnSave();return;}try{localStorage.setItem(KEY,JSON.stringify({S,cur}))}catch(e){}}
 function restore(){try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d&&d.S&&Array.isArray(d.S.week)&&d.S.card)return d;}catch(e){}return null;}
 function getPath(o,p){return p.split('.').reduce((a,k)=>a==null?a:a[k],o);}
 function setPath(o,p,v){const ks=p.split('.');let a=o;for(let i=0;i<ks.length-1;i++)a=a[ks[i]];a[ks[ks.length-1]]=v;}
@@ -626,7 +626,42 @@ document.addEventListener('click',e=>{
 window.addEventListener('resize',fitSheet);
 
 /* ---------- boot ---------- */
-(function boot(){
+/* ---------- saving to a student's account ----------
+   Opened from the /learn dashboard as ?card=new or ?card=<id>, the worksheet saves to
+   the student's account (and not this browser), so we can read it before the next session. */
+const LEARN=new URLSearchParams(location.search).get('card');
+let learnId=LEARN&&LEARN!=='new'?LEARN:null,learnTimer=null,learnPending=null,learnState='';
+function learnStatus(t){learnState=t;const el=$('#learn-status');if(el)el.textContent=t;}
+async function learnFetch(method,url,body,keepalive){
+  const r=await fetch(url,{method,headers:body?{'Content-Type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined,credentials:'same-origin',keepalive:!!keepalive});
+  if(r.status===401){location.href='/learn';throw new Error('signed out');}
+  if(!r.ok)throw new Error('save failed');
+  return r.json();
+}
+async function learnFlush(keepalive){
+  clearTimeout(learnTimer);learnTimer=null;
+  if(learnPending)await learnPending.catch(()=>{});
+  const body={data:{S,cur}};
+  learnPending=(async()=>{
+    if(learnId)await learnFetch('PUT','/api/learn/cards/'+learnId,body,keepalive);
+    else{const r=await learnFetch('POST','/api/learn/cards',body,keepalive);learnId=String(r.id);history.replaceState(null,'','?card='+learnId);}
+  })();
+  try{await learnPending;learnStatus('Saved to your account');}catch(e){learnStatus('Not saved. Check your connection.');}
+}
+function learnSave(){if(!learnBooted)return;learnStatus('Saving…');clearTimeout(learnTimer);learnTimer=setTimeout(()=>learnFlush(false),800);}
+let learnBooted=false;
+addEventListener('pagehide',()=>{if(learnTimer)learnFlush(true);});
+
+(async function boot(){
+  if(LEARN){
+    $('.topbar .meta').innerHTML='Praxis · Use case card · <a href="/learn/dashboard">Back to your dashboard</a> · <span id="learn-status"></span>';
+    try{
+      if(learnId){const r=await learnFetch('GET','/api/learn/cards/'+learnId);S=r.data.S||blank();cur=Math.min(r.data.cur||0,STEPS.length-1);}
+      else{S=blank();const me=await learnFetch('GET','/api/learn/me');S.who.name=me.student.name||'';S.who.role=me.student.jobTitle||'';}
+    }catch(e){if(e.message==='signed out')return;S=blank();learnId=null;history.replaceState(null,'','?card=new');}
+    render();learnBooted=true;learnStatus(learnId?'Saved to your account':'Saves as you type');
+    return;
+  }
   const d=restore();
   if(d){S=d.S;cur=Math.min(d.cur||0,STEPS.length-1);}else S=blank();
   render();

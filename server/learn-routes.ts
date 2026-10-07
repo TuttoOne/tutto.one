@@ -10,13 +10,13 @@ import type { Express, Request, Response, NextFunction } from "express";
 import { createHash, randomBytes } from "crypto";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-import { and, asc, eq, gt, inArray, isNull } from "drizzle-orm";
+import { and, asc, desc, eq, gt, inArray, isNull } from "drizzle-orm";
 import { db } from "./db";
 import { requireAdmin } from "./admin-routes";
 import { getResend } from "./email/resend";
 import { buildSignInEmail, buildWelcomeEmail } from "./email/learn-emails";
 import {
-  cohorts, cohortSessions, students, studentProgress, loginTokens,
+  cohorts, cohortSessions, students, studentProgress, loginTokens, useCaseCards,
   studentProfileSchema,
   type Cohort, type CohortSession, type Student,
 } from "@shared/schema";
@@ -90,6 +90,9 @@ async function loadDashboard(student: Student) {
     .orderBy(asc(cohortSessions.startsAt));
   const progress = await db.select().from(studentProgress).where(eq(studentProgress.studentId, student.id));
   const programme = getProgramme(cohort.programmeKey);
+  const cards = await db.select({ id: useCaseCards.id, title: useCaseCards.title, updatedAt: useCaseCards.updatedAt })
+    .from(useCaseCards).where(eq(useCaseCards.studentId, student.id)).orderBy(asc(useCaseCards.createdAt));
+
   const modules: ModuleView[] = (programme?.modules ?? []).map((m) => {
     const s = sessions.find((x) => x.moduleNumber === m.number && !x.isSpare);
     const p = progress.find((x) => x.moduleNumber === m.number);
@@ -112,6 +115,7 @@ async function loadDashboard(student: Student) {
       sessionMinutes: cohort.sessionMinutes,
       meetUrl: cohort.meetUrl,
     },
+    cards: cards.map((c) => ({ id: c.id, title: c.title, updatedAt: c.updatedAt.toISOString() })),
     spares: sessions.filter((s) => s.isSpare).map((s) => ({ startsAt: s.startsAt.toISOString(), endsAt: s.endsAt.toISOString() })),
     modules,
   };
@@ -121,6 +125,19 @@ async function loadDashboard(student: Student) {
 function publicStudent(s: Student) {
   const { aboutBlurb: _blurb, ...rest } = s;
   return rest;
+}
+
+// ── Use case cards ───────────────────────────────────────────────────────────
+
+/** The worksheet's whole state, as the page keeps it. Capped so nobody stores a novel. */
+const cardData = z.record(z.string(), z.unknown()).refine((d) => JSON.stringify(d).length < 200_000, "Too large");
+
+/** What a list shows for a card: its task in the student's words. */
+function cardTitle(d: Record<string, any>): string {
+  const s = d?.S ?? {};
+  const first = (...xs: unknown[]) => xs.map((x) => String(x ?? "").trim()).find(Boolean) ?? "";
+  const listed = Array.isArray(s.week) ? s.week.find((w: any) => String(w?.task ?? "").trim())?.task : "";
+  return first(s.task?.sentence, s.card?.need, s.week?.[s.pick]?.task, listed).slice(0, 200);
 }
 
 // ── Middleware ───────────────────────────────────────────────────────────────
@@ -301,6 +318,60 @@ export function registerLearnRoutes(app: Express) {
     }
   });
 
+  // ── Use case cards (the scoping worksheet saves here when opened from /learn) ──
+
+  async function ownCard(req: Request) {
+    const id = z.coerce.number().int().positive().parse(req.params.id);
+    const [card] = await db.select().from(useCaseCards)
+      .where(and(eq(useCaseCards.id, id), eq(useCaseCards.studentId, req.student!.id)));
+    return card ?? null;
+  }
+
+  app.get("/api/learn/cards/:id", requireStudent, async (req, res) => {
+    try {
+      const card = await ownCard(req);
+      if (!card) return res.status(404).json({ error: "Not found" });
+      res.json({ id: card.id, data: card.data });
+    } catch (error) {
+      fail(res, error, "load the card");
+    }
+  });
+
+  app.post("/api/learn/cards", requireStudent, async (req, res) => {
+    try {
+      const data = cardData.parse(req.body?.data);
+      const [card] = await db.insert(useCaseCards)
+        .values({ studentId: req.student!.id, title: cardTitle(data), data })
+        .returning({ id: useCaseCards.id });
+      res.json({ id: card.id });
+    } catch (error) {
+      fail(res, error, "save the card");
+    }
+  });
+
+  app.put("/api/learn/cards/:id", requireStudent, async (req, res) => {
+    try {
+      const card = await ownCard(req);
+      if (!card) return res.status(404).json({ error: "Not found" });
+      const data = cardData.parse(req.body?.data);
+      await db.update(useCaseCards).set({ data, title: cardTitle(data), updatedAt: new Date() }).where(eq(useCaseCards.id, card.id));
+      res.json({ ok: true });
+    } catch (error) {
+      fail(res, error, "save the card");
+    }
+  });
+
+  app.delete("/api/learn/cards/:id", requireStudent, async (req, res) => {
+    try {
+      const card = await ownCard(req);
+      if (!card) return res.status(404).json({ error: "Not found" });
+      await db.delete(useCaseCards).where(eq(useCaseCards.id, card.id));
+      res.json({ ok: true });
+    } catch (error) {
+      fail(res, error, "delete the card");
+    }
+  });
+
   // ── Admin ──
 
   app.get("/api/admin/learn/cohorts", requireAdmin, async (_req, res) => {
@@ -317,6 +388,9 @@ export function registerLearnRoutes(app: Express) {
       const progress = pids.length
         ? await db.select().from(studentProgress).where(inArray(studentProgress.studentId, pids))
         : [];
+      const cards = pids.length
+        ? await db.select().from(useCaseCards).where(inArray(useCaseCards.studentId, pids)).orderBy(desc(useCaseCards.updatedAt))
+        : [];
       res.json(all.map((c) => ({
         ...c,
         programme: getProgramme(c.programmeKey) ?? null,
@@ -324,6 +398,7 @@ export function registerLearnRoutes(app: Express) {
         students: people.filter((p) => p.cohortId === c.id).map((p) => ({
           ...p,
           progress: progress.filter((x) => x.studentId === p.id),
+          cards: cards.filter((x) => x.studentId === p.id),
         })),
       })));
     } catch (error) {
@@ -426,6 +501,7 @@ export function registerLearnRoutes(app: Express) {
     try {
       const id = z.coerce.number().int().parse(req.params.id);
       await db.delete(studentProgress).where(eq(studentProgress.studentId, id));
+      await db.delete(useCaseCards).where(eq(useCaseCards.studentId, id));
       await db.delete(loginTokens).where(eq(loginTokens.studentId, id));
       await db.delete(students).where(eq(students.id, id));
       res.json({ ok: true });
