@@ -36,7 +36,7 @@ const SEED: SeedCohort[] = [
     programmeKey: "background-italia",
     timezone: "Europe/Rome",
     sessionMinutes: 60,
-    meetUrl: null,
+    meetUrl: "https://meet.google.com/epd-krnx-ujn",
     status: "active",
     sessions: [
       { module: 1, start: "2026-10-14T10:00:00+02:00" },
