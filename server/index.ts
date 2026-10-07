@@ -9,6 +9,7 @@ import { createServer } from "http";
 import { seedBlogPostsIfEmpty } from "./seed-blog";
 import { ensureSchema, ensureLearnSchema } from "./ensure-schema";
 import { seedLearnCohorts } from "./seed-learn";
+import { scheduleRetention } from "./data-routes";
 import { clearStalePortfolioOverride } from "./cleanup-portfolio-override";
 
 const app = express();
@@ -85,6 +86,8 @@ app.use((req, res, next) => {
   try {
     await ensureLearnSchema();
     await seedLearnCohorts();
+    // Deletes what the data policy says we no longer keep: a minute after boot, then daily.
+    scheduleRetention();
   } catch (err) {
     console.error("Failed to set up the learn tables:", err);
   }

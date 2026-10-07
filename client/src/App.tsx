@@ -40,6 +40,7 @@ import Souverainete from "@/pages/souverainete";
 import GtmOrchestrator from "@/pages/gtm-orchestrator";
 import BecomeATrainer from "@/pages/become-a-trainer";
 import PeerGroups from "@/pages/peer-groups";
+import DataPolicy from "@/pages/data-policy";
 import PraxisLearn from "@/pages/praxis-learn";
 // Students' private area: sign-in, dashboard and profile. Noindex, and kept
 // out of the nav and the WebMCP site index.
@@ -107,6 +108,7 @@ function Router() {
         <Route path="/gtm-orchestrator" component={GtmOrchestrator} />
         <Route path="/become-a-trainer" component={BecomeATrainer} />
         <Route path="/peer-groups" component={PeerGroups} />
+        <Route path="/data-policy" component={DataPolicy} />
         <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
         <Route path="/praxis/learn/:course" component={PraxisLearn} />
         <Route path="/learn" component={LearnLogin} />

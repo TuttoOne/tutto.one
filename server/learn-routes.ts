@@ -16,11 +16,13 @@ import { requireAdmin } from "./admin-routes";
 import { getResend } from "./email/resend";
 import { buildSignInEmail, buildWelcomeEmail } from "./email/learn-emails";
 import {
-  cohorts, cohortSessions, students, studentProgress, loginTokens, useCaseCards,
+  cohorts, cohortSessions, students, studentProgress, loginTokens, sharedRecords,
   studentProfileSchema,
   type Cohort, type CohortSession, type Student,
 } from "@shared/schema";
 import { getProgramme, type Module } from "@shared/learn-programmes";
+import { POLICY_VERSION } from "@shared/data-policy";
+import { eraseStudent } from "./data-routes";
 
 const COOKIE_NAME = "student_token";
 const COOKIE_DAYS = 30;
@@ -90,8 +92,8 @@ async function loadDashboard(student: Student) {
     .orderBy(asc(cohortSessions.startsAt));
   const progress = await db.select().from(studentProgress).where(eq(studentProgress.studentId, student.id));
   const programme = getProgramme(cohort.programmeKey);
-  const cards = await db.select({ id: useCaseCards.id, title: useCaseCards.title, updatedAt: useCaseCards.updatedAt })
-    .from(useCaseCards).where(eq(useCaseCards.studentId, student.id)).orderBy(asc(useCaseCards.createdAt));
+  const shared = await db.select({ id: sharedRecords.id, tool: sharedRecords.tool, title: sharedRecords.title, createdAt: sharedRecords.createdAt })
+    .from(sharedRecords).where(eq(sharedRecords.studentId, student.id)).orderBy(desc(sharedRecords.createdAt));
 
   const modules: ModuleView[] = (programme?.modules ?? []).map((m) => {
     const s = sessions.find((x) => x.moduleNumber === m.number && !x.isSpare);
@@ -115,7 +117,8 @@ async function loadDashboard(student: Student) {
       sessionMinutes: cohort.sessionMinutes,
       meetUrl: cohort.meetUrl,
     },
-    cards: cards.map((c) => ({ id: c.id, title: c.title, updatedAt: c.updatedAt.toISOString() })),
+    shared: shared.map((r) => ({ id: r.id, tool: r.tool, title: r.title, createdAt: r.createdAt.toISOString() })),
+    policyCurrent: student.policyVersion === POLICY_VERSION,
     spares: sessions.filter((s) => s.isSpare).map((s) => ({ startsAt: s.startsAt.toISOString(), endsAt: s.endsAt.toISOString() })),
     modules,
   };
@@ -127,19 +130,6 @@ function publicStudent(s: Student) {
   return rest;
 }
 
-// ── Use case cards ───────────────────────────────────────────────────────────
-
-/** The worksheet's whole state, as the page keeps it. Capped so nobody stores a novel. */
-const cardData = z.record(z.string(), z.unknown()).refine((d) => JSON.stringify(d).length < 200_000, "Too large");
-
-/** What a list shows for a card: its task in the student's words. */
-function cardTitle(d: Record<string, any>): string {
-  const s = d?.S ?? {};
-  const first = (...xs: unknown[]) => xs.map((x) => String(x ?? "").trim()).find(Boolean) ?? "";
-  const listed = Array.isArray(s.week) ? s.week.find((w: any) => String(w?.task ?? "").trim())?.task : "";
-  return first(s.task?.sentence, s.card?.need, s.week?.[s.pick]?.task, listed).slice(0, 200);
-}
-
 // ── Middleware ───────────────────────────────────────────────────────────────
 
 declare global {
@@ -147,6 +137,19 @@ declare global {
     interface Request {
       student?: Student;
     }
+  }
+}
+
+/** The signed-in student, or null. For routes open to everyone that link to a student when they can. */
+export async function studentFromRequest(req: Request): Promise<Student | null> {
+  const token = req.cookies?.[COOKIE_NAME];
+  if (!token) return null;
+  try {
+    const { sid } = jwt.verify(token, JWT_SECRET) as { sid: number };
+    const [student] = await db.select().from(students).where(eq(students.id, sid));
+    return student ?? null;
+  } catch {
+    return null;
   }
 }
 
@@ -198,6 +201,9 @@ const cohortInput = z.object({
   meetUrl: z.string().nullable().optional(),
   language: z.string().optional(),
   status: z.enum(["draft", "active", "done"]),
+  /** A date (YYYY-MM-DD) from the contract, or null to follow the policy. */
+  retainUntil: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional()
+    .transform((d): Date | null | undefined => (d === undefined ? undefined : d ? new Date(`${d}T23:59:59Z`) : null)),
 });
 
 const sessionInput = z.object({
@@ -318,57 +324,13 @@ export function registerLearnRoutes(app: Express) {
     }
   });
 
-  // ── Use case cards (the scoping worksheet saves here when opened from /learn) ──
-
-  async function ownCard(req: Request) {
-    const id = z.coerce.number().int().positive().parse(req.params.id);
-    const [card] = await db.select().from(useCaseCards)
-      .where(and(eq(useCaseCards.id, id), eq(useCaseCards.studentId, req.student!.id)));
-    return card ?? null;
-  }
-
-  app.get("/api/learn/cards/:id", requireStudent, async (req, res) => {
+  app.post("/api/learn/consent", requireStudent, async (req, res) => {
     try {
-      const card = await ownCard(req);
-      if (!card) return res.status(404).json({ error: "Not found" });
-      res.json({ id: card.id, data: card.data });
-    } catch (error) {
-      fail(res, error, "load the card");
-    }
-  });
-
-  app.post("/api/learn/cards", requireStudent, async (req, res) => {
-    try {
-      const data = cardData.parse(req.body?.data);
-      const [card] = await db.insert(useCaseCards)
-        .values({ studentId: req.student!.id, title: cardTitle(data), data })
-        .returning({ id: useCaseCards.id });
-      res.json({ id: card.id });
-    } catch (error) {
-      fail(res, error, "save the card");
-    }
-  });
-
-  app.put("/api/learn/cards/:id", requireStudent, async (req, res) => {
-    try {
-      const card = await ownCard(req);
-      if (!card) return res.status(404).json({ error: "Not found" });
-      const data = cardData.parse(req.body?.data);
-      await db.update(useCaseCards).set({ data, title: cardTitle(data), updatedAt: new Date() }).where(eq(useCaseCards.id, card.id));
+      const { version } = z.object({ version: z.literal(POLICY_VERSION) }).parse(req.body);
+      await db.update(students).set({ policyVersion: version, policyAcceptedAt: new Date() }).where(eq(students.id, req.student!.id));
       res.json({ ok: true });
     } catch (error) {
-      fail(res, error, "save the card");
-    }
-  });
-
-  app.delete("/api/learn/cards/:id", requireStudent, async (req, res) => {
-    try {
-      const card = await ownCard(req);
-      if (!card) return res.status(404).json({ error: "Not found" });
-      await db.delete(useCaseCards).where(eq(useCaseCards.id, card.id));
-      res.json({ ok: true });
-    } catch (error) {
-      fail(res, error, "delete the card");
+      fail(res, error, "record your agreement");
     }
   });
 
@@ -388,8 +350,9 @@ export function registerLearnRoutes(app: Express) {
       const progress = pids.length
         ? await db.select().from(studentProgress).where(inArray(studentProgress.studentId, pids))
         : [];
-      const cards = pids.length
-        ? await db.select().from(useCaseCards).where(inArray(useCaseCards.studentId, pids)).orderBy(desc(useCaseCards.updatedAt))
+      const shared = pids.length
+        ? await db.select({ id: sharedRecords.id, studentId: sharedRecords.studentId, tool: sharedRecords.tool, title: sharedRecords.title, createdAt: sharedRecords.createdAt })
+          .from(sharedRecords).where(inArray(sharedRecords.studentId, pids)).orderBy(desc(sharedRecords.createdAt))
         : [];
       res.json(all.map((c) => ({
         ...c,
@@ -398,7 +361,7 @@ export function registerLearnRoutes(app: Express) {
         students: people.filter((p) => p.cohortId === c.id).map((p) => ({
           ...p,
           progress: progress.filter((x) => x.studentId === p.id),
-          cards: cards.filter((x) => x.studentId === p.id),
+          shared: shared.filter((x) => x.studentId === p.id),
         })),
       })));
     } catch (error) {
@@ -497,14 +460,14 @@ export function registerLearnRoutes(app: Express) {
     }
   });
 
+  // Removing a student is a deletion under the data policy: everything in that student
+  // record goes, and the deletion log keeps a record that it happened.
   app.delete("/api/admin/learn/students/:id", requireAdmin, async (req, res) => {
     try {
       const id = z.coerce.number().int().parse(req.params.id);
-      await db.delete(studentProgress).where(eq(studentProgress.studentId, id));
-      await db.delete(useCaseCards).where(eq(useCaseCards.studentId, id));
-      await db.delete(loginTokens).where(eq(loginTokens.studentId, id));
-      await db.delete(students).where(eq(students.id, id));
-      res.json({ ok: true });
+      const entry = await eraseStudent(id, "Removed from a cohort in admin");
+      if (!entry) return res.status(404).json({ error: "Not found" });
+      res.json({ ok: true, reference: entry.reference });
     } catch (error) {
       fail(res, error, "remove the student");
     }

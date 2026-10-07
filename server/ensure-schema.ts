@@ -82,15 +82,37 @@ export async function ensureLearnSchema(): Promise<void> {
   await db.execute(
     sql`CREATE UNIQUE INDEX IF NOT EXISTS student_progress_student_module_idx ON student_progress (student_id, module_number)`,
   );
-  await db.execute(sql`CREATE TABLE IF NOT EXISTS use_case_cards (
+  // Use case cards were saved to the server for a few hours on 7 October 2026. Under the
+  // data policy the tools keep work in the browser and we only hold what is shared, so
+  // that table goes. Safe to remove this line once it has run in production.
+  await db.execute(sql`DROP TABLE IF EXISTS use_case_cards`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS shared_records (
     id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    student_id integer NOT NULL,
+    tool text NOT NULL,
     title text NOT NULL DEFAULT '',
     data jsonb NOT NULL,
-    created_at timestamp NOT NULL DEFAULT now(),
-    updated_at timestamp NOT NULL DEFAULT now()
+    name text NOT NULL,
+    email text NOT NULL,
+    organisation text,
+    note text,
+    student_id integer,
+    policy_version text NOT NULL,
+    created_at timestamp NOT NULL DEFAULT now()
   )`);
-  await db.execute(sql`CREATE INDEX IF NOT EXISTS use_case_cards_student_idx ON use_case_cards (student_id)`);
+  await db.execute(sql`CREATE INDEX IF NOT EXISTS shared_records_email_idx ON shared_records (email)`);
+  await db.execute(sql`CREATE INDEX IF NOT EXISTS shared_records_student_idx ON shared_records (student_id)`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS deletion_log (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    reference text NOT NULL UNIQUE,
+    subject_hash text,
+    reason text NOT NULL,
+    counts jsonb NOT NULL,
+    note text,
+    created_at timestamp NOT NULL DEFAULT now()
+  )`);
+  await db.execute(sql`ALTER TABLE students ADD COLUMN IF NOT EXISTS policy_version text`);
+  await db.execute(sql`ALTER TABLE students ADD COLUMN IF NOT EXISTS policy_accepted_at timestamp`);
+  await db.execute(sql`ALTER TABLE cohorts ADD COLUMN IF NOT EXISTS retain_until timestamp`);
   await db.execute(sql`CREATE TABLE IF NOT EXISTS login_tokens (
     id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     student_id integer NOT NULL,

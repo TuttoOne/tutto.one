@@ -13,6 +13,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Header } from "@/components/layout/Layout";
 import { SITE_TITLE } from "@/lib/i18n";
 import type { Material } from "@shared/learn-programmes";
+import { POLICY_PATH, POLICY_VERSION, BROWSER_DAYS, RETENTION_MONTHS } from "@shared/data-policy";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
 const INTER: React.CSSProperties = { fontFamily: "'Inter', -apple-system, sans-serif" };
@@ -92,8 +93,10 @@ type Me = {
     sessionMinutes: number;
     meetUrl: string | null;
   };
-  /** Use case cards: each is a scoping worksheet saved to their account. */
-  cards: { id: number; title: string; updatedAt: string }[];
+  /** Copies of their work they chose to share from the tools (the tools keep work in the browser). */
+  shared: { id: number; tool: string; title: string; createdAt: string }[];
+  /** False until they've agreed to the current data policy. */
+  policyCurrent: boolean;
   spares: { startsAt: string; endsAt: string }[];
   modules: ModuleView[];
 };
@@ -211,6 +214,9 @@ export function LearnLogin() {
               {send.isPending ? "Sending..." : "Send me a link"}
             </button>
             {send.error && <p style={{ color: "#b91c1c", fontSize: 13, marginTop: 12 }}>{send.error.message}</p>}
+            <p style={{ fontSize: 12, color: MUTED, marginTop: 16 }}>
+              <a href={POLICY_PATH} style={{ color: MUTED }}>How we handle your data</a>
+            </p>
           </form>
         )}
       </div>
@@ -262,8 +268,8 @@ const STATUS_LABEL: Record<ProgressStatus, string> = {
   done: "Done",
 };
 
-// The scoping worksheet from the discovery session. Opened with ?card=, it saves to the student's account.
-const WORKSHEET = "/use-case-card";
+// The use case card (the discovery session's scoping worksheet). ?from=learn gives it a way back here.
+const WORKSHEET = "/use-case-card?from=learn";
 
 function StepCard({ n, title, done, children }: { n: number; title: string; done?: boolean; children: React.ReactNode }) {
   return (
@@ -372,6 +378,11 @@ export function LearnDashboard() {
     mutationFn: () => api("POST", "/api/learn/logout"),
     onSuccess: () => { qc.clear(); navigate("/learn"); },
   });
+  const [agree, setAgree] = useState(false);
+  const consent = useMutation({
+    mutationFn: () => api("POST", "/api/learn/consent", { version: POLICY_VERSION }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["/api/learn/me"] }),
+  });
 
   if (isLoading || (error && error.message === "UNAUTHORIZED")) {
     return <div style={PAGE}><Header /><div style={WRAP}><p style={{ color: MUTED }}>Loading...</p></div></div>;
@@ -380,6 +391,38 @@ export function LearnDashboard() {
     return <div style={PAGE}><Header /><div style={WRAP}><p>{error?.message ?? "Something went wrong."}</p></div></div>;
   }
 
+  if (!me.policyCurrent) {
+    return (
+      <div style={PAGE}>
+        <Header />
+        <div style={WRAP}>
+          <span style={{ ...CAPS, fontSize: 11, color: AMBER }}>Before you start</span>
+          <h1 style={{ ...H1, marginTop: 8 }}>How we handle your data</h1>
+          <div style={{ ...CARD, fontSize: 15, lineHeight: 1.6 }}>
+            <ul style={{ margin: "0 0 16px", paddingLeft: 20, listStyle: "disc", display: "grid", gap: 8 }}>
+              <li>Your profile, your dates and which sessions you've done are kept on our server, so this page works. Only Daniel and the trainers on your programme see them.</li>
+              <li>The tools you use in the sessions keep your work in your own browser. It's wiped after {BROWSER_DAYS} days unused and doesn't follow you to another computer, so save it to a file at the end of each go. You choose when to share a copy with us.</li>
+              <li>Use placeholders for client names, personal details and real figures until your organisation's AI rules say otherwise.</li>
+              <li>We keep what you've given us for the length of your programme and {RETENTION_MONTHS} months after, then delete it. You can ask us to delete it sooner, and we confirm in writing when it's done.</li>
+            </ul>
+            <p style={{ margin: "0 0 16px" }}>
+              The full details are in our <a href={POLICY_PATH} target="_blank" rel="noopener noreferrer" style={{ color: AMBER }}>data policy</a>.
+            </p>
+            <label style={{ display: "flex", gap: 10, alignItems: "flex-start", margin: "0 0 20px", fontSize: 14 }}>
+              <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} style={{ marginTop: 4 }} />
+              <span>I've read the data policy and agree to it.</span>
+            </label>
+            <button type="button" style={{ ...BUTTON, opacity: agree ? 1 : 0.5 }} disabled={!agree || consent.isPending} onClick={() => consent.mutate()}>
+              Continue to your dashboard
+            </button>
+            {consent.error && <p style={{ color: "#b91c1c", fontSize: 13, marginTop: 12 }}>{consent.error.message}</p>}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const cards = me.shared.filter((r) => r.tool === "use-case-card");
   const now = Date.now();
   const next = me.modules.find((m) => m.session && new Date(m.session.endsAt).getTime() > now);
   const doneCount = me.modules.filter((m) => m.progress.status === "done").length;
@@ -454,24 +497,22 @@ export function LearnDashboard() {
               {profileDone ? "Edit my profile" : "Fill in my profile"}
             </Link>
           </StepCard>
-          <StepCard n={2} title="Your use cases" done={me.cards.length > 0}>
+          <StepCard n={2} title="Your use cases" done={cards.length > 0}>
             <p style={{ margin: "0 0 12px", fontSize: 14, lineHeight: 1.6, color: MUTED }}>
-              {me.cards.length
-                ? "Your cards are saved to your account, so we can read them before we meet. Open one to change it."
-                : "Pick one real task from your week and write it up as a use case card: what starts it, what goes in, what comes out, what AI does and what you keep. It takes about 20 minutes and saves as you type."}
+              Pick one real task from your week and write it up as a use case card: what starts it, what goes in, what comes out, what AI does and what you keep. It takes about 20 minutes. Your card stays in your browser, so save it to a file under "Your work" when you stop, and choose "Share with Tutto" there when you'd like us to read it before we meet.
             </p>
-            {me.cards.length > 0 && (
+            {cards.length > 0 && (
               <ul style={{ margin: "0 0 12px", padding: 0, listStyle: "none", display: "grid", gap: 6 }}>
-                {me.cards.map((c) => (
+                {cards.map((c) => (
                   <li key={c.id} style={{ fontSize: 14 }}>
-                    <a href={`${WORKSHEET}?card=${c.id}`} style={{ color: INK, fontWeight: 600 }}>{c.title || "Untitled card"}</a>
-                    <span style={{ color: MUTED, fontSize: 12 }}> · updated {new Date(c.updatedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}</span>
+                    <span style={{ fontWeight: 600 }}>{c.title || "Untitled card"}</span>
+                    <span style={{ color: MUTED, fontSize: 12 }}> · shared with us {new Date(c.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}</span>
                   </li>
                 ))}
               </ul>
             )}
-            <a href={`${WORKSHEET}?card=new`} style={me.cards.length ? BUTTON_QUIET : BUTTON}>
-              {me.cards.length ? "Add another card" : "Start your use case card"}
+            <a href={WORKSHEET} style={cards.length ? BUTTON_QUIET : BUTTON}>
+              {cards.length ? "Open the use case card" : "Start your use case card"}
             </a>
           </StepCard>
         </div>
@@ -502,7 +543,10 @@ export function LearnDashboard() {
         )}
 
         <div style={{ marginTop: 48, paddingTop: 24, borderTop: `1px solid ${RULE}`, display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 13, color: MUTED }}>
-          <span>Questions? Email <a href="mailto:daniel@tutto.one" style={{ color: INK }}>daniel@tutto.one</a></span>
+          <span>
+            Questions? Email <a href="mailto:daniel@tutto.one" style={{ color: INK }}>daniel@tutto.one</a>
+            {" · "}<a href={POLICY_PATH} style={{ color: INK }}>How we handle your data</a>
+          </span>
           <button type="button" onClick={() => logout.mutate()} style={{ background: "none", border: 0, color: MUTED, cursor: "pointer", fontSize: 13, textDecoration: "underline" }}>
             Sign out
           </button>
@@ -613,7 +657,7 @@ export function LearnProfile() {
           <div style={{ ...CARD, marginBottom: 24 }}>
             <h2 style={{ ...H2, fontSize: 17, marginBottom: 4 }}>Someone else we can contact</h2>
             <p style={{ margin: "0 0 16px", fontSize: 13, color: MUTED, lineHeight: 1.5 }}>
-              Optional. Who we should get in touch with if a session moves and we can't reach you{solo ? "" : ", such as a colleague or an assistant"}.
+              Optional. Who we should get in touch with if a session moves and we can't reach you{solo ? "" : ", such as a colleague or an assistant"}. Please ask them first: we only use it for that and delete it with the rest of your details.
             </p>
             <Field id="altContactName" label="Name" value={form.altContactName} onChange={set("altContactName")} />
             <Field id="altContactEmail" label="Email" type="email" value={form.altContactEmail} onChange={set("altContactEmail")} />

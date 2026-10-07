@@ -8,6 +8,7 @@ import { registerAdminRoutes, requireAdmin } from "./admin-routes";
 import { enquiryMessageHtml, escapeHtml } from "./email/enquiry-message";
 import { getResend } from "./email/resend";
 import { registerLearnRoutes } from "./learn-routes";
+import { registerDataRoutes } from "./data-routes";
 
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
 const FROM_EMAIL = "Tutto <notifications@tutto.one>";
@@ -290,6 +291,7 @@ export async function registerRoutes(
 
   // Student sign-in, dashboard and the admin side of cohorts (/learn)
   registerLearnRoutes(app);
+  registerDataRoutes(app);
 
   return httpServer;
 }

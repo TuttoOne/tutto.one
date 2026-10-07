@@ -135,6 +135,8 @@ export const cohorts = pgTable("cohorts", {
   language: text("language").notNull().default("en"),
   /** draft: set up, nobody contacted yet. active: running. done: finished. */
   status: text("status").notNull().default("draft"),
+  /** Keep this cohort's personal data until then, when a contract says longer or shorter than the policy. */
+  retainUntil: timestamp("retain_until"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -175,6 +177,9 @@ export const students = pgTable("students", {
   aboutBlurb: text("about_blurb"),
   invitedAt: timestamp("invited_at"),
   profileCompletedAt: timestamp("profile_completed_at"),
+  /** Which data policy version they agreed to on /learn, and when. */
+  policyVersion: text("policy_version"),
+  policyAcceptedAt: timestamp("policy_accepted_at"),
   lastLoginAt: timestamp("last_login_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 }, (t) => [uniqueIndex("students_cohort_email_idx").on(t.cohortId, t.email)]);
@@ -210,20 +215,46 @@ export const studentProgress = pgTable("student_progress", {
 export type StudentProgress = typeof studentProgress.$inferSelect;
 
 /**
- * A student's use case cards: each one is a whole scoping worksheet
- * (client/public/use-case-card/index.html, served at /use-case-card), saved as the page keeps it.
- * `title` is the card's sentence, or the task, so lists don't have to open the JSON.
+ * A copy of someone's work in one of the tools, sent to us on purpose with
+ * "Share with Tutto". The tools themselves keep work in the user's browser;
+ * this is the only place it reaches us. Linked to a student when they shared
+ * it while signed in to /learn. Deleted by the retention job (shared/data-policy.ts).
  */
-export const useCaseCards = pgTable("use_case_cards", {
+export const sharedRecords = pgTable("shared_records", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
-  studentId: integer("student_id").notNull(),
+  tool: text("tool").notNull(),
   title: text("title").notNull().default(""),
   data: jsonb("data").notNull(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  organisation: text("organisation"),
+  note: text("note"),
+  studentId: integer("student_id"),
+  /** The data policy version they agreed to when they shared. */
+  policyVersion: text("policy_version").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
-}, (t) => [index("use_case_cards_student_idx").on(t.studentId)]);
+}, (t) => [index("shared_records_email_idx").on(t.email), index("shared_records_student_idx").on(t.studentId)]);
 
-export type UseCaseCard = typeof useCaseCards.$inferSelect;
+export type SharedRecord = typeof sharedRecords.$inferSelect;
+
+/**
+ * Evidence that something was deleted, without the thing itself. `subjectHash`
+ * is the sha256 of the person's lowercased email, so we can show a deletion
+ * happened for someone who asks, without keeping their address.
+ */
+export const deletionLog = pgTable("deletion_log", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  reference: text("reference").notNull().unique(),
+  subjectHash: text("subject_hash"),
+  /** "request" (someone asked) or "retention" (the clean-up job). */
+  reason: text("reason").notNull(),
+  /** Counts by kind, e.g. { students: 1, sharedRecords: 3 }. Never the data. */
+  counts: jsonb("counts").notNull(),
+  note: text("note"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type DeletionLogEntry = typeof deletionLog.$inferSelect;
 
 export const loginTokens = pgTable("login_tokens", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),

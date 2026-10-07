@@ -12,37 +12,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ExternalLink, Mail, Trash2, UserPlus, ChevronDown, ChevronRight, Plus } from "lucide-react";
-import type { Cohort, CohortSession, Student, StudentProgress, UseCaseCard } from "@shared/schema";
+import type { Cohort, CohortSession, Student, StudentProgress } from "@shared/schema";
+import { SHARE_TOOLS, RETENTION_MONTHS } from "@shared/data-policy";
 import { PROGRAMMES, type Programme } from "@shared/learn-programmes";
 
-type AdminStudent = Student & { progress: StudentProgress[]; cards: UseCaseCard[] };
-
-// The card part of a scoping worksheet, as the worksheet saves it under data.S.card.
-const CARD_FIELDS: [string, string][] = [
-  ["why", "Why it matters"], ["ai", "What AI does"], ["me", "What they keep"],
-  ["checks", "How they check it"], ["success", "Success looks like"], ["first", "First experiment"],
-];
-
-function CardView({ card }: { card: UseCaseCard }) {
-  const c = ((card.data as { S?: { card?: Record<string, string> } })?.S?.card) ?? {};
-  const has = (k: string) => !!String(c[k] ?? "").trim();
-  return (
-    <div className="rounded-md border border-border/60 p-3 text-sm space-y-2">
-      <p className="font-medium">{card.title || "Untitled card"} <span className="text-xs text-muted-foreground font-normal">· updated {shortDate(card.updatedAt)}</span></p>
-      {["when", "need", "using", "produce"].every(has) && (
-        <p className="italic">When {c.when} happens, I need to {c.need} using {c.using} to produce {c.produce}.</p>
-      )}
-      <dl className="grid sm:grid-cols-[140px_1fr] gap-x-4 gap-y-1">
-        {CARD_FIELDS.filter(([k]) => has(k)).map(([k, l]) => (
-          <div key={k} className="contents">
-            <dt className="text-muted-foreground">{l}</dt>
-            <dd className="whitespace-pre-wrap break-words">{c[k]}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  );
-}
+type AdminShared = { id: number; tool: string; title: string; createdAt: string };
+type AdminStudent = Student & { progress: StudentProgress[]; shared: AdminShared[] };
 type AdminCohort = Cohort & { programme: Programme | null; sessions: CohortSession[]; students: AdminStudent[] };
 
 const KEY = ["/api/admin/learn/cohorts"];
@@ -124,7 +99,7 @@ function StudentRow({ s, cohort, total }: { s: AdminStudent; cohort: AdminCohort
         </span>
         <span className="text-muted-foreground hidden sm:block">{s.invitedAt ? `Invited ${shortDate(s.invitedAt)}` : "Not invited"}</span>
         <span className="text-muted-foreground hidden sm:block">{s.lastLoginAt ? `Seen ${shortDate(s.lastLoginAt)}` : "Never signed in"}</span>
-        <span className="text-muted-foreground hidden sm:block">{done}/{total} · {s.cards.length} {s.cards.length === 1 ? "card" : "cards"}</span>
+        <span className="text-muted-foreground hidden sm:block">{done}/{total} · {s.shared.length} shared</span>
       </button>
 
       {open && (
@@ -137,11 +112,16 @@ function StudentRow({ s, cohort, total }: { s: AdminStudent; cohort: AdminCohort
               </div>
             ))}
           </dl>
-          <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">Use case cards</p>
-            {s.cards.length
-              ? s.cards.map((card) => <CardView key={card.id} card={card} />)
-              : <p className="text-sm text-muted-foreground/60">None yet</p>}
+          <div className="space-y-1 text-sm">
+            <p className="text-muted-foreground">Work shared with us (read it in the Data tab)</p>
+            {s.shared.length
+              ? s.shared.map((r) => (
+                <p key={r.id}>
+                  {SHARE_TOOLS[r.tool as keyof typeof SHARE_TOOLS]?.label ?? r.tool}: <span className="font-medium">{r.title || "Untitled"}</span>
+                  <span className="text-xs text-muted-foreground"> · {shortDate(r.createdAt)}</span>
+                </p>
+              ))
+              : <p className="text-muted-foreground/60">Nothing yet</p>}
           </div>
           <div>
             <Label htmlFor={`blurb-${s.id}`}>About {s.name.split(" ")[0]} (our notes, never shown to them)</Label>
@@ -166,7 +146,7 @@ function StudentRow({ s, cohort, total }: { s: AdminStudent; cohort: AdminCohort
             </Button>
             <Button
               size="sm" variant="ghost" className="text-destructive"
-              onClick={() => { if (window.confirm(`Remove ${s.name} and their progress?`)) remove.mutate(); }}
+              onClick={() => { if (window.confirm(`Remove ${s.name}? This deletes their profile, progress and shared work, and is logged as a deletion.`)) remove.mutate(); }}
             >
               <Trash2 className="w-4 h-4 mr-1" />Remove
             </Button>
@@ -184,6 +164,8 @@ function CohortCard({ c }: { c: AdminCohort }) {
   const qc = useQueryClient();
   const refresh = () => qc.invalidateQueries({ queryKey: KEY });
   const [meetUrl, setMeetUrl] = useState(c.meetUrl ?? "");
+  const savedRetain = c.retainUntil ? new Date(c.retainUntil).toISOString().slice(0, 10) : "";
+  const [retain, setRetain] = useState(savedRetain);
   const [lines, setLines] = useState("");
   const [addMsg, setAddMsg] = useState<string | null>(null);
   const [newSession, setNewSession] = useState({ moduleNumber: "", startsAt: "" });
@@ -191,7 +173,7 @@ function CohortCard({ c }: { c: AdminCohort }) {
   const title = (n: number | null) => modules.find((m) => m.number === n)?.title ?? "";
 
   const patch = useMutation({
-    mutationFn: (data: Partial<Cohort>) => api("PATCH", `/api/admin/learn/cohorts/${c.id}`, data),
+    mutationFn: (data: Partial<Omit<Cohort, "retainUntil">> & { retainUntil?: string | null }) => api("PATCH", `/api/admin/learn/cohorts/${c.id}`, data),
     onSuccess: refresh,
   });
   const addStudents = useMutation({
@@ -250,8 +232,8 @@ function CohortCard({ c }: { c: AdminCohort }) {
           value={c.status}
           onChange={(e) => {
             const status = e.target.value;
-            if (status === "active" && c.status === "draft" && !window.confirm("Make this cohort active? Its students will be able to sign in and be invited.")) return;
-            patch.mutate({ status } as Partial<Cohort>);
+            if (status === "active" && c.status === "draft" && !window.confirm("Make this cohort active? It means they've paid: they can be invited and can tick sessions off.")) return;
+            patch.mutate({ status });
           }}
           className="text-sm border border-border rounded px-2 py-1 bg-background"
         >
@@ -267,6 +249,15 @@ function CohortCard({ c }: { c: AdminCohort }) {
           <Input id={`meet-${c.id}`} value={meetUrl} onChange={(e) => setMeetUrl(e.target.value)} placeholder="https://meet.google.com/..." className="mt-1" />
         </div>
         <Button variant="outline" size="sm" onClick={() => patch.mutate({ meetUrl: meetUrl || null })} disabled={meetUrl === (c.meetUrl ?? "")}>Save</Button>
+      </div>
+
+      <div className="flex gap-2 items-end">
+        <div className="flex-1">
+          <Label htmlFor={`retain-${c.id}`}>Keep personal data until (only if the contract sets a date)</Label>
+          <Input id={`retain-${c.id}`} type="date" value={retain} onChange={(e) => setRetain(e.target.value)} className="mt-1" />
+          <p className="text-xs text-muted-foreground mt-1">Empty means the policy: {RETENTION_MONTHS} months after the last session, then deleted automatically.</p>
+        </div>
+        <Button variant="outline" size="sm" onClick={() => patch.mutate({ retainUntil: retain || null })} disabled={retain === savedRetain}>Save</Button>
       </div>
 
       <div>

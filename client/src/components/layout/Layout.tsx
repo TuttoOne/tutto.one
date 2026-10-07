@@ -141,7 +141,7 @@ export function Footer() {
           {t({ en: "All rights reserved.", fr: "Tous droits réservés." })}
         </p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-foreground transition-colors">
+          <a href="/data-policy" className="hover:text-foreground transition-colors">
             {t({ en: "Privacy", fr: "Confidentialité" })}
           </a>
         </div>

@@ -112,6 +112,7 @@ ${button(o.signInUrl, "Open your dashboard")}
 <tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows}</table></td></tr>
 <tr><td style="padding:20px 0 0;">
 ${o.meetUrl ? `<p style="${P}">Every session is on the same call: <a href="${escapeHtml(o.meetUrl)}" style="color:${AMBER};">${escapeHtml(o.meetUrl)}</a></p>` : ""}
+<p style="${P}">The tools we use keep your work in your browser, so save it to a file after each session. How we handle your data is at <a href="https://tutto.one/data-policy" style="color:${AMBER};">tutto.one/data-policy</a>.</p>
 <p style="${P}">Any questions, just reply to this email.</p>
 <p style="${P}">Daniel</p>
 </td></tr>`;
@@ -131,6 +132,8 @@ ${o.meetUrl ? `<p style="${P}">Every session is on the same call: <a href="${esc
     ...o.sessions.map((s) => `${when(s.startsAt, o.timezone)}  ${s.isSpare ? "Spare date" : `${s.number}. ${s.title}`}`),
     "",
     ...(o.meetUrl ? [`Every session is on the same call: ${o.meetUrl}`, ""] : []),
+    "The tools we use keep your work in your browser, so save it to a file after each session. How we handle your data: https://tutto.one/data-policy",
+    "",
     "Any questions, just reply to this email.",
     "",
     "Daniel",
