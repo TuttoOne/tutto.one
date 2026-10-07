@@ -2,7 +2,7 @@
 // A suggestion is written into the state only while the person has not touched that path.
 
 import { state, get, setIn, isTouched } from './state.js';
-import { ROLES, PRINCIPLES, STAKEHOLDERS, PARTICIPATION_METHODS, COMMUNICATION, FREQUENCIES, labelOf, MODELS, ME_NEVER, ME_NOGO, CHECK_QUESTIONS } from './schema.js';
+import { ROLES, PRINCIPLES, STAKEHOLDERS, PARTICIPATION_METHODS, COMMUNICATION, FREQUENCIES, labelOf, regionOf, MODELS, ME_NEVER, ME_NOGO, CHECK_QUESTIONS } from './schema.js';
 
 export let suggestions = {};
 
@@ -25,10 +25,7 @@ export function listText(items, conj = 'and') {
 
 const lower = s => s ? s.charAt(0).toLowerCase() + s.slice(1) : s;
 
-const EU = ['france', 'germany', 'italy', 'spain', 'portugal', 'belgium', 'netherlands', 'luxembourg', 'ireland', 'austria',
-  'denmark', 'sweden', 'finland', 'poland', 'czechia', 'czech republic', 'slovakia', 'slovenia', 'croatia', 'hungary', 'romania',
-  'bulgaria', 'greece', 'cyprus', 'malta', 'estonia', 'latvia', 'lithuania', 'eu', 'european union'];
-const inEU = country => EU.includes((country || '').trim().toLowerCase());
+const inEU = country => regionOf(country) === 'eu';
 
 // Who sits at the top, in words that fit the organisation.
 export function leadershipName(type) {
@@ -75,8 +72,10 @@ export function suggestRoles(s = state) {
   const ids = [...(MODEL_ROLES[model] || MODEL_ROLES.other)];
   if (has(s.org.stakeholders, 'staff') && !isSmall(s.org.size)) ids.push('hr');
   if (s.org.type === 'education' || has(s.org.stakeholders, 'public', 'patients')) ids.push('stakeholderRep');
-  if (s.charterType === 'development' || s.org.maturity === 'centric') ids.push('architect');
-  return [...new Set(ids)].map(id => ({
+  if (has(s.charterTypes, 'development') || s.org.maturity === 'centric') ids.push('architect');
+  // In South Africa POPIA's information officer does the data protection officer's job.
+  const za = regionOf(s.org.country) === 'za';
+  return [...new Set(ids.map(id => (za && id === 'dpo' ? 'infoOfficer' : id)))].map(id => ({
     name: id === 'leadership' ? leadershipName(s.org.type) : ROLES[id].name,
     responsibilities: ROLES[id].responsibilities,
   }));
@@ -87,7 +86,13 @@ export function suggestFrameworks(s = state) {
   const reg = s.governance.regulation;
   if (!type && !size) return [];
   const out = [];
-  if (inEU(country) || ['public', 'healthcare'].includes(type) || ['high', 'public'].includes(reg) || ['international', 'global'].includes(scope)) out.push('eu-ai-act');
+  const region = regionOf(country);
+  // The EU AI Act also reaches organisations outside the EU that offer AI to people in it.
+  if (inEU(country) || ['international', 'global'].includes(scope) || (!region && (['public', 'healthcare'].includes(type) || ['high', 'public'].includes(reg)))) out.push('eu-ai-act');
+  if (['eu', 'eea'].includes(region)) out.push('gdpr');
+  if (country === 'it') out.push('it-ai-law');
+  if (region === 'uk') out.push('uk-gdpr');
+  if (region === 'za') out.push('popia');
   if (['private', 'education', 'nonprofit', 'research', 'healthcare'].includes(type) || !out.length) out.push('nist-ai-rmf');
   if (!isSmall(size) && (isBig(size) || advanced(maturity))) out.push('iso-42001');
   if (['international', 'global'].includes(scope) || ['public', 'research'].includes(type)) out.push('oecd');
@@ -174,7 +179,7 @@ function compute(s) {
   if (selected.includes('privacy')) areas.push('dataprotection');
   if (selected.includes('fair')) areas.push('diverse');
   if (selected.includes('transparent')) areas.push('transparency');
-  if (has(fw, 'eu-ai-act', 'iso-42001') || advanced(org.maturity)) areas.push('impact');
+  if (has(fw, 'eu-ai-act', 'gdpr', 'uk-gdpr', 'iso-42001') || advanced(org.maturity)) areas.push('impact');
   if (has(fw, 'iso-42001') || advanced(org.maturity)) areas.push('monitoring');
   if ((selected.includes('robust') && !early(org.maturity)) || has(fw, 'nist-ai-rmf')) areas.push('incidents');
   if (selected.includes('sustainable') || early(org.maturity) || org.maturity === 'adopting') areas.push('procurement');
@@ -185,6 +190,7 @@ function compute(s) {
     { title: 'Keep a register of AI uses', description: 'We list every AI tool in use, what it is for and who owns it, and review the list every quarter.' },
     { title: 'Train everyone who uses AI', description: 'Everyone who uses AI in their work completes a short training session within three months of this charter’s launch.' },
   ];
+  if (org.country === 'it' && has(sh, 'staff')) items.push({ title: 'Tell staff where AI is used', description: 'As Italian law requires, we tell staff which AI systems are used in their work, what they are for and how they affect them.' });
   if (chosenAreas.includes('dataprotection')) items.push({ title: 'No personal data in unapproved tools', description: 'Personal or confidential data only goes into AI tools on the approved list.' });
   if (chosenAreas.includes('transparency')) items.push({ title: 'Say when AI was used', description: 'We disclose when content or decisions have been substantially shaped by AI.' });
   if (chosenAreas.includes('incidents')) items.push({ title: 'Report AI incidents quickly', description: `Anyone can report an AI incident or concern to ${body}. Serious incidents are reported within 48 hours.` });

@@ -1,7 +1,9 @@
 // One state object, saved to localStorage on every change.
 // `touched` records paths the person has edited, so suggestions never overwrite them.
-// `provenance` records paths filled from the register, a website or a document.
+// `provenance` records paths filled from a website or a document.
 // `mode` says who the charter is for: 'org' (an organisation) or 'me' (one person). Each keeps its own answers.
+
+import { COUNTRIES, countryCode } from './schema.js';
 
 export const STORAGE_KEY = 'praxis_charter_v2';
 const LEGACY_KEY = 'ai_charter_wizard_data';
@@ -14,10 +16,10 @@ export function emptyState() {
   return {
     version: 2,
     mode: 'org',
-    charterType: 'strategy',
+    charterTypes: ['strategy'],
     org: {
       name: '', type: '', typeOther: '', size: '', maturity: '', contact: '', stakeholders: [],
-      scope: '', country: '', sector: '', website: '', description: '', aiUses: '', existingPolicies: '', siren: '',
+      scope: '', country: '', countryOther: '', sector: '', website: '', description: '', aiUses: '', existingPolicies: '',
     },
     meta: { title: '', version: '', date: '' },
     vision: { statement: '', purpose: '', aiDefinition: '', values: [], customValues: [] },
@@ -144,6 +146,16 @@ function normalise(data) {
     if (v && typeof v === 'object' && !Array.isArray(v)) out[k] = { ...v, ...(data?.[k] || {}) };
   }
   out.me.check = { ...base.me.check, ...(data?.me?.check || {}) };
+  // Older saves had one charterType and the country as free text.
+  if (typeof data?.charterType === 'string' && !Array.isArray(data?.charterTypes)) out.charterTypes = [data.charterType];
+  delete out.charterType;
+  if (!Array.isArray(out.charterTypes)) out.charterTypes = base.charterTypes;
+  const c = out.org.country;
+  if (c && !COUNTRIES.some(x => x.value === c)) {
+    out.org.country = countryCode(c) || 'other';
+    if (out.org.country === 'other' && !out.org.countryOther) out.org.countryOther = c;
+  }
+  delete out.org.siren;
   out.mode = out.mode === 'me' ? 'me' : 'org';
   out.version = 2;
   return out;

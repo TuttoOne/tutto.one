@@ -39,6 +39,35 @@ export const MATURITY = [
   { value: 'centric', label: 'AI-centric: AI is core to what we do' },
 ];
 
+// Where the organisation is based. `region` decides which laws and frameworks apply:
+// eu (EU member state), eea (GDPR applies, EU AI Act not in force yet), uk, za, ch, other.
+const C = (value, label, region) => ({ value, label, region });
+export const COUNTRIES = [
+  C('at', 'Austria', 'eu'), C('be', 'Belgium', 'eu'), C('bg', 'Bulgaria', 'eu'), C('hr', 'Croatia', 'eu'), C('cy', 'Cyprus', 'eu'),
+  C('cz', 'Czechia', 'eu'), C('dk', 'Denmark', 'eu'), C('ee', 'Estonia', 'eu'), C('fi', 'Finland', 'eu'), C('fr', 'France', 'eu'),
+  C('de', 'Germany', 'eu'), C('gr', 'Greece', 'eu'), C('hu', 'Hungary', 'eu'), C('is', 'Iceland', 'eea'), C('ie', 'Ireland', 'eu'),
+  C('it', 'Italy', 'eu'), C('lv', 'Latvia', 'eu'), C('li', 'Liechtenstein', 'eea'), C('lt', 'Lithuania', 'eu'), C('lu', 'Luxembourg', 'eu'),
+  C('mt', 'Malta', 'eu'), C('nl', 'Netherlands', 'eu'), C('no', 'Norway', 'eea'), C('pl', 'Poland', 'eu'), C('pt', 'Portugal', 'eu'),
+  C('ro', 'Romania', 'eu'), C('sk', 'Slovakia', 'eu'), C('si', 'Slovenia', 'eu'), C('za', 'South Africa', 'za'), C('es', 'Spain', 'eu'),
+  C('se', 'Sweden', 'eu'), C('ch', 'Switzerland', 'ch'), C('gb', 'United Kingdom', 'uk'), C('other', 'Other', 'other'),
+];
+
+const COUNTRY_ALIASES = {
+  uk: 'gb', 'great britain': 'gb', britain: 'gb', england: 'gb', scotland: 'gb', wales: 'gb', 'northern ireland': 'gb',
+  italia: 'it', deutschland: 'de', 'españa': 'es', espana: 'es', 'czech republic': 'cz', 'the netherlands': 'nl', holland: 'nl',
+  rsa: 'za', 'republic of south africa': 'za', suisse: 'ch', schweiz: 'ch', svizzera: 'ch',
+};
+
+// A country name or code typed anywhere (an old save, a website) to a value in COUNTRIES, or '' if unknown.
+export function countryCode(text) {
+  const t = (text || '').toString().trim().toLowerCase();
+  if (!t) return '';
+  const hit = COUNTRIES.find(c => c.value === t || c.label.toLowerCase() === t);
+  return hit && hit.value !== 'other' ? hit.value : COUNTRY_ALIASES[t] || '';
+}
+
+export const regionOf = code => COUNTRIES.find(c => c.value === code)?.region || '';
+
 export const SCOPES = [
   { value: 'local', label: 'Local: one site' },
   { value: 'regional', label: 'Regional: several sites in one region' },
@@ -116,7 +145,7 @@ export const PRINCIPLES = [
 
 export const REGULATION = [
   { value: 'light', label: 'Light: little sector-specific regulation' },
-  { value: 'moderate', label: 'Moderate: general rules such as GDPR apply' },
+  { value: 'moderate', label: 'Moderate: general rules such as data protection law apply' },
   { value: 'high', label: 'High: regulated sector such as health, finance or critical infrastructure' },
   { value: 'public', label: 'Public sector: public accountability applies' },
 ];
@@ -155,12 +184,37 @@ export const MODELS = [
   { value: 'other', label: 'Something else', bestFor: '', pros: '', cons: '' },
 ];
 
+// `regions` limits a framework to organisations based there (see COUNTRIES). No `regions` means it fits anywhere.
 export const FRAMEWORKS = [
   {
     value: 'eu-ai-act', label: 'EU AI Act', status: 'Binding EU regulation',
-    bestFor: 'Anyone using or offering AI in the EU.',
+    bestFor: 'Anyone using AI in the EU, or offering AI to people there.',
     meaning: 'We classify our AI uses by risk, avoid prohibited practices, and meet the transparency and oversight duties that apply to us.',
     step: 'Check each AI use against the EU AI Act risk categories and close any gaps.',
+  },
+  {
+    value: 'gdpr', label: 'GDPR', status: 'Binding EU and EEA regulation', regions: ['eu', 'eea'],
+    bestFor: 'Anyone using personal data in AI tools.',
+    meaning: 'We have a lawful basis for any personal data that goes into AI tools, assess the risk before high-risk uses, and give people the safeguards the GDPR sets for decisions made by automated means.',
+    step: 'Run a data protection impact assessment for each AI use that involves personal data.',
+  },
+  {
+    value: 'it-ai-law', label: 'Italian AI law (Law 132/2025)', status: 'Binding Italian law', regions: ['it'],
+    bestFor: 'Organisations based in Italy.',
+    meaning: 'We tell staff when AI is used in their work, professionals tell clients when they use AI, and a person keeps the final decision in health care and public services.',
+    step: 'Check our AI uses against Law 132/2025, starting with how we inform staff and clients.',
+  },
+  {
+    value: 'uk-gdpr', label: 'UK GDPR and the ICO’s AI guidance', status: 'Binding UK law, with regulator guidance', regions: ['uk'],
+    bestFor: 'Organisations in the UK, or handling data of people there.',
+    meaning: 'We follow UK data protection law and the Information Commissioner’s guidance on AI: a lawful basis for personal data, impact assessments where the risk is high, and a way to challenge significant automated decisions.',
+    step: 'Run a data protection impact assessment for each AI use that involves personal data, using the ICO’s AI guidance.',
+  },
+  {
+    value: 'popia', label: 'POPIA', status: 'Binding South African law', regions: ['za'],
+    bestFor: 'Organisations in South Africa.',
+    meaning: 'We process personal information in AI tools only under POPIA’s conditions, our information officer is registered with the Information Regulator, and nobody is subject to a decision based only on automated processing without the safeguards section 71 requires.',
+    step: 'Check each AI use that involves personal information against POPIA, including section 71 on automated decisions.',
   },
   {
     value: 'nist-ai-rmf', label: 'NIST AI Risk Management Framework', status: 'Voluntary framework',
@@ -188,6 +242,7 @@ export const ROLES = {
   caio: { name: 'Chief AI officer', responsibilities: 'Sets AI strategy and standards across the organisation and chairs the governance council.' },
   committeeChair: { name: 'AI ethics committee chair', responsibilities: 'Runs the committee, sets its agenda and signs off its decisions.' },
   committee: { name: 'AI ethics committee', responsibilities: 'A cross-functional group (for example legal, IT, HR and operations) that reviews new AI uses and advises on hard cases.' },
+  infoOfficer: { name: 'Information officer', responsibilities: 'Makes sure AI uses involving personal information meet POPIA, and is registered with the Information Regulator.' },
   dpo: { name: 'Data protection officer', responsibilities: 'Checks that AI uses involving personal data are lawful and proportionate, and leads on data protection impact assessments.' },
   legal: { name: 'Legal and compliance', responsibilities: 'Tracks AI law and regulation and advises on contracts, liability and compliance.' },
   hr: { name: 'HR representative', responsibilities: 'Looks after the effect of AI on jobs, skills and working conditions, and links with staff representatives.' },
@@ -271,6 +326,13 @@ export const TRIGGERS = [
   { value: 'audit', label: 'Audit findings' },
 ];
 
+// Whether a framework card fits the organisation's country. With no country chosen, everything shows.
+export function frameworkApplies(fw) {
+  const code = state.org.country;
+  if (!fw.regions || !code || code === 'other') return true;
+  return fw.regions.includes(regionOf(code)) || fw.regions.includes(code);
+}
+
 export const labelOf = (options, value) => options.find(o => o.value === value)?.label ?? value ?? '';
 export const principleOf = value => PRINCIPLES.find(p => p.value === value);
 
@@ -282,10 +344,10 @@ export const STEPS = [
   {
     id: 'start', title: 'Start',
     todo: 'Say what the charter covers',
-    heading: 'Start with what you already have',
-    lead: 'Pull in your organisation’s details from the French company register, or skip ahead and type them in. You can check every value before it is used.',
+    heading: 'What the charter covers',
+    lead: 'Choose as many as you need. Most charters cover two or three of these, and you can change it later.',
     fields: [
-      { path: 'charterType', type: 'cards', label: 'What should the charter cover?', options: CHARTER_TYPES },
+      { path: 'charterTypes', type: 'cards', multiple: true, label: 'What should the charter cover?', options: CHARTER_TYPES, required: true, error: 'Choose at least one thing the charter should cover' },
     ],
   },
   {
@@ -298,10 +360,10 @@ export const STEPS = [
       { path: 'org.type', type: 'select', label: 'Type of organisation', options: ORG_TYPES, required: true, error: 'Choose the type of organisation', other: 'org.typeOther' },
       { path: 'org.size', type: 'select', label: 'Size', options: ORG_SIZES, required: true, error: 'Choose the size of your organisation' },
       { path: 'org.maturity', type: 'select', label: 'Where are you with AI today?', options: MATURITY, required: true, error: 'Choose where you are with AI today' },
+      { path: 'org.country', type: 'select', label: 'Country where you are based', hint: 'This decides which laws the charter points to.', options: COUNTRIES, required: true, error: 'Choose the country where you are based', other: 'org.countryOther' },
       { path: 'org.contact', type: 'email', label: 'Contact email for questions about the charter', required: true, error: 'Enter a contact email', autocomplete: 'email' },
       { path: 'org.stakeholders', type: 'checkboxes', label: 'Who does the charter affect?', options: STAKEHOLDERS, columns: 2 },
       { path: 'org.scope', type: 'select', label: 'Geographic scope', options: SCOPES, more: true },
-      { path: 'org.country', type: 'text', label: 'Country where you are based', more: true },
       { path: 'org.sector', type: 'text', label: 'Sector or main activity', more: true },
       { path: 'org.website', type: 'url', label: 'Website', more: true, placeholder: 'https://' },
       { path: 'org.description', type: 'textarea', label: 'Context and motivation', hint: 'Why are you writing this charter now?', more: true },
@@ -341,7 +403,7 @@ export const STEPS = [
       { path: 'governance.regulation', type: 'select', label: 'How regulated is your use of AI?', options: REGULATION },
       { type: 'recommendation' },
       { path: 'governance.model', type: 'cards', label: 'Governance model', options: MODELS, required: true, error: 'Choose a governance model', other: 'governance.modelOther', describe: 'model' },
-      { path: 'governance.frameworks', type: 'cards', multiple: true, label: 'Frameworks to align with', options: FRAMEWORKS, describe: 'framework' },
+      { path: 'governance.frameworks', type: 'cards', multiple: true, label: 'Laws and frameworks to align with', hint: 'Showing the ones that apply where you are based.', options: FRAMEWORKS, describe: 'framework', filter: frameworkApplies },
       { path: 'governance.roles', type: 'list', label: 'Roles and responsibilities', addLabel: 'Add a role', item: { fields: [
         { key: 'name', type: 'text', label: 'Role' },
         { key: 'responsibilities', type: 'textarea', label: 'Responsibilities', rows: 2 },

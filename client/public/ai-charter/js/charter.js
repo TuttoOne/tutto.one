@@ -5,10 +5,10 @@
 import { state } from './state.js';
 import {
   ORG_TYPES, ORG_SIZES, MATURITY, SCOPES, STAKEHOLDERS, VALUES, PRINCIPLES, MODELS, FRAMEWORKS,
-  PARTICIPATION_METHODS, COMMITMENT_AREAS, APPROACHES, RESOURCES, COMMUNICATION, FREQUENCIES, TRIGGERS, CHARTER_TYPES, labelOf,
+  PARTICIPATION_METHODS, COMMITMENT_AREAS, APPROACHES, RESOURCES, COMMUNICATION, FREQUENCIES, TRIGGERS, CHARTER_TYPES, COUNTRIES, labelOf,
   ME_PRINCIPLES, ME_NEVER, ME_NOGO, ME_CHECKS, ME_FREQUENCIES, ME_TRIGGERS, CHECK_QUESTIONS,
 } from './schema.js';
-import { recommendModel, today } from './derive.js';
+import { recommendModel, today, listText } from './derive.js';
 import { esc, customKey } from './render.js';
 
 const clean = s => (s ?? '').toString().trim();
@@ -49,7 +49,7 @@ function buildOrganisation(s) {
 
   // Preface
   section('About this charter', [
-    p(`This charter sets out ${COVERS[s.charterType] || COVERS.strategy}: what we use it for, the principles we hold ourselves to, who is accountable, and how we will keep the charter current.`),
+    p(`This charter sets out ${listText((s.charterTypes || []).map(t => COVERS[t]).filter(Boolean)) || COVERS.strategy}: what we use it for, the principles we hold ourselves to, who is accountable, and how we will keep the charter current.`),
     p(s.participation.methods?.includes('cafeia')
       ? 'We wrote it with the people it affects, following the Café IA co-design approach.'
       : 'We wrote it with the people it affects.'),
@@ -63,7 +63,7 @@ function buildOrganisation(s) {
       ['Sector', org.sector],
       ['Where we are with AI', labelOf(MATURITY, org.maturity)],
       ['Geographic scope', labelOf(SCOPES, org.scope)],
-      ['Based in', org.country],
+      ['Based in', withOther(COUNTRIES, org.country, org.countryOther)],
     ]),
     ...sub('Who this charter affects', ul(labels(STAKEHOLDERS, org.stakeholders))),
     ...(clean(org.description) ? sub('Why we wrote it', p(org.description)) : []),
@@ -150,7 +150,7 @@ function buildOrganisation(s) {
     title: clean(s.meta.title) || `${name} AI charter`,
     org: name,
     lead: clean(s.vision.statement),
-    eyebrow: `AI charter${labelOf(CHARTER_TYPES, s.charterType) ? ` · ${labelOf(CHARTER_TYPES, s.charterType)}` : ''}`,
+    eyebrow: `AI charter${s.charterTypes?.length === 1 ? ` · ${labelOf(CHARTER_TYPES, s.charterTypes[0])}` : ''}`,
     version: clean(s.meta.version) || '1.0',
     toc: true,
     credit: 'Drafted with the Tutto AI charter wizard, after the Café IA method and Capgemini’s Code of Ethics for AI.',

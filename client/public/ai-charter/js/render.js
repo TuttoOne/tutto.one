@@ -96,7 +96,9 @@ function cards(f) {
   const multi = !!f.multiple;
   const value = get(f.path);
   const rec = f.describe === 'model' ? recommendModel()?.model : null;
-  const items = f.options.map(o => {
+  // A filter hides options that do not fit, but never one already chosen.
+  const options = f.filter ? f.options.filter(o => f.filter(o) || (multi ? (value || []).includes(o.value) : value === o.value)) : f.options;
+  const items = options.map(o => {
     const checked = multi ? (value || []).includes(o.value) : value === o.value;
     let body = `<b>${esc(o.label)}</b>`;
     if (f.describe === 'model' && o.bestFor) {

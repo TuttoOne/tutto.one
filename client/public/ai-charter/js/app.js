@@ -137,7 +137,7 @@ function render({ focusHeading = false, focusField = null, keepFocus = null } = 
   const errs = window.__errors || {};
   let body;
   if (step.output) body = outputHtml();
-  else body = `${step.id === 'start' ? '<div id="sources"></div>' : ''}${stepFieldsHtml(step)}${footHtml(step)}`;
+  else body = `${stepFieldsHtml(step)}${step.id === 'start' ? '<div id="sources"></div>' : ''}${footHtml(step)}`;
 
   mount.innerHTML = `<h2 tabindex="-1">${esc(step.heading)}</h2><p class="lead">${esc(step.lead)}</p>${errorSummary(errs)}${body}`;
 

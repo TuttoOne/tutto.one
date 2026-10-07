@@ -1,15 +1,14 @@
-// Autofill from the French company register (browser only), a website or uploaded documents (via server.py).
+// Autofill from a website or uploaded documents (via server.py or the claude.ai viewer).
 // Nothing is written until the person accepts it in the review panel.
 
 import { state, get, fill, isTouched, commit } from './state.js';
-import { ORG_TYPES, ORG_SIZES, MATURITY, SCOPES, STAKEHOLDERS, VALUES, REGULATION, labelOf } from './schema.js';
+import { ORG_TYPES, ORG_SIZES, MATURITY, SCOPES, STAKEHOLDERS, VALUES, REGULATION, COUNTRIES, countryCode, labelOf } from './schema.js';
 import { esc } from './render.js';
 import { hosted, sampleFn, loadScript } from './host.js';
 
 let proposals = null; // { source, sourceLabel, items: [{ path, label, value, display, quote, basis }] }
 let busy = '';
 let message = '';
-let results = [];
 let onDone = () => {};
 
 // 'server': python3 server.py with Claude set up. 'sample': a claude.ai artifact viewer. 'none': neither.
@@ -27,68 +26,12 @@ export async function checkAI() {
   return (mode = (await sampleFn()) ? 'sample' : 'none');
 }
 
-// --- Company register (recherche-entreprises.api.gouv.fr) ---------------------------------------
-
-const NAF_SECTIONS = {
-  A: 'Agriculture, forestry and fishing', B: 'Mining and quarrying', C: 'Manufacturing', D: 'Energy supply',
-  E: 'Water supply and waste management', F: 'Construction', G: 'Wholesale and retail trade', H: 'Transport and storage',
-  I: 'Accommodation and food services', J: 'Information and communication', K: 'Finance and insurance', L: 'Real estate',
-  M: 'Professional, scientific and technical services', N: 'Administrative and support services', O: 'Public administration',
-  P: 'Education', Q: 'Health and social work', R: 'Arts, entertainment and recreation', S: 'Other services',
-  T: 'Households as employers', U: 'Extraterritorial organisations',
-};
-
-function sizeFromRegister(r) {
-  const t = r.tranche_effectif_salarie;
-  if (['00', '01', '02', '03', '11', '12'].includes(t)) return ['small', 'stated'];
-  if (['21', '22', '31', '32'].includes(t)) return ['medium', 'stated'];
-  if (['41', '42', '51'].includes(t)) return ['large', 'stated'];
-  if (['52', '53'].includes(t)) return ['xlarge', 'stated'];
-  if (r.categorie_entreprise === 'GE') return ['xlarge', 'inferred'];
-  if (r.categorie_entreprise === 'ETI') return ['large', 'inferred'];
-  return [null];
-}
-
-function typeFromRegister(r) {
-  const c = r.complements || {};
-  const section = r.section_activite_principale;
-  if (c.est_association) return ['nonprofit', 'stated'];
-  if (c.est_administration || c.collectivite_territoriale || c.est_service_public || section === 'O' || String(r.nature_juridique || '').startsWith('7')) return ['public', 'stated'];
-  if (section === 'P' || c.est_uai) return ['education', 'inferred'];
-  if (section === 'Q' || c.est_finess) return ['healthcare', 'inferred'];
-  if (String(r.activite_principale || '').startsWith('72')) return ['research', 'inferred'];
-  return ['private', 'inferred'];
-}
-
-async function searchRegister(q) {
-  const url = `https://recherche-entreprises.api.gouv.fr/search?q=${encodeURIComponent(q)}&per_page=6&etat_administratif=A`;
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(r.status === 429 ? 'Too many searches. Wait a few seconds and try again.' : 'The register did not respond.');
-  return (await r.json()).results || [];
-}
-
-function registerProposals(r) {
-  const items = [];
-  const siege = r.siege || {};
-  const quote = [r.nom_complet, siege.adresse, r.activite_principale && `NAF ${r.activite_principale}`].filter(Boolean).join(' · ');
-  const add = (path, label, value, display, basis = 'stated') => value != null && value !== '' && items.push({ path, label, value, display: display ?? value, quote: '', basis });
-  add('org.name', 'Organisation name', titleCase(r.nom_complet));
-  const [type, tb] = typeFromRegister(r); add('org.type', 'Type of organisation', type, labelOf(ORG_TYPES, type), tb);
-  const [size, sb] = sizeFromRegister(r); add('org.size', 'Size', size, labelOf(ORG_SIZES, size), sb);
-  add('org.sector', 'Sector', NAF_SECTIONS[r.section_activite_principale]);
-  add('org.country', 'Country', 'France');
-  add('org.siren', 'SIREN number', r.siren);
-  return { source: 'register', sourceLabel: 'the French company register', note: `Register entry: ${quote}`, items };
-}
-
-const titleCase = s => (s || '').toLowerCase().replace(/(^|[\s\-'’(])([a-zà-ÿ])/g, (m, a, b) => a + b.toUpperCase());
-
 // --- Website and documents (server.py + Claude) ------------------------------------------------------
 
 const FIELD_MAP = {
   name: ['org.name', 'Organisation name'], website: ['org.website', 'Website'], contact_email: ['org.contact', 'Contact email'],
   org_type: ['org.type', 'Type of organisation', ORG_TYPES], size: ['org.size', 'Size', ORG_SIZES], sector: ['org.sector', 'Sector'],
-  scope: ['org.scope', 'Geographic scope', SCOPES], country: ['org.country', 'Country'], description: ['org.description', 'Context and motivation'],
+  scope: ['org.scope', 'Geographic scope', SCOPES], description: ['org.description', 'Context and motivation'],
   ai_maturity: ['org.maturity', 'Where you are with AI', MATURITY], stakeholders: ['org.stakeholders', 'Who the charter affects', STAKEHOLDERS],
   values: ['vision.values', 'Values', VALUES], vision: ['vision.statement', 'Vision statement'], ai_uses: ['org.aiUses', 'Where you already use AI'],
   existing_policies: ['org.existingPolicies', 'Related policies'],
@@ -100,6 +43,15 @@ function serverProposals(data, source, sourceLabel) {
     if (!f || f.value == null || f.value === '' || (Array.isArray(f.value) && !f.value.length)) continue;
     if (key === 'regulated_sector') {
       if (f.value === true) items.push({ path: 'governance.regulation', label: 'Regulation', value: 'high', display: labelOf(REGULATION, 'high'), quote: f.source_quote, basis: f.basis });
+      continue;
+    }
+    if (key === 'country') {
+      const code = countryCode(f.value);
+      if (code) items.push({ path: 'org.country', label: 'Country', value: code, display: labelOf(COUNTRIES, code), quote: f.source_quote, basis: f.basis });
+      else {
+        items.push({ path: 'org.country', label: 'Country', value: 'other', display: 'Other', quote: f.source_quote, basis: f.basis });
+        items.push({ path: 'org.countryOther', label: 'Country', value: String(f.value), display: String(f.value), quote: f.source_quote, basis: f.basis });
+      }
       continue;
     }
     const m = FIELD_MAP[key];
@@ -225,7 +177,7 @@ ${sourceText.slice(0, 40000)}
 function currentDisplay(item) {
   const v = get(item.path);
   if (v == null || v === '' || (Array.isArray(v) && !v.length)) return '';
-  const opts = { 'org.type': ORG_TYPES, 'org.size': ORG_SIZES, 'org.scope': SCOPES, 'org.maturity': MATURITY, 'org.stakeholders': STAKEHOLDERS, 'vision.values': VALUES, 'governance.regulation': REGULATION }[item.path];
+  const opts = { 'org.type': ORG_TYPES, 'org.size': ORG_SIZES, 'org.scope': SCOPES, 'org.country': COUNTRIES, 'org.maturity': MATURITY, 'org.stakeholders': STAKEHOLDERS, 'vision.values': VALUES, 'governance.regulation': REGULATION }[item.path];
   if (Array.isArray(v)) return v.map(x => (opts ? labelOf(opts, x) : x)).join(', ');
   return opts ? labelOf(opts, v) : String(v);
 }
@@ -256,26 +208,11 @@ function reviewHtml() {
   </section>`;
 }
 
-function resultsHtml() {
-  if (!results.length) return '';
-  return `<ul class="results">${results.map((r, i) => `<li><button type="button" class="result" data-af="pick" data-index="${i}">` +
-    `<span class="result-name">${esc(titleCase(r.nom_complet))}</span>` +
-    `<span class="result-meta">${esc([r.siege?.libelle_commune && titleCase(r.siege.libelle_commune), NAF_SECTIONS[r.section_activite_principale], r.siren && `SIREN ${r.siren}`].filter(Boolean).join(' · '))}</span></button></li>`).join('')}</ul>`;
-}
-
 export function sourcesHtml() {
   const off = mode === 'none';
   const offNote = off
     ? `<p class="hint">${hosted ? 'Claude is not available in this view.' : 'Needs the local server with Claude set up. See the README.'}</p>`
     : '';
-  const register = hosted ? '' : `<div class="source">
-      <h3>Company register</h3>
-      <p class="hint">French organisations. Name, SIREN or SIRET. Free and runs in your browser.</p>
-      <form data-af-form="register" class="inline-form"><label class="sr-only" for="af-q">Organisation name or SIREN</label>
-        <input id="af-q" type="search" placeholder="Organisation name or SIREN" autocomplete="organization">
-        <button class="btn btn-ghost btn-sm" type="submit"${busy ? ' disabled' : ''}>Search</button></form>
-      ${resultsHtml()}
-    </div>`;
   const website = mode === 'sample' || (hosted && off) ? `<div class="source${off ? ' is-disabled' : ''}">
       <h3>Your website</h3>
       <p class="hint">Paste the text of your about or mission page. Claude suggests answers from it.</p>
@@ -291,12 +228,9 @@ export function sourcesHtml() {
         <button class="btn btn-ghost btn-sm" type="submit"${busy || off ? ' disabled' : ''}>Read site</button></form>
       ${offNote}
     </div>`;
-  // On the website there is no Claude behind the page: offer the register search only.
-  if (!hosted && off) return `<div class="sources">${register}</div>
-  <p class="status" role="status" aria-live="polite">${esc(busy || message)}</p>
-  ${reviewHtml()}`;
+  // On the website there is no Claude behind the page, so there is nothing to read from.
+  if (!hosted && off) return '';
   return `<div class="sources">
-    ${register}
     ${website}
     <div class="source${off ? ' is-disabled' : ''}">
       <h3>Your documents</h3>
@@ -325,13 +259,7 @@ export function mountSources(el, done) {
     const kind = e.target.dataset.afForm;
     message = '';
     try {
-      if (kind === 'register') {
-        const q = el.querySelector('#af-q').value.trim();
-        if (q.length < 3) { message = 'Enter at least three characters.'; redraw(); return; }
-        busy = 'Searching the register…'; redraw();
-        results = await searchRegister(q);
-        message = results.length ? `${results.length} match${results.length === 1 ? '' : 'es'}. Choose yours.` : 'No active organisation found. Try another spelling or the SIREN number.';
-      } else if (kind === 'url') {
+      if (kind === 'url') {
         let url = el.querySelector('#af-url').value.trim();
         if (!url) { message = 'Enter your website address.'; redraw(); return; }
         if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
@@ -378,11 +306,7 @@ export function mountSources(el, done) {
     const btn = e.target.closest('[data-af]');
     if (!btn) return;
     const act = btn.dataset.af;
-    if (act === 'pick') {
-      proposals = registerProposals(results[Number(btn.dataset.index)]);
-      results = [];
-      message = '';
-    } else if (act === 'discard') {
+    if (act === 'discard') {
       proposals = null;
     } else if (act === 'accept') {
       const chosen = [...el.querySelectorAll('[data-af-item]')].filter(c => c.checked).map(c => proposals.items[Number(c.dataset.afItem)]);
