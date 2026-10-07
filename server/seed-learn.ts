@@ -91,6 +91,29 @@ const SEED: SeedCohort[] = [
     sessions: [],
     students: [{ name: "Christine Venter", email: "christinev@healthscience.co.za" }],
   },
+  {
+    // Daniel's own test login. Same programme and dates as Background Italia, but
+    // active, so he sees what a paid student sees and can tick sessions off.
+    slug: "test-daniel",
+    name: "Test (Daniel)",
+    organisation: null,
+    programmeKey: "background-italia",
+    timezone: "Europe/Paris",
+    sessionMinutes: 60,
+    meetUrl: null,
+    status: "active",
+    sessions: [
+      { module: 1, start: "2026-10-14T10:00:00+02:00" },
+      { module: 2, start: "2026-10-21T10:00:00+02:00" },
+      { module: 3, start: "2026-10-28T10:00:00+01:00" },
+      { module: 4, start: "2026-11-04T10:00:00+01:00" },
+      { module: 5, start: "2026-11-11T10:00:00+01:00" },
+      { module: 6, start: "2026-11-18T10:00:00+01:00" },
+      { module: 7, start: "2026-11-25T10:00:00+01:00" },
+      { module: 8, start: "2026-12-02T10:00:00+01:00" },
+    ],
+    students: [{ name: "Daniel Forsthofer", email: "dr.forsthofer@gmail.com" }],
+  },
 ];
 
 export async function seedLearnCohorts(): Promise<void> {
