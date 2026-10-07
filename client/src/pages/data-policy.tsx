@@ -80,7 +80,7 @@ export default function DataPolicy() {
           Only Daniel and the trainers on your programme see your data. These services hold it for us, under their own data protection terms:
         </p>
         <ul style={UL}>
-          <li>Replit runs the website, and its database partner Neon holds the data{DATABASE_REGION ? `, in ${DATABASE_REGION}` : ". We're confirming which region it's held in and will add it here"}.</li>
+          <li>Replit runs the website and holds its database{DATABASE_REGION ? `, in ${DATABASE_REGION}` : ". We're confirming which region it's held in and will add it here"}.</li>
           <li>Resend sends the sign-in and welcome emails.</li>
           <li>Google Workspace holds our email, calendar invites, meeting notes and Google Meet calls.</li>
         </ul>

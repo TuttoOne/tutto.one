@@ -35,8 +35,8 @@ export const SHARE_TOOLS = {
 export type ShareTool = keyof typeof SHARE_TOOLS;
 
 /**
- * Where the database is. Find it in the Replit Shell with `echo $PGHOST`: the host
- * name carries the region (for example "us-east-2.aws.neon.tech" is Ohio, USA).
- * Until it's filled in, the policy page says we're confirming it.
+ * Where the site and its database are hosted. Confirmed by Daniel on 7 October 2026
+ * from Replit's settings: North America. (The workspace's `$PGHOST` is "helium",
+ * Replit's internal development database, which doesn't name a region.)
  */
-export const DATABASE_REGION: string | null = null;
+export const DATABASE_REGION: string | null = "North America";
