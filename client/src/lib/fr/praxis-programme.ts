@@ -5,8 +5,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The Praxis Programme": "Le programme Praxis",
   "Eight sessions.":
     "Huit séances.",
-  "Your team stops repeating itself.":
-    "Votre équipe arrête de se répéter.",
+  "Your team leaves AI-fluent.":
+    "Votre équipe en ressort à l'aise avec l'IA.",
   "Sending...": "Envoi…",
   "Send it →": "Envoyer →",
   "You and up to four of your team · Online or in person":
@@ -300,16 +300,16 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Votre charte, une grille par rôle, des consignes et contrôles permanents pour vos trois tâches clés, et les outils construits dessus. Une attestation consigne ce que vous avez réalisé, pas seulement votre présence.",
   "A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.":
     "Un mot de franchise, pour poser la bonne attente : vous ferez vous-même l'essentiel du chemin. Sur tout ce qui est complexe, la dernière portion se termine à la main ou se délègue. Faire déjà l'essentiel du chemin représente une économie considérable par rapport à la façon dont le travail se fait aujourd'hui, et c'est cette économie que nous visons.",
-  "Your staff already use AI, and it saves them nothing: ask, fix, ask again. Over eight sessions we fix it in order, on your own work. The rules, a KPI for each job, what to hand over. Then the tools, skills and automations that do it without you.":
-    "Vos équipes utilisent déjà l'IA, et cela ne leur fait rien gagner : demander, corriger, redemander. En huit séances, nous corrigeons cela dans l'ordre, sur votre propre travail. Les règles, un indicateur par tâche, ce qu'on délègue. Puis les outils, les compétences et les automatisations qui le font sans vous.",
+  "Your staff already use AI, and it saves them nothing: ask, fix, ask again. But your team knows its own work inside out, and that's where we start. First we set up your AI around your business: the rules, what good looks like for each job and what to hand over. Then we build on that setup together, on your own work, through real conversations and worked examples, up to the tools, skills and automations that do the work without you.":
+    "Vos équipes utilisent déjà l'IA, et cela ne leur fait rien gagner : demander, corriger, redemander. Mais votre équipe connaît son travail sur le bout des doigts, et c'est par là que nous commençons. D'abord, nous configurons votre IA autour de votre entreprise : les règles, ce qu'est un bon résultat pour chaque tâche et ce qu'on délègue. Ensuite, nous construisons sur cette base ensemble, sur votre propre travail, par de vraies conversations et des exemples concrets, jusqu'aux outils, compétences et automatisations qui font le travail sans vous.",
   "Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
     "Quatre séances supplémentaires vous transforment en formateur. Clients que vous amenez vous-même : vous conservez 80 % des frais de formation payés. Clients amenés par Tutto : vous en conservez 60 %. Je trouve et j'organise les clients avec vous, vous assurez les séances, et une structure vous épaule pour les cas difficiles.",
   "Tell me here, or bring it to a free 15-minute call. I'll tell you honestly whether this programme is the right fit.":
     "Dites-le-moi ici, ou venez avec elle à un appel gratuit de 15 minutes. Je vous dirai franchement si ce programme vous convient.",
   "It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.":
     "Il fera de vous quelqu'un capable de construire des choses réellement utiles, qui sait reconnaître quand un chantier justifie l'appel à un développeur, et comment le briefer le cas échéant. C'est une position bien plus précieuse qu'il n'y paraît.",
-  "No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.":
-    "Aucune compétence en code n'est requise. Vous repartez avec la charte, les grilles, les consignes et les contrôles, et les tâches qui se répétaient, déléguées.",
+  "After eight sessions your team is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.":
+    "Après huit séances, votre équipe est à l'aise avec l'IA : elle sait s'y retrouver et créer tout ce qu'elle sait décrire. Aucune compétence en code n'est requise. Vous repartez avec la charte, les grilles, les consignes et les contrôles, et les tâches qui se répétaient, déléguées.",
   "Weekly, over roughly two months. The first four set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.":
     "Une séance par semaine, sur près de deux mois. Les quatre premières posent les fondations : les règles, le standard, les décisions, les consignes. Les quatre dernières construisent dessus.",
   "Your staff have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.":
