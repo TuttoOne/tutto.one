@@ -733,20 +733,26 @@ function SiteContentSection() {
 
 // ── Tools ─────────────────────────────────────────────────────────────────────
 
-// The link-only workshop tools. Each is a static page under client/public,
-// served by server/routes.ts with noindex, so this list is the one place
-// they are gathered. Each opens in a new tab; use its own "Admin view"
-// toggle for the working and sources.
+// The link-only workshop tools, in the order a programme uses them. Each is a
+// static page under client/public, served by server/routes.ts with noindex, so
+// this list is the one place they are gathered. Each opens in a new tab; the
+// scorecard and hand-over check have their own "Admin view" toggle for the
+// working and sources. Work people share from them is in the Data tab.
 const TOOLS = [
+  {
+    name: "Use case card",
+    href: "/use-case-card",
+    what: "The discovery session. Picks one real task from someone's week and ends on their use case card, ready to print.",
+  },
   {
     name: "AI charter",
     href: "/ai-charter",
-    what: "The policy tool. Builds a firm's AI charter step by step and downloads it as Markdown, PDF or a save file.",
+    what: "Session one, the policy tool. Builds a firm's AI charter step by step and downloads it as Markdown, PDF or a save file.",
   },
   {
     name: "Agent scorecard",
     href: "/agent-scorecard",
-    what: "The KPI tool. Sets the measures an AI agent is judged on, with targets, counter-metrics and an agent pack.",
+    what: "Session two, the KPI tool. Sets the measures an AI agent is judged on, with targets, counter-metrics and an agent pack.",
   },
   {
     name: "Hand-over check",
