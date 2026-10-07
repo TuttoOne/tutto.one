@@ -11,7 +11,8 @@
  *   (client/src/pages/praxis-programme.tsx) and the artefacts in the HSA quote.
  * - `background-italia`: the 8 sessions in Alice Cappiello's proposal
  *   (30 September 2026), which is what Quote 00103 refers to.
- * - `solo-fast-track`: Alex Boshoff's 4 sessions, from our call on 2 October.
+ * - `solo-fast-track`: Alex Boshoff's 4 sessions, from our call on 2 October
+ *   and her WhatsApp of 7 October (her own tools first, then the business idea).
  */
 
 export type Material = { label: string; href: string };
@@ -197,35 +198,37 @@ const BACKGROUND_ITALIA: Programme = {
 const SOLO_FAST_TRACK: Programme = {
   key: "solo-fast-track",
   name: "Praxis Solo Fast Track",
+  // Built with the end in mind: the pieces of her own tools (figures in, UK tax
+  // rules, a check, an alert) are the pieces of the app she wants to build for others.
   modules: [
     {
       number: 1,
-      title: "Set up, and your rules",
-      what: "We set up your UK-hosted machine so your financial data stays in the UK, get Claude working on it and move across the prompts you've built up in ChatGPT. Then we write your own rules: what goes in, what stays out and where it all runs.",
-      leaveWith: "A working setup and your personal AI rules",
-      practice: "Write down the tax job you want AI to do, step by step, the way you do it today.",
+      title: "Set up, and your first tools",
+      what: "We set up your UK-hosted machine so your financial data stays in the UK, get Claude working on it and move across the prompts you've built up in ChatGPT. We agree your own rules: what goes in, what stays out and where it all runs. Then we build your first tool: a watch on the stocks you follow that alerts you to big price moves and news.",
+      leaveWith: "A working setup, your personal AI rules and a stock alert",
+      practice: "Let the stock alert run for a fortnight and note every alert that was useless or missing.",
       materials: [M.charterToolMe, M.startHere, M.limits],
     },
     {
       number: 2,
-      title: "Define good, and brief it once",
-      what: "Your tax optimisation is the project. We write down what a good answer looks like and how you'd check it, then turn the way you work into standing instructions so you never explain it twice.",
-      leaveWith: "A scorecard and your first skill file",
-      practice: "Run the skill on your own figures and mark where the answer was wrong or unclear.",
-      materials: [M.scorecardTool, M.skillFile, M.fluency],
+      title: "Your tax year, and the business idea",
+      what: "We build the tool that collects your figures as the year goes on, so the year-end return is mostly done when it arrives. The UK tax rules we write down for it become standing instructions your app will use too. Then we start on the business idea: who it's for, what it does for them and what a good answer looks like.",
+      leaveWith: "A tax-year tool, your first skill file and a one-page brief for the app",
+      practice: "Write down three people the app is for and the one question each of them would ask it.",
+      materials: [M.skillFile, M.scorecardTool, M.fluency],
     },
     {
       number: 3,
-      title: "Build with Claude Code",
-      what: "We build the first version of your app together on your machine, one piece at a time. At each step I explain how and why, so you can carry on without me.",
-      leaveWith: "A first working app on your own machine",
+      title: "Build the app with Claude Code",
+      what: "We build the first version of the app for others, one piece at a time, reusing what already works in your own tools. At each step I explain how and why, so you can carry on without me.",
+      leaveWith: "A first working version of the app on your own machine",
       practice: "Add one small feature on your own and bring what went wrong.",
       materials: [M.claudeCode101, M.claudeCodeInAction],
     },
     {
       number: 4,
       title: "Agents, and AI inside your app",
-      what: "Your first agent, checked against your scorecard. Then how to call Claude from inside your own app. We look at what the FCA rules on automated advice mean for the retirement app and agree the next steps.",
+      what: "Your first agent, checked against what we agreed a good answer looks like. Then how to call Claude from inside your own app. We look at where the FCA draws the line between guidance and advice, what that means for the app and what comes next.",
       leaveWith: "A working agent and a plan for the app",
       practice: "For the next 30 days, send one piece of work a week for review.",
       materials: [M.api, M.mcp, M.evals],
