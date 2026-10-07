@@ -5,13 +5,13 @@
  * A draft cohort is one that hasn't paid: it can be set up in full, but the
  * server refuses to invite anyone in it and its students get a read-only dashboard.
  */
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ExternalLink, Mail, Trash2, UserPlus, ChevronDown, ChevronRight, Plus } from "lucide-react";
+import { ExternalLink, Mail, Trash2, UserPlus, ChevronDown, ChevronRight, Plus, Search } from "lucide-react";
 import type { Cohort, CohortSession, Student, StudentProgress } from "@shared/schema";
 import { SHARE_TOOLS, RETENTION_MONTHS } from "@shared/data-policy";
 import { PROGRAMMES, type Programme } from "@shared/learn-programmes";
@@ -41,6 +41,10 @@ function inZone(d: string | Date, timeZone: string) {
 
 function shortDate(d: string | Date | null) {
   return d ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short" }).format(new Date(d)) : "";
+}
+
+function fullDate(d: string | Date) {
+  return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" }).format(new Date(d));
 }
 
 const STATUS_STYLE: Record<string, string> = {
@@ -160,7 +164,7 @@ function StudentRow({ s, cohort, total }: { s: AdminStudent; cohort: AdminCohort
 
 // ── One cohort ───────────────────────────────────────────────────────────────
 
-function CohortCard({ c }: { c: AdminCohort }) {
+function CohortCard({ c, open, onToggle }: { c: AdminCohort; open: boolean; onToggle: () => void }) {
   const qc = useQueryClient();
   const refresh = () => qc.invalidateQueries({ queryKey: KEY });
   const [meetUrl, setMeetUrl] = useState(c.meetUrl ?? "");
@@ -217,17 +221,22 @@ function CohortCard({ c }: { c: AdminCohort }) {
   const uninvited = c.students.filter((s) => !s.invitedAt).length;
 
   return (
-    <div className="rounded-lg border border-border/60 bg-card p-5 space-y-6">
+    <div id={`cohort-${c.id}`} className={`rounded-lg border border-border/60 bg-card scroll-mt-4 ${open ? "p-5 space-y-6" : "px-5 py-3"}`}>
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <div className="flex items-center gap-2">
-            <h3 className="font-serif font-bold text-lg">{c.name}</h3>
-            <span className={`text-xs px-2 py-0.5 rounded ${STATUS_STYLE[c.status] ?? ""}`}>{c.status}</span>
+        <button type="button" onClick={onToggle} aria-expanded={open} className="flex items-start gap-2 text-left min-w-0 flex-1">
+          {open ? <ChevronDown className="w-4 h-4 mt-1.5 shrink-0" /> : <ChevronRight className="w-4 h-4 mt-1.5 shrink-0" />}
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <h3 className="font-serif font-bold text-lg truncate">{c.name}</h3>
+              <span className={`text-xs px-2 py-0.5 rounded ${STATUS_STYLE[c.status] ?? ""}`}>{c.status}</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {open
+                ? <>{c.programme?.name ?? c.programmeKey} · {c.sessionMinutes} min · {c.timezone}</>
+                : <>{c.organisation || "Solo"} · {c.programme?.name ?? c.programmeKey} · {c.students.length} {c.students.length === 1 ? "student" : "students"} · created {fullDate(c.createdAt)}</>}
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground">
-            {c.programme?.name ?? c.programmeKey} · {c.sessionMinutes} min · {c.timezone}
-          </p>
-        </div>
+        </button>
         <select
           value={c.status}
           onChange={(e) => {
@@ -243,6 +252,7 @@ function CohortCard({ c }: { c: AdminCohort }) {
         </select>
       </div>
 
+      {open && <>
       <div className="flex gap-2 items-end">
         <div className="flex-1">
           <Label htmlFor={`meet-${c.id}`}>Call link</Label>
@@ -331,6 +341,7 @@ function CohortCard({ c }: { c: AdminCohort }) {
           </div>
         </div>
       </div>
+      </>}
     </div>
   );
 }
@@ -383,15 +394,55 @@ function NewCohort({ onDone }: { onDone: () => void }) {
   );
 }
 
+type SortKey = "created" | "name" | "organisation";
+
+const byText = (a: string | null, b: string | null) => {
+  // Empty last, so solo cohorts sit after the named organisations.
+  if (!a) return b ? 1 : 0;
+  if (!b) return -1;
+  return a.localeCompare(b, "en-GB", { sensitivity: "base" });
+};
+
+const SORTS: Record<SortKey, (a: AdminCohort, b: AdminCohort) => number> = {
+  created: (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  name: (a, b) => byText(a.name, b.name),
+  organisation: (a, b) => byText(a.organisation, b.organisation) || byText(a.name, b.name),
+};
+
+function matches(c: AdminCohort, q: string) {
+  const hay = [c.name, c.slug, c.organisation, ...c.students.flatMap((s) => [s.name, s.email])];
+  return hay.some((v) => v?.toLowerCase().includes(q));
+}
+
 export function StudentsSection() {
   const [adding, setAdding] = useState(false);
+  const [sort, setSort] = useState<SortKey>("created");
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState<Set<number>>(new Set());
   const { data, isLoading, error } = useQuery<AdminCohort[]>({
     queryKey: KEY,
     queryFn: () => api("GET", "/api/admin/learn/cohorts"),
   });
 
+  const q = query.trim().toLowerCase();
+  const shown = useMemo(
+    () => [...(data ?? [])].filter((c) => !q || matches(c, q)).sort(SORTS[sort]),
+    [data, q, sort],
+  );
+
   if (isLoading) return <p className="text-sm text-muted-foreground">Loading...</p>;
   if (error) return <p className="text-sm text-destructive">{(error as Error).message}</p>;
+
+  const toggle = (id: number) => setOpen((prev) => {
+    const next = new Set(prev);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    return next;
+  });
+  const jumpTo = (id: number) => {
+    setOpen((prev) => new Set(prev).add(id));
+    requestAnimationFrame(() => document.getElementById(`cohort-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+  const allOpen = shown.length > 0 && shown.every((c) => open.has(c.id));
 
   return (
     <div className="space-y-6">
@@ -402,7 +453,53 @@ export function StudentsSection() {
         {!adding && <Button size="sm" variant="outline" onClick={() => setAdding(true)}><Plus className="w-4 h-4 mr-1" />New cohort</Button>}
       </div>
       {adding && <NewCohort onDone={() => setAdding(false)} />}
-      {(data ?? []).map((c) => <CohortCard key={c.id} c={c} />)}
+
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="relative flex-1 min-w-[220px]">
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            data-testid="input-cohort-search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && shown[0]) jumpTo(shown[0].id);
+              if (e.key === "Escape") setQuery("");
+            }}
+            placeholder="Find a cohort, organisation or student (Enter opens the first)"
+            className="pl-9"
+          />
+        </div>
+        <select
+          data-testid="select-cohort-sort"
+          value={sort}
+          onChange={(e) => setSort(e.target.value as SortKey)}
+          className="text-sm border border-border rounded px-2 h-9 bg-background"
+          aria-label="Sort cohorts"
+        >
+          <option value="created">Newest first</option>
+          <option value="name">Name A to Z</option>
+          <option value="organisation">Organisation A to Z</option>
+        </select>
+        <Button
+          size="sm" variant="outline"
+          disabled={shown.length === 0}
+          onClick={() => setOpen(allOpen ? new Set() : new Set(shown.map((c) => c.id)))}
+        >
+          {allOpen ? "Close all" : "Open all"}
+        </Button>
+      </div>
+
+      {q && (
+        <p className="text-xs text-muted-foreground -mt-3">
+          {shown.length} of {data?.length ?? 0} cohorts match
+        </p>
+      )}
+      {shown.length === 0 && (data?.length ?? 0) > 0 && (
+        <p className="text-sm text-muted-foreground">Nothing matches "{query}".</p>
+      )}
+      <div className="space-y-3">
+        {shown.map((c) => <CohortCard key={c.id} c={c} open={open.has(c.id)} onToggle={() => toggle(c.id)} />)}
+      </div>
     </div>
   );
 }
