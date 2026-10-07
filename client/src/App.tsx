@@ -113,6 +113,7 @@ function Router() {
         <Route path="/learn/auth" component={LearnAuth} />
         <Route path="/learn/dashboard" component={LearnDashboard} />
         <Route path="/learn/profile" component={LearnProfile} />
+        <Route path="/learn/*">{() => <Redirect to="/learn" />}</Route>
         <Route path="/admin" component={AdminDashboard} />
         <Route path="/admin/login" component={AdminLogin} />
         <Route path="/admin/setup" component={AdminSetup} />

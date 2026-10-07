@@ -83,6 +83,8 @@ type StudentView = {
 type Me = {
   student: StudentView;
   cohort: {
+    /** "draft" until we've been paid: the dashboard shows a holding screen. */
+    status: "draft" | "active" | "done";
     name: string;
     organisation: string | null;
     programmeName: string;
@@ -371,6 +373,10 @@ export function LearnDashboard() {
     return <div style={PAGE}><Header /><div style={WRAP}><p>{error?.message ?? "Something went wrong."}</p></div></div>;
   }
 
+  if (me.cohort.status === "draft") {
+    return <NotActiveYet me={me} onSignOut={() => logout.mutate()} />;
+  }
+
   const now = Date.now();
   const next = me.modules.find((m) => m.session && new Date(m.session.endsAt).getTime() > now);
   const doneCount = me.modules.filter((m) => m.progress.status === "done").length;
@@ -476,6 +482,35 @@ export function LearnDashboard() {
   );
 }
 
+/** A student whose cohort is still a draft: signed in, but nothing opens until we've been paid. */
+function NotActiveYet({ me, onSignOut }: { me: Me; onSignOut: () => void }) {
+  const first = me.student.name.split(" ")[0];
+  return (
+    <div style={PAGE}>
+      <Header />
+      <div style={WRAP}>
+        <span style={{ ...CAPS, fontSize: 11, color: AMBER }}>
+          {me.cohort.programmeName}{me.cohort.organisation ? ` · ${me.cohort.organisation}` : ""}
+        </span>
+        <h1 style={{ ...H1, marginTop: 8 }}>Hi {first}</h1>
+        <div style={{ ...CARD, marginTop: 24 }}>
+          <span style={{ ...CAPS, fontSize: 10, color: MUTED, display: "block", marginBottom: 8 }}>Account status</span>
+          <h2 style={H2}>Your account isn't active yet</h2>
+          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: MUTED }}>
+            It opens as soon as we've received payment. Then you'll find your dates, what we cover in each session and your profile here. We'll email you when it's ready.
+          </p>
+        </div>
+        <div style={{ marginTop: 48, paddingTop: 24, borderTop: `1px solid ${RULE}`, display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 13, color: MUTED }}>
+          <span>Questions? Email <a href="mailto:daniel@tutto.one" style={{ color: INK }}>daniel@tutto.one</a></span>
+          <button type="button" onClick={onSignOut} style={{ background: "none", border: 0, color: MUTED, cursor: "pointer", fontSize: 13, textDecoration: "underline" }}>
+            Sign out
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── /learn/profile ───────────────────────────────────────────────────────────
 
 const PROFILE_FIELDS = [
@@ -507,6 +542,10 @@ export function LearnProfile() {
   const qc = useQueryClient();
   const { data: me } = useMe();
   const [form, setForm] = useState<ProfileForm | null>(null);
+
+  useEffect(() => {
+    if (me?.cohort.status === "draft") navigate("/learn/dashboard", { replace: true });
+  }, [me, navigate]);
 
   useEffect(() => {
     if (me && !form) {
