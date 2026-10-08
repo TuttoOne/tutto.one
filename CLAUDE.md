@@ -21,3 +21,13 @@ still need a read. Don't mass-rewrite old copy to clear flags unless Daniel
 asks; fix what you touch.
 
 No em dashes anywhere, in English or French.
+
+## Admin login bypass (dev only, never production)
+
+`ADMIN_DEV_BYPASS=1` lets Daniel use /admin on his own machine without
+signing in. It is only ever a local dev feature: nobody else may reach admin
+without a login, ever. The guard in `server/admin-routes.ts` (above
+`requireAdmin`) needs development mode, not running on Replit, and a
+request from this machine with no proxy headers. Never loosen those checks,
+never set `ADMIN_DEV_BYPASS` in Replit secrets, a deployment or any shared
+`.env`, and never add another route or flag that skips `requireAdmin`.

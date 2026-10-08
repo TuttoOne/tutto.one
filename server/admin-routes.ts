@@ -22,7 +22,38 @@ const JWT_EXPIRY = "24h";
 const COOKIE_NAME = "admin_token";
 const APP_NAME = "Tutto Admin";
 
+// DEV ONLY, NEVER IN PRODUCTION. ADMIN_DEV_BYPASS=1 skips the admin login so
+// Daniel can test /admin on his own machine. Nobody else may ever reach admin
+// without a login, so it takes all of these at once:
+// - NODE_ENV is "development" (the production build never is)
+// - not on Replit (REPL_ID is set there, and the workspace's dev server has a
+//   public preview URL even though it runs in development)
+// - the request comes from this machine (loopback) and has no proxy headers,
+//   so nothing forwarded in from outside is let through
+// Don't loosen any of these, don't set ADMIN_DEV_BYPASS in Replit secrets or
+// any shared .env, and don't add another way round requireAdmin.
+const DEV_BYPASS =
+  process.env.NODE_ENV === "development" &&
+  process.env.ADMIN_DEV_BYPASS === "1" &&
+  !process.env.REPL_ID;
+if (process.env.ADMIN_DEV_BYPASS === "1" && !DEV_BYPASS) {
+  console.warn("[admin] ADMIN_DEV_BYPASS ignored: it only works in local development, off Replit");
+} else if (DEV_BYPASS) {
+  console.warn("[admin] ADMIN_DEV_BYPASS is on: admin routes are open without a login to requests from this machine only");
+}
+
+const LOOPBACK = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
+function isLocalRequest(req: Request) {
+  return (
+    LOOPBACK.has(req.socket.remoteAddress ?? "") &&
+    !req.headers["x-forwarded-for"] &&
+    !req.headers["x-real-ip"] &&
+    !req.headers["forwarded"]
+  );
+}
+
 export function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  if (DEV_BYPASS && isLocalRequest(req)) return next();
   const token = req.cookies?.[COOKIE_NAME];
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
