@@ -36,6 +36,13 @@ const COURSE_SESSIONS_N = 8;
 const FAST_TRACK_SESSIONS_N = 4;
 
 /**
+ * The referral credit, as a percentage of the full course at the session rate.
+ * 5% of R30,000 is R1,500, so the five credits allowed (REFERRAL_CREDITS_MAX)
+ * give back at most a quarter of the course.
+ */
+const REFERRAL_CREDIT_PCT = 5;
+
+/**
  * Sessions in the in-company Article 4 engagement. Six, not eight: it is a
  * different product from the open programme, sold to a compliance obligation
  * rather than to a curriculum. Named apart from COURSE_SESSIONS_N so the two
@@ -213,13 +220,18 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
   praxisIntro: SESSION,
   /**
    * Credit taken off a client's own programme for each person they refer who
-   * enrols, up to REFERRAL_CREDITS_MAX of them.
+   * enrols, up to REFERRAL_CREDITS_MAX of them. Computed from the course so it
+   * moves with it: R1,500, €100 or £80 today.
    *
-   * It replaced a scheme that halved the fee on one referral and refunded it
-   * entirely on two, which made the second referral worth four times the
-   * eighth and cost a full course to honour.
+   * It was a whole session (R3,750, capped at four, so half the course), which
+   * gave away half a group seat on every referral who took one. Before that, a
+   * scheme halved the fee on one referral and refunded it entirely on two.
    */
-  referralCredit: SESSION,
+  referralCredit: {
+    GBP: Math.round((SESSION.GBP * COURSE_SESSIONS_N * REFERRAL_CREDIT_PCT) / 100),
+    EUR: Math.round((SESSION.EUR * COURSE_SESSIONS_N * REFERRAL_CREDIT_PCT) / 100),
+    ZAR: Math.round((SESSION.ZAR * COURSE_SESSIONS_N * REFERRAL_CREDIT_PCT) / 100),
+  },
   /**
    * Promotional session rate — half the standard rate.
    *
@@ -373,10 +385,10 @@ export const TRAINER_TRACK_SESSIONS = 4;
 /** Students used in the worked annual example on the trainer page. */
 export const EXAMPLE_STUDENTS = 24;
 /**
- * Referral credits one client can stack. Four at the session rate is a full
- * course fee off, which is the cap the copy quotes.
+ * Referral credits one client can stack. Five at 5% of the course is a quarter
+ * of it off (R7,500 of R30,000), which is the cap the copy quotes.
  */
-export const REFERRAL_CREDITS_MAX = 4;
+export const REFERRAL_CREDITS_MAX = 5;
 
 /**
  * Ongoing support for a Pythia build, as a share of build cost per year.
