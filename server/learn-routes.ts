@@ -15,6 +15,7 @@ import { db } from "./db";
 import { requireAdmin } from "./admin-routes";
 import { getResend } from "./email/resend";
 import { buildSignInEmail, buildWelcomeEmail } from "./email/learn-emails";
+import { notifyProfileSaved } from "./email/student-notify";
 import {
   cohorts, cohortSessions, students, studentProgress, loginTokens, sharedRecords,
   studentProfileSchema,
@@ -46,7 +47,7 @@ const FROM_PERSON = process.env.LEARN_FROM_EMAIL ?? "Daniel Forsthofer <daniel@t
 const FROM_SYSTEM = "Tutto <notifications@tutto.one>";
 const REPLY_TO = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
 
-function siteUrl(req: Request): string {
+export function siteUrl(req: Request): string {
   if (process.env.PUBLIC_SITE_URL) return process.env.PUBLIC_SITE_URL.replace(/\/$/, "");
   if (process.env.NODE_ENV === "production") return "https://tutto.one";
   return `${req.protocol}://${req.get("host")}`;
@@ -300,6 +301,14 @@ export function registerLearnRoutes(app: Express) {
         .where(eq(students.id, req.student!.id))
         .returning();
       res.json({ student: publicStudent(updated) });
+      const [cohort] = await db.select({ name: cohorts.name }).from(cohorts).where(eq(cohorts.id, updated.cohortId));
+      notifyProfileSaved({
+        siteUrl: siteUrl(req),
+        cohortName: cohort?.name ?? null,
+        firstTime: !req.student!.profileCompletedAt,
+        email: updated.email,
+        profile,
+      });
     } catch (error) {
       fail(res, error, "save the profile");
     }

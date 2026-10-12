@@ -18,7 +18,8 @@ import { db } from "./db";
 import { requireAdmin } from "./admin-routes";
 import { getResend } from "./email/resend";
 import { buildDeletionEmail } from "./email/privacy-emails";
-import { studentFromRequest } from "./learn-routes";
+import { siteUrl, studentFromRequest } from "./learn-routes";
+import { notifyShared } from "./email/student-notify";
 import {
   cohorts, cohortSessions, students, studentProgress, loginTokens, sharedRecords, deletionLog,
   contactSubmissions, emailLeads,
@@ -199,6 +200,17 @@ export function registerDataRoutes(app: Express) {
         policyVersion: input.policyVersion,
       }).returning({ id: sharedRecords.id, createdAt: sharedRecords.createdAt });
       res.json({ ok: true, id: row.id, linkedToAccount: !!student });
+      notifyShared({
+        siteUrl: siteUrl(req),
+        toolLabel: SHARE_TOOLS[input.tool].label,
+        title: shareTitle(input.tool, input.data),
+        name: input.name,
+        email: norm(input.email),
+        organisation: input.organisation || null,
+        note: input.note || null,
+        linkedToStudent: !!student,
+        data: input.data,
+      });
     } catch (error) {
       fail(res, error, "share your work");
     }
