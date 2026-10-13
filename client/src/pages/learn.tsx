@@ -12,7 +12,8 @@ import { Link, useLocation } from "wouter";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Header } from "@/components/layout/Layout";
 import { SITE_TITLE } from "@/lib/i18n";
-import type { Material } from "@shared/learn-programmes";
+import type { Material, ModuleIcon as IconName } from "@shared/learn-programmes";
+import { ModuleIcon } from "@/components/learn/ModuleIcon";
 import { POLICY_PATH, POLICY_VERSION, BROWSER_DAYS, RETENTION_MONTHS } from "@shared/data-policy";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -57,6 +58,7 @@ type ProgressStatus = "not_started" | "in_progress" | "done";
 type ModuleView = {
   number: number;
   title: string;
+  icon: IconName;
   what: string;
   leaveWith?: string;
   practice: string;
@@ -299,7 +301,14 @@ function StepCard({ n, title, done, children }: { n: number; title: string; done
   );
 }
 
-function ModuleCard({ m, timezone, past, locked }: { m: ModuleView; timezone: string; past: boolean; locked: boolean }) {
+// The first half of a programme lays the foundations, the second half builds on them.
+function toneFor(n: number, total: number): "foundations" | "building" {
+  return n <= Math.ceil(total / 2) ? "foundations" : "building";
+}
+
+function ModuleCard({ m, timezone, past, locked, tone }: {
+  m: ModuleView; timezone: string; past: boolean; locked: boolean; tone: "foundations" | "building";
+}) {
   const qc = useQueryClient();
   const [open, setOpen] = useState(!past && m.progress.status !== "done");
   const save = useMutation({
@@ -316,9 +325,10 @@ function ModuleCard({ m, timezone, past, locked }: { m: ModuleView; timezone: st
         aria-expanded={open}
         style={{
           width: "100%", textAlign: "left", background: "transparent", border: 0, padding: "18px 24px",
-          display: "flex", gap: 16, alignItems: "baseline", cursor: "pointer", color: INK,
+          display: "flex", gap: 14, alignItems: "center", cursor: "pointer", color: INK,
         }}
       >
+        <ModuleIcon name={m.icon} size={48} tone={tone} />
         <span style={{ ...ROBOTO, fontWeight: 700, color: done ? AMBER : MUTED, fontSize: 14, minWidth: 24 }}>
           {String(m.number).padStart(2, "0")}
         </span>
@@ -335,7 +345,7 @@ function ModuleCard({ m, timezone, past, locked }: { m: ModuleView; timezone: st
       </button>
 
       {open && (
-        <div style={{ padding: "0 24px 24px 64px" }}>
+        <div style={{ padding: "0 24px 24px 24px" }}>
           <p style={{ margin: "0 0 12px", fontSize: 15, lineHeight: 1.6 }}>{m.what}</p>
           {m.leaveWith && (
             <p style={{ margin: "0 0 16px", fontSize: 14 }}>
@@ -469,7 +479,10 @@ export function LearnDashboard() {
           </span>
           {next ? (
             <>
-              <p style={{ ...ROBOTO, fontSize: 22, fontWeight: 700, margin: "0 0 4px" }}>{next.title}</p>
+              <div style={{ display: "flex", gap: 14, alignItems: "center", marginBottom: 4 }}>
+                <ModuleIcon name={next.icon} size={64} tone={toneFor(next.number, me.modules.length)} />
+                <p style={{ ...ROBOTO, fontSize: 22, fontWeight: 700, margin: 0, minWidth: 0 }}>{next.title}</p>
+              </div>
               <p style={{ margin: "0 0 4px", fontSize: 15 }}>{formatWhen(next.session!.startsAt)}, {me.cohort.sessionMinutes} minutes</p>
               {viewerZone !== me.cohort.timezone && (
                 <p style={{ margin: 0, fontSize: 13, color: "rgba(246,241,234,0.6)" }}>
@@ -543,6 +556,7 @@ export function LearnDashboard() {
               timezone={me.cohort.timezone}
               past={!!m.session && new Date(m.session.endsAt).getTime() < now}
               locked={notActive}
+              tone={toneFor(m.number, me.modules.length)}
             />
           ))}
         </div>
