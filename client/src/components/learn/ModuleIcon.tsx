@@ -2,6 +2,7 @@
  * The hand-drawn session icons on /learn. Each module in
  * shared/learn-programmes.ts names one; the same drawings sit on the
  * Background Italia week 1 page, so the dashboard and the handouts match.
+ * The evenings at /rieuzal use them too, with four of their own.
  *
  * The wobble is an SVG displacement filter over clean paths, so a drawing
  * stays a few short lines to edit. Foundations sessions sit on an amber blob,
@@ -118,6 +119,52 @@ const DRAWINGS: Record<IconName, { blob: string; body: ReactNode }> = {
         <path {...S} d="M26 41.5c3.5 2 8.5 2 12 0" />
         <path {...S} d="M16.5 30h-4v10h4M47.8 30h4v10h-4" />
         <path {...A} d="M55 7v6M52 10h6" />
+      </>
+    ),
+  },
+  terminal: {
+    blob: "M10 25c4-12 20-17 32-13s17 16 13 28-18 18-30 14S6 36 10 25z",
+    body: (
+      <>
+        <path {...S} d="M9.5 15 53 14.5l.5 33.5-43.5.5z" />
+        <path {...S} d="M9.8 21.5h43.4" />
+        <path {...A} d="m17 29 6.5 5.5-6.5 5.5" />
+        <path {...S} d="M27.5 41h10" />
+        <path {...A} d="M54 3.5v7M50.5 7h7" />
+      </>
+    ),
+  },
+  question: {
+    blob: "M12 18c8-9 26-10 36-3s12 22 5 31-24 13-34 7S4 27 12 18z",
+    body: (
+      <>
+        <path {...S} d="M11.5 13.5 52 13l.5 27.5H29l-9.5 8.5v-8.5H12z" />
+        <path {...A} d="M26.5 22.5a5.5 5.5 0 1 1 7.5 5.1c-1.6.7-2.1 1.8-2.1 3.4v.8" />
+        <path {...A} d="M31.9 36.2v.2" />
+      </>
+    ),
+  },
+  calculator: {
+    blob: "M11 21c6-10 23-14 34-8s15 21 9 31-22 14-32 9S5 31 11 21z",
+    body: (
+      <>
+        <path {...S} d="M17 9.5 46.5 9l.5 45-30 .5z" />
+        <path {...S} d="M22 15.5h19.5V25H22z" />
+        <path {...A} d="M31 20.5h7" />
+        <path {...S} d="M24 33h.2M31 33h.2M38 33h.2M24 40h.2M31 40h.2M24 47h.2M31 47h.2" strokeWidth={3.4} />
+        <path {...A} d="M36.5 41h5M36.5 46.5h5" />
+      </>
+    ),
+  },
+  chat: {
+    blob: "M8 28c2-12 17-19 30-17s20 12 18 24-13 20-27 19S6 40 8 28z",
+    body: (
+      <>
+        <path {...S} d="M8.5 12 38 11.5l.5 19H22l-7.5 6.5v-6.5H9z" />
+        <path {...S} d="M14 18.5h18.5M14 24h11" />
+        <path {...COVER} d="M27 27.5h28.5v18.5H49v7l-7.5-7H27z" />
+        <path {...A} d="M27 27.5 55.5 27l.5 19H49v7l-7.5-7H27.3z" />
+        <path {...A} d="M33 34h16M33 39.5h9" />
       </>
     ),
   },

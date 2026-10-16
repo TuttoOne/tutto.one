@@ -29,6 +29,7 @@ import {
 } from "./email/event-emails";
 import { events, eventBookings, eventBookingInputSchema, MAX_SEATS_PER_BOOKING, type Event, type EventBooking } from "@shared/schema";
 import { POLICY_VERSION } from "@shared/data-policy";
+import { MODULE_ICONS, type ModuleIcon } from "@shared/learn-programmes";
 
 const FROM = process.env.LEARN_FROM_EMAIL ?? "Daniel Forsthofer <daniel@tutto.one>";
 const DANIEL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
@@ -100,6 +101,7 @@ function publicEvent(e: Event, c: Counts) {
     series: e.series,
     title: e.title,
     note: e.note,
+    icon: e.icon,
     startsAt: e.startsAt,
     endsAt: e.endsAt,
     venue: e.venue,
@@ -293,6 +295,7 @@ const adminEventInput = z.object({
   series: z.string().trim().regex(/^[a-z0-9-]+$/).max(60),
   title: z.string().trim().min(1).max(200),
   note: z.string().trim().max(300).optional().nullable(),
+  icon: z.enum(MODULE_ICONS as [ModuleIcon, ...ModuleIcon[]]).optional().nullable(),
   startsAt: z.coerce.date(),
   minutes: z.coerce.number().int().min(15).max(600).default(90),
   venue: z.string().trim().min(1).max(200),
@@ -408,7 +411,7 @@ export function registerEventRoutes(app: Express) {
       const [taken] = await db.select({ id: events.id }).from(events).where(eq(events.slug, slug));
       if (taken) slug = `${slug}-${randomBytes(2).toString("hex")}`;
       const [row] = await db.insert(events).values({
-        slug, series: i.series, title: i.title, note: i.note || null,
+        slug, series: i.series, title: i.title, note: i.note || null, icon: i.icon || null,
         startsAt: i.startsAt, endsAt: new Date(i.startsAt.getTime() + i.minutes * 60 * 1000),
         venue: i.venue, address: i.address, capacity: i.capacity, status: i.status,
       }).returning();
@@ -431,6 +434,7 @@ export function registerEventRoutes(app: Express) {
         const [after] = await tx.update(events).set({
           ...(i.title !== undefined && { title: i.title }),
           ...(i.note !== undefined && { note: i.note || null }),
+          ...(i.icon !== undefined && { icon: i.icon || null }),
           ...(i.venue !== undefined && { venue: i.venue }),
           ...(i.address !== undefined && { address: i.address }),
           ...(i.capacity !== undefined && { capacity: i.capacity }),

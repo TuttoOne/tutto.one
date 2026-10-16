@@ -279,6 +279,8 @@ export const events = pgTable("events", {
   title: text("title").notNull(),
   /** One line under the title: the task done live that evening. */
   note: text("note"),
+  /** Which hand-drawn icon the page shows beside it (a ModuleIcon name, see shared/learn-programmes.ts). */
+  icon: text("icon"),
   startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
   endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
   venue: text("venue").notNull(),

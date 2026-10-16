@@ -18,7 +18,11 @@
 export type Material = { label: string; href: string };
 
 /** The hand-drawn icon for a session, drawn in client/src/components/learn/ModuleIcon.tsx. */
-export type ModuleIcon = "rules" | "scorecard" | "signpost" | "pencil" | "plug" | "magnifier" | "gear" | "robot";
+export type ModuleIcon = "rules" | "scorecard" | "signpost" | "pencil" | "plug" | "magnifier" | "gear" | "robot"
+  // Drawn for the /rieuzal evenings: the launch, the bonus, accounts, front desk and sales.
+  | "terminal" | "question" | "calculator" | "chat";
+
+export const MODULE_ICONS: ModuleIcon[] = ["rules", "scorecard", "signpost", "pencil", "plug", "magnifier", "gear", "robot", "terminal", "question", "calculator", "chat"];
 
 export type Module = {
   number: number;

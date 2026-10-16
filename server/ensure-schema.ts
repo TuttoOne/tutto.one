@@ -153,6 +153,7 @@ export async function ensureEventsSchema(): Promise<void> {
     cancelled_at timestamp,
     created_at timestamp NOT NULL DEFAULT now()
   )`);
+  await db.execute(sql`ALTER TABLE events ADD COLUMN IF NOT EXISTS icon text`);
   await db.execute(sql`CREATE INDEX IF NOT EXISTS event_bookings_event_idx ON event_bookings (event_id)`);
   await db.execute(sql`CREATE INDEX IF NOT EXISTS event_bookings_email_idx ON event_bookings (email)`);
 }

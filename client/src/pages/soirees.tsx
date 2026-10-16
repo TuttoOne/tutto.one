@@ -12,6 +12,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Header } from "@/components/layout/Layout";
 import { SITE_TITLE } from "@/lib/i18n";
 import { RETENTION_MONTHS } from "@shared/data-policy";
+import type { ModuleIcon as IconName } from "@shared/learn-programmes";
+import { ModuleIcon } from "@/components/learn/ModuleIcon";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
 const INTER: React.CSSProperties = { fontFamily: "'Inter', -apple-system, sans-serif" };
@@ -30,7 +32,7 @@ const LABEL: React.CSSProperties = { ...CAPS, fontSize: 11, color: MUTED, displa
 const BUTTON: React.CSSProperties = { ...INTER, background: INK, color: "#fff", border: 0, borderRadius: 6, padding: "11px 20px", fontSize: 15, fontWeight: 600, cursor: "pointer" };
 
 type PublicEvent = {
-  slug: string; series: string; title: string; note: string | null; startsAt: string; endsAt: string;
+  slug: string; series: string; title: string; note: string | null; icon: IconName | null; startsAt: string; endsAt: string;
   venue: string; address: string; capacity: number; placesLeft: number; waitlist: number; status: string;
 };
 
@@ -132,6 +134,9 @@ function BookingForm({ e, maxSeats, onDone }: { e: PublicEvent; maxSeats: number
 
 // ── One evening in the list ──────────────────────────────────────────────────
 
+/** Drawings for the groundwork sit on amber, the ones about building and running things on slate, as on /learn. */
+const GROUNDWORK = new Set<IconName>(["terminal", "rules", "scorecard", "signpost", "question"]);
+
 function EventCard({ e, maxSeats, first, onBooked }: { e: PublicEvent; maxSeats: number; first: boolean; onBooked: () => void }) {
   const [open, setOpen] = useState(false);
   const cancelled = e.status === "cancelled";
@@ -141,12 +146,15 @@ function EventCard({ e, maxSeats, first, onBooked }: { e: PublicEvent; maxSeats:
 
   return (
     <article style={{ background: CARD, border: `1px solid ${first ? AMBER : RULE}`, borderRadius: 8, padding: "18px 20px" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "8px 16px", alignItems: "baseline" }}>
+      <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+      {e.icon && <ModuleIcon name={e.icon} size={56} tone={GROUNDWORK.has(e.icon) ? "foundations" : "building"} />}
+      <div style={{ flex: 1, minWidth: 0, display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "8px 16px", alignItems: "baseline" }}>
         <div style={{ minWidth: 0 }}>
           <p style={{ ...ROBOTO, fontSize: 20, fontWeight: 700, margin: 0, textDecoration: cancelled ? "line-through" : undefined }}>{cap(day(e.startsAt))} · {time(e.startsAt)}</p>
           <p style={{ margin: "4px 0 0", fontSize: 15 }}>{e.title}{e.note ? <span style={{ color: MUTED }}> · {e.note}</span> : null}</p>
         </div>
         <span style={{ ...CAPS, fontSize: 11, color: cancelled ? "#b42318" : full || closed ? MUTED : AMBER, whiteSpace: "nowrap" }}>{availability}</span>
+      </div>
       </div>
       {!cancelled && !closed && !open && (
         <button onClick={() => setOpen(true)} style={{ ...BUTTON, marginTop: 14, background: full ? "transparent" : INK, color: full ? INK : "#fff", border: full ? `1px solid ${INK}` : 0 }}>

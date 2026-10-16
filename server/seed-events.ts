@@ -11,30 +11,31 @@
 import { and, eq, isNull } from "drizzle-orm";
 import { db } from "./db";
 import { events } from "@shared/schema";
+import type { ModuleIcon } from "@shared/learn-programmes";
 
 const VENUE = "Manoir de Rieuzal";
 const ADDRESS = "370 Chemin de Rieuzal, 46130 Loubressac";
 
-type SeedEvent = { date: string; offset: string; title: string; note: string; status?: "open" | "hidden" };
+type SeedEvent = { date: string; icon: ModuleIcon; offset: string; title: string; note: string; status?: "open" | "hidden" };
 
 // Each evening starts with the same foundations (setting up Mistral, what an agent
 // is) and then has its own theme and one task done live, following the Praxis
 // programme in order, with two evenings for particular jobs (accounts, front desk
 // and sales). Guests are not announced yet, so no evening names one.
 const RIEUZAL: SeedEvent[] = [
-  { date: "2026-11-05", offset: "+01:00", title: "Le Chonk : Mistral Large 4 en direct", note: "On installe Mistral et on crée un premier agent" },
-  { date: "2026-11-24", offset: "+01:00", title: "Les règles d'abord", note: "On écrit la charte IA de votre entreprise" },
-  { date: "2026-12-10", offset: "+01:00", title: "C'est quoi, un bon travail ?", note: "Une grille pour juger ce que l'IA produit" },
+  { date: "2026-11-05", icon: "terminal", offset: "+01:00", title: "Le Chonk : Mistral Large 4 en direct", note: "On installe Mistral et on crée un premier agent" },
+  { date: "2026-11-24", icon: "rules", offset: "+01:00", title: "Les règles d'abord", note: "On écrit la charte IA de votre entreprise" },
+  { date: "2026-12-10", icon: "scorecard", offset: "+01:00", title: "C'est quoi, un bon travail ?", note: "Une grille pour juger ce que l'IA produit" },
   // A bonus evening Daniel is keeping in reserve. Hidden until he opens it in admin.
-  { date: "2026-12-15", offset: "+01:00", title: "Soirée bonus", note: "Vos questions, sur vos tâches", status: "hidden" },
-  { date: "2027-01-14", offset: "+01:00", title: "Que confier à l'IA ?", note: "La liste de ce qu'on lui confie, et de ce qu'on garde" },
-  { date: "2027-01-28", offset: "+01:00", title: "Briefer une fois pour toutes", note: "Des instructions permanentes pour vos tâches qui reviennent" },
-  { date: "2027-02-04", offset: "+01:00", title: "Mistral relié à vos outils", note: "Vos fichiers, vos mails et votre agenda" },
-  { date: "2027-02-25", offset: "+01:00", title: "Vérifier avant d'envoyer", note: "Relire, noter et valider le travail de l'IA" },
-  { date: "2027-03-11", offset: "+01:00", title: "La compta avec Mistral", note: "Une vraie tâche comptable, en direct" },
-  { date: "2027-03-25", offset: "+01:00", title: "Accueil et commercial", note: "Devis, relances et réponses aux clients" },
-  { date: "2027-04-22", offset: "+02:00", title: "Automatiser", note: "Des tâches qui tournent toutes seules" },
-  { date: "2027-05-04", offset: "+02:00", title: "Votre premier agent, et le garder en main", note: "Un agent sur vos données, et comment le faire évoluer" },
+  { date: "2026-12-15", icon: "question", offset: "+01:00", title: "Soirée bonus", note: "Vos questions, sur vos tâches", status: "hidden" },
+  { date: "2027-01-14", icon: "signpost", offset: "+01:00", title: "Que confier à l'IA ?", note: "La liste de ce qu'on lui confie, et de ce qu'on garde" },
+  { date: "2027-01-28", icon: "pencil", offset: "+01:00", title: "Briefer une fois pour toutes", note: "Des instructions permanentes pour vos tâches qui reviennent" },
+  { date: "2027-02-04", icon: "plug", offset: "+01:00", title: "Mistral relié à vos outils", note: "Vos fichiers, vos mails et votre agenda" },
+  { date: "2027-02-25", icon: "magnifier", offset: "+01:00", title: "Vérifier avant d'envoyer", note: "Relire, noter et valider le travail de l'IA" },
+  { date: "2027-03-11", icon: "calculator", offset: "+01:00", title: "La compta avec Mistral", note: "Une vraie tâche comptable, en direct" },
+  { date: "2027-03-25", icon: "chat", offset: "+01:00", title: "Accueil et commercial", note: "Devis, relances et réponses aux clients" },
+  { date: "2027-04-22", icon: "gear", offset: "+02:00", title: "Automatiser", note: "Des tâches qui tournent toutes seules" },
+  { date: "2027-05-04", icon: "robot", offset: "+02:00", title: "Votre premier agent, et le garder en main", note: "Un agent sur vos données, et comment le faire évoluer" },
 ];
 
 /** What the first seed wrote, before each evening had a theme. Rows still showing it get their theme. */
@@ -52,6 +53,7 @@ export async function seedEvents(): Promise<void> {
       series: "rieuzal",
       title: e.title,
       note: e.note,
+      icon: e.icon,
       startsAt: new Date(`${e.date}T18:30:00${e.offset}`),
       endsAt: new Date(`${e.date}T20:00:00${e.offset}`),
       venue: VENUE,
@@ -78,5 +80,8 @@ export async function seedEvents(): Promise<void> {
         .returning({ id: events.id });
       if (done.length) console.log(`[events] gave rieuzal-${e.date} its theme`);
     }
+    // Icons came after themes: fill in any evening that has none yet.
+    await db.update(events).set({ icon: e.icon })
+      .where(and(eq(events.slug, `rieuzal-${e.date}`), isNull(events.icon)));
   }
 }

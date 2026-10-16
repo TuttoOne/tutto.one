@@ -12,6 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChevronDown, ChevronRight, Copy, ExternalLink, Plus, UserPlus } from "lucide-react";
 import type { Event } from "@shared/schema";
+import { MODULE_ICONS } from "@shared/learn-programmes";
+import { ModuleIcon } from "@/components/learn/ModuleIcon";
 
 type AdminEvent = Event & { confirmedSeats: number; waitlistBookings: number; waitlistSeats: number };
 type AdminBooking = {
@@ -74,7 +76,7 @@ function EventRow({ e }: { e: AdminEvent }) {
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [form, setForm] = useState({
-    title: e.title, note: e.note ?? "", startsAt: toLocalInput(e.startsAt), capacity: String(e.capacity),
+    title: e.title, note: e.note ?? "", icon: e.icon ?? "", startsAt: toLocalInput(e.startsAt), capacity: String(e.capacity),
     venue: e.venue, address: e.address, status: e.status,
   });
   const [add, setAdd] = useState({ name: "", email: "", company: "", seats: "1", force: false, notify: true });
@@ -87,7 +89,7 @@ function EventRow({ e }: { e: AdminEvent }) {
 
   const save = useMutation({
     mutationFn: () => api("PATCH", `/api/admin/events/${e.id}`, {
-      title: form.title, note: form.note, startsAt: fromLocalInput(form.startsAt), capacity: Number(form.capacity),
+      title: form.title, note: form.note, icon: form.icon || null, startsAt: fromLocalInput(form.startsAt), capacity: Number(form.capacity),
       venue: form.venue, address: form.address, status: form.status,
     }),
     onSuccess: (r) => { setMsg(`Saved.${moved(r.moved)}`); refresh(); },
@@ -144,6 +146,7 @@ function EventRow({ e }: { e: AdminEvent }) {
     <div className="border rounded-md">
       <button className="w-full p-3 text-left flex items-center gap-3" onClick={() => setOpen(!open)}>
         {open ? <ChevronDown className="w-4 h-4 shrink-0" /> : <ChevronRight className="w-4 h-4 shrink-0" />}
+        {e.icon && <ModuleIcon name={e.icon as any} size={32} />}
         <div className="min-w-0 flex-1">
           <p className="font-medium truncate">{paris(e.startsAt)} · {e.title}</p>
           <p className="text-sm text-muted-foreground truncate">{e.note ? `${e.note} · ` : ""}{e.venue}</p>
@@ -199,6 +202,13 @@ function EventRow({ e }: { e: AdminEvent }) {
             <div className="grid gap-2 sm:grid-cols-2">
               <div><Label>Title</Label><Input value={form.title} onChange={(ev) => setForm({ ...form, title: ev.target.value })} /></div>
               <div><Label>The task done live (one line)</Label><Input value={form.note} onChange={(ev) => setForm({ ...form, note: ev.target.value })} /></div>
+              <div>
+                <Label>Icon</Label>
+                <select className="w-full h-9 rounded-md border bg-background px-2 text-sm" value={form.icon} onChange={(ev) => setForm({ ...form, icon: ev.target.value })}>
+                  <option value="">None</option>
+                  {MODULE_ICONS.map((n) => <option key={n} value={n}>{n}</option>)}
+                </select>
+              </div>
               <div><Label>Starts (Paris time)</Label><Input type="datetime-local" value={form.startsAt} onChange={(ev) => setForm({ ...form, startsAt: ev.target.value })} /></div>
               <div><Label>Places</Label><Input type="number" min={1} value={form.capacity} onChange={(ev) => setForm({ ...form, capacity: ev.target.value })} /></div>
               <div><Label>Venue</Label><Input value={form.venue} onChange={(ev) => setForm({ ...form, venue: ev.target.value })} /></div>
