@@ -198,7 +198,7 @@ function EventRow({ e }: { e: AdminEvent }) {
             <h4 className="font-semibold text-sm">The evening</h4>
             <div className="grid gap-2 sm:grid-cols-2">
               <div><Label>Title</Label><Input value={form.title} onChange={(ev) => setForm({ ...form, title: ev.target.value })} /></div>
-              <div><Label>Theme or guest (one line)</Label><Input value={form.note} onChange={(ev) => setForm({ ...form, note: ev.target.value })} /></div>
+              <div><Label>The task done live (one line)</Label><Input value={form.note} onChange={(ev) => setForm({ ...form, note: ev.target.value })} /></div>
               <div><Label>Starts (Paris time)</Label><Input type="datetime-local" value={form.startsAt} onChange={(ev) => setForm({ ...form, startsAt: ev.target.value })} /></div>
               <div><Label>Places</Label><Input type="number" min={1} value={form.capacity} onChange={(ev) => setForm({ ...form, capacity: ev.target.value })} /></div>
               <div><Label>Venue</Label><Input value={form.venue} onChange={(ev) => setForm({ ...form, venue: ev.target.value })} /></div>
@@ -226,7 +226,7 @@ function NewEvent({ last }: { last?: AdminEvent }) {
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [f, setF] = useState({
-    series: last?.series ?? "rieuzal", title: "Soirée IA avec Mistral", note: "", startsAt: "",
+    series: last?.series ?? "rieuzal", title: "", note: "", startsAt: "",
     capacity: String(last?.capacity ?? 15), venue: last?.venue ?? "", address: last?.address ?? "", status: "open",
   });
   const create = useMutation({
@@ -241,7 +241,7 @@ function NewEvent({ last }: { last?: AdminEvent }) {
       <div className="grid gap-2 sm:grid-cols-2">
         <div><Label>Series (its page is /series)</Label><Input value={f.series} onChange={(e) => setF({ ...f, series: e.target.value })} /></div>
         <div><Label>Title</Label><Input value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} /></div>
-        <div><Label>Theme or guest</Label><Input value={f.note} onChange={(e) => setF({ ...f, note: e.target.value })} /></div>
+        <div><Label>The task done live</Label><Input value={f.note} onChange={(e) => setF({ ...f, note: e.target.value })} /></div>
         <div><Label>Starts (Paris time, 90 minutes)</Label><Input type="datetime-local" value={f.startsAt} onChange={(e) => setF({ ...f, startsAt: e.target.value })} /></div>
         <div><Label>Places</Label><Input type="number" min={1} value={f.capacity} onChange={(e) => setF({ ...f, capacity: e.target.value })} /></div>
         <div><Label>Venue</Label><Input value={f.venue} onChange={(e) => setF({ ...f, venue: e.target.value })} /></div>

@@ -91,7 +91,7 @@ export const SITE_PAGES: SitePage[] = [
     name: "Soirées IA à Rieuzal (in-person evenings, in French)",
     summary: "Free 90-minute evenings every 2 weeks at the Manoir de Rieuzal, Loubressac (Lot), with Mistral. 15 places, booking required.",
     detail:
-      "In-person evenings in French for companies around the Lot, every two weeks from 5 November 2026 at the Manoir de Rieuzal, 370 Chemin de Rieuzal, Loubressac. Each lasts 90 minutes: a live demo with Mistral Large 4 (Le Chonk), the French model, showing how AI is set up in a company, how teams are trained with Praxis, how the systems are run together and what each role gains. Each evening also has a guest. Free, 15 places, booked on the page for 1 to 4 people. When an evening is full, visitors can join the waiting list and get the place automatically when someone cancels.",
+      "In-person evenings in French for companies around the Lot, every two weeks from 5 November 2026 at the Manoir de Rieuzal, 370 Chemin de Rieuzal, Loubressac. Each lasts 90 minutes: a live demo with Mistral Large 4 (Le Chonk), the French model, showing how AI is set up in a company, how teams are trained with Praxis, how the systems are run together and what each role gains. Every evening starts with the same foundations (setting up Mistral, what an agent is) and then has its own theme and a task done live, following the Praxis programme: rules, judging good work, what to hand over, standing briefs, connecting tools, checking before sending, accounts, front desk and sales, automation, and a first agent. Free, 15 places, booked on the page for 1 to 4 people. When an evening is full, visitors can join the waiting list and get the place automatically when someone cancels.",
     offering: false,
   },
   {

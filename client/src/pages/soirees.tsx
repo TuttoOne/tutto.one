@@ -185,7 +185,10 @@ export function EventSeries({ series }: { series: string }) {
         1h30 pour voir l'IA faire du vrai travail, en direct, avec Mistral Large 4, le nouveau modèle français. On vous montre comment on la met en place dans une entreprise, comment on forme vos équipes avec Praxis, comment on fait tourner vos systèmes ensemble et ce que chaque poste y gagne, de la compta à l'atelier.
       </p>
       <p style={{ ...P, color: MUTED }}>
-        15 places par soirée, gratuit, sur réservation. Chaque soirée reprend la démo et accueille un invité différent. Si une soirée est complète, inscrivez-vous sur la liste d'attente : dès qu'une place se libère, elle est à vous.
+        Chaque soirée commence par les bases (installer Mistral, comprendre ce qu'est un agent), puis on se concentre sur un thème et une tâche faite en direct. Venez à une soirée ou à toutes : elles sont toutes différentes.
+      </p>
+      <p style={{ ...P, color: MUTED }}>
+        15 places par soirée, gratuit, sur réservation. Si une soirée est complète, inscrivez-vous sur la liste d'attente : dès qu'une place se libère, elle est à vous.
       </p>
 
       <section style={{ margin: "32px 0", display: "grid", gap: 12 }}>

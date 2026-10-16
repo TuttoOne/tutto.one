@@ -277,7 +277,7 @@ export const events = pgTable("events", {
   slug: text("slug").notNull().unique(),
   series: text("series").notNull(),
   title: text("title").notNull(),
-  /** One line under the title: the theme or the guest for that evening. */
+  /** One line under the title: the task done live that evening. */
   note: text("note"),
   startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
   endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
