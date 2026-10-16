@@ -9,6 +9,7 @@ import { enquiryMessageHtml, escapeHtml } from "./email/enquiry-message";
 import { getResend } from "./email/resend";
 import { registerLearnRoutes } from "./learn-routes";
 import { registerDataRoutes } from "./data-routes";
+import { registerEventRoutes } from "./event-routes";
 
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
 const FROM_EMAIL = "Tutto <notifications@tutto.one>";
@@ -292,6 +293,9 @@ export async function registerRoutes(
   // Student sign-in, dashboard and the admin side of cohorts (/learn)
   registerLearnRoutes(app);
   registerDataRoutes(app);
+
+  // Booking places at the in-person evenings (/rieuzal), with a waiting list
+  registerEventRoutes(app);
 
   return httpServer;
 }

@@ -264,3 +264,60 @@ export const loginTokens = pgTable("login_tokens", {
   expiresAt: timestamp("expires_at").notNull(),
   usedAt: timestamp("used_at"),
 });
+
+// ── Events: in-person evenings people book a place at ───────────────────────
+//
+// A series (e.g. "rieuzal") is a run of evenings with one public page at
+// /<series>. Each evening has a fixed number of places. A booking that fits is
+// confirmed; one that doesn't joins the waiting list, and a cancellation moves
+// the next people on the list up. Created in server/ensure-schema.ts too.
+
+export const events = pgTable("events", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  slug: text("slug").notNull().unique(),
+  series: text("series").notNull(),
+  title: text("title").notNull(),
+  /** One line under the title: the theme or the guest for that evening. */
+  note: text("note"),
+  startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),
+  endsAt: timestamp("ends_at", { withTimezone: true }).notNull(),
+  venue: text("venue").notNull(),
+  address: text("address").notNull(),
+  capacity: integer("capacity").notNull().default(15),
+  /** open: bookable. closed: shown, not bookable. hidden: not shown. cancelled: shown as cancelled. */
+  status: text("status").notNull().default("open"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type Event = typeof events.$inferSelect;
+
+export const eventBookings = pgTable("event_bookings", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  eventId: integer("event_id").notNull(),
+  name: text("name").notNull(),
+  /** Stored lower-case. */
+  email: text("email").notNull(),
+  company: text("company"),
+  /** How many people this booking is for, the booker included. */
+  seats: integer("seats").notNull().default(1),
+  /** confirmed, waitlist or cancelled. */
+  status: text("status").notNull(),
+  /** sha256 of the token in the cancel link. The token itself is never stored. */
+  tokenHash: text("token_hash").notNull().unique(),
+  policyVersion: text("policy_version").notNull(),
+  promotedAt: timestamp("promoted_at"),
+  reminderSentAt: timestamp("reminder_sent_at"),
+  cancelledAt: timestamp("cancelled_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, (t) => [index("event_bookings_event_idx").on(t.eventId), index("event_bookings_email_idx").on(t.email)]);
+
+export type EventBooking = typeof eventBookings.$inferSelect;
+
+export const MAX_SEATS_PER_BOOKING = 4;
+
+export const eventBookingInputSchema = z.object({
+  name: z.string().trim().min(1, "Indiquez votre nom").max(200),
+  email: z.string().trim().email("Indiquez une adresse e-mail valide").max(320),
+  company: z.string().trim().max(200).optional().default(""),
+  seats: z.coerce.number().int().min(1).max(MAX_SEATS_PER_BOOKING),
+});

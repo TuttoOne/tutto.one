@@ -121,3 +121,38 @@ export async function ensureLearnSchema(): Promise<void> {
     used_at timestamp
   )`);
 }
+
+/** The event tables (/rieuzal and any later series). */
+export async function ensureEventsSchema(): Promise<void> {
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS events (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    slug text NOT NULL UNIQUE,
+    series text NOT NULL,
+    title text NOT NULL,
+    note text,
+    starts_at timestamptz NOT NULL,
+    ends_at timestamptz NOT NULL,
+    venue text NOT NULL,
+    address text NOT NULL,
+    capacity integer NOT NULL DEFAULT 15,
+    status text NOT NULL DEFAULT 'open',
+    created_at timestamp NOT NULL DEFAULT now()
+  )`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS event_bookings (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    event_id integer NOT NULL,
+    name text NOT NULL,
+    email text NOT NULL,
+    company text,
+    seats integer NOT NULL DEFAULT 1,
+    status text NOT NULL,
+    token_hash text NOT NULL UNIQUE,
+    policy_version text NOT NULL,
+    promoted_at timestamp,
+    reminder_sent_at timestamp,
+    cancelled_at timestamp,
+    created_at timestamp NOT NULL DEFAULT now()
+  )`);
+  await db.execute(sql`CREATE INDEX IF NOT EXISTS event_bookings_event_idx ON event_bookings (event_id)`);
+  await db.execute(sql`CREATE INDEX IF NOT EXISTS event_bookings_email_idx ON event_bookings (email)`);
+}

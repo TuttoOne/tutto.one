@@ -22,7 +22,7 @@ import { siteUrl, studentFromRequest } from "./learn-routes";
 import { notifyShared } from "./email/student-notify";
 import {
   cohorts, cohortSessions, students, studentProgress, loginTokens, sharedRecords, deletionLog,
-  contactSubmissions, emailLeads,
+  contactSubmissions, emailLeads, events, eventBookings,
 } from "@shared/schema";
 import { POLICY_VERSION, RETENTION_MONTHS, BACKUP_DAYS, SHARE_TOOLS } from "@shared/data-policy";
 
@@ -97,7 +97,8 @@ export async function eraseByEmail(email: string, reason: "request" | "retention
   const shared = await db.delete(sharedRecords).where(sql`lower(${sharedRecords.email}) = ${e}`).returning({ id: sharedRecords.id });
   const enquiries = await db.delete(contactSubmissions).where(sql`lower(${contactSubmissions.email}) = ${e}`).returning({ id: contactSubmissions.id });
   const leads = await db.delete(emailLeads).where(sql`lower(${emailLeads.email}) = ${e}`).returning({ id: emailLeads.id });
-  counts = add(counts, { sharedRecords: shared.length, enquiries: enquiries.length, leads: leads.length });
+  const bookings = await db.delete(eventBookings).where(sql`lower(${eventBookings.email}) = ${e}`).returning({ id: eventBookings.id });
+  counts = add(counts, { sharedRecords: shared.length, enquiries: enquiries.length, leads: leads.length, eventBookings: bookings.length });
   return logDeletion({ email: e, reason, counts, note });
 }
 
@@ -114,6 +115,7 @@ function monthsAfter(d: Date, months: number) {
  * - a cohort's students, progress and shared work, RETENTION_MONTHS after its last
  *   session (or after it was set up, if it never had one), unless retainUntil says otherwise
  * - shared copies from people who aren't students, RETENTION_MONTHS after they were sent
+ * - bookings for an evening, RETENTION_MONTHS after it took place
  * - sign-in links once they're a day past use or expiry
  * The cohort itself (a name, a programme, dates) stays, with nobody in it.
  */
@@ -140,6 +142,16 @@ export async function runRetention(now = new Date()) {
     await db.delete(sharedRecords).where(eq(sharedRecords.id, r.id));
     await logDeletion({ email: r.email, reason: "retention", counts: { sharedRecords: 1 } });
     erased++;
+  }
+
+  const pastEvents = await db.select({ id: events.id }).from(events).where(lt(events.endsAt, cutoff));
+  if (pastEvents.length) {
+    const gone = await db.delete(eventBookings).where(inArray(eventBookings.eventId, pastEvents.map((p) => p.id)))
+      .returning({ email: eventBookings.email });
+    for (const r of gone) {
+      await logDeletion({ email: r.email, reason: "retention", counts: { eventBookings: 1 } });
+      erased++;
+    }
   }
 
   const dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
@@ -267,11 +279,15 @@ export function registerDataRoutes(app: Express) {
     ));
     const enquiries = await db.select().from(contactSubmissions).where(sql`lower(${contactSubmissions.email}) = ${e}`);
     const leads = await db.select().from(emailLeads).where(sql`lower(${emailLeads.email}) = ${e}`);
+    const bookings = await db.select({
+      id: eventBookings.id, event: events.title, startsAt: events.startsAt, name: eventBookings.name, company: eventBookings.company,
+      seats: eventBookings.seats, status: eventBookings.status, createdAt: eventBookings.createdAt,
+    }).from(eventBookings).leftJoin(events, eq(events.id, eventBookings.eventId)).where(sql`lower(${eventBookings.email}) = ${e}`);
     const deletions = await db.select().from(deletionLog).where(eq(deletionLog.subjectHash, emailHash(e))).orderBy(desc(deletionLog.createdAt));
     return {
       email: e,
       students: people.map((p) => ({ ...p, cohort: cohortRows.find((c) => c.id === p.cohortId)?.name ?? null })),
-      progress, sharedRecords: shared, enquiries, leads, deletions,
+      progress, sharedRecords: shared, enquiries, leads, eventBookings: bookings, deletions,
     };
   }
 

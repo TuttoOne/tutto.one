@@ -61,6 +61,7 @@ export default function DataPolicy() {
           <li><strong>Your progress</strong>: which sessions you've ticked off, and when you signed in.</li>
           <li><strong>Work you share with us</strong> from the tools: one copy each time you press "Share with Tutto", with your name, email and organisation, so we can read it before we meet.</li>
           <li><strong>Enquiries and mailing list sign-ups</strong> from the contact forms, so we can reply.</li>
+          <li><strong>Bookings for our evenings</strong>, like the ones at Rieuzal: your name, email, company and how many of you are coming, so we can hold your place, run the waiting list and send you the reminder.</li>
           <li><strong>When you agreed to this policy</strong>, and which version, so we can show it later.</li>
         </ul>
         <p style={P}>We don't sell any of it, use it for advertising or put it into AI tools to train them.</p>
@@ -70,6 +71,7 @@ export default function DataPolicy() {
           <li>Your student account, progress, our notes and anything you shared: for the length of your programme and {RETENTION_MONTHS} months after your last session. That covers the review period after the course and any questions about it. Then it's deleted automatically.</li>
           <li>If your organisation's contract sets a different period, the contract wins and we set that date on your programme.</li>
           <li>Work shared by someone who isn't on a programme: {RETENTION_MONTHS} months after it was sent.</li>
+          <li>Bookings for an evening: {RETENTION_MONTHS} months after it took place.</li>
           <li>Sign-in links: a day after they're used or expire.</li>
           <li>Enquiries and mailing list sign-ups: until you ask us to delete them or unsubscribe.</li>
           <li>Deleted data can stay in our database host's backups for up to {BACKUP_DAYS} days, and then it's gone too.</li>
@@ -81,7 +83,7 @@ export default function DataPolicy() {
         </p>
         <ul style={UL}>
           <li>Replit runs the website and holds its database{DATABASE_REGION ? `, in ${DATABASE_REGION}` : ". We're confirming which region it's held in and will add it here"}.</li>
-          <li>Resend sends the sign-in and welcome emails.</li>
+          <li>Resend sends the sign-in, welcome and booking emails.</li>
           <li>Google Workspace holds our email, calendar invites, meeting notes and Google Meet calls.</li>
         </ul>
         <p style={P}>

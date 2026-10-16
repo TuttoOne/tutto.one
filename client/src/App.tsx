@@ -42,6 +42,9 @@ import BecomeATrainer from "@/pages/become-a-trainer";
 import PeerGroups from "@/pages/peer-groups";
 import DataPolicy from "@/pages/data-policy";
 import PraxisLearn from "@/pages/praxis-learn";
+// The in-person evenings: the page on the poster's QR code, and the cancel
+// link in every booking email. Both URLs are built by server/event-routes.ts.
+import { EventSeries, EventCancel } from "@/pages/soirees";
 // Students' private area: sign-in, dashboard and profile. Noindex, and kept
 // out of the nav and the WebMCP site index.
 import { LearnLogin, LearnAuth, LearnDashboard, LearnProfile } from "@/pages/learn";
@@ -109,6 +112,8 @@ function Router() {
         <Route path="/become-a-trainer" component={BecomeATrainer} />
         <Route path="/peer-groups" component={PeerGroups} />
         <Route path="/data-policy" component={DataPolicy} />
+        <Route path="/rieuzal">{() => <EventSeries series="rieuzal" />}</Route>
+        <Route path="/rieuzal/annuler" component={EventCancel} />
         <Route path="/praxis/learn/:course/:lesson" component={PraxisLearn} />
         <Route path="/praxis/learn/:course" component={PraxisLearn} />
         <Route path="/learn" component={LearnLogin} />

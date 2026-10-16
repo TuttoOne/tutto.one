@@ -7,7 +7,9 @@ import { serveStatic } from "./static";
 import { guardPythiaDemo } from "./pythia-demo";
 import { createServer } from "http";
 import { seedBlogPostsIfEmpty } from "./seed-blog";
-import { ensureSchema, ensureLearnSchema } from "./ensure-schema";
+import { ensureSchema, ensureLearnSchema, ensureEventsSchema } from "./ensure-schema";
+import { seedEvents } from "./seed-events";
+import { scheduleReminders } from "./event-routes";
 import { seedLearnCohorts } from "./seed-learn";
 import { scheduleRetention } from "./data-routes";
 import { clearStalePortfolioOverride } from "./cleanup-portfolio-override";
@@ -92,6 +94,17 @@ app.use((req, res, next) => {
     console.error("Failed to set up the learn tables:", err);
   }
 
+  // The evenings people book a place at (/rieuzal). Separate again, so a failure
+  // here leaves the enquiry forms and /learn working.
+  try {
+    await ensureEventsSchema();
+    await seedEvents();
+    // The day-before reminder, checked every half hour.
+    scheduleReminders();
+  } catch (err) {
+    console.error("Failed to set up the event tables:", err);
+  }
+
   // Seed blog posts on startup if empty
   try {
     await seedBlogPostsIfEmpty();
@@ -109,7 +122,7 @@ app.use((req, res, next) => {
 
   // Student pages are private: keep them out of search whichever handler
   // ends up serving the SPA shell.
-  app.use(["/learn", "/api/learn"], (_req, res, next) => {
+  app.use(["/learn", "/api/learn", "/rieuzal/annuler", "/api/events"], (_req, res, next) => {
     res.setHeader("X-Robots-Tag", "noindex, nofollow");
     next();
   });

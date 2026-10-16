@@ -113,6 +113,7 @@ type Subject = {
   sharedRecords: { id: number; tool: string; title: string; createdAt: string }[];
   enquiries: { id: number; message: string; createdAt: string }[];
   leads: { id: number; source: string; createdAt: string }[];
+  eventBookings: { id: number; event: string | null; startsAt: string | null; status: string }[];
   deletions: DeletionLogEntry[];
 };
 
@@ -140,7 +141,7 @@ function PersonLookup() {
     onError: (e: Error) => setMsg(e.message),
   });
 
-  const total = found ? found.students.length + found.sharedRecords.length + found.enquiries.length + found.leads.length : 0;
+  const total = found ? found.students.length + found.sharedRecords.length + found.enquiries.length + found.leads.length + found.eventBookings.length : 0;
 
   return (
     <section className="space-y-3">
@@ -161,6 +162,7 @@ function PersonLookup() {
             <li>Shared work: {found.sharedRecords.length ? found.sharedRecords.map((r) => `${toolLabel(r.tool)} "${r.title || "Untitled"}"`).join(", ") : "none"}</li>
             <li>Enquiries: {found.enquiries.length}</li>
             <li>Mailing list sign-ups: {found.leads.length}</li>
+            <li>Evening bookings: {found.eventBookings.length}</li>
             <li>Earlier deletions: {found.deletions.length ? found.deletions.map((d) => `${d.reference} (${when(d.createdAt)})`).join(", ") : "none"}</li>
           </ul>
           <div className="flex flex-wrap gap-2">
