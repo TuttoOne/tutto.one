@@ -23,7 +23,7 @@ type SeedEvent = { date: string; icon: ModuleIcon; offset: string; title: string
 // programme in order, with two evenings for particular jobs (accounts, front desk
 // and sales). Guests are not announced yet, so no evening names one.
 const RIEUZAL: SeedEvent[] = [
-  { date: "2026-11-05", icon: "terminal", offset: "+01:00", title: "Le Chonk : Mistral Large 4 en direct", note: "On installe Mistral et on crée un premier agent" },
+  { date: "2026-11-12", icon: "terminal", offset: "+01:00", title: "Le Chonk : Mistral Large 4 en direct", note: "On installe Mistral et on crée un premier agent" },
   { date: "2026-11-24", icon: "rules", offset: "+01:00", title: "Les règles d'abord", note: "On écrit la charte IA de votre entreprise" },
   { date: "2026-12-10", icon: "scorecard", offset: "+01:00", title: "C'est quoi, un bon travail ?", note: "Une grille pour juger ce que l'IA produit" },
   // A bonus evening Daniel is keeping in reserve. Hidden until he opens it in admin.
@@ -36,7 +36,11 @@ const RIEUZAL: SeedEvent[] = [
   { date: "2027-03-25", icon: "chat", offset: "+01:00", title: "Accueil et commercial", note: "Devis, relances et réponses aux clients" },
   { date: "2027-04-22", icon: "gear", offset: "+02:00", title: "Automatiser", note: "Des tâches qui tournent toutes seules" },
   { date: "2027-05-04", icon: "robot", offset: "+02:00", title: "Votre premier agent, et le garder en main", note: "Un agent sur vos données, et comment le faire évoluer" },
+  { date: "2027-05-20", icon: "scorecard", offset: "+02:00", title: "Le bilan : votre plan IA pour la suite", note: "Ce qui a marché chez vous, et ce qu'on met en place ensuite" },
 ];
+
+/** Evenings whose date changed after they were seeded. The launch went from 5 to 12 November. */
+const MOVED = [{ from: "2026-11-05", to: "2026-11-12", offset: "+01:00" }];
 
 /** What the first seed wrote, before each evening had a theme. Rows still showing it get their theme. */
 const UNTHEMED = [
@@ -46,6 +50,20 @@ const UNTHEMED = [
 ];
 
 export async function seedEvents(): Promise<void> {
+  // Moves the row, and anyone booked on it, but only while it still has the seeded
+  // time and nothing sits on the new date, so a date Daniel set in admin stays.
+  for (const m of MOVED) {
+    const [taken] = await db.select({ id: events.id }).from(events).where(eq(events.slug, `rieuzal-${m.to}`));
+    if (taken) continue;
+    const done = await db.update(events).set({
+      slug: `rieuzal-${m.to}`,
+      startsAt: new Date(`${m.to}T18:30:00${m.offset}`),
+      endsAt: new Date(`${m.to}T20:00:00${m.offset}`),
+    }).where(and(eq(events.slug, `rieuzal-${m.from}`), eq(events.startsAt, new Date(`${m.from}T18:30:00${m.offset}`))))
+      .returning({ id: events.id });
+    if (done.length) console.log(`[events] moved rieuzal-${m.from} to ${m.to}`);
+  }
+
   const existing = new Set((await db.select({ slug: events.slug }).from(events)).map((e) => e.slug));
   const missing = RIEUZAL
     .map((e) => ({
