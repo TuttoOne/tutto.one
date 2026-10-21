@@ -8,6 +8,8 @@
  * - wipes saved work that hasn't been opened for BROWSER_DAYS
  * - adds a "Your work" button: save to a CSV file, open a saved file, share a copy
  *   with Tutto, clear it from this browser
+ * - adds a black "Share with Tutto" button at the top and bottom of the page, which
+ *   opens the same panel at the share form
  *
  * Load it in <head>, before the tool's own script, so the expiry check runs first:
  *   <script src="/praxis-data.js" data-tool="agent-scorecard" data-key="praxis-agent-scorecard-v2"></script>
@@ -185,6 +187,10 @@
   /* ---------- the panel ---------- */
   var CSS = '\
 .pd-btn{display:inline-flex;align-items:center;gap:6px}\
+.btn.pd-share{background:#111;color:#fff;border:1px solid #111}\
+.btn.pd-share:hover,.btn.pd-share:focus-visible{background:#333;border-color:#333;color:#fff}\
+.pd-foot{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin-top:32px;padding-top:16px;border-top:1px solid hsl(var(--border,220 13% 91%))}\
+.pd-foot p{margin:0;color:hsl(var(--muted-foreground,220 9% 46%));font-size:.9rem}\
 .pd-back{position:fixed;inset:0;background:rgba(20,20,20,.45);z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px;overflow:auto}\
 .pd-box{background:hsl(var(--card,0 0% 100%));color:hsl(var(--foreground,0 0% 12%));border-radius:12px;max-width:560px;width:100%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25);font-size:15px;line-height:1.55}\
 .pd-box h2{margin:0 0 8px;font-size:1.35rem}\
@@ -203,7 +209,7 @@
 .pd-ok{padding:12px;border-radius:8px;background:hsl(var(--muted,40 5% 90%))}\
 .pd-close{float:right;background:none;border:0;font-size:22px;line-height:1;cursor:pointer;color:inherit}\
 .pd-box a{color:hsl(var(--primary,32 95% 44%))}\
-@media print{.pd-back,.pd-btn{display:none!important}}';
+@media print{.pd-back,.pd-btn,.pd-foot{display:none!important}}';
 
   var box, msgEl;
   function say(t) { if (msgEl) msgEl.textContent = t; else alert(t); }
@@ -253,7 +259,7 @@
       '<button type="button" class="btn btn-primary" data-pd="close">OK</button>');
   }
 
-  function panel() {
+  function panel(toShare) {
     var has = get(KEY) !== null, until = wipeDate();
     var back = open(
       '<button class="pd-close" aria-label="Close">×</button>' +
@@ -263,7 +269,7 @@
       '<button type="button" class="btn btn-primary btn-sm" data-pd="export"' + (has ? '' : ' disabled') + '>Save to a file (CSV)</button>' +
       '<label class="btn btn-ghost btn-sm" style="cursor:pointer">Open a saved file<input type="file" accept=".csv,text/csv" data-pd="import" hidden></label>' +
       '</div>' +
-      '<h3>Share a copy with Tutto</h3>' +
+      '<h3 id="pd-share-h">Share a copy with Tutto</h3>' +
       '<p class="pd-muted">Sends us one copy of your work as it is now, so we can read it before your next session. We keep it as our data policy says and delete it when you ask.</p>' +
       '<form data-pd="share"' + (has ? '' : ' hidden') + '>' +
       '<label class="pd-f" for="pd-name">Your name</label><input type="text" id="pd-name" name="pd-name" required autocomplete="name">' +
@@ -271,7 +277,7 @@
       '<label class="pd-f" for="pd-org">Organisation (optional)</label><input type="text" id="pd-org" name="pd-org" autocomplete="organization">' +
       '<label class="pd-f" for="pd-note">A note for Daniel (optional)</label><textarea id="pd-note" name="pd-note" rows="2"></textarea>' +
       '<label class="pd-check"><input type="checkbox" name="pd-agree"> <span>I agree to the <a href="' + POLICY_URL + '" target="_blank" rel="noopener">data policy</a> and I\'ve left out anything I\'m not allowed to share.</span></label>' +
-      '<button type="submit" class="btn btn-primary btn-sm">Share with Tutto</button>' +
+      '<button type="submit" class="btn btn-sm pd-share">Share with Tutto</button>' +
       '</form>' +
       (has ? '' : '<p class="pd-muted">Start working and this opens.</p>') +
       '<h3>Clear from this browser</h3>' +
@@ -292,6 +298,10 @@
     back.querySelector('input[data-pd=import]').addEventListener('change', function (e) { if (e.target.files[0]) importCsv(e.target.files[0]); });
     var form = back.querySelector('form[data-pd=share]');
     form.addEventListener('submit', function (e) { e.preventDefault(); share(form); });
+    if (toShare) {
+      back.querySelector('#pd-share-h').scrollIntoView({ block: 'start' });
+      if (has) form.elements['pd-name'].focus({ preventScroll: true });
+    }
   }
 
   document.addEventListener('click', function (e) {
@@ -300,12 +310,20 @@
     var a = t.getAttribute('data-pd');
     if (t.classList.contains('pd-close') || a === 'close') close();
     else if (a === 'open') panel();
+    else if (a === 'share') panel(true);
     else if (a === 'export') exportCsv();
     else if (a === 'clear') {
       if (t.getAttribute('data-sure')) clearAll();
       else { t.setAttribute('data-sure', '1'); t.textContent = 'Click again to clear'; say('This cannot be undone.'); }
     }
   });
+
+  function shareBtn() {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn btn-sm pd-btn pd-share'; b.setAttribute('data-pd', 'share');
+    b.textContent = 'Share with Tutto';
+    return b;
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     var style = document.createElement('style');
@@ -317,6 +335,15 @@
       b.type = 'button'; b.className = 'btn btn-ghost btn-sm pd-btn'; b.setAttribute('data-pd', 'open');
       b.textContent = 'Your work';
       mount.insertBefore(b, mount.firstChild);
+      mount.insertBefore(shareBtn(), mount.firstChild);
+    }
+    var shell = document.querySelector('.shell');
+    if (shell) {
+      var foot = document.createElement('div');
+      foot.className = 'pd-foot';
+      foot.innerHTML = '<p>Want Daniel to read your work before you meet? Send him a copy.</p>';
+      foot.appendChild(shareBtn());
+      shell.appendChild(foot);
     }
     if (get(AGREED) !== POLICY_VERSION) consentGate();
     else if (expired) expiredNote();
