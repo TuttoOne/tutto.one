@@ -1,5 +1,5 @@
 /**
- * /data-policy: how we handle the data people put into /learn and the Praxis tools.
+ * /data-policy: how we handle the data people put into /learn, the Praxis tools and calls to our phone assistant.
  *
  * Linked from the footer, the /learn sign-in and agreement screens, and the
  * consent box in every tool (client/public/praxis-data.js). The numbers come from
@@ -40,7 +40,7 @@ export default function DataPolicy() {
         <span style={{ ...CAPS, fontSize: 11, color: AMBER }}>Data policy · version of {version}</span>
         <h1 style={{ ...ROBOTO, fontSize: 36, fontWeight: 700, lineHeight: 1.15, margin: "8px 0 16px" }}>How we handle your data</h1>
         <p style={{ ...P, fontSize: 18, color: MUTED }}>
-          We teach with your real work, so the tools see real work. This page says what we keep, where we keep it, who sees it, how long we hold it and how to have it deleted. It covers the student area at tutto.one/learn, the Praxis tools (the use case card, the AI charter, the agent scorecard and the hand-over check) and the enquiries you send us.
+          We teach with your real work, so the tools see real work. This page says what we keep, where we keep it, who sees it, how long we hold it and how to have it deleted. It covers the student area at tutto.one/learn, the Praxis tools (the use case card, the AI charter, the agent scorecard and the hand-over check), the enquiries you send us and calls to our phone assistant.
         </p>
 
         <h2 style={H2}>What stays with you</h2>
@@ -62,6 +62,7 @@ export default function DataPolicy() {
           <li><strong>Work you share with us</strong> from the tools: one copy each time you press "Share with Tutto", with your name, email and organisation, so we can read it before we meet.</li>
           <li><strong>Enquiries and mailing list sign-ups</strong> from the contact forms, so we can reply.</li>
           <li><strong>Bookings for our evenings</strong>, like the ones at Rieuzal: your name, email, company and how many of you are coming, so we can hold your place, run the waiting list and send you the reminder.</li>
+          <li><strong>Calls to our phone assistant</strong> on 05 36 08 02 89: the number you call from, a transcript of the call and a short summary, including any name, company or contact details you give. They're sent to Daniel after the call so he can answer your questions. The assistant is an AI (Voxtral, from Mistral AI). Before you ask anything, it tells you that and says the call is passed on to Daniel. If you'd rather it wasn't, hang up and email us instead.</li>
           <li><strong>When you agreed to this policy</strong>, and which version, so we can show it later.</li>
         </ul>
         <p style={P}>We don't sell any of it, use it for advertising or put it into AI tools to train them.</p>
@@ -72,6 +73,7 @@ export default function DataPolicy() {
           <li>If your organisation's contract sets a different period, the contract wins and we set that date on your programme.</li>
           <li>Work shared by someone who isn't on a programme: {RETENTION_MONTHS} months after it was sent.</li>
           <li>Bookings for an evening: {RETENTION_MONTHS} months after it took place.</li>
+          <li>Call transcripts and summaries: {RETENTION_MONTHS} months after the call.</li>
           <li>Sign-in links: a day after they're used or expire.</li>
           <li>Enquiries and mailing list sign-ups: until you ask us to delete them or unsubscribe.</li>
           <li>Deleted data can stay in our database host's backups for up to {BACKUP_DAYS} days, and then it's gone too.</li>
@@ -84,6 +86,7 @@ export default function DataPolicy() {
         <ul style={UL}>
           <li>Replit runs the website and holds its database{DATABASE_REGION ? `, in ${DATABASE_REGION}` : ". We're confirming which region it's held in and will add it here"}.</li>
           <li>Resend sends the sign-in, welcome and booking emails.</li>
+          <li>Mistral AI, in France, runs the phone assistant's voice model (Voxtral) and makes the transcript.</li>
           <li>Google Workspace holds our email, calendar invites, meeting notes and Google Meet calls.</li>
         </ul>
         <p style={P}>
