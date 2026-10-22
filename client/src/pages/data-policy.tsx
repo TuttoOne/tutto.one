@@ -85,7 +85,7 @@ export default function DataPolicy() {
         </p>
         <ul style={UL}>
           <li>Replit runs the website and holds its database{DATABASE_REGION ? `, in ${DATABASE_REGION}` : ". We're confirming which region it's held in and will add it here"}.</li>
-          <li>Resend sends the sign-in, welcome and booking emails, and the call summaries to Daniel.</li>
+          <li>Resend sends the sign-in, welcome and booking emails. It also sends Daniel the call summaries.</li>
           <li>For the phone assistant: OVH, in France, provides the phone line and the server the assistant runs on, where the transcripts are stored. LiveKit carries the sound of the call, in the European Union (Frankfurt). Mistral AI, in the European Union, turns your voice into text and back (Voxtral) and writes the assistant's answers and the summary.</li>
           <li>Google Workspace holds our email, calendar invites, meeting notes and Google Meet calls.</li>
         </ul>
