@@ -73,7 +73,7 @@ export default function DataPolicy() {
           <li>If your organisation's contract sets a different period, the contract wins and we set that date on your programme.</li>
           <li>Work shared by someone who isn't on a programme: {RETENTION_MONTHS} months after it was sent.</li>
           <li>Bookings for an evening: {RETENTION_MONTHS} months after it took place.</li>
-          <li>Call transcripts and summaries: {RETENTION_MONTHS} months after the call.</li>
+          <li>Call transcripts and summaries: deleted from our server automatically {RETENTION_MONTHS} months after the call. The summary emailed to Daniel stays in his mailbox like any other email, until you ask us to delete it.</li>
           <li>Sign-in links: a day after they're used or expire.</li>
           <li>Enquiries and mailing list sign-ups: until you ask us to delete them or unsubscribe.</li>
           <li>Deleted data can stay in our database host's backups for up to {BACKUP_DAYS} days, and then it's gone too.</li>
