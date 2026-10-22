@@ -88,10 +88,10 @@ export const SITE_PAGES: SitePage[] = [
   },
   {
     path: "/rieuzal",
-    name: "Soirées IA à Rieuzal (in-person evenings, in French)",
-    summary: "Free 90-minute evenings every 2 weeks at the Manoir de Rieuzal, Loubressac (Lot), with Mistral. 15 places, booking required.",
+    name: "Ateliers IA à Rieuzal (in-person workshops, in French)",
+    summary: "6 free 90-minute practical workshops from November 2026 to March 2027 at the Manoir de Rieuzal, Loubressac (Lot), with Mistral. 15 places, booking required.",
     detail:
-      "In-person evenings in French for companies around the Lot, every two weeks from 12 November 2026 to 20 May 2027 at the Manoir de Rieuzal, 370 Chemin de Rieuzal, Loubressac. Each lasts 90 minutes: a live demo with Mistral Large 4 (Le Chonk), the French model, showing how AI is set up in a company, how teams are trained with Praxis, how the systems are run together and what each role gains. Every evening starts with the same foundations (setting up Mistral, what an agent is) and then has its own theme and a task done live, following the Praxis programme: rules, judging good work, what to hand over, standing briefs, connecting tools, checking before sending, accounts, front desk and sales, automation, a first agent and a closing review with a plan for what comes next. Free, 15 places, booked on the page for 1 to 4 people. When an evening is full, visitors can join the waiting list and get the place automatically when someone cancels.",
+      "In-person practical workshops (ateliers) in French for companies around the Lot, at the Manoir de Rieuzal, 370 Chemin de Rieuzal, Loubressac, 18:30 to 20:00. The six dates announced: Tuesday 24 November 2026, Thursday 10 December 2026, Tuesday 12 January 2027, Thursday 28 January 2027, Tuesday 2 March 2027 and Thursday 18 March 2027. Each one uses Mistral on real tasks, then a discussion. It teaches a method that works the same with Claude, ChatGPT or Mistral, on the infrastructure and in the region you choose. Themes in order: a working folder so an agent can run on its own, a machine that stays on, security, your AI policy, a scorecard for agents and agents as subcontractors. Free, 15 places, booked on the page for 1 to 4 people. When one is full, visitors can join the waiting list and get the place automatically when someone cancels.",
     offering: false,
   },
   {

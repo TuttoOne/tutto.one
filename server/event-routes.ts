@@ -186,9 +186,9 @@ type BookResult = { booking: EventBooking; event: Event; token: string; already:
 async function book(eventId: number, input: z.infer<typeof eventBookingInputSchema>, opts: { force?: boolean; allowClosed?: boolean } = {}): Promise<BookResult> {
   return db.transaction(async (tx) => {
     const e = await lockEvent(tx, eventId);
-    if (!e) throw new BookingError("Cette soirée n'existe pas.", 404);
-    if (e.startsAt <= new Date()) throw new BookingError("Cette soirée a déjà eu lieu.");
-    if (!opts.allowClosed && e.status !== "open") throw new BookingError("Les réservations pour cette soirée sont fermées.");
+    if (!e) throw new BookingError("Cet atelier n'existe pas.", 404);
+    if (e.startsAt <= new Date()) throw new BookingError("Cet atelier a déjà eu lieu.");
+    if (!opts.allowClosed && e.status !== "open") throw new BookingError("Les réservations pour cet atelier sont fermées.");
 
     const email = norm(input.email);
     const [existing] = await tx.select().from(eventBookings)
@@ -324,7 +324,7 @@ export function registerEventRoutes(app: Express) {
       if (tooMany(req.ip ?? "?")) return res.status(429).json({ error: "Trop de réservations depuis cette connexion. Réessayez dans une heure." });
       const input = eventBookingInputSchema.parse(req.body);
       const [e] = await db.select().from(events).where(eq(events.slug, String(req.params.slug)));
-      if (!e || e.status === "hidden") throw new BookingError("Cette soirée n'existe pas.", 404);
+      if (!e || e.status === "hidden") throw new BookingError("Cet atelier n'existe pas.", 404);
       const r = await book(e.id, input);
       if (r.already) {
         return res.json({

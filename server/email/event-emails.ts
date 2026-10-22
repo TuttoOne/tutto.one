@@ -70,7 +70,7 @@ function details(e: EventInfo, seats: number): string {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:6px 16px 6px 0;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:${MUTED};vertical-align:top;white-space:nowrap;">${label}</td><td style="padding:6px 0;font-size:15px;">${escapeHtml(value)}</td></tr>`;
   return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 20px;border-top:1px solid ${RULE};border-bottom:1px solid ${RULE};width:100%;">
-${row("Soirée", e.title)}
+${row("Atelier", e.title)}
 ${row("Quand", `${frWhen(e.startsAt)}, 1h30`)}
 ${row("Où", `${e.venue}, ${e.address}`)}
 ${row("Pour", places(seats))}
@@ -82,7 +82,7 @@ function link(href: string, label: string): string {
 }
 
 function textDetails(e: EventInfo, seats: number): string[] {
-  return [`Soirée : ${e.title}`, `Quand : ${frWhen(e.startsAt)}, 1h30`, `Où : ${e.venue}, ${e.address}`, `Pour : ${places(seats)}`];
+  return [`Atelier : ${e.title}`, `Quand : ${frWhen(e.startsAt)}, 1h30`, `Où : ${e.venue}, ${e.address}`, `Pour : ${places(seats)}`];
 }
 
 const sign = ["À bientôt,", "Daniel"];
@@ -105,7 +105,7 @@ export function buildIcs(e: EventInfo, pageUrl: string): string {
     `DTEND:${icsDate(e.endsAt)}`,
     `SUMMARY:${icsText(e.title)}`,
     `LOCATION:${icsText(`${e.venue}, ${e.address}`)}`,
-    `DESCRIPTION:${icsText(`Soirée Tutto. Pour annuler ou voir les autres dates : ${pageUrl}`)}`,
+    `DESCRIPTION:${icsText(`Atelier Tutto. Pour annuler ou voir les autres dates : ${pageUrl}`)}`,
     `URL:${pageUrl}`,
     "END:VEVENT",
     "END:VCALENDAR",
@@ -137,8 +137,8 @@ ${details(m.event, m.seats)}
 
 export function buildWaitlistEmail(m: BookingMail & { position: number }): Mail {
   const subject = `Liste d'attente : ${m.event.title}, ${frWhen(m.event.startsAt)}`;
-  const intro = `La soirée est complète, alors vous êtes sur la liste d'attente, en position ${m.position}. Dès qu'une place se libère, elle est à vous et je vous écris aussitôt.`;
-  const other = "Les soirées reviennent tous les 15 jours. Une autre date vous irait peut-être :";
+  const intro = `L'atelier est complet, alors vous êtes sur la liste d'attente, en position ${m.position}. Dès qu'une place se libère, elle est à vous et je vous écris aussitôt.`;
+  const other = "Une autre date vous irait peut-être :";
   const leave = "Si vous ne souhaitez plus attendre :";
   const html = `<tr><td>
 <p style="${P}">Bonjour ${escapeHtml(m.firstName)},</p>
@@ -170,9 +170,9 @@ ${details(m.event, m.seats)}
 export function buildCancelledEmail(m: BookingMail & { wasWaitlist: boolean }): Mail {
   const subject = m.wasWaitlist ? `Vous avez quitté la liste d'attente : ${m.event.title}` : `Réservation annulée : ${m.event.title}`;
   const intro = m.wasWaitlist
-    ? `C'est fait, vous n'êtes plus sur la liste d'attente pour la soirée du ${frWhen(m.event.startsAt)}.`
-    : `C'est fait, votre réservation pour la soirée du ${frWhen(m.event.startsAt)} est annulée. Merci d'avoir libéré la place.`;
-  const other = "Les soirées reviennent tous les 15 jours :";
+    ? `C'est fait, vous n'êtes plus sur la liste d'attente pour l'atelier du ${frWhen(m.event.startsAt)}.`
+    : `C'est fait, votre réservation pour l'atelier du ${frWhen(m.event.startsAt)} est annulée. Merci d'avoir libéré la place.`;
+  const other = "Les autres dates :";
   const html = `<tr><td>
 <p style="${P}">Bonjour ${escapeHtml(m.firstName)},</p>
 <p style="${P}">${escapeHtml(intro)}</p>

@@ -100,11 +100,11 @@ function BookingForm({ e, maxSeats, onDone }: { e: PublicEvent; maxSeats: number
   if (result) {
     const text = result.already
       ? result.status === "confirmed"
-        ? "Vous êtes déjà inscrit(e) à cette soirée. Le mail de confirmation contient le lien pour annuler si besoin."
+        ? "Vous êtes déjà inscrit(e) à cet atelier. Le mail de confirmation contient le lien pour annuler si besoin."
         : `Vous êtes déjà sur la liste d'attente, en position ${result.position}.`
       : result.status === "confirmed"
         ? "C'est réservé. Vous recevez un mail de confirmation avec le calendrier et le lien pour annuler."
-        : `La soirée est complète, alors vous êtes sur la liste d'attente, en position ${result.position}. Si une place se libère, elle est à vous et vous recevez un mail.`;
+        : `L'atelier est complet, alors vous êtes sur la liste d'attente, en position ${result.position}. Si une place se libère, elle est à vous et vous recevez un mail.`;
     return <p role="status" style={{ ...P, margin: "16px 0 0", padding: "12px 14px", background: "#fdf6ec", border: "1px solid #f0d9b0", borderRadius: 6 }}>{text}</p>;
   }
 
@@ -176,7 +176,7 @@ export function EventSeries({ series }: { series: string }) {
   });
 
   useEffect(() => {
-    document.title = "Soirées IA à Rieuzal | Tutto";
+    document.title = "Ateliers IA à Rieuzal | Tutto";
     return () => { document.title = SITE_TITLE; };
   }, []);
 
@@ -185,24 +185,24 @@ export function EventSeries({ series }: { series: string }) {
 
   return (
     <Shell>
-      <span style={{ ...CAPS, fontSize: 11, color: AMBER }}>Soirées Praxis · tous les 15 jours</span>
+      <span style={{ ...CAPS, fontSize: 11, color: AMBER }}>Ateliers IA · novembre à mars</span>
       <h1 style={{ ...ROBOTO, fontSize: 40, fontWeight: 700, lineHeight: 1.1, margin: "8px 0 16px", textWrap: "balance" } as React.CSSProperties}>
-        Soirées IA à Rieuzal, avec Mistral
+        Apprenez une méthode claire pour toutes les IA
       </h1>
       <p style={{ ...P, fontSize: 18 }}>
-        1h30 pour voir l'IA faire du vrai travail, en direct, avec Mistral Large 4, le nouveau modèle français. On vous montre comment on la met en place dans une entreprise, comment on forme vos équipes avec Praxis, comment on fait tourner vos systèmes ensemble et ce que chaque poste y gagne, de la compta à l'atelier.
+        Six ateliers pratiques de 1h30 au Manoir de Rieuzal, avec Mistral. On fait faire de vraies tâches à Mistral devant vous, et on en parle ensemble. Ce qu'on vous apprend marche aussi avec Claude et ChatGPT, alors vous passez de l'une à l'autre quand vous voulez, sur l'infrastructure de votre choix et dans la région de votre choix.
       </p>
       <p style={{ ...P, color: MUTED }}>
-        Chaque soirée commence par les bases (installer Mistral, comprendre ce qu'est un agent), puis on se concentre sur un thème et une tâche faite en direct. Venez à une soirée ou à toutes : elles sont toutes différentes.
+        Chaque atelier a son thème. Venez à un atelier ou à tous : ils sont tous différents.
       </p>
       <p style={{ ...P, color: MUTED }}>
-        15 places par soirée, gratuit, sur réservation. Si une soirée est complète, inscrivez-vous sur la liste d'attente : dès qu'une place se libère, elle est à vous.
+        15 places par atelier, gratuit, sur réservation. Si un atelier est complet, inscrivez-vous sur la liste d'attente : dès qu'une place se libère, elle est à vous.
       </p>
 
       <section style={{ margin: "32px 0", display: "grid", gap: 12 }}>
         {isLoading && <p style={{ ...P, color: MUTED }}>Chargement des dates...</p>}
         {error && <p style={{ ...P, color: "#b42318" }}>Les dates ne se chargent pas. Réessayez, ou écrivez à daniel@tutto.one.</p>}
-        {!isLoading && !error && list.length === 0 && <p style={{ ...P, color: MUTED }}>Pas de soirée prévue pour l'instant. Écrivez à daniel@tutto.one pour être prévenu(e) des prochaines.</p>}
+        {!isLoading && !error && list.length === 0 && <p style={{ ...P, color: MUTED }}>Pas d'atelier prévu pour l'instant. Écrivez à daniel@tutto.one pour être prévenu(e) des prochaines.</p>}
         {list.map((e, i) => (
           <EventCard key={e.slug} e={e} maxSeats={data!.maxSeats} first={i === 0} onBooked={() => qc.invalidateQueries({ queryKey: key })} />
         ))}
@@ -219,7 +219,7 @@ export function EventSeries({ series }: { series: string }) {
       )}
 
       <p style={{ ...P, marginTop: 24, fontSize: 14, color: MUTED }}>
-        Nous gardons votre nom, votre e-mail et votre entreprise pour gérer la soirée, et nous les supprimons {RETENTION_MONTHS} mois après. Détails sur <a style={A} href="/data-policy">notre politique de données</a> (en anglais). Une question : <a style={A} href="mailto:daniel@tutto.one">daniel@tutto.one</a>
+        Nous gardons votre nom, votre e-mail et votre entreprise pour gérer l'atelier, et nous les supprimons {RETENTION_MONTHS} mois après. Détails sur <a style={A} href="/data-policy">notre politique de données</a> (en anglais). Une question : <a style={A} href="mailto:daniel@tutto.one">daniel@tutto.one</a>
       </p>
     </Shell>
   );
@@ -276,7 +276,7 @@ export function EventCancel() {
               <a style={A} href={`/${e.series}`}>Voir les autres dates</a>
             </p>
           ) : past ? (
-            <p style={P}>Cette soirée a déjà eu lieu.</p>
+            <p style={P}>Cet atelier a déjà eu lieu.</p>
           ) : (
             <>
               <p style={P}>

@@ -8,9 +8,9 @@
  * Times carry their own UTC offset. France changes clocks on 25 October 2026
  * and 28 March 2027.
  */
-import { and, eq, isNull } from "drizzle-orm";
+import { and, eq, inArray, isNull, ne, notInArray } from "drizzle-orm";
 import { db } from "./db";
-import { events } from "@shared/schema";
+import { eventBookings, events } from "@shared/schema";
 import type { ModuleIcon } from "@shared/learn-programmes";
 
 const VENUE = "Manoir de Rieuzal";
@@ -18,26 +18,28 @@ const ADDRESS = "370 Chemin de Rieuzal, 46130 Loubressac";
 
 type SeedEvent = { date: string; icon: ModuleIcon; offset: string; title: string; note: string; status?: "open" | "hidden" };
 
-// Each evening starts with the same foundations (setting up Mistral, what an agent
-// is) and then has its own theme and one task done live, following the Praxis
-// programme in order, with two evenings for particular jobs (accounts, front desk
-// and sales). Guests are not announced yet, so no evening names one.
+// The six ateliers announced on the poster (22 October 2026). Daniel plans six at a
+// time, so this list is the whole public programme: any other Rieuzal row is hidden
+// below. Every atelier works with Mistral, then takes one theme. February is left
+// out for the zone C school holidays (6 to 22 February 2027).
 const RIEUZAL: SeedEvent[] = [
-  { date: "2026-11-12", icon: "terminal", offset: "+01:00", title: "Le Chonk : Mistral Large 4 en direct", note: "On installe Mistral et on crée un premier agent" },
-  { date: "2026-11-24", icon: "rules", offset: "+01:00", title: "Les règles d'abord", note: "On écrit la charte IA de votre entreprise" },
-  { date: "2026-12-10", icon: "scorecard", offset: "+01:00", title: "C'est quoi, un bon travail ?", note: "Une grille pour juger ce que l'IA produit" },
-  // A bonus evening Daniel is keeping in reserve. Hidden until he opens it in admin.
-  { date: "2026-12-15", icon: "question", offset: "+01:00", title: "Soirée bonus", note: "Vos questions, sur vos tâches", status: "hidden" },
-  { date: "2027-01-14", icon: "signpost", offset: "+01:00", title: "Que confier à l'IA ?", note: "La liste de ce qu'on lui confie, et de ce qu'on garde" },
-  { date: "2027-01-28", icon: "pencil", offset: "+01:00", title: "Briefer une fois pour toutes", note: "Des instructions permanentes pour vos tâches qui reviennent" },
-  { date: "2027-02-04", icon: "plug", offset: "+01:00", title: "Mistral relié à vos outils", note: "Vos fichiers, vos mails et votre agenda" },
-  { date: "2027-02-25", icon: "magnifier", offset: "+01:00", title: "Vérifier avant d'envoyer", note: "Relire, noter et valider le travail de l'IA" },
-  { date: "2027-03-11", icon: "calculator", offset: "+01:00", title: "La compta avec Mistral", note: "Une vraie tâche comptable, en direct" },
-  { date: "2027-03-25", icon: "chat", offset: "+01:00", title: "Accueil et commercial", note: "Devis, relances et réponses aux clients" },
-  { date: "2027-04-22", icon: "gear", offset: "+02:00", title: "Automatiser", note: "Des tâches qui tournent toutes seules" },
-  { date: "2027-05-04", icon: "robot", offset: "+02:00", title: "Votre premier agent, et le garder en main", note: "Un agent sur vos données, et comment le faire évoluer" },
-  { date: "2027-05-20", icon: "scorecard", offset: "+02:00", title: "Le bilan : votre plan IA pour la suite", note: "Ce qui a marché chez vous, et ce qu'on met en place ensuite" },
+  { date: "2026-11-24", icon: "terminal", offset: "+01:00", title: "Un dossier pour que l'agent travaille seul", note: "Préparer un dossier de travail pour qu'un agent Mistral avance sans vous" },
+  { date: "2026-12-10", icon: "gear", offset: "+01:00", title: "Une machine toujours allumée", note: "Ordinateur ou serveur : où faire tourner vos agents" },
+  { date: "2027-01-12", icon: "magnifier", offset: "+01:00", title: "La sécurité", note: "Ce que l'agent peut voir, faire et envoyer" },
+  { date: "2027-01-28", icon: "rules", offset: "+01:00", title: "Votre charte IA", note: "Les règles de votre entreprise pour l'IA" },
+  { date: "2027-03-02", icon: "scorecard", offset: "+01:00", title: "Une grille pour vos agents", note: "Noter le travail de vos agents" },
+  { date: "2027-03-18", icon: "pencil", offset: "+01:00", title: "Vos agents, comme des sous-traitants", note: "Les briefer, les suivre et vérifier leur travail" },
 ];
+
+/** The 22 October plan replaced every theme. Rows still showing one of these get the new one. */
+const OLD_THEMES: Record<string, string> = {
+  "2026-11-24": "Les règles d'abord",
+  "2026-12-10": "C'est quoi, un bon travail ?",
+  "2027-01-28": "Briefer une fois pour toutes",
+};
+
+/** The 12 November launch moved to 24 November, which already had its own row. Its bookings move across. */
+const MERGED = { from: "2026-11-12", to: "2026-11-24" };
 
 /** Evenings whose date changed after they were seeded. The launch went from 5 to 12 November. */
 const MOVED = [{ from: "2026-11-05", to: "2026-11-12", offset: "+01:00" }];
@@ -65,6 +67,12 @@ export async function seedEvents(): Promise<void> {
   }
 
   const existing = new Set((await db.select({ slug: events.slug }).from(events)).map((e) => e.slug));
+
+  // The first boot with the six-atelier plan (12 January isn't there yet) moves the
+  // 12 November bookings to the 24th and hides every Rieuzal row outside the six.
+  // It runs once, so a row Daniel reopens in admin later stays open.
+  if (!existing.has("rieuzal-2027-01-12")) await switchToSix();
+
   const missing = RIEUZAL
     .map((e) => ({
       slug: `rieuzal-${e.date}`,
@@ -85,6 +93,15 @@ export async function seedEvents(): Promise<void> {
     console.log(`[events] added ${missing.length} Rieuzal evenings`);
   }
 
+  for (const e of RIEUZAL) {
+    const old = OLD_THEMES[e.date];
+    if (!old) continue;
+    const done = await db.update(events).set({ title: e.title, note: e.note, icon: e.icon })
+      .where(and(eq(events.slug, `rieuzal-${e.date}`), eq(events.title, old)))
+      .returning({ id: events.id });
+    if (done.length) console.log(`[events] gave rieuzal-${e.date} its new theme`);
+  }
+
   // Evenings seeded before they had themes. Only touched while they still show the
   // old seed text, so anything Daniel has written in admin stays.
   for (const e of RIEUZAL) {
@@ -102,4 +119,24 @@ export async function seedEvents(): Promise<void> {
     await db.update(events).set({ icon: e.icon })
       .where(and(eq(events.slug, `rieuzal-${e.date}`), isNull(events.icon)));
   }
+}
+
+async function switchToSix(): Promise<void> {
+  const [from] = await db.select({ id: events.id }).from(events).where(eq(events.slug, `rieuzal-${MERGED.from}`));
+  const [to] = await db.select({ id: events.id }).from(events).where(eq(events.slug, `rieuzal-${MERGED.to}`));
+  if (from && to) {
+    // Skip anyone already booked on the 24th, so nobody ends up with two bookings.
+    const already = (await db.select({ email: eventBookings.email }).from(eventBookings)
+      .where(and(eq(eventBookings.eventId, to.id), ne(eventBookings.status, "cancelled")))).map((b) => b.email);
+    const moved = await db.update(eventBookings).set({ eventId: to.id })
+      .where(and(eq(eventBookings.eventId, from.id), ne(eventBookings.status, "cancelled"),
+        already.length ? notInArray(eventBookings.email, already) : undefined))
+      .returning({ id: eventBookings.id });
+    if (moved.length) console.log(`[events] moved ${moved.length} bookings from rieuzal-${MERGED.from} to ${MERGED.to}`);
+  }
+  const keep = RIEUZAL.map((e) => `rieuzal-${e.date}`);
+  const hidden = await db.update(events).set({ status: "hidden" })
+    .where(and(eq(events.series, "rieuzal"), notInArray(events.slug, keep), inArray(events.status, ["open", "closed"])))
+    .returning({ slug: events.slug });
+  if (hidden.length) console.log(`[events] hid ${hidden.length} Rieuzal evenings outside the six: ${hidden.map((h) => h.slug).join(", ")}`);
 }
