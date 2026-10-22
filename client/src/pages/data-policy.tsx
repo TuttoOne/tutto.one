@@ -62,7 +62,7 @@ export default function DataPolicy() {
           <li><strong>Work you share with us</strong> from the tools: one copy each time you press "Share with Tutto", with your name, email and organisation, so we can read it before we meet.</li>
           <li><strong>Enquiries and mailing list sign-ups</strong> from the contact forms, so we can reply.</li>
           <li><strong>Bookings for our evenings</strong>, like the ones at Rieuzal: your name, email, company and how many of you are coming, so we can hold your place, run the waiting list and send you the reminder.</li>
-          <li><strong>Calls to our phone assistant</strong> on 05 36 08 02 89: the number you call from, a transcript of the call and a short summary, including any name, company or contact details you give. They're sent to Daniel after the call so he can answer your questions. The assistant is an AI (Voxtral, from Mistral AI). Before you ask anything, it tells you that and says the call is passed on to Daniel. If you'd rather it wasn't, hang up and email us instead.</li>
+          <li><strong>Calls to our phone assistant</strong> on 05 36 08 02 89: the number you call from, a transcript of the call and a short summary, including any name, company or contact details you give. We don't record the sound of the call: it's turned into text as you speak, and only the text is kept. The transcript and summary are stored on our server in France and emailed to Daniel after the call so he can answer your questions. The assistant is an AI (Voxtral, from Mistral AI). Before you ask anything, it tells you that and says the call is passed on to Daniel. If you'd rather it wasn't, hang up and email us instead.</li>
           <li><strong>When you agreed to this policy</strong>, and which version, so we can show it later.</li>
         </ul>
         <p style={P}>We don't sell any of it, use it for advertising or put it into AI tools to train them.</p>
@@ -85,8 +85,8 @@ export default function DataPolicy() {
         </p>
         <ul style={UL}>
           <li>Replit runs the website and holds its database{DATABASE_REGION ? `, in ${DATABASE_REGION}` : ". We're confirming which region it's held in and will add it here"}.</li>
-          <li>Resend sends the sign-in, welcome and booking emails.</li>
-          <li>Mistral AI, in France, runs the phone assistant's voice model (Voxtral) and makes the transcript.</li>
+          <li>Resend sends the sign-in, welcome and booking emails, and the call summaries to Daniel.</li>
+          <li>For the phone assistant: OVH, in France, provides the phone line and the server the assistant runs on, where the transcripts are stored. LiveKit carries the sound of the call, in the European Union (Frankfurt). Mistral AI, in the European Union, turns your voice into text and back (Voxtral) and writes the assistant's answers and the summary.</li>
           <li>Google Workspace holds our email, calendar invites, meeting notes and Google Meet calls.</li>
         </ul>
         <p style={P}>
