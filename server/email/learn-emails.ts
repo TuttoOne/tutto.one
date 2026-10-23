@@ -8,11 +8,11 @@
  */
 import { escapeHtml } from "./enquiry-message";
 
-const BG = "#f6f1ea";
-const INK = "#1a1a1a";
-const AMBER = "#d97706";
-const MUTED = "#6b645a";
-const RULE = "#d8d0c5";
+export const BG = "#f6f1ea";
+export const INK = "#1a1a1a";
+export const AMBER = "#d97706";
+export const MUTED = "#6b645a";
+export const RULE = "#d8d0c5";
 const FONT = "Inter, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
 export type WelcomeSession = { number: number | null; title: string; startsAt: Date; isSpare: boolean };
@@ -50,7 +50,7 @@ function zoneLabel(timezone: string): string {
   return `${city[timezone] ?? timezone} time`;
 }
 
-function shell(title: string, body: string): string {
+export function shell(title: string, body: string): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title></head>
@@ -68,9 +68,9 @@ ${body}
 </html>`;
 }
 
-const P = `margin:0 0 16px;font-size:15px;line-height:1.6;`;
+export const P = `margin:0 0 16px;font-size:15px;line-height:1.6;`;
 
-function button(href: string, label: string): string {
+export function button(href: string, label: string): string {
   return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 24px;"><tr>
 <td style="background:${AMBER};border-radius:6px;">
 <a href="${escapeHtml(href)}" style="display:inline-block;padding:12px 24px;font-size:14px;font-weight:700;color:#ffffff;text-decoration:none;">${escapeHtml(label)}</a>

@@ -287,6 +287,20 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "use-case-card", "index.html"));
   });
 
+  // The tools' Markdown versions download as files, also when opened from a link in an email.
+  app.use((req, res, next) => {
+    if (/^\/[a-z-]+\/praxis-[a-z-]+\.md$/.test(req.path)) {
+      res.setHeader("Content-Disposition", `attachment; filename="${path.basename(req.path)}"`);
+    }
+    next();
+  });
+
+  // How to use those Markdown files with your own AI: same arrangement, link only, not indexed.
+  app.get(["/ai-files", "/ai-files/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "ai-files", "index.html"));
+  });
+
   // Praxis VS Code setup pack (Claude and Mistral Vibe): same arrangement, link only, not indexed.
   // Its screenshots are plain static files under /vscode-setup/img/.
   app.get(["/vscode-setup", "/vscode-setup/"], (_req, res) => {

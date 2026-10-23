@@ -15,9 +15,10 @@ import { db } from "./db";
 import { requireAdmin } from "./admin-routes";
 import { getResend } from "./email/resend";
 import { buildSignInEmail, buildWelcomeEmail } from "./email/learn-emails";
+import { MAILINGS, getMailing } from "./email/learn-mailings";
 import { notifyProfileSaved } from "./email/student-notify";
 import {
-  cohorts, cohortSessions, students, studentProgress, loginTokens, sharedRecords,
+  cohorts, cohortSessions, students, studentProgress, loginTokens, sharedRecords, studentMailings,
   studentProfileSchema,
   type Cohort, type CohortSession, type Student,
 } from "@shared/schema";
@@ -363,6 +364,9 @@ export function registerLearnRoutes(app: Express) {
         ? await db.select({ id: sharedRecords.id, studentId: sharedRecords.studentId, tool: sharedRecords.tool, title: sharedRecords.title, createdAt: sharedRecords.createdAt })
           .from(sharedRecords).where(inArray(sharedRecords.studentId, pids)).orderBy(desc(sharedRecords.createdAt))
         : [];
+      const mailed = pids.length
+        ? await db.select().from(studentMailings).where(inArray(studentMailings.studentId, pids))
+        : [];
       res.json(all.map((c) => ({
         ...c,
         programme: getProgramme(c.programmeKey) ?? null,
@@ -371,6 +375,7 @@ export function registerLearnRoutes(app: Express) {
           ...p,
           progress: progress.filter((x) => x.studentId === p.id),
           shared: shared.filter((x) => x.studentId === p.id),
+          mailings: mailed.filter((x) => x.studentId === p.id).map((x) => ({ mailing: x.mailing, sentAt: x.sentAt })),
         })),
       })));
     } catch (error) {
@@ -517,6 +522,56 @@ export function registerLearnRoutes(app: Express) {
       res.json(student);
     } catch (error) {
       fail(res, error, "send the invite");
+    }
+  });
+  // ── Update emails (server/email/learn-mailings.ts) ──
+  // They go only to students who have had their welcome, in cohorts that aren't drafts,
+  // and student_mailings makes sure nobody gets the same one twice.
+
+  app.get("/api/admin/learn/mailings", requireAdmin, (_req, res) => {
+    res.json(MAILINGS.map((m) => ({ key: m.key, label: m.label })));
+  });
+
+  app.get("/api/admin/learn/mailings/:key/preview", requireAdmin, (req, res) => {
+    const mailing = getMailing(String(req.params.key));
+    if (!mailing) return res.status(404).send("Not found");
+    const site = siteUrl(req);
+    res.type("html").send(mailing.build({ firstName: "Alex", signInUrl: `${site}/learn/auth?token=PREVIEW`, site }).html);
+  });
+
+  app.post("/api/admin/learn/cohorts/:id/mailings/:key", requireAdmin, async (req, res) => {
+    try {
+      const mailing = getMailing(String(req.params.key));
+      if (!mailing) return res.status(404).json({ error: "Unknown mailing" });
+      const cohortId = z.coerce.number().int().parse(req.params.id);
+      const [cohort] = await db.select().from(cohorts).where(eq(cohorts.id, cohortId));
+      if (!cohort) return res.status(404).json({ error: "Not found" });
+      if (cohort.status === "draft") {
+        return res.status(409).json({ error: "This cohort is still a draft. Set it to active before mailing anyone." });
+      }
+      const people = await db.select().from(students).where(eq(students.cohortId, cohortId));
+      const done = new Set((people.length
+        ? await db.select().from(studentMailings).where(and(inArray(studentMailings.studentId, people.map((p) => p.id)), eq(studentMailings.mailing, mailing.key)))
+        : []).map((x) => x.studentId));
+      const site = siteUrl(req);
+      let sent = 0;
+      const failed: string[] = [];
+      for (const s of people) {
+        if (!s.invitedAt || done.has(s.id)) continue;
+        try {
+          const token = await issueToken(s.id, WELCOME_LINK_DAYS * 24 * 60);
+          const mail = mailing.build({ firstName: firstName(s.name), signInUrl: `${site}/learn/auth?token=${token}`, site });
+          await sendMail({ from: FROM_PERSON, to: s.email, ...mail });
+          await db.insert(studentMailings).values({ studentId: s.id, mailing: mailing.key }).onConflictDoNothing();
+          sent++;
+        } catch (error) {
+          console.error(`[learn] mailing ${mailing.key} to student ${s.id}:`, error);
+          failed.push(s.name);
+        }
+      }
+      res.json({ sent, failed });
+    } catch (error) {
+      fail(res, error, "send the mailing");
     }
   });
 }

@@ -265,6 +265,16 @@ export const loginTokens = pgTable("login_tokens", {
   usedAt: timestamp("used_at"),
 });
 
+/** Which update emails (server/email/learn-mailings.ts) each student has had, so none goes twice. */
+export const studentMailings = pgTable("student_mailings", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  studentId: integer("student_id").notNull(),
+  mailing: text("mailing").notNull(),
+  sentAt: timestamp("sent_at").notNull().defaultNow(),
+}, (t) => [uniqueIndex("student_mailings_student_mailing_idx").on(t.studentId, t.mailing)]);
+
+export type StudentMailing = typeof studentMailings.$inferSelect;
+
 // ── Events: in-person evenings people book a place at ───────────────────────
 //
 // A series (e.g. "rieuzal") is a run of evenings with one public page at

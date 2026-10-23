@@ -17,7 +17,8 @@ import { SHARE_TOOLS, RETENTION_MONTHS } from "@shared/data-policy";
 import { PROGRAMMES, type Programme } from "@shared/learn-programmes";
 
 type AdminShared = { id: number; tool: string; title: string; createdAt: string };
-type AdminStudent = Student & { progress: StudentProgress[]; shared: AdminShared[] };
+type AdminStudent = Student & { progress: StudentProgress[]; shared: AdminShared[]; mailings: { mailing: string; sentAt: string }[] };
+type MailingInfo = { key: string; label: string };
 type AdminCohort = Cohort & { programme: Programme | null; sessions: CohortSession[]; students: AdminStudent[] };
 
 const KEY = ["/api/admin/learn/cohorts"];
@@ -52,6 +53,55 @@ const STATUS_STYLE: Record<string, string> = {
   active: "bg-primary/15 text-primary",
   done: "bg-secondary text-secondary-foreground",
 };
+
+// ── Update emails to a cohort (server/email/learn-mailings.ts) ──────────────
+
+function CohortMailings({ c }: { c: AdminCohort }) {
+  const qc = useQueryClient();
+  const [msg, setMsg] = useState<string | null>(null);
+  const { data: mailings } = useQuery<MailingInfo[]>({
+    queryKey: ["/api/admin/learn/mailings"],
+    queryFn: () => api("GET", "/api/admin/learn/mailings"),
+  });
+  const send = useMutation({
+    mutationFn: (key: string) => api("POST", `/api/admin/learn/cohorts/${c.id}/mailings/${key}`),
+    onSuccess: (r: { sent: number; failed: string[] }) =>
+      setMsg(`Sent to ${r.sent}.${r.failed.length ? ` Failed: ${r.failed.join(", ")}` : ""}`),
+    onError: (e: Error) => setMsg(e.message),
+    onSettled: () => qc.invalidateQueries({ queryKey: KEY }),
+  });
+  if (!mailings?.length || c.status === "draft") return null;
+  const invited = c.students.filter((s) => s.invitedAt);
+
+  return (
+    <div>
+      <h4 className="text-sm font-semibold mb-1">Update emails</h4>
+      <p className="text-xs text-muted-foreground mb-2">Sent from you, with a sign-in button, to students who've had their welcome. Nobody gets the same one twice.</p>
+      {mailings.map((m) => {
+        const had = invited.filter((s) => s.mailings?.some((x) => x.mailing === m.key)).length;
+        const left = invited.length - had;
+        return (
+          <div key={m.key} className="flex flex-wrap items-center gap-3 py-1">
+            <span className="text-sm">{m.label}</span>
+            <span className="text-xs text-muted-foreground">{had} of {invited.length} sent</span>
+            <a href={`/api/admin/learn/mailings/${m.key}/preview`} target="_blank" rel="noopener noreferrer" className="text-xs underline inline-flex items-center gap-1">
+              Preview<ExternalLink className="w-3 h-3" />
+            </a>
+            {left > 0 && (
+              <Button
+                size="sm" variant="outline" disabled={send.isPending}
+                onClick={() => { if (window.confirm(`Send "${m.label}" to the ${left} in ${c.name} who haven't had it?`)) send.mutate(m.key); }}
+              >
+                <Mail className="w-4 h-4 mr-1" />Send to {left}
+              </Button>
+            )}
+          </div>
+        );
+      })}
+      {msg && <p className="text-xs text-muted-foreground mt-1">{msg}</p>}
+    </div>
+  );
+}
 
 // ── One student ──────────────────────────────────────────────────────────────
 
@@ -341,6 +391,7 @@ function CohortCard({ c, open, onToggle }: { c: AdminCohort; open: boolean; onTo
           </div>
         </div>
       </div>
+      <CohortMailings c={c} />
       </>}
     </div>
   );

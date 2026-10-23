@@ -21,7 +21,7 @@ import { buildDeletionEmail } from "./email/privacy-emails";
 import { siteUrl, studentFromRequest } from "./learn-routes";
 import { notifyShared } from "./email/student-notify";
 import {
-  cohorts, cohortSessions, students, studentProgress, loginTokens, sharedRecords, deletionLog,
+  cohorts, cohortSessions, students, studentProgress, loginTokens, sharedRecords, deletionLog, studentMailings,
   contactSubmissions, emailLeads, events, eventBookings,
 } from "@shared/schema";
 import { POLICY_VERSION, RETENTION_MONTHS, BACKUP_DAYS, SHARE_TOOLS } from "@shared/data-policy";
@@ -57,8 +57,9 @@ async function eraseStudentRecords(studentId: number): Promise<Counts> {
   const progress = await db.delete(studentProgress).where(eq(studentProgress.studentId, studentId)).returning({ id: studentProgress.id });
   const tokens = await db.delete(loginTokens).where(eq(loginTokens.studentId, studentId)).returning({ id: loginTokens.id });
   const shared = await db.delete(sharedRecords).where(eq(sharedRecords.studentId, studentId)).returning({ id: sharedRecords.id });
+  const mailings = await db.delete(studentMailings).where(eq(studentMailings.studentId, studentId)).returning({ id: studentMailings.id });
   const people = await db.delete(students).where(eq(students.id, studentId)).returning({ id: students.id });
-  return { students: people.length, progress: progress.length, loginTokens: tokens.length, sharedRecords: shared.length };
+  return { students: people.length, progress: progress.length, loginTokens: tokens.length, sharedRecords: shared.length, mailings: mailings.length };
 }
 
 function add(a: Counts, b: Counts): Counts {

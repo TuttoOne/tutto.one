@@ -120,6 +120,15 @@ export async function ensureLearnSchema(): Promise<void> {
     expires_at timestamp NOT NULL,
     used_at timestamp
   )`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS student_mailings (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    student_id integer NOT NULL,
+    mailing text NOT NULL,
+    sent_at timestamp NOT NULL DEFAULT now()
+  )`);
+  await db.execute(
+    sql`CREATE UNIQUE INDEX IF NOT EXISTS student_mailings_student_mailing_idx ON student_mailings (student_id, mailing)`,
+  );
 }
 
 /** The event tables (/rieuzal and any later series). */

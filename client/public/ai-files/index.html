@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="How to use the Praxis tool files with your own AI: download a file, drop it into your folder, start a chat and let your AI guide you.">
+<title>Your AI Files · Tutto</title>
+<link rel="icon" href="/favicon.png">
+<style>body{margin:0}img{max-width:100%}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&display=swap">
+<style>
+/* Praxis design system (tutto.one/praxis): warm off-white, near-black, amber accent; Roboto display, Inter body.
+   Layout: report: dark cover band, then a single 42rem reading column with full-width screenshots. */
+:root {
+  --bg: #FAF9F6;
+  --fg: #1F1F1F;
+  --card: #FFFFFF;
+  --muted: #E8E6E1;
+  --muted-fg: #6B7280;
+  --border: #E5E7EB;
+  --accent: #DB7400;
+  --accent-soft: rgb(219 116 0 / 0.08);
+  --cover-bg: #1F1F1F;
+  --cover-fg: #FAF9F6;
+  --hl-ring: rgb(255 255 255 / 0.85);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Roboto', 'Inter', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --content: 42rem;
+  --wide: 60rem;
+  --radius: 0.75rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0A09; --fg: #FAF9F6; --card: #171513; --muted: #221F1C; --muted-fg: #9AA0AA;
+    --border: #2A2622; --accent: #F08A1C; --accent-soft: rgb(240 138 28 / 0.12);
+    --cover-bg: #171513; --cover-fg: #FAF9F6; --hl-ring: rgb(0 0 0 / 0.5); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0A09; --fg: #FAF9F6; --card: #171513; --muted: #221F1C; --muted-fg: #9AA0AA;
+  --border: #2A2622; --accent: #F08A1C; --accent-soft: rgb(240 138 28 / 0.12);
+  --cover-bg: #171513; --cover-fg: #FAF9F6; --hl-ring: rgb(0 0 0 / 0.5); color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; font-feature-settings: 'cv11', 'ss01';
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; text-wrap: balance; margin: 0 0 1rem; }
+h2 { font-size: clamp(1.6rem, 4vw, 1.875rem); }
+h3 { font-size: 1.15rem; margin-top: 2rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--accent); text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+code, kbd { font-family: var(--font-mono); font-size: 0.88em; background: var(--muted); padding: 0.1em 0.4em; border-radius: 0.375rem; }
+kbd { border: 1px solid var(--border); white-space: nowrap; }
+.lead { font-size: 1.2rem; line-height: 1.45; color: var(--muted-fg); }
+.eyebrow { display: block; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; }
+.brand { font-family: var(--font-display); font-weight: 900; font-size: 1.35rem; letter-spacing: -0.025em; }
+.brand .dot { color: var(--accent); }
+.tag { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 0.7rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+
+/* Cover */
+.cover { background: var(--cover-bg); color: var(--cover-fg); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.cover-in { max-width: var(--wide); margin: 0 auto; padding-block: 2.5rem 3rem; display: grid; gap: 4rem; }
+.cover-top { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+.cover-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.claude-md { display: inline-flex; align-items: center; border: 1px solid var(--accent); border-radius: 999px; padding: 7px 14px; font: 500 0.85rem/1 var(--font-sans); color: var(--accent); text-decoration: none; white-space: nowrap; }
+.claude-md:hover, .claude-md:focus-visible { background: var(--accent); color: #fff; }
+.cover h1 { color: var(--cover-fg); font-weight: 900; font-size: clamp(2.4rem, 7vw, 3.75rem); margin: 0 0 1.25rem; max-width: 14ch; }
+.cover .lead { color: rgb(250 249 246 / 0.7); max-width: 34rem; margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; margin: 0; padding-top: 1.25rem; border-top: 1px solid rgb(250 249 246 / 0.15); }
+.meta dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(250 249 246 / 0.55); }
+.meta dd { margin: 0.15rem 0 0; font-weight: 500; }
+
+/* Page */
+.page { max-width: var(--wide); margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 3rem 2rem; }
+.page > nav, .page > article { max-width: var(--content); margin-inline: auto; }
+article { padding-top: 3.5rem; margin-top: 3.5rem; border-top: 1px solid var(--border); scroll-margin-top: 1rem; }
+nav.toc h2 { font-size: 1.25rem; }
+.toc ol { list-style: none; padding: 0; margin: 0 0 1.5rem; counter-reset: s; }
+.toc li { counter-increment: s; display: flex; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 1.05rem; }
+.toc li::before { content: counter(s, decimal-leading-zero); color: var(--accent); font-family: var(--font-display); font-weight: 700; min-width: 2.5ch; font-variant-numeric: tabular-nums; }
+.toc a { color: var(--fg); text-decoration: none; }
+.toc a:hover { color: var(--accent); }
+.note { font-size: 0.9rem; color: var(--muted-fg); }
+
+ol.steps { padding-left: 1.25rem; margin: 0 0 1rem; }
+ol.steps li { margin-bottom: 0.6rem; padding-left: 0.25rem; }
+ol.steps li::marker { color: var(--accent); font-weight: 700; font-family: var(--font-display); }
+ul.dash { list-style: none; padding: 0; margin: 0 0 1rem; }
+ul.dash li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; }
+ul.dash li::before { content: '–'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+/* Screenshots: full page width, breaking out of the reading column */
+.shot { margin: 2rem calc((var(--content) - min(var(--wide), 100vw - 32px)) / 2); }
+@media (max-width: 44rem) { .shot { margin-inline: 0; } }
+.frame { position: relative; display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--card); }
+.frame img { display: block; width: 100%; height: auto; }
+.frame:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hl {
+  position: absolute;
+  left: calc(var(--x) / 2000 * 100%); top: calc(var(--y) / 1299 * 100%);
+  width: calc(var(--w) / 2000 * 100%); height: calc(var(--h) / 1299 * 100%);
+  border: 2.5px solid var(--accent); border-radius: 6px;
+  box-shadow: 0 0 0 2px var(--hl-ring);
+  pointer-events: none;
+}
+.hl b {
+  position: absolute; top: -11px; left: -11px;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--accent); color: #fff;
+  font: 700 12px/1 var(--font-display);
+  box-shadow: 0 0 0 2px var(--hl-ring);
+}
+.shot figcaption { max-width: var(--content); margin: 0.85rem auto 0; font-weight: 500; }
+.fignum { font-family: var(--font-display); font-weight: 700; color: var(--accent); margin-right: 0.35rem; }
+.legend { list-style: none; padding: 0; max-width: var(--content); margin: 0.6rem auto 0; display: grid; gap: 0.45rem; }
+.legend li { display: flex; gap: 0.7rem; align-items: baseline; font-size: 0.93rem; color: var(--muted-fg); }
+.legend li b { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font: 700 11px/1 var(--font-display); transform: translateY(2px); }
+.legend li span { min-width: 0; }
+
+.callout { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 1rem 1.25rem; border-radius: 0 var(--radius) var(--radius) 0; margin: 2rem 0; }
+.callout p { margin: 0; }
+.callout.warn { border-left-width: 4px; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+th, td { padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-family: var(--font-display); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-fg); border-bottom: 2px solid var(--fg); }
+td code { word-break: break-all; }
+article > table { display: block; overflow-x: auto; }
+
+.doc-footer { max-width: var(--content); margin: 4rem auto 0; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; font-size: 0.85rem; color: var(--muted-fg); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+</head>
+<body>
+<section class="cover">
+  <div class="cover-in">
+    <header class="cover-top"><span class="brand">Tutto<span class="dot">.</span></span><span class="tag">Praxis</span></header>
+    <div class="title-block">
+      <span class="eyebrow">How-to guide</span>
+      <h1>Use the tool files with your AI</h1>
+      <p class="lead">Every Praxis tool comes as a file you can give to your own AI. Drop it into your folder, start a chat and your AI walks you through the same steps as the tool on the site.</p>
+    </div>
+    <dl class="meta">
+      <div><dt>Updated</dt><dd>October 2026</dd></div>
+      <div><dt>Time needed</dt><dd>About 5 minutes</dd></div>
+      <div><dt>Works with</dt><dd>Claude, ChatGPT, Codex, Mistral, Gemini, Copilot</dd></div>
+    </dl>
+  </div>
+</section>
+
+<main class="page">
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#s1">Get the files</a></li>
+    <li><a href="#s2">Put them in your working folder</a></li>
+    <li><a href="#s3">Copy the file's path</a></li>
+    <li><a href="#s4">Start a chat and say what you want</a></li>
+    <li><a href="#s5">Let your AI guide you</a></li>
+    <li><a href="#s6">Test what you made</a></li>
+  </ol>
+  <p class="note">Screenshots are from VS Code on a Mac with Claude Code. Mistral Vibe and Codex work the same way in the same panel. If VS Code isn't set up yet, start with the <a href="/vscode-setup">VS Code setup guide</a>. Not using VS Code at all? See <a href="#chat-app">step 4</a>.</p>
+</nav>
+
+<article id="s1">
+  <span class="eyebrow">Step 01</span>
+  <h2>Get the files</h2>
+  <p class="lead">Each tool has a button at the top marked "Download for your AI (.md)". They're also on your dashboard at tutto.one/learn, next to each tool.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Tool</th><th>File</th><th>On the site</th></tr></thead>
+    <tbody><tr><td>AI charter</td><td><a href="/ai-charter/praxis-ai-charter.md" download>Download (.md)</a></td><td><a href="/ai-charter">Web version</a></td></tr><tr><td>Agent scorecard</td><td><a href="/agent-scorecard/praxis-agent-scorecard.md" download>Download (.md)</a></td><td><a href="/agent-scorecard">Web version</a></td></tr><tr><td>Hand-over check</td><td><a href="/handover-list/praxis-handover-check.md" download>Download (.md)</a></td><td><a href="/handover-list">Web version</a></td></tr><tr><td>Use case card</td><td><a href="/use-case-card/praxis-use-case-card.md" download>Download (.md)</a></td><td><a href="/use-case-card">Web version</a></td></tr><tr><td>VS Code setup pack</td><td><a href="/vscode-setup/praxis-vscode-setup.md" download>Download (.md)</a></td><td><a href="/vscode-setup">Web version</a></td></tr></tbody>
+  </table>
+  </div>
+  <p>A .md file is plain text with a little formatting. Each one has two parts: a short note for you at the top, and the instructions your AI follows to run the tool.</p>
+</article>
+
+<article id="s2">
+  <span class="eyebrow">Step 02</span>
+  <h2>Put them in your working folder</h2>
+  <p class="lead">Keep the files where your AI works, so it can read them whenever you need them.</p>
+  <ol class="steps">
+    <li>Open your working folder in VS Code (<a href="/vscode-setup#s2">step 2 of the setup guide</a> shows how).</li>
+    <li>Drag the downloaded files from your Downloads folder onto the Explorer on the left.</li>
+    <li>They appear in the list with the rest of your files, as in Fig. 1. Click one to read it. To see it formatted, choose <em>Markdown Preview</em> from the menu at the top right of the file.</li>
+  </ol>
+</article>
+
+<article id="s3">
+  <span class="eyebrow">Step 03</span>
+  <h2>Copy the file's path</h2>
+  <p class="lead">The path tells your AI exactly which file to read.</p>
+  
+<figure class="shot" id="fig1">
+  <a class="frame" href="/ai-files/img/fig01.jpg" target="_blank" rel="noopener">
+    <img src="/ai-files/img/fig01.jpg" alt="VS Code Explorer with the Praxis files in the working folder and the right-click menu open on one of them" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:70;--y:412;--w:385;--h:30"><b>1</b></span><span class="hl" style="--x:300;--y:895;--w:350;--h:32"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 1</span> The files sit in your folder like any other. Right-click the one you want.</figcaption>
+  <ol class="legend"><li><b>1</b><span>The tool file, dropped into the working folder. Here it is praxis-agent-scorecard.md.</span></li><li><b>2</b><span>Copy Path. Shortcut ⌥⌘C on a Mac, Shift+Alt+C on Windows.</span></li></ol>
+</figure>
+</article>
+
+<article id="s4">
+  <span class="eyebrow">Step 04</span>
+  <h2>Start a chat and say what you want</h2>
+  <p class="lead">Open the AI panel on the right, start a new chat, paste the path and say in a sentence or two what you want to make with it.</p>
+  
+<figure class="shot" id="fig2">
+  <a class="frame" href="/ai-files/img/fig02.jpg" target="_blank" rel="noopener">
+    <img src="/ai-files/img/fig02.jpg" alt="Claude Code prompt box with the pasted file path and a request underneath" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1455;--y:945;--w:500;--h:52"><b>1</b></span><span class="hl" style="--x:1455;--y:1020;--w:500;--h:180"><b>2</b></span><span class="hl" style="--x:1922;--y:1222;--w:46;--h:38"><b>3</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 2</span> Paste the path, then say what you want to make.</figcaption>
+  <ol class="legend"><li><b>1</b><span>The path you copied, pasted on the first line.</span></li><li><b>2</b><span>Your request in your own words. Here: use the scorecard kit to make a translation agent that weighs meaning over literal wording.</span></li><li><b>3</b><span>Send.</span></li></ol>
+</figure>
+  <div class="callout"><p><strong>Say what you're working on.</strong> The file is enough to start, but a line about your real task means your AI tailors its suggestions from the first question.</p></div>
+  <div class="callout" id="chat-app"><p><strong>Not using VS Code?</strong> In Claude, ChatGPT, Le Chat, Gemini or Copilot, open a new chat, attach the file with the paperclip or + button (or paste everything in it), and send <em>Let's start</em> with a line about your task. Everything else works the same.</p></div>
+</article>
+
+<article id="s5">
+  <span class="eyebrow">Step 05</span>
+  <h2>Let your AI guide you</h2>
+  <p class="lead">It runs the same steps as the tool on the site: one step at a time, with suggestions and the same documents at the end.</p>
+  
+<figure class="shot" id="fig3">
+  <a class="frame" href="/ai-files/img/fig03.jpg" target="_blank" rel="noopener">
+    <img src="/ai-files/img/fig03.jpg" alt="The AI reads the file, explains the seven steps and asks the first questions" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1175;--y:380;--w:795;--h:670"><b>1</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 3</span> Your AI reads the file and starts the first step.</figcaption>
+  <ol class="legend"><li><b>1</b><span>It says what you will finish with, picks up your request and asks the first step's questions, with suggestions you can say yes to or change.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig4">
+  <a class="frame" href="/ai-files/img/fig04.jpg" target="_blank" rel="noopener">
+    <img src="/ai-files/img/fig04.jpg" alt="The AI shows a checklist of what is still to do, with a reply in the prompt box" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1205;--y:690;--w:420;--h:280"><b>1</b></span><span class="hl" style="--x:1165;--y:1092;--w:800;--h:120"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 4</span> It keeps track of what is done and what is still open.</figcaption>
+  <ol class="legend"><li><b>1</b><span>The checklist from the tool. It ticks items off as you answer.</span></li><li><b>2</b><span>Answer in short. Tell it when something doesn't apply to your task.</span></li></ol>
+</figure>
+  <ul class="dash">
+    <li>Short answers are fine: "yes", "2 and 4", "skip".</li>
+    <li>You can go back to any step by saying so.</li>
+    <li>If your AI can create documents, it offers to put the final result in one. If not, it writes it out in the chat for you to copy.</li>
+  </ul>
+</article>
+
+<article id="s6">
+  <span class="eyebrow">Step 06</span>
+  <h2>Test what you made</h2>
+  <p class="lead">Answer the questions and let your AI guide you through. Tell it if parts aren't relevant to your task. Then test the result, ideally on something where you already know the answer.</p>
+  <p>Showing it what good work looks like beats describing it, and doing both gives you the best results. Keep a couple of finished pieces of real work to hand, and ask your AI to check its output against them.</p>
+  <div class="callout warn"><p><strong>Your answers stay in your AI's chat,</strong> under that tool's terms. Leave out personal or confidential details unless your organisation has approved the tool. If your agent can act on its own, keep it on the mode that asks before it acts (Manual in Claude, Ask in Mistral) until you trust it.</p></div>
+</article>
+
+<footer class="doc-footer"><span>Tutto · Praxis · tutto.one</span><span>How-to guide · v1</span></footer>
+</main>
+
+</body>
+</html>
