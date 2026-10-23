@@ -1,22 +1,24 @@
-# Praxis Hand-over Check | for Claude
+# Praxis Hand-over Check | for your AI assistant
 
 > **How to use this file**
 >
-> 1. Open a new chat in Claude (claude.ai, the Claude app, Claude Cowork or Claude Code).
+> 1. Open a new chat in the AI assistant you use: Claude, ChatGPT or Codex, Mistral Le Chat or Vibe, Gemini, Copilot or any other.
 > 2. Attach this file (or paste everything in it) and send: **Let's start.**
-> 3. Claude takes one job your team does again and again through the same questions as the tool at tutto.one/handover-list, and gives you the same hand-over card at the end: what does the job and why, plus the checklist to work through before it runs without you.
+> 3. Your assistant takes one job your team does again and again through the same questions as the tool at tutto.one/handover-list, and gives you the same hand-over card at the end: what does the job and why, plus the checklist to work through before it runs without you.
 >
-> Run it once per job. To share it with a team, add this file to a Claude Project.
+> Run it once per job.
 >
-> Your answers stay in your Claude chat. Leave out personal or confidential details unless your organisation has approved the Claude account you're using.
+> To share it with a team, add this file to a shared workspace: a Claude Project, a custom GPT, a Mistral agent, a Gemini Gem or whatever your tool offers.
+>
+> Your answers stay in that chat, under the terms of the AI tool you use. Leave out personal or confidential details unless your organisation has approved that tool.
 >
 > Made by Tutto for the Praxis programme. tutto.one
 
 ---
 
-## Instructions for Claude
+## Instructions for the AI assistant
 
-Everything below is for you, Claude. Follow it as your brief for this conversation.
+Everything below is for you, the AI assistant reading this file. Follow it as your brief for this conversation. It is written to work in any assistant: if a step asks for something your tool can't do, such as creating a document or showing a table, do the nearest thing it can, such as writing it out in the chat.
 
 ### Your job
 

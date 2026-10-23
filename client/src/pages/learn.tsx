@@ -286,7 +286,7 @@ const WORKSHEET_MD = "/use-case-card/praxis-use-case-card.md";
 // The VS Code setup pack, a link-only page like the tools.
 const SETUP_GUIDE = "/vscode-setup";
 const SETUP_GUIDE_MD = "/vscode-setup/praxis-vscode-setup.md";
-const CLAUDE_MD_TITLE = "The same tool as a Markdown file. Open it in any Claude chat and Claude walks you through it.";
+const AI_MD_TITLE = "The same tool as a Markdown file. Open it with your AI assistant (Claude, ChatGPT, Mistral, Gemini, Copilot or any other) and it walks you through it.";
 
 function StepCard({ n, title, done, children }: { n: number; title: string; done?: boolean; children: React.ReactNode }) {
   return (
@@ -372,7 +372,7 @@ function ModuleCard({ m, timezone, past, locked, tone }: {
                     {mat.claude && (
                       <>
                         {" · "}
-                        <a href={mat.claude} download title={CLAUDE_MD_TITLE} style={{ color: AMBER }}>Download for Claude (.md)</a>
+                        <a href={mat.claude} download title={AI_MD_TITLE} style={{ color: AMBER }}>Download for your AI (.md)</a>
                       </>
                     )}
                   </li>
@@ -484,7 +484,7 @@ export function LearnDashboard() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
             <a href={SETUP_GUIDE} target="_blank" rel="noopener noreferrer" style={BUTTON}>Open the setup guide</a>
-            <a href={SETUP_GUIDE_MD} download title={CLAUDE_MD_TITLE} style={{ fontSize: 13, color: AMBER }}>Download for Claude (.md)</a>
+            <a href={SETUP_GUIDE_MD} download title={AI_MD_TITLE} style={{ fontSize: 13, color: AMBER }}>Download for your AI (.md)</a>
           </div>
         </div>
 
@@ -564,7 +564,7 @@ export function LearnDashboard() {
               {cards.length ? "Open the use case card" : "Start your use case card"}
             </a>
             <p style={{ margin: "10px 0 0", fontSize: 13, color: MUTED }}>
-              Rather work in Claude? <a href={WORKSHEET_MD} download title={CLAUDE_MD_TITLE} style={{ color: AMBER }}>Download for Claude (.md)</a>
+              Rather work directly with your AI? <a href={WORKSHEET_MD} download title={AI_MD_TITLE} style={{ color: AMBER }}>Download for your AI (.md)</a>
             </p>
           </StepCard>
         </div>

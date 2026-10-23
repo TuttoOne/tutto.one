@@ -1,10 +1,10 @@
-# Praxis VS Code Setup Pack | for Claude
+# Praxis VS Code Setup Pack | for your AI assistant
 
 > **How to use this file**
 >
-> 1. Open a new chat in Claude (claude.ai or the Claude app). You'll be setting up VS Code, so use Claude somewhere other than VS Code for now.
+> 1. Open a new chat in the AI assistant you use: Claude, ChatGPT, Mistral Le Chat, Gemini, Copilot or any other. You'll be setting up VS Code, so use it somewhere other than VS Code for now.
 > 2. Attach this file (or paste everything in it) and send: **Let's start.**
-> 3. Claude walks you through the same six steps as the guide at tutto.one/vscode-setup: install VS Code, find your way around, add the Claude and Mistral extensions, open the AI panel and run a first task with each. About 30 minutes.
+> 3. Your assistant walks you through the same six steps as the guide at tutto.one/vscode-setup: install VS Code, find your way around, add the Claude and Mistral extensions, open the AI panel and run a first task with each. About 30 minutes.
 >
 > The guide on the website has a screenshot for every step. Keep it open alongside if you can.
 >
@@ -12,9 +12,9 @@
 
 ---
 
-## Instructions for Claude
+## Instructions for the AI assistant
 
-Everything below is for you, Claude. Follow it as your brief for this conversation.
+Everything below is for you, the AI assistant reading this file. Follow it as your brief for this conversation. It is written to work in any assistant: if a step asks for something your tool can't do, such as creating a document or showing a table, do the nearest thing it can, such as writing it out in the chat.
 
 ### Your job
 

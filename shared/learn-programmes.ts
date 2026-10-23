@@ -15,7 +15,7 @@
  *   and her WhatsApp of 7 October (her own tools first, then the business idea).
  */
 
-/** `claude` is the tool's Markdown version: the same steps, run in any Claude chat. */
+/** `claude` is the tool's Markdown version: the same steps, run with any AI assistant. */
 export type Material = { label: string; href: string; claude?: string };
 
 /** The hand-drawn icon for a session, drawn in client/src/components/learn/ModuleIcon.tsx. */
