@@ -78,12 +78,12 @@ const SEED: SeedCohort[] = [
     students: [{ name: "Alex Boshoff", email: "aboshoff@me.com" }],
   },
   {
-    // Quote QUO0013536, sent 7 October 2026 and not yet signed. Draft until it's
-    // signed and paid: a draft cohort can't be invited and its dashboard is read-only.
+    // Paid 22 October 2026. The seed only inserts missing cohorts, so the live one is
+    // set up in admin: status, programme, dates, call link and the other three people.
     slug: "health-science-academy-2026",
     name: "Health Science Academy",
     organisation: "Health Science Academy",
-    programmeKey: "ai-fluent-team",
+    programmeKey: "hsa-content-team",
     timezone: "Africa/Johannesburg",
     sessionMinutes: 90,
     meetUrl: null,

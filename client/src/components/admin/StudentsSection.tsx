@@ -303,10 +303,24 @@ function CohortCard({ c, open, onToggle }: { c: AdminCohort; open: boolean; onTo
       </div>
 
       {open && <>
+      <div>
+        <Label htmlFor={`programme-${c.id}`}>Programme (what the dashboard says each session covers)</Label>
+        <select
+          id={`programme-${c.id}`}
+          value={c.programmeKey}
+          onChange={(e) => {
+            if (window.confirm("Switch this cohort's programme? Dates already added keep their session numbers.")) patch.mutate({ programmeKey: e.target.value });
+          }}
+          className="block w-full mt-1 text-sm border border-border rounded px-2 h-9 bg-background"
+        >
+          {Object.values(PROGRAMMES).map((p) => <option key={p.key} value={p.key}>{p.name} ({p.key})</option>)}
+        </select>
+      </div>
+
       <div className="flex gap-2 items-end">
         <div className="flex-1">
           <Label htmlFor={`meet-${c.id}`}>Call link</Label>
-          <Input id={`meet-${c.id}`} value={meetUrl} onChange={(e) => setMeetUrl(e.target.value)} placeholder="https://meet.google.com/..." className="mt-1" />
+          <Input id={`meet-${c.id}`} value={meetUrl} onChange={(e) => setMeetUrl(e.target.value)} placeholder="Google Meet or Teams link" className="mt-1" />
         </div>
         <Button variant="outline" size="sm" onClick={() => patch.mutate({ meetUrl: meetUrl || null })} disabled={meetUrl === (c.meetUrl ?? "")}>Save</Button>
       </div>

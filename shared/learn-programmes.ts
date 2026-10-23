@@ -13,6 +13,8 @@
  *   (30 September 2026), which is what Quote 00103 refers to.
  * - `solo-fast-track`: Alex Boshoff's 4 sessions, from our call on 2 October
  *   and her WhatsApp of 7 October (her own tools first, then the business idea).
+ * - `hsa-content-team`: the 6 sessions in the HSA training plan (21 October 2026),
+ *   as sent to Christine Venter.
  */
 
 /** `claude` is the tool's Markdown version: the same steps, run with any AI assistant. */
@@ -265,10 +267,72 @@ const SOLO_FAST_TRACK: Programme = {
   ],
 };
 
+const HSA_CONTENT_TEAM: Programme = {
+  key: "hsa-content-team",
+  name: "AI training programme",
+  modules: [
+    {
+      number: 1,
+      title: "Foundations and ground rules",
+      icon: "rules",
+      what: "How these tools work and where they go wrong. What you can and can't share: learner data, your IP, Council rules and your own policy. We set up Copilot with Claude inside your own account, so your content stays with you. As a first try, we summarise a section of Stock Receiving.",
+      leaveWith: "A one-page AI use policy and a working setup",
+      practice: "Summarise one more section of Stock Receiving on your own and note where the summary needed correcting.",
+      materials: [M.charterTool, M.startHere, M.limits],
+    },
+    {
+      number: 2,
+      title: "Getting your content ready",
+      icon: "pencil",
+      what: "Turning the Word guides into clean text the AI can work with, and tagging each part by module, unit, outcome, assessment criteria, credits and notional hours. We build the tagging scheme together on Stock Receiving.",
+      leaveWith: "A tagging template and a tagged pilot module",
+      practice: "Tag one more unit with the template and bring anything that didn't fit.",
+      materials: [M.claude101],
+    },
+    {
+      number: 3,
+      title: "Remapping the curriculum, part 1",
+      icon: "signpost",
+      what: "We load the old and new curriculum side by side and have the AI draft the crosswalk: old unit to new module, credits and hours moved, and what shifts between basic, post-basic and technician. Then we learn how to check every line of it against the source.",
+      leaveWith: "A draft mapping document and a way to check it",
+      practice: "Check 10 lines of the draft mapping against the source documents and mark any that are wrong.",
+      materials: [M.scorecardTool],
+    },
+    {
+      number: 4,
+      title: "Remapping, part 2: gaps and new content",
+      icon: "magnifier",
+      what: "Find what's missing in the new structure, the new maths module for one. Teach the AI your house style so new material reads like what you already have, then draft one gap unit together in that style.",
+      leaveWith: "A gap list, a house-style prompt and one drafted unit",
+      practice: "Use the house-style prompt on one more piece of new material and note what you still had to change.",
+      materials: [M.skillFile, M.fluency],
+    },
+    {
+      number: 5,
+      title: "What's possible for learning and assessment",
+      icon: "robot",
+      what: "Live demos on Stock Receiving: an audio summary or short podcast, a short explainer video, a clinical scenario or role play, voice answers in place of typing and auto-marked activities in place of the crossword. What Moodle can take, and when to keep paper or a plain PDF.",
+      leaveWith: "An options menu: activity type, tool, effort and whether to do it yourselves or brief someone",
+      practice: "Pick the 2 options from the menu you'd try first on Stock Receiving, and say why.",
+      materials: [M.handoverTool],
+    },
+    {
+      number: 6,
+      title: "Putting it together",
+      icon: "gear",
+      what: "Redesign one Stock Receiving lesson as a blended journey: short digital chunks, then facilitator time. How to write a brief for a freelancer, or for us. Then plan the 10-month rescope, from mapping to Council submission.",
+      leaveWith: "A lesson outline, a brief template and a 10-month roadmap",
+      practice: "Share the roadmap with the team and bring back what they'd change.",
+      materials: [M.scorecardTool, M.handoverTool],
+    },
+  ],
+};
+
 export const PROGRAMMES: Record<string, Programme> = {
   [AI_FLUENT_TEAM.key]: AI_FLUENT_TEAM,
   [BACKGROUND_ITALIA.key]: BACKGROUND_ITALIA,
   [SOLO_FAST_TRACK.key]: SOLO_FAST_TRACK,
+  [HSA_CONTENT_TEAM.key]: HSA_CONTENT_TEAM,
 };
 
 export function getProgramme(key: string): Programme | undefined {
