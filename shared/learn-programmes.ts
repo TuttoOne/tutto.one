@@ -15,7 +15,8 @@
  *   and her WhatsApp of 7 October (her own tools first, then the business idea).
  */
 
-export type Material = { label: string; href: string };
+/** `claude` is the tool's Markdown version: the same steps, run in any Claude chat. */
+export type Material = { label: string; href: string; claude?: string };
 
 /** The hand-drawn icon for a session, drawn in client/src/components/learn/ModuleIcon.tsx. */
 export type ModuleIcon = "rules" | "scorecard" | "signpost" | "pencil" | "plug" | "magnifier" | "gear" | "robot"
@@ -58,10 +59,10 @@ const M = {
   subagents: { label: "Subagents", href: "/courses/09-praxis-introduction-to-subagents.html" },
   skillFile: { label: "Writing your skill file", href: "/praxis/learn/praxis-foundations/03-skill-file" },
   evals: { label: "Evals: proving the output is good", href: "/praxis/learn/praxis-foundations/05-evals" },
-  charterTool: { label: "AI charter tool", href: "/ai-charter" },
-  charterToolMe: { label: "AI charter tool (just me)", href: "/ai-charter?for=me" },
-  scorecardTool: { label: "Agent scorecard tool", href: "/agent-scorecard" },
-  handoverTool: { label: "Hand-over check", href: "/handover-list" },
+  charterTool: { label: "AI charter tool", href: "/ai-charter", claude: "/ai-charter/praxis-ai-charter.md" },
+  charterToolMe: { label: "AI charter tool (just me)", href: "/ai-charter?for=me", claude: "/ai-charter/praxis-ai-charter.md" },
+  scorecardTool: { label: "Agent scorecard tool", href: "/agent-scorecard", claude: "/agent-scorecard/praxis-agent-scorecard.md" },
+  handoverTool: { label: "Hand-over check", href: "/handover-list", claude: "/handover-list/praxis-handover-check.md" },
 } satisfies Record<string, Material>;
 
 const AI_FLUENT_TEAM: Programme = {

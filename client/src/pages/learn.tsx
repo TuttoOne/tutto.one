@@ -282,6 +282,11 @@ const STATUS_LABEL: Record<ProgressStatus, string> = {
 
 // The use case card (the discovery session's scoping worksheet). ?from=learn gives it a way back here.
 const WORKSHEET = "/use-case-card?from=learn";
+const WORKSHEET_MD = "/use-case-card/praxis-use-case-card.md";
+// The VS Code setup pack, a link-only page like the tools.
+const SETUP_GUIDE = "/vscode-setup";
+const SETUP_GUIDE_MD = "/vscode-setup/praxis-vscode-setup.md";
+const CLAUDE_MD_TITLE = "The same tool as a Markdown file. Open it in any Claude chat and Claude walks you through it.";
 
 function StepCard({ n, title, done, children }: { n: number; title: string; done?: boolean; children: React.ReactNode }) {
   return (
@@ -364,6 +369,12 @@ function ModuleCard({ m, timezone, past, locked, tone }: {
                 {m.materials.map((mat) => (
                   <li key={mat.href}>
                     <a href={mat.href} target="_blank" rel="noopener noreferrer" style={{ color: INK }}>{mat.label}</a>
+                    {mat.claude && (
+                      <>
+                        {" · "}
+                        <a href={mat.claude} download title={CLAUDE_MD_TITLE} style={{ color: AMBER }}>Download for Claude (.md)</a>
+                      </>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -462,6 +473,21 @@ export function LearnDashboard() {
           Everything for your sessions is here: the dates, what we cover each time, the reading and a short task in between.
         </p>
 
+        {/* Setup guide, for every student before the first session */}
+        <div style={{ ...CARD, marginBottom: 32, display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" }}>
+          <div style={{ flex: "1 1 280px", minWidth: 0 }}>
+            <span style={{ ...CAPS, fontSize: 10, color: AMBER, display: "block", marginBottom: 6 }}>Setup guide</span>
+            <h2 style={{ ...H2, fontSize: 17 }}>VS Code with Claude and Mistral</h2>
+            <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: MUTED }}>
+              Six steps from a fresh install to your first task with both agents, each with the screen you should see. About 30 minutes.
+            </p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
+            <a href={SETUP_GUIDE} target="_blank" rel="noopener noreferrer" style={BUTTON}>Open the setup guide</a>
+            <a href={SETUP_GUIDE_MD} download title={CLAUDE_MD_TITLE} style={{ fontSize: 13, color: AMBER }}>Download for Claude (.md)</a>
+          </div>
+        </div>
+
         {notActive && (
           <div style={{ ...CARD, borderColor: AMBER, marginBottom: 32 }}>
             <span style={{ ...CAPS, fontSize: 10, color: AMBER, display: "block", marginBottom: 8 }}>Account status</span>
@@ -537,6 +563,9 @@ export function LearnDashboard() {
             <a href={WORKSHEET} style={cards.length ? BUTTON_QUIET : BUTTON}>
               {cards.length ? "Open the use case card" : "Start your use case card"}
             </a>
+            <p style={{ margin: "10px 0 0", fontSize: 13, color: MUTED }}>
+              Rather work in Claude? <a href={WORKSHEET_MD} download title={CLAUDE_MD_TITLE} style={{ color: AMBER }}>Download for Claude (.md)</a>
+            </p>
           </StepCard>
         </div>
 

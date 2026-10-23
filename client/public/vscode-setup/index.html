@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Set up VS Code with Claude and Mistral Vibe: six steps from a fresh install to your first task, each with the screen you should see.">
+<title>VS Code Setup Pack · Tutto</title>
+<link rel="icon" href="/favicon.png">
+<style>body{margin:0}img{max-width:100%}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&display=swap">
+<style>
+/* Praxis design system (tutto.one/praxis): warm off-white, near-black, amber accent; Roboto display, Inter body.
+   Layout: report: dark cover band, then a single 42rem reading column with full-width screenshots. */
+:root {
+  --bg: #FAF9F6;
+  --fg: #1F1F1F;
+  --card: #FFFFFF;
+  --muted: #E8E6E1;
+  --muted-fg: #6B7280;
+  --border: #E5E7EB;
+  --accent: #DB7400;
+  --accent-soft: rgb(219 116 0 / 0.08);
+  --cover-bg: #1F1F1F;
+  --cover-fg: #FAF9F6;
+  --hl-ring: rgb(255 255 255 / 0.85);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Roboto', 'Inter', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --content: 42rem;
+  --wide: 60rem;
+  --radius: 0.75rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0A09; --fg: #FAF9F6; --card: #171513; --muted: #221F1C; --muted-fg: #9AA0AA;
+    --border: #2A2622; --accent: #F08A1C; --accent-soft: rgb(240 138 28 / 0.12);
+    --cover-bg: #171513; --cover-fg: #FAF9F6; --hl-ring: rgb(0 0 0 / 0.5); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0A09; --fg: #FAF9F6; --card: #171513; --muted: #221F1C; --muted-fg: #9AA0AA;
+  --border: #2A2622; --accent: #F08A1C; --accent-soft: rgb(240 138 28 / 0.12);
+  --cover-bg: #171513; --cover-fg: #FAF9F6; --hl-ring: rgb(0 0 0 / 0.5); color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; font-feature-settings: 'cv11', 'ss01';
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; text-wrap: balance; margin: 0 0 1rem; }
+h2 { font-size: clamp(1.6rem, 4vw, 1.875rem); }
+h3 { font-size: 1.15rem; margin-top: 2rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--accent); text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+code, kbd { font-family: var(--font-mono); font-size: 0.88em; background: var(--muted); padding: 0.1em 0.4em; border-radius: 0.375rem; }
+kbd { border: 1px solid var(--border); white-space: nowrap; }
+.lead { font-size: 1.2rem; line-height: 1.45; color: var(--muted-fg); }
+.eyebrow { display: block; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; }
+.brand { font-family: var(--font-display); font-weight: 900; font-size: 1.35rem; letter-spacing: -0.025em; }
+.brand .dot { color: var(--accent); }
+.tag { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 0.7rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+
+/* Cover */
+.cover { background: var(--cover-bg); color: var(--cover-fg); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.cover-in { max-width: var(--wide); margin: 0 auto; padding-block: 2.5rem 3rem; display: grid; gap: 4rem; }
+.cover-top { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+.cover-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.claude-md { display: inline-flex; align-items: center; border: 1px solid var(--accent); border-radius: 999px; padding: 7px 14px; font: 500 0.85rem/1 var(--font-sans); color: var(--accent); text-decoration: none; white-space: nowrap; }
+.claude-md:hover, .claude-md:focus-visible { background: var(--accent); color: #fff; }
+.cover h1 { color: var(--cover-fg); font-weight: 900; font-size: clamp(2.4rem, 7vw, 3.75rem); margin: 0 0 1.25rem; max-width: 14ch; }
+.cover .lead { color: rgb(250 249 246 / 0.7); max-width: 34rem; margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; margin: 0; padding-top: 1.25rem; border-top: 1px solid rgb(250 249 246 / 0.15); }
+.meta dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(250 249 246 / 0.55); }
+.meta dd { margin: 0.15rem 0 0; font-weight: 500; }
+
+/* Page */
+.page { max-width: var(--wide); margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 3rem 2rem; }
+.page > nav, .page > article { max-width: var(--content); margin-inline: auto; }
+article { padding-top: 3.5rem; margin-top: 3.5rem; border-top: 1px solid var(--border); scroll-margin-top: 1rem; }
+nav.toc h2 { font-size: 1.25rem; }
+.toc ol { list-style: none; padding: 0; margin: 0 0 1.5rem; counter-reset: s; }
+.toc li { counter-increment: s; display: flex; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 1.05rem; }
+.toc li::before { content: counter(s, decimal-leading-zero); color: var(--accent); font-family: var(--font-display); font-weight: 700; min-width: 2.5ch; font-variant-numeric: tabular-nums; }
+.toc a { color: var(--fg); text-decoration: none; }
+.toc a:hover { color: var(--accent); }
+.note { font-size: 0.9rem; color: var(--muted-fg); }
+
+ol.steps { padding-left: 1.25rem; margin: 0 0 1rem; }
+ol.steps li { margin-bottom: 0.6rem; padding-left: 0.25rem; }
+ol.steps li::marker { color: var(--accent); font-weight: 700; font-family: var(--font-display); }
+ul.dash { list-style: none; padding: 0; margin: 0 0 1rem; }
+ul.dash li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; }
+ul.dash li::before { content: '–'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+/* Screenshots: full page width, breaking out of the reading column */
+.shot { margin: 2rem calc((var(--content) - min(var(--wide), 100vw - 32px)) / 2); }
+@media (max-width: 44rem) { .shot { margin-inline: 0; } }
+.frame { position: relative; display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--card); }
+.frame img { display: block; width: 100%; height: auto; }
+.frame:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hl {
+  position: absolute;
+  left: calc(var(--x) / 2000 * 100%); top: calc(var(--y) / 1299 * 100%);
+  width: calc(var(--w) / 2000 * 100%); height: calc(var(--h) / 1299 * 100%);
+  border: 2.5px solid var(--accent); border-radius: 6px;
+  box-shadow: 0 0 0 2px var(--hl-ring);
+  pointer-events: none;
+}
+.hl b {
+  position: absolute; top: -11px; left: -11px;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--accent); color: #fff;
+  font: 700 12px/1 var(--font-display);
+  box-shadow: 0 0 0 2px var(--hl-ring);
+}
+.shot figcaption { max-width: var(--content); margin: 0.85rem auto 0; font-weight: 500; }
+.fignum { font-family: var(--font-display); font-weight: 700; color: var(--accent); margin-right: 0.35rem; }
+.legend { list-style: none; padding: 0; max-width: var(--content); margin: 0.6rem auto 0; display: grid; gap: 0.45rem; }
+.legend li { display: flex; gap: 0.7rem; align-items: baseline; font-size: 0.93rem; color: var(--muted-fg); }
+.legend li b { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font: 700 11px/1 var(--font-display); transform: translateY(2px); }
+.legend li span { min-width: 0; }
+
+.callout { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 1rem 1.25rem; border-radius: 0 var(--radius) var(--radius) 0; margin: 2rem 0; }
+.callout p { margin: 0; }
+.callout.warn { border-left-width: 4px; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+th, td { padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-family: var(--font-display); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-fg); border-bottom: 2px solid var(--fg); }
+td code { word-break: break-all; }
+article > table { display: block; overflow-x: auto; }
+
+.doc-footer { max-width: var(--content); margin: 4rem auto 0; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; font-size: 0.85rem; color: var(--muted-fg); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+</head>
+<body>
+<section class="cover">
+  <div class="cover-in">
+    <header class="cover-top"><span class="brand">Tutto<span class="dot">.</span></span><span class="cover-actions"><a class="claude-md" href="/vscode-setup/praxis-vscode-setup.md" download title="The same guide as a Markdown file. Open it in any Claude chat and Claude walks you through the setup.">Download for Claude (.md)</a><span class="tag">Praxis</span></span></header>
+    <div class="title-block">
+      <span class="eyebrow">Setup guide</span>
+      <h1>VS Code with Claude and Mistral</h1>
+      <p class="lead">From a fresh install to your first task with two AI agents. Six steps, each with the screen you should see.</p>
+    </div>
+    <dl class="meta">
+      <div><dt>Updated</dt><dd>October 2026</dd></div>
+      <div><dt>Time needed</dt><dd>About 30 minutes</dd></div>
+    </dl>
+  </div>
+</section>
+
+<main class="page">
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#s1">Install VS Code</a></li>
+    <li><a href="#s2">Find your way around the screen</a></li>
+    <li><a href="#s3">Install the Claude and Mistral extensions</a></li>
+    <li><a href="#s4">Open the AI panel on the right</a></li>
+    <li><a href="#s5">Run a first task with Claude</a></li>
+    <li><a href="#s6">Run a task with Mistral Vibe</a></li>
+    <li><a href="#s7">Quick reference</a></li>
+  </ol>
+  <p class="note">Screenshots are from a Mac. On Windows the screen is the same; use <kbd>Ctrl</kbd> where the Mac uses <kbd>⌘</kbd>. Click any screenshot to open it full size. Amber boxes mark what to look at; the numbers match the list under each image.</p>
+</nav>
+
+<article id="s1">
+  <span class="eyebrow">Step 01</span>
+  <h2>Install VS Code</h2>
+  <p class="lead">VS Code is a free editor from Microsoft. It is where Claude and Mistral will read and write your files.</p>
+  <ol class="steps">
+    <li>Go to <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a>.</li>
+    <li><strong>Windows:</strong> download the <em>User Installer</em> and run it. Accept the licence, keep the default folder, leave <em>Add to PATH</em> ticked, then click <em>Install</em> and <em>Finish</em>. No admin rights needed.</li>
+    <li><strong>Mac:</strong> download the <em>Universal</em> build, open the .zip and drag <em>Visual Studio Code</em> into <em>Applications</em>.</li>
+    <li>Open VS Code. You should see the empty window in Fig. 1.</li>
+  </ol>
+</article>
+
+<article id="s2">
+  <span class="eyebrow">Step 02</span>
+  <h2>Find your way around the screen</h2>
+  <p class="lead">Three areas matter: the file navigator on the left, your files in the middle, and the AI panel on the right. Four buttons in the top-right corner show and hide them.</p>
+  
+<figure class="shot" id="fig1">
+  <a class="frame" href="/vscode-setup/img/fig01.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig01.jpg" alt="Empty VS Code window with the four layout buttons in the top-right corner" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1850;--y:50;--w:140;--h:36"><b>1</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 1</span> A fresh window. Nothing is open yet.</figcaption>
+  <ol class="legend"><li><b>1</b><span>The layout buttons, left to right: customise layout, left side bar (files), bottom panel (terminal), right side bar (AI chat). Click one to show it; click again to hide it.</span></li></ol>
+</figure>
+  <p>The left side bar holds the <strong>Explorer</strong>, your file navigator. Open a working folder before you start, so the agents know where to work.</p>
+  
+<figure class="shot" id="fig2">
+  <a class="frame" href="/vscode-setup/img/fig02.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig02.jpg" alt="Explorer open in the left side bar with an Open Folder button" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:14;--y:98;--w:42;--h:42"><b>1</b></span><span class="hl" style="--x:86;--y:262;--w:300;--h:42"><b>2</b></span><span class="hl" style="--x:1885;--y:52;--w:34;--h:32"><b>3</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 2</span> Explorer open, no folder chosen yet.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Explorer icon. Click to open the file navigator; click again to minimise it.</span></li><li><b>2</b><span>Open Folder. Pick or create a working folder for the session.</span></li><li><b>3</b><span>The left side bar button does the same as the Explorer icon. Shortcut ⌘B / Ctrl+B.</span></li></ol>
+</figure>
+  <div class="callout"><p><strong>Use a practice folder.</strong> Create an empty folder such as <code>Desktop/New</code> for training. Keep real case files out of it until the team is comfortable with how the agents behave.</p></div>
+</article>
+
+<article id="s3">
+  <span class="eyebrow">Step 03</span>
+  <h2>Install the Claude and Mistral extensions</h2>
+  <p class="lead">Both agents are free extensions. Many look-alikes exist, so check the publisher before you click Install.</p>
+  
+<figure class="shot" id="fig3">
+  <a class="frame" href="/vscode-setup/img/fig03.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig03.jpg" alt="Extensions view open with its search box at the top" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:14;--y:390;--w:42;--h:42"><b>1</b></span><span class="hl" style="--x:74;--y:138;--w:325;--h:36"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 3</span> The Extensions view. Shortcut ⇧⌘X / Ctrl+Shift+X.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Extensions icon in the left-hand bar.</span></li><li><b>2</b><span>Search box. Type the extension name here.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig4">
+  <a class="frame" href="/vscode-setup/img/fig04.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig04.jpg" alt="Search results for claude with Claude Code for VS Code by Anthropic selected" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:70;--y:284;--w:333;--h:94"><b>1</b></span><span class="hl" style="--x:686;--y:205;--w:245;--h:32"><b>2</b></span><span class="hl" style="--x:1595;--y:452;--w:345;--h:26"><b>3</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 4</span> Search for <em>claude</em> and pick the official extension.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Claude Code for VS Code, published by Anthropic with a verified tick. Click Install.</span></li><li><b>2</b><span>Publisher: Anthropic, anthropic.com.</span></li><li><b>3</b><span>Identifier: anthropic.claude-code. Anything else is not the official extension.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig5">
+  <a class="frame" href="/vscode-setup/img/fig05.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig05.jpg" alt="Search results for mistral with Mistral Vibe VS Code by Mistral AI selected" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:70;--y:188;--w:333;--h:94"><b>1</b></span><span class="hl" style="--x:70;--y:290;--w:333;--h:80"><b>2</b></span><span class="hl" style="--x:1595;--y:452;--w:345;--h:50"><b>3</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 5</span> Search for <em>mistral</em> and pick Mistral Vibe.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Mistral Vibe VS Code, published by Mistral AI. Click Install.</span></li><li><b>2</b><span>Mistral Code is the older extension, shown struck through. Skip it.</span></li><li><b>3</b><span>Identifier: mistralai.mistral-vibe-code.</span></li></ol>
+</figure>
+  <table>
+    <thead><tr><th>Extension</th><th>Publisher</th><th>Identifier</th><th>Sign-in</th></tr></thead>
+    <tbody>
+      <tr><td>Claude Code for VS Code</td><td>Anthropic</td><td><code>anthropic.claude-code</code></td><td>Paid Claude plan (Pro, Max, Team or Enterprise) or Claude Console account</td></tr>
+      <tr><td>Mistral Vibe VS Code</td><td>Mistral AI</td><td><code>mistralai.mistral-vibe-code</code></td><td>Mistral API key, pasted once during setup</td></tr>
+    </tbody>
+  </table>
+</article>
+
+<article id="s4">
+  <span class="eyebrow">Step 04</span>
+  <h2>Open the AI panel on the right</h2>
+  <p class="lead">Keep the agents in the right side bar. Files stay on the left and you can watch both at once.</p>
+  
+<figure class="shot" id="fig6">
+  <a class="frame" href="/vscode-setup/img/fig06.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig06.jpg" alt="Right side bar open with Chat, Claude Code, Mistral Vibe and Codex tabs; Claude Code selected" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1953;--y:52;--w:34;--h:32"><b>1</b></span><span class="hl" style="--x:1300;--y:96;--w:390;--h:34"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 6</span> The right side bar with one tab per agent.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Right side bar button. Click to open or minimise the AI panel. Shortcut ⌥⌘B / Ctrl+Alt+B.</span></li><li><b>2</b><span>One tab per agent. Click Claude Code or Mistral Vibe to switch between them.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig7">
+  <a class="frame" href="/vscode-setup/img/fig07.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig07.jpg" alt="Mistral Vibe tab selected in the right side bar, ready for a prompt" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1492;--y:96;--w:118;--h:34"><b>1</b></span><span class="hl" style="--x:1316;--y:1112;--w:656;--h:116"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 7</span> Mistral Vibe in the same panel.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Mistral Vibe tab.</span></li><li><b>2</b><span>Prompt box. Type your request here.</span></li></ol>
+</figure>
+  <div class="callout"><p><strong>If an agent opens on the left or as a tab in the middle,</strong> drag its tab into the right side bar. VS Code remembers the position next time. The first time you open each agent, it asks you to sign in (Claude) or paste your API key (Mistral).</p></div>
+</article>
+
+<article id="s5">
+  <span class="eyebrow">Step 05</span>
+  <h2>Run a first task with Claude</h2>
+  <p class="lead">Give Claude a task and watch the Explorer. New files appear on the left as Claude creates them.</p>
+  
+<figure class="shot" id="fig8">
+  <a class="frame" href="/vscode-setup/img/fig08.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig08.jpg" alt="Empty folder named New open in the Explorer; Claude Code mode menu showing Manual, Edit automatically, Plan and Auto" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:72;--y:176;--w:330;--h:28"><b>1</b></span><span class="hl" style="--x:1524;--y:852;--w:400;--h:362"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 8</span> Before the task: an empty folder, and Claude's mode menu.</figcaption>
+  <ol class="legend"><li><b>1</b><span>The open folder, still empty.</span></li><li><b>2</b><span>Modes. Manual asks before each edit; Plan explores first and shows a plan; Auto approves actions that pass a safety check. Switch with ⇧Tab.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig9">
+  <a class="frame" href="/vscode-setup/img/fig09.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig09.jpg" alt="Claude Code working on a prompt while the Explorer still shows an empty folder" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1322;--y:302;--w:645;--h:64"><b>1</b></span><span class="hl" style="--x:72;--y:176;--w:330;--h:28"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 9</span> The prompt goes in. Claude starts checking the folder.</figcaption>
+  <ol class="legend"><li><b>1</b><span>The request: a demo kit with a CLAUDE.md, a script and a basic tool for an investigator.</span></li><li><b>2</b><span>The Explorer is still empty while Claude plans.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig10">
+  <a class="frame" href="/vscode-setup/img/fig10.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig10.jpg" alt="New files cases, sample_evidence, casekit.py, CLAUDE.md and demo.sh appear in the Explorer; CLAUDE.md open with the view menu" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:72;--y:238;--w:330;--h:148"><b>1</b></span><span class="hl" style="--x:1288;--y:165;--w:262;--h:145"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 10</span> Seconds later the files appear in the navigator.</figcaption>
+  <ol class="legend"><li><b>1</b><span>New in the Explorer: cases, sample_evidence, casekit.py, CLAUDE.md and demo.sh. Click any file to open it.</span></li><li><b>2</b><span>Markdown files open as raw text. Switch to Markdown Preview to read them formatted.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig11">
+  <a class="frame" href="/vscode-setup/img/fig11.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig11.jpg" alt="CLAUDE.md shown as a formatted preview; Claude summarises what it built" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1335;--y:545;--w:635;--h:520"><b>1</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 11</span> CLAUDE.md formatted, and Claude's summary of what it built.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Claude reports what it made, what each file does and that it ran the demo end to end.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig12">
+  <a class="frame" href="/vscode-setup/img/fig12.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig12.jpg" alt="Explorer expanded to show the case folder, evidence files, custody log and report" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:72;--y:205;--w:330;--h:410"><b>1</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 12</span> Expand the folders to see everything the run produced.</figcaption>
+  <ol class="legend"><li><b>1</b><span>A case folder with evidence files, a case record, a custody log and a report, all created by the task.</span></li></ol>
+</figure>
+  <div class="callout"><p><strong>CLAUDE.md is the briefing file.</strong> Claude reads it at the start of every session in that folder. Here it holds the commands and the rules: evidence goes in only through the tool, the custody log is append-only, and the kit is for lawful work only. Edit it to brief Claude on how your team works.</p></div>
+</article>
+
+<article id="s6">
+  <span class="eyebrow">Step 06</span>
+  <h2>Run a task with Mistral Vibe</h2>
+  <p class="lead">Mistral works on the same folder. Switch tabs and give it a task; here it builds a reusable skill from what Claude produced.</p>
+  
+<figure class="shot" id="fig13">
+  <a class="frame" href="/vscode-setup/img/fig13.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig13.jpg" alt="Mistral Vibe working on a prompt about the same folder" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1404;--y:208;--w:580;--h:86"><b>1</b></span><span class="hl" style="--x:1310;--y:716;--w:660;--h:36"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 13</span> Mistral reads the folder before it acts.</figcaption>
+  <ol class="legend"><li><b>1</b><span>The request: assess the folder and create a skill for repeat work.</span></li><li><b>2</b><span>The live status line shows each command Mistral runs.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig14">
+  <a class="frame" href="/vscode-setup/img/fig14.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig14.jpg" alt="Mistral Vibe plus menu with Add context, Attach image, Commands and Loop" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1332;--y:953;--w:194;--h:214"><b>1</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 14</span> The + menu.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Add context (point to a file), attach an image, run a command, or loop a task.</span></li></ol>
+</figure>
+  
+<figure class="shot" id="fig15">
+  <a class="frame" href="/vscode-setup/img/fig15.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig15.jpg" alt="Mistral Vibe approval menu with Ask, Accept Edits, Smart Approve and Auto Approve" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1446;--y:856;--w:466;--h:312"><b>1</b></span><span class="hl" style="--x:1736;--y:1180;--w:176;--h:34"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 15</span> Mistral's approval modes.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Ask requires approval for every action; Accept Edits approves file edits only; Smart Approve prompts only for risky actions; Auto Approve runs everything.</span></li><li><b>2</b><span>The current mode. Click to change it.</span></li></ol>
+</figure>
+  <div class="callout warn"><p><strong>Choose the approval mode on purpose.</strong> In these screenshots both agents run in Auto. That is fine in a practice folder. With real case material, use <em>Manual</em> in Claude and <em>Ask</em> in Mistral until you trust the workflow, so every command waits for your approval. In Fig. 13, Mistral reads files outside the open folder; agents can reach anything your user account can.</p></div>
+</article>
+
+<article id="s7">
+  <span class="eyebrow">Reference</span>
+  <h2>Quick reference</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Action</th><th>Mac</th><th>Windows</th></tr></thead>
+    <tbody>
+      <tr><td>Show / hide file Explorer (left)</td><td><kbd>⌘B</kbd></td><td><kbd>Ctrl+B</kbd></td></tr>
+      <tr><td>Show / hide AI panel (right)</td><td><kbd>⌥⌘B</kbd></td><td><kbd>Ctrl+Alt+B</kbd></td></tr>
+      <tr><td>Open Extensions</td><td><kbd>⇧⌘X</kbd></td><td><kbd>Ctrl+Shift+X</kbd></td></tr>
+      <tr><td>Search every command</td><td><kbd>⇧⌘P</kbd></td><td><kbd>Ctrl+Shift+P</kbd></td></tr>
+      <tr><td>Switch Claude's mode</td><td><kbd>⇧Tab</kbd></td><td><kbd>Shift+Tab</kbd></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>If something is missing</h3>
+  <ul class="dash">
+    <li><strong>No layout buttons:</strong> right-click the title bar and tick <em>Layout Controls</em>.</li>
+    <li><strong>Extension installed but not showing:</strong> search every command for <em>Developer: Reload Window</em>.</li>
+    <li><strong>Claude says “Not logged in”:</strong> reload the window; the sign-in screen reopens.</li>
+    <li><strong>Mistral asks for a key every time:</strong> rerun setup from the Mistral Vibe panel and paste the key once.</li>
+  </ul>
+  <h3>Sources</h3>
+  <ul class="dash sources">
+    <li><a href="https://code.visualstudio.com/docs/configure/custom-layout" target="_blank" rel="noopener">Custom layout</a>, Microsoft VS Code docs</li>
+    <li><a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">Use Claude Code in VS Code</a>, Anthropic</li>
+    <li><a href="https://docs.mistral.ai/vibe/code/vs-code-extension/install-authenticate" target="_blank" rel="noopener">Mistral Vibe for VS Code: install and authenticate</a>, Mistral AI</li>
+  </ul>
+</article>
+
+<footer class="doc-footer"><span>Tutto · Praxis · tutto.one</span><span>Setup guide · v1</span></footer>
+</main>
+
+
+</body>
+</html>

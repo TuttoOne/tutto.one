@@ -287,6 +287,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "use-case-card", "index.html"));
   });
 
+  // Praxis VS Code setup pack (Claude and Mistral Vibe): same arrangement, link only, not indexed.
+  // Its screenshots are plain static files under /vscode-setup/img/.
+  app.get(["/vscode-setup", "/vscode-setup/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "vscode-setup", "index.html"));
+  });
+
   // Register admin routes
   registerAdminRoutes(app);
 
