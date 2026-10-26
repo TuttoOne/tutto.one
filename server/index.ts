@@ -133,7 +133,7 @@ app.use((req, res, next) => {
   // The course pages are public and may be indexed; the trainers' teaching
   // notes that sit beside them may not.
   app.use("/courses", (req, res, next) => {
-    if (/-teaching-notes\.html$/.test(req.path)) res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    if (/-teaching-notes(-fr)?\.html$/.test(req.path)) res.setHeader("X-Robots-Tag", "noindex, nofollow");
     next();
   });
 

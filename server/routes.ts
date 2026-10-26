@@ -10,6 +10,7 @@ import { getResend } from "./email/resend";
 import { registerLearnRoutes } from "./learn-routes";
 import { registerDataRoutes } from "./data-routes";
 import { registerEventRoutes } from "./event-routes";
+import { registerSeoRoutes } from "./seo";
 
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
 const FROM_EMAIL = "Tutto <notifications@tutto.one>";
@@ -76,6 +77,9 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+
+  // robots.txt, sitemap.xml and llms.txt (docs/seo-geo-plan.md, section 3).
+  registerSeoRoutes(app);
 
   // Contact form submission
   app.post("/api/contact", async (req, res) => {

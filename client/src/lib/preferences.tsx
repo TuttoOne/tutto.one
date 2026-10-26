@@ -71,9 +71,16 @@ function detectCurrency(): Currency {
   return speaksBritish || inBritain ? "GBP" : "EUR";
 }
 
-export function PreferencesProvider({ children }: { children: React.ReactNode }) {
+export function PreferencesProvider({
+  children,
+  initialLocale,
+}: {
+  children: React.ReactNode;
+  /** Set by the server render, which has no storage or browser to read. */
+  initialLocale?: Locale;
+}) {
   const [locale, setLocaleState] = useState<Locale>(
-    () => readStored<Locale>(LOCALE_KEY, ["en", "fr"]) ?? detectLocale(),
+    () => initialLocale ?? readStored<Locale>(LOCALE_KEY, ["en", "fr"]) ?? detectLocale(),
   );
   // EUR is the default: it is the currency the rate card is set in, and the
   // market the site is being pointed at. A UK visitor gets sterling instead. A

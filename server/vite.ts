@@ -5,6 +5,7 @@ import viteConfig from "../vite.config";
 import fs from "fs";
 import path from "path";
 import { nanoid } from "nanoid";
+import { pageFor, type LoadRenderer } from "./ssr";
 
 const viteLogger = createLogger();
 
@@ -48,8 +49,14 @@ export async function setupVite(server: Server, app: Express) {
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
-      const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      const shell = await vite.transformIndexHtml(url, template);
+      const { status, html } = await pageFor(
+        req,
+        shell,
+        () => vite.ssrLoadModule("/src/entry-server.tsx") as ReturnType<LoadRenderer>,
+        { useCache: false },
+      );
+      res.status(status).set({ "Content-Type": "text/html" }).end(html);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);

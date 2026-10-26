@@ -1,6 +1,7 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
 import { rm, readFile } from "fs/promises";
+import path from "path";
 
 // server deps to bundle to reduce openat(2) syscalls
 // which helps cold start times
@@ -37,6 +38,20 @@ async function buildAll() {
 
   console.log("building client...");
   await viteBuild();
+
+  // The server render of the public pages (server/ssr.ts). Everything is
+  // bundled in, so it needs nothing from node_modules at run time.
+  console.log("building server render...");
+  await viteBuild({
+    publicDir: false,
+    build: {
+      ssr: path.resolve("client/src/entry-server.tsx"),
+      outDir: path.resolve("dist/server"),
+      emptyOutDir: true,
+      rollupOptions: { output: { format: "es", entryFileNames: "entry-server.mjs" } },
+    },
+    ssr: { noExternal: true },
+  });
 
   console.log("building server...");
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));
