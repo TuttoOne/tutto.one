@@ -1,0 +1,152 @@
+{
+  "/admin": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/admin/login": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/admin/setup": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/api/admin/me": {
+    "status": 401,
+    "robots": null,
+    "location": null,
+    "body": "3be5b8e53fdc8b0a"
+  },
+  "/learn": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/learn/auth": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/learn/dashboard": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/learn/profile": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/learn/somewhere-else": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/api/learn/me": {
+    "status": 401,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "3be5b8e53fdc8b0a"
+  },
+  "/praxis/learn/claude-101": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/praxis/learn/claude-101/1": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  },
+  "/agent-scorecard": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "d5d638892b7fbcc1"
+  },
+  "/agent-scorecard/": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "d5d638892b7fbcc1"
+  },
+  "/ai-charter": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "9dfff35dc55744d6"
+  },
+  "/handover-list": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "9019d466b4055bcc"
+  },
+  "/use-case-card": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "41b9ec0d85a5a65d"
+  },
+  "/ai-files": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "fa1d6e7039341770"
+  },
+  "/vscode-setup": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "9ba128de4aed1fc1"
+  },
+  "/courses/": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "c993ffebddc41b8d"
+  },
+  "/courses/00-praxis-start-here.html": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "4f9250b31622bffd"
+  },
+  "/courses/01-praxis-claude-101.html": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "216463e18cc3c0e9"
+  },
+  "/courses/01-claude-101-teaching-notes.html": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "4684c3ae78163c9a"
+  },
+  "/courses/trainer/scoping-worksheet.html": {
+    "status": 200,
+    "robots": null,
+    "location": null,
+    "body": "19ae0c2d7ba788b4"
+  },
+  "/rieuzal/annuler": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "f589dcc48fce1f97"
+  }
+}
