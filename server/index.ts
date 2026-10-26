@@ -120,10 +120,20 @@ app.use((req, res, next) => {
     console.error("Failed to check the portfolio override:", err);
   }
 
-  // Student pages are private: keep them out of search whichever handler
-  // ends up serving the SPA shell.
-  app.use(["/learn", "/api/learn", "/rieuzal/annuler", "/api/events"], (_req, res, next) => {
-    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+  // Student, trainer and admin pages are private: keep them out of search
+  // whichever handler ends up serving the SPA shell.
+  app.use(
+    ["/learn", "/api/learn", "/rieuzal/annuler", "/api/events", "/admin", "/api/admin", "/praxis/learn"],
+    (_req, res, next) => {
+      res.setHeader("X-Robots-Tag", "noindex, nofollow");
+      next();
+    },
+  );
+
+  // The course pages are public and may be indexed; the trainers' teaching
+  // notes that sit beside them may not.
+  app.use("/courses", (req, res, next) => {
+    if (/-teaching-notes\.html$/.test(req.path)) res.setHeader("X-Robots-Tag", "noindex, nofollow");
     next();
   });
 

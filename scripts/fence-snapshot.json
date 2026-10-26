@@ -1,25 +1,25 @@
 {
   "/admin": {
     "status": 200,
-    "robots": null,
+    "robots": "noindex, nofollow",
     "location": null,
     "body": "f589dcc48fce1f97"
   },
   "/admin/login": {
     "status": 200,
-    "robots": null,
+    "robots": "noindex, nofollow",
     "location": null,
     "body": "f589dcc48fce1f97"
   },
   "/admin/setup": {
     "status": 200,
-    "robots": null,
+    "robots": "noindex, nofollow",
     "location": null,
     "body": "f589dcc48fce1f97"
   },
   "/api/admin/me": {
     "status": 401,
-    "robots": null,
+    "robots": "noindex, nofollow",
     "location": null,
     "body": "3be5b8e53fdc8b0a"
   },
@@ -61,13 +61,13 @@
   },
   "/praxis/learn/claude-101": {
     "status": 200,
-    "robots": null,
+    "robots": "noindex, nofollow",
     "location": null,
     "body": "f589dcc48fce1f97"
   },
   "/praxis/learn/claude-101/1": {
     "status": 200,
-    "robots": null,
+    "robots": "noindex, nofollow",
     "location": null,
     "body": "f589dcc48fce1f97"
   },
@@ -133,7 +133,7 @@
   },
   "/courses/01-claude-101-teaching-notes.html": {
     "status": 200,
-    "robots": null,
+    "robots": "noindex, nofollow",
     "location": null,
     "body": "4684c3ae78163c9a"
   },
