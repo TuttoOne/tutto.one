@@ -9,11 +9,13 @@
 import { escapeHtml } from "./enquiry-message";
 import { AMBER, INK, MUTED, RULE, P, button, shell } from "./learn-emails";
 
-export type MailingInput = { firstName: string; signInUrl: string; site: string };
+export type MailingInput = { firstName: string; signInUrl: string; site: string; teamSize: number };
 export type Mailing = {
   key: string;
   /** What the admin sees on the send button. */
   label: string;
+  /** "one" goes to a single person (the sponsor) from their student row, not to the whole cohort. */
+  audience?: "cohort" | "one";
   build: (o: MailingInput) => { subject: string; html: string; text: string };
 };
 
@@ -93,5 +95,80 @@ ${button(signInUrl, "Open your dashboard")}
   },
 };
 
-export const MAILINGS: Mailing[] = [aiFiles];
+// To the sponsor after session 1: they're overwhelmed, so reassure them, then
+// the setup, the accounts decision, setup calls and the policy.
+const afterSession1: Mailing = {
+  key: "after-session-1",
+  label: "After session 1 (to the sponsor)",
+  audience: "one",
+  build: ({ firstName, signInUrl, site, teamSize }) => {
+    const subject = "After our first session: setup and your next steps";
+    const team = teamSize > 1 ? `${teamSize} accounts` : "an account";
+    const paras = {
+      thanks: "Thank you for your time in our first session.",
+      overwhelmed: "I know you're feeling overwhelmed at this point. That's completely normal. As you use the tools during the course you'll gain more confidence in the things we discussed today, and we keep coming back to the concepts, so don't feel you need to remember everything (or even anything) from today.",
+      setup: "The first task for everyone is to install VS Code using the setup guide. It takes about 30 minutes and the steps are all there with pictures.",
+      accounts: `We recommend a Claude account for this work, at least while you're learning. It helps with the work you need to do after that too. Claude is already partly in your Copilot, but you'll get much more out of going straight to Claude Pro: ${team} for one month. After that you can decide who keeps one.`,
+      shared: "If the cost of several accounts is a problem, one shared account can work and I can help set it up. Everyone would see everyone else's chat history in the Claude app, but the sessions on your own computers stay private. With several people on it you'd also use up the account's limits much faster.",
+      calls: "I'm offering 15-minute calls this week for anyone who needs help with the setup. Please let me know when people have time and I'll fit around them.",
+      policy: "The other thing to start this week is your AI policy. The charter tool walks you through it one question at a time. It doesn't need to be finished, just started.",
+      close: "Again, I know it's a lot. Nobody expects you to have it all after one session. Today was the start of upskilling and improving the way we work with AI, and that takes time.",
+    };
+    const link = (path: string, label: string) =>
+      `<a href="${escapeHtml(site + path)}" style="font-size:15px;font-weight:700;color:${AMBER};text-decoration:none;">${escapeHtml(label)} &rarr;</a>`;
+
+    const body = `
+<tr><td>
+<p style="${P}">Hi ${escapeHtml(firstName)},</p>
+<p style="${P}">${escapeHtml(paras.thanks)}</p>
+<p style="${P}">${escapeHtml(paras.overwhelmed)}</p>
+<p style="${P}">Your dashboard has the dates, the reading and the tools:</p>
+${button(signInUrl, "Open your dashboard")}
+<p style="margin:0 0 16px;font-size:13px;color:${MUTED};">The button signs you in. It works once and lasts 14 days. After that, go to tutto.one/learn and we'll email you a new one.</p>
+<p style="${P}">${escapeHtml(paras.setup)}</p>
+<p style="${P}">${link("/vscode-setup", "Open the VS Code setup guide")}</p>
+<p style="${P}">${escapeHtml(paras.accounts)}</p>
+<p style="${P}">${escapeHtml(paras.shared)}</p>
+<p style="${P}">${escapeHtml(paras.calls)}</p>
+<p style="${P}">${escapeHtml(paras.policy)}</p>
+<p style="${P}">${link("/ai-charter", "Open the charter tool")}</p>
+<p style="${P}">${escapeHtml(paras.close)}</p>
+<p style="${P}">Any questions, just reply to this email.</p>
+<p style="${P}">Daniel</p>
+</td></tr>`;
+
+    const text = [
+      `Hi ${firstName},`,
+      "",
+      paras.thanks,
+      "",
+      paras.overwhelmed,
+      "",
+      `Your dashboard has the dates, the reading and the tools: ${signInUrl}`,
+      "(The link signs you in. It works once and lasts 14 days. After that, go to tutto.one/learn and we'll email you a new one.)",
+      "",
+      paras.setup,
+      `VS Code setup guide: ${site}/vscode-setup`,
+      "",
+      paras.accounts,
+      "",
+      paras.shared,
+      "",
+      paras.calls,
+      "",
+      paras.policy,
+      `Charter tool: ${site}/ai-charter`,
+      "",
+      paras.close,
+      "",
+      "Any questions, just reply to this email.",
+      "",
+      "Daniel",
+    ].join("\n");
+
+    return { subject, html: shell(subject, body), text };
+  },
+};
+
+export const MAILINGS: Mailing[] = [aiFiles, afterSession1];
 export const getMailing = (key: string) => MAILINGS.find((m) => m.key === key);

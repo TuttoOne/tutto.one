@@ -65,6 +65,9 @@ type ModuleView = {
   materials: Material[];
   session: { startsAt: string; endsAt: string; status: string } | null;
   progress: { status: ProgressStatus; practiceNote: string | null };
+  /** Only sent once the session is done. */
+  afterNote?: string[];
+  afterLinks?: Material[];
 };
 
 type StudentView = {
@@ -317,7 +320,7 @@ function ModuleCard({ m, timezone, past, locked, tone }: {
   m: ModuleView; timezone: string; past: boolean; locked: boolean; tone: "foundations" | "building";
 }) {
   const qc = useQueryClient();
-  const [open, setOpen] = useState(!past && m.progress.status !== "done");
+  const [open, setOpen] = useState(!!m.afterNote || (!past && m.progress.status !== "done"));
   const save = useMutation({
     mutationFn: (status: ProgressStatus) => api("PUT", `/api/learn/progress/${m.number}`, { status }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["/api/learn/me"] }),
@@ -353,6 +356,21 @@ function ModuleCard({ m, timezone, past, locked, tone }: {
 
       {open && (
         <div style={{ padding: "0 24px 24px 24px" }}>
+          {m.afterNote && (
+            <div style={{ border: `1px solid ${AMBER}`, borderRadius: 8, padding: "14px 16px", marginBottom: 16 }}>
+              <span style={LABEL}>A note from us after this session</span>
+              {m.afterNote.map((para, i) => (
+                <p key={i} style={{ margin: "0 0 10px", fontSize: 14, lineHeight: 1.6 }}>{para}</p>
+              ))}
+              {m.afterLinks && m.afterLinks.length > 0 && (
+                <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, lineHeight: 1.8, listStyle: "disc" }}>
+                  {m.afterLinks.map((l) => (
+                    <li key={l.href}><a href={l.href} target="_blank" rel="noopener noreferrer" style={{ color: AMBER }}>{l.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
           <p style={{ margin: "0 0 12px", fontSize: 15, lineHeight: 1.6 }}>{m.what}</p>
           {m.leaveWith && (
             <p style={{ margin: "0 0 16px", fontSize: 14 }}>

@@ -18,7 +18,7 @@ import { PROGRAMMES, type Programme } from "@shared/learn-programmes";
 
 type AdminShared = { id: number; tool: string; title: string; createdAt: string };
 type AdminStudent = Student & { progress: StudentProgress[]; shared: AdminShared[]; mailings: { mailing: string; sentAt: string }[] };
-type MailingInfo = { key: string; label: string };
+type MailingInfo = { key: string; label: string; audience: "cohort" | "one" };
 type AdminCohort = Cohort & { programme: Programme | null; sessions: CohortSession[]; students: AdminStudent[] };
 
 const KEY = ["/api/admin/learn/cohorts"];
@@ -56,13 +56,15 @@ const STATUS_STYLE: Record<string, string> = {
 
 // ── Update emails to a cohort (server/email/learn-mailings.ts) ──────────────
 
+const useMailings = () => useQuery<MailingInfo[]>({
+  queryKey: ["/api/admin/learn/mailings"],
+  queryFn: () => api("GET", "/api/admin/learn/mailings"),
+});
+
 function CohortMailings({ c }: { c: AdminCohort }) {
   const qc = useQueryClient();
   const [msg, setMsg] = useState<string | null>(null);
-  const { data: mailings } = useQuery<MailingInfo[]>({
-    queryKey: ["/api/admin/learn/mailings"],
-    queryFn: () => api("GET", "/api/admin/learn/mailings"),
-  });
+  const mailings = useMailings().data?.filter((m) => m.audience === "cohort");
   const send = useMutation({
     mutationFn: (key: string) => api("POST", `/api/admin/learn/cohorts/${c.id}/mailings/${key}`),
     onSuccess: (r: { sent: number; failed: string[] }) =>
@@ -125,6 +127,13 @@ function StudentRow({ s, cohort, total }: { s: AdminStudent; cohort: AdminCohort
   const remove = useMutation({
     mutationFn: () => api("DELETE", `/api/admin/learn/students/${s.id}`),
     onSuccess: refresh,
+  });
+  // One-person mailings, like the note to the sponsor after session 1.
+  const oneMailings = useMailings().data?.filter((m) => m.audience === "one") ?? [];
+  const sendOne = useMutation({
+    mutationFn: (key: string) => api("POST", `/api/admin/learn/students/${s.id}/mailings/${key}`),
+    onSuccess: () => { setMsg("Email sent"); refresh(); },
+    onError: (e: Error) => setMsg(e.message),
   });
 
   const done = s.progress.filter((p) => p.status === "done").length;
@@ -198,6 +207,26 @@ function StudentRow({ s, cohort, total }: { s: AdminStudent; cohort: AdminCohort
             >
               <Mail className="w-4 h-4 mr-1" />{s.invitedAt ? "Send again" : "Send welcome"}
             </Button>
+            {s.invitedAt && cohort.status !== "draft" && oneMailings.map((m) => {
+              const had = s.mailings?.find((x) => x.mailing === m.key);
+              return (
+                <span key={m.key} className="inline-flex items-center gap-2">
+                  <a href={`/api/admin/learn/mailings/${m.key}/preview`} target="_blank" rel="noopener noreferrer" className="text-xs underline inline-flex items-center gap-1">
+                    Preview {m.label}<ExternalLink className="w-3 h-3" />
+                  </a>
+                  {had
+                    ? <span className="text-xs text-muted-foreground">Sent {shortDate(had.sentAt)}</span>
+                    : (
+                      <Button
+                        size="sm" variant="outline" disabled={sendOne.isPending}
+                        onClick={() => { if (window.confirm(`Send "${m.label}" to ${s.email}?`)) sendOne.mutate(m.key); }}
+                      >
+                        <Mail className="w-4 h-4 mr-1" />Send
+                      </Button>
+                    )}
+                </span>
+              );
+            })}
             <Button
               size="sm" variant="ghost" className="text-destructive"
               onClick={() => { if (window.confirm(`Remove ${s.name}? This deletes their profile, progress and shared work, and is logged as a deletion.`)) remove.mutate(); }}
@@ -347,6 +376,7 @@ function CohortCard({ c, open, onToggle }: { c: AdminCohort; open: boolean; onTo
               <select
                 value={s.status}
                 onChange={(e) => sessionStatus.mutate({ id: s.id, status: e.target.value })}
+                title="Done ticks the session off for everyone in the cohort and shows them the note after it, if it has one"
                 className="text-xs border border-border rounded px-1 py-0.5 bg-background"
               >
                 <option value="scheduled">Scheduled</option>

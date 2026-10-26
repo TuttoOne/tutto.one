@@ -37,6 +37,10 @@ export type Module = {
   /** The short task between this session and the next. */
   practice: string;
   materials: Material[];
+  /** A note from us, shown on the dashboard once the session is marked done. One string per paragraph. */
+  afterNote?: string[];
+  /** Links that go with the note. */
+  afterLinks?: Material[];
 };
 
 export type Programme = {
@@ -279,6 +283,17 @@ const HSA_CONTENT_TEAM: Programme = {
       leaveWith: "A one-page AI use policy and a working setup",
       practice: "Summarise one more section of Stock Receiving on your own and note where the summary needed correcting.",
       materials: [M.charterTool, M.startHere, M.limits],
+      afterNote: [
+        "Thank you for your time in our first session.",
+        "I know you're feeling overwhelmed at this point. That's completely normal. As you use the tools during the course you'll gain more confidence in the things we discussed today, and we keep coming back to the concepts, so don't feel you need to remember everything (or even anything) from today.",
+        "Your first task is to install VS Code using the setup guide below. It takes about 30 minutes and the steps are all there with pictures.",
+        "We've recommended a Claude Pro account for each of you for the first month, at least while you're learning. It helps with the work you need to do after that too. Christine and I are sorting out the accounts this week, so check with her before you sign up for anything.",
+        "I'm offering 15-minute calls this week for anyone who needs help with the setup. Let Christine or me know when you have time and I'll fit around you.",
+        "The other thing to start this week is your AI policy, with the charter tool below. It doesn't need to be finished, just started.",
+        "Again, I know it's a lot. Nobody expects you to have it all after one session. Today was the start of upskilling and improving the way we work with AI, and that takes time.",
+        "Daniel",
+      ],
+      afterLinks: [{ label: "VS Code setup guide", href: "/vscode-setup" }, M.charterTool],
     },
     {
       number: 2,

@@ -100,8 +100,11 @@ async function loadDashboard(student: Student) {
   const modules: ModuleView[] = (programme?.modules ?? []).map((m) => {
     const s = sessions.find((x) => x.moduleNumber === m.number && !x.isSpare);
     const p = progress.find((x) => x.moduleNumber === m.number);
+    // The note after a session only shows once we've marked that session done.
+    const { afterNote, afterLinks, ...rest } = m;
     return {
-      ...m,
+      ...rest,
+      ...(s?.status === "done" && afterNote ? { afterNote, afterLinks: afterLinks ?? [] } : {}),
       title: s?.titleOverride || m.title,
       session: s ? { startsAt: s.startsAt.toISOString(), endsAt: s.endsAt.toISOString(), status: s.status } : null,
       progress: { status: p?.status ?? "not_started", practiceNote: p?.practiceNote ?? null },
@@ -420,6 +423,16 @@ export function registerLearnRoutes(app: Express) {
       const id = z.coerce.number().int().parse(req.params.id);
       const data = sessionInput.partial().parse(req.body);
       const [session] = await db.update(cohortSessions).set(data).where(eq(cohortSessions.id, id)).returning();
+      // Marking a session done ticks it off for everyone in the cohort. Their practice notes stay.
+      if (session && data.status === "done" && session.moduleNumber !== null) {
+        const people = await db.select({ id: students.id }).from(students).where(eq(students.cohortId, session.cohortId));
+        const now = new Date();
+        for (const p of people) {
+          await db.insert(studentProgress)
+            .values({ studentId: p.id, moduleNumber: session.moduleNumber, status: "done", updatedAt: now })
+            .onConflictDoUpdate({ target: [studentProgress.studentId, studentProgress.moduleNumber], set: { status: "done", updatedAt: now } });
+        }
+      }
       res.json(session);
     } catch (error) {
       fail(res, error, "update the session");
@@ -529,20 +542,20 @@ export function registerLearnRoutes(app: Express) {
   // and student_mailings makes sure nobody gets the same one twice.
 
   app.get("/api/admin/learn/mailings", requireAdmin, (_req, res) => {
-    res.json(MAILINGS.map((m) => ({ key: m.key, label: m.label })));
+    res.json(MAILINGS.map((m) => ({ key: m.key, label: m.label, audience: m.audience ?? "cohort" })));
   });
 
   app.get("/api/admin/learn/mailings/:key/preview", requireAdmin, (req, res) => {
     const mailing = getMailing(String(req.params.key));
     if (!mailing) return res.status(404).send("Not found");
     const site = siteUrl(req);
-    res.type("html").send(mailing.build({ firstName: "Alex", signInUrl: `${site}/learn/auth?token=PREVIEW`, site }).html);
+    res.type("html").send(mailing.build({ firstName: "Alex", signInUrl: `${site}/learn/auth?token=PREVIEW`, site, teamSize: 4 }).html);
   });
 
   app.post("/api/admin/learn/cohorts/:id/mailings/:key", requireAdmin, async (req, res) => {
     try {
       const mailing = getMailing(String(req.params.key));
-      if (!mailing) return res.status(404).json({ error: "Unknown mailing" });
+      if (!mailing || mailing.audience === "one") return res.status(404).json({ error: "Unknown mailing" });
       const cohortId = z.coerce.number().int().parse(req.params.id);
       const [cohort] = await db.select().from(cohorts).where(eq(cohorts.id, cohortId));
       if (!cohort) return res.status(404).json({ error: "Not found" });
@@ -560,7 +573,7 @@ export function registerLearnRoutes(app: Express) {
         if (!s.invitedAt || done.has(s.id)) continue;
         try {
           const token = await issueToken(s.id, WELCOME_LINK_DAYS * 24 * 60);
-          const mail = mailing.build({ firstName: firstName(s.name), signInUrl: `${site}/learn/auth?token=${token}`, site });
+          const mail = mailing.build({ firstName: firstName(s.name), signInUrl: `${site}/learn/auth?token=${token}`, site, teamSize: people.length });
           await sendMail({ from: FROM_PERSON, to: s.email, ...mail });
           await db.insert(studentMailings).values({ studentId: s.id, mailing: mailing.key }).onConflictDoNothing();
           sent++;
@@ -570,6 +583,31 @@ export function registerLearnRoutes(app: Express) {
         }
       }
       res.json({ sent, failed });
+    } catch (error) {
+      fail(res, error, "send the mailing");
+    }
+  });
+
+  // A one-person mailing (audience "one"), sent from that student's row.
+  app.post("/api/admin/learn/students/:id/mailings/:key", requireAdmin, async (req, res) => {
+    try {
+      const mailing = getMailing(String(req.params.key));
+      if (!mailing || mailing.audience !== "one") return res.status(404).json({ error: "Unknown mailing" });
+      const found = await studentAndCohort(z.coerce.number().int().parse(req.params.id));
+      if (!found) return res.status(404).json({ error: "Not found" });
+      if (found.cohort.status === "draft") {
+        return res.status(409).json({ error: "This cohort is still a draft. Set it to active before mailing anyone." });
+      }
+      const [had] = await db.select().from(studentMailings)
+        .where(and(eq(studentMailings.studentId, found.student.id), eq(studentMailings.mailing, mailing.key)));
+      if (had) return res.status(409).json({ error: "They've already had this one." });
+      const teamSize = (await db.select({ id: students.id }).from(students).where(eq(students.cohortId, found.cohort.id))).length;
+      const site = siteUrl(req);
+      const token = await issueToken(found.student.id, WELCOME_LINK_DAYS * 24 * 60);
+      const mail = mailing.build({ firstName: firstName(found.student.name), signInUrl: `${site}/learn/auth?token=${token}`, site, teamSize });
+      await sendMail({ from: FROM_PERSON, to: found.student.email, ...mail });
+      await db.insert(studentMailings).values({ studentId: found.student.id, mailing: mailing.key }).onConflictDoNothing();
+      res.json({ sent: 1 });
     } catch (error) {
       fail(res, error, "send the mailing");
     }
