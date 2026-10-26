@@ -275,6 +275,53 @@ article > table { display: block; overflow-x: auto; }
   <ol class="legend"><li><b>1</b><span>Mistral Vibe tab.</span></li><li><b>2</b><span>Prompt box. Type your request here.</span></li></ol>
 </figure>
   <div class="callout"><p><strong>If an agent opens on the left or as a tab in the middle,</strong> drag its tab into the right side bar. VS Code remembers the position next time. The first time you open each agent, it asks you to sign in (Claude) or paste your API key (Mistral).</p></div>
+  <h3>Sign in to Claude</h3>
+  <p>You do this once. VS Code hands you over to your browser, you log in to your Claude account and approve the connection, then you come back to VS Code.</p>
+
+<figure class="shot" id="fig8">
+  <a class="frame" href="/vscode-setup/img/fig08.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig08.jpg" alt="Claude Code tab asking how you want to log in: Claude.ai Subscription, Anthropic Console or Bedrock, Foundry or Vertex" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1432;--y:749;--w:531;--h:40"><b>1</b></span><span class="hl" style="--x:1432;--y:839;--w:531;--h:40"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 8</span> The first time you open the Claude Code tab.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Claude.ai Subscription. Pick this if you have a Pro, Max, Team or Enterprise plan.</span></li><li><b>2</b><span>Anthropic Console. Only if your organisation pays for Claude by API usage.</span></li></ol>
+</figure>
+
+<figure class="shot" id="fig9">
+  <a class="frame" href="/vscode-setup/img/fig09.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig09.jpg" alt="VS Code asking whether to open the claude.com sign-in page, with the Continue in browser panel behind it" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:1222;--y:759;--w:121;--h:38"><b>1</b></span><span class="hl" style="--x:1432;--y:632;--w:531;--h:178"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 9</span> VS Code asks before it opens your browser.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Click Open. The address starts with claude.com.</span></li><li><b>2</b><span>If the browser doesn't open, copy the link from here into your browser. If the browser then shows you a code, paste it into the box below and click Continue.</span></li></ol>
+</figure>
+
+<figure class="shot" id="fig10">
+  <a class="frame" href="/vscode-setup/img/fig10.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig10.jpg" alt="Claude log-in page in the browser with Google, Apple and email options" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:762;--y:668;--w:476;--h:304"><b>1</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 10</span> Log in to Claude in your browser.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Use the same account you use for Claude every day, the one with your plan. If you're already logged in, you go straight to Fig. 11.</span></li></ol>
+</figure>
+
+<figure class="shot" id="fig11">
+  <a class="frame" href="/vscode-setup/img/fig11.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig11.jpg" alt="Claude Code would like to connect to your Claude chat account, with Authorize and Decline buttons" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:662;--y:998;--w:676;--h:54"><b>1</b></span><span class="hl" style="--x:860;--y:1208;--w:280;--h:60"><b>2</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 11</span> Let Claude Code use your account.</figcaption>
+  <ol class="legend"><li><b>1</b><span>Click Authorize. Claude Code then works from your plan, and your privacy settings apply to it too.</span></li><li><b>2</b><span>Check the account shown here. Wrong one? Click Switch account.</span></li></ol>
+</figure>
+
+<figure class="shot" id="fig12">
+  <a class="frame" href="/vscode-setup/img/fig12.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig12.jpg" alt="Browser page saying you're all set up for Claude Code and can close the window" width="1600" height="1039" loading="lazy">
+    <span class="hl" style="--x:845;--y:650;--w:310;--h:112"><b>1</b></span>
+  </a>
+  <figcaption><span class="fignum">Fig. 12</span> Done. Close the tab and go back to VS Code.</figcaption>
+  <ol class="legend"><li><b>1</b><span>This page means the sign-in worked. The Claude Code tab in VS Code is now ready for a prompt.</span></li></ol>
+</figure>
 </article>
 
 <article id="s5">
@@ -282,48 +329,48 @@ article > table { display: block; overflow-x: auto; }
   <h2>Run a first task with Claude</h2>
   <p class="lead">Give Claude a task and watch the Explorer. New files appear on the left as Claude creates them.</p>
   
-<figure class="shot" id="fig8">
-  <a class="frame" href="/vscode-setup/img/fig08.jpg" target="_blank" rel="noopener">
-    <img src="/vscode-setup/img/fig08.jpg" alt="Empty folder named New open in the Explorer; Claude Code mode menu showing Manual, Edit automatically, Plan and Auto" width="1600" height="1039" loading="lazy">
+<figure class="shot" id="fig13">
+  <a class="frame" href="/vscode-setup/img/fig13.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig13.jpg" alt="Empty folder named New open in the Explorer; Claude Code mode menu showing Manual, Edit automatically, Plan and Auto" width="1600" height="1039" loading="lazy">
     <span class="hl" style="--x:72;--y:176;--w:330;--h:28"><b>1</b></span><span class="hl" style="--x:1524;--y:852;--w:400;--h:362"><b>2</b></span>
   </a>
-  <figcaption><span class="fignum">Fig. 8</span> Before the task: an empty folder, and Claude's mode menu.</figcaption>
+  <figcaption><span class="fignum">Fig. 13</span> Before the task: an empty folder, and Claude's mode menu.</figcaption>
   <ol class="legend"><li><b>1</b><span>The open folder, still empty.</span></li><li><b>2</b><span>Modes. Manual asks before each edit; Plan explores first and shows a plan; Auto approves actions that pass a safety check. Switch with ⇧Tab.</span></li></ol>
 </figure>
   
-<figure class="shot" id="fig9">
-  <a class="frame" href="/vscode-setup/img/fig09.jpg" target="_blank" rel="noopener">
-    <img src="/vscode-setup/img/fig09.jpg" alt="Claude Code working on a prompt while the Explorer still shows an empty folder" width="1600" height="1039" loading="lazy">
+<figure class="shot" id="fig14">
+  <a class="frame" href="/vscode-setup/img/fig14.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig14.jpg" alt="Claude Code working on a prompt while the Explorer still shows an empty folder" width="1600" height="1039" loading="lazy">
     <span class="hl" style="--x:1322;--y:302;--w:645;--h:64"><b>1</b></span><span class="hl" style="--x:72;--y:176;--w:330;--h:28"><b>2</b></span>
   </a>
-  <figcaption><span class="fignum">Fig. 9</span> The prompt goes in. Claude starts checking the folder.</figcaption>
+  <figcaption><span class="fignum">Fig. 14</span> The prompt goes in. Claude starts checking the folder.</figcaption>
   <ol class="legend"><li><b>1</b><span>The request: a demo kit with a CLAUDE.md, a script and a basic tool for an investigator.</span></li><li><b>2</b><span>The Explorer is still empty while Claude plans.</span></li></ol>
 </figure>
   
-<figure class="shot" id="fig10">
-  <a class="frame" href="/vscode-setup/img/fig10.jpg" target="_blank" rel="noopener">
-    <img src="/vscode-setup/img/fig10.jpg" alt="New files cases, sample_evidence, casekit.py, CLAUDE.md and demo.sh appear in the Explorer; CLAUDE.md open with the view menu" width="1600" height="1039" loading="lazy">
+<figure class="shot" id="fig15">
+  <a class="frame" href="/vscode-setup/img/fig15.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig15.jpg" alt="New files cases, sample_evidence, casekit.py, CLAUDE.md and demo.sh appear in the Explorer; CLAUDE.md open with the view menu" width="1600" height="1039" loading="lazy">
     <span class="hl" style="--x:72;--y:238;--w:330;--h:148"><b>1</b></span><span class="hl" style="--x:1288;--y:165;--w:262;--h:145"><b>2</b></span>
   </a>
-  <figcaption><span class="fignum">Fig. 10</span> Seconds later the files appear in the navigator.</figcaption>
+  <figcaption><span class="fignum">Fig. 15</span> Seconds later the files appear in the navigator.</figcaption>
   <ol class="legend"><li><b>1</b><span>New in the Explorer: cases, sample_evidence, casekit.py, CLAUDE.md and demo.sh. Click any file to open it.</span></li><li><b>2</b><span>Markdown files open as raw text. Switch to Markdown Preview to read them formatted.</span></li></ol>
 </figure>
   
-<figure class="shot" id="fig11">
-  <a class="frame" href="/vscode-setup/img/fig11.jpg" target="_blank" rel="noopener">
-    <img src="/vscode-setup/img/fig11.jpg" alt="CLAUDE.md shown as a formatted preview; Claude summarises what it built" width="1600" height="1039" loading="lazy">
+<figure class="shot" id="fig16">
+  <a class="frame" href="/vscode-setup/img/fig16.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig16.jpg" alt="CLAUDE.md shown as a formatted preview; Claude summarises what it built" width="1600" height="1039" loading="lazy">
     <span class="hl" style="--x:1335;--y:545;--w:635;--h:520"><b>1</b></span>
   </a>
-  <figcaption><span class="fignum">Fig. 11</span> CLAUDE.md formatted, and Claude's summary of what it built.</figcaption>
+  <figcaption><span class="fignum">Fig. 16</span> CLAUDE.md formatted, and Claude's summary of what it built.</figcaption>
   <ol class="legend"><li><b>1</b><span>Claude reports what it made, what each file does and that it ran the demo end to end.</span></li></ol>
 </figure>
   
-<figure class="shot" id="fig12">
-  <a class="frame" href="/vscode-setup/img/fig12.jpg" target="_blank" rel="noopener">
-    <img src="/vscode-setup/img/fig12.jpg" alt="Explorer expanded to show the case folder, evidence files, custody log and report" width="1600" height="1039" loading="lazy">
+<figure class="shot" id="fig17">
+  <a class="frame" href="/vscode-setup/img/fig17.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig17.jpg" alt="Explorer expanded to show the case folder, evidence files, custody log and report" width="1600" height="1039" loading="lazy">
     <span class="hl" style="--x:72;--y:205;--w:330;--h:410"><b>1</b></span>
   </a>
-  <figcaption><span class="fignum">Fig. 12</span> Expand the folders to see everything the run produced.</figcaption>
+  <figcaption><span class="fignum">Fig. 17</span> Expand the folders to see everything the run produced.</figcaption>
   <ol class="legend"><li><b>1</b><span>A case folder with evidence files, a case record, a custody log and a report, all created by the task.</span></li></ol>
 </figure>
   <div class="callout"><p><strong>CLAUDE.md is the briefing file.</strong> Claude reads it at the start of every session in that folder. Here it holds the commands and the rules: evidence goes in only through the tool, the custody log is append-only, and the kit is for lawful work only. Edit it to brief Claude on how your team works.</p></div>
@@ -334,33 +381,33 @@ article > table { display: block; overflow-x: auto; }
   <h2>Run a task with Mistral Vibe</h2>
   <p class="lead">Mistral works on the same folder. Switch tabs and give it a task; here it builds a reusable skill from what Claude produced.</p>
   
-<figure class="shot" id="fig13">
-  <a class="frame" href="/vscode-setup/img/fig13.jpg" target="_blank" rel="noopener">
-    <img src="/vscode-setup/img/fig13.jpg" alt="Mistral Vibe working on a prompt about the same folder" width="1600" height="1039" loading="lazy">
+<figure class="shot" id="fig18">
+  <a class="frame" href="/vscode-setup/img/fig18.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig18.jpg" alt="Mistral Vibe working on a prompt about the same folder" width="1600" height="1039" loading="lazy">
     <span class="hl" style="--x:1404;--y:208;--w:580;--h:86"><b>1</b></span><span class="hl" style="--x:1310;--y:716;--w:660;--h:36"><b>2</b></span>
   </a>
-  <figcaption><span class="fignum">Fig. 13</span> Mistral reads the folder before it acts.</figcaption>
+  <figcaption><span class="fignum">Fig. 18</span> Mistral reads the folder before it acts.</figcaption>
   <ol class="legend"><li><b>1</b><span>The request: assess the folder and create a skill for repeat work.</span></li><li><b>2</b><span>The live status line shows each command Mistral runs.</span></li></ol>
 </figure>
   
-<figure class="shot" id="fig14">
-  <a class="frame" href="/vscode-setup/img/fig14.jpg" target="_blank" rel="noopener">
-    <img src="/vscode-setup/img/fig14.jpg" alt="Mistral Vibe plus menu with Add context, Attach image, Commands and Loop" width="1600" height="1039" loading="lazy">
+<figure class="shot" id="fig19">
+  <a class="frame" href="/vscode-setup/img/fig19.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig19.jpg" alt="Mistral Vibe plus menu with Add context, Attach image, Commands and Loop" width="1600" height="1039" loading="lazy">
     <span class="hl" style="--x:1332;--y:953;--w:194;--h:214"><b>1</b></span>
   </a>
-  <figcaption><span class="fignum">Fig. 14</span> The + menu.</figcaption>
+  <figcaption><span class="fignum">Fig. 19</span> The + menu.</figcaption>
   <ol class="legend"><li><b>1</b><span>Add context (point to a file), attach an image, run a command, or loop a task.</span></li></ol>
 </figure>
   
-<figure class="shot" id="fig15">
-  <a class="frame" href="/vscode-setup/img/fig15.jpg" target="_blank" rel="noopener">
-    <img src="/vscode-setup/img/fig15.jpg" alt="Mistral Vibe approval menu with Ask, Accept Edits, Smart Approve and Auto Approve" width="1600" height="1039" loading="lazy">
+<figure class="shot" id="fig20">
+  <a class="frame" href="/vscode-setup/img/fig20.jpg" target="_blank" rel="noopener">
+    <img src="/vscode-setup/img/fig20.jpg" alt="Mistral Vibe approval menu with Ask, Accept Edits, Smart Approve and Auto Approve" width="1600" height="1039" loading="lazy">
     <span class="hl" style="--x:1446;--y:856;--w:466;--h:312"><b>1</b></span><span class="hl" style="--x:1736;--y:1180;--w:176;--h:34"><b>2</b></span>
   </a>
-  <figcaption><span class="fignum">Fig. 15</span> Mistral's approval modes.</figcaption>
+  <figcaption><span class="fignum">Fig. 20</span> Mistral's approval modes.</figcaption>
   <ol class="legend"><li><b>1</b><span>Ask requires approval for every action; Accept Edits approves file edits only; Smart Approve prompts only for risky actions; Auto Approve runs everything.</span></li><li><b>2</b><span>The current mode. Click to change it.</span></li></ol>
 </figure>
-  <div class="callout warn"><p><strong>Choose the approval mode on purpose.</strong> In these screenshots both agents run in Auto. That is fine in a practice folder. With real case material, use <em>Manual</em> in Claude and <em>Ask</em> in Mistral until you trust the workflow, so every command waits for your approval. In Fig. 13, Mistral reads files outside the open folder; agents can reach anything your user account can.</p></div>
+  <div class="callout warn"><p><strong>Choose the approval mode on purpose.</strong> In these screenshots both agents run in Auto. That is fine in a practice folder. With real case material, use <em>Manual</em> in Claude and <em>Ask</em> in Mistral until you trust the workflow, so every command waits for your approval. In Fig. 18, Mistral reads files outside the open folder; agents can reach anything your user account can.</p></div>
 </article>
 
 <article id="s7">

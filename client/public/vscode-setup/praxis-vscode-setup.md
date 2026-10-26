@@ -76,6 +76,12 @@ Keep the agents in the right side bar. Files stay on the left and you can watch 
 2. The panel has one tab per agent. Click **Claude Code** or **Mistral Vibe** to switch between them. The prompt box is at the bottom.
 3. If an agent opens on the left or as a tab in the middle, drag its tab into the right side bar. VS Code remembers the position next time.
 4. The first time they open each agent, Claude asks them to sign in and Mistral asks for their API key.
+5. Signing in to Claude, once only:
+   - In the Claude Code tab, pick **Claude.ai Subscription** if they have a Pro, Max, Team or Enterprise plan. **Anthropic Console** is only for organisations that pay by API usage.
+   - VS Code asks whether to open an external website starting with claude.com. Click **Open**. If the browser doesn't open, they copy the link shown in the Claude Code tab into their browser, and if the browser then shows a code, they paste it back into the tab and click **Continue**.
+   - In the browser, they log in with the same Claude account they use every day (Google, Apple or email). If they're already logged in, this step is skipped.
+   - A page says "Claude Code would like to connect to your Claude chat account". They check the "Logged in as" address at the bottom (wrong account: **Switch account**), then click **Authorize**.
+   - A page saying "You're all set up for Claude Code" means it worked. They close the tab and go back to VS Code, where the Claude Code tab is ready for a prompt.
 
 ### Step 5. Run a first task with Claude
 
