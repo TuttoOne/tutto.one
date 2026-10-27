@@ -1,0 +1,303 @@
+{
+  "id": "18-what-an-eval-is",
+  "title": "Ce qu’est une évaluation",
+  "anthropic": null,
+  "intro": {
+    "title": "Ce qu’est une évaluation, et quand il vous en faut une.",
+    "lead": "La théorie avant l’atelier. Ce que sont réellement ces choses, pourquoi la première que l’on construit finit presque toujours abandonnée, et comment choisir la bonne pour le travail qui vous attend.",
+    "teach": "La théorie avant l’atelier. Ce que sont réellement ces choses, pourquoi la première que l’on construit finit presque toujours abandonnée, et comment choisir la bonne pour le travail qui vous attend."
+  },
+  "close": {
+    "title": "Une évaluation ne prouve pas que vous avez raison. Elle vous dit dans quel sens vous vous êtes déplacé.",
+    "lead": "Écrivez ce qui compte comme correct. Figez un petit jeu de cas. Notez-les de la manière la moins coûteuse qui exprime ce que vous voulez dire. Puis changez une règle et regardez le chiffre.",
+    "teach": "Écrivez ce qui compte comme correct. Figez un petit jeu de cas. Notez-les de la manière la moins coûteuse qui exprime ce que vous voulez dire. Puis changez une règle et regardez le chiffre."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Le problème",
+      "title": "Vous avez vérifié une fois, et cela avait l’air correct",
+      "cap": "",
+      "teach": "C’est une démonstration. Elle vous dit que l’outil peut marcher. Elle ne vous dit pas à quelle fréquence il marche.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Vous avez lancé votre processus une fois et le résultat avait l’air juste. Qu’avez-vous établi ?",
+          "options": [
+            {
+              "t": "Rien d’utile.",
+              "why": "Trop sévère. Une démonstration prouve bien que la chose est possible, ce qui vaut la peine d’être su."
+            },
+            {
+              "t": "Que cela fonctionne, au moins pour ce type d’entrée.",
+              "why": "Un résultat ne vous dit rien sur un type. Il vous dit quelque chose sur un résultat."
+            },
+            {
+              "t": "Que cela peut fonctionner. Pas à quelle fréquence.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Lequel de ces arguments plaide le plus fort pour mesurer, dans une salle sceptique ?",
+          "options": [
+            {
+              "t": "Le changement : on ne peut pas modifier un prompt en sécurité sans savoir si la modification a aidé.",
+              "correct": true
+            },
+            {
+              "t": "La conformité : quelqu’un finira par vous demander de montrer votre raisonnement.",
+              "why": "Cela passe pour une obligation plutôt qu’une raison, et cela repousse la valeur à un futur audit."
+            },
+            {
+              "t": "L’exactitude : vous saurez à quelle fréquence c’est faux.",
+              "why": "C’est vrai, et une salle qui fait déjà confiance à l’outil y entend la solution d’un problème qu’elle n’a pas."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Où passe la ligne",
+      "title": "Des tests pour les parties ennuyeuses. Des évaluations pour le jugement.",
+      "cap": "",
+      "teach": "Deux outils, une ligne entre les deux. La plupart des confusions sur les évaluations viennent de quelqu’un qui se trompe de côté.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Où passe la ligne entre un test et une évaluation ?",
+          "options": [
+            {
+              "t": "Les tests couvrent ce qui a une seule bonne réponse ; les évaluations couvrent le jugement.",
+              "correct": true
+            },
+            {
+              "t": "Les tests sont pour le code ; les évaluations pour les prompts.",
+              "why": "Proche d’une règle empirique, et cela casse dès qu’un prompt a une seule bonne réponse."
+            },
+            {
+              "t": "Les tests tournent automatiquement ; les évaluations se font à la main.",
+              "why": "Les deux peuvent tourner automatiquement. La ligne porte sur ce qui est jugé."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Le choix qui décide de tout le reste",
+      "title": "La question a-t-elle une seule bonne réponse, ou plusieurs bonnes réponses ?",
+      "cap": "",
+      "teach": "Répondez à cela et le type d’évaluation est déjà décidé. Trompez-vous et vous passerez une semaine à construire le mauvais instrument.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quelle est la première question à trancher avant de construire quoi que ce soit ?",
+          "options": [
+            {
+              "t": "La question a-t-elle une seule bonne réponse, ou plusieurs bonnes réponses ?",
+              "correct": true
+            },
+            {
+              "t": "Qui va s’en occuper dans la durée ?",
+              "why": "Une vraie préoccupation, et elle ne vous dit pas quoi construire."
+            },
+            {
+              "t": "De combien de cas avons-nous besoin ?",
+              "why": "À poser en deuxième. Autre chose décide de la nature même de l’instrument que vous construisez."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Comment la notation se fait vraiment",
+      "title": "Quatre façons de noter, de la moins chère à la plus chère",
+      "cap": "",
+      "teach": "Prenez la moins coûteuse qui exprime ce que vous voulez dire. Se ruer d’emblée sur la plus chère est l’erreur la plus fréquente.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quatre façons de noter. Vers laquelle vous tournez-vous en premier ?",
+          "options": [
+            {
+              "t": "La moins coûteuse qui exprime ce que vous voulez dire.",
+              "correct": true
+            },
+            {
+              "t": "La plus exacte que vous puissiez vous offrir.",
+              "why": "Une exactitude que vous ne pouvez pas tenir sera abandonnée au bout de deux mois. Le premier filtre est ailleurs."
+            },
+            {
+              "t": "Un modèle juge, puisqu’il gère n’importe quel type de sortie.",
+              "why": "Il gère tout, et c’est le haut de gamme. S’y ruer d’emblée est l’erreur courante."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Anatomie",
+      "title": "Toute évaluation, ce sont les mêmes quatre parties",
+      "cap": "",
+      "teach": "Quel qu’en soit le type, quel qu’en soit le domaine. S’il en manque une, vous n’avez pas une évaluation, vous avez un tableur.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Une évaluation a quatre parties. Que vous reste-t-il s’il en manque une ?",
+          "options": [
+            {
+              "t": "Une évaluation partielle sur laquelle on peut quand même agir.",
+              "why": "Elle ne vous dira pas ce dont vous avez besoin. C’est un échec plus net que « partiel »."
+            },
+            {
+              "t": "Un tableur.",
+              "correct": true
+            },
+            {
+              "t": "Un test plutôt qu’une évaluation.",
+              "why": "Un test est un autre instrument, pas une évaluation cassée."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Ce qu’on en fait vraiment",
+      "title": "Le chiffre n’est pas une note. C’est une direction.",
+      "cap": "",
+      "teach": "Personne n’a besoin de savoir qu’il est à 73 %. Ce dont on a besoin, c’est de savoir si le changement d’hier a aidé.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Votre évaluation affiche 73 %. À quoi sert ce chiffre ?",
+          "options": [
+            {
+              "t": "À vous dire si le changement d’hier a aidé.",
+              "correct": true
+            },
+            {
+              "t": "À fixer la barre à franchir avant de livrer.",
+              "why": "Un seuil traite un chiffre unique comme un verdict. Il est plus utile comme direction."
+            },
+            {
+              "t": "À vous dire à quel point le système est bon.",
+              "why": "Personne ne peut agir là-dessus, et cela invite à débattre pour savoir si 73 est bon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Pourquoi la plupart des premières évaluations sont abandonnées",
+      "title": "Trois façons de se tromper",
+      "cap": "",
+      "teach": "On en construit une, on obtient un mauvais chiffre, on en conclut que l’outil ne sait pas faire le travail, et on s’arrête. Le chiffre mesurait généralement la mauvaise chose.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quelqu’un construit une évaluation, obtient un mauvais chiffre, et conclut que l’outil ne sait pas faire. Que s’est-il passé, le plus souvent ?",
+          "options": [
+            {
+              "t": "Il aurait fallu un modèle plus gros.",
+              "why": "C’est se ruer sur la capacité avant de vérifier si la mesure voulait dire quelque chose."
+            },
+            {
+              "t": "L’outil ne sait vraiment pas faire.",
+              "why": "Parfois. C’est la conclusion vers laquelle on saute, et ce n’est généralement pas ce que le chiffre disait."
+            },
+            {
+              "t": "L’évaluation mesurait la mauvaise chose.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Avant de promettre cela au travail",
+      "title": "Peu coûteux à faire tourner. Coûteux à démarrer.",
+      "cap": "",
+      "teach": "Le coût tombe à l’inverse de ce que l’on suppose, et se tromper là-dessus est la façon dont ces projets meurent au bout de deux mois.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Où tombe réellement le coût d’une évaluation ?",
+          "options": [
+            {
+              "t": "Coûteuse aux deux bouts, ce qui explique que la plupart des équipes s’en passent.",
+              "why": "Le coût de fonctionnement est vraiment faible. C’est le début que l’on sous-estime."
+            },
+            {
+              "t": "Coûteuse à faire tourner, bon marché à mettre en place.",
+              "why": "C’est l’idée reçue avec laquelle on arrive, et c’est l’inverse."
+            },
+            {
+              "t": "Peu coûteuse à faire tourner, coûteuse à démarrer.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Quelle est la partie coûteuse du démarrage ?",
+          "options": [
+            {
+              "t": "Décider ce qui compte comme correct.",
+              "correct": true
+            },
+            {
+              "t": "Choisir le modèle qui servira de juge.",
+              "why": "Une décision sur laquelle on peut revenir à peu de frais, et ce n’est pas là que part l’effort."
+            },
+            {
+              "t": "Écrire le code qui la fait tourner.",
+              "why": "Cette partie est courte. Le plus dur n’est pas technique."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Où cela mène",
+      "title": "Deux séances, une pour chaque moitié",
+      "cap": "",
+      "teach": "Vous avez maintenant la carte. Les deux séances suivantes en sont les deux moitiés, construites à la main.",
+      "diagram": "diagrams/fr/18-what-an-eval-is/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Par qui une évaluation est-elle vraiment construite ?",
+          "options": [
+            {
+              "t": "Par un développeur, puisqu’il faut du code.",
+              "why": "Le code fait une vingtaine de lignes. Le plus dur est un jugement métier."
+            },
+            {
+              "t": "Par celui qui a le plus de temps.",
+              "why": "Il faut la personne qui sait à quoi ressemble le bon travail, pas celle qui est disponible."
+            },
+            {
+              "t": "Par celui qui porte la norme de qualité du travail.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

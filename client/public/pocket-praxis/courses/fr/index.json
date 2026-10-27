@@ -1,0 +1,80 @@
+[
+  {
+    "id": "01-claude-101",
+    "title": "Claude 101",
+    "steps": 12,
+    "questions": 27
+  },
+  {
+    "id": "02-claude-code-101",
+    "title": "Claude Code 101",
+    "steps": 12,
+    "questions": 24
+  },
+  {
+    "id": "03-claude-cowork",
+    "title": "Introduction à Claude Cowork",
+    "steps": 13,
+    "questions": 26
+  },
+  {
+    "id": "04-claude-code-in-action",
+    "title": "Claude Code en action",
+    "steps": 14,
+    "questions": 25
+  },
+  {
+    "id": "05-ai-fluency",
+    "title": "Maîtrise de l'IA : cadre et fondations",
+    "steps": 13,
+    "questions": 24
+  },
+  {
+    "id": "06-anthropic-api",
+    "title": "Claude avec l'API Anthropic",
+    "steps": 11,
+    "questions": 18
+  },
+  {
+    "id": "07-mcp",
+    "title": "Introduction au MCP",
+    "steps": 11,
+    "questions": 14
+  },
+  {
+    "id": "08-agent-skills",
+    "title": "Introduction aux compétences d'agent",
+    "steps": 6,
+    "questions": 12
+  },
+  {
+    "id": "09-subagents",
+    "title": "Introduction aux sous-agents",
+    "steps": 4,
+    "questions": 8
+  },
+  {
+    "id": "10-capabilities-and-limitations",
+    "title": "Capacités et limites de l'IA",
+    "steps": 9,
+    "questions": 16
+  },
+  {
+    "id": "17-where-claude-keeps-what-it-knows",
+    "title": "Où Claude garde ce qu'il sait",
+    "steps": 8,
+    "questions": 13
+  },
+  {
+    "id": "18-what-an-eval-is",
+    "title": "Ce qu'est une évaluation",
+    "steps": 9,
+    "questions": 11
+  },
+  {
+    "id": "19-measuring-extraction",
+    "title": "Mesurer l'extraction",
+    "steps": 12,
+    "questions": 14
+  }
+]

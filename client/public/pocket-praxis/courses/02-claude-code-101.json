@@ -1,0 +1,621 @@
+{
+  "id": "02-claude-code-101",
+  "title": "Claude Code 101",
+  "anthropic": "https://anthropic.skilljar.com/claude-code-101",
+  "intro": {
+    "title": "What Claude Code actually is, and how to work with it.",
+    "lead": "Twelve ideas, one per screen. Show each one working, then stop and ask where it fits their work. Leave the silences in.",
+    "teach": "There are twelve ideas in this course, one per screen. They all point at one change. Up to now, Claude has given you text and you did the rest, you copied it out, used it, fixed it.\n\nClaude Code does the work itself, in your own files, on your own computer. For each idea I'll show you it working, then stop and ask where it fits in your week. You don't need to remember it all today."
+  },
+  "close": {
+    "title": "Understand the loop. Run the workflow. Customise to your work.",
+    "lead": "Explore → Plan → Code → Commit is the spine. Context, CLAUDE.md, subagents, skills, MCP and hooks are how you make it yours.",
+    "teach": "To sum up the session: the workflow is the thing to keep. Explore, plan, code, commit, and correct at the plan stage, because that's where a correction costs you a minute instead of an afternoon. Everything else we saw today exists to make that workflow run better.\n\nThe memory commands keep it focused. CLAUDE.md holds your rules. Skills hold your methods.\n\nMCP reaches your data. Hooks guarantee the rules that must always hold. And all of it lives in a folder on your computer, so nothing is lost when a conversation ends."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1",
+      "title": "Chat answers. An agent acts.",
+      "cap": "An agent reads and understands the codebase, edits files across the project, runs terminal commands, and searches the web, then decides what to do next.",
+      "teach": "In a chat, you ask a question and get text back, and then the rest is on you: you copy the answer out, use it somewhere, and paste back whatever went wrong. An agent removes that carrying. It reads your files, edits them, runs the commands, checks the result, and keeps going until the job is done.\n\nIt's the same Claude you know from the browser. The difference is that it can act on your computer instead of only answering.",
+      "diagram": "diagrams/02-claude-code-101/s3.svg",
+      "videos": [
+        {
+          "id": "fl1DSmwQKKY",
+          "label": "What is Claude Code?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You paste a file into a chat, it writes the fix, you copy it back. What is an agent doing differently?",
+          "options": [
+            {
+              "t": "It opens, edits and runs the files itself, then decides what to do next.",
+              "correct": true
+            },
+            {
+              "t": "It remembers the file between sessions so you don't paste it twice.",
+              "why": "Memory is a different idea. Think about the copying you did in that sequence."
+            },
+            {
+              "t": "It writes better code because it can see more of the project.",
+              "why": "It may well, but that's a consequence. Ask what changes about who does the moving."
+            }
+          ]
+        },
+        {
+          "q": "You start Claude Code in your accounts folder. A colleague asks whether it can see the payroll folder next door.",
+          "options": [
+            {
+              "t": "Yes, it can read anywhere on the machine if it needs to.",
+              "why": "That would make it unusable on any machine with anything confidential on it. There's a boundary, set by something you did."
+            },
+            {
+              "t": "No. It sees the folder you started it in, and what's underneath.",
+              "correct": true
+            },
+            {
+              "t": "Only if payroll is in the same repository.",
+              "why": "The boundary isn't about repositories. Think about the command you typed to start it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2",
+      "title": "The agentic loop",
+      "cap": "Four parts make the loop run: the loop itself, a managed context window, tools it can call, and permissions you control. That combination is what a chat window doesn't have.",
+      "teach": "\"Underneath, it runs a cycle. You give it an instruction. It gathers the context it needs.\n\nThen it acts: it edits files, runs commands, searches. Then it checks its own work, and if the result isn't right, it tries again. When it's done, it stops and waits for you.\n\nYou can step in at any point along the way, add a file, correct something, or send it in a different direction.\" (Four parts make the loop run: the loop itself, a managed memory, the tools it can call, and the permissions you control, that combination is what a chat doesn't have.)",
+      "diagram": "diagrams/02-claude-code-101/s4.svg",
+      "videos": [
+        {
+          "id": "6bs5b4FltCU",
+          "label": "How Claude Code Works"
+        }
+      ],
+      "checks": [
+        {
+          "q": "It's three minutes into a task and heading somewhere you don't want. What can you do?",
+          "options": [
+            {
+              "t": "Stop it and start again with a better prompt.",
+              "why": "That works and throws away the context it has built. There's something less drastic."
+            },
+            {
+              "t": "Wait for it to finish, then correct the result.",
+              "why": "You can, and you'd be paying for work you already know is wrong. There's an earlier option."
+            },
+            {
+              "t": "Interrupt and steer it, at any point in the loop.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Which step of the loop do people most often assume isn't there?",
+          "options": [
+            {
+              "t": "Verify. They picture it acting and then stopping.",
+              "correct": true
+            },
+            {
+              "t": "Act. They expect it to suggest rather than do.",
+              "why": "That confusion belongs to the chat-versus-agent question, and it's usually cleared up first."
+            },
+            {
+              "t": "Gather. They think it works from the prompt alone.",
+              "why": "Some do, and they find out quickly when it starts reading files. There's a later step that's easier to miss entirely."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3",
+      "title": "Five places it runs",
+      "cap": "Want the cutting edge? Terminal. Want it inside your editor? VS Code or JetBrains. Want it working while you do other things? Desktop. Working from a GitHub repo remotely? Web.",
+      "teach": "You can run Claude Code in five places: in the terminal, inside an editor like VS Code or JetBrains, in the desktop app, and on the web. The terminal gets new features first. The desktop app is the easiest place to start, because it runs in the background while you do other things.\n\nThe rule that matters is the same everywhere: you start it in a folder, and it can see that folder and everything inside it, and nothing above it.",
+      "diagram": "diagrams/02-claude-code-101/s5.svg",
+      "videos": [
+        {
+          "id": "0kILa02vKuI",
+          "label": "Installing Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Someone says the terminal makes them nervous. What's the right move?",
+          "options": [
+            {
+              "t": "Start them in Desktop or VS Code.",
+              "correct": true
+            },
+            {
+              "t": "Walk them through the terminal anyway. It's ten minutes of discomfort.",
+              "why": "It's also where a good number of people quietly decide this isn't for them, and there's no need."
+            },
+            {
+              "t": "Explain that the terminal version is the only one with full capability.",
+              "why": "It isn't, and telling someone the easy door is the lesser one guarantees they feel they're missing out."
+            }
+          ]
+        },
+        {
+          "q": "A regulated firm says nothing can be installed on staff machines. What's the useful answer?",
+          "options": [
+            {
+              "t": "Then this isn't viable for them.",
+              "why": "There's a floor and a ceiling to how this can be run, and neither of them involves installing on a laptop."
+            },
+            {
+              "t": "The web version needs no install, and a self-hosted model is the other end of the range.",
+              "correct": true
+            },
+            {
+              "t": "They'll need an enterprise agreement first.",
+              "why": "That may follow, but it answers a commercial question rather than the technical one they asked."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4",
+      "title": "One key sets how much you watch",
+      "cap": "Plan mode is the safe place to start anything complex: it reads your code, asks clarifying questions, and hands back a plan before a single file changes.",
+      "teach": "One key, Shift + Tab, sets how closely you watch it work. There are three settings. Approval mode asks you before every change; that's where you start, because watching it ask is how you build trust.\n\nAuto-accept lets the edits happen without asking, for when you've seen the pattern enough times. And Plan mode is read-only: it studies the files, asks its questions, and gives you a plan. Nothing changes until you approve the plan.",
+      "diagram": "diagrams/02-claude-code-101/s6.svg",
+      "videos": [
+        {
+          "id": "gbetp6D7J_Q",
+          "label": "Your first Claude Code prompt"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You want it to work out how to restructure a module, but nothing should change until you have read the proposal. Which mode?",
+          "options": [
+            {
+              "t": "Auto-accept, then review the diff at the end.",
+              "why": "By then the changes have already been made. You asked for nothing to change until you'd read it."
+            },
+            {
+              "t": "Approval, so you can decline each edit as it comes.",
+              "why": "That works and it makes you the bottleneck on every single change. There's a mode that gets you one decision instead of thirty."
+            },
+            {
+              "t": "Plan mode.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Someone new is nervous about handing over control. Where should they start, and why?",
+          "options": [
+            {
+              "t": "Approval, because trust is built by watching it work first.",
+              "correct": true
+            },
+            {
+              "t": "Plan mode, because nothing can change.",
+              "why": "Safe, and they never see it do anything, so they learn nothing about whether its work is any good."
+            },
+            {
+              "t": "Auto-accept, so they see how much it can do and relax.",
+              "why": "Showing a nervous person the least reversible mode first tends to confirm the fear rather than settle it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Lesson 5, if you take one thing away",
+      "title": "Explore → Plan → Code → Commit",
+      "cap": "Make \"correct\" explicit (success criteria), give it tools and a test suite to check against, and if it keeps hitting the same wall, tell it to save the fix to CLAUDE.md .",
+      "teach": "If you keep one thing from today, keep this workflow. It has four steps. First, explore: it reads what's already there.\n\nSecond, plan: it writes out what it intends to do, and you correct that plan. This is the cheap place to catch a mistake, changing a plan takes a minute, changing finished work takes an afternoon. Third, it does the work, back and forth with you.\n\nFourth, you review the result and commit it. Most people skip straight to the third step, and then spend their time correcting the output.",
+      "diagram": "diagrams/02-claude-code-101/s7.svg",
+      "videos": [
+        {
+          "id": "xJQuF02NAK8",
+          "label": "The Explore → Plan → Code → Commit workflow in Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Which skipped step costs the most, and why?",
+          "options": [
+            {
+              "t": "Commit, because unreviewed work reaches the repository.",
+              "why": "Serious, and it's a discipline problem rather than the step people habitually skip."
+            },
+            {
+              "t": "Explore, because it starts without knowing the codebase.",
+              "why": "Real, and it usually announces itself early and cheaply. Think about which mistake you find out about last."
+            },
+            {
+              "t": "Plan, because correcting a plan takes minutes and correcting finished work takes an afternoon.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "What makes a plan worth the time it costs?",
+          "options": [
+            {
+              "t": "You can hold the result up against it and see whether it did the job.",
+              "correct": true
+            },
+            {
+              "t": "It makes the work faster to write once it starts.",
+              "why": "Sometimes. But the saving comes from what you avoid rather than what you speed up."
+            },
+            {
+              "t": "It stops it from touching files you didn't intend.",
+              "why": "That's what a permission mode is for. A plan does something else."
+            },
+            {
+              "t": "It gives the team a record of what was agreed.",
+              "why": "Useful, and it isn't what saves you the afternoon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Lesson 6",
+      "title": "Context is working memory, it fills up",
+      "cap": "Spend less context: be specific (vague prompts cost more, not less), turn off MCP servers you're not using, and hand exploration to a subagent that returns just the answer.",
+      "teach": "Claude has a working memory, and it fills up. Every file it reads and every command it runs takes up space in it. Three commands manage that space. /compact summarises the conversation so far, you keep the thread of the task but free up room, so use it in the middle of a long job. /clear empties the memory completely, for when you start something unrelated. /context shows you what's taking up the space.\n\nAnything you want it to keep beyond the session goes in a file, and that file is the next slide.",
+      "diagram": "diagrams/02-claude-code-101/s8.svg",
+      "videos": [
+        {
+          "id": "eW3oTyfeWZ0",
+          "label": "Context Management in Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You've finished a feature and want to start something unrelated. Which command, and why?",
+          "options": [
+            {
+              "t": "/compact, to keep the useful parts and drop the rest.",
+              "why": "Compact keeps the thread alive in shorter form. You have no use for this thread at all."
+            },
+            {
+              "t": "/clear, because none of this conversation applies to the next job.",
+              "correct": true
+            },
+            {
+              "t": "/context, to see what's worth keeping first.",
+              "why": "That tells you what's in there. It doesn't do anything about it."
+            }
+          ]
+        },
+        {
+          "q": "Which of these uses MORE context, not less?",
+          "options": [
+            {
+              "t": "A long prompt with the file paths spelled out.",
+              "why": "It's more to read up front and it saves the searching. Think about what a vague one forces it to do."
+            },
+            {
+              "t": "Attaching the two files it needs.",
+              "why": "You pay for the files, and only the ones that matter. Compare that with making it hunt."
+            },
+            {
+              "t": "A short, vague prompt.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Lesson 7",
+      "title": "Fresh eyes before you push",
+      "cap": "Keep the reviewer read-only, it flags issues, it doesn't edit. Check it into the repo so the whole team reviews the same way.",
+      "teach": "\"The Claude that did the work is not a good judge of it, for the same reason you're not a good judge of your own writing: it made the choices, so it defends them. So before the work goes out, a second Claude reads it with no memory of how it was made. It can point at problems, but it can't change anything.\n\nThen one command saves the work and posts it for review. And you can come back to that piece of work later and carry on from where you stopped.\" (Adapt to their world: this is the same instinct as a colleague checking your work before it goes to the client.)",
+      "diagram": "diagrams/02-claude-code-101/s9.svg",
+      "videos": [
+        {
+          "id": "RKsADl0ZC3Y",
+          "label": "Introducing Code Review"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Why hand the review to a subagent rather than asking the session that wrote the code?",
+          "options": [
+            {
+              "t": "The one that wrote the work carries its own bias about it.",
+              "correct": true
+            },
+            {
+              "t": "The main session's context is too full by then.",
+              "why": "Often true, and it's a convenience. There's a reason that would hold even with an empty context."
+            },
+            {
+              "t": "It's faster, because the review runs in parallel.",
+              "why": "Speed isn't the argument. Think about who is being asked to judge whose work."
+            }
+          ]
+        },
+        {
+          "q": "What should the reviewer be allowed to do?",
+          "options": [
+            {
+              "t": "Fix the problems it finds, so the work comes back clean.",
+              "why": "Then it has written code and reviewed its own code, which is the situation you set the reviewer up to avoid."
+            },
+            {
+              "t": "Flag what it finds. Read-only.",
+              "correct": true
+            },
+            {
+              "t": "Fix anything mechanical, and flag anything it has to judge.",
+              "why": "Reasonable-sounding, and the line between mechanical and judged is exactly the thing it can't be trusted to draw about its own work."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Lesson 8",
+      "title": "CLAUDE.md, memory that survives the session",
+      "cap": "It's an onboarding script for your codebase, appended to every prompt. Commit it so the team shares one source of truth, keep it compact and only what's necessary.",
+      "teach": "This is the most important file in the whole system. CLAUDE.md is a plain-English file that holds the rules of your work: what the project is, how you want things done, what to never do. Claude reads it at the start of every session.\n\nSo instead of re-explaining your rules every time, it starts already knowing them. And because it's an ordinary file, you can share it: put it in the shared project folder and the whole team works from the same rules.",
+      "diagram": "diagrams/02-claude-code-101/s10.svg",
+      "videos": [
+        {
+          "id": "O0FGCxkHM-U",
+          "label": "The CLAUDE.md file"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You're setting up CLAUDE.md for a project you know well. How should you start it?",
+          "options": [
+            {
+              "t": "Write down everything important about the project while you remember it.",
+              "why": "You end up with a long file, most of which was never a problem, and the parts that matter get lost in it."
+            },
+            {
+              "t": "Leave it empty, and add the things you find yourself correcting.",
+              "correct": true
+            },
+            {
+              "t": "Copy the README in, since it already describes the project.",
+              "why": "A README explains the project to a person. This file exists to stop a specific set of repeated corrections."
+            }
+          ]
+        },
+        {
+          "q": "What's the practical difference between putting a rule in CLAUDE.md and putting it in a skill?",
+          "options": [
+            {
+              "t": "CLAUDE.md is shared with the team; a skill is personal.",
+              "why": "Either can be either. The difference is about when they get read."
+            },
+            {
+              "t": "CLAUDE.md holds facts; a skill holds instructions.",
+              "why": "Both hold instructions. Think about the moment each one arrives."
+            },
+            {
+              "t": "CLAUDE.md is read every session; a skill loads only when it's relevant.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Lesson 9",
+      "title": "Subagents, send the heavy lifting away",
+      "cap": "\"Where are the auth endpoints?\", the subagent reads half the codebase to find out, but only the answer comes back. The journey never clutters your main window.",
+      "teach": "\"Some jobs need a lot of digging: reading through half the files to find one thing. If your main session does all that reading, its memory fills up with material you don't need. A subagent fixes that.\n\nIt's a helper that does the digging in its own separate memory and sends back only the answer, so your main session stays focused on the task. You create one just by asking; Claude writes the setup for you.\" (Plain framing: it's like asking a researcher 'go find me this' and getting a one-paragraph answer, not their twenty open tabs.)",
+      "diagram": "diagrams/02-claude-code-101/s11.svg",
+      "videos": [
+        {
+          "id": "jKErNxuxPXg",
+          "label": "What are subagents?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "What does a subagent actually buy you?",
+          "options": [
+            {
+              "t": "It runs while you keep working in the main session.",
+              "why": "Convenient, and not the reason it exists. Think about what your main session looks like afterwards."
+            },
+            {
+              "t": "It can do things the main session can't.",
+              "why": "Same capability, same tools. The win is about where the work happens rather than what's possible."
+            },
+            {
+              "t": "The exploration happens in its context, and only the answer comes back.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Which job is the better fit for a subagent?",
+          "options": [
+            {
+              "t": "Reading thirty files to work out where a behaviour is set.",
+              "correct": true
+            },
+            {
+              "t": "Anything you want done properly.",
+              "why": "It isn't a quality setting. It's about which work would otherwise clog up your session."
+            },
+            {
+              "t": "Making the edit you've already decided on.",
+              "why": "Nothing to isolate. You'd be sending a one-line job away and waiting for it to come back."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Lesson 10",
+      "title": "Skills, capability loaded only when needed",
+      "cap": "That's the win over loading everything up front: skills keep the context window lean. (The course points to a dedicated \"Introduction to agent skills\" for the deep dive.)",
+      "teach": "A skill is a set of instructions for one repeatable task: the steps, the rules, the format, written down once. When that task comes up, Claude loads the instructions and does the job your way. The rest of the time the skill costs almost nothing, because Claude only holds its name and a one-line description.\n\nYou've already used the built-in skills every time it made you a spreadsheet or a document. The valuable ones are the ones you write yourself, in plain English, about your own work.",
+      "diagram": "diagrams/02-claude-code-101/s12.svg",
+      "videos": [
+        {
+          "id": "bjdBVZa66oU",
+          "label": "What are skills?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "When does Claude read a skill's full instructions?",
+          "options": [
+            {
+              "t": "When you name the skill in your prompt.",
+              "why": "You can, and it doesn't need you to. Something else does the deciding."
+            },
+            {
+              "t": "At startup, with everything else it might need.",
+              "why": "That's how the thing on the next slide works, and it's the cost this design avoids."
+            },
+            {
+              "t": "Once your request matches its one-line description.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "For a non-technical team, which part of a skill is the point?",
+          "options": [
+            {
+              "t": "The plain-English file holding the method they already follow.",
+              "correct": true
+            },
+            {
+              "t": "The progressive loading that keeps context small.",
+              "why": "That's the engineering reason it works well. It isn't the reason it's worth their time."
+            },
+            {
+              "t": "That it can be shared across the whole team.",
+              "why": "Sharing matters, and only once there's something worth sharing. Ask what that thing is."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Lesson 11",
+      "title": "MCP, a bridge to everything outside the code",
+      "cap": "Watch the cost: every server loads its tool definitions into context, used or not. Run /mcp and disable what you're not using, a CLI like gh , or a Skill, is often leaner.",
+      "teach": "Most of what Claude needs to know doesn't live in one folder. It lives in your email, your project tracker, your databases. MCP is the standard that connects those, so Claude works with your actual data instead of what you paste in.\n\nOne practical thing to know: every connection takes up a little of its working memory whether you use it or not, so switch off the ones you don't need.",
+      "diagram": "diagrams/02-claude-code-101/s13.svg",
+      "videos": [
+        {
+          "id": "kkBFmwkDzdo",
+          "label": "MCP in Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You add four MCP servers and use one. What does that cost?",
+          "options": [
+            {
+              "t": "Startup time, but not context.",
+              "why": "Startup is the smaller half. Think about what those definitions occupy once loaded."
+            },
+            {
+              "t": "Nothing until each one gets called.",
+              "why": "That's how a skill behaves. MCP makes the opposite trade."
+            },
+            {
+              "t": "All four load their tool definitions into context whether you use them or not.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "A client asks where their data goes once MCP connects Claude to their systems.",
+          "options": [
+            {
+              "t": "It depends on the setup, and the range runs from the web to a model inside their own network.",
+              "correct": true
+            },
+            {
+              "t": "MCP servers run locally, so the data stays on their machine.",
+              "why": "The server runs locally. What it hands back still travels wherever the model is."
+            },
+            {
+              "t": "Through Anthropic's API, like everything else.",
+              "why": "That describes one arrangement and states it as though there's no choice, which shuts down the conversation they were trying to start."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Lesson 12",
+      "title": "Hooks, the things that must happen, always",
+      "cap": "Auto-format on every edit, log every command for compliance, block writes to production. If it needs to happen every time without fail, don't put it in a prompt, put it in a hook.",
+      "teach": "\"Everything else in this session works by asking: you request something, and Claude usually does it. A hook is different. A hook is a rule that runs automatically, every single time, with no exceptions.\n\nFor example: format every file after it's saved, log every command for the audit trail, block a dangerous action before it runs. The test is simple. If a rule has to hold every time without fail, don't put it in a prompt, put it in a hook.\" (For these learners the headline is the guarantee, not the syntax: some rules are too important to leave to \"usually\".)",
+      "diagram": "diagrams/02-claude-code-101/s14.svg",
+      "videos": [
+        {
+          "id": "IkaPHiMDazM",
+          "label": "Hooks in Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Your team must never commit without running the linter. Where does that belong?",
+          "options": [
+            {
+              "t": "In a skill, so it loads whenever a commit is involved.",
+              "why": "A skill still leaves the decision to load with Claude. You said never."
+            },
+            {
+              "t": "In CLAUDE.md, so it's read every session.",
+              "why": "It'll be read, and reading is not running. \"Never\" needs something stronger than an instruction."
+            },
+            {
+              "t": "In a hook.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "What decides when a hook runs?",
+          "options": [
+            {
+              "t": "A fixed point in the lifecycle: on submit, before a tool, after a tool, on stop.",
+              "correct": true
+            },
+            {
+              "t": "The permission mode you're in.",
+              "why": "Permission modes govern what you're asked about. Hooks fire regardless."
+            },
+            {
+              "t": "Claude, when it judges the hook relevant.",
+              "why": "That's how a skill activates. A hook doesn't get an opinion."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

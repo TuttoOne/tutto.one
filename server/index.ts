@@ -7,7 +7,7 @@ import { serveStatic } from "./static";
 import { guardPythiaDemo } from "./pythia-demo";
 import { createServer } from "http";
 import { seedBlogPostsIfEmpty } from "./seed-blog";
-import { ensureSchema, ensureLearnSchema, ensureEventsSchema } from "./ensure-schema";
+import { ensureSchema, ensureLearnSchema, ensureEventsSchema, ensurePocketSchema } from "./ensure-schema";
 import { seedEvents } from "./seed-events";
 import { scheduleReminders } from "./event-routes";
 import { seedLearnCohorts } from "./seed-learn";
@@ -103,6 +103,13 @@ app.use((req, res, next) => {
     scheduleReminders();
   } catch (err) {
     console.error("Failed to set up the event tables:", err);
+  }
+
+  // Pocket Praxis accounts (optional sign-in for the phone game).
+  try {
+    await ensurePocketSchema();
+  } catch (err) {
+    console.error("Failed to set up the Pocket Praxis tables:", err);
   }
 
   // Seed blog posts on startup if empty

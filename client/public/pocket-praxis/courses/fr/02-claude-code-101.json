@@ -1,0 +1,622 @@
+{
+  "id": "02-claude-code-101",
+  "title": "Claude Code 101",
+  "anthropic": "https://anthropic.skilljar.com/claude-code-101",
+  "intro": {
+    "title": "Ce qu’est réellement Claude Code, et comment travailler avec.",
+    "lead": "Douze idées, une par écran. Montrez chacune en train de fonctionner, puis arrêtez-vous et demandez où elle s’inscrit dans leur travail. Laissez les silences.",
+    "teach": "Ce cours compte douze idées, une par écran. Elles pointent toutes vers un même changement. Jusqu’ici, Claude vous donnait du texte et vous faisiez le reste : vous le copiiez, vous l’utilisiez, vous le corrigiez.\n\nClaude Code fait le travail lui-même, dans vos propres fichiers, sur votre propre ordinateur. Pour chaque idée, je vous la montre en train de fonctionner, puis je m’arrête et je vous demande où elle s’inscrit dans votre semaine. Vous n’avez pas besoin de tout retenir aujourd’hui."
+  },
+  "close": {
+    "title": "Comprenez la boucle. Exécutez le workflow. Adaptez-le à votre travail.",
+    "lead": "Explorer → Planifier → Coder → Valider est la colonne vertébrale. Le contexte, CLAUDE.md, les sous-agents, les compétences, le MCP et les hooks sont la façon de vous l’approprier.",
+    "teach": "Pour résumer la séance : le workflow est ce qu’il faut garder. Explorer, planifier, coder, valider — et corriger à l’étape du plan, car c’est là qu’une correction vous coûte une minute plutôt qu’un après-midi. Tout le reste de ce que nous avons vu aujourd’hui existe pour faire mieux tourner ce workflow.\n\nLes commandes de mémoire le gardent concentré. CLAUDE.md contient vos règles. Les compétences contiennent vos méthodes.\n\nLe MCP atteint vos données. Les hooks garantissent les règles qui doivent toujours tenir. Et tout cela vit dans un dossier sur votre ordinateur : rien n’est perdu quand une conversation se termine."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1",
+      "title": "La conversation répond. Un agent agit.",
+      "cap": "Un agent lit et comprend la base de code, modifie des fichiers dans tout le projet, exécute des commandes du terminal, et cherche sur le web — puis décide de la suite.",
+      "teach": "Dans une conversation, vous posez une question et vous recevez du texte, et le reste vous incombe : vous copiez la réponse, vous l’utilisez quelque part, et vous recollez ce qui a mal tourné. Un agent supprime ce transport. Il lit vos fichiers, les modifie, exécute les commandes, vérifie le résultat, et continue jusqu’à ce que le travail soit fait.\n\nC’est le même Claude que vous connaissez dans le navigateur. La différence, c’est qu’il peut agir sur votre ordinateur au lieu de seulement répondre.",
+      "diagram": "diagrams/fr/02-claude-code-101/s3.svg",
+      "videos": [
+        {
+          "id": "fl1DSmwQKKY",
+          "label": "What is Claude Code?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Vous collez un fichier dans une conversation, elle écrit le correctif, vous le recopiez. Que fait un agent différemment ?",
+          "options": [
+            {
+              "t": "Il ouvre, modifie et exécute les fichiers lui-même, puis décide de la suite.",
+              "correct": true
+            },
+            {
+              "t": "Il se souvient du fichier d’une session à l’autre, pour que vous n’ayez pas à le coller deux fois.",
+              "why": "La mémoire est une autre idée. Pensez au copier-coller que vous avez fait dans cette séquence."
+            },
+            {
+              "t": "Il écrit du meilleur code parce qu’il voit davantage du projet.",
+              "why": "C’est bien possible, mais c’est une conséquence. Demandez-vous ce qui change quant à savoir qui déplace le travail."
+            }
+          ]
+        },
+        {
+          "q": "Vous lancez Claude Code dans votre dossier comptabilité. Un collègue demande s’il peut voir le dossier paie juste à côté.",
+          "options": [
+            {
+              "t": "Oui, il peut lire n’importe où sur la machine s’il en a besoin.",
+              "why": "Cela le rendrait inutilisable sur toute machine contenant quoi que ce soit de confidentiel. Il y a une frontière, posée par quelque chose que vous avez fait."
+            },
+            {
+              "t": "Non. Il voit le dossier dans lequel vous l’avez lancé, et ce qui se trouve en dessous.",
+              "correct": true
+            },
+            {
+              "t": "Seulement si la paie est dans le même dépôt.",
+              "why": "La frontière ne tient pas aux dépôts. Pensez à la commande que vous avez tapée pour le lancer."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2",
+      "title": "La boucle agentique",
+      "cap": "Quatre éléments font tourner la boucle : la boucle elle-même, une fenêtre de contexte gérée, des outils qu’il peut appeler, et des permissions que vous contrôlez. C’est cette combinaison qui manque à une fenêtre de conversation.",
+      "teach": "« En dessous, il tourne en cycle. Vous donnez une instruction. Il rassemble le contexte dont il a besoin.\n\nPuis il agit : il modifie des fichiers, exécute des commandes, cherche. Puis il vérifie son propre travail, et si le résultat n’est pas bon, il recommence. Quand il a fini, il s’arrête et vous attend.\n\nVous pouvez intervenir à n’importe quel moment du parcours : ajouter un fichier, corriger quelque chose, ou l’envoyer dans une autre direction. » (Quatre éléments font tourner la boucle : la boucle elle-même, une mémoire gérée, les outils qu’il peut appeler, et les permissions que vous contrôlez — c’est cette combinaison qui manque à une conversation.)",
+      "diagram": "diagrams/fr/02-claude-code-101/s4.svg",
+      "videos": [
+        {
+          "id": "6bs5b4FltCU",
+          "label": "How Claude Code Works"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Trois minutes après le début d’une tâche, il part dans une direction que vous ne voulez pas. Que pouvez-vous faire ?",
+          "options": [
+            {
+              "t": "L’arrêter et recommencer avec un meilleur prompt.",
+              "why": "Cela fonctionne et jette le contexte qu’il a bâti. Il y a moins radical."
+            },
+            {
+              "t": "Attendre qu’il finisse, puis corriger le résultat.",
+              "why": "Vous le pouvez, et vous paieriez un travail que vous savez déjà mauvais. Il existe une option plus précoce."
+            },
+            {
+              "t": "L’interrompre et l’orienter, à n’importe quel moment de la boucle.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Quelle étape de la boucle suppose-t-on le plus souvent absente ?",
+          "options": [
+            {
+              "t": "Vérifier. On l’imagine agir puis s’arrêter.",
+              "correct": true
+            },
+            {
+              "t": "Agir. On s’attend à ce qu’il suggère plutôt qu’il fasse.",
+              "why": "Cette confusion relève de la question conversation-contre-agent, et elle se dissipe généralement en premier."
+            },
+            {
+              "t": "Rassembler. On croit qu’il travaille à partir du seul prompt.",
+              "why": "Certains le croient, et ils s’en aperçoivent vite quand il se met à lire des fichiers. Il y a une étape plus tardive, bien plus facile à manquer entièrement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3",
+      "title": "Cinq endroits où il tourne",
+      "cap": "Vous voulez la pointe ? Le terminal. Vous le voulez dans votre éditeur ? VS Code ou JetBrains. Vous le voulez au travail pendant que vous faites autre chose ? L’application de bureau. Vous travaillez à distance depuis un dépôt GitHub ? Le web.",
+      "teach": "Vous pouvez faire tourner Claude Code à cinq endroits : dans le terminal, dans un éditeur comme VS Code ou JetBrains, dans l’application de bureau, et sur le web. Le terminal reçoit les nouveautés en premier. L’application de bureau est le point de départ le plus facile, car elle tourne en arrière-plan pendant que vous faites autre chose.\n\nLa règle qui compte est la même partout : vous le lancez dans un dossier, et il voit ce dossier et tout ce qu’il contient, et rien au-dessus.",
+      "diagram": "diagrams/fr/02-claude-code-101/s5.svg",
+      "videos": [
+        {
+          "id": "0kILa02vKuI",
+          "label": "Installing Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Quelqu’un dit que le terminal l’intimide. Quel est le bon geste ?",
+          "options": [
+            {
+              "t": "Le faire démarrer sur l’application de bureau ou VS Code.",
+              "correct": true
+            },
+            {
+              "t": "Le guider quand même dans le terminal. Ce sont dix minutes d’inconfort.",
+              "why": "C’est aussi là qu’un bon nombre de gens décident discrètement que ce n’est pas pour eux, et cela n’a rien de nécessaire."
+            },
+            {
+              "t": "Expliquer que la version terminal est la seule complète.",
+              "why": "Elle ne l’est pas, et dire à quelqu’un que la porte facile est la moindre garantit qu’il aura l’impression de rater quelque chose."
+            }
+          ]
+        },
+        {
+          "q": "Un cabinet réglementé dit que rien ne peut être installé sur les machines du personnel. Quelle est la réponse utile ?",
+          "options": [
+            {
+              "t": "Alors ce n’est pas viable pour eux.",
+              "why": "Il y a un plancher et un plafond à la façon dont cela peut tourner, et aucun des deux n’implique une installation sur un portable."
+            },
+            {
+              "t": "La version web ne demande aucune installation, et un modèle auto-hébergé est l’autre extrémité de la gamme.",
+              "correct": true
+            },
+            {
+              "t": "Il leur faudra d’abord un accord entreprise.",
+              "why": "C’est peut-être la suite, mais cela répond à une question commerciale plutôt qu’à la question technique posée."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4",
+      "title": "Une touche règle le degré de surveillance",
+      "cap": "Le mode plan est l’endroit sûr pour commencer tout ce qui est complexe : il lit votre code, pose des questions de clarification, et vous rend un plan avant qu’un seul fichier ne change.",
+      "teach": "Une touche, Maj + Tab, règle le degré auquel vous le surveillez travailler. Il y a trois réglages. Le mode validation vous demande avant chaque modification ; c’est par là qu’on commence, car le regarder demander est la façon de construire la confiance.\n\nL’acceptation automatique laisse les modifications se faire sans demander, pour quand vous avez vu le motif assez souvent. Et le mode plan est en lecture seule : il étudie les fichiers, pose ses questions, et vous donne un plan. Rien ne change tant que vous n’avez pas approuvé le plan.",
+      "diagram": "diagrams/fr/02-claude-code-101/s6.svg",
+      "videos": [
+        {
+          "id": "gbetp6D7J_Q",
+          "label": "Your first Claude Code prompt"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Vous voulez qu’il détermine comment restructurer un module, mais rien ne doit changer avant que vous ayez lu la proposition. Quel mode ?",
+          "options": [
+            {
+              "t": "L’acceptation automatique, puis relire le diff à la fin.",
+              "why": "À ce moment-là, les modifications ont déjà été faites. Vous demandiez que rien ne change avant lecture."
+            },
+            {
+              "t": "La validation, pour pouvoir refuser chaque modification au fil de l’eau.",
+              "why": "Cela fonctionne et fait de vous le goulot d’étranglement sur chaque modification. Il existe un mode qui vous donne une décision au lieu de trente."
+            },
+            {
+              "t": "Le mode plan.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Un débutant est inquiet à l’idée de céder le contrôle. Par où commencer, et pourquoi ?",
+          "options": [
+            {
+              "t": "La validation, parce que la confiance se construit en le regardant travailler d’abord.",
+              "correct": true
+            },
+            {
+              "t": "Le mode plan, parce que rien ne peut changer.",
+              "why": "Sûr, et ils ne le voient jamais rien faire : ils n’apprennent donc rien sur la qualité de son travail."
+            },
+            {
+              "t": "L’acceptation automatique, pour qu’ils voient tout ce qu’il sait faire et se détendent.",
+              "why": "Montrer à une personne inquiète le mode le moins réversible en premier tend à confirmer la peur plutôt qu’à l’apaiser."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Leçon 5, si vous ne retenez qu’une chose",
+      "title": "Explorer → Planifier → Coder → Valider",
+      "cap": "Rendez « correct » explicite (des critères de réussite), donnez-lui des outils et une suite de tests contre laquelle se vérifier, et s’il bute sans cesse sur le même mur, dites-lui d’enregistrer le correctif dans CLAUDE.md .",
+      "teach": "Si vous ne gardez qu’une chose d’aujourd’hui, gardez ce workflow. Il compte quatre étapes. D’abord, explorer : il lit ce qui est déjà là.\n\nEnsuite, planifier : il écrit ce qu’il compte faire, et vous corrigez ce plan. C’est l’endroit bon marché pour attraper une erreur : changer un plan prend une minute, changer un travail terminé prend un après-midi. Troisièmement, il fait le travail, en va-et-vient avec vous.\n\nQuatrièmement, vous relisez le résultat et vous le validez. La plupart des gens sautent directement à la troisième étape, puis passent leur temps à corriger la production.",
+      "diagram": "diagrams/fr/02-claude-code-101/s7.svg",
+      "videos": [
+        {
+          "id": "xJQuF02NAK8",
+          "label": "The Explore → Plan → Code → Commit workflow in Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Quelle étape sautée coûte le plus cher, et pourquoi ?",
+          "options": [
+            {
+              "t": "Valider, parce qu’un travail non relu atteint le dépôt.",
+              "why": "Grave, et c’est un problème de discipline plutôt que l’étape que l’on saute par habitude."
+            },
+            {
+              "t": "Explorer, parce qu’il démarre sans connaître la base de code.",
+              "why": "Réel, et cela se signale généralement tôt et à peu de frais. Demandez-vous de quelle erreur vous vous apercevez en dernier."
+            },
+            {
+              "t": "Planifier, parce que corriger un plan prend des minutes et corriger un travail terminé prend un après-midi.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Qu’est-ce qui rend un plan digne du temps qu’il coûte ?",
+          "options": [
+            {
+              "t": "Vous pouvez confronter le résultat au plan et voir s’il a fait le travail.",
+              "correct": true
+            },
+            {
+              "t": "Cela rend le travail plus rapide à écrire une fois lancé.",
+              "why": "Parfois. Mais l’économie vient de ce que vous évitez plutôt que de ce que vous accélérez."
+            },
+            {
+              "t": "Cela l’empêche de toucher des fichiers que vous ne visiez pas.",
+              "why": "C’est à cela que sert un mode de permissions. Un plan fait autre chose."
+            },
+            {
+              "t": "Cela donne à l’équipe une trace de ce qui a été convenu.",
+              "why": "Utile, et ce n’est pas ce qui vous économise l’après-midi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Leçon 6",
+      "title": "Le contexte est une mémoire de travail, et il se remplit",
+      "cap": "Dépensez moins de contexte : soyez précis (les prompts vagues coûtent plus, pas moins), désactivez les serveurs MCP que vous n’utilisez pas, et confiez l’exploration à un sous-agent qui ne rapporte que la réponse.",
+      "teach": "Claude a une mémoire de travail, et elle se remplit. Chaque fichier qu’il lit et chaque commande qu’il exécute y prend de la place. Trois commandes gèrent cette place. /compact résume la conversation jusqu’ici : vous gardez le fil de la tâche tout en libérant de la place — à utiliser donc au milieu d’un long travail. /clear vide complètement la mémoire, pour quand vous commencez quelque chose sans rapport. /context vous montre ce qui prend la place.\n\nTout ce que vous voulez lui faire garder au-delà de la session va dans un fichier, et ce fichier est l’écran suivant.",
+      "diagram": "diagrams/fr/02-claude-code-101/s8.svg",
+      "videos": [
+        {
+          "id": "eW3oTyfeWZ0",
+          "label": "Context Management in Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Vous avez terminé une fonctionnalité et voulez commencer quelque chose sans rapport. Quelle commande, et pourquoi ?",
+          "options": [
+            {
+              "t": "/compact, pour garder les parties utiles et jeter le reste.",
+              "why": "Compact garde le fil vivant sous une forme plus courte. Vous n’avez aucun usage de ce fil."
+            },
+            {
+              "t": "/clear, parce que rien de cette conversation ne s’applique au travail suivant.",
+              "correct": true
+            },
+            {
+              "t": "/context, pour voir d’abord ce qui vaut la peine d’être gardé.",
+              "why": "Cela vous dit ce qu’il y a dedans. Cela n’y change rien."
+            }
+          ]
+        },
+        {
+          "q": "Lequel de ces choix consomme PLUS de contexte, et non moins ?",
+          "options": [
+            {
+              "t": "Un long prompt avec les chemins de fichiers explicités.",
+              "why": "C’est plus à lire d’emblée et cela épargne la recherche. Demandez-vous ce qu’un prompt vague l’oblige à faire."
+            },
+            {
+              "t": "Joindre les deux fichiers dont il a besoin.",
+              "why": "Vous payez pour les fichiers, et seulement ceux qui comptent. Comparez avec le fait de le faire chasser."
+            },
+            {
+              "t": "Un prompt court et vague.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Leçon 7",
+      "title": "Un œil neuf avant de pousser",
+      "cap": "Gardez le relecteur en lecture seule : il signale les problèmes, il ne modifie pas. Versionnez-le dans le dépôt pour que toute l’équipe relise de la même façon.",
+      "teach": "« Le Claude qui a fait le travail n’en est pas bon juge, pour la même raison que vous n’êtes pas bon juge de vos propres écrits : c’est lui qui a fait les choix, il les défend donc. Avant que le travail ne sorte, un second Claude le lit sans aucun souvenir de la façon dont il a été fait. Il peut montrer des problèmes du doigt, mais il ne peut rien changer.\n\nEnsuite, une commande enregistre le travail et le poste pour relecture. Et vous pouvez revenir à ce travail plus tard et repartir de là où vous vous étiez arrêté. » (Adaptez à leur monde : c’est le même réflexe qu’un collègue qui vérifie votre travail avant qu’il ne parte chez le client.)",
+      "diagram": "diagrams/fr/02-claude-code-101/s9.svg",
+      "videos": [
+        {
+          "id": "RKsADl0ZC3Y",
+          "label": "Introducing Code Review"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Pourquoi confier la relecture à un sous-agent plutôt que de la demander à la session qui a écrit le code ?",
+          "options": [
+            {
+              "t": "Celle qui a fait le travail porte son propre biais à son sujet.",
+              "correct": true
+            },
+            {
+              "t": "Le contexte de la session principale est trop plein à ce stade.",
+              "why": "Souvent vrai, et c’est une commodité. Il existe une raison qui tiendrait même avec un contexte vide."
+            },
+            {
+              "t": "C’est plus rapide, parce que la relecture tourne en parallèle.",
+              "why": "La vitesse n’est pas l’argument. Demandez-vous à qui l’on demande de juger le travail de qui."
+            }
+          ]
+        },
+        {
+          "q": "Que doit-on autoriser au relecteur ?",
+          "options": [
+            {
+              "t": "Corriger les problèmes qu’il trouve, pour que le travail revienne propre.",
+              "why": "Il aurait alors écrit du code et relu son propre code, c’est-à-dire précisément la situation que le relecteur devait éviter."
+            },
+            {
+              "t": "Signaler ce qu’il trouve. En lecture seule.",
+              "correct": true
+            },
+            {
+              "t": "Corriger tout ce qui est mécanique, et signaler tout ce qui relève du jugement.",
+              "why": "Cela sonne raisonnable, et la ligne entre mécanique et jugement est précisément ce qu’on ne peut lui faire confiance de tracer sur son propre travail."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Leçon 8",
+      "title": "CLAUDE.md, une mémoire qui survit à la session",
+      "cap": "C’est un script d’intégration pour votre base de code, ajouté à chaque prompt. Versionnez-le pour que l’équipe partage une source de vérité unique, gardez-le compact et limité au nécessaire.",
+      "teach": "C’est le fichier le plus important de tout le système. CLAUDE.md est un fichier en français courant qui contient les règles de votre travail : ce qu’est le projet, comment vous voulez que les choses soient faites, ce qu’il ne faut jamais faire. Claude le lit au début de chaque session.\n\nAinsi, au lieu de réexpliquer vos règles à chaque fois, il démarre en les connaissant déjà. Et comme c’est un fichier ordinaire, vous pouvez le partager : mettez-le dans le dossier de projet partagé et toute l’équipe travaille selon les mêmes règles.",
+      "diagram": "diagrams/fr/02-claude-code-101/s10.svg",
+      "videos": [
+        {
+          "id": "O0FGCxkHM-U",
+          "label": "The CLAUDE.md file"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Vous mettez en place CLAUDE.md pour un projet que vous connaissez bien. Comment le commencer ?",
+          "options": [
+            {
+              "t": "Écrire tout ce qui compte à propos du projet pendant que vous vous en souvenez.",
+              "why": "Vous obtenez un long fichier, dont l’essentiel n’a jamais posé problème, et les parties qui comptent s’y perdent."
+            },
+            {
+              "t": "Le laisser vide, et ajouter les choses que vous vous surprenez à corriger.",
+              "correct": true
+            },
+            {
+              "t": "Y copier le README, puisqu’il décrit déjà le projet.",
+              "why": "Un README explique le projet à une personne. Ce fichier existe pour mettre fin à un ensemble précis de corrections répétées."
+            }
+          ]
+        },
+        {
+          "q": "Quelle est la différence pratique entre mettre une règle dans CLAUDE.md et la mettre dans une compétence ?",
+          "options": [
+            {
+              "t": "CLAUDE.md est partagé avec l’équipe ; une compétence est personnelle.",
+              "why": "L’un comme l’autre peut être l’un ou l’autre. La différence porte sur le moment où ils sont lus."
+            },
+            {
+              "t": "CLAUDE.md contient des faits ; une compétence contient des instructions.",
+              "why": "Les deux contiennent des instructions. Pensez au moment où chacun arrive."
+            },
+            {
+              "t": "CLAUDE.md est lu à chaque session ; une compétence ne se charge que lorsqu’elle est pertinente.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Leçon 9",
+      "title": "Les sous-agents : envoyez ailleurs le gros du travail",
+      "cap": "« Où sont les points d’accès d’authentification ? » : le sous-agent lit la moitié de la base de code pour le découvrir, mais seule la réponse revient. Le chemin parcouru n’encombre jamais votre fenêtre principale.",
+      "teach": "« Certains travaux exigent beaucoup de fouille : parcourir la moitié des fichiers pour trouver une seule chose. Si votre session principale fait toute cette lecture, sa mémoire se remplit de matière dont vous n’avez pas besoin. Un sous-agent règle cela.\n\nC’est un assistant qui fait la fouille dans sa propre mémoire séparée et ne renvoie que la réponse, si bien que votre session principale reste concentrée sur la tâche. Vous en créez un simplement en le demandant ; Claude écrit la configuration pour vous. » (Formulation simple : c’est comme demander à un documentaliste « va me trouver ceci » et obtenir une réponse d’un paragraphe, pas ses vingt onglets ouverts.)",
+      "diagram": "diagrams/fr/02-claude-code-101/s11.svg",
+      "videos": [
+        {
+          "id": "jKErNxuxPXg",
+          "label": "What are subagents?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Que vous apporte réellement un sous-agent ?",
+          "options": [
+            {
+              "t": "Il tourne pendant que vous continuez à travailler dans la session principale.",
+              "why": "Pratique, et ce n’est pas sa raison d’être. Demandez-vous à quoi ressemble votre session principale ensuite."
+            },
+            {
+              "t": "Il peut faire des choses que la session principale ne peut pas.",
+              "why": "Même capacité, mêmes outils. Le gain porte sur l’endroit où se fait le travail plutôt que sur ce qui est possible."
+            },
+            {
+              "t": "L’exploration se fait dans son contexte, et seule la réponse revient.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Quel travail convient le mieux à un sous-agent ?",
+          "options": [
+            {
+              "t": "Lire trente fichiers pour déterminer où un comportement est défini.",
+              "correct": true
+            },
+            {
+              "t": "Tout ce que vous voulez voir bien fait.",
+              "why": "Ce n’est pas un réglage de qualité. Il s’agit du travail qui, sinon, encombrerait votre session."
+            },
+            {
+              "t": "Faire la modification que vous avez déjà décidée.",
+              "why": "Rien à isoler. Vous enverriez au loin un travail d’une ligne et attendriez son retour."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Leçon 10",
+      "title": "Les compétences : de la capacité chargée seulement au besoin",
+      "cap": "C’est le gain par rapport à tout charger d’emblée : les compétences gardent la fenêtre de contexte sobre. (Le cours renvoie à une « Introduction aux compétences d’agent » dédiée pour approfondir.)",
+      "teach": "Une compétence est un jeu d’instructions pour une tâche répétable : les étapes, les règles, le format, écrits une fois. Quand cette tâche se présente, Claude charge les instructions et fait le travail à votre manière. Le reste du temps, la compétence ne coûte presque rien, car Claude ne retient que son nom et une description d’une ligne.\n\nVous avez déjà utilisé les compétences intégrées chaque fois qu’il vous a fabriqué un tableur ou un document. Celles qui ont de la valeur sont celles que vous écrivez vous-même, en français courant, sur votre propre travail.",
+      "diagram": "diagrams/fr/02-claude-code-101/s12.svg",
+      "videos": [
+        {
+          "id": "bjdBVZa66oU",
+          "label": "What are skills?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Quand Claude lit-il les instructions complètes d’une compétence ?",
+          "options": [
+            {
+              "t": "Quand vous nommez la compétence dans votre prompt.",
+              "why": "Vous le pouvez, et il n’en a pas besoin. C’est autre chose qui décide."
+            },
+            {
+              "t": "Au démarrage, avec tout ce dont il pourrait avoir besoin.",
+              "why": "C’est le fonctionnement de ce qui figure sur l’écran suivant, et c’est le coût que cette conception évite."
+            },
+            {
+              "t": "Dès que votre demande correspond à sa description d’une ligne.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Pour une équipe non technique, quelle partie d’une compétence est l’essentiel ?",
+          "options": [
+            {
+              "t": "Le fichier en français courant qui contient la méthode qu’ils suivent déjà.",
+              "correct": true
+            },
+            {
+              "t": "Le chargement progressif qui garde le contexte réduit.",
+              "why": "C’est la raison technique pour laquelle cela fonctionne bien. Ce n’est pas la raison pour laquelle cela vaut leur temps."
+            },
+            {
+              "t": "Le fait qu’elle puisse être partagée dans toute l’équipe.",
+              "why": "Le partage compte, et seulement une fois qu’il y a quelque chose qui mérite d’être partagé. Demandez-vous ce qu’est cette chose."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Leçon 11",
+      "title": "Le MCP : un pont vers tout ce qui est hors du code",
+      "cap": "Attention au coût : chaque serveur charge ses définitions d’outils dans le contexte, utilisé ou non. Lancez /mcp et désactivez ce dont vous ne vous servez pas — un outil en ligne de commande comme gh , ou une compétence, est souvent plus sobre.",
+      "teach": "L’essentiel de ce que Claude a besoin de savoir ne vit pas dans un seul dossier. Cela vit dans votre messagerie, votre outil de suivi de projet, vos bases de données. Le MCP est la norme qui relie tout cela, pour que Claude travaille avec vos données réelles plutôt qu’avec ce que vous collez.\n\nUne chose pratique à savoir : chaque connexion occupe un peu de sa mémoire de travail, que vous vous en serviez ou non ; désactivez donc celles dont vous n’avez pas besoin.",
+      "diagram": "diagrams/fr/02-claude-code-101/s13.svg",
+      "videos": [
+        {
+          "id": "kkBFmwkDzdo",
+          "label": "MCP in Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Vous ajoutez quatre serveurs MCP et vous en utilisez un. Qu’est-ce que cela coûte ?",
+          "options": [
+            {
+              "t": "Du temps de démarrage, mais pas de contexte.",
+              "why": "Le démarrage est la moindre moitié. Demandez-vous ce que ces définitions occupent une fois chargées."
+            },
+            {
+              "t": "Rien tant que chacun n’est pas appelé.",
+              "why": "C’est le comportement d’une compétence. Le MCP fait le compromis inverse."
+            },
+            {
+              "t": "Les quatre chargent leurs définitions d’outils dans le contexte, que vous vous en serviez ou non.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Un client demande où vont ses données une fois que le MCP relie Claude à ses systèmes.",
+          "options": [
+            {
+              "t": "Cela dépend de l’installation, et l’éventail va du web à un modèle à l’intérieur de leur propre réseau.",
+              "correct": true
+            },
+            {
+              "t": "Les serveurs MCP tournent en local, les données restent donc sur leur machine.",
+              "why": "Le serveur tourne en local. Ce qu’il renvoie voyage quand même là où se trouve le modèle."
+            },
+            {
+              "t": "Par l’API d’Anthropic, comme tout le reste.",
+              "why": "Cela décrit une configuration parmi d’autres et l’énonce comme s’il n’y avait pas le choix, ce qui clôt la conversation qu’ils cherchaient à ouvrir."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Leçon 12",
+      "title": "Les hooks : ce qui doit arriver, toujours",
+      "cap": "Formatage automatique à chaque modification, journalisation de chaque commande pour la conformité, blocage des écritures en production. Si quelque chose doit arriver à chaque fois sans faute, ne le mettez pas dans un prompt, mettez-le dans un hook.",
+      "teach": "« Tout le reste de cette séance fonctionne sur demande : vous demandez quelque chose, et Claude le fait généralement. Un hook, c’est différent. Un hook est une règle qui s’exécute automatiquement, à chaque fois, sans exception.\n\nPar exemple : formater chaque fichier après enregistrement, journaliser chaque commande pour la piste d’audit, bloquer une action dangereuse avant son exécution. Le test est simple. Si une règle doit tenir à chaque fois sans faute, ne la mettez pas dans un prompt, mettez-la dans un hook. » (Pour ces apprenants, le titre est la garantie, pas la syntaxe : certaines règles sont trop importantes pour être laissées au « généralement ».)",
+      "diagram": "diagrams/fr/02-claude-code-101/s14.svg",
+      "videos": [
+        {
+          "id": "IkaPHiMDazM",
+          "label": "Hooks in Claude Code"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Votre équipe ne doit jamais valider sans lancer le linter. Où cela a-t-il sa place ?",
+          "options": [
+            {
+              "t": "Dans une compétence, pour qu’elle se charge dès qu’une validation est en jeu.",
+              "why": "Une compétence laisse encore à Claude la décision de charger. Vous avez dit jamais."
+            },
+            {
+              "t": "Dans CLAUDE.md, pour que ce soit lu à chaque session.",
+              "why": "Ce sera lu, et lire n’est pas exécuter. « Jamais » exige plus fort qu’une instruction."
+            },
+            {
+              "t": "Dans un hook.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Qu’est-ce qui décide du moment où un hook s’exécute ?",
+          "options": [
+            {
+              "t": "Un point fixe du cycle de vie : à la soumission, avant un outil, après un outil, à l’arrêt.",
+              "correct": true
+            },
+            {
+              "t": "Le mode de permissions dans lequel vous êtes.",
+              "why": "Les modes de permissions régissent ce sur quoi on vous consulte. Les hooks se déclenchent quoi qu’il arrive."
+            },
+            {
+              "t": "Claude, quand il juge le hook pertinent.",
+              "why": "C’est ainsi qu’une compétence s’active. Un hook n’a pas droit à un avis."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "Claude Code 101"
+}

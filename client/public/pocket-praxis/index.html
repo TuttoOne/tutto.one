@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pocket Praxis</title>
+<meta name="description" content="The Praxis course decks, one step at a time, on a phone.">
+<meta name="theme-color" content="#FAF9F6">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="praxis.css">
+<link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="bar">
+    <div class="bar-row">
+      <!-- Persistent chrome, so both live here rather than being painted per
+           page. Back is contextual and goes up one level; home is absolute. -->
+      <button class="bar-icon" id="home" type="button" aria-label="Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3.5 11.5 12 4.5l8.5 7"/>
+          <path d="M5.75 9.75V19.5h12.5V9.75"/>
+          <path d="M9.75 19.5v-5.25h4.5v5.25"/>
+        </svg>
+      </button>
+      <button class="bar-back" id="back" hidden>&#8592; <span class="bl">Back</span></button>
+      <span id="bar-left"></span>
+      <span id="bar-right"></span>
+      <!-- Both languages named, rather than one button showing the other one:
+           "FR" alone cannot say whether it means you are in French or that you
+           would like to be. Labels are painted from the string table like
+           everything else, so this is only the shape. -->
+      <div class="lang" id="lang" role="group">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="fr">FR</button>
+      </div>
+      <!-- Only once there is an account to go to. Until then the offer to make
+           one is a full-width button on the home screen instead. -->
+      <button class="bar-icon" id="who" type="button" aria-label="Your account" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8.5" r="3.5"/>
+          <path d="M4.75 20.25a7.25 7.25 0 0 1 14.5 0"/>
+        </svg>
+      </button>
+    </div>
+    <div class="bar-title" id="bar-title"></div>
+    <div class="track"><i id="bar-track"></i></div>
+  </header>
+
+  <main class="screen" id="screen" tabindex="-1"></main>
+
+  <footer class="foot" id="foot"></footer>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

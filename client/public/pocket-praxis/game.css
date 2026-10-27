@@ -1,0 +1,429 @@
+/* Pocket Praxis — the mobile layer over praxis.css.
+ *
+ * praxis.css is a print and desktop document system: it has no breakpoints and
+ * its grids are fixed columns. Everything phone-shaped lives here, and nothing
+ * here redefines a design-system token.
+ *
+ * House rule from praxis-design-system/SKILL.md: no animations, gradients or
+ * drop shadows, and "this brand doesn't pop". Points and streaks are markup and
+ * copy, not effects. Flat amber, no glow, no confetti, no exclamation marks.
+ */
+
+:root {
+  --plato-ink:    #1F1F1F;
+  --plato-cloth:  #FFFFFF;
+  --plato-shade:  #E4DFD6;
+  --plato-amber:  hsl(var(--primary));
+  --plato-skin:   #E8C9A4;
+  --plato-muzzle: #C6A279;
+  --plato-beard:  #CECAC5;
+  --plato-hair:   #928D87;
+
+  --app-w: 430px;
+  --tap: 44px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --plato-ink:   #14100D;
+    --plato-shade: #D4CEC4;
+    --plato-muzzle: #B08F6A;
+    --plato-hair:  #7C7770;
+  }
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: hsl(var(--muted));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overscroll-behavior: contain;
+}
+
+/* ---- the app frame ------------------------------------------------------ */
+.app {
+  width: 100%;
+  max-width: var(--app-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: hsl(var(--background));
+  position: relative;
+  overflow: hidden;
+}
+@media (min-width: 480px) {
+  body { padding: var(--space-6) 0; }
+  .app {
+    height: min(900px, calc(100vh - 6rem));
+    flex: 0 0 auto;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius-xl);
+  }
+}
+
+/* ---- top chrome --------------------------------------------------------- */
+.bar {
+  flex: 0 0 auto;
+  padding: calc(var(--space-4) + env(safe-area-inset-top)) var(--space-5) var(--space-3);
+  border-bottom: 1px solid hsl(var(--border));
+}
+.bar-row {
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3);
+  font-size: var(--text-xs); letter-spacing: var(--tracking-wider);
+  text-transform: uppercase; color: hsl(var(--muted-foreground));
+}
+.bar-row b {
+  color: hsl(var(--foreground)); font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+/* Course names run to "AI Fluency: Framework and Foundations", which wraps the
+   row onto three lines and squeezes the score. The name gives way; the score
+   and the back control keep their space. */
+#bar-left {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+}
+#bar-right { flex: 0 0 auto; white-space: nowrap; }
+.bar-back { flex: 0 0 auto; white-space: nowrap; }
+
+/* Two segments rather than one toggle: the row is uppercase and tiny, and a
+   lone "FR" in it reads as a label of where you are as easily as a way out.
+   Both named, one of them clearly on, and there is nothing to work out.
+   Aligned like .bar-icon rather than on the row's baseline, because the pill's
+   own padding is what sets its height. */
+.lang {
+  flex: 0 0 auto;
+  align-self: center;
+  display: flex;
+  border: 1px solid hsl(var(--border));
+  border-radius: 999px;
+  overflow: hidden;
+}
+.lang button {
+  background: none; border: 0; cursor: pointer;
+  padding: 3px var(--space-2);
+  font: inherit; font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider); text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.4;
+}
+.lang button + button { border-left: 1px solid hsl(var(--border)); }
+.lang button:hover, .lang button:focus-visible { color: hsl(var(--foreground)); }
+/* The state, not a hover: aria-pressed is what the screen reader is told, so
+   drive the paint off the same attribute rather than a parallel class. */
+.lang button[aria-pressed="true"] {
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+  font-weight: var(--weight-semibold);
+}
+
+/* The row is aligned on the baseline, which a button with no text in it does
+   not really have: centre these instead. The padding is a tap target the 20px
+   glyph does not need to grow to fill, and the negative margin keeps it from
+   pushing the row taller than the text already makes it. */
+.bar-icon {
+  flex: 0 0 auto;
+  align-self: center;
+  display: block;
+  background: none; border: 0; cursor: pointer;
+  padding: var(--space-2);
+  margin: calc(var(--space-2) * -1);
+  color: hsl(var(--muted-foreground));
+}
+.bar-icon svg {
+  display: block; width: 20px; height: 20px;
+  fill: none; stroke: currentColor; stroke-width: 1.75;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.bar-icon:hover, .bar-icon:focus-visible { color: hsl(var(--foreground)); }
+.bar-icon[hidden] { display: none; }
+
+/* Home, back, the course name, the score and the account all want the same
+   row, and on a 320px phone they stop fitting once the score reaches four
+   digits — which it does, since the course set is worth a few thousand points.
+   The back control gives up its word: the arrow is the affordance, the label is
+   the least load-bearing part of the row, and it stays in the accessible name
+   so nothing is lost to a screen reader. */
+@media (max-width: 374px) {
+  .bar { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .bar-row { gap: var(--space-2); }
+  .bar-back .bl {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+  /* Four characters and two borders is already the smallest this can honestly
+     be, so it only gives up its side padding. */
+  .lang button { padding-left: 5px; padding-right: 5px; letter-spacing: 0; }
+}
+.bar-back {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font: inherit; color: inherit; letter-spacing: inherit;
+  text-transform: inherit;
+}
+.bar-title {
+  margin: var(--space-2) 0;
+  font-family: var(--font-display); font-weight: var(--weight-bold);
+  font-size: var(--text-base); letter-spacing: var(--tracking-tight);
+}
+.track { height: 4px; background: hsl(var(--muted)); border-radius: 2px; overflow: hidden; }
+.track i { display: block; width: 0; height: 100%; background: hsl(var(--primary)); }
+
+/* ---- scrolling body ----------------------------------------------------- */
+.screen {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-5) var(--space-5) var(--space-6);
+}
+.foot {
+  flex: 0 0 auto;
+  padding: var(--space-4) var(--space-5) calc(var(--space-4) + env(safe-area-inset-bottom));
+  border-top: 1px solid hsl(var(--border));
+}
+.foot:empty { display: none; }
+
+/* ---- Plato ---------------------------------------------------------------
+   The pointer is a 624x624 video of a black silhouette on a white card, and the
+   dog occupies only a 543x355 window of that square (x29,y107).
+
+   The white is cut out a frame at a time in JS — see Pointer in game.js, which
+   also holds the window's measurements and the reasoning. What that leaves is
+   a canvas with a transparent dog on it, in whatever colour the block is
+   setting text: it needs no particular surface behind it, and no dark mode of
+   its own. Nothing here should go back to matching a colour to the clip, which
+   is what it did before, and which held on a desktop and not on a phone.
+
+   The video keeps rendering as the source of those frames. It is only hidden,
+   not display:none and not visibility:hidden, because a browser that thinks
+   nothing is showing a video stops giving it frames to show. */
+.plato {
+  --plato-w: 62px;
+  width: var(--plato-w);
+  flex: 0 0 var(--plato-w);
+  height: calc(var(--plato-w) * 355 / 543);
+  position: relative;
+  overflow: hidden;
+  /* The tutto.one amber, the same orange as the site mark. */
+  color: hsl(var(--primary));
+}
+.plato video, .plato canvas {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+.plato canvas { left: 0; top: 0; width: 100%; height: 100%; }
+/* Cropped to the window, for the one case where the cut-out could not be set
+   up and the clip has to stand in for itself — the old look, card and all,
+   rather than a gap where the dog was. */
+.plato video {
+  left: calc(var(--plato-w) * -29 / 543);
+  top: calc(var(--plato-w) * -107 / 543);
+  width: calc(var(--plato-w) * 624 / 543);
+  height: calc(var(--plato-w) * 624 / 543);
+}
+.plato.keyed video { opacity: 0; }
+.plato-lg { --plato-w: 108px; margin: 0 auto var(--space-4); }
+
+/* ---- the masthead ------------------------------------------------------- */
+/* The character and whatever stands beside it, above the page proper.
+
+   This was a white band, and the bar with it, because the clip carried a white
+   card that no browser would knock out for us and the surface under it had to
+   be the colour that card already was. The card is cut out for real now (see
+   .plato), so the band has nothing left to hide and the app runs one colour
+   from the bar down — its own warm off-white, which is what the rest of the
+   design system expects. The break to the page proper is the gap below.
+
+   The bar still gives up its border: the progress track already closes it, and
+   two lines that close together would read as a boundary in the wrong place. */
+.top { margin: 0 0 var(--space-8); }
+.top > :last-child { margin-bottom: 0; }
+.bar { border-bottom: 0; }
+
+.speech { display: flex; gap: var(--space-4); align-items: center; margin-bottom: var(--space-5); }
+.speech .said { flex: 1; min-width: 0; }
+.speech h2 {
+  font-size: var(--text-xl); line-height: var(--leading-tight);
+  margin: 0 0 var(--space-2); letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+.speech h2:last-child { margin-bottom: 0; }
+.speech p { margin: 0; font-size: var(--text-sm); color: hsl(var(--muted-foreground)); }
+
+.teach { font-size: var(--text-base); line-height: var(--leading-relaxed); margin: 0 0 var(--space-5); }
+
+/* ---- buttons ------------------------------------------------------------ */
+.btn-lg {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; min-height: var(--tap);
+  padding: var(--space-3) var(--space-5);
+  border: 0; border-radius: var(--radius);
+  background: hsl(var(--foreground)); color: hsl(var(--background));
+  font-family: var(--font-sans); font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+}
+.btn-lg[disabled] { opacity: .4; cursor: default; }
+.btn-lg .arr { opacity: .6; }
+
+.opt {
+  display: block; width: 100%; text-align: left;
+  min-height: var(--tap);
+  margin-bottom: var(--space-3);
+  padding: var(--space-4);
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  font-family: var(--font-sans); font-size: var(--text-sm);
+  line-height: var(--leading-snug); color: hsl(var(--foreground));
+  cursor: pointer;
+}
+/* The option they chose is marked as theirs, not as wrong, and the correct
+   answer stays hidden: the question gets re-offered, so revealing it here would
+   end the thinking rather than restart it. */
+.opt.picked {
+  border-color: hsl(var(--muted-foreground));
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+}
+.opt.ok { border-color: hsl(var(--primary)); border-width: 2px; padding: calc(var(--space-4) - 1px); }
+.opt[disabled] { cursor: default; }
+.opt .k {
+  display: inline-block; width: 1.4em;
+  font-weight: var(--weight-bold); color: hsl(var(--muted-foreground));
+}
+
+/* The offer to make an account, signed out, at the top of the home screen.
+   It used to sit under the course list, which on a phone is below the fold on
+   every screen size we have. Spaced off the character below it so the two do
+   not read as one block. */
+.acct-top { margin-bottom: var(--space-5); }
+
+.q { font-size: var(--text-lg); line-height: var(--leading-snug); margin: 0 0 var(--space-5); text-wrap: balance; }
+
+:where(button, a, textarea):focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* ---- diagram ------------------------------------------------------------ */
+/* House rule: diagram content is centred in the viewBox. A pair of boxes set
+   symmetrically about the centre line counts as centred and stays put; a lone
+   element does not, and gets moved. */
+.diagram { margin: 0 0 var(--space-5); overflow-x: auto; }
+.diagram svg { width: 100%; height: auto; display: block; }
+.box       { fill: hsl(var(--card));       stroke: hsl(var(--border));  stroke-width: 1.5; }
+.box-amber { fill: hsl(var(--card));       stroke: hsl(var(--primary)); stroke-width: 2; }
+.box-ink   { fill: hsl(var(--foreground)); }
+.t-band { font: 600 10px var(--font-sans); letter-spacing: .09em; fill: hsl(var(--muted-foreground)); text-transform: uppercase; }
+.t-lbl  { font: 600 14px var(--font-sans); fill: hsl(var(--foreground)); }
+.t-sub  { font: 400 12px var(--font-sans); fill: hsl(var(--muted-foreground)); }
+.t-tiny { font: 400 11px var(--font-sans); fill: hsl(var(--muted-foreground)); }
+.t-mono { font: 400 12px var(--font-mono); fill: hsl(var(--foreground)); }
+.t-white{ font: 600 13px var(--font-sans); fill: hsl(var(--background)); }
+.l-ink   { stroke: hsl(var(--foreground)); fill: none; }
+.l-amber { stroke: hsl(var(--primary));    fill: none; }
+.l-faint { stroke: hsl(var(--border));     fill: none; }
+.s-ink   { fill: hsl(var(--foreground)); }
+.s-amber { fill: hsl(var(--primary)); }
+.s-muted { fill: hsl(var(--muted-foreground)); }
+
+/* ---- video card --------------------------------------------------------- */
+.video {
+  display: flex; align-items: center; gap: var(--space-3);
+  min-height: var(--tap);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid hsl(var(--border)); border-left: 3px solid hsl(var(--primary));
+  border-radius: var(--radius-sm);
+  text-decoration: none; color: inherit;
+  margin-bottom: var(--space-5);
+}
+.video .play {
+  flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%;
+  background: hsl(var(--primary));
+  display: grid; place-items: center;
+}
+.video .play svg { width: 8px; height: 8px; fill: hsl(var(--primary-foreground)); }
+.video .vt { font-size: var(--text-sm); font-weight: var(--weight-medium); line-height: 1.3; }
+.video .vm { font-size: var(--text-xs); color: hsl(var(--muted-foreground)); }
+
+/* ---- verdict ------------------------------------------------------------ */
+.verdict {
+  border-top: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+  padding: var(--space-4) 0; margin: var(--space-5) 0;
+}
+.verdict .vl { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-base); display: block; margin-bottom: var(--space-2); }
+.verdict p { margin: 0; font-size: var(--text-sm); line-height: var(--leading-relaxed); color: hsl(var(--muted-foreground)); }
+
+/* ---- lists -------------------------------------------------------------- */
+.lesson-list { list-style: none; margin: 0; padding: 0; }
+/* Rows are <li> when they are inert and <button> when they can be opened, so
+   this has to match both. A bare `li` selector leaves the buttons unstyled and
+   their contents stretch to fill the row. */
+.lesson-list > * {
+  display: flex; gap: var(--space-4); align-items: center;
+  width: 100%; min-height: var(--tap);
+  padding: var(--space-3) 0;
+  border: 0; border-bottom: 1px solid hsl(var(--border));
+  background: none; text-align: left;
+  font-family: var(--font-sans); font-size: var(--text-sm); color: inherit;
+}
+.lesson-list button.li { cursor: pointer; }
+.lesson-list .n {
+  flex: 0 0 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: var(--text-xs); font-weight: var(--weight-bold);
+  background: hsl(var(--muted)); color: hsl(var(--muted-foreground));
+  font-variant-numeric: tabular-nums;
+}
+.lesson-list .done .n { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+.lesson-list .now .n  { background: hsl(var(--foreground)); color: hsl(var(--background)); }
+.lesson-list .t { flex: 1; line-height: var(--leading-snug); min-width: 0; }
+.lesson-list .locked { opacity: .45; }
+.lesson-list .meta {
+  font-size: var(--text-xs); color: hsl(var(--muted-foreground));
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- stats -------------------------------------------------------------- */
+.stat-row { display: flex; gap: var(--space-3); margin-bottom: var(--space-5); }
+.stat {
+  flex: 1; min-width: 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid hsl(var(--border)); border-radius: var(--radius-sm);
+}
+.stat .v {
+  font-family: var(--font-display); font-weight: var(--weight-black);
+  font-size: var(--text-2xl); line-height: 1; font-variant-numeric: tabular-nums;
+}
+.stat .l {
+  font-size: var(--text-xs); text-transform: uppercase;
+  letter-spacing: var(--tracking-wider); color: hsl(var(--muted-foreground));
+  margin-top: var(--space-1);
+}
+
+/* ---- odds and ends ------------------------------------------------------ */
+.note { font-size: var(--text-sm); color: hsl(var(--muted-foreground)); line-height: var(--leading-relaxed); }
+/* Classes rather than inline style attributes, so the deployment can run a
+   Content-Security-Policy without 'unsafe-inline' on styles. */
+.video-lead { margin-bottom: var(--space-3); }
+
+/* ---- sign-in form ------------------------------------------------------- */
+.field {
+  display: block; width: 100%; box-sizing: border-box;
+  min-height: var(--tap);
+  margin-bottom: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid hsl(var(--border)); border-radius: var(--radius);
+  background: hsl(var(--card)); color: hsl(var(--foreground));
+  font-family: var(--font-sans); font-size: var(--text-base);
+}
+.field::placeholder { color: hsl(var(--muted-foreground)); }
+#code { font-variant-numeric: tabular-nums; letter-spacing: var(--tracking-widest); }
+.speech-done { margin-bottom: var(--space-4); }
+.speech-done .said { text-align: center; }
+.rule { border: 0; border-top: 1px solid hsl(var(--border)); margin: var(--space-5) 0; }
+.link { color: hsl(var(--primary)); font-weight: var(--weight-medium); text-decoration: none; }
+

@@ -1,0 +1,317 @@
+{
+  "id": "08-agent-skills",
+  "title": "Introduction to Agent Skills",
+  "anthropic": "https://anthropic.skilljar.com/introduction-to-agent-skills",
+  "intro": {
+    "title": "Teach Claude Code something once. It remembers when it matters.",
+    "lead": "Six ideas, one per screen. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.",
+    "teach": "Six ideas, one screen each. The whole course is one move: anything you find yourself explaining to Claude over and over, you write down once, and from then on it loads itself the moment it's relevant. I'll show you, then stop and ask where it fits your work."
+  },
+  "close": {
+    "title": "Write it once. Describe it well. Let Claude load it when it fits.",
+    "lead": "A folder and a SKILL.md turn a repeated instruction into automatic, shareable expertise, built lean, placed among the other tools, fixed by its description.",
+    "teach": "If you keep one thing: write your method down once, describe well when it should fire, and let Claude load it when it fits. Everything today was a way to make that durable, sharable, and reliable. The rules that lived in someone's head now live on disk, and they come out the same every time."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1, if you take one thing away",
+      "title": "If you keep explaining it, write it down once",
+      "cap": "Personal skills ( ~/.claude/skills ) follow you across every project; project skills ( .claude/skills ) ship in the repo for the whole team. The rule of thumb: if you find yourself repeating an instruction, that's a skill waiting to be written.",
+      "teach": "This is the idea the whole programme has been building to. The rules your best person carries in their head, written down once, so the work comes out their way every time. That written-down thing is a skill: a folder with a plain-English file in it.\n\nClaude keeps only its one-line description in mind, and the moment your request matches, it pulls in the full instructions. Up to now those rules walked out the door at six o'clock. The skill file pulls them out of the head and onto disk.",
+      "diagram": "diagrams/08-agent-skills/s3.svg",
+      "videos": [
+        {
+          "id": "bjdBVZa66oU",
+          "label": "What are skills?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "A skill, CLAUDE.md and a slash command all hold instructions. What's different about the skill?",
+          "options": [
+            {
+              "t": "It's loaded at startup, so it's always available.",
+              "why": "Its description is. The instructions arrive later, and that timing is the point."
+            },
+            {
+              "t": "It activates itself when your request matches its description.",
+              "correct": true
+            },
+            {
+              "t": "It's the only one that can hold more than a page.",
+              "why": "Length isn't the difference. Think about what makes each one arrive."
+            }
+          ]
+        },
+        {
+          "q": "What tells you something should be a skill?",
+          "options": [
+            {
+              "t": "It involves a step you can't do yourself.",
+              "why": "A skill captures how you already do it. It isn't about capability you lack."
+            },
+            {
+              "t": "It's too long to type each time.",
+              "why": "Length nudges you towards a file, and it doesn't say which kind."
+            },
+            {
+              "t": "You keep repeating the same instruction.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2",
+      "title": "Build one: folder, file, restart",
+      "cap": "Claude loads only names and descriptions at startup, then asks you to confirm before pulling the full skill into context. If two skills share a name, priority decides, so keep names distinct.",
+      "teach": "Building one is three steps: a folder, a file called SKILL.md, restart. The file is plain English, a name, a one-line description of when to use it, then the instructions. You build it just by talking to Claude Code; you don't write the file by hand.\n\nOn restart it reads every skill's name and description, and from then on it matches what you ask against them.",
+      "diagram": "diagrams/08-agent-skills/s4.svg",
+      "videos": [
+        {
+          "id": "Wx6_vjFFyHM",
+          "label": "Creating your first skill"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You've written SKILL.md. Why isn't Claude using it yet?",
+          "options": [
+            {
+              "t": "You haven't restarted.",
+              "correct": true
+            },
+            {
+              "t": "It needs to be committed to the repository.",
+              "why": "That's how you share it, not how you load it."
+            },
+            {
+              "t": "The description isn't specific enough to match.",
+              "why": "A real cause, and there's something more basic to do first."
+            }
+          ]
+        },
+        {
+          "q": "Two skills have the same name. What resolves it?",
+          "options": [
+            {
+              "t": "Whichever was written most recently.",
+              "why": "Nothing here goes by date. There's a fixed order."
+            },
+            {
+              "t": "A priority ladder, and the real advice is to keep names distinct.",
+              "correct": true
+            },
+            {
+              "t": "Claude asks you which one you meant.",
+              "why": "It won't ask. It resolves silently, which is why distinct names matter."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3",
+      "title": "Keep SKILL.md lean, split the rest out",
+      "cap": "allowed-tools fences a skill, say Read, Grep, Glob, Bash only, for read-only or sensitive work. And tell Claude to run a script, not read it: the source never enters context, only the result does.",
+      "teach": "Keep the main file short. Two things are required, the name and the description, and a couple are optional. When a skill grows, you don't cram it into one giant file.\n\nYou split the detail into side files Claude only opens when it actually needs them. And two controls earn their place even for non-technical work: you can fence a skill to read-only with allowed-tools, and you tell Claude to run a script rather than read it, so only the result costs anything, never the source.",
+      "diagram": "diagrams/08-agent-skills/s5.svg",
+      "videos": [
+        {
+          "id": "98KaK_rn5rQ",
+          "label": "Configuration and multi-file skills"
+        }
+      ],
+      "checks": [
+        {
+          "q": "SKILL.md has grown past 500 lines. What now?",
+          "options": [
+            {
+              "t": "Move the detail into supporting files it opens only when needed.",
+              "correct": true
+            },
+            {
+              "t": "Leave it. Length costs nothing once it's loaded.",
+              "why": "It costs context every time it loads, which is exactly what the design avoids."
+            },
+            {
+              "t": "Split it into several skills.",
+              "why": "Sometimes right, and it changes when things trigger. There's a move that keeps one skill."
+            }
+          ]
+        },
+        {
+          "q": "The frontmatter looks like gibberish to a non-technical learner. What do you say?",
+          "options": [
+            {
+              "t": "It's YAML, and it's worth learning the basics.",
+              "why": "It puts a syntax lesson between them and the thing that actually matters."
+            },
+            {
+              "t": "Don't read it. The intelligence lives in the plain-English part.",
+              "correct": true
+            },
+            {
+              "t": "Claude generates it, so you never see it.",
+              "why": "They just did see it, so telling them they won't isn't going to help."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4",
+      "title": "Five tools, five jobs",
+      "cap": "Reach for a skill when knowledge should apply automatically the moment the topic comes up. CLAUDE.md is always-on standards; subagents isolate delegated work; hooks fire on events; MCP brings in outside tools. Most setups use several at once.",
+      "teach": "\"Five ways to tailor Claude Code, and they're not rivals. A skill fires when your request matches it. CLAUDE.md is the always-on house rules.\n\nSubagents are work you hand off to run on its own. Hooks fire on an event, like saving a file. Connectors, MCP, plug in your outside tools.\n\nThe skill is the right reach when the knowledge should apply automatically the moment the topic comes up. Pick by when each one fires.\" (CLAUDE.md is the project's standing rules; the skill is the on-demand method.)",
+      "diagram": "diagrams/08-agent-skills/s6.svg",
+      "videos": [
+        {
+          "id": "IgNN4v0BJdU",
+          "label": "How skills compare to other Claude Code features"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Five customisations, five jobs. Which one is always loaded?",
+          "options": [
+            {
+              "t": "CLAUDE.md.",
+              "correct": true
+            },
+            {
+              "t": "Hooks.",
+              "why": "They fire on an event rather than sitting in context."
+            },
+            {
+              "t": "Skills.",
+              "why": "Only their descriptions are. That's the distinction the whole design turns on."
+            }
+          ]
+        },
+        {
+          "q": "Someone asks whether they need all five to start.",
+          "options": [
+            {
+              "t": "Yes, they work as a system.",
+              "why": "They do compose, and needing all five before you begin is how nobody begins."
+            },
+            {
+              "t": "No. One skill, on one painful task.",
+              "correct": true
+            },
+            {
+              "t": "Start with hooks, since they're the safety layer.",
+              "why": "The most technical of the five is a strange place to begin."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Lesson 5",
+      "title": "Three ways to share, widest reach last",
+      "cap": "One gotcha: subagents start with a clean context, so they don't inherit your skills. List them in a custom agent's skills: field. Built-in agents (Explore, Plan, Verify) can't use skills at all.",
+      "teach": "A skill one person uses is handy. The same skill shared across a team is a standard. Three ways out, by reach.\n\nDrop it in the project folder and everyone who opens that folder has it. Package it as a plugin for anyone to install. Or, for a firm, an admin pushes it to everyone, at top priority, for the rules that aren't optional. This is the upgrade from 'a tool I use' to 'how our firm works'.",
+      "diagram": "diagrams/08-agent-skills/s7.svg",
+      "videos": [
+        {
+          "id": "OCBi3eScNLk",
+          "label": "Sharing skills"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Three ways to share a skill. Which reaches furthest?",
+          "options": [
+            {
+              "t": "Push it through enterprise-managed settings.",
+              "correct": true
+            },
+            {
+              "t": "Commit it to the repository.",
+              "why": "Your team on clone. Wide, and not the widest."
+            },
+            {
+              "t": "Ship it as a plugin.",
+              "why": "That reaches anyone who installs it, and there's one that reaches further inside an organisation."
+            }
+          ]
+        },
+        {
+          "q": "You delegate to a subagent and your skill doesn't fire. Why?",
+          "options": [
+            {
+              "t": "The subagent's model doesn't support skills.",
+              "why": "Nothing about the model is involved. It's about what the subagent starts with."
+            },
+            {
+              "t": "Subagents start clean and don't inherit your skills.",
+              "correct": true
+            },
+            {
+              "t": "Skills only work in the main session by design.",
+              "why": "They work in a subagent, once it knows about them."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Lesson 6",
+      "title": "When it breaks, it's one of five things",
+      "cap": "Test the exact phrases you'd type, \"why is this slow\", \"make this faster\", and add any that fail to the description. That single fix solves most triggering problems. Run claude --debug to see loading errors by name.",
+      "teach": "\"When a skill doesn't fire, don't panic and don't read the code. It's almost always the description: Claude couldn't see the link between what you typed and what the skill says it's for. The fix is to add the exact phrases you'd really use.\n\nTest it the way you'd actually ask, and any wording that fails to trigger, you add to the description. That single fix solves most of it.\" (Echoes Claude 101's slide 5: when it's off, it's almost always fixable, and the fix is context the description didn't carry.)",
+      "diagram": "diagrams/08-agent-skills/s8.svg",
+      "videos": [
+        {
+          "id": "YBa1cwaG7is",
+          "label": "Troubleshooting skills"
+        }
+      ],
+      "checks": [
+        {
+          "q": "A skill isn't triggering. What do you do first?",
+          "options": [
+            {
+              "t": "Run the validator, which catches structure before you debug logic.",
+              "correct": true
+            },
+            {
+              "t": "Check the priority ladder for a name collision.",
+              "why": "Worth checking, and it's one of five possible causes rather than the first move."
+            },
+            {
+              "t": "Rewrite the description with phrases you'd really type.",
+              "why": "The right fix for that symptom, and there's a cheaper step before you diagnose anything."
+            }
+          ]
+        },
+        {
+          "q": "\"What is it doing under the hood?\" Where do you redirect?",
+          "options": [
+            {
+              "t": "The debug output, which shows the loading sequence.",
+              "why": "It reports by name, and sending someone there first teaches them to read logs rather than to write descriptions."
+            },
+            {
+              "t": "The description, which is plain English and is where you change behaviour.",
+              "correct": true
+            },
+            {
+              "t": "The scripts, since that's where the real work happens.",
+              "why": "The scripts do the repeatable part. The behaviour they're asking about is decided elsewhere."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

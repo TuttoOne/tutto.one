@@ -1,0 +1,387 @@
+{
+  "id": "19-measuring-extraction",
+  "title": "Mesurer l’extraction",
+  "anthropic": null,
+  "intro": {
+    "title": "Mesurer l’extraction.",
+    "lead": "Vous allez extraire les mêmes champs de quatre contrats, puis répondre à une question plus difficile : à quelle fréquence était-ce juste ? Pas « est-ce que ça a l’air correct ». Un chiffre.",
+    "teach": "Vous allez extraire les mêmes champs de quatre contrats, puis répondre à une question plus difficile : à quelle fréquence était-ce juste ? Pas « est-ce que ça a l’air correct ». Un chiffre."
+  },
+  "close": {
+    "title": "Écrivez ce qui compte comme correct, et l’évaluation vient toute seule.",
+    "lead": "Un corrigé note l’extraction, là où une valeur est juste. Une grille note le jugement, là où plusieurs sorties pourraient convenir. Ensemble, ils vous permettent de mesurer les deux moitiés du travail. Ni l’un ni l’autre ne mesure ce que fait le second.",
+    "teach": "Un corrigé note l’extraction, là où une valeur est juste. Une grille note le jugement, là où plusieurs sorties pourraient convenir. Ensemble, ils vous permettent de mesurer les deux moitiés du travail. Ni l’un ni l’autre ne mesure ce que fait le second."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Ce sur quoi vous travaillez",
+      "title": "Quatre contrats de services gérés",
+      "cap": "",
+      "teach": "Vingt à trente pages chacun, rédigés comme l’est un vrai contrat fournisseur. Tous les secteurs en signent : droit, comptabilité, services financiers, dommages corporels.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Pourquoi quatre contrats de longueur réelle plutôt qu’un court échantillon ?",
+          "options": [
+            {
+              "t": "Parce que l’exercice prendrait sinon trop peu de temps.",
+              "why": "Remplir l’heure n’est une raison de rien faire."
+            },
+            {
+              "t": "Pour donner au modèle davantage de matière d’entraînement.",
+              "why": "Rien n’est entraîné ici. Demandez-vous ce que vous cherchez à découvrir."
+            },
+            {
+              "t": "Parce qu’un taux exige plus d’un cas, et que les vrais documents échouent d’une manière que les échantillons ignorent.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Exercice 1 · 15 minutes",
+      "title": "Terminez le schéma",
+      "cap": "",
+      "teach": "Un schéma est la définition formelle des données que vous voulez obtenir. Trois choses pour chaque champ.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un schéma définit les données que vous voulez obtenir. Que faut-il pour chaque champ ?",
+          "options": [
+            {
+              "t": "Un nom et un type de données.",
+              "why": "Deux sur trois. Il manque ce qui décide si une réponse compte."
+            },
+            {
+              "t": "Un nom, une description et une règle de correspondance.",
+              "correct": true
+            },
+            {
+              "t": "Un nom et un exemple de valeur.",
+              "why": "Un exemple aide, et il ne dit pas au correcteur ce qui compte comme juste."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Exercice 2 · 10 minutes",
+      "title": "Extrayez un seul contrat",
+      "cap": "",
+      "teach": "Pointez Claude Code sur votre schéma et sur le contrat Northgate. Une ligne par champ, en suivant la colonne des règles de correspondance.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Pourquoi extraire un seul contrat avant de lancer les quatre ?",
+          "options": [
+            {
+              "t": "Parce que la compétence n’est pas encore écrite.",
+              "why": "C’est vrai de l’ordre des étapes, et ce n’en est pas la raison."
+            },
+            {
+              "t": "Pour limiter les coûts.",
+              "why": "Le coût est faible dans les deux cas. Demandez-vous ce qu’un premier passage vous apprend."
+            },
+            {
+              "t": "Pour trouver les trous du schéma tant qu’ils sont encore bon marché à combler.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Exercice 3 · 5 minutes",
+      "title": "Empaquetez-le en compétence",
+      "cap": "",
+      "teach": "Transformez le prompt qui marche en fichier, pour pouvoir le relancer sans tout retaper. Demandez à Claude Code de l’écrire, et de vous poser d’abord des questions de clarification.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Vous avez un prompt qui marche. Pourquoi en faire une compétence ?",
+          "options": [
+            {
+              "t": "Pour le relancer sans tout retaper, de la même façon à chaque fois.",
+              "correct": true
+            },
+            {
+              "t": "Pour que le modèle puisse l’améliorer avec le temps.",
+              "why": "Elle ne change pas toute seule. C’est vous qui la changez."
+            },
+            {
+              "t": "Pour qu’il s’exécute plus vite la prochaine fois.",
+              "why": "La vitesse n’y est pour rien. Pensez à la troisième et à la quatrième fois où vous en aurez besoin."
+            }
+          ]
+        },
+        {
+          "q": "Vous demandez à Claude Code d’écrire le fichier de compétence. Que devez-vous lui demander de faire d’abord ?",
+          "options": [
+            {
+              "t": "Vous montrer un brouillon à valider.",
+              "why": "Utile, et vous valideriez un brouillon bâti sur ses suppositions à propos de ce que vous avez omis."
+            },
+            {
+              "t": "Vous poser des questions de clarification.",
+              "correct": true
+            },
+            {
+              "t": "Lire le schéma pour avoir le contexte.",
+              "why": "Il l’a déjà. Ce qu’il n’a pas, c’est ce que vous n’avez pas écrit."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Exercice 4 · 10 minutes",
+      "title": "Quatre contrats, annexes complètes",
+      "cap": "",
+      "teach": "Lancez la compétence sur les quatre. Un enregistrement par contrat, plus l’annexe tarifaire complète de chacun. Pas un échantillon. Tout.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Pourquoi traiter toutes les annexes tarifaires plutôt qu’un échantillon ?",
+          "options": [
+            {
+              "t": "Parce qu’on ne peut pas demander à la compétence d’échantillonner.",
+              "why": "On le pourrait. La raison tient à ce que vous apprendriez, pas à ce qui est possible."
+            },
+            {
+              "t": "Un échantillon irait plus vite mais impressionnerait moins.",
+              "why": "Impressionner n’est pas l’objet d’une mesure."
+            },
+            {
+              "t": "Un échantillon vous renseigne sur l’échantillon. Les échecs se cachent dans ce que vous avez sauté.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Ce que nous faisons à la place",
+      "title": "Quelqu’un a écrit la bonne réponse pour chaque champ",
+      "cap": "",
+      "teach": "À la main, en vérifiant chaque valeur dans le document. C’est cela, le corrigé.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Le corrigé a été écrit à la main, champ par champ. Pourquoi ne pas le faire produire par Claude ?",
+          "options": [
+            {
+              "t": "Vous noteriez son travail à l’aune de son propre travail.",
+              "correct": true
+            },
+            {
+              "t": "Il n’est pas assez exact sur ce type de document.",
+              "why": "Il est peut-être très exact. Ce n’est pas l’exactitude qui le disqualifie ici."
+            },
+            {
+              "t": "Cela prendrait tout autant de temps.",
+              "why": "Ce serait plus rapide, et c’est justement la tentation. Le problème est ailleurs."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Exercice 5.1 · 5 minutes",
+      "title": "Notez par rapport au corrigé",
+      "cap": "",
+      "teach": "Demandez à Claude Code de comparer sa sortie au corrigé, champ par champ, et de signaler où cela correspond et où cela échoue.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Premier passage de notation. Que signifie très probablement un score bas à ce stade ?",
+          "options": [
+            {
+              "t": "Des réponses justes sont comptées fausses parce qu’elles sont formatées différemment.",
+              "correct": true
+            },
+            {
+              "t": "Le corrigé contient des erreurs.",
+              "why": "C’est possible, et ce n’est pas ce qu’un premier passage sans comparaison fait généralement ressortir."
+            },
+            {
+              "t": "L’extraction est vraiment mauvaise.",
+              "why": "C’est possible, et il existe une explication bien plus courante lors d’une première comparaison."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Exercice 5.2 · 5 minutes",
+      "title": "Normalisez, puis notez à nouveau",
+      "cap": "",
+      "teach": "Une réponse juste peut ne pas ressembler au corrigé. Retirez le formatage des deux côtés avant de comparer.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Que fait réellement la normalisation ?",
+          "options": [
+            {
+              "t": "Elle corrige l’extraction pour qu’elle corresponde au corrigé.",
+              "why": "Rien ne change dans l’extraction. C’est la comparaison qui change."
+            },
+            {
+              "t": "Elle retire le formatage des deux côtés avant de comparer.",
+              "correct": true
+            },
+            {
+              "t": "Elle assouplit la correspondance pour que les presque-justes passent.",
+              "why": "Cela masquerait de vrais échecs. Elle supprime une différence qui n’a jamais eu de sens."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Exercice 5.3, si vous ne retenez qu’une chose",
+      "title": "Le correcteur, c’est vous qui l’avez écrit ce matin",
+      "cap": "",
+      "teach": "Tout ce qui échoue encore après normalisation remonte à un champ dont la règle de correspondance était vague, ou vide. Ouvrez le schéma que vous avez rempli il y a une heure.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Après normalisation, certains champs échouent encore. Où regardez-vous ?",
+          "options": [
+            {
+              "t": "Dans le prompt, à la recherche d’instructions qui se contredisent.",
+              "why": "Cela vaudra le coup d’œil, plus tard. La règle qui décide de ce qui compte comme juste vient d’abord."
+            },
+            {
+              "t": "Dans les documents, à la recherche des cas que le modèle a mal lus.",
+              "why": "Vous en trouverez, et il existe d’abord une cause plus probable et bien moins chère."
+            },
+            {
+              "t": "Dans le schéma que vous avez rempli ce matin, à la recherche d’une règle de correspondance vague ou vide.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Exercice 6 · 8 minutes",
+      "title": "Construisez un tableau de bord",
+      "cap": "",
+      "teach": "Un mur de « réussi » et « échoué » est techniquement une évaluation et pratiquement inutile. Vous voulez pouvoir le regarder et savoir en trois secondes quel champ pose problème.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Qu’est-ce qui rend un tableau de bord meilleur qu’une liste de réussites et d’échecs ?",
+          "options": [
+            {
+              "t": "Il peut être partagé avec des gens qui n’étaient pas à la séance.",
+              "why": "Une liste aussi. La différence, c’est la vitesse à laquelle il répond à la question."
+            },
+            {
+              "t": "C’est un livrable plus professionnel.",
+              "why": "La présentation n’est pas la raison. Pensez à ce que vous en faites."
+            },
+            {
+              "t": "On voit en trois secondes quel champ pose problème.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Exercice 7 · 8 minutes",
+      "title": "Corrigez la spécification, jamais la sortie",
+      "cap": "",
+      "teach": "Prenez le champ qui échoue le plus. Déterminez laquelle des trois causes est en jeu, changez la règle, et relancez le tout.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un champ échoue systématiquement. Que changez-vous ?",
+          "options": [
+            {
+              "t": "La spécification : la règle qui dit ce qui compte comme juste.",
+              "correct": true
+            },
+            {
+              "t": "Le corrigé, si l’extraction paraît défendable.",
+              "why": "Le corrigé est parfois faux, et s’y attaquer en premier est la façon dont une mesure devient discrètement un tampon de complaisance."
+            },
+            {
+              "t": "La sortie, pour qu’elle corresponde au corrigé.",
+              "why": "Cela répare un passage et ne vous apprend rien. Le suivant échouera de la même façon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Partie 8",
+      "title": "Ce que cela ne vous donne pas",
+      "cap": "",
+      "teach": "Un chiffre auquel on se fie trop est pire que pas de chiffre du tout. Cinq choses que ce cours n’a pas enseignées, et que vous devriez toutes connaître.",
+      "diagram": "diagrams/fr/19-measuring-extraction/s14.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Vous avez un chiffre. Qu’est-ce qu’il n’est pas ?",
+          "options": [
+            {
+              "t": "Un moyen de trouver quel champ est le plus faible.",
+              "why": "Il fait cela très bien, et c’est l’essentiel de la raison pour laquelle vous l’avez construit."
+            },
+            {
+              "t": "Une mesure de ce que fera le système sur des documents autres que ces quatre-là.",
+              "correct": true
+            },
+            {
+              "t": "Une comparaison entre les règles d’hier et celles d’aujourd’hui.",
+              "why": "C’est exactement ce à quoi il sert."
+            }
+          ]
+        },
+        {
+          "q": "Pourquoi un chiffre auquel on se fie trop est-il pire que pas de chiffre du tout ?",
+          "options": [
+            {
+              "t": "Parce que d’autres le citeront hors contexte.",
+              "why": "C’est possible, et le premier problème est ce qu’il fait à votre propre jugement."
+            },
+            {
+              "t": "Parce qu’il demande des efforts à produire.",
+              "why": "L’effort en vaut la peine. Le danger est dans ce que vous faites du résultat."
+            },
+            {
+              "t": "Parce qu’il vous empêche de regarder, et qu’il n’a jamais mesuré que ce que vous aviez spécifié.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

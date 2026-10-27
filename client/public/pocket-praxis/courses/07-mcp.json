@@ -1,0 +1,376 @@
+{
+  "id": "07-mcp",
+  "title": "Introduction to MCP",
+  "anthropic": "https://anthropic.skilljar.com/introduction-to-model-context-protocol",
+  "intro": {
+    "title": "One protocol, so any AI app can reach any tool or data source.",
+    "lead": "Eleven ideas, one per screen. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.",
+    "teach": "Eleven ideas, one screen each. In Claude 101 we said Claude can plug into the tools you already use. This is the one standard that makes that work, what it is, and the part everyone actually worries about, what it can and can't see. I'll show you each piece, then stop and ask where it touches your work."
+  },
+  "close": {
+    "title": "One protocol. Three primitives. Any tool, any app.",
+    "lead": "Tools, resources and prompts, exposed by a server and reached by a client inside your host, so context and capability plug in once instead of being rebuilt every time.",
+    "teach": "If you keep one thing: MCP is the one standard that lets Claude reach the tools and data you already use, in three kinds, actions it takes, data you give it, templates you run, and it only ever sees what you hand it. Everything else today was the wiring under that. You don't build it; you choose what to connect and what it's allowed to see."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1",
+      "title": "M×N integrations become M+N",
+      "cap": "MCP is a standard, like USB-C for AI: build to the protocol once and every compliant tool just works. It also splits the work, app builders on one side, tool builders on the other.",
+      "teach": "\"Before this, every AI app had to be wired by hand to every tool, your email, your drive, your tracker, over and over, a tangle that grows with both sides. MCP is one standard, like USB-C for AI: build to it once and every tool that speaks it just works. That's why connecting things to Claude stopped being a custom job.\" (Mirrors course 01 slide 10, connectors, the one standard behind them.)",
+      "diagram": "diagrams/07-mcp/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "What problem does MCP actually solve?",
+          "options": [
+            {
+              "t": "Every app wiring up to every tool by hand, so the work grows with both sides.",
+              "correct": true
+            },
+            {
+              "t": "Making AI tools run faster by cutting out a layer.",
+              "why": "It adds a layer rather than removing one. The saving is in how many you have to build."
+            },
+            {
+              "t": "Keeping your data inside your own network.",
+              "why": "That's a deployment question. This is about how many integrations you have to write."
+            }
+          ]
+        },
+        {
+          "q": "Someone pictures connecting their case store and gets nervous. What's the straight line?",
+          "options": [
+            {
+              "t": "Connections are read-only by default, so nothing can change.",
+              "why": "Some are and some aren't. Promising a default that isn't universal is the kind of reassurance that breaks."
+            },
+            {
+              "t": "A standard for connecting is not a standard for exposing.",
+              "correct": true
+            },
+            {
+              "t": "You can revoke it at any time, so the risk is small.",
+              "why": "True and it answers a different question. They asked what it can reach, not how to stop it later."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2",
+      "title": "Host, client, server, one client per server",
+      "cap": "Messages travel as JSON-RPC over a transport: stdio for a local server, HTTP for a remote one. The host can hold many clients at once, but each client talks to exactly one server.",
+      "teach": "\"Three words worth knowing, because the rest hangs off them. The host is the app you're in, Claude Code, the desktop app. The server is the thing that wraps a real tool or data source, your drive or your tracker.\n\nAnd a client is one private line between them, one client to one server. The host can hold many of these lines at once.\" (Don't dwell on JSON-RPC or transports, name them once, on the caption, and move. They don't change anything for a non-technical learner.)",
+      "diagram": "diagrams/07-mcp/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "\"One client per server.\" Why does that matter beyond the plumbing?",
+          "options": [
+            {
+              "t": "It stops two tools interfering with each other's data.",
+              "why": "A side benefit. The one that matters to a nervous room is about control."
+            },
+            {
+              "t": "It makes each connection faster.",
+              "why": "Performance isn't the point. Think about what separate, named connections let you do."
+            },
+            {
+              "t": "Each connection is separate and named, so you grant and revoke them one at a time.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3",
+      "title": "A server is a few lines to start",
+      "cap": "stdio runs the server as a local subprocess of the host; HTTP exposes it as a remote service. Same server code either way, the transport is just how messages travel.",
+      "teach": "\"This slide is for the builders in the room: standing up a server is small. The SDK handles the protocol; you write a few ordinary functions and mark them as capabilities. For everyone else, the takeaway is only this, the people who make these connections do it in a handful of lines, which is why so many tools already have one.\" (One shared example below; this is a mechanics slide, it does not vary by domain.)",
+      "diagram": "diagrams/07-mcp/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "The same server code runs locally or remotely. What changes?",
+          "options": [
+            {
+              "t": "The capabilities it can expose.",
+              "why": "It exposes the same things either way. Something outside the server changes."
+            },
+            {
+              "t": "Whether the model can call it.",
+              "why": "It can be called either way. The difference is how the messages travel."
+            },
+            {
+              "t": "The transport it runs over.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4",
+      "title": "Tools, actions the model can choose to call",
+      "cap": "A clear name and description matter: that text is all the model has to decide whether and how to call the tool. Treat the docstring as a prompt, not a comment.",
+      "teach": "\"The first of three pieces. A tool is an action Claude can take, send the email, run the search, update the record. The verbs.\n\nThe key word is who decides: Claude does. It reads what each tool is for and chooses when to use it, the way a capable colleague decides which step to take next. That's why we call tools model-controlled.\" (Pairs with course 02 slide 3, an agent acts, it doesn't just hand you text. A tool is how it acts.)",
+      "diagram": "diagrams/07-mcp/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Tools are the verbs. What follows from that?",
+          "options": [
+            {
+              "t": "They have side effects, so they're where the control question lives.",
+              "correct": true
+            },
+            {
+              "t": "They can only be called once per conversation.",
+              "why": "They can be called repeatedly. That isn't the consequence."
+            },
+            {
+              "t": "They're the fastest of the three primitives.",
+              "why": "Speed doesn't come into it. Think about what a verb does that a noun doesn't."
+            }
+          ]
+        },
+        {
+          "q": "\"What if it calls a tool I didn't want?\" What answers that?",
+          "options": [
+            {
+              "t": "Tool descriptions, which tell the model when each one applies.",
+              "why": "They steer the choice. They don't stop it."
+            },
+            {
+              "t": "The permission model: approval first, auto only once you trust the pattern.",
+              "correct": true
+            },
+            {
+              "t": "Scoping the server so only safe tools are exposed.",
+              "why": "Worth doing, and it means deciding at setup rather than at the moment it matters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Lesson 5",
+      "title": "Test the server before wiring it to an app",
+      "cap": "Debug the server on its own first. If the Inspector can list and call everything cleanly, the problem later is in the client wiring, not the server.",
+      "teach": "This is a builder's slide: before you let Claude near a new connection, you test it on its own, does it list its tools, does each one return cleanly. A plain quality check on the plumbing. For everyone else, the point is reassuring: connections get tested in isolation before they're trusted, the same way you'd test a new process on dummy data before you run it for real.",
+      "diagram": "diagrams/07-mcp/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Why test a server with the Inspector before wiring it to an app?",
+          "options": [
+            {
+              "t": "With no model involved, a failure is unambiguously the server's.",
+              "correct": true
+            },
+            {
+              "t": "The Inspector is faster to run than the app.",
+              "why": "Convenience rather than the reason. Think about what you learn from a clean test."
+            },
+            {
+              "t": "The app can't show you errors from the server.",
+              "why": "It usually can, buried. There's a cleaner reason to test first."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Lesson 6",
+      "title": "The client feeds tools to the model, in a loop",
+      "cap": "This is the same agentic loop a chat window doesn't have: the model can act, see the result, and decide what to do next. MCP is just how the tools get there.",
+      "teach": "\"Here's the loop you saw in Claude Code 101, now with MCP feeding it. Claude is offered the tools, asks for one, the server runs it, the result comes back, and it goes round again until the job's done. A chat window can't do that, it answers and waits.\n\nMCP is simply how the tools get into that loop.\" (Mirrors course 02 slide 4, the agentic loop; this is the loop reaching outside the folder.)",
+      "diagram": "diagrams/07-mcp/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "The client loops until there's an answer. Why is that not runaway autonomy?",
+          "options": [
+            {
+              "t": "The loop has a fixed maximum number of turns.",
+              "why": "Usually true and it's a backstop rather than the reason. Think about who runs each step."
+            },
+            {
+              "t": "Every step runs through your client, which decides whether to honour it.",
+              "correct": true
+            },
+            {
+              "t": "The model asks permission before each iteration.",
+              "why": "It doesn't ask. The control sits somewhere that doesn't rely on it asking."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Lesson 7",
+      "title": "Resources, data to pull in, addressed by URI",
+      "cap": "A URI scheme like docs:// names the data. Direct resources return a collection; templated ones take a parameter to fetch exactly one, a single document, a single record.",
+      "teach": "\"The second piece. Where a tool does something, a resource just provides something, a document, a record, a list, at a named address, read-only. Nothing changes when you load it; it's safe to read any time.\n\nThe whole list, or one item by name. Think of it as the read-only side: fetching, never altering.\" (Contrast it explicitly with the tools slides, same server, but a resource only reads.)",
+      "diagram": "diagrams/07-mcp/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A resource is read-only. Why does that matter to a regulated room?",
+          "options": [
+            {
+              "t": "It means the data never leaves their systems.",
+              "why": "Where the data goes is a separate question from what can be done to it."
+            },
+            {
+              "t": "Read-only data is exempt from most data rules.",
+              "why": "It isn't, and telling a compliance team that would end the conversation badly."
+            },
+            {
+              "t": "You can connect the read side first, before anything that acts.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Lesson 8",
+      "title": "The app decides which resources to load",
+      "cap": "That's the difference from a tool: a tool is the model's to call, a resource is the app's to load. Same server, two different control models, which is the heart of MCP.",
+      "teach": "\"Here's the difference that matters for trust. A tool, Claude chooses to use. A resource, you choose to bring in, usually by picking it from a list, an @-mention.\n\nClaude doesn't go rummaging through your data; it sees a resource only when you, or the app, hand it over. Same connection, but you hold the gate on what's read.\" (This is the heart of the safety story, say it slowly.)",
+      "diagram": "diagrams/07-mcp/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Who decides which resources get loaded?",
+          "options": [
+            {
+              "t": "The application, and usually the user picking from a list.",
+              "correct": true
+            },
+            {
+              "t": "The server, which sends whatever it holds.",
+              "why": "That would be the floodgate. Something on the other end chooses."
+            },
+            {
+              "t": "The model, when it judges them relevant.",
+              "why": "That's how tools work. Resources are the other way round, which is the whole reassurance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Lesson 9",
+      "title": "Prompts, reusable templates the author ships",
+      "cap": "Prompts move hard-won phrasing out of people's heads and into the server. The author tunes it once; everyone else just calls it and gets the good version.",
+      "teach": "The third piece. A prompt here isn't what you type, it's a tested template someone wrote once and packaged, so the good wording is built in. The expert tunes it; everyone else just runs it and gets their standard.\n\nIf that sounds familiar, it's the same idea as the skill file: the rules that lived in your best person's head, written down so the work comes out their way every time.",
+      "diagram": "diagrams/07-mcp/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "An MCP prompt is not the thing you type in chat. What is it?",
+          "options": [
+            {
+              "t": "The plain-English skill file, under another name.",
+              "why": "Cousins rather than the same thing. One is packaged by an author and shipped with a server."
+            },
+            {
+              "t": "A tested, parameterised template the server author ships.",
+              "correct": true
+            },
+            {
+              "t": "The system prompt the server sets for every call.",
+              "why": "Nothing here is set for every call. This is something you reach for deliberately."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Lesson 10",
+      "title": "Prompts surface as slash commands",
+      "cap": "If you've used a slash command in Claude Code, you've used an MCP prompt. The server ships the command; the client makes it a one-keystroke action.",
+      "teach": "\"And this is how you reach one: it shows up as a slash command. You type the slash, pick the one you want, answer a question or two, and it expands into the full expert wording, ready to run. You're in control, you trigger it, deliberately.\n\nIf you've ever used a slash command in Claude Code, that's exactly this.\" (Tie to their own experience: the /plato they ran to get here is a prompt surfaced as a slash command.)",
+      "diagram": "diagrams/07-mcp/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Tools, resources, prompts. Which one does the user trigger?",
+          "options": [
+            {
+              "t": "Resources.",
+              "why": "The application loads those, often from a list you pick."
+            },
+            {
+              "t": "Prompts.",
+              "correct": true
+            },
+            {
+              "t": "Tools.",
+              "why": "The model reaches for those when it decides they apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Lesson 11, if you take one thing away",
+      "title": "Three primitives, three owners",
+      "cap": "Everything in the course hangs off this: tools the model calls, resources the app loads, prompts the user triggers. Get the owners straight and the rest follows.",
+      "teach": "\"If you keep one thing today, keep this. MCP exposes three things, and the only thing you really need to remember is who controls each. Tools, actions, the model chooses to call.\n\nResources, data, you or the app choose to load. Prompts, templates, you trigger, deliberately. One standard, three pieces, three owners.\n\nAnd the reassurance under all of it: every connection is one you grant, scoped to what you can already see, and you can revoke it.\" (Mirrors course 01 slide 10 and course 02 slide 13, the one standard, scoped and revocable, it sees only what you can see.)",
+      "diagram": "diagrams/07-mcp/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Three primitives, three owners. Which pairing is right?",
+          "options": [
+            {
+              "t": "Tools: user. Resources: model. Prompts: application.",
+              "why": "The one with side effects is the one the model reaches for. Work outward from there."
+            },
+            {
+              "t": "All three are controlled by the application.",
+              "why": "That would be simpler and it isn't how it works. Each has a different hand on it."
+            },
+            {
+              "t": "Tools: model. Resources: application. Prompts: user.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "A compliance officer asks what Claude can reach through MCP.",
+          "options": [
+            {
+              "t": "Only what you can see, every connection scoped, and you decide what loads.",
+              "correct": true
+            },
+            {
+              "t": "It depends entirely on the setup.",
+              "why": "It does, and answering a worry with \"it depends\" leaves them exactly where they started."
+            },
+            {
+              "t": "Whatever the servers expose, which is why you audit them.",
+              "why": "True and it lands as a warning. There are three sentences that settle it better."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,622 @@
+{
+  "id": "05-ai-fluency",
+  "title": "AI Fluency: Framework and Foundations",
+  "anthropic": "https://anthropic.skilljar.com/ai-fluency-framework-foundations",
+  "intro": {
+    "title": "How to actually collaborate with AI.",
+    "lead": "Thirteen ideas, one per screen, a framework that outlasts the tips and tricks. The drama is in the watching, so take the silences.",
+    "teach": "Tips and tricks date fast; the models change every few months. This is the thing underneath that doesn't: how to actually collaborate with AI. Four habits. Once you have them, they keep working whatever the tool does next."
+  },
+  "close": {
+    "title": "Delegate well. Describe and discern. Stay diligent.",
+    "lead": "Four competencies, three ways to work, one habit, practice.",
+    "teach": "Four habits, three modes, one practice. If the tools change next year, and they will, this still holds. Delegate well, describe and discern in a loop, stay diligent. That's fluency."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1",
+      "title": "Fluency is collaboration, not knowing about AI",
+      "cap": "The shift is treating AI as a collaborator you build a working relationship with, not a technology to study, and not a vending machine you query.",
+      "teach": "Fluency isn't knowing facts about AI. It's working with it well, on four counts: effective, efficient, ethical, safe. The mental shift that unlocks it is to stop treating it like a vending machine you put a question into, and start treating it like a colleague you build a working relationship with.",
+      "diagram": "diagrams/05-ai-fluency/s3.svg",
+      "videos": [
+        {
+          "id": "JpGtOfSgR-c",
+          "label": "Lesson 1: Introduction to AI Fluency | AI Fluency: Framework & Foundations Course |"
+        },
+        {
+          "id": "4szRHy_CT7s",
+          "label": "Lesson 2A: Why do we need AI Fluency? | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "AI Fluency is described as a collaboration rather than a subject. What does that rule out?",
+          "options": [
+            {
+              "t": "Relying on it without checking the output.",
+              "why": "True, and it belongs to one of the four competencies rather than to the definition."
+            },
+            {
+              "t": "Treating it as a technology to study before you use it.",
+              "correct": true
+            },
+            {
+              "t": "Using it for anything you couldn't do yourself.",
+              "why": "Nothing here says that. Think about the stance you take towards it rather than the tasks you give it."
+            }
+          ]
+        },
+        {
+          "q": "\"Effective, efficient, ethical and safe.\" Someone says the last two sound like box-ticking.",
+          "options": [
+            {
+              "t": "They matter in regulated industries and less elsewhere.",
+              "why": "Standing behind your own output isn't an industry-specific concern."
+            },
+            {
+              "t": "They are, and they matter for compliance reasons.",
+              "why": "Conceding it's ceremony makes it ceremony. There's a version of this that lands on their own work."
+            },
+            {
+              "t": "It's whose data this is, and whether you'd stand behind the output.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2",
+      "title": "Three ways to work with AI",
+      "cap": "These aren't rungs to climb, they're modes you pick per task. The four competencies apply to all three.",
+      "teach": "Three modes. Automation: you define it, it does it. Augmentation: you think together, the most common one.\n\nAgency: you set it up to act on its own. These aren't levels, you don't graduate from one to the next. You pick the mode that fits the task.",
+      "diagram": "diagrams/05-ai-fluency/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Automation, augmentation, agency. What's the relationship between them?",
+          "options": [
+            {
+              "t": "A ladder. You progress up as you get more confident.",
+              "why": "That implies the top is always better. They aren't ranked."
+            },
+            {
+              "t": "Modes you pick per task.",
+              "correct": true
+            },
+            {
+              "t": "Three products, matched to three kinds of user.",
+              "why": "One person uses all three in a week, depending on the job."
+            }
+          ]
+        },
+        {
+          "q": "Agency is where the \"what if it does something I didn't want\" fear lives. What settles it?",
+          "options": [
+            {
+              "t": "Keeping agency for low-stakes work only.",
+              "why": "That leaves the capability permanently out of reach for the work that would benefit most."
+            },
+            {
+              "t": "Explaining that mistakes are rare in practice.",
+              "why": "Rarity is not a control, and someone who is nervous hears it as a promise rather than a mechanism."
+            },
+            {
+              "t": "Confirm-each-step first, auto once the pattern is trusted, and you always check the end.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3, if you take one thing away",
+      "title": "Delegation · Description · Discernment · Diligence",
+      "cap": "Delegation decides what's worth doing together; Description and Discernment loop in the middle; Diligence keeps it responsible. The rest of the course is these four.",
+      "teach": "Four habits. Delegation: decide what's even worth doing together. Description: say what you want, and how.\n\nDiscernment: judge what comes back. Diligence: own the final result. The middle two are a loop you'll run over and over. Delegation sets it up, Diligence keeps it straight. That's the whole framework.",
+      "diagram": "diagrams/05-ai-fluency/s5.svg",
+      "videos": [
+        {
+          "id": "W4Ua6XFfX9w",
+          "label": "Lesson 2B: The 4D Framework | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Where do Description and Discernment sit in the four?",
+          "options": [
+            {
+              "t": "At the start, before Delegation.",
+              "why": "You have to decide what you're handing over before you can describe it."
+            },
+            {
+              "t": "Looping in the middle: say what you want, judge what comes back, refine.",
+              "correct": true
+            },
+            {
+              "t": "At the end, once the work is delivered.",
+              "why": "That would make them a review step rather than the working loop they are."
+            }
+          ]
+        },
+        {
+          "q": "\"Describe what good looks like, once.\" Which idea from the other courses is that?",
+          "options": [
+            {
+              "t": "The permission mode.",
+              "why": "That's about how closely you watch, not about the standard you're holding to."
+            },
+            {
+              "t": "The context window.",
+              "why": "That's about what fits, not about what good means."
+            },
+            {
+              "t": "The skill file.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4",
+      "title": "It generates, it doesn't look things up",
+      "cap": "Three things had to arrive together: the transformer architecture, vast training data, and a leap in compute. Knowing it generates rather than retrieves is what makes its limits make sense.",
+      "teach": "Pick the route by audience . For analysts and regulated rooms: *\"All of this is predicting the next word. 'The cat sat on the…', most likely 'mat'. It's picking the most plausible next thing.\n\nBrilliant for drafting, wrong for anything that has to be identical every time.\"* For generalists and designers: the Excel-formula contrast. For technical peers: one sentence and move on.",
+      "diagram": "diagrams/05-ai-fluency/s6.svg",
+      "videos": [
+        {
+          "id": "RyvXxApfHkk",
+          "label": "Lesson 3A: What is generative AI? (Deep Dive) | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "A language model generates rather than retrieves. Which follows from that?",
+          "options": [
+            {
+              "t": "It cannot quote a source accurately.",
+              "why": "It can. Generating doesn't rule out getting a quotation right."
+            },
+            {
+              "t": "It has no access to anything factual.",
+              "why": "It learned from a great deal of fact. The consequence is subtler than having none."
+            },
+            {
+              "t": "It can produce something confident and wrong.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Someone worries their files are being used to train the model.",
+          "options": [
+            {
+              "t": "Training happened before you arrived. You point a trained model at your files.",
+              "correct": true
+            },
+            {
+              "t": "You can switch training off in the settings.",
+              "why": "It frames the default as the dangerous one, and it misdescribes what is happening at all."
+            },
+            {
+              "t": "Only the enterprise plans exclude your data from training.",
+              "why": "That turns a fact about how the thing works into a plan feature."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Lesson 5",
+      "title": "Strong where you're weak, weak where you're strong",
+      "cap": "The limits aren't bugs to wait out, they're the reason you stay in the loop. Pair its breadth with your judgment, creativity, and oversight.",
+      "teach": "It's strong exactly where most of us are weak, speed, breadth, tireless drafting. And weak where you're strong, your judgement, your context, knowing what 'right' looks like here. The limits aren't temporary.\n\nThey're the reason you stay in the loop. Best results pair its breadth with your oversight.",
+      "diagram": "diagrams/05-ai-fluency/s7.svg",
+      "videos": [
+        {
+          "id": "W5cga7xipRI",
+          "label": "Lesson 3B: Capabilities & limitations | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "\"Strong where you're weak, weak where you're strong.\" Which is the model's weak side?",
+          "options": [
+            {
+              "t": "Working across many subjects at once.",
+              "why": "That's its strong side, and one of the reasons it's useful to a specialist."
+            },
+            {
+              "t": "Knowing what happened after its cutoff, and knowing when it's wrong.",
+              "correct": true
+            },
+            {
+              "t": "Producing fluent writing at length.",
+              "why": "Fluency is among the things it does most easily."
+            }
+          ]
+        },
+        {
+          "q": "Someone hears all this and says \"so it's better than me\". What's the accurate reply?",
+          "options": [
+            {
+              "t": "It's better at breadth, you're better at depth.",
+              "why": "Tidy, and it invites them to defend a shrinking patch rather than seeing the pairing."
+            },
+            {
+              "t": "Not yet, and the gap is closing.",
+              "why": "It concedes the frame and then adds a countdown, which is the fear rather than the answer."
+            },
+            {
+              "t": "A human with AI beats either alone, and that gap doesn't close.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Lesson 6",
+      "title": "Delegation, decide what's worth doing together",
+      "cap": "It takes both: your domain expertise and a real sense of the tool. The goal isn't to automate everything, it's the best split for this task.",
+      "teach": "Delegation happens before you type a word. Two things meet: what you know about the problem, and what you know the tool can do. Where they overlap, you split the work. Not 'automate everything', the right split. The parts that are yours stay yours.",
+      "diagram": "diagrams/05-ai-fluency/s8.svg",
+      "videos": [
+        {
+          "id": "EljzyfdYkrc",
+          "label": "Lesson 4: A closer look at Delegation | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Which mistake do people actually make when delegating?",
+          "options": [
+            {
+              "t": "They hand over work the model cannot do at all.",
+              "why": "That fails visibly and gets corrected quickly. The damaging one is quieter."
+            },
+            {
+              "t": "They hand over too little and keep doing everything.",
+              "why": "Common at the very start, and it isn't the one that produces bad work."
+            },
+            {
+              "t": "They hand over the judgement and keep the grunt work.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "What are the two awarenesses that make good delegation possible?",
+          "options": [
+            {
+              "t": "Knowing your goal, and knowing what this AI can and can't do.",
+              "correct": true
+            },
+            {
+              "t": "Knowing your deadline, and knowing the cost.",
+              "why": "Both practical, and neither tells you where to draw the line between the two of you."
+            },
+            {
+              "t": "Knowing your data, and knowing the compliance rules.",
+              "why": "That's the Diligence layer rather than the deciding-what-to-hand-over one."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Lesson 7",
+      "title": "Turn delegation into a plan",
+      "cap": "The course carries one project through every competency. Naming success up front is what makes Discernment possible later, you can only judge against a target.",
+      "teach": "Delegation becomes a plan in four steps: name what good looks like, break the work into tasks, mark each as yours, the AI's, or shared, then carry it through. The first step is the one people skip and the one that matters most: if you don't name success up front, you've got nothing to judge the output against later.",
+      "diagram": "diagrams/05-ai-fluency/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Why name what good looks like before any work starts?",
+          "options": [
+            {
+              "t": "It stops you changing your mind halfway through.",
+              "why": "Changing your mind is allowed. Think about what you would otherwise have no way of doing later."
+            },
+            {
+              "t": "Without a target, there's nothing to judge the result against.",
+              "correct": true
+            },
+            {
+              "t": "It gives the model the standard it needs to self-assess.",
+              "why": "Useful to it, and the bigger loss is on your side of the exchange."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Lesson 8",
+      "title": "Description, say what, how, and how to behave",
+      "cap": "AI can't read your mind, and it's a partner, not a database. Process is the layer most people skip, and it's often as decisive as the goal itself.",
+      "teach": "Three layers to a good description. The product: what you want made. The process: how it should get there, the method.\n\nThe performance: how it should behave with you. Almost everyone gives the first and forgets the second. The process layer is where the quality hides.",
+      "diagram": "diagrams/05-ai-fluency/s10.svg",
+      "videos": [
+        {
+          "id": "DmgujoZ1mmk",
+          "label": "Lesson 6: A closer look at Description | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Product, process, performance. Which layer do people leave out?",
+          "options": [
+            {
+              "t": "Product: what to create.",
+              "why": "Almost nobody forgets to say what they want made."
+            },
+            {
+              "t": "Process: how to approach it.",
+              "correct": true
+            },
+            {
+              "t": "Performance: how it should behave.",
+              "why": "Often left out too, and it's the one people find strange rather than the one they never think of."
+            }
+          ]
+        },
+        {
+          "q": "\"I have to tell it how to behave?\" How do you normalise that?",
+          "options": [
+            {
+              "t": "You don't have to. The default behaviour suits most work.",
+              "why": "It does suit a lot of work, and dropping the layer means never asking for the behaviour that would suit yours."
+            },
+            {
+              "t": "It's how the model was designed, so it expects the instruction.",
+              "why": "An answer about the machine, to a question about whether this is a reasonable thing to be doing."
+            },
+            {
+              "t": "Same as telling a new colleague to push back if you're wrong.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Lesson 9",
+      "title": "Six moves that make a prompt work",
+      "cap": "Prompting is iterative, not one-shot, expect to refine. The shortcut most people miss: hand the AI your prompt and ask it to make it better.",
+      "teach": "Six practical moves. Context, examples, constraints, steps, ask it to think before answering, give it a role. You won't use all six every time.\n\nAnd the shortcut most people never try: paste your own prompt back to it and ask it to make it better. It's good at that.",
+      "diagram": "diagrams/05-ai-fluency/s11.svg",
+      "videos": [
+        {
+          "id": "2YCaBqP8muw",
+          "label": "Lesson 7: Effective prompting techniques (Deep Dive) | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Of the six prompting moves, which is the one people forget and shouldn't?",
+          "options": [
+            {
+              "t": "Give context.",
+              "why": "The most-taught of the six, and the one people do remember."
+            },
+            {
+              "t": "Hand it your prompt and ask it to improve it.",
+              "correct": true
+            },
+            {
+              "t": "Define role and tone.",
+              "why": "Easy to forget, and it isn't the one that compounds into all the others."
+            }
+          ]
+        },
+        {
+          "q": "\"Prompting is iterative, not one-shot.\" What does that mean in practice?",
+          "options": [
+            {
+              "t": "You should expect to rewrite the prompt from scratch each time.",
+              "why": "Rewriting from scratch throws away what you learned from the last answer."
+            },
+            {
+              "t": "You write several prompts and pick the best result.",
+              "why": "That's parallel guessing. Iteration builds on what came back."
+            },
+            {
+              "t": "The first answer is the start of the exchange, not the end of it.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Lesson 10",
+      "title": "Discernment, judge what comes back",
+      "cap": "Your expertise is what makes discernment sharp, you can only catch what you'd notice. Even the best models benefit from a human checking the work.",
+      "teach": "Discernment is Description in reverse. You judge the output, the reasoning, and the behaviour. Here's the uncomfortable part: you can only catch what you'd notice.\n\nYour expertise isn't replaced here, it's exactly what makes you able to judge. This is where the human earns their place.",
+      "diagram": "diagrams/05-ai-fluency/s12.svg",
+      "videos": [
+        {
+          "id": "Y0KidGr9Z2Y",
+          "label": "Lesson 8: A closer look at Discernment | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Discernment is the flip side of Description. What does that mean?",
+          "options": [
+            {
+              "t": "You judge on the same three layers you described on.",
+              "correct": true
+            },
+            {
+              "t": "You describe first and judge only at the end.",
+              "why": "That makes it a final step. It's the same three questions, asked from the other direction, throughout."
+            },
+            {
+              "t": "The model judges its own output against your description.",
+              "why": "It can be asked to, and that isn't what this competency is. The judgement is yours."
+            }
+          ]
+        },
+        {
+          "q": "Why is discernment the thing that can't be automated away?",
+          "options": [
+            {
+              "t": "Models are not yet reliable enough to self-assess.",
+              "why": "That frames it as a temporary gap waiting on better models."
+            },
+            {
+              "t": "Your expertise is what makes the judgement worth anything.",
+              "correct": true
+            },
+            {
+              "t": "Someone has to be accountable for compliance reasons.",
+              "why": "Accountability is the Diligence layer. This is about whether the work is any good."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Lesson 11",
+      "title": "Say it, check it, refine it",
+      "cap": "This is where collaboration beats either side working alone. You stay the one who integrates judgment and owns the final call.",
+      "teach": "Describe, look at the output, discern, then describe it better and go again. That loop is where the actual work lives. Not the first answer, the third or the fourth. And at the end of the loop, the decision is yours. You own the final call.",
+      "diagram": "diagrams/05-ai-fluency/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Someone is disappointed with what came back. What's the first question to ask them?",
+          "options": [
+            {
+              "t": "Which model were you using?",
+              "why": "Almost never the explanation, and it teaches them to shop for models rather than to work the loop."
+            },
+            {
+              "t": "What did you put in the prompt?",
+              "why": "Worth asking, and it assumes the failure was at the start rather than in what happened next."
+            },
+            {
+              "t": "Did you go a second round?",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Lesson 12",
+      "title": "Diligence, own the result",
+      "cap": "Different contexts expect different disclosure. A diligence statement names AI's role in the work and your responsibility for the output.",
+      "teach": "Diligence is owning it. Three parts: which tool you chose and whether it was right for sensitive work; being open about AI's role where that matters; and verifying what you put your name to. You're accountable for the output, whether or not AI helped make it. A diligence statement just names AI's role and your responsibility for the result.",
+      "diagram": "diagrams/05-ai-fluency/s14.svg",
+      "videos": [
+        {
+          "id": "QbLf2zb3oPc",
+          "label": "Lesson 10: A closer look at Diligence | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Diligence has three parts. Which is about what you do before you share the work?",
+          "options": [
+            {
+              "t": "Transparency: being open about AI's role.",
+              "why": "About who knows, rather than about whether the thing is right."
+            },
+            {
+              "t": "Deployment: verify it, and vouch for it.",
+              "correct": true
+            },
+            {
+              "t": "Creation: which AI, and how you use it.",
+              "why": "That's the choice at the start rather than the check at the end."
+            }
+          ]
+        },
+        {
+          "q": "How much disclosure does AI involvement need?",
+          "options": [
+            {
+              "t": "Only where a regulator requires it.",
+              "why": "That reduces a judgement about your readers to a compliance floor."
+            },
+            {
+              "t": "Always disclose. Anything less is misleading.",
+              "why": "A rule that would have you footnoting your spellchecker. The expectation isn't flat."
+            },
+            {
+              "t": "It depends on the context and who needs to know.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "eyebrow": "Lesson 13",
+      "title": "Fluency is built by practice, not switched on",
+      "cap": "Treat AI as a thinking partner, hold to effective, efficient, ethical, and safe, and the framework keeps working as the models change.",
+      "teach": "You don't get fluent by finishing a course, any more than you get fluent in a language that way. You get there by doing it, badly at first, then better. The four habits are the thing you practise. AI is powerful, not magical, it's only ever as good as what you bring to it.",
+      "diagram": "diagrams/05-ai-fluency/s15.svg",
+      "videos": [
+        {
+          "id": "ytEN_iAk09c",
+          "label": "Lesson 11: Conclusion | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "\"Fluency is built by practice, not switched on.\" What follows for a team adopting this?",
+          "options": [
+            {
+              "t": "The system gets better through use, so the habit matters more than the rollout.",
+              "correct": true
+            },
+            {
+              "t": "Training has to come before any access is granted.",
+              "why": "That inverts it. Practice is the thing, and practice needs access."
+            },
+            {
+              "t": "You need a longer programme than most firms plan for.",
+              "why": "Length isn't the variable. What happens between sessions is."
+            }
+          ]
+        },
+        {
+          "q": "One habit to end a working session with?",
+          "options": [
+            {
+              "t": "Clear the context so tomorrow starts clean.",
+              "why": "Good hygiene, and it throws away today's lesson along with today's clutter."
+            },
+            {
+              "t": "Ask it to look back at what went badly and save how you fixed it.",
+              "correct": true
+            },
+            {
+              "t": "Save the conversation somewhere you can find it again.",
+              "why": "You'll have a transcript nobody reads. The value is in what gets distilled out of it."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

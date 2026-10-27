@@ -10,6 +10,7 @@ import { getResend } from "./email/resend";
 import { registerLearnRoutes } from "./learn-routes";
 import { registerDataRoutes } from "./data-routes";
 import { registerEventRoutes } from "./event-routes";
+import { registerPocketRoutes } from "./pocket-routes";
 import { registerSeoRoutes } from "./seo";
 
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
@@ -311,6 +312,19 @@ export async function registerRoutes(
     res.setHeader("X-Robots-Tag", "noindex, nofollow");
     res.sendFile(path.join(deckDir, "vscode-setup", "index.html"));
   });
+
+  // Pocket Praxis, the course decks as a phone game: link only, not indexed. Served from
+  // the folder with a trailing slash, because its scripts, course files and offline
+  // service worker all load relative to it.
+  app.get(["/pocket-praxis", "/pocket-praxis/index.html"], (req, res) => {
+    const [pathname, query] = req.originalUrl.split("?");
+    if (pathname === "/pocket-praxis") {
+      return res.redirect(301, "/pocket-praxis/" + (query !== undefined ? "?" + query : ""));
+    }
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "pocket-praxis", "index.html"));
+  });
+  registerPocketRoutes(app);
 
   // Register admin routes
   registerAdminRoutes(app);

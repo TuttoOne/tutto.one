@@ -1,0 +1,444 @@
+{
+  "id": "06-anthropic-api",
+  "title": "Claude with the Anthropic API",
+  "anthropic": "https://anthropic.skilljar.com/claude-with-the-anthropic-api",
+  "intro": {
+    "title": "Building with the API underneath the chat window.",
+    "lead": "Eleven ideas, one per screen. This is the layer Claude Code and every other app sits on. Each slide is a thing to point at while you explain, take the silences.",
+    "teach": "Everything you've used so far, the chat, Claude Code, the desktop app, sits on one thing: a request you send to the API. Eleven ideas, one screen each. You don't have to be able to write the request to understand it.\n\nThe point is that you'll know what's under the floor, so you can brief whoever builds on it and judge what they hand back."
+  },
+  "close": {
+    "title": "Make the call. Trust it. Give it reach. Compose it into systems.",
+    "lead": "A stateless request is the unit. Evals and prompting make it reliable; tools, RAG and the model's own capabilities give it reach; MCP and the workflow-vs-agent choice are how you build something real.",
+    "teach": "Four moves. Make the call, one stateless request, the unit everything's built from. Make it reliable, test it, and brief it clearly.\n\nGive it reach, tools, your own knowledge, more than text. Then compose those into a system. If you keep one thing: nothing here is magic, it's all the same request with more switched on."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1",
+      "title": "One request, and the API forgets you",
+      "cap": "A \"multi-turn conversation\" is just this loop run by hand: the model holds nothing between calls, so the growing messages[] list is the memory. Same key, same structure, whatever language you call from.",
+      "teach": "Underneath the chat, there's no conversation. There's one request, one reply, and then it forgets you completely. What looks like a conversation is the program quietly re-sending the whole history every single time. The list of messages is the memory, there's nowhere else it's kept.",
+      "diagram": "diagrams/06-anthropic-api/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "You send a second API call. What does the model remember from the first?",
+          "options": [
+            {
+              "t": "Nothing. You send the whole message list every time.",
+              "correct": true
+            },
+            {
+              "t": "The conversation, for as long as the session is open.",
+              "why": "There is no session. Think about what the second request has to carry with it."
+            },
+            {
+              "t": "A summary, so the context stays small.",
+              "why": "Nothing is summarised for you. What travels is what you put in the request."
+            }
+          ]
+        },
+        {
+          "q": "Someone hears \"it remembers nothing\" and worries that sounds unreliable.",
+          "options": [
+            {
+              "t": "It's a limitation you work around by keeping calls short.",
+              "why": "It isn't a limitation being worked around, and short calls aren't the point."
+            },
+            {
+              "t": "It's the reassuring half of the data answer: nothing of theirs is held between calls.",
+              "correct": true
+            },
+            {
+              "t": "Memory is added by the more expensive tiers.",
+              "why": "No tier changes this. Anything that persists is held by your own system."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2",
+      "title": "Four dials on the same request",
+      "cap": "The system prompt does the heavy lifting, it's where the role and rules live. Temperature trades reliability for variety; streaming is about feel; structured output is how you get data a program can actually use.",
+      "teach": "Same model, four dials. The big one is the system prompt, the standing instructions for who it should be and what rules it follows. Temperature is how adventurous you let it be: zero for steady and repeatable, higher for variety.\n\nStreaming is just feel, words appear as they're written instead of all at once. Structured output is when you need clean data a program can read, not a paragraph.",
+      "diagram": "diagrams/06-anthropic-api/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Of the four dials on a request, which one is the same object as the skill file they already know?",
+          "options": [
+            {
+              "t": "The model choice.",
+              "why": "That picks the engine. It carries none of your method."
+            },
+            {
+              "t": "The temperature setting.",
+              "why": "That changes how varied the output is, not what it knows about how you work."
+            },
+            {
+              "t": "The system prompt.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3",
+      "title": "Stop guessing whether a prompt is good",
+      "cap": "Two ways to grade: code-based for anything exact (is it valid JSON? does it contain the answer?), model-based for judgement (is this tactful? is it on-topic?), you ask another Claude call to score it against a rubric.",
+      "teach": "\"How do you know a prompt is actually good, not just good on the one example you tried? You build an eval, a set of test cases, run automatically and scored to a single number. Then when you change the wording, you re-run and watch the number move.\n\nTwo ways to grade: by code, for anything you can check exactly, and by model, where you ask another Claude to judge it against a rubric, the same way you'd ask a second person to mark it.\" (This is the API-level form of the student question *\"how would I know the output is right?\"*, 05-ai-fluency slide 12, Discernment, made measurable.)",
+      "diagram": "diagrams/06-anthropic-api/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "\"An eval is a test suite for prompts.\" What is it really doing?",
+          "options": [
+            {
+              "t": "Writing down what good means, then checking against it automatically.",
+              "correct": true
+            },
+            {
+              "t": "Measuring how fast and how cheaply the prompt runs.",
+              "why": "Those are worth knowing and they say nothing about whether the output is right."
+            },
+            {
+              "t": "Checking the model has not changed underneath you.",
+              "why": "A useful side effect, and not what you built it for."
+            }
+          ]
+        },
+        {
+          "q": "What is the number an eval gives you actually for?",
+          "options": [
+            {
+              "t": "Comparing your system against other people's.",
+              "why": "Your cases are yours. The number means nothing outside them."
+            },
+            {
+              "t": "Change the prompt, re-run, and see which way it moved.",
+              "correct": true
+            },
+            {
+              "t": "Deciding whether the system is ready to ship.",
+              "why": "It informs that, and a single threshold treats one number as a verdict it can't carry alone."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4",
+      "title": "Four techniques, in order of leverage",
+      "cap": "Examples (few-shot) move quality the most: a couple of worked input→output pairs teach format and edge cases that paragraphs of instruction can't. XML tags matter because Claude is trained to respect them, <document>…</document> reads cleaner than quotes.",
+      "teach": "\"When it gets something wrong, the instinct is 'I need a smarter model'. Almost always you need a clearer instruction. Four moves, weakest to strongest: say exactly what you want; spell out the details; label the parts cleanly; and the one that moves quality most, show it a worked example.\n\nOne good before-and-after teaches it more than a page of rules.\" (This is the same lesson as Claude 101 slide 5 and the AI Fluency prompting slide, here at the API level: when it's off, it's almost always fixable.)",
+      "diagram": "diagrams/06-anthropic-api/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "The output is wrong. Of these four moves, which has the most leverage?",
+          "options": [
+            {
+              "t": "Be clear and direct.",
+              "why": "The right place to start, and the smallest of the four in effect."
+            },
+            {
+              "t": "Use tags to label the parts of the prompt.",
+              "why": "Genuinely helps it tell your instruction from your document, and it isn't the big one."
+            },
+            {
+              "t": "Give it examples.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "When is a bigger model the answer to a bad output?",
+          "options": [
+            {
+              "t": "Once you've tried the four techniques and it's still wrong.",
+              "correct": true
+            },
+            {
+              "t": "Straight away. Capability is usually the constraint.",
+              "why": "It rarely is. Reaching for a bigger model first hides a prompt problem behind a bigger bill."
+            },
+            {
+              "t": "Never. Prompting solves everything.",
+              "why": "Overstated in the other direction. Some tasks genuinely need more."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Lesson 5, if you take one thing away",
+      "title": "Tool use is a round trip you complete",
+      "cap": "The loop can repeat, Claude can call several tools across several turns before it answers. This single mechanism is what every agent is built on: the model proposes, your environment executes, the result comes back.",
+      "teach": "\"Here's the thing that changes everything: Claude on its own can't do anything. It can't check your calendar, hit your database, send an email. All it can do is say 'I'd like to call this tool, with these inputs'.\n\nYour system runs it for real and hands the answer back, and it carries on. That round trip, it asks, you act, you return the result, is the whole basis of letting AI act, not just answer. Every agent you've heard of is built on exactly this.\" (This is the under-the-floor version of letting it act: augmentation becomes agency, 05-ai-fluency slide 4, through one mechanism.)",
+      "diagram": "diagrams/06-anthropic-api/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "\"So with tools it can just do things?\" What's the accurate answer?",
+          "options": [
+            {
+              "t": "No. It only ever asks. Your system runs the function.",
+              "correct": true
+            },
+            {
+              "t": "Only for the tools Anthropic runs server-side.",
+              "why": "Those are a special case. The general answer applies to the tools you define."
+            },
+            {
+              "t": "Yes, within the permissions you granted it.",
+              "why": "Closer to how an agent framework behaves, and it skips what actually happens at the API level."
+            }
+          ]
+        },
+        {
+          "q": "Where is the gate in a tool-use round trip?",
+          "options": [
+            {
+              "t": "In the tool definition, which limits what can be asked for.",
+              "why": "It limits what can be requested. Something else decides whether the request is honoured."
+            },
+            {
+              "t": "In your code, which decides whether to run what was asked for.",
+              "correct": true
+            },
+            {
+              "t": "In the model, which declines anything unsafe.",
+              "why": "Relying on the model to be the gate puts the control in the wrong place entirely."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Lesson 6",
+      "title": "Some tools you don't have to build",
+      "cap": "The text editor and code execution tools are exactly what powers Claude Code and the analysis features. The Files API lets a request reference uploaded files (PDFs, datasets) without re-sending them every call.",
+      "teach": "Most tools, your developer builds. A handful, Anthropic already built, you just switch them on. A text editor that changes files, web search that comes back with cited results, and a code sandbox that runs Python.\n\nWorth knowing because these aren't abstract: the text editor and the sandbox are literally what's running when you use Claude Code. You've been using these tools without knowing their names.",
+      "diagram": "diagrams/06-anthropic-api/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "\"Code execution runs Python in a sandbox\" worries a regulated room. What reassures?",
+          "options": [
+            {
+              "t": "You can turn it off.",
+              "why": "True, and it answers by removing the capability rather than explaining it."
+            },
+            {
+              "t": "The sandbox is isolated, and web results come back with citations.",
+              "correct": true
+            },
+            {
+              "t": "It only runs code the model wrote itself.",
+              "why": "That's the part they're worried about, restated as though it were the comfort."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Lesson 7",
+      "title": "RAG, give it knowledge it was never trained on",
+      "cap": "Embeddings catch meaning (\"car\" finds \"vehicle\"); BM25 catches exact terms (an error code, a part number). A multi-index pipeline runs both and merges the hits, that's what production RAG actually does.",
+      "teach": "\"Claude was trained on the public internet up to a point in time. It was never trained on your documents. RAG is how you give it those: you index everything once, then for each question you pull only the handful of passages that matter and hand them over.\n\nTwo ways to find the right passages, one that understands meaning, so 'car' also finds 'vehicle', and one that nails exact terms like a part number or an error code. The good systems use both.\" (This is the engine-room version of the Claude 101 connectors and Enterprise Search slides: work with your actual data, not a cold start.)",
+      "diagram": "diagrams/06-anthropic-api/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Why not just paste the whole knowledge base into the prompt?",
+          "options": [
+            {
+              "t": "It doesn't fit, so you index once and retrieve only what the question needs.",
+              "correct": true
+            },
+            {
+              "t": "The model would be confused by irrelevant material.",
+              "why": "A real effect, and secondary to the hard limit you'd hit first."
+            },
+            {
+              "t": "It would be slow.",
+              "why": "It would, and speed isn't the blocker."
+            }
+          ]
+        },
+        {
+          "q": "Two kinds of index work best together. Why?",
+          "options": [
+            {
+              "t": "One is faster and the other more accurate.",
+              "why": "Not the split. They catch different things, not the same thing at different speeds."
+            },
+            {
+              "t": "Embeddings catch meaning; keyword search catches exact terms.",
+              "correct": true
+            },
+            {
+              "t": "One handles text and the other handles documents.",
+              "why": "Both handle text. The difference is what kind of match they are good at."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Lesson 8",
+      "title": "The same API takes more than text",
+      "cap": "Extended thinking gives the model room to work through hard problems before committing to an answer. Citations turn \"trust me\" into \"here's the passage\", the backbone of any answer a business has to stand behind.",
+      "teach": "The same request takes more than typed text. On the way in: images, so it can read a chart or a screenshot, and PDFs, page by page with the layout intact. On the way out: it can think through a hard problem before committing to an answer, and it can point at the exact source it drew a claim from.\n\nThat last one, citations, is the backbone of any answer a business has to be able to stand behind.",
+      "diagram": "diagrams/06-anthropic-api/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "\"But my real files are Word, Excel, PDFs and scans.\" What does this slide answer?",
+          "options": [
+            {
+              "t": "The same request takes images and PDFs, with layout, page by page.",
+              "correct": true
+            },
+            {
+              "t": "You need a separate document API for those.",
+              "why": "Same request, same structure. Nothing separate to learn."
+            },
+            {
+              "t": "You convert them to text first.",
+              "why": "That was the training-wheels version. The real machinery does more."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Lesson 9",
+      "title": "Pay for the long part once",
+      "cap": "The rule: only an exact, unchanged prefix is reused, so put everything stable first and the variable part last. Cache lifetimes are short (minutes), so it pays off across a burst of related calls, the heart of any responsive, repeated-context app.",
+      "teach": "Remember slide 3, every call re-sends the whole history. If that history starts with the same big block every time, a long document, a fat set of rules, you'd be paying for it again and again. Caching lets you pay for that stable part once and have later calls read it cheaply. It's a cost-and-speed optimisation, not a new capability.",
+      "diagram": "diagrams/06-anthropic-api/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Prompt caching reuses the long opening block. What breaks the reuse?",
+          "options": [
+            {
+              "t": "Switching to a different model.",
+              "why": "True, and it's rarely the accident. The common one is about what you put where."
+            },
+            {
+              "t": "Changing anything in the prefix, even slightly.",
+              "correct": true
+            },
+            {
+              "t": "Waiting too long between calls.",
+              "why": "There is an expiry, and it isn't the thing people trip over when they design the prompt."
+            }
+          ]
+        },
+        {
+          "q": "So where does the variable part of the prompt belong?",
+          "options": [
+            {
+              "t": "In the system prompt, separately from the messages.",
+              "why": "The system prompt is usually part of the stable block you're trying to cache."
+            },
+            {
+              "t": "At the start, so the model sees it first.",
+              "why": "That is the one arrangement guaranteed to break the reuse on every call."
+            },
+            {
+              "t": "At the end, after the stable block.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Lesson 10",
+      "title": "MCP, one standard plug for tools and data",
+      "cap": "A server publishes three things, tools, resources, prompts, and the inspector lets you test it before wiring it to a client. Build the integration once; plug it into Claude Code, your own client, or anyone else's.",
+      "teach": "\"MCP is the standard plug. Before it, connecting Claude to your CRM, your drive, your database meant a custom wire for each, for each app. With MCP you build the connection once and any tool that speaks the standard can use it.\n\nYou've heard 'USB-C for AI', that's it. Build once, plug in everywhere.\" (This is the engine-room version of the Claude 101 connectors slide, same idea, one layer down: one standard behind every integration.)",
+      "diagram": "diagrams/06-anthropic-api/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "What is the durable takeaway from MCP for a non-technical room?",
+          "options": [
+            {
+              "t": "The three primitives a server publishes.",
+              "why": "Developer vocabulary. It won't survive the week."
+            },
+            {
+              "t": "The connectors they liked are a standard, not bespoke magic.",
+              "correct": true
+            },
+            {
+              "t": "That they should ask IT to run their own server.",
+              "why": "A long way ahead of where they are, and it isn't what the idea is for."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Lesson 11",
+      "title": "Workflows vs agents, who decides the path",
+      "cap": "Choose by predictability. If you can draw the steps in advance, a workflow is cheaper and more reliable. If the path depends on what's found along the way, you need an agent, Claude Code is one. Most production systems mix both.",
+      "teach": "\"Two ways to build something real, and the difference is who's driving. In a workflow, you fix the steps in advance, do this, then this, then this. In an agent, the model decides the path as it goes, looping until it's done.\n\nPick by how predictable the job is. If you could draw the steps on a whiteboard beforehand, build a workflow, it's cheaper and steadier. If the right next step depends on what it finds, you need an agent.\n\nClaude Code is one.\" (This is automation versus agency from 05-ai-fluency slide 4, made concrete: a fixed task you define versus a system that decides for itself.)",
+      "diagram": "diagrams/06-anthropic-api/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Workflow or agent: what decides?",
+          "options": [
+            {
+              "t": "Whether the task needs tools.",
+              "why": "Both use tools. That isn't the dividing line."
+            },
+            {
+              "t": "How complex the task is.",
+              "why": "Complex work is often a workflow. Think about who chooses the order of the steps."
+            },
+            {
+              "t": "Who decides the path: you wire it in advance, or the model chooses as it goes.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Most of what a business team actually needs is which of the two?",
+          "options": [
+            {
+              "t": "A workflow: cheaper, steadier, easier to trust.",
+              "correct": true
+            },
+            {
+              "t": "Both together, from the start.",
+              "why": "That doubles the thing to build and to debug before you know the simple version is insufficient."
+            },
+            {
+              "t": "An agent, because real work is unpredictable.",
+              "why": "It feels unpredictable and usually turns out the same way every month."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

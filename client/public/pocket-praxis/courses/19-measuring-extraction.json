@@ -1,0 +1,387 @@
+{
+  "id": "19-measuring-extraction",
+  "title": "Measuring extraction",
+  "anthropic": null,
+  "intro": {
+    "title": "Measuring extraction.",
+    "lead": "You will pull the same fields out of four contracts, and then answer a harder question: how often was it right? Not \"does that look correct\". A number.",
+    "teach": "You will pull the same fields out of four contracts, and then answer a harder question: how often was it right? Not \"does that look correct\". A number."
+  },
+  "close": {
+    "title": "Write down what counts as correct, and the eval comes free.",
+    "lead": "An answer key grades extraction, where one value is right. A rubric grades judgment, where several outputs could be good. Between them you can measure both halves of the work. Neither one measures the other.",
+    "teach": "An answer key grades extraction, where one value is right. A rubric grades judgment, where several outputs could be good. Between them you can measure both halves of the work. Neither one measures the other."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "What you are working with",
+      "title": "Four managed-services agreements",
+      "cap": "",
+      "teach": "Twenty to thirty pages each, written the way a real supplier contract is written. Every sector signs these: law, accounting, financial services, personal injury.",
+      "diagram": "diagrams/19-measuring-extraction/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Why use four real-length agreements rather than one short sample?",
+          "options": [
+            {
+              "t": "Because the exercise takes too little time otherwise.",
+              "why": "Filling the hour isn't a reason to do anything."
+            },
+            {
+              "t": "To give the model more training material.",
+              "why": "Nothing is being trained. Think about what you're trying to find out."
+            },
+            {
+              "t": "Because a rate needs more than one case, and real documents fail in ways samples don't.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Exercise 1 · 15 minutes",
+      "title": "Finish the schema",
+      "cap": "",
+      "teach": "A schema is the formal definition of the data you want out. Three things for every field.",
+      "diagram": "diagrams/19-measuring-extraction/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A schema defines the data you want out. What does each field need?",
+          "options": [
+            {
+              "t": "A name and a data type.",
+              "why": "Two of three. Something is missing that decides whether an answer counts."
+            },
+            {
+              "t": "A name, a description, and a match rule.",
+              "correct": true
+            },
+            {
+              "t": "A name and an example value.",
+              "why": "An example helps and it doesn't tell the grader what counts as right."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Exercise 2 · 10 minutes",
+      "title": "Extract one agreement",
+      "cap": "",
+      "teach": "Point Claude Code at your schema and at the Northgate agreement. One row per field, following the match rule column.",
+      "diagram": "diagrams/19-measuring-extraction/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Why extract one agreement before running all four?",
+          "options": [
+            {
+              "t": "Because the skill isn't written yet.",
+              "why": "True of the ordering and not the reason for it."
+            },
+            {
+              "t": "To keep the cost down.",
+              "why": "The cost is small either way. Think about what a first run tells you."
+            },
+            {
+              "t": "To find the schema's holes while they're still cheap to fix.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Exercise 3 · 5 minutes",
+      "title": "Package it as a skill",
+      "cap": "",
+      "teach": "Turn the working prompt into a file so you can run it again without retyping. Ask Claude Code to write it, and to ask you clarifying questions first.",
+      "diagram": "diagrams/19-measuring-extraction/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "You have a prompt that works. Why turn it into a skill?",
+          "options": [
+            {
+              "t": "So you can run it again without retyping, the same way every time.",
+              "correct": true
+            },
+            {
+              "t": "So the model can improve it over time.",
+              "why": "It doesn't change on its own. You change it."
+            },
+            {
+              "t": "So it runs faster next time.",
+              "why": "Speed isn't it. Think about what happens the third and fourth time you need it."
+            }
+          ]
+        },
+        {
+          "q": "You ask Claude Code to write the skill file. What should you ask it to do first?",
+          "options": [
+            {
+              "t": "Show you a draft to approve.",
+              "why": "Useful, and you'd be approving a draft built on its guesses about what you left out."
+            },
+            {
+              "t": "Ask you clarifying questions.",
+              "correct": true
+            },
+            {
+              "t": "Read the schema so it has the context.",
+              "why": "It has that already. What it doesn't have is what you didn't write down."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Exercise 4 · 10 minutes",
+      "title": "Four agreements, full schedules",
+      "cap": "",
+      "teach": "Run the skill across all four. One record per agreement, plus the complete charge schedule for each. Not a sample. All of it.",
+      "diagram": "diagrams/19-measuring-extraction/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Why run every charge schedule rather than a sample of them?",
+          "options": [
+            {
+              "t": "The skill can't be told to sample.",
+              "why": "It could be. The reason is about what you'd learn rather than what's possible."
+            },
+            {
+              "t": "A sample would be faster but less impressive.",
+              "why": "Impressiveness isn't the point of a measurement."
+            },
+            {
+              "t": "A sample tells you about the sample. The failures hide in what you skipped.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "What we do instead",
+      "title": "Somebody wrote down the right answer for every field",
+      "cap": "",
+      "teach": "By hand, checking each value against the document. That is the answer key.",
+      "diagram": "diagrams/19-measuring-extraction/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "The answer key was written by hand, field by field. Why not have Claude produce it?",
+          "options": [
+            {
+              "t": "You'd be grading its work against its own work.",
+              "correct": true
+            },
+            {
+              "t": "It isn't accurate enough on this kind of document.",
+              "why": "It may well be accurate. Accuracy isn't what disqualifies it here."
+            },
+            {
+              "t": "It would take just as long.",
+              "why": "It would be quicker, which is exactly the temptation. The problem is elsewhere."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Exercise 5.1 · 5 minutes",
+      "title": "Score it against the key",
+      "cap": "",
+      "teach": "Ask Claude Code to compare its output to the answer key, field by field, and report where it matches and where it misses.",
+      "diagram": "diagrams/19-measuring-extraction/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "First scoring run. What does a low score most likely mean at this stage?",
+          "options": [
+            {
+              "t": "Correct answers are being marked wrong because they're formatted differently.",
+              "correct": true
+            },
+            {
+              "t": "The answer key has errors in it.",
+              "why": "It might, and that's not what a first uncompared run usually surfaces."
+            },
+            {
+              "t": "The extraction is genuinely poor.",
+              "why": "Possible, and there's a much more common explanation on a first comparison."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Exercise 5.2 · 5 minutes",
+      "title": "Normalise, then score again",
+      "cap": "",
+      "teach": "A correct answer can look different from the answer key. Strip the formatting off both sides before you compare.",
+      "diagram": "diagrams/19-measuring-extraction/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "What does normalising actually do?",
+          "options": [
+            {
+              "t": "Corrects the extraction so it matches the key.",
+              "why": "Nothing about the extraction changes. The comparison changes."
+            },
+            {
+              "t": "Strips formatting off both sides before comparing.",
+              "correct": true
+            },
+            {
+              "t": "Loosens the match so near-misses count as passes.",
+              "why": "That would hide real failures. It removes a difference that was never meaningful."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Exercise 5.3, if you take one thing away",
+      "title": "You wrote the grader this morning",
+      "cap": "",
+      "teach": "Everything still failing after normalisation traces back to one field whose match rule was vague, or blank. Open the schema you filled in an hour ago.",
+      "diagram": "diagrams/19-measuring-extraction/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "After normalising, some fields still fail. Where do you look?",
+          "options": [
+            {
+              "t": "At the prompt, for instructions that contradict each other.",
+              "why": "Worth a look eventually. The rule that decides what counts as correct comes first."
+            },
+            {
+              "t": "At the documents, for the cases the model misread.",
+              "why": "You'll find some, and there's a more likely and much cheaper cause first."
+            },
+            {
+              "t": "At the schema you filled in this morning, for a vague or blank match rule.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Exercise 6 · 8 minutes",
+      "title": "Build a scorecard",
+      "cap": "",
+      "teach": "A wall of pass and fail text is technically an eval and practically useless. You want to look at this and know within three seconds which field is your problem.",
+      "diagram": "diagrams/19-measuring-extraction/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "What makes a scorecard better than a list of passes and failures?",
+          "options": [
+            {
+              "t": "It can be shared with people who weren't in the session.",
+              "why": "So can a list. The difference is how fast it answers the question."
+            },
+            {
+              "t": "It's a more professional deliverable.",
+              "why": "Presentation isn't the reason. Think about what you do with it."
+            },
+            {
+              "t": "You can see within three seconds which field is the problem.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Exercise 7 · 8 minutes",
+      "title": "Fix the specification, never the output",
+      "cap": "",
+      "teach": "Take the top failing field. Work out which of three things it is, change the rule, and re-run the whole thing.",
+      "diagram": "diagrams/19-measuring-extraction/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A field keeps failing. What do you change?",
+          "options": [
+            {
+              "t": "The specification: the rule that says what counts as correct.",
+              "correct": true
+            },
+            {
+              "t": "The answer key, if the extraction looks defensible.",
+              "why": "Sometimes the key is wrong, and reaching for it first is how a measurement quietly becomes a rubber stamp."
+            },
+            {
+              "t": "The output, so it matches the key.",
+              "why": "That fixes one run and teaches you nothing. The next run fails the same way."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Part 8",
+      "title": "What this does not give you",
+      "cap": "",
+      "teach": "A number you trust too much is worse than no number. Five things this class did not teach, and you should know all of them.",
+      "diagram": "diagrams/19-measuring-extraction/s14.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "You have a number. What is it not?",
+          "options": [
+            {
+              "t": "A way to find which field is weakest.",
+              "why": "It does that well, which is most of why you built it."
+            },
+            {
+              "t": "A measure of how well the system will do on documents unlike these four.",
+              "correct": true
+            },
+            {
+              "t": "A comparison between yesterday's rules and today's.",
+              "why": "That's exactly what it is good for."
+            }
+          ]
+        },
+        {
+          "q": "Why is a number you trust too much worse than no number?",
+          "options": [
+            {
+              "t": "Because other people will quote it out of context.",
+              "why": "They might, and the first problem is what it does to your own judgement."
+            },
+            {
+              "t": "Because it takes effort to produce.",
+              "why": "The effort is worth it. The danger is in what you do with the result."
+            },
+            {
+              "t": "Because it stops you looking, and it was only ever measuring what you specified.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,318 @@
+{
+  "id": "08-agent-skills",
+  "title": "Introduction aux compétences d’agent",
+  "anthropic": "https://anthropic.skilljar.com/introduction-to-agent-skills",
+  "intro": {
+    "title": "Apprenez quelque chose à Claude Code une fois. Il s’en souvient quand cela compte.",
+    "lead": "Six idées, une par écran. Chacune est quelque chose à montrer du doigt pendant que vous expliquez. Tout se joue dans l’observation, alors ménagez les silences.",
+    "teach": "Six idées, un écran chacune. Tout le cours tient en un seul geste : tout ce que vous vous surprenez à expliquer encore et encore à Claude, vous l’écrivez une fois, et à partir de là cela se charge tout seul dès que c’est pertinent. Je vous montre, puis je m’arrête et je vous demande où cela s’inscrit dans votre travail."
+  },
+  "close": {
+    "title": "Écrivez-le une fois. Décrivez-le bien. Laissez Claude le charger quand cela convient.",
+    "lead": "Un dossier et un SKILL.md transforment une instruction répétée en expertise automatique et partageable : construite sobrement, placée parmi les autres outils, réparée par sa description.",
+    "teach": "Si vous ne retenez qu’une chose : écrivez votre méthode une fois, décrivez bien quand elle doit se déclencher, et laissez Claude la charger quand elle convient. Tout ce que nous avons vu aujourd’hui visait à rendre cela durable, partageable et fiable. Les règles qui vivaient dans la tête de quelqu’un vivent désormais sur le disque, et elles ressortent identiques à chaque fois."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1, si vous ne retenez qu’une chose",
+      "title": "Si vous n’arrêtez pas de l’expliquer, écrivez-le une fois",
+      "cap": "Les compétences personnelles ( ~/.claude/skills ) vous suivent dans tous les projets ; les compétences de projet ( .claude/skills ) voyagent dans le dépôt pour toute l’équipe. La règle empirique : si vous vous surprenez à répéter une instruction, c’est une compétence qui attend d’être écrite.",
+      "teach": "C’est l’idée vers laquelle tout le programme construisait. Les règles que votre meilleur collaborateur porte dans sa tête, écrites une seule fois, pour que le travail sorte à sa manière à chaque fois. Cette chose écrite, c’est une compétence : un dossier contenant un fichier en français courant.\n\nClaude ne garde en tête que sa description d’une ligne, et dès que votre demande y correspond, il charge les instructions complètes. Jusqu’ici, ces règles franchissaient la porte à dix-huit heures. Le fichier de compétence les sort de la tête et les pose sur le disque.",
+      "diagram": "diagrams/fr/08-agent-skills/s3.svg",
+      "videos": [
+        {
+          "id": "bjdBVZa66oU",
+          "label": "What are skills?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Une compétence, un CLAUDE.md et une commande slash contiennent tous des instructions. Qu’est-ce qui distingue la compétence ?",
+          "options": [
+            {
+              "t": "Elle est chargée au démarrage, donc toujours disponible.",
+              "why": "Sa description l’est. Les instructions arrivent plus tard, et c’est tout l’intérêt de ce décalage."
+            },
+            {
+              "t": "Elle s’active d’elle-même quand votre demande correspond à sa description.",
+              "correct": true
+            },
+            {
+              "t": "C’est la seule qui puisse contenir plus d’une page.",
+              "why": "La longueur n’est pas la différence. Demandez-vous ce qui fait arriver chacune."
+            }
+          ]
+        },
+        {
+          "q": "Qu’est-ce qui vous indique que quelque chose devrait être une compétence ?",
+          "options": [
+            {
+              "t": "Cela suppose une étape que vous ne savez pas faire vous-même.",
+              "why": "Une compétence capture votre façon de faire actuelle. Il ne s’agit pas d’une capacité qui vous manque."
+            },
+            {
+              "t": "C’est trop long à taper à chaque fois.",
+              "why": "La longueur pousse vers un fichier, et elle ne dit pas lequel."
+            },
+            {
+              "t": "Vous répétez sans cesse la même instruction.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2",
+      "title": "Créez-en une : dossier, fichier, redémarrage",
+      "cap": "Claude ne charge que les noms et les descriptions au démarrage, puis vous demande confirmation avant de tirer la compétence entière dans le contexte. Si deux compétences portent le même nom, c’est la priorité qui tranche : gardez donc des noms distincts.",
+      "teach": "En créer une tient en trois étapes : un dossier, un fichier nommé SKILL.md, un redémarrage. Le fichier est en français courant : un nom, une description d’une ligne indiquant quand l’utiliser, puis les instructions. On la construit simplement en parlant à Claude Code ; on n’écrit pas le fichier à la main.\n\nAu redémarrage, il lit le nom et la description de chaque compétence, et à partir de là il rapproche ce que vous demandez de ce qu’il a lu.",
+      "diagram": "diagrams/fr/08-agent-skills/s4.svg",
+      "videos": [
+        {
+          "id": "Wx6_vjFFyHM",
+          "label": "Creating your first skill"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Vous avez écrit SKILL.md. Pourquoi Claude ne s’en sert-il pas encore ?",
+          "options": [
+            {
+              "t": "Vous n’avez pas redémarré.",
+              "correct": true
+            },
+            {
+              "t": "Il faut la versionner dans le dépôt.",
+              "why": "C’est ainsi qu’on la partage, pas qu’on la charge."
+            },
+            {
+              "t": "La description n’est pas assez précise pour correspondre.",
+              "why": "Une vraie cause, et il y a plus élémentaire à faire d’abord."
+            }
+          ]
+        },
+        {
+          "q": "Deux compétences portent le même nom. Qu’est-ce qui tranche ?",
+          "options": [
+            {
+              "t": "La plus récemment écrite.",
+              "why": "Rien ici ne se joue à la date. Il existe un ordre fixe."
+            },
+            {
+              "t": "Une échelle de priorité, et le vrai conseil est de garder des noms distincts.",
+              "correct": true
+            },
+            {
+              "t": "Claude vous demande laquelle vous vouliez.",
+              "why": "Il ne demandera rien. Il tranche en silence, et c’est pourquoi des noms distincts comptent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3",
+      "title": "Gardez SKILL.md sobre, sortez le reste",
+      "cap": "allowed-tools clôture une compétence — disons Read, Grep, Glob, Bash uniquement — pour du travail en lecture seule ou sensible. Et dites à Claude d’exécuter un script, pas de le lire : la source n’entre jamais dans le contexte, seul le résultat y entre.",
+      "teach": "Gardez le fichier principal court. Deux choses sont obligatoires, le nom et la description, et deux autres sont facultatives. Quand une compétence grossit, on ne l’entasse pas dans un fichier géant.\n\nOn répartit le détail dans des fichiers annexes que Claude n’ouvre que lorsqu’il en a réellement besoin. Et deux contrôles méritent leur place même pour du travail non technique : vous pouvez clôturer une compétence en lecture seule avec allowed-tools, et vous dites à Claude d’exécuter un script plutôt que de le lire, pour que seul le résultat coûte quelque chose, jamais la source.",
+      "diagram": "diagrams/fr/08-agent-skills/s5.svg",
+      "videos": [
+        {
+          "id": "98KaK_rn5rQ",
+          "label": "Configuration and multi-file skills"
+        }
+      ],
+      "checks": [
+        {
+          "q": "SKILL.md a dépassé les 500 lignes. Et maintenant ?",
+          "options": [
+            {
+              "t": "Déplacer le détail dans des fichiers annexes qu’il n’ouvre qu’au besoin.",
+              "correct": true
+            },
+            {
+              "t": "Laisser tel quel. La longueur ne coûte rien une fois chargée.",
+              "why": "Elle coûte du contexte à chaque chargement, ce que la conception cherche précisément à éviter."
+            },
+            {
+              "t": "La scinder en plusieurs compétences.",
+              "why": "Parfois juste, et cela change les moments de déclenchement. Il existe une solution qui conserve une seule compétence."
+            }
+          ]
+        },
+        {
+          "q": "Le frontmatter ressemble à du charabia pour un apprenant non technique. Que dites-vous ?",
+          "options": [
+            {
+              "t": "C’est du YAML, et cela vaut la peine d’en apprendre les bases.",
+              "why": "Cela met une leçon de syntaxe entre eux et ce qui compte vraiment."
+            },
+            {
+              "t": "Ne le lisez pas. L’intelligence se trouve dans la partie en français courant.",
+              "correct": true
+            },
+            {
+              "t": "Claude le génère, vous ne le voyez donc jamais.",
+              "why": "Ils viennent justement de le voir : leur dire qu’ils ne le verront pas ne va pas aider."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4",
+      "title": "Cinq outils, cinq rôles",
+      "cap": "Prenez une compétence quand un savoir doit s’appliquer automatiquement dès que le sujet se présente. CLAUDE.md porte les standards toujours actifs ; les sous-agents isolent le travail délégué ; les hooks se déclenchent sur des événements ; MCP amène les outils extérieurs. La plupart des configurations en combinent plusieurs.",
+      "teach": "« Cinq façons d’adapter Claude Code, et ce ne sont pas des rivales. Une compétence se déclenche quand votre demande y correspond. CLAUDE.md, ce sont les règles de la maison, toujours actives.\n\nLes sous-agents, c’est du travail que vous confiez pour qu’il tourne tout seul. Les hooks se déclenchent sur un événement, comme l’enregistrement d’un fichier. Les connecteurs, MCP, branchent vos outils extérieurs.\n\nLa compétence est le bon choix quand le savoir doit s’appliquer automatiquement dès que le sujet se présente. Choisissez selon le moment où chacun se déclenche. » (CLAUDE.md, ce sont les règles permanentes du projet ; la compétence est la méthode à la demande.)",
+      "diagram": "diagrams/fr/08-agent-skills/s6.svg",
+      "videos": [
+        {
+          "id": "IgNN4v0BJdU",
+          "label": "How skills compare to other Claude Code features"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Cinq personnalisations, cinq rôles. Laquelle est toujours chargée ?",
+          "options": [
+            {
+              "t": "CLAUDE.md.",
+              "correct": true
+            },
+            {
+              "t": "Les hooks.",
+              "why": "Ils se déclenchent sur un événement plutôt que de siéger dans le contexte."
+            },
+            {
+              "t": "Les compétences.",
+              "why": "Seules leurs descriptions le sont. C’est la distinction sur laquelle repose toute la conception."
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un demande s’il faut les cinq pour démarrer.",
+          "options": [
+            {
+              "t": "Oui, elles fonctionnent comme un système.",
+              "why": "Elles se composent bien, et exiger les cinq avant de commencer est la façon dont personne ne commence."
+            },
+            {
+              "t": "Non. Une compétence, sur une seule tâche pénible.",
+              "correct": true
+            },
+            {
+              "t": "Commencez par les hooks, puisque c’est la couche de sécurité.",
+              "why": "Le plus technique des cinq est un point de départ étrange."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Leçon 5",
+      "title": "Trois façons de partager, la plus large en dernier",
+      "cap": "Un piège : les sous-agents démarrent avec un contexte vierge, ils n’héritent donc pas de vos compétences. Listez-les dans le champ skills: d’un agent personnalisé. Les agents intégrés (Explore, Plan, Verify) ne peuvent pas du tout utiliser de compétences.",
+      "teach": "Une compétence qu’une personne utilise est pratique. La même compétence partagée dans une équipe est une norme. Trois sorties, par portée.\n\nDéposez-la dans le dossier du projet et tous ceux qui ouvrent ce dossier l’ont. Empaquetez-la en plugin, que n’importe qui peut installer. Ou, pour un cabinet, un administrateur la pousse à tout le monde, en priorité maximale, pour les règles qui ne sont pas facultatives. C’est le passage de « un outil que j’utilise » à « la façon dont notre cabinet travaille ».",
+      "diagram": "diagrams/fr/08-agent-skills/s7.svg",
+      "videos": [
+        {
+          "id": "OCBi3eScNLk",
+          "label": "Sharing skills"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Trois façons de partager une compétence. Laquelle porte le plus loin ?",
+          "options": [
+            {
+              "t": "La pousser via les réglages gérés par l’entreprise.",
+              "correct": true
+            },
+            {
+              "t": "La versionner dans le dépôt.",
+              "why": "Votre équipe, au clone. Large, mais pas le plus large."
+            },
+            {
+              "t": "La livrer comme plugin.",
+              "why": "Cela atteint quiconque l’installe, et il en existe une qui porte plus loin à l’intérieur d’une organisation."
+            }
+          ]
+        },
+        {
+          "q": "Vous déléguez à un sous-agent et votre compétence ne se déclenche pas. Pourquoi ?",
+          "options": [
+            {
+              "t": "Le modèle du sous-agent ne prend pas en charge les compétences.",
+              "why": "Le modèle n’y est pour rien. C’est une question de ce avec quoi le sous-agent démarre."
+            },
+            {
+              "t": "Les sous-agents démarrent à vide et n’héritent pas de vos compétences.",
+              "correct": true
+            },
+            {
+              "t": "Les compétences ne fonctionnent que dans la session principale, par conception.",
+              "why": "Elles fonctionnent dans un sous-agent, une fois qu’il en a connaissance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Leçon 6",
+      "title": "Quand ça casse, c’est l’une de cinq choses",
+      "cap": "Testez les formulations exactes que vous taperiez — « pourquoi est-ce lent », « rends ça plus rapide » — et ajoutez à la description celles qui échouent. Ce seul correctif règle la plupart des problèmes de déclenchement. Lancez claude --debug pour voir les erreurs de chargement par nom.",
+      "teach": "« Quand une compétence ne se déclenche pas, pas de panique, et ne lisez pas le code. C’est presque toujours la description : Claude n’a pas vu le lien entre ce que vous avez tapé et ce à quoi la compétence dit servir. Le correctif consiste à ajouter les formulations exactes que vous emploieriez vraiment.\n\nTestez comme vous demanderiez réellement, et toute formulation qui ne déclenche rien, vous l’ajoutez à la description. Ce seul correctif règle l’essentiel. » (Écho à l’écran 5 de Claude 101 : quand ça déraille, c’est presque toujours réparable, et le correctif est du contexte que la description ne portait pas.)",
+      "diagram": "diagrams/fr/08-agent-skills/s8.svg",
+      "videos": [
+        {
+          "id": "YBa1cwaG7is",
+          "label": "Troubleshooting skills"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Une compétence ne se déclenche pas. Que faites-vous en premier ?",
+          "options": [
+            {
+              "t": "Lancer le validateur, qui attrape la structure avant qu’on débogue la logique.",
+              "correct": true
+            },
+            {
+              "t": "Vérifier l’échelle de priorité, au cas où deux noms se télescopent.",
+              "why": "Cela vaut la vérification, et c’est l’une des cinq causes possibles plutôt que le premier geste."
+            },
+            {
+              "t": "Réécrire la description avec les formulations que vous taperiez vraiment.",
+              "why": "Le bon correctif pour ce symptôme, et il existe une étape moins coûteuse avant tout diagnostic."
+            }
+          ]
+        },
+        {
+          "q": "« Qu’est-ce que ça fait sous le capot ? » Vers quoi redirigez-vous ?",
+          "options": [
+            {
+              "t": "La sortie de débogage, qui montre la séquence de chargement.",
+              "why": "Elle signale par nom, et y envoyer quelqu’un d’emblée lui apprend à lire des journaux plutôt qu’à écrire des descriptions."
+            },
+            {
+              "t": "La description, qui est en français courant et où l’on change le comportement.",
+              "correct": true
+            },
+            {
+              "t": "Les scripts, puisque c’est là que le vrai travail se fait.",
+              "why": "Les scripts font la partie répétable. Le comportement dont il est question se décide ailleurs."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "Introduction to Agent Skills"
+}

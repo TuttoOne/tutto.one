@@ -1,0 +1,326 @@
+{
+  "id": "17-where-claude-keeps-what-it-knows",
+  "title": "Where Claude keeps what it knows",
+  "anthropic": null,
+  "intro": {
+    "title": "Where Claude keeps what it knows.",
+    "lead": "Three stores, four depths, one folder name. Once you see the pattern, the whole configuration model collapses into a single idea.",
+    "teach": "Three stores, four depths, one folder name. Once you see the pattern, the whole configuration model collapses into a single idea."
+  },
+  "close": {
+    "title": "Everything is a file. Where it sits decides who it applies to.",
+    "lead": "Check any of it yourself: /memory lists the files, /context shows what actually loaded, /doctor tells you why something is not taking effect.",
+    "teach": "Check any of it yourself: /memory lists the files, /context shows what actually loaded, /doctor tells you why something is not taking effect."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Step 1",
+      "title": "Everything is a file",
+      "cap": "Local storage is not the same as local processing. The durable copy stays on the workstation, but when a session loads one of these files its contents go to the API as part of the prompt, exactly like any source file Claude reads.",
+      "teach": "There is no memory database and no account-level profile. Three things get called memory, they have different authors, and all three are plain text on your own machine.",
+      "diagram": "diagrams/17-where-claude-keeps-what-it-knows/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Where does Claude Code keep what it remembers about you?",
+          "options": [
+            {
+              "t": "In plain text files on your own machine.",
+              "correct": true
+            },
+            {
+              "t": "In a local database the tool manages.",
+              "why": "No database anywhere. It's simpler and more inspectable than that."
+            },
+            {
+              "t": "In your account, so it follows you between machines.",
+              "why": "There is no account-level profile. Think about what you could open and read yourself."
+            }
+          ]
+        },
+        {
+          "q": "The files are stored locally. Does that mean the contents stay on your machine?",
+          "options": [
+            {
+              "t": "Yes. Local storage means local processing.",
+              "why": "Those are two different things, and running them together is the mistake this slide exists to stop."
+            },
+            {
+              "t": "No. The durable copy is local, but a loaded file goes to the API as part of the prompt.",
+              "correct": true
+            },
+            {
+              "t": "Only if you use a local model.",
+              "why": "That changes where the model runs. The question is what happens to a file that gets loaded."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Step 2",
+      "title": "They all live in one folder",
+      "cap": "One folder per repository under projects\\ , so every worktree and checkout of the same repo shares one memory. Two developers on the same codebase build separate memories, and neither sees the other's.",
+      "teach": "In your home directory there is a folder called .claude . That is where your version of everything sits: your instructions, your procedures, and the memory Claude keeps per repository.",
+      "diagram": "diagrams/17-where-claude-keeps-what-it-knows/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Two developers work on the same codebase. What happens to the memory Claude keeps per repository?",
+          "options": [
+            {
+              "t": "They share it, since it belongs to the repository.",
+              "why": "It's keyed by repository and it lives in each person's home folder."
+            },
+            {
+              "t": "They build separate memories, and neither sees the other's.",
+              "correct": true
+            },
+            {
+              "t": "It merges when they push.",
+              "why": "Nothing about it is committed, so there's nothing to merge."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "The same thing, on a real machine",
+      "title": "This is what it actually looks like",
+      "cap": "",
+      "teach": "Not an illustration. A working laptop, with the runtime clutter stripped out.",
+      "diagram": "diagrams/17-where-claude-keeps-what-it-knows/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Why show a real laptop's folder rather than a diagram of one?",
+          "options": [
+            {
+              "t": "Because it is genuinely this plain, and an illustration would look tidier than the truth.",
+              "correct": true
+            },
+            {
+              "t": "Because the folder names change between versions.",
+              "why": "They're stable. Nothing here depends on a version."
+            },
+            {
+              "t": "Because the layout differs between machines.",
+              "why": "It doesn't. That's rather the point of there being one folder name."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Step 3",
+      "title": "The same folder exists again, in the repository",
+      "cap": "The nesting is about audience, not disk. A repository is not inside your home folder. It is drawn inside because it reaches fewer people, and that is the variable worth reading off this picture.",
+      "teach": "A second .claude lives in the codebase itself, and it is committed. That is the whole difference between a habit you have and a standard your team has.",
+      "diagram": "diagrams/17-where-claude-keeps-what-it-knows/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A second .claude folder lives in the repository and is committed. What does that change?",
+          "options": [
+            {
+              "t": "It makes the configuration load faster for the team.",
+              "why": "Speed isn't it. Think about who ends up with the file."
+            },
+            {
+              "t": "A habit you have becomes a standard your team has.",
+              "correct": true
+            },
+            {
+              "t": "It overrides anything in your home folder.",
+              "why": "The layers add up rather than replacing each other."
+            }
+          ]
+        },
+        {
+          "q": "The repository folder is drawn inside your home folder. Is that where it lives on disk?",
+          "options": [
+            {
+              "t": "No, it's drawn that way to show load order.",
+              "why": "Load order is a separate idea. The nesting is about reach."
+            },
+            {
+              "t": "Yes, repositories sit under your home directory.",
+              "why": "They often do and the drawing isn't describing disk at all."
+            },
+            {
+              "t": "No. The nesting shows audience: it reaches fewer people.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Step 4, if you take one thing away",
+      "title": "One folder name, four depths",
+      "cap": "The instruction files add up rather than replacing each other, read from the outside in.",
+      "teach": "Two more layers exist, one outside yours and one inside the repository. Four in total, and the only thing separating them is where the folder sits.",
+      "diagram": "diagrams/17-where-claude-keeps-what-it-knows/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Four depths, one folder name. What separates them?",
+          "options": [
+            {
+              "t": "What kind of file each one can hold.",
+              "why": "All four hold the same kinds of file. That's what makes it one idea rather than four."
+            },
+            {
+              "t": "Which of them Claude reads first.",
+              "why": "Read order follows from position rather than defining it."
+            },
+            {
+              "t": "Where the folder sits.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "You have an instruction at two different depths. What happens?",
+          "options": [
+            {
+              "t": "They add up, read from the outside in.",
+              "correct": true
+            },
+            {
+              "t": "Claude flags the conflict and asks.",
+              "why": "It won't ask. They combine quietly."
+            },
+            {
+              "t": "The innermost one wins and the outer is ignored.",
+              "why": "That would make the outer layers pointless most of the time."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Step 5",
+      "title": "Not all of it loads at once",
+      "cap": "This is the whole argument for keeping a CLAUDE.md short. A skill contributes only its one-line description until Claude actually uses it, so a long procedure is free until the moment it is needed.",
+      "teach": "Some of these files are read at the start of every session and cost you context whether they are relevant or not. The rest sit on disk until Claude reaches for them.",
+      "diagram": "diagrams/17-where-claude-keeps-what-it-knows/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Why keep CLAUDE.md short?",
+          "options": [
+            {
+              "t": "It's read every session and costs context whether it's relevant or not.",
+              "correct": true
+            },
+            {
+              "t": "There's a size limit on the file.",
+              "why": "No limit to hit. The cost is real before you get anywhere near one."
+            },
+            {
+              "t": "Long files are harder for Claude to follow.",
+              "why": "It handles length well. The cost is somewhere else and it's paid constantly."
+            }
+          ]
+        },
+        {
+          "q": "So where does a long procedure belong?",
+          "options": [
+            {
+              "t": "In CLAUDE.md, since that is what it's for.",
+              "why": "That's the file you're trying to keep short, and a procedure is exactly the thing that bloats it."
+            },
+            {
+              "t": "In a skill, which contributes only its description until it's used.",
+              "correct": true
+            },
+            {
+              "t": "Split across several CLAUDE.md files at different depths.",
+              "why": "They all load. Splitting it changes nothing about the cost."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Step 6",
+      "title": "Skills use the same four places",
+      "cap": "Put a procedure in the repository and every developer who clones it has it. Put the same file in your home folder and it helps one person. That choice, and nothing else, is your distribution mechanism.",
+      "teach": "A skill is a folder with a SKILL.md in it: a written procedure. Nothing new to learn about where it goes, because it goes exactly where everything else does.",
+      "diagram": "diagrams/17-where-claude-keeps-what-it-knows/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "You put a skill in the repository rather than your home folder. What have you decided?",
+          "options": [
+            {
+              "t": "That it should load earlier in the session.",
+              "why": "Load timing isn't what position decides here."
+            },
+            {
+              "t": "Your distribution: everyone who clones gets it.",
+              "correct": true
+            },
+            {
+              "t": "That the team can edit it.",
+              "why": "They can, and editing isn't the decision you just made."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Step 7",
+      "title": "Instructions advise. Settings enforce.",
+      "cap": "People reach for the left when they need the right, then wonder why it held nine times out of ten instead of ten. If it has to be impossible rather than discouraged, it is not a written instruction.",
+      "teach": "The distinction that saves the most trouble. Both live in the same four folders, and only one of them is a control.",
+      "diagram": "diagrams/17-where-claude-keeps-what-it-knows/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Something must be impossible, not merely discouraged. Where does it go?",
+          "options": [
+            {
+              "t": "Settings, which enforce rather than advise.",
+              "correct": true
+            },
+            {
+              "t": "A skill, so it loads whenever the situation applies.",
+              "why": "It loads when Claude judges it relevant, and a judgement can go the other way."
+            },
+            {
+              "t": "A written instruction, stated firmly.",
+              "why": "Firmness doesn't change the category. An instruction advises, however it's worded."
+            }
+          ]
+        },
+        {
+          "q": "Someone wrote a rule as an instruction and it held nine times out of ten. What went wrong?",
+          "options": [
+            {
+              "t": "The instruction was too vague.",
+              "why": "Sharpening it might get you to nineteen out of twenty. It won't get you to certainty."
+            },
+            {
+              "t": "They reached for the thing that advises when they needed the thing that enforces.",
+              "correct": true
+            },
+            {
+              "t": "It was at the wrong depth.",
+              "why": "Depth changes who gets it, not whether it binds."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

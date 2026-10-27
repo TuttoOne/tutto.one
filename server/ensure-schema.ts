@@ -166,3 +166,35 @@ export async function ensureEventsSchema(): Promise<void> {
   await db.execute(sql`CREATE INDEX IF NOT EXISTS event_bookings_event_idx ON event_bookings (event_id)`);
   await db.execute(sql`CREATE INDEX IF NOT EXISTS event_bookings_email_idx ON event_bookings (email)`);
 }
+
+/** The Pocket Praxis account tables (/pocket-praxis). Emails are stored lowercased. */
+export async function ensurePocketSchema(): Promise<void> {
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS pocket_users (
+    id bigserial PRIMARY KEY,
+    email text NOT NULL UNIQUE,
+    name text,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    last_seen_at timestamptz NOT NULL DEFAULT now()
+  )`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS pocket_login_codes (
+    id bigserial PRIMARY KEY,
+    email text NOT NULL,
+    code_hmac bytea NOT NULL,
+    expires_at timestamptz NOT NULL,
+    attempts integer NOT NULL DEFAULT 0,
+    created_at timestamptz NOT NULL DEFAULT now()
+  )`);
+  await db.execute(sql`CREATE INDEX IF NOT EXISTS pocket_login_codes_email_idx ON pocket_login_codes (email)`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS pocket_sessions (
+    token_hash bytea PRIMARY KEY,
+    user_id bigint NOT NULL REFERENCES pocket_users(id) ON DELETE CASCADE,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    expires_at timestamptz NOT NULL
+  )`);
+  await db.execute(sql`CREATE INDEX IF NOT EXISTS pocket_sessions_user_idx ON pocket_sessions (user_id)`);
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS pocket_progress (
+    user_id bigint PRIMARY KEY REFERENCES pocket_users(id) ON DELETE CASCADE,
+    data jsonb NOT NULL,
+    updated_at timestamptz NOT NULL DEFAULT now()
+  )`);
+}

@@ -1,0 +1,434 @@
+{
+  "id": "10-capabilities-and-limitations",
+  "title": "Capacités et limites de l’IA",
+  "anthropic": "https://anthropic.skilljar.com/ai-capabilities-and-limitations",
+  "intro": {
+    "title": "Ce que l’IA sait faire, où elle casse, et comment faire la différence.",
+    "lead": "Neuf idées, une par écran : un modèle mental de la machine, petit et net. Chacune est quelque chose à montrer du doigt pendant que vous expliquez. Tout se joue dans l’observation, alors ménagez les silences.",
+    "teach": "La plupart des gens oscillent entre une confiance totale dans l’IA et une méfiance totale. Les deux ont tort. À la fin de ce cours, vous aurez en tête un petit modèle de la machine : quatre choses où elle est forte et faible, et un moyen de déterminer, pour n’importe quelle tâche, avec quelle rigueur vérifier. Neuf idées, un écran chacune. L’observation est la leçon, alors je ménagerai les silences."
+  },
+  "close": {
+    "title": "Quatre propriétés. Chacune un continuum. Une confiance calibrée.",
+    "lead": "Prédiction du token suivant, Connaissance, Mémoire de travail, Pilotabilité : situez votre tâche sur chacune, puis ajustez la rigueur de votre vérification à sa position.",
+    "teach": "Si vous ne retenez qu’une chose : ne demandez pas « puis-je faire confiance à l’IA ? ». Demandez « où cette tâche se situe-t-elle sur chacun des quatre curseurs, et avec quelle rigueur dois-je vérifier vu cela ? ». Faites-lui confiance sur les parties banales et rebattues. Vérifiez-la sur les parties précises et vérifiables : noms, dates, chiffres, références.\n\nC’est toute la discipline, et elle sera encore vraie quand ce modèle aura trois versions de retard."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1",
+      "title": "Deux moitiés d’un même système",
+      "cap": "Pourquoi c’est durable : les frontières bougent à mesure que les modèles progressent, mais les propriétés restent les mêmes. Apprenez le motif une fois et il continue de rapporter.",
+      "teach": "Si vous avez suivi le cadre 4D, il vous a appris le versant humain : déléguer, décrire, juger, assumer le résultat. Voici l’autre moitié : ce que fait réellement la machine de l’autre côté de ces habitudes. Et la raison pour laquelle cela vaut votre temps : les modèles changent tous les quelques mois, mais ces quatre propriétés, non. Apprenez le motif une fois et il continue de rapporter.",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s3.svg",
+      "videos": [
+        {
+          "id": "AiiiyYiEJa4",
+          "label": "What we mean by generative AI"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Ce cours et le cadre 4D sont deux moitiés d’un même système. Quelle moitié est laquelle ?",
+          "options": [
+            {
+              "t": "Le 4D, c’est votre façon de travailler avec l’IA ; celui-ci, c’est le comportement de la machine.",
+              "correct": true
+            },
+            {
+              "t": "Le 4D est pour les débutants, celui-ci est la version avancée.",
+              "why": "Ni l’un ni l’autre n’est un niveau. Ils décrivent des sujets différents."
+            },
+            {
+              "t": "Le 4D est la théorie, celui-ci la pratique.",
+              "why": "Les deux sont pratiques. La séparation porte sur le versant du couple que chacun décrit."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2, si vous ne retenez qu’une chose",
+      "title": "Quatre propriétés, chacune un continuum",
+      "cap": "Une confiance calibrée, ce n’est pas faire confiance ou se méfier de l’IA en bloc. C’est situer sa tâche sur chaque continuum, puis ajuster la rigueur de la vérification à cette position.",
+      "teach": "« Voici tout le cours en une image. Quatre propriétés, et chacune est un curseur, pas un interrupteur. À gauche, le bout capacité : faites confiance.\n\nÀ droite, le bout limite : vérifiez davantage. L’erreur que tout le monde commet est de traiter l’IA comme une seule chose à laquelle on fait confiance ou non. Elle ne l’est pas.\n\nUne même tâche peut se situer tout à gauche sur un curseur et tout à droite sur un autre. Le savoir-faire consiste à situer sa tâche sur chacun, puis à vérifier avec la rigueur qu’exige cette position. » (C’est le cadrage central de tout le cours : revenez sans cesse à « où cette tâche se situe-t-elle sur le curseur ? ».)",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s4.svg",
+      "videos": [
+        {
+          "id": "Sj1yynxA9hw",
+          "label": "AI Capabilities & Limitations: A companion course to AI Fluency & Foundations"
+        }
+      ],
+      "checks": [
+        {
+          "q": "« Donc je dois quand même tout vérifier ? » Quelle est la réponse ?",
+          "options": [
+            {
+              "t": "Oui. La vérification est le prix à payer pour s’en servir.",
+              "why": "C’est aussi gaspilleur que de ne rien vérifier, et c’est précisément la croyance que les quatre propriétés existent pour remplacer."
+            },
+            {
+              "t": "Non. Vous vérifiez plus là où elle est faible et moins là où elle est forte.",
+              "correct": true
+            },
+            {
+              "t": "Seulement pour ce qui quitte votre bureau.",
+              "why": "Une règle empirique raisonnable qui ignore quelles parties de la sortie sont réellement risquées."
+            }
+          ]
+        },
+        {
+          "q": "Chacune des quatre propriétés est un continuum. Qu’est-ce que cela veut dire en pratique ?",
+          "options": [
+            {
+              "t": "On peut régler sa position sur chaque axe.",
+              "why": "Vous ne pouvez pas déplacer l’axe. Vous pouvez décider où vérifier."
+            },
+            {
+              "t": "Elle s’améliore le long de chaque axe à mesure que les modèles progressent.",
+              "why": "Les frontières bougent, et la propriété ne cesse pas d’être un compromis."
+            },
+            {
+              "t": "Le même mécanisme vous donne à la fois la force et la faiblesse.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3",
+      "title": "Le caractère est entraîné, pas émergent",
+      "cap": "Faites précéder une demande d’une hypothèse fausse — « je trouve ce plan à toute épreuve » — et regardez-la vous donner raison. C’est la complaisance, et une fois que vous savez la nommer, vous la voyez venir.",
+      "teach": "Sa personnalité a été entraînée, en deux étapes. D’abord, il a simplement appris à prédire le mot suivant sur une immense quantité de texte : un complèteur de documents, sans la moindre idée d’aider qui que ce soit. Ensuite, des humains ont noté les bonnes réponses, et cela en a fait un assistant.\n\nCette seconde étape laisse des empreintes : il vous donne trop facilement raison, il sur-explique, il nuance quand ce n’est pas nécessaire, et — la plus importante — il semble exactement aussi sûr de lui quand il a tort que quand il a raison. Une fois que vous savez nommer cela, vous le voyez venir.",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s5.svg",
+      "videos": [
+        {
+          "id": "6jRk3nC4-xI",
+          "label": "How AI gets its character"
+        }
+      ],
+      "checks": [
+        {
+          "q": "D’où vient la serviabilité du modèle ?",
+          "options": [
+            {
+              "t": "Du prompt système qu’Anthropic pose à chaque requête.",
+              "why": "Cela oriente le comportement du jour. Le caractère a été fixé bien avant."
+            },
+            {
+              "t": "Elle a émergé une fois les modèles devenus assez grands.",
+              "why": "Rien n’a émergé. Elle y a été mise, à une étape précise."
+            },
+            {
+              "t": "D’un affinage sur les préférences humaines, après une étape qui ne faisait que prédire du texte.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Que laisse derrière elle l’étape d’entraînement sur les préférences ?",
+          "options": [
+            {
+              "t": "Une tendance à approuver l’hypothèse que vous lui avez tendue.",
+              "correct": true
+            },
+            {
+              "t": "Un refus de répondre à tout ce qui est litigieux.",
+              "why": "Il répond à beaucoup de choses. L’empreinte est plus subtile et plus flatteuse."
+            },
+            {
+              "t": "Une préférence pour les réponses longues plutôt que courtes.",
+              "why": "La verbosité est un style que l’on peut piloter. Celle-ci change ce qu’il vous présente comme vrai."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4",
+      "title": "C’est de la saisie prédictive à grande échelle",
+      "cap": "La démonstration « écrivez à un ami » le rend palpable : continuez de taper le mot suggéré par votre téléphone et vous avez construit un minuscule modèle de langage. Fluidité et fabulation sont le même mécanisme : impossible d’avoir l’une sans l’autre.",
+      "teach": "Sous le capot, c’est de la saisie prédictive à grande échelle. Il écrit le mot suivant d’après ce qui suit habituellement, puis le suivant, puis le suivant. Le jeu du clavier de téléphone : continuez de taper le mot suggéré et vous avez construit une version miniature de tout cela.\n\nVoici ce qui compte : la fluidité que vous adorez et les faits inventés que vous redoutez sont le même mécanisme. On n’a pas l’un sans l’autre. Et l’inventé se concentre à un seul endroit : les détails précis.\n\nNoms, dates, chiffres, références. Plus l’affirmation est vague, plus elle est sûre ; plus elle est précise, plus elle mérite une vérification.",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s6.svg",
+      "videos": [
+        {
+          "id": "kl0gunXTvyk",
+          "label": "How AI models use next token prediction"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Fluidité et fabulation viennent du même mécanisme. Qu’est-ce qui en découle ?",
+          "options": [
+            {
+              "t": "Les réponses qui sonnent fluides ont plus de chances d’être fausses.",
+              "why": "La fluidité n’est pas un signal d’alerte en soi. Elle est constante dans les deux cas."
+            },
+            {
+              "t": "On n’a pas l’une sans l’autre : on la gère plutôt qu’on la supprime.",
+              "correct": true
+            },
+            {
+              "t": "De meilleurs modèles finiront par avoir la fluidité sans la fabulation.",
+              "why": "Cela la traite comme un défaut en cours de correction plutôt que comme le mécanisme qui fonctionne."
+            }
+          ]
+        },
+        {
+          "q": "Où la fabulation se concentre-t-elle ?",
+          "options": [
+            {
+              "t": "Dans les opinions et les jugements.",
+              "why": "Ceux-là sont contestables plutôt que fabriqués. Le risque est dans ce qui a l’air vérifiable."
+            },
+            {
+              "t": "Dans tout ce qui sort de ses données d’entraînement.",
+              "why": "Globalement vrai et trop large pour agir. Il existe un motif plus net."
+            },
+            {
+              "t": "Dans les détails précis : noms, dates, chiffres, références.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Leçon 5",
+      "title": "Il sait ce qu’il a lu, figé à une date de coupure",
+      "cap": "Défaillances caractéristiques : l’obsolescence, une couverture inégale, un biais hérité sur ce qui compte comme « normal », et aucun souvenir de ses sources. La démonstration à 1024 dimensions montre comment la recherche trouve du sens, pas des mots-clés : « voiture » atterrit près de « ma Civic a besoin de plaquettes ».",
+      "teach": "Il ne connaît que ce qu’il a lu pendant l’entraînement, et cette lecture s’est arrêtée à une date fixe. Aucun souvenir de rien depuis, à moins que vous ne lui donniez un moyen d’aller voir. La question à se poser n’est donc pas « est-ce qu’il sait cela ? », mais « à quel point cela était-il courant et établi dans ce qu’il a lu ? ». Grand public et stable : il est fort.\n\nRécent, de niche, local, ou modifié le mois dernier : il est mince, et il ne vous dira pas toujours qu’il est mince. La recherche web et les outils connectés sont la façon de percer ce mur quand il vous faut des faits à jour.",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s7.svg",
+      "videos": [
+        {
+          "id": "iSLdQXeKbHs",
+          "label": "Understanding knowledge gaps in AI models"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Quelle question vaut mieux que « est-ce qu’il sait cela ? »",
+          "options": [
+            {
+              "t": "À quel point cela était-il représenté dans ce qu’il a lu ?",
+              "correct": true
+            },
+            {
+              "t": "Peut-il chercher cela ?",
+              "why": "Cela concerne les outils autour de lui, pas ce qu’il détient."
+            },
+            {
+              "t": "Est-ce postérieur à la date de coupure ?",
+              "why": "Bon à savoir, et cela n’attrape que ce qui est récent."
+            }
+          ]
+        },
+        {
+          "q": "Quel est le piège subtil dans sa façon de traiter votre métier ?",
+          "options": [
+            {
+              "t": "Il retient par défaut la pratique la plus récente qu’il a vue.",
+              "why": "Il retient par défaut la plus courante qu’il a vue, ce qui est une autre défaillance."
+            },
+            {
+              "t": "Il suppose que votre métier fonctionne comme le décrirait un profane.",
+              "correct": true
+            },
+            {
+              "t": "Il refuse de répondre sur les sujets spécialisés.",
+              "why": "Il répond avec assurance. C’est le problème, pas la protection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Leçon 6",
+      "title": "Le milieu d’un long contexte se perd",
+      "cap": "C’est une falaise, pas une pente : cela marche jusqu’à ce que cela ne marche plus, et le débordement est silencieux. Le remède n’est pas plus de contexte, c’est un contexte plus malin : mettez l’essentiel en tête, répétez ce qui compte, repartez à zéro. Mémoire, compaction et projets repoussent la falaise.",
+      "teach": "Tout ce à quoi il prête attention en ce moment vit dans un espace de travail de taille fixe. Pensez au bachotage avant un examen : vous retenez le début et la fin de la liste, et le milieu s’évanouit. L’IA fait exactement pareil.\n\nEnfouissez une instruction au milieu d’un long document et il y a un vrai risque qu’elle soit ignorée en silence, sans le moindre avertissement. L’instinct de tout coller se retourne donc contre vous : chaque page supplémentaire pousse autre chose dans la zone morte. Le remède n’est pas plus de contexte, c’est un contexte plus malin : mettez l’essentiel en tête, répétez-le à la fin, et quand une conversation devient longue et confuse, repartez à zéro.",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s8.svg",
+      "videos": [
+        {
+          "id": "QJjt4wF4iHM",
+          "label": "The Context Window: How working memory affects generative AI outputs"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Vous placez une contrainte clé au milieu d’un long brief. Que se passe-t-il ?",
+          "options": [
+            {
+              "t": "Elle est résumée avec le reste.",
+              "why": "Rien ne la résume. Elle reçoit simplement moins d’attention."
+            },
+            {
+              "t": "Elle est pondérée à égalité avec tout le reste.",
+              "why": "L’attention n’est pas plate. La position change ce qui survit."
+            },
+            {
+              "t": "Elle disparaît en silence. L’attention privilégie les extrémités.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "En quoi la mémoire de travail diffère-t-elle des trois autres propriétés ?",
+          "options": [
+            {
+              "t": "Elle a un bord net : au-delà de la limite, la matière a purement disparu.",
+              "correct": true
+            },
+            {
+              "t": "C’est la seule que l’on puisse mesurer directement.",
+              "why": "Mesurable, et ce n’est pas ce qui la fait se comporter différemment."
+            },
+            {
+              "t": "C’est la seule qui s’améliore avec un meilleur modèle.",
+              "why": "Elles se déplacent toutes quand les modèles progressent. Celle-ci a quelque chose que les autres n’ont pas."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Leçon 7",
+      "title": "Il suit la lettre, pas l’esprit",
+      "cap": "Quand il a suivi littéralement mais inutilement, reformulez l’objectif : parler plus fort n’aidera pas. « Plus court, pour que le dirigeant voie la demande en page deux » fait mouche. Dans un travail en plusieurs étapes, insérez un point de contrôle pour qu’un écart initial ne se propage pas jusqu’au bout.",
+      "teach": "Il est pilotable : dites-lui « trois colonnes, moins de 100 mots, à la deuxième personne » et il exécute parfaitement. Mais il suit vos mots par appariement de motifs, pas en comprenant ce que vous visez. Ainsi « fais plus court » vous donne moins de mots, ce qui n’était pas votre intention : vous vouliez « faire ressortir la demande pour qu’un dirigeant pressé la repère ».\n\nQuand il fait la lettre et rate l’essentiel, ne répétez pas l’instruction plus fort. Énoncez l’objectif : « plus court, pour que la décision saute aux yeux en page un ». Et sur tout ce qui comporte plusieurs étapes ou des chiffres, glissez un point de contrôle : un petit écart initial se compose jusqu’au bout.",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s9.svg",
+      "videos": [
+        {
+          "id": "M_RwSRmp220",
+          "label": "How steerability affects generative AI outputs"
+        }
+      ],
+      "checks": [
+        {
+          "q": "La pilotabilité est forte sur certaines instructions et faible sur d’autres. Sur lesquelles est-elle forte ?",
+          "options": [
+            {
+              "t": "Sur tout ce que vous énoncez clairement, si abstrait soit-il.",
+              "why": "La clarté aide, et l’abstraction est précisément là où il dérape."
+            },
+            {
+              "t": "Les instructions courtes, concrètes et vérifiables : format, longueur, rôle.",
+              "correct": true
+            },
+            {
+              "t": "Les règles sur ce qu’il ne doit jamais faire.",
+              "why": "Ce sont celles qu’il a le plus de chances de suivre à la lettre en ratant l’esprit."
+            }
+          ]
+        },
+        {
+          "q": "Il se trompe avec assurance sur un calcul. Quel est le remède ?",
+          "options": [
+            {
+              "t": "Utiliser un modèle plus gros pour tout ce qui est numérique.",
+              "why": "Cela déplace un peu la frontière et laisse le mécanisme inchangé."
+            },
+            {
+              "t": "Lui dire de revérifier son raisonnement.",
+              "why": "Il vérifiera de la même façon qu’il a calculé, c’est-à-dire par ce qui a déraillé."
+            },
+            {
+              "t": "Lui demander d’écrire du code pour faire le calcul.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Leçon 8",
+      "title": "La plupart des défaillances sont la rencontre de deux propriétés",
+      "cap": "D’autres paires fonctionnent pareil : des calculs faux avec assurance (déportez-les vers du code), une mauvaise prémisse approuvée (invitez à une vraie contradiction). Nommer la paire, c’est du discernement appliqué : on évalue mieux quand on sait à quel genre d’erreur on a affaire.",
+      "teach": "La plupart des vraies défaillances ne sont pas une chose qui déraille, mais deux. Une référence inventée, c’est la Prédiction du token suivant (elle produit du plausible) qui rencontre la Connaissance (il n’avait pas la source). La dérive dans une longue conversation, c’est la Mémoire de travail (il a perdu le contexte initial) qui rencontre la Pilotabilité (votre objectif s’est donc estompé).\n\nLe geste utile : quand quelque chose cloche, nommez les deux propriétés qui se sont percutées. Le remède est presque toujours inscrit dans la paire : vérifier les détails précis, ou refournir le contexte et réénoncer l’objectif.",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s10.svg",
+      "videos": [
+        {
+          "id": "SPkg5WRfnEE",
+          "label": "Diagnosing AI failures"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Des noms et des dates hallucinés. Quelles deux propriétés se sont rencontrées ?",
+          "options": [
+            {
+              "t": "Connaissance et Pilotabilité.",
+              "why": "Ni l’une ni l’autre n’invente le détail à elle seule. L’une des deux doit être le mécanisme générateur."
+            },
+            {
+              "t": "Mémoire de travail et Pilotabilité.",
+              "why": "Cette paire produit la dérive en long contexte plutôt que des détails inventés."
+            },
+            {
+              "t": "Prédiction du token suivant et Connaissance.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Que vous apporte concrètement le raisonnement par paires de propriétés ?",
+          "options": [
+            {
+              "t": "« Il invente » devient une défaillance nommée assortie d’un remède.",
+              "correct": true
+            },
+            {
+              "t": "Un moyen de prédire quelles tâches échoueront avant de les tenter.",
+              "why": "C’est diagnostique plutôt que prédictif. On y recourt une fois que quelque chose cloche."
+            },
+            {
+              "t": "Un vocabulaire pour expliquer les défaillances à des collègues.",
+              "why": "Utile, et cela s’arrête à l’explication. Il y a quelque chose que cela fait pour vous sur le moment."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Leçon 9",
+      "title": "Gardez en tête un petit modèle de la machine",
+      "cap": "C’est cela, la confiance calibrée, et elle survit à chaque montée de version. Ce cours est la moitié machine ; le cours « Cadre 4D et fondations » est la moitié humaine qui agit dessus.",
+      "teach": "Voici le tout ramené à une habitude. Quelque chose cloche dans une réponse. Au lieu de simplement vous en méfier, passez-la par quatre questions.\n\nD’où cela vient-il — Prédiction du token suivant ? Le savait-il vraiment — Connaissance ? Prêtait-il attention à la bonne chose — Mémoire de travail ?\n\nL’ai-je bien piloté — Pilotabilité ? Situez la tâche, et le remède suit : vérifier, refournir le contexte, ou ajouter un point de contrôle. C’est cela, la confiance calibrée.\n\nEt elle survit à chaque montée de version : les lignes ne cessent de reculer à mesure que les modèles s’améliorent, mais les quatre questions restent exactement les mêmes.",
+      "diagram": "diagrams/fr/10-capabilities-and-limitations/s11.svg",
+      "videos": [
+        {
+          "id": "F7ciHDKAlCA",
+          "label": "Applying the 4D framework to get better AI outputs"
+        }
+      ],
+      "checks": [
+        {
+          "q": "En quoi consiste réellement un usage maîtrisé ?",
+          "options": [
+            {
+              "t": "À vérifier chaque sortie par rapport à une source.",
+              "why": "C’est encore un effort uniforme, que les quatre propriétés existent pour remplacer par un effort ciblé."
+            },
+            {
+              "t": "À mémoriser les modes de défaillance pour pouvoir les éviter.",
+              "why": "Ils sont trop nombreux à mémoriser, et ils se recombinent. Quelque chose de plus petit porte plus loin."
+            },
+            {
+              "t": "À reconnaître à quel genre d’erreur on a affaire, puis à recourir à la réponse qui lui correspond.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "AI Capabilities and Limitations"
+}

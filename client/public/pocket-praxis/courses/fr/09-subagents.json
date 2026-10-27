@@ -1,0 +1,218 @@
+{
+  "id": "09-subagents",
+  "title": "Introduction aux sous-agents",
+  "anthropic": "https://anthropic.skilljar.com/introduction-to-subagents",
+  "intro": {
+    "title": "Confiez le gros du travail à un sous-agent.",
+    "lead": "Quatre idées, une par écran. Chacune est quelque chose à montrer du doigt pendant que vous expliquez. Tout se joue dans l’observation, alors ménagez les silences.",
+    "teach": "Quatre idées, un écran chacune. Tout tourne autour de la délégation, la plus vieille compétence de management qui soit, appliquée cette fois à un outil. Vous allez apprendre quoi confier, comment briefer, et quand ne pas s’en donner la peine. Je vous montre chaque élément, puis je m’arrête et je vous demande où il s’inscrit dans votre travail."
+  },
+  "close": {
+    "title": "Isolez le travail. Fixez le format de sortie. Déléguez avec discernement.",
+    "lead": "Un sous-agent tourne dans son propre contexte et renvoie un résumé. Créez-le avec /agents, pilotez-le avec une description précise et un format de sortie, et n’y recourez que lorsque le chemin parcouru n’a pas d’importance.",
+    "teach": "Si vous ne retenez qu’une chose : déléguez avec discernement. Un assistant part, travaille dans son propre espace et ne rapporte que la réponse ; vous ne l’envoyez que lorsque vous n’avez pas besoin de suivre le chemin. Créez-le en le décrivant, pilotez-le avec un brief clair et un format de réponse imposé. C’est le début d’une équipe que l’on dirige, plutôt que chaque étape faite à la main."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1",
+      "title": "Un sous-agent travaille dans son propre contexte",
+      "cap": "Déjà intégrés : un agent polyvalent, Explore pour la recherche rapide, et Plan pour la recherche en mode plan. La contrepartie : vous perdez de vue comment il est arrivé là.",
+      "teach": "Imaginez que vous demandiez à un documentaliste d’aller chercher une seule chose. Il ouvre vingt onglets, lit pendant une heure, puis revient vous donner la réponse en une phrase. Vous ne voyez jamais les vingt onglets.\n\nC’est cela, un sous-agent : il part dans son propre espace, fait les recherches, et ne rapporte que le résultat. Votre bureau à vous reste dégagé.",
+      "diagram": "diagrams/fr/09-subagents/s3.svg",
+      "videos": [
+        {
+          "id": "jKErNxuxPXg",
+          "label": "What are subagents?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Que rapporte un sous-agent ?",
+          "options": [
+            {
+              "t": "Un résumé de son contexte, que l’on peut déplier.",
+              "why": "Il n’y a rien à déplier. Le travail intermédiaire a disparu."
+            },
+            {
+              "t": "La réponse, et les étapes suivies pour y arriver.",
+              "why": "Les étapes restent là où elles ont eu lieu. C’est le marché que vous passez."
+            },
+            {
+              "t": "Seulement la réponse. Les lectures de fichiers et les recherches restent isolées.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "À quoi renoncez-vous en déléguant à un sous-agent ?",
+          "options": [
+            {
+              "t": "Vous obtenez la réponse sans voir comment il y est parvenu.",
+              "correct": true
+            },
+            {
+              "t": "Il ne peut pas utiliser les mêmes outils que la session principale.",
+              "why": "Si, il le peut. Ce qu’il ne rapporte pas, c’est le chemin parcouru."
+            },
+            {
+              "t": "Il est plus lent, à cause de l’aller-retour.",
+              "why": "Parfois, et ce n’est pas la vitesse qui compte dans ce que vous cédez."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2",
+      "title": "Créez-en un avec /agents, Claude écrit le fichier",
+      "cap": "Portée projet (ce dépôt) ou utilisateur (partout). Mettez le mot « proactively » dans la description et Claude déléguera sans qu’on le lui demande.",
+      "teach": "On en crée un en parlant, pas en codant. Vous lancez /agents, vous dites « je veux un assistant qui relit mon travail à la recherche de X », et Claude écrit toute la configuration pour vous. Le seul élément qui mérite d’être compris, c’est la description : c’est la ligne qui indique à Claude quand faire appel à cet assistant, et quoi lui dire. Rendez-la précise et le reste suit.",
+      "diagram": "diagrams/fr/09-subagents/s4.svg",
+      "videos": [
+        {
+          "id": "arD6qEWa2Xc",
+          "label": "Creating a subagent"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Comment crée-t-on un sous-agent ?",
+          "options": [
+            {
+              "t": "En écrivant le fichier de configuration à la main, puis en redémarrant.",
+              "why": "Vous pourrez le modifier ensuite. Partir d’un fichier vide, c’est refaire un travail déjà fait pour vous."
+            },
+            {
+              "t": "En copiant un sous-agent existant et en changeant le nom.",
+              "why": "Faisable, mais cela vous fait partir du brief de quelqu’un d’autre plutôt que du vôtre."
+            },
+            {
+              "t": "En lançant /agents, en décrivant ce que vous voulez, et Claude écrit le fichier.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Vous voulez que Claude lui délègue sans qu’on le lui demande. Quelle est l’astuce ?",
+          "options": [
+            {
+              "t": "Mettre le mot « proactively » dans la description.",
+              "correct": true
+            },
+            {
+              "t": "Lui donner accès à tous les outils, pour qu’il soit toujours candidat.",
+              "why": "L’accès aux outils détermine ce qu’il peut faire une fois lancé, pas s’il est choisi."
+            },
+            {
+              "t": "Le définir comme agent par défaut du projet.",
+              "why": "Ce réglage par défaut n’existe pas, et il s’appliquerait à tout plutôt qu’aux bons cas."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3",
+      "title": "Quatre choses séparent un exécutant d’un vagabond",
+      "cap": "La description fait double emploi : elle décide quand le sous-agent se lance, et elle fixe le prompt de tâche que l’agent principal rédige pour lui. Vague à l’entrée, vague à la sortie.",
+      "teach": "C’est comme briefer une personne. Un bon brief dit exactement quand c’est votre travail, donne un modèle à remplir pour que vous sachiez quand vous avez fini, demande de signaler tout ce qui a coincé, et ne remet que les outils dont la tâche a besoin. Un brief vague donne un vagabond qui lit tout et ne rapporte rien d’utile. La plus grande amélioration à elle seule, c’est de lui indiquer le format de la réponse que vous attendez.",
+      "diagram": "diagrams/fr/09-subagents/s5.svg",
+      "videos": [
+        {
+          "id": "WPxWKT_OaU4",
+          "label": "Designing effective subagents"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Un sous-agent vous rapporte quelque chose d’inutilisable. Lequel des quatre correctifs s’applique ?",
+          "options": [
+            {
+              "t": "Un modèle moins coûteux, pour qu’il en fasse moins.",
+              "why": "En faire moins n’est pas la même chose que faire ce qu’il faut."
+            },
+            {
+              "t": "Un format de sortie défini, pour qu’il ait un point d’arrêt exploitable.",
+              "correct": true
+            },
+            {
+              "t": "Une liste d’outils plus étroite, pour qu’il ne puisse pas vagabonder.",
+              "why": "Cela l’empêche d’aller trop loin. Cela ne rend pas pour autant exploitable ce qui revient."
+            }
+          ]
+        },
+        {
+          "q": "La description remplit deux rôles. Lesquels ?",
+          "options": [
+            {
+              "t": "Elle décide quand il se lance, et quels outils il reçoit.",
+              "why": "Les outils se configurent séparément. Le second rôle porte sur ce qu’on lui dit."
+            },
+            {
+              "t": "Elle nomme le sous-agent et l’explique à votre équipe.",
+              "why": "La documentation est un effet secondaire. Ses deux rôles sont opérationnels."
+            },
+            {
+              "t": "Elle décide quand le sous-agent se lance, et elle fixe le prompt de tâche rédigé pour lui.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4, si vous ne retenez qu’une chose",
+      "title": "Le travail intermédiaire a-t-il de l’importance ?",
+      "cap": "Pourquoi la relecture de code figure sur la liste : Claude critique le code plus librement quand il ne l’a pas écrit. Un relecteur au contexte vierge vaut mieux que la conversation qui a construit la fonctionnalité.",
+      "teach": "« Tout le discernement tient en une question : est-ce le chemin qui compte, ou seulement la destination ? Si vous n’avez besoin que de la réponse — va chercher ceci, va vérifier cela — déléguez et gardez votre bureau dégagé. Si vous avez besoin de voir les choses se dérouler et d’orienter à chaque tournant, faites-le vous-même.\n\nDéléguer un travail dont chaque étape dépend de la précédente ne fait que perdre de l’information au passage de relais. » (C’est l’instinct du superviseur rendu concret : l’idée « Frontier » de Praxis, diriger une petite équipe d’agents plutôt que de faire chaque étape à la main.)",
+      "diagram": "diagrams/fr/09-subagents/s6.svg",
+      "videos": [
+        {
+          "id": "n5LoKZ8Oa-A",
+          "label": "Using subagents effectively"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Une seule question décide s’il faut déléguer. Laquelle ?",
+          "options": [
+            {
+              "t": "Le travail intermédiaire vous importe-t-il ?",
+              "correct": true
+            },
+            {
+              "t": "Pourriez-vous le faire vous-même s’il le fallait ?",
+              "why": "Vous pourriez faire l’essentiel. Cela ne dit rien de l’endroit où le travail doit tourner."
+            },
+            {
+              "t": "La tâche est-elle assez longue pour que cela en vaille la peine ?",
+              "why": "La longueur est un indice. Ce n’est pas la question décisive."
+            }
+          ]
+        },
+        {
+          "q": "Pourquoi la relecture de code a-t-elle sa place sur la liste des tâches à déléguer ?",
+          "options": [
+            {
+              "t": "C’est lent, donc autant le faire tourner ailleurs.",
+              "why": "Le temps n’est pas la raison. Demandez-vous qui juge le travail de qui."
+            },
+            {
+              "t": "Un contexte vierge critique plus librement que la conversation qui a écrit la chose.",
+              "correct": true
+            },
+            {
+              "t": "Elle exige des outils que la session principale n’a pas.",
+              "why": "Les mêmes outils. La différence, c’est ce que le relecteur a déjà vu ou non."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "Introduction to Subagents"
+}

@@ -1,0 +1,217 @@
+{
+  "id": "09-subagents",
+  "title": "Introduction to Subagents",
+  "anthropic": "https://anthropic.skilljar.com/introduction-to-subagents",
+  "intro": {
+    "title": "Send the heavy lifting to a subagent.",
+    "lead": "Four ideas, one per screen. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.",
+    "teach": "Four ideas, one screen each. The whole thing is about delegation, the oldest management skill there is, now pointed at a tool. You learn what to send away, how to brief it, and when not to bother. I'll show you each piece, then stop and ask where it fits your work."
+  },
+  "close": {
+    "title": "Isolate the work. Set the output. Delegate by judgment.",
+    "lead": "A subagent runs in its own context and returns a summary. Build it with /agents , steer it with a sharp description and an output format, and reach for it only when the journey doesn't matter.",
+    "teach": "If you keep one thing: delegate by judgment. A helper goes off, works in its own space, and brings back just the answer, and you only send it when you don't need to watch the journey. Build it by describing it, steer it with a clear brief and a fixed format for the answer. That's the start of managing a team of these, not doing every step yourself."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1",
+      "title": "A subagent works in its own context",
+      "cap": "Built in already: a general-purpose agent, Explore for fast search, and Plan for plan-mode research. The tradeoff, you lose sight of how it got there.",
+      "teach": "Picture asking a researcher to go find one thing. They open twenty tabs, read for an hour, then come back and tell you the answer in a sentence. You never see the twenty tabs.\n\nThat's a subagent, it goes off into its own space, does the digging, and brings back just the result. Your own desk stays clear.",
+      "diagram": "diagrams/09-subagents/s3.svg",
+      "videos": [
+        {
+          "id": "jKErNxuxPXg",
+          "label": "What are subagents?"
+        }
+      ],
+      "checks": [
+        {
+          "q": "What comes back from a subagent?",
+          "options": [
+            {
+              "t": "A summary of its context, which you can expand.",
+              "why": "There's nothing to expand into. The intermediate work is gone."
+            },
+            {
+              "t": "The answer, and the steps it took to get there.",
+              "why": "The steps stay where they happened. That's the trade you're making."
+            },
+            {
+              "t": "Only the answer. The file reads and searches stay isolated.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "What do you give up by delegating to a subagent?",
+          "options": [
+            {
+              "t": "You get the answer without seeing how it got there.",
+              "correct": true
+            },
+            {
+              "t": "It can't use the same tools as the main session.",
+              "why": "It can. What it doesn't bring back is the journey."
+            },
+            {
+              "t": "It's slower, because of the round trip.",
+              "why": "Sometimes, and speed isn't what you give up that matters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2",
+      "title": "Make one with /agents, Claude writes the file",
+      "cap": "Scope it project-level (this repo) or user-level (everywhere). Put the word \"proactively\" in the description and Claude will delegate without being asked.",
+      "teach": "You build one by talking, not by coding. You run /agents, say 'I want a helper that reviews my work for X', and Claude writes the whole setup for you. The one part worth understanding is the description, that's the line that tells Claude when to reach for this helper and what to tell it. Get that sharp and the rest follows.",
+      "diagram": "diagrams/09-subagents/s4.svg",
+      "videos": [
+        {
+          "id": "arD6qEWa2Xc",
+          "label": "Creating a subagent"
+        }
+      ],
+      "checks": [
+        {
+          "q": "How do you create a subagent?",
+          "options": [
+            {
+              "t": "Write the configuration file by hand and restart.",
+              "why": "You can edit it afterwards. Starting from a blank file is doing work that's already done for you."
+            },
+            {
+              "t": "Copy an existing one and change the name.",
+              "why": "Workable, and it starts you from someone else's brief rather than your own."
+            },
+            {
+              "t": "Run /agents, describe what you want, and Claude writes the file.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "You want Claude to delegate to it without being asked. What's the trick?",
+          "options": [
+            {
+              "t": "Put the word \"proactively\" in the description.",
+              "correct": true
+            },
+            {
+              "t": "Give it access to every tool, so it's always a candidate.",
+              "why": "Tool access decides what it can do once running, not whether it gets picked."
+            },
+            {
+              "t": "Set it as the default agent for the project.",
+              "why": "There's no such default, and it would apply to everything rather than the right things."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3",
+      "title": "Four things separate a worker from a wanderer",
+      "cap": "The description does double duty: it decides when the subagent launches and sets the task prompt the main agent writes for it. Vague in, vague out.",
+      "teach": "Same as briefing a person. A good brief says exactly when this is your job, gives you a template to fill so you know when you're done, asks you to flag anything that got in the way, and hands you only the tools the task needs. A vague brief gets you a wanderer who reads everything and reports nothing useful. The biggest single improvement is telling it the format of the answer you want back.",
+      "diagram": "diagrams/09-subagents/s5.svg",
+      "videos": [
+        {
+          "id": "WPxWKT_OaU4",
+          "label": "Designing effective subagents"
+        }
+      ],
+      "checks": [
+        {
+          "q": "A subagent came back with something you can't use. Which of the four fixes applies?",
+          "options": [
+            {
+              "t": "A cheaper model, so it does less.",
+              "why": "Doing less isn't the same as doing the right thing."
+            },
+            {
+              "t": "A defined output format, so it has a stopping point you can act on.",
+              "correct": true
+            },
+            {
+              "t": "A narrower tool list, so it can't wander.",
+              "why": "That stops it going too far. It doesn't make what comes back usable."
+            }
+          ]
+        },
+        {
+          "q": "The description does two jobs. Which two?",
+          "options": [
+            {
+              "t": "It decides when it launches, and which tools it gets.",
+              "why": "Tools are configured separately. The second job is about what it's told."
+            },
+            {
+              "t": "It names the subagent, and explains it to your team.",
+              "why": "Documentation is a side effect. Both its jobs are operational."
+            },
+            {
+              "t": "It decides when the subagent launches, and it sets the task prompt written for it.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4, if you take one thing away",
+      "title": "Does the intermediate work matter?",
+      "cap": "Why code review makes the list: Claude critiques code more freely when it didn't write it. A fresh-context reviewer beats asking the thread that built the feature.",
+      "teach": "\"Here's the whole judgment call in one question: does the journey matter, or just the destination? If you only need the answer, go research this, go check this, delegate it and keep your desk clear. If you need to watch it unfold and steer at each turn, do it yourself.\n\nDelegating a job where every step depends on the last just loses information in the handoff.\" (This is the supervisor's instinct made concrete, the Praxis \"Frontier\" idea of running a small team of agents rather than doing every step by hand.)",
+      "diagram": "diagrams/09-subagents/s6.svg",
+      "videos": [
+        {
+          "id": "n5LoKZ8Oa-A",
+          "label": "Using subagents effectively"
+        }
+      ],
+      "checks": [
+        {
+          "q": "One question decides whether to delegate. Which?",
+          "options": [
+            {
+              "t": "Does the intermediate work matter to you?",
+              "correct": true
+            },
+            {
+              "t": "Could you do it yourself if you had to?",
+              "why": "You could do most of it. That tells you nothing about where it should run."
+            },
+            {
+              "t": "Is the task long enough to be worth it?",
+              "why": "Length is a hint. It isn't the deciding question."
+            }
+          ]
+        },
+        {
+          "q": "Why does code review belong on the delegate list?",
+          "options": [
+            {
+              "t": "It's slow, so it's worth running elsewhere.",
+              "why": "Time isn't the reason. Think about who is judging whose work."
+            },
+            {
+              "t": "A fresh context critiques more freely than the thread that wrote the thing.",
+              "correct": true
+            },
+            {
+              "t": "It needs tools the main session doesn't have.",
+              "why": "Same tools. The difference is what the reviewer has and hasn't already seen."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,623 @@
+{
+  "id": "05-ai-fluency",
+  "title": "Maîtrise de l’IA : cadre et fondations",
+  "anthropic": "https://anthropic.skilljar.com/ai-fluency-framework-foundations",
+  "intro": {
+    "title": "Comment collaborer vraiment avec l’IA.",
+    "lead": "Treize idées, une par écran : un cadre qui survit aux trucs et astuces. Tout se joue dans l’observation, alors ménagez les silences.",
+    "teach": "Les trucs et astuces se périment vite ; les modèles changent tous les quelques mois. Voici ce qui, en dessous, ne change pas : comment collaborer vraiment avec l’IA. Quatre habitudes. Une fois acquises, elles continuent de fonctionner quoi que fassent les outils ensuite."
+  },
+  "close": {
+    "title": "Déléguez bien. Décrivez et discernez. Restez diligent.",
+    "lead": "Quatre compétences, trois façons de travailler, une habitude : la pratique.",
+    "teach": "Quatre habitudes, trois modes, une pratique. Si les outils changent l’an prochain — et ils changeront — cela tiendra toujours. Déléguez bien, décrivez et discernez en boucle, restez diligent. C’est cela, la maîtrise."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1",
+      "title": "La maîtrise, c’est de la collaboration, pas des connaissances sur l’IA",
+      "cap": "Le basculement consiste à traiter l’IA comme un collaborateur avec qui l’on construit une relation de travail, et non comme une technologie à étudier ni comme un distributeur automatique que l’on interroge.",
+      "teach": "La maîtrise, ce n’est pas connaître des faits sur l’IA. C’est bien travailler avec elle, sur quatre plans : efficace, efficient, éthique, sûr. Le basculement mental qui la débloque consiste à cesser de la traiter comme un distributeur automatique dans lequel on glisse une question, pour commencer à la traiter comme un collègue avec qui l’on construit une relation de travail.",
+      "diagram": "diagrams/fr/05-ai-fluency/s3.svg",
+      "videos": [
+        {
+          "id": "JpGtOfSgR-c",
+          "label": "Lesson 1: Introduction to AI Fluency | AI Fluency: Framework & Foundations Course |"
+        },
+        {
+          "id": "4szRHy_CT7s",
+          "label": "Lesson 2A: Why do we need AI Fluency? | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "On décrit la maîtrise de l’IA comme une collaboration plutôt que comme une matière. Qu’est-ce que cela exclut ?",
+          "options": [
+            {
+              "t": "S’y fier sans vérifier la sortie.",
+              "why": "C’est vrai, et cela relève de l’une des quatre compétences plutôt que de la définition."
+            },
+            {
+              "t": "La traiter comme une technologie à étudier avant de s’en servir.",
+              "correct": true
+            },
+            {
+              "t": "S’en servir pour tout ce que l’on ne saurait pas faire soi-même.",
+              "why": "Rien ici ne dit cela. Pensez à la posture que vous adoptez envers elle plutôt qu’aux tâches que vous lui confiez."
+            }
+          ]
+        },
+        {
+          "q": "« Efficace, efficient, éthique et sûr. » Quelqu’un dit que les deux derniers sonnent comme des cases à cocher.",
+          "options": [
+            {
+              "t": "Ils comptent dans les secteurs réglementés et moins ailleurs.",
+              "why": "Assumer sa propre production n’est pas une préoccupation propre à un secteur."
+            },
+            {
+              "t": "C’est le cas, et ils comptent pour des raisons de conformité.",
+              "why": "Concéder que c’est un rituel en fait un rituel. Il existe une version de cela qui touche leur propre travail."
+            },
+            {
+              "t": "Il s’agit de savoir à qui appartiennent ces données, et si vous assumeriez la production.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2",
+      "title": "Trois façons de travailler avec l’IA",
+      "cap": "Ce ne sont pas des échelons à gravir, ce sont des modes que l’on choisit tâche par tâche. Les quatre compétences s’appliquent aux trois.",
+      "teach": "Trois modes. L’automatisation : vous la définissez, elle l’exécute. L’augmentation : vous réfléchissez ensemble — le plus courant.\n\nL’agentivité : vous la configurez pour agir seule. Ce ne sont pas des niveaux, on ne passe pas de l’un à l’autre par promotion. On choisit le mode qui convient à la tâche.",
+      "diagram": "diagrams/fr/05-ai-fluency/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Automatisation, augmentation, agentivité. Quel est le rapport entre elles ?",
+          "options": [
+            {
+              "t": "Une échelle. On monte à mesure que l’on gagne en confiance.",
+              "why": "Cela suppose que le sommet est toujours meilleur. Elles ne sont pas hiérarchisées."
+            },
+            {
+              "t": "Des modes que l’on choisit tâche par tâche.",
+              "correct": true
+            },
+            {
+              "t": "Trois produits, adaptés à trois types d’utilisateurs.",
+              "why": "Une même personne utilise les trois en une semaine, selon le travail."
+            }
+          ]
+        },
+        {
+          "q": "L’agentivité est là où loge la peur du « et s’il faisait quelque chose que je ne voulais pas ». Qu’est-ce qui règle cela ?",
+          "options": [
+            {
+              "t": "Réserver l’agentivité aux travaux à faible enjeu.",
+              "why": "Cela met la capacité hors de portée pour toujours, précisément là où elle profiterait le plus."
+            },
+            {
+              "t": "Expliquer que les erreurs sont rares en pratique.",
+              "why": "La rareté n’est pas un contrôle, et quelqu’un d’inquiet y entend une promesse plutôt qu’un mécanisme."
+            },
+            {
+              "t": "Valider chaque étape d’abord, automatiser une fois le schéma éprouvé, et toujours vérifier le résultat final.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3, si vous ne retenez qu’une chose",
+      "title": "Délégation · Description · Discernement · Diligence",
+      "cap": "La délégation décide de ce qui vaut la peine d’être fait ensemble ; la description et le discernement bouclent au milieu ; la diligence maintient la responsabilité. Le reste du cours, ce sont ces quatre-là.",
+      "teach": "Quatre habitudes. La délégation : décider de ce qui vaut seulement la peine d’être fait ensemble. La description : dire ce que vous voulez, et comment.\n\nLe discernement : juger ce qui revient. La diligence : assumer le résultat final. Les deux du milieu forment une boucle que vous parcourrez encore et encore. La délégation la met en place, la diligence la garde droite. Voilà tout le cadre.",
+      "diagram": "diagrams/fr/05-ai-fluency/s5.svg",
+      "videos": [
+        {
+          "id": "W4Ua6XFfX9w",
+          "label": "Lesson 2B: The 4D Framework | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Où se situent la description et le discernement parmi les quatre ?",
+          "options": [
+            {
+              "t": "Au début, avant la délégation.",
+              "why": "Il faut décider ce que l’on confie avant de pouvoir le décrire."
+            },
+            {
+              "t": "En boucle au milieu : dire ce que l’on veut, juger ce qui revient, affiner.",
+              "correct": true
+            },
+            {
+              "t": "À la fin, une fois le travail livré.",
+              "why": "Cela en ferait une étape de relecture plutôt que la boucle de travail qu’ils sont."
+            }
+          ]
+        },
+        {
+          "q": "« Décrire à quoi ressemble le bon travail, une fois. » Quelle idée des autres cours cela recoupe-t-il ?",
+          "options": [
+            {
+              "t": "Le mode de permissions.",
+              "why": "Cela concerne l’attention que vous portez, pas le standard que vous tenez."
+            },
+            {
+              "t": "La fenêtre de contexte.",
+              "why": "Cela concerne ce qui tient dedans, pas ce que « bon » veut dire."
+            },
+            {
+              "t": "Le fichier de compétence.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4",
+      "title": "Elle génère, elle ne va pas chercher",
+      "cap": "Trois choses devaient arriver ensemble : l’architecture transformeur, d’immenses données d’entraînement, et un bond de puissance de calcul. Savoir qu’elle génère plutôt qu’elle ne récupère est ce qui rend ses limites compréhensibles.",
+      "teach": "Choisissez la voie selon le public. Pour les analystes et les salles en secteur réglementé : *« Tout cela consiste à prédire le mot suivant. “Le chat était assis sur le…”, le plus probablement “tapis”. Il choisit la suite la plus plausible.\n\nExcellent pour rédiger, inadapté à tout ce qui doit être identique à chaque fois. »* Pour les généralistes et les designers : le parallèle avec la formule Excel. Pour les pairs techniques : une phrase et on passe.",
+      "diagram": "diagrams/fr/05-ai-fluency/s6.svg",
+      "videos": [
+        {
+          "id": "RyvXxApfHkk",
+          "label": "Lesson 3A: What is generative AI? (Deep Dive) | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Un modèle de langage génère plutôt qu’il ne va chercher. Qu’est-ce qui en découle ?",
+          "options": [
+            {
+              "t": "Il ne peut pas citer une source avec exactitude.",
+              "why": "Il le peut. Générer n’exclut pas de rapporter une citation correctement."
+            },
+            {
+              "t": "Il n’a accès à rien de factuel.",
+              "why": "Il a appris à partir d’énormément de faits. La conséquence est plus subtile que de n’en avoir aucun."
+            },
+            {
+              "t": "Il peut produire quelque chose d’assuré et de faux.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un s’inquiète que ses fichiers servent à entraîner le modèle.",
+          "options": [
+            {
+              "t": "L’entraînement a eu lieu avant votre arrivée. Vous pointez un modèle déjà entraîné vers vos fichiers.",
+              "correct": true
+            },
+            {
+              "t": "On peut désactiver l’entraînement dans les réglages.",
+              "why": "Cela présente le réglage par défaut comme le dangereux, et cela décrit mal ce qui se passe réellement."
+            },
+            {
+              "t": "Seules les formules entreprise excluent vos données de l’entraînement.",
+              "why": "Cela transforme un fait sur le fonctionnement de la chose en caractéristique d’abonnement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Leçon 5",
+      "title": "Forte là où vous êtes faible, faible là où vous êtes fort",
+      "cap": "Les limites ne sont pas des bogues qu’il faut attendre : ce sont la raison pour laquelle vous restez dans la boucle. Associez son ampleur à votre jugement, votre créativité et votre supervision.",
+      "teach": "Elle est forte exactement là où la plupart d’entre nous sommes faibles : vitesse, ampleur, rédaction infatigable. Et faible là où vous êtes fort : votre jugement, votre contexte, savoir à quoi ressemble « juste » ici. Les limites ne sont pas temporaires.\n\nCe sont la raison pour laquelle vous restez dans la boucle. Les meilleurs résultats associent son ampleur à votre supervision.",
+      "diagram": "diagrams/fr/05-ai-fluency/s7.svg",
+      "videos": [
+        {
+          "id": "W5cga7xipRI",
+          "label": "Lesson 3B: Capabilities & limitations | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "« Forte là où vous êtes faible, faible là où vous êtes fort. » Quel est le versant faible du modèle ?",
+          "options": [
+            {
+              "t": "Travailler sur de nombreux sujets à la fois.",
+              "why": "C’est son versant fort, et l’une des raisons de son utilité pour un spécialiste."
+            },
+            {
+              "t": "Savoir ce qui s’est passé après sa date de coupure, et savoir quand il se trompe.",
+              "correct": true
+            },
+            {
+              "t": "Produire de l’écriture fluide sur la longueur.",
+              "why": "La fluidité fait partie de ce qu’il fait le plus facilement."
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un entend tout cela et dit « donc elle est meilleure que moi ». Quelle est la réponse exacte ?",
+          "options": [
+            {
+              "t": "Elle est meilleure en ampleur, vous êtes meilleur en profondeur.",
+              "why": "C’est net, et cela l’invite à défendre un territoire qui rétrécit plutôt qu’à voir l’association."
+            },
+            {
+              "t": "Pas encore, et l’écart se resserre.",
+              "why": "Cela concède le cadrage puis ajoute un compte à rebours : c’est la peur plutôt que la réponse."
+            },
+            {
+              "t": "Un humain avec l’IA bat l’un ou l’autre isolément, et cet écart-là ne se resserre pas.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Leçon 6",
+      "title": "La délégation : décider de ce qui vaut la peine d’être fait ensemble",
+      "cap": "Il faut les deux : votre expertise métier et une vraie idée de l’outil. L’objectif n’est pas de tout automatiser, c’est le meilleur partage pour cette tâche.",
+      "teach": "La délégation se joue avant d’avoir tapé un mot. Deux choses se rencontrent : ce que vous savez du problème, et ce que vous savez faire à l’outil. Là où elles se recouvrent, vous partagez le travail. Pas « tout automatiser » : le bon partage. Les parties qui sont vôtres le restent.",
+      "diagram": "diagrams/fr/05-ai-fluency/s8.svg",
+      "videos": [
+        {
+          "id": "EljzyfdYkrc",
+          "label": "Lesson 4: A closer look at Delegation | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Quelle erreur commet-on réellement en déléguant ?",
+          "options": [
+            {
+              "t": "On confie un travail que le modèle ne sait pas du tout faire.",
+              "why": "Cela échoue de façon visible et se corrige vite. La plus dommageable est plus discrète."
+            },
+            {
+              "t": "On confie trop peu et on continue de tout faire soi-même.",
+              "why": "Courant au tout début, et ce n’est pas ce qui produit du mauvais travail."
+            },
+            {
+              "t": "On confie le jugement et on garde la corvée.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Quelles sont les deux consciences qui rendent possible une bonne délégation ?",
+          "options": [
+            {
+              "t": "Connaître son objectif, et connaître ce que cette IA sait et ne sait pas faire.",
+              "correct": true
+            },
+            {
+              "t": "Connaître son échéance, et connaître le coût.",
+              "why": "Les deux sont pratiques, et ni l’une ni l’autre ne dit où tracer la ligne entre vous deux."
+            },
+            {
+              "t": "Connaître ses données, et connaître les règles de conformité.",
+              "why": "C’est la couche de diligence plutôt que celle qui décide de ce qu’on confie."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Leçon 7",
+      "title": "Transformez la délégation en plan",
+      "cap": "Le cours suit un même projet à travers toutes les compétences. Nommer la réussite d’emblée est ce qui rend le discernement possible ensuite : on ne peut juger que par rapport à une cible.",
+      "teach": "La délégation devient un plan en quatre étapes : nommer à quoi ressemble le bon travail, découper le travail en tâches, marquer chacune comme vôtre, celle de l’IA ou partagée, puis la mener à bien. La première étape est celle que l’on saute et celle qui compte le plus : si vous ne nommez pas la réussite d’emblée, vous n’aurez rien à quoi comparer la sortie ensuite.",
+      "diagram": "diagrams/fr/05-ai-fluency/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Pourquoi nommer à quoi ressemble le bon travail avant de commencer ?",
+          "options": [
+            {
+              "t": "Cela vous empêche de changer d’avis à mi-parcours.",
+              "why": "Changer d’avis est permis. Demandez-vous ce que, sinon, vous n’auriez aucun moyen de faire ensuite."
+            },
+            {
+              "t": "Sans cible, il n’y a rien à quoi comparer le résultat.",
+              "correct": true
+            },
+            {
+              "t": "Cela donne au modèle le standard dont il a besoin pour s’auto-évaluer.",
+              "why": "Utile pour lui, et la perte la plus lourde est de votre côté de l’échange."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Leçon 8",
+      "title": "La description : dire quoi, comment, et comment se comporter",
+      "cap": "L’IA ne lit pas dans vos pensées, et c’est un partenaire, pas une base de données. Le processus est la couche que l’on saute le plus, et elle est souvent aussi décisive que l’objectif lui-même.",
+      "teach": "Trois couches dans une bonne description. Le produit : ce que vous voulez voir fabriqué. Le processus : la façon d’y arriver, la méthode.\n\nLe comportement : la manière dont il doit se conduire avec vous. Presque tout le monde donne la première et oublie la deuxième. La couche du processus est là où se cache la qualité.",
+      "diagram": "diagrams/fr/05-ai-fluency/s10.svg",
+      "videos": [
+        {
+          "id": "DmgujoZ1mmk",
+          "label": "Lesson 6: A closer look at Description | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Produit, processus, comportement. Quelle couche laisse-t-on de côté ?",
+          "options": [
+            {
+              "t": "Le produit : ce qu’il faut créer.",
+              "why": "Presque personne n’oublie de dire ce qu’il veut voir fabriqué."
+            },
+            {
+              "t": "Le processus : comment l’aborder.",
+              "correct": true
+            },
+            {
+              "t": "Le comportement : comment il doit se conduire.",
+              "why": "Souvent laissé de côté aussi, et c’est celle que l’on trouve étrange plutôt que celle à laquelle on ne pense jamais."
+            }
+          ]
+        },
+        {
+          "q": "« Je dois lui dire comment se comporter ? » Comment normaliser cela ?",
+          "options": [
+            {
+              "t": "Vous n’y êtes pas obligé. Le comportement par défaut convient à la plupart des travaux.",
+              "why": "Il convient à beaucoup de travaux, et abandonner la couche revient à ne jamais demander le comportement qui conviendrait au vôtre."
+            },
+            {
+              "t": "C’est ainsi que le modèle a été conçu, il attend donc l’instruction.",
+              "why": "Une réponse sur la machine, à une question qui portait sur le caractère raisonnable de la démarche."
+            },
+            {
+              "t": "C’est comme dire à un nouveau collègue de vous contredire quand vous avez tort.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Leçon 9",
+      "title": "Six gestes qui font marcher un prompt",
+      "cap": "Le prompting est itératif, pas en un coup : attendez-vous à affiner. Le raccourci que la plupart ratent : tendez votre prompt à l’IA et demandez-lui de l’améliorer.",
+      "teach": "Six gestes pratiques. Du contexte, des exemples, des contraintes, des étapes, lui demander de réfléchir avant de répondre, lui donner un rôle. Vous n’utiliserez pas les six à chaque fois.\n\nEt le raccourci que presque personne n’essaie : recollez-lui votre propre prompt et demandez-lui de l’améliorer. Il est bon à cela.",
+      "diagram": "diagrams/fr/05-ai-fluency/s11.svg",
+      "videos": [
+        {
+          "id": "2YCaBqP8muw",
+          "label": "Lesson 7: Effective prompting techniques (Deep Dive) | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Parmi les six gestes de prompting, lequel oublie-t-on à tort ?",
+          "options": [
+            {
+              "t": "Donner du contexte.",
+              "why": "Le plus enseigné des six, et celui dont on se souvient."
+            },
+            {
+              "t": "Lui tendre votre prompt et lui demander de l’améliorer.",
+              "correct": true
+            },
+            {
+              "t": "Définir le rôle et le ton.",
+              "why": "Facile à oublier, et ce n’est pas celui qui se répercute sur tous les autres."
+            }
+          ]
+        },
+        {
+          "q": "« Le prompting est itératif, pas en un coup. » Qu’est-ce que cela veut dire en pratique ?",
+          "options": [
+            {
+              "t": "Il faut s’attendre à réécrire le prompt de zéro à chaque fois.",
+              "why": "Réécrire de zéro jette ce que la dernière réponse vous a appris."
+            },
+            {
+              "t": "On écrit plusieurs prompts et on garde le meilleur résultat.",
+              "why": "C’est deviner en parallèle. L’itération s’appuie sur ce qui est revenu."
+            },
+            {
+              "t": "La première réponse est le début de l’échange, pas sa fin.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Leçon 10",
+      "title": "Le discernement : juger ce qui revient",
+      "cap": "C’est votre expertise qui rend le discernement affûté : vous ne pouvez attraper que ce que vous remarqueriez. Même les meilleurs modèles gagnent à ce qu’un humain vérifie le travail.",
+      "teach": "Le discernement, c’est la description à l’envers. Vous jugez la sortie, le raisonnement et le comportement. Voici la part inconfortable : vous ne pouvez attraper que ce que vous remarqueriez.\n\nVotre expertise n’est pas remplacée ici : c’est exactement ce qui vous rend capable de juger. C’est là que l’humain gagne sa place.",
+      "diagram": "diagrams/fr/05-ai-fluency/s12.svg",
+      "videos": [
+        {
+          "id": "Y0KidGr9Z2Y",
+          "label": "Lesson 8: A closer look at Discernment | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Le discernement est le revers de la description. Qu’est-ce que cela veut dire ?",
+          "options": [
+            {
+              "t": "Vous jugez sur les trois mêmes couches que celles que vous avez décrites.",
+              "correct": true
+            },
+            {
+              "t": "On décrit d’abord et on ne juge qu’à la fin.",
+              "why": "Cela en fait une étape finale. Ce sont les trois mêmes questions, posées dans l’autre sens, tout du long."
+            },
+            {
+              "t": "Le modèle juge sa propre sortie par rapport à votre description.",
+              "why": "On peut le lui demander, et ce n’est pas ce qu’est cette compétence. Le jugement est le vôtre."
+            }
+          ]
+        },
+        {
+          "q": "Pourquoi le discernement est-il ce qu’on ne peut pas automatiser ?",
+          "options": [
+            {
+              "t": "Les modèles ne sont pas encore assez fiables pour s’auto-évaluer.",
+              "why": "Cela le présente comme un manque temporaire en attente de meilleurs modèles."
+            },
+            {
+              "t": "C’est votre expertise qui donne sa valeur au jugement.",
+              "correct": true
+            },
+            {
+              "t": "Il faut bien quelqu’un de responsable, pour des raisons de conformité.",
+              "why": "La responsabilité est la couche de diligence. Ici, il s’agit de savoir si le travail est bon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Leçon 11",
+      "title": "Dites-le, vérifiez-le, affinez-le",
+      "cap": "C’est là que la collaboration bat chacun des deux côtés isolément. Vous restez celui qui intègre le jugement et assume la décision finale.",
+      "teach": "Décrivez, regardez la sortie, discernez, puis décrivez mieux et recommencez. C’est dans cette boucle que vit le vrai travail. Pas la première réponse : la troisième ou la quatrième. Et au bout de la boucle, la décision vous appartient. Vous assumez le choix final.",
+      "diagram": "diagrams/fr/05-ai-fluency/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quelqu’un est déçu de ce qui est revenu. Quelle est la première question à lui poser ?",
+          "options": [
+            {
+              "t": "Quel modèle utilisiez-vous ?",
+              "why": "Presque jamais l’explication, et cela lui apprend à faire les soldes des modèles plutôt qu’à travailler la boucle."
+            },
+            {
+              "t": "Qu’avez-vous mis dans le prompt ?",
+              "why": "Bonne question, et elle suppose que l’échec s’est joué au départ plutôt que dans ce qui a suivi."
+            },
+            {
+              "t": "Avez-vous fait un deuxième tour ?",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Leçon 12",
+      "title": "La diligence : assumer le résultat",
+      "cap": "Chaque contexte attend un niveau de divulgation différent. Une déclaration de diligence nomme le rôle de l’IA dans le travail et votre responsabilité sur le résultat.",
+      "teach": "La diligence, c’est assumer. Trois parties : quel outil vous avez choisi et s’il convenait à un travail sensible ; être transparent sur le rôle de l’IA là où cela compte ; et vérifier ce que vous signez de votre nom. Vous répondez de la production, que l’IA ait aidé à la faire ou non. Une déclaration de diligence ne fait que nommer le rôle de l’IA et votre responsabilité sur le résultat.",
+      "diagram": "diagrams/fr/05-ai-fluency/s14.svg",
+      "videos": [
+        {
+          "id": "QbLf2zb3oPc",
+          "label": "Lesson 10: A closer look at Diligence | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "La diligence a trois parties. Laquelle porte sur ce que vous faites avant de partager le travail ?",
+          "options": [
+            {
+              "t": "La transparence : être transparent sur le rôle de l’IA.",
+              "why": "Cela porte sur qui sait, plutôt que sur la justesse de la chose."
+            },
+            {
+              "t": "Le déploiement : vérifier, et se porter garant.",
+              "correct": true
+            },
+            {
+              "t": "La création : quelle IA, et comment vous l’utilisez.",
+              "why": "C’est le choix du départ plutôt que la vérification de la fin."
+            }
+          ]
+        },
+        {
+          "q": "Quel niveau de divulgation le recours à l’IA exige-t-il ?",
+          "options": [
+            {
+              "t": "Uniquement là où un régulateur l’impose.",
+              "why": "Cela ramène un jugement sur vos lecteurs à un plancher de conformité."
+            },
+            {
+              "t": "Toujours divulguer. Moins, c’est trompeur.",
+              "why": "Une règle qui vous ferait mettre votre correcteur orthographique en note de bas de page. L’attente n’est pas uniforme."
+            },
+            {
+              "t": "Cela dépend du contexte et de qui a besoin de savoir.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "eyebrow": "Leçon 13",
+      "title": "La maîtrise se construit par la pratique, elle ne s’active pas",
+      "cap": "Traitez l’IA comme un partenaire de réflexion, tenez-vous à l’efficace, l’efficient, l’éthique et le sûr, et le cadre continue de fonctionner à mesure que les modèles changent.",
+      "teach": "On ne devient pas maître en finissant un cours, pas plus qu’on ne devient bilingue ainsi. On y arrive en pratiquant, mal d’abord, puis mieux. Les quatre habitudes sont ce que vous pratiquez. L’IA est puissante, pas magique : elle ne vaut jamais mieux que ce que vous lui apportez.",
+      "diagram": "diagrams/fr/05-ai-fluency/s15.svg",
+      "videos": [
+        {
+          "id": "ytEN_iAk09c",
+          "label": "Lesson 11: Conclusion | AI Fluency: Framework & Foundations Course"
+        }
+      ],
+      "checks": [
+        {
+          "q": "« La maîtrise se construit par la pratique, elle ne s’active pas. » Qu’en découle-t-il pour une équipe qui l’adopte ?",
+          "options": [
+            {
+              "t": "Le système s’améliore par l’usage : l’habitude compte donc plus que le déploiement.",
+              "correct": true
+            },
+            {
+              "t": "La formation doit précéder tout octroi d’accès.",
+              "why": "Cela inverse les choses. La pratique est le sujet, et la pratique exige l’accès."
+            },
+            {
+              "t": "Il vous faut un programme plus long que ce que prévoient la plupart des cabinets.",
+              "why": "La durée n’est pas la variable. Ce qui se passe entre les séances, si."
+            }
+          ]
+        },
+        {
+          "q": "Une habitude pour clore une séance de travail ?",
+          "options": [
+            {
+              "t": "Vider le contexte pour que demain reparte à zéro.",
+              "why": "Bonne hygiène, et cela jette la leçon du jour avec le fatras du jour."
+            },
+            {
+              "t": "Lui demander de revenir sur ce qui s’est mal passé et d’enregistrer comment vous l’avez corrigé.",
+              "correct": true
+            },
+            {
+              "t": "Enregistrer la conversation quelque part où vous la retrouverez.",
+              "why": "Vous aurez une transcription que personne ne lit. La valeur est dans ce qu’on en distille."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "AI Fluency: Framework and Foundations"
+}

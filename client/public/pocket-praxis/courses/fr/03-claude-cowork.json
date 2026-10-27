@@ -1,0 +1,642 @@
+{
+  "id": "03-claude-cowork",
+  "title": "Introduction à Claude Cowork",
+  "anthropic": "https://anthropic.skilljar.com/introduction-to-claude-cowork",
+  "intro": {
+    "title": "Arrêtez de discuter. Commencez à déléguer.",
+    "lead": "Treize idées, une par écran. Chacune est quelque chose à montrer du doigt pendant que vous expliquez. Cowork, c’est Claude qui fait le travail, dans vos fichiers, vos applications, votre navigateur. Ménagez les silences.",
+    "teach": "Treize idées, un écran chacune. Tout le cours tient en un geste : vous cessez de taper des questions et vous commencez à confier du travail. La conversation, c’est là où vous réfléchissez à voix haute.\n\nCowork, c’est là où vous donnez une mission à Claude et où il part la faire, dans vos fichiers, vos applications, votre navigateur. Je vous montre, puis je m’arrête et je vous demande où cela s’inscrit dans votre semaine."
+  },
+  "close": {
+    "title": "Confiez le travail. Apprenez-lui votre façon de faire. Faites confiance, mais relisez.",
+    "lead": "Cowork va au-delà de la conversation pour vous permettre de déléguer du vrai travail. Faites-le vôtre avec du contexte permanent, des compétences et des plugins ; faites-le tourner dans votre navigateur et dans Office ; puis partagez ce qui marche et gardez-le sûr.",
+    "teach": "Si vous ne retenez qu’une chose : confiez le travail, ne vous contentez pas d’en discuter. Apprenez une fois votre façon de faire à Cowork — instructions globales, un projet, une compétence — et le livrable suivant revient meilleur et plus vite. Faites-lui confiance pour faire, mais relisez le résultat comme le brouillon d’un collègue, car c’est vous qui assumez ce qui sort.\n\nTout ce que nous avons vu aujourd’hui — le navigateur, les applications Office, la place de marché — n’est qu’une façon de faire cela en plus d’endroits."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1",
+      "title": "La conversation réfléchit avec vous. Cowork fait le travail.",
+      "cap": "La conversation est là où l’on va réfléchir à voix haute. Cowork est fait pour le travail que vous feriez normalement vous-même : décrivez un résultat et Claude planifie, exécute et livre le tout — collecte du contexte, analyse, production de fichiers, usage d’outils.",
+      "teach": "« Trois versions du même Claude. La conversation se fait tour par tour : c’est là qu’on va réfléchir à voix haute et rédiger. Cowork diffère en nature, pas en degré : vous décrivez une chose finie et Claude rassemble le contexte, exécute les étapes, utilise vos outils et enregistre le livrable.\n\nCode s’adresse aux développeurs qui construisent des logiciels. Le réflexe hérité des chatbots, c’est une question, une réponse, et vous recousez le reste vous-même. Cowork vous ôte toute la couture des mains. » (La légende du deck : la conversation pour réfléchir à voix haute, Cowork pour le travail que vous feriez normalement vous-même.)",
+      "diagram": "diagrams/fr/03-claude-cowork/s3.svg",
+      "videos": [
+        {
+          "id": "UAmKyyZ-b9E",
+          "label": "Introducing Cowork: Claude Code for the rest of your work"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Qu’est-ce qui change réellement quand on passe de la conversation à Cowork ?",
+          "options": [
+            {
+              "t": "C’est la même conversation, à qui l’on donne plus de temps.",
+              "why": "Le temps n’est pas la différence. Demandez-vous qui exécute les étapes entre la question et le livrable."
+            },
+            {
+              "t": "Il écrit des logiciels plutôt que des documents.",
+              "why": "C’est le troisième mode. Cowork ne se définit pas par la matière de sa production."
+            },
+            {
+              "t": "Vous confiez un résultat, et il planifie, exécute les étapes et livre le tout.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "« Pourquoi ne pas simplement utiliser Claude dans le navigateur ? » Quelle est la réponse directe ?",
+          "options": [
+            {
+              "t": "Le navigateur oublie d’une session à l’autre et peine avec un dossier de fichiers.",
+              "correct": true
+            },
+            {
+              "t": "Le navigateur envoie vos données quelque part où l’application de bureau ne les envoie pas.",
+              "why": "Ce n’est pas la distinction ici, et répondre sécurité à une question de commodité tend à soulever une peur plutôt qu’à en apaiser une."
+            },
+            {
+              "t": "La version navigateur est un modèle plus petit.",
+              "why": "La même intelligence des deux côtés. La différence tient à ce qu’il peut retenir et à ce qu’il peut atteindre."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2",
+      "title": "Pointez-le sur un dossier. Ce dossier est la frontière.",
+      "cap": "Installez l’application de bureau, connectez-vous, choisissez Cowork. Le dossier est le choix le plus important : prenez le plus petit qui contienne ce dont la tâche a besoin. Les connecteurs cloud sont souvent en lecture seule ; votre dossier local est là où Claude construit et itère.",
+      "teach": "« Vous installez l’application de bureau, vous vous connectez, vous choisissez Cowork, puis vous prenez une décision qui compte plus que toutes les autres : quel dossier. Ce dossier est la frontière, la pièce dans laquelle Claude travaille. Prenez le plus petit qui contienne la tâche, pas tout votre disque Documents.\n\nLes connecteurs atteignent votre messagerie, votre Drive et le reste, souvent en lecture seule. Et vous choisissez sa façon de demander : demander avant d’agir est le réglage par défaut, et il demande toujours avant de supprimer, sans exception. » (La légende du deck : les connecteurs cloud sont souvent en lecture seule ; votre dossier local est là où Claude construit et itère.)",
+      "diagram": "diagrams/fr/03-claude-cowork/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Trois choses sont paramétrées : le dossier, les connecteurs, et la fréquence à laquelle il demande avant d’agir. Laquelle compte le plus ?",
+          "options": [
+            {
+              "t": "Le dossier, parce que c’est la frontière de tout ce qu’il touche.",
+              "correct": true
+            },
+            {
+              "t": "Les connecteurs, parce qu’ils décident de ce qu’il peut atteindre.",
+              "why": "Ils élargissent la portée, ils ne la bornent pas. C’est autre chose qui trace la limite autour de tout ce qu’il touche."
+            },
+            {
+              "t": "La fréquence des demandes, parce que c’est votre contrôle.",
+              "why": "C’est votre réglage de confort. Il régit la fréquence à laquelle on vous consulte, pas ce qui est à portée."
+            }
+          ]
+        },
+        {
+          "q": "Un collègue demande ce que Cowork peut voir une fois lancé.",
+          "options": [
+            {
+              "t": "Seulement les fichiers que vous nommez dans le prompt.",
+              "why": "Trop restrictif. Il peut travailler dans tout le dossier sans que vous listiez chaque fichier."
+            },
+            {
+              "t": "Le dossier sur lequel vous l’avez pointé, plus ce que vos connecteurs atteignent et que vous pouvez déjà voir.",
+              "correct": true
+            },
+            {
+              "t": "Tout ce qui est sur la machine, puisqu’il tourne en local.",
+              "why": "Tourner en local ne veut pas dire être sans limites. L’un des trois choix de configuration existe précisément pour empêcher cela."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3",
+      "title": "Trois types de travail qui valent la peine d’être confiés",
+      "cap": "Le fil conducteur : le travail qui supposait de jongler avec des étapes, des fichiers et des outils dans sa tête peut désormais être confié comme une seule tâche. Les tâches planifiées et Dispatch ne s’exécutent que si votre ordinateur est allumé et Claude en marche.",
+      "teach": "« Comment savoir qu’une tâche convient à Cowork ? Trois motifs. Elle comporte plusieurs étapes : rassembler, comparer, rechercher, rédiger, mettre en forme.\n\nElle vit dans de vrais fichiers et finit dans un vrai fichier. Ou elle traverse les outils que vous utilisez déjà. Un motif ou plus, et c’est à confier.\n\nEt vous n’avez pas besoin d’être à votre bureau : vous pouvez la planifier chaque semaine, ou la lancer depuis votre téléphone, tant que votre machine est allumée et Claude en marche. » (La légende du deck : le fil conducteur, c’est le travail que vous jongliez dans votre tête, confié comme une seule tâche.)",
+      "diagram": "diagrams/fr/03-claude-cowork/s5.svg",
+      "videos": [
+        {
+          "id": "b-ntWZqHF78",
+          "label": "Scheduled Tasks in Cowork: Set it once, Claude handles the rest"
+        },
+        {
+          "id": "fVIV-L49eBs",
+          "label": "Dispatch tasks to Claude Cowork from anywhere"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Lequel de ces travaux est le moins bon candidat à confier à Cowork ?",
+          "options": [
+            {
+              "t": "Extraire des chiffres de quarante PDF pour les rassembler dans un tableau.",
+              "why": "Fondé sur des fichiers et répétitif : exactement le profil qui mérite d’être délégué."
+            },
+            {
+              "t": "Décider laquelle de deux stratégies le cabinet doit soutenir.",
+              "correct": true
+            },
+            {
+              "t": "Un rapport hebdomadaire qui puise dans trois systèmes différents.",
+              "why": "Multi-étapes et multi-outils. Un bon candidat plutôt qu’un mauvais."
+            }
+          ]
+        },
+        {
+          "q": "Vous planifiez une tâche à 6 h. Votre portable est fermé. Que se passe-t-il ?",
+          "options": [
+            {
+              "t": "Elle est mise en file et s’exécute dès que vous relevez l’écran.",
+              "why": "Supposition raisonnable, et elle promet un rattrapage qui n’existe pas."
+            },
+            {
+              "t": "Elle s’exécute sur les serveurs d’Anthropic et le résultat vous attend.",
+              "why": "C’est le comportement d’un service cloud. La planification de Cowork a une condition attachée que cela ignore."
+            },
+            {
+              "t": "Rien. Les tâches planifiées et Dispatch ne s’exécutent que si votre ordinateur est allumé.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4, si vous ne retenez qu’une chose",
+      "title": "Briefez-le comme un collègue compétent",
+      "cap": "Les allers-retours se font davantage en amont, avant que Claude ne démarre, plutôt qu’en cinq tours de « en fait, tu pourrais aussi… ». Le livrable est l’artefact, pas la conversation : vérifiez qu’il a atteint l’objectif et que rien n’est inventé.",
+      "teach": "Briefez-le comme vous briefriez un collègue compétent sur le point de disparaître dans une tâche et de revenir avec le travail fait. Trois choses : nommez le livrable — une note d’une page, une diapositive, une liste classée ; nommez les entrées — quel dossier, quel canal, quelle plage de dates ; et nommez la nuance que vous seul connaissez.\n\nIl posera une question ou deux pour combler les vides, puis il partira. S’il dérive, intervenez : une réorientation coûte peu. Ensuite, vous relisez le fichier, pas la conversation.",
+      "diagram": "diagrams/fr/03-claude-cowork/s6.svg",
+      "videos": [
+        {
+          "id": "Lbml7IuGJYw",
+          "label": "Getting started with Claude Cowork"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Un bon brief Cowork nomme trois choses. Laquelle laisse-t-on de côté ?",
+          "options": [
+            {
+              "t": "La nuance qu’il ne pourrait jamais deviner.",
+              "correct": true
+            },
+            {
+              "t": "Le livrable.",
+              "why": "On est généralement clair sur ce que l’on veut obtenir. Le manque est ailleurs, moins évident."
+            },
+            {
+              "t": "Les entrées.",
+              "why": "Généralement nommées, ou au moins esquissées. Pensez à ce que vous seul savez."
+            }
+          ]
+        },
+        {
+          "q": "Vous avez écrit une seule ligne, et ce qui est revenu était générique. Qu’est-ce que cela signifie ?",
+          "options": [
+            {
+              "t": "Il vous faut un fichier de compétence avant qu’il puisse faire cela correctement.",
+              "why": "Une compétence aide quand on se répète. Quelque chose de moins coûteux règle cette première tentative."
+            },
+            {
+              "t": "C’est le moment d’apprendre. Ajoutez ce que vous avez omis et recommencez.",
+              "correct": true
+            },
+            {
+              "t": "La tâche convient mal à Cowork.",
+              "why": "Vous n’avez pas encore mis la tâche à l’épreuve. Vous avez mis à l’épreuve un brief d’une ligne."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Leçon 5",
+      "title": "Quatre façons pour Cowork de mieux connaître votre travail",
+      "cap": "Vous ne commencerez pas avec les quatre le premier jour. Posez d’abord les instructions globales, ajoutez un projet quand un travail récurrent apparaît, construisez une compétence quand vous êtes las de réexpliquer un processus, et empaquetez un plugin une fois que vous avez quelque chose qui mérite d’être partagé.",
+      "teach": "Aujourd’hui, vous vous réexpliquez à chaque fois. Ces quatre choses y mettent fin. Les instructions globales : qui vous êtes et comment vous travaillez, posées une fois.\n\nLes projets : un flux de travail unique, pour que Claude agisse comme s’il faisait déjà partie de l’équipe. Les compétences : la façon dont un processus précis doit être mené, à votre manière. Les plugins : l’expertise de tout votre métier, empaquetée.\n\nPlus il en sait, plus il vous décharge, et le contexte que vous fournissez une fois continue de rapporter.",
+      "diagram": "diagrams/fr/03-claude-cowork/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quelqu’un utilise Cowork depuis une semaine et demande par quoi commencer.",
+          "options": [
+            {
+              "t": "Un plugin, pour que tout soit en place dès le départ.",
+              "why": "C’est le dernier des quatre, et il empaquette des choses qu’ils n’ont pas encore construites."
+            },
+            {
+              "t": "Les instructions globales : qui vous êtes, reportées dans chaque session.",
+              "correct": true
+            },
+            {
+              "t": "Les quatre, pour que rien ne manque.",
+              "why": "Chacune gagne sa place à un moment différent. Installer les quatre le premier jour revient à en deviner trois."
+            }
+          ]
+        },
+        {
+          "q": "Quand une compétence est-elle la bonne chose à sortir ?",
+          "options": [
+            {
+              "t": "Quand un projet est devenu trop gros.",
+              "why": "La taille n’est pas le déclencheur. Pensez répétition plutôt que volume."
+            },
+            {
+              "t": "Quand vous voulez qu’un coéquipier l’ait aussi.",
+              "why": "Cela vient après. Il faut que quelque chose mérite d’être partagé avant que le partage se pose."
+            },
+            {
+              "t": "Quand vous êtes las d’expliquer le même processus.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Leçon 6",
+      "title": "Contexte permanent : sur vous, et sur le travail",
+      "cap": "Ce dernier point est ce que les projets apportent. Hors projet, chaque session repart de zéro ; à l’intérieur, chaque conversation enrichit ce que Claude sait, si bien que la tâche suivante s’ouvre avec la situation du client et les décisions de la semaine dernière déjà en main.",
+      "teach": "Deux sortes de contexte permanent. Les instructions globales sont un brief sur vous, posé une fois dans les réglages : qui vous êtes, vos abréviations, la façon dont vous aimez les livrables. Elles s’appliquent à chaque session.\n\nUn projet est délimité à un flux de travail — un client, un rapport récurrent, un lancement — et il contient des instructions, les dossiers d’où il travaille, et des exécutions planifiées. Ce que les projets apportent, c’est la dernière partie : la mémoire. Dans un projet, chaque conversation enrichit ce que Claude sait. Hors projet, chaque session repart de zéro.",
+      "diagram": "diagrams/fr/03-claude-cowork/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Vous avez travaillé dans un projet la semaine dernière et pris plusieurs décisions. Nouvelle tâche, même projet. Avec quoi démarre-t-il ?",
+          "options": [
+            {
+              "t": "Les fichiers et les instructions que vous avez mis, mais pas les décisions.",
+              "why": "Presque, et cela le sous-estime. Un projet ne contient pas que ce que vous y avez classé."
+            },
+            {
+              "t": "Les fichiers, les instructions, et la mémoire bâtie à partir de ces conversations.",
+              "correct": true
+            },
+            {
+              "t": "Rien. La mémoire est propre à chaque conversation.",
+              "why": "Vrai d’une conversation nue. Un projet fait quelque chose qu’une conversation ne sait pas faire."
+            }
+          ]
+        },
+        {
+          "q": "Les instructions globales et un projet portent tous deux du contexte permanent. Qu’est-ce qui les sépare ?",
+          "options": [
+            {
+              "t": "Les instructions globales sont permanentes ; le contexte d’un projet expire.",
+              "why": "Ni l’un ni l’autre n’expire. La différence porte sur la portée plutôt que sur la durée de vie."
+            },
+            {
+              "t": "Les instructions globales servent aux préférences ; un projet sert aux fichiers.",
+              "why": "Un projet contient bien plus que des fichiers, et les instructions font plus que fixer des préférences."
+            },
+            {
+              "t": "Les instructions globales vous couvrent partout ; un projet couvre un seul flux de travail.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Leçon 7",
+      "title": "Une compétence est un mode d’emploi que Claude charge quand la tâche correspond",
+      "cap": "Les instructions disent à Claude quoi faire ; les ressources lui donnent la matière première ; les références lui montrent à quoi ressemble le « bon » ; les scripts exécutent les parties répétables de la même façon à chaque fois. Incluez ce dont le travail a besoin, rien de plus.",
+      "teach": "Une compétence est un mode d’emploi. Un dossier où vous écrivez une fois comment un certain type de travail doit être mené, pour que Claude le fasse à votre manière à chaque fois. Le brief, SKILL.md, est la seule partie obligatoire : ce qu’elle fait, quand, et comment, écrit comme une consigne pour un nouveau collègue.\n\nAjoutez des modèles comme ressources, vos meilleurs travaux passés comme références, et un script pour la partie qui doit sortir identique à chaque fois. Claude la charge de lui-même quand la tâche correspond. Et vous la construisez en parlant : « je veux une compétence pour la chose que je n’arrête pas de réexpliquer, guide-moi sur ce dont tu as besoin ».",
+      "diagram": "diagrams/fr/03-claude-cowork/s9.svg",
+      "videos": [
+        {
+          "id": "kS1MJFZWMq4",
+          "label": "Creating custom Skills with Claude"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Un dossier de compétence peut contenir quatre choses. Combien sont obligatoires ?",
+          "options": [
+            {
+              "t": "Une : SKILL.md.",
+              "correct": true
+            },
+            {
+              "t": "Deux : SKILL.md et au moins un exemple de bonne production.",
+              "why": "Les exemples aident beaucoup et restent facultatifs."
+            },
+            {
+              "t": "Les quatre, sinon elle ne se charge pas.",
+              "why": "Une seule est porteuse. Les trois autres gagnent leur place quand le travail l’exige."
+            }
+          ]
+        },
+        {
+          "q": "Il y a un script dans le dossier de compétence et vous ne savez pas lire le code. Que faites-vous ?",
+          "options": [
+            {
+              "t": "Faire vérifier par un développeur avant d’utiliser la compétence.",
+              "why": "Sensé pour tout ce qui touche à la production, et cela esquive la question de savoir où réside vraiment l’intelligence de la compétence."
+            },
+            {
+              "t": "Lire le SKILL.md. C’est là qu’est la réflexion, en français courant.",
+              "correct": true
+            },
+            {
+              "t": "Supprimer le script et garder les instructions.",
+              "why": "Le script fait la partie répétable de la même façon à chaque fois. Vous jetteriez la moitié fiable."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Leçon 8",
+      "title": "Un plugin empaquette des compétences autour d’un métier",
+      "cap": "Anthropic publie des plugins pour les métiers courants : finance, juridique, ventes, support. Installez-en un sur étagère, adaptez-le à vos modèles, ou construisez le vôtre. L’expertise voyage avec l’installation, pas avec la personne. Commencez par /setup-cowork pour trouver le bon.",
+      "teach": "Un plugin est un paquet bâti autour d’un métier. Deux formes. Un pipeline : plusieurs compétences qui s’enchaînent, comme extraire les réalisés, construire l’écart, rédiger la note au conseil.\n\nOu une boîte à outils : les compétences qu’une fonction sollicite le plus, empaquetées pour qu’un nouveau coéquipier installe une seule chose et dispose de tout le jeu. L’idée, c’est que l’expertise voyage avec l’installation, pas avec la personne. Anthropic en publie pour la finance, le juridique, les ventes, le support ; commencez par /setup-cowork et il trouve celui qui convient à votre travail.",
+      "diagram": "diagrams/fr/03-claude-cowork/s10.svg",
+      "videos": [
+        {
+          "id": "v5IOHK5xFlc",
+          "label": "Cowork and Plugins: Helping enterprises move faster"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Qu’est-ce qu’un plugin ?",
+          "options": [
+            {
+              "t": "Plusieurs compétences, plus les connecteurs et sous-agents dont elles ont besoin, empaquetés autour d’un métier.",
+              "correct": true
+            },
+            {
+              "t": "Une fiche sur la place de marché pour une compétence.",
+              "why": "La place de marché est la façon dont il voyage, pas ce qu’il est."
+            },
+            {
+              "t": "Une compétence avec les connecteurs dont elle a besoin attachés.",
+              "why": "Presque. Un plugin est plus grand qu’un seul mode d’emploi."
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un vient de construire sa première compétence et demande s’il faut en faire un plugin.",
+          "options": [
+            {
+              "t": "Oui. Un plugin est la bonne façon d’empaqueter une compétence.",
+              "why": "Il n’y a encore rien à empaqueter. Un plugin rassemble plusieurs choses qui fonctionnent déjà."
+            },
+            {
+              "t": "Pas encore. Les plugins empaquettent plusieurs compétences, il n’y a donc rien à rassembler.",
+              "correct": true
+            },
+            {
+              "t": "Oui, car seuls les plugins peuvent être partagés avec une équipe.",
+              "why": "Une compétence isolée peut être transmise telle quelle."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Leçon 9",
+      "title": "Claude dans Chrome : le pont vers les outils sans connecteur",
+      "cap": "Vous restez connecté : Claude travaille dans la session que vous avez déjà authentifiée, il ne peut pas se connecter à votre place. Une seule conversation, deux surfaces. (Claude dans Chrome peut ne pas être disponible sur certaines formules entreprise.)",
+      "teach": "« Certains de vos outils n’ont pas de connecteur : le tableau de bord décisionnel, le portail achats, le CRM derrière l’authentification unique. Claude dans Chrome est le pont. Il lit et clique la page dans la session où vous êtes déjà connecté, en extrait ce qu’il vous faut, et le rend à Cowork pour construire le livrable.\n\nUne seule conversation sur les deux. La phrase qui compte : il ne peut pas se connecter à votre place, vous restez connecté, et il demande avant les actions sensibles. » (La légende du deck : vous restez connecté ; Claude dans Chrome peut ne pas être disponible sur certaines formules entreprise.)",
+      "diagram": "diagrams/fr/03-claude-cowork/s11.svg",
+      "videos": [
+        {
+          "id": "IypXvHej9eY",
+          "label": "Claude for Chrome brings AI where you’re already working"
+        }
+      ],
+      "checks": [
+        {
+          "q": "À quoi sert Claude dans Chrome ?",
+          "options": [
+            {
+              "t": "À lire des pages web publiques quand Cowork n’a pas accès à internet.",
+              "why": "Cowork n’est pas coupé du web. Le manque comblé ici est derrière quelque chose."
+            },
+            {
+              "t": "Aux portails fournisseurs et tableaux de bord qui n’ont pas de connecteur.",
+              "correct": true
+            },
+            {
+              "t": "À tout ce qui est plus rapide à faire dans un navigateur que dans Cowork.",
+              "why": "La vitesse n’est pas sa raison d’être. Pensez aux systèmes qui n’offrent aucune autre porte d’entrée."
+            }
+          ]
+        },
+        {
+          "q": "Le portail exige une connexion. Que fait Claude dans Chrome à ce sujet ?",
+          "options": [
+            {
+              "t": "Il vous demande le mot de passe quand il arrive sur la page.",
+              "why": "Il n’a jamais besoin de détenir le mot de passe."
+            },
+            {
+              "t": "Il se connecte avec des identifiants que vous stockez dans les réglages.",
+              "why": "Il ne prend pas vos identifiants. Il existe un arrangement plus simple qui évite la question."
+            },
+            {
+              "t": "Il travaille dans la session où vous êtes déjà connecté.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Leçon 10",
+      "title": "Claude pour Microsoft 365, à l’intérieur du document",
+      "cap": "Sortez Cowork quand le travail puise à de nombreuses sources et finit en livrable ; sortez Claude dans M365 quand vous modifiez le fichier Office sur place. Les deux se passent le relais proprement, et le fichier est le même des deux côtés.",
+      "teach": "« Le même Claude apparaît dans les applications Office sous forme de complément. Dans Excel, il écrit des formules et des commentaires d’écart, et débogue vos erreurs #REF. Dans PowerPoint, il lit votre masque de diapositives et construit des graphiques natifs et modifiables.\n\nDans Word, il rédige et remet en forme sur place avec le suivi des modifications. Dans Outlook, il trie et rédige des réponses avec le contexte du fil. Et une seule conversation reporte le contexte : le modèle Excel devient la présentation qui devient l’e-mail.\n\nSortez Cowork pour construire à partir de nombreuses sources ; sortez M365 quand vous modifiez le fichier lui-même. » (La légende du deck : les deux se passent le relais proprement, et le fichier est le même des deux côtés.)",
+      "diagram": "diagrams/fr/03-claude-cowork/s12.svg",
+      "videos": [
+        {
+          "id": "F6dzjaBCBtU",
+          "label": "Collaborate with Claude across Microsoft365 apps"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Il vous faut un premier jet puisant dans six sources différentes, puis un polissage soigné du fichier Word. Quels outils ?",
+          "options": [
+            {
+              "t": "Le complément Microsoft 365 de bout en bout, puisque le livrable est un fichier Word.",
+              "why": "Le complément travaille sur le fichier que vous avez ouvert. Rassembler six sources est le travail de l’autre outil."
+            },
+            {
+              "t": "Cowork de bout en bout. Le complément est pour ceux qui ne veulent pas quitter Office.",
+              "why": "Cela sous-estime le complément. Affiner un document sur place est réellement meilleur là où le document existe déjà."
+            },
+            {
+              "t": "Cowork pour le premier jet, puis le complément Microsoft 365 pour le polissage.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Cowork et le complément Microsoft 365 sont-ils concurrents ?",
+          "options": [
+            {
+              "t": "Non. L’un construit le brouillon à partir de nombreuses sources, l’autre affine le fichier sur place.",
+              "correct": true
+            },
+            {
+              "t": "Oui. Prenez celui qui convient à votre façon de travailler.",
+              "why": "Cela en fait une affaire de préférence, alors que la plupart des vrais travaux passent par les deux, l’un après l’autre."
+            },
+            {
+              "t": "Oui, et le complément l’emporte pour tout ce qui finit dans Office.",
+              "why": "Le point d’arrivée ne décide pas du lieu de construction."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Leçon 11",
+      "title": "Le dossier pose la frontière ; le prompt pose les limites",
+      "cap": "La plupart des erreurs ne viennent pas d’une protection qui a lâché : elles viennent de quelqu’un qui a cliqué à travers une confirmation qui n’était pas tout à fait l’action qu’il visait. La boîte de dialogue existe parce que l’action compte ; traitez-la comme telle.",
+      "teach": "« Un outil autonome qui accède aux fichiers et aux applications a besoin de garde-fous, et la plupart, c’est à vous de les apporter. Trois couches. La mise en place : un dossier dédié, pas un fourre-tout ; sauvegardez tout ce qui est irremplaçable ; testez les nouvelles tâches sur des copies.\n\nL’écriture du prompt : nommez précisément les verbes destructeurs, nommez les limites — “seulement les fichiers du T3” —, restez en mode brouillon jusqu’à ce que vous lui fassiez confiance. Et sur le moment : lisez le plan avant qu’il ne s’exécute, guettez l’élargissement du périmètre, et quand une confirmation apparaît, lisez-la. La plupart des erreurs ne sont pas une protection qui lâche, c’est quelqu’un qui clique à travers une boîte de dialogue qui n’était pas tout à fait l’action visée. » (La légende du deck : la boîte de dialogue existe parce que l’action compte, traitez-la comme telle.)",
+      "diagram": "diagrams/fr/03-claude-cowork/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "« Et s’il fait quelque chose que je ne voulais pas ? » Quel est le plancher, avant toute configuration de votre part ?",
+          "options": [
+            {
+              "t": "Il vous soumet tout avant d’agir.",
+              "why": "C’est le réglage par défaut, que vous pouvez changer. Le plancher est ce que vous ne pouvez pas désactiver."
+            },
+            {
+              "t": "Il demande toujours avant de supprimer.",
+              "correct": true
+            },
+            {
+              "t": "Il ne peut rien toucher hors du dossier.",
+              "why": "C’est vrai, et c’est la frontière plutôt que le plancher. À l’intérieur du dossier, une action s’arrête encore toujours pour demander."
+            }
+          ]
+        },
+        {
+          "q": "Vous préparez quelqu’un pour sa première vraie exécution. Quel est l’arrangement raisonnable ?",
+          "options": [
+            {
+              "t": "Son dossier de travail réel, pour que le résultat soit immédiatement utile.",
+              "why": "C’est aussi là qu’une erreur coûte le plus cher, lors de l’exécution qu’il comprend le moins."
+            },
+            {
+              "t": "Un dossier vide, pour que rien ne puisse mal tourner.",
+              "why": "Rien ne peut mal tourner et rien ne peut arriver non plus. Ils n’apprennent rien sur leur propre travail."
+            },
+            {
+              "t": "Un dossier dédié, l’irremplaçable sauvegardé, et une copie pour tester.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Leçon 12",
+      "title": "Une évaluation est un essai : avec la compétence, et sans",
+      "cap": "Intégré à skill-creator . La barre pour livrer n’est pas des évaluations parfaites : c’est que les cas qui vous importent passent nettement mieux que la référence, et que vous ayez nommé ceux que vous ne traitez pas encore. Changez une chose à la fois.",
+      "teach": "« Une évaluation n’est qu’un essai. Ne vous laissez pas effrayer par le mot. skill-creator exécute la même demande réaliste de deux façons, une fois avec votre compétence, une fois sans, et vous montre la paire. Vous lisez les deux et vous répondez à deux questions : est-ce que j’enverrais la version avec la compétence, et sinon, qu’est-ce qui cloche ?\n\nVous le dites en français courant — “trop formel”, “il a sauté le résumé” — et Claude révise. C’est une boucle, pas un portail unique. Vous livrez quand les cas qui vous importent battent la référence et que vous avez nommé les cas limites que vous ne traitez pas encore. » (La légende du deck : changez une chose à la fois ; la barre est « nettement mieux que la référence », pas « parfait ».)",
+      "diagram": "diagrams/fr/03-claude-cowork/s14.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Vous avez construit une compétence. Comment savoir si elle est bonne ?",
+          "options": [
+            {
+              "t": "Lancer le même prompt avec la compétence et sans, et comparer.",
+              "correct": true
+            },
+            {
+              "t": "S’en servir pendant quinze jours et voir si l’impression est meilleure.",
+              "why": "Vous vous y serez habitué d’ici là, et vous n’aurez rien à quoi comparer."
+            },
+            {
+              "t": "La relire et vérifier que les instructions sont complètes.",
+              "why": "Cela vaut la peine, et cela vous dit ce que vous vouliez plutôt que ce qui en sort."
+            }
+          ]
+        },
+        {
+          "q": "Quelle est la barre qu’une évaluation doit franchir ici ?",
+          "options": [
+            {
+              "t": "Un script de test qui s’exécute automatiquement à chaque changement.",
+              "why": "Celle-ci relève de votre jugement, pas du code. Aucun script en jeu."
+            },
+            {
+              "t": "Les cas qui vous importent ressortent nettement mieux que la référence.",
+              "correct": true
+            },
+            {
+              "t": "Tous les cas passent.",
+              "why": "C’est une barre plus haute que ce que le travail exige, et vous ne livreriez jamais rien."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "eyebrow": "Leçon 13",
+      "title": "D’un seul portable à toute l’équipe",
+      "cap": "Les coéquipiers le voient dans leur annuaire, étiqueté comme venant de votre entreprise ; vos mises à jour leur parviennent automatiquement. Gardez-le sain : un propriétaire nommé, des évaluations avant chaque publication, des noms de compétences précis, une revue trimestrielle.",
+      "teach": "Le gain : ce qui a commencé sur votre portable devient quelque chose que toute l’équipe installe. Dans une entreprise, cela passe par une place de marché privée gérée par un administrateur. Vous remettez votre plugin à celui qui en est propriétaire, et il le publie à un niveau : disponible sur adhésion, installé par défaut, ou obligatoire pour ce que tout le monde doit exécuter de la même façon.\n\nLes coéquipiers le voient dans leur annuaire, étiqueté comme venant de votre entreprise, et vos mises à jour leur parviennent automatiquement. Gardez-le vivant avec quatre habitudes : un propriétaire nommé, des évaluations avant chaque publication, des noms précis, et une revue trimestrielle pour retirer ce que personne ne lance.",
+      "diagram": "diagrams/fr/03-claude-cowork/s15.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Votre cabinet n’a pas de place de marché privée. Pouvez-vous quand même donner votre plugin à un coéquipier ?",
+          "options": [
+            {
+              "t": "Seulement s’il a la même formule que vous.",
+              "why": "La condition de formule porte sur la place de marché, pas sur le plugin."
+            },
+            {
+              "t": "Oui. Exportez le dossier du plugin et transmettez-le.",
+              "correct": true
+            },
+            {
+              "t": "Non. La distribution ne passe que par une place de marché.",
+              "why": "C’est un dossier. Tout ce qui déplace un dossier le déplacera."
+            }
+          ]
+        },
+        {
+          "q": "Qui décide qu’un plugin est installé par défaut pour tout le monde ?",
+          "options": [
+            {
+              "t": "Celui qui l’a écrit.",
+              "why": "L’écrire et le publier à toute une organisation sont deux travaux différents, avec des permissions différentes."
+            },
+            {
+              "t": "N’importe qui dans l’équipe, une fois qu’il est sur la place de marché.",
+              "why": "Cela créerait un réglage par défaut que personne n’a approuvé. La publication a un propriétaire."
+            },
+            {
+              "t": "Un propriétaire : un responsable d’équipe, la DSI, ou l’équipe d’accompagnement.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "Introduction to Claude Cowork"
+}

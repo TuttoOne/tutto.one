@@ -1,0 +1,687 @@
+{
+  "id": "01-claude-101",
+  "title": "Claude 101",
+  "anthropic": "https://anthropic.skilljar.com/claude-101",
+  "intro": {
+    "title": "Ce qu’est Claude, et comment travailler vraiment avec.",
+    "lead": "De zéro à héros",
+    "teach": "Ce cours compte douze idées, une par écran. Pour chacune, je vous montre la chose en train de fonctionner, puis je m’arrête et je vous demande où elle s’inscrit dans votre travail. Vous n’avez pas besoin de tout retenir aujourd’hui. Ce qui compte, c’est que vous voyiez chacune fonctionner pour de vrai."
+  },
+  "close": {
+    "title": "Parlez-lui comme à un collègue. Donnez-lui votre contexte. Itérez jusqu’au résultat.",
+    "lead": "Plantez le décor, définissez la tâche, précisez les règles > puis affinez. Les projets, les artefacts et les compétences organisent le travail ; les connecteurs, la recherche web et la recherche approfondie étendent sa portée ; et il vient à vous dans les outils que vous utilisez déjà.",
+    "teach": "Pour résumer la séance : donnez-lui un vrai contexte et une consigne claire, comme vous le feriez avec un collègue compétent, et quand la réponse n’est pas la bonne, ajoutez ce qui manque et recommencez. C’est l’essentiel. Les projets, les compétences et les connecteurs existent pour que vous puissiez faire cela avec moins de répétition et en plus d’endroits."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1",
+      "title": "Pas un chatbot : un partenaire de réflexion",
+      "cap": "La même « intelligence » que vous l’atteigniez sur le web, sur le bureau ou sur mobile, bâtie sur trois principes : serviable, inoffensif, honnête. Les applications ne sont que des portes d’entrée.",
+      "teach": "Vous avez peut-être déjà utilisé un chatbot : vous posez une question, vous obtenez une réponse, et c’est fini. Claude fonctionne mieux quand vous le traitez autrement. Il sait beaucoup de choses en général, mais il ne sait rien de votre travail, de vos clients, de vos exigences, de votre façon de faire.\n\nC’est vous qui fournissez cette part. Et quand la première réponse n’est pas la bonne, vous ne repartez pas de zéro : vous lui dites ce qui ne va pas et il corrige, comme vous régleriez une question avec un collègue.",
+      "diagram": "diagrams/fr/01-claude-101/s3.svg",
+      "videos": [
+        {
+          "id": "0vZ_UVLhSQQ",
+          "label": "Getting started with Claude.ai"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Votre première réponse revient fausse. Que faites-vous ?",
+          "options": [
+            {
+              "t": "Lui dire ce qui ne va pas et le laisser corriger.",
+              "correct": true
+            },
+            {
+              "t": "Garder ce qui est utile et finir le reste vous-même.",
+              "why": "Vous le ferez à la fin, sur la dernière ligne droite. Le faire dès le tout premier jet revient à payer pour un travail que vous auriez pu obtenir."
+            },
+            {
+              "t": "Ajouter le détail manquant et relancer la même demande.",
+              "why": "Plus proche. Mais relancer jette quand même le brouillon que vous tenez, et ce n’est pas nécessaire."
+            },
+            {
+              "t": "Recommencer, en formulant la demande plus soigneusement cette fois.",
+              "why": "Une formulation soignée vaut la peine, mais recommencer jette tout ce que Claude a déjà saisi de ce travail. Il existe un geste qui le conserve."
+            }
+          ]
+        },
+        {
+          "q": "Sur laquelle de ces tâches Claude peut-il le moins aider, en l’état ?",
+          "options": [
+            {
+              "t": "Rédiger un point client selon la structure habituelle de votre cabinet.",
+              "why": "Il le peut, une fois que vous lui avez dit quelle est cette structure. Cherchez celle qu’il ne pourrait jamais déduire de sa seule culture générale."
+            },
+            {
+              "t": "Décider lequel de deux fournisseurs votre cabinet doit garder.",
+              "correct": true
+            },
+            {
+              "t": "Expliquer une clause contractuelle en français courant.",
+              "why": "La culture générale couvre celle-ci. Cherchez l’option qui repose sur ce que seul votre cabinet sait."
+            },
+            {
+              "t": "Transformer un fatras de notes en synthèse.",
+              "why": "C’est une capacité générale. Cherchez celle qui exige un jugement sur votre propre activité."
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un dit « ce n’est que de la saisie prédictive, il ne comprend pas vraiment mon métier ». Quelle est la réponse exacte ?",
+          "options": [
+            {
+              "t": "Ils ont tort : il comprend le travail aussi bien qu’un collègue.",
+              "why": "Trop en promettre ici vous coûte votre crédibilité, et c’est faux. Il existe une réponse qui concède le point tout en tenant."
+            },
+            {
+              "t": "Ils ont raison de dire qu’il démarre sans rien savoir de leur métier : c’est la part qu’ils fournissent.",
+              "correct": true
+            },
+            {
+              "t": "Ils ont raison, il n’est donc utile que pour les travaux à faible enjeu.",
+              "why": "Cela concède beaucoup trop. L’écart qu’ils ont nommé, vous pouvez le combler en une phrase de contexte."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2 : le point à retenir",
+      "title": "Plantez le DÉCOR · Définissez la TÂCHE · Précisez les RÈGLES",
+      "cap": "Ajoutez du contexte en téléversant des fichiers, et laissez la mémoire et les styles reporter votre rôle et vos préférences pour cesser de vous répéter.",
+      "teach": "Une bonne consigne comporte trois parties. Le contexte : qui vous êtes et à quoi sert ce travail. La tâche : ce que vous voulez exactement voir fait.\n\nLes règles : le ton, le format, et si possible un exemple de ce à quoi ressemble le bon travail. La plupart des gens écrivent une courte ligne et s’attendent à ce qu’il devine le reste : il ne lit pas dans vos pensées. Plus vous lui en dites, meilleur est le résultat.\n\nUne comparaison utile : briefez-le comme vous briefriez un nouveau collègue compétent, le premier jour.",
+      "diagram": "diagrams/fr/01-claude-101/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Laquelle de ces formulations est un brief ?",
+          "options": [
+            {
+              "t": "Tu es mon responsable des opérations. Rédige la note du T3 pour le conseil. Deux pages, en français courant, aucun chiffre qui ne figure pas dans le fichier.",
+              "correct": true
+            },
+            {
+              "t": "Écris-moi une note.",
+              "why": "C’est la tâche et rien d’autre. Pas de contexte, pas de contraintes. Vous obtiendrez quelque chose de générique et passerez plus de temps à le corriger que le brief n’en aurait pris."
+            },
+            {
+              "t": "Écris-moi une note de deux pages en français courant sur le T3.",
+              "why": "Mieux, et il manque encore la part qui lui dit qui il incarne et à quoi sert la note. Deux des trois parties sont là."
+            }
+          ]
+        },
+        {
+          "q": "« Tu es mon comptable. Rassemble ces factures dans un CSV. » Laquelle des trois parties manque ?",
+          "options": [
+            {
+              "t": "Le décor.",
+              "why": "« Tu es mon comptable », c’est le décor, et il est là."
+            },
+            {
+              "t": "La tâche.",
+              "why": "Rassembler les factures dans un CSV, c’est la tâche, et elle est là."
+            },
+            {
+              "t": "Les règles.",
+              "correct": true
+            }
+          ],
+          "keep_order": true
+        },
+        {
+          "q": "Vous briefez bien et vous récupérez quelque chose d’environ quatre-vingt-dix pour cent juste. Qu’est-ce que cela vous dit ?",
+          "options": [
+            {
+              "t": "Il lui faut un exemple de bon travail avant de pouvoir terminer.",
+              "why": "Un exemple élève la qualité, mais attendre qu’il atteigne cent pour cent est l’hypothèse qui mérite d’être examinée."
+            },
+            {
+              "t": "La tâche convient mal et devrait rester manuelle.",
+              "why": "Quatre-vingt-dix pour cent d’une tâche faite est une bien mauvaise raison de tout reprendre."
+            },
+            {
+              "t": "Le brief était encore trop vague. Resserrez-le et recommencez.",
+              "why": "Parfois vrai, mais pas à quatre-vingt-dix. Demandez-vous à quoi servent réellement les dix pour cent restants."
+            },
+            {
+              "t": "C’est le partage normal. Vous finissez les dix derniers.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3",
+      "title": "Quand ça déraille, c’est presque toujours réparable",
+      "cap": "Faites une évaluation rapide (5 à 10 de vos propres exemples) pour découvrir où Claude s’insère déjà dans votre travail.",
+      "teach": "Quand vous obtenez une mauvaise réponse, ce n’est généralement pas parce que l’outil ne sait pas faire le travail. C’est parce que quelque chose que vous saviez n’est jamais entré dans la consigne. Trop générique ?\n\nIl ignorait votre rôle ou votre public. Mauvais format ? Montrez-lui un exemple au lieu de décrire ce que vous voulez.\n\nAssuré mais faux ? Cela arrive : demandez-lui de citer ses sources, et vérifiez les faits qui comptent. Repérer ce qui manque et l’ajouter est la compétence principale du travail avec l’IA. Cela porte un nom, la maîtrise de l’IA, et il y a toute une séance Praxis là-dessus.",
+      "diagram": "diagrams/fr/01-claude-101/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un brouillon revient en avançant un chiffre qui se révèle inventé. Quelle est la bonne réaction ?",
+          "options": [
+            {
+              "t": "Demander les sources, puis vérifier les faits qui pèsent.",
+              "correct": true
+            },
+            {
+              "t": "Cesser de l’utiliser pour tout ce qui comporte des chiffres.",
+              "why": "Cela abandonne beaucoup pour un problème sur lequel on a une prise connue."
+            },
+            {
+              "t": "Lui donner les documents sources et redemander.",
+              "why": "Cela aide, et c’est la moitié de la réponse. Cela vous laisse quand même faire confiance au chiffre suivant sans moyen de vérifier."
+            },
+            {
+              "t": "Lui dire d’arrêter d’inventer.",
+              "why": "Il n’a aucun moyen de se contrôler face à une consigne aussi abstraite. Il lui faut quelque chose qu’il puisse réellement faire."
+            }
+          ]
+        },
+        {
+          "q": "Quatre choses déraillent dans les brouillons : trop générique, mauvais format, assuré mais faux, ton inadapté. Laquelle n’est PAS généralement réglée en ajoutant du contexte ?",
+          "options": [
+            {
+              "t": "Trop générique.",
+              "why": "Le générique est la défaillance classique du contexte manquant. Il n’avait rien de précis pour travailler."
+            },
+            {
+              "t": "Assuré mais faux.",
+              "correct": true
+            },
+            {
+              "t": "Ton inadapté.",
+              "why": "Le ton se règle par le contexte, précisément par un exemple de ce à quoi sonne le bon travail."
+            },
+            {
+              "t": "Mauvais format.",
+              "why": "Le format se règle en disant ce que vous voulez. C’est du contexte que vous n’avez pas donné."
+            }
+          ]
+        },
+        {
+          "q": "Lequel de ces résultats décevants relève le plus probablement de la limite de l’outil plutôt que de votre prompt ?",
+          "options": [
+            {
+              "t": "Il a ignoré la structure en huit sections de vos rapports.",
+              "why": "Il ne peut pas suivre une structure qu’on ne lui a jamais montrée."
+            },
+            {
+              "t": "Il a écrit dans un registre inadapté à votre client.",
+              "why": "Le registre vient d’un contexte que vous pouvez fournir. Cherchez celui qu’aucun brief ne règle."
+            },
+            {
+              "t": "Il a donné une réponse assurée sur quelque chose survenu la semaine dernière.",
+              "correct": true
+            },
+            {
+              "t": "Il a produit une synthèse qui a raté ce qui comptait pour vous.",
+              "why": "Ce qui compte pour vous est précisément ce que porte un brief. Continuez de chercher."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4",
+      "title": "Trois modes, adaptés à la taille du travail",
+      "cap": "Cowork et Code reposent sur Claude Code en dessous : local à votre machine, capable de lancer des sous-agents et de tenir des tâches longues. Cowork reste dans les dossiers que vous partagez ; Code travaille directement dans votre projet.",
+      "teach": "L’application vous donne le même Claude en trois modes, et vous choisissez selon la taille du travail. La conversation sert aux questions rapides et aux courts brouillons. Cowork sert aux travaux plus lourds : il travaille sur plusieurs fichiers ou sources pendant un moment et revient avec un travail achevé.\n\nCode sert à construire des logiciels. Rien à mémoriser ici : quand un travail semble trop gros pour une fenêtre de conversation, il existe un mode fait pour cela.",
+      "diagram": "diagrams/fr/01-claude-101/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un collègue a une question qui prendra trente secondes, et un rapprochement sur quarante fichiers qui prendra un après-midi. Quels modes ?",
+          "options": [
+            {
+              "t": "La conversation pour la question, Cowork pour le rapprochement.",
+              "correct": true
+            },
+            {
+              "t": "La conversation pour les deux. Le rapprochement n’est qu’une conversation plus longue.",
+              "why": "La longueur n’est pas la différence. Demandez-vous ce dont le rapprochement a besoin et qu’une conversation ne peut pas lui donner."
+            },
+            {
+              "t": "Cowork pour la question, Code pour le rapprochement.",
+              "why": "Cowork, c’est de la grosse machinerie pour une question de trente secondes, et il n’est pas besoin d’aller jusqu’à Code pour l’autre."
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un a ouvert Claude pour la première fois ce matin et veut essayer quelque chose de réel. Où l’envoyez-vous ?",
+          "options": [
+            {
+              "t": "Vers le terminal, pour qu’il apprenne d’emblée la version puissante.",
+              "why": "Commencer par la porte la plus difficile est la façon dont les gens décident que ce n’est pas pour eux. Il y a une version de la même chose déjà ouverte devant eux."
+            },
+            {
+              "t": "Vers la barre latérale de l’application de bureau.",
+              "correct": true
+            },
+            {
+              "t": "Où il veut. Les trois sont interchangeables.",
+              "why": "C’est le même Claude, mais ils ne sont pas aussi faciles à aborder le premier jour."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Leçon 5",
+      "title": "Les projets : un espace de travail qui se souvient",
+      "cap": "Idéal pour tout ce qui est continu plutôt que ponctuel. Nommez vos fichiers de façon descriptive : Claude se sert du nom de fichier pour trouver le bon.",
+      "teach": "Aujourd’hui, chaque nouvelle conversation repart de zéro : vous finissez par retéléverser les mêmes fichiers et réexpliquer les mêmes règles. Un projet règle cela. Vous y mettez les fichiers et les règles une fois, et chaque conversation lancée dans le projet les connaît déjà.\n\nL’effet pratique : vous cessez de vous répéter, et le travail cesse de se perdre à la fin d’une conversation.",
+      "diagram": "diagrams/fr/01-claude-101/s7.svg",
+      "videos": [
+        {
+          "id": "GJ5jTgcbRHA",
+          "label": "Getting started with projects in Claude.ai"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Vous avez configuré un projet avec vos exigences et trois fichiers de référence. Vous lancez une toute nouvelle conversation dedans. Que sait-elle ?",
+          "options": [
+            {
+              "t": "Les fichiers, les instructions, et ce que le projet a mémorisé.",
+              "correct": true
+            },
+            {
+              "t": "Rien. Chaque conversation démarre à froid.",
+              "why": "C’est vrai d’une conversation isolée. Demandez-vous ce que le projet autour d’elle retient."
+            },
+            {
+              "t": "Les fichiers et les instructions, mais pas ce que les conversations précédentes ont établi.",
+              "why": "Plus proche, et cela sous-estime une part. Un projet retient plus que la matière que vous y avez mise."
+            }
+          ]
+        },
+        {
+          "q": "Laquelle de ces raisons est la plus forte pour créer un projet ?",
+          "options": [
+            {
+              "t": "Cela garde les conversations liées au même endroit.",
+              "why": "C’est bien rangé, mais le rangement n’est pas ce qui vous fait gagner du temps. Demandez-vous ce que vous feriez sinon au début de chaque conversation."
+            },
+            {
+              "t": "Vous cessez de retéléverser les mêmes fichiers et de réexpliquer les mêmes règles.",
+              "correct": true
+            },
+            {
+              "t": "Votre équipe peut voir ce sur quoi vous avez travaillé.",
+              "why": "Un effet secondaire, pas la raison. Pensez à ce que vous répétez plutôt qu’à ce que vous partagez."
+            },
+            {
+              "t": "Les réponses dans un projet sont plus exactes.",
+              "why": "Elles sont meilleures parce qu’elles sont mieux briefées, ce qui est la conséquence d’un autre élément de cette liste."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Leçon 6",
+      "title": "Les artefacts : la production, rendue à côté de la conversation",
+      "cap": "Soyez précis et itérez un changement à la fois. Si Claude crée quelque chose d’exploitable, dites simplement « fais-en un artefact ».",
+      "teach": "Quand il produit quelque chose de substantiel — un document, un tableau, une page fonctionnelle — il l’ouvre dans sa propre fenêtre à côté de la conversation, correctement mis en forme, où vous pouvez le lire, le modifier, le télécharger et le partager. S’il répond dans la conversation alors que vous vouliez quelque chose d’exploitable, dites « fais-en un artefact » et il le fera.",
+      "diagram": "diagrams/fr/01-claude-101/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un artefact comporte cinq problèmes. Que faites-vous ?",
+          "options": [
+            {
+              "t": "Les lister tous les cinq dans un seul message pour qu’il les corrige ensemble.",
+              "why": "Efficace jusqu’au moment où l’une des corrections en casse une autre et où vous ne pouvez pas dire quelle consigne l’a causée."
+            },
+            {
+              "t": "Changer une chose à la fois.",
+              "correct": true
+            },
+            {
+              "t": "Lui demander de refaire l’artefact avec les cinq corrections intégrées.",
+              "why": "Vous jetez les quatre-vingts pour cent déjà justes, et vous ne pouvez toujours pas dire quel changement a causé quoi."
+            }
+          ]
+        },
+        {
+          "q": "Qu’est-ce qui distingue un artefact du reste de la conversation ?",
+          "options": [
+            {
+              "t": "C’est la partie que vous pouvez partager avec d’autres.",
+              "why": "Vous pouvez le partager, mais c’est une conséquence de ce qu’il est plutôt que ce qui le distingue."
+            },
+            {
+              "t": "Il est enregistré et pas la conversation.",
+              "why": "Ce n’est pas la distinction. Pensez à ce que vous pouvez en faire plutôt qu’à sa durée de vie."
+            },
+            {
+              "t": "C’est la chose finie, rendue dans sa propre fenêtre et modifiable.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Leçon 7",
+      "title": "Les compétences : du savoir-faire empaqueté, exécuté de la même façon à chaque fois",
+      "cap": "N’installez de compétences personnalisées que depuis des sources de confiance : elles peuvent contenir du code. Pour approfondir, voir l’« Introduction aux compétences d’agent » dédiée d’Anthropic.",
+      "teach": "Une compétence est un jeu d’instructions que Claude conserve et applique dès que cette tâche se présente. Celles intégrées, vous les avez déjà utilisées : c’est ainsi qu’il fabrique des tableurs et des documents. Celles qui ont de la valeur sont celles que vous créez vous-même : vous décrivez votre façon de mener une tâche répétable — les étapes, les règles, le format — et à partir de là il fait cette tâche à votre manière, à chaque fois, sans qu’on le lui redise.\n\nVous la construisez en lui parlant ; aucun code n’entre en jeu. Pour un cabinet, c’est la partie qui compte : la façon dont votre collaborateur le plus expérimenté fait le travail peut être écrite une fois et utilisée par tous.",
+      "diagram": "diagrams/fr/01-claude-101/s9.svg",
+      "videos": [
+        {
+          "id": "LpGpwhORWr0",
+          "label": "Claude works with you on slides, spreadsheets, and contract redlines"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Votre cabinet rédige des rapports selon une structure fixe en huit sections avec des règles de citation strictes. Projet, ou compétence ?",
+          "options": [
+            {
+              "t": "Une compétence, parce que c’est une méthode que vous voulez exécutée de la même façon à chaque fois.",
+              "correct": true
+            },
+            {
+              "t": "Ni l’un ni l’autre. Sa place est dans le prompt à chaque fois.",
+              "why": "Cela fonctionne, et cela veut dire retaper les mêmes huit sections jusqu’à la fin de vos jours."
+            },
+            {
+              "t": "Un projet, parce que ces règles relèvent du savoir sur le fonctionnement de votre cabinet.",
+              "why": "Un projet est le bon endroit pour la matière source. Mais ce n’est pas un fait à consulter, c’est une méthode à exécuter."
+            }
+          ]
+        },
+        {
+          "q": "« Compétences » désigne deux choses différentes selon l’endroit où vous êtes. Laquelle est celle que vous écrivez vous-même ?",
+          "options": [
+            {
+              "t": "Celles intégrées qu’Anthropic maintient pour Excel, Word et PDF.",
+              "why": "C’est la moitié prête à l’emploi. La question porte sur la moitié qui porte votre propre méthode."
+            },
+            {
+              "t": "Un dossier contenant un fichier en français courant, décrivant comment vous voulez que le travail soit fait.",
+              "correct": true
+            },
+            {
+              "t": "Une fonctionnalité que l’on active dans les réglages du compte.",
+              "why": "Rien ici n’est un interrupteur. Les deux sortes sont des choses qui se chargent quand elles s’appliquent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Leçon 8",
+      "title": "Les connecteurs : amenez vos outils dans la conversation",
+      "cap": "Claude ne voit QUE ce que vous pouvez voir : connecter votre messagerie n’expose celle de personne d’autre. Les permissions sont délimitées et révocables ; ne connectez que des outils de confiance.",
+      "teach": "Les connecteurs permettent à Claude de travailler avec les outils que vous utilisez déjà — Drive, Gmail, Slack et le reste — via une norme unique. Au lieu d’y copier-coller des choses, il lit la source elle-même. Sur la question que tout le monde pose : il ne peut voir que ce que votre propre compte peut voir.\n\nConnecter votre messagerie lui donne votre boîte de réception, celle de personne d’autre. Vous choisissez ce que vous connectez, et vous pouvez tout déconnecter à tout moment.",
+      "diagram": "diagrams/fr/01-claude-101/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Vous connectez Claude à la base documentaire de votre cabinet. Un collègue demande s’il peut désormais lire les fichiers des associés. Qu’en est-il ?",
+          "options": [
+            {
+              "t": "Oui. Une fois connecté, il peut atteindre tout ce qui est dans la base.",
+              "why": "Cela rendrait les connecteurs inutilisables dans tout cabinet détenant de la matière confidentielle. Demandez-vous sous quel compte la connexion s’exécute."
+            },
+            {
+              "t": "Seulement si vous pouvez déjà ouvrir ces fichiers vous-même.",
+              "correct": true
+            },
+            {
+              "t": "Non. Les connecteurs sont en lecture seule sur vos propres documents.",
+              "why": "Trop étroit d’un côté, et ce n’est pas la vraie règle. La limite ne tient pas à la propriété."
+            }
+          ]
+        },
+        {
+          "q": "Un responsable conformité demande où vont les données. Quelle réponse lui est la plus utile ?",
+          "options": [
+            {
+              "t": "Elles sont chiffrées en transit et au repos.",
+              "why": "Vrai de presque tous les outils qu’ils utilisent déjà : cela ne règle rien. Leur question est plus vaste."
+            },
+            {
+              "t": "Cela dépend de votre équipe informatique.",
+              "why": "Cela leur renvoie la question sans même leur dire quelles sont les options."
+            },
+            {
+              "t": "Anthropic n’entraîne jamais sur les données professionnelles, tout va donc bien.",
+              "why": "C’est vrai et ce n’est pas ce qu’ils demandaient. Ils veulent connaître l’éventail des dispositifs à leur disposition."
+            },
+            {
+              "t": "Cela dépend de l’installation, qui va du web sans rien installer à un modèle sur votre propre réseau.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Leçon 9",
+      "title": "La recherche en entreprise : poser une question à toute votre société",
+      "cap": "Formules Team et Enterprise uniquement : un administrateur la met en place, chacun authentifie ses propres comptes. Elle ne renvoie que ce que vous avez déjà la permission de voir.",
+      "teach": "La recherche en entreprise vous permet de poser une seule question à tout ce que votre organisation possède — les documents, la messagerie instantanée, les e-mails — et d’obtenir une seule réponse, avec des citations renvoyant aux sources. Elle ne renvoie que ce que vous avez déjà la permission de voir ; un administrateur la met en place, et rien ne change quant à qui peut accéder à quoi.",
+      "diagram": "diagrams/fr/01-claude-101/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un professionnel qui exerce seul vous demande de lui installer la recherche en entreprise. Que dites-vous ?",
+          "options": [
+            {
+              "t": "Cela fonctionne, mais il n’y a rien à chercher avec les documents d’une seule personne.",
+              "why": "Le volume n’est pas l’obstacle. Il y a un blocage plus dur bien avant."
+            },
+            {
+              "t": "Cela exige une formule Team ou Enterprise, donc pas encore.",
+              "correct": true
+            },
+            {
+              "t": "Cela fonctionne sur toute formule payante une fois les connecteurs installés.",
+              "why": "Les connecteurs et la recherche en entreprise ne sont pas la même barrière. L’un des deux a une exigence de formule."
+            }
+          ]
+        },
+        {
+          "q": "La recherche en entreprise répond sur tout ce que l’organisation a connecté. Que vous revient-il ?",
+          "options": [
+            {
+              "t": "Tout ce qui est pertinent. Les règles d’accès s’appliquent quand vous ouvrez la source.",
+              "why": "Cela ferait fuiter le contenu par la réponse elle-même, ce que la règle existe justement pour empêcher."
+            },
+            {
+              "t": "Tout ce qui est pertinent, la matière restreinte étant signalée comme telle.",
+              "why": "Elle ne vous montre pas des choses que vous ne pouvez pas ouvrir en les étiquetant. La règle est plus simple et plus stricte."
+            },
+            {
+              "t": "Seulement la matière à laquelle vous avez déjà accès.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Leçon 10",
+      "title": "La recherche approfondie : d’une seule recherche à un rapport documenté",
+      "cap": "Sortez la recherche approfondie quand une réponse complète exige de nombreuses sources. Pour un fait rapide, la recherche web ; pour du pur raisonnement, le raisonnement étendu ; pour des questions purement internes, la recherche en entreprise.",
+      "teach": "La fonction de recherche approfondie sert aux questions qui exigent une vraie fouille. Au lieu d’une seule recherche, elle en lance beaucoup : elle établit un plan, cherche, lit ce qu’elle trouve, décide quoi consulter ensuite, et rédige le résultat avec une citation pour chaque affirmation. Cela prend cinq à quinze minutes, pas quelques secondes. Utilisez-la quand une bonne réponse exige vingt sources plutôt qu’une.",
+      "diagram": "diagrams/fr/01-claude-101/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un rapport de recherche revient avec chaque affirmation sourcée. Que reste-t-il à faire ?",
+          "options": [
+            {
+              "t": "Rien. Les citations sont la vérification.",
+              "why": "Une citation vous dit d’où vient une affirmation. Elle ne vous dit pas que la source a été bien lue."
+            },
+            {
+              "t": "Vérifier les faits qui pèsent vraiment.",
+              "correct": true
+            },
+            {
+              "t": "Vérifier chaque citation, sinon on ne peut pas se fier au rapport.",
+              "why": "C’est reprendre tout le travail. La vérification doit être proportionnée à ce qu’une erreur coûterait."
+            }
+          ]
+        },
+        {
+          "q": "Qu’est-ce qui distingue la recherche approfondie d’une question posée avec la recherche web activée ?",
+          "options": [
+            {
+              "t": "C’est la même chose, à qui l’on donne plus de temps.",
+              "why": "Le temps seul ne produit pas un rapport structuré doté d’une ligne argumentative."
+            },
+            {
+              "t": "Elle atteint des sources qu’une recherche normale ne peut pas.",
+              "why": "C’est le même web ouvert. La différence tient à ce qu’elle en fait."
+            },
+            {
+              "t": "Elle planifie, puis lance de nombreuses recherches qui s’appuient les unes sur les autres, puis rédige.",
+              "correct": true
+            },
+            {
+              "t": "Elle interroge de nombreuses sources à la fois au lieu d’une par une.",
+              "why": "Ce n’est pas une largeur en un seul passage. Pensez à ce qui se passe entre la première recherche et la suivante."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Leçon 11",
+      "title": "Quel que soit votre métier, il y a un point de départ",
+      "cap": "Choisissez une tâche récurrente cette semaine et essayez. Le savoir-faire s’affûte à la pratique : vous développez l’intuition de là où Claude gagne sa place.",
+      "teach": "« Nous avons vu beaucoup de fonctionnalités aujourd’hui. Vous n’avez pas encore besoin de la plupart. Ce dont vous avez besoin, c’est d’une tâche, une vraie, tirée de votre semaine réelle, pour commencer. Choisissons la vôtre maintenant. » (Puis allez à leur tâche issue de l’entretien préalable, pas à la grille de l’écran.)",
+      "diagram": "diagrams/fr/01-claude-101/s13.svg",
+      "videos": [
+        {
+          "id": "Zzn-g8lvLMA",
+          "label": "Data analysis with AI"
+        }
+      ],
+      "checks": [
+        {
+          "q": "On vient de vous montrer une douzaine de fonctionnalités. Quelle première semaine change vraiment votre façon de travailler ?",
+          "options": [
+            {
+              "t": "Prendre les deux fonctionnalités les plus impressionnantes et approfondir.",
+              "why": "Impressionnant n’est pas porteur. Le test, c’est de savoir si cela touche du travail que vous avez réellement."
+            },
+            {
+              "t": "Essayer chaque fonctionnalité une fois pour savoir ce qui existe.",
+              "why": "Vous finirez la semaine avec douze démonstrations et aucune habitude changée. Demandez-vous ce que vous feriez encore dans un mois."
+            },
+            {
+              "t": "Une vraie tâche que vous faites déjà, menée correctement, du début à la fin.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Quelle tâche est le meilleur candidat pour votre première vraie tentative ?",
+          "options": [
+            {
+              "t": "Quelque chose que vous faites de la même façon à répétition, et que vous pourriez vérifier vite.",
+              "correct": true
+            },
+            {
+              "t": "Quelque chose dont personne n’a le temps, ainsi il n’y a rien à perdre en cas d’échec.",
+              "why": "Si personne n’avait besoin que ce soit fait, le finir ne prouve rien et ne change rien."
+            },
+            {
+              "t": "La chose la plus difficile que vous fassiez, parce que c’est là qu’est la valeur.",
+              "why": "La valeur y est, et la plus forte chance d’une première tentative qui vous dégoûte aussi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Leçon 12",
+      "title": "Une seule intelligence, là où vous travaillez déjà",
+      "cap": "La suite dépend du travail : construire des logiciels (Code), le contexte d’équipe (Slack), des modèles (Excel), des présentations (PowerPoint), ou le web en direct (Chrome).",
+      "teach": "« Tout ce que nous avons fait aujourd’hui se passait dans l’application Claude, mais le même Claude est disponible dans d’autres outils : dans Slack, dans Excel et PowerPoint, dans le navigateur, et dans une version appelée Claude Code qui travaille directement avec les fichiers et dossiers de votre ordinateur. La question à emporter n’est donc pas de savoir s’il faut changer d’outil.\n\nC’est de savoir lequel des outils où vous passez déjà vos journées gagnerait le plus à avoir Claude dedans. » (Tenez le terme unique : c’est Claude Code, à chaque fois.)",
+      "diagram": "diagrams/fr/01-claude-101/s14.svg",
+      "videos": [
+        {
+          "id": "s-avRazvmLg",
+          "label": "Claude Code on the web"
+        },
+        {
+          "id": "tI1uzSJuSxc",
+          "label": "Claude in Slack"
+        },
+        {
+          "id": "8ZRTSIRWLu4",
+          "label": "Claude in Excel: Sample Use Case"
+        },
+        {
+          "id": "IypXvHej9eY",
+          "label": "Claude for Chrome brings AI where you’re already working"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Claude apparaît dans Slack, Excel, Chrome et le terminal. Quel est le rapport entre eux ?",
+          "options": [
+            {
+              "t": "Des produits distincts qui partagent un nom par hasard.",
+              "why": "Ils partagent plus qu’un nom. Demandez-vous ce qui reste identique quand la surface change."
+            },
+            {
+              "t": "Le même Claude, adapté à chaque surface.",
+              "correct": true
+            },
+            {
+              "t": "Un seul produit, avec des modèles plus petits sur les surfaces légères.",
+              "why": "La surface change ce qu’il peut atteindre et sa façon de se comporter, pas ses capacités en dessous."
+            }
+          ]
+        },
+        {
+          "q": "De tout ce cours, quelle partie survit au fait d’être transmise à un collègue dans un an ?",
+          "options": [
+            {
+              "t": "Vos préférences enregistrées et votre mémoire.",
+              "why": "Elles vous suivent, ce qui est précisément le problème quand celui qui en a besoin est quelqu’un d’autre."
+            },
+            {
+              "t": "Le projet, avec ses fichiers et ses instructions.",
+              "why": "Plus proche que les autres, et il vit dans un compte plutôt qu’à un endroit que l’on peut transmettre."
+            },
+            {
+              "t": "Le dossier, avec les règles écrites dedans.",
+              "correct": true
+            },
+            {
+              "t": "La conversation, puisqu’on peut partager un échange.",
+              "why": "Une conversation partagée est la trace d’un échange, pas quelque chose que l’on peut reprendre et exécuter."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "Claude 101"
+}

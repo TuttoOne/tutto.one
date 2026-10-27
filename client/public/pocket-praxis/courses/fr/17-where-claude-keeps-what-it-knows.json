@@ -1,0 +1,326 @@
+{
+  "id": "17-where-claude-keeps-what-it-knows",
+  "title": "Où Claude garde ce qu’il sait",
+  "anthropic": null,
+  "intro": {
+    "title": "Où Claude garde ce qu’il sait.",
+    "lead": "Trois dépôts, quatre profondeurs, un nom de dossier. Une fois le motif repéré, tout le modèle de configuration se ramène à une seule idée.",
+    "teach": "Trois dépôts, quatre profondeurs, un nom de dossier. Une fois le motif repéré, tout le modèle de configuration se ramène à une seule idée."
+  },
+  "close": {
+    "title": "Tout est un fichier. Son emplacement décide à qui il s’applique.",
+    "lead": "Vérifiez-le vous-même : /memory liste les fichiers, /context montre ce qui a réellement été chargé, /doctor vous dit pourquoi quelque chose ne prend pas effet.",
+    "teach": "Vérifiez-le vous-même : /memory liste les fichiers, /context montre ce qui a réellement été chargé, /doctor vous dit pourquoi quelque chose ne prend pas effet."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Étape 1",
+      "title": "Tout est un fichier",
+      "cap": "Stockage local ne veut pas dire traitement local. La copie durable reste sur le poste de travail, mais lorsqu’une session charge l’un de ces fichiers, son contenu part vers l’API dans le prompt, exactement comme n’importe quel fichier source que Claude lit.",
+      "teach": "Il n’y a ni base de données de mémoire ni profil au niveau du compte. Trois choses portent le nom de mémoire, elles ont des auteurs différents, et toutes les trois sont du texte brut sur votre propre machine.",
+      "diagram": "diagrams/fr/17-where-claude-keeps-what-it-knows/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Où Claude Code garde-t-il ce dont il se souvient à votre sujet ?",
+          "options": [
+            {
+              "t": "Dans des fichiers texte, sur votre propre machine.",
+              "correct": true
+            },
+            {
+              "t": "Dans une base de données locale gérée par l’outil.",
+              "why": "Aucune base de données nulle part. C’est plus simple et plus inspectable que cela."
+            },
+            {
+              "t": "Dans votre compte, pour vous suivre d’une machine à l’autre.",
+              "why": "Il n’existe pas de profil au niveau du compte. Pensez à ce que vous pourriez ouvrir et lire vous-même."
+            }
+          ]
+        },
+        {
+          "q": "Les fichiers sont stockés en local. Cela veut-il dire que leur contenu reste sur votre machine ?",
+          "options": [
+            {
+              "t": "Oui. Stockage local vaut traitement local.",
+              "why": "Ce sont deux choses différentes, et les confondre est précisément l’erreur que cet écran existe pour éviter."
+            },
+            {
+              "t": "Non. La copie durable est locale, mais un fichier chargé part vers l’API dans le prompt.",
+              "correct": true
+            },
+            {
+              "t": "Seulement si vous utilisez un modèle local.",
+              "why": "Cela change l’endroit où tourne le modèle. La question porte sur ce qu’il advient d’un fichier chargé."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Étape 2",
+      "title": "Ils vivent tous dans un seul dossier",
+      "cap": "Un dossier par dépôt sous projects\\ , si bien que tous les worktrees et toutes les copies d’un même dépôt partagent une seule mémoire. Deux développeurs sur la même base de code construisent des mémoires distinctes, et aucun ne voit celle de l’autre.",
+      "teach": "Dans votre répertoire personnel se trouve un dossier nommé .claude . C’est là que réside votre version de tout : vos instructions, vos procédures, et la mémoire que Claude tient par dépôt.",
+      "diagram": "diagrams/fr/17-where-claude-keeps-what-it-knows/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Deux développeurs travaillent sur la même base de code. Qu’advient-il de la mémoire que Claude tient par dépôt ?",
+          "options": [
+            {
+              "t": "Ils la partagent, puisqu’elle appartient au dépôt.",
+              "why": "Elle est indexée par dépôt et réside dans le dossier personnel de chacun."
+            },
+            {
+              "t": "Ils construisent des mémoires distinctes, et aucun ne voit celle de l’autre.",
+              "correct": true
+            },
+            {
+              "t": "Elle fusionne au moment du push.",
+              "why": "Rien de tout cela n’est versionné, il n’y a donc rien à fusionner."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "La même chose, sur une vraie machine",
+      "title": "Voici à quoi cela ressemble réellement",
+      "cap": "",
+      "teach": "Pas une illustration. Un portable qui sert vraiment, dépouillé de son fatras d’exécution.",
+      "diagram": "diagrams/fr/17-where-claude-keeps-what-it-knows/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Pourquoi montrer le dossier d’un vrai portable plutôt qu’un schéma ?",
+          "options": [
+            {
+              "t": "Parce que c’est vraiment aussi simple que cela, et qu’une illustration aurait l’air plus rangée que la réalité.",
+              "correct": true
+            },
+            {
+              "t": "Parce que les noms de dossiers changent d’une version à l’autre.",
+              "why": "Ils sont stables. Rien ici ne dépend d’une version."
+            },
+            {
+              "t": "Parce que l’organisation diffère d’une machine à l’autre.",
+              "why": "Elle ne diffère pas. C’est justement l’intérêt d’un nom de dossier unique."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Étape 3",
+      "title": "Le même dossier existe encore, dans le dépôt",
+      "cap": "L’imbrication parle d’audience, pas de disque. Un dépôt ne se trouve pas à l’intérieur de votre dossier personnel. Il est dessiné dedans parce qu’il touche moins de monde, et c’est cette variable-là qu’il faut lire sur ce schéma.",
+      "teach": "Un second .claude vit dans la base de code elle-même, et il est versionné. C’est toute la différence entre une habitude que vous avez et une norme que votre équipe a.",
+      "diagram": "diagrams/fr/17-where-claude-keeps-what-it-knows/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un second dossier .claude vit dans le dépôt et il est versionné. Qu’est-ce que cela change ?",
+          "options": [
+            {
+              "t": "La configuration se charge plus vite pour l’équipe.",
+              "why": "La vitesse n’y est pour rien. Demandez-vous plutôt qui se retrouve avec le fichier."
+            },
+            {
+              "t": "Une habitude que vous avez devient une norme que votre équipe a.",
+              "correct": true
+            },
+            {
+              "t": "Il l’emporte sur tout ce qui se trouve dans votre dossier personnel.",
+              "why": "Les couches s’additionnent plutôt qu’elles ne se remplacent."
+            }
+          ]
+        },
+        {
+          "q": "Le dossier du dépôt est dessiné à l’intérieur de votre dossier personnel. Est-ce là qu’il se trouve sur le disque ?",
+          "options": [
+            {
+              "t": "Non, on le dessine ainsi pour montrer l’ordre de chargement.",
+              "why": "L’ordre de chargement est une autre idée. L’imbrication parle de portée."
+            },
+            {
+              "t": "Oui, les dépôts se trouvent sous le répertoire personnel.",
+              "why": "C’est souvent le cas, et le schéma ne décrit pas du tout le disque."
+            },
+            {
+              "t": "Non. L’imbrication montre l’audience : le dossier touche moins de monde.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Étape 4, si vous ne retenez qu’une chose",
+      "title": "Un nom de dossier, quatre profondeurs",
+      "cap": "Les fichiers d’instructions s’additionnent plutôt qu’ils ne se remplacent, lus de l’extérieur vers l’intérieur.",
+      "teach": "Deux autres couches existent, une à l’extérieur de la vôtre et une à l’intérieur du dépôt. Quatre en tout, et la seule chose qui les sépare est l’emplacement du dossier.",
+      "diagram": "diagrams/fr/17-where-claude-keeps-what-it-knows/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quatre profondeurs, un seul nom de dossier. Qu’est-ce qui les sépare ?",
+          "options": [
+            {
+              "t": "Le type de fichier que chacune peut contenir.",
+              "why": "Les quatre contiennent les mêmes types de fichiers. C’est ce qui en fait une seule idée plutôt que quatre."
+            },
+            {
+              "t": "L’ordre dans lequel Claude les lit.",
+              "why": "L’ordre de lecture découle de la position plutôt qu’il ne la définit."
+            },
+            {
+              "t": "L’emplacement du dossier.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Vous avez une instruction à deux profondeurs différentes. Que se passe-t-il ?",
+          "options": [
+            {
+              "t": "Elles s’additionnent, lues de l’extérieur vers l’intérieur.",
+              "correct": true
+            },
+            {
+              "t": "Claude signale le conflit et pose la question.",
+              "why": "Il ne demandera rien. Elles se combinent sans bruit."
+            },
+            {
+              "t": "La plus interne l’emporte et l’externe est ignorée.",
+              "why": "Cela rendrait les couches externes inutiles la plupart du temps."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Étape 5",
+      "title": "Tout ne se charge pas d’un coup",
+      "cap": "C’est tout l’argument pour garder un CLAUDE.md court. Une compétence n’apporte que sa description d’une ligne tant que Claude ne s’en sert pas, si bien qu’une longue procédure ne coûte rien jusqu’au moment où on en a besoin.",
+      "teach": "Certains de ces fichiers sont lus au début de chaque session et vous coûtent du contexte, qu’ils soient pertinents ou non. Les autres restent sur le disque jusqu’à ce que Claude aille les chercher.",
+      "diagram": "diagrams/fr/17-where-claude-keeps-what-it-knows/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Pourquoi garder CLAUDE.md court ?",
+          "options": [
+            {
+              "t": "Il est lu à chaque session et coûte du contexte, pertinent ou non.",
+              "correct": true
+            },
+            {
+              "t": "Le fichier a une taille limite.",
+              "why": "Aucune limite à atteindre. Le coût est réel bien avant d’en approcher."
+            },
+            {
+              "t": "Les fichiers longs sont plus difficiles à suivre pour Claude.",
+              "why": "Il gère très bien la longueur. Le coût est ailleurs, et il se paie en permanence."
+            }
+          ]
+        },
+        {
+          "q": "Alors où a sa place une longue procédure ?",
+          "options": [
+            {
+              "t": "Dans CLAUDE.md, puisque c’est à cela qu’il sert.",
+              "why": "C’est le fichier que vous cherchez à garder court, et une procédure est exactement ce qui le fait gonfler."
+            },
+            {
+              "t": "Dans une compétence, qui n’apporte que sa description tant qu’elle n’est pas utilisée.",
+              "correct": true
+            },
+            {
+              "t": "Répartie sur plusieurs CLAUDE.md à différentes profondeurs.",
+              "why": "Ils se chargent tous. La répartir ne change rien au coût."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Étape 6",
+      "title": "Les compétences utilisent les mêmes quatre emplacements",
+      "cap": "Mettez une procédure dans le dépôt et tous les développeurs qui le clonent l’ont. Mettez le même fichier dans votre dossier personnel et il n’aide qu’une personne. Ce choix, et rien d’autre, est votre mécanisme de distribution.",
+      "teach": "Une compétence est un dossier contenant un SKILL.md : une procédure écrite. Rien de nouveau à apprendre sur son emplacement, car elle va exactement là où va tout le reste.",
+      "diagram": "diagrams/fr/17-where-claude-keeps-what-it-knows/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Vous placez une compétence dans le dépôt plutôt que dans votre dossier personnel. Qu’avez-vous décidé ?",
+          "options": [
+            {
+              "t": "Qu’elle doit se charger plus tôt dans la session.",
+              "why": "Le moment du chargement n’est pas ce que la position décide ici."
+            },
+            {
+              "t": "Votre distribution : tous ceux qui clonent l’obtiennent.",
+              "correct": true
+            },
+            {
+              "t": "Que l’équipe peut la modifier.",
+              "why": "Elle le peut, et ce n’est pas la décision que vous venez de prendre."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Étape 7",
+      "title": "Les instructions conseillent. Les réglages imposent.",
+      "cap": "On se tourne vers la gauche quand on aurait besoin de la droite, puis on s’étonne que cela ait tenu neuf fois sur dix au lieu de dix. Si une chose doit être impossible plutôt que découragée, ce n’est pas une instruction écrite.",
+      "teach": "La distinction qui évite le plus d’ennuis. Les deux vivent dans les mêmes quatre dossiers, et une seule est un contrôle.",
+      "diagram": "diagrams/fr/17-where-claude-keeps-what-it-knows/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quelque chose doit être impossible, et pas seulement découragé. Où le met-on ?",
+          "options": [
+            {
+              "t": "Dans les réglages, qui imposent au lieu de conseiller.",
+              "correct": true
+            },
+            {
+              "t": "Dans une compétence, pour qu’elle se charge dès que la situation s’y prête.",
+              "why": "Elle se charge quand Claude la juge pertinente, et un jugement peut aller dans l’autre sens."
+            },
+            {
+              "t": "Dans une instruction écrite, formulée fermement.",
+              "why": "La fermeté ne change pas la catégorie. Une instruction conseille, quelle que soit sa formulation."
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un a écrit une règle sous forme d’instruction et elle a tenu neuf fois sur dix. Qu’est-ce qui a mal tourné ?",
+          "options": [
+            {
+              "t": "L’instruction était trop vague.",
+              "why": "L’affûter vous mènerait peut-être à dix-neuf sur vingt. Cela ne vous mènera pas à la certitude."
+            },
+            {
+              "t": "On s’est tourné vers ce qui conseille alors qu’il fallait ce qui impose.",
+              "correct": true
+            },
+            {
+              "t": "Elle était à la mauvaise profondeur.",
+              "why": "La profondeur change qui la reçoit, pas si elle contraint."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

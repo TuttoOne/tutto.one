@@ -1,0 +1,596 @@
+{
+  "id": "04-claude-code-in-action",
+  "title": "Claude Code in Action",
+  "anthropic": "https://anthropic.skilljar.com/claude-code-in-action",
+  "intro": {
+    "title": "Watch Claude Code actually do the work.",
+    "lead": "Fourteen ideas, one per screen, from install to hooks. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.",
+    "teach": "Fourteen ideas, one screen each. Last time we talked about what this thing is. Today you watch it actually do the work, installed, pointed at real files, making changes you review, then locked down so the things that must happen always happen. I'll show each piece, then stop and ask where it fits your week."
+  },
+  "close": {
+    "title": "See it act. Drive it daily. Make it guaranteed.",
+    "lead": "Install Claude Code, work the edit-and-review loop, connect it out with MCP and GitHub, then lock in the must-haves with hooks, and build on it with the SDK.",
+    "teach": "If you keep one thing, keep the pattern: you watched it act, you learned to drive it day to day, and you learned how to make the things that must happen always happen. The durable version of your task isn't a chat you lose, it's a folder, a set of reusable commands, and a guarantee or two that hold every single time."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1",
+      "title": "From autocomplete to a teammate that acts",
+      "cap": "An agent doesn't just talk about the code, it works inside your terminal and your repo: reading files, editing across them, running commands, and deciding what to do next.",
+      "teach": "There's a spectrum here. At one end, autocomplete, it finishes your line. In the middle, a chat assistant, it answers, and you carry the answer across yourself.\n\nAt the far end is Claude Code: it reads your files, edits across them, runs the commands, and decides what to do next. Same intelligence you know from the browser, but now it has hands.",
+      "diagram": "diagrams/04-claude-code-in-action/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Autocomplete, a chat assistant, an agent. What separates the third from the second?",
+          "options": [
+            {
+              "t": "The agent reads the project and does the work itself.",
+              "correct": true
+            },
+            {
+              "t": "The agent is better at the code it produces.",
+              "why": "Quality isn't the line between them. Think about what happens after the answer exists."
+            },
+            {
+              "t": "The agent has read more of your codebase.",
+              "why": "It may well have, and that's a consequence. Ask who moves the work from the answer into the files."
+            }
+          ]
+        },
+        {
+          "q": "\"Is my data safe once it's in my files?\" What's the straight answer?",
+          "options": [
+            {
+              "t": "It only reads files, it never writes.",
+              "why": "It writes, and saying otherwise to be reassuring is a promise that breaks on their first session."
+            },
+            {
+              "t": "The files were already there. It sits dormant until you summon it, and sees only that folder.",
+              "correct": true
+            },
+            {
+              "t": "Everything is encrypted, so there's nothing to worry about.",
+              "why": "True of most tools they already use, so it settles nothing about what this one can reach."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2",
+      "title": "What a session actually looks like",
+      "cap": "The course demos this on a small UI-generation app (uigen), but nothing is special about it: you can follow along on a codebase of your own.",
+      "teach": "This is what a session looks like, top to bottom. You ask in plain English. It finds the files that matter, edits across them, runs them to check its own work, and shows you the result.\n\nYou look, you refine, it goes round again. The demo uses a little sample app, but that's just so everyone has the same thing to point at, your own folder works exactly the same.",
+      "diagram": "diagrams/04-claude-code-in-action/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "First real session, and the result isn't finished. What does that tell you?",
+          "options": [
+            {
+              "t": "Review and refine is the method, not a sign it went wrong.",
+              "correct": true
+            },
+            {
+              "t": "The project is too large for one session.",
+              "why": "Size wasn't tested here. The first pass was."
+            },
+            {
+              "t": "The prompt was too vague to work from.",
+              "why": "Sometimes. But treating any unfinished first pass as a failed prompt misreads how the thing works."
+            }
+          ]
+        },
+        {
+          "q": "What does Claude do between reading your request and showing you the result?",
+          "options": [
+            {
+              "t": "Plans the change and waits for approval before touching anything.",
+              "why": "That's one permission mode rather than the loop itself."
+            },
+            {
+              "t": "Reads the relevant files, edits, then runs them to check.",
+              "correct": true
+            },
+            {
+              "t": "Reads the files and writes the edits for you to apply.",
+              "why": "You'd be back to copying. It applies them itself."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3",
+      "title": "One command to install",
+      "cap": "Hit a \"command not found\", network or permissions error? The docs' \"Troubleshoot installation\" page is the first stop. Running through Bedrock, Vertex or Foundry has its own setup.",
+      "teach": "Installing is one line, and which line depends only on your machine, Mac, Linux, Windows. Then you type claude, pick a colour theme, sign in with the account you already have. The fastest way through it is to ask Claude itself to walk you through the install, that's how most people get over the line.",
+      "diagram": "diagrams/04-claude-code-in-action/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "\"It won't install on my work machine.\" Where does that conversation go?",
+          "options": [
+            {
+              "t": "To IT discovery: the web needs no install, and a local model is the far end.",
+              "correct": true
+            },
+            {
+              "t": "To a personal machine, so they can at least learn it.",
+              "why": "Fine for learning and it leaves the actual blocker untouched."
+            },
+            {
+              "t": "Nowhere useful. Without an install there's no Claude Code.",
+              "why": "There's a floor and a ceiling to how this runs, and neither needs a laptop install."
+            }
+          ]
+        },
+        {
+          "q": "Someone hits an error during install. Where do they go first?",
+          "options": [
+            {
+              "t": "Wait for someone technical to look at it.",
+              "why": "That turns a five-minute problem into a two-day one, and the help is already in front of them."
+            },
+            {
+              "t": "Ask Claude itself to walk them through it.",
+              "correct": true
+            },
+            {
+              "t": "Reinstall from scratch with a different method.",
+              "why": "Starting over without knowing what failed usually reproduces the same failure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4",
+      "title": "Point it at a real project",
+      "cap": "The Anthropic API key is optional; it only powers the app's own UI generation. Node JS is the one real prerequisite.",
+      "teach": "The course gives you a little app to play with so nobody starts from a blank screen. You download it, run one setup command, and it's live. But don't fixate on the sample, the point is you can point Claude Code at any folder of your own work and start there instead. That folder is the project.",
+      "diagram": "diagrams/04-claude-code-in-action/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "The course ships a sample app. What's the transferable lesson?",
+          "options": [
+            {
+              "t": "That Claude Code is for web applications.",
+              "why": "The sample happens to be one. Nothing about the tool is."
+            },
+            {
+              "t": "How to set up Node and a local database.",
+              "why": "That's the sample's plumbing. It won't be there in their own work."
+            },
+            {
+              "t": "You point it at a folder of real work.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Lesson 5",
+      "title": "Context in: how Claude learns your project",
+      "cap": "Be specific about what matters. The less Claude has to guess, the less it wanders, and the less context (and money) each run burns.",
+      "teach": "Claude knows exactly what's in front of it and nothing more. So before you ask, you put the right things in front of it: point at a file with the @ sign, paste in an error or a screenshot, keep your standing rules in a file it reads every time, and let it search the folder when it needs to.\n\nThe skill is being specific, vague prompts cost you, because it goes wandering to fill the gap.",
+      "diagram": "diagrams/04-claude-code-in-action/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Claude only knows what's in its context. Which of these does NOT get something in there?",
+          "options": [
+            {
+              "t": "Pasting an error or a screenshot.",
+              "why": "Both work. Images included."
+            },
+            {
+              "t": "Having the file open in your editor.",
+              "correct": true
+            },
+            {
+              "t": "Naming a file with @file.",
+              "why": "That's the most direct way of all."
+            }
+          ]
+        },
+        {
+          "q": "Where should a rule you never want to repeat live?",
+          "options": [
+            {
+              "t": "At the top of each conversation, so it's fresh.",
+              "why": "That's the repeating you were trying to stop, and a long conversation loses it anyway."
+            },
+            {
+              "t": "In a custom command you run at the start.",
+              "why": "Better than retyping, and it still needs you to remember to run it."
+            },
+            {
+              "t": "In CLAUDE.md, read every session.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Lesson 6",
+      "title": "Making changes: describe it, review the diff",
+      "cap": "You stay in control: every edit is reviewable, and you can steer, undo or redirect before anything lands in the repo.",
+      "teach": "Here's the part people worry about, and it's the part you have the most control over. You describe the change. It makes the edits and shows you a diff, a side-by-side of exactly what it changed, nothing hidden.\n\nYou approve, or you correct it and it goes again. Nothing gets locked in until you say so. You're never handing it the keys; you're reviewing every change before it lands.",
+      "diagram": "diagrams/04-claude-code-in-action/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "People hear \"it edits my files\" and picture losing control. What's the answer?",
+          "options": [
+            {
+              "t": "Permission modes: it asks before every edit.",
+              "why": "True, and it's a setting they can change. Something shows them the change itself."
+            },
+            {
+              "t": "The diff. You see exactly what changed before anything is committed.",
+              "correct": true
+            },
+            {
+              "t": "Version control. Anything wrong can be reverted.",
+              "why": "A safety net after the fact. There's something that stops it being a surprise in the first place."
+            }
+          ]
+        },
+        {
+          "q": "Five things need changing. What's the better move?",
+          "options": [
+            {
+              "t": "Two or three at a time, to balance speed and clarity.",
+              "why": "A reasonable-sounding compromise that still leaves you guessing when one of them misbehaves."
+            },
+            {
+              "t": "All five at once, then review one diff.",
+              "why": "One diff covering five instructions is exactly where you lose track of which note caused what."
+            },
+            {
+              "t": "One at a time.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Lesson 7",
+      "title": "Controlling context: keep the window lean",
+      "cap": "Clear between unrelated tasks; compact to keep a long thread alive; check /context when answers start to drift, that's usually a full window.",
+      "teach": "Think of its working memory as a desk. Every file it reads, every command it runs, lands on the desk, and the desk has an edge. When you start something unrelated, /clear wipes it clean.\n\nWhen you're mid-task and it's running long, /compact tidies up but keeps the thread. And /context shows you what's taking the space. If answers start drifting, that's usually a full desk.",
+      "diagram": "diagrams/04-claude-code-in-action/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "It has started drifting halfway through a long session. Most likely cause?",
+          "options": [
+            {
+              "t": "The task is too complex for one session.",
+              "why": "Possible, and there's a much more common and more mechanical explanation."
+            },
+            {
+              "t": "The context window is full.",
+              "correct": true
+            },
+            {
+              "t": "The instructions in CLAUDE.md contradict each other.",
+              "why": "That produces confusion from the start rather than drift halfway through."
+            }
+          ]
+        },
+        {
+          "q": "Which of these should NOT live in the conversation?",
+          "options": [
+            {
+              "t": "The file you're currently working on.",
+              "why": "That's exactly what the conversation is for."
+            },
+            {
+              "t": "The error message you just hit.",
+              "why": "Belongs in the conversation. It's about right now."
+            },
+            {
+              "t": "The rules that should hold on every session.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Lesson 8",
+      "title": "Custom commands: save a prompt you reuse",
+      "cap": "Anything you find yourself re-explaining, a review checklist, a release routine, is a candidate. Write it once; call it with a slash.",
+      "teach": "Anything you find yourself typing over and over, a review checklist, a release routine, the way you want a report formatted, you write down once as a command. After that you just type a slash and its name, and the whole long prompt expands. Put it in the shared folder and everyone on the team has the same shortcut, the same way, every time.",
+      "diagram": "diagrams/04-claude-code-in-action/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A prompt you type most days. What do you do with it?",
+          "options": [
+            {
+              "t": "Keep it in a notes file and paste it in.",
+              "why": "Works, and it stays yours alone. The repository version reaches the whole team."
+            },
+            {
+              "t": "Save it as a slash command in the repository.",
+              "correct": true
+            },
+            {
+              "t": "Put it in CLAUDE.md so it's always loaded.",
+              "why": "Then it loads every session whether or not you want it. This one you want on demand."
+            }
+          ]
+        },
+        {
+          "q": "Slash commands, CLAUDE.md and skills are all the same underlying idea. What is it?",
+          "options": [
+            {
+              "t": "Ways of restricting what Claude is allowed to do.",
+              "why": "That's what permissions and hooks are for. These three add rather than restrict."
+            },
+            {
+              "t": "Ways of making Claude faster.",
+              "why": "Speed is a side effect. Think about what all three are storing."
+            },
+            {
+              "t": "Your method, written down once and reused.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Lesson 9",
+      "title": "MCP: reach the tools outside your code",
+      "cap": "Watch the cost: every server loads its tool definitions into context whether you use them or not. Add what you need, and disable the rest with /mcp .",
+      "teach": "Your real context doesn't all live in one folder, it's in your email, your project tracker, your databases. MCP is the one standard that plugs those in, so Claude Code can reach your actual data instead of starting cold. One thing to know: each connection costs a little memory up front whether you use it or not, so you turn off what you don't need.",
+      "diagram": "diagrams/04-claude-code-in-action/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "You add an MCP server for a system you query occasionally. What does it cost the rest of the time?",
+          "options": [
+            {
+              "t": "Nothing until you use it.",
+              "why": "That's how a skill behaves. MCP makes a different trade."
+            },
+            {
+              "t": "Its tool definitions sit in context on every session.",
+              "correct": true
+            },
+            {
+              "t": "A slower startup, and nothing after that.",
+              "why": "Startup is the smaller half of the cost."
+            }
+          ]
+        },
+        {
+          "q": "Where should an MCP server be scoped so the whole team gets it?",
+          "options": [
+            {
+              "t": "Local, so it's tied to the machine.",
+              "why": "That gives it to one person on one machine."
+            },
+            {
+              "t": "User, so it follows whoever set it up.",
+              "why": "It follows a person rather than the project. The team doesn't inherit it."
+            },
+            {
+              "t": "Project, in .mcp.json in the repository.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Lesson 10",
+      "title": "GitHub: from local change to pull request",
+      "cap": "Top row is you, locally. Bottom row is hands-off: tag @claude on an issue or PR and the GitHub app runs Claude Code in CI to triage, review or implement.",
+      "teach": "\"Two things on this slide. The top half is you on your own machine, once a change is right, one flow commits it, pushes it, and opens it for review. The bottom half is where it gets interesting for a team: you can tag Claude on a piece of work, and it goes off and does it on a server, then comes back with the result for someone to review.\n\nThat's the same agent you've been driving, now working while you're not watching.\" (Adapt to their world: this is the colleague who picks up the ticket, does the first pass, and leaves it ready for your sign-off.)",
+      "diagram": "diagrams/04-claude-code-in-action/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "What does tagging @claude on a GitHub issue actually do?",
+          "options": [
+            {
+              "t": "Asks Claude to comment on the issue with a suggestion.",
+              "why": "That undersells it. It does the work, not just the advice."
+            },
+            {
+              "t": "Adds the issue to Claude's queue for your next local session.",
+              "why": "Nothing is waiting for you to sit down. It runs somewhere else."
+            },
+            {
+              "t": "Runs Claude Code on a server and comes back with the work.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Lesson 11, if you take one thing away",
+      "title": "A prompt is a request. A hook is a guarantee.",
+      "cap": "The purpose of a hook: turn what you'd ask Claude to do into what always happens. Run by the harness, not the model, if something must happen every time, don't put it in a prompt. That's what moves a team from \"we'll review it after\" to \"it can't happen in the first place\".",
+      "teach": "\"Everything else this session is something you ask for, and usually get. A hook is something that always happens, no asking, no exceptions. The reason it's reliable is that it's run by the machinery around Claude, not by Claude deciding to remember.\n\nFormat every file. Log every action for compliance. Block a dangerous step before it runs.\n\nThe rule of thumb: if it has to happen every single time without fail, it doesn't belong in a prompt, it belongs in a hook.\" (For these learners the headline is the guarantee, not the syntax: some rules are too important to leave to \"usually\".)",
+      "diagram": "diagrams/04-claude-code-in-action/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "You tell Claude \"always run the formatter before committing\". What have you actually got?",
+          "options": [
+            {
+              "t": "A guarantee, since it's written down.",
+              "why": "Writing it down makes it likely. It doesn't make it certain, and that difference has a name."
+            },
+            {
+              "t": "A request that will usually be honoured and sometimes missed.",
+              "correct": true
+            },
+            {
+              "t": "Nothing. Instructions in a prompt are ignored.",
+              "why": "Far too harsh. They're followed most of the time, which is exactly what makes the gap easy to miss."
+            }
+          ]
+        },
+        {
+          "q": "So what makes something guaranteed rather than likely?",
+          "options": [
+            {
+              "t": "A skill, which loads whenever the task matches.",
+              "why": "Matching is a judgement, and a judgement can go the other way."
+            },
+            {
+              "t": "Putting it in CLAUDE.md, which is read every session.",
+              "why": "Read every session, and reading is still not running."
+            },
+            {
+              "t": "A hook: the harness runs it at a fixed point, every time.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Lesson 12",
+      "title": "Defining a hook: event → matcher → command",
+      "cap": "PreToolUse is the one hook that runs before a tool, so it's the only one that can stop a call, exit 2 (or return \"permissionDecision\":\"deny\" ) and the rm -rf or the commit to main is blocked before it happens, not after.",
+      "teach": "\"A hook is three simple decisions. When does it fire, for instance, just before a tool runs. What does it apply to.\n\nAnd what command should run. The powerful case is the 'before' hook: it can look at what's about to happen and stop it. So a dangerous delete, or a change to something protected, gets caught before it happens, not cleaned up afterwards.\n\nYou're moving from 'we'll review it after' to 'it can't happen in the first place'.\" (Keep it conceptual; this concept does not vary much by domain, see the shared example below.)",
+      "diagram": "diagrams/04-claude-code-in-action/s14.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A hook is three things in a settings file. Which three?",
+          "options": [
+            {
+              "t": "The trigger, the condition, and the error message.",
+              "why": "Close in spirit. One of these three is what actually gets executed."
+            },
+            {
+              "t": "The schedule, the scope, and the command.",
+              "why": "Hooks don't run on a schedule. They fire at points in the lifecycle."
+            },
+            {
+              "t": "The event, the tool it matches, and the command to run.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "What can a PreToolUse hook do that the others cannot?",
+          "options": [
+            {
+              "t": "Stop the action before it happens.",
+              "correct": true
+            },
+            {
+              "t": "Change the arguments the tool was called with.",
+              "why": "Not the headline power. The important one is more absolute than editing."
+            },
+            {
+              "t": "Run before Claude has decided what to do.",
+              "why": "It runs before the tool, which is after the decision. Think about what it can do to that action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "eyebrow": "Lesson 13",
+      "title": "Hooks in practice: share them, debug them",
+      "cap": "The input on stdin changes per event and per tool, so log it first. Absolute paths are recommended for security, which is why shared settings use a $PWD placeholder that setup expands.",
+      "teach": "\"Two real-world snags. First, sharing: the secure way to write a hook uses the full path to a script, but my full path won't match yours, so the project uses a placeholder that gets filled in automatically when each person sets up. That's how a team shares the same guarantees without hand-editing paths.\n\nSecond, debugging: a hook gets fed information, and what it contains changes depending on what triggered it, so the trick is to log it first and look, then write the real rule against what you actually saw.\" (Concrete, not abstract: this is the \"measure twice, cut once\" of hooks.)",
+      "diagram": "diagrams/04-claude-code-in-action/s15.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Absolute paths are recommended for hooks, but your path isn't mine. How is that solved?",
+          "options": [
+            {
+              "t": "Everyone agrees to check out the repository to the same location.",
+              "why": "A convention that holds until the first person joins who didn't hear about it."
+            },
+            {
+              "t": "An example settings file with a placeholder that the setup step fills in.",
+              "correct": true
+            },
+            {
+              "t": "Relative paths, since the security concern is overstated.",
+              "why": "The recommendation exists for a reason. There's a way to keep it and still share."
+            }
+          ]
+        },
+        {
+          "q": "Who realistically sets up shared hooks for a non-technical team?",
+          "options": [
+            {
+              "t": "Nobody. Hooks are optional and most teams skip them.",
+              "why": "That gives up the one mechanism that makes the system trustworthy at team scale."
+            },
+            {
+              "t": "Each person, once they've done the course.",
+              "why": "This is the most technical part of the course and the least likely to be done unaided."
+            },
+            {
+              "t": "A trainer or a developer, once, after which the team inherits it.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "eyebrow": "Lesson 14",
+      "title": "The SDK: Claude Code as a building block",
+      "cap": "Wrap the agentic loop, tools, context, permissions, inside your own software, and Claude Code stops being just a CLI and becomes a component you build on.",
+      "teach": "\"Last idea, and it's a horizon, not a homework. Everything you've watched Claude Code do at the terminal can also be wired inside other software, so instead of you sitting and driving it, it runs as a part of a bigger system you build. That's how your one repeatable workflow could eventually run on a schedule, or on every new file, with nobody at the keyboard.\n\nYou don't need this today; it's where the road goes.\" (Hold the one term: it's Claude Code, and the SDK is the same agent as a library.)",
+      "diagram": "diagrams/04-claude-code-in-action/s16.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "What does the SDK change about Claude Code?",
+          "options": [
+            {
+              "t": "It gives you a faster version for automated work.",
+              "why": "Same agent, same loop. What changes is where it can live."
+            },
+            {
+              "t": "The same agent becomes a component inside your own software.",
+              "correct": true
+            },
+            {
+              "t": "It lets you train the model on your codebase.",
+              "why": "No training involved anywhere in this. It's the same model, embedded differently."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

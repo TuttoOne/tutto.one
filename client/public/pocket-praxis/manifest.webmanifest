@@ -1,0 +1,16 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "Pocket Praxis",
+  "short_name": "Praxis",
+  "description": "The Praxis course decks, one step at a time, on a phone.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF9F6",
+  "theme_color": "#FAF9F6",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

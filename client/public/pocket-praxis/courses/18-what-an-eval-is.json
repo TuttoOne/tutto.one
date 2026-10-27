@@ -1,0 +1,303 @@
+{
+  "id": "18-what-an-eval-is",
+  "title": "What an eval is",
+  "anthropic": null,
+  "intro": {
+    "title": "What an eval is, and when you need one.",
+    "lead": "The theory before the workshop. What these things actually are, why the first one people build almost always gets abandoned, and how to pick the right kind for the work in front of you.",
+    "teach": "The theory before the workshop. What these things actually are, why the first one people build almost always gets abandoned, and how to pick the right kind for the work in front of you."
+  },
+  "close": {
+    "title": "An eval does not prove you are right. It tells you which way you moved.",
+    "lead": "Write down what counts as correct. Freeze a small set of cases. Score them the cheapest way that expresses what you mean. Then change a rule and watch the number.",
+    "teach": "Write down what counts as correct. Freeze a small set of cases. Score them the cheapest way that expresses what you mean. Then change a rule and watch the number."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "The problem",
+      "title": "You checked it once, and it looked fine",
+      "cap": "",
+      "teach": "That is a demo. It tells you the tool can work. It does not tell you how often it does.",
+      "diagram": "diagrams/18-what-an-eval-is/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "You ran your process once and the output looked right. What have you established?",
+          "options": [
+            {
+              "t": "Nothing useful.",
+              "why": "Too harsh. A demo does prove the thing is possible, which is worth knowing."
+            },
+            {
+              "t": "That it works, at least for this kind of input.",
+              "why": "One output tells you nothing about a kind. It tells you about one output."
+            },
+            {
+              "t": "That it can work. Not how often it does.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Which of these is the strongest argument for measuring, in a sceptical room?",
+          "options": [
+            {
+              "t": "Change: you can't safely edit a prompt without knowing whether the edit helped.",
+              "correct": true
+            },
+            {
+              "t": "Compliance: someone will eventually ask you to show your working.",
+              "why": "It lands as an obligation rather than a reason, and it postpones the value to some future audit."
+            },
+            {
+              "t": "Accuracy: you'll find out how often it's wrong.",
+              "why": "True, and a room that already trusts it hears this as solving a problem they don't have."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Where the line sits",
+      "title": "Tests for the boring parts. Evals for the judgment.",
+      "cap": "",
+      "teach": "Two tools, one line between them. Most confusion about evals is someone reaching for the wrong side of it.",
+      "diagram": "diagrams/18-what-an-eval-is/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Where's the line between a test and an eval?",
+          "options": [
+            {
+              "t": "Tests cover the parts with one right answer; evals cover the judgement.",
+              "correct": true
+            },
+            {
+              "t": "Tests are for code; evals are for prompts.",
+              "why": "Close to a rule of thumb and it breaks the moment a prompt has one right answer."
+            },
+            {
+              "t": "Tests run automatically; evals are run by hand.",
+              "why": "Both can run automatically. The line is about what's being judged."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "The choice that decides everything else",
+      "title": "Does the question have one right answer, or several good ones?",
+      "cap": "",
+      "teach": "Answer that and the kind of eval is already decided. Get it wrong and you will spend a week building the wrong instrument.",
+      "diagram": "diagrams/18-what-an-eval-is/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "What's the first question to answer before building anything?",
+          "options": [
+            {
+              "t": "Does the question have one right answer, or several good ones?",
+              "correct": true
+            },
+            {
+              "t": "Who is going to maintain it?",
+              "why": "A real concern, and it doesn't tell you what to build."
+            },
+            {
+              "t": "How many cases do we need?",
+              "why": "Worth asking second. Something else decides what kind of instrument you're building at all."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "How the scoring actually happens",
+      "title": "Four ways to grade, cheapest first",
+      "cap": "",
+      "teach": "Use the cheapest one that can express what you mean. Reaching for the expensive one first is the most common mistake.",
+      "diagram": "diagrams/18-what-an-eval-is/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Four ways to grade. Which do you reach for first?",
+          "options": [
+            {
+              "t": "The cheapest one that can express what you mean.",
+              "correct": true
+            },
+            {
+              "t": "The most accurate one you can afford.",
+              "why": "Accuracy you can't sustain gets abandoned in month two. Something else is the first filter."
+            },
+            {
+              "t": "A model judge, since it handles any kind of output.",
+              "why": "It handles everything and it's the expensive end. Reaching for it first is the common mistake."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Anatomy",
+      "title": "Every eval is the same four parts",
+      "cap": "",
+      "teach": "Whatever the kind, whatever the domain. If one of these is missing you do not have an eval, you have a spreadsheet.",
+      "diagram": "diagrams/18-what-an-eval-is/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "An eval has four parts. What have you got if one is missing?",
+          "options": [
+            {
+              "t": "A partial eval you can still act on.",
+              "why": "It won't tell you what you need. That's a stronger failure than partial."
+            },
+            {
+              "t": "A spreadsheet.",
+              "correct": true
+            },
+            {
+              "t": "A test rather than an eval.",
+              "why": "A test is a different instrument, not a broken eval."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "What you actually do with it",
+      "title": "The number is not a grade. It is a direction.",
+      "cap": "",
+      "teach": "Nobody needs to know they are at 73%. What they need is to know whether yesterday's change helped.",
+      "diagram": "diagrams/18-what-an-eval-is/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Your eval says 73%. What is that number for?",
+          "options": [
+            {
+              "t": "Telling you whether yesterday's change helped.",
+              "correct": true
+            },
+            {
+              "t": "Setting the bar you have to clear before shipping.",
+              "why": "A threshold treats one number as a verdict. It's more useful as a direction."
+            },
+            {
+              "t": "Telling you how good the system is.",
+              "why": "Nobody can act on that, and it invites an argument about whether 73 is good."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Why most first evals get abandoned",
+      "title": "Three ways this goes wrong",
+      "cap": "",
+      "teach": "People build one, get a bad number, conclude the tool cannot do the job, and stop. The number was usually measuring the wrong thing.",
+      "diagram": "diagrams/18-what-an-eval-is/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Someone builds an eval, gets a bad number, and concludes the tool can't do the job. What usually happened?",
+          "options": [
+            {
+              "t": "They needed a bigger model.",
+              "why": "That's reaching for capability before checking whether the measurement meant anything."
+            },
+            {
+              "t": "The tool genuinely can't do it.",
+              "why": "Sometimes. It's the conclusion people jump to, and it's usually not what the number was telling them."
+            },
+            {
+              "t": "The eval was measuring the wrong thing.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Before you promise this at work",
+      "title": "Cheap to run. Expensive to start.",
+      "cap": "",
+      "teach": "The cost falls the opposite way round to what most people assume, and getting it wrong is how these die in month two.",
+      "diagram": "diagrams/18-what-an-eval-is/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Where does the cost of an eval actually fall?",
+          "options": [
+            {
+              "t": "Expensive at both ends, which is why most teams skip them.",
+              "why": "The running cost is genuinely small. It's the beginning that people underestimate."
+            },
+            {
+              "t": "Expensive to run, cheap to set up.",
+              "why": "That's the assumption people arrive with, and it's backwards."
+            },
+            {
+              "t": "Cheap to run, expensive to start.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "What is the expensive part of starting?",
+          "options": [
+            {
+              "t": "Deciding what counts as correct.",
+              "correct": true
+            },
+            {
+              "t": "Choosing which model to grade with.",
+              "why": "A decision you can revisit cheaply, and not where the effort goes."
+            },
+            {
+              "t": "Writing the code that runs it.",
+              "why": "That part is short. The hard bit isn't technical."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Where this goes",
+      "title": "Two sessions, one for each half",
+      "cap": "",
+      "teach": "You now have the map. The next two sessions are the two halves of it, built by hand.",
+      "diagram": "diagrams/18-what-an-eval-is/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Who is an eval actually built by?",
+          "options": [
+            {
+              "t": "A developer, since it needs code.",
+              "why": "The code is about twenty lines. The hard part is a domain judgement."
+            },
+            {
+              "t": "Whoever has the most time.",
+              "why": "It needs the person who knows what good looks like, not the person who is free."
+            },
+            {
+              "t": "Whoever owns the standard for the work.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

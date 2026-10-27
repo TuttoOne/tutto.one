@@ -1,0 +1,377 @@
+{
+  "id": "07-mcp",
+  "title": "Introduction au MCP",
+  "anthropic": "https://anthropic.skilljar.com/introduction-to-model-context-protocol",
+  "intro": {
+    "title": "Un seul protocole, pour que n’importe quelle application d’IA atteigne n’importe quel outil ou source de données.",
+    "lead": "Onze idées, une par écran. Chacune est quelque chose à montrer du doigt pendant que vous expliquez. Tout se joue dans l’observation, alors ménagez les silences.",
+    "teach": "Onze idées, un écran chacune. Dans Claude 101, nous disions que Claude peut se brancher sur les outils que vous utilisez déjà. Voici la norme unique qui rend cela possible : ce qu’elle est, et le point qui inquiète tout le monde — ce qu’elle peut voir et ce qu’elle ne peut pas voir. Je vous montre chaque élément, puis je m’arrête et je vous demande où cela touche votre travail."
+  },
+  "close": {
+    "title": "Un protocole. Trois primitives. N’importe quel outil, n’importe quelle application.",
+    "lead": "Des outils, des ressources et des prompts, exposés par un serveur et atteints par un client à l’intérieur de votre hôte, si bien que contexte et capacités se branchent une fois au lieu d’être reconstruits à chaque fois.",
+    "teach": "Si vous ne retenez qu’une chose : le MCP est la norme unique qui permet à Claude d’atteindre les outils et les données que vous utilisez déjà, en trois catégories — les actions qu’il exécute, les données que vous lui donnez, les modèles que vous lancez — et il ne voit jamais que ce que vous lui tendez. Tout le reste aujourd’hui n’était que le câblage en dessous. Vous ne le construisez pas ; vous choisissez ce que vous branchez et ce qu’il a le droit de voir."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1",
+      "title": "Les intégrations M×N deviennent M+N",
+      "cap": "Le MCP est une norme, comme l’USB-C de l’IA : on développe une fois pour le protocole et tout outil conforme fonctionne. Il répartit aussi le travail : les développeurs d’applications d’un côté, les développeurs d’outils de l’autre.",
+      "teach": "« Avant cela, chaque application d’IA devait être câblée à la main à chaque outil — votre messagerie, votre espace de fichiers, votre outil de suivi — encore et encore, un enchevêtrement qui grossit des deux côtés. Le MCP est une norme unique, comme l’USB-C de l’IA : on développe une fois pour elle et tout outil qui la parle fonctionne. Voilà pourquoi brancher des choses à Claude a cessé d’être du sur-mesure. » (Fait écho à l’écran 10 du cours 01, les connecteurs, et la norme unique derrière eux.)",
+      "diagram": "diagrams/fr/07-mcp/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quel problème le MCP résout-il réellement ?",
+          "options": [
+            {
+              "t": "Chaque application câblée à la main à chaque outil, si bien que le travail grossit des deux côtés.",
+              "correct": true
+            },
+            {
+              "t": "Rendre les outils d’IA plus rapides en supprimant une couche.",
+              "why": "Il ajoute une couche plutôt qu’il n’en retire une. L’économie porte sur le nombre de couches à construire."
+            },
+            {
+              "t": "Garder vos données à l’intérieur de votre propre réseau.",
+              "why": "C’est une question de déploiement. Il s’agit ici du nombre d’intégrations à écrire."
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un s’imagine brancher sa base de dossiers et prend peur. Quelle est la réponse directe ?",
+          "options": [
+            {
+              "t": "Les connexions sont en lecture seule par défaut, rien ne peut donc changer.",
+              "why": "Certaines le sont, d’autres non. Promettre un réglage par défaut qui n’est pas universel, c’est le genre de réassurance qui se retourne contre vous."
+            },
+            {
+              "t": "Une norme pour connecter n’est pas une norme pour exposer.",
+              "correct": true
+            },
+            {
+              "t": "Vous pouvez la révoquer à tout moment, le risque est donc faible.",
+              "why": "C’est vrai, et cela répond à une autre question. On vous a demandé ce qu’il peut atteindre, pas comment l’arrêter ensuite."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2",
+      "title": "Hôte, client, serveur, un client par serveur",
+      "cap": "Les messages circulent en JSON-RPC sur un transport : stdio pour un serveur local, HTTP pour un serveur distant. L’hôte peut tenir plusieurs clients à la fois, mais chaque client parle à un seul serveur.",
+      "teach": "« Trois mots à connaître, car le reste en découle. L’hôte est l’application dans laquelle vous êtes : Claude Code, l’application de bureau. Le serveur est ce qui enveloppe un véritable outil ou une source de données : votre espace de fichiers, votre outil de suivi.\n\nEt un client est une ligne privée entre les deux, un client pour un serveur. L’hôte peut tenir plusieurs de ces lignes à la fois. » (Ne vous attardez pas sur JSON-RPC ni sur les transports : nommez-les une fois, dans la légende, et passez. Ils ne changent rien pour un apprenant non technique.)",
+      "diagram": "diagrams/fr/07-mcp/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "« Un client par serveur. » Pourquoi cela compte-t-il au-delà de la tuyauterie ?",
+          "options": [
+            {
+              "t": "Cela empêche deux outils d’interférer avec les données l’un de l’autre.",
+              "why": "Un bénéfice secondaire. Celui qui compte pour une salle inquiète porte sur le contrôle."
+            },
+            {
+              "t": "Cela rend chaque connexion plus rapide.",
+              "why": "La performance n’est pas le sujet. Demandez-vous ce que permettent des connexions séparées et nommées."
+            },
+            {
+              "t": "Chaque connexion est séparée et nommée : vous les accordez et les révoquez une par une.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3",
+      "title": "Un serveur, c’est quelques lignes pour démarrer",
+      "cap": "stdio fait tourner le serveur comme un sous-processus local de l’hôte ; HTTP l’expose comme un service distant. Le même code de serveur dans les deux cas : le transport n’est que la façon dont les messages circulent.",
+      "teach": "« Cet écran s’adresse aux développeurs présents : monter un serveur, c’est peu de chose. Le SDK gère le protocole ; vous écrivez quelques fonctions ordinaires et vous les marquez comme capacités. Pour tous les autres, à retenir seulement ceci : ceux qui fabriquent ces connexions le font en une poignée de lignes, et c’est pourquoi tant d’outils en ont déjà une. » (Un exemple commun ci-dessous ; c’est un écran de mécanique, il ne varie pas selon le métier.)",
+      "diagram": "diagrams/fr/07-mcp/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Le même code de serveur tourne en local ou à distance. Qu’est-ce qui change ?",
+          "options": [
+            {
+              "t": "Les capacités qu’il peut exposer.",
+              "why": "Il expose les mêmes choses dans les deux cas. C’est autre chose, en dehors du serveur, qui change."
+            },
+            {
+              "t": "La possibilité pour le modèle de l’appeler.",
+              "why": "Il peut être appelé dans les deux cas. La différence tient à la façon dont les messages circulent."
+            },
+            {
+              "t": "Le transport sur lequel il fonctionne.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4",
+      "title": "Les outils : des actions que le modèle peut choisir d’appeler",
+      "cap": "Un nom et une description clairs comptent : ce texte est tout ce dont le modèle dispose pour décider s’il faut appeler l’outil, et comment. Traitez la docstring comme un prompt, pas comme un commentaire.",
+      "teach": "« Le premier des trois éléments. Un outil est une action que Claude peut exécuter : envoyer l’e-mail, lancer la recherche, mettre à jour la fiche. Les verbes.\n\nLe mot clé, c’est qui décide : Claude. Il lit à quoi sert chaque outil et choisit quand l’utiliser, comme un collègue compétent décide de l’étape suivante. C’est pourquoi on dit que les outils sont contrôlés par le modèle. » (Va de pair avec l’écran 3 du cours 02 : un agent agit, il ne se contente pas de vous rendre du texte. Un outil, c’est sa façon d’agir.)",
+      "diagram": "diagrams/fr/07-mcp/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Les outils sont les verbes. Qu’est-ce qui en découle ?",
+          "options": [
+            {
+              "t": "Ils ont des effets de bord : c’est donc là que se pose la question du contrôle.",
+              "correct": true
+            },
+            {
+              "t": "Ils ne peuvent être appelés qu’une fois par conversation.",
+              "why": "Ils peuvent être appelés à répétition. Ce n’est pas la conséquence."
+            },
+            {
+              "t": "Ce sont les plus rapides des trois primitives.",
+              "why": "La vitesse n’entre pas en jeu. Demandez-vous ce que fait un verbe qu’un nom ne fait pas."
+            }
+          ]
+        },
+        {
+          "q": "« Et s’il appelait un outil que je ne voulais pas ? » Qu’est-ce qui répond à cela ?",
+          "options": [
+            {
+              "t": "Les descriptions d’outils, qui indiquent au modèle quand chacun s’applique.",
+              "why": "Elles orientent le choix. Elles ne l’empêchent pas."
+            },
+            {
+              "t": "Le modèle de permissions : validation d’abord, automatisation seulement une fois le schéma éprouvé.",
+              "correct": true
+            },
+            {
+              "t": "Restreindre le serveur pour n’exposer que des outils sûrs.",
+              "why": "Cela vaut la peine, et cela revient à décider au moment de l’installation plutôt qu’au moment qui compte."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Leçon 5",
+      "title": "Testez le serveur avant de le brancher à une application",
+      "cap": "Déboguez d’abord le serveur seul. Si l’Inspector peut tout lister et tout appeler proprement, le problème ultérieur vient du câblage côté client, pas du serveur.",
+      "teach": "C’est un écran pour développeurs : avant de laisser Claude approcher une nouvelle connexion, on la teste seule — liste-t-elle ses outils, chacun renvoie-t-il proprement. Un simple contrôle qualité sur la tuyauterie. Pour tous les autres, le point est rassurant : les connexions sont testées isolément avant qu’on leur fasse confiance, exactement comme on testerait un nouveau processus sur des données fictives avant de le lancer pour de bon.",
+      "diagram": "diagrams/fr/07-mcp/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Pourquoi tester un serveur avec l’Inspector avant de le brancher à une application ?",
+          "options": [
+            {
+              "t": "Sans modèle en jeu, un échec est sans ambiguïté celui du serveur.",
+              "correct": true
+            },
+            {
+              "t": "L’Inspector est plus rapide à lancer que l’application.",
+              "why": "C’est du confort, pas la raison. Demandez-vous ce qu’un test propre vous apprend."
+            },
+            {
+              "t": "L’application ne peut pas vous montrer les erreurs du serveur.",
+              "why": "Elle le peut généralement, mais enfouies. Il existe une raison plus nette de tester d’abord."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Leçon 6",
+      "title": "Le client fournit les outils au modèle, en boucle",
+      "cap": "C’est la même boucle agentique dont une fenêtre de conversation est dépourvue : le modèle peut agir, voir le résultat, et décider de la suite. Le MCP n’est que la façon dont les outils y parviennent.",
+      "teach": "« Voici la boucle que vous avez vue dans Claude Code 101, alimentée cette fois par le MCP. On propose les outils à Claude, il en demande un, le serveur l’exécute, le résultat revient, et on repart pour un tour jusqu’à ce que le travail soit fait. Une fenêtre de conversation ne sait pas faire cela : elle répond et attend.\n\nLe MCP est simplement la façon dont les outils entrent dans cette boucle. » (Fait écho à l’écran 4 du cours 02, la boucle agentique ; ici, la boucle sort du dossier.)",
+      "diagram": "diagrams/fr/07-mcp/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Le client boucle jusqu’à obtenir une réponse. Pourquoi n’est-ce pas de l’autonomie incontrôlée ?",
+          "options": [
+            {
+              "t": "La boucle a un nombre maximal de tours fixé.",
+              "why": "C’est généralement vrai, et c’est un garde-fou plutôt que la raison. Demandez-vous qui exécute chaque étape."
+            },
+            {
+              "t": "Chaque étape passe par votre client, qui décide s’il l’honore.",
+              "correct": true
+            },
+            {
+              "t": "Le modèle demande la permission avant chaque itération.",
+              "why": "Il ne la demande pas. Le contrôle se situe là où l’on ne dépend pas de sa demande."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Leçon 7",
+      "title": "Les ressources : des données à charger, adressées par URI",
+      "cap": "Un schéma d’URI comme docs:// nomme la donnée. Les ressources directes renvoient une collection ; les ressources à modèle prennent un paramètre pour en chercher une seule — un document, une fiche.",
+      "teach": "« Le deuxième élément. Là où un outil fait quelque chose, une ressource ne fait que fournir quelque chose : un document, une fiche, une liste, à une adresse nommée, en lecture seule. Rien ne change quand vous la chargez ; on peut la lire à tout moment sans risque.\n\nLa liste entière, ou un élément par son nom. Voyez cela comme le versant lecture seule : on va chercher, on ne modifie jamais. » (Opposez-la explicitement aux écrans sur les outils : même serveur, mais une ressource ne fait que lire.)",
+      "diagram": "diagrams/fr/07-mcp/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Une ressource est en lecture seule. Pourquoi cela compte-t-il dans un secteur réglementé ?",
+          "options": [
+            {
+              "t": "Cela signifie que les données ne quittent jamais leurs systèmes.",
+              "why": "Où vont les données est une question distincte de ce qu’on peut leur faire."
+            },
+            {
+              "t": "Les données en lecture seule échappent à la plupart des règles sur les données.",
+              "why": "Ce n’est pas le cas, et dire cela à une équipe conformité ferait très mal finir la conversation."
+            },
+            {
+              "t": "Vous pouvez brancher le versant lecture d’abord, avant tout ce qui agit.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Leçon 8",
+      "title": "C’est l’application qui décide des ressources à charger",
+      "cap": "Voilà la différence avec un outil : un outil, c’est au modèle de l’appeler ; une ressource, c’est à l’application de la charger. Même serveur, deux modèles de contrôle distincts — c’est le cœur du MCP.",
+      "teach": "« Voici la différence qui compte pour la confiance. Un outil, Claude choisit de l’utiliser. Une ressource, c’est vous qui choisissez de l’apporter, généralement en la prenant dans une liste, une mention avec @.\n\nClaude ne va pas fouiller dans vos données ; il ne voit une ressource que lorsque vous, ou l’application, la lui tendez. Même connexion, mais c’est vous qui tenez la porte de ce qui est lu. » (C’est le cœur du discours sur la sûreté : dites-le lentement.)",
+      "diagram": "diagrams/fr/07-mcp/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Qui décide des ressources chargées ?",
+          "options": [
+            {
+              "t": "L’application, et généralement l’utilisateur qui choisit dans une liste.",
+              "correct": true
+            },
+            {
+              "t": "Le serveur, qui envoie tout ce qu’il détient.",
+              "why": "Ce serait la vanne grande ouverte. Quelqu’un, à l’autre bout, choisit."
+            },
+            {
+              "t": "Le modèle, quand il les juge pertinentes.",
+              "why": "C’est ainsi que fonctionnent les outils. Les ressources, c’est l’inverse, et c’est là toute la réassurance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Leçon 9",
+      "title": "Les prompts : des modèles réutilisables livrés par l’auteur",
+      "cap": "Les prompts sortent des formulations durement acquises de la tête des gens pour les mettre dans le serveur. L’auteur les affine une fois ; tous les autres se contentent de les appeler et obtiennent la bonne version.",
+      "teach": "Le troisième élément. Un prompt, ici, n’est pas ce que vous tapez : c’est un modèle éprouvé que quelqu’un a écrit une fois et empaqueté, pour que la bonne formulation soit intégrée. L’expert l’affine ; tous les autres se contentent de le lancer et obtiennent leur standard.\n\nSi cela vous semble familier, c’est la même idée que le fichier de compétence : les règles qui vivaient dans la tête de votre meilleur collaborateur, écrites pour que le travail sorte à sa manière à chaque fois.",
+      "diagram": "diagrams/fr/07-mcp/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Un prompt MCP n’est pas ce que vous tapez dans la conversation. Qu’est-ce que c’est ?",
+          "options": [
+            {
+              "t": "Le fichier de compétence en français courant, sous un autre nom.",
+              "why": "Des cousins plutôt que la même chose. L’un est empaqueté par un auteur et livré avec un serveur."
+            },
+            {
+              "t": "Un modèle éprouvé et paramétré, livré par l’auteur du serveur.",
+              "correct": true
+            },
+            {
+              "t": "Le prompt système que le serveur pose pour chaque appel.",
+              "why": "Rien ici n’est posé pour chaque appel. C’est quelque chose que l’on va chercher délibérément."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Leçon 10",
+      "title": "Les prompts apparaissent comme des commandes slash",
+      "cap": "Si vous avez déjà utilisé une commande slash dans Claude Code, vous avez utilisé un prompt MCP. Le serveur livre la commande ; le client en fait une action en une frappe.",
+      "teach": "« Et voici comment on en atteint un : il apparaît sous forme de commande slash. Vous tapez la barre oblique, vous choisissez celle que vous voulez, vous répondez à une question ou deux, et elle se déploie en la formulation experte complète, prête à lancer. Vous gardez la main : c’est vous qui la déclenchez, délibérément.\n\nSi vous avez déjà utilisé une commande slash dans Claude Code, c’est exactement cela. » (Reliez à leur propre expérience : le /plato qu’ils ont lancé pour arriver ici est un prompt exposé en commande slash.)",
+      "diagram": "diagrams/fr/07-mcp/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Outils, ressources, prompts. Lequel l’utilisateur déclenche-t-il ?",
+          "options": [
+            {
+              "t": "Les ressources.",
+              "why": "C’est l’application qui les charge, souvent depuis une liste où vous choisissez."
+            },
+            {
+              "t": "Les prompts.",
+              "correct": true
+            },
+            {
+              "t": "Les outils.",
+              "why": "C’est le modèle qui va les chercher quand il juge qu’ils s’appliquent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Leçon 11, si vous ne retenez qu’une chose",
+      "title": "Trois primitives, trois propriétaires",
+      "cap": "Tout le cours en découle : les outils que le modèle appelle, les ressources que l’application charge, les prompts que l’utilisateur déclenche. Clarifiez les propriétaires et le reste suit.",
+      "teach": "« Si vous ne retenez qu’une chose aujourd’hui, retenez ceci. Le MCP expose trois choses, et la seule chose vraiment à retenir est qui contrôle chacune. Les outils, des actions, que le modèle choisit d’appeler.\n\nLes ressources, des données, que vous ou l’application choisissez de charger. Les prompts, des modèles, que vous déclenchez, délibérément. Une norme, trois éléments, trois propriétaires.\n\nEt la réassurance sous tout cela : chaque connexion est une connexion que vous accordez, limitée à ce que vous pouvez déjà voir, et vous pouvez la révoquer. » (Fait écho à l’écran 10 du cours 01 et à l’écran 13 du cours 02 : la norme unique, limitée et révocable, elle ne voit que ce que vous pouvez voir.)",
+      "diagram": "diagrams/fr/07-mcp/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Trois primitives, trois propriétaires. Quel appariement est le bon ?",
+          "options": [
+            {
+              "t": "Outils : utilisateur. Ressources : modèle. Prompts : application.",
+              "why": "Celui qui a des effets de bord est celui que le modèle va chercher. Partez de là."
+            },
+            {
+              "t": "Les trois sont contrôlées par l’application.",
+              "why": "Ce serait plus simple, et ce n’est pas ainsi que cela marche. Chacune a une main différente dessus."
+            },
+            {
+              "t": "Outils : modèle. Ressources : application. Prompts : utilisateur.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Un responsable conformité demande ce que Claude peut atteindre via le MCP.",
+          "options": [
+            {
+              "t": "Seulement ce que vous pouvez voir, chaque connexion limitée, et c’est vous qui décidez de ce qui se charge.",
+              "correct": true
+            },
+            {
+              "t": "Cela dépend entièrement de l’installation.",
+              "why": "C’est vrai, et répondre à une inquiétude par « ça dépend » laisse la personne exactement là où elle en était."
+            },
+            {
+              "t": "Tout ce que les serveurs exposent, et c’est pourquoi on les audite.",
+              "why": "C’est vrai, et cela sonne comme un avertissement. Trois phrases règlent mieux la question."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "Introduction to MCP"
+}

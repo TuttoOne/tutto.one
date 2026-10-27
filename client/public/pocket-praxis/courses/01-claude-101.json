@@ -1,0 +1,686 @@
+{
+  "id": "01-claude-101",
+  "title": "Claude 101",
+  "anthropic": "https://anthropic.skilljar.com/claude-101",
+  "intro": {
+    "title": "What Claude is, and how to actually work with it.",
+    "lead": "From zero to hero",
+    "teach": "There are twelve ideas in this course, one per screen. For each one I'll show you the thing working, then stop and ask where it fits in your work. You don't need to remember it all today. What matters is that you see each one actually work."
+  },
+  "close": {
+    "title": "Talk to it like a colleague. Give it your context. Iterate to the result.",
+    "lead": "Set the stage, define the task, specify the rules > then refine. Projects, artifacts and skills organise the work; connectors, search and research expand its reach; and it meets you in the tools you already use.",
+    "teach": "To sum up the session: give it proper context and a clear instruction, the way you would with a capable colleague, and when the answer isn't right, add what's missing and go again. That's the core of it. Projects, skills and connectors exist so you can do that with less repetition and in more places."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1",
+      "title": "Not a chatbot: a thinking partner",
+      "cap": "Same \"intelligence\" whether you reach it on web, desktop or mobile, built on three principles: helpful, harmless, honest. The apps are just front doors.",
+      "teach": "You may have used a chatbot before: you ask a question, you get an answer, and that's the end of it. Claude works best when you treat it differently. It knows a great deal in general, but it knows nothing about your work, your clients, your standards, your way of doing things.\n\nYou supply that part. And when the first answer isn't right, you don't start over; you tell it what's wrong and it corrects, the same way you'd work something out with a colleague.",
+      "diagram": "diagrams/01-claude-101/s3.svg",
+      "videos": [
+        {
+          "id": "0vZ_UVLhSQQ",
+          "label": "Getting started with Claude.ai"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Your first answer comes back wrong. What do you do?",
+          "options": [
+            {
+              "t": "Tell it what's wrong and let it correct.",
+              "correct": true
+            },
+            {
+              "t": "Keep what's useful and finish the rest yourself.",
+              "why": "You'll do that eventually, on the last stretch. Doing it on the very first draft means paying for work you could have had."
+            },
+            {
+              "t": "Add the missing detail and re-run the same request.",
+              "why": "Closer. But re-running still discards the draft you're holding, and you don't need to."
+            },
+            {
+              "t": "Start again, wording the request more carefully this time.",
+              "why": "Careful wording is worth having, but starting again throws away everything Claude has already picked up about this job. There's a move that keeps it."
+            }
+          ]
+        },
+        {
+          "q": "Which of these is Claude least able to help with, as it stands?",
+          "options": [
+            {
+              "t": "Drafting a client update in your firm's usual structure.",
+              "why": "It can, once you've told it what that structure is. Ask which of these it could never work out from general knowledge alone."
+            },
+            {
+              "t": "Deciding which of two suppliers your firm should keep.",
+              "correct": true
+            },
+            {
+              "t": "Explaining a contract clause in plain English.",
+              "why": "General knowledge covers this one. Look for the option that turns on things only your firm knows."
+            },
+            {
+              "t": "Turning a messy set of notes into a summary.",
+              "why": "That's general capability. Look for the one that needs judgement about your own business."
+            }
+          ]
+        },
+        {
+          "q": "Someone says \"it's just autocomplete, it doesn't really understand my job\". What's the accurate reply?",
+          "options": [
+            {
+              "t": "They're wrong, it understands the work as well as a colleague does.",
+              "why": "Overclaiming here costs you credibility, and it isn't true. There's a reply that concedes the point and still holds."
+            },
+            {
+              "t": "They're right that it starts knowing nothing about their job, which is the part they supply.",
+              "correct": true
+            },
+            {
+              "t": "They're right, so it's only useful for low-stakes work.",
+              "why": "That concedes far too much. The gap they've named is one you can close in a sentence of context."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2: Key Point to Remember",
+      "title": "Set the STAGE · Define the TASK · Specify the RULES",
+      "cap": "Add context by uploading files, and let memory and styles carry your role and preferences forward so you stop repeating yourself.",
+      "teach": "A good instruction has three parts. The context: who you are and what this work is for. The task: what exactly you want done.\n\nThe rules: the tone, the format, and if you can, an example of what good looks like. Most people write one short line and expect it to guess the rest, it can't read your mind. The more you tell it, the better the result.\n\nA useful comparison: brief it the way you'd brief a capable new colleague on their first day.",
+      "diagram": "diagrams/01-claude-101/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Which of these is a brief?",
+          "options": [
+            {
+              "t": "You're my ops lead. Draft the Q3 note for the board. Two pages, plain English, no numbers that aren't in the file.",
+              "correct": true
+            },
+            {
+              "t": "Write me a memo.",
+              "why": "That's the task and nothing else. No context, no constraints. You'll get something generic and spend longer fixing it than briefing would have taken."
+            },
+            {
+              "t": "Write me a two-page memo in plain English about Q3.",
+              "why": "Better, and still missing the part that tells it who it's being and what the memo is for. Two of the three parts are there."
+            }
+          ]
+        },
+        {
+          "q": "\"You're my bookkeeper. Pull these invoices into a CSV.\" Which of the three parts is missing?",
+          "options": [
+            {
+              "t": "The stage.",
+              "why": "\"You're my bookkeeper\" is the stage, and it's there."
+            },
+            {
+              "t": "The task.",
+              "why": "Pulling the invoices into a CSV is the task, and it's there."
+            },
+            {
+              "t": "The rules.",
+              "correct": true
+            }
+          ],
+          "keep_order": true
+        },
+        {
+          "q": "You brief it well and get back something about ninety percent right. What does that tell you?",
+          "options": [
+            {
+              "t": "It needs an example of good work before it can finish the job.",
+              "why": "An example lifts quality, but expecting it to reach a hundred is the assumption worth checking."
+            },
+            {
+              "t": "The task is a poor fit and should stay manual.",
+              "why": "Ninety percent of a task done is a poor reason to take the whole thing back."
+            },
+            {
+              "t": "The brief was still too vague. Tighten it and go again.",
+              "why": "Sometimes true, but not at ninety. Ask what the remaining ten percent is actually for."
+            },
+            {
+              "t": "That's the normal split. You finish the last ten.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3",
+      "title": "When it's off, it's almost always fixable",
+      "cap": "Run a quick eval (5–10 of your own examples) to learn where Claude already fits your work.",
+      "teach": "When you get a bad answer, it's usually not because the tool can't do the job. It's because something you know never made it into the instruction. Too generic?\n\nIt didn't know your role or your audience. Wrong format? Show it an example instead of describing what you want.\n\nConfident but wrong? That happens, ask it to cite sources, and check the facts that matter. Spotting what's missing and adding it is the main skill in working with AI. It has a name, AI Fluency, and there's a whole Praxis session on it.",
+      "diagram": "diagrams/01-claude-101/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A draft comes back stating a figure that turns out to be invented. What's the right response?",
+          "options": [
+            {
+              "t": "Ask for sources, then verify the facts that carry weight.",
+              "correct": true
+            },
+            {
+              "t": "Stop using it for anything with numbers in it.",
+              "why": "That gives up a great deal over a problem with a known handle on it."
+            },
+            {
+              "t": "Give it the source documents and ask again.",
+              "why": "That helps, and it's half the answer. It still leaves you trusting the next figure without a way to check it."
+            },
+            {
+              "t": "Tell it to stop making things up.",
+              "why": "It has no way to check itself against an instruction that abstract. It needs something it can actually do."
+            }
+          ]
+        },
+        {
+          "q": "Four things go wrong with drafts: too generic, wrong format, confident but wrong, tone off. Which one is NOT usually fixed by adding context?",
+          "options": [
+            {
+              "t": "Too generic.",
+              "why": "Generic is the classic missing-context failure. It had nothing specific to work from."
+            },
+            {
+              "t": "Confident but wrong.",
+              "correct": true
+            },
+            {
+              "t": "Tone off.",
+              "why": "Tone is fixed by context, specifically an example of what good sounds like."
+            },
+            {
+              "t": "Wrong format.",
+              "why": "Format is fixed by saying what you want. That's context you didn't give."
+            }
+          ]
+        },
+        {
+          "q": "Which of these disappointing results is most likely to be the tool's limit rather than your prompt?",
+          "options": [
+            {
+              "t": "It ignored the eight-section structure your reports use.",
+              "why": "It can't follow a structure it was never shown."
+            },
+            {
+              "t": "It wrote in the wrong register for your client.",
+              "why": "Register comes from context you can supply. Look for the one no amount of briefing fixes."
+            },
+            {
+              "t": "It gave a confident answer about something that happened last week.",
+              "correct": true
+            },
+            {
+              "t": "It produced a summary that missed what mattered to you.",
+              "why": "What matters to you is exactly the thing a brief carries. Keep looking."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4",
+      "title": "Three modes, matched to the size of the job",
+      "cap": "Cowork and Code run on Claude Code underneath: local to your machine, able to spin up subagents and sustain long tasks. Cowork stays inside the folders you share; Code works directly in your project.",
+      "teach": "The app gives you the same Claude in three modes, and you pick by the size of the job. Chat is for quick questions and short drafts. Cowork is for the bigger jobs: it works across several files or sources for a stretch and comes back with a finished piece of work.\n\nCode is for building software. Nothing to memorise here, when a job feels too big for a chat window, there's a mode built for it.",
+      "diagram": "diagrams/01-claude-101/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A colleague has one question that will take thirty seconds, and a reconciliation across forty files that will take an afternoon. Which modes?",
+          "options": [
+            {
+              "t": "Chat for the question, Cowork for the reconciliation.",
+              "correct": true
+            },
+            {
+              "t": "Chat for both. The reconciliation is just a longer conversation.",
+              "why": "Length isn't the difference. Ask what the reconciliation needs that a conversation cannot give it."
+            },
+            {
+              "t": "Cowork for the question, Code for the reconciliation.",
+              "why": "Cowork is heavy machinery for a thirty-second question, and you don't need to reach as far as Code for the other."
+            }
+          ]
+        },
+        {
+          "q": "Someone opened Claude for the first time this morning and wants to try something real. Where do you send them?",
+          "options": [
+            {
+              "t": "The terminal, so they learn the powerful version from the start.",
+              "why": "Starting at the hardest door is how people decide this is not for them. There's a version of the same thing already open in front of them."
+            },
+            {
+              "t": "The sidebar in the desktop app.",
+              "correct": true
+            },
+            {
+              "t": "Wherever they like. The three are interchangeable.",
+              "why": "They're the same Claude, but they are not equally easy to walk into on day one."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Lesson 5",
+      "title": "Projects: a workspace that remembers",
+      "cap": "Best for anything ongoing rather than a one-off. Name your files descriptively: Claude uses the filename to find the right one.",
+      "teach": "Right now, every new chat starts from zero, so you end up re-uploading the same files and re-explaining the same rules. A project fixes that. You put the files and the rules in once, and every conversation you start inside the project already knows them.\n\nThe practical effect: you stop repeating yourself, and the work stops getting lost when a chat ends.",
+      "diagram": "diagrams/01-claude-101/s7.svg",
+      "videos": [
+        {
+          "id": "GJ5jTgcbRHA",
+          "label": "Getting started with projects in Claude.ai"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You have set up a project with your standards and three reference files. You start a brand new chat inside it. What does that chat know?",
+          "options": [
+            {
+              "t": "The files, the instructions, and what the project has remembered.",
+              "correct": true
+            },
+            {
+              "t": "Nothing. Each chat starts cold.",
+              "why": "That's true of a chat on its own. Ask what the project around it is holding."
+            },
+            {
+              "t": "The files and instructions, but not what earlier chats worked out.",
+              "why": "Closer, and it undersells one part. A project holds more than the material you put in it."
+            }
+          ]
+        },
+        {
+          "q": "Which of these is the strongest reason to set up a project?",
+          "options": [
+            {
+              "t": "It keeps related conversations together in one place.",
+              "why": "Tidy, but tidiness isn't what saves you time. Ask what you would otherwise be doing at the start of every single chat."
+            },
+            {
+              "t": "You stop re-uploading the same files and re-explaining the same rules.",
+              "correct": true
+            },
+            {
+              "t": "Your team can see what you have been working on.",
+              "why": "A side effect, not the reason. Think about what you repeat rather than what you share."
+            },
+            {
+              "t": "Answers inside a project are more accurate.",
+              "why": "They're better because they're better briefed, which is a consequence of something else on this list."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Lesson 6",
+      "title": "Artifacts: the output, rendered next to the chat",
+      "cap": "Be specific and iterate one change at a time. If Claude creates something usable, just say \"make that an artifact\".",
+      "teach": "When it produces something substantial, a document, a table, a working page, it opens it in its own window next to the conversation, properly formatted, where you can read it, edit it, download it and share it. If it ever answers inside the chat when you wanted something usable, say 'make that an artifact' and it will.",
+      "diagram": "diagrams/01-claude-101/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "An artifact has five things wrong with it. What do you do?",
+          "options": [
+            {
+              "t": "List all five in one message so it can fix them together.",
+              "why": "Efficient right up to the point where one of the fixes breaks something else and you cannot tell which instruction did it."
+            },
+            {
+              "t": "Change one thing at a time.",
+              "correct": true
+            },
+            {
+              "t": "Ask it to start the artifact again with all five corrections built in.",
+              "why": "You throw away the eighty percent that was already right, and you still can't tell which change caused what."
+            }
+          ]
+        },
+        {
+          "q": "What distinguishes an artifact from the rest of the conversation?",
+          "options": [
+            {
+              "t": "It's the part you can share with other people.",
+              "why": "You can share it, but that's a consequence of what it is rather than what makes it different."
+            },
+            {
+              "t": "It's saved and the conversation isn't.",
+              "why": "Not the distinction. Think about what you can do with it rather than how long it lasts."
+            },
+            {
+              "t": "It's the finished thing, rendered in its own window and editable.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Lesson 7",
+      "title": "Skills: packaged know-how, run the same way every time",
+      "cap": "Only install custom skills from trusted sources: they can include code. The deep dive is Anthropic's dedicated \"Introduction to agent skills\".",
+      "teach": "A skill is a set of instructions Claude keeps and applies whenever that task comes up. The built-in ones you've already used, that's how it makes spreadsheets and documents. The valuable ones are the ones you make yourself: you describe how you do a repeatable task, the steps, the rules, the format, and from then on it does that task your way, every time, without being re-told.\n\nYou build it by talking to it; there's no code involved. For a firm, this is the part that matters: the way your most experienced person does the job can be written down once and used by everyone.",
+      "diagram": "diagrams/01-claude-101/s9.svg",
+      "videos": [
+        {
+          "id": "LpGpwhORWr0",
+          "label": "Claude works with you on slides, spreadsheets, and contract redlines"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Your firm writes reports to a fixed eight-section structure with strict citation rules. Project, or skill?",
+          "options": [
+            {
+              "t": "A skill, because it's a method you want performed the same way every time.",
+              "correct": true
+            },
+            {
+              "t": "Neither. That belongs in the prompt each time.",
+              "why": "That works, and it means typing the same eight sections out for the rest of your life."
+            },
+            {
+              "t": "A project, because the rules are knowledge about how your firm works.",
+              "why": "A project is the right home for the source material. But this isn't a fact to look up, it's a method to run."
+            }
+          ]
+        },
+        {
+          "q": "\"Skills\" means two different things depending on where you are. Which is the one you write yourself?",
+          "options": [
+            {
+              "t": "The built-in ones Anthropic maintains for Excel, Word and PDF.",
+              "why": "Those are the ready-made half. The question is about the half that carries your own method."
+            },
+            {
+              "t": "A folder with a plain-English file in it, describing how you want the work done.",
+              "correct": true
+            },
+            {
+              "t": "A capability you enable in your account settings.",
+              "why": "Nothing here is a toggle. Both kinds are things that get loaded when they apply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Lesson 8",
+      "title": "Connectors: bring your tools into the conversation",
+      "cap": "Claude sees ONLY what you can see: connecting your email doesn't expose anyone else's. Permissions are scoped and revocable; only connect tools you trust.",
+      "teach": "Connectors let Claude work with the tools you already use, Drive, Gmail, Slack and the rest, through one standard. Instead of copy-pasting things in, it reads the actual source. On the question everyone asks: it can only see what your own account can see.\n\nConnecting your email gives it your inbox, nobody else's. You choose what to connect, and you can disconnect any of it at any time.",
+      "diagram": "diagrams/01-claude-101/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "You connect Claude to your firm's document store. A colleague asks whether it can now read the partners' files. What's true?",
+          "options": [
+            {
+              "t": "Yes. Once connected, it can reach anything in the store.",
+              "why": "That would make connectors unusable in any firm with confidential material. Think about whose account the connection runs under."
+            },
+            {
+              "t": "Only if you can already open those files yourself.",
+              "correct": true
+            },
+            {
+              "t": "No. Connectors are read-only on your own documents.",
+              "why": "Too narrow in one direction and not the actual rule. The limit isn't about ownership."
+            }
+          ]
+        },
+        {
+          "q": "A compliance officer asks where the data goes. Which answer is most useful to them?",
+          "options": [
+            {
+              "t": "It's encrypted in transit and at rest.",
+              "why": "True of almost every tool they already use, so it settles nothing. They're asking a bigger question."
+            },
+            {
+              "t": "That depends on your IT team.",
+              "why": "It puts the question back on them without telling them what the options even are."
+            },
+            {
+              "t": "Anthropic never trains on business data, so it's fine.",
+              "why": "True and not what they asked. They want to know the range of arrangements available to them."
+            },
+            {
+              "t": "It depends on the setup, which runs from the web with nothing installed to a model on your own network.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Lesson 9",
+      "title": "Enterprise Search: ask your whole company one question",
+      "cap": "Team and Enterprise plans only: an admin sets it up, each person authenticates their own accounts. It returns only what you already have permission to see.",
+      "teach": "Enterprise Search lets you ask one question across everything your organisation has, the documents, the chat, the email, and get one answer, with citations back to the sources. It only returns what you already have permission to see; an administrator sets it up, and nothing changes about who can access what.",
+      "diagram": "diagrams/01-claude-101/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A sole practitioner asks you to set up Enterprise Search for them. What do you say?",
+          "options": [
+            {
+              "t": "It works, but there's nothing to search with only one person's documents.",
+              "why": "The volume isn't the obstacle. There's a harder blocker before you get that far."
+            },
+            {
+              "t": "It needs a Team or Enterprise plan, so not yet.",
+              "correct": true
+            },
+            {
+              "t": "It works on any paid plan once connectors are set up.",
+              "why": "Connectors and Enterprise Search are not the same gate. One of them has a plan requirement."
+            }
+          ]
+        },
+        {
+          "q": "Enterprise Search answers across everything the organisation has connected. What comes back to you?",
+          "options": [
+            {
+              "t": "Everything relevant. Access rules apply when you open the source.",
+              "why": "That would leak the contents through the answer itself, which is the failure the rule exists to prevent."
+            },
+            {
+              "t": "Everything relevant, with restricted material marked as such.",
+              "why": "It doesn't show you things you can't open and then label them. The rule is simpler and stricter."
+            },
+            {
+              "t": "Only material you already have access to.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Lesson 10",
+      "title": "Research: from one search to a researched report",
+      "cap": "Reach for Research when a thorough answer needs many sources. For a quick fact use web search; for pure reasoning use extended thinking; for internal-only questions use Enterprise Search.",
+      "teach": "The Research function is for questions that need real digging. Instead of one search, it runs many: it makes a plan, searches, reads what it finds, decides what to look up next, and writes the result up with a citation for every claim. That takes five to fifteen minutes, not seconds. Use it when a good answer needs twenty sources rather than one.",
+      "diagram": "diagrams/01-claude-101/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "A research report comes back with every claim cited. What still needs doing?",
+          "options": [
+            {
+              "t": "Nothing. The citations are the verification.",
+              "why": "A citation tells you where a claim came from. It doesn't tell you the source was read correctly."
+            },
+            {
+              "t": "Check the facts that carry real weight.",
+              "correct": true
+            },
+            {
+              "t": "Check every citation, or the report can't be relied on.",
+              "why": "That's the whole job back again. Verification is meant to be proportionate to what a mistake would cost."
+            }
+          ]
+        },
+        {
+          "q": "What makes Research different from asking a question with web search on?",
+          "options": [
+            {
+              "t": "It's the same thing, given longer to run.",
+              "why": "Time alone doesn't produce a structured report with a line of argument."
+            },
+            {
+              "t": "It reaches sources a normal search cannot.",
+              "why": "It's the same open web. The difference is in what it does with it."
+            },
+            {
+              "t": "It plans, then runs many searches that build on each other, then writes it up.",
+              "correct": true
+            },
+            {
+              "t": "It searches many sources at once instead of one at a time.",
+              "why": "Not breadth in a single pass. Think about what happens between the first search and the next."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Lesson 11",
+      "title": "Whatever your role, there's a starting point",
+      "cap": "Pick one recurring task this week and try it. The skill sharpens with practice: you build intuition for where Claude earns its place.",
+      "teach": "\"We've seen a lot of features today. You don't need most of them yet. What you need is one task, a real one, from your actual week, to start with. Let's pick yours now.\" (Then go to their task from intake, not the grid on the slide.)",
+      "diagram": "diagrams/01-claude-101/s13.svg",
+      "videos": [
+        {
+          "id": "Zzn-g8lvLMA",
+          "label": "Data analysis with AI"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You've just been shown a dozen features. Which first week actually changes how you work?",
+          "options": [
+            {
+              "t": "Pick the two features that looked most impressive and go deep.",
+              "why": "Impressive is not the same as load-bearing. The test is whether it touches work you actually have."
+            },
+            {
+              "t": "Try each feature once so you know what's available.",
+              "why": "You'll end the week with twelve demonstrations and no changed habit. Think about what you'd still be doing in a month."
+            },
+            {
+              "t": "One real task you already do, done properly, start to finish.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Which task is the best candidate for your first real attempt?",
+          "options": [
+            {
+              "t": "Something you do the same way repeatedly, and could check quickly.",
+              "correct": true
+            },
+            {
+              "t": "Something nobody has time for, so there's no downside if it fails.",
+              "why": "If nobody needed it done, finishing it proves nothing and changes nothing."
+            },
+            {
+              "t": "The hardest thing you do, because that's where the value is.",
+              "why": "The value is there, and so is the highest chance of a first attempt that puts you off."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "eyebrow": "Lesson 12",
+      "title": "One intelligence, where you already work",
+      "cap": "Where you go next depends on the work: building software (Code), team context (Slack), models (Excel), decks (PowerPoint), or the live web (Chrome).",
+      "teach": "\"Everything we did today was in the Claude app, but the same Claude is available inside other tools: in Slack, in Excel and PowerPoint, in the browser, and in a version called Claude Code that works directly with the files and folders on your computer. So the question to leave with isn't whether to switch tools.\n\nIt's which of the tools you already spend your day in would benefit most from having Claude inside it.\" (Hold the one term: it's Claude Code, every time.)",
+      "diagram": "diagrams/01-claude-101/s14.svg",
+      "videos": [
+        {
+          "id": "s-avRazvmLg",
+          "label": "Claude Code on the web"
+        },
+        {
+          "id": "tI1uzSJuSxc",
+          "label": "Claude in Slack"
+        },
+        {
+          "id": "8ZRTSIRWLu4",
+          "label": "Claude in Excel: Sample Use Case"
+        },
+        {
+          "id": "IypXvHej9eY",
+          "label": "Claude for Chrome brings AI where you’re already working"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Claude appears in Slack, Excel, Chrome and the terminal. What's the relationship between them?",
+          "options": [
+            {
+              "t": "Separate products that happen to share a name.",
+              "why": "They share more than a name. Think about what stays the same as the surface changes."
+            },
+            {
+              "t": "The same Claude, tuned to each surface.",
+              "correct": true
+            },
+            {
+              "t": "One product, with smaller models on the lighter surfaces.",
+              "why": "The surface changes what it can reach and how it behaves, not how capable it is underneath."
+            }
+          ]
+        },
+        {
+          "q": "Of everything in this course, which part survives being handed to a colleague a year from now?",
+          "options": [
+            {
+              "t": "Your saved preferences and memory.",
+              "why": "Those follow you, which is exactly the problem when the person who needs them is someone else."
+            },
+            {
+              "t": "The project, with its files and instructions.",
+              "why": "Closer than the others, and it lives in an account rather than somewhere you can hand over."
+            },
+            {
+              "t": "The folder, with the rules written down in it.",
+              "correct": true
+            },
+            {
+              "t": "The conversation, since you can share a chat.",
+              "why": "A shared chat is a record of one exchange, not something anyone can pick up and run."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

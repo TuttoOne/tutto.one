@@ -1,0 +1,445 @@
+{
+  "id": "06-anthropic-api",
+  "title": "Claude avec l’API Anthropic",
+  "anthropic": "https://anthropic.skilljar.com/claude-with-the-anthropic-api",
+  "intro": {
+    "title": "Construire avec l’API, sous la fenêtre de conversation.",
+    "lead": "Onze idées, une par écran. C’est la couche sur laquelle reposent Claude Code et toutes les autres applications. Chaque écran est quelque chose à montrer du doigt pendant que vous expliquez : ménagez les silences.",
+    "teach": "Tout ce que vous avez utilisé jusqu’ici — la conversation, Claude Code, l’application de bureau — repose sur une seule chose : une requête que vous envoyez à l’API. Onze idées, un écran chacune. Vous n’avez pas besoin de savoir écrire la requête pour la comprendre.\n\nL’objectif est que vous sachiez ce qu’il y a sous le plancher, pour pouvoir briefer celui qui construit dessus et juger ce qu’il vous rend."
+  },
+  "close": {
+    "title": "Passez l’appel. Fiabilisez-le. Donnez-lui de la portée. Composez-en des systèmes.",
+    "lead": "Une requête sans état est l’unité de base. Les évaluations et le prompting la rendent fiable ; les outils, le RAG et les capacités propres du modèle lui donnent de la portée ; le MCP et le choix entre workflow et agent sont la façon d’en construire quelque chose de réel.",
+    "teach": "Quatre gestes. Passez l’appel : une requête sans état, l’unité à partir de laquelle tout se construit. Fiabilisez-le : testez-le, et briefez-le clairement.\n\nDonnez-lui de la portée : des outils, vos propres connaissances, plus que du texte. Puis composez tout cela en système. Si vous ne retenez qu’une chose : rien ici n’est magique, c’est la même requête avec davantage d’options activées."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Leçon 1",
+      "title": "Une requête, et l’API vous oublie",
+      "cap": "Une « conversation à plusieurs tours » n’est que cette boucle exécutée à la main : le modèle ne retient rien entre les appels, si bien que la liste messages[] qui grossit est la mémoire. Même clé, même structure, quel que soit le langage d’appel.",
+      "teach": "Sous la conversation, il n’y a pas de conversation. Il y a une requête, une réponse, puis il vous oublie complètement. Ce qui ressemble à une conversation, c’est le programme qui renvoie discrètement tout l’historique à chaque fois. La liste des messages est la mémoire ; elle n’est conservée nulle part ailleurs.",
+      "diagram": "diagrams/fr/06-anthropic-api/s3.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Vous envoyez un deuxième appel à l’API. Que retient le modèle du premier ?",
+          "options": [
+            {
+              "t": "Rien. Vous envoyez toute la liste de messages à chaque fois.",
+              "correct": true
+            },
+            {
+              "t": "La conversation, tant que la session reste ouverte.",
+              "why": "Il n’y a pas de session. Demandez-vous ce que la deuxième requête doit emporter avec elle."
+            },
+            {
+              "t": "Un résumé, pour que le contexte reste petit.",
+              "why": "Rien n’est résumé pour vous. Ce qui voyage, c’est ce que vous mettez dans la requête."
+            }
+          ]
+        },
+        {
+          "q": "Quelqu’un entend « il ne retient rien » et s’inquiète que cela paraisse peu fiable.",
+          "options": [
+            {
+              "t": "C’est une limite que l’on contourne en gardant les appels courts.",
+              "why": "Ce n’est pas une limite que l’on contourne, et la brièveté des appels n’est pas le sujet."
+            },
+            {
+              "t": "C’est la moitié rassurante de la réponse sur les données : rien de ce qui leur appartient n’est conservé entre les appels.",
+              "correct": true
+            },
+            {
+              "t": "La mémoire est ajoutée par les formules plus chères.",
+              "why": "Aucune formule ne change cela. Tout ce qui persiste est détenu par votre propre système."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Leçon 2",
+      "title": "Quatre réglages sur une même requête",
+      "cap": "Le prompt système fait le gros du travail : c’est là que vivent le rôle et les règles. La température échange de la fiabilité contre de la variété ; le streaming relève du ressenti ; la sortie structurée est la façon d’obtenir des données qu’un programme peut réellement exploiter.",
+      "teach": "Même modèle, quatre réglages. Le principal est le prompt système : les instructions permanentes sur qui il doit être et quelles règles il suit. La température, c’est la hardiesse que vous lui accordez : zéro pour du régulier et reproductible, plus haut pour de la variété.\n\nLe streaming n’est qu’une affaire de ressenti : les mots apparaissent à mesure qu’ils s’écrivent au lieu d’arriver d’un bloc. La sortie structurée, c’est lorsqu’il vous faut des données propres qu’un programme peut lire, et non un paragraphe.",
+      "diagram": "diagrams/fr/06-anthropic-api/s4.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Parmi les quatre réglages d’une requête, lequel est le même objet que le fichier de compétence qu’ils connaissent déjà ?",
+          "options": [
+            {
+              "t": "Le choix du modèle.",
+              "why": "Cela choisit le moteur. Cela ne porte rien de votre méthode."
+            },
+            {
+              "t": "Le réglage de température.",
+              "why": "Cela change la variété de la sortie, pas ce qu’il sait de votre façon de travailler."
+            },
+            {
+              "t": "Le prompt système.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Leçon 3",
+      "title": "Arrêtez de deviner si un prompt est bon",
+      "cap": "Deux façons de noter : par le code pour tout ce qui est exact (est-ce du JSON valide ? contient-il la réponse ?), par le modèle pour le jugement (est-ce diplomate ? est-ce dans le sujet ?) — on demande à un autre appel à Claude de noter selon une grille.",
+      "teach": "« Comment savoir qu’un prompt est vraiment bon, et pas seulement bon sur le seul exemple essayé ? On construit une évaluation : un jeu de cas de test, exécuté automatiquement et noté en un chiffre unique. Puis, quand on change la formulation, on relance et on regarde le chiffre bouger.\n\nDeux façons de noter : par le code, pour tout ce qui se vérifie exactement, et par le modèle, où l’on demande à un autre Claude de juger selon une grille, comme on demanderait à une deuxième personne de corriger. » (C’est la forme au niveau de l’API de la question d’élève *« comment saurais-je que la sortie est juste ? »*, écran 12 de 05-ai-fluency : le discernement, rendu mesurable.)",
+      "diagram": "diagrams/fr/06-anthropic-api/s5.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "« Une évaluation est une suite de tests pour les prompts. » Que fait-elle vraiment ?",
+          "options": [
+            {
+              "t": "Écrire ce que « bon » veut dire, puis vérifier automatiquement par rapport à cela.",
+              "correct": true
+            },
+            {
+              "t": "Mesurer à quelle vitesse et à quel coût le prompt s’exécute.",
+              "why": "Bon à savoir, et cela ne dit rien sur la justesse de la sortie."
+            },
+            {
+              "t": "Vérifier que le modèle n’a pas changé sous vos pieds.",
+              "why": "Un effet secondaire utile, et ce n’est pas pour cela que vous l’avez construite."
+            }
+          ]
+        },
+        {
+          "q": "À quoi sert vraiment le chiffre que donne une évaluation ?",
+          "options": [
+            {
+              "t": "À comparer votre système à celui des autres.",
+              "why": "Vos cas sont les vôtres. Le chiffre ne signifie rien en dehors d’eux."
+            },
+            {
+              "t": "À changer le prompt, relancer, et voir dans quel sens il a bougé.",
+              "correct": true
+            },
+            {
+              "t": "À décider si le système est prêt à être livré.",
+              "why": "Cela y contribue, et un seuil unique traite un chiffre comme un verdict qu’il ne peut pas porter seul."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Leçon 4",
+      "title": "Quatre techniques, par ordre de levier",
+      "cap": "Les exemples (few-shot) font le plus bouger la qualité : deux ou trois paires entrée→sortie travaillées enseignent le format et les cas limites que des paragraphes d’instructions ne peuvent pas transmettre. Les balises XML comptent parce que Claude est entraîné à les respecter : <document>…</document> se lit mieux que des guillemets.",
+      "teach": "« Quand il se trompe, le réflexe est “il me faut un modèle plus intelligent”. Presque toujours, il vous faut une instruction plus claire. Quatre gestes, du plus faible au plus fort : dites exactement ce que vous voulez ; détaillez ; étiquetez proprement les parties ; et celui qui fait le plus bouger la qualité, montrez-lui un exemple travaillé.\n\nUn bon avant-après lui apprend davantage qu’une page de règles. » (C’est la même leçon que l’écran 5 de Claude 101 et l’écran sur le prompting d’AI Fluency, ici au niveau de l’API : quand ça déraille, c’est presque toujours réparable.)",
+      "diagram": "diagrams/fr/06-anthropic-api/s6.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "La sortie est fausse. Parmi ces quatre gestes, lequel a le plus de levier ?",
+          "options": [
+            {
+              "t": "Être clair et direct.",
+              "why": "Le bon point de départ, et le plus faible des quatre par son effet."
+            },
+            {
+              "t": "Utiliser des balises pour étiqueter les parties du prompt.",
+              "why": "Cela l’aide vraiment à distinguer votre instruction de votre document, et ce n’est pas le geste décisif."
+            },
+            {
+              "t": "Lui donner des exemples.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Quand un modèle plus gros est-il la réponse à une mauvaise sortie ?",
+          "options": [
+            {
+              "t": "Une fois les quatre techniques essayées et le résultat toujours faux.",
+              "correct": true
+            },
+            {
+              "t": "Tout de suite. La capacité est généralement la contrainte.",
+              "why": "Elle l’est rarement. Se ruer sur un modèle plus gros masque un problème de prompt derrière une facture plus grosse."
+            },
+            {
+              "t": "Jamais. Le prompting résout tout.",
+              "why": "Exagéré dans l’autre sens. Certaines tâches exigent réellement davantage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Leçon 5, si vous ne retenez qu’une chose",
+      "title": "L’usage d’outils est un aller-retour que vous complétez",
+      "cap": "La boucle peut se répéter : Claude peut appeler plusieurs outils sur plusieurs tours avant de répondre. C’est sur ce seul mécanisme que repose tout agent : le modèle propose, votre environnement exécute, le résultat revient.",
+      "teach": "« Voici ce qui change tout : Claude, seul, ne peut rien faire. Il ne peut pas consulter votre agenda, interroger votre base, envoyer un e-mail. Tout ce qu’il peut faire, c’est dire “j’aimerais appeler cet outil, avec ces entrées”.\n\nVotre système l’exécute pour de vrai et lui rend la réponse, et il continue. Cet aller-retour — il demande, vous agissez, vous renvoyez le résultat — est toute la base qui permet à l’IA d’agir, et pas seulement de répondre. Tous les agents dont vous avez entendu parler reposent exactement là-dessus. » (C’est la version sous le plancher du fait de le laisser agir : l’augmentation devient agentivité, écran 4 de 05-ai-fluency, par un seul mécanisme.)",
+      "diagram": "diagrams/fr/06-anthropic-api/s7.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "« Donc avec des outils, il peut simplement faire des choses ? » Quelle est la réponse exacte ?",
+          "options": [
+            {
+              "t": "Non. Il ne fait jamais que demander. C’est votre système qui exécute la fonction.",
+              "correct": true
+            },
+            {
+              "t": "Seulement pour les outils qu’Anthropic exécute côté serveur.",
+              "why": "Ce sont un cas particulier. La réponse générale vaut pour les outils que vous définissez."
+            },
+            {
+              "t": "Oui, dans les limites des permissions que vous lui avez accordées.",
+              "why": "Plus proche du comportement d’un framework d’agents, et cela saute ce qui se passe réellement au niveau de l’API."
+            }
+          ]
+        },
+        {
+          "q": "Où se trouve le point de contrôle dans un aller-retour d’usage d’outil ?",
+          "options": [
+            {
+              "t": "Dans la définition de l’outil, qui limite ce qui peut être demandé.",
+              "why": "Elle limite ce qui peut être demandé. C’est autre chose qui décide si la demande est honorée."
+            },
+            {
+              "t": "Dans votre code, qui décide s’il exécute ce qui a été demandé.",
+              "correct": true
+            },
+            {
+              "t": "Dans le modèle, qui refuse tout ce qui n’est pas sûr.",
+              "why": "Compter sur le modèle comme point de contrôle place la maîtrise au tout mauvais endroit."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Leçon 6",
+      "title": "Certains outils, vous n’avez pas à les construire",
+      "cap": "L’éditeur de texte et l’outil d’exécution de code sont exactement ce qui fait tourner Claude Code et les fonctions d’analyse. L’API Files permet à une requête de référencer des fichiers téléversés (PDF, jeux de données) sans les renvoyer à chaque appel.",
+      "teach": "La plupart des outils, c’est votre développeur qui les construit. Une poignée, Anthropic les a déjà construits : il suffit de les activer. Un éditeur de texte qui modifie des fichiers, une recherche web qui revient avec des résultats sourcés, et un bac à sable qui exécute du Python.\n\nBon à savoir, car ce n’est pas abstrait : l’éditeur de texte et le bac à sable sont littéralement ce qui tourne quand vous utilisez Claude Code. Vous vous servez de ces outils sans en connaître le nom.",
+      "diagram": "diagrams/fr/06-anthropic-api/s8.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "« L’exécution de code lance du Python dans un bac à sable » inquiète une salle en secteur réglementé. Qu’est-ce qui rassure ?",
+          "options": [
+            {
+              "t": "Vous pouvez le désactiver.",
+              "why": "C’est vrai, et cela répond en retirant la capacité plutôt qu’en l’expliquant."
+            },
+            {
+              "t": "Le bac à sable est isolé, et les résultats web reviennent avec leurs sources.",
+              "correct": true
+            },
+            {
+              "t": "Il n’exécute que du code que le modèle a lui-même écrit.",
+              "why": "C’est précisément ce qui les inquiète, reformulé comme si c’était le réconfort."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Leçon 7",
+      "title": "Le RAG : lui donner des connaissances sur lesquelles il n’a jamais été entraîné",
+      "cap": "Les embeddings captent le sens (« voiture » trouve « véhicule ») ; BM25 capte les termes exacts (un code d’erreur, une référence de pièce). Un pipeline multi-index exécute les deux et fusionne les résultats — c’est ce que fait réellement un RAG en production.",
+      "teach": "« Claude a été entraîné sur l’internet public jusqu’à une certaine date. Il n’a jamais été entraîné sur vos documents. Le RAG est la façon de les lui donner : on indexe tout une fois, puis, pour chaque question, on ne tire que la poignée de passages qui comptent et on les lui remet.\n\nDeux façons de trouver les bons passages : l’une qui comprend le sens, si bien que “voiture” trouve aussi “véhicule”, et l’autre qui vise juste sur les termes exacts, comme une référence de pièce ou un code d’erreur. Les bons systèmes utilisent les deux. » (C’est la version salle des machines des écrans de Claude 101 sur les connecteurs et la recherche en entreprise : travailler avec vos données réelles, et non à froid.)",
+      "diagram": "diagrams/fr/06-anthropic-api/s9.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Pourquoi ne pas simplement coller toute la base de connaissances dans le prompt ?",
+          "options": [
+            {
+              "t": "Elle n’entre pas : on indexe une fois et on ne récupère que ce dont la question a besoin.",
+              "correct": true
+            },
+            {
+              "t": "Le modèle serait perturbé par du matériel non pertinent.",
+              "why": "Un effet réel, et secondaire par rapport à la limite dure que vous atteindriez d’abord."
+            },
+            {
+              "t": "Ce serait lent.",
+              "why": "Ce le serait, et la vitesse n’est pas le point bloquant."
+            }
+          ]
+        },
+        {
+          "q": "Deux types d’index fonctionnent mieux ensemble. Pourquoi ?",
+          "options": [
+            {
+              "t": "L’un est plus rapide et l’autre plus exact.",
+              "why": "Ce n’est pas la séparation. Ils attrapent des choses différentes, pas la même chose à des vitesses différentes."
+            },
+            {
+              "t": "Les embeddings captent le sens ; la recherche par mots-clés capte les termes exacts.",
+              "correct": true
+            },
+            {
+              "t": "L’un traite le texte et l’autre les documents.",
+              "why": "Les deux traitent du texte. La différence tient au type de correspondance dans lequel ils excellent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Leçon 8",
+      "title": "La même API accepte plus que du texte",
+      "cap": "Le raisonnement étendu donne au modèle de la place pour travailler un problème difficile avant de s’engager sur une réponse. Les citations transforment « faites-moi confiance » en « voici le passage » : la colonne vertébrale de toute réponse qu’une entreprise doit assumer.",
+      "teach": "La même requête accepte plus que du texte tapé. À l’entrée : des images, pour qu’il puisse lire un graphique ou une capture d’écran, et des PDF, page par page avec la mise en page intacte. À la sortie : il peut réfléchir à un problème difficile avant de s’engager sur une réponse, et il peut désigner la source exacte d’où il a tiré une affirmation.\n\nCe dernier point, les citations, est la colonne vertébrale de toute réponse qu’une entreprise doit pouvoir assumer.",
+      "diagram": "diagrams/fr/06-anthropic-api/s10.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "« Mais mes vrais fichiers, ce sont du Word, de l’Excel, des PDF et des scans. » À quoi cet écran répond-il ?",
+          "options": [
+            {
+              "t": "La même requête accepte les images et les PDF, avec la mise en page, page par page.",
+              "correct": true
+            },
+            {
+              "t": "Il vous faut une API documentaire séparée pour cela.",
+              "why": "Même requête, même structure. Rien de séparé à apprendre."
+            },
+            {
+              "t": "On les convertit d’abord en texte.",
+              "why": "C’était la version avec petites roues. La vraie machinerie fait davantage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Leçon 9",
+      "title": "Payez la partie longue une seule fois",
+      "cap": "La règle : seul un préfixe exact et inchangé est réutilisé ; mettez donc tout ce qui est stable en premier et la partie variable en dernier. Les durées de cache sont courtes (quelques minutes), le gain se fait donc sur une rafale d’appels liés — le cœur de toute application réactive à contexte répété.",
+      "teach": "Souvenez-vous de l’écran 3 : chaque appel renvoie tout l’historique. Si cet historique commence à chaque fois par le même gros bloc — un long document, un épais jeu de règles — vous le paieriez encore et encore. Le cache vous permet de payer cette partie stable une fois et de la faire relire à bas coût par les appels suivants. C’est une optimisation de coût et de vitesse, pas une nouvelle capacité.",
+      "diagram": "diagrams/fr/06-anthropic-api/s11.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Le cache de prompt réutilise le long bloc d’ouverture. Qu’est-ce qui casse la réutilisation ?",
+          "options": [
+            {
+              "t": "Changer de modèle.",
+              "why": "C’est vrai, et c’est rarement l’accident. Le cas courant porte sur ce que vous placez où."
+            },
+            {
+              "t": "Modifier quoi que ce soit dans le préfixe, même légèrement.",
+              "correct": true
+            },
+            {
+              "t": "Attendre trop longtemps entre deux appels.",
+              "why": "Il y a bien une expiration, et ce n’est pas ce sur quoi on trébuche en concevant le prompt."
+            }
+          ]
+        },
+        {
+          "q": "Alors où doit se placer la partie variable du prompt ?",
+          "options": [
+            {
+              "t": "Dans le prompt système, à part des messages.",
+              "why": "Le prompt système fait généralement partie du bloc stable que vous cherchez à mettre en cache."
+            },
+            {
+              "t": "Au début, pour que le modèle la voie en premier.",
+              "why": "C’est la seule disposition garantie de casser la réutilisation à chaque appel."
+            },
+            {
+              "t": "À la fin, après le bloc stable.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "eyebrow": "Leçon 10",
+      "title": "Le MCP : une prise standard pour les outils et les données",
+      "cap": "Un serveur publie trois choses — outils, ressources, prompts — et l’inspecteur permet de le tester avant de le brancher à un client. Construisez l’intégration une fois ; branchez-la sur Claude Code, sur votre propre client, ou sur celui de quelqu’un d’autre.",
+      "teach": "« Le MCP est la prise standard. Avant lui, connecter Claude à votre CRM, à votre espace de fichiers, à votre base de données, cela voulait dire un câble sur mesure pour chacun, et pour chaque application. Avec le MCP, vous construisez la connexion une fois et tout outil qui parle la norme peut s’en servir.\n\nVous avez entendu “l’USB-C de l’IA” : c’est cela. Construire une fois, brancher partout. » (C’est la version salle des machines de l’écran de Claude 101 sur les connecteurs : même idée, un étage plus bas — une norme unique derrière chaque intégration.)",
+      "diagram": "diagrams/fr/06-anthropic-api/s12.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Quel est l’enseignement durable du MCP pour une salle non technique ?",
+          "options": [
+            {
+              "t": "Les trois primitives qu’un serveur publie.",
+              "why": "Du vocabulaire de développeur. Cela ne survivra pas à la semaine."
+            },
+            {
+              "t": "Les connecteurs qu’ils ont appréciés reposent sur une norme, pas sur une magie sur mesure.",
+              "correct": true
+            },
+            {
+              "t": "Qu’ils devraient demander à la DSI de faire tourner leur propre serveur.",
+              "why": "Très en avance sur là où ils en sont, et ce n’est pas à cela que sert l’idée."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "eyebrow": "Leçon 11",
+      "title": "Workflows ou agents : qui décide du chemin",
+      "cap": "Choisissez selon la prévisibilité. Si vous pouvez dessiner les étapes à l’avance, un workflow coûte moins cher et est plus fiable. Si le chemin dépend de ce que l’on trouve en route, il vous faut un agent — Claude Code en est un. La plupart des systèmes en production mêlent les deux.",
+      "teach": "« Deux façons de construire quelque chose de réel, et la différence tient à qui conduit. Dans un workflow, vous fixez les étapes à l’avance : fais ceci, puis ceci, puis cela. Dans un agent, le modèle décide du chemin au fur et à mesure, en bouclant jusqu’à ce que ce soit fini.\n\nChoisissez selon la prévisibilité du travail. Si vous pouviez dessiner les étapes au tableau à l’avance, construisez un workflow : c’est moins cher et plus régulier. Si la bonne étape suivante dépend de ce qu’il trouve, il vous faut un agent.\n\nClaude Code en est un. » (C’est l’automatisation face à l’agentivité de l’écran 4 de 05-ai-fluency, rendue concrète : une tâche fixe que vous définissez, face à un système qui décide de lui-même.)",
+      "diagram": "diagrams/fr/06-anthropic-api/s13.svg",
+      "videos": [],
+      "checks": [
+        {
+          "q": "Workflow ou agent : qu’est-ce qui tranche ?",
+          "options": [
+            {
+              "t": "Le fait que la tâche nécessite des outils.",
+              "why": "Les deux utilisent des outils. Ce n’est pas la ligne de partage."
+            },
+            {
+              "t": "La complexité de la tâche.",
+              "why": "Un travail complexe est souvent un workflow. Demandez-vous qui choisit l’ordre des étapes."
+            },
+            {
+              "t": "Qui décide du chemin : vous le câblez à l’avance, ou le modèle choisit au fur et à mesure.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "Ce dont une équipe métier a réellement besoin, c’est le plus souvent lequel des deux ?",
+          "options": [
+            {
+              "t": "Un workflow : moins cher, plus régulier, plus facile à faire confiance.",
+              "correct": true
+            },
+            {
+              "t": "Les deux ensemble, dès le départ.",
+              "why": "Cela double ce qu’il faut construire et déboguer, avant même de savoir que la version simple ne suffit pas."
+            },
+            {
+              "t": "Un agent, parce que le travail réel est imprévisible.",
+              "why": "Il semble imprévisible et se révèle généralement identique tous les mois."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceTitle": "Claude with the Anthropic API"
+}

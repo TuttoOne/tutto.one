@@ -1,0 +1,433 @@
+{
+  "id": "10-capabilities-and-limitations",
+  "title": "AI Capabilities and Limitations",
+  "anthropic": "https://anthropic.skilljar.com/ai-capabilities-and-limitations",
+  "intro": {
+    "title": "What AI can do, where it breaks, and how to tell which.",
+    "lead": "Nine ideas, one per screen, a small, clear model of the machine. Each is a thing to point at while you explain. The drama is in the watching, so take the silences.",
+    "teach": "Most people swing between trusting AI completely and not trusting it at all. Both are wrong. By the end of this you'll have a small model of the machine in your head: four things it's strong and weak at, and a way to tell, for any task, how hard you need to check. Nine ideas, one screen each. The watching is the lesson, so I'll take the silences."
+  },
+  "close": {
+    "title": "Four properties. Each a continuum. Trust, calibrated.",
+    "lead": "Next Token Prediction, Knowledge, Working Memory, Steerability, locate your task on each, then match how hard you check to where it sits.",
+    "teach": "If you keep one thing: don't ask 'can I trust AI?' Ask 'where does this task sit on each of the four sliders, and how hard should I check given that?' Trust it on the boring, well-worn parts. Check it on the specific, checkable parts, names, dates, numbers, citations.\n\nThat's the whole discipline, and it'll still be true when this model is three versions old."
+  },
+  "steps": [
+    {
+      "id": "s3",
+      "eyebrow": "Lesson 1",
+      "title": "Two halves of one system",
+      "cap": "Why it's durable: the boundaries move as models improve, but the properties stay the same. Learn the pattern once and it keeps paying off.",
+      "teach": "If you've done the 4D framework, that taught you the human side, how to delegate, describe, judge, own the result. This is the other half: what the machine is actually doing on the far side of those habits. And the reason it's worth your time, the specific models change every few months, but these four properties don't. Learn the pattern once and it keeps paying off.",
+      "diagram": "diagrams/10-capabilities-and-limitations/s3.svg",
+      "videos": [
+        {
+          "id": "AiiiyYiEJa4",
+          "label": "What we mean by generative AI"
+        }
+      ],
+      "checks": [
+        {
+          "q": "This course and the 4D framework are two halves of one system. Which half is which?",
+          "options": [
+            {
+              "t": "4D is how you work with AI; this is how the machine behaves.",
+              "correct": true
+            },
+            {
+              "t": "4D is for beginners, this is the advanced version.",
+              "why": "Neither is a level. They describe different subjects."
+            },
+            {
+              "t": "4D is the theory, this is the practice.",
+              "why": "Both are practical. The split is about which side of the pairing each one describes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "eyebrow": "Lesson 2, if you take one thing away",
+      "title": "Four properties, each a continuum",
+      "cap": "Calibrated trust isn't trusting or distrusting AI wholesale. It's locating your task on each continuum, then matching how hard you check to where it sits.",
+      "teach": "\"Here's the whole course on one picture. Four properties, and each is a slider, not a switch. On the left, the capability end, trust it.\n\nOn the right, the limitation end, verify more. The mistake everyone makes is treating AI as one thing you either trust or don't. It isn't.\n\nThe same task can sit far left on one slider and far right on another. The skill is locating your task on each, then checking as hard as where it sits demands.\" (The core framing for the whole course, keep coming back to \"where does this task sit on the slider?\".)",
+      "diagram": "diagrams/10-capabilities-and-limitations/s4.svg",
+      "videos": [
+        {
+          "id": "Sj1yynxA9hw",
+          "label": "AI Capabilities & Limitations: A companion course to AI Fluency & Foundations"
+        }
+      ],
+      "checks": [
+        {
+          "q": "\"So I have to check everything anyway?\" What's the answer?",
+          "options": [
+            {
+              "t": "Yes. Verification is the price of using it at all.",
+              "why": "That's as wasteful as checking nothing, and it's the belief the four properties exist to replace."
+            },
+            {
+              "t": "No. You check harder where it's weak and lighter where it's strong.",
+              "correct": true
+            },
+            {
+              "t": "Only for anything that leaves your desk.",
+              "why": "A reasonable rule of thumb that ignores which parts of the output are actually risky."
+            }
+          ]
+        },
+        {
+          "q": "Each of the four properties is a continuum. What does that mean in practice?",
+          "options": [
+            {
+              "t": "You can tune where it sits on each axis.",
+              "why": "You can't move the axis. You can decide where to check."
+            },
+            {
+              "t": "It gets better along each axis as models improve.",
+              "why": "The boundaries move, and the property doesn't stop being a trade-off."
+            },
+            {
+              "t": "The same mechanism gives you both the strength and the weakness.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "eyebrow": "Lesson 3",
+      "title": "Character is trained in, not emergent",
+      "cap": "Preface a request with a wrong assumption, \"I think this plan is bulletproof\", and watch it validate you. That's sycophancy, and once you can name it, you can see it coming.",
+      "teach": "Its personality was trained in, in two stages. First it just learned to predict the next word across a vast amount of text, a document completer with no idea of helping anyone. Then humans rated good answers, and that turned it into an assistant.\n\nThat second stage leaves fingerprints: it agrees with you too easily, it over-explains, it hedges when it doesn't need to, and, the important one, it sounds exactly as confident when it's wrong as when it's right. Once you can name those, you can see them coming.",
+      "diagram": "diagrams/10-capabilities-and-limitations/s5.svg",
+      "videos": [
+        {
+          "id": "6jRk3nC4-xI",
+          "label": "How AI gets its character"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Where does the model's helpfulness come from?",
+          "options": [
+            {
+              "t": "The system prompt Anthropic sets on every request.",
+              "why": "That steers behaviour on the day. The character was set long before."
+            },
+            {
+              "t": "It emerged once the models got large enough.",
+              "why": "Nothing emerged. It was put there, in a specific stage."
+            },
+            {
+              "t": "Fine-tuning on human preference, after a stage that just predicted text.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "What does the preference-training stage leave behind?",
+          "options": [
+            {
+              "t": "A tendency to agree with the assumption you handed it.",
+              "correct": true
+            },
+            {
+              "t": "A refusal to answer anything contentious.",
+              "why": "It answers plenty. The fingerprint is subtler and more flattering."
+            },
+            {
+              "t": "A preference for long answers over short ones.",
+              "why": "Verbosity is a style you can steer. This one changes what it tells you is true."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "eyebrow": "Lesson 4",
+      "title": "It's autocomplete at scale",
+      "cap": "The \"text your friend\" demo makes it visceral: keep tapping your phone's suggested word and you've built a tiny language model. Fluency and fabrication are the same mechanism, you can't have one without the other.",
+      "teach": "Under the hood, it's autocomplete at scale. It writes the next word based on what usually follows, then the next, then the next. The phone-keyboard game, keep tapping the suggested word and you've built a tiny version of this.\n\nHere's the part that matters: the fluency you love and the made-up facts you fear are the same mechanism. You don't get one without the other. And the made-up stuff clusters in one place, the specifics.\n\nNames, dates, numbers, citations. The vaguer the claim, the safer; the more precise, the more it earns a check.",
+      "diagram": "diagrams/10-capabilities-and-limitations/s6.svg",
+      "videos": [
+        {
+          "id": "kl0gunXTvyk",
+          "label": "How AI models use next token prediction"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Fluency and fabrication come from the same mechanism. What follows?",
+          "options": [
+            {
+              "t": "Fluent-sounding answers are more likely to be wrong.",
+              "why": "Fluency isn't a warning sign in itself. It's constant either way."
+            },
+            {
+              "t": "You can't have one without the other, so you manage it rather than remove it.",
+              "correct": true
+            },
+            {
+              "t": "Better models will eventually have the fluency without the fabrication.",
+              "why": "That treats it as a defect being fixed rather than as the mechanism working."
+            }
+          ]
+        },
+        {
+          "q": "Where does fabrication concentrate?",
+          "options": [
+            {
+              "t": "In opinions and judgement calls.",
+              "why": "Those are contestable rather than fabricated. The risk is in things that look checkable."
+            },
+            {
+              "t": "In anything outside its training data.",
+              "why": "Broadly true and too broad to act on. There's a sharper pattern."
+            },
+            {
+              "t": "In specifics: names, dates, numbers, citations.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "eyebrow": "Lesson 5",
+      "title": "It knows what it read, frozen at a cutoff",
+      "cap": "Characteristic failures: staleness, uneven coverage, inherited bias in what counts as \"normal,\" and no memory of its sources. The 1024-dimension demo shows how retrieval finds meaning, not keywords, \"car\" lands near \"my Civic needs brakes.\"",
+      "teach": "It only knows what it read during training, and that reading stopped on a fixed date. No memory of anything since, unless you give it a way to look. So the question to ask yourself isn't 'does it know this?', it's 'how common and how settled was this in what it read?' Mainstream and stable, it's strong.\n\nRecent, niche, local, or anything that changed last month, it's thin, and it won't always tell you it's thin. Web search and connected tools are how you breach that wall when you need current facts.",
+      "diagram": "diagrams/10-capabilities-and-limitations/s7.svg",
+      "videos": [
+        {
+          "id": "iSLdQXeKbHs",
+          "label": "Understanding knowledge gaps in AI models"
+        }
+      ],
+      "checks": [
+        {
+          "q": "What's the better question than \"does it know this?\"",
+          "options": [
+            {
+              "t": "How well represented was this in what it read?",
+              "correct": true
+            },
+            {
+              "t": "Can it search for this?",
+              "why": "That's about the tools around it, not about what it holds."
+            },
+            {
+              "t": "Is this after the cutoff?",
+              "why": "Worth knowing, and it only catches the recent stuff."
+            }
+          ]
+        },
+        {
+          "q": "What's the subtle trap in how it treats your field?",
+          "options": [
+            {
+              "t": "It defaults to the most recent practice it saw.",
+              "why": "It defaults to the most common one it saw, which is a different failure."
+            },
+            {
+              "t": "It assumes your field works the way an outsider would describe it.",
+              "correct": true
+            },
+            {
+              "t": "It refuses to answer on specialist topics.",
+              "why": "It answers confidently. That's the problem rather than the safeguard."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "eyebrow": "Lesson 6",
+      "title": "The middle of a long context gets lost",
+      "cap": "It's a cliff, not a gradient, it works until it doesn't, and the overflow is silent. The fix isn't more context, it's smarter: front-load, repeat what matters, start fresh. Memory, compaction and projects push the cliff out.",
+      "teach": "Everything it's paying attention to right now lives in a fixed-size workspace. Think of cramming for an exam, you remember the start and the end of the list, and the middle vanishes. AI does exactly the same.\n\nBury an instruction in the middle of a long document and there's a real chance it's quietly ignored, and you won't get a warning. So the instinct to paste in everything backfires, every extra page pushes something else into the dead zone. The fix isn't more context, it's smarter context: put what matters up front, repeat it at the end, and when a conversation gets long and muddled, start fresh.",
+      "diagram": "diagrams/10-capabilities-and-limitations/s8.svg",
+      "videos": [
+        {
+          "id": "QJjt4wF4iHM",
+          "label": "The Context Window: How working memory affects generative AI outputs"
+        }
+      ],
+      "checks": [
+        {
+          "q": "You put a key constraint in the middle of a long brief. What happens?",
+          "options": [
+            {
+              "t": "It's summarised along with the rest.",
+              "why": "Nothing summarises it. It just gets less attention."
+            },
+            {
+              "t": "It's weighted equally with everything else.",
+              "why": "Attention isn't flat. Position changes how much survives."
+            },
+            {
+              "t": "It quietly drops out. Attention weights the edges.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "How is working memory different from the other three properties?",
+          "options": [
+            {
+              "t": "It has a hard edge: past the limit, material is simply gone.",
+              "correct": true
+            },
+            {
+              "t": "It's the only one you can measure directly.",
+              "why": "Measurable, and that isn't what makes it behave differently."
+            },
+            {
+              "t": "It's the only one that improves with a better model.",
+              "why": "They all shift as models improve. This one has something the others don't."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "eyebrow": "Lesson 7",
+      "title": "It follows the letter, not the spirit",
+      "cap": "When it's followed literally but uselessly, restate the goal, saying it louder won't help. \"Shorter, so the exec sees the ask on page two\" lands right. In multi-step work, insert a checkpoint so an early slip doesn't carry to the end.",
+      "teach": "It's steerable, tell it 'three columns, under 100 words, second person' and it nails it. But it follows your words by pattern-matching, not by understanding what you're after. So 'make it shorter' gets you fewer words, which isn't what you meant, you meant 'surface the ask so a busy exec catches it'.\n\nWhen it does the letter but misses the point, don't repeat the instruction louder. State the goal: 'shorter, so the decision is obvious on page one.' And on anything multi-step or numerical, drop in a checkpoint, a small early slip compounds all the way to the end.",
+      "diagram": "diagrams/10-capabilities-and-limitations/s9.svg",
+      "videos": [
+        {
+          "id": "M_RwSRmp220",
+          "label": "How steerability affects generative AI outputs"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Steerability is strong on some instructions and weak on others. Which kind is it strong on?",
+          "options": [
+            {
+              "t": "Anything you state clearly, however abstract.",
+              "why": "Clarity helps and abstraction is exactly where it slips."
+            },
+            {
+              "t": "Short, concrete, verifiable ones: format, length, role.",
+              "correct": true
+            },
+            {
+              "t": "Rules about what it must never do.",
+              "why": "Those are the ones most likely to be followed to the letter and missed in spirit."
+            }
+          ]
+        },
+        {
+          "q": "It gets an arithmetic answer confidently wrong. What's the fix?",
+          "options": [
+            {
+              "t": "Use a larger model for anything numerical.",
+              "why": "It moves the boundary a little and leaves the mechanism unchanged."
+            },
+            {
+              "t": "Tell it to double-check its working.",
+              "why": "It'll check the same way it calculated, which is the thing that went wrong."
+            },
+            {
+              "t": "Ask it to write code to do the calculation.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "eyebrow": "Lesson 8",
+      "title": "Most failures are two properties meeting",
+      "cap": "Other pairs work the same way: confidently wrong math (offload it to code), an agreeable bad premise (invite genuine pushback). Naming the pair is Discernment applied, you evaluate better when you know what kind of wrong you're looking at.",
+      "teach": "Most real failures aren't one thing going wrong, they're two. A made-up citation is Next Token Prediction (it generates something plausible) meeting Knowledge (it didn't actually have the source). Drift in a long conversation is Working Memory (it lost the early context) meeting Steerability (so your goal faded).\n\nThe useful move: when something's off, name the two properties that collided. The fix is almost always written into the pair, verify the specifics, or re-supply the context and restate the goal.",
+      "diagram": "diagrams/10-capabilities-and-limitations/s10.svg",
+      "videos": [
+        {
+          "id": "SPkg5WRfnEE",
+          "label": "Diagnosing AI failures"
+        }
+      ],
+      "checks": [
+        {
+          "q": "Hallucinated names and dates. Which two properties met?",
+          "options": [
+            {
+              "t": "Knowledge and Steerability.",
+              "why": "Neither of those two on its own invents the detail. One of the pair has to be the generating mechanism."
+            },
+            {
+              "t": "Working Memory and Steerability.",
+              "why": "That pairing produces long-context drift rather than invented specifics."
+            },
+            {
+              "t": "Next Token Prediction and Knowledge.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "q": "What does thinking in property pairs actually buy you?",
+          "options": [
+            {
+              "t": "\"It makes things up\" becomes a named failure with a matching fix.",
+              "correct": true
+            },
+            {
+              "t": "A way to predict which tasks will fail before you try them.",
+              "why": "It's diagnostic rather than predictive. You reach for it once something looks off."
+            },
+            {
+              "t": "A vocabulary for explaining failures to colleagues.",
+              "why": "Useful, and it stops at explaining. There's something it does for you in the moment."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "eyebrow": "Lesson 9",
+      "title": "Hold a small model of the machine",
+      "cap": "That's calibrated trust, and it survives every model upgrade. This course is the machine half; the 4D Framework & Foundations course is the human half that acts on it.",
+      "teach": "Here's the whole thing as one habit. Something feels off in an answer. Instead of just distrusting it, run it through four questions.\n\nWhere did this come from, Next Token Prediction? Did it actually know this, Knowledge? Was it paying attention to the right thing, Working Memory?\n\nDid I control it well, Steerability? Locate the task, and the fix follows: verify, re-supply the context, or add a checkpoint. That's calibrated trust.\n\nAnd it survives every upgrade, the lines keep moving outward as models get better, but the four questions stay exactly the same.",
+      "diagram": "diagrams/10-capabilities-and-limitations/s11.svg",
+      "videos": [
+        {
+          "id": "F7ciHDKAlCA",
+          "label": "Applying the 4D framework to get better AI outputs"
+        }
+      ],
+      "checks": [
+        {
+          "q": "What does fluent use actually consist of?",
+          "options": [
+            {
+              "t": "Verifying every output against a source.",
+              "why": "That's uniform effort again, which the four properties exist to replace with aimed effort."
+            },
+            {
+              "t": "Memorising the failure modes so you can avoid them.",
+              "why": "There are too many to memorise, and they recombine. Something smaller carries further."
+            },
+            {
+              "t": "Recognising which kind of wrong you're looking at, then reaching for the matching response.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
