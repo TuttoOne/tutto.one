@@ -170,5 +170,61 @@ ${button(signInUrl, "Open your dashboard")}
   },
 };
 
-export const MAILINGS: Mailing[] = [aiFiles, afterSession1];
+// To the whole cohort after session 3: the handout, this week's task and what
+// to bring. Each person's own list for session 4 goes separately, from Daniel.
+const afterSession3: Mailing = {
+  key: "after-session-3",
+  label: "After session 3 (handout)",
+  build: ({ firstName, signInUrl, site }) => {
+    const subject = "After session 3: your handout and what to bring next time";
+    const paras = {
+      thanks: "Thank you for driving today. Seeing what you tried, including the parts that only half worked, is the most useful thing for all of us.",
+      handout: "I've put what we covered on one page: how the hour ran, the three show-and-tell questions and how a scorecard decides whether an AI draft is good enough to send.",
+      task: "This week, finish your scorecard and score one of your own recent pieces of work against it.",
+      bring: "Next session we teach it to write like you, so bring samples of your own work, redacted or dummy. I'll send you your own list separately.",
+      help: "Stuck on setup? Reply to this email and we'll book a short one-to-one before the next session.",
+    };
+    const link = (path: string, label: string) =>
+      `<a href="${escapeHtml(site + path)}" style="font-size:15px;font-weight:700;color:${AMBER};text-decoration:none;">${escapeHtml(label)} &rarr;</a>`;
+
+    const body = `
+<tr><td>
+<p style="${P}">Hi ${escapeHtml(firstName)},</p>
+<p style="${P}">${escapeHtml(paras.thanks)}</p>
+<p style="${P}">${escapeHtml(paras.handout)}</p>
+<p style="${P}">${link("/session-3", "Open the session 3 handout")}</p>
+<p style="${P}">${escapeHtml(paras.task)}</p>
+<p style="${P}">${escapeHtml(paras.bring)}</p>
+<p style="${P}">The handout is also on your dashboard, under session 3:</p>
+${button(signInUrl, "Open your dashboard")}
+<p style="margin:0 0 16px;font-size:13px;color:${MUTED};">The button signs you in. It works once and lasts 14 days. After that, go to tutto.one/learn and we'll email you a new one.</p>
+<p style="${P}">${escapeHtml(paras.help)}</p>
+<p style="${P}">Daniel</p>
+</td></tr>`;
+
+    const text = [
+      `Hi ${firstName},`,
+      "",
+      paras.thanks,
+      "",
+      paras.handout,
+      `Session 3 handout: ${site}/session-3`,
+      "",
+      paras.task,
+      "",
+      paras.bring,
+      "",
+      `The handout is also on your dashboard, under session 3: ${signInUrl}`,
+      "(The link signs you in. It works once and lasts 14 days. After that, go to tutto.one/learn and we'll email you a new one.)",
+      "",
+      paras.help,
+      "",
+      "Daniel",
+    ].join("\n");
+
+    return { subject, html: shell(subject, body), text };
+  },
+};
+
+export const MAILINGS: Mailing[] = [aiFiles, afterSession1, afterSession3];
 export const getMailing = (key: string) => MAILINGS.find((m) => m.key === key);

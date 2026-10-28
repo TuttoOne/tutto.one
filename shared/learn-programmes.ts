@@ -69,6 +69,7 @@ const M = {
   charterToolMe: { label: "AI charter tool (just me)", href: "/ai-charter?for=me", claude: "/ai-charter/praxis-ai-charter.md" },
   scorecardTool: { label: "Agent scorecard tool", href: "/agent-scorecard", claude: "/agent-scorecard/praxis-agent-scorecard.md" },
   handoverTool: { label: "Hand-over check", href: "/handover-list", claude: "/handover-list/praxis-handover-check.md" },
+  session3: { label: "Session 3 handout: is the work good?", href: "/session-3" },
 } satisfies Record<string, Material>;
 
 const AI_FLUENT_TEAM: Programme = {
@@ -100,7 +101,7 @@ const AI_FLUENT_TEAM: Programme = {
       what: "Which jobs AI should do, which it shouldn't and what each one needs to run without you: the inputs, the rules, the check at the end.",
       leaveWith: "Your hand-over list",
       practice: "Run one more of your jobs through the hand-over check.",
-      materials: [M.handoverTool, M.claude101],
+      materials: [M.session3, M.handoverTool, M.claude101],
     },
     {
       number: 4,
@@ -176,7 +177,7 @@ const BACKGROUND_ITALIA: Programme = {
       what: "Claude, ChatGPT, Mistral or a model that runs on your own machine: which fits your policy and your clients, and which subscription makes sense for the team. Then which jobs AI should do, which it shouldn't and what each one needs.",
       leaveWith: "A tool and subscription recommendation, and your hand-over list",
       practice: "Run one more of your jobs through the hand-over check.",
-      materials: [M.handoverTool, M.claude101],
+      materials: [M.session3, M.handoverTool, M.claude101],
     },
     {
       number: 4,

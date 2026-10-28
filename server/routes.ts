@@ -313,6 +313,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "vscode-setup", "index.html"));
   });
 
+  // Session 3 handout (the show and tell, and how a scorecard decides if a draft is good):
+  // same arrangement, link only, not indexed.
+  app.get(["/session-3", "/session-3/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "session-3", "index.html"));
+  });
+
   // Pocket Praxis, the course decks as a phone game: link only, not indexed. Served from
   // the folder with a trailing slash, because its scripts, course files and offline
   // service worker all load relative to it.
