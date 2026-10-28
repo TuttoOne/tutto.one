@@ -72,6 +72,17 @@ Both agents are free extensions.
 
 Keep the agents in the right side bar. Files stay on the left and you can watch both at once.
 
+First, trust the folder that holds their work. VS Code opens any folder it doesn't know in Restricted Mode, and in Restricted Mode extensions are switched off, so Claude and Mistral won't show up. Trust works on the parent folder: trust the folder that holds all their working folders and every folder inside it is trusted too, so the agents are there each time they open a new window.
+
+1. If a banner across the top says **Restricted Mode is intended for safe code browsing**, click **Manage** in it.
+2. The Workspace Trust page opens. **Trust** switches everything on for the folder that's open.
+3. To cover every working folder, scroll down to **Trusted Folders & Workspaces**, click **Add Folder** and pick the parent folder, the one that holds all their working folders.
+4. The banner goes and the Claude Code and Mistral Vibe tabs appear in the right side bar.
+
+Tell them to pick the parent with care: everything under a trusted folder can run tasks and extensions without asking. Trust the folder they keep their own work in, such as `Desktop` if the practice folder is `Desktop/New`. Not `Downloads` or the whole home folder, because files from other people land there.
+
+Then open the panel:
+
 1. Click the right side bar button (the far-right layout button), or ⌥⌘B / Ctrl+Alt+B.
 2. The panel has one tab per agent. Click **Claude Code** or **Mistral Vibe** to switch between them. The prompt box is at the bottom.
 3. If an agent opens on the left or as a tab in the middle, drag its tab into the right side bar. VS Code remembers the position next time.
@@ -131,6 +142,7 @@ Make sure they hear this: in the guide's screenshots both agents run in Auto. Th
 ## If something is missing
 
 - **No layout buttons:** right-click the title bar and tick *Layout Controls*.
+- **Agents missing and a Restricted Mode banner at the top:** the folder isn't trusted. Click *Manage* and trust its parent folder.
 - **Extension installed but not showing:** search every command for *Developer: Reload Window*.
 - **Claude says "Not logged in":** reload the window and the sign-in screen reopens.
 - **Mistral asks for a key every time:** rerun setup from the Mistral Vibe panel and paste the key once.
