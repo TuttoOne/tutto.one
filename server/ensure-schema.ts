@@ -18,6 +18,16 @@ export async function ensureSchema(): Promise<void> {
   await db.execute(
     sql`ALTER TABLE contact_submissions ADD COLUMN IF NOT EXISTS trainer_code text`,
   );
+  await db.execute(sql`CREATE TABLE IF NOT EXISTS admin_passkeys (
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    credential_id text NOT NULL UNIQUE,
+    public_key text NOT NULL,
+    counter integer NOT NULL DEFAULT 0,
+    transports text,
+    name text NOT NULL,
+    created_at timestamp NOT NULL DEFAULT now(),
+    last_used_at timestamp
+  )`);
 }
 
 /**

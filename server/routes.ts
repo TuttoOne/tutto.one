@@ -5,6 +5,7 @@ import { storage } from "./storage";
 import { insertContactSubmissionSchema, insertEmailLeadSchema } from "@shared/schema";
 import { z } from "zod";
 import { registerAdminRoutes, requireAdmin } from "./admin-routes";
+import { registerAdminPasskeyRoutes } from "./admin-passkeys";
 import { enquiryMessageHtml, escapeHtml } from "./email/enquiry-message";
 import { getResend } from "./email/resend";
 import { registerLearnRoutes } from "./learn-routes";
@@ -349,6 +350,7 @@ export async function registerRoutes(
 
   // Register admin routes
   registerAdminRoutes(app);
+  registerAdminPasskeyRoutes(app);
 
   // Student sign-in, dashboard and the admin side of cohorts (/learn)
   registerLearnRoutes(app);

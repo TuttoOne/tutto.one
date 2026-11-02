@@ -18,10 +18,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Plus, Pencil, Trash2, ArrowLeft, LogOut, FileText, Layout, Wrench, ExternalLink, GraduationCap, ShieldCheck, CalendarDays } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, LogOut, FileText, Layout, Wrench, ExternalLink, GraduationCap, ShieldCheck, CalendarDays, Fingerprint } from "lucide-react";
 import { StudentsSection } from "@/components/admin/StudentsSection";
 import { PrivacySection } from "@/components/admin/PrivacySection";
 import { EventsSection } from "@/components/admin/EventsSection";
+import { PasskeysSection } from "@/components/admin/PasskeysSection";
 import type { BlogPost } from "@shared/schema";
 import { SELECTABLE_PRICES, type PriceKey } from "@/lib/pricing";
 import { DEFAULT_SERVICES, type ServiceItem } from "@/lib/services-content";
@@ -868,6 +869,10 @@ export default function AdminDashboard() {
               <ShieldCheck className="w-4 h-4 mr-2" />
               Data
             </TabsTrigger>
+            <TabsTrigger data-testid="tab-passkeys" value="passkeys">
+              <Fingerprint className="w-4 h-4 mr-2" />
+              Passkeys
+            </TabsTrigger>
             <TabsTrigger data-testid="tab-tools" value="tools">
               <Wrench className="w-4 h-4 mr-2" />
               Tools
@@ -892,6 +897,10 @@ export default function AdminDashboard() {
 
           <TabsContent value="data">
             <PrivacySection />
+          </TabsContent>
+
+          <TabsContent value="passkeys">
+            <PasskeysSection />
           </TabsContent>
 
           <TabsContent value="tools">

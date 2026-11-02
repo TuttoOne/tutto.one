@@ -90,6 +90,24 @@ export const adminConfig = pgTable("admin_config", {
 
 export type AdminConfig = typeof adminConfig.$inferSelect;
 
+/**
+ * Passkeys for /admin. A passkey signs in on its own (the device checks
+ * Face ID, Touch ID or a PIN), so it stands in for password + authenticator
+ * code. Added from the dashboard once signed in; password + code still works.
+ */
+export const adminPasskeys = pgTable("admin_passkeys", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  credentialId: text("credential_id").notNull().unique(),
+  publicKey: text("public_key").notNull(),
+  counter: integer("counter").notNull().default(0),
+  transports: text("transports"),
+  name: text("name").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  lastUsedAt: timestamp("last_used_at"),
+});
+
+export type AdminPasskey = typeof adminPasskeys.$inferSelect;
+
 export const siteContent = pgTable("site_content", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   key: text("key").notNull().unique(),

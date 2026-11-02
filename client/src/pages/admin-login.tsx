@@ -4,7 +4,8 @@ import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Lock, KeyRound, ShieldCheck } from "lucide-react";
+import { Lock, KeyRound, ShieldCheck, Fingerprint } from "lucide-react";
+import { startAuthentication, browserSupportsWebAuthn } from "@simplewebauthn/browser";
 
 type Step = "password" | "totp";
 
@@ -47,6 +48,21 @@ export default function AdminLogin() {
     },
   });
 
+  const passkeyMutation = useMutation({
+    mutationFn: async () => {
+      const { options, challengeToken } = await apiPost("/api/admin/login/passkey/options", {});
+      const response = await startAuthentication({ optionsJSON: options });
+      return apiPost("/api/admin/login/passkey/verify", { response, challengeToken });
+    },
+    onSuccess: () => navigate("/admin"),
+    onError: (err: Error) => {
+      // Closing the browser's passkey prompt isn't an error worth showing.
+      if (err.name === "NotAllowedError" || err.name === "AbortError") return;
+      setError(err.message);
+    },
+  });
+  const passkeysSupported = typeof window !== "undefined" && browserSupportsWebAuthn();
+
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -71,6 +87,26 @@ export default function AdminLogin() {
         </div>
 
         <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm">
+          {step === "password" && passkeysSupported && (
+            <div className="mb-6">
+              <Button
+                data-testid="button-passkey"
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => { setError(""); passkeyMutation.mutate(); }}
+                disabled={passkeyMutation.isPending}
+              >
+                <Fingerprint className="w-4 h-4 mr-2" />
+                {passkeyMutation.isPending ? "Waiting for your passkey..." : "Sign in with a passkey"}
+              </Button>
+              <div className="flex items-center gap-3 mt-6">
+                <div className="h-px flex-1 bg-border" />
+                <span className="text-xs text-muted-foreground">or use your password</span>
+                <div className="h-px flex-1 bg-border" />
+              </div>
+            </div>
+          )}
           {step === "password" ? (
             <form onSubmit={handlePasswordSubmit} className="space-y-4">
               <div className="flex items-center gap-2 mb-4">
@@ -88,7 +124,7 @@ export default function AdminLogin() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter admin password"
                   required
-                  autoFocus
+                  autoComplete="current-password"
                 />
               </div>
 

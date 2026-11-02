@@ -69,6 +69,29 @@ export function requireAdmin(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+/** Signs the admin in: the 24-hour session cookie requireAdmin checks. */
+export function issueAdminSession(res: Response) {
+  const adminToken = jwt.sign({ admin: true }, JWT_SECRET, { expiresIn: JWT_EXPIRY });
+  res.cookie(COOKIE_NAME, adminToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+}
+
+/** Short-lived signed tokens for multi-step logins (TOTP step, passkey challenges). */
+export function signStepToken(payload: Record<string, unknown>, expiresIn: "5m" = "5m") {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn });
+}
+export function verifyStepToken<T>(token: string): T | null {
+  try {
+    return jwt.verify(token, JWT_SECRET) as T;
+  } catch {
+    return null;
+  }
+}
+
 export function registerAdminRoutes(app: Express) {
   // Setup status
   app.get("/api/admin/setup-status", async (req, res) => {
@@ -214,15 +237,7 @@ export function registerAdminRoutes(app: Express) {
         return res.status(401).json({ error: "Invalid authenticator code" });
       }
 
-      const adminToken = jwt.sign({ admin: true }, JWT_SECRET, { expiresIn: JWT_EXPIRY });
-
-      res.cookie(COOKIE_NAME, adminToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-
+      issueAdminSession(res);
       res.json({ success: true });
     } catch (error) {
       if (error instanceof z.ZodError) {
