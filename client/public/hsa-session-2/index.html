@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="HSA session 2: turning the Stock Receiving guides into clean text and tagging every part, with three prompts and this week's task.">
+<title>Getting your content ready | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  /* HSA session 2 handout in the Praxis house style (same tokens as /session-3).
+     Layout: one document card; the 3-step flow, the tag set beside a worked example, prompts, then checks and homework. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #4f6274; --slate-soft: #e8edf2;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8; --fail: #b4322a; --fail-soft: #f8e3e1;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a;
+      --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a;
+    --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  p { margin: 0; }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; color: var(--ink); text-decoration: none; }
+  .top a.back { font-size: 14px; color: var(--amber); text-underline-offset: 0.15em; }
+  .brand span { color: var(--amber); }
+  .top .client { font-size: 14px; color: var(--muted); }
+
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 58ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 44px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { font: 700 17px/1.25 var(--display); margin: 0; text-wrap: balance; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 64ch; }
+
+  /* Flow */
+  .flow { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr); gap: 10px; align-items: stretch; }
+  .step { min-width: 0; background: var(--panel); border-radius: 8px; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .step.goal { background: var(--amber-soft); box-shadow: inset 0 0 0 2px var(--amber); }
+  .step .n { font: 700 12px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber); }
+  .step p { font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+  .arrow { align-self: center; color: var(--amber); display: flex; justify-content: center; }
+  .arrow svg { display: block; }
+
+  /* Tags and example */
+  .two { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); gap: 28px; align-items: start; }
+  .key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+  .key span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; }
+  .key .k-where::before { background: var(--slate); }
+  .key .k-what::before { background: var(--amber); }
+  .key .k-size::before { background: var(--pass); }
+  .tags { display: grid; gap: 10px; }
+  .tag-row { display: grid; grid-template-columns: 8.5em minmax(0,1fr); gap: 12px; align-items: baseline; font-size: 14.5px; color: var(--ink-2); }
+  .chip { font: 700 11px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 4px; white-space: nowrap; justify-self: start; }
+  .where { background: var(--slate-soft); color: var(--slate); }
+  .what { background: var(--amber-soft); color: var(--amber-ink); }
+  .size { background: var(--pass-soft); color: var(--pass); }
+  .note { font-size: 14px; color: var(--muted); margin-top: 14px; }
+
+  .card { min-width: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .card .head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 12px 16px; background: var(--panel); border-bottom: 1px solid var(--line); font: 700 15px/1.3 var(--display); }
+  .card .head small { font: 400 13px/1.4 var(--body); color: var(--muted); }
+  .row { display: grid; grid-template-columns: 7.5em minmax(0,1fr); gap: 10px; padding: 9px 16px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .row b { font: 700 11px/1.9 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .row.missing { background: var(--fail-soft); }
+  .row.missing span { color: var(--fail); font-weight: 600; }
+  .card .body { padding: 12px 16px; font: italic 400 15px/1.5 var(--serif); color: var(--ink-2); }
+  .example-note { font-size: 13.5px; color: var(--muted); margin-top: 10px; }
+
+  /* Prompts */
+  .prompts { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .prompt { background: var(--panel); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
+  .prompt .txt { min-width: 0; flex: 1; }
+  .prompt .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .prompt code { display: block; font: 500 15px/1.55 var(--mono); color: var(--ink); margin-top: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .copy { flex: none; font: 700 12px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber-ink); background: var(--paper); border: 1.5px solid var(--amber); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+  .copy:hover { background: var(--amber-soft); }
+  .copy:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  /* Bottom */
+  .bottom { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 28px; align-items: start; }
+  .rules { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: var(--ink-2); }
+  .rules li { display: flex; gap: 10px; align-items: flex-start; }
+  .rules li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); margin-top: 8px; flex: none; }
+  .homework { background: var(--amber-soft); border-radius: 10px; padding: 18px 20px; margin-top: 10px; }
+  .homework p { font-size: 14.5px; color: var(--ink); }
+  .pairs { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0; }
+  .pair { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+  .who { font: 700 13px/1 var(--display); background: var(--paper); color: var(--ink); padding: 7px 10px; border-radius: 6px; }
+  .homework .small { font-size: 13.5px; color: var(--ink-2); }
+
+  .foot { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  .foot b { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 860px) {
+    .two, .bottom { grid-template-columns: minmax(0,1fr); }
+  }
+  @media (max-width: 680px) {
+    .doc { padding: 28px 20px; }
+    .flow { grid-template-columns: minmax(0,1fr); }
+    .arrow { transform: rotate(90deg); }
+    .tag-row, .row { grid-template-columns: minmax(0,1fr); gap: 4px; }
+    .prompt { flex-direction: column; }
+  }
+  @media print {
+    body { background: #fff; }
+    .page { padding: 0; }
+    .doc { border: 0; padding: 0; }
+    .copy { display: none; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Health Science Academy · Session 2 of 6</p>
+  <h1>Getting your content ready</h1>
+  <p class="lede">Before the AI can help with the remap, it needs to know what each part of a guide is. Today we turn the Stock Receiving guides into clean text and tag every part, so in session 3 it can match old units to new modules and you can check each match.</p>
+  <div class="meta">
+    <span><b>When</b> Mon 2 Nov 2026, 9:00 to 10:30 SAST</span>
+    <span><b>Working example</b> Stock Receiving</span>
+  </div>
+
+  <section>
+    <h2>Three steps</h2>
+    <p class="sub">From the guide as it is now to parts the AI can work with.</p>
+    <ol class="flow">
+      <li class="step">
+        <span class="n">Step 1</span>
+        <h3>Word guide</h3>
+        <p>The resource guide, learner guide and memo as they are now. Headings, tables, crosswords and all.</p>
+      </li>
+      <li class="arrow" aria-hidden="true"><svg width="28" height="16" viewBox="0 0 28 16"><path d="M1 8h22M17 2l7 6-7 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+      <li class="step">
+        <span class="n">Step 2</span>
+        <h3>Clean text</h3>
+        <p>Same words, no layout. One heading per unit, tables kept as plain lists, page furniture taken out.</p>
+      </li>
+      <li class="arrow" aria-hidden="true"><svg width="28" height="16" viewBox="0 0 28 16"><path d="M1 8h22M17 2l7 6-7 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+      <li class="step goal">
+        <span class="n">Step 3</span>
+        <h3>Tagged parts</h3>
+        <p>Every part carries a label saying where it sits in the qualification, what it teaches and how much it's worth.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="two">
+    <div>
+      <h2>The six tags</h2>
+      <div class="key"><span class="k-where">Where it sits</span><span class="k-what">What it teaches</span><span class="k-size">What it's worth</span></div>
+      <div class="tags">
+        <div class="tag-row"><span class="chip where">module</span><span>Old and new code, e.g. old KM-02, new KM-02</span></div>
+        <div class="tag-row"><span class="chip where">unit</span><span>The topic or unit inside the module</span></div>
+        <div class="tag-row"><span class="chip what">outcome</span><span>What the learner can do after it, in the curriculum's words</span></div>
+        <div class="tag-row"><span class="chip what">assessment</span><span>The criteria it's assessed against, and how (MCQ, activity, workplace)</span></div>
+        <div class="tag-row"><span class="chip size">credits</span><span>From the curriculum document</span></div>
+        <div class="tag-row"><span class="chip size">hours</span><span>Notional hours. 1 credit is 10 hours</span></div>
+      </div>
+      <p class="note">We agree the final list together today. If something in your guides doesn't fit a tag, write it down: that's what we need to see.</p>
+    </div>
+
+    <div>
+      <h2>What a tagged part looks like</h2>
+      <p class="sub" style="margin-bottom:14px">One label per part, then the guide's own words.</p>
+      <div class="card" role="figure" aria-label="Example of a tagged part">
+        <div class="head"><span>Stock Receiving</span><small>part 3 of 12</small></div>
+        <div class="row"><b>module</b><span>old KM-02 (Basic) &gt; new KM-02</span></div>
+        <div class="row"><b>unit</b><span>Receiving stock from a supplier</span></div>
+        <div class="row"><b>outcome</b><span>Check a delivery against the order and invoice</span></div>
+        <div class="row missing"><b>assessment</b><span>MISSING: not in this guide</span></div>
+        <div class="row"><b>credits</b><span>module 8 (was 4)</span></div>
+        <div class="row"><b>hours</b><span>module 80 (was 40)</span></div>
+        <div class="row"><b>source</b><span>Resource guide, p. 14 to 16</span></div>
+        <div class="body">The text of the section follows here, exactly as it is in the guide.</div>
+      </div>
+      <p class="example-note">An example to show the shape. The unit, outcome and pages are made up. Your own guide fills them in. MISSING is good: it means the AI didn't guess.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Three prompts for today</h2>
+    <p class="sub">Copy them in order. Swap [X] for the section you're on.</p>
+    <ol class="prompts">
+      <li class="prompt">
+        <div class="txt"><span class="label">1 · Summarise and check</span><code id="p1">Summarise section [X] of the Stock Receiving resource guide in about 150 words. After each point, quote the sentence from the guide it comes from.</code></div>
+        <button class="copy" type="button" data-target="p1">Copy</button>
+      </li>
+      <li class="prompt">
+        <div class="txt"><span class="label">2 · Tag the guide</span><code id="p2">Split this guide into its units. Give each part these tags: module, unit, outcome, assessment, credits, hours, source page. Use only what is in the guide and the curriculum. If a tag isn't there, write MISSING.</code></div>
+        <button class="copy" type="button" data-target="p2">Copy</button>
+      </li>
+      <li class="prompt">
+        <div class="txt"><span class="label">3 · Check the tags</span><code id="p3">For every tag you filled in, show me the exact sentence in the guide or curriculum it came from, with the page number. Mark any tag you can't back up.</code></div>
+        <button class="copy" type="button" data-target="p3">Copy</button>
+      </li>
+    </ol>
+  </section>
+
+  <section class="bottom">
+    <div>
+      <h2>Before you trust it</h2>
+      <ul class="rules">
+        <li>Open the page it quotes and read the line yourself.</li>
+        <li>Check credits and hours against the curriculum, every time.</li>
+        <li>Keep learner names, ID numbers and marks out of it.</li>
+        <li>Mark anything the AI drafted as AI-assisted. You stay responsible for it.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Before Thursday 5 Nov</h2>
+      <div class="homework">
+        <p>In your pairs, tag one more unit of Stock Receiving with the template and bring anything that didn't fit.</p>
+        <div class="pairs">
+          <div class="pair"><span class="who">Laetitia</span>+<span class="who">Christine</span></div>
+          <div class="pair"><span class="who">Elsa</span>+<span class="who">Alta</span></div>
+        </div>
+        <p class="small">Stuck on the setup? Email Daniel and we'll find 15 minutes.</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot"><b>Next session, Thu 5 Nov:</b> remapping part 1. We load the old and new curriculum and have the AI draft the crosswalk from your tagged parts. Tutto.One, daniel@tutto.one</p>
+</main>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.target);
+    var text = el.textContent;
+    function done(ok) { btn.textContent = ok ? 'Copied' : 'Select'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); }
+    function select() { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done(false); }
+    try { navigator.clipboard.writeText(text).then(function () { done(true); }, select); } catch (e) { select(); }
+  });
+});
+</script>
+</body>
+</html>

@@ -70,6 +70,7 @@ const M = {
   scorecardTool: { label: "Agent scorecard tool", href: "/agent-scorecard", claude: "/agent-scorecard/praxis-agent-scorecard.md" },
   handoverTool: { label: "Hand-over check", href: "/handover-list", claude: "/handover-list/praxis-handover-check.md" },
   session3: { label: "Session 3 handout: is the work good?", href: "/session-3" },
+  hsaSession2: { label: "Session 2 handout: getting your content ready", href: "/hsa-session-2" },
 } satisfies Record<string, Material>;
 
 const AI_FLUENT_TEAM: Programme = {
@@ -303,7 +304,7 @@ const HSA_CONTENT_TEAM: Programme = {
       what: "Turning the Word guides into clean text the AI can work with, and tagging each part by module, unit, outcome, assessment criteria, credits and notional hours. We build the tagging scheme together on Stock Receiving.",
       leaveWith: "A tagging template and a tagged pilot module",
       practice: "Tag one more unit with the template and bring anything that didn't fit.",
-      materials: [M.claude101],
+      materials: [M.hsaSession2, M.claude101],
     },
     {
       number: 3,
