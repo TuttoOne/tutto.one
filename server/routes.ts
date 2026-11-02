@@ -313,6 +313,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "vscode-setup", "index.html"));
   });
 
+  // Session 2 handout (Define good: Claude in VS Code, the brand file, PDF, Excel, Word and a chart):
+  // same arrangement, link only, not indexed.
+  app.get(["/session-2", "/session-2/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "session-2", "index.html"));
+  });
+
   // Session 3 handout (the show and tell, and how a scorecard decides if a draft is good):
   // same arrangement, link only, not indexed.
   app.get(["/session-3", "/session-3/"], (_req, res) => {

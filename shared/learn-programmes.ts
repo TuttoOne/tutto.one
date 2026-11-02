@@ -69,6 +69,7 @@ const M = {
   charterToolMe: { label: "AI charter tool (just me)", href: "/ai-charter?for=me", claude: "/ai-charter/praxis-ai-charter.md" },
   scorecardTool: { label: "Agent scorecard tool", href: "/agent-scorecard", claude: "/agent-scorecard/praxis-agent-scorecard.md" },
   handoverTool: { label: "Hand-over check", href: "/handover-list", claude: "/handover-list/praxis-handover-check.md" },
+  session2: { label: "Session 2 handout: what good looks like", href: "/session-2" },
   session3: { label: "Session 3 handout: is the work good?", href: "/session-3" },
   hsaSession2: { label: "Session 2 handout: getting your content ready", href: "/hsa-session-2" },
 } satisfies Record<string, Material>;
@@ -93,7 +94,7 @@ const AI_FLUENT_TEAM: Programme = {
       what: "Pick the jobs that repeat. For each one, write down what good output looks like and how you'd score it. These are your evals: the standard every piece of AI work gets judged against.",
       leaveWith: "A KPI Scorecard per role",
       practice: "Score one piece of your own work against the scorecard and note where it falls short.",
-      materials: [M.scorecardTool],
+      materials: [M.session2, M.scorecardTool],
     },
     {
       number: 3,
@@ -169,7 +170,7 @@ const BACKGROUND_ITALIA: Programme = {
       what: "Pick the jobs that repeat, starting with the client reports that follow the same standard every time. For each one, write down what good looks like and how you'd score it: complete, correct data, no invented facts, no typos, sounds like you.",
       leaveWith: "A scorecard for each recurring job",
       practice: "Score one of your own recent reports against the scorecard and note where it falls short.",
-      materials: [M.scorecardTool],
+      materials: [M.session2, M.scorecardTool],
     },
     {
       number: 3,
@@ -250,7 +251,7 @@ const SOLO_FAST_TRACK: Programme = {
       what: "We build the tool that collects your figures as the year goes on, so the year-end return is mostly done when it arrives. The UK tax rules we write down for it become standing instructions your app will use too. Then we start on the business idea: who it's for, what it does for them and what a good answer looks like.",
       leaveWith: "A tax-year tool, your first skill file and a one-page brief for the app",
       practice: "Write down three people the app is for and the one question each of them would ask it.",
-      materials: [M.skillFile, M.scorecardTool, M.fluency],
+      materials: [M.session2, M.skillFile, M.scorecardTool, M.fluency],
     },
     {
       number: 3,
@@ -304,7 +305,7 @@ const HSA_CONTENT_TEAM: Programme = {
       what: "Turning the Word guides into clean text the AI can work with, and tagging each part by module, unit, outcome, assessment criteria, credits and notional hours. We build the tagging scheme together on Stock Receiving.",
       leaveWith: "A tagging template and a tagged pilot module",
       practice: "Tag one more unit with the template and bring anything that didn't fit.",
-      materials: [M.hsaSession2, M.claude101],
+      materials: [M.hsaSession2, M.session2, M.claude101],
     },
     {
       number: 3,

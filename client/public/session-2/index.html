@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Praxis session 2: what good AI work looks like in VS Code. Point Claude at the right file, give it your brand once and check the PDFs, spreadsheets, Word documents and charts it makes against a scorecard.">
+<title>Define good | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+  /* Session 2 handout (Define good), the generic module page. Same Praxis-house column as /session-3.
+     Layout: agenda cards, then a drawn VS Code window, the brand file, three file types, a before/after chart, homework.
+     The example firm Fenwick & Rowe is made up; its colours live in the --fr tokens and stay the same in both themes,
+     because they are a picture of a printed document. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #5b6b7c; --slate-soft: #e8edf2; --on-amber: #ffffff;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8; --fail: #b4322a; --fail-soft: #f8e3e1;
+    /* Fenwick & Rowe, the example brand */
+    --fr-green: #1f4d45; --fr-brass: #b8862f; --fr-paper: #f6f3ec; --fr-ink: #1c2321; --fr-grey: #b9bfbb; --fr-white: #ffffff;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --fr-head: "Fraunces", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a; --on-amber: #1a1206;
+      --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a; --on-amber: #1a1206;
+    --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  img { max-width: 100%; }
+  .page { max-width: 1020px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; color: var(--ink); text-decoration: none; }
+  .brand span { color: var(--amber); }
+  .top a.back { font-size: 14px; color: var(--amber); text-underline-offset: 0.15em; }
+  a { color: var(--amber-ink); text-underline-offset: 0.15em; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 60ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 48px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { text-wrap: balance; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 66ch; }
+  .note { font-size: 13.5px; color: var(--muted); margin: 10px 0 0; }
+
+  /* Sketch icons, same drawings as /learn */
+  .ico { width: 64px; height: 64px; flex: none; color: var(--ink); }
+  .ico .blob { fill: var(--amber-soft); }
+  .ico.build .blob { fill: var(--slate-soft); }
+  .ico .s { fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+  .ico .a { fill: none; stroke: var(--amber); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Agenda */
+  .agenda { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .slot { min-width: 0; background: var(--panel); border-radius: 8px; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .slot.big { background: var(--amber-soft); box-shadow: inset 0 0 0 2px var(--amber); }
+  .slot.big .ico .blob { fill: var(--paper); }
+  .slot .when { font: 700 12px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber); font-variant-numeric: tabular-nums; }
+  .slot h3 { font: 700 17px/1.25 var(--display); margin: 0; }
+  .slot p { font-size: 14px; line-height: 1.5; color: var(--ink-2); margin: 0; }
+
+  /* Real VS Code screenshots (paths removed), and the CLAUDE.md rules beside them */
+  .shot { margin: 0; min-width: 0; }
+  .shot img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); background: var(--fr-white); }
+  .shot figcaption { font-size: 14px; color: var(--ink-2); margin-top: 8px; max-width: 70ch; }
+  .shot figcaption b { color: var(--ink); font-weight: 600; }
+  .shotrow { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 20px; margin-top: 20px; align-items: start; }
+  .shot.tall img { max-height: 560px; width: auto; max-width: 100%; }
+  .rulesfile { min-width: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .rulesfile .fname { font: 600 13px/1.3 var(--mono); padding: 10px 14px; background: var(--panel); border-bottom: 1px solid var(--line); color: var(--ink); }
+  .rulesfile pre { margin: 0; padding: 14px 16px; font: 500 13px/1.75 var(--mono); color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+  .rulesfile pre .k { color: var(--amber-ink); font-weight: 700; }
+  .rulesfile pre .s { color: var(--slate); }
+  .rulesfile p { margin: 0; padding: 0 16px 14px; font-size: 13.5px; color: var(--ink-2); }
+
+  .ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 16px 0 0; }
+  .way { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .way b { display: block; font: 700 16px/1.3 var(--display); margin-bottom: 4px; }
+  .way p { margin: 0; font-size: 14px; color: var(--ink-2); }
+  kbd { font: 600 12px/1 var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 2px 6px; background: var(--panel); color: var(--ink); white-space: nowrap; }
+  code.inl { font: 500 13px/1.4 var(--mono); background: var(--panel); border-radius: 4px; padding: 1px 5px; color: var(--ink); }
+
+  /* Brand file */
+  .brandgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .card { min-width: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .card > h3 { margin: 0; padding: 12px 16px; font: 700 15px/1.3 var(--display); background: var(--panel); border-bottom: 1px solid var(--line); }
+  .card > h3 small { display: block; font: 400 13px/1.4 var(--body); color: var(--muted); }
+  .brow { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--line); font-size: 14px; align-items: start; }
+  .brow:last-child { border-bottom: 0; }
+  .brow > b { font: 700 12px/1.6 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .sw { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sw span { display: inline-flex; align-items: center; gap: 6px; font: 500 12.5px/1 var(--mono); color: var(--ink-2); }
+  .sw i { width: 18px; height: 18px; border-radius: 4px; display: inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+
+  /* The branded element: a report header Claude made from BRAND.md */
+  .fr { background: var(--fr-paper); color: var(--fr-ink); border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+  .fr-top { background: var(--fr-green); color: var(--fr-white); padding: 16px 20px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .fr-mark { font: 600 20px/1 var(--fr-head); letter-spacing: -.01em; }
+  .fr-mark em { font-style: normal; color: var(--fr-brass); }
+  .fr-top small { font: 500 12px/1.2 var(--body); opacity: .85; }
+  .fr-in { padding: 18px 20px 20px; }
+  .fr-in h4 { font: 600 19px/1.25 var(--fr-head); margin: 0 0 4px; color: var(--fr-green); }
+  .fr-in p { font-size: 13.5px; margin: 0 0 14px; color: var(--fr-ink); }
+  .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .kpi { min-width: 0; background: var(--fr-white); border-top: 3px solid var(--fr-brass); padding: 10px 12px; }
+  .kpi span { display: block; font: 500 11px/1.3 var(--body); text-transform: uppercase; letter-spacing: .06em; color: #5d6662; }
+  .kpi b { display: block; font: 600 22px/1.2 var(--fr-head); color: var(--fr-green); font-variant-numeric: tabular-nums; }
+  .kpi small { font-size: 11.5px; color: #5d6662; }
+  .kpi.miss b { font: 600 13px/1.6 var(--mono); color: #9a3b2f; }
+  .fr-foot { font-size: 11px; color: #5d6662; padding: 0 20px 14px; }
+
+  /* Prompts */
+  .prompts { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .prompt { background: var(--panel); border-radius: 10px; padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start; }
+  .prompt .txt { min-width: 0; flex: 1; }
+  .prompt .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .prompt code { display: block; font: 500 14.5px/1.55 var(--mono); color: var(--ink); margin-top: 4px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .copy { flex: none; font: 600 13px/1 var(--body); background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+  .copy:hover { border-color: var(--amber); }
+  .copy.done { background: var(--pass-soft); color: var(--pass); border-color: var(--pass); }
+
+  /* Three file types */
+  .files { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .ft { min-width: 0; border: 1px solid var(--line); border-radius: 10px; display: flex; flex-direction: column; overflow: hidden; }
+  .ft .thumb { background: var(--panel); padding: 18px 18px 0; height: 190px; overflow: hidden; display: flex; justify-content: center; }
+  .ft .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+  .ft h3 { margin: 0; font: 700 18px/1.25 var(--display); display: flex; gap: 8px; align-items: baseline; }
+  .ft h3 .ext { font: 700 11px/1 var(--mono); padding: 4px 6px; border-radius: 4px; background: var(--slate-soft); color: var(--slate); letter-spacing: .04em; }
+  .ft .ask { font: 500 13px/1.5 var(--mono); background: var(--panel); border-radius: 8px; padding: 10px 12px; color: var(--ink); overflow-wrap: anywhere; }
+  .ft h4 { margin: 4px 0 0; font: 700 12px/1.2 var(--display); letter-spacing: .08em; text-transform: uppercase; }
+  .ft h4.g { color: var(--pass); }
+  .ft h4.w { color: var(--fail); }
+  .ft ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--ink-2); }
+  .ft ul li { display: flex; gap: 8px; align-items: flex-start; }
+  .ft ul.good li::before { content: ""; flex: none; width: 12px; height: 7px; border-left: 2px solid var(--pass); border-bottom: 2px solid var(--pass); transform: rotate(-45deg); margin-top: 6px; }
+  .ft ul.warn li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--fail); margin-top: 7px; }
+
+  /* Document thumbnails (pictures of the files, so they keep the brand colours in both themes) */
+  .sheet { width: 100%; max-width: 230px; background: var(--fr-white); border-radius: 4px 4px 0 0; box-shadow: 0 2px 10px rgba(0,0,0,.12); color: var(--fr-ink); font: 9px/1.35 var(--body); overflow: hidden; }
+  .pdf .bar { background: var(--fr-green); color: var(--fr-white); padding: 7px 10px; font: 600 10px/1 var(--fr-head); display: flex; justify-content: space-between; }
+  .pdf .bar em { font-style: normal; color: var(--fr-brass); }
+  .pdf .pg { padding: 8px 10px; }
+  .pdf .pg b { font: 600 11px/1.2 var(--fr-head); color: var(--fr-green); display: block; margin-bottom: 6px; }
+  .pdf .tri { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 8px; }
+  .pdf .tri span { border-top: 2px solid var(--fr-brass); background: var(--fr-paper); padding: 4px; font: 600 10px/1.2 var(--fr-head); color: var(--fr-green); }
+  .pdf .tri span small { display: block; font: 400 7px/1.2 var(--body); color: #5d6662; }
+  .lines i { display: block; height: 4px; background: #e3e0d8; border-radius: 2px; margin: 0 0 5px; }
+  .pdf .cite { font: 500 7.5px/1.3 var(--mono); color: #5d6662; margin-top: 6px; }
+  .xls .fx { display: flex; gap: 6px; align-items: center; border-bottom: 1px solid #d9d9d9; padding: 5px 6px; font: 500 9px/1 var(--mono); color: #333; }
+  .xls .fx em { font-style: italic; color: #777; }
+  .xls table { border-collapse: collapse; width: 100%; font: 9px/1 var(--body); font-variant-numeric: tabular-nums; }
+  .xls th, .xls td { border: 1px solid #e1e1e1; padding: 5px 5px; text-align: right; color: #222; }
+  .xls th { background: var(--fr-green); color: var(--fr-white); font-weight: 600; }
+  .xls td:first-child, .xls th:first-child { text-align: left; }
+  .xls td.rh { background: #f3f3f3; color: #777; text-align: center; width: 14px; }
+  .xls tr.tot td { font-weight: 700; border-top: 2px solid var(--fr-green); }
+  .xls td.sel { box-shadow: inset 0 0 0 2px #1d7a45; }
+  .xls .tabs { display: flex; gap: 2px; padding: 5px 6px; background: #f3f3f3; font: 8.5px/1 var(--body); color: #555; }
+  .xls .tabs span { padding: 3px 6px; }
+  .xls .tabs span.on { background: var(--fr-white); color: var(--fr-green); font-weight: 600; border-bottom: 2px solid var(--fr-green); }
+  .doc-w { display: grid; grid-template-columns: minmax(0, 1fr) 74px; }
+  .doc-w .pg { padding: 12px 10px; }
+  .doc-w .pg b { font: 600 11px/1.2 var(--fr-head); color: var(--fr-green); display: block; margin-bottom: 7px; }
+  .doc-w .pg .hl { background: #fdf0c8; }
+  .doc-w .margin { background: #f6f6f6; padding: 22px 5px 0; }
+  .doc-w .cm { background: var(--fr-white); border-left: 2px solid var(--fr-brass); padding: 4px; font: 7.5px/1.3 var(--body); color: #333; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .doc-w .cm b { display: block; font-size: 7px; color: var(--fr-green); }
+
+  /* Before / after chart */
+  .charts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+  .chartcard { min-width: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .chartcard .lab { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--line); font: 700 13px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; }
+  .chartcard.bad .lab { color: var(--fail); background: var(--fail-soft); }
+  .chartcard.good .lab { color: var(--pass); background: var(--pass-soft); }
+  .chartcard .lab small { font: 500 12px/1.2 var(--body); letter-spacing: 0; text-transform: none; color: var(--ink-2); }
+  .chartcard .pic { background: var(--fr-white); padding: 6px 4px 0; }
+  .chartcard svg { display: block; width: 100%; height: auto; }
+  .chartcard svg text { font-family: var(--body); }
+  .checks { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; counter-reset: c; }
+  .checks li { min-width: 0; background: var(--panel); border-radius: 8px; padding: 12px 12px 12px 12px; font-size: 13.5px; color: var(--ink-2); display: flex; gap: 8px; align-items: flex-start; counter-increment: c; }
+  .checks li::before { content: counter(c); flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--fr-brass); color: var(--fr-white); font: 700 11px/20px var(--display); text-align: center; }
+  .checks b { color: var(--ink); font-weight: 600; display: block; }
+
+  /* Scorecard */
+  .sc { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .sc th { text-align: left; font: 700 12px/1.3 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 10px 14px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .sc td { padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
+  .sc td:first-child { font: 700 13px/1.6 var(--display); color: var(--muted); width: 36px; font-variant-numeric: tabular-nums; }
+  .sc td b { color: var(--ink); font-weight: 600; }
+  .sc tr:last-child td { border-bottom: 0; }
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  .tablewrap .sc { min-width: 560px; }
+
+  /* Homework */
+  .hw { background: var(--amber-soft); border-radius: 12px; padding: 24px 26px; box-shadow: inset 0 0 0 2px var(--amber); }
+  .hw h2 { margin-bottom: 4px; }
+  .steps { list-style: none; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; counter-reset: s; }
+  .steps li { min-width: 0; background: var(--paper); border-radius: 8px; padding: 14px 14px 16px; font-size: 14px; color: var(--ink-2); counter-increment: s; }
+  .steps li::before { content: "Step " counter(s); display: block; font: 700 12px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
+  .steps b { display: block; font: 700 16px/1.3 var(--display); color: var(--ink); margin-bottom: 4px; }
+  .hw .prompts { margin-top: 16px; }
+  .hw .prompt { background: var(--paper); }
+  .foot { margin-top: 16px; font-size: 14px; color: var(--ink-2); }
+
+  @media (max-width: 900px) {
+    .agenda, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .files, .ways, .shotrow { grid-template-columns: minmax(0, 1fr); }
+    .ft .thumb { height: 170px; }
+    .brandgrid, .charts { grid-template-columns: minmax(0, 1fr); }
+    .checks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 620px) {
+    .doc { padding: 28px 18px; }
+    .hw { padding: 20px 16px; }
+    .agenda, .steps, .checks { grid-template-columns: minmax(0, 1fr); }
+    .prompt { flex-direction: column; }
+    .kpis { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n" />
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" />
+  </filter>
+</svg>
+
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Praxis programme · Session 2</p>
+  <h1>Define good</h1>
+  <p class="lede">Before you hand a job to AI, you need to know what a good result looks like. Today we watch Claude make real files in VS Code (a PDF, a spreadsheet, a Word letter and a chart) and check each one the way you'd check a new colleague's work.</p>
+  <div class="meta">
+    <span><b>You leave with</b> a brand file Claude reads every time, and a scorecard for one job that repeats</span>
+    <span><b>Working example</b> Fenwick &amp; Rowe, a made-up advisory firm</span>
+  </div>
+
+  <section>
+    <h2>The hour</h2>
+    <p class="sub">Most of it is on the shared screen, then on yours.</p>
+    <ol class="agenda">
+      <li class="slot">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><g filter="url(#pencil)">
+          <path class="blob" d="M12 18c8-9 26-10 36-3s12 22 5 31-24 13-34 7S4 27 12 18z"/>
+          <path class="s" d="M13.5 15.5 47 14.5l.8 35.5-34 1z"/>
+          <circle class="s" cx="20" cy="25" r="1.6"/><circle class="s" cx="20" cy="33" r="1.6"/><circle class="s" cx="20" cy="41" r="1.6"/>
+          <path class="s" d="M25 25h16M25 33h10M25 41h13"/><path class="a" d="m37 15 6 7.5L57 5"/>
+        </g></svg>
+        <span class="when">10 min</span>
+        <h3>Your task from session 1</h3>
+        <p>The real task you picked. What would a good result look like?</p>
+      </li>
+      <li class="slot big">
+        <svg class="ico build" viewBox="0 0 64 64" aria-hidden="true"><g filter="url(#pencil)">
+          <path class="blob" d="M10 25c4-12 20-17 32-13s17 16 13 28-18 18-30 14S6 36 10 25z"/>
+          <path class="s" d="M9.5 15 53 14.5l.5 33.5-43.5.5z"/><path class="s" d="M9.8 21.5h43.4"/>
+          <path class="a" d="m17 29 6.5 5.5-6.5 5.5"/><path class="s" d="M27.5 41h10"/>
+        </g></svg>
+        <span class="when">15 min</span>
+        <h3>Point it at the file</h3>
+        <p>In VS Code: give Claude the exact file, and your brand once.</p>
+      </li>
+      <li class="slot big">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><g filter="url(#pencil)">
+          <path class="blob" d="M10 25c4-12 20-17 32-13s17 16 13 28-18 18-30 14S6 36 10 25z"/>
+          <path class="s" d="M10 21.5V48h30.5V25.5H26l-4-4.2z"/><path class="a" d="M17 36.5l5 4.5 10-10"/>
+          <path class="s" d="M36 12h16v22H36z"/><path class="s" d="M40 18h8M40 23h5"/>
+        </g></svg>
+        <span class="when">25 min</span>
+        <h3>Four files, live</h3>
+        <p>PDF, Excel, Word and a chart. We check each one together.</p>
+      </li>
+      <li class="slot">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><g filter="url(#pencil)">
+          <path class="blob" d="M11 21c6-10 23-14 34-8s15 21 9 31-22 14-32 9S5 31 11 21z"/>
+          <path class="s" d="M12 15.5h19M12 22.5h13"/><path class="s" d="M28.5 43.5 50 22l6 6-21.5 21.5z"/>
+          <path class="s" d="m46 26 6 6"/><path class="s" d="m28.5 43.5-3.2 9.3 9.2-3.3"/>
+        </g></svg>
+        <span class="when">10 min</span>
+        <h3>Your scorecard</h3>
+        <p>Turn what we checked into 5 checks for your own job.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Point Claude at the file</h2>
+    <p class="sub">"Summarise the Q3 accounts" makes Claude guess which file you mean. Name the file and it reads that one, and it can tell you which page each number came from. Here's the folder we use all session.</p>
+
+    <figure class="shot">
+      <img src="/session-2/vscode-read-file.jpg" width="3024" height="1019" alt="VS Code with the Claude extension. The Explorer shows a folder of Praxis files. The prompt names praxis-agent-scorecard.md and asks for a visual handout in the design system, and Claude's first step reads exactly that file.">
+      <figcaption><b>A real session.</b> The message names the file, praxis-agent-scorecard.md, and Claude's first step is to read that file and nothing else. Then it goes on to build the handout.</figcaption>
+    </figure>
+
+    <div class="shotrow">
+      <figure class="shot tall">
+        <img src="/session-2/vscode-copy-path.jpg" width="840" height="1497" alt="Right-click menu on a file in the VS Code Explorer, with Add File to Chat, Copy Path and Copy Relative Path highlighted.">
+        <figcaption><b>Right-click any file.</b> Add File to Chat puts it straight into the Claude box. Copy Path or Copy Relative Path gives you the name to paste into your message.</figcaption>
+      </figure>
+      <div class="rulesfile">
+        <div class="fname">fenwick-rowe/CLAUDE.md</div>
+<pre><span class="k"># Fenwick &amp; Rowe: client work</span>
+
+- Before you make any document, read <span class="s">brand/BRAND.md</span> and follow it.
+- Every number says the file and page it came from.
+- Can't find it? Write <span class="s">[NOT IN SOURCE]</span>.
+- Not sure? Write <span class="s">[CHECK]</span>.
+- Save finished files in <span class="s">output/</span>. Never write over a file in sources/.
+- Write like our past letters in brand/examples.</pre>
+        <p>The rules file in our example folder, next to brand/, sources/, templates/ and output/. Copy it into your own folder and change the names.</p>
+      </div>
+    </div>
+
+    <ul class="ways">
+      <li class="way"><b>Type @ and the file name</b><p>Start typing <code class="inl">@q3</code> in the Claude box and pick the file from the list. Works for folders too: <code class="inl">@sources/</code></p></li>
+      <li class="way"><b>Send the open file</b><p>With a file open in the editor, press <kbd>Option</kbd> <kbd>K</kbd> on a Mac or <kbd>Alt</kbd> <kbd>K</kbd> on Windows. Select some lines first and it sends just those, with their line numbers.</p></li>
+      <li class="way"><b>Copy the path</b><p>Right-click any file in the Explorer, choose <b style="display:inline;font:inherit;font-weight:600">Copy Relative Path</b> and paste it into your message.</p></li>
+    </ul>
+    <p class="note">The CLAUDE.md file is read at the start of every conversation in that folder, so the rules above apply to every job without you typing them again. When Claude asks to run a script, read what it says it will do, then say yes.</p>
+  </section>
+
+  <section>
+    <h2>Your brand, written down once</h2>
+    <p class="sub">A design system sounds grand. For us it's one file, brand/BRAND.md, that says what your documents look like and how you write. Claude builds it from documents you already have, and every PDF, sheet and chart after that comes out in your colours.</p>
+
+    <div class="brandgrid">
+      <div class="card">
+        <h3>What goes in BRAND.md<small>Fenwick &amp; Rowe's, short enough to read in a minute</small></h3>
+        <div class="brow"><b>Colours</b><div class="sw">
+          <span><i style="background:var(--fr-green)"></i>#1F4D45 main</span>
+          <span><i style="background:var(--fr-brass)"></i>#B8862F highlight</span>
+          <span><i style="background:var(--fr-paper)"></i>#F6F3EC paper</span>
+          <span><i style="background:var(--fr-grey)"></i>#B9BFBB past data</span>
+        </div></div>
+        <div class="brow"><b>Fonts</b><span>Fraunces for headings, Inter for text. If they're missing, Georgia and Arial.</span></div>
+        <div class="brow"><b>Logo</b><span>brand/logo.svg, top left, never stretched, white on green.</span></div>
+        <div class="brow"><b>Layout</b><span>A4, 20 mm margins, page number and "Confidential" in the footer.</span></div>
+        <div class="brow"><b>Charts</b><span>Past periods in grey, the period that matters in green, one brass highlight at most.</span></div>
+        <div class="brow"><b>Voice</b><span>British spelling, short sentences, "we" for the firm. Look at brand/examples for how we write.</span></div>
+      </div>
+
+      <div>
+        <div class="fr" role="figure" aria-label="A report header Claude made from the brand file: green band with the Fenwick and Rowe wordmark, then three key figures with their page numbers, one marked not in source.">
+          <div class="fr-top"><span class="fr-mark">Fenwick <em>&amp;</em> Rowe</span><small>Q3 client summary · Confidential</small></div>
+          <div class="fr-in">
+            <h4>Q3 at a glance</h4>
+            <p>Revenue up on Q2, margin steady and cash enough for 4 months of costs.</p>
+            <div class="kpis">
+              <div class="kpi"><span>Revenue</span><b>€412,300</b><small>Accounts p. 2</small></div>
+              <div class="kpi"><span>Gross margin</span><b>38.4%</b><small>Accounts p. 3</small></div>
+              <div class="kpi miss"><span>Debtor days</span><b>[NOT IN SOURCE]</b><small>Ask the client</small></div>
+            </div>
+          </div>
+          <div class="fr-foot">Made by Claude from brand/BRAND.md and sources/q3-accounts.pdf. The firm and figures are examples.</div>
+        </div>
+        <ol class="prompts" style="margin-top:12px">
+          <li class="prompt">
+            <div class="txt"><span class="label">Build your brand file</span><code id="p1">Look at the documents in @brand/examples/ and write brand/BRAND.md: our colours as hex codes, fonts, where the logo goes, page layout, how charts should look and how we write. Ask me about anything you can't tell from the files.</code></div>
+            <button class="copy" type="button" data-target="p1">Copy</button>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Three files, and what good looks like</h2>
+    <p class="sub">Claude can read and make PDFs, Excel workbooks and Word documents. A file that opens isn't the same as a file you'd send. Here's what we check before it goes anywhere.</p>
+
+    <div class="files">
+      <article class="ft">
+        <div class="thumb" aria-hidden="true">
+          <div class="sheet pdf">
+            <div class="bar"><span>Fenwick <em>&amp;</em> Rowe</span><span style="font:500 8px/1 var(--body)">Q3 summary</span></div>
+            <div class="pg">
+              <b>Q3 at a glance</b>
+              <div class="tri"><span>€412k<small>p. 2</small></span><span>38.4%<small>p. 3</small></span><span>€96k<small>p. 5</small></span></div>
+              <div class="lines"><i style="width:96%"></i><i style="width:88%"></i><i style="width:92%"></i><i style="width:60%"></i></div>
+              <div class="cite">Debtor days [NOT IN SOURCE]</div>
+              <div class="lines" style="margin-top:6px"><i style="width:90%"></i><i style="width:70%"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <h3>Read a PDF, make a PDF <span class="ext">.pdf</span></h3>
+          <div class="ask">Read @sources/q3-accounts.pdf. Give me revenue, margin and cash, each with its page number. Then make a one-page summary following @brand/BRAND.md.</div>
+          <h4 class="g">Good looks like</h4>
+          <ul class="good">
+            <li>Every number has a page, and the page says that number</li>
+            <li>Anything missing says [NOT IN SOURCE]</li>
+            <li>Fits on one page, logo and colours from the brand file</li>
+          </ul>
+          <h4 class="w">Watch for</h4>
+          <ul class="warn">
+            <li>Numbers rounded differently from the accounts</li>
+            <li>Text cut off at the bottom of the page</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="ft">
+        <div class="thumb" aria-hidden="true">
+          <div class="sheet xls">
+            <div class="fx"><em>fx</em> =SUM(B2:B4)</div>
+            <table>
+              <tr><td class="rh"></td><th>Month</th><th>Revenue</th><th>Costs</th></tr>
+              <tr><td class="rh">2</td><td>July</td><td>131,900</td><td>82,400</td></tr>
+              <tr><td class="rh">3</td><td>August</td><td>126,050</td><td>79,100</td></tr>
+              <tr><td class="rh">4</td><td>September</td><td>154,350</td><td>92,500</td></tr>
+              <tr class="tot"><td class="rh">5</td><td>Q3</td><td class="sel">412,300</td><td>254,000</td></tr>
+            </table>
+            <div class="tabs"><span class="on">Summary</span><span>July</span><span>Aug</span><span>Sep</span><span>Notes</span></div>
+          </div>
+        </div>
+        <div class="body">
+          <h3>Build a workbook <span class="ext">.xlsx</span></h3>
+          <div class="ask">Turn @sources/q3-transactions.csv into a workbook: a tab per month, a summary tab with formulas, headers in our brand green.</div>
+          <h4 class="g">Good looks like</h4>
+          <ul class="good">
+            <li>Click a total and you see a formula like =SUM, so it updates when a number changes</li>
+            <li>Q3 total matches the accounts: €412,300</li>
+            <li>A Notes tab says where the data came from</li>
+          </ul>
+          <h4 class="w">Watch for</h4>
+          <ul class="warn">
+            <li>Totals typed in as plain numbers</li>
+            <li>#REF! or #VALUE! anywhere in the sheet</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="ft">
+        <div class="thumb" aria-hidden="true">
+          <div class="sheet doc-w">
+            <div class="pg">
+              <b>Your Q3 results</b>
+              <div class="lines"><i style="width:94%"></i><i style="width:90%"></i><i style="width:97%"></i><i style="width:55%"></i></div>
+              <div class="lines" style="margin-top:8px"><i style="width:92%"></i><i class="hl" style="width:80%"></i><i style="width:86%"></i><i style="width:40%"></i></div>
+              <div class="lines" style="margin-top:8px"><i style="width:95%"></i><i style="width:72%"></i></div>
+            </div>
+            <div class="margin"><div class="cm"><b>Claude</b>Debtor days not in the accounts. Ask before sending?</div></div>
+          </div>
+        </div>
+        <div class="body">
+          <h3>Draft in your template <span class="ext">.docx</span></h3>
+          <div class="ask">Draft the Q3 client letter in @templates/client-letter.docx using the summary. Keep our styles. Put anything you're unsure of in a comment.</div>
+          <h4 class="g">Good looks like</h4>
+          <ul class="good">
+            <li>Headings use the template's styles, so the contents page and spacing still work</li>
+            <li>Reads like your past letters, no AI phrasing</li>
+            <li>Doubts sit in comments, out of the text</li>
+          </ul>
+          <h4 class="w">Watch for</h4>
+          <ul class="warn">
+            <li>"I hope this finds you well" and friends</li>
+            <li>Bold and font sizes typed in by hand</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <p class="note">To make Excel and Word files, Claude writes a short script and asks to run it. The file lands in output/, and you open it in Excel or Word as normal. Open every file before you trust it.</p>
+  </section>
+
+  <section>
+    <h2>The same chart, twice</h2>
+    <p class="sub">Same data, same request, one with the brand file and a clear brief. This is the example we use for "what good looks like": hours spent on the monthly client report, before and after the brief and scorecard went in.</p>
+
+    <div class="charts">
+      <figure class="chartcard bad" style="margin:0">
+        <div class="lab">First try <small>"Make a chart of the report hours"</small></div>
+        <div class="pic">
+          <svg viewBox="0 0 400 300" role="img" aria-labelledby="bad-t">
+            <title id="bad-t">A default chart titled Chart 1, with one colour per month, a legend, a vertical axis that starts at 2 and no source.</title>
+            <rect x="0" y="0" width="400" height="300" fill="#ffffff"/>
+            <text x="200" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Chart 1</text>
+            <g stroke="#bdbdbd" stroke-width="1">
+              <line x1="50" y1="60" x2="380" y2="60"/><line x1="50" y1="96" x2="380" y2="96"/><line x1="50" y1="132" x2="380" y2="132"/>
+              <line x1="50" y1="168" x2="380" y2="168"/><line x1="50" y1="204" x2="380" y2="204"/><line x1="50" y1="240" x2="380" y2="240"/>
+            </g>
+            <g font-size="11" fill="#555555" text-anchor="end">
+              <text x="44" y="64">7</text><text x="44" y="100">6</text><text x="44" y="136">5</text><text x="44" y="172">4</text><text x="44" y="208">3</text><text x="44" y="244">2</text>
+            </g>
+            <rect x="60" y="78" width="34" height="162" fill="#e6194b"/>
+            <rect x="115" y="96" width="34" height="144" fill="#f58231"/>
+            <rect x="170" y="67.2" width="34" height="172.8" fill="#ffe119"/>
+            <rect x="225" y="186" width="34" height="54" fill="#3cb44b"/>
+            <rect x="280" y="222" width="34" height="18" fill="#4363d8"/>
+            <rect x="335" y="232.8" width="34" height="7.2" fill="#911eb4"/>
+            <text x="16" y="150" font-size="11" fill="#555555" transform="rotate(-90 16 150)" text-anchor="middle">Value</text>
+            <g font-size="10" fill="#444444">
+              <rect x="58" y="262" width="9" height="9" fill="#e6194b"/><text x="70" y="270">Jan</text>
+              <rect x="110" y="262" width="9" height="9" fill="#f58231"/><text x="122" y="270">Feb</text>
+              <rect x="162" y="262" width="9" height="9" fill="#ffe119"/><text x="174" y="270">Mar</text>
+              <rect x="214" y="262" width="9" height="9" fill="#3cb44b"/><text x="226" y="270">Apr</text>
+              <rect x="266" y="262" width="9" height="9" fill="#4363d8"/><text x="278" y="270">May</text>
+              <rect x="318" y="262" width="9" height="9" fill="#911eb4"/><text x="330" y="270">Jun</text>
+            </g>
+          </svg>
+        </div>
+      </figure>
+
+      <figure class="chartcard good" style="margin:0">
+        <div class="lab">With the brief <small>Brand file, plus five rules</small></div>
+        <div class="pic">
+          <svg viewBox="0 0 400 300" role="img" aria-labelledby="good-t">
+            <title id="good-t">Report time down from 6.5 to 2.2 hours a month. Bars for January to March in grey at 6.5, 6.0 and 6.8 hours, then April to June in green at 3.5, 2.5 and 2.2 hours, after the brief and scorecard went in. Source: the run log.</title>
+            <rect x="0" y="0" width="400" height="300" fill="#ffffff"/>
+            <text x="20" y="26" font-size="15" font-weight="700" fill="#1f4d45" font-family="Fraunces, Georgia, serif">Report time down from 6.5 to 2.2 hours</text>
+            <text x="20" y="44" font-size="11" fill="#5d6662">Hours on the monthly client report, Jan to Jun 2026</text>
+            <g stroke="#ecebe6" stroke-width="1">
+              <line x1="50" y1="195" x2="380" y2="195"/><line x1="50" y1="150" x2="380" y2="150"/><line x1="50" y1="105" x2="380" y2="105"/>
+            </g>
+            <line x1="50" y1="240" x2="380" y2="240" stroke="#1c2321" stroke-width="1.2"/>
+            <text x="44" y="244" font-size="10" fill="#5d6662" text-anchor="end">0</text>
+            <rect x="60" y="93.75" width="34" height="146.25" fill="#b9bfbb"/>
+            <rect x="115" y="105" width="34" height="135" fill="#b9bfbb"/>
+            <rect x="170" y="87" width="34" height="153" fill="#b9bfbb"/>
+            <rect x="225" y="161.25" width="34" height="78.75" fill="#1f4d45"/>
+            <rect x="280" y="183.75" width="34" height="56.25" fill="#1f4d45"/>
+            <rect x="335" y="190.5" width="34" height="49.5" fill="#1f4d45"/>
+            <g font-size="11" font-weight="600" fill="#1c2321" text-anchor="middle" style="font-variant-numeric:tabular-nums">
+              <text x="77" y="88">6.5</text><text x="132" y="99">6.0</text><text x="187" y="81">6.8</text>
+              <text x="242" y="155">3.5</text><text x="297" y="178">2.5</text><text x="352" y="185">2.2</text>
+            </g>
+            <g font-size="10.5" fill="#5d6662" text-anchor="middle">
+              <text x="77" y="256">Jan</text><text x="132" y="256">Feb</text><text x="187" y="256">Mar</text>
+              <text x="242" y="256">Apr</text><text x="297" y="256">May</text><text x="352" y="256">Jun</text>
+            </g>
+            <line x1="214.5" y1="70" x2="214.5" y2="240" stroke="#b8862f" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="222" y="80" font-size="10.5" font-weight="600" fill="#8a6420">Brief and scorecard</text>
+            <text x="222" y="93" font-size="10.5" font-weight="600" fill="#8a6420">in place</text>
+            <text x="20" y="284" font-size="9.5" fill="#5d6662">Source: output/run-log.xlsx, one line per run. Example data.</text>
+            <g font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">
+              <circle cx="384" cy="22" r="8" fill="#b8862f"/><text x="384" y="25.5">1</text>
+              <circle cx="104" cy="74" r="8" fill="#b8862f"/><text x="104" y="77.5">2</text>
+              <circle cx="372" cy="176" r="8" fill="#b8862f"/><text x="372" y="179.5">3</text>
+              <circle cx="30" cy="240" r="8" fill="#b8862f"/><text x="30" y="243.5">4</text>
+              <circle cx="372" cy="281" r="8" fill="#b8862f"/><text x="372" y="284.5">5</text>
+            </g>
+          </svg>
+        </div>
+      </figure>
+    </div>
+
+    <ol class="checks">
+      <li><div><b>Title says what happened</b>"Report time down from 6.5 to 2.2 hours", where the first try said "Chart 1".</div></li>
+      <li><div><b>Colours mean something</b>Grey for before, green for after. Six colours made you read a legend.</div></li>
+      <li><div><b>Values on the bars</b>Nobody has to read numbers off an axis.</div></li>
+      <li><div><b>Starts at zero</b>The first try started at 2, so June's bar looked 24 times shorter than March's. The real gap is about 3 times.</div></li>
+      <li><div><b>Says where it's from</b>A source line, so anyone can check it.</div></li>
+    </ol>
+
+    <ol class="prompts" style="margin-top:14px">
+      <li class="prompt">
+        <div class="txt"><span class="label">The brief behind the good chart</span><code id="p2">Make a bar chart of report hours by month from @output/run-log.xlsx. Follow @brand/BRAND.md. Title it with what the data shows, put the value on each bar, start the axis at zero and add a source line underneath. Save it as a PNG in output/.</code></div>
+        <button class="copy" type="button" data-target="p2">Copy</button>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>From examples to a scorecard</h2>
+    <p class="sub">Everything we checked today becomes a scorecard: the standard every piece of AI work on that job gets judged against. Here's Fenwick &amp; Rowe's for the monthly client summary. Each check is something a colleague could tick without asking you.</p>
+    <div class="tablewrap">
+      <table class="sc">
+        <thead><tr><th>#</th><th>Check</th><th>How you test it</th><th>Pass when</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><b>No invented facts</b></td><td>Open 3 cited pages and find the number</td><td>All 3 match</td></tr>
+          <tr><td>2</td><td><b>Complete</b></td><td>Compare with last month's summary</td><td>Every section there, gaps marked [NOT IN SOURCE]</td></tr>
+          <tr><td>3</td><td><b>Totals add up</b></td><td>Click the totals in the workbook</td><td>Formulas, and they match the accounts</td></tr>
+          <tr><td>4</td><td><b>On brand</b></td><td>Put it next to a past report</td><td>Same colours, fonts and logo position</td></tr>
+          <tr><td>5</td><td><b>Sounds like us</b></td><td>Read the first paragraph aloud</td><td>You'd send it without rewording</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">"No invented facts" is always check number one. Four out of five is a fail: fix the brief or the brand file, then run it again. Build your own with the <a href="/agent-scorecard">agent scorecard tool</a>.</p>
+  </section>
+
+  <section class="hw">
+    <h2>Before session 3</h2>
+    <p class="sub" style="margin-bottom:0">About an hour, on your own machine. Use redacted or dummy files until your AI policy is agreed.</p>
+    <ol class="steps">
+      <li><b>Set up the folder</b>Make brand/, sources/, templates/ and output/. Copy the CLAUDE.md rules from this page.</li>
+      <li><b>Build your brand file</b>Put three of your own documents in brand/examples and run the brand prompt above.</li>
+      <li><b>Make one real file</b>Pick the task from session 1. Point Claude at the source with @ and ask for a PDF, a workbook or a Word draft.</li>
+      <li><b>Score it</b>Write 5 checks in the scorecard tool. Score Claude's file, then one of your own recent pieces of work.</li>
+    </ol>
+    <ol class="prompts">
+      <li class="prompt">
+        <div class="txt"><span class="label">Start your scorecard</span><code id="p3">I do this job every [week / month]: [describe it]. Here's a good example I made: @[file]. Help me write 5 checks for a good result. Each check needs a way to test it and a clear pass. "No invented facts" is check 1.</code></div>
+        <button class="copy" type="button" data-target="p3">Copy</button>
+      </li>
+    </ol>
+    <p class="foot"><b>Bring to session 3:</b> the file Claude made, your scorecard with both scores, and one thing you'd change in the brief. If it only half worked, bring that too: it's the most useful thing to look at together. Stuck on setup? Reply to any of our emails and we'll book a short one-to-one before the next session.</p>
+  </section>
+</main>
+</div>
+
+<script>
+  document.querySelectorAll(".copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var el = document.getElementById(btn.dataset.target);
+      if (!el) return;
+      var done = function () {
+        btn.textContent = "Copied"; btn.classList.add("done");
+        setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1800);
+      };
+      var select = function () {
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = "Selected";
+      };
+      try {
+        navigator.clipboard.writeText(el.textContent.trim()).then(done, select);
+      } catch (e) { select(); }
+    });
+  });
+</script>
+</body>
+</html>
