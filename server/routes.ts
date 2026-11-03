@@ -342,6 +342,10 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "toolkit", "index.html"));
   });
 
+  // /calendar was the Applied AI Evenings page. The events are the Rieuzal
+  // ateliers now, so old links, blog posts and search results land there.
+  app.get(["/calendar", "/calendar/"], (_req, res) => res.redirect(301, "/rieuzal"));
+
   // Pocket Praxis, the course decks as a phone game: link only, not indexed. Served from
   // the folder with a trailing slash, because its scripts, course files and offline
   // service worker all load relative to it.

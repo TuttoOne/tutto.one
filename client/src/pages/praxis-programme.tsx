@@ -556,7 +556,7 @@ export default function PraxisProgramme() {
           <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 20, maxWidth: 560 }}>
             {tr("Start with the free 60-minute session: proof on one of your own jobs before you spend anything. When you book the course, a 15-minute call to say hello and set the dates comes with it. Both programmes are invoiced, ex VAT.")}{" "}
             {tr("We also run free sessions from time to time. They are general rather than built around your use case:")}{" "}
-            <a href="/calendar" style={{ color: "#d97706" }}>{tr("see Events")}</a>.
+            <a href="/rieuzal" style={{ color: "#d97706" }}>{tr("see Events")}</a>.
           </p>
           <div style={{ marginTop: 20, padding: "16px 20px", background: "#f0ece6", borderRadius: 8, maxWidth: 560 }}>
             <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>

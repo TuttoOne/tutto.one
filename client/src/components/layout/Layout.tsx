@@ -19,7 +19,7 @@ export function Header() {
     { label: t(copy.nav.praxis), href: "/praxis" },
     { label: t(copy.nav.sovereign), href: "/sovereign" },
     { label: t(copy.nav.thinking), href: "/blog" },
-    { label: t(copy.nav.events), href: "/calendar" },
+    { label: t(copy.nav.events), href: "/rieuzal" },
     { label: t(copy.nav.contact), href: "/contact" },
   ];
 

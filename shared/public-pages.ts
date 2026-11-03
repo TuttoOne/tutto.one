@@ -21,7 +21,6 @@ export type PageKey =
   | "usecase"
   | "praxis"
   | "praxis-programme"
-  | "calendar"
   | "sovereign"
   | "pythia"
   | "blog"
@@ -67,7 +66,6 @@ export const PUBLIC_PAGES: PublicPage[] = [
   { path: "/pythia", key: "pythia", title: { en: "Pythia: On-premise document intelligence | Tutto", fr: "Pythia : intelligence documentaire sur site | Tutto" }, priority: 0.7, schema: "Service" },
   { path: "/gtm-orchestrator", key: "gtm-orchestrator", title: { en: "GTM: On-premise sales outreach engine | Tutto", fr: "GTM : moteur de prospection sur site | Tutto" }, priority: 0.5, schema: "Service" },
   { path: "/souverainete", key: "souverainete", title: { en: "Sovereignty: diagnostic | Tutto", fr: "Souveraineté : diagnostic | Tutto" }, priority: 0.6 },
-  { path: "/calendar", key: "calendar", title: { en: "Applied AI Evenings | Praxis | Tutto", fr: "Les soirées IA appliquée | Praxis | Tutto" }, priority: 0.6 },
   { path: "/rieuzal", key: "rieuzal", title: { en: "Ateliers IA à Rieuzal | Tutto" }, priority: 0.7, schema: "EventSeries", lang: "fr" },
   { path: "/applied", key: "applied", title: { en: "Applied AI, at length | Tutto", fr: "L'IA en pratique | Tutto" }, priority: 0.6 },
   { path: "/usecase/", key: "usecase", priority: 0.6 },

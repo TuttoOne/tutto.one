@@ -23,7 +23,6 @@ import Portfolio from "@/pages/portfolio";
 import UseCase from "@/pages/usecase";
 import Praxis from "@/pages/praxis";
 import PraxisProgramme from "@/pages/praxis-programme";
-import Calendar from "@/pages/calendar";
 import Pythia from "@/pages/pythia";
 import Sovereign from "@/pages/sovereign";
 import Blog from "@/pages/blog";
@@ -47,7 +46,6 @@ const PAGES: Record<PageKey, ComponentType> = {
   usecase: UseCase,
   praxis: Praxis,
   "praxis-programme": PraxisProgramme,
-  calendar: Calendar,
   sovereign: Sovereign,
   pythia: Pythia,
   blog: Blog,

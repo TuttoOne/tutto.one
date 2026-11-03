@@ -282,7 +282,7 @@ export default function Praxis() {
         </Section>
 
         <Link
-          href="/calendar"
+          href="/rieuzal"
           className="mt-16 group flex items-center justify-between gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
         >
           <div>

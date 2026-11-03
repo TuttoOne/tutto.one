@@ -20,7 +20,6 @@ import Portfolio from "@/pages/portfolio";
 import UseCase from "@/pages/usecase";
 import Praxis from "@/pages/praxis";
 import PraxisProgramme from "@/pages/praxis-programme";
-import Calendar from "@/pages/calendar";
 import Pythia from "@/pages/pythia";
 import Sovereign from "@/pages/sovereign";
 import Blog from "@/pages/blog";
@@ -83,7 +82,8 @@ function Router() {
         <Route path="/usecase" component={UseCase} />
         <Route path="/usecase/" component={UseCase} />
         <Route path="/praxis" component={Praxis} />
-        <Route path="/calendar" component={Calendar} />
+        {/* /calendar was the Applied AI Evenings page; the events are the Rieuzal ateliers now. */}
+        <Route path="/calendar">{() => <Redirect to="/rieuzal" />}</Route>
         {/* The general front door to Pythia, and what the nav now points at.
            /pythia keeps its own URL and its legal copy: the two pages are
            the same product written for two different readers. */}

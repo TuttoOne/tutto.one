@@ -353,10 +353,6 @@ export const copy = {
       en: "A speaker in an orange shirt standing in front of a seated audience, gesturing at a chart of six rising bars on the wall behind him.",
       fr: "Un intervenant en chemise orange devant un public assis, désignant un graphique de six barres croissantes sur le mur derrière lui.",
     },
-    calendar: {
-      en: "A spiral desk calendar with an orange header band and an orange pencil lying across it, against a pale sky with ink-drawn clouds.",
-      fr: "Un calendrier à spirale au bandeau orange, un crayon orange posé en travers, sur un ciel pâle aux nuages dessinés à l'encre.",
-    },
     builder: {
       en: "Someone in a hard hat holding a large plan open behind a computer case with its side off, surrounded by tools, rolled drawings, a monitor and a keyboard.",
       fr: "Quelqu'un en casque de chantier déployant un grand plan derrière un boîtier d'ordinateur ouvert, entouré d'outils, de plans roulés, d'un écran et d'un clavier.",
@@ -408,7 +404,7 @@ export const copy = {
       en: "Eight sessions for your team, or four one to one · 90 minutes each · Online or in person",
       fr: "Huit séances pour votre équipe, ou quatre en tête-à-tête · 90 minutes chacune · À distance ou sur place",
     },
-    /** What separates this from the group evenings on /calendar. */
+    /** What separates this from the group ateliers at /rieuzal. */
     tailoredLabel: { en: "Send your own work first", fr: "Envoyez d'abord votre propre travail" },
     tailored: {
       en: "It runs on your work, not a demo. Before we start, send the jobs you keep repeating (the quote you rewrite every week, the report nobody wants to do) and we build on those. The group evenings use generic examples. This doesn't.",
@@ -1361,208 +1357,17 @@ export const copy = {
   },
 
   /**
-   * The Applied AI Evenings calendar. Prices are never inside a sentence here:
-   * the header currency toggle rewrites them, so the copy is split into
-   * fragments that read correctly in both languages around an inserted figure.
+   * Card on /praxis pointing to the Rieuzal ateliers. Its job is to draw the
+   * contrast with the one to one on that page.
    */
   calendar: {
-    plateCalendarCaption: {
-      en: "Dates, not a course. Nothing assumes you were there last time, so pick the evening that suits and come to that one.",
-      fr: "Des dates, pas un cursus. Rien ne suppose que vous étiez là la fois précédente : choisissez la soirée qui vous convient et venez à celle-là.",
-    },
-    /** Caption for the drawing under the header. */
-    plateHandsCaption: {
-      en: "What an evening is for: one person, and the tools they already had, wired to talk to each other.",
-      fr: "C'est à cela que sert une soirée : une personne, et les outils qu'elle avait déjà, reliés entre eux.",
-    },
-    eyebrow: { en: "Praxis · Autumn 2026", fr: "Praxis · Automne 2026" },
-    title: { en: "Applied AI Evenings", fr: "Les soirées IA appliquée" },
-    leadA: {
-      en: "The same four sessions online every month, the first one free, and an evening in person in the Lot every fortnight. After work, an hour online or ninety minutes in a hall.",
-      fr: "Les quatre mêmes séances en ligne chaque mois, la première gratuite, et une soirée en présentiel dans le Lot tous les quinze jours. Après le travail : une heure en ligne, ou quatre-vingt-dix minutes dans une salle.",
-    },
-    leadStrong: {
-      en: "Every date stands on its own.",
-      fr: "Chaque date se suffit à elle-même.",
-    },
-    leadB: {
-      en: "Take a whole month, or drop into the one you need. Nothing assumes you were there last time, and if you miss a month it comes round again.",
-      fr: "Prenez un mois entier, ou venez seulement à celle qu'il vous faut. Rien ne suppose que vous étiez là la fois précédente, et si vous manquez un mois, tout revient le mois suivant.",
-    },
-
-    factFirstFree: { en: "First Tuesday free", fr: "Premier mardi gratuit" },
-    factPerClass: { en: "a class,", fr: "la séance," },
-    factAllSix: { en: "for all three", fr: "les trois" },
-    factHour: { en: "One hour, 20:00 CET", fr: "Une heure, 20h00 CET" },
-    factLotFree: { en: "Lot evenings free", fr: "Soirées du Lot gratuites" },
-
-    onlineTitle: { en: "Online, every month", fr: "En ligne, chaque mois" },
-    onlineIntro: {
-      en: "Tuesday evenings, 20:00 to 21:00 Paris time, in English. The same four come round every month: the first Tuesday is free and stands alone, then the three classes. Take a whole month, or drop into the one you need. Each class is recorded, so if a date does not suit you, ask for the recording.",
-      fr: "Le mardi soir, de 20h00 à 21h00 heure de Paris, en anglais. Les quatre mêmes séances reviennent chaque mois : le premier mardi est gratuit et se suffit à lui-même, puis les trois séances du parcours. Prenez un mois entier, ou seulement celle qu'il vous faut. Chaque séance est enregistrée : si une date ne vous convient pas, demandez l'enregistrement.",
-    },
-    /** Marks a session's place in the monthly cycle, in place of a date. */
-    nthTuesday: { en: "Tue of the month", fr: "mardi du mois" },
-    /** Ordinal suffix set superscript against the session number. */
-    ord1: { en: "st", fr: "er" },
-    ord2: { en: "nd", fr: "e" },
-    ord3: { en: "rd", fr: "e" },
-    ord4: { en: "th", fr: "e" },
-    datesLabel: { en: "The Tuesdays", fr: "Les mardis" },
-    datesNote: {
-      en: "The run opens in October. When a month has five Tuesdays the last one is skipped, so the cycle stays four long.",
-      fr: "Le parcours démarre en octobre. Quand un mois compte cinq mardis, le dernier saute, pour que le cycle reste à quatre séances.",
-    },
-
-    lotTitle: { en: "In the Lot, in person", fr: "Dans le Lot, en présentiel" },
-    lotIntro: {
-      en: "Every second Thursday, 20:30 to 22:00, in French. Ninety minutes in a village hall, open to anyone, and free. It is the same evening each time in a different commune, so come to whichever is nearest. There is nothing to catch up on and no order to follow.",
-      fr: "Un jeudi sur deux, de 20h30 à 22h00, en français. Quatre-vingt-dix minutes dans une salle des fêtes, ouvertes à tous, et gratuites. C'est la même soirée à chaque fois, dans une commune différente ; venez à la plus proche. Rien à rattraper, aucun ordre à suivre.",
-    },
-    lotDatesLabel: { en: "The Thursdays", fr: "Les jeudis" },
-    lotDatesNote: {
-      en: "Each falls two days after that week's online session, so you can watch it online first if you want to. Venues are being confirmed, and go out with the reminder.",
-      fr: "Chacune tombe deux jours après la séance en ligne de la semaine, si vous voulez d'abord la voir à distance. Les lieux sont en cours de confirmation et sont annoncés avec le rappel.",
-    },
-
-    tagFree: { en: "Free", fr: "Gratuit" },
-
-    oct: { en: "Oct", fr: "oct." },
-    nov: { en: "Nov", fr: "nov." },
-    tue: { en: "Tue", fr: "mar." },
-    thu: { en: "Thu", fr: "jeu." },
-
-    /**
-     * The recurring free one. It is the front door for the whole run, so it is
-     * an overview of where these systems actually are as much as a demo.
-     */
-    o1Title: {
-      en: "What AI can do now, seen working",
-      fr: "Ce que l'IA sait faire aujourd'hui, en action",
-    },
-    o1Body: {
-      en: "Where these systems actually are today, watched working in real time rather than described. What they can do, what they still cannot, and an empty folder becoming a working tool while you watch. Start here if you have only ever used AI in a chat box.",
-      fr: "Où en sont réellement ces systèmes aujourd'hui, montrés en train de travailler en temps réel plutôt que décrits. Ce qu'ils savent faire, ce qu'ils ne savent toujours pas faire, et un dossier vide qui devient un outil qui fonctionne sous vos yeux. Commencez ici si vous n'avez jamais utilisé l'IA que dans une fenêtre de conversation.",
-    },
-    o2Title: { en: "The build loop", fr: "La boucle de construction" },
-    o2Body: {
-      en: "You describe what you want in plain English. It gets built. You look at it and say what is wrong. What that loop looks like from the outside, and where a person still has to think.",
-      fr: "Vous décrivez ce que vous voulez en langage courant. C'est construit. Vous regardez le résultat et dites ce qui ne va pas. À quoi ressemble cette boucle vue de l'extérieur, et où une personne doit encore réfléchir.",
-    },
-    /** Data-and-cost merged with hosting-and-safety: one session on exposure. */
-    o3Title: { en: "Safety, data, and what it costs", fr: "Sécurité, données, et ce que cela coûte" },
-    o3Body: {
-      en: "The questions everyone asks and few answer plainly. Where your files go, what is kept, what “training on your data” does and does not mean, and the real monthly number. Then where a tool runs once it leaves your laptop, what that exposes, and how to protect yourself when work goes online.",
-      fr: "Les questions que tout le monde pose et auxquelles peu répondent clairement. Où vont vos fichiers, ce qui est conservé, ce que « l'entraînement sur vos données » signifie et ne signifie pas, et le vrai montant mensuel. Puis où tourne un outil une fois qu'il a quitté votre ordinateur, ce que cela expose, et comment vous protéger quand le travail passe en ligne.",
-    },
-    /** Rules, connectors and the real build, merged into the closing session. */
-    o4Title: {
-      en: "Your rules, your connections, and something real",
-      fr: "Vos règles, vos connexions, et quelque chose de réel",
-    },
-    o4Body: {
-      en: "Write down the rules your work already follows, so a tool applies them the same way every time, including the day you are not there. Connect it to your calendar, your drive, your documents, with you deciding what it can touch. Then one build end to end on a job that comes round every week, your own MCP included, the small piece that lets an assistant reach a system you already use.",
-      fr: "Mettez par écrit les règles que votre travail suit déjà, pour qu'un outil les applique de la même façon à chaque fois, y compris le jour où vous n'êtes pas là. Reliez-le à votre agenda, votre espace de stockage, vos documents, en décidant vous-même de ce qu'il peut toucher. Puis une construction de bout en bout sur une tâche qui revient chaque semaine, votre propre MCP compris, la petite pièce qui permet à un assistant d'atteindre un système que vous utilisez déjà.",
-    },
-
-    /** One description, since it is the same talk in each commune. */
-    lotEveningTitle: { en: "L'IA concrète", fr: "L'IA concrète" },
-    lotEveningBody: {
-      en: "A carpenter's devis system built live, from the job notes to a quote that comes out the same every time, mentions légales included. Then what applied AI means for a small business, for your children, and what building safely looks like.",
-      fr: "Un système de devis pour un menuisier construit en direct, des notes de chantier au devis qui sort identique à chaque fois, mentions légales comprises. Puis ce que l'IA appliquée signifie pour une petite entreprise, pour vos enfants, et à quoi ressemble une construction sûre.",
-    },
-
-    note1Title: { en: "Nothing to prepare", fr: "Rien à préparer" },
-    note1Body: {
-      en: "Turn up and watch. If you would rather follow along, bring a laptop, but it is not expected and nobody will be waiting for you.",
-      fr: "Venez et regardez. Si vous préférez suivre en pratiquant, apportez un ordinateur portable, mais ce n'est pas attendu et personne ne vous attendra.",
-    },
-    note2Title: { en: "Built live, not recorded", fr: "Construit en direct, pas préenregistré" },
-    note2Body: {
-      en: "The part that matters has no slides. Things occasionally go wrong on screen, which is the useful bit, and the part a polished video will never show you.",
-      fr: "La partie qui compte n'a pas de diapositives. Il arrive que les choses se passent mal à l'écran, et c'est justement le plus utile : ce qu'une vidéo bien léchée ne vous montrera jamais.",
-    },
-    /**
-     * The distinction that matters commercially: these are group workshops on
-     * generic examples, and Praxis proper is one to one on the client's own
-     * material. Stated as a comparison rather than prose so neither side can
-     * be skim-read into the other.
-     */
-    compareTitle: { en: "These evenings, or Praxis?", fr: "Ces soirées, ou Praxis ?" },
-    compareIntro: {
-      en: "Both are Praxis teaching and they are not the same thing. Come to an evening to work out whether any of this applies to you. Take Praxis one to one when you want it applied to your own work.",
-      fr: "Les deux relèvent de Praxis, et ce ne sont pas la même chose. Venez à une soirée pour déterminer si tout cela vous concerne. Prenez Praxis en tête-à-tête quand vous voulez l'appliquer à votre propre travail.",
-    },
-    compareAHead: { en: "These evenings", fr: "Ces soirées" },
-    compareA1: {
-      en: "In a group. Other people are there, asking their own questions.",
-      fr: "En groupe. D'autres personnes sont là, avec leurs propres questions.",
-    },
-    compareA2: {
-      en: "Generic examples: a carpenter's quote, a report that comes round every week. Not your files.",
-      fr: "Des exemples génériques : le devis d'un menuisier, un rapport qui revient chaque semaine. Pas vos fichiers.",
-    },
-    compareA3: {
-      en: "Short. A free hour, or three classes if you want the course.",
-      fr: "Court. Une heure gratuite, ou trois séances si vous voulez le parcours.",
-    },
-    compareA4: {
-      en: "Higher level: what this is good for and what it asks of you, rather than how to build it line by line.",
-      fr: "Plus haut niveau : à quoi cela sert et ce que cela exige de vous, plutôt que comment le construire ligne à ligne.",
-    },
-    compareBHead: { en: "Praxis, one to one", fr: "Praxis, en tête-à-tête" },
-    compareB1: { en: "Just you and me. Nobody else's questions.", fr: "Vous et moi. Les questions de personne d'autre." },
-    compareB2: {
-      en: "Your own use cases. Send your examples when you register and we learn on those, from the first session.",
-      fr: "Vos propres cas d'usage. Envoyez vos exemples à l'inscription et nous apprenons sur ceux-là, dès la première séance.",
-    },
-    compareB3: { en: "Longer. Eight sessions, over two months.", fr: "Plus long. Huit séances, sur deux mois." },
-    compareB4: {
-      en: "How to build, in your hands, until you can carry on without me.",
-      fr: "Comment construire, entre vos mains, jusqu'à pouvoir continuer sans moi.",
-    },
-
-    note3Title: { en: "Not a pitch", fr: "Ce n'est pas un argumentaire" },
-    note3Body: {
-      en: "There is a longer programme for people who want to go further, and these classes are not a sales run at it. Come, learn something, leave. If you do go further, what you paid here comes off the price.",
-      fr: "Il existe un programme plus long pour celles et ceux qui veulent aller plus loin, et ces séances ne sont pas une opération commerciale à son profit. Venez, apprenez quelque chose, repartez. Si vous allez plus loin, ce que vous avez payé ici est déduit du prix.",
-    },
-
-    joinTitle: { en: "Coming to one", fr: "Venir à une séance" },
-    joinA: { en: "Write to", fr: "Écrivez à" },
-    joinB: {
-      en: "and say which date. You get a link the day before and a reminder an hour ahead. No account, no sign-up form.",
-      fr: "en indiquant la date. Vous recevez un lien la veille et un rappel une heure avant. Pas de compte, pas de formulaire d'inscription.",
-    },
-    joinPay: {
-      en: "The first Tuesday of the month and every Lot evening are free, so for those there is nothing else to do. For the three classes you get a payment link with the confirmation, and you can pay for one or for all three.",
-      fr: "Le premier mardi du mois et toutes les soirées dans le Lot sont gratuits : pour ceux-là, il n'y a rien d'autre à faire. Pour les trois séances, vous recevez un lien de paiement avec la confirmation, et vous pouvez régler une séance ou les trois.",
-    },
-    joinReschedule: {
-      en: "If a date does not work, say so. Everything here runs again, and there is a recording of every class.",
-      fr: "Si une date ne vous convient pas, dites-le. Tout ce qui est ici sera reprogrammé, et chaque séance est enregistrée.",
-    },
-
-    independence: {
-      en: "These evenings are independent and are not run on behalf of Anthropic.",
-      fr: "Ces soirées sont indépendantes et ne sont pas organisées pour le compte d'Anthropic.",
-    },
-
-    programmeTitle: { en: "The Praxis Programme", fr: "Le programme Praxis" },
-    programmeBody: {
-      en: "Eight sessions for one to four people, built on use cases you send before we start. Where you learn to build rather than to apply. What you pay for these evenings comes off the price.",
-      fr: "Huit séances, de une à quatre personnes, construites à partir de cas d'usage que vous envoyez avant de commencer. C'est là que l'on apprend à construire, et non seulement à appliquer. Ce que vous payez pour ces soirées est déduit du prix.",
-    },
-    programmeLink: { en: "See the programme", fr: "Voir le programme" },
-
-    /** Card on /praxis pointing here. Its job is to draw the contrast. */
     fromPraxisTitle: {
-      en: "Applied AI Evenings: the group version",
-      fr: "Les soirées IA appliquée : la version collective",
+      en: "Ateliers IA à Rieuzal: the group version, in French",
+      fr: "Ateliers IA à Rieuzal : la version collective",
     },
     fromPraxisBody: {
-      en: "The same four sessions online every month (the first free) and an evening in the Lot every fortnight. In a group, on generic examples, and pitched higher: applying rather than building. The one to one on this page is the tailored version.",
-      fr: "Les quatre mêmes séances en ligne chaque mois (la première gratuite) et une soirée dans le Lot tous les quinze jours. En groupe, sur des exemples génériques, et à un niveau plus élevé : appliquer plutôt que construire. Le tête-à-tête présenté sur cette page en est la version sur mesure.",
+      en: "Six free 90-minute ateliers at the Manoir de Rieuzal in Loubressac, November to March. We put Mistral to work on real tasks in front of you, then talk it through together. 15 places each. The one to one on this page is the tailored version, on your own work.",
+      fr: "Six ateliers gratuits de 1h30 au Manoir de Rieuzal, à Loubressac, de novembre à mars. On fait faire de vraies tâches à Mistral devant vous, et on en parle ensemble. 15 places par atelier. Le tête-à-tête présenté sur cette page en est la version sur mesure, sur votre propre travail.",
     },
     fromPraxisLink: { en: "See the dates", fr: "Voir les dates" },
   },

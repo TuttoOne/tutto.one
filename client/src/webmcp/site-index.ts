@@ -63,14 +63,6 @@ export const SITE_PAGES: SitePage[] = [
     offering: true,
   },
   {
-    path: "/calendar",
-    name: "Applied AI Evenings",
-    summary: "The monthly cycle of evening classes, with the dates.",
-    detail:
-      "The Applied AI Evenings calendar, run as one monthly cycle rather than a list of one-off dates. Marked off from the Praxis course proper.",
-    offering: true,
-  },
-  {
     path: "/become-a-trainer",
     name: "Praxis Trainer Track",
     summary: "Teach Praxis, and earn from it: four sessions plus a readiness bar.",

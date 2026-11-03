@@ -121,7 +121,7 @@ function llmsTxt(posts: { slug: string; title: string; excerpt: string }[]): str
     "",
     "Tutto is Daniel Forsthofer's AI training and consulting practice, working in English and French, online and in person in the Lot. Praxis is the training: your team learns to brief AI once, with rules, a standard for good work and what to hand over, so it works every time. On the build side, Pythia is AI that runs on your own machines and reads your files where they already sit.",
     "",
-    section("Training", ["/", "/praxis", "/calendar", "/peer-groups", "/become-a-trainer", "/rieuzal"], [
+    section("Training", ["/", "/praxis", "/peer-groups", "/become-a-trainer", "/rieuzal"], [
       "- [The AI-Fluent Team](" + SITE_URL + "/praxis-programme): the Praxis programme for a whole team.",
       "- [Article 4: AI literacy training](" + SITE_URL + "/article-4): what the EU AI Act asks of employers, and the training that covers it.",
     ]),
