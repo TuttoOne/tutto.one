@@ -335,6 +335,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "hsa-session-2", "index.html"));
   });
 
+  // The toolkit (VS Code extensions, command-line tools and Python libraries, and which to get):
+  // same arrangement, link only, not indexed.
+  app.get(["/toolkit", "/toolkit/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "toolkit", "index.html"));
+  });
+
   // Pocket Praxis, the course decks as a phone game: link only, not indexed. Served from
   // the folder with a trailing slash, because its scripts, course files and offline
   // service worker all load relative to it.

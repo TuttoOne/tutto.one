@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="The VS Code extensions, command-line tools and Python libraries on Daniel's machine, what each one does for Claude and which ones you need.">
+<title>The Claude toolkit | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  /* The toolkit handout in the Praxis house style (same tokens as /hsa-session-2).
+     Layout: one document card; the key, then three groups (extensions, command line, Python), each a list of rows with an install box. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #4f6274; --slate-soft: #e8edf2;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a;
+      --pass: #6fcf97; --pass-soft: #1d3326; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a;
+    --pass: #6fcf97; --pass-soft: #1d3326; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  p { margin: 0; }
+  code { font: 500 0.92em var(--mono); }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; color: var(--ink); text-decoration: none; }
+  .brand span { color: var(--amber); }
+  .top a.back { font-size: 14px; color: var(--amber); text-underline-offset: 0.15em; }
+
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 60ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 44px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { font: 700 13px/1.2 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 26px 0 10px; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 66ch; }
+
+  /* Key */
+  .key { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 14px; color: var(--ink-2); margin-top: 22px; }
+  .key div { display: flex; gap: 8px; align-items: center; }
+
+  .chip { font: 700 11px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 4px; white-space: nowrap; }
+  .need { background: var(--amber-soft); color: var(--amber-ink); }
+  .handy { background: var(--pass-soft); color: var(--pass); }
+  .dev { background: var(--slate-soft); color: var(--slate); }
+
+  /* Tool rows */
+  .tools { list-style: none; padding: 0; margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .tool { display: grid; grid-template-columns: 13em minmax(0,1fr) 6.5em; gap: 14px; padding: 13px 16px; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .tool:last-child { border-bottom: 0; }
+  .tool .name { font: 700 15px/1.35 var(--display); }
+  .tool .name small { display: block; font: 400 12.5px/1.4 var(--mono); color: var(--muted); margin-top: 2px; overflow-wrap: anywhere; }
+  .tool .does { font-size: 14.5px; color: var(--ink-2); }
+  .tool .chip { justify-self: end; }
+  .tools.quiet .tool { background: var(--panel); }
+
+  /* Install boxes */
+  .install { background: var(--panel); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; margin-top: 14px; }
+  .install .txt { min-width: 0; flex: 1; }
+  .install .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .install pre { margin: 6px 0 0; font: 500 14.5px/1.55 var(--mono); color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+  .install p { font-size: 14px; color: var(--ink-2); margin-top: 6px; }
+  .copy { flex: none; font: 700 12px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber-ink); background: var(--paper); border: 1.5px solid var(--amber); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+  .copy:hover { background: var(--amber-soft); }
+  .copy:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  .tip { background: var(--amber-soft); border-radius: 10px; padding: 18px 20px; margin-top: 44px; }
+  .tip h2 { font-size: 19px; }
+  .tip p { font-size: 15px; color: var(--ink); max-width: 66ch; }
+  .tip p + p { margin-top: 8px; }
+
+  .foot { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .doc { padding: 28px 20px; }
+    .tool { grid-template-columns: minmax(0,1fr) auto; gap: 4px 12px; }
+    .tool .name { grid-column: 1; }
+    .tool .chip { grid-column: 2; grid-row: 1; }
+    .tool .does { grid-column: 1 / -1; }
+    .install { flex-direction: column; }
+  }
+  @media print {
+    body { background: #fff; }
+    .page { padding: 0; }
+    .doc { border: 0; padding: 0; }
+    .copy { display: none; }
+    .tool { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Praxis · Setup</p>
+  <h1>The Claude toolkit</h1>
+  <p class="lede">Claude on its own can read and write text. The extras on this page let it open a PDF, fill in a spreadsheet, read a scanned page or cut a recording, so here's everything on my machine, what each one does and which ones you need.</p>
+  <div class="meta">
+    <span><b>Checked</b> 3 Nov 2026</span>
+    <span><b>Start with</b> the VS Code setup guide, then come back here</span>
+  </div>
+  <div class="key">
+    <div><span class="chip need">Get it</span>Worth having from day one</div>
+    <div><span class="chip handy">Handy</span>Add it when the job comes up</div>
+    <div><span class="chip dev">Builders</span>Only if you build apps or run servers</div>
+  </div>
+
+  <section>
+    <h2>VS Code extensions</h2>
+    <p class="sub">Add these in VS Code: open the Extensions panel (the four squares on the left), search for the name and check the publisher matches before you click Install. Copycat extensions with similar names do turn up.</p>
+    <ul class="tools">
+      <li class="tool"><span class="name">Claude Code<small>anthropic.claude-code</small></span><span class="does">Claude in a panel beside your files. It reads the folder you have open, makes changes you can see and asks before it does anything big.</span><span class="chip need">Get it</span></li>
+      <li class="tool"><span class="name">PDF Preview<small>tomoki1207.pdf</small></span><span class="does">Opens a PDF in a VS Code tab so you can check what Claude quotes without switching apps. Claude reads PDFs without it: this one is for you.</span><span class="chip need">Get it</span></li>
+      <li class="tool"><span class="name">Rainbow CSV<small>mechatroner.rainbow-csv</small></span><span class="does">Colours each column of a CSV file so an export from Moodle, your CRM or a spreadsheet is readable before you hand it to Claude.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">YAML<small>redhat.vscode-yaml</small></span><span class="does">Underlines mistakes in YAML, the format a lot of settings files and skill files use, so a missing space doesn't break them without you noticing.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">Remote SSH<small>ms-vscode-remote.remote-ssh</small></span><span class="does">Opens a folder on another computer, a server for example, as if it were on your laptop. Claude then works on that machine. Comes with Remote SSH Editing and Remote Explorer.</span><span class="chip dev">Builders</span></li>
+      <li class="tool"><span class="name">Dev Containers and Container Tools<small>ms-vscode-remote.remote-containers · ms-azuretools.vscode-containers</small></span><span class="does">Runs a project inside Docker so it behaves the same on every machine, and lets you see what's running.</span><span class="chip dev">Builders</span></li>
+      <li class="tool"><span class="name">Kubernetes<small>ms-kubernetes-tools.vscode-kubernetes-tools</small></span><span class="does">For the client projects that run on a Kubernetes cluster. You won't need it.</span><span class="chip dev">Builders</span></li>
+    </ul>
+
+    <h3>Also on my machine, you don't need these</h3>
+    <ul class="tools quiet">
+      <li class="tool"><span class="name">Other AI assistants<small>openai.chatgpt · google.gemini-cli-vscode-ide-companion · google.google-antigravity · mistralai.mistral-vibe-code</small></span><span class="does">I keep ChatGPT, Gemini and Mistral installed to compare them with Claude for clients. One assistant is plenty when you're learning.</span><span class="chip dev">Builders</span></li>
+      <li class="tool"><span class="name">Claude Speak<small>built by Tutto, so it isn't on the marketplace</small></span><span class="does">Reads Claude's answers aloud with the Mac's built-in voices. I built it for myself, so ask if you'd like a copy.</span><span class="chip handy">Handy</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Command-line tools</h2>
+    <p class="sub">These are small programs Claude runs behind the scenes when you ask it to do something. You rarely type them yourself: you ask, Claude runs the command and shows you what it did.</p>
+
+    <h3>Everyday</h3>
+    <ul class="tools">
+      <li class="tool"><span class="name">Python<small>python3</small></span><span class="does">The language Claude reaches for when a job needs real work on a file: totting up a spreadsheet, filling in a Word template, splitting a PDF. Most of what's in the Python section below runs on it.</span><span class="chip need">Get it</span></li>
+      <li class="tool"><span class="name">Git<small>git</small></span><span class="does">Keeps a history of every change to a folder, so you can see what Claude changed and undo it. It's your safety net.</span><span class="chip need">Get it</span></li>
+      <li class="tool"><span class="name">Node.js<small>node · npm · npx</small></span><span class="does">Runs a lot of the connectors that plug Claude into other apps, and the websites we build together.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">uv<small>uv</small></span><span class="does">Installs Python and Python tools quickly and keeps each project's libraries separate, so one project can't break another.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">Homebrew<small>brew</small></span><span class="does">The Mac's app store for command-line tools. One line installs anything else on this list. On Windows, <code>winget</code> does the same job.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">GitHub CLI<small>gh</small></span><span class="does">Lets Claude save your work to GitHub, open a pull request or read an issue without you leaving VS Code.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">ripgrep and jq<small>rg · jq</small></span><span class="does">ripgrep searches thousands of files in a second. jq reads and reshapes JSON, the format most apps export. Claude uses both to find things fast.</span><span class="chip handy">Handy</span></li>
+    </ul>
+
+    <h3>Documents, scans and audio</h3>
+    <ul class="tools">
+      <li class="tool"><span class="name">Poppler<small>pdftotext · pdftoppm</small></span><span class="does">Pulls the text out of a PDF and turns pages into images. Helps Claude with long or awkward PDFs.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">Tesseract<small>tesseract · tesseract-lang</small></span><span class="does">Reads the words in a scan or a photo of a page (OCR), in many languages. Use it when a PDF is really a picture of a page.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">FFmpeg<small>ffmpeg</small></span><span class="does">Cuts, joins, shrinks and converts audio and video. Claude uses it to trim a recording or pull the sound out of a video.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">whisper.cpp<small>whisper-cli</small></span><span class="does">Turns a recording into a transcript on your own computer, so the audio never leaves it.</span><span class="chip handy">Handy</span></li>
+    </ul>
+
+    <h3>For building and running apps</h3>
+    <ul class="tools">
+      <li class="tool"><span class="name">Docker<small>docker</small></span><span class="does">Runs a database or a whole app in a sealed box on your laptop, so I can test a site before it goes live.</span><span class="chip dev">Builders</span></li>
+      <li class="tool"><span class="name">Azure CLI and Supabase CLI<small>az · supabase</small></span><span class="does">Talk to the cloud services some client projects run on.</span><span class="chip dev">Builders</span></li>
+      <li class="tool"><span class="name">llama.cpp and Hugging Face CLI<small>llama.cpp · hf</small></span><span class="does">Download and run open AI models on the laptop itself, for testing what works offline.</span><span class="chip dev">Builders</span></li>
+      <li class="tool"><span class="name">browser-use<small>browser-use (via uv)</small></span><span class="does">Lets an AI drive a web browser: click through a site, fill in a form, check a page works.</span><span class="chip dev">Builders</span></li>
+      <li class="tool"><span class="name">LiveKit CLI<small>livekit-cli</small></span><span class="does">For voice agents, the AI you can talk to on a call.</span><span class="chip dev">Builders</span></li>
+      <li class="tool"><span class="name">Others<small>codex · mistral-vibe · xcodegen · mas · even-terminal</small></span><span class="does">Other assistants' command-line versions, iPhone app tooling, Mac App Store installs and smart-glasses tooling. You can skip all of these.</span><span class="chip dev">Builders</span></li>
+    </ul>
+
+    <div class="install">
+      <div class="txt"><span class="label">Install the everyday set on a Mac</span><pre id="i1">brew install python git node uv gh ripgrep jq poppler tesseract tesseract-lang ffmpeg whisper-cpp</pre><p>Get Homebrew first from brew.sh. On Windows: <code>winget install Python.Python.3.13 Git.Git OpenJS.NodeJS.LTS astral-sh.uv GitHub.cli</code>, or ask Claude to do it.</p></div>
+      <button class="copy" type="button" data-target="i1">Copy</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Python libraries</h2>
+    <p class="sub">Add-ons for Python. Each one teaches Claude to handle one kind of file properly, so it edits your actual Excel or Word file and the layout stays as you left it.</p>
+
+    <h3>Office files</h3>
+    <ul class="tools">
+      <li class="tool"><span class="name">openpyxl<small>openpyxl · et_xmlfile</small></span><span class="does">Reads and writes Excel files, formulas and formatting included. This is how Claude fills in a spreadsheet you already have.</span><span class="chip need">Get it</span></li>
+      <li class="tool"><span class="name">python-docx<small>python-docx</small></span><span class="does">Reads and writes Word documents: headings, tables, styles. Claude uses it to turn your guides into clean text and to fill in a template.</span><span class="chip need">Get it</span></li>
+      <li class="tool"><span class="name">ReportLab<small>reportlab</small></span><span class="does">Makes new PDFs from scratch: certificates, handouts, a report in your colours.</span><span class="chip handy">Handy</span></li>
+    </ul>
+
+    <h3>PDFs, scans and images</h3>
+    <ul class="tools">
+      <li class="tool"><span class="name">PyMuPDF<small>PyMuPDF (imported as fitz)</small></span><span class="does">The fastest way to read, split, merge and search PDFs. It also pulls out the images and tells you which page a line is on.</span><span class="chip need">Get it</span></li>
+      <li class="tool"><span class="name">pdf2image and pytesseract<small>pdf2image · pytesseract</small></span><span class="does">Turn PDF pages into pictures, then read the text in them. Together with Poppler and Tesseract above, this handles scanned documents.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">Pillow<small>pillow</small></span><span class="does">Resizes, crops and converts images, screenshots for a handout for example.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">lxml<small>lxml</small></span><span class="does">Reads HTML and XML quickly. Word and Excel files are XML inside, so the other libraries lean on it.</span><span class="chip handy">Handy</span></li>
+    </ul>
+
+    <h3>Audio and the rest</h3>
+    <ul class="tools">
+      <li class="tool"><span class="name">Whisper<small>openai-whisper · torch · tiktoken · numba · numpy</small></span><span class="does">The Python version of the transcriber above. It's a big download (torch alone is over a gigabyte), so only add it if you transcribe a lot.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">Requests<small>requests · certifi · urllib3 · idna · charset-normalizer</small></span><span class="does">Fetches a web page or talks to an app's API. The four small ones come with it.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">Jinja2<small>Jinja2 · MarkupSafe</small></span><span class="does">Fills a template with your data, for example 30 personalised letters from one spreadsheet.</span><span class="chip handy">Handy</span></li>
+      <li class="tool"><span class="name">SymPy and NetworkX<small>sympy · mpmath · networkx</small></span><span class="does">Maths and maps of how things connect. They came in with other tools: you won't use them directly.</span><span class="chip dev">Builders</span></li>
+    </ul>
+
+    <div class="install">
+      <div class="txt"><span class="label">Install the office and PDF set</span><pre id="i2">python3 -m pip install openpyxl python-docx PyMuPDF reportlab pdf2image pytesseract pillow</pre><p>On Windows type <code>py</code> in place of <code>python3</code>.</p></div>
+      <button class="copy" type="button" data-target="i2">Copy</button>
+    </div>
+  </section>
+
+  <div class="tip">
+    <h2>The easy way to install any of this</h2>
+    <p>Ask Claude. Type "Install openpyxl and python-docx so you can work with my Excel and Word files" into the Claude Code panel. It checks what you already have, runs the commands and asks before each one, so you can say no.</p>
+    <p>Start with the ones marked Get it, then add the rest when a job needs them. If anything fails, copy the error into Claude or email me and we'll find 15 minutes.</p>
+  </div>
+
+  <p class="foot">Tutto.One, daniel@tutto.one</p>
+</main>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.target);
+    var text = el.textContent;
+    function done(ok) { btn.textContent = ok ? 'Copied' : 'Select'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); }
+    function select() { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done(false); }
+    try { navigator.clipboard.writeText(text).then(function () { done(true); }, select); } catch (e) { select(); }
+  });
+});
+</script>
+</body>
+</html>
