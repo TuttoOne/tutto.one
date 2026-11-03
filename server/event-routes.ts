@@ -101,6 +101,8 @@ function publicEvent(e: Event, c: Counts) {
     series: e.series,
     title: e.title,
     note: e.note,
+    titleEn: e.titleEn,
+    noteEn: e.noteEn,
     icon: e.icon,
     startsAt: e.startsAt,
     endsAt: e.endsAt,
@@ -177,8 +179,12 @@ async function emailPromoted(req: Request, e: Event, moved: EventBooking[]) {
   }
 }
 
+/** The page sends X-Locale: en when its toggle is on English. Everything else answers in French. */
+type Lang = "fr" | "en";
+const langOf = (req: Request): Lang => (req.get("x-locale") === "en" ? "en" : "fr");
+
 class BookingError extends Error {
-  constructor(message: string, public status = 400) { super(message); }
+  constructor(message: string, public status = 400, public en = message) { super(message); }
 }
 
 type BookResult = { booking: EventBooking; event: Event; token: string; already: boolean };
@@ -186,9 +192,9 @@ type BookResult = { booking: EventBooking; event: Event; token: string; already:
 async function book(eventId: number, input: z.infer<typeof eventBookingInputSchema>, opts: { force?: boolean; allowClosed?: boolean } = {}): Promise<BookResult> {
   return db.transaction(async (tx) => {
     const e = await lockEvent(tx, eventId);
-    if (!e) throw new BookingError("Cet atelier n'existe pas.", 404);
-    if (e.startsAt <= new Date()) throw new BookingError("Cet atelier a déjà eu lieu.");
-    if (!opts.allowClosed && e.status !== "open") throw new BookingError("Les réservations pour cet atelier sont fermées.");
+    if (!e) throw new BookingError("Cet atelier n'existe pas.", 404, "This atelier doesn't exist.");
+    if (e.startsAt <= new Date()) throw new BookingError("Cet atelier a déjà eu lieu.", 400, "This atelier has already taken place.");
+    if (!opts.allowClosed && e.status !== "open") throw new BookingError("Les réservations pour cet atelier sont fermées.", 400, "Booking for this atelier is closed.");
 
     const email = norm(input.email);
     const [existing] = await tx.select().from(eventBookings)
@@ -278,12 +284,25 @@ function tooMany(ip: string) {
   return hits.length > 10;
 }
 
-function fail(res: any, error: unknown, what: string) {
-  if (error instanceof z.ZodError) return res.status(400).json({ error: error.errors[0]?.message ?? "Saisie invalide" });
-  if (error instanceof BookingError) return res.status(error.status).json({ error: error.message });
+/** What the booking form's own checks say in English. The French is in the schema. */
+const FIELD_EN: Record<string, string> = { name: "Enter your name", email: "Enter a valid email address" };
+
+function fail(res: any, error: unknown, what: string, lang: Lang = "fr") {
+  const en = lang === "en";
+  if (error instanceof z.ZodError) {
+    const issue = error.errors[0];
+    const field = String(issue?.path[0] ?? "");
+    return res.status(400).json({ error: en ? FIELD_EN[field] ?? "Please check what you entered" : issue?.message ?? "Saisie invalide" });
+  }
+  if (error instanceof BookingError) return res.status(error.status).json({ error: en ? error.en : error.message });
   console.error(`[events] failed to ${what}:`, error);
-  return res.status(500).json({ error: "Une erreur s'est produite. Réessayez, ou écrivez à daniel@tutto.one." });
+  return res.status(500).json({ error: en ? "Something went wrong. Try again, or write to daniel@tutto.one." : "Une erreur s'est produite. Réessayez, ou écrivez à daniel@tutto.one." });
 }
+
+const GONE = {
+  fr: "Ce lien ne fonctionne plus. Il a peut-être été remplacé par celui d'un mail plus récent.",
+  en: "This link no longer works. It may have been replaced by the one in a more recent email.",
+};
 
 async function bookingFromToken(t: unknown) {
   const token = z.string().min(20).max(100).parse(t);
@@ -295,6 +314,8 @@ const adminEventInput = z.object({
   series: z.string().trim().regex(/^[a-z0-9-]+$/).max(60),
   title: z.string().trim().min(1).max(200),
   note: z.string().trim().max(300).optional().nullable(),
+  titleEn: z.string().trim().max(200).optional().nullable(),
+  noteEn: z.string().trim().max(300).optional().nullable(),
   icon: z.enum(MODULE_ICONS as [ModuleIcon, ...ModuleIcon[]]).optional().nullable(),
   startsAt: z.coerce.date(),
   minutes: z.coerce.number().int().min(15).max(600).default(90),
@@ -315,16 +336,16 @@ export function registerEventRoutes(app: Express) {
       const counts = await countsFor(rows.map((e) => e.id));
       res.json({ series, maxSeats: MAX_SEATS_PER_BOOKING, events: rows.map((e) => publicEvent(e, counts.get(e.id)!)) });
     } catch (error) {
-      fail(res, error, "list events");
+      fail(res, error, "list events", langOf(req));
     }
   });
 
   app.post("/api/events/:slug/book", async (req, res) => {
     try {
-      if (tooMany(req.ip ?? "?")) return res.status(429).json({ error: "Trop de réservations depuis cette connexion. Réessayez dans une heure." });
+      if (tooMany(req.ip ?? "?")) return res.status(429).json({ error: langOf(req) === "en" ? "Too many bookings from this connection. Try again in an hour." : "Trop de réservations depuis cette connexion. Réessayez dans une heure." });
       const input = eventBookingInputSchema.parse(req.body);
       const [e] = await db.select().from(events).where(eq(events.slug, String(req.params.slug)));
-      if (!e || e.status === "hidden") throw new BookingError("Cet atelier n'existe pas.", 404);
+      if (!e || e.status === "hidden") throw new BookingError("Cet atelier n'existe pas.", 404, "This atelier doesn't exist.");
       const r = await book(e.id, input);
       if (r.already) {
         return res.json({
@@ -346,7 +367,7 @@ export function registerEventRoutes(app: Express) {
         `${siteUrl(req)}/admin`,
       );
     } catch (error) {
-      fail(res, error, "book");
+      fail(res, error, "book", langOf(req));
     }
   });
 
@@ -355,7 +376,7 @@ export function registerEventRoutes(app: Express) {
   app.get("/api/events/booking", async (req, res) => {
     try {
       const b = await bookingFromToken(req.query.t);
-      if (!b) return res.status(404).json({ error: "Ce lien ne fonctionne plus. Il a peut-être été remplacé par celui d'un mail plus récent." });
+      if (!b) return res.status(404).json({ error: GONE[langOf(req)] });
       const [e] = await db.select().from(events).where(eq(events.id, b.eventId));
       const c = (await countsFor([e.id])).get(e.id)!;
       res.json({
@@ -366,17 +387,17 @@ export function registerEventRoutes(app: Express) {
         event: publicEvent(e, c),
       });
     } catch (error) {
-      fail(res, error, "load a booking");
+      fail(res, error, "load a booking", langOf(req));
     }
   });
 
   app.post("/api/events/cancel", async (req, res) => {
     try {
       const b = await bookingFromToken(req.body?.t);
-      if (!b) return res.status(404).json({ error: "Ce lien ne fonctionne plus. Il a peut-être été remplacé par celui d'un mail plus récent." });
+      if (!b) return res.status(404).json({ error: GONE[langOf(req)] });
       if (b.status === "cancelled") return res.json({ ok: true, status: "cancelled" });
       const r = await cancel(b.id);
-      if (!r) return res.status(404).json({ error: "Réservation introuvable." });
+      if (!r) return res.status(404).json({ error: langOf(req) === "en" ? "Booking not found." : "Réservation introuvable." });
       res.json({ ok: true, status: "cancelled" });
       const token = randomBytes(24).toString("base64url");
       void sendTo(b.email, buildCancelledEmail({ ...mailFor(req, r.event, b, token), wasWaitlist: r.wasWaitlist }));
@@ -387,7 +408,7 @@ export function registerEventRoutes(app: Express) {
       );
       void emailPromoted(req, r.event, r.moved);
     } catch (error) {
-      fail(res, error, "cancel");
+      fail(res, error, "cancel", langOf(req));
     }
   });
 
@@ -411,7 +432,7 @@ export function registerEventRoutes(app: Express) {
       const [taken] = await db.select({ id: events.id }).from(events).where(eq(events.slug, slug));
       if (taken) slug = `${slug}-${randomBytes(2).toString("hex")}`;
       const [row] = await db.insert(events).values({
-        slug, series: i.series, title: i.title, note: i.note || null, icon: i.icon || null,
+        slug, series: i.series, title: i.title, note: i.note || null, titleEn: i.titleEn || null, noteEn: i.noteEn || null, icon: i.icon || null,
         startsAt: i.startsAt, endsAt: new Date(i.startsAt.getTime() + i.minutes * 60 * 1000),
         venue: i.venue, address: i.address, capacity: i.capacity, status: i.status,
       }).returning();
@@ -434,6 +455,8 @@ export function registerEventRoutes(app: Express) {
         const [after] = await tx.update(events).set({
           ...(i.title !== undefined && { title: i.title }),
           ...(i.note !== undefined && { note: i.note || null }),
+          ...(i.titleEn !== undefined && { titleEn: i.titleEn || null }),
+          ...(i.noteEn !== undefined && { noteEn: i.noteEn || null }),
           ...(i.icon !== undefined && { icon: i.icon || null }),
           ...(i.venue !== undefined && { venue: i.venue }),
           ...(i.address !== undefined && { address: i.address }),

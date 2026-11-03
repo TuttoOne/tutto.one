@@ -76,7 +76,7 @@ function EventRow({ e }: { e: AdminEvent }) {
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [form, setForm] = useState({
-    title: e.title, note: e.note ?? "", icon: e.icon ?? "", startsAt: toLocalInput(e.startsAt), capacity: String(e.capacity),
+    title: e.title, note: e.note ?? "", titleEn: e.titleEn ?? "", noteEn: e.noteEn ?? "", icon: e.icon ?? "", startsAt: toLocalInput(e.startsAt), capacity: String(e.capacity),
     venue: e.venue, address: e.address, status: e.status,
   });
   const [add, setAdd] = useState({ name: "", email: "", company: "", seats: "1", force: false, notify: true });
@@ -89,7 +89,7 @@ function EventRow({ e }: { e: AdminEvent }) {
 
   const save = useMutation({
     mutationFn: () => api("PATCH", `/api/admin/events/${e.id}`, {
-      title: form.title, note: form.note, icon: form.icon || null, startsAt: fromLocalInput(form.startsAt), capacity: Number(form.capacity),
+      title: form.title, note: form.note, titleEn: form.titleEn, noteEn: form.noteEn, icon: form.icon || null, startsAt: fromLocalInput(form.startsAt), capacity: Number(form.capacity),
       venue: form.venue, address: form.address, status: form.status,
     }),
     onSuccess: (r) => { setMsg(`Saved.${moved(r.moved)}`); refresh(); },
@@ -202,6 +202,8 @@ function EventRow({ e }: { e: AdminEvent }) {
             <div className="grid gap-2 sm:grid-cols-2">
               <div><Label>Title</Label><Input value={form.title} onChange={(ev) => setForm({ ...form, title: ev.target.value })} /></div>
               <div><Label>The task done live (one line)</Label><Input value={form.note} onChange={(ev) => setForm({ ...form, note: ev.target.value })} /></div>
+              <div><Label>Title in English</Label><Input value={form.titleEn} placeholder="Empty shows the French" onChange={(ev) => setForm({ ...form, titleEn: ev.target.value })} /></div>
+              <div><Label>The task in English</Label><Input value={form.noteEn} placeholder="Empty shows the French" onChange={(ev) => setForm({ ...form, noteEn: ev.target.value })} /></div>
               <div>
                 <Label>Icon</Label>
                 <select className="w-full h-9 rounded-md border bg-background px-2 text-sm" value={form.icon} onChange={(ev) => setForm({ ...form, icon: ev.target.value })}>
@@ -236,7 +238,7 @@ function NewEvent({ last }: { last?: AdminEvent }) {
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [f, setF] = useState({
-    series: last?.series ?? "rieuzal", title: "", note: "", startsAt: "",
+    series: last?.series ?? "rieuzal", title: "", note: "", titleEn: "", noteEn: "", startsAt: "",
     capacity: String(last?.capacity ?? 15), venue: last?.venue ?? "", address: last?.address ?? "", status: "open",
   });
   const create = useMutation({
@@ -252,6 +254,8 @@ function NewEvent({ last }: { last?: AdminEvent }) {
         <div><Label>Series (its page is /series)</Label><Input value={f.series} onChange={(e) => setF({ ...f, series: e.target.value })} /></div>
         <div><Label>Title</Label><Input value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} /></div>
         <div><Label>The task done live</Label><Input value={f.note} onChange={(e) => setF({ ...f, note: e.target.value })} /></div>
+        <div><Label>Title in English</Label><Input value={f.titleEn} onChange={(e) => setF({ ...f, titleEn: e.target.value })} /></div>
+        <div><Label>The task in English</Label><Input value={f.noteEn} onChange={(e) => setF({ ...f, noteEn: e.target.value })} /></div>
         <div><Label>Starts (Paris time, 90 minutes)</Label><Input type="datetime-local" value={f.startsAt} onChange={(e) => setF({ ...f, startsAt: e.target.value })} /></div>
         <div><Label>Places</Label><Input type="number" min={1} value={f.capacity} onChange={(e) => setF({ ...f, capacity: e.target.value })} /></div>
         <div><Label>Venue</Label><Input value={f.venue} onChange={(e) => setF({ ...f, venue: e.target.value })} /></div>

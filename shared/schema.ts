@@ -307,6 +307,9 @@ export const events = pgTable("events", {
   title: text("title").notNull(),
   /** One line under the title: the task done live that evening. */
   note: text("note"),
+  /** The title and note in English, for the page's EN toggle. Empty falls back to the French. */
+  titleEn: text("title_en"),
+  noteEn: text("note_en"),
   /** Which hand-drawn icon the page shows beside it (a ModuleIcon name, see shared/learn-programmes.ts). */
   icon: text("icon"),
   startsAt: timestamp("starts_at", { withTimezone: true }).notNull(),

@@ -1362,7 +1362,7 @@ export const copy = {
    */
   calendar: {
     fromPraxisTitle: {
-      en: "Ateliers IA à Rieuzal: the group version, in French",
+      en: "AI ateliers at Rieuzal: the group version, in French",
       fr: "Ateliers IA à Rieuzal : la version collective",
     },
     fromPraxisBody: {

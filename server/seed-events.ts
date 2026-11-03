@@ -16,19 +16,19 @@ import type { ModuleIcon } from "@shared/learn-programmes";
 const VENUE = "Manoir de Rieuzal";
 const ADDRESS = "370 Chemin de Rieuzal, 46130 Loubressac";
 
-type SeedEvent = { date: string; icon: ModuleIcon; offset: string; title: string; note: string; status?: "open" | "hidden" };
+type SeedEvent = { date: string; icon: ModuleIcon; offset: string; title: string; note: string; titleEn: string; noteEn: string; status?: "open" | "hidden" };
 
 // The six ateliers announced on the poster (22 October 2026). Daniel plans six at a
 // time, so this list is the whole public programme: any other Rieuzal row is hidden
 // below. Every atelier works with Mistral, then takes one theme. February is left
 // out for the zone C school holidays (6 to 22 February 2027).
 const RIEUZAL: SeedEvent[] = [
-  { date: "2026-11-24", icon: "terminal", offset: "+01:00", title: "Un dossier pour que l'agent travaille seul", note: "Préparer un dossier de travail pour qu'un agent Mistral avance sans vous" },
-  { date: "2026-12-10", icon: "gear", offset: "+01:00", title: "Une machine toujours allumée", note: "Ordinateur ou serveur : où faire tourner vos agents" },
-  { date: "2027-01-12", icon: "magnifier", offset: "+01:00", title: "La sécurité", note: "Ce que l'agent peut voir, faire et envoyer" },
-  { date: "2027-01-28", icon: "rules", offset: "+01:00", title: "Votre charte IA", note: "Les règles de votre entreprise pour l'IA" },
-  { date: "2027-03-02", icon: "scorecard", offset: "+01:00", title: "Une grille pour vos agents", note: "Noter le travail de vos agents" },
-  { date: "2027-03-18", icon: "pencil", offset: "+01:00", title: "Vos agents, comme des sous-traitants", note: "Les briefer, les suivre et vérifier leur travail" },
+  { date: "2026-11-24", icon: "terminal", offset: "+01:00", title: "Un dossier pour que l'agent travaille seul", note: "Préparer un dossier de travail pour qu'un agent Mistral avance sans vous", titleEn: "A folder so the agent works on its own", noteEn: "Set up a working folder so a Mistral agent gets on without you" },
+  { date: "2026-12-10", icon: "gear", offset: "+01:00", title: "Une machine toujours allumée", note: "Ordinateur ou serveur : où faire tourner vos agents", titleEn: "A machine that stays on", noteEn: "Computer or server: where to run your agents" },
+  { date: "2027-01-12", icon: "magnifier", offset: "+01:00", title: "La sécurité", note: "Ce que l'agent peut voir, faire et envoyer", titleEn: "Security", noteEn: "What the agent can see, do and send" },
+  { date: "2027-01-28", icon: "rules", offset: "+01:00", title: "Votre charte IA", note: "Les règles de votre entreprise pour l'IA", titleEn: "Your AI policy", noteEn: "Your company's rules for AI" },
+  { date: "2027-03-02", icon: "scorecard", offset: "+01:00", title: "Une grille pour vos agents", note: "Noter le travail de vos agents", titleEn: "A scorecard for your agents", noteEn: "Mark the work your agents do" },
+  { date: "2027-03-18", icon: "pencil", offset: "+01:00", title: "Vos agents, comme des sous-traitants", note: "Les briefer, les suivre et vérifier leur travail", titleEn: "Your agents as subcontractors", noteEn: "Brief them, keep track of them and check their work" },
 ];
 
 /** The 22 October plan replaced every theme. Rows still showing one of these get the new one. */
@@ -79,6 +79,8 @@ export async function seedEvents(): Promise<void> {
       series: "rieuzal",
       title: e.title,
       note: e.note,
+      titleEn: e.titleEn,
+      noteEn: e.noteEn,
       icon: e.icon,
       startsAt: new Date(`${e.date}T18:30:00${e.offset}`),
       endsAt: new Date(`${e.date}T20:00:00${e.offset}`),
@@ -118,6 +120,10 @@ export async function seedEvents(): Promise<void> {
     // Icons came after themes: fill in any evening that has none yet.
     await db.update(events).set({ icon: e.icon })
       .where(and(eq(events.slug, `rieuzal-${e.date}`), isNull(events.icon)));
+    // English came later still. Only while the French is still the seeded text,
+    // so a theme rewritten in admin never gets a translation of the old one.
+    await db.update(events).set({ titleEn: e.titleEn, noteEn: e.noteEn })
+      .where(and(eq(events.slug, `rieuzal-${e.date}`), isNull(events.titleEn), eq(events.title, e.title)));
   }
 }
 

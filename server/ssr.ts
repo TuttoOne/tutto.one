@@ -70,7 +70,9 @@ async function renderPage(
     if (res.ok) data[JSON.stringify(key)] = await res.json();
   }
 
-  const body = renderer.render({ key: page.key, path: page.path, locale: "en", data });
+  // A page written for French readers (/rieuzal) renders in French; the
+  // browser then follows the visitor's own toggle.
+  const body = renderer.render({ key: page.key, path: page.path, locale: page.lang ?? "en", data });
   const post = page.key === "blog-post" ? (Object.values(data)[0] as BlogPostData | undefined) : undefined;
 
   const title = post
