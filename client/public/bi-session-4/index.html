@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Background Italia session 4: scorecards, CLAUDE.md, PDFs into text, VS Code workspaces, the design system and what to bring to session 5.">
+<title>Session 4 handout | Background Italia | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  /* Background Italia session 4 handout in the Praxis house style (same tokens as /session-3 and /hsa-session-2).
+     Layout: one document card; what worked, the folder, then one section per topic with prompts, then this week. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #5b6b7c; --slate-soft: #e8edf2;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a;
+      --pass: #6fcf97; --pass-soft: #1d3326; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a;
+    --pass: #6fcf97; --pass-soft: #1d3326; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  a { color: var(--amber-ink); text-underline-offset: .15em; }
+  a:hover { color: var(--amber); }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 3px; }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; color: var(--ink); margin: 0 0 28px; }
+  .brand span { color: var(--amber); }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .top .brand { margin: 0; text-decoration: none; }
+  .top a.back { font-size: 14px; color: var(--amber); text-underline-offset: 0.15em; }
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 58ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 44px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { font: 700 17px/1.3 var(--display); margin: 0; text-wrap: balance; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 64ch; }
+  p { max-width: 68ch; }
+  .foot { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+  code { font: 500 0.92em var(--mono); background: var(--panel); padding: 1px 5px; border-radius: 4px; }
+
+  /* Contents */
+  .toc { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; counter-reset: s; }
+  .toc li { counter-increment: s; display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; min-width: 0; }
+  .toc li::before { content: counter(s); color: var(--amber); font: 700 15px/1.6 var(--display); min-width: 1.5ch; font-variant-numeric: tabular-nums; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { color: var(--amber); }
+
+  /* Two cards side by side */
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .card { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .card p { font-size: 15px; color: var(--ink-2); margin: 8px 0 0; }
+  .card .who { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+  .card.worked { background: var(--pass-soft); border-color: transparent; }
+  .card.next { background: var(--amber-soft); border-color: transparent; }
+
+  /* Folder tree */
+  .tree { background: var(--panel); border-radius: 10px; padding: 18px 20px; overflow-x: auto; }
+  .tree pre { margin: 0; font: 500 14px/1.75 var(--mono); color: var(--ink); }
+  .tree .c { color: var(--muted); }
+  .tree .d { color: var(--amber-ink); font-weight: 700; }
+
+  /* Prompts */
+  .prompts { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+  .prompt { background: var(--panel); border-radius: 10px; padding: 16px 20px; }
+  .prompt .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .prompt code { display: block; background: none; padding: 0; font: 500 clamp(14px, 2vw, 16.5px)/1.5 var(--mono); color: var(--ink); margin-top: 6px; overflow-wrap: anywhere; }
+  .prompt p { margin: 8px 0 0; font-size: 14px; color: var(--ink-2); }
+
+  /* Lists */
+  ul.plain { margin: 10px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: var(--ink-2); }
+  ol.steps { margin: 12px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; color: var(--ink-2); }
+  ol.steps li::marker { color: var(--amber); font: 700 15px var(--display); }
+  ol.steps b { color: var(--ink); }
+
+  /* Tables */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 620px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font: 700 12px/1.3 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+  tr:last-child td { border-bottom: 0; }
+  td { color: var(--ink-2); }
+  td b { color: var(--ink); }
+
+  /* Scorecard ladder */
+  .ladder { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .ladder li { min-width: 0; background: var(--panel); border-radius: 8px; padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
+  .ladder li:nth-child(2) { background: var(--slate-soft); }
+  .ladder li:nth-child(3) { background: var(--amber-soft); }
+  .ladder .when { font: 700 12px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber-ink); }
+  .ladder p { font-size: 14px; line-height: 1.5; color: var(--ink-2); margin: 0; }
+  .ladder .eg { font: italic 400 15px/1.45 var(--serif); color: var(--ink); }
+
+  .callout { border-left: 3px solid var(--amber); background: var(--amber-soft); padding: 14px 18px; border-radius: 0 10px 10px 0; margin-top: 18px; }
+  .callout p { margin: 0; font-size: 15px; }
+  .callout p + p { margin-top: 8px; }
+
+  /* Bring list */
+  .bring { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0; }
+  .bring li { min-width: 0; background: var(--panel); border-radius: 8px; padding: 12px 14px; font-size: 14px; color: var(--ink-2); }
+  .bring b { display: block; font: 700 15px/1.3 var(--display); color: var(--ink); margin-bottom: 4px; }
+
+  @media (max-width: 860px) {
+    .ladder, .bring { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 620px) {
+    .doc { padding: 26px 18px; }
+    .two, .toc { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Praxis programme · Session 4 · Brief it once</p>
+  <h1>Write it down once, so it's right every time</h1>
+  <p class="lede">What we covered on Wednesday, built around the work you brought: Gabriel's report from Spain and Alice and Riccardo's Italy and France job. Keep it open while you set up your folders this week.</p>
+  <div class="meta">
+    <span><b>Wed 4 November 2026</b>, session 4 of 8</span>
+    <span>Next: <b>Wed 11 November</b>, 11:00 to 12:00 Milan, Tools</span>
+  </div>
+
+  <ol class="toc">
+    <li><a href="#worked">What worked, and what to fix</a></li>
+    <li><a href="#folder">One folder per job</a></li>
+    <li><a href="#claudemd">CLAUDE.md and your voice</a></li>
+    <li><a href="#scorecard">Scorecards</a></li>
+    <li><a href="#pdfs">PDFs into text</a></li>
+    <li><a href="#workspace">Workspaces in VS Code</a></li>
+    <li><a href="#design">Your brand as a design system</a></li>
+    <li><a href="#week">This week, and session 5</a></li>
+  </ol>
+
+  <section id="worked">
+    <h2>What worked, and what to fix</h2>
+    <p class="sub">You've each built the start of a tool already. Both examples show the same thing: the result is as good as what you put in the folder and what you write down once.</p>
+    <div class="two">
+      <div class="card worked">
+        <p class="who">Gabriel · report in Italian</p>
+        <h3>A sample report did most of the work</h3>
+        <p>All the documents in one folder, one past report as the example and a prompt asking it to copy the format and write in native Italian in our narrative style. The first draft got the style and the layout right and needed small edits.</p>
+        <p>He asked it to double check and still found small mistakes. A general "check your work" isn't enough. The checks need writing down one by one. That's your scorecard.</p>
+      </div>
+      <div class="card next">
+        <p class="who">Alice and Riccardo · Italy and France</p>
+        <h3>Reviewing went well, adding went too far</h3>
+        <p>It compared the Italian documents and the French subcontractor's report and found what was missing. When Alice asked it to add some points, it wrote far more detail than we needed and Riccardo had to cut it back by hand.</p>
+        <p>Next time, ask it to mark everything it adds (tracked changes or a highlight), and put a line on length in <code>CLAUDE.md</code> so it stays short without being told.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="folder">
+    <h2>One folder per job</h2>
+    <p class="sub">This is how the pieces from today fit together. The case folder changes every time. The starting context and the design system stay in one place and get linked in, so you only keep one copy of each.</p>
+    <div class="tree"><pre><span class="d">case-folder/</span>              <span class="c">one per job, named after the case</span>
+  CLAUDE.md               <span class="c">read first, in every new chat</span>
+  <span class="d">sources/</span>                <span class="c">the case documents: each PDF and its .md text</span>
+  <span class="d">output/</span>                 <span class="c">what Claude writes</span>
+
+<span class="d">starting-context/</span>         <span class="c">one copy on your computer, linked in the workspace</span>
+  INSTRUCTIONS.md         <span class="c">the standing brief: how this job is done</span>
+  VOICE.md                <span class="c">how Background Italia writes (or keep it in CLAUDE.md)</span>
+  SCORECARD.md            <span class="c">the checks every draft has to pass</span>
+  <span class="d">examples/</span>               <span class="c">a good past report, as text</span>
+
+<span class="d">design-system/</span>            <span class="c">your brand, made in the Claude app, linked the same way</span></pre></div>
+    <p class="foot">This follows the starter kit: <code>INSTRUCTIONS.md</code>, <code>SCORECARD.md</code> and <code>examples/</code> are the files in <code>system-template/</code>. Don't worry about getting the layout perfect. Use it, change it and tidy it with Claude when it gets messy.</p>
+  </section>
+
+  <section id="claudemd">
+    <h2>CLAUDE.md and your voice</h2>
+    <p class="sub">Claude reads <code>CLAUDE.md</code> on its own before it does anything in that folder, in every new chat. You don't need to tell it to. Keep the name <code>CLAUDE.md</code>, and copy it into each new folder where you want the same rules.</p>
+    <p>Whatever you keep correcting by hand belongs in this file. If it writes too much, have it describe a short piece of your writing and turn that description into instructions for itself. It understands its own words best, so let it write them and you approve them. Your voice can live here too, or in a <code>VOICE.md</code> next to it.</p>
+    <div class="prompts">
+      <div class="prompt">
+        <span class="label">Make it write shorter</span>
+        <code>Read the short report in examples/. Describe how it's written: sentence length, how much detail, how it opens and closes. Then write instructions for yourself that make your writing as short as this, and add them to CLAUDE.md for me to approve.</code>
+      </div>
+      <div class="prompt">
+        <span class="label">See what it added</span>
+        <code>When you add anything to a report I've written, highlight it so I can see what's yours. Add this rule to CLAUDE.md.</code>
+      </div>
+    </div>
+    <div class="callout">
+      <p>When results start to get worse in a long chat, start a new one. It begins again from <code>CLAUDE.md</code> with a clean head.</p>
+      <p>Every few months, give your old <code>.md</code> files back to Claude and ask it to make them shorter and easier to use. The tools change, so your files should too.</p>
+    </div>
+  </section>
+
+  <section id="scorecard">
+    <h2>Scorecards</h2>
+    <p class="sub">A scorecard is the job description you'd give a new hire, with the KPIs you'd judge them on. Gabriel called them contracts, which is close. It's as small or as big as the job needs: the more you want it to run on its own, the more exact it has to be.</p>
+    <ol class="ladder">
+      <li>
+        <span class="when">Simple</span>
+        <h3>A list in SCORECARD.md</h3>
+        <p>One to ten things a good draft has. You check it yourself as you read, on the train if that's when you have time.</p>
+        <p class="eg">No invented facts. Every finding has its source. Written in Italian throughout.</p>
+      </li>
+      <li>
+        <span class="when">Measured</span>
+        <h3>Checks with a number</h3>
+        <p>For review work where a client will spot a gap. Give it a threshold it has to reach, and a way to count.</p>
+        <p class="eg">Every document in sources/ is cited at least once. Every date matches its source.</p>
+      </li>
+      <li>
+        <span class="when">Assessment</span>
+        <h3>A table it fills in first</h3>
+        <p>Before it drafts, it counts the documents, lists the key facts and flags the holes. This is what an agent runs on its own across several cases.</p>
+        <p class="eg">Documents 1 to 5 are numbered in sequence. Document 4 is missing.</p>
+      </li>
+    </ol>
+    <p>How hard you check depends on the report too. Alice's rule from your brainstorm is a good first line: on a long report, check the key issues and findings. On a short one, check every detail, because the client accepts fewer mistakes.</p>
+    <p>The best scorecards come from your own corrections. Gabriel already gives back the revised version and asks Claude to update its instructions. Do that and also say why you changed it, the way you'd brief a subcontractor. You can dictate it. Then share the file, and anyone on the team can run the job to the same standard.</p>
+    <div class="prompts">
+      <div class="prompt">
+        <span class="label">After you correct a draft</span>
+        <code>My corrected version is in output/final.docx. Compare it with your draft. I changed it because &lt;say why&gt;. Update SCORECARD.md so the next draft passes these checks without me making the same changes.</code>
+      </div>
+    </div>
+    <p class="foot">For more on how to think about a scorecard, use the <a href="/agent-scorecard">agent scorecard tool</a>.</p>
+  </section>
+
+  <section id="pdfs">
+    <h2>PDFs into text</h2>
+    <p class="sub">PDFs are messy underneath, so Claude has to guess at what's in them and can leave things out. They're also heavy, and copying them into every case folder adds up fast.</p>
+    <p>Have Claude convert each one to a text (<code>.md</code>) file once, then check the text against the original. The text version is what you keep in your starting context and examples. Keep the PDF only where you need the original.</p>
+    <div class="prompts">
+      <div class="prompt">
+        <span class="label">Convert and check</span>
+        <code>Convert every PDF in sources/ to a .md file with the same name. Keep the tables as tables. Then compare each .md with its PDF and list anything missing: pages, tables, numbers, footnotes.</code>
+        <p>For work that has to be complete, like litigation, put the comparison in your scorecard so it runs every time. You can also add it to <code>CLAUDE.md</code>: "When I add a PDF, convert it to text and check nothing was lost."</p>
+      </div>
+    </div>
+    <p class="foot">A big archive of old files costs a lot to convert this way. If you get there, ask me: there are cheaper ways to run it in the background.</p>
+  </section>
+
+  <section id="workspace">
+    <h2>Workspaces in VS Code</h2>
+    <p class="sub">Gabriel was copying his starting-context folder into every new case. A workspace lets each case see that one folder without copying it.</p>
+    <ol class="steps">
+      <li>Keep <code>starting-context/</code> (and later <code>design-system/</code>) in one place on your computer, outside your case folders.</li>
+      <li>Open the case folder in VS Code as usual.</li>
+      <li>Drag <code>starting-context/</code> from File Explorer into the VS Code side panel. When it asks, choose <b>Add Folder to Workspace</b> so nothing gets copied.</li>
+      <li>Both folders now sit in the side panel. Right-click a file, choose <b>Copy Path</b> and paste it into the chat when you want Claude to use it.</li>
+      <li>When you close, VS Code asks to save the workspace. Say yes. It saves one small file that remembers which folders this case can see.</li>
+    </ol>
+    <p class="foot">Nothing moves on your computer. If you change a file in <code>starting-context/</code>, every case that links it sees the change.</p>
+  </section>
+
+  <section id="design">
+    <h2>Your brand as a design system</h2>
+    <p class="sub">The same idea as the PDFs, for how things look. Give Claude your brand guidelines, presentations, Word files, PDFs or your website. It turns them into a design system: small, exact files for your logo, colours, fonts and spacing.</p>
+    <div class="two">
+      <div class="card">
+        <h3>What it's for</h3>
+        <ul class="plain">
+          <li>Reports and proposals that look the same every time</li>
+          <li>Layout rules you'd otherwise fix by hand, like "a table never splits across two pages"</li>
+          <li>A separate version where Italy and France look different</li>
+          <li>LinkedIn posts in your style, built from your old posts</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Where to find it</h3>
+        <ul class="plain">
+          <li>You make it in the Claude desktop app or at claude.ai. It isn't part of VS Code</li>
+          <li>Claude Design has moved into Artifacts, which is why Alice couldn't find it. The old claude.ai/design closes on 14 December 2026</li>
+          <li>Download the folder and link it into your workspace like <code>starting-context/</code></li>
+          <li>Any web designer could use it, and so can Mistral or another AI</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <p>The setup guide takes about 15 minutes and works on your Pro plan: <a href="/design-system">Create a design system in Claude</a>. There's a <a href="/design-system/praxis-design-system.md">version for your AI</a> too, if you'd rather it walked you through.</p>
+      <p>Alice, I'll call you for 10 minutes this week to set it up for the team.</p>
+    </div>
+  </section>
+
+  <section id="week">
+    <h2>This week, and session 5</h2>
+    <p class="sub">Everyone: write a scorecard for one of your jobs, with a number wherever you can count something. Use your instructions on one real job and note what you still had to correct.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Who</th><th>This week</th><th>Bring on 11 November</th></tr></thead>
+      <tbody>
+        <tr><td><b>Alice</b></td><td>Add the "write shorter" and "highlight what you add" rules to <code>CLAUDE.md</code>. Set up the design system with me</td><td>A proposal and the report that came from it</td></tr>
+        <tr><td><b>Gabriel</b></td><td>Convert the PDFs in your starting context to text and run the check. Move <code>starting-context/</code> out of your case folders and link it in a workspace</td><td>Your litigation and directorship chart, with its scorecard</td></tr>
+        <tr><td><b>Riccardo</b></td><td>Try your next translation from one folder with a <code>CLAUDE.md</code></td><td>A translation: the source and your final version</td></tr>
+        <tr><td><b>Manuela</b></td><td>Collect three or four posts you'd like it to write like</td><td>Your LinkedIn and social media examples</td></tr>
+        <tr><td><b>Veronica</b></td><td>Try your next translation or interview report the same way</td><td>A translation or an interview report, before and after</td></tr>
+      </tbody>
+    </table></div>
+    <p class="foot">Redacted, dummy or public material only, as always.</p>
+
+    <h3 style="margin-top: 32px">Session 5: Tools</h3>
+    <p>Next week I'll show you my own setup and a reference guide to everything my system is connected to, past Gmail, Google Drive and the browser, including a few small Python scripts. Then we look at what we can connect to your accounts properly. Also bring:</p>
+    <ul class="bring">
+      <li><b>Your template</b>The report, proposal or chart layout you fill in by hand</li>
+      <li><b>Your copy and paste</b>The files you copy from every week, and where they live</li>
+      <li><b>What you corrected</b>Your notes from this week's real job</li>
+    </ul>
+    <p class="foot">Stuck on any of this? Reply to any of my emails and we'll do a short call before Wednesday.</p>
+  </section>
+</main>
+</div>
+</body>
+</html>

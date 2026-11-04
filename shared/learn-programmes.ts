@@ -73,6 +73,8 @@ const M = {
   toolkit: { label: "The Claude toolkit: extensions, tools and libraries", href: "/toolkit" },
   session3: { label: "Session 3 handout: is the work good?", href: "/session-3" },
   hsaSession2: { label: "Session 2 handout: getting your content ready", href: "/hsa-session-2" },
+  biSession4: { label: "Session 4 handout: write it down once", href: "/bi-session-4" },
+  designSystem: { label: "Design system guide: brief Claude on your brand", href: "/design-system", claude: "/design-system/praxis-design-system.md" },
 } satisfies Record<string, Material>;
 
 const AI_FLUENT_TEAM: Programme = {
@@ -113,7 +115,7 @@ const AI_FLUENT_TEAM: Programme = {
       what: "Turn each job on the list into standing instructions: the audience, the constraints, an example of good. Written once, read by the assistant every time, so nobody explains the same job twice.",
       leaveWith: "Standing briefs for your top three jobs",
       practice: "Use your standing brief on a real job this week and write down what you still had to correct.",
-      materials: [M.fluency, M.skillFile],
+      materials: [M.fluency, M.skillFile, M.designSystem],
     },
     {
       number: 5,
@@ -189,7 +191,7 @@ const BACKGROUND_ITALIA: Programme = {
       what: "Teach it to write like you and stop sounding like Claude. We take samples of your own writing, have it describe your style and put that where it's read every time. Your report-review prompt becomes standing instructions for the whole team.",
       leaveWith: "Standing instructions for your 3 key jobs",
       practice: "Use the standing instructions on a real job this week and write down what you still had to correct.",
-      materials: [M.fluency, M.skillFile],
+      materials: [M.biSession4, M.designSystem, M.fluency, M.skillFile],
     },
     {
       number: 5,

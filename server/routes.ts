@@ -314,6 +314,14 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "vscode-setup", "index.html"));
   });
 
+  // Design system guide (making one from the Claude app home, or from code with Claude Code):
+  // same arrangement, link only, not indexed. Its screenshots are plain static files under /design-system/img/.
+  app.get(["/design-system", "/design-system/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "design-system", "index.html"));
+  });
+
+
   // Session 2 handout (Define good: Claude in VS Code, the brand file, PDF, Excel, Word and a chart):
   // same arrangement, link only, not indexed.
   app.get(["/session-2", "/session-2/"], (_req, res) => {
@@ -333,6 +341,13 @@ export async function registerRoutes(
   app.get(["/hsa-session-2", "/hsa-session-2/"], (_req, res) => {
     res.setHeader("X-Robots-Tag", "noindex, nofollow");
     res.sendFile(path.join(deckDir, "hsa-session-2", "index.html"));
+  });
+
+  // Background Italia session 4 handout (scorecards, CLAUDE.md, PDFs into text, workspaces, the design system):
+  // same arrangement, link only, not indexed.
+  app.get(["/bi-session-4", "/bi-session-4/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "bi-session-4", "index.html"));
   });
 
   // The toolkit (VS Code extensions, command-line tools and Python libraries, and which to get):
