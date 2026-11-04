@@ -321,6 +321,12 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "design-system", "index.html"));
   });
 
+  // Workspaces guide (link a shared folder into each VS Code project instead of copying it):
+  // same arrangement, link only, not indexed. Its screenshots are plain static files under /workspaces/img/.
+  app.get(["/workspaces", "/workspaces/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "workspaces", "index.html"));
+  });
 
   // Session 2 handout (Define good: Claude in VS Code, the brand file, PDF, Excel, Word and a chart):
   // same arrangement, link only, not indexed.

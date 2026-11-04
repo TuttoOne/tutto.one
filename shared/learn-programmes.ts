@@ -75,6 +75,7 @@ const M = {
   hsaSession2: { label: "Session 2 handout: getting your content ready", href: "/hsa-session-2" },
   biSession4: { label: "Session 4 handout: write it down once", href: "/bi-session-4" },
   designSystem: { label: "Design system guide: brief Claude on your brand", href: "/design-system", claude: "/design-system/praxis-design-system.md" },
+  workspaces: { label: "Workspaces guide: share folders without copying them", href: "/workspaces", claude: "/workspaces/praxis-workspaces.md" },
 } satisfies Record<string, Material>;
 
 const AI_FLUENT_TEAM: Programme = {
@@ -191,7 +192,7 @@ const BACKGROUND_ITALIA: Programme = {
       what: "Teach it to write like you and stop sounding like Claude. We take samples of your own writing, have it describe your style and put that where it's read every time. Your report-review prompt becomes standing instructions for the whole team.",
       leaveWith: "Standing instructions for your 3 key jobs",
       practice: "Use the standing instructions on a real job this week and write down what you still had to correct.",
-      materials: [M.biSession4, M.designSystem, M.fluency, M.skillFile],
+      materials: [M.biSession4, M.designSystem, M.workspaces, M.fluency, M.skillFile],
     },
     {
       number: 5,
