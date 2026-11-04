@@ -363,6 +363,17 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "toolkit", "index.html"));
   });
 
+  // The skill file and evals lessons from the Praxis Foundations course, copied here so they
+  // don't depend on the GitHub token behind /praxis/learn: same arrangement, link only, not indexed.
+  app.get(["/skill-file", "/skill-file/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "skill-file", "index.html"));
+  });
+  app.get(["/evals", "/evals/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "evals", "index.html"));
+  });
+
   // /calendar was the Applied AI Evenings page. The events are the Rieuzal
   // ateliers now, so old links, blog posts and search results land there.
   app.get(["/calendar", "/calendar/"], (_req, res) => res.redirect(301, "/rieuzal"));
