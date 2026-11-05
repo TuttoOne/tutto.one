@@ -116,7 +116,7 @@ const STACK_COPY: Record<StackKey, { title: string; body: string }> = {
     body: "How output is checked before it ships, and who signs it off.",
   },
   sessions: {
-    title: "Eight live working sessions",
+    title: "Live working sessions",
     body: "On your own work, not exercises. Nothing is homework that could be done in the room.",
   },
   fieldGuide: {
@@ -278,9 +278,9 @@ export default function PraxisProgramme() {
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The team course")}</p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Eight sessions.")}<br />{tr("Your team leaves AI-fluent.")}</h2>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Eight topics.")}<br />{tr("Your team leaves AI-fluent.")}</h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Your staff already use AI, and it saves them nothing: ask, fix, ask again. But your team knows its own work inside out, and that's where we start. First we set up your AI around your business: the rules, what good looks like for each job and what to hand over. Then we build on that setup together, on your own work, through real conversations and worked examples, up to the tools, skills and automations that do the work without you.")}</p>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 20, maxWidth: 560 }}>{tr("After eight sessions your team is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.")}</p>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 20, maxWidth: 560 }}>{tr("After the eight topics your team is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.7, fontWeight: 600, color: "#f6f1ea", marginBottom: 24, maxWidth: 560 }}>{tr("Bring the one job that's bugging you. In an hour you'll get started with our scorecard and policy tools, and leave with your first artefact. No slides, no pitch you didn't ask for.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
             <a href={proofSession} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{tr("Book the 60-minute session, free")} →</a>
@@ -291,7 +291,7 @@ export default function PraxisProgramme() {
 
         {/* Doc header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #1a1a1a", padding: "18px 0", marginBottom: 64 }}>
-          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>{tr("The team course · Eight sessions")}</span>
+          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>{tr("The team course · Eight topics")}</span>
           <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>01 / 01</span>
         </div>
 
@@ -351,9 +351,9 @@ export default function PraxisProgramme() {
         {/* Section 03 - The eight sessions */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 12 }}>
-            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Eight Sessions")}</h2>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("The Eight Topics")}</h2>
           </div>
-          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Weekly, over roughly two months. The first four set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.")}</p>
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Taught in eight sessions, or condensed into six or four. The first four topics set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.")}</p>
           <div className="pp-sessions">
             {sessions.map((s) => (
               <div key={s.n} style={{ border: "1px solid #d8d0c5", borderRadius: 10, padding: "22px 20px", background: "#faf8f5", position: "relative" }}>
@@ -416,7 +416,7 @@ export default function PraxisProgramme() {
             {[
               { label: "Format", body: "You and up to four of your team. On your own, take the four sessions one-to-one. Either way it is built on your own work, not a syllabus." },
               { label: "Your use cases", body: "Before we start, send the jobs you keep repeating: the quote, the report, the weekly export. We work on those from the first session. The group evenings use generic examples. This doesn't." },
-              { label: "Cadence", body: "One session a week, 90 minutes each, over roughly two months. A short practice task between each session." },
+              { label: "Cadence", body: "Eight 90-minute sessions over about two months, or the same eight topics condensed into six or four longer ones. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
               { label: "What you need", body: "A laptop - Mac or Windows. An account with the AI assistant of your choice. We set up everything else together in the first session." },
             ].map((item) => (
@@ -475,7 +475,7 @@ export default function PraxisProgramme() {
               {
                 label: "The team course",
                 price: econ.course,
-                note: tr("Eight 90-minute sessions for you and up to four of your team. Everything in the stack above."),
+                note: tr("Eight topics for you and up to four of your team, in eight, six or four sessions. Everything listed above."),
               },
               {
                 label: "One-to-one",
@@ -757,7 +757,7 @@ export default function PraxisProgramme() {
         {/* Doc footer */}
         <div className="pp-footer-bar">
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Tutto Applied AI · tutto.one/praxis-programme")}</span>
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Eight sessions · Two months")}</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Eight topics · Eight, six or four sessions")}</span>
         </div>
 
       </div>

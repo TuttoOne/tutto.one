@@ -58,13 +58,13 @@ export const SITE_URL = "https://www.tutto.one";
 
 export const PUBLIC_PAGES: PublicPage[] = [
   { path: "/", key: "landing", title: { en: "Tutto Applied AI | AI training for teams", fr: "Tutto Applied AI | Formation IA pour les équipes" },
-    description: { en: "AI training for teams, on your own work: the rules, a scorecard for each job, what to hand over, then the build. 8 sessions, with a guarantee.", fr: "Formation IA pour les équipes, sur votre propre travail : les règles, une grille par tâche, ce qu'on délègue, puis la construction. 8 séances, avec garantie." },
+    description: { en: "AI training for teams, on your own work: the rules, a scorecard for each job, what to hand over, then the build. 8 topics, with a guarantee.", fr: "Formation IA pour les équipes, sur votre propre travail : les règles, une grille par tâche, ce qu'on délègue, puis la construction. 8 thèmes, avec garantie." },
     priority: 1 },
   { path: "/praxis", key: "praxis", title: { en: "Brief it once. It works every time | Tutto Applied AI", fr: "Briefez-la une fois. Elle fonctionne à chaque fois | Tutto Applied AI" },
     description: { en: "How we train teams in the Praxis method, on your own work and your own machine: the team course, one-to-one or a small group.", fr: "Comment nous formons les équipes à la méthode Praxis, sur votre travail et votre machine : formation équipe, tête-à-tête ou petit groupe." },
     priority: 0.9, schema: "Course" },
   { path: "/praxis-programme", key: "praxis-programme", title: { en: "AI training for teams | Tutto Applied AI", fr: "Formation IA pour les équipes | Tutto Applied AI" },
-    description: { en: "Eight 90-minute sessions for you and up to four of your team, on your own work. What you leave with, the guarantee and the price.", fr: "Huit séances de 90 minutes pour vous et jusqu'à quatre personnes de votre équipe, sur votre travail. Ce que vous emportez, la garantie et le prix." },
+    description: { en: "Eight topics for you and up to four of your team, in eight, six or four sessions, on your own work. What you leave with, the guarantee and the price.", fr: "Huit thèmes pour vous et jusqu'à quatre personnes de votre équipe, en huit, six ou quatre séances. Ce que vous emportez, la garantie et le prix." },
     priority: 0.9, schema: "Course" },
   { path: "/peer-groups", key: "peer-groups", title: { en: "AI training in a small group | Tutto Applied AI", fr: "Formation IA en petit groupe | Tutto Applied AI" },
     description: { en: "Four 90-minute sessions with three people from a similar background, each of you on your own work. Priced per person, and a deposit holds your seat.", fr: "Quatre séances de 90 minutes avec trois personnes au parcours proche, chacun sur son propre travail. Prix par personne, un acompte réserve votre place." },

@@ -139,8 +139,8 @@ export const BECOME_A_TRAINER_FR: FrDict = {
 
   // --- The deal ---
   "Complete Praxis": "Suivre Praxis",
-  "The eight-session programme is the prerequisite. That is where you walk the path yourself.":
-    "Le programme en huit séances est le prérequis. C'est là que vous parcourez le chemin vous-même.",
+  "The team course is the prerequisite. That is where you walk the path yourself.":
+    "La formation équipe est le prérequis. C'est là que vous parcourez le chemin vous-même.",
   "Do four more sessions": "Suivre quatre séances de plus",
   "The trainer track teaches you how to teach it, not just how to do it.":
     "Le parcours formateur vous apprend à l'enseigner, et pas seulement à le faire.",

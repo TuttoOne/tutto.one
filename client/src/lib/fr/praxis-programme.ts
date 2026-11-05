@@ -3,15 +3,14 @@ import type { FrDict } from "../page-fr";
 /** French for the Praxis Programme page, keyed on the English string. */
 export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The team course": "La formation équipe",
-  "Eight sessions.":
-    "Huit séances.",
+  "Eight topics.": "Huit thèmes.",
   "Your team leaves AI-fluent.":
     "Votre équipe en ressort à l'aise avec l'IA.",
   "Sending...": "Envoi…",
   "Send it →": "Envoyer →",
   "You and up to four of your team · Online or in person":
     "Vous et jusqu'à quatre personnes de votre équipe · À distance ou sur place",
-  "The team course · Eight sessions": "La formation équipe · Huit séances",
+  "The team course · Eight topics": "La formation équipe · Huit thèmes",
   "Most teams start with the tools.":
     "La plupart des équipes commencent par les outils.",
   "That's why nothing sticks.":
@@ -61,7 +60,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Pourquoi un accompagnant plut\u00f4t qu'une vid\u00e9o de plus",
   "What You Will Be Able to Do by the End":
     "Ce que vous saurez faire \u00e0 la fin",
-  "The Eight Sessions": "Les huit s\u00e9ances",
+  "The Eight Topics": "Les huit thèmes",
   "What You Finish With": "Ce avec quoi vous repartez",
   "How It Works": "Comment cela se d\u00e9roule",
   "What It Costs": "Les tarifs",
@@ -103,7 +102,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "on the clients you bring in yourself": "sur les clients que vous amenez vous-même",
   "See the trainer track →": "Voir le parcours formateur →",
   "Tutto Applied AI · tutto.one/praxis-programme": "Tutto Applied AI · tutto.one/praxis-programme",
-  "Eight sessions · Two months": "Huit séances · Deux mois",
+  "Eight topics · Eight, six or four sessions": "Huit thèmes · Huit, six ou quatre séances",
 
   // --- The eight sessions ---
   "Rules first": "Les règles d'abord",
@@ -206,8 +205,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "One-to-one or small group. You choose what suits you.":
     "En individuel ou en petit groupe. Vous choisissez ce qui vous convient.",
   Cadence: "Rythme",
-  "One session a week, 90 minutes each, over roughly two months. A short practice task between each session.":
-    "Une séance par semaine, de 90 minutes, sur près de deux mois. Un court exercice entre chaque séance.",
+  "Eight 90-minute sessions over about two months, or the same eight topics condensed into six or four longer ones. A short practice task between each session.":
+    "Huit séances de 90 minutes sur environ deux mois, ou les mêmes huit thèmes condensés en six ou quatre séances plus longues. Un court exercice entre chaque séance.",
   Where: "Lieu",
   "Online, via Teams or Google Meet. In person on request.":
     "À distance, via Teams ou Google Meet. Sur place à la demande.",
@@ -236,7 +235,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Verification Protocol": "Protocole de vérification",
   "How output is checked before it ships, and who signs it off.":
     "Comment le résultat est vérifié avant de partir, et qui le valide.",
-  "Eight live working sessions": "Huit séances de travail en direct",
+  "Live working sessions": "Des séances de travail en direct",
   "On your own work, not exercises. Nothing is homework that could be done in the room.":
     "Sur votre propre travail, pas sur des exercices. Rien n'est laissé en devoir qui pourrait se faire en séance.",
   "Bonus: The Field Guide": "Bonus : le guide de terrain",
@@ -253,8 +252,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille. Sinon, nous continuons à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
   "The only condition is that you attend the sessions and answer the questions.":
     "La seule condition : assister aux séances et répondre aux questions.",
-  "Eight 90-minute sessions for you and up to four of your team. Everything in the stack above.":
-    "Huit séances de 90 minutes pour vous et jusqu'à quatre personnes de votre équipe. Tout ce qui figure ci-dessus.",
+  "Eight topics for you and up to four of your team, in eight, six or four sessions. Everything listed above.":
+    "Huit thèmes pour vous et jusqu'à quatre personnes de votre équipe, en huit, six ou quatre séances. Tout ce qui figure ci-dessus.",
   "One-to-one": "En tête-à-tête",
   "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows.":
     "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si votre équipe suit.",
@@ -302,10 +301,10 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Dites-le-moi ici, ou venez avec elle à un appel gratuit de 15 minutes. Je vous dirai franchement si ce programme vous convient.",
   "It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.":
     "Il fera de vous quelqu'un capable de construire des choses réellement utiles, qui sait reconnaître quand un chantier justifie l'appel à un développeur, et comment le briefer le cas échéant. C'est une position bien plus précieuse qu'il n'y paraît.",
-  "After eight sessions your team is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.":
-    "Après huit séances, votre équipe est à l'aise avec l'IA : elle sait s'y retrouver et créer tout ce qu'elle sait décrire. Aucune compétence en code n'est requise. Vous repartez avec la charte, les grilles, les consignes et les contrôles, et les tâches qui se répétaient, déléguées.",
-  "Weekly, over roughly two months. The first four set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.":
-    "Une séance par semaine, sur près de deux mois. Les quatre premières posent les fondations : les règles, le standard, les décisions, les consignes. Les quatre dernières construisent dessus.",
+  "After the eight topics your team is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.":
+    "Après les huit thèmes, votre équipe est à l'aise avec l'IA : elle sait s'y retrouver et créer tout ce qu'elle sait décrire. Aucune compétence en code n'est requise. Vous repartez avec la charte, les grilles, les consignes et les contrôles, et les tâches qui se répétaient, déléguées.",
+  "Taught in eight sessions, or condensed into six or four. The first four topics set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.":
+    "Enseignés en huit séances, ou condensés en six ou quatre. Les quatre premiers thèmes posent les fondations : les règles, le standard, les décisions, les consignes. Les quatre derniers construisent dessus.",
   "Your staff have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.":
     "Vos équipes ont posé des questions à ChatGPT ou à Claude. Certaines réponses étaient utiles. La plupart demandaient des corrections, et le temps gagné est parti dans les corrections. Le problème n'est pas l'outil. Personne n'a fixé les règles, défini un bon résultat, ni décidé quoi déléguer. Ce programme fait ces trois choses d'abord, sur votre propre travail, puis construit dessus.",
 

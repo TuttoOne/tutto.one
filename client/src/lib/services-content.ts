@@ -121,9 +121,9 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
     title: "The team course",
     titleFr: "La formation équipe",
     description:
-      "Eight sessions to stop repeating yourself: the rules, a KPI for each job, what to hand over, then the build. With a guarantee.",
+      "Eight topics to stop repeating yourself: the rules, a KPI for each job, what to hand over, then the build. With a guarantee.",
     descriptionFr:
-      "Huit séances pour arrêter de vous répéter : les règles, un indicateur par tâche, ce qu'on délègue, puis la construction. Avec une garantie.",
+      "Huit thèmes pour arrêter de vous répéter : les règles, un indicateur par tâche, ce qu'on délègue, puis la construction. Avec une garantie.",
     features: [
       "AI Use Charter",
       "KPI Scorecard per role",

@@ -105,7 +105,7 @@ export function FicheSheet({ showContact = true }: { showContact?: boolean }) {
 
         <Section label="Formation">
           <p>
-            Huit séances, sur vos propres documents, dans l'ordre : la charte d'usage de l'IA, une
+            Huit thèmes, sur vos propres documents, dans l'ordre : la charte d'usage de l'IA, une
             grille d'évaluation par rôle, la liste de ce qu'on délègue, puis les outils, les
             compétences, l'automatisation et les agents. Pas une démonstration : un travail réel,
             mené en séance.

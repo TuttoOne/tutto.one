@@ -259,8 +259,8 @@ export const copy = {
       fr: "« Je veux vraiment savoir m'en servir. »",
     },
     l2Body: {
-      en: "The team course: eight sessions on your own work, in order. The rules, a KPI for each job, what to hand over, then the build.",
-      fr: "La formation équipe : huit séances sur votre propre travail, dans l'ordre. Les règles, un indicateur par tâche, ce qu'on délègue, puis la construction.",
+      en: "The team course: eight topics on your own work, in order. The rules, a KPI for each job, what to hand over, then the build.",
+      fr: "La formation équipe : huit thèmes sur votre propre travail, dans l'ordre. Les règles, un indicateur par tâche, ce qu'on délègue, puis la construction.",
     },
     l3Q: {
       en: "“I want the whole organisation to be.”",
@@ -402,8 +402,8 @@ export const copy = {
       fr: "Nous corrigeons cela dans l'ordre, sur votre propre travail : les règles, un indicateur par tâche, ce qu'on délègue. Puis les outils, les compétences et les automatisations qui le font sans vous.",
     },
     meta: {
-      en: "Eight sessions for your team, or four one to one · 90 minutes each · Online or in person",
-      fr: "Huit séances pour votre équipe, ou quatre en tête-à-tête · 90 minutes chacune · À distance ou sur place",
+      en: "Eight topics for your team, in four to eight sessions, or four sessions one to one · Online or in person",
+      fr: "Huit thèmes pour votre équipe, en quatre à huit séances, ou quatre séances en tête-à-tête · À distance ou sur place",
     },
     /** What separates this from the group ateliers at /rieuzal. */
     tailoredLabel: { en: "Send your own work first", fr: "Envoyez d'abord votre propre travail" },
@@ -411,10 +411,10 @@ export const copy = {
       en: "It runs on your work, not a demo. Before we start, send the jobs you keep repeating (the quote you rewrite every week, the report nobody wants to do) and we build on those. The group evenings use generic examples. This doesn't.",
       fr: "Tout se fait sur votre travail, pas sur une démo. Avant de commencer, envoyez les tâches que vous répétez sans cesse (le devis que vous réécrivez chaque semaine, le rapport dont personne ne veut) et nous construisons sur celles-là. Les soirées collectives utilisent des exemples génériques. Pas ici.",
     },
-    programmeTitle: { en: "The eight-session programme", fr: "Le programme en huit séances" },
+    programmeTitle: { en: "The eight-topic programme", fr: "Le programme en huit thèmes" },
     programmeBody: {
-      en: "The team course in eight sessions, or one-to-one in four private ones. What's included, the guarantee and the price.",
-      fr: "La formation équipe en huit séances, ou le tête-à-tête en quatre séances privées. Le contenu, la garantie et le prix.",
+      en: "The team course in eight topics, or one-to-one in four private sessions. What's included, the guarantee and the price.",
+      fr: "La formation équipe en huit thèmes, ou le tête-à-tête en quatre séances privées. Le contenu, la garantie et le prix.",
     },
     programmeLink: { en: "See the team course", fr: "Voir la formation équipe" },
 
@@ -536,8 +536,8 @@ export const copy = {
     },
     programmeCardTitle: { en: "The team course", fr: "La formation équipe" },
     programmeCard: {
-      en: "Eight 90-minute sessions, you and up to four of your team. Your AI-use charter, a scorecard per role, standing briefs for your top three jobs and a check before anything ships. Built on your own work.",
-      fr: "Huit séances de 90 minutes, vous et jusqu'à quatre personnes de votre équipe. Votre charte d'usage de l'IA, une grille par rôle, des consignes permanentes pour vos trois tâches clés et une vérification avant tout envoi. Construits sur votre propre travail.",
+      en: "Eight topics in eight, six or four sessions, you and up to four of your team. Your AI-use charter, a scorecard per role, standing briefs for your top three jobs and a check before anything ships. Built on your own work.",
+      fr: "Huit thèmes en huit, six ou quatre séances, vous et jusqu'à quatre personnes de votre équipe. Votre charte d'usage de l'IA, une grille par rôle, des consignes permanentes pour vos trois tâches clés et une vérification avant tout envoi. Construits sur votre propre travail.",
     },
     fastTitle: { en: "One-to-one", fr: "En tête-à-tête" },
     fast: {
@@ -576,8 +576,8 @@ export const copy = {
     /** The home page's closing question, so the two pages ask the same
      *  thing, and the free call as the only next step. */
     ctaBody: {
-      en: "The team course page has the eight sessions, what you leave with, the guarantee and the price.",
-      fr: "La page de la formation équipe présente les huit séances, ce avec quoi vous repartez, la garantie et le prix.",
+      en: "The team course page has the eight topics, what you leave with, the guarantee and the price.",
+      fr: "La page de la formation équipe présente les huit thèmes, ce avec quoi vous repartez, la garantie et le prix.",
     },
   },
 

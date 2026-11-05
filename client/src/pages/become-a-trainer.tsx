@@ -212,7 +212,7 @@ export default function BecomeATrainer() {
           </div>
           <div style={{ maxWidth: 700 }}>
             {[
-              { label: "Complete Praxis", body: "The eight-session programme is the prerequisite. That is where you walk the path yourself." },
+              { label: "Complete Praxis", body: "The team course is the prerequisite. That is where you walk the path yourself." },
               { label: "Do four more sessions", body: "The trainer track teaches you how to teach it, not just how to do it." },
               { label: "Clear the readiness bar", body: "A single real session, or a full mock, with us watching, followed by an honest debrief. One standard to clear before you carry the name." },
               { label: "Start teaching", body: "We find and organise your clients, with your help. You deliver the sessions." },
