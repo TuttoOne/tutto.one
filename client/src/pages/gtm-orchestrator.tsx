@@ -30,8 +30,8 @@ export default function GtmOrchestrator() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "GTM : moteur de prospection sur site | Tutto"
-        : "GTM: On-premise sales outreach engine | Tutto";
+        ? "Moteur de prospection sur site | Tutto Applied AI"
+        : "On-premise sales outreach engine | Tutto Applied AI";
     return () => {
       document.title = SITE_TITLE;
     };
@@ -183,7 +183,7 @@ export default function GtmOrchestrator() {
               ))}
             </div>
             <ExampleSession
-              caption={locale === "fr" ? "GTM · session type" : "GTM · example session"}
+              caption={locale === "fr" ? "Session type" : "Example session"}
               items={session}
             />
           </div>

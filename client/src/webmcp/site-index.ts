@@ -24,42 +24,42 @@ export type SitePage = {
 export const SITE_PAGES: SitePage[] = [
   {
     path: "/",
-    name: "Tutto: where to start with Claude",
-    summary: "For people overwhelmed by what they hear about Claude. Two tracks: For Work and For Life.",
+    name: "Tutto Applied AI: AI training for teams",
+    summary: "For teams overwhelmed by what they hear about Claude. One track: the team course.",
     detail:
-      "The site's front door. People say Claude is amazing, scary, expensive, that it hallucinates, is a sycophant, will steal their data or take their job. The page tells a visitor who feels left behind that it is still early, and invites them to get ahead together. AI is new and can seem complex, but the visitor knows their own work, interests and life inside out, so Tutto starts there: first it sets up the visitor's AI around what they know, then builds on that setup together. It is done in a small group, through rich conversations and worked examples. At the end the visitor can navigate all of it and create anything they can describe. Tutto teaches, but the visitor does most of the talking, making and refining, and teaching it back to the group is how they come to understand it. The page sets out 4 steps to top AI work. The page leads to two tracks that follow the same system with different content: For Work, the professional track at /praxis-programme, and For Life, the general track, which goes straight to the peer groups at /peer-groups. The page also prices The AI-Fluent Team at its back-to-work price.",
+      "The site's front door. People say Claude is amazing, scary, expensive, that it hallucinates, is a sycophant, will steal their data or take their job. The page tells a visitor who feels left behind that it is still early, and invites them to get ahead together. AI is new and can seem complex, but the visitor knows their own work and business inside out, so Tutto starts there: first it sets up the team's AI around what they know, then builds on that setup together with the team, through rich conversations and worked examples. Tutto teaches, but the team does most of the talking, making and refining, and teaching it back to the group is how they come to understand it. The page sets out 4 steps to top AI work and prices the team course (eight sessions, at /praxis-programme). One-to-one and small-group options are on /praxis.",
     offering: true,
   },
   {
     path: "/services",
     name: "Services: we build it, or you learn to",
-    summary: "How we work, and the priced engagements underneath it.",
+    summary: "How we work, and the engagements underneath it.",
     detail:
-      "We build it, or your team learns to; either way it starts with the rules, a standard for good work and what to hand over. Below that, the priced engagements: the data audit and knowledge mapping diagnostic charged by the day, building on your own infrastructure with your choice of models, and The AI-Fluent Team training programme at a fixed price. Each is priced in the currency the visitor has selected.",
+      "We build it, or your team learns to. Either way it starts with the rules, a standard for good work and what to hand over. Below that, the engagements: the data audit and knowledge mapping diagnostic, building on your own infrastructure with your choice of models, and the team course at a fixed price. Build work and the diagnostic are quoted after a first call. The team course is priced in the currency the visitor has selected.",
     offering: true,
   },
   {
     path: "/sovereign",
-    name: "Sovereign AI | Pythia",
+    name: "Sovereign AI on your own hardware",
     summary: "Where the system runs, and whose model reads your data.",
     detail:
-      "The general front door to Pythia, written in plain language: we design and build the working system, then deploy it wherever you choose: your own hardware, a private or public cloud, or a hosted environment. Where a model is needed, you choose that too. Local, private or public deployment, open-weight or frontier models, human-in-the-loop workflows, and tool selection and integration.",
+      "Written in plain language: we design and build a system that reads everything a business holds and answers from it, on hardware the client owns, in their building. Nothing is uploaded. Build work is quoted after a first call; the page gives indicative prices for the hardware it runs on. Linked from the site footer.",
     offering: true,
   },
   {
     path: "/pythia",
-    name: "Pythia: on-premise document intelligence",
-    summary: "The same product as /sovereign, written for a legal reader.",
+    name: "On-premise document AI for legal work",
+    summary: "The same system as /sovereign, written for a legal reader.",
     detail:
-      "Pythia organises scattered knowledge into a structured hierarchy, makes it semantically searchable, and connects an AI orchestration layer that can query it, reason across it, and instruct agents to act, without any of that data touching an external service. This page keeps the legal copy; /sovereign is the same product written for a general reader.",
+      "A document system that organises scattered knowledge into a structured hierarchy, makes it semantically searchable, and connects an AI orchestration layer that can query it, reason across it, and instruct agents to act, without any of that data touching an external service. This page keeps the legal copy; /sovereign is the same system written for a general reader.",
     offering: true,
   },
   {
     path: "/praxis",
-    name: "Praxis: client training",
+    name: "Training for your team: the Praxis method",
     summary: "Brief it once. It works every time. Training in order: rules, KPIs, what to hand over, then build.",
     detail:
-      "Praxis is Tutto's hands-on training. You don't need a proprietary platform or an account with us: an AI assistant subscription and a free code editor, both pointed at the same folder on your machine. That folder, and what's inside it, is your app. The page lays out the training ladder: free sessions, The AI-Fluent Team (eight sessions for an owner and up to four staff), and The Solo Fast Track (four private sessions), both at a back-to-work price with the regular price struck through. The Fast Track can also be taken in a group of four, priced per person, at /peer-groups. Every CTA on the page opens a conversation rather than selling an hour.",
+      "Tutto Applied AI's hands-on training, built on the Praxis method. You don't need a proprietary platform or an account with us: an AI assistant subscription and a free code editor, both pointed at the same folder on your machine. That folder, and what's inside it, is your app. The page lays out the training ladder: free sessions, the team course (eight sessions for an owner and up to four staff), one-to-one (four private sessions) and a small group (the same four sessions with three peers, priced per person, at /peer-groups). Every CTA on the page opens a conversation rather than selling an hour.",
     offering: true,
   },
   {
@@ -72,10 +72,10 @@ export const SITE_PAGES: SitePage[] = [
   },
   {
     path: "/peer-groups",
-    name: "Praxis Peer Groups",
-    summary: "The Solo Fast Track in a group of four people with a similar background.",
+    name: "AI training in a small group",
+    summary: "The four one-to-one sessions, taken in a group of four people with a similar background.",
     detail:
-      "For people who ran a company and now work on their own. We put you in a group of four people with a similar background, so you work through your own tasks and hear how the others are thinking about theirs. The same four 90-minute sessions as The Solo Fast Track, online, at fixed weekly times. You put your name on the list with the times that suit you, book a 15-minute call, and a deposit holds your seat. The deposit is refunded in full if no group forms in time, and a group starts with three if the last seat stays open.",
+      "For people who ran a company and now work on their own. We put you in a group of four people with a similar background, so you work through your own tasks and hear how the others are thinking about theirs. The same four 90-minute sessions as one-to-one, online, at fixed weekly times. You put your name on the list with the times that suit you, book a 15-minute call, and a deposit holds your seat. The deposit is refunded in full if no group forms in time, and a group starts with three if the last seat stays open.",
     offering: true,
   },
   {
@@ -88,7 +88,7 @@ export const SITE_PAGES: SitePage[] = [
   },
   {
     path: "/gtm-orchestrator",
-    name: "GTM: on-premise sales outreach engine",
+    name: "On-premise sales outreach engine",
     summary: "A custom system that runs B2B prospecting end-to-end.",
     detail:
       "A custom system designed and built to run B2B prospecting end-to-end. It researches prospects, writes personalised emails in the sender's voice, schedules and sends safely, and keeps every account in order.",

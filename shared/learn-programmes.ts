@@ -80,7 +80,7 @@ const M = {
 
 const AI_FLUENT_TEAM: Programme = {
   key: "ai-fluent-team",
-  name: "AI-Fluent Team programme",
+  name: "team course",
   modules: [
     {
       number: 1,
@@ -156,7 +156,7 @@ const AI_FLUENT_TEAM: Programme = {
 
 const BACKGROUND_ITALIA: Programme = {
   key: "background-italia",
-  name: "Praxis programme",
+  name: "Tutto Applied AI programme",
   modules: [
     {
       number: 1,
@@ -235,7 +235,7 @@ const BACKGROUND_ITALIA: Programme = {
 
 const SOLO_FAST_TRACK: Programme = {
   key: "solo-fast-track",
-  name: "Praxis Solo Fast Track",
+  name: "one-to-one programme",
   // Built with the end in mind: the pieces of her own tools (figures in, UK tax
   // rules, a check, an alert) are the pieces of the app she wants to build for others.
   modules: [

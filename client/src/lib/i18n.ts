@@ -16,7 +16,7 @@ import { usePreferences, type Locale } from "./preferences";
  * in eight files, which is how it stayed on the old "AI Consulting" wording long
  * after the positioning moved on; keep it here so the next rename is one edit.
  */
-export const SITE_TITLE = "Tutto | Applied AI";
+export const SITE_TITLE = "Tutto Applied AI";
 
 export const copy = {
   nav: {
@@ -24,26 +24,26 @@ export const copy = {
     services: { en: "Services", fr: "Prestations" },
     work: { en: "Work", fr: "Réalisations" },
     /**
-     * Points at /praxis, which keeps its name everywhere else. "Praxis"
-     * in the bar told a first-time visitor nothing about what was behind
-     * it; the page itself still opens on the name and explains it.
+     * Points at /praxis. Training is what Tutto Applied AI sells (November
+     * 2026), so it leads the bar under the plain word for it. Praxis is the
+     * name of the method, explained on the page, never a product name.
      *
-     * The French is "Formation" rather than a translation of "Learn":
+     * The French is "Formation" rather than a translation of "Training":
      * it is the word the French market actually uses for this, and the
      * one that signals fundable professional training.
      */
-    praxis: { en: "Learn", fr: "Formation" },
+    praxis: { en: "Training", fr: "Formation" },
     events: { en: "Events", fr: "Événements" },
     /**
-     * The nav entry that used to read "Pythia" and point at /pythia. The name
-     * meant nothing to a reader who was not a litigator, so the bar now names
-     * the proposition and /pythia is reached from inside the page.
+     * Not in the bar since November 2026: the site leads with training and
+     * the on-premise work is there for whoever asks. This is the one quiet
+     * link to /sovereign, in the footer.
      *
      * The French is the noun, not the adjective: "souveraineté numérique" is
      * ordinary political vocabulary in France, so the word arrives already
      * meaning something. Bare "Souverain" would not.
      */
-    sovereign: { en: "Sovereign", fr: "Souveraineté" },
+    sovereign: { en: "Sovereign AI", fr: "IA souveraine" },
     thinking: { en: "Thinking", fr: "Réflexions" },
     usecase: { en: "Use cases", fr: "Cas d'usage" },
     contact: { en: "Contact", fr: "Contact" },
@@ -53,6 +53,8 @@ export const copy = {
   },
 
   footer: {
+    /** The searchable unit: "Tutto" alone is an everyday Italian word. */
+    brand: { en: "Tutto Applied AI", fr: "Tutto Applied AI" },
     /**
      * Sitewide disclosure. Kept to one sentence: it should read as a note the
      * site is comfortable making, not an apology, and it sits under every page
@@ -195,8 +197,8 @@ export const copy = {
       fr: "Dans les deux cas, on commence dans le même ordre : les règles, un standard pour juger le travail, et ce qu'on délègue. Sautez ces étapes et tout ce qui est construit est à refaire.",
     },
     lead2: {
-      en: "Most clients do both: the team learns in Praxis, and we build what's too big to build in the room.",
-      fr: "La plupart de nos clients font les deux : l'équipe apprend avec Praxis, et nous construisons ce qui est trop gros pour être fait en séance.",
+      en: "Most clients do both: the team learns the Praxis method with us, and we build what's too big to build in the room.",
+      fr: "La plupart de nos clients font les deux : l'équipe apprend la méthode Praxis avec nous, et nous construisons ce qui est trop gros pour être fait en séance.",
     },
     meta: {
       en: "One free 15-minute call tells you which.",
@@ -217,7 +219,7 @@ export const copy = {
       en: "You end up able to build the next one.",
       fr: "Vous repartez capable de construire le suivant.",
     },
-    learnCta: { en: "How Praxis works", fr: "Comment fonctionne Praxis" },
+    learnCta: { en: "How our training works", fr: "Comment se déroule notre formation" },
 
     b1Q: {
       en: "“I want something to just run.”",
@@ -257,8 +259,8 @@ export const copy = {
       fr: "« Je veux vraiment savoir m'en servir. »",
     },
     l2Body: {
-      en: "The AI-Fluent Team: eight sessions on your own work, in order. The rules, a KPI for each job, what to hand over, then the build.",
-      fr: "L'équipe à l'aise avec l'IA : huit séances sur votre propre travail, dans l'ordre. Les règles, un indicateur par tâche, ce qu'on délègue, puis la construction.",
+      en: "The team course: eight sessions on your own work, in order. The rules, a KPI for each job, what to hand over, then the build.",
+      fr: "La formation équipe : huit séances sur votre propre travail, dans l'ordre. Les règles, un indicateur par tâche, ce qu'on délègue, puis la construction.",
     },
     l3Q: {
       en: "“I want the whole organisation to be.”",
@@ -275,10 +277,10 @@ export const copy = {
       en: "Most engagements start with a diagnostic: one to two days for a simple project, longer for a larger one. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
       fr: "La plupart des missions commencent par un diagnostic : un à deux jours pour un projet simple, davantage pour un projet plus important. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
     },
-    /** `{team}` is the AI-Fluent Team price in the reader's currency. */
+    /** `{team}` is the team course price in the reader's currency. */
     priceBody2: {
-      en: "Build work is quoted from the scope the diagnostic found. Training skips the diagnostic: The AI-Fluent Team is a fixed programme at {team}, with its guarantee on the programme page. If the honest answer is smaller than you expected, we'll say so on the first call.",
-      fr: "Le développement est chiffré à partir du périmètre révélé par le diagnostic. La formation se passe de diagnostic : l'équipe à l'aise avec l'IA est un programme à prix fixe, {team}, avec sa garantie sur la page du programme. Si la réponse honnête est plus modeste que prévu, nous vous le dirons dès le premier appel.",
+      en: "Build work is quoted from the scope the diagnostic found. Training skips the diagnostic: the team course is a fixed programme at {team}, with its guarantee on the programme page. If the honest answer is smaller than you expected, we'll say so on the first call.",
+      fr: "Le développement est chiffré à partir du périmètre révélé par le diagnostic. La formation se passe de diagnostic : la formation équipe est un programme à prix fixe, {team}, avec sa garantie sur la page du programme. Si la réponse honnête est plus modeste que prévu, nous vous le dirons dès le premier appel.",
     },
 
     ctaTitle: {
@@ -384,8 +386,8 @@ export const copy = {
 
   praxis: {
     eyebrow: {
-      en: "Praxis · Training for your team",
-      fr: "Praxis · Formation pour vos équipes",
+      en: "The Praxis method · Training for your team",
+      fr: "La méthode Praxis · Formation pour vos équipes",
     },
     title: {
       en: "Brief it once. It works every time.",
@@ -396,8 +398,8 @@ export const copy = {
       fr: "La plupart des équipes utilisent l'IA comme un moteur de recherche : demander, corriger, redemander. Cela prend autant de temps qu'à la main, et brûle des tokens au passage.",
     },
     lead2: {
-      en: "Praxis fixes it in order, on your own work: the rules, a KPI for each job, what to hand over. Then the tools, skills and automations that do it without you.",
-      fr: "Praxis corrige cela dans l'ordre, sur votre propre travail : les règles, un indicateur par tâche, ce qu'on délègue. Puis les outils, les compétences et les automatisations qui le font sans vous.",
+      en: "We fix it in order, on your own work: the rules, a KPI for each job, what to hand over. Then the tools, skills and automations that do it without you.",
+      fr: "Nous corrigeons cela dans l'ordre, sur votre propre travail : les règles, un indicateur par tâche, ce qu'on délègue. Puis les outils, les compétences et les automatisations qui le font sans vous.",
     },
     meta: {
       en: "Eight sessions for your team, or four one to one · 90 minutes each · Online or in person",
@@ -411,10 +413,10 @@ export const copy = {
     },
     programmeTitle: { en: "The eight-session programme", fr: "Le programme en huit séances" },
     programmeBody: {
-      en: "The AI-Fluent Team in eight sessions, or The Solo Fast Track in four private ones. What's in the stack, the guarantee, and the back-to-work price.",
-      fr: "L'équipe à l'aise avec l'IA en huit séances, ou la formule accélérée en solo en quatre séances privées. Le contenu, la garantie, et le prix de rentrée.",
+      en: "The team course in eight sessions, or one-to-one in four private ones. What's included, the guarantee and the price.",
+      fr: "La formation équipe en huit séances, ou le tête-à-tête en quatre séances privées. Le contenu, la garantie et le prix.",
     },
-    programmeLink: { en: "See the Praxis Programme", fr: "Voir le programme Praxis" },
+    programmeLink: { en: "See the team course", fr: "Voir la formation équipe" },
 
     s1Label: { en: "The idea", fr: "L'idée" },
     s1Title: {
@@ -436,8 +438,8 @@ export const copy = {
      * file and a French one.
      */
     plate4dCaption: {
-      en: "Four habits, not four tools. Deciding what is worth handing over, describing it clearly, judging what comes back, and following it through. Praxis drills all four on your own work, and they outlast whatever the folder ends up doing.",
-      fr: "Quatre réflexes, pas quatre outils. Décider ce qui mérite d'être confié, le décrire clairement, juger ce qui revient, aller au bout. Praxis travaille les quatre sur vos propres dossiers, et ils vous restent quoi que fasse le dossier ensuite.",
+      en: "Four habits you use every day. Deciding what is worth handing over, describing it clearly, judging what comes back and following it through. We drill all four on your own work, and they outlast whatever the folder ends up doing.",
+      fr: "Quatre réflexes de tous les jours. Décider ce qui mérite d'être confié, le décrire clairement, juger ce qui revient, aller au bout. Nous travaillons les quatre sur vos propres dossiers, et ils vous restent quoi que fasse le dossier ensuite.",
     },
     plateHallucinationCaption: {
       en: "Why the third of them is discernment. Asked for something it does not have, a model will not leave the gap open: it fills it with whatever fits the shape, plausibly, confidently, and wrong.",
@@ -532,26 +534,26 @@ export const copy = {
       en: "Webinars we run from time to time: getting started, skills, connectors and projects. General rather than built around your use case. Worth less to some people, and a good first look for others.",
       fr: "Des webinaires organisés de temps en temps : premiers pas, compétences, connecteurs et projets. Généraux plutôt que construits autour de votre cas d'usage. Moins utiles pour certains, un bon premier aperçu pour d'autres.",
     },
-    programmeCardTitle: { en: "The AI-Fluent Team", fr: "L'équipe à l'aise avec l'IA" },
+    programmeCardTitle: { en: "The team course", fr: "La formation équipe" },
     programmeCard: {
       en: "Eight 90-minute sessions, you and up to four of your team. Your AI-use charter, a scorecard per role, standing briefs for your top three jobs and a check before anything ships. Built on your own work.",
       fr: "Huit séances de 90 minutes, vous et jusqu'à quatre personnes de votre équipe. Votre charte d'usage de l'IA, une grille par rôle, des consignes permanentes pour vos trois tâches clés et une vérification avant tout envoi. Construits sur votre propre travail.",
     },
-    fastTitle: { en: "The Solo Fast Track", fr: "La formule accélérée en solo" },
+    fastTitle: { en: "One-to-one", fr: "En tête-à-tête" },
     fast: {
       en: "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you. Credited in full if your team follows.",
       fr: "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle. Déduite intégralement si votre équipe suit.",
     },
-    /** The Fast Track taken with three peers. Its page is /peer-groups. */
+    /** The one-to-one sessions taken with three peers. Its page is /peer-groups. */
     peerTitle: {
-      en: "The Fast Track, in a group of four",
-      fr: "La formule accélérée, en groupe de quatre",
+      en: "Small group",
+      fr: "En petit groupe",
     },
     peer: {
       en: "Per person. The same four sessions, with three people who have a similar background. You choose a time and a deposit holds your seat.",
       fr: "Par personne. Les quatre mêmes séances, avec trois personnes au parcours proche du vôtre. Vous choisissez un créneau et un acompte réserve votre place.",
     },
-    peerLink: { en: "See the peer groups", fr: "Voir les groupes de pairs" },
+    peerLink: { en: "See the small groups", fr: "Voir les petits groupes" },
     billing: {
       en: "The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.",
       fr: "La première étape est un appel gratuit de 15 minutes. Les deux programmes sont facturés hors taxes.",
@@ -574,20 +576,20 @@ export const copy = {
     /** The home page's closing question, so the two pages ask the same
      *  thing, and the free call as the only next step. */
     ctaBody: {
-      en: "The programme page has the eight sessions, what you leave with, the guarantee and the back-to-work price.",
-      fr: "La page du programme présente les huit séances, ce avec quoi vous repartez, la garantie et le prix de rentrée.",
+      en: "The team course page has the eight sessions, what you leave with, the guarantee and the price.",
+      fr: "La page de la formation équipe présente les huit séances, ce avec quoi vous repartez, la garantie et le prix.",
     },
   },
 
   pythia: {
-    eyebrow: { en: "Pythia · Document intelligence", fr: "Pythia · Intelligence documentaire" },
+    eyebrow: { en: "Document AI · For legal work", fr: "IA documentaire · Pour le juridique" },
     title: {
       en: "Read every file. Find what matters. In hours, not days.",
       fr: "Lire chaque fichier. Trouver ce qui compte. En heures, pas en jours.",
     },
     lead1: {
-      en: "Juniors spend days reading. Partners wait. The thing you miss is the thing that loses the case. Pythia reads everything - every file, every footnote - and lets you ask questions the way you'd brief a junior.",
-      fr: "Les collaborateurs passent des journées à lire. Les associés attendent. Ce qui vous échappe est précisément ce qui fait perdre le dossier. Pythia lit tout (chaque fichier, chaque note de bas de page) et vous laisse poser vos questions comme vous les poseriez à un collaborateur.",
+      en: "Juniors spend days reading. Partners wait. The thing you miss is the thing that loses the case. It reads everything (every file, every footnote) and lets you ask questions the way you'd brief a junior.",
+      fr: "Les collaborateurs passent des journées à lire. Les associés attendent. Ce qui vous échappe est précisément ce qui fait perdre le dossier. Le système lit tout (chaque fichier, chaque note de bas de page) et vous laisse poser vos questions comme vous les poseriez à un collaborateur.",
     },
     lead2: {
       en: "It runs on your hardware. Nothing leaves your office. No cloud, no third-party APIs, no exposure.",
@@ -604,8 +606,8 @@ export const copy = {
       fr: "Une plateforme d'intelligence documentaire auto-hébergée, pour les métiers à forte charge documentaire.",
     },
     s1Body: {
-      en: "Pythia processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. It finds every relevant file, and shows you exactly why it surfaced.",
-      fr: "Pythia traite localement des fonds documentaires entiers : recherche sémantique, questions-réponses avec citations, chronologies interactives et OCR. Le système trouve chaque fichier pertinent et vous montre exactement pourquoi il ressort.",
+      en: "The system processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. It finds every relevant file, and shows you exactly why it surfaced.",
+      fr: "Le système traite localement des fonds documentaires entiers : recherche sémantique, questions-réponses avec citations, chronologies interactives et OCR. Le système trouve chaque fichier pertinent et vous montre exactement pourquoi il ressort.",
     },
     c1Title: { en: "Ask in plain language", fr: "Poser la question en langage courant" },
     c1Qual: { en: "Semantic search · Cited answers", fr: "Recherche sémantique · Réponses sourcées" },
@@ -622,8 +624,8 @@ export const copy = {
     c3Title: { en: "Every document, every format", fr: "Chaque document, chaque format" },
     c3Qual: { en: "150,000+ files · All formats", fr: "150 000+ fichiers · Tous formats" },
     c3Body: {
-      en: "PDF, DOCX, MSG, EML, XLSX, TIF and more. Pythia reads in your first disclosure set in a few weeks, and new documents are added as they arrive.",
-      fr: "PDF, DOCX, MSG, EML, XLSX, TIF et bien d'autres. Pythia intègre votre premier fonds documentaire en quelques semaines, et les nouveaux documents sont ajoutés au fil de leur arrivée.",
+      en: "PDF, DOCX, MSG, EML, XLSX, TIF and more. It reads in your first disclosure set in a few weeks, and new documents are added as they arrive.",
+      fr: "PDF, DOCX, MSG, EML, XLSX, TIF et bien d'autres. Le système intègre votre premier fonds documentaire en quelques semaines, et les nouveaux documents sont ajoutés au fil de leur arrivée.",
     },
 
     s2Label: { en: "What it looks like in use", fr: "En pratique" },
@@ -652,8 +654,8 @@ export const copy = {
     demoCta: { en: "Open the demonstration", fr: "Ouvrir la démonstration" },
     fitLabel: { en: "Where it fits", fr: "À qui cela s'adresse" },
     fitBody: {
-      en: "Pythia suits anything legal, regulatory or commercially sensitive that cannot be sent to a cloud service or a US-hosted model: privileged material, regulated records, contractual or export-controlled data. The constraint is the same wherever it comes from: the documents cannot leave. Everything runs on hardware you control.",
-      fr: "Pythia convient à tout ce qui relève du juridique, du réglementaire ou du secret des affaires et ne peut être transmis à un service en cloud ou à un modèle hébergé aux États-Unis : pièces couvertes par le secret professionnel, données réglementées, informations contractuelles ou sous contrôle export. La contrainte est la même quelle qu'en soit l'origine : les documents ne peuvent pas sortir. Tout s'exécute sur du matériel que vous maîtrisez.",
+      en: "It suits anything legal, regulatory or commercially sensitive that cannot be sent to a cloud service or a US-hosted model: privileged material, regulated records, contractual or export-controlled data. The constraint is the same wherever it comes from: the documents cannot leave. Everything runs on hardware you control.",
+      fr: "Le système convient à tout ce qui relève du juridique, du réglementaire ou du secret des affaires et ne peut être transmis à un service en cloud ou à un modèle hébergé aux États-Unis : pièces couvertes par le secret professionnel, données réglementées, informations contractuelles ou sous contrôle export. La contrainte est la même quelle qu'en soit l'origine : les documents ne peuvent pas sortir. Tout s'exécute sur du matériel que vous maîtrisez.",
     },
     languageNote: {
       en: "We work in French as well as English. The screen above is the French interface; engagements, sessions and written work are delivered in either language.",
@@ -673,7 +675,7 @@ export const copy = {
     stat2Label: { en: "Files that leave your office", fr: "Fichier sortant de vos bureaux" },
     stat3: { en: "Every footnote", fr: "Chaque note" },
     stat3Label: { en: "Found, cited and explained", fr: "Trouvée, citée et expliquée" },
-    sessionCaption: { en: "Pythia · example session", fr: "Pythia · session type" },
+    sessionCaption: { en: "Example session", fr: "Session type" },
 
     s3Label: { en: "Beyond legal", fr: "Au-delà du juridique" },
     s3Title: {
@@ -730,8 +732,8 @@ export const copy = {
     },
     e1Title: { en: "Diagnostic", fr: "Diagnostic" },
     e1Body: {
-      en: "One to two days for a simple project; up to two weeks for a larger build, such as a whole set of chambers. We review your real documents and workflows and tell you exactly what Pythia can do for your practice. Credited in full against the build if you proceed.",
-      fr: "Un à deux jours pour un projet simple ; jusqu'à deux semaines pour un projet plus important, comme un cabinet entier. Nous examinons vos documents et vos processus réels et vous disons précisément ce que Pythia peut apporter à votre cabinet. Intégralement déduit du prix de la construction si vous poursuivez.",
+      en: "One to two days for a simple project; up to two weeks for a larger build, such as a whole set of chambers. We review your real documents and workflows and tell you exactly what the system can do for your practice. Credited in full against the build if you proceed.",
+      fr: "Un à deux jours pour un projet simple ; jusqu'à deux semaines pour un projet plus important, comme un cabinet entier. Nous examinons vos documents et vos processus réels et vous disons précisément ce que le système peut apporter à votre cabinet. Intégralement déduit du prix de la construction si vous poursuivez.",
     },
     e2Title: { en: "The build", fr: "La réalisation" },
     /**
@@ -746,8 +748,8 @@ export const copy = {
     },
     e3Title: { en: "Ongoing", fr: "Suivi" },
     e3Body: {
-      en: "Agreed during the project, not fixed up front. Covers ingestion of new matter files, system maintenance and keeping Pythia current as your work evolves.",
-      fr: "Convenu pendant le projet, et non fixé d'avance. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
+      en: "Agreed with you during the project. Covers ingestion of new matter files, system maintenance and keeping it current as your work evolves.",
+      fr: "Convenu avec vous pendant le projet. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
     },
 
     /**
@@ -794,14 +796,6 @@ export const copy = {
     },
     generalCta: { en: "See it for any business", fr: "Le voir pour toute entreprise" },
 
-    etymPull: {
-      en: "The Pythia was the Oracle at Delphi - the one you consulted when you needed an answer from everything that had been heard.",
-      fr: "La Pythie était l'oracle de Delphes, celle que l'on consultait lorsqu'on voulait une réponse tirée de tout ce qui avait été entendu.",
-    },
-    etymBody: {
-      en: "Pythia was the title given to the high priestess of the Temple of Apollo at Delphi, who served as its oracle. The name derives from Python, the serpent Apollo slew at Delphi. To put a question to the Pythia was not to ask for a guess - it was to receive the distilled answer from everything the oracle had witnessed and absorbed. That is the model: every document, read; every question, answered from the record itself.",
-      fr: "Pythie était le titre porté par la grande prêtresse du temple d'Apollon à Delphes, qui en était l'oracle. Le nom vient de Python, le serpent qu'Apollon terrassa à Delphes. Poser une question à la Pythie, ce n'était pas demander une supposition : c'était recevoir la réponse distillée de tout ce que l'oracle avait vu et absorbé. C'est le modèle : chaque document, lu ; chaque question, répondue à partir des pièces elles-mêmes.",
-    },
     ctaTitle: { en: "Ready to see it in your practice?", fr: "Envie de le voir dans votre cabinet ?" },
     ctaBody: {
       en: "Book a thirty-minute conversation. We'll walk through your documents and tell you what's possible.",
@@ -824,7 +818,7 @@ export const copy = {
    * re-arguing it in slightly worse words.
    */
   sovereign: {
-    eyebrow: { en: "Pythia · Sovereign AI", fr: "Pythia · IA souveraine" },
+    eyebrow: { en: "Sovereign AI · On your own hardware", fr: "IA souveraine · Sur votre matériel" },
     title: {
       en: "Everything your business holds, readable. Without any of it leaving the building.",
       fr: "Tout ce que votre entreprise conserve, enfin lisible. Sans que rien ne sorte de vos murs.",
@@ -834,8 +828,8 @@ export const copy = {
       fr: "Toute entreprise conserve plus d'écrits que personne ne peut en lire. Factures, CV, certificats fournisseurs, contrats, bons de livraison signés, photographies de documents papier, quinze ans de courriels. Les réponses s'y trouvent. Aller en chercher une, c'est l'après-midi de quelqu'un, à chaque fois.",
     },
     lead2: {
-      en: "Pythia reads all of it and answers questions from it, and it runs on a computer you own, in your building. No cloud account, no upload, no file going anywhere. For a lot of businesses that is not a preference. It is the condition of doing the work at all.",
-      fr: "Pythia lit l'ensemble et répond aux questions à partir de ces documents, sur un ordinateur qui vous appartient, dans vos locaux. Aucun compte en ligne, aucun téléversement, aucun fichier qui s'en va ailleurs. Pour beaucoup d'entreprises, ce n'est pas une préférence. C'est la condition même pour que le travail puisse se faire.",
+      en: "We build a system that reads all of it and answers questions from it, and it runs on a computer you own, in your building. No cloud account, no upload, no file going anywhere. For a lot of businesses that is not a preference. It is the condition of doing the work at all.",
+      fr: "Nous construisons un système qui lit l'ensemble et répond aux questions à partir de ces documents, sur un ordinateur qui vous appartient, dans vos locaux. Aucun compte en ligne, aucun téléversement, aucun fichier qui s'en va ailleurs. Pour beaucoup d'entreprises, ce n'est pas une préférence. C'est la condition même pour que le travail puisse se faire.",
     },
     meta: {
       en: "Your hardware · Nothing uploaded · 30 minutes",
@@ -925,8 +919,8 @@ export const copy = {
       fr: "Et le rapport mensuel que personne n'a le temps de produire.",
     },
     reportBody: {
-      en: "The database you already own, asked a question directly instead of exported to a spreadsheet once a month and rebuilt by hand. That one is worked through in full on the home page.",
-      fr: "La base de données que vous possédez déjà, interrogée directement au lieu d'être exportée vers un tableur une fois par mois et reconstruite à la main. Cet exemple est développé en entier sur la page d'accueil.",
+      en: "The database you already own, asked a question directly instead of exported to a spreadsheet once a month and rebuilt by hand. That one is worked through in full on the Applied AI page.",
+      fr: "La base de données que vous possédez déjà, interrogée directement au lieu d'être exportée vers un tableur une fois par mois et reconstruite à la main. Cet exemple est développé en entier sur la page L'IA en pratique.",
     },
     reportCta: { en: "Read it there", fr: "Le lire là-bas" },
 
@@ -982,8 +976,8 @@ export const copy = {
       fr: "L'IA en nuage se facture à la question : mieux elle vous sert, plus vous en achetez. Le matériel que vous possédez se paie une fois.",
     },
     wMore: {
-      en: "That case is made properly on the home page, along with what running a model on your own machine actually involves, trade-offs included.",
-      fr: "Cet argument est développé comme il se doit sur la page d'accueil, avec ce qu'implique réellement l'exécution d'un modèle sur votre propre machine, arbitrages compris.",
+      en: "That case is made properly on the Applied AI page, along with what running a model on your own machine actually involves, trade-offs included.",
+      fr: "Cet argument est développé comme il se doit sur la page L'IA en pratique, avec ce qu'implique réellement l'exécution d'un modèle sur votre propre machine, arbitrages compris.",
     },
     wMoreCta: { en: "The longer argument", fr: "L'argument développé" },
 
@@ -1035,7 +1029,7 @@ export const copy = {
       en: "High volume, high stakes, and a privilege requirement that rules out the cloud entirely: the version of this problem where sending a file outside ends a career. It was built there first, which is why the rest of this page is not a promise.",
       fr: "Gros volumes, enjeux élevés, et une exigence de secret professionnel qui exclut totalement le nuage : la version du problème où envoyer un fichier au-dehors met fin à une carrière. C'est là qu'il a d'abord été construit, et c'est pourquoi le reste de cette page n'est pas une promesse.",
     },
-    ev3Title: { en: "Bomza", fr: "Bomza" },
+    ev3Title: { en: "Building plans against the standard", fr: "Des plans face à la norme" },
     ev3Qual: {
       en: "Building regulations · South Africa",
       fr: "Réglementation du bâtiment · Afrique du Sud",
@@ -1044,7 +1038,7 @@ export const copy = {
       en: "Building plans verified against a published national standard, with every finding traced back to the clause it comes from.",
       fr: "Des plans de construction vérifiés au regard d'une norme nationale publiée, chaque constat étant rattaché à l'article dont il découle.",
     },
-    ev4Title: { en: "EntityVault", fr: "EntityVault" },
+    ev4Title: { en: "Records shared by consent", fr: "Des dossiers partagés sous consentement" },
     ev4Qual: {
       en: "Entity management · Consent-based sharing",
       fr: "Gestion des entités · Partage sous consentement",
@@ -1079,7 +1073,7 @@ export const copy = {
       en: "There is a page written for litigation in particular: disclosure sets, cited answers, and the audit checks that go with them.",
       fr: "Une page est écrite pour le contentieux en particulier : fonds de pièces, réponses sourcées, et les contrôles qui les accompagnent.",
     },
-    legalCta: { en: "Read the Pythia page", fr: "Lire la page Pythia" },
+    legalCta: { en: "Read the page for law firms", fr: "Lire la page pour les cabinets" },
 
     ctaTitle: {
       en: "What is the job that eats your week?",
@@ -1100,14 +1094,14 @@ export const copy = {
    * it goes and does not reach the client systems until the idea has landed.
    */
   applied: {
-    /** The last thing on /applied: every road ends at the Praxis programme. */
+    /** The last thing on /applied: every road ends at the training. */
     praxisLinkTitle: {
       en: "Learn to do it right, the first time.",
       fr: "Apprenez à bien faire, du premier coup.",
     },
     praxisLinkBody: {
-      en: "Praxis: training on your own documents and process. The rules, a scorecard for each job, what to hand over, then the build.",
-      fr: "Praxis : une formation sur vos propres documents et processus. Les règles, une grille par tâche, ce qu'on délègue, puis la construction.",
+      en: "Our training runs on your own documents and process: the rules, a scorecard for each job, what to hand over, then the build.",
+      fr: "Notre formation se fait sur vos propres documents et processus : les règles, une grille par tâche, ce qu'on délègue, puis la construction.",
     },
     /** The link at the top of /about to the long argument. */
     /** The band in the middle of /praxis, above its button to the programme. */
@@ -1137,7 +1131,7 @@ export const copy = {
       fr: "Écrit pour quiconque a utilisé ChatGPT et s'est demandé ce qu'il y avait d'autre. Aucune connaissance technique requise.",
     },
 
-    /** Closes the page in an Etymology block, as Praxis and Pythia do. */
+    /** Closes the page in an Etymology block, as Praxis does. */
     namePull: {
       en: "A pointer's entire job is to find the thing you are looking for and point straight at it.",
       fr: "Tout le métier d'un pointer consiste à trouver ce que vous cherchez et à le désigner sans détour.",
@@ -1238,13 +1232,13 @@ export const copy = {
       en: "Every system we have built has the same shape. Point it at the real data. Describe the job in the language of the people who do it. Keep the work on hardware the client controls. What changes is the room.",
       fr: "Tous les systèmes que nous avons construits ont la même forme. On les branche sur les données réelles. On décrit la tâche dans les mots de ceux qui l'accomplissent. On garde le traitement sur du matériel que le client maîtrise. Seul le contexte change.",
     },
-    f1Title: { en: "Pythia", fr: "Pythia" },
+    f1Title: { en: "Document search for litigation", fr: "Recherche documentaire en contentieux" },
     f1Qual: { en: "Litigation disclosure", fr: "Communication de pièces" },
     f1Body: {
       en: "150,000+ documents from a disclosure set, read on a machine standing in the room. Ask in plain language; every answer cites the document and page it came from, because an answer a lawyer cannot check is worse than no answer at all.",
       fr: "Plus de 150 000 documents d'un dossier de communication de pièces, traités sur une machine présente dans la pièce. On interroge en langage courant ; chaque réponse cite le document et la page dont elle provient, car une réponse qu'un avocat ne peut vérifier vaut moins que pas de réponse du tout.",
     },
-    f2Title: { en: "GTM", fr: "GTM" },
+    f2Title: { en: "A sales outreach engine", fr: "Un moteur de prospection" },
     f2Qual: { en: "Business development", fr: "Développement commercial" },
     f2Body: {
       en: "6,675 prospects profiled across nine countries. Open-weight models on the client's own hardware do the bulk of the reading and writing; a frontier model is called across a single auditable boundary, with identifying detail held back.",
@@ -1324,8 +1318,8 @@ export const copy = {
     },
     r1Title: { en: "Build it yourself", fr: "Le construire vous-même" },
     r1Body: {
-      en: "Praxis: for one to four people, on your own use cases, from four private sessions to eight with your team. You leave with a working tool for your own work, not with notes about one. There are group evenings too, cheaper and more general, if you would rather look before you commit.",
-      fr: "Praxis : de une à quatre personnes, sur vos propres cas d'usage, de quatre séances privées à huit avec votre équipe. Vous repartez avec un outil qui fonctionne pour votre propre travail, et non avec des notes à son sujet. Il existe aussi des soirées collectives, moins chères et plus générales, si vous préférez regarder avant de vous engager.",
+      en: "Our training: for one to four people, on your own use cases, from four private sessions to eight with your team. You leave with a working tool for your own work, not with notes about one. There are group evenings too, cheaper and more general, if you would rather look before you commit.",
+      fr: "Notre formation : de une à quatre personnes, sur vos propres cas d'usage, de quatre séances privées à huit avec votre équipe. Vous repartez avec un outil qui fonctionne pour votre propre travail, et non avec des notes à son sujet. Il existe aussi des soirées collectives, moins chères et plus générales, si vous préférez regarder avant de vous engager.",
     },
     r2Title: { en: "Have it built", fr: "Le faire construire" },
     r2Body: {
@@ -1334,8 +1328,8 @@ export const copy = {
     },
     r3Title: { en: "See a whole system", fr: "Voir un système entier" },
     r3Body: {
-      en: "Pythia in full: a system that reads everything you hold and answers from it, on a machine you own. What it does, what it costs, and an open demonstration you can click through without speaking to anybody.",
-      fr: "Pythia en entier : un système qui lit tout ce que vous conservez et répond à partir de là, sur une machine qui vous appartient. Ce qu'il fait, ce qu'il coûte, et une démonstration ouverte que vous pouvez parcourir sans parler à personne.",
+      en: "The document system in full: it reads everything you hold and answers from it, on a machine you own. What it does, what it runs on and an open demonstration you can click through without speaking to anybody.",
+      fr: "Le système documentaire en entier : il lit tout ce que vous conservez et répond à partir de là, sur une machine qui vous appartient. Ce qu'il fait, sur quoi il tourne et une démonstration ouverte que vous pouvez parcourir sans parler à personne.",
     },
 
     ctaTitle: {
@@ -1520,8 +1514,8 @@ export const copy = {
       fr: "Depuis février 2025, la formation de vos équipes à l'IA est une obligation légale.",
     },
     standfirst: {
-      en: "Article 4 of the EU AI Act requires every employer deploying AI to ensure its people have a sufficient level of AI literacy. Praxis meets it, and ends in the documentation that shows you have.",
-      fr: "L'article 4 du règlement européen sur l'IA impose à tout employeur qui déploie de l'IA de garantir à ses collaborateurs un niveau suffisant de maîtrise de l'IA. Praxis y répond, et se termine par le dossier qui l'atteste.",
+      en: "Article 4 of the EU AI Act requires every employer deploying AI to ensure its people have a sufficient level of AI literacy. Our training meets it, and ends in the documentation that shows you have.",
+      fr: "L'article 4 du règlement européen sur l'IA impose à tout employeur qui déploie de l'IA de garantir à ses collaborateurs un niveau suffisant de maîtrise de l'IA. Notre formation y répond, et se termine par le dossier qui l'atteste.",
     },
     meta: {
       en: "On your site · Six sessions · French or English",

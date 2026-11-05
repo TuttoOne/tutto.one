@@ -10,6 +10,8 @@
  * reader should see them in French. Keyed on the English question.
  */
 export type PortfolioFr = {
+  /** The entry's title in French, for entries named for what they do. */
+  name?: string;
   tagline?: string;
   badge?: string;
   description?: string;
@@ -22,12 +24,13 @@ export type PortfolioFr = {
 };
 
 export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
-  Pythia: {
+  "Document search for a litigation team": {
+    name: "Recherche documentaire pour une équipe contentieux",
     tagline: "IA sur site · Intelligence documentaire",
     badge: "Mission client",
     description:
       "Une plateforme d'intelligence documentaire auto-hébergée pour le contentieux et la revue juridique, bâtie sur du matériel NVIDIA DGX Spark. Elle traite localement des fonds documentaires entiers : recherche sémantique, questions-réponses avec citations, chronologies interactives et OCR. Aucune donnée ne quitte l'appareil, ce qui satisfait le secret professionnel par conception. Cela vaut bien au-delà du contentieux : pour tout document juridique, réglementaire ou couvert par le secret des affaires qui doit rester sur site, ou qui ne peut être transmis à un modèle en cloud pour être traité par l'IA.",
-    urlLabel: "En savoir plus sur Pythia",
+    urlLabel: "Comment fonctionne le système documentaire",
     capabilities: {
       "Document Ingestion at Scale": {
         title: "Ingestion documentaire à grande échelle",
@@ -37,7 +40,7 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
       "Semantic Search & RAG Q&A": {
         title: "Recherche sémantique et questions-réponses",
         detail:
-          "Posez vos questions en langage courant. Chaque réponse cite le document source et le numéro de page : aucune invention tirée des connaissances propres du modèle.",
+          "Posez vos questions en langage courant. Chaque réponse cite le document source et le numéro de page, pour que chacun puisse la vérifier.",
       },
       "Interactive Timeline": {
         title: "Chronologie interactive",
@@ -116,24 +119,27 @@ export const PORTFOLIO_FR: Record<string, PortfolioFr> = {
     },
   },
 
-  EntityVault: {
+  "Records shared by consent": {
+    name: "Des dossiers partagés sous consentement",
     description:
       "Une plateforme de gestion des entités pensée d'abord pour la confidentialité : stockage tokenisé, demandes de collaboration et recherche d'entités. Conçue pour les organisations qui prennent la protection des données au sérieux.",
     screenshotLabels: ["Accueil", "Mes entités", "Demandes de collaboration"],
   },
 
-  "AI ROI Portal": {
+  "AI adoption tracker": {
+    name: "Suivi de l'adoption de l'IA",
     description:
       "Un tableau de bord de conseil pour suivre le retour sur investissement de l'adoption de l'IA, les indicateurs d'usage, les jalons de projet et les économies réalisées. Il aide les équipes à mesurer l'impact réel de l'automatisation.",
     screenshotLabels: ["Tableau de bord ROI", "Suivi de l'usage de l'IA", "Projets"],
   },
 
-  GTM: {
+  "Sales outreach engine": {
+    name: "Moteur de prospection commerciale",
     tagline: "Moteur de prospection commerciale · Sur site",
     badge: "Mission client",
     description:
       "Un système sur mesure qui mène la prospection B2B de bout en bout. Il étudie les prospects, rédige des courriels personnalisés dans la voix de l'expéditeur, planifie et envoie en toute sûreté, et fait avancer chaque compte, l'humain relisant plutôt que ressaisissant. Il tourne sur un NVIDIA DGX Spark, et non sur du cloud loué.",
-    urlLabel: "En savoir plus sur GTM",
+    urlLabel: "Comment fonctionne le moteur de prospection",
     capabilities: {
       "Researches every prospect": {
         title: "Étudie chaque prospect",

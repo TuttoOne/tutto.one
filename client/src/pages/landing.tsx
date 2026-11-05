@@ -11,7 +11,7 @@ import {
 } from "@/components/product/ProductPage";
 import { SITE_TITLE, useT } from "@/lib/i18n";
 import { landing, testimonial } from "@/lib/landing-copy";
-import { praxisEconomics, price } from "@/lib/pricing";
+import { praxisEconomics } from "@/lib/pricing";
 import { usePreferences } from "@/lib/preferences";
 import { MarkupLayer } from "@/components/markup/MarkupLayer";
 import { CopyEditor } from "@/components/copy/CopyEditor";
@@ -136,10 +136,10 @@ function Hero() {
             </p>
           </div>
 
-          {/* The two tracks. Every button on this page goes to one or the other.
-              They are stacked, the same width, each with what it is beside it.
-              On a phone the note drops under its button, centred like the
-              button's own label. */}
+          {/* The one track: the team course. Small groups and one-to-one are
+              offered on /praxis and /praxis-programme, not here (November
+              2026). On a phone the note drops under the button, centred like
+              the button's own label. */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-[auto_minmax(0,1fr)] gap-x-5 gap-y-2 sm:gap-y-3 sm:items-center">
             <Link
               href={landing.tracks.work.href}
@@ -149,15 +149,6 @@ function Hero() {
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed text-center sm:text-left">
               {t(landing.tracks.work.note)}
-            </p>
-            <Link
-              href={landing.tracks.life.href}
-              className="mt-3 sm:mt-0 flex items-center justify-center gap-2 px-8 py-2.5 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
-            >
-              {t(landing.tracks.life.label)} <ArrowRight className="w-4 h-4" />
-            </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed text-center sm:text-left">
-              {t(landing.tracks.life.note)}
             </p>
           </div>
         </div>
@@ -391,16 +382,15 @@ function Sequence() {
 }
 
 /**
- * The one price on the front door: The AI-Fluent Team, with its regular price
- * struck through while the back-to-work special runs. Everything else — the
- * stack, the guarantee, Fast Track — is on /praxis-programme, one click on.
- * Under it, the For Life track as a block of its own, to /peer-groups.
+ * The one price on the front door: the team course, stated once. Everything
+ * else (what's included, the guarantee, one-to-one and small groups) is on
+ * /praxis-programme, one click on.
  */
 function Pricing() {
   const t = useT();
   const { locale, currency } = usePreferences();
   const econ = praxisEconomics(currency, locale);
-  const { offer, peer } = landing.pricing;
+  const { offer } = landing.pricing;
 
   return (
     <Section label={t(landing.pricing.label)}>
@@ -417,27 +407,11 @@ function Pricing() {
       >
         {t(offer.body)}
       </HeadlinePrice>
-      <Link
-        href={landing.tracks.life.href}
-        className="mt-4 group flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-6 bg-card border border-border rounded-2xl hover:border-primary/40 transition-colors"
-      >
-        <div>
-          <p className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-            {t(peer.title)}
-          </p>
-          <p className="text-sm text-muted-foreground mt-1 max-w-xl">
-            {t(peer.body).replace("{price}", price("peerGroupSeat", currency, locale))}
-          </p>
-        </div>
-        <span className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-full text-sm font-medium shrink-0">
-          {t(peer.link)} <ArrowRight className="w-4 h-4" />
-        </span>
-      </Link>
     </Section>
   );
 }
 
-/** The conversion moment: the same two tracks as the hero. */
+/** The conversion moment: the same track as the hero. */
 function Close() {
   const t = useT();
 
@@ -448,7 +422,6 @@ function Close() {
       body={t(landing.close.body)}
       href={landing.tracks.work.href}
       label={t(landing.tracks.work.label)}
-      secondary={{ href: landing.tracks.life.href, label: t(landing.tracks.life.label) }}
       messageLabel={t(landing.close.alt)}
       footnote={
         <>

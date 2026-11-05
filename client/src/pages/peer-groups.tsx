@@ -75,7 +75,7 @@ export default function PeerGroups() {
   };
 
   useEffect(() => {
-    document.title = "Peer Groups | Praxis | Tutto";
+    document.title = "AI training in a small group | Tutto Applied AI";
     return () => { document.title = SITE_TITLE; };
   }, []);
 
@@ -133,7 +133,7 @@ export default function PeerGroups() {
           name: form.name,
           email: form.email,
           message: [
-            "Peer group list: Solo Fast Track in a group of four",
+            "Small group list: four sessions in a group of four",
             `Last role and sector: ${form.background || "-"}`,
             `Times that suit: ${times || "None of the current times"}`,
             `Proposed time: ${proposed || "-"}`,
@@ -190,7 +190,7 @@ export default function PeerGroups() {
 
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
-          <p style={{ ...CAPS, fontSize: 10, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Praxis Peer Groups")}</p>
+          <p style={{ ...CAPS, fontSize: 10, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Small groups")}</p>
           <h1 style={{ ...ROBOTO, fontSize: "clamp(24px, 4.2vw, 38px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Learn it with three people like you.")}</h1>
           <p style={{ ...INTER, fontSize: 16, lineHeight: 1.8, color: "rgba(246,241,234,0.75)", marginBottom: 16, maxWidth: 580 }}>{tr("You ran a company. Now you work on your own, and you want to use AI properly. We put you in a group of four people with a similar background, so you work through your own tasks and hear how the others are thinking about theirs.")}</p>
           <p style={{ ...INTER, fontSize: 16, lineHeight: 1.8, color: "rgba(246,241,234,0.75)", marginBottom: 28, maxWidth: 580 }}>{tr("Put your name on the list and tell us which times suit you. When your group has its four people, we set the start date.")}</p>
@@ -296,7 +296,7 @@ export default function PeerGroups() {
           <div className="pg-cols-2">
             <div style={CARD}>
               <p style={{ ...CAPS, fontSize: 10, color: "#a8a092", marginBottom: 12 }}>{tr("The sessions")}</p>
-              <p style={BODY}>{tr("The same four sessions as The Solo Fast Track, on your own work. You leave with your AI Use Charter, your scorecard, your hand-over list, your briefs and your checks.")}</p>
+              <p style={BODY}>{tr("The same four sessions as one-to-one, on your own work. You leave with your AI Use Charter, your scorecard, your hand-over list, your briefs and your checks.")}</p>
               <p style={{ ...BODY, marginTop: 12 }}>
                 {tr("No coding background needed.")}
               </p>
@@ -309,7 +309,7 @@ export default function PeerGroups() {
                 {fill("Per person, for all {sessions} sessions. {deposit} of it is the deposit, and the balance is due when your group is confirmed. Invoiced, ex VAT.", terms)}
               </p>
               <p style={{ ...BODY, fontSize: 13, color: "#7a7568", marginTop: 12 }}>
-                {fill("Prefer one to one? The Solo Fast Track is the same sessions in private, at {price}.", { price: fastTrack })}
+                {fill("Prefer one to one? The same sessions in private are {price}.", { price: fastTrack })}
               </p>
             </div>
           </div>
@@ -482,7 +482,7 @@ export default function PeerGroups() {
 
         {/* Doc footer */}
         <div className="pg-footer-bar">
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Praxis Peer Groups · tutto.one/peer-groups")}</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Tutto Applied AI · tutto.one/peer-groups")}</span>
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{fill("Groups of {size} · {sessions} sessions", terms)}</span>
         </div>
 

@@ -48,13 +48,13 @@ const entryThemes = [
 export const portfolioEntries: PortfolioEntry[] = [
   {
     type: "project",
-    name: "Pythia",
+    name: "Document search for a litigation team",
     tagline: "On-Premise AI · Document Intelligence",
     badge: "Client Engagement",
     description:
       "A self-hosted document intelligence platform for litigation and legal review - built on NVIDIA DGX Spark hardware. Processes entire disclosure sets locally: semantic search, conversational Q&A with citations, interactive timelines, and OCR. No data ever leaves the device, satisfying Legal Professional Privilege by design. The same applies well beyond litigation: any legal, compliance or commercially sensitive material that has to stay on-premise, or that cannot be sent to a cloud model for AI processing.",
     url: "/pythia",
-    urlLabel: "About Pythia",
+    urlLabel: "How the document system works",
     capabilities: [
       {
         title: "Document Ingestion at Scale",
@@ -62,7 +62,7 @@ export const portfolioEntries: PortfolioEntry[] = [
       },
       {
         title: "Semantic Search & RAG Q&A",
-        detail: "Ask questions in plain language. Every answer cites its source document and page number - no hallucination from the AI's own knowledge.",
+        detail: "Ask questions in plain language. Every answer cites its source document and page number, so anyone can check it.",
       },
       {
         title: "Interactive Timeline",
@@ -132,13 +132,13 @@ export const portfolioEntries: PortfolioEntry[] = [
   },
   {
     type: "project",
-    name: "GTM",
+    name: "Sales outreach engine",
     tagline: "Sales Outreach Engine · On-Premise",
     badge: "Client Engagement",
     description:
       "A custom system that runs B2B prospecting end to end. It researches prospects, writes personalised emails in the sender's voice, schedules and sends safely, and keeps every account moving - with a human reviewing rather than retyping. It runs on an NVIDIA DGX Spark, not rented cloud.",
     url: "/gtm-orchestrator",
-    urlLabel: "About GTM",
+    urlLabel: "How the outreach engine works",
     capabilities: [
       {
         title: "Researches every prospect",
@@ -170,7 +170,7 @@ export const portfolioEntries: PortfolioEntry[] = [
   },
   {
     type: "product",
-    name: "EntityVault",
+    name: "Records shared by consent",
     tagline: "entityvault.tutto.one",
     description:
       "A privacy-first entity management platform with tokenized data storage, collaboration requests, and entity search. Built for organisations that take data privacy seriously.",
@@ -180,7 +180,7 @@ export const portfolioEntries: PortfolioEntry[] = [
   },
   {
     type: "product",
-    name: "AI ROI Portal",
+    name: "AI adoption tracker",
     tagline: "tracker.tutto.one",
     description:
       "A consulting dashboard for tracking AI adoption ROI, usage metrics, project milestones, and cost savings. Helps teams measure the real impact of automation.",
@@ -354,6 +354,7 @@ export function PortfolioDisplay({
           const fr = PORTFOLIO_FR[entry.name] ?? (original ? PORTFOLIO_FR[original.name] : undefined);
           if (!fr) return entry;
           const common = {
+            name: fr.name ?? entry.name,
             tagline: fr.tagline ?? entry.tagline,
             description: fr.description ?? entry.description,
           };

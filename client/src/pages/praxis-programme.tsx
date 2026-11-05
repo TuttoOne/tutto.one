@@ -156,7 +156,7 @@ const faqs = [
   },
   {
     q: "One-to-one or a group?",
-    a: "The AI-Fluent Team is for you and up to four of your team. The Solo Fast Track is private: one to one, in four sessions, and credited in full if your team follows.",
+    a: "The team course is for you and up to four of your team. One-to-one is private, in four sessions, and it is credited in full if your team follows.",
   },
   {
     q: "What if it doesn't work for us?",
@@ -184,7 +184,7 @@ export default function PraxisProgramme() {
   const fill = (en: string, subs: Record<string, string>) =>
     Object.entries(subs).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), tr(en));
   useEffect(() => {
-    document.title = "The AI-Fluent Team | Praxis | Tutto";
+    document.title = "AI training for teams | Tutto Applied AI";
     return () => { document.title = SITE_TITLE; };
   }, []);
 
@@ -197,7 +197,7 @@ export default function PraxisProgramme() {
      a short form, then the 15-minute call to say hello and set dates, which
      is offered once the form is in. Both carry the referring trainer's code.
      Each programme has its own 15-minute event in Cal.com, so the booking
-     lands on the right track; the Fast Track one redirects to Stripe. */
+     lands on the right track; the one-to-one one redirects to Stripe. */
   const proofSession = bookingHref("https://cal.com/tuttoone/60-min-meeting", trainerCode);
   const greetingCall = bookingHref(
     form.programme === "fastTrack"
@@ -224,8 +224,8 @@ export default function PraxisProgramme() {
           name: form.name,
           email: form.email,
           message: [
-            "Praxis Programme: course booking",
-            `Programme: ${form.programme === "fastTrack" ? "The Solo Fast Track" : "The AI-Fluent Team"}`,
+            "Team course: booking",
+            `Programme: ${form.programme === "fastTrack" ? "One-to-one" : "The team course"}`,
             `Company: ${form.company || "-"}`,
             `Team size: ${form.teamSize || "-"}`,
             "",
@@ -277,7 +277,7 @@ export default function PraxisProgramme() {
 
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
-          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The Praxis Programme")}</p>
+          <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The team course")}</p>
           <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Eight sessions.")}<br />{tr("Your team leaves AI-fluent.")}</h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Your staff already use AI, and it saves them nothing: ask, fix, ask again. But your team knows its own work inside out, and that's where we start. First we set up your AI around your business: the rules, what good looks like for each job and what to hand over. Then we build on that setup together, on your own work, through real conversations and worked examples, up to the tools, skills and automations that do the work without you.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 20, maxWidth: 560 }}>{tr("After eight sessions your team is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.")}</p>
@@ -291,7 +291,7 @@ export default function PraxisProgramme() {
 
         {/* Doc header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #1a1a1a", padding: "18px 0", marginBottom: 64 }}>
-          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>{tr("The AI-Fluent Team · Eight Sessions")}</span>
+          <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>{tr("The team course · Eight sessions")}</span>
           <span style={{ ...CAPS, fontSize: 10, color: "#1a1a1a" }}>01 / 01</span>
         </div>
 
@@ -414,7 +414,7 @@ export default function PraxisProgramme() {
           </div>
           <div className="pp-cols-2">
             {[
-              { label: "Format", body: "You and up to four of your team. For one to one, take The Solo Fast Track. Either way it is built on your own work, not a syllabus." },
+              { label: "Format", body: "You and up to four of your team. On your own, take the four sessions one-to-one. Either way it is built on your own work, not a syllabus." },
               { label: "Your use cases", body: "Before we start, send the jobs you keep repeating: the quote, the report, the weekly export. We work on those from the first session. The group evenings use generic examples. This doesn't." },
               { label: "Cadence", body: "One session a week, 90 minutes each, over roughly two months. A short practice task between each session." },
               { label: "Where", body: "Online, via Teams or Google Meet. In person on request." },
@@ -452,7 +452,7 @@ export default function PraxisProgramme() {
               lands after the risk has been taken away. No stated values: the
               price is the price. */}
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, background: "#faf8f5", maxWidth: 680 }}>
-            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", padding: "20px 22px 0" }}>{tr("The AI-Fluent Team · what you get")}</p>
+            <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", padding: "20px 22px 0" }}>{tr("The team course · what you get")}</p>
             {PRAXIS_STACK.map((row) => (
               <div key={row.key} style={{ display: "flex", justifyContent: "space-between", gap: 16, padding: "14px 22px", borderBottom: "1px solid #e8e1d7" }}>
                 <div>
@@ -473,12 +473,12 @@ export default function PraxisProgramme() {
           <div className="pp-cols-2">
             {[
               {
-                label: "The AI-Fluent Team",
+                label: "The team course",
                 price: econ.course,
                 note: tr("Eight 90-minute sessions for you and up to four of your team. Everything in the stack above."),
               },
               {
-                label: "The Solo Fast Track",
+                label: "One-to-one",
                 price: econ.fastTrack,
                 note: tr("Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows."),
               },
@@ -508,9 +508,9 @@ export default function PraxisProgramme() {
           >
             <span style={{ display: "block", maxWidth: 480 }}>
               <span style={{ ...ROBOTO, display: "block", fontSize: 16, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 }}>{tr("On your own, and you'd rather learn with people like you?")}</span>
-              <span style={{ ...INTER, display: "block", fontSize: 13, lineHeight: 1.7, color: "#5a5248" }}>{tr("Take the Fast Track in a group of four.")}</span>
+              <span style={{ ...INTER, display: "block", fontSize: 13, lineHeight: 1.7, color: "#5a5248" }}>{tr("Take the same four sessions in a small group.")}</span>
             </span>
-            <span style={{ ...CTA_SECONDARY, whiteSpace: "nowrap" }}>{tr("See the peer groups")} →</span>
+            <span style={{ ...CTA_SECONDARY, whiteSpace: "nowrap" }}>{tr("See the small groups")} →</span>
           </a>
 
           {/* Ask for the call while the price and the guarantee are on screen,
@@ -660,8 +660,8 @@ export default function PraxisProgramme() {
                 <label style={LABEL}>{tr("Programme")}</label>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {[
-                    { value: "team", label: "The AI-Fluent Team" },
-                    { value: "fastTrack", label: "The Solo Fast Track" },
+                    { value: "team", label: "The team course" },
+                    { value: "fastTrack", label: "One-to-one" },
                   ].map((o) => (
                     <button
                       key={o.value}
@@ -756,7 +756,7 @@ export default function PraxisProgramme() {
 
         {/* Doc footer */}
         <div className="pp-footer-bar">
-          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Praxis Programme · tutto.one/praxis-programme")}</span>
+          <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Tutto Applied AI · tutto.one/praxis-programme")}</span>
           <span style={{ ...CAPS, fontSize: 9, color: "#1a1a1a" }}>{tr("Eight sessions · Two months")}</span>
         </div>
 

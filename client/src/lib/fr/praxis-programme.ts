@@ -2,7 +2,7 @@ import type { FrDict } from "../page-fr";
 
 /** French for the Praxis Programme page, keyed on the English string. */
 export const PRAXIS_PROGRAMME_FR: FrDict = {
-  "The Praxis Programme": "Le programme Praxis",
+  "The team course": "La formation équipe",
   "Eight sessions.":
     "Huit séances.",
   "Your team leaves AI-fluent.":
@@ -11,8 +11,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Send it →": "Envoyer →",
   "You and up to four of your team · Online or in person":
     "Vous et jusqu'à quatre personnes de votre équipe · À distance ou sur place",
-  "The AI-Fluent Team · Eight Sessions":
-    "L'équipe à l'aise avec l'IA · Huit séances",
+  "The team course · Eight sessions": "La formation équipe · Huit séances",
   "Most teams start with the tools.":
     "La plupart des équipes commencent par les outils.",
   "That's why nothing sticks.":
@@ -50,8 +49,9 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Next: pick a call time →": "Suite : choisir un créneau →",
   "Not ready to book?": "Pas encore prêt à réserver ?",
 
-  "You and up to four of your team. For one to one, take The Solo Fast Track. Either way it is built on your own work, not a syllabus.":
-    "Vous et jusqu'à quatre personnes de votre équipe. Pour un tête-à-tête, choisissez la formule accélérée en solo. Dans les deux cas, tout se construit sur votre propre travail, pas sur un référentiel.",
+  "You and up to four of your team. On your own, take the four sessions one-to-one. Either way it is built on your own work, not a syllabus.":
+
+    "Vous et jusqu'à quatre personnes de votre équipe. Seul, suivez les quatre séances en tête-à-tête. Dans les deux cas, tout est construit sur votre propre travail, pas sur un programme type.",
   "Your use cases": "Vos cas d'usage",
   "Before we start, send the jobs you keep repeating: the quote, the report, the weekly export. We work on those from the first session. The group evenings use generic examples. This doesn't.":
     "Avant de commencer, envoyez les tâches que vous répétez sans cesse : le devis, le rapport, l'export hebdomadaire. Nous travaillons dessus dès la première séance. Les soirées collectives utilisent des exemples génériques. Pas ici.",
@@ -102,8 +102,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "You keep": "Vous conservez",
   "on the clients you bring in yourself": "sur les clients que vous amenez vous-même",
   "See the trainer track →": "Voir le parcours formateur →",
-  "Praxis Programme · tutto.one/praxis-programme":
-    "Programme Praxis · tutto.one/praxis-programme",
+  "Tutto Applied AI · tutto.one/praxis-programme": "Tutto Applied AI · tutto.one/praxis-programme",
   "Eight sessions · Two months": "Huit séances · Deux mois",
 
   // --- The eight sessions ---
@@ -154,8 +153,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "You get a practice task and a clear way to get unstuck. When something breaks, the fix is usually one screenshot away, and learning that habit is part of the programme.":
     "Vous repartez avec un exercice et une marche à suivre claire pour vous débloquer. Quand quelque chose casse, la solution tient le plus souvent à une capture d'écran, et acquérir ce réflexe fait partie du programme.",
   "One-to-one or a group?": "En individuel ou en groupe ?",
-  "The AI-Fluent Team is for you and up to four of your team. The Solo Fast Track is private: one to one, in four sessions, and credited in full if your team follows.":
-    "L'équipe à l'aise avec l'IA, c'est vous et jusqu'à quatre personnes de votre équipe. La formule accélérée en solo est privée : en tête-à-tête, en quatre séances, et déduite intégralement si votre équipe suit.",
+  "The team course is for you and up to four of your team. One-to-one is private, in four sessions, and it is credited in full if your team follows.":
+    "La formation équipe s'adresse à vous et jusqu'à quatre personnes de votre équipe. Le tête-à-tête est privé, en quatre séances, et il est déduit intégralement si votre équipe suit.",
   "What if it doesn't work for us?": "Et si cela ne fonctionne pas pour nous ?",
   "Pick one recurring piece of work before we start. If by the last session your team can't produce it with AI to the standard on your own scorecard, I keep working with you at no charge until they can. The only condition is that you attend and answer the questions.":
     "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne. La seule condition : assister aux séances et répondre aux questions.",
@@ -221,7 +220,7 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Vous repartez avec : des consignes permanentes pour vos trois tâches clés",
   "You leave with: your Verification Protocol": "Vous repartez avec : votre protocole de vérification",
 
-  "The AI-Fluent Team · what you get": "L'équipe à l'aise avec l'IA · ce que vous obtenez",
+  "The team course · what you get": "La formation équipe · ce que vous obtenez",
   "AI Use Charter": "Charte d'usage de l'IA",
   "What may go into the tools, which tools and connections are allowed, and what happens if the rule is broken. Written in session one.":
     "Ce qui peut entrer dans les outils, quels outils et connexions sont autorisés, et ce qui se passe si la règle n'est pas respectée. Rédigée dès la première séance.",
@@ -254,16 +253,16 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille ; sinon je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
   "The only condition is that you attend the sessions and answer the questions.":
     "La seule condition : assister aux séances et répondre aux questions.",
-  "The AI-Fluent Team": "L'équipe à l'aise avec l'IA",
   "Eight 90-minute sessions for you and up to four of your team. Everything in the stack above.":
     "Huit séances de 90 minutes pour vous et jusqu'à quatre personnes de votre équipe. Tout ce qui figure ci-dessus.",
-  "The Solo Fast Track": "La formule accélérée en solo",
+  "One-to-one": "En tête-à-tête",
   "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows.":
     "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si votre équipe suit.",
   "On your own, and you'd rather learn with people like you?":
     "Vous êtes seul, et vous préférez apprendre avec des personnes qui vous ressemblent ?",
-  "Take the Fast Track in a group of four.": "Suivez la formule accélérée en groupe de quatre.",
-  "See the peer groups": "Voir les groupes de pairs",
+  "Take the same four sessions in a small group.":
+    "Suivez les quatre mêmes séances en petit groupe.",
+  "See the small groups": "Voir les petits groupes",
   /* The free 60-minute session: the proof before the course. This page is
      the only one that books it. */
   "Book the 60-minute session, free": "Réserver la séance de 60 min, gratuite",

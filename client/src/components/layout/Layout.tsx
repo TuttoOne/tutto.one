@@ -11,13 +11,14 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const t = useT();
 
+  /* Training first: it is what Tutto Applied AI sells. The on-premise work
+     is linked from the footer only. */
   const navItems = [
-    { label: t(copy.nav.about), href: "/about" },
+    { label: t(copy.nav.praxis), href: "/praxis" },
     { label: t(copy.nav.services), href: "/services" },
     { label: t(copy.nav.work), href: "/portfolio" },
     { label: t(copy.nav.usecase), href: "/usecase/" },
-    { label: t(copy.nav.praxis), href: "/praxis" },
-    { label: t(copy.nav.sovereign), href: "/sovereign" },
+    { label: t(copy.nav.about), href: "/about" },
     { label: t(copy.nav.thinking), href: "/blog" },
     { label: t(copy.nav.events), href: "/rieuzal" },
     { label: t(copy.nav.contact), href: "/contact" },
@@ -137,10 +138,13 @@ export function Footer() {
       </div>
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
         <p>
-          © {new Date().getFullYear()} Tutto.{" "}
+          © {new Date().getFullYear()} {t(copy.footer.brand)}.{" "}
           {t({ en: "All rights reserved.", fr: "Tous droits réservés." })}
         </p>
         <div className="flex gap-6">
+          <a href="/sovereign" className="hover:text-foreground transition-colors">
+            {t(copy.nav.sovereign)}
+          </a>
           <a href="/data-policy" className="hover:text-foreground transition-colors">
             {t({ en: "Privacy", fr: "Confidentialité" })}
           </a>

@@ -2,7 +2,7 @@ import type { FrDict } from "../page-fr";
 
 /** French for the Peer Groups page, keyed on the English string. */
 export const PEER_GROUPS_FR: FrDict = {
-  "Praxis Peer Groups": "Groupes de pairs Praxis",
+  "Small groups": "Petits groupes",
   "Learn it with three people like you.":
     "Apprenez-le avec trois personnes qui vous ressemblent.",
   "You ran a company. Now you work on your own, and you want to use AI properly. We put you in a group of four people with a similar background, so you work through your own tasks and hear how the others are thinking about theirs.":
@@ -64,17 +64,17 @@ export const PEER_GROUPS_FR: FrDict = {
   // --- Sessions and price ---
   "What You Do, and What It Costs": "Ce que vous faites, et ce que cela coûte",
   "The sessions": "Les séances",
-  "The same four sessions as The Solo Fast Track, on your own work. You leave with your AI Use Charter, your scorecard, your hand-over list, your briefs and your checks.":
-    "Les quatre mêmes séances que la formule accélérée en solo, sur votre propre travail. Vous repartez avec votre charte d'usage de l'IA, votre grille, votre liste de délégation, vos consignes et vos contrôles.",
+  "The same four sessions as one-to-one, on your own work. You leave with your AI Use Charter, your scorecard, your hand-over list, your briefs and your checks.":
+    "Les quatre mêmes séances qu'en tête-à-tête, sur votre propre travail. Vous repartez avec votre charte d'usage de l'IA, votre grille d'évaluation, votre liste de délégation, vos consignes et vos vérifications.",
   "No coding background needed.": "Aucune compétence en code n'est requise.",
   "See the programme in full": "Voir le programme complet",
   "A seat in a group": "Une place dans un groupe",
   /** `{sessions}` sessions in the course, `{deposit}` the amount held. */
   "Per person, for all {sessions} sessions. {deposit} of it is the deposit, and the balance is due when your group is confirmed. Invoiced, ex VAT.":
     "Par personne, pour les {sessions} séances, dont {deposit} d'acompte. Le solde est dû quand votre groupe est confirmé. Facturé, hors TVA.",
-  /** `{price}` is the Solo Fast Track price in force today. */
-  "Prefer one to one? The Solo Fast Track is the same sessions in private, at {price}.":
-    "Vous préférez un tête-à-tête ? La formule accélérée en solo, ce sont les mêmes séances en privé, à {price}.",
+  /** `{price}` is the one-to-one price. */
+  "Prefer one to one? The same sessions in private are {price}.":
+    "Vous préférez le tête-à-tête ? Les mêmes séances en privé coûtent {price}.",
 
   // --- The list ---
   "Join the list": "Rejoindre la liste",
@@ -119,6 +119,6 @@ export const PEER_GROUPS_FR: FrDict = {
     "Une erreur est survenue. Réessayez ou écrivez à daniel@tutto.one",
   "Or email directly: daniel@tutto.one": "Ou écrivez directement : daniel@tutto.one",
 
-  "Praxis Peer Groups · tutto.one/peer-groups": "Groupes de pairs Praxis · tutto.one/peer-groups",
+  "Tutto Applied AI · tutto.one/peer-groups": "Tutto Applied AI · tutto.one/peer-groups",
   "Groups of {size} · {sessions} sessions": "Groupes de {size} · {sessions} séances",
 };

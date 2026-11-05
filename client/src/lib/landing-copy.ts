@@ -14,9 +14,10 @@
  *
  * One thing: the staff use AI and it saves them nothing. The page names that,
  * sets out the order that fixes it (rules, scorecards, decisions, then build), prices the
- * programme that installs them, and sends the reader down one of two tracks:
- * For Work (/praxis-programme) or For Life (/peer-groups). It was "we
- * build agents" until September 2026; that is the upsell, not the way in.
+ * programme that installs them, and sends the reader to one track: the team
+ * course at /praxis-programme. It was "we build agents" until September 2026;
+ * that is the upsell, not the way in. Until November 2026 there was a second
+ * track, For Life (/peer-groups); small groups are now offered on /praxis.
  *
  * The previous version sold four offers at once and was forgettable for it.
  * If a new offer needs a home, give it a page; do not add a fifth door here.
@@ -42,7 +43,7 @@ export const landing = {
   /**
    * The label every OTHER page uses for the free 15-minute intro call. Kept
    * here so they all ask the same way; the home page itself books nothing and
-   * sends the reader to a track instead (see `tracks`).
+   * sends the reader to the team course instead (see `tracks`).
    */
   introCall: {
     en: "Bring the job that's bugging you: 15 minutes, free",
@@ -97,42 +98,31 @@ export const landing = {
      *  technology is new and seems complex, their own work and life are what
      *  they know best, and a small group gets from the one to the other. */
     deck: {
-      en: "AI is new and it can seem complex, but your work, your interests and your life are something you know inside out. That's where we start. First we set up your AI around what you know. Then we build on that setup together, in a small group, through rich conversations and worked examples. At the end, you'll be able to navigate all of it and create anything you can describe.",
-      fr: "L'IA est nouvelle et peut sembler complexe, mais votre travail, vos centres d'intérêt et votre vie, vous les connaissez sur le bout des doigts. C'est par là que nous commençons. D'abord, nous configurons votre IA autour de ce que vous connaissez. Ensuite, nous construisons sur cette base ensemble, en petit groupe, par des conversations riches et des exemples concrets. À la fin, vous saurez vous y retrouver et créer tout ce que vous savez décrire.",
+      en: "AI is new and it can seem complex, but your work and your business are something you know inside out. That's where we start. First we set up your AI around what you know. Then we build on that setup together, with your team, through rich conversations and worked examples. At the end, you'll be able to navigate all of it and create anything you can describe.",
+      fr: "L'IA est nouvelle et peut sembler complexe, mais votre travail et votre entreprise, vous les connaissez sur le bout des doigts. C'est par là que nous commençons. D'abord, nous configurons votre IA autour de ce que vous connaissez. Ensuite, nous construisons sur cette base ensemble, avec votre équipe, par des conversations riches et des exemples concrets. À la fin, vous saurez vous y retrouver et créer tout ce que vous savez décrire.",
     },
 
     /** The second paragraph of the deck: how the teaching works. We teach,
      *  the reader does the work and teaches it back. */
     deckTeach: {
-      en: "Yes, Tutto will teach you, but you'll do most of the talking, making and refining. Teaching it back to our small group makes you understand it so much better.",
-      fr: "Oui, Tutto vous forme, mais c'est vous qui parlez, fabriquez et affinez le plus. L'enseigner à votre tour à notre petit groupe vous le fait comprendre bien mieux.",
+      en: "Yes, Tutto will teach you, but you'll do most of the talking, making and refining. Teaching it back to the group makes you understand it so much better.",
+      fr: "Oui, Tutto vous forme, mais c'est vous qui parlez, fabriquez et affinez le plus. L'enseigner à votre tour au groupe vous le fait comprendre bien mieux.",
     },
 
   },
 
   /**
-   * The two tracks, and the only two places a button on this page goes.
-   * For Work is the professional track, laid out and booked on
-   * /praxis-programme. For Life is the general one and goes straight to
-   * /peer-groups, where the peer sessions are booked. The same system in
-   * both, with different content.
+   * The one track, and the only place a button on this page goes: the team
+   * course, laid out and booked on /praxis-programme.
    */
   tracks: {
     work: {
-      label: { en: "For Work", fr: "Pour le travail" },
+      label: { en: "Train your team", fr: "Former votre équipe" },
       href: "/praxis-programme",
       /** Beside the button in the hero: what this track is. */
       note: {
         en: "Built around your business and your team.",
         fr: "Construit autour de votre entreprise et de votre équipe.",
-      },
-    },
-    life: {
-      label: { en: "For Life", fr: "Pour la vie" },
-      href: "/peer-groups",
-      note: {
-        en: "With a group of four people like you.",
-        fr: "Avec quatre personnes comme vous.",
       },
     },
   },
@@ -290,8 +280,8 @@ export const landing = {
 
     offer: {
       title: {
-        en: "The AI-Fluent Team",
-        fr: "L'équipe à l'aise avec l'IA",
+        en: "The team course",
+        fr: "La formation équipe",
       },
       body: {
         en: "We optimise your setup together, create your use policy, set up a scorecard for your agents and make sure you / your whole team knows how to manage the change. We build it together so your systems work every day.",
@@ -302,20 +292,6 @@ export const landing = {
         fr: "Ce qui est inclus, et la garantie",
       },
     },
-
-    /** The For Life block under the price: the peer groups have their own
-     *  page at /peer-groups. `{price}` is one seat, from pricing.ts. */
-    peer: {
-      title: {
-        en: "On your own? Learn it in a group of four",
-        fr: "Vous êtes seul ? Apprenez-le en groupe de quatre",
-      },
-      body: {
-        en: "The same system with three people like you, on your own tasks. {price} per person.",
-        fr: "La même méthode avec trois personnes qui vous ressemblent, sur vos propres tâches. {price} par personne.",
-      },
-      link: { en: "See the peer groups", fr: "Voir les groupes de pairs" },
-    },
   },
 
   close: {
@@ -324,11 +300,11 @@ export const landing = {
       fr: "Quelle tâche répétez-vous encore ?",
     },
     body: {
-      en: "Bring the one job that's bugging you. Both tracks work through it the same way, on your own files and your own tasks. Choose For Work if it's for your business, or For Life if it's for you.",
-      fr: "Venez avec la tâche qui vous pèse. Les deux parcours la traitent de la même façon, sur vos propres fichiers et vos propres tâches. Choisissez Pour le travail si c'est pour votre entreprise, Pour la vie si c'est pour vous.",
+      en: "Bring the one job that's bugging you. We work through it with your team, on your own files and your own tasks.",
+      fr: "Venez avec la tâche qui vous pèse. Nous la traitons avec votre équipe, sur vos propres fichiers et vos propres tâches.",
     },
     alt: { en: "Or send a message", fr: "Ou écrivez-nous" },
-    signatureNote: { en: "Tutto, Applied AI", fr: "Tutto, IA appliquée" },
+    signatureNote: { en: "Tutto Applied AI", fr: "Tutto Applied AI" },
   },
 
   footer: {

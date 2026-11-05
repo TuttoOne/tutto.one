@@ -9,7 +9,6 @@ import {
   FeatureCard,
   PriceRow,
   HardwareTiers,
-  Etymology,
   ClosingCta,
   Plate,
   PlateRow,
@@ -60,8 +59,8 @@ export default function Sovereign() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "IA souveraine | Pythia | Tutto"
-        : "Sovereign AI | Pythia | Tutto";
+        ? "IA souveraine, sur votre matériel | Tutto Applied AI"
+        : "Sovereign AI on your own hardware | Tutto Applied AI";
     return () => {
       document.title = SITE_TITLE;
     };
@@ -269,7 +268,7 @@ export default function Sovereign() {
               <b className="text-foreground">{t(c.reportTitle)}</b> {t(c.reportBody)}
             </p>
             <Link
-              href="/"
+              href="/applied"
               className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
             >
               {t(c.reportCta)} <ArrowRight className="w-4 h-4" />
@@ -334,7 +333,7 @@ export default function Sovereign() {
 
           <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-2xl">
             {t(c.wMore)}{" "}
-            <Link href="/" className="text-primary hover:underline">
+            <Link href="/applied" className="text-primary hover:underline">
               {t(c.wMoreCta)}
             </Link>
             .
@@ -411,7 +410,7 @@ export default function Sovereign() {
         {/* The build and ongoing lines are read straight off `pythia` — same
             product, same terms, and two pages that describe them differently is
             a problem waiting to happen. Only the diagnostic needed rewording,
-            because Pythia's says "for your practice". */}
+            because the legal page's says "for your practice". */}
         <Section index="07" label={t(c.s6Label)} intro={<p>{t(c.s6Body)}</p>}>
           <CardGrid cols={3}>
             <PriceRow
@@ -453,10 +452,6 @@ export default function Sovereign() {
             </span>
           </Link>
         </Section>
-
-        <Etymology pull={t(copy.pythia.etymPull)}>
-          <p>{t(copy.pythia.etymBody)}</p>
-        </Etymology>
 
         <ClosingCta
           title={t(c.ctaTitle)}

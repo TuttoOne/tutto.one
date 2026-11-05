@@ -115,17 +115,17 @@ function llmsTxt(posts: { slug: string; title: string; excerpt: string }[]): str
     [`## ${title}`, "", ...paths.map(line).filter(Boolean), ...extra, ""].join("\n");
 
   return [
-    "# Tutto",
+    "# Tutto Applied AI",
     "",
     "> We fix how your team uses AI. Then we build what's worth building.",
     "",
-    "Tutto is Daniel Forsthofer's AI training and consulting practice, working in English and French, online and in person in the Lot. Praxis is the training: your team learns to brief AI once, with rules, a standard for good work and what to hand over, so it works every time. On the build side, Pythia is AI that runs on your own machines and reads your files where they already sit.",
+    "Tutto Applied AI trains teams to use AI properly, in English and French, online and in person in the Lot. The training follows the Praxis method: your team learns to brief AI once, with rules, a standard for good work and what to hand over, so it works every time. We also build what's worth building, including AI that runs on your own machines and reads your files where they already sit.",
     "",
     section("Training", ["/", "/praxis", "/peer-groups", "/become-a-trainer", "/rieuzal"], [
-      "- [The AI-Fluent Team](" + SITE_URL + "/praxis-programme): the Praxis programme for a whole team.",
+      "- [The team course](" + SITE_URL + "/praxis-programme): eight sessions for an owner and up to four of their team.",
       "- [Article 4: AI literacy training](" + SITE_URL + "/article-4): what the EU AI Act asks of employers, and the training that covers it.",
     ]),
-    section("Building", ["/services", "/sovereign", "/pythia", "/gtm-orchestrator", "/usecase"]),
+    section("Building", ["/services", "/usecase", "/sovereign", "/pythia", "/gtm-orchestrator"]),
     section("About", ["/about", "/applied", "/portfolio", "/contact"]),
     "## Writing",
     "",

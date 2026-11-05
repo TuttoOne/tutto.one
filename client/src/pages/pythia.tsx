@@ -11,7 +11,6 @@ import {
   PriceRow,
   HardwareTiers,
   ExampleSession,
-  Etymology,
   ClosingCta,
 } from "@/components/product/ProductPage";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
@@ -83,8 +82,8 @@ export default function Pythia() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "Pythia : intelligence documentaire sur site | Tutto"
-        : "Pythia: On-premise document intelligence | Tutto";
+        ? "IA documentaire sur site pour le juridique | Tutto Applied AI"
+        : "On-premise document AI for legal work | Tutto Applied AI";
     return () => {
       document.title = SITE_TITLE;
     };
@@ -110,13 +109,13 @@ export default function Pythia() {
 
   const applied = [
     {
-      name: "Bomza: SANS 10400",
+      name: locale === "fr" ? "Plans de construction : SANS 10400" : "Building plans: SANS 10400",
       domain: t(copy.pythia.app1Domain),
       body: t(copy.pythia.app1Body),
       href: "https://bomza.tutto.one/",
     },
     {
-      name: "EntityVault",
+      name: t(copy.sovereign.ev4Title),
       domain: t(copy.pythia.app2Domain),
       body: t(copy.pythia.app2Body),
       href: "https://entityvault.tutto.one/",
@@ -316,10 +315,6 @@ export default function Pythia() {
             note={t(copy.pythia.hwNote)}
           />
         </Section>
-
-        <Etymology pull={t(copy.pythia.etymPull)}>
-          <p>{t(copy.pythia.etymBody)}</p>
-        </Etymology>
 
         <ClosingCta
           title={t(copy.pythia.ctaTitle)}

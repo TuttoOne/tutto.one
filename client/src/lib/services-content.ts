@@ -111,15 +111,15 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
     priceLabel: QUOTED,
     /**
      * Sends the reader to the page that argues this card at length, the way
-     * The AI-Fluent Team below sends them to the programme. Someone weighing up
+     * the team course below sends them to its page. Someone weighing up
      * where their data would run wants to see it before enquiring.
      */
     href: "/sovereign",
     ctaLabel: { en: "See how it runs", fr: "Voir comment cela fonctionne" },
   },
   {
-    title: "The AI-Fluent Team",
-    titleFr: "L'équipe à l'aise avec l'IA",
+    title: "The team course",
+    titleFr: "La formation équipe",
     description:
       "Eight sessions to stop repeating yourself: the rules, a KPI for each job, what to hand over, then the build. With a guarantee.",
     descriptionFr:

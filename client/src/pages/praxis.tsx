@@ -55,7 +55,7 @@ export default function Praxis() {
   const booking = bookingHref(BOOKING, useTrainerCode());
 
   useEffect(() => {
-    document.title = `Praxis: ${t(copy.praxis.title).replace(/\.$/, "")} | Tutto`;
+    document.title = `${t(copy.praxis.title).replace(/\.$/, "")} | Tutto Applied AI`;
     return () => {
       document.title = SITE_TITLE;
     };
