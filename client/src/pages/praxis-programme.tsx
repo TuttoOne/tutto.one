@@ -4,7 +4,7 @@ import { PRAXIS_PROGRAMME_FR } from "@/lib/fr/praxis-programme";
 import { usePreferences } from "@/lib/preferences";
 import { useTrainerCode, bookingHref } from "@/lib/trainer-code";
 import { SITE_TITLE } from "@/lib/i18n";
-import { praxisEconomics, trainerEconomics, perMonth, PRAXIS_STACK, stackValue, type StackKey } from "@/lib/pricing";
+import { praxisEconomics, trainerEconomics, perMonth, PRAXIS_STACK, type StackKey } from "@/lib/pricing";
 import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -445,11 +445,12 @@ export default function PraxisProgramme() {
         {/* Section 07 - Pricing */}
         <div style={{ marginBottom: 56 }}>
           <div style={{ borderTop: "1.5px solid #1a1a1a", paddingTop: 14, marginBottom: 28 }}>
-            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Everything You Get, and What It's Worth")}</h2>
+            <h2 style={{ ...ROBOTO, fontSize: 22, fontWeight: 800, color: "#1a1a1a", letterSpacing: "-0.2px", margin: 0 }}>{tr("Everything you get")}</h2>
           </div>
-          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("Each piece priced as if you bought it on its own. Then the guarantee, then what you actually pay.")}</p>
-          {/* Hormozi order: the stack, then the guarantee, then the price — so
-              the number lands after the risk has been taken away. */}
+          <p style={{ ...INTER, fontSize: 13, color: "#7a7568", lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>{tr("What your team leaves with, then the guarantee, then the price.")}</p>
+          {/* What's included, then the guarantee, then the price, so the number
+              lands after the risk has been taken away. No stated values: the
+              price is the price. */}
           <div style={{ border: "1px solid #d8d0c5", borderRadius: 10, background: "#faf8f5", maxWidth: 680 }}>
             <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", padding: "20px 22px 0" }}>{tr("The AI-Fluent Team · what you get")}</p>
             {PRAXIS_STACK.map((row) => (
@@ -458,19 +459,9 @@ export default function PraxisProgramme() {
                   <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 700, color: row.bonus ? "#d97706" : "#1a1a1a", marginBottom: 4 }}>{tr(STACK_COPY[row.key].title)}</p>
                   <p style={{ ...INTER, fontSize: 12, lineHeight: 1.65, color: "#5a5248", margin: 0 }}>{tr(STACK_COPY[row.key].body)}</p>
                 </div>
-                <p style={{ ...MONO, fontSize: 12, color: "#7a7568", whiteSpace: "nowrap", margin: 0 }}>{stackValue(row.key, currency, locale)}</p>
               </div>
             ))}
-            <div style={{ display: "flex", justifyContent: "space-between", gap: 16, padding: "16px 22px" }}>
-              <p style={{ ...ROBOTO, fontSize: 14, fontWeight: 800, color: "#1a1a1a", margin: 0 }}>{tr("Total stated value")}</p>
-              <p style={{ ...MONO, fontSize: 14, fontWeight: 700, color: "#1a1a1a", margin: 0 }}>{econ.stackTotal}</p>
-            </div>
           </div>
-          {econ.specialActive && (
-            <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 12, maxWidth: 680 }}>
-              {fill("The 30 days of async review is included for anyone who starts by {date}. After that it is an extra.", { date: econ.specialEnds })}
-            </p>
-          )}
 
           <div style={{ marginTop: 28, marginBottom: 28, borderRadius: 10, background: "#1a1a1a", padding: "24px 26px", maxWidth: 680 }}>
             <p style={{ ...CAPS, fontSize: 9, color: "#d97706", marginBottom: 12 }}>{tr("The guarantee")}</p>
@@ -483,13 +474,11 @@ export default function PraxisProgramme() {
             {[
               {
                 label: "The AI-Fluent Team",
-                was: econ.teamRegular,
                 price: econ.course,
                 note: tr("Eight 90-minute sessions for you and up to four of your team. Everything in the stack above."),
               },
               {
                 label: "The Solo Fast Track",
-                was: econ.fastTrackRegular,
                 price: econ.fastTrack,
                 note: tr("Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows."),
               },
@@ -506,16 +495,8 @@ export default function PraxisProgramme() {
               >
                 <p style={{ ...CAPS, fontSize: 9, color: "#a8a092", marginBottom: 12 }}>{tr(p.label)}</p>
                 <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 4, letterSpacing: "-1px" }}>
-                  {econ.specialActive && (
-                    <s style={{ fontSize: 20, fontWeight: 400, color: "#a8a092", marginRight: 12, letterSpacing: 0 }}>{p.was}</s>
-                  )}
-                  {econ.specialActive ? p.price : p.was}
+                  {p.price}
                 </p>
-                {econ.specialActive && (
-                  <p style={{ ...INTER, fontSize: 11, fontWeight: 600, color: "#d97706", marginBottom: 12 }}>
-                    {fill("Back-to-work price until {date}", { date: econ.specialEnds })}
-                  </p>
-                )}
                 <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
               </div>
             ))}

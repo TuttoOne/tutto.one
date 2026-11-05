@@ -407,12 +407,8 @@ function Pricing() {
       <HeadlinePrice
         title={t(offer.title)}
         price={econ.course}
-        was={econ.specialActive ? econ.teamRegular : undefined}
         note={
           <>
-            {econ.specialActive && (
-              <>{t(offer.special).replace("{date}", econ.specialEnds)} </>
-            )}
             <Link href="/praxis-programme" className="text-primary hover:underline">
               {t(offer.link)} →
             </Link>

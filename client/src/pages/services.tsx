@@ -6,7 +6,7 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ClosingCta, Plate, ProductHero, Section } from "@/components/product/ProductPage";
 import { usePreferences } from "@/lib/preferences";
-import { price, perDay, praxisEconomics } from "@/lib/pricing";
+import { price, praxisEconomics } from "@/lib/pricing";
 import { DEFAULT_SERVICES, localiseService, type ServiceItem } from "@/lib/services-content";
 import { pick, copy, useT, SITE_TITLE } from "@/lib/i18n";
 /* The booking label is the home page's, so every page asks the same way. */
@@ -119,7 +119,6 @@ export default function Services() {
     { numeral: "06", quote: t(copy.waysIn.l3Q), body: t(copy.waysIn.l3Body) },
   ];
 
-  const diagnostic = perDay("diagnosticDay", currency, locale);
   /* The referral terms are quoted on the training card, and have to agree with
      /praxis-programme to the penny — so both read the same derived figures. */
   const referral = praxisEconomics(currency, locale);
@@ -173,14 +172,13 @@ export default function Services() {
           title={t(copy.waysIn.s2Title)}
           intro={
             <>
-              {/* The figure is read from the pricing table rather than written
-                  into the sentence, so it follows the currency toggle, and it
-                  carries its own "per day" so the rate cannot read as a total. */}
-              <p>{t(copy.waysIn.priceBody1).replace("{price}", diagnostic)}</p>
+              {/* Build work is quoted, not priced on the page; only the
+                  training figure is read from the pricing table. */}
+              <p>{t(copy.waysIn.priceBody1)}</p>
               <p>
                 {t(copy.waysIn.priceBody2).replace(
                   "{team}",
-                  referral.specialActive ? referral.course : referral.teamRegular,
+                  referral.course,
                 )}
               </p>
             </>

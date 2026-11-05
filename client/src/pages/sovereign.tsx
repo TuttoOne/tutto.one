@@ -16,7 +16,7 @@ import {
 } from "@/components/product/ProductPage";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
-import { price, perDay, perMonth } from "@/lib/pricing";
+import { price } from "@/lib/pricing";
 import { USE_CASE_RUNS } from "@/lib/usecase-runs";
 import { USECASE_FR } from "@/lib/fr/usecase";
 import { usePageTr } from "@/lib/page-fr";
@@ -416,21 +416,18 @@ export default function Sovereign() {
           <CardGrid cols={3}>
             <PriceRow
               title={t(copy.pythia.e1Title)}
-              price={perDay("diagnosticDay", currency, locale)}
+              price={t(copy.pythia.quoted)}
             >
               {t(c.e1Body)}
             </PriceRow>
             <PriceRow
               title={t(copy.pythia.e2Title)}
-              price={`${t(copy.pythia.e2Price)} ${p("build")}`}
+              price={t(copy.pythia.quoted)}
             >
               {t(copy.pythia.e2Body)}
             </PriceRow>
-            <PriceRow title={t(copy.pythia.e3Title)} price={t(copy.pythia.e3Price)}>
-              {t(copy.pythia.e3Body).replace(
-                "{floor}",
-                perMonth("ongoingMinMonthly", currency, locale),
-              )}
+            <PriceRow title={t(copy.pythia.e3Title)} price={t(copy.pythia.quoted)}>
+              {t(copy.pythia.e3Body)}
             </PriceRow>
           </CardGrid>
 

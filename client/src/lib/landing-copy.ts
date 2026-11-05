@@ -283,8 +283,7 @@ export const landing = {
 
   /**
    * The one priced thing on the front door: the team offer, named after the
-   * outcome rather than the calendar. The price itself comes from pricing.ts;
-   * `{date}` is the last day of the back-to-work special.
+   * outcome rather than the calendar. The price itself comes from pricing.ts.
    */
   pricing: {
     label: { en: "What it costs", fr: "Ce que cela coûte" },
@@ -297,10 +296,6 @@ export const landing = {
       body: {
         en: "We optimise your setup together, create your use policy, set up a scorecard for your agents and make sure you / your whole team knows how to manage the change. We build it together so your systems work every day.",
         fr: "Nous optimisons votre configuration ensemble, rédigeons votre politique d'usage, définissons une grille d'évaluation pour vos agents et veillons à ce que vous / toute votre équipe sachiez accompagner le changement. Nous le construisons ensemble pour que vos systèmes fonctionnent au quotidien.",
-      },
-      special: {
-        en: "Back-to-work price until {date}.",
-        fr: "Prix de rentrée jusqu'au {date}.",
       },
       link: {
         en: "What's included, and the guarantee",

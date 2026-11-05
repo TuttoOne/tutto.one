@@ -20,7 +20,7 @@ import { copy, useT, SITE_TITLE } from "@/lib/i18n";
 import { landing } from "@/lib/landing-copy";
 import { usePreferences } from "@/lib/preferences";
 import { useTrainerCode, bookingHref } from "@/lib/trainer-code";
-import { praxisEconomics, price } from "@/lib/pricing";
+import { praxisEconomics, perMonth, price } from "@/lib/pricing";
 
 /* The free 15-minute intro, not a paid session. Nothing on the site is paid
    at booking; everything priced here is invoiced, so every CTA on this page
@@ -49,6 +49,7 @@ export default function Praxis() {
   const t = useT();
   const { locale, currency } = usePreferences();
   const econ = praxisEconomics(currency, locale);
+  const tools = perMonth("toolsMonthly", currency, locale);
   /* Carries the referring trainer's code into the Cal.com booking, so the
      client is attributed to them rather than to us. */
   const booking = bookingHref(BOOKING, useTrainerCode());
@@ -65,7 +66,7 @@ export default function Praxis() {
 
   const ingredients = [
     { numeral: "i.", title: t(copy.praxis.ing1Title), qualifier: t(copy.praxis.ing1Qual), body: t(copy.praxis.ing1Body) },
-    { numeral: "ii.", title: t(copy.praxis.ing2Title), qualifier: t(copy.praxis.ing2Qual), body: t(copy.praxis.ing2Body) },
+    { numeral: "ii.", title: t(copy.praxis.ing2Title), qualifier: t(copy.praxis.ing2Qual).replace("{tools}", tools), body: t(copy.praxis.ing2Body) },
     { numeral: "iii.", title: t(copy.praxis.ing3Title), qualifier: t(copy.praxis.ing3Qual), body: t(copy.praxis.ing3Body) },
   ];
 
@@ -103,7 +104,7 @@ export default function Praxis() {
           index="01"
           label={t(copy.praxis.s1Label)}
           title={t(copy.praxis.s1Title)}
-          intro={<p>{t(copy.praxis.s1Body)}</p>}
+          intro={<p>{t(copy.praxis.s1Body).replace("{tools}", tools)}</p>}
         >
           <Plate
             src={plate("4d")}
@@ -234,14 +235,12 @@ export default function Praxis() {
             <PriceRow
               title={t(copy.praxis.programmeCardTitle)}
               price={econ.course}
-              was={econ.specialActive ? econ.teamRegular : undefined}
             >
               {t(copy.praxis.programmeCard)}
             </PriceRow>
             <PriceRow
               title={t(copy.praxis.fastTitle)}
               price={econ.fastTrack}
-              was={econ.specialActive ? econ.fastTrackRegular : undefined}
             >
               {t(copy.praxis.fast)}
             </PriceRow>
@@ -256,11 +255,8 @@ export default function Praxis() {
             </PriceRow>
           </CardGrid>
           <div className="mt-6 max-w-3xl space-y-2 text-sm text-muted-foreground leading-relaxed">
-            {econ.specialActive && (
-              <p>{t(copy.praxis.special).replace("{date}", econ.specialEnds)}</p>
-            )}
             <p>{t(copy.praxis.billing)}</p>
-            <p>{t(copy.praxis.costTools)}</p>
+            <p>{t(copy.praxis.costTools).replace("{tools}", tools)}</p>
           </div>
         </Section>
 

@@ -24,9 +24,9 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "A desk with the weekly report on screen, a calculator, and a red thread running between them":
     "Un bureau avec le rapport hebdomadaire à l'écran, une calculatrice, et un fil rouge qui les relie",
   "Book your first course": "Réserver votre première formation",
-  "Everything You Get, and What It's Worth": "Tout ce que vous obtenez, et ce que cela vaut",
-  "Each piece priced as if you bought it on its own. Then the guarantee, then what you actually pay.":
-    "Chaque élément chiffré comme s'il était acheté seul. Puis la garantie, puis ce que vous payez réellement.",
+  "Everything you get": "Tout ce que vous obtenez",
+  "What your team leaves with, then the guarantee, then the price.":
+    "Ce que votre équipe emporte, puis la garantie, puis le prix.",
   "What you pay": "Ce que vous payez",
   "Start with the free 60-minute session: proof on one of your own jobs before you spend anything. When you book the course, a 15-minute call to say hello and set the dates comes with it. Both programmes are invoiced, ex VAT.":
     "Commencez par la séance gratuite de 60 minutes : la preuve sur l'une de vos propres tâches, avant de dépenser quoi que ce soit. Quand vous réservez la formation, un appel de 15 minutes pour faire connaissance et fixer les dates suit. Les deux programmes sont facturés, hors TVA.",
@@ -249,10 +249,6 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Bonus: 90-day check-in call": "Bonus : un appel de suivi à 90 jours",
   "For \"we'll drift back in three months\": we look at what slipped and fix it.":
     "Pour « dans trois mois, on aura tout oublié » : on regarde ce qui a glissé et on le corrige.",
-  "Total stated value": "Valeur totale annoncée",
-  /** `{date}` is the last day of the back-to-work special. */
-  "The 30 days of async review is included for anyone who starts by {date}. After that it is an extra.":
-    "Les 30 jours de relecture à distance sont inclus pour toute inscription avant le {date}. Ensuite, ils sont en supplément.",
   "The guarantee": "La garantie",
   "Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard, or I keep working with you at no charge until they do.":
     "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille ; sinon je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
@@ -264,7 +260,6 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The Solo Fast Track": "La formule accélérée en solo",
   "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows.":
     "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si votre équipe suit.",
-  "Back-to-work price until {date}": "Prix de rentrée jusqu'au {date}",
   "On your own, and you'd rather learn with people like you?":
     "Vous êtes seul, et vous préférez apprendre avec des personnes qui vous ressemblent ?",
   "Take the Fast Track in a group of four.": "Suivez la formule accélérée en groupe de quatre.",

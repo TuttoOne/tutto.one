@@ -271,10 +271,9 @@ export const copy = {
 
     s2Label: { en: "What it costs", fr: "Ce que cela coûte" },
     s2Title: { en: "Diagnostic", fr: "Diagnostic" },
-    /** `{price}` is replaced with the diagnostic day rate, in the reader's currency. */
     priceBody1: {
-      en: "Most engagements start with a diagnostic: {price}. One to two days for a simple project, longer for a larger one. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
-      fr: "La plupart des missions commencent par un diagnostic : {price}. Un à deux jours pour un projet simple, davantage pour un projet plus important. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
+      en: "Most engagements start with a diagnostic: one to two days for a simple project, longer for a larger one. It ends with a written map of where the work is and what it is worth, and that map is yours whether or not we build anything.",
+      fr: "La plupart des missions commencent par un diagnostic : un à deux jours pour un projet simple, davantage pour un projet plus important. Il se termine par une cartographie écrite de ce qu'il y a à faire et de ce que cela vaut, et cette cartographie vous appartient, que nous construisions ensuite quelque chose ou non.",
     },
     /** `{team}` is the AI-Fluent Team price in the reader's currency. */
     priceBody2: {
@@ -422,9 +421,11 @@ export const copy = {
       en: "The folder is the app. It runs on your machine. It belongs to you.",
       fr: "Le dossier est l'application. Elle tourne sur votre machine. Elle vous appartient.",
     },
+    /** `{tools}` in this, `ing2Qual` and `costTools` is the assistant's monthly
+     *  cost (pricing.ts `toolsMonthly`), so it follows the currency toggle. */
     s1Body: {
-      en: "You don't need a proprietary platform, or an account with us. The only thing you'll subscribe to is the AI assistant - about $20 a month - plus a free code editor. Point all three at the same folder on your machine. That folder, and what's inside it, is your app.",
-      fr: "Vous n'avez besoin ni d'une plateforme propriétaire, ni d'un compte chez nous. Le seul abonnement à prendre est celui de l'assistant IA (environ 20 $ par mois) auquel s'ajoute un éditeur de code gratuit. Dirigez les trois vers le même dossier sur votre machine. Ce dossier, et ce qu'il contient, est votre application.",
+      en: "You don't need a proprietary platform, or an account with us. The only thing you'll subscribe to is the AI assistant (about {tools}) plus a free code editor. Point all three at the same folder on your machine. That folder, and what's inside it, is your app.",
+      fr: "Vous n'avez besoin ni d'une plateforme propriétaire, ni d'un compte chez nous. Le seul abonnement à prendre est celui de l'assistant IA (environ {tools}) auquel s'ajoute un éditeur de code gratuit. Dirigez les trois vers le même dossier sur votre machine. Ce dossier, et ce qu'il contient, est votre application.",
     },
 
     /**
@@ -455,7 +456,7 @@ export const copy = {
       fr: "Un éditeur de code ouvert, à votre choix. Ils sont généralement gratuits. Il affiche les fichiers et vous permet de modifier, chercher et dialoguer avec votre assistant en langage courant. Rien de magique : c'est l'établi.",
     },
     ing2Title: { en: "The assistant", fr: "L'assistant" },
-    ing2Qual: { en: "The intelligence · ~$20/mo", fr: "L'intelligence · ~20 $/mois" },
+    ing2Qual: { en: "The intelligence · about {tools}", fr: "L'intelligence · environ {tools}" },
     ing2Body: {
       en: "An AI assistant that reads your folder, follows your written instructions, edits files, and runs scripts on your behalf. Use a paid version - that is what keeps the work fully secure.",
       fr: "Un assistant IA qui lit votre dossier, suit vos instructions écrites, modifie les fichiers et exécute des scripts pour vous. Utilisez une version payante : c'est ce qui garantit la sécurité du travail.",
@@ -514,8 +515,8 @@ export const copy = {
 
     s4Label: { en: "What it costs", fr: "Les tarifs" },
     costTools: {
-      en: "A code editor is free. A paid AI assistant subscription is about $20 a month. That is the only recurring cost, and it is not paid to us.",
-      fr: "Un éditeur de code est gratuit. Un abonnement payant à un assistant IA coûte environ 20 $ par mois. C'est le seul coût récurrent, et il ne nous est pas versé.",
+      en: "A code editor is free. A paid AI assistant subscription is about {tools}. That is the only recurring cost, and it is not paid to us.",
+      fr: "Un éditeur de code est gratuit. Un abonnement payant à un assistant IA coûte environ {tools}. C'est le seul coût récurrent, et il ne nous est pas versé.",
     },
     /**
      * The training ladder, cheapest first. Every paid step is the same €250
@@ -551,11 +552,6 @@ export const copy = {
       fr: "Par personne. Les quatre mêmes séances, avec trois personnes au parcours proche du vôtre. Vous choisissez un créneau et un acompte réserve votre place.",
     },
     peerLink: { en: "See the peer groups", fr: "Voir les groupes de pairs" },
-    /** `{date}` is the last day of the back-to-work special. */
-    special: {
-      en: "Back-to-work price until {date}.",
-      fr: "Prix de rentrée jusqu'au {date}.",
-    },
     billing: {
       en: "The first step is a free 15-minute call. Both programmes are invoiced, ex VAT.",
       fr: "La première étape est un appel gratuit de 15 minutes. Les deux programmes sont facturés hors taxes.",
@@ -738,24 +734,20 @@ export const copy = {
       fr: "Un à deux jours pour un projet simple ; jusqu'à deux semaines pour un projet plus important, comme un cabinet entier. Nous examinons vos documents et vos processus réels et vous disons précisément ce que Pythia peut apporter à votre cabinet. Intégralement déduit du prix de la construction si vous poursuivez.",
     },
     e2Title: { en: "The build", fr: "La réalisation" },
-    e2Price: { en: "From", fr: "À partir de" },
     /**
-     * The figure above this is an estimate, and the copy has to say so. A
-     * round number beside "From" reads as a rate card, and this is not one:
-     * it is what comparable builds have come to. Saying where it comes from
-     * is what makes it usable — a reader can weigh an estimate drawn from
-     * delivered work, and cannot weigh a number with no provenance.
+     * In place of a figure on all three engagement cards. Build work is not
+     * priced on the site (November 2026): it is quoted from what the
+     * diagnostic finds. Only the hardware keeps indicative prices.
      */
+    quoted: { en: "Quoted after a first call", fr: "Chiffré après un premier échange" },
     e2Body: {
-      en: "Larger builds, such as a whole set of chambers, are priced well above this. The diagnostic fee is credited against the final build. Custom build, scoped after the diagnostic. Excludes hardware. The figure is an estimate based on builds we have already delivered, not a quote. Typically four to eight weeks from sign-off to a system running on your premises.",
-      fr: "Les projets plus importants, comme un cabinet entier, sont chiffrés nettement au-dessus. Les frais de diagnostic sont déduits du prix final. Développement sur mesure, cadré après le diagnostic. Hors matériel. Le chiffre est une estimation fondée sur des réalisations déjà livrées, et non un devis. Généralement quatre à huit semaines entre la validation et un système en fonctionnement dans vos locaux.",
+      en: "Custom build, scoped after the diagnostic. The diagnostic fee is credited against it. Excludes hardware. Typically four to eight weeks from sign-off to a system running on your premises.",
+      fr: "Développement sur mesure, cadré après le diagnostic. Les frais de diagnostic en sont déduits. Hors matériel. Généralement quatre à huit semaines entre la validation et un système en fonctionnement dans vos locaux.",
     },
     e3Title: { en: "Ongoing", fr: "Suivi" },
-    e3Price: { en: "10–20% p.a.", fr: "10–20 % par an" },
-    /** `{floor}` is replaced with the monthly minimum, in the reader's currency. */
     e3Body: {
-      en: "Of the build price, with a minimum of {floor}. Agreed during the project, not fixed up front. Covers ingestion of new matter files, system maintenance, and keeping Pythia current as your work evolves.",
-      fr: "Du prix de la construction, avec un minimum de {floor}. Convenu pendant le projet, et non fixé d'avance. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
+      en: "Agreed during the project, not fixed up front. Covers ingestion of new matter files, system maintenance and keeping Pythia current as your work evolves.",
+      fr: "Convenu pendant le projet, et non fixé d'avance. Couvre l'intégration des pièces des nouveaux dossiers, la maintenance du système et sa mise à jour à mesure que votre activité évolue.",
     },
 
     /**

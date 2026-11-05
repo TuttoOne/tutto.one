@@ -178,9 +178,9 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    * from the offer stack, not derived: the session rate stays where it is
    * because the trainer split is computed from it.
    *
-   * Shown struck through while the back-to-work special runs (see
-   * SPECIAL_ENDS); the special IS the computed course and fastTrack figures.
-   * When the special ends these become the only price on the page.
+   * No longer shown on the site: since November 2026 the price is stated
+   * once, at the computed course and fastTrack figures, with nothing struck
+   * through. Kept for the admin price list.
    *
    * ZAR is the Praxis rand rule (see zarPraxis), 25% under EUR x 20.
    */
@@ -457,30 +457,11 @@ export function perMonth(key: PriceKey, currency: Currency, locale: Locale): str
 }
 
 /**
- * The back-to-work special: the two Praxis offers at today's computed prices,
- * with the regular price struck through beside them. The last day it applies,
- * inclusive. A real date, because urgency that is not true is the part of the
- * playbook that reads as an infomercial — when it passes, `specialActive`
- * turns false and every page drops the strikethrough on its own.
- */
-export const SPECIAL_ENDS = "2026-11-30";
-
-export function specialActive(today: Date = new Date()): boolean {
-  return today <= new Date(`${SPECIAL_ENDS}T23:59:59`);
-}
-
-/** The special's last day, written the way each language says a date. */
-export function specialEndsLabel(locale: Locale): string {
-  return new Intl.DateTimeFormat(locale === "fr" ? "fr-FR" : "en-GB", {
-    day: "numeric",
-    month: "long",
-  }).format(new Date(`${SPECIAL_ENDS}T12:00:00`));
-}
-
-/**
- * The AI-Fluent Team stack: what the buyer gets, with a stated value for each.
- * EUR is set; GBP follows the file's EUR/1.2 and ZAR the Praxis rand rule, and the total
- * is summed, never typed, so it cannot disagree with its rows.
+ * The team course: what the buyer gets, in the order the page lists it.
+ *
+ * Until November 2026 each row carried a stated value and the page showed
+ * their total above a struck-through regular price. Both went: the price is
+ * stated once and nothing is anchored against it.
  *
  * `bonus` rows are the ones that answer a named objection rather than deliver
  * the core outcome; the page lists them after the core so the stack grows in
@@ -497,29 +478,17 @@ export type StackKey =
   | "asyncReview"
   | "checkIn";
 
-export const PRAXIS_STACK: { key: StackKey; eur: number; bonus: boolean }[] = [
-  { key: "charter", eur: 1400, bonus: false },
-  { key: "scorecard", eur: 1400, bonus: false },
-  { key: "handoverList", eur: 1000, bonus: false },
-  { key: "briefingLibrary", eur: 2300, bonus: false },
-  { key: "verification", eur: 900, bonus: false },
-  { key: "sessions", eur: 3700, bonus: false },
-  { key: "fieldGuide", eur: 200, bonus: true },
-  { key: "asyncReview", eur: 700, bonus: true },
-  { key: "checkIn", eur: 400, bonus: true },
+export const PRAXIS_STACK: { key: StackKey; bonus: boolean }[] = [
+  { key: "charter", bonus: false },
+  { key: "scorecard", bonus: false },
+  { key: "handoverList", bonus: false },
+  { key: "briefingLibrary", bonus: false },
+  { key: "verification", bonus: false },
+  { key: "sessions", bonus: false },
+  { key: "fieldGuide", bonus: true },
+  { key: "asyncReview", bonus: true },
+  { key: "checkIn", bonus: true },
 ];
-
-function fromEur(eur: number, currency: Currency): number {
-  if (currency === "GBP") return Math.round(eur / 1.2);
-  if (currency === "ZAR") return zarPraxis(eur);
-  return eur;
-}
-
-/** One stack row's stated value, formatted. */
-export function stackValue(key: StackKey, currency: Currency, locale: Locale): string {
-  const row = PRAXIS_STACK.find((r) => r.key === key)!;
-  return formatMoney(fromEur(row.eur, currency), currency, locale);
-}
 
 /**
  * The training ladder and the referral credit, all derived from the session
@@ -530,20 +499,12 @@ export function praxisEconomics(currency: Currency, locale: Locale) {
   const credit = amount("referralCredit", currency);
   const course = session * COURSE_SESSIONS;
   const f = (n: number) => formatMoney(n, currency, locale);
-  const stackTotal = PRAXIS_STACK.reduce((sum, r) => sum + fromEur(r.eur, currency), 0);
   return {
     session: f(session),
-    /** All eight sessions: The AI-Fluent Team at the special price. */
+    /** All eight sessions: the team course. */
     course: f(course),
-    /** Four private sessions: The Solo Fast Track at the special price. */
+    /** Four private sessions: one-to-one. */
     fastTrack: f(session * FAST_TRACK_SESSIONS_N),
-    /** Regular prices, struck through while the special runs. */
-    teamRegular: f(amount("teamRegular", currency)),
-    fastTrackRegular: f(amount("fastTrackRegular", currency)),
-    /** Sum of the stated values in PRAXIS_STACK. */
-    stackTotal: f(stackTotal),
-    specialActive: specialActive(),
-    specialEnds: specialEndsLabel(locale),
     /** Taken off the client's own fee per referred enrolment. */
     referralCredit: f(credit),
     /** The ceiling on stacked credits. */

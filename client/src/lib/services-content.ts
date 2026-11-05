@@ -47,6 +47,8 @@ export interface ServiceItem {
 export const STARTS_AT = { en: "Starts at", fr: "À partir de" };
 /** For the diagnostic, which is a rate and reads as a total without this. */
 export const PER_DAY = { en: "per day", fr: "par jour" };
+/** Build work is quoted after a first call, not priced on the page (November 2026). */
+export const QUOTED = { en: "Quoted after a first call", fr: "Chiffré après un premier échange" };
 
 /** Resolve a service's text for the active locale, falling back to English. */
 export function localiseService(s: ServiceItem, locale: Locale) {
@@ -76,9 +78,7 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
       "Évaluation de la maturité des API",
       "Architecture du graphe de connaissances",
     ],
-    priceKey: "diagnosticDay",
-    pricePrefix: STARTS_AT,
-    priceSuffix: PER_DAY,
+    priceLabel: QUOTED,
   },
   {
     /**
@@ -104,19 +104,11 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
       "Flux avec supervision humaine",
       "Choix et intégration des outils",
     ],
-    /**
-     * A stated price, not "custom scoping". The floor is thirty hours, and it
-     * is deliberately the same figure the landing page quotes for an agent
-     * build — same offer, two readers. The hosting caveat is the only genuine
-     * variable, so it is stated as a caveat rather than smuggled into an
-     * open-ended quote.
-     */
     note: {
-      en: "Priced on deployment to hosting or hardware you specify, where running it costs you nothing further. If we have to host it, that is quoted separately.",
-      fr: "Tarif établi pour un déploiement sur l'hébergement ou le matériel que vous indiquez, dont l'exploitation ne vous coûte rien de plus. Si l'hébergement nous incombe, il est chiffré à part.",
+      en: "Deployed to hosting or hardware you specify, where running it costs you nothing further. If we have to host it, that is quoted separately.",
+      fr: "Déployé sur l'hébergement ou le matériel que vous indiquez, dont l'exploitation ne vous coûte rien de plus. Si l'hébergement nous incombe, il est chiffré à part.",
     },
-    priceKey: "scriptBuildFrom",
-    pricePrefix: STARTS_AT,
+    priceLabel: QUOTED,
     /**
      * Sends the reader to the page that argues this card at length, the way
      * The AI-Fluent Team below sends them to the programme. Someone weighing up
@@ -153,8 +145,8 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
       en: "Every person you refer who enrols takes {credit} off your own fee, up to {cap}. Credits apply to courses taught by participating trainers.",
       fr: "Chaque personne que vous parrainez et qui s'inscrit réduit votre propre tarif de {credit}, jusqu'à {cap}. Les crédits s'appliquent aux cours animés par des formateurs participants.",
     },
-    /* A fixed programme, not a floor, so no "Starts at". The figure is the
-       back-to-work price; the regular price is on the programme page. */
+    /* A fixed programme, not a floor, so no "Starts at". Training is the one
+       service with a price on the page. */
     priceKey: "enablementFrom",
     href: "/praxis-programme",
     ctaLabel: { en: "See the programme", fr: "Voir le programme" },
