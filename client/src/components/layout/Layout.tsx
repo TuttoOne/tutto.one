@@ -11,13 +11,10 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const t = useT();
 
-  /* Training first: it is what Tutto Applied AI sells. The on-premise work
-     is linked from the footer only. */
+  /* Training first: it is what Tutto Applied AI sells. Services, work, use
+     cases and the on-premise page are linked from the footer only. */
   const navItems = [
     { label: t(copy.nav.praxis), href: "/praxis" },
-    { label: t(copy.nav.services), href: "/services" },
-    { label: t(copy.nav.work), href: "/portfolio" },
-    { label: t(copy.nav.usecase), href: "/usecase/" },
     { label: t(copy.nav.about), href: "/about" },
     { label: t(copy.nav.thinking), href: "/blog" },
     { label: t(copy.nav.events), href: "/rieuzal" },
@@ -141,10 +138,17 @@ export function Footer() {
           © {new Date().getFullYear()} {t(copy.footer.brand)}.{" "}
           {t({ en: "All rights reserved.", fr: "Tous droits réservés." })}
         </p>
-        <div className="flex gap-6">
-          <a href="/sovereign" className="hover:text-foreground transition-colors">
-            {t(copy.nav.sovereign)}
-          </a>
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          {[
+            { label: t(copy.nav.services), href: "/services" },
+            { label: t(copy.nav.work), href: "/portfolio" },
+            { label: t(copy.nav.usecase), href: "/usecase/" },
+            { label: t(copy.nav.sovereign), href: "/sovereign" },
+          ].map((item) => (
+            <a key={item.href} href={item.href} className="hover:text-foreground transition-colors">
+              {item.label}
+            </a>
+          ))}
           <a href="/data-policy" className="hover:text-foreground transition-colors">
             {t({ en: "Privacy", fr: "Confidentialité" })}
           </a>
