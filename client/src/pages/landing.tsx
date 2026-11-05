@@ -36,11 +36,9 @@ import { CopyEditor } from "@/components/copy/CopyEditor";
 export default function Landing() {
   const t = useT();
 
-  /* The tab title is the second line of the headline, so it is translated for
-     free. The first line cycles, which a tab title cannot. */
-  const title = t(landing.hero.titleSecond).replace(/\n/g, " ");
+  const title = t(landing.tabTitle);
   useEffect(() => {
-    document.title = `Tutto | ${title}`;
+    document.title = title;
     return () => {
       document.title = SITE_TITLE;
     };
@@ -111,8 +109,8 @@ function Hero() {
           <span className="block sm:inline">
             <TypedWords />
           </span>
-        </span>
-        <span className="block whitespace-pre-line sm:whitespace-nowrap">{second}</span>
+        </span>{" "}
+        <span className="block whitespace-pre-line sm:whitespace-nowrap">{second}</span>{" "}
         <span className="block whitespace-pre-line sm:whitespace-nowrap">{third}</span>
       </h1>
 
@@ -337,8 +335,11 @@ function TypedWords() {
   return (
     <>
       <span className="sr-only">{words[0]}</span>
-      <span aria-hidden="true" className="text-primary">
-        {word.slice(0, Math.max(shown, 0))}
+      <span
+        aria-hidden="true"
+        className="hero-typed text-primary"
+        data-text={word.slice(0, Math.max(shown, 0))}
+      >
         <span className="hero-caret" />
       </span>
     </>

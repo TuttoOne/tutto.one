@@ -55,7 +55,7 @@ export type PublicPage = {
 export const SITE_URL = "https://www.tutto.one";
 
 export const PUBLIC_PAGES: PublicPage[] = [
-  { path: "/", key: "landing", title: { en: "Tutto | AI that never leaves the building." }, priority: 1 },
+  { path: "/", key: "landing", title: { en: "Tutto Applied AI | AI training for teams", fr: "Tutto Applied AI | Formation IA pour les équipes" }, priority: 1 },
   { path: "/praxis", key: "praxis", title: { en: "Praxis: Brief it once. It works every time | Tutto" }, priority: 0.9, schema: "Course" },
   { path: "/praxis-programme", key: "praxis-programme", title: { en: "The AI-Fluent Team | Praxis | Tutto" }, priority: 0.9, schema: "Course" },
   { path: "/peer-groups", key: "peer-groups", title: { en: "Peer Groups | Praxis | Tutto" }, priority: 0.8, schema: "Course" },

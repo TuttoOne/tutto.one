@@ -49,6 +49,14 @@ export const landing = {
     fr: "Venez avec la tâche qui vous pèse : 15 minutes, gratuit",
   },
 
+  /** The tab title, the same one the server sends for `/` (shared/public-pages.ts).
+   *  The brand and what it sells, because the headline cycles and a tab
+   *  title cannot. */
+  tabTitle: {
+    en: "Tutto Applied AI | AI training for teams",
+    fr: "Tutto Applied AI | Formation IA pour les équipes",
+  },
+
   hero: {
     /** The headline is one line: the word "Claude", which stays put, and the
      *  things people say about it, typed out one at a time, rubbed out and
@@ -68,7 +76,7 @@ export const landing = {
     ],
 
     /** The second line: the fear the reader is left with after hearing all
-     *  of that. It is also the tab title.
+     *  of that.
      *
      *  The line break in this one and the next is where the line folds on a
      *  phone, set by hand so no single word is left on a line of its own.

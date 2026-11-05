@@ -165,6 +165,13 @@
   }
 }
 
+/* The phrase being typed in the landing headline is drawn from an attribute,
+   so it never enters the page text: crawlers and link previews read the H1 as
+   one clean sentence, with the sr-only copy as its only cycling phrase. */
+.hero-typed::before {
+  content: attr(data-text);
+}
+
 /* The cursor after the phrase being typed in the landing headline. */
 @keyframes hero-caret-blink {
   50% { opacity: 0; }
