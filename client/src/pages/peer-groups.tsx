@@ -217,7 +217,7 @@ export default function PeerGroups() {
               },
               {
                 label: tr("A 15-minute call"),
-                body: tr("We say hello and check the fit, and I tell you which group I have in mind for you."),
+                body: tr("We say hello and check the fit, and we tell you which group we have in mind for you."),
               },
               {
                 label: tr("We set the date"),
@@ -318,8 +318,8 @@ export default function PeerGroups() {
         {/* The list */}
         <div id="join" style={{ marginTop: 64, borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 48px)" }}>
           <p style={{ ...CAPS, fontSize: 10, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Join the list")}</p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>{tr("Tell me about you. Then I find your group.")}</h2>
-          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.75, color: "rgba(246,241,234,0.7)", marginBottom: 32, maxWidth: 520 }}>{tr("A few details so I can match you with the right people. Once they're in, you pay the deposit to hold your seat and book a 15-minute call.")}</p>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(20px, 3.5vw, 30px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 16, letterSpacing: "-0.2px" }}>{tr("Tell us about you. Then we find your group.")}</h2>
+          <p style={{ ...INTER, fontSize: 15, lineHeight: 1.75, color: "rgba(246,241,234,0.7)", marginBottom: 32, maxWidth: 520 }}>{tr("A few details so we can match you with the right people. Once they're in, you pay the deposit to hold your seat and book a 15-minute call.")}</p>
 
           {formState === "sent" && form.slots.length > 0 ? (
             /* A time is chosen, so there is a seat to hold: the deposit comes
@@ -331,7 +331,7 @@ export default function PeerGroups() {
               </p>
               <a href={depositHref} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{fill("Pay the {deposit} deposit", terms)} →</a>
               <p style={{ ...INTER, fontSize: 15, lineHeight: 1.7, color: "rgba(246,241,234,0.7)", margin: "26px auto 16px", maxWidth: 520 }}>
-                {tr("Then pick a time for the 15-minute call, so we can say hello and I can tell you which group I have in mind.")}
+                {tr("Then pick a time for the 15-minute call, so we can say hello and tell you which group we have in mind.")}
               </p>
               <a href={withContact(call, form.name, form.email)} target="_blank" rel="noopener noreferrer" style={{ ...CTA_PRIMARY, background: "transparent", borderColor: "rgba(246,241,234,0.3)", color: "#f6f1ea" }}>{tr("Book the 15-minute call")} →</a>
             </div>
@@ -339,7 +339,7 @@ export default function PeerGroups() {
             /* Only a proposed time: nothing to hold yet, so it is the call alone. */
             <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: 8, padding: "28px 24px", textAlign: "center" }}>
               <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 700, color: "#f6f1ea", marginBottom: 6 }}>{tr("You're on the list. One step left.")}</p>
-              <p style={{ ...INTER, fontSize: 15, color: "rgba(246,241,234,0.7)", marginBottom: 20 }}>{tr("Pick a time for the 15-minute call: we say hello, check the fit and I tell you which group I have in mind.")}</p>
+              <p style={{ ...INTER, fontSize: 15, color: "rgba(246,241,234,0.7)", marginBottom: 20 }}>{tr("Pick a time for the 15-minute call: we say hello, check the fit and tell you which group we have in mind.")}</p>
               <a href={withContact(call, form.name, form.email)} target="_blank" rel="noopener noreferrer" style={CTA_PRIMARY}>{tr("Book the 15-minute call")} →</a>
             </div>
           ) : (
@@ -428,7 +428,7 @@ export default function PeerGroups() {
                   />
                 )}
                 {slotMissing && (
-                  <p role="alert" style={{ ...INTER, fontSize: 13, color: "#f87171", marginTop: 8 }}>{tr("Choose a time or propose one, so I know where to put you.")}</p>
+                  <p role="alert" style={{ ...INTER, fontSize: 13, color: "#f87171", marginTop: 8 }}>{tr("Choose a time or propose one, so we know where to put you.")}</p>
                 )}
               </div>
               <div style={{ marginBottom: 14 }}>
@@ -440,7 +440,7 @@ export default function PeerGroups() {
                   id="pg-with"
                   className="pg-input"
                   style={INPUT}
-                  placeholder={tr("Their names, and I'll get in touch with them")}
+                  placeholder={tr("Their names, and we'll get in touch with them")}
                   value={form.withWhom}
                   onChange={e => setForm(f => ({ ...f, withWhom: e.target.value }))}
                 />

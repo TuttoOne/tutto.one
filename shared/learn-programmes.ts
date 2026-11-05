@@ -261,7 +261,7 @@ const SOLO_FAST_TRACK: Programme = {
       number: 3,
       title: "Build the app with Claude Code",
       icon: "plug",
-      what: "We build the first version of the app for others, one piece at a time, reusing what already works in your own tools. At each step I explain how and why, so you can carry on without me.",
+      what: "We build the first version of the app for others, one piece at a time, reusing what already works in your own tools. At each step we explain how and why, so you can carry on without us.",
       leaveWith: "A first working version of the app on your own machine",
       practice: "Add one small feature on your own and bring what went wrong.",
       materials: [M.claudeCode101, M.claudeCodeInAction],

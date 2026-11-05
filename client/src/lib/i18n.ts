@@ -108,7 +108,7 @@ export const copy = {
   },
 
   contact: {
-    label: { en: "Get in touch", fr: "Me contacter" },
+    label: { en: "Get in touch", fr: "Nous contacter" },
     address: { en: "Address", fr: "Adresse" },
     phone: { en: "Telephone", fr: "Téléphone" },
     email: { en: "Email", fr: "Courriel" },
@@ -132,8 +132,8 @@ export const copy = {
     phName: { en: "Jane Doe", fr: "Marie Dupont" },
     phEmail: { en: "jane@company.com", fr: "marie@entreprise.fr" },
     phMessage: {
-      en: "Tell me about your project...",
-      fr: "Parlez-moi de votre projet…",
+      en: "Tell us about your project...",
+      fr: "Parlez-nous de votre projet…",
     },
     submit: { en: "Send message", fr: "Envoyer le message" },
     sending: { en: "Sending...", fr: "Envoi en cours…" },
@@ -316,7 +316,7 @@ export const copy = {
     title: { en: "Tutto Applied AI", fr: "Tutto Applied AI" },
     standfirst: {
       en: "We build the systems, bridges, and infrastructure that let AI work inside your organisation - not just beside it.",
-      fr: "Je construis les systèmes, les passerelles et l'infrastructure qui permettent à l'IA de travailler au sein de votre organisation, et non à côté d'elle.",
+      fr: "Nous construisons les systèmes, les passerelles et l'infrastructure qui permettent à l'IA de travailler au sein de votre organisation, et non à côté d'elle.",
     },
     /** Labels the arrow under the hero. It used to read "our work", because the
      *  portfolio sat below; what sits below now is the case for the work. */
@@ -1599,8 +1599,8 @@ export const copy = {
       fr: "Les budgets OPCO sont annuels. Ce qui n'est pas engagé fin décembre est perdu et non reporté, ce qui fait du quatrième trimestre le moment le moins coûteux pour s'y mettre.",
     },
     urgency3Body: {
-      en: "Engagements per quarter. I deliver these myself and the training is not subcontracted, so the capacity is one person's. That is the real number.",
-      fr: "Accompagnements par trimestre. J'anime moi-même et la formation n'est pas sous-traitée : la capacité est celle d'une seule personne, et c'est le chiffre réel.",
+      en: "Engagements per quarter. We deliver these ourselves and the training is not subcontracted, so the capacity is small. That is the real number.",
+      fr: "Accompagnements par trimestre. Nous animons nous-mêmes et la formation n'est pas sous-traitée : la capacité est réduite, et c'est le chiffre réel.",
     },
 
     /**

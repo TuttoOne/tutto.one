@@ -308,7 +308,7 @@ export default function About() {
               role={isFr ? "IA appliquée, architecture, réalisation" : "Applied AI, architecture, delivery"}
               link={{
                 href: "/about/me",
-                label: isFr ? "Mon parcours, en plus long" : "The longer version, in my own words",
+                label: isFr ? "Le parcours de Daniel, en ses propres mots" : "Daniel's story, in his own words",
               }}
             >
               {isFr ? (

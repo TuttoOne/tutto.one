@@ -20,8 +20,8 @@ export const PEER_GROUPS_FR: FrDict = {
   "Tell us what you did, what you want to use AI for and which times suit you. If there's someone you'd like to learn with, name them.":
     "Dites-nous ce que vous faisiez, à quoi vous voulez employer l'IA et quels créneaux vous conviennent. Si vous souhaitez apprendre avec quelqu'un, donnez son nom.",
   "A 15-minute call": "Un appel de 15 minutes",
-  "We say hello and check the fit, and I tell you which group I have in mind for you.":
-    "On fait connaissance, on vérifie que cela vous convient, et je vous dis à quel groupe je pense pour vous.",
+  "We say hello and check the fit, and we tell you which group we have in mind for you.":
+    "On fait connaissance, on vérifie que cela vous convient, et nous vous disons à quel groupe nous pensons pour vous.",
   "A deposit holds your seat": "Un acompte réserve votre place",
   /** `{deposit}` the amount, `{weeks}` how long a group has to form. */
   "{deposit} holds your seat while the group fills. It comes off the price. If no group forms within {weeks} weeks you get it back in full.":
@@ -78,20 +78,20 @@ export const PEER_GROUPS_FR: FrDict = {
 
   // --- The list ---
   "Join the list": "Rejoindre la liste",
-  "Tell me about you. Then I find your group.":
-    "Parlez-moi de vous. Ensuite, je trouve votre groupe.",
-  "A few details so I can match you with the right people. Once they're in, you pay the deposit to hold your seat and book a 15-minute call.":
+  "Tell us about you. Then we find your group.":
+    "Parlez-nous de vous. Ensuite, nous trouvons votre groupe.",
+  "A few details so we can match you with the right people. Once they're in, you pay the deposit to hold your seat and book a 15-minute call.":
     "Quelques informations pour vous réunir avec les bonnes personnes. Ensuite, vous réglez l'acompte pour réserver votre place et vous prenez rendez-vous pour un appel de 15 minutes.",
   "You're on the list. Now hold your seat.": "Vous êtes sur la liste. Réservez maintenant votre place.",
   "The {deposit} deposit holds your seat and comes off the price. If no group forms within {weeks} weeks you get it back in full.":
     "L'acompte de {deposit} réserve votre place et il est déduit du prix. Si aucun groupe ne se forme sous {weeks} semaines, il vous est remboursé intégralement.",
   "Pay the {deposit} deposit": "Régler l'acompte de {deposit}",
-  "Then pick a time for the 15-minute call, so we can say hello and I can tell you which group I have in mind.":
-    "Choisissez ensuite un créneau pour l'appel de 15 minutes, pour faire connaissance et pour que je vous dise à quel groupe je pense.",
+  "Then pick a time for the 15-minute call, so we can say hello and tell you which group we have in mind.":
+    "Choisissez ensuite un créneau pour l'appel de 15 minutes, pour faire connaissance et pour que nous vous disions à quel groupe nous pensons.",
   "Next: hold your seat →": "Suite : réserver votre place →",
   "You're on the list. One step left.": "Vous êtes sur la liste. Plus qu'une étape.",
-  "Pick a time for the 15-minute call: we say hello, check the fit and I tell you which group I have in mind.":
-    "Choisissez un créneau pour l'appel de 15 minutes : on fait connaissance, on vérifie que cela vous convient, et je vous dis à quel groupe je pense.",
+  "Pick a time for the 15-minute call: we say hello, check the fit and tell you which group we have in mind.":
+    "Choisissez un créneau pour l'appel de 15 minutes : on fait connaissance, on vérifie que cela vous convient, et nous vous disons à quel groupe nous pensons.",
   "Book the 15-minute call": "Réserver l'appel de 15 minutes",
   Name: "Nom",
   Email: "Courriel",
@@ -104,11 +104,11 @@ export const PEER_GROUPS_FR: FrDict = {
     "ex. : je siège dans deux conseils et je veux lire les dossiers plus vite. J'écris aussi un livre…",
   "Times that suit you": "Les créneaux qui vous conviennent",
   "(choose all that work)": "(choisissez tous ceux qui conviennent)",
-  "Choose a time or propose one, so I know where to put you.":
-    "Choisissez un créneau ou proposez-en un, pour que je sache où vous placer.",
+  "Choose a time or propose one, so we know where to put you.":
+    "Choisissez un créneau ou proposez-en un, pour que nous sachions où vous placer.",
   "Anyone you'd like to learn with?": "Quelqu'un avec qui vous aimeriez apprendre ?",
   "(optional)": "(facultatif)",
-  "Their names, and I'll get in touch with them": "Leurs noms, et je prends contact avec eux",
+  "Their names, and we'll get in touch with them": "Leurs noms, et nous prenons contact avec eux",
   "Trainer code": "Code formateur",
   "If a trainer sent you here": "Si un formateur vous a orienté ici",
   "No marketing. Your details are used only to put your group together and reply to you.":

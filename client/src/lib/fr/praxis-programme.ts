@@ -29,8 +29,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "What you pay": "Ce que vous payez",
   "Start with the free 60-minute session: proof on one of your own jobs before you spend anything. When you book the course, a 15-minute call to say hello and set the dates comes with it. Both programmes are invoiced, ex VAT.":
     "Commencez par la séance gratuite de 60 minutes : la preuve sur l'une de vos propres tâches, avant de dépenser quoi que ce soit. Quand vous réservez la formation, un appel de 15 minutes pour faire connaissance et fixer les dates suit. Les deux programmes sont facturés, hors TVA.",
-  "Tell me about your team. Then we pick the dates.":
-    "Parlez-moi de votre équipe. Ensuite, on fixe les dates.",
+  "Tell us about your team. Then we pick the dates.":
+    "Parlez-nous de votre équipe. Ensuite, on fixe les dates.",
   "A few details so the first session starts on your work, not on introductions. Once they're in, you book a 15-minute call to say hello and set the dates.":
     "Quelques informations pour que la première séance commence sur votre travail, pas sur les présentations. Ensuite, vous réservez un appel de 15 minutes pour faire connaissance et fixer les dates.",
   "Got it. One step left.": "C'est noté. Plus qu'une étape.",
@@ -156,8 +156,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The team course is for you and up to four of your team. One-to-one is private, in four sessions, and it is credited in full if your team follows.":
     "La formation équipe s'adresse à vous et jusqu'à quatre personnes de votre équipe. Le tête-à-tête est privé, en quatre séances, et il est déduit intégralement si votre équipe suit.",
   "What if it doesn't work for us?": "Et si cela ne fonctionne pas pour nous ?",
-  "Pick one recurring piece of work before we start. If by the last session your team can't produce it with AI to the standard on your own scorecard, I keep working with you at no charge until they can. The only condition is that you attend and answer the questions.":
-    "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne. La seule condition : assister aux séances et répondre aux questions.",
+  "Pick one recurring piece of work before we start. If by the last session your team can't produce it with AI to the standard on your own scorecard, we keep working with you at no charge until they can. The only condition is that you attend and answer the questions.":
+    "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, nous continuons à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne. La seule condition : assister aux séances et répondre aux questions.",
 
   // --- Who this is for ---
   "Your team already uses AI":
@@ -249,8 +249,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "For \"we'll drift back in three months\": we look at what slipped and fix it.":
     "Pour « dans trois mois, on aura tout oublié » : on regarde ce qui a glissé et on le corrige.",
   "The guarantee": "La garantie",
-  "Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard, or I keep working with you at no charge until they do.":
-    "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille ; sinon je continue à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
+  "Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard, or we keep working with you at no charge until they do.":
+    "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille. Sinon, nous continuons à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
   "The only condition is that you attend the sessions and answer the questions.":
     "La seule condition : assister aux séances et répondre aux questions.",
   "Eight 90-minute sessions for you and up to four of your team. Everything in the stack above.":
@@ -296,8 +296,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Un mot de franchise, pour poser la bonne attente : vous ferez vous-même l'essentiel du chemin. Sur tout ce qui est complexe, la dernière portion se termine à la main ou se délègue. Faire déjà l'essentiel du chemin représente une économie considérable par rapport à la façon dont le travail se fait aujourd'hui, et c'est cette économie que nous visons.",
   "Your staff already use AI, and it saves them nothing: ask, fix, ask again. But your team knows its own work inside out, and that's where we start. First we set up your AI around your business: the rules, what good looks like for each job and what to hand over. Then we build on that setup together, on your own work, through real conversations and worked examples, up to the tools, skills and automations that do the work without you.":
     "Vos équipes utilisent déjà l'IA, et cela ne leur fait rien gagner : demander, corriger, redemander. Mais votre équipe connaît son travail sur le bout des doigts, et c'est par là que nous commençons. D'abord, nous configurons votre IA autour de votre entreprise : les règles, ce qu'est un bon résultat pour chaque tâche et ce qu'on délègue. Ensuite, nous construisons sur cette base ensemble, sur votre propre travail, par de vraies conversations et des exemples concrets, jusqu'aux outils, compétences et automatisations qui font le travail sans vous.",
-  "Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. I find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
-    "Quatre séances supplémentaires vous transforment en formateur. Clients que vous amenez vous-même : vous conservez 80 % des frais de formation payés. Clients amenés par Tutto : vous en conservez 60 %. Je trouve et j'organise les clients avec vous, vous assurez les séances, et une structure vous épaule pour les cas difficiles.",
+  "Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. We find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
+    "Quatre séances supplémentaires vous transforment en formateur. Clients que vous amenez vous-même : vous conservez 80 % des frais de formation payés. Clients amenés par Tutto : vous en conservez 60 %. Nous trouvons et organisons les clients avec vous, vous assurez les séances, et une structure vous épaule pour les cas difficiles.",
   "Tell me here, or bring it to a free 15-minute call. I'll tell you honestly whether this programme is the right fit.":
     "Dites-le-moi ici, ou venez avec elle à un appel gratuit de 15 minutes. Je vous dirai franchement si ce programme vous convient.",
   "It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.":
