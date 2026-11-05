@@ -1504,8 +1504,8 @@ export const copy = {
    */
   article4: {
     pageTitle: {
-      en: "Article 4: AI literacy training | Tutto",
-      fr: "Article 4 : Formation IA en entreprise | Tutto",
+      en: "Article 4: AI literacy training | Tutto Applied AI",
+      fr: "Article 4 : Formation IA en entreprise | Tutto Applied AI",
     },
     eyebrow: { en: "Article 4 · EU AI Act", fr: "Article 4 · Règlement européen sur l'IA" },
     /** The obligation, not the topic. A date, because a date is checkable. */

@@ -7,8 +7,10 @@
  * later is kept out of search until someone puts it here on purpose.
  *
  * Titles are the ones each page already sets in its own effect; keep them in
- * step when a page's title changes. The description is taken from the page's
- * first paragraph at render time unless one is given here.
+ * step when a page's title changes. Every title ends in "Tutto Applied AI",
+ * the searchable unit ("Tutto" alone is an everyday Italian word). Each main
+ * page has a description written for what it sells (November 2026); without
+ * one, it is taken from the page's first paragraph at render time.
  */
 
 export type PageKey =
@@ -55,26 +57,56 @@ export type PublicPage = {
 export const SITE_URL = "https://www.tutto.one";
 
 export const PUBLIC_PAGES: PublicPage[] = [
-  { path: "/", key: "landing", title: { en: "Tutto Applied AI | AI training for teams", fr: "Tutto Applied AI | Formation IA pour les équipes" }, priority: 1 },
-  { path: "/praxis", key: "praxis", title: { en: "Praxis: Brief it once. It works every time | Tutto" }, priority: 0.9, schema: "Course" },
-  { path: "/praxis-programme", key: "praxis-programme", title: { en: "The AI-Fluent Team | Praxis | Tutto" }, priority: 0.9, schema: "Course" },
-  { path: "/peer-groups", key: "peer-groups", title: { en: "Peer Groups | Praxis | Tutto" }, priority: 0.8, schema: "Course" },
-  { path: "/become-a-trainer", key: "become-a-trainer", title: { en: "Become a Praxis Trainer - teach it, and earn from it" }, priority: 0.7, schema: "Course" },
-  { path: "/article-4", key: "article-4", title: { en: "Article 4: AI literacy training | Tutto", fr: "Article 4 : Formation IA en entreprise | Tutto" }, priority: 0.8, schema: "Course" },
-  { path: "/services", key: "services", title: { en: "Services: we build it, or you learn to | Tutto", fr: "Prestations : nous le construisons, ou vous apprenez | Tutto" }, priority: 0.9, schema: "Service" },
-  { path: "/sovereign", key: "sovereign", title: { en: "Sovereign AI | Pythia | Tutto", fr: "IA souveraine | Pythia | Tutto" }, priority: 0.8, schema: "Service" },
-  { path: "/pythia", key: "pythia", title: { en: "Pythia: On-premise document intelligence | Tutto", fr: "Pythia : intelligence documentaire sur site | Tutto" }, priority: 0.7, schema: "Service" },
-  { path: "/gtm-orchestrator", key: "gtm-orchestrator", title: { en: "GTM: On-premise sales outreach engine | Tutto", fr: "GTM : moteur de prospection sur site | Tutto" }, priority: 0.5, schema: "Service" },
+  { path: "/", key: "landing", title: { en: "Tutto Applied AI | AI training for teams", fr: "Tutto Applied AI | Formation IA pour les équipes" },
+    description: { en: "AI training for teams, on your own work: the rules, a scorecard for each job, what to hand over, then the build. 8 sessions, with a guarantee.", fr: "Formation IA pour les équipes, sur votre propre travail : les règles, une grille par tâche, ce qu'on délègue, puis la construction. 8 séances, avec garantie." },
+    priority: 1 },
+  { path: "/praxis", key: "praxis", title: { en: "Brief it once. It works every time | Tutto Applied AI", fr: "Briefez-la une fois. Elle fonctionne à chaque fois | Tutto Applied AI" },
+    description: { en: "How we train teams in the Praxis method, on your own work and your own machine: the team course, one-to-one or a small group.", fr: "Comment nous formons les équipes à la méthode Praxis, sur votre travail et votre machine : formation équipe, tête-à-tête ou petit groupe." },
+    priority: 0.9, schema: "Course" },
+  { path: "/praxis-programme", key: "praxis-programme", title: { en: "AI training for teams | Tutto Applied AI", fr: "Formation IA pour les équipes | Tutto Applied AI" },
+    description: { en: "Eight 90-minute sessions for you and up to four of your team, on your own work. What you leave with, the guarantee and the price.", fr: "Huit séances de 90 minutes pour vous et jusqu'à quatre personnes de votre équipe, sur votre travail. Ce que vous emportez, la garantie et le prix." },
+    priority: 0.9, schema: "Course" },
+  { path: "/peer-groups", key: "peer-groups", title: { en: "AI training in a small group | Tutto Applied AI", fr: "Formation IA en petit groupe | Tutto Applied AI" },
+    description: { en: "Four 90-minute sessions with three people from a similar background, each of you on your own work. Priced per person, and a deposit holds your seat.", fr: "Quatre séances de 90 minutes avec trois personnes au parcours proche, chacun sur son propre travail. Prix par personne, un acompte réserve votre place." },
+    priority: 0.8, schema: "Course" },
+  { path: "/become-a-trainer", key: "become-a-trainer", title: { en: "Become a Praxis trainer: teach it, and earn from it | Tutto Applied AI", fr: "Devenez formateur Praxis | Tutto Applied AI" },
+    description: { en: "Four sessions that turn someone who can build with AI into someone who can teach it. You keep 80% of the tuition on the clients you bring in.", fr: "Quatre séances pour passer de quelqu'un qui construit avec l'IA à quelqu'un qui l'enseigne. Vous gardez 80 % des honoraires sur vos propres clients." },
+    priority: 0.7, schema: "Course" },
+  { path: "/article-4", key: "article-4", title: { en: "Article 4: AI literacy training | Tutto Applied AI", fr: "Article 4 : Formation IA en entreprise | Tutto Applied AI" },
+    description: { en: "What Article 4 of the EU AI Act asks of employers, and the training that covers it, ending in the documentation that shows you have.", fr: "Ce que l'article 4 du règlement européen sur l'IA impose aux employeurs, et la formation qui y répond, jusqu'au dossier qui le prouve." },
+    priority: 0.8, schema: "Course" },
+  { path: "/services", key: "services", title: { en: "Services: we build it, or you learn to | Tutto Applied AI", fr: "Prestations : nous le construisons, ou vous apprenez | Tutto Applied AI" },
+    description: { en: "We train your team to use AI properly, then build what's worth building. Either way it starts with the rules and a standard for good work.", fr: "Nous formons votre équipe à bien utiliser l'IA, puis nous construisons ce qui en vaut la peine. Toujours en commençant par les règles et un standard." },
+    priority: 0.9, schema: "Service" },
+  { path: "/sovereign", key: "sovereign", title: { en: "Sovereign AI on your own hardware | Tutto Applied AI", fr: "IA souveraine, sur votre matériel | Tutto Applied AI" },
+    description: { en: "A system that reads everything your business holds and answers from it, on hardware you own, in your building. Nothing is uploaded.", fr: "Un système qui lit tout ce que votre entreprise conserve et y répond, sur un matériel qui vous appartient, dans vos locaux. Rien n'est téléversé." },
+    priority: 0.8, schema: "Service" },
+  { path: "/pythia", key: "pythia", title: { en: "On-premise document AI for legal work | Tutto Applied AI", fr: "IA documentaire sur site pour le juridique | Tutto Applied AI" },
+    description: { en: "Document AI for disclosure sets and privileged material: search, cited answers and timelines, on a machine in your own office.", fr: "IA documentaire pour les fonds de pièces et les documents couverts par le secret : recherche, réponses citées et chronologies, dans vos bureaux." },
+    priority: 0.7, schema: "Service" },
+  { path: "/gtm-orchestrator", key: "gtm-orchestrator", title: { en: "On-premise sales outreach engine | Tutto Applied AI", fr: "Moteur de prospection sur site | Tutto Applied AI" },
+    description: { en: "A custom system that researches prospects, writes in the sender's voice and sends safely, with open-weight models on the client's own hardware.", fr: "Un système sur mesure qui étudie les prospects, écrit dans la voix de l'expéditeur et envoie en sûreté, avec des modèles locaux sur le matériel du client." },
+    priority: 0.5, schema: "Service" },
   { path: "/souverainete", key: "souverainete", title: { en: "Sovereignty: diagnostic | Tutto", fr: "Souveraineté : diagnostic | Tutto" }, priority: 0.6 },
   { path: "/rieuzal", key: "rieuzal", title: { en: "Ateliers IA à Rieuzal | Tutto" }, priority: 0.7, schema: "EventSeries", lang: "fr" },
-  { path: "/applied", key: "applied", title: { en: "Applied AI, at length | Tutto", fr: "L'IA en pratique | Tutto" }, priority: 0.6 },
+  { path: "/applied", key: "applied", title: { en: "Applied AI, at length | Tutto Applied AI", fr: "L'IA en pratique | Tutto Applied AI" },
+    description: { en: "The long version: how we set AI up on your own machine and your own data, with worked examples and the trade-offs.", fr: "La version longue : comment nous installons l'IA sur votre machine et vos données, avec des exemples concrets et les compromis." },
+    priority: 0.6 },
   { path: "/usecase/", key: "usecase", priority: 0.6 },
-  { path: "/portfolio", key: "portfolio", priority: 0.5 },
-  { path: "/about", key: "about", title: { en: "About - Tutto", fr: "À propos - Tutto" }, priority: 0.7, schema: "AboutPage" },
+  { path: "/portfolio", key: "portfolio", title: { en: "Work | Tutto Applied AI", fr: "Réalisations | Tutto Applied AI" },
+    description: { en: "Systems we have built with clients: document search for litigation, a SharePoint bridge, a sales outreach engine and more.", fr: "Les systèmes construits avec nos clients : recherche documentaire en contentieux, pont SharePoint, moteur de prospection et d'autres." },
+    priority: 0.5 },
+  { path: "/about", key: "about", title: { en: "About | Tutto Applied AI", fr: "À propos | Tutto Applied AI" },
+    description: { en: "We fix how your team uses AI. Then we build what's worth building. Who we are, how we work and who we've worked with.", fr: "Nous corrigeons la façon dont votre équipe utilise l'IA, puis nous construisons ce qui en vaut la peine. Qui nous sommes et comment nous travaillons." },
+    priority: 0.7, schema: "AboutPage" },
   { path: "/about/me", key: "about-me", title: { en: "About me - Daniel Forsthofer", fr: "À propos de moi - Daniel Forsthofer" }, priority: 0.6, schema: "ProfilePage" },
-  { path: "/blog", key: "blog", priority: 0.8, schema: "Blog" },
-  { path: "/contact", key: "contact", priority: 0.6, schema: "ContactPage" },
-  { path: "/data-policy", key: "data-policy", title: { en: "How we handle your data | Tutto" }, priority: 0.3 },
+  { path: "/blog", key: "blog", title: { en: "Thinking | Tutto Applied AI", fr: "Réflexions | Tutto Applied AI" },
+    description: { en: "Our writing on AI, agents and setting a business up so AI can work inside it.", fr: "Nos articles sur l'IA, les agents et la façon d'organiser une entreprise pour que l'IA y travaille." },
+    priority: 0.8, schema: "Blog" },
+  { path: "/contact", key: "contact", title: { en: "Contact | Tutto Applied AI", fr: "Contact | Tutto Applied AI" },
+    description: { en: "Book a free 15-minute call, or send us a message about the job you keep repeating.", fr: "Réservez un appel gratuit de 15 minutes, ou écrivez-nous au sujet de la tâche que vous répétez." },
+    priority: 0.6, schema: "ContactPage" },
+  { path: "/data-policy", key: "data-policy", title: { en: "How we handle your data | Tutto Applied AI", fr: "Comment nous traitons vos données | Tutto Applied AI" }, priority: 0.3 },
 ];
 
 /** `/usecase` is the same page as `/usecase/`, the URL already in the wild. */

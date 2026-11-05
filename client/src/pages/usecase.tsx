@@ -342,7 +342,7 @@ export default function UseCase() {
 
   const title = t(c.title);
   useEffect(() => {
-    document.title = `${title} | Tutto`;
+    document.title = `${title} | Tutto Applied AI`;
     return () => {
       document.title = SITE_TITLE;
     };

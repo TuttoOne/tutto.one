@@ -29,7 +29,7 @@ const version = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long"
 
 export default function DataPolicy() {
   useEffect(() => {
-    document.title = "How we handle your data | Tutto";
+    document.title = "How we handle your data | Tutto Applied AI";
     return () => { document.title = SITE_TITLE; };
   }, []);
 

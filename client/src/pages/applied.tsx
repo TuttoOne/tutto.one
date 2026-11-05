@@ -21,8 +21,8 @@ export default function Applied() {
   useEffect(() => {
     document.title =
       locale === "fr"
-        ? "L'IA en pratique | Tutto"
-        : "Applied AI, at length | Tutto";
+        ? "L'IA en pratique | Tutto Applied AI"
+        : "Applied AI, at length | Tutto Applied AI";
     return () => {
       document.title = SITE_TITLE;
     };

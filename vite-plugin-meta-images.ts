@@ -3,18 +3,17 @@ import fs from 'fs';
 import path from 'path';
 
 /**
- * Vite plugin that updates og:image and twitter:image meta tags
- * to point to the app's opengraph image with the correct Replit domain.
+ * Vite plugin that updates og:image and twitter:image meta tags to an
+ * absolute URL for the app's opengraph image.
+ *
+ * Always the public domain. It used to take the Replit app domain, so a page
+ * shared on LinkedIn showed a replit.app address (brand audit, November 2026).
  */
 export function metaImagesPlugin(): Plugin {
   return {
     name: 'vite-plugin-meta-images',
     transformIndexHtml(html) {
-      const baseUrl = getDeploymentUrl();
-      if (!baseUrl) {
-        log('[meta-images] no Replit deployment domain found, skipping meta tag updates');
-        return html;
-      }
+      const baseUrl = PUBLIC_URL;
 
       // Check if opengraph image exists in public directory
       const publicDir = path.resolve(process.cwd(), 'client', 'public');
@@ -55,21 +54,8 @@ export function metaImagesPlugin(): Plugin {
   };
 }
 
-function getDeploymentUrl(): string | null {
-  if (process.env.REPLIT_INTERNAL_APP_DOMAIN) {
-    const url = `https://${process.env.REPLIT_INTERNAL_APP_DOMAIN}`;
-    log('[meta-images] using internal app domain:', url);
-    return url;
-  }
-
-  if (process.env.REPLIT_DEV_DOMAIN) {
-    const url = `https://${process.env.REPLIT_DEV_DOMAIN}`;
-    log('[meta-images] using dev domain:', url);
-    return url;
-  }
-
-  return null;
-}
+/** Same as SITE_URL in shared/public-pages.ts. */
+const PUBLIC_URL = 'https://www.tutto.one';
 
 function log(...args: any[]): void {
   if (process.env.NODE_ENV === 'production') {

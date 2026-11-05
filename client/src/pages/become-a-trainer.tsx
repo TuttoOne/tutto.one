@@ -93,7 +93,7 @@ export default function BecomeATrainer() {
     Object.entries(subs).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), tr(en));
 
   useEffect(() => {
-    document.title = "Become a Praxis Trainer - teach it, and earn from it";
+    document.title = "Become a Praxis trainer: teach it, and earn from it | Tutto Applied AI";
     return () => { document.title = SITE_TITLE; };
   }, []);
 

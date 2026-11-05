@@ -76,8 +76,8 @@ async function renderPage(
   const post = page.key === "blog-post" ? (Object.values(data)[0] as BlogPostData | undefined) : undefined;
 
   const title = post
-    ? `${post.title} | Tutto`
-    : page.title?.en ?? `${textOf(firstTag(body, "h1")) || "Tutto"} | Tutto`;
+    ? `${post.title} | Tutto Applied AI`
+    : page.title?.en ?? `${textOf(firstTag(body, "h1")) || "Tutto"} | Tutto Applied AI`;
   const description = post?.excerpt ?? page.description?.en ?? describe(body);
   const url = SITE_URL + page.path;
 

@@ -100,7 +100,7 @@ export default function About() {
   const t = useT();
 
   useEffect(() => {
-    document.title = locale === "fr" ? "À propos - Tutto" : "About - Tutto";
+    document.title = locale === "fr" ? "À propos | Tutto Applied AI" : "About | Tutto Applied AI";
     return () => {
       document.title = SITE_TITLE;
     };
