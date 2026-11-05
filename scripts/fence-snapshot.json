@@ -3,19 +3,19 @@
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/admin/login": {
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/admin/setup": {
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/api/admin/me": {
     "status": 401,
@@ -27,31 +27,31 @@
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/learn/auth": {
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/learn/dashboard": {
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/learn/profile": {
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/learn/somewhere-else": {
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/api/learn/me": {
     "status": 401,
@@ -63,13 +63,13 @@
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/praxis/learn/claude-101/1": {
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   },
   "/agent-scorecard": {
     "status": 200,
@@ -111,7 +111,13 @@
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "9ba128de4aed1fc1"
+    "body": "f81306acca7c050a"
+  },
+  "/workspaces": {
+    "status": 200,
+    "robots": "noindex, nofollow",
+    "location": null,
+    "body": "1fad44e0213f12b8"
   },
   "/courses/": {
     "status": 200,
@@ -147,6 +153,6 @@
     "status": 200,
     "robots": "noindex, nofollow",
     "location": null,
-    "body": "f589dcc48fce1f97"
+    "body": "fb37f75a8c929b72"
   }
 }
