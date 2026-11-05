@@ -14,7 +14,7 @@ export function Header() {
   /* Training first: it is what Tutto Applied AI sells. Services, work, use
      cases and the on-premise page are linked from the footer only. */
   const navItems = [
-    { label: t(copy.nav.praxis), href: "/praxis" },
+    { label: t(copy.nav.praxis), href: "/praxis-programme" },
     { label: t(copy.nav.about), href: "/about" },
     { label: t(copy.nav.thinking), href: "/blog" },
     { label: t(copy.nav.events), href: "/rieuzal" },

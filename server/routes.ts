@@ -378,6 +378,11 @@ export async function registerRoutes(
   // ateliers now, so old links, blog posts and search results land there.
   app.get(["/calendar", "/calendar/"], (_req, res) => res.redirect(301, "/rieuzal"));
 
+  // /praxis was the training overview. Retired in November 2026: the team
+  // course page says it better, so the nav and old links go there. Only the
+  // bare path: /praxis/learn is the course reader and stays where it is.
+  app.get(["/praxis", "/praxis/"], (_req, res) => res.redirect(301, "/praxis-programme"));
+
   // Pocket Praxis, the course decks as a phone game: link only, not indexed. Served from
   // the folder with a trailing slash, because its scripts, course files and offline
   // service worker all load relative to it.

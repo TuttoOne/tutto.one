@@ -161,7 +161,7 @@ export default function Services() {
               heading={t(copy.waysIn.learnHeading)}
               qualifier={t(copy.waysIn.learnQualifier)}
               wants={learn}
-              cta={{ label: t(copy.waysIn.learnCta), href: "/praxis" }}
+              cta={{ label: t(copy.waysIn.learnCta), href: "/praxis-programme" }}
             />
           </div>
         </Section>

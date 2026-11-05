@@ -121,8 +121,7 @@ function llmsTxt(posts: { slug: string; title: string; excerpt: string }[]): str
     "",
     "Tutto Applied AI trains teams to use AI properly, in English and French, online and in person in the Lot. The training follows the Praxis method: your team learns to brief AI once, with rules, a standard for good work and what to hand over, so it works every time. We also build what's worth building, including AI that runs on your own machines and reads your files where they already sit.",
     "",
-    section("Training", ["/", "/praxis", "/peer-groups", "/become-a-trainer", "/rieuzal"], [
-      "- [The team course](" + SITE_URL + "/praxis-programme): eight topics for an owner and up to four of their team, in eight, six or four sessions.",
+    section("Training", ["/", "/praxis-programme", "/peer-groups", "/become-a-trainer", "/rieuzal"], [
       "- [Article 4: AI literacy training](" + SITE_URL + "/article-4): what the EU AI Act asks of employers, and the training that covers it.",
     ]),
     section("Building", ["/services", "/usecase", "/sovereign", "/pythia", "/gtm-orchestrator"]),

@@ -27,7 +27,7 @@ export const SITE_PAGES: SitePage[] = [
     name: "Tutto Applied AI: AI training for teams",
     summary: "For teams overwhelmed by what they hear about Claude. One track: the team course.",
     detail:
-      "The site's front door. People say Claude is amazing, scary, expensive, that it hallucinates, is a sycophant, will steal their data or take their job. The page tells a visitor who feels left behind that it is still early, and invites them to get ahead together. AI is new and can seem complex, but the visitor knows their own work and business inside out, so Tutto starts there: first it sets up the team's AI around what they know, then builds on that setup together with the team, through rich conversations and worked examples. Tutto teaches, but the team does most of the talking, making and refining, and teaching it back to the group is how they come to understand it. The page sets out 4 steps to top AI work and prices the team course (eight topics, at /praxis-programme). One-to-one and small-group options are on /praxis.",
+      "The site's front door. People say Claude is amazing, scary, expensive, that it hallucinates, is a sycophant, will steal their data or take their job. The page tells a visitor who feels left behind that it is still early, and invites them to get ahead together. AI is new and can seem complex, but the visitor knows their own work and business inside out, so Tutto starts there: first it sets up the team's AI around what they know, then builds on that setup together with the team, through rich conversations and worked examples. Tutto teaches, but the team does most of the talking, making and refining, and teaching it back to the group is how they come to understand it. The page sets out 4 steps to top AI work and prices the team course (eight topics, at /praxis-programme). One-to-one and small-group options are on the same page.",
     offering: true,
   },
   {
@@ -55,11 +55,11 @@ export const SITE_PAGES: SitePage[] = [
     offering: true,
   },
   {
-    path: "/praxis",
-    name: "Training for your team: the Praxis method",
-    summary: "Brief it once. It works every time. Training in order: rules, KPIs, what to hand over, then build.",
+    path: "/praxis-programme",
+    name: "AI training for teams: the team course",
+    summary: "Eight topics for an owner and up to four of their team, in eight, six or four sessions. Rules, KPIs, what to hand over, then build.",
     detail:
-      "Tutto Applied AI's hands-on training, built on the Praxis method. You don't need a proprietary platform or an account with us: an AI assistant subscription and a free code editor, both pointed at the same folder on your machine. That folder, and what's inside it, is your app. The page lays out the training ladder: free sessions, the team course (eight topics for an owner and up to four staff, in eight, six or four sessions), one-to-one (four private sessions) and a small group (the same four sessions with three peers, priced per person, at /peer-groups). Every CTA on the page opens a conversation rather than selling an hour.",
+      "Tutto Applied AI's hands-on training, built on the Praxis method. You don't need a proprietary platform or an account with us: an AI assistant subscription and a free code editor, both pointed at the same folder on your machine. That folder, and what's inside it, is your app. The page sets out the eight topics in order, what the team leaves with, the guarantee and the price, with one-to-one (four private sessions) and a small group (at /peer-groups) as alternatives. It starts with a free 60-minute session on one of your own jobs.",
     offering: true,
   },
   {

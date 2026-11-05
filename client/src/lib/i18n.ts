@@ -24,7 +24,7 @@ export const copy = {
     services: { en: "Services", fr: "Prestations" },
     work: { en: "Work", fr: "Réalisations" },
     /**
-     * Points at /praxis. Training is what Tutto Applied AI sells (November
+     * Points at /praxis-programme. Training is what Tutto Applied AI sells (November
      * 2026), so it leads the bar under the plain word for it. Praxis is the
      * name of the method, explained on the page, never a product name.
      *
@@ -384,6 +384,8 @@ export const copy = {
     },
   },
 
+  /** The retired /praxis page (November 2026; it redirects to /praxis-programme).
+   *  No page reads this block now. Kept for its copy until it is reused or dropped. */
   praxis: {
     eyebrow: {
       en: "The Praxis method · Training for your team",

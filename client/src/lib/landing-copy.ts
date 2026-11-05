@@ -17,7 +17,7 @@
  * programme that installs them, and sends the reader to one track: the team
  * course at /praxis-programme. It was "we build agents" until September 2026;
  * that is the upsell, not the way in. Until November 2026 there was a second
- * track, For Life (/peer-groups); small groups are now offered on /praxis.
+ * track, For Life (/peer-groups); small groups are now offered on /praxis-programme.
  *
  * The previous version sold four offers at once and was forgettable for it.
  * If a new offer needs a home, give it a page; do not add a fifth door here.

@@ -18,7 +18,6 @@ import AboutMe from "@/pages/about-me";
 import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
 import UseCase from "@/pages/usecase";
-import Praxis from "@/pages/praxis";
 import PraxisProgramme from "@/pages/praxis-programme";
 import Pythia from "@/pages/pythia";
 import Sovereign from "@/pages/sovereign";
@@ -81,7 +80,8 @@ function Router() {
            public/usecase/. */}
         <Route path="/usecase" component={UseCase} />
         <Route path="/usecase/" component={UseCase} />
-        <Route path="/praxis" component={Praxis} />
+        {/* /praxis was the training overview, retired for the team course page. */}
+        <Route path="/praxis">{() => <Redirect to="/praxis-programme" />}</Route>
         {/* /calendar was the Applied AI Evenings page; the events are the Rieuzal ateliers now. */}
         <Route path="/calendar">{() => <Redirect to="/rieuzal" />}</Route>
         {/* The general front door to Pythia, and what the nav now points at.
