@@ -4,6 +4,8 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { usePreferences } from "@/lib/preferences";
 import { copy, useT, SITE_TITLE } from "@/lib/i18n";
+import { landing } from "@/lib/landing-copy";
+import { LogoMarquee } from "@/components/product/ProductPage";
 /* The booking label is the home page's, so every page asks the same way. */
 
 /**
@@ -219,6 +221,16 @@ export default function About() {
             </>
           )}
         </div>
+
+        {/* The work from before Tutto, in the same strip the home page uses
+            for Tutto's own clients, so the two read as one format and neither
+            is mistaken for the other. */}
+        <section className="mt-16">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary mb-4">
+            {t(landing.priorClients.label)}
+          </p>
+          <LogoMarquee items={landing.priorClients.items} />
+        </section>
 
         {/*
           Both of us, same card, Rox first. Her introduction lives here

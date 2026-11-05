@@ -169,9 +169,38 @@ export const landing = {
    * That clearance covers the names below and nothing else — the last two
    * on 8 September 2026, the rest the day before. A logo added later needs
    * its own; do not read the cleared list as a cleared category.
+   *
+   * SPLIT ON 5 NOVEMBER 2026. The home page shows Tutto's own clients only;
+   * the work from before Tutto moved to /about as `priorClients`, in the same
+   * strip, so nobody reads an employer-era name as a Tutto engagement.
+   * Background Italia, HSA (Health Science Academy), Errigal Farm and Hoven
+   * were added that day, named by Daniel as cleared for the wall. Their
+   * artwork came from each one's own site: Background Italia's and Hoven's
+   * SVGs as published, Errigal's PNG trimmed of its transparent margin, and
+   * HSA's wordmark, which is only 19 pixels tall, so it is held at roughly
+   * its own size rather than enlarged. Ask HSA for a vector file.
    */
   clients: {
-    label: { en: "16 years of analytics and consulting work for", fr: "16 ans d'analyses et de conseil pour" },
+    label: { en: "Who we train and build for", fr: "Pour qui nous formons et construisons" },
+    items: [
+      { name: "Background Italia", logo: "/logos/background-italia.svg", scale: 1.1 },
+      { name: "Health Science Academy", logo: "/logos/hsa.png", scale: 0.6 },
+      { name: "Bearstone Global", logo: "/logos/bearstone-global.svg", scale: 0.42 },
+      /* Supplied as a dark and a white wordmark; the dark one is filed here
+         because the strip sits on the off-white page and the white one would
+         be invisible on it. Trimmed of its transparent margin so it sits on
+         the same optical baseline as the rest. */
+      { name: "RGBC", logo: "/logos/rgbc.png", scale: 1.35 },
+      /* The stacked mark: the tree sits over the wordmark, so like Bulldog it
+         is barely wider than tall and needs the extra height to be read. */
+      { name: "Errigal Farm", logo: "/logos/errigal-farm.png", scale: 1.6 },
+      { name: "Hoven", logo: "/logos/hoven.svg", scale: 0.9 },
+    ],
+  },
+
+  /** Shown on /about, in the same strip: the work from before Tutto. */
+  priorClients: {
+    label: { en: "Who we've worked with", fr: "Avec qui nous avons travaillé" },
     items: [
       { name: "Standard Bank", logo: "/logos/standard-bank.svg", scale: 1 },
       { name: "Spur Corporation", logo: "/logos/spur-corporation.png", scale: 1.15 },
@@ -182,7 +211,6 @@ export const landing = {
          IMT artwork if the relationship is better placed under the old name. */
       { name: "IMT Mining", logo: "/logos/imt-mining.png", scale: 1.1 },
       { name: "Bulldog Group", logo: "/logos/bulldog-group.png", scale: 1.25 },
-      { name: "Bearstone Global", logo: "/logos/bearstone-global.svg", scale: 0.42 },
       /* "ABI" here is the Association of British Investigators — not
          Amalgamated Beverage Industries, which is what a South African list
          reads it as, and not the Association of British Insurers. Spelled out
@@ -199,11 +227,6 @@ export const landing = {
       },
       { name: "TSplus", logo: "/logos/tsplus.png", scale: 0.75 },
       { name: "Opus4Business", logo: "/logos/opus4business.png", scale: 0.95 },
-      /* Supplied as a dark and a white wordmark; the dark one is filed here
-         because the strip sits on the off-white page and the white one would
-         be invisible on it. Trimmed of its transparent margin so it sits on
-         the same optical baseline as the rest. */
-      { name: "RGBC", logo: "/logos/rgbc.png", scale: 1.35 },
       /* Supplied as the tagline lockup — the navy block sitting above a white
          strip carrying "innovative solutions - endless possibilities" in type
          six pixels tall. Only the block is filed. The strapline is under three
