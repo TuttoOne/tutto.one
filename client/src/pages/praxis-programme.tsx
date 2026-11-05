@@ -9,6 +9,9 @@ import { Header } from "@/components/layout/Layout";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
 const INTER: React.CSSProperties = { fontFamily: "'Inter', -apple-system, sans-serif" };
+/** The second line of a two-line heading: the same heading, a step down,
+ *  so the claim leads and the line after it reads as its consequence. */
+const SUBLINE: React.CSSProperties = { display: "block", fontSize: "0.6em", fontWeight: 700, letterSpacing: "-0.1px", marginTop: "0.35em" };
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono','Fira Mono','Courier New',monospace" };
 const CAPS: React.CSSProperties = { ...INTER, textTransform: "uppercase", letterSpacing: "0.12em" };
 
@@ -278,7 +281,7 @@ export default function PraxisProgramme() {
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("The team course")}</p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Eight topics.")}<br />{tr("Your team leaves AI-fluent.")}</h2>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Eight topics.")}{" "}<span style={SUBLINE}>{tr("Your team leaves AI-fluent.")}</span></h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Your staff already use AI, and it saves them nothing: ask, fix, ask again. But your team knows its own work inside out, and that's where we start. First we set up your AI around your business: the rules, what good looks like for each job and what to hand over. Then we build on that setup together, on your own work, through real conversations and worked examples, up to the tools, skills and automations that do the work without you.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 20, maxWidth: 560 }}>{tr("After the eight topics your team is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.7, fontWeight: 600, color: "#f6f1ea", marginBottom: 24, maxWidth: 560 }}>{tr("Bring the one job that's bugging you. In an hour you'll get started with our scorecard and policy tools, and leave with your first artefact. No slides, no pitch you didn't ask for.")}</p>
@@ -299,7 +302,7 @@ export default function PraxisProgramme() {
             their own team before being told who the programme is for. */}
         <div className="pp-split" style={{ marginBottom: 64 }}>
           <div>
-            <h1 style={{ ...ROBOTO, fontSize: "clamp(30px, 4.6vw, 46px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a", marginBottom: 24 }}>{tr("Most teams start with the tools.")}<br />{tr("That's why nothing sticks.")}</h1>
+            <h1 style={{ ...ROBOTO, fontSize: "clamp(30px, 4.6vw, 46px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a", marginBottom: 24 }}>{tr("Most teams start with the tools.")}{" "}<span style={SUBLINE}>{tr("That's why nothing sticks.")}</span></h1>
             <p style={{ ...INTER, fontSize: 14, lineHeight: 1.75, color: "#3d3d3d" }}>{tr("Your staff have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.")}</p>
           </div>
           <img src="/artwork/team-at-screens.webp" width={1400} height={1048} loading="lazy" alt={tr("A small team around a desk of screens, working through AI output together")} style={FIGURE} />
@@ -730,7 +733,7 @@ export default function PraxisProgramme() {
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 16 }}>{tr("What comes next")}</p>
           <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "flex-start", justifyContent: "space-between" }}>
             <div style={{ maxWidth: 480 }}>
-              <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>{tr("Become a Praxis trainer.")}<br />{tr("Teach it, and earn from it.")}</h3>
+              <h3 style={{ ...ROBOTO, fontSize: "clamp(18px, 3vw, 26px)", fontWeight: 800, color: "#1a1a1a", marginBottom: 12, letterSpacing: "-0.2px", lineHeight: 1.2 }}>{tr("Become a Praxis trainer.")}{" "}<span style={SUBLINE}>{tr("Teach it, and earn from it.")}</span></h3>
               <p style={{ ...INTER, fontSize: 13, lineHeight: 1.8, color: "#3d3d3d", marginBottom: 0 }}>{tr("Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. We find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.")}</p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}>

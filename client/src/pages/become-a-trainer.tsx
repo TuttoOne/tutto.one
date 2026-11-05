@@ -14,6 +14,8 @@ import {
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
 const INTER: React.CSSProperties = { fontFamily: "'Inter', -apple-system, sans-serif" };
+/** The second line of a two-line heading, a step down (as on /praxis-programme). */
+const SUBLINE: React.CSSProperties = { display: "block", fontSize: "0.6em", fontWeight: 700, letterSpacing: "-0.1px", marginTop: "0.35em" };
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono','Fira Mono','Courier New',monospace" };
 const CAPS: React.CSSProperties = { ...INTER, textTransform: "uppercase", letterSpacing: "0.12em" };
 
@@ -153,7 +155,7 @@ export default function BecomeATrainer() {
         {/* Dark intro card */}
         <div style={{ borderRadius: 12, background: "#1a1a1a", padding: "clamp(28px, 5vw, 52px)", marginBottom: 56, marginTop: 32 }}>
           <p style={{ ...CAPS, fontSize: 9, color: "#d97706", letterSpacing: "0.14em", marginBottom: 18 }}>{tr("Praxis Trainer Track")}</p>
-          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Teach Praxis.")}<br />{tr("Earn from it.")}</h2>
+          <h2 style={{ ...ROBOTO, fontSize: "clamp(22px, 4vw, 36px)", fontWeight: 800, lineHeight: 1.2, color: "#f6f1ea", marginBottom: 24, letterSpacing: "-0.3px" }}>{tr("Teach Praxis.")}{" "}<span style={SUBLINE}>{tr("Earn from it.")}</span></h2>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 16, maxWidth: 560 }}>{tr("Four sessions on top of Praxis turn you from someone who can build into someone who can teach it for a living. You teach, we find and organise the clients with you, and you keep 80% of the tuition on the clients you bring in yourself, and 60% on the ones we bring you.")}</p>
           <p style={{ ...INTER, fontSize: 15, lineHeight: 1.8, color: "rgba(246,241,234,0.72)", marginBottom: 32, maxWidth: 560 }}>{tr("You have been through Praxis. You can build working tools with an AI assistant, and you have felt how fast the people around you want the same thing.")}</p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
@@ -177,7 +179,7 @@ export default function BecomeATrainer() {
 
         {/* Hero */}
         <div style={{ marginBottom: 28 }}>
-          <h1 style={{ ...ROBOTO, fontSize: "clamp(32px, 5.5vw, 56px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a" }}>{tr("You built it.")}<br />{tr("Now teach it.")}</h1>
+          <h1 style={{ ...ROBOTO, fontSize: "clamp(32px, 5.5vw, 56px)", fontWeight: 900, lineHeight: 1.1, letterSpacing: "-0.5px", color: "#1a1a1a" }}>{tr("You built it.")}{" "}<span style={SUBLINE}>{tr("Now teach it.")}</span></h1>
         </div>
 
         {/* Intro */}
