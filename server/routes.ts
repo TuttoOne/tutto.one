@@ -328,6 +328,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "workspaces", "index.html"));
   });
 
+  // Claude privacy guide (switch off training on your chats in Settings, Privacy):
+  // same arrangement, link only, not indexed. Its screenshots are plain static files under /claude-privacy/img/.
+  app.get(["/claude-privacy", "/claude-privacy/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "claude-privacy", "index.html"));
+  });
+
   // Session 2 handout (Define good: Claude in VS Code, the brand file, PDF, Excel, Word and a chart):
   // same arrangement, link only, not indexed.
   app.get(["/session-2", "/session-2/"], (_req, res) => {

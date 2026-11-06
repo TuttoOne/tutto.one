@@ -42,6 +42,7 @@ const ROUTES = [
   "/ai-files",
   "/vscode-setup",
   "/workspaces",
+  "/claude-privacy",
   // Course library
   "/courses/",
   "/courses/00-praxis-start-here.html",

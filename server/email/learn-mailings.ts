@@ -226,5 +226,121 @@ ${button(signInUrl, "Open your dashboard")}
   },
 };
 
-export const MAILINGS: Mailing[] = [aiFiles, afterSession1, afterSession3];
+// To every cohort: the /toolkit page, what's on Daniel's machine and which
+// of it to install. Came out of an HSA question about a PDF extension.
+const toolkit: Mailing = {
+  key: "toolkit-2026-11",
+  label: "Claude toolkit",
+  build: ({ firstName, signInUrl, site }) => {
+    const subject = "The extras that make Claude better at your files";
+    const paras = {
+      intro: "A student asked me this week whether a PDF extension for VS Code was safe to install. Good question, and the answer is useful to everyone, so I've written it up.",
+      what: "Claude can read and write text on its own. A few extras let it open a PDF, fill in a spreadsheet, read a scanned page or cut a recording. I've listed everything on my machine, what each one does and which ones you need.",
+      tags: "Each one is marked Get it, Handy or Builders. Start with the Get it ones: the Claude Code extension, PDF Preview, Python, Git and three Python libraries for Excel, Word and PDF files. The rest can wait until a job needs them.",
+      easy: "The easy way to install any of it is to ask Claude. Type \"Install openpyxl and python-docx so you can work with my Excel and Word files\" into the Claude Code panel. It checks what you already have and asks before each step, so you can say no.",
+      help: "If anything fails, copy the error into Claude or reply to this email and we'll find 15 minutes.",
+    };
+    const link = (path: string, label: string) =>
+      `<a href="${escapeHtml(site + path)}" style="font-size:15px;font-weight:700;color:${AMBER};text-decoration:none;">${escapeHtml(label)} &rarr;</a>`;
+
+    const body = `
+<tr><td>
+<p style="${P}">Hi ${escapeHtml(firstName)},</p>
+<p style="${P}">${escapeHtml(paras.intro)}</p>
+<p style="${P}">${escapeHtml(paras.what)}</p>
+<p style="${P}">${link("/toolkit", "Open the Claude toolkit")}</p>
+<p style="${P}">${escapeHtml(paras.tags)}</p>
+<p style="${P}">${escapeHtml(paras.easy)}</p>
+<p style="${P}">It's also on your dashboard, under session 2:</p>
+${button(signInUrl, "Open your dashboard")}
+<p style="margin:0 0 16px;font-size:13px;color:${MUTED};">The button signs you in. It works once and lasts 14 days. After that, go to tutto.one/learn and we'll email you a new one.</p>
+<p style="${P}">${escapeHtml(paras.help)}</p>
+<p style="${P}">Daniel</p>
+</td></tr>`;
+
+    const text = [
+      `Hi ${firstName},`,
+      "",
+      paras.intro,
+      "",
+      paras.what,
+      `The Claude toolkit: ${site}/toolkit`,
+      "",
+      paras.tags,
+      "",
+      paras.easy,
+      "",
+      `It's also on your dashboard, under session 2: ${signInUrl}`,
+      "(The link signs you in. It works once and lasts 14 days. After that, go to tutto.one/learn and we'll email you a new one.)",
+      "",
+      paras.help,
+      "",
+      "Daniel",
+    ].join("\n");
+
+    return { subject, html: shell(subject, body), text };
+  },
+};
+
+// To every cohort: the /claude-privacy guide, switching off training on
+// your chats before any client material goes into Claude.
+const claudePrivacy: Mailing = {
+  key: "claude-privacy-2026-11",
+  label: "Claude privacy guide",
+  build: ({ firstName, signInUrl, site }) => {
+    const subject = "One switch to check before you put client work into Claude";
+    const paras = {
+      intro: "If you're on a personal Claude plan (Free, Pro or Max), Anthropic asks whether it can use your chats and coding sessions to train its models. With the switch on, your chats can be kept for up to 5 years. With it off, they're kept for 30 days and stay out of training.",
+      why: "Please check yours before you put anything real into Claude: client figures, a CV, a contract, the files Claude Code reads in VS Code. It takes 2 minutes and I've put the three screens in a short guide.",
+      steps: "Click your name in the bottom-left corner of Claude, then Settings, then Privacy. Switch off Help improve our AI models. Grey means off. The one switch also covers claude.ai, the phone app and Claude Code.",
+      feedback: "One thing the switch doesn't cover: if you rate a reply with a thumbs up or down, that conversation goes to Anthropic as feedback whatever the setting. So don't rate chats with client material in them.",
+      team: "On a Team or Enterprise plan your chats aren't used for training, and you may not see the switch at all.",
+      help: "Any questions, just reply to this email.",
+    };
+    const link = (path: string, label: string) =>
+      `<a href="${escapeHtml(site + path)}" style="font-size:15px;font-weight:700;color:${AMBER};text-decoration:none;">${escapeHtml(label)} &rarr;</a>`;
+
+    const body = `
+<tr><td>
+<p style="${P}">Hi ${escapeHtml(firstName)},</p>
+<p style="${P}">${escapeHtml(paras.intro)}</p>
+<p style="${P}">${escapeHtml(paras.why)}</p>
+<p style="${P}">${link("/claude-privacy", "Open the privacy guide")}</p>
+<p style="${P}">${escapeHtml(paras.steps)}</p>
+<p style="${P}">${escapeHtml(paras.feedback)}</p>
+<p style="${P}">${escapeHtml(paras.team)}</p>
+<p style="${P}">It's also on your dashboard, under session 1:</p>
+${button(signInUrl, "Open your dashboard")}
+<p style="margin:0 0 16px;font-size:13px;color:${MUTED};">The button signs you in. It works once and lasts 14 days. After that, go to tutto.one/learn and we'll email you a new one.</p>
+<p style="${P}">${escapeHtml(paras.help)}</p>
+<p style="${P}">Daniel</p>
+</td></tr>`;
+
+    const text = [
+      `Hi ${firstName},`,
+      "",
+      paras.intro,
+      "",
+      paras.why,
+      `The privacy guide: ${site}/claude-privacy`,
+      "",
+      paras.steps,
+      "",
+      paras.feedback,
+      "",
+      paras.team,
+      "",
+      `It's also on your dashboard, under session 1: ${signInUrl}`,
+      "(The link signs you in. It works once and lasts 14 days. After that, go to tutto.one/learn and we'll email you a new one.)",
+      "",
+      paras.help,
+      "",
+      "Daniel",
+    ].join("\n");
+
+    return { subject, html: shell(subject, body), text };
+  },
+};
+
+export const MAILINGS: Mailing[] = [aiFiles, afterSession1, afterSession3, toolkit, claudePrivacy];
 export const getMailing = (key: string) => MAILINGS.find((m) => m.key === key);

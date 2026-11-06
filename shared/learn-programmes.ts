@@ -76,6 +76,7 @@ const M = {
   biSession4: { label: "Session 4 handout: write it down once", href: "/bi-session-4" },
   designSystem: { label: "Design system guide: brief Claude on your brand", href: "/design-system", claude: "/design-system/praxis-design-system.md" },
   workspaces: { label: "Workspaces guide: share folders without copying them", href: "/workspaces", claude: "/workspaces/praxis-workspaces.md" },
+  claudePrivacy: { label: "Privacy guide: stop Claude training on your chats", href: "/claude-privacy", claude: "/claude-privacy/praxis-claude-privacy.md" },
 } satisfies Record<string, Material>;
 
 const AI_FLUENT_TEAM: Programme = {
@@ -89,7 +90,7 @@ const AI_FLUENT_TEAM: Programme = {
       what: "What goes in, which tools and connections are allowed, what never leaves the building and what happens when the rule is broken. We set up your assistant safely while we write it.",
       leaveWith: "Your AI Use Charter",
       practice: "Pick one real task from your week that you'd like AI to help with, and bring it to session 2.",
-      materials: [M.charterTool, M.startHere, M.limits],
+      materials: [M.charterTool, M.claudePrivacy, M.startHere, M.limits],
     },
     {
       number: 2,
@@ -165,7 +166,7 @@ const BACKGROUND_ITALIA: Programme = {
       what: "What may go into the tools (client names, personal data, bank details, contracts), which connections are allowed (email, Google Drive or SharePoint) and what never leaves the office. We check the settings on each account, including switching off training on your data, and write it the way you'd brief a new hire.",
       leaveWith: "Your AI use policy, first draft",
       practice: "Pick one real task from your week and bring it to week 2. Until the policy is agreed, use a redacted or dummy version.",
-      materials: [M.charterTool, M.startHere, M.limits],
+      materials: [M.charterTool, M.claudePrivacy, M.startHere, M.limits],
     },
     {
       number: 2,
@@ -246,7 +247,7 @@ const SOLO_FAST_TRACK: Programme = {
       what: "We set up your UK-hosted machine so your financial data stays in the UK, get Claude working on it and move across the prompts you've built up in ChatGPT. We agree your own rules: what goes in, what stays out and where it all runs. Then we build your first tool: a watch on the stocks you follow that alerts you to big price moves and news.",
       leaveWith: "A working setup, your personal AI rules and a stock alert",
       practice: "Let the stock alert run for a fortnight and note every alert that was useless or missing.",
-      materials: [M.charterToolMe, M.startHere, M.limits],
+      materials: [M.charterToolMe, M.claudePrivacy, M.startHere, M.limits],
     },
     {
       number: 2,
@@ -289,7 +290,7 @@ const HSA_CONTENT_TEAM: Programme = {
       what: "How these tools work and where they go wrong. What you can and can't share: learner data, your IP, Council rules and your own policy. We set up Copilot with Claude inside your own account, so your content stays with you. As a first try, we summarise a section of Stock Receiving.",
       leaveWith: "A one-page AI use policy and a working setup",
       practice: "Summarise one more section of Stock Receiving on your own and note where the summary needed correcting.",
-      materials: [M.charterTool, M.startHere, M.limits],
+      materials: [M.charterTool, M.claudePrivacy, M.startHere, M.limits],
       afterNote: [
         "Thank you for your time in our first session.",
         "I know you're feeling overwhelmed at this point. That's completely normal. As you use the tools during the course you'll gain more confidence in the things we discussed today, and we keep coming back to the concepts, so don't feel you need to remember everything (or even anything) from today.",
