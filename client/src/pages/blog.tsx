@@ -5,6 +5,7 @@ import type { BlogPost } from "@shared/schema";
 import { copy, useT } from "@/lib/i18n";
 import { usePreferences } from "@/lib/preferences";
 import { BLOG_FR } from "@/lib/blog-fr";
+import { GUIDES } from "@/lib/guides";
 
 export default function Blog() {
   const t = useT();
@@ -44,7 +45,38 @@ export default function Blog() {
 
         {posts && (
           <div className="space-y-12">
-            {posts.map((post) => {
+            {[
+              ...posts.map((post) => ({ kind: "post" as const, date: post.date, post })),
+              ...GUIDES.map((guide) => ({ kind: "guide" as const, date: guide.date, guide })),
+            ]
+              .sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
+              .map((item) => {
+              if (item.kind === "guide") {
+                // Guides are static pages outside the app, so a plain link
+                // and a full page load, not the router.
+                const g = item.guide;
+                return (
+                  <a key={g.href} href={g.href} className="block">
+                    <article className="group cursor-pointer border-b border-border/40 pb-12 last:border-0">
+                      <div className="flex flex-col md:flex-row gap-6 md:items-baseline">
+                        <div className="md:w-32 shrink-0 text-sm text-muted-foreground font-mono">
+                          {g.date}
+                          <span className="block mt-1 text-xs uppercase tracking-wider text-primary font-sans">{t(copy.blog.guide)}</span>
+                        </div>
+                        <div>
+                          <h2 className="text-2xl font-serif font-semibold mb-3 group-hover:text-primary transition-colors">
+                            {t(g.title)}
+                          </h2>
+                          <p className="text-muted-foreground leading-relaxed">
+                            {t(g.excerpt)}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  </a>
+                );
+              }
+              const post = item.post;
               // Posts are database rows, so French comes from an overlay keyed
               // by slug; anything not translated falls back to the English.
               const fr = locale === "fr" ? BLOG_FR[post.slug] : undefined;

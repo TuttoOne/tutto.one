@@ -157,13 +157,14 @@ export const copy = {
   blog: {
     title: { en: "Thinking", fr: "Réflexions" },
     standfirst: {
-      en: "Essays on the intersection of organizational knowledge, AI architecture, and the future of work.",
-      fr: "Des articles à la croisée du savoir organisationnel, de l'architecture de l'IA et de l'avenir du travail.",
+      en: "Essays on AI at work, and the step-by-step guides we use with our students, each with the screens you should see.",
+      fr: "Des articles sur l'IA au travail, et les guides pas à pas que nous utilisons avec nos stagiaires, avec les écrans que vous devez voir.",
     },
     loadError: {
       en: "Failed to load posts. Please try again.",
       fr: "Impossible de charger les articles. Veuillez réessayer.",
     },
+    guide: { en: "Guide", fr: "Guide (en anglais)" },
   },
 
   services: {
