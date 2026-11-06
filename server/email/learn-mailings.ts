@@ -288,11 +288,12 @@ const claudePrivacy: Mailing = {
   key: "claude-privacy-2026-11",
   label: "Claude privacy guide",
   build: ({ firstName, signInUrl, site }) => {
-    const subject = "One switch to check before you put client work into Claude";
+    const subject = "A setting to check every month: Claude training on your chats";
     const paras = {
       intro: "If you're on a personal Claude plan (Free, Pro or Max), Anthropic asks whether it can use your chats and coding sessions to train its models. With the switch on, your chats can be kept for up to 5 years. With it off, they're kept for 30 days and stay out of training.",
-      why: "Please check yours before you put anything real into Claude: client figures, a CV, a contract, the files Claude Code reads in VS Code. It takes 2 minutes and I've put the three screens in a short guide.",
+      why: "Many of you switched this off when we set up your accounts. We'd like you to check it regularly. Apps update, plans change and new or shared logins get added, so your setting may not be as you originally set it up. It takes 2 minutes and I've put the three screens in a short guide.",
       steps: "Click your name in the bottom-left corner of Claude, then Settings, then Privacy. Switch off Help improve our AI models. Grey means off. The one switch also covers claude.ai, the phone app and Claude Code.",
+      reminder: "Set yourself a monthly reminder in your calendar to come in and check it, and check it again whenever you start work on sensitive material: client figures, a CV, a contract or the files Claude Code reads in VS Code.",
       feedback: "One thing the switch doesn't cover: if you rate a reply with a thumbs up or down, that conversation goes to Anthropic as feedback whatever the setting. So don't rate chats with client material in them.",
       team: "On a Team or Enterprise plan your chats aren't used for training, and you may not see the switch at all.",
       help: "Any questions, just reply to this email.",
@@ -307,6 +308,7 @@ const claudePrivacy: Mailing = {
 <p style="${P}">${escapeHtml(paras.why)}</p>
 <p style="${P}">${link("/claude-privacy", "Open the privacy guide")}</p>
 <p style="${P}">${escapeHtml(paras.steps)}</p>
+<p style="${P}">${escapeHtml(paras.reminder)}</p>
 <p style="${P}">${escapeHtml(paras.feedback)}</p>
 <p style="${P}">${escapeHtml(paras.team)}</p>
 <p style="${P}">It's also on your dashboard, under session 1:</p>
@@ -325,6 +327,8 @@ ${button(signInUrl, "Open your dashboard")}
       `The privacy guide: ${site}/claude-privacy`,
       "",
       paras.steps,
+      "",
+      paras.reminder,
       "",
       paras.feedback,
       "",
