@@ -149,7 +149,7 @@ export function buildSignInEmail(o: { firstName: string; signInUrl: string }): {
 <p style="${P}">Hi ${escapeHtml(o.firstName)},</p>
 <p style="${P}">Here's your link to sign in to your dashboard.</p>
 ${button(o.signInUrl, "Sign in")}
-<p style="margin:0 0 8px;font-size:13px;color:${MUTED};">It works once and lasts 30 minutes. If you didn't ask for it, you can ignore this email.</p>
+<p style="margin:0 0 8px;font-size:13px;color:${MUTED};">It works once and lasts 15 minutes. If you didn't ask for it, you can ignore this email.</p>
 </td></tr>`;
   const text = [
     `Hi ${o.firstName},`,
@@ -157,7 +157,7 @@ ${button(o.signInUrl, "Sign in")}
     "Here's your link to sign in to your dashboard:",
     o.signInUrl,
     "",
-    "It works once and lasts 30 minutes. If you didn't ask for it, you can ignore this email.",
+    "It works once and lasts 15 minutes. If you didn't ask for it, you can ignore this email.",
   ].join("\n");
   return { subject, html: shell(subject, body), text };
 }

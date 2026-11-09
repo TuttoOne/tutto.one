@@ -29,7 +29,7 @@ import { eraseStudent } from "./data-routes";
 
 const COOKIE_NAME = "student_token";
 const COOKIE_DAYS = 30;
-const SIGN_IN_MINUTES = 30;
+const SIGN_IN_MINUTES = 15;
 const WELCOME_LINK_DAYS = 14;
 
 const JWT_SECRET = (() => {
