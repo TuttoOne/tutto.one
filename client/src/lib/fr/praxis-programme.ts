@@ -8,36 +8,50 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Votre équipe en ressort à l'aise avec l'IA.",
   "Sending...": "Envoi…",
   "Send it →": "Envoyer →",
-  "You and up to four of your team · Online or in person":
-    "Vous et jusqu'à quatre personnes de votre équipe · À distance ou sur place",
+  "Online or in person · One-to-one or in a small group":
+    "À distance ou sur place · En individuel ou en petit groupe",
+  "Training": "Formation",
+  "Training · Eight topics": "Formation · Huit thèmes",
+  "Learn by doing, on your own work.": "Apprenez en faisant, sur votre propre travail.",
+  "Then take it to any AI with one simple setup.":
+    "Puis emmenez-le vers n'importe quelle IA, avec une configuration simple.",
+  "Bring the work you already do. We set up your AI around it once, then you learn by doing: real tasks and real files, worked through together. The setup moves with you to Claude, Mistral or ChatGPT, so you're never tied to one tool.":
+    "Apportez le travail que vous faites déjà. Nous configurons une fois votre IA autour de ce travail, puis vous apprenez en faisant : de vraies tâches et de vrais fichiers, travaillés ensemble. La configuration vous suit vers Claude, Mistral ou ChatGPT, alors vous n'êtes jamais lié à un seul outil.",
+  "Bring your work": "Apportez votre travail",
+  "Set it up once": "Configurez une fois",
+  "Learn by doing": "Apprenez en faisant",
+  "Check the result": "Vérifiez le résultat",
+  "Use any AI": "Passez à n'importe quelle IA",
+  "Everyone in the group has different work and different needs, so we work with each person on their own, and as time goes on they help one another. On your own, you follow the same method one-to-one.":
+    "Chacun dans le groupe a un travail et des besoins différents : nous travaillons avec chaque personne sur le sien, et au fil du temps ils s'entraident. Seul ou seule, vous suivez la même méthode en individuel.",
   "The team course · Eight topics": "La formation équipe · Huit thèmes",
-  "Most teams start with the tools.":
-    "La plupart des équipes commencent par les outils.",
-  "That's why nothing sticks.":
-    "C'est pour ça que rien ne tient.",
-  "A small team around a desk of screens, working through AI output together":
-    "Une petite équipe autour d'un bureau couvert d'écrans, qui passe en revue le travail de l'IA",
+  "Begin with the tools,":
+    "Commencez par les outils,",
+  "and nothing sticks.":
+    "et rien ne tient.",
+  "A small group around a desk of screens, working through AI output together":
+    "Un petit groupe autour d'un bureau couvert d'écrans, qui passe en revue le travail de l'IA",
   "An agent scorecard on a clipboard, filled in by hand next to a laptop and a calculator":
     "Une grille d'évaluation d'agent sur un porte-bloc, remplie à la main à côté d'un ordinateur et d'une calculatrice",
   "A desk with the weekly report on screen, a calculator, and a red thread running between them":
     "Un bureau avec le rapport hebdomadaire à l'écran, une calculatrice, et un fil rouge qui les relie",
   "Book your first course": "Réserver votre première formation",
   "Everything you get": "Tout ce que vous obtenez",
-  "What your team leaves with, then the guarantee, then the price.":
-    "Ce que votre équipe emporte, puis la garantie, puis le prix.",
+  "What you leave with, then the guarantee, then the price.":
+    "Ce que vous emportez, puis la garantie, puis le prix.",
   "What you pay": "Ce que vous payez",
   "Start with the free 60-minute session: proof on one of your own jobs before you spend anything. When you book the course, a 15-minute call to say hello and set the dates comes with it. Both programmes are invoiced, ex VAT.":
     "Commencez par la séance gratuite de 60 minutes : la preuve sur l'une de vos propres tâches, avant de dépenser quoi que ce soit. Quand vous réservez la formation, un appel de 15 minutes pour faire connaissance et fixer les dates suit. Les deux programmes sont facturés, hors TVA.",
-  "Tell us about your team. Then we pick the dates.":
-    "Parlez-nous de votre équipe. Ensuite, on fixe les dates.",
+  "Tell us who's coming. Then we pick the dates.":
+    "Dites-nous qui vient. Ensuite, on fixe les dates.",
   "A few details so the first session starts on your work, not on introductions. Once they're in, you book a 15-minute call to say hello and set the dates.":
     "Quelques informations pour que la première séance commence sur votre travail, pas sur les présentations. Ensuite, vous réservez un appel de 15 minutes pour faire connaissance et fixer les dates.",
   "Got it. One step left.": "C'est noté. Plus qu'une étape.",
   "Pick a time for the 15-minute call: we say hello, check the fit, and set the dates.":
     "Choisissez un créneau pour l'appel de 15 minutes : on fait connaissance, on vérifie que cela vous convient, et on fixe les dates.",
   "Book the 15-minute call": "Réserver l'appel de 15 minutes",
-  "Company": "Entreprise",
-  "Company name": "Nom de l'entreprise",
+  "Company (optional)": "Entreprise (facultatif)",
+  "If you're coming as a company": "Si vous venez en tant qu'entreprise",
   "Who takes part": "Qui participe",
   "Choose": "Choisir",
   "Just me": "Moi seul·e",
@@ -48,9 +62,9 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Next: pick a call time →": "Suite : choisir un créneau →",
   "Not ready to book?": "Pas encore prêt à réserver ?",
 
-  "You and up to four of your team. On your own, take the four sessions one-to-one. Either way it is built on your own work, not a syllabus.":
+  "You and up to four others, from work or not. On your own, take the four sessions one-to-one. Either way it is built on your own work, not a syllabus.":
 
-    "Vous et jusqu'à quatre personnes de votre équipe. Seul, suivez les quatre séances en tête-à-tête. Dans les deux cas, tout est construit sur votre propre travail, pas sur un programme type.",
+    "Vous et jusqu'à quatre autres personnes, collègues ou non. Seul, suivez les quatre séances en tête-à-tête. Dans les deux cas, tout est construit sur votre propre travail, pas sur un programme type.",
   "Your use cases": "Vos cas d'usage",
   "Before we start, send the jobs you keep repeating: the quote, the report, the weekly export. We work on those from the first session. The group evenings use generic examples. This doesn't.":
     "Avant de commencer, envoyez les tâches que vous répétez sans cesse : le devis, le rapport, l'export hebdomadaire. Nous travaillons dessus dès la première séance. Les soirées collectives utilisent des exemples génériques. Pas ici.",
@@ -124,8 +138,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Score the output against your KPIs. Where it falls short, fix the brief, not the draft. Agree who signs off and what gets checked before anything leaves.":
     "Notez le résultat selon vos indicateurs. Là où il est insuffisant, corrigez la consigne, pas le brouillon. Convenez de qui valide et de ce qui est vérifié avant tout envoi.",
   "Skills and automation": "Compétences et automatisation",
-  "Package what works into skills the whole team can call, and schedule the jobs that should run without anyone asking.":
-    "Transformez ce qui fonctionne en compétences que toute l'équipe peut appeler, et programmez les tâches qui doivent tourner sans que personne ne le demande.",
+  "Package what works into skills the whole group can call, and schedule the jobs that should run without anyone asking.":
+    "Transformez ce qui fonctionne en compétences que tout le groupe peut appeler, et programmez les tâches qui doivent tourner sans que personne ne le demande.",
   "Agents, and a clean handover": "Les agents, et une transmission propre",
   "Your first agent: a job that runs on its own, on your data, checked against your scorecard. Then hand it over cleanly, so it is still changeable in a year.":
     "Votre premier agent : une tâche qui tourne seule, sur vos données, contrôlée par votre grille. Puis une transmission propre, pour qu'il reste modifiable dans un an.",
@@ -152,15 +166,15 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "You get a practice task and a clear way to get unstuck. When something breaks, the fix is usually one screenshot away, and learning that habit is part of the programme.":
     "Vous repartez avec un exercice et une marche à suivre claire pour vous débloquer. Quand quelque chose casse, la solution tient le plus souvent à une capture d'écran, et acquérir ce réflexe fait partie du programme.",
   "One-to-one or a group?": "En individuel ou en groupe ?",
-  "The team course is for you and up to four of your team. One-to-one is private, in four sessions, and it is credited in full if your team follows.":
-    "La formation équipe s'adresse à vous et jusqu'à quatre personnes de votre équipe. Le tête-à-tête est privé, en quatre séances, et il est déduit intégralement si votre équipe suit.",
+  "The team course is for you and up to four others: colleagues, family or friends. One-to-one is private, in four sessions, and it is credited in full if a group follows.":
+    "La formation équipe s'adresse à vous et jusqu'à quatre autres personnes : collègues, famille ou amis. Le tête-à-tête est privé, en quatre séances, et il est déduit intégralement si un groupe suit.",
   "What if it doesn't work for us?": "Et si cela ne fonctionne pas pour nous ?",
-  "Pick one recurring piece of work before we start. If by the last session your team can't produce it with AI to the standard on your own scorecard, we keep working with you at no charge until they can. The only condition is that you attend and answer the questions.":
-    "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, nous continuons à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne. La seule condition : assister aux séances et répondre aux questions.",
+  "Pick one recurring piece of work before we start. If by the last session your group can't produce it with AI to the standard on your own scorecard, we keep working with you at no charge until they can. The only condition is that you attend and answer the questions.":
+    "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre groupe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, nous continuons à travailler avec vous sans frais jusqu'à ce qu'il y parvienne. La seule condition : assister aux séances et répondre aux questions.",
 
   // --- Who this is for ---
-  "Your team already uses AI":
-    "Votre équipe utilise déjà l'IA",
+  "You already use AI":
+    "Vous utilisez déjà l'IA",
   "And it takes as long as before, because every answer gets checked, fixed and asked again.":
     "Et cela prend autant de temps qu'avant, parce que chaque réponse est vérifiée, corrigée et redemandée.",
   "A job that repeats":
@@ -173,8 +187,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Des dossiers clients et des données personnelles, collés dans des outils que personne n'a vérifiés. Vous voulez une règle avant que cela devienne un problème.",
   "Nobody needs to code":
     "Personne n'a besoin de coder",
-  "Nobody on your team has to become a developer. You want the work done once, not a new hobby.":
-    "Personne dans votre équipe n'a à devenir développeur. Vous voulez que le travail soit fait une fois, pas un nouveau passe-temps.",
+  "Nobody in the group has to become a developer. You want the work done once, not a new hobby.":
+    "Personne dans le groupe n'a à devenir développeur. Vous voulez que le travail soit fait une fois, pas un nouveau passe-temps.",
 
   // --- Why a person ---
   "Tailored to your actual work": "Adapté à votre travail réel",
@@ -248,15 +262,15 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "For \"we'll drift back in three months\": we look at what slipped and fix it.":
     "Pour « dans trois mois, on aura tout oublié » : on regarde ce qui a glissé et on le corrige.",
   "The guarantee": "La garantie",
-  "Pick one recurring piece of work before we start. By the last session your team produces it with AI to the standard on your own scorecard, or we keep working with you at no charge until they do.":
-    "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre équipe le produit avec l'IA au niveau fixé par votre propre grille. Sinon, nous continuons à travailler avec vous sans frais jusqu'à ce qu'elle y parvienne.",
+  "Pick one recurring piece of work before we start. By the last session your group produces it with AI to the standard on your own scorecard, or we keep working with you at no charge until they do.":
+    "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre groupe le produit avec l'IA au niveau fixé par votre propre grille. Sinon, nous continuons à travailler avec vous sans frais jusqu'à ce qu'il y parvienne.",
   "The only condition is that you attend the sessions and answer the questions.":
     "La seule condition : assister aux séances et répondre aux questions.",
-  "Eight topics for you and up to four of your team, in eight, six or four sessions. Everything listed above.":
-    "Huit thèmes pour vous et jusqu'à quatre personnes de votre équipe, en huit, six ou quatre séances. Tout ce qui figure ci-dessus.",
+  "Eight topics for you and up to four others, in eight, six or four sessions. Everything listed above.":
+    "Huit thèmes pour vous et jusqu'à quatre autres personnes, en huit, six ou quatre séances. Tout ce qui figure ci-dessus.",
   "One-to-one": "En tête-à-tête",
-  "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if your team follows.":
-    "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si votre équipe suit.",
+  "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if a group follows.":
+    "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si un groupe suit.",
   "On your own, and you'd rather learn with people like you?":
     "Vous êtes seul, et vous préférez apprendre avec des personnes qui vous ressemblent ?",
   "Take the same four sessions in a small group.":
@@ -293,20 +307,20 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
     "Votre charte, une grille par rôle, des consignes et contrôles permanents pour vos trois tâches clés, et les outils construits dessus. Une attestation consigne ce que vous avez réalisé, pas seulement votre présence.",
   "A note on honesty, because it sets the right expectation: you will get most of the way there yourself. On anything complex, the last stretch you finish by hand or hand off. Even getting most of the way is a large saving on how the work is done today - and that is the saving we are after.":
     "Un mot de franchise, pour poser la bonne attente : vous ferez vous-même l'essentiel du chemin. Sur tout ce qui est complexe, la dernière portion se termine à la main ou se délègue. Faire déjà l'essentiel du chemin représente une économie considérable par rapport à la façon dont le travail se fait aujourd'hui, et c'est cette économie que nous visons.",
-  "Your staff already use AI, and it saves them nothing: ask, fix, ask again. But your team knows its own work inside out, and that's where we start. First we set up your AI around your business: the rules, what good looks like for each job and what to hand over. Then we build on that setup together, on your own work, through real conversations and worked examples, up to the tools, skills and automations that do the work without you.":
-    "Vos équipes utilisent déjà l'IA, et cela ne leur fait rien gagner : demander, corriger, redemander. Mais votre équipe connaît son travail sur le bout des doigts, et c'est par là que nous commençons. D'abord, nous configurons votre IA autour de votre entreprise : les règles, ce qu'est un bon résultat pour chaque tâche et ce qu'on délègue. Ensuite, nous construisons sur cette base ensemble, sur votre propre travail, par de vraies conversations et des exemples concrets, jusqu'aux outils, compétences et automatisations qui font le travail sans vous.",
+  "A team is simply a group of people: colleagues, business partners, a family or a few friends who want to learn together. Most of them already use AI, and it saves them nothing: ask, fix, ask again. But each of them knows their own work inside out, and that's where we start. First we set up your AI around what you do: the rules, what good looks like for each job and what to hand over. Then we build on that setup together, on your own work, through real conversations and worked examples, up to the tools, skills and automations that do the work without you.":
+    "Une équipe, c'est simplement un groupe de personnes : des collègues, des associés, une famille ou quelques amis qui veulent apprendre ensemble. La plupart utilisent déjà l'IA, et cela ne leur fait rien gagner : demander, corriger, redemander. Mais chacun connaît son propre travail sur le bout des doigts, et c'est par là que nous commençons. D'abord, nous configurons votre IA autour de ce que vous faites : les règles, ce qu'est un bon résultat pour chaque tâche et ce qu'on délègue. Ensuite, nous construisons sur cette base ensemble, sur votre propre travail, par de vraies conversations et des exemples concrets, jusqu'aux outils, compétences et automatisations qui font le travail sans vous.",
   "Four sessions on top of the programme turn you into a trainer. Clients you bring in yourself: you keep 80% of the tuition they pay. Clients Tutto brings in: you keep 60%. We find and organise the clients with you, you deliver the sessions, and a hub is behind you for the hard jobs.":
     "Quatre séances supplémentaires vous transforment en formateur. Clients que vous amenez vous-même : vous conservez 80 % des frais de formation payés. Clients amenés par Tutto : vous en conservez 60 %. Nous trouvons et organisons les clients avec vous, vous assurez les séances, et une structure vous épaule pour les cas difficiles.",
   "Tell me here, or bring it to a free 15-minute call. I'll tell you honestly whether this programme is the right fit.":
     "Dites-le-moi ici, ou venez avec elle à un appel gratuit de 15 minutes. Je vous dirai franchement si ce programme vous convient.",
   "It will make you someone who can build genuinely useful things, and who knows when a job is big enough to call in a developer, and how to brief them when you do. That is a more valuable place to stand than it sounds.":
     "Il fera de vous quelqu'un capable de construire des choses réellement utiles, qui sait reconnaître quand un chantier justifie l'appel à un développeur, et comment le briefer le cas échéant. C'est une position bien plus précieuse qu'il n'y paraît.",
-  "After the eight topics your team is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.":
-    "Après les huit thèmes, votre équipe est à l'aise avec l'IA : elle sait s'y retrouver et créer tout ce qu'elle sait décrire. Aucune compétence en code n'est requise. Vous repartez avec la charte, les grilles, les consignes et les contrôles, et les tâches qui se répétaient, déléguées.",
+  "After the eight topics everyone in the group is AI-fluent: they can find their way around all of it and build anything they can describe. No coding background needed. You leave with the charter, the scorecards, the briefs and the checks, and the jobs that used to repeat, handed over.":
+    "Après les huit thèmes, chacun dans le groupe est à l'aise avec l'IA : il sait s'y retrouver et créer tout ce qu'il sait décrire. Aucune compétence en code n'est requise. Vous repartez avec la charte, les grilles, les consignes et les contrôles, et les tâches qui se répétaient, déléguées.",
   "Taught in eight sessions, or condensed into six or four. The first four topics set the foundations: the rules, the standard, the decisions, the briefs. The last four build on them.":
     "Enseignés en huit séances, ou condensés en six ou quatre. Les quatre premiers thèmes posent les fondations : les règles, le standard, les décisions, les consignes. Les quatre derniers construisent dessus.",
-  "Your staff have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.":
-    "Vos équipes ont posé des questions à ChatGPT ou à Claude. Certaines réponses étaient utiles. La plupart demandaient des corrections, et le temps gagné est parti dans les corrections. Le problème n'est pas l'outil. Personne n'a fixé les règles, défini un bon résultat, ni décidé quoi déléguer. Ce programme fait ces trois choses d'abord, sur votre propre travail, puis construit dessus.",
+  "You and the people around you have typed questions into ChatGPT or Claude. Some answers were useful. Most needed fixing, and the time saved went on the fixing. The problem isn't the tool. Nobody set the rules, defined what good looks like, or decided what to hand over. This programme does those three first, on your own work, then builds on them.":
+    "Vous et les gens autour de vous avez posé des questions à ChatGPT ou à Claude. Certaines réponses étaient utiles. La plupart demandaient des corrections, et le temps gagné est parti dans les corrections. Le problème n'est pas l'outil. Personne n'a fixé les règles, défini un bon résultat, ni décidé quoi déléguer. Ce programme fait ces trois choses d'abord, sur votre propre travail, puis construit dessus.",
 
   "On the choice of assistant":
     "Sur le choix de l'assistant",

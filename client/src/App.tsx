@@ -54,7 +54,8 @@ import { WebmcpProvider } from "@/webmcp/register";
 function ScrollToTop() {
   const [location] = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // A link to a section (/rieuzal#pour-vous) is scrolled by its page.
+    if (!window.location.hash) window.scrollTo(0, 0);
   }, [location]);
   return null;
 }

@@ -192,7 +192,8 @@ function jsonLd(
       for (const e of series?.events ?? []) {
         graph.push({
           "@type": "Event",
-          name: e.title,
+          // The same name for every date: the workshops have no separate themes on show.
+          name: "Atelier IA avec Mistral",
           startDate: e.startsAt,
           endDate: e.endsAt,
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",

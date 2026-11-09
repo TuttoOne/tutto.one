@@ -1351,11 +1351,11 @@ export const copy = {
    */
   calendar: {
     fromPraxisTitle: {
-      en: "AI ateliers at Rieuzal: the group version, in French",
+      en: "AI workshops at Rieuzal: the group version, in French",
       fr: "Ateliers IA à Rieuzal : la version collective",
     },
     fromPraxisBody: {
-      en: "Six free 90-minute ateliers at the Manoir de Rieuzal in Loubressac, November to March. We put Mistral to work on real tasks in front of you, then talk it through together. 15 places each. The one to one on this page is the tailored version, on your own work.",
+      en: "Six free 90-minute workshops at the Manoir de Rieuzal in Loubressac, November to March. We put Mistral to work on real tasks in front of you, then talk it through together. 15 places each. The one to one on this page is the tailored version, on your own work.",
       fr: "Six ateliers gratuits de 1h30 au Manoir de Rieuzal, à Loubressac, de novembre à mars. On fait faire de vraies tâches à Mistral devant vous, et on en parle ensemble. 15 places par atelier. Le tête-à-tête présenté sur cette page en est la version sur mesure, sur votre propre travail.",
     },
     fromPraxisLink: { en: "See the dates", fr: "Voir les dates" },

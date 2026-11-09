@@ -192,9 +192,9 @@ type BookResult = { booking: EventBooking; event: Event; token: string; already:
 async function book(eventId: number, input: z.infer<typeof eventBookingInputSchema>, opts: { force?: boolean; allowClosed?: boolean } = {}): Promise<BookResult> {
   return db.transaction(async (tx) => {
     const e = await lockEvent(tx, eventId);
-    if (!e) throw new BookingError("Cet atelier n'existe pas.", 404, "This atelier doesn't exist.");
-    if (e.startsAt <= new Date()) throw new BookingError("Cet atelier a déjà eu lieu.", 400, "This atelier has already taken place.");
-    if (!opts.allowClosed && e.status !== "open") throw new BookingError("Les réservations pour cet atelier sont fermées.", 400, "Booking for this atelier is closed.");
+    if (!e) throw new BookingError("Cet atelier n'existe pas.", 404, "This workshop doesn't exist.");
+    if (e.startsAt <= new Date()) throw new BookingError("Cet atelier a déjà eu lieu.", 400, "This workshop has already taken place.");
+    if (!opts.allowClosed && e.status !== "open") throw new BookingError("Les réservations pour cet atelier sont fermées.", 400, "Booking for this workshop is closed.");
 
     const email = norm(input.email);
     const [existing] = await tx.select().from(eventBookings)
@@ -345,7 +345,7 @@ export function registerEventRoutes(app: Express) {
       if (tooMany(req.ip ?? "?")) return res.status(429).json({ error: langOf(req) === "en" ? "Too many bookings from this connection. Try again in an hour." : "Trop de réservations depuis cette connexion. Réessayez dans une heure." });
       const input = eventBookingInputSchema.parse(req.body);
       const [e] = await db.select().from(events).where(eq(events.slug, String(req.params.slug)));
-      if (!e || e.status === "hidden") throw new BookingError("Cet atelier n'existe pas.", 404, "This atelier doesn't exist.");
+      if (!e || e.status === "hidden") throw new BookingError("Cet atelier n'existe pas.", 404, "This workshop doesn't exist.");
       const r = await book(e.id, input);
       if (r.already) {
         return res.json({

@@ -46,6 +46,10 @@ export function frWhen(d: Date): string {
   return `${day} à ${Number(h)}h${m}`;
 }
 
+/** What every booking email calls the evening. The theme in admin isn't shown:
+ *  every workshop is the same method, so no one should think they need all six. */
+const NAME = "Atelier IA avec Mistral";
+
 const places = (n: number) => (n === 1 ? "1 place" : `${n} places`);
 
 function shell(title: string, body: string): string {
@@ -70,7 +74,7 @@ function details(e: EventInfo, seats: number): string {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:6px 16px 6px 0;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:${MUTED};vertical-align:top;white-space:nowrap;">${label}</td><td style="padding:6px 0;font-size:15px;">${escapeHtml(value)}</td></tr>`;
   return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 20px;border-top:1px solid ${RULE};border-bottom:1px solid ${RULE};width:100%;">
-${row("Atelier", e.title)}
+${row("Atelier", NAME)}
 ${row("Quand", `${frWhen(e.startsAt)}, 1h30`)}
 ${row("Où", `${e.venue}, ${e.address}`)}
 ${row("Pour", places(seats))}
@@ -82,7 +86,7 @@ function link(href: string, label: string): string {
 }
 
 function textDetails(e: EventInfo, seats: number): string[] {
-  return [`Atelier : ${e.title}`, `Quand : ${frWhen(e.startsAt)}, 1h30`, `Où : ${e.venue}, ${e.address}`, `Pour : ${places(seats)}`];
+  return [`Atelier : ${NAME}`, `Quand : ${frWhen(e.startsAt)}, 1h30`, `Où : ${e.venue}, ${e.address}`, `Pour : ${places(seats)}`];
 }
 
 const sign = ["À bientôt,", "Daniel"];
@@ -103,7 +107,7 @@ export function buildIcs(e: EventInfo, pageUrl: string): string {
     `DTSTAMP:${icsDate(new Date())}`,
     `DTSTART:${icsDate(e.startsAt)}`,
     `DTEND:${icsDate(e.endsAt)}`,
-    `SUMMARY:${icsText(e.title)}`,
+    `SUMMARY:${icsText(NAME)}`,
     `LOCATION:${icsText(`${e.venue}, ${e.address}`)}`,
     `DESCRIPTION:${icsText(`Atelier Tutto. Pour annuler ou voir les autres dates : ${pageUrl}`)}`,
     `URL:${pageUrl}`,

@@ -136,10 +136,11 @@ function Hero() {
             </p>
           </div>
 
-          {/* The one track: the team course. Small groups and one-to-one are
-              offered on /praxis and /praxis-programme, not here (November
-              2026). On a phone the note drops under the button, centred like
-              the button's own label. */}
+          {/* The team course, and under it the same method for one person,
+              which goes to the personal section of /rieuzal. They are stacked,
+              the same width, each with what it is beside it. On a phone the
+              note drops under its button, centred like the button's own
+              label. */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-[auto_minmax(0,1fr)] gap-x-5 gap-y-2 sm:gap-y-3 sm:items-center">
             <Link
               href={landing.tracks.work.href}
@@ -149,6 +150,15 @@ function Hero() {
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed text-center sm:text-left">
               {t(landing.tracks.work.note)}
+            </p>
+            <Link
+              href={landing.tracks.yourself.href}
+              className="mt-3 sm:mt-0 flex items-center justify-center gap-2 px-8 py-2.5 border border-border rounded-full font-medium text-foreground hover:bg-muted/50 transition-colors"
+            >
+              {t(landing.tracks.yourself.label)} <ArrowRight className="w-4 h-4" />
+            </Link>
+            <p className="text-sm text-muted-foreground leading-relaxed text-center sm:text-left">
+              {t(landing.tracks.yourself.note)}
             </p>
           </div>
         </div>

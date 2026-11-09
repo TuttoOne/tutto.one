@@ -14,10 +14,12 @@
  *
  * One thing: the staff use AI and it saves them nothing. The page names that,
  * sets out the order that fixes it (rules, scorecards, decisions, then build), prices the
- * programme that installs them, and sends the reader to one track: the team
- * course at /praxis-programme. It was "we build agents" until September 2026;
- * that is the upsell, not the way in. Until November 2026 there was a second
- * track, For Life (/peer-groups); small groups are now offered on /praxis-programme.
+ * programme that installs them, and sends the reader to the team course at
+ * /praxis-programme. It was "we build agents" until September 2026; that is
+ * the upsell, not the way in. Until November 2026 there was a second track,
+ * For Life (/peer-groups); small groups are now offered on /praxis-programme.
+ * Since 9 November 2026 a second button, For yourself, goes to the personal
+ * section of /rieuzal (see `tracks`).
  *
  * The previous version sold four offers at once and was forgettable for it.
  * If a new offer needs a home, give it a page; do not add a fifth door here.
@@ -112,10 +114,21 @@ export const landing = {
   },
 
   /**
-   * The one track, and the only place a button on this page goes: the team
-   * course, laid out and booked on /praxis-programme.
+   * The two buttons in the hero. The team course, laid out and booked on
+   * /praxis-programme, is the track. "For yourself" is the same method for
+   * one person (9 November 2026, after a friend said the site read as
+   * business-only): it goes to the section on /rieuzal for people coming in
+   * a personal capacity. It is a way in, so don't give it a product page.
    */
   tracks: {
+    yourself: {
+      label: { en: "For yourself", fr: "Pour vous" },
+      href: "/rieuzal#pour-vous",
+      note: {
+        en: "Free workshops, starting with your own paperwork.",
+        fr: "Des ateliers gratuits, en partant de vos propres papiers.",
+      },
+    },
     work: {
       label: { en: "Train your team", fr: "Former votre équipe" },
       href: "/praxis-programme",

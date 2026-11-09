@@ -59,7 +59,7 @@ export const PUBLIC_PAGES: PublicPage[] = [
   { path: "/", key: "landing", title: { en: "Tutto Applied AI | AI training for teams", fr: "Tutto Applied AI | Formation IA pour les équipes" },
     description: { en: "AI training for teams, on your own work: the rules, a scorecard for each job, what to hand over, then the build. 8 topics, with a guarantee.", fr: "Formation IA pour les équipes, sur votre propre travail : les règles, une grille par tâche, ce qu'on délègue, puis la construction. 8 thèmes, avec garantie." },
     priority: 1 },
-  { path: "/praxis-programme", key: "praxis-programme", title: { en: "AI training for teams | Tutto Applied AI", fr: "Formation IA pour les équipes | Tutto Applied AI" },
+  { path: "/praxis-programme", key: "praxis-programme", title: { en: "AI training for teams and individuals | Tutto Applied AI", fr: "Formation IA pour les équipes et les particuliers | Tutto Applied AI" },
     description: { en: "Eight topics for you and up to four of your team, in eight, six or four sessions, on your own work. What you leave with, the guarantee and the price.", fr: "Huit thèmes pour vous et jusqu'à quatre personnes de votre équipe, en huit, six ou quatre séances. Ce que vous emportez, la garantie et le prix." },
     priority: 0.9, schema: "Course" },
   { path: "/peer-groups", key: "peer-groups", title: { en: "AI training in a small group | Tutto Applied AI", fr: "Formation IA en petit groupe | Tutto Applied AI" },
