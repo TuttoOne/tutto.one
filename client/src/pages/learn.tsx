@@ -246,29 +246,43 @@ export function LearnAuth() {
   const [, navigate] = useLocation();
   const qc = useQueryClient();
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const token = new URLSearchParams(window.location.search).get("token");
 
-  useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get("token");
-    if (!token) { setError("This link is missing its code."); return; }
+  // The token is only spent when a person presses the button. Company mail
+  // scanners (Microsoft Safe Links, Mimecast) open links in a real browser and
+  // run the page's script, so signing in on load used the link up before the
+  // student ever saw it.
+  const signIn = () => {
+    if (!token) return;
+    setBusy(true);
     api("POST", "/api/learn/auth", { token })
       .then(() => {
         qc.removeQueries({ queryKey: ["/api/learn/me"] });
         navigate("/learn/dashboard", { replace: true });
       })
-      .catch((e: Error) => setError(e.message === "UNAUTHORIZED" ? "This link has expired or has already been used." : e.message));
-  }, [navigate, qc]);
+      .catch((e: Error) => {
+        setBusy(false);
+        setError(e.message === "UNAUTHORIZED" ? "This link has expired or has already been used." : e.message);
+      });
+  };
 
   return (
     <div style={PAGE}>
       <Header />
       <div style={{ ...WRAP, maxWidth: 480 }}>
-        {error ? (
+        {error || !token ? (
           <div style={CARD}>
-            <p style={{ margin: "0 0 16px", fontSize: 15, lineHeight: 1.6 }}>{error}</p>
+            <p style={{ margin: "0 0 16px", fontSize: 15, lineHeight: 1.6 }}>{error ?? "This link is missing its code."}</p>
             <Link href="/learn" style={BUTTON}>Send me a new link</Link>
           </div>
         ) : (
-          <p style={{ color: MUTED }}>Signing you in...</p>
+          <div style={CARD}>
+            <p style={{ margin: "0 0 16px", fontSize: 15, lineHeight: 1.6 }}>Press the button to sign in to your programme space.</p>
+            <button type="button" onClick={signIn} disabled={busy} style={{ ...BUTTON, cursor: busy ? "default" : "pointer", opacity: busy ? 0.6 : 1 }}>
+              {busy ? "Signing you in..." : "Sign me in"}
+            </button>
+          </div>
         )}
       </div>
     </div>

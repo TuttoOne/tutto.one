@@ -3,8 +3,9 @@
  *
  * Students sign in with a link we email them, never a password. The link
  * carries a random token; only its sha256 is stored, it works once, and the
- * page at /learn/auth trades it for a cookie with a POST, so a mail scanner
- * that follows the link with a GET can't use it up.
+ * page at /learn/auth trades it for a cookie with a POST only when the student
+ * presses a button, so a mail scanner that opens the link (even one that runs
+ * the page's script) can't use it up.
  */
 import type { Express, Request, Response, NextFunction } from "express";
 import { createHash, randomBytes } from "crypto";
