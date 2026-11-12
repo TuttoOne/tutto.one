@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="HSA session 5: artifacts, projects and scheduled tasks in the Claude app, built on the board risk register and the 2027 year plan.">
+<title>Session 5 handout: share it, schedule it | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  /* HSA session 5 handout, same Praxis house tokens as sessions 2 and 4.
+     Layout: one document card. App vs folder, artifacts (what, two of Christine's jobs, sharing),
+     projects, scheduled tasks (steps, a weekly board-notice check), checks, before Monday. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #4f6274; --slate-soft: #e8edf2;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8; --fail: #b4322a; --fail-soft: #f8e3e1;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a;
+      --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a;
+    --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  p { margin: 0; }
+  a { color: var(--amber-ink); text-underline-offset: 3px; }
+  code.inl { font: 500 0.88em/1.4 var(--mono); background: var(--panel); border-radius: 4px; padding: 1px 5px; }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; }
+  .brand span { color: var(--amber); }
+  a.brand { color: var(--ink); text-decoration: none; }
+  .top a.back { font-size: 14px; color: var(--amber); text-underline-offset: 0.15em; }
+  .top .client { font-size: 14px; color: var(--muted); }
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 60ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 48px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { font: 700 17px/1.25 var(--display); margin: 0; text-wrap: balance; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 64ch; }
+  .ico { width: 22px; height: 22px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .plain { display: grid; gap: 10px; color: var(--ink-2); max-width: 62ch; }
+  .plain b { color: var(--ink); }
+
+  /* Which place for which job */
+  .places { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
+  .place { min-width: 0; border-radius: 12px; padding: 18px 20px; display: grid; gap: 10px; align-content: start; }
+  .place.app { background: var(--slate-soft); }
+  .place.code { background: var(--amber-soft); }
+  .place-hd { display: flex; gap: 10px; align-items: center; }
+  .place.app .place-hd .ico { color: var(--slate); }
+  .place.code .place-hd .ico { color: var(--amber-ink); }
+  .place ul { margin: 0; padding-left: 18px; font-size: 14.5px; color: var(--ink-2); }
+  .place li + li { margin-top: 4px; }
+  .place .best { font: italic 400 15.5px/1.45 var(--serif); color: var(--ink); }
+
+  /* Monday steps */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; counter-reset: s; }
+  .steps li { min-width: 0; background: var(--panel); border-radius: 10px; padding: 14px 16px; font-size: 14px; color: var(--ink-2); counter-increment: s; }
+  .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--amber); color: var(--paper); font: 700 13px/1 var(--display); margin-bottom: 8px; }
+  .steps b { display: block; color: var(--ink); font: 700 14.5px/1.3 var(--display); margin-bottom: 2px; }
+
+  /* Exercises */
+  .ex { display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 20px; padding: 26px 0; border-top: 1px solid var(--line); }
+  .ex:first-of-type { border-top: 0; padding-top: 6px; }
+  .ex-icon { width: 64px; height: 64px; border-radius: 14px; background: var(--amber-soft); color: var(--amber-ink); display: grid; place-items: center; }
+  .ex-icon .ico { width: 32px; height: 32px; stroke-width: 1.6; }
+  .ex-main { min-width: 0; display: grid; gap: 14px; }
+  .ex-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font: 600 12.5px/1 var(--body); color: var(--ink-2); background: var(--panel); border-radius: 999px; padding: 6px 10px; }
+  .pill .ico { width: 15px; height: 15px; }
+  .ex-main > p { color: var(--ink-2); max-width: 66ch; }
+
+  .prompt { background: var(--panel); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
+  .prompt .txt { min-width: 0; flex: 1; }
+  .prompt .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .prompt code { display: block; font: 500 14px/1.6 var(--mono); color: var(--ink); margin-top: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .prompt code i { font-style: normal; color: var(--amber-ink); background: var(--amber-soft); border-radius: 3px; padding: 0 3px; }
+  .copy { flex: none; font: 700 12px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber-ink); background: var(--paper); border: 1.5px solid var(--amber); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+  .copy:hover { background: var(--amber-soft); }
+  .copy:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  .talk { display: flex; gap: 14px; align-items: flex-start; border: 1.5px dashed var(--slate); border-radius: 10px; padding: 14px 18px; background: var(--slate-soft); }
+  .talk .ico { color: var(--slate); margin-top: 2px; }
+  .talk .label { font: 700 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--slate); }
+  .talk ul { margin: 4px 0 0; padding-left: 18px; font-size: 14.5px; color: var(--ink); }
+  .talk li + li { margin-top: 3px; }
+
+  /* Mock artifact: heat map */
+  .mock { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .mock-bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--panel); font-size: 12.5px; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .mock-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); display: inline-block; }
+  .mock-bar span { margin-left: auto; font-weight: 600; color: var(--amber-ink); }
+  .mock-body { padding: 14px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; align-items: center; }
+  .heat { display: grid; grid-template-columns: 22px repeat(4, minmax(0,1fr)); gap: 4px; font-size: 11px; color: var(--muted); }
+  .heat .c { aspect-ratio: 1.4; border-radius: 4px; display: grid; place-items: center; font: 700 12px/1 var(--display); color: var(--ink); }
+  .heat .lo { background: var(--pass-soft); }
+  .heat .md { background: var(--amber-soft); }
+  .heat .hi { background: var(--fail-soft); color: var(--fail); }
+  .heat .ax { display: grid; place-items: center; }
+  .heat .cap { grid-column: 2 / -1; text-align: center; }
+  .toprisks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13px; color: var(--ink-2); }
+  .toprisks li { display: flex; gap: 8px; align-items: baseline; }
+  .toprisks b { font: 700 12px/1 var(--display); color: var(--fail); min-width: 1.6em; }
+  .mock-note { font-size: 12.5px; color: var(--muted); padding: 0 14px 12px; }
+
+  /* Mock: year plan */
+  .plan { padding: 14px; display: grid; gap: 6px; overflow-x: auto; }
+  .plan-row { display: grid; grid-template-columns: 74px repeat(12, minmax(22px,1fr)); gap: 3px; font-size: 11px; color: var(--muted); align-items: center; min-width: 420px; }
+  .plan-row .v { font: 600 12px/1.2 var(--body); color: var(--ink); }
+  .plan-row .m { text-align: center; }
+  .cell { height: 18px; border-radius: 3px; background: var(--panel); }
+  .cell.i1 { background: var(--slate-soft); box-shadow: inset 0 0 0 1px var(--slate); }
+  .cell.i2 { background: var(--amber-soft); box-shadow: inset 0 0 0 1px var(--amber); }
+  .cell.x { background: var(--fail-soft); box-shadow: inset 0 0 0 1.5px var(--fail); }
+
+  /* Share cards */
+  .share { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+  .scard { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+  .scard .hd { display: flex; gap: 10px; align-items: center; }
+  .scard .hd .ico { color: var(--amber-ink); }
+  .scard p { font-size: 14px; color: var(--ink-2); }
+  .scard.warn { border-color: var(--fail); background: var(--fail-soft); }
+  .scard.warn .hd .ico { color: var(--fail); }
+
+  /* Schedule steps */
+  .sched { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px; align-items: start; }
+  .sched > div { min-width: 0; }
+  .olist { margin: 0; padding-left: 22px; display: grid; gap: 8px; color: var(--ink-2); font-size: 15px; }
+  .olist b { color: var(--ink); }
+  .freq { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .freq span { font: 600 12.5px/1 var(--body); background: var(--slate-soft); color: var(--slate); border-radius: 999px; padding: 6px 10px; }
+  .facts { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; font-size: 14px; color: var(--ink-2); }
+  .facts li { display: flex; gap: 10px; align-items: flex-start; }
+  .facts .ico { width: 18px; height: 18px; color: var(--pass); margin-top: 3px; }
+  .ideas { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 16px; }
+  .idea { min-width: 0; background: var(--panel); border-radius: 10px; padding: 12px 14px; font-size: 14px; color: var(--ink-2); }
+  .idea b { display: block; color: var(--ink); font: 700 14px/1.3 var(--display); margin-bottom: 2px; }
+
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+  .rules li { min-width: 0; display: flex; gap: 10px; align-items: flex-start; background: var(--pass-soft); border-radius: 10px; padding: 12px 14px; font-size: 14.5px; color: var(--ink); }
+  .rules .ico { width: 18px; height: 18px; color: var(--pass); margin-top: 3px; }
+
+  .hw { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  .task { display: flex; gap: 14px; align-items: flex-start; background: var(--panel); border-radius: 10px; padding: 14px 16px; min-width: 0; }
+  .task .n { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--amber); color: var(--amber-ink); display: grid; place-items: center; }
+  .task .n .ico { width: 18px; height: 18px; }
+  .task b { display: block; font: 700 14.5px/1.3 var(--display); }
+  .task span { font-size: 14px; color: var(--ink-2); }
+
+  .foot { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  .foot b { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 860px) {
+    .places, .sched, .share, .rules, .hw, .ideas { grid-template-columns: minmax(0,1fr); }
+    .steps { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .mock-body { grid-template-columns: minmax(0,1fr); }
+  }
+  @media (max-width: 680px) {
+    .doc { padding: 28px 20px; }
+    .ex { grid-template-columns: minmax(0,1fr); gap: 12px; }
+    .ex-icon { width: 48px; height: 48px; }
+    .ex-icon .ico { width: 26px; height: 26px; }
+    .prompt { flex-direction: column; }
+    .steps { grid-template-columns: minmax(0,1fr); }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-window" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 8.5h17"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19.5h16"/><path d="M7 16v-5M12 16V7M17 16v-8"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M7.5 13h2M11 13h2M14.5 13h2M7.5 16.5h2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M3.5 19c.6-3.2 2.7-5 5.5-5s4.9 1.8 5.5 5"/><path d="M14.5 14.3c.6-.2 1.3-.3 2-.3 2.3 0 4 1.5 4.5 4.3"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l4.5 4.5 10-10"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h12l-3-3M20 13v2a3 3 0 0 1-3 3H5l3 3"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 6.5h6l2 2h9v10h-17z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 19.5h15"/></symbol>
+</svg>
+
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Praxis programme · Session 5 of 6</p>
+  <h1>Share it, schedule it: the Claude app</h1>
+  <p class="lede">So far we've worked in folders, one job at a time. This week we step up a level into the Claude app, where you can turn work into a page others can open and set Claude to do a job for you every week. We use Christine's board and planning work as the example.</p>
+  <div class="meta">
+    <span><b>When</b> Mon 16 Nov 2026, 9:00 to 10:30 SAST</span>
+    <span><b>Tool</b> the Claude desktop app</span>
+    <span><b>Bring</b> the risk register and the venues spreadsheet</span>
+  </div>
+
+  <section aria-labelledby="which">
+    <h2 id="which">Which place for which job</h2>
+    <p class="sub">Same Claude, same account. The difference is what the work is for.</p>
+    <div class="places">
+      <div class="place code">
+        <div class="place-hd"><svg class="ico"><use href="#i-code"/></svg><h3>VS Code, in a folder</h3></div>
+        <p class="best">Best for content you build up and keep in files.</p>
+        <ul>
+          <li>Learner guides, question banks, the gap lists</li>
+          <li>Rules in CLAUDE.md, the HSA format skill</li>
+          <li>Many files read together</li>
+        </ul>
+      </div>
+      <div class="place app">
+        <div class="place-hd"><svg class="ico"><use href="#i-window"/></svg><h3>The Claude app</h3></div>
+        <p class="best">Best for things you show people and things that repeat.</p>
+        <ul>
+          <li><b>Artifacts:</b> pages, charts and planners you can share by link</li>
+          <li><b>Projects:</b> a set of files and instructions for one area, like board work</li>
+          <li><b>Scheduled tasks:</b> a job Claude runs daily or weekly on its own</li>
+        </ul>
+      </div>
+    </div>
+    <p class="plain" style="margin-top:14px">If the Word and Excel add-ins aren't available to you, the app is also the easiest way to work on a spreadsheet: attach it to a chat.</p>
+  </section>
+
+  <section aria-labelledby="monday">
+    <h2 id="monday">What we do on Monday</h2>
+    <ol class="steps">
+      <li><b>A tour of the app</b>Chats, projects, artifacts and where Scheduled sits in the sidebar.</li>
+      <li><b>The risk register</b>Turn it into a page the board can read in two minutes.</li>
+      <li><b>The year plan</b>The intakes as a calendar you can change, with the clashes shown.</li>
+      <li><b>One scheduled job</b>Set up a weekly check that runs without you.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="art">
+    <h2 id="art">Artifacts: work you can open and share</h2>
+    <p class="sub">An artifact is a page Claude builds next to the chat: a chart, a table, a calendar or a small tool. It opens in its own panel, you can keep changing it in the chat, and you can share it as a link. Use the word "artifact" in your request and Claude knows what you mean.</p>
+
+    <article class="ex">
+      <div class="ex-icon"><svg class="ico"><use href="#i-chart"/></svg></div>
+      <div class="ex-main">
+        <div class="ex-head">
+          <h3>1 · The risk register for the board</h3>
+          <span class="pill"><svg class="ico"><use href="#i-clock"/></svg>20 min</span>
+          <span class="pill"><svg class="ico"><use href="#i-people"/></svg>Christine drives</span>
+        </div>
+        <p>You already have Claude pulling the register apart and drawing graphs. As an artifact it becomes one page: what's most likely and most serious, who owns it and what happens next.</p>
+        <div class="prompt">
+          <div class="txt"><span class="label">Prompt 1</span><code id="p1">Attached is our risk register. Make an artifact for the board:
+- a heat map of likelihood against impact, with each risk as a numbered dot
+- the 5 highest risks with owner, next action and due date
+- what changed since the last version, if the file shows it
+Use only what is in the file. If a field is empty, show it as empty instead of filling it in. Keep it to one screen, in plain English for board members.</code></div>
+          <button class="copy" type="button" data-target="p1">Copy</button>
+        </div>
+        <div class="mock" aria-label="Example of what the artifact could look like, with made-up risks">
+          <div class="mock-bar"><i></i><i></i><i></i>Risk register · example only<span>Artifact</span></div>
+          <div class="mock-body">
+            <div class="heat" role="img" aria-label="Example heat map with a high-risk cell in the top right">
+              <span class="ax">4</span><span class="c md"></span><span class="c md">3</span><span class="c hi">1</span><span class="c hi"></span>
+              <span class="ax">3</span><span class="c lo"></span><span class="c md"></span><span class="c md">4</span><span class="c hi">2</span>
+              <span class="ax">2</span><span class="c lo">6</span><span class="c lo"></span><span class="c md">5</span><span class="c md"></span>
+              <span class="ax">1</span><span class="c lo"></span><span class="c lo"></span><span class="c lo"></span><span class="c md"></span>
+              <span></span><span class="cap">Impact, low to high</span>
+            </div>
+            <ol class="toprisks">
+              <li><b>1</b>Venues fully booked in peak months</li>
+              <li><b>2</b>New curriculum not approved in time</li>
+              <li><b>3</b>Moodle move runs late</li>
+              <li><b>4</b>Key author unavailable</li>
+              <li><b>5</b>Learners share test questions</li>
+            </ol>
+          </div>
+          <p class="mock-note">Made-up example to show the shape. Yours comes from your own register.</p>
+        </div>
+        <div class="talk">
+          <svg class="ico"><use href="#i-chat"/></svg>
+          <div>
+            <span class="label">Talk about it</span>
+            <ul>
+              <li>Pick two dots and check them against the spreadsheet. Are they in the right square?</li>
+              <li>Would a board member understand it without you in the room?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="ex">
+      <div class="ex-icon"><svg class="ico"><use href="#i-cal"/></svg></div>
+      <div class="ex-main">
+        <div class="ex-head">
+          <h3>2 · The 2027 year plan you can change</h3>
+          <span class="pill"><svg class="ico"><use href="#i-clock"/></svg>20 min</span>
+          <span class="pill"><svg class="ico"><use href="#i-people"/></svg>Christine drives, all review</span>
+        </div>
+        <p>A plan in a chat tells you there's a clash. As an artifact you can see where it happens, try a different number of intakes or an extra venue, and watch the clashes move.</p>
+        <div class="prompt">
+          <div class="txt"><span class="label">Prompt 2</span><code id="p2">Attached are our venues spreadsheet and an example class timetable. Build an interactive artifact that plans 2027:
+- one row per venue, one column per month, coloured by intake
+- laboratory weeks marked, and any clash or over-booking in red with a list underneath
+- controls to change the number of intakes (4 to 6) and add a laboratory, so I can see what changes
+Use only the venues and capacities in the spreadsheet. Tell me any assumption you had to make.</code></div>
+          <button class="copy" type="button" data-target="p2">Copy</button>
+        </div>
+        <div class="mock" aria-label="Example of a year plan with one clash marked">
+          <div class="mock-bar"><i></i><i></i><i></i>2027 year plan · example only<span>Artifact</span></div>
+          <div class="plan" role="img" aria-label="Example grid of venues by month, with one red clash in the laboratory row">
+            <div class="plan-row"><span></span><span class="m">J</span><span class="m">F</span><span class="m">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m">N</span><span class="m">D</span></div>
+            <div class="plan-row"><span class="v">Room A</span><span class="cell i1"></span><span class="cell i1"></span><span class="cell i1"></span><span class="cell"></span><span class="cell i2"></span><span class="cell i2"></span><span class="cell i2"></span><span class="cell"></span><span class="cell i1"></span><span class="cell i1"></span><span class="cell"></span><span class="cell"></span></div>
+            <div class="plan-row"><span class="v">Room B</span><span class="cell"></span><span class="cell i2"></span><span class="cell i2"></span><span class="cell i2"></span><span class="cell"></span><span class="cell i1"></span><span class="cell i1"></span><span class="cell i1"></span><span class="cell"></span><span class="cell i2"></span><span class="cell i2"></span><span class="cell"></span></div>
+            <div class="plan-row"><span class="v">Lab</span><span class="cell"></span><span class="cell"></span><span class="cell i1"></span><span class="cell x"></span><span class="cell i2"></span><span class="cell"></span><span class="cell x"></span><span class="cell i1"></span><span class="cell"></span><span class="cell x"></span><span class="cell i2"></span><span class="cell"></span></div>
+          </div>
+          <p class="mock-note">Made-up example. Red is a month where two intakes need the lab at once.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section aria-labelledby="share">
+    <h2 id="share">Sharing an artifact, and when not to</h2>
+    <p class="sub">An artifact starts private. You choose who sees it.</p>
+    <div class="share">
+      <div class="scard">
+        <div class="hd"><svg class="ico"><use href="#i-link"/></svg><h3>Share a link</h3></div>
+        <p>Use Share or Publish on the artifact. Anyone with the link can open it, and they don't need a Claude account. Good for a planner the team works from.</p>
+      </div>
+      <div class="scard">
+        <div class="hd"><svg class="ico"><use href="#i-download"/></svg><h3>Make a file for the pack</h3></div>
+        <p>For board papers, ask: "make this as a PowerPoint slide" or "as a Word page". The file goes in the pack like anything else.</p>
+      </div>
+      <div class="scard warn">
+        <div class="hd"><svg class="ico"><use href="#i-lock"/></svg><h3>Keep it private</h3></div>
+        <p>A link can be forwarded. Don't share a link to anything board-confidential, any learner data or anything with salaries in it. Use the file instead.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="proj">
+    <h2 id="proj">Projects: the app's version of a folder</h2>
+    <div class="plain">
+      <p>In VS Code your rules live in a CLAUDE.md. In the app the same idea is a <b>Project</b>: you give it instructions and files once, and every chat inside it starts with them.</p>
+      <p>A "Board" project could hold the risk register, last quarter's minutes and an instruction like "write for board members, one page, plain English, never guess a number". Then each board chat starts from there, and you stop attaching the same files every time.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="sched">
+    <h2 id="sched">Scheduled tasks: a job Claude does every week</h2>
+    <p class="sub">You write the job once and pick how often. Claude runs it and the result waits for you under Scheduled. It works on your Pro account.</p>
+    <div class="sched">
+      <div>
+        <ol class="olist">
+          <li>Open the Claude desktop app and choose <b>Scheduled</b> in the left sidebar.</li>
+          <li>Choose <b>New task</b>, then <b>Create with Claude</b>. Describe the job and how often. (In the newest version of the app you can just ask for it in any chat.)</li>
+          <li>Answer Claude's questions, check the name, timing and instructions, then choose <b>Schedule</b>.</li>
+          <li>Under Scheduled you can see past runs, edit, pause, delete or run it now.</li>
+        </ol>
+        <div class="freq" aria-label="How often a task can run"><span>Hourly</span><span>Daily</span><span>Weekdays</span><span>Weekly</span><span>Only when I click</span></div>
+        <ul class="facts">
+          <li><svg class="ico"><use href="#i-check"/></svg>It runs even if your laptop is asleep, unless the job needs files that are only on your computer.</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>It can use the web and files you've saved to your Claude account.</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Start with "Only when I click" and run it a few times before you put it on a timetable.</li>
+        </ul>
+      </div>
+      <div class="prompt">
+        <div class="txt"><span class="label">Prompt 3 · the weekly regulation check</span><code id="p3">Every Monday at 7:00, search the Government Gazette and the South African Pharmacy Council website for anything published in the last 7 days about pharmacist's assistants, their training or their scope of practice: board notices, rules, regulations and calls for comment.
+For each one give the date, title, link and one line on what it could mean for HSA's courses.
+Only list items you found on those official sites. If there's nothing new, say "Nothing new this week" and stop.</code></div>
+        <button class="copy" type="button" data-target="p3">Copy</button>
+      </div>
+    </div>
+    <div class="ideas">
+      <div class="idea"><b>Before each board meeting</b>Summarise what changed in the risk register since last time, from the file in your Board project.</div>
+      <div class="idea"><b>Every Friday</b>A short list of what's due next week, from a timetable you keep in the app.</div>
+      <div class="idea"><b>Monthly</b>Check the Claude privacy setting is still off for training, and remind you to tidy your CLAUDE.md files.</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="rules">
+    <h2 id="rules">The same rules apply</h2>
+    <ul class="rules">
+      <li><svg class="ico"><use href="#i-check"/></svg>Check two numbers in every chart against the spreadsheet before anyone else sees it.</li>
+      <li><svg class="ico"><use href="#i-check"/></svg>Open the link for every regulation the weekly check finds and read the notice itself before you act on the summary.</li>
+      <li><svg class="ico"><use href="#i-check"/></svg>No learner names, ID numbers or marks in a chat, a project or an artifact.</li>
+      <li><svg class="ico"><use href="#i-check"/></svg>Your name goes on the board paper, so you sign it off.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="hw">
+    <h2 id="hw">Before Monday</h2>
+    <div class="hw">
+      <div class="task"><span class="n"><svg class="ico"><use href="#i-window"/></svg></span><div><b>Install the desktop app</b><span>From <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a>, and sign in with the account you use in VS Code. If you can't install it, use claude.ai in the browser and we'll do the scheduled task on my screen.</span></div></div>
+      <div class="task"><span class="n"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Bring two files</b><span>The risk register and the venues spreadsheet, with anything you wouldn't show the whole team taken out.</span></div></div>
+      <div class="task"><span class="n"><svg class="ico"><use href="#i-repeat"/></svg></span><div><b>Think of one weekly job</b><span>Something you do every week that starts with "go and look at...". That's your first scheduled task.</span></div></div>
+      <div class="task"><span class="n"><svg class="ico"><use href="#i-folder"/></svg></span><div><b>Laetitia and Elsa</b><span>Bring one piece of finished work you'd like to share with the team. We'll turn it into an artifact too.</span></div></div>
+    </div>
+  </section>
+
+  <p class="foot"><b>Questions before Monday?</b> Message me in Teams or email daniel@tutto.one, and I'll book a quick call.</p>
+</main>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.target);
+    var text = el.textContent;
+    function done(ok) { btn.textContent = ok ? 'Copied' : 'Select'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); }
+    function select() { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done(false); }
+    try { navigator.clipboard.writeText(text).then(function () { done(true); }, select); } catch (e) { select(); }
+  });
+});
+</script>
+</body>
+</html>

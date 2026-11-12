@@ -356,6 +356,20 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "hsa-session-2", "index.html"));
   });
 
+  // HSA session 4 handout (what the team built, sign-off, and where Claude's rules live):
+  // same arrangement, link only, not indexed.
+  app.get(["/hsa-session-4", "/hsa-session-4/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "hsa-session-4", "index.html"));
+  });
+
+  // HSA session 5 handout (the Claude app: artifacts, projects and scheduled tasks):
+  // same arrangement, link only, not indexed.
+  app.get(["/hsa-session-5", "/hsa-session-5/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "hsa-session-5", "index.html"));
+  });
+
   // Background Italia session 4 handout (scorecards, CLAUDE.md, PDFs into text, workspaces, the design system):
   // same arrangement, link only, not indexed.
   app.get(["/bi-session-4", "/bi-session-4/"], (_req, res) => {

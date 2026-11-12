@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="HSA session 4: what the team built, signing work off, and where Claude's rules live: the hierarchy, file paths, voice files and the web rule in settings.">
+<title>Session 4 handout: where Claude looks for your rules | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  /* HSA session 4 handout, same Praxis house tokens as the session 2 handout.
+     Layout: one document card. What you built, sign-off loop, the Claude hierarchy (diagram, paths,
+     voice files, the web rule in settings), sharing, fresh chats, homework, links, next week. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #4f6274; --slate-soft: #e8edf2;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8; --fail: #b4322a; --fail-soft: #f8e3e1;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a;
+      --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a;
+    --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  p { margin: 0; }
+  a { color: var(--amber-ink); text-underline-offset: 3px; }
+  code.inl { font: 500 0.88em/1.4 var(--mono); background: var(--panel); border-radius: 4px; padding: 1px 5px; overflow-wrap: anywhere; }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; }
+  .brand span { color: var(--amber); }
+  a.brand { color: var(--ink); text-decoration: none; }
+  .top a.back { font-size: 14px; color: var(--amber); text-underline-offset: 0.15em; }
+  .top .client { font-size: 14px; color: var(--muted); }
+
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 60ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 48px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { font: 700 17px/1.25 var(--display); margin: 0; text-wrap: balance; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 64ch; }
+  .ico { width: 22px; height: 22px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .clar { display: inline-block; font: 700 11px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--slate); background: var(--slate-soft); border-radius: 999px; padding: 5px 9px; margin-bottom: 10px; }
+
+  /* Journey */
+  .journey { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); position: relative; }
+  .journey::before { content: ""; position: absolute; left: 10%; right: 10%; top: 17px; height: 2px; background: var(--line); }
+  .journey li { position: relative; text-align: center; padding: 0 6px; font-size: 13.5px; color: var(--muted); min-width: 0; }
+  .dot { width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 8px; display: grid; place-items: center; background: var(--paper); border: 2px solid var(--line); color: var(--muted); font: 700 14px/1 var(--display); position: relative; }
+  .journey .done .dot { background: var(--pass-soft); border-color: var(--pass); color: var(--pass); }
+  .journey .now .dot { background: var(--amber); border-color: var(--amber); color: var(--paper); box-shadow: 0 0 0 5px var(--amber-soft); }
+  .journey .now { color: var(--ink); font-weight: 600; }
+  .journey b { display: block; font: 700 12px/1.3 var(--display); letter-spacing: .06em; text-transform: uppercase; color: inherit; }
+
+  /* What you built */
+  .built { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+  .card { min-width: 0; background: var(--panel); border-radius: 10px; padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .card .who { display: flex; align-items: center; gap: 10px; }
+  .card p { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+  .card .next { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13.5px; color: var(--ink); }
+  .card .next b { color: var(--amber-ink); }
+
+  .avatar { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--amber); color: var(--amber-ink); display: grid; place-items: center; font: 700 13px/1 var(--display); }
+
+  /* Check loop */
+  .loopwrap { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 32px; align-items: center; }
+  .loop { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto; }
+  .loop text { font-family: var(--display); fill: var(--ink); }
+  .quote { font: italic 400 24px/1.4 var(--serif); color: var(--ink); border-left: 4px solid var(--amber); padding-left: 18px; }
+  .quote small { display: block; margin-top: 10px; font: 400 14px/1.5 var(--body); color: var(--muted); font-style: normal; }
+  .rules { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: var(--ink-2); }
+  .rules li { display: flex; gap: 10px; align-items: flex-start; }
+  .rules .ico { width: 18px; height: 18px; color: var(--pass); margin-top: 3px; }
+
+  /* Architecture diagram */
+  .arch { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.5fr); gap: 16px; align-items: stretch; }
+  .zone { min-width: 0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .zone.app { background: var(--slate-soft); }
+  .zone.code { background: var(--amber-soft); }
+  .zone-hd { display: flex; align-items: center; gap: 10px; }
+  .zone-hd .ico { color: var(--slate); }
+  .zone.code .zone-hd .ico { color: var(--amber-ink); }
+  .zone-hd small { display: block; font: 400 13px/1.3 var(--body); color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font: 600 13px/1 var(--body); background: var(--paper); border-radius: 999px; padding: 7px 11px; color: var(--ink); }
+  .zone p.note { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .nest { border: 1.5px solid; border-radius: 10px; padding: 12px 12px 12px; background: var(--paper); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .nest.l1 { border-color: var(--slate); }
+  .nest.l2 { border-color: var(--amber); }
+  .nest.l3 { border-color: var(--pass); border-style: dashed; background: var(--panel); }
+  .nest-hd { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; align-items: baseline; }
+  .nest-hd b { font: 700 14.5px/1.3 var(--display); }
+  .nest-hd span { font-size: 12.5px; color: var(--muted); }
+  .nest p { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .jobs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+  .jobs .nest { padding: 10px; }
+  .jobs .nest-hd b { font-size: 13.5px; }
+  .file { display: inline-block; font: 600 12px/1.3 var(--mono); color: var(--amber-ink); overflow-wrap: anywhere; }
+  .memo { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--ink-2); border-top: 1px dashed color-mix(in srgb, var(--amber) 40%, transparent); padding-top: 10px; }
+  .memo .ico { width: 18px; height: 18px; color: var(--amber-ink); margin-top: 2px; }
+  .readorder { margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+  .readorder .step { background: var(--panel); border-radius: 6px; padding: 6px 10px; font-weight: 600; color: var(--ink); }
+  .readorder .ico { width: 18px; height: 18px; color: var(--amber); }
+
+  /* Paths table */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; }
+  th, td { text-align: left; padding: 11px 14px; vertical-align: top; border-top: 1px solid var(--line); }
+  thead th { border-top: 0; background: var(--panel); font: 700 12px/1.3 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  td code { font: 500 12.5px/1.5 var(--mono); color: var(--ink); overflow-wrap: anywhere; }
+  td.what b { display: block; font-weight: 600; }
+  td.what span { color: var(--muted); font-size: 13px; }
+  .tip { margin-top: 12px; font-size: 14px; color: var(--ink-2); display: flex; gap: 10px; align-items: flex-start; }
+  .tip .ico { width: 18px; height: 18px; color: var(--amber); margin-top: 2px; }
+
+  /* Two-column explainer */
+  .two { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px; align-items: start; }
+  .two > div { min-width: 0; }
+  .plain { display: grid; gap: 10px; color: var(--ink-2); max-width: 62ch; }
+  .plain b { color: var(--ink); }
+
+  .prompt { background: var(--panel); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
+  .prompt .txt { min-width: 0; flex: 1; }
+  .prompt .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .prompt code { display: block; font: 500 14px/1.6 var(--mono); color: var(--ink); margin-top: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .copy { flex: none; font: 700 12px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber-ink); background: var(--paper); border: 1.5px solid var(--amber); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+  .copy:hover { background: var(--amber-soft); }
+  .copy:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  .compare { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; margin-bottom: 16px; }
+  .opt { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 8px; align-content: start; }
+  .opt.rec { border-color: var(--slate); }
+  .opt-hd { display: flex; gap: 10px; align-items: center; color: var(--slate); }
+  .opt-hd h3 { color: var(--ink); }
+  .opt-when { font: italic 400 15.5px/1.45 var(--serif); color: var(--ink-2); }
+  .pros { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: 14px; color: var(--ink-2); }
+  .pros li { position: relative; padding-left: 26px; }
+  .pros li::before { position: absolute; left: 0; top: 0; width: 18px; font: 700 15px/1.35 var(--display); text-align: center; }
+  .pros .plus::before { content: "+"; color: var(--pass); }
+  .pros .minus::before { content: "\2212"; color: var(--fail); }
+
+  .talk { display: flex; gap: 14px; align-items: flex-start; border: 1.5px dashed var(--slate); border-radius: 10px; padding: 14px 18px; background: var(--slate-soft); }
+  .talk .ico { color: var(--slate); margin-top: 2px; }
+  .talk .label { font: 700 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--slate); }
+  .talk ul { margin: 4px 0 0; padding-left: 18px; font-size: 14.5px; color: var(--ink); }
+  .talk li + li { margin-top: 3px; }
+
+  /* Homework */
+  .hw { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  .task { display: flex; gap: 14px; align-items: flex-start; background: var(--panel); border-radius: 10px; padding: 14px 16px; min-width: 0; }
+  .task b { display: block; font: 700 14.5px/1.3 var(--display); }
+  .task span { font-size: 14px; color: var(--ink-2); }
+
+  /* Links */
+  .links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+  .links li { min-width: 0; }
+  .links a { display: flex; gap: 12px; align-items: flex-start; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; text-decoration: none; color: var(--ink); height: 100%; }
+  .links a:hover { border-color: var(--amber); }
+  .links a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+  .links .ico { color: var(--amber-ink); margin-top: 2px; }
+  .links b { display: block; font: 700 15px/1.3 var(--display); }
+  .links span { font-size: 13.5px; color: var(--ink-2); }
+
+  /* Next week */
+  .nextweek { margin-top: 48px; background: var(--slate-soft); border-radius: 12px; padding: 24px 26px; display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 18px; }
+  .nextweek .big { width: 56px; height: 56px; border-radius: 14px; background: var(--paper); color: var(--slate); display: grid; place-items: center; }
+  .nextweek .big .ico { width: 30px; height: 30px; }
+  .nextweek h2 { margin-bottom: 8px; }
+  .nextweek p { color: var(--ink-2); max-width: 64ch; }
+  .nextweek ul { margin: 10px 0 0; padding-left: 20px; color: var(--ink-2); font-size: 15px; }
+  .nextweek li + li { margin-top: 4px; }
+  .nextweek .go { margin-top: 14px; font-size: 15px; }
+
+  .foot { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  .foot b { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 860px) {
+    .loopwrap, .arch, .two, .compare { grid-template-columns: minmax(0,1fr); }
+    .built, .hw, .links { grid-template-columns: minmax(0,1fr); }
+  }
+  @media (max-width: 680px) {
+    .doc { padding: 28px 20px; }
+    .journey li { font-size: 0; padding: 0 2px; }
+    .journey li b { font-size: 10px; }
+    .jobs { grid-template-columns: minmax(0,1fr); }
+    .prompt { flex-direction: column; }
+    .nextweek { grid-template-columns: minmax(0,1fr); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .journey .now .dot { animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 9px var(--amber-soft); } }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l4.5 4.5 10-10"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 6.5h6l2 2h9v10h-17z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-window" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 8.5h17"/><circle cx="6.5" cy="6.5" r=".4"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4.5a3 3 0 0 0-3 3 3 3 0 0 0-1.5 5.5A3 3 0 0 0 9 18.5V4.5zM15 4.5a3 3 0 0 1 3 3 3 3 0 0 1 1.5 5.5 3 3 0 0 1-4.5 5.5V4.5z"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 17.5h6M10 20.5h4"/><path d="M12 3.5a5.5 5.5 0 0 0-3.2 10c.7.5 1.2 1.3 1.2 2.2v1.8h4v-1.8c0-.9.5-1.7 1.2-2.2A5.5 5.5 0 0 0 12 3.5z"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 0 1 16 0"/><path d="M12 16l4-5"/><path d="M4 19.5h16"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4.5 5.5c2.5-1 5-1 7.5.5v13c-2.5-1.5-5-1.5-7.5-.5z"/><path d="M19.5 5.5c-2.5-1-5-1-7.5.5v13c2.5-1.5 5-1.5 7.5-.5z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="6.5" cy="12" r="2.3"/><circle cx="17.5" cy="6" r="2.3"/><circle cx="17.5" cy="18" r="2.3"/><path d="M8.6 10.9l6.8-3.8M8.6 13.1l6.8 3.8"/></symbol>
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="7" cy="5.5" r="2.2"/><circle cx="7" cy="18.5" r="2.2"/><circle cx="17" cy="8" r="2.2"/><path d="M7 7.7v8.6"/><path d="M17 10.2c0 4-10 2.5-10 6"/></symbol>
+  <symbol id="i-team" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M8 10.5h8M8 13.5h5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+</svg>
+
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Praxis programme · Session 4 of 6</p>
+  <h1>Finding the gaps in how Claude works for you</h1>
+  <p class="lede">You brought real work this week: a question mapping, an HSA format, a Moodle question bank and a year plan. So we looked at the gaps between what you asked for and what Claude gave back, and where to write the rules down so you don't have to repeat them.</p>
+  <div class="meta">
+    <span><b>When</b> Thu 12 Nov 2026, 9:00 to 10:30 SAST</span>
+    <span><b>Tool</b> Claude in VS Code, opened in your own folders</span>
+    <span><b>Recording</b> in the Teams chat</span>
+  </div>
+
+  <section aria-labelledby="where">
+    <h2 id="where">Where we are</h2>
+    <p class="sub">Each session builds on the one before. Next week we step up one level, into the Claude app.</p>
+    <ol class="journey">
+      <li class="done"><span class="dot"><svg class="ico" style="width:16px;height:16px;stroke-width:2.6"><use href="#i-check"/></svg></span><b>Session 2</b>Tag the content</li>
+      <li class="done"><span class="dot"><svg class="ico" style="width:16px;height:16px;stroke-width:2.6"><use href="#i-check"/></svg></span><b>Session 3</b>Draft the crosswalk</li>
+      <li class="now"><span class="dot">4</span><b>Today</b>Your rules, written down</li>
+      <li><span class="dot">5</span><b>Mon 16 Nov</b>The Claude app</li>
+      <li><span class="dot">6</span><b>Mon 23 Nov</b>Put it together</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="built">
+    <h2 id="built">What you built this week</h2>
+    <p class="sub">Three different jobs, and the same pattern in each: ask, look at what comes back, say what's missing, ask again.</p>
+    <div class="built">
+      <div class="card">
+        <div class="who"><span class="avatar">L</span><h3>Laetitia</h3></div>
+        <p>Mapped the author's 15 sets of questions onto the new 8-module course: fully covered, partly covered, doesn't fit. Then checked them against Bloom's taxonomy and the spread of answers.</p>
+        <p>Built the <b>HSA format</b> skill along the way: the advantage, disadvantage and legal icons, numbered captions, lists of tables and figures, Harvard references and Arial 10 tables.</p>
+        <p class="next"><b>Next:</b> ask Claude to boil the mapping down to one list of next steps.</p>
+      </div>
+      <div class="card">
+        <div class="who"><span class="avatar">E</span><h3>Elsa</h3></div>
+        <p>Started in plan mode and built the skeleton for the Moodle question bank in Excel: every assessment criterion, three questions each, the existing questions imported, the import files made and doubtful items flagged.</p>
+        <p>When her documents contradicted each other, Claude went to official sources on its own to settle it.</p>
+        <p class="next"><b>Next:</b> write down what good looks like, then check a small batch line by line.</p>
+      </div>
+      <div class="card">
+        <div class="who"><span class="avatar">C</span><h3>Christine</h3></div>
+        <p>Took Claude to the strategy side: a risk register with graphs for the board, and a 2027 year plan for six intakes built from the venues spreadsheet.</p>
+        <p>The plan showed where the venues clash, before anyone had booked a room.</p>
+        <p class="next"><b>Next:</b> a CLAUDE.md with Laetitia, then artifacts in the Claude app next week.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="check">
+    <h2 id="check">You still sign it off</h2>
+    <p class="sub">Think of Claude as someone you've hired to do the work. You'd read what a new contractor sends back before your name goes on it, and the same goes here.</p>
+    <div class="loopwrap">
+      <svg class="loop" viewBox="0 0 360 300" role="img" aria-label="The check loop: Claude drafts, you check a small batch, you note what's wrong, the rules get updated, then Claude drafts again">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--amber)"/></marker></defs>
+        <circle cx="180" cy="150" r="96" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="4 6"/>
+        <path d="M232 70 A96 96 0 0 1 270 128" fill="none" stroke="var(--amber)" stroke-width="2.5" marker-end="url(#ah)"/>
+        <path d="M262 200 A96 96 0 0 1 210 240" fill="none" stroke="var(--amber)" stroke-width="2.5" marker-end="url(#ah)"/>
+        <path d="M120 230 A96 96 0 0 1 90 175" fill="none" stroke="var(--amber)" stroke-width="2.5" marker-end="url(#ah)"/>
+        <path d="M95 110 A96 96 0 0 1 135 66" fill="none" stroke="var(--amber)" stroke-width="2.5" marker-end="url(#ah)"/>
+        <rect x="125" y="28" width="110" height="40" rx="8" fill="var(--amber-soft)" stroke="var(--amber)"/>
+        <text x="180" y="53" text-anchor="middle" font-size="14" font-weight="700">Claude drafts</text>
+        <rect x="236" y="130" width="116" height="40" rx="8" fill="var(--panel)" stroke="var(--line)"/>
+        <text x="294" y="155" text-anchor="middle" font-size="14" font-weight="700">Check a batch</text>
+        <rect x="120" y="232" width="120" height="40" rx="8" fill="var(--panel)" stroke="var(--line)"/>
+        <text x="180" y="257" text-anchor="middle" font-size="14" font-weight="700">Note what's off</text>
+        <rect x="8" y="130" width="116" height="40" rx="8" fill="var(--pass-soft)" stroke="var(--pass)"/>
+        <text x="66" y="155" text-anchor="middle" font-size="14" font-weight="700">Update rules</text>
+        <text x="180" y="146" text-anchor="middle" font-size="12" style="fill:var(--muted)">you stay</text>
+        <text x="180" y="162" text-anchor="middle" font-size="12" style="fill:var(--muted)">responsible</text>
+      </svg>
+      <div>
+        <p class="quote">Check it the way you'd check a new contractor's first piece of work.<small>The first time is slow. Every error you note becomes a rule, so the next batch needs less checking.</small></p>
+        <ul class="rules">
+          <li><svg class="ico"><use href="#i-check"/></svg>Start small. Check one module line by line before you ask for ten.</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Check against something Claude didn't write: your subject experts and your own learner material.</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Write each error down (format, wording, facts), then give Claude the list.</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Too much to read? Ask for a summary, and add "keep answers short" to your CLAUDE.md.</li>
+          <li><svg class="ico"><use href="#i-check"/></svg>Keep learner names, ID numbers and marks out of the folder.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="arch">
+    <span class="clar">Clarifying the architecture</span>
+    <h2 id="arch">Where Claude looks for your rules</h2>
+    <p class="sub">This is the diagram I promised. Rules sit at different levels, like a company handbook, a department's way of working and the brief for one job. The level you put a rule at decides which work it applies to.</p>
+
+    <div class="arch" role="img" aria-label="Two areas. The Claude app holds chats, projects, skills, artifacts and scheduled tasks. Claude in VS Code reads rules from your personal .claude folder, then the HSA folder's CLAUDE.md, then the CLAUDE.md in each job folder.">
+      <div class="zone app">
+        <div class="zone-hd"><svg class="ico"><use href="#i-window"/></svg><div><h3>The Claude app</h3><small>claude.ai and the desktop app</small></div></div>
+        <div class="chips"><span class="chip">Chats</span><span class="chip">Projects</span><span class="chip">Skills</span><span class="chip">Artifacts</span><span class="chip">Scheduled tasks</span></div>
+        <p class="note">Your settings and skills here apply to all your chats in the app. It's a separate place from your folders in VS Code. A skill you make in the app can show up in VS Code when you're signed in to the same account (type <code class="inl">/skills</code> to see which ones). To be sure, keep a copy in your personal <code class="inl">.claude</code> folder.</p>
+        <p class="note">This is where we go next week.</p>
+      </div>
+
+      <div class="zone code">
+        <div class="zone-hd"><svg class="ico"><use href="#i-code"/></svg><div><h3>Claude in VS Code</h3><small>works on the folder you open</small></div></div>
+        <div class="nest l1">
+          <div class="nest-hd"><b>You, in every folder</b><span class="file">.claude in your user folder</span></div>
+          <p>How you like answers: short, English (South Africa), ask before guessing. Only you see it.</p>
+          <div class="nest l2">
+            <div class="nest-hd"><b>All HSA work</b><span class="file">HSA\CLAUDE.md</span></div>
+            <p>The house rules: the HSA format, trusted sources, NQF 4, no learner data. Shared with the team.</p>
+            <div class="jobs">
+              <div class="nest l3"><div class="nest-hd"><b>Question bank</b></div><span class="file">CLAUDE.md</span><p>Moodle format, 3 per criterion.</p></div>
+              <div class="nest l3"><div class="nest-hd"><b>Gap analysis</b></div><span class="file">CLAUDE.md</span><p>Quote the source line.</p></div>
+              <div class="nest l3"><div class="nest-hd"><b>Proofreader</b></div><span class="file">CLAUDE.md</span><p>Score a draft against the rules.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="memo"><svg class="ico"><use href="#i-brain"/></svg><span><b>Claude's own notes.</b> Claude also keeps notes about each project as you work, in your personal <code class="inl">.claude</code> folder. That's why a new chat still remembers things. Type <code class="inl">/memory</code> to read or clear them.</span></div>
+      </div>
+    </div>
+
+    <div class="readorder" aria-label="Read order">
+      <span>When you open a job folder, Claude reads</span>
+      <span class="step">your rules</span><svg class="ico"><use href="#i-arrow"/></svg>
+      <span class="step">HSA rules</span><svg class="ico"><use href="#i-arrow"/></svg>
+      <span class="step">the job's rules</span>
+    </div>
+    <div class="plain" style="margin-top:14px">
+      <p>So when I said one folder doesn't speak to another, I meant folders <b>side by side</b>. The question bank folder doesn't see the proofreader's rules. A folder <b>above</b> does reach down, though: put the HSA rules in the HSA folder once and every job folder inside it gets them.</p>
+      <p>If two files say different things, Claude may follow either one. Keep each rule in one place, at the highest level it's true for.</p>
+      <p>Claude doesn't make a CLAUDE.md for you. Type <code class="inl">/init</code>, or ask it: "make a CLAUDE.md for this folder from what we've agreed so far." After that it adds to it when you ask, so tell it when something's worth keeping.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="paths">
+    <span class="clar">Clarifying paths</span>
+    <h2 id="paths">Where each file lives</h2>
+    <p class="sub">The same levels, as real places on your computer. On Windows your user folder is <code class="inl">C:\Users\&lt;your name&gt;</code>, on a Mac it's your home folder (shown as <code class="inl">~</code>).</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>What</th><th>Windows</th><th>Mac</th></tr></thead>
+        <tbody>
+          <tr><td class="what"><b>Your rules, every folder</b><span>Only you</span></td><td><code>C:\Users\&lt;you&gt;\.claude\CLAUDE.md</code></td><td><code>~/.claude/CLAUDE.md</code></td></tr>
+          <tr><td class="what"><b>Your skills, every folder</b><span>Type /name to use one</span></td><td><code>C:\Users\&lt;you&gt;\.claude\skills\&lt;name&gt;\SKILL.md</code></td><td><code>~/.claude/skills/&lt;name&gt;/SKILL.md</code></td></tr>
+          <tr><td class="what"><b>HSA rules</b><span>Share with the team</span></td><td colspan="2"><code>HSA\CLAUDE.md</code> at the top of the HSA folder</td></tr>
+          <tr><td class="what"><b>HSA skills</b><span>e.g. the HSA format</span></td><td colspan="2"><code>HSA\.claude\skills\hsa-format\SKILL.md</code></td></tr>
+          <tr><td class="what"><b>One job's rules</b><span>Open this folder in VS Code</span></td><td colspan="2"><code>HSA\Question bank\CLAUDE.md</code></td></tr>
+          <tr><td class="what"><b>Settings, such as the web rule</b><span>See below</span></td><td colspan="2"><code>HSA\.claude\settings.json</code></td></tr>
+          <tr><td class="what"><b>Claude's own notes</b><span>Claude writes these</span></td><td><code>C:\Users\&lt;you&gt;\.claude\projects\…\memory\</code></td><td><code>~/.claude/projects/…/memory/</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tip"><svg class="ico"><use href="#i-bulb"/></svg><span>Folders that start with a dot are hidden. On Windows, File Explorer, View, Show, Hidden items. On a Mac, press Cmd + Shift + full stop in Finder. When you share the HSA folder in Teams, check the <code class="inl">.claude</code> folder goes with it, or the HSA format skill stays behind.</span></p>
+  </section>
+
+  <section aria-labelledby="voice">
+    <span class="clar">Clarifying voice.md</span>
+    <h2 id="voice">CLAUDE.md is the one Claude reads by itself</h2>
+    <div class="two">
+      <div class="plain">
+        <p>I mentioned a voice.md alongside CLAUDE.md. The difference matters: <b>CLAUDE.md is the only file Claude reads at the start of every chat</b>. A voice.md, a style guide or a format file is read when CLAUDE.md points to it.</p>
+        <p>That's what Laetitia's Claude did this morning: it kept CLAUDE.md short and pointed to the HSA format instead of copying every rule in. That's the right way round.</p>
+        <p>There are two ways to point. Write <code class="inl">@house-style.md</code> and the file is loaded every time. Write "follow house-style.md when you write learner material" and Claude opens it when the job needs it. Skills like the HSA format work the second way: Claude uses one when the job matches, or straight away when you type <code class="inl">/hsa-format</code>.</p>
+      </div>
+      <div class="prompt">
+        <div class="txt"><span class="label">Paste into Claude in your HSA folder</span><code id="p1">Make a CLAUDE.md for this folder from what we've agreed so far. Keep it under 40 lines. Include:
+- Write in English (South Africa) for NQF 4 learners.
+- Keep answers short. Give me a summary first and the detail only if I ask.
+- Use the HSA format skill for any learner material.
+- Only use the documents in this folder unless I say otherwise. If you need an outside source, use official ones (Government Gazette, board notices, SAPC, WHO) and tell me each time you use one.
+- Never put learner names, ID numbers or marks in a file.
+Point to other files instead of copying them in. Show me the file before you save it.</code></div>
+        <button class="copy" type="button" data-target="p1">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="web">
+    <span class="clar">Clarifying the website block</span>
+    <h2 id="web">A request in CLAUDE.md, a rule in settings</h2>
+    <p class="sub">When I talked about blocking websites, the block sits in a settings file. Claude reads CLAUDE.md and tries to follow it. Settings are rules the program enforces, so Claude can't talk its way round them.</p>
+    <div class="compare">
+      <div class="opt">
+        <div class="opt-hd"><svg class="ico"><use href="#i-book"/></svg><h3>In CLAUDE.md</h3></div>
+        <p class="opt-when">"Use official sources and tell me when you do."</p>
+        <ul class="pros">
+          <li class="plus">Flexible. Claude can still settle a contradiction, like it did for Elsa.</li>
+          <li class="minus">It's a request. In a long chat Claude can drift, as Laetitia found.</li>
+        </ul>
+      </div>
+      <div class="opt rec">
+        <div class="opt-hd"><svg class="ico"><use href="#i-gauge"/></svg><h3>In .claude\settings.json</h3></div>
+        <p class="opt-when">Claude has to ask you before every search, or can't search at all.</p>
+        <ul class="pros">
+          <li class="plus">Enforced every time, in that folder only.</li>
+          <li class="plus">"Ask" is the middle ground Elsa wanted: you see each source and say yes or no.</li>
+          <li class="minus">Change it back when you do want open research in that folder.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="two">
+      <div class="prompt">
+        <div class="txt"><span class="label">What the file says (ask first)</span><code id="p2">{
+  "permissions": {
+    "ask": ["WebSearch", "WebFetch"]
+  }
+}</code></div>
+        <button class="copy" type="button" data-target="p2">Copy</button>
+      </div>
+      <div class="plain">
+        <p>You don't need to type it. Ask Claude: <b>"In this folder's .claude settings, make Claude ask me before any web search or web page."</b></p>
+        <p>For a hard stop, change <code class="inl">ask</code> to <code class="inl">deny</code>. Use both together: the CLAUDE.md rule says which sources are good, and the setting makes sure you see each one.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="share">
+    <h2 id="share">Sharing your rules with each other</h2>
+    <p class="sub">Not everyone can reach the same OneDrive, so you chose a Teams channel. That's a good place to start.</p>
+    <div class="compare">
+      <div class="opt">
+        <div class="opt-hd"><svg class="ico"><use href="#i-team"/></svg><h3>A Teams channel, now</h3></div>
+        <p class="opt-when">Everyone can reach it today.</p>
+        <ul class="pros">
+          <li class="plus">Put the HSA folder (with its <code class="inl">.claude</code> folder) in the channel's Files. Each of you copies it to your laptop and opens it in VS Code.</li>
+          <li class="minus">Copies drift. Agree one owner per file and post in the channel when you change it.</li>
+        </ul>
+      </div>
+      <div class="opt rec">
+        <div class="opt-hd"><svg class="ico"><use href="#i-branch"/></svg><h3>A private GitHub repository, later</h3></div>
+        <p class="opt-when">When several of you edit the same rules.</p>
+        <ul class="pros">
+          <li class="plus">Every change saved with who, when and why. Go back to any version, and merge two people's work.</li>
+          <li class="plus">Claude does the saving and describes the changes, so you don't learn commands.</li>
+          <li class="minus">A new account, which IT may want to approve first.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="fresh">
+    <h2 id="fresh">Fresh chats and a tidy-up</h2>
+    <div class="two">
+      <div class="plain">
+        <p><b>Start a new chat for each new piece of work.</b> It's like starting the day after a good night's sleep. The chat forgets the last conversation and goes back to your CLAUDE.md. Elsa noticed it still remembers some things: those come from the files in the folder and Claude's own notes, which is the point.</p>
+      </div>
+      <div class="plain">
+        <p><b>Put a reminder in your calendar for two or three months from now.</b> Read your CLAUDE.md files and Claude's notes, delete what's out of date and fix rules that contradict each other. You can ask Claude to do the first pass: "read every CLAUDE.md in these folders and list anything that clashes or is out of date."</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="hw">
+    <h2 id="hw">Before Monday 16 November</h2>
+    <p class="sub">What each of you said you'd do this week.</p>
+    <div class="hw">
+      <div class="task"><span class="avatar">L</span><div><b>Laetitia</b><span>Work through Claude's list of next steps for the 15 question sets, easy ones first. Add English (South Africa) to the HSA format. Share the HSA folder in the Teams channel.</span></div></div>
+      <div class="task"><span class="avatar">E</span><div><b>Elsa</b><span>Define what good looks like and write it into a CLAUDE.md (prompt above). Check one module of the question bank line by line and list what was wrong.</span></div></div>
+      <div class="task"><span class="avatar">C</span><div><b>Christine</b><span>Set up a CLAUDE.md with Laetitia. Install the Claude desktop app and bring the risk register and venues spreadsheet on Monday (details below).</span></div></div>
+      <div class="task"><span class="avatar"><svg class="ico" style="width:18px;height:18px"><use href="#i-folder"/></svg></span><div><b>Everyone</b><span>Collect what was useful and what wasn't from Claude's answers into one document. It becomes the start of your proofreader folder.</span></div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="links">
+    <h2 id="links">Your reference links</h2>
+    <p class="sub">These are the tools on your portal for defining good work and checking it. Keep them handy while you write your rules.</p>
+    <ul class="links">
+      <li><a href="/agent-scorecard" target="_blank" rel="noopener"><svg class="ico"><use href="#i-gauge"/></svg><div><b>KPI scorecard tool</b><span>Turn "what good looks like" into a scorecard you can mark Claude's work against.</span></div></a></li>
+      <li><a href="/session-2" target="_blank" rel="noopener"><svg class="ico"><use href="#i-book"/></svg><div><b>Define good</b><span>From your own examples to a scorecard, step by step.</span></div></a></li>
+      <li><a href="/evals" target="_blank" rel="noopener"><svg class="ico"><use href="#i-check"/></svg><div><b>Proving the output is good</b><span>The thinking behind a proofreader folder.</span></div></a></li>
+      <li><a href="/skill-file" target="_blank" rel="noopener"><svg class="ico"><use href="#i-folder"/></svg><div><b>Writing your skill file</b><span>How the HSA format skill is put together, and how to write your own.</span></div></a></li>
+      <li><a href="/workspaces" target="_blank" rel="noopener"><svg class="ico"><use href="#i-share"/></svg><div><b>Workspaces guide</b><span>Open a shared folder in VS Code without copying it.</span></div></a></li>
+      <li><a href="/learn"><svg class="ico"><use href="#i-link"/></svg><div><b>Your dashboard</b><span>Every session, handout and recording in one place.</span></div></a></li>
+    </ul>
+  </section>
+
+  <aside class="nextweek" aria-labelledby="nw">
+    <div class="big"><svg class="ico"><use href="#i-window"/></svg></div>
+    <div>
+      <p class="eyebrow">Next week · Mon 16 Nov</p>
+      <h2 id="nw">Christine, next week we open the Claude app</h2>
+      <p>You're already using Claude for the board and for planning. Next week we take two of your own jobs into the Claude app, where the work is easy to share and can run on a timetable.</p>
+      <ul>
+        <li><b>Artifacts:</b> the risk register as a page with charts the board can read, and the six-intake year plan as a calendar.</li>
+        <li><b>Scheduled tasks:</b> a job Claude does for you every week, like checking for new board notices.</li>
+      </ul>
+      <p class="go"><a href="/hsa-session-5" target="_blank" rel="noopener">Read the session 5 handout before Monday</a></p>
+    </div>
+  </aside>
+
+  <p class="foot"><b>Questions before then?</b> Message me in Teams or email daniel@tutto.one, and I'll book a quick call.</p>
+</main>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.target);
+    var text = el.textContent;
+    function done(ok) { btn.textContent = ok ? 'Copied' : 'Select'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); }
+    function select() { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done(false); }
+    try { navigator.clipboard.writeText(text).then(function () { done(true); }, select); } catch (e) { select(); }
+  });
+});
+</script>
+</body>
+</html>
