@@ -43,7 +43,8 @@ export const insertEmailLeadSchema = createInsertSchema(emailLeads).pick({
   email: true,
   source: true,
 }).extend({
-  email: z.string().email(),
+  email: z.string().trim().email().max(320),
+  source: z.string().trim().min(1).max(200),
 });
 
 export type InsertEmailLead = z.infer<typeof insertEmailLeadSchema>;

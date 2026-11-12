@@ -1,3 +1,4 @@
+import { useFormGuard } from "@/lib/form-guard";
 import { useEffect, useRef, useState } from "react";
 import { usePageTr } from "@/lib/page-fr";
 import { PEER_GROUPS_FR } from "@/lib/fr/peer-groups";
@@ -56,6 +57,7 @@ function withContact(href: string, name: string, email: string): string {
 }
 
 export default function PeerGroups() {
+  const guard = useFormGuard();
   const tr = usePageTr(PEER_GROUPS_FR);
   const { locale, currency } = usePreferences();
   const seat = price("peerGroupSeat", currency, locale);
@@ -142,6 +144,7 @@ export default function PeerGroups() {
             `What they want to use AI for: ${form.goal || "-"}`,
           ].join("\n"),
           trainerCode: form.trainerCode.trim() || null,
+          ...(await guard.fields()),
         }),
       });
       if (!res.ok) throw new Error();
@@ -344,6 +347,7 @@ export default function PeerGroups() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "24px" }}>
+              {guard.honeypot}
               <div className="pg-form-row">
                 <div>
                   <label htmlFor="pg-name" style={LABEL}>{tr("Name")}</label>

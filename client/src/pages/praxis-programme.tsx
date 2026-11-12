@@ -1,3 +1,4 @@
+import { useFormGuard } from "@/lib/form-guard";
 import { useEffect, useState } from "react";
 import { usePageTr } from "@/lib/page-fr";
 import { PRAXIS_PROGRAMME_FR } from "@/lib/fr/praxis-programme";
@@ -184,6 +185,7 @@ function withContact(href: string, name: string, email: string): string {
 }
 
 export default function PraxisProgramme() {
+  const guard = useFormGuard();
   const tr = usePageTr(PRAXIS_PROGRAMME_FR);
   const { locale, currency } = usePreferences();
   const econ = praxisEconomics(currency, locale);
@@ -245,6 +247,7 @@ export default function PraxisProgramme() {
             `The job they keep repeating: ${form.task || "-"}`,
           ].join("\n"),
           trainerCode: form.trainerCode.trim() || null,
+          ...(await guard.fields()),
         }),
       });
       if (!res.ok) throw new Error();
@@ -631,6 +634,7 @@ export default function PraxisProgramme() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "24px" }}>
+              {guard.honeypot}
               <div className="pp-form-row">
                 <div>
                   <label style={{ ...CAPS, fontSize: 9, color: "rgba(246,241,234,0.4)", display: "block", marginBottom: 6 }}>{tr("Name")}</label>

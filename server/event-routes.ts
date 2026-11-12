@@ -23,6 +23,7 @@ import { requireAdmin } from "./admin-routes";
 import { getResend } from "./email/resend";
 import { siteUrl } from "./learn-routes";
 import { escapeHtml } from "./email/enquiry-message";
+import { clientIp, logDrop, screen } from "./form-guard";
 import {
   buildCancelledEmail, buildConfirmedEmail, buildPromotedEmail, buildReminderEmail, buildWaitlistEmail,
   frWhen, type BookingMail, type Mail,
@@ -342,8 +343,14 @@ export function registerEventRoutes(app: Express) {
 
   app.post("/api/events/:slug/book", async (req, res) => {
     try {
-      if (tooMany(req.ip ?? "?")) return res.status(429).json({ error: langOf(req) === "en" ? "Too many bookings from this connection. Try again in an hour." : "Trop de réservations depuis cette connexion. Réessayez dans une heure." });
+      if (tooMany(clientIp(req))) return res.status(429).json({ error: langOf(req) === "en" ? "Too many bookings from this connection. Try again in an hour." : "Trop de réservations depuis cette connexion. Réessayez dans une heure." });
       const input = eventBookingInputSchema.parse(req.body);
+      const verdict = screen(req, { email: input.email, message: input.company });
+      if (verdict.action === "drop") {
+        logDrop("booking", req, verdict);
+        return res.json({ status: "confirmed", already: false, position: null });
+      }
+      const spam = verdict.action === "flag" ? "[Likely spam] " : "";
       const [e] = await db.select().from(events).where(eq(events.slug, String(req.params.slug)));
       if (!e || e.status === "hidden") throw new BookingError("Cet atelier n'existe pas.", 404, "This workshop doesn't exist.");
       const r = await book(e.id, input);
@@ -359,10 +366,11 @@ export function registerEventRoutes(app: Express) {
       void sendBookingEmail(req, r);
       const c = (await countsFor([e.id])).get(e.id)!;
       tellDaniel(
-        r.booking.status === "confirmed" ? `${r.booking.name} booked ${frWhen(e.startsAt)}` : `${r.booking.name} joined the waiting list for ${frWhen(e.startsAt)}`,
+        spam + (r.booking.status === "confirmed" ? `${r.booking.name} booked ${frWhen(e.startsAt)}` : `${r.booking.name} joined the waiting list for ${frWhen(e.startsAt)}`),
         [
           `${r.booking.email}${r.booking.company ? ` · ${r.booking.company}` : ""} · ${r.booking.seats} seat(s)`,
           `Now ${c.confirmedSeats}/${e.capacity} confirmed, ${c.waitlistBookings} on the waiting list.`,
+          ...(spam ? [`Flagged: ${verdict.reasons.join("; ")}`] : []),
         ],
         `${siteUrl(req)}/admin`,
       );

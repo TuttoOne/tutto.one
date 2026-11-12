@@ -1,5 +1,10 @@
 import { defineTool } from "@nekuda/webmcp-sdk";
 import { toast } from "@/hooks/use-toast";
+import { guardFields, primeFormToken } from "@/lib/form-guard";
+
+// Fetch the form token when the tool registers, so a call made right away
+// waits at most a few seconds for it to age (see lib/form-guard.tsx).
+primeFormToken();
 
 type SubmitEnquiryInput = {
   name: string;
@@ -40,7 +45,7 @@ export const submitEnquiry = defineTool({
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
+      body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim(), ...(await guardFields()) }),
     });
     if (!res.ok) {
       const detail = (await res.text()) || res.statusText;

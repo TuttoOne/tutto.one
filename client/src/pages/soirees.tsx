@@ -1,3 +1,4 @@
+import { useFormGuard } from "@/lib/form-guard";
 /**
  * The public page for a series of in-person evenings (/rieuzal), and the page
  * the cancel link in every booking email opens (/rieuzal/annuler?t=...).
@@ -178,6 +179,7 @@ function Shell({ children }: { children: React.ReactNode }) {
 type BookResult = { status: "confirmed" | "waitlist"; already: boolean; position: number | null };
 
 function BookingForm({ e, maxSeats, onDone }: { e: PublicEvent; maxSeats: number; onDone: () => void }) {
+  const guard = useFormGuard();
   const w = useWords();
   const full = e.placesLeft === 0;
   const [f, setF] = useState({ name: "", email: "", company: "", seats: "1" });
@@ -191,7 +193,7 @@ function BookingForm({ e, maxSeats, onDone }: { e: PublicEvent; maxSeats: number
     setBusy(true);
     setError(null);
     try {
-      const r = await postJson<BookResult>(`/api/events/${e.slug}/book`, { ...f, seats: Number(f.seats) }, w.locale);
+      const r = await postJson<BookResult>(`/api/events/${e.slug}/book`, { ...f, seats: Number(f.seats), ...(await guard.fields()) }, w.locale);
       setResult(r);
       onDone();
     } catch (err) {
@@ -216,6 +218,7 @@ function BookingForm({ e, maxSeats, onDone }: { e: PublicEvent; maxSeats: number
 
   return (
     <form onSubmit={submit} style={{ marginTop: 16, display: "grid", gap: 12 }}>
+      {guard.honeypot}
       <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
         <label><span style={LABEL}>{w.t("name")}</span><input id={`name-${e.slug}`} required autoComplete="name" style={FIELD} value={f.name} onChange={(x) => setF({ ...f, name: x.target.value })} /></label>
         <label><span style={LABEL}>{w.t("email")}</span><input id={`email-${e.slug}`} required type="email" autoComplete="email" style={FIELD} value={f.email} onChange={(x) => setF({ ...f, email: x.target.value })} /></label>

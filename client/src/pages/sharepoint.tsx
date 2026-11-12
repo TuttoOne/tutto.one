@@ -1,3 +1,4 @@
+import { useFormGuard } from "@/lib/form-guard";
 import { Layout } from "@/components/layout/Layout";
 import { usePageTr } from "@/lib/page-fr";
 import { SHAREPOINT_FR } from "@/lib/fr/sharepoint";
@@ -41,6 +42,7 @@ My SharePoint environment:
 [Describe your setup here - number of sites, approximate document count, key teams that use it, and any existing metadata or content type work]`;
 
 export default function Sharepoint() {
+  const guard = useFormGuard();
   const tr = usePageTr(SHAREPOINT_FR);
   const [email, setEmail] = useState("");
   const [copied, setCopied] = useState(false);
@@ -87,7 +89,7 @@ export default function Sharepoint() {
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, ...(await guard.fields()) }),
       });
       if (!response.ok) {
         const error = await response.json();
@@ -290,6 +292,7 @@ export default function Sharepoint() {
                 className="flex flex-col sm:flex-row gap-3 max-w-md"
                 data-testid="form-email-capture"
               >
+                  {guard.honeypot}
                 <input
                   type="email"
                   required

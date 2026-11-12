@@ -18,6 +18,7 @@ import { createHash, createHmac, randomBytes, randomInt, timingSafeEqual } from 
 import { z } from "zod";
 import { pool } from "./db";
 import { getResend } from "./email/resend";
+import { clientIp } from "./form-guard";
 
 const COOKIE = "pocket_session";
 const COOKIE_PATH = "/api/pocket";
@@ -159,7 +160,7 @@ export function registerPocketRoutes(app: Express) {
     const email = norm(parsed.data.email);
     // The same answer whether the address is known, new or throttled, so this
     // can't be used to test who has signed up.
-    if (byEmail(email) && byIp(req.ip ?? "?")) {
+    if (byEmail(email) && byIp(clientIp(req))) {
       try {
         const code = String(randomInt(1_000_000)).padStart(6, "0");
         await pool.query(`DELETE FROM pocket_login_codes WHERE email = $1`, [email]);

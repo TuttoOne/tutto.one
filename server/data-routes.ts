@@ -25,6 +25,7 @@ import {
   contactSubmissions, emailLeads, events, eventBookings,
 } from "@shared/schema";
 import { POLICY_VERSION, RETENTION_MONTHS, BACKUP_DAYS, SHARE_TOOLS } from "@shared/data-policy";
+import { clientIp } from "./form-guard";
 
 const FROM = "Tutto <notifications@tutto.one>";
 const REPLY_TO = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
@@ -198,7 +199,7 @@ export function registerDataRoutes(app: Express) {
   // Open to everyone: the tools are public. Linked to a student when they're signed in to /learn.
   app.post("/api/shares", async (req, res) => {
     try {
-      if (tooMany(req.ip ?? "?")) return res.status(429).json({ error: "Too many shares from here. Try again in an hour." });
+      if (tooMany(clientIp(req))) return res.status(429).json({ error: "Too many shares from here. Try again in an hour." });
       const input = shareInput.parse(req.body);
       const student = await studentFromRequest(req);
       const [row] = await db.insert(sharedRecords).values({

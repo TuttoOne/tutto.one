@@ -13,9 +13,26 @@ import { registerDataRoutes } from "./data-routes";
 import { registerEventRoutes } from "./event-routes";
 import { registerPocketRoutes } from "./pocket-routes";
 import { registerSeoRoutes } from "./seo";
+import { logDrop, overLimit, registerFormGuardRoutes, screen } from "./form-guard";
 
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL ?? "daniel@tutto.one";
 const FROM_EMAIL = "Tutto <notifications@tutto.one>";
+
+// The schema only says these are strings, so cap them and check the address here.
+const contactInputSchema = insertContactSubmissionSchema.extend({
+  name: z.string().trim().min(1).max(200),
+  email: z.string().trim().email().max(320),
+  message: z.string().trim().min(1).max(20000),
+  trainerCode: z.string().trim().max(100).nullish(),
+});
+
+/** Why a flagged submission was flagged, shown under it in the notification. */
+function spamNoteHtml(reasons: string[]) {
+  return `<div style="background: #fdecec; border-radius: 10px; padding: 16px 24px; border: 1px solid #f0b0b0; margin-top: 16px;">
+              <p style="color: #a85050; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 6px;">Likely spam</p>
+              <p style="color: #1a1a1a; font-size: 13px; margin: 0;">${reasons.map(escapeHtml).join("<br>")}</p>
+            </div>`;
+}
 
 // GitHub content cache
 const _ghCache = new Map<string, { data: string; exp: number }>();
@@ -83,14 +100,26 @@ export async function registerRoutes(
   // robots.txt, sitemap.xml and llms.txt (docs/seo-geo-plan.md, section 3).
   registerSeoRoutes(app);
 
+  // Hands each public form a signed timestamp (server/form-guard.ts).
+  registerFormGuardRoutes(app);
+
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
-      const data = insertContactSubmissionSchema.parse(req.body);
-      const submission = await storage.createContactSubmission(data);
+      if (overLimit(req, "contact", 5)) {
+        return res.status(429).json({ error: "Too many messages from this connection. Try again in an hour, or email daniel@tutto.one." });
+      }
+      const data = contactInputSchema.parse(req.body);
+      const verdict = screen(req, { email: data.email, message: data.message });
+      if (verdict.action === "drop") {
+        logDrop("enquiry", req, verdict);
+        return res.json({ success: true });
+      }
+      await storage.createContactSubmission(data);
+      const spam = verdict.action === "flag";
 
       await sendNotificationEmail(
-        `New enquiry from ${data.name}`,
+        `${spam ? "[Likely spam] " : ""}New enquiry from ${data.name}`,
         `
           <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px; background: #f6f1ea;">
             <div style="background: #1a1a1a; border-radius: 10px; padding: 28px; margin-bottom: 24px;">
@@ -101,6 +130,7 @@ export async function registerRoutes(
             <div style="background: #fff; border-radius: 10px; padding: 24px 24px 8px; border: 1px solid #d8d0c5;">
               ${enquiryMessageHtml(data.message)}
             </div>
+            ${spam ? spamNoteHtml(verdict.reasons) : ""}
             ${
               data.trainerCode
                 ? `<div style="background: #fdf6ec; border-radius: 10px; padding: 16px 24px; border: 1px solid #f0d9b0; margin-top: 16px;">
@@ -114,7 +144,7 @@ export async function registerRoutes(
         `
       );
 
-      res.json({ success: true, submission });
+      res.json({ success: true });
     } catch (error) {
       if (error instanceof z.ZodError) {
         res.status(400).json({ error: "Invalid input", details: error.errors });
@@ -139,24 +169,34 @@ export async function registerRoutes(
   // Email lead capture (SharePoint page)
   app.post("/api/leads", async (req, res) => {
     try {
+      if (overLimit(req, "leads", 5)) {
+        return res.status(429).json({ error: "Too many sign-ups from this connection. Try again in an hour." });
+      }
       const data = insertEmailLeadSchema.parse(req.body);
-      const lead = await storage.createEmailLead(data);
+      const verdict = screen(req, { email: data.email });
+      if (verdict.action === "drop") {
+        logDrop("lead", req, verdict);
+        return res.json({ success: true });
+      }
+      await storage.createEmailLead(data);
+      const spam = verdict.action === "flag";
 
       await sendNotificationEmail(
-        `New lead: ${data.email}`,
+        `${spam ? "[Likely spam] " : ""}New lead: ${data.email}`,
         `
           <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px; background: #f6f1ea;">
             <div style="background: #1a1a1a; border-radius: 10px; padding: 28px; margin-bottom: 24px;">
               <p style="color: #d97706; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 8px;">New Lead Capture</p>
-              <h2 style="color: #f6f1ea; font-size: 22px; margin: 0;">${data.email}</h2>
-              <p style="color: rgba(246,241,234,0.5); font-size: 13px; margin: 4px 0 0;">${data.source}</p>
+              <h2 style="color: #f6f1ea; font-size: 22px; margin: 0;">${escapeHtml(data.email)}</h2>
+              <p style="color: rgba(246,241,234,0.5); font-size: 13px; margin: 4px 0 0;">${escapeHtml(data.source)}</p>
             </div>
+            ${spam ? spamNoteHtml(verdict.reasons) : ""}
             <p style="color: #a8a092; font-size: 11px; margin: 20px 0 0; text-align: center;">Tutto · tutto.one</p>
           </div>
         `
       );
 
-      res.json({ success: true, lead });
+      res.json({ success: true });
     } catch (error) {
       if (error instanceof z.ZodError) {
         res.status(400).json({ error: "Invalid input", details: error.errors });

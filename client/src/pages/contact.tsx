@@ -1,3 +1,4 @@
+import { useFormGuard } from "@/lib/form-guard";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { copy, useT } from "@/lib/i18n";
@@ -6,6 +7,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 export default function Contact() {
+  const guard = useFormGuard();
   const t = useT();
   const [formData, setFormData] = useState({
     name: "",
@@ -19,7 +21,7 @@ export default function Contact() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, ...(await guard.fields()) }),
       });
       if (!response.ok) {
         const error = await response.json();
@@ -108,6 +110,7 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {guard.honeypot}
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
                     {t(copy.contact.fieldName)}
