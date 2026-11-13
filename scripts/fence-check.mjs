@@ -45,6 +45,7 @@ const ROUTES = [
   "/workspaces",
   "/bi-specialist-tools",
   "/bi-team-files",
+  "/bi-github",
   "/claude-privacy",
   // Course library
   "/courses/",

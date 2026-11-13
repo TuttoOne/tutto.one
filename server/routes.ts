@@ -426,7 +426,7 @@ export async function registerRoutes(
 
   // Background Italia handouts from the 13 Nov call (specialist AI tools; one team library for
   // the .md files): same arrangement, link only, not indexed.
-  for (const page of ["bi-specialist-tools", "bi-team-files"]) {
+  for (const page of ["bi-specialist-tools", "bi-team-files", "bi-github"]) {
     app.get([`/${page}`, `/${page}/`], (_req, res) => {
       res.setHeader("X-Robots-Tag", "noindex, nofollow");
       res.sendFile(path.join(deckDir, page, "index.html"));

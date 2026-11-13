@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Background Italia handout: one GitHub repository for the team or one per tool, when a tool gets its own, setting up your account and bringing your project in.">
+<title>One repository or several | Background Italia | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  /* Background Italia GitHub handout (13 Nov 2026 call) in the Praxis house style, same tokens as /bi-session-4. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #5b6b7c; --slate-soft: #e8edf2;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a;
+      --pass: #6fcf97; --pass-soft: #1d3326; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a;
+    --pass: #6fcf97; --pass-soft: #1d3326; color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  a { color: var(--amber-ink); text-underline-offset: .15em; }
+  a:hover { color: var(--amber); }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 3px; }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; color: var(--ink); margin: 0 0 28px; }
+  .brand span { color: var(--amber); }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .top .brand { margin: 0; text-decoration: none; }
+  .top a.back { font-size: 14px; color: var(--amber); text-underline-offset: 0.15em; }
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 58ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 44px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { font: 700 17px/1.3 var(--display); margin: 0; text-wrap: balance; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 64ch; }
+  p { max-width: 68ch; }
+  .foot { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+  code { font: 500 0.92em var(--mono); background: var(--panel); padding: 1px 5px; border-radius: 4px; }
+
+  /* Contents */
+  .toc { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; counter-reset: s; }
+  .toc li { counter-increment: s; display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; min-width: 0; }
+  .toc li::before { content: counter(s); color: var(--amber); font: 700 15px/1.6 var(--display); min-width: 1.5ch; font-variant-numeric: tabular-nums; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { color: var(--amber); }
+
+  /* Two cards side by side */
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .card { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .card p { font-size: 15px; color: var(--ink-2); margin: 8px 0 0; }
+  .card .who { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+  .card.worked { background: var(--pass-soft); border-color: transparent; }
+  .card.next { background: var(--amber-soft); border-color: transparent; }
+
+  /* Folder tree */
+  .tree { background: var(--panel); border-radius: 10px; padding: 18px 20px; overflow-x: auto; }
+  .tree pre { margin: 0; font: 500 14px/1.75 var(--mono); color: var(--ink); }
+  .tree .c { color: var(--muted); }
+  .tree .d { color: var(--amber-ink); font-weight: 700; }
+
+  /* Prompts */
+  .prompts { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+  .prompt { background: var(--panel); border-radius: 10px; padding: 16px 20px; }
+  .prompt .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .prompt code { display: block; background: none; padding: 0; font: 500 clamp(14px, 2vw, 16.5px)/1.5 var(--mono); color: var(--ink); margin-top: 6px; overflow-wrap: anywhere; }
+  .prompt p { margin: 8px 0 0; font-size: 14px; color: var(--ink-2); }
+
+  /* Lists */
+  ul.plain { margin: 10px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: var(--ink-2); }
+  ol.steps { margin: 12px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; color: var(--ink-2); }
+  ol.steps li::marker { color: var(--amber); font: 700 15px var(--display); }
+  ol.steps b { color: var(--ink); }
+
+  /* Tables */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 620px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font: 700 12px/1.3 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+  tr:last-child td { border-bottom: 0; }
+  td { color: var(--ink-2); }
+  td b { color: var(--ink); }
+
+  /* Scorecard ladder */
+  .ladder { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .ladder li { min-width: 0; background: var(--panel); border-radius: 8px; padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
+  .ladder li:nth-child(2) { background: var(--slate-soft); }
+  .ladder li:nth-child(3) { background: var(--amber-soft); }
+  .ladder .when { font: 700 12px/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber-ink); }
+  .ladder p { font-size: 14px; line-height: 1.5; color: var(--ink-2); margin: 0; }
+  .ladder .eg { font: italic 400 15px/1.45 var(--serif); color: var(--ink); }
+
+  .callout { border-left: 3px solid var(--amber); background: var(--amber-soft); padding: 14px 18px; border-radius: 0 10px 10px 0; margin-top: 18px; }
+  .callout p { margin: 0; font-size: 15px; }
+  .callout p + p { margin-top: 8px; }
+
+  /* Bring list */
+  .bring { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0; }
+  .bring li { min-width: 0; background: var(--panel); border-radius: 8px; padding: 12px 14px; font-size: 14px; color: var(--ink-2); }
+  .bring b { display: block; font: 700 15px/1.3 var(--display); color: var(--ink); margin-bottom: 4px; }
+
+  @media (max-width: 860px) {
+    .ladder, .bring { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 620px) {
+    .doc { padding: 26px 18px; }
+    .two, .toc { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* Icons and diagrams (13 Nov handouts). Icons are a sprite of 24px line drawings, as on /hsa-session-4.
+     Diagrams are HTML flows so they stack on a phone; only the loop is SVG. */
+  :root { --stop: #b42318; --stop-soft: #fdecea; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --stop: #f97066; --stop-soft: #3b1a17; } }
+  :root[data-theme="dark"] { --stop: #f97066; --stop-soft: #3b1a17; }
+  .ico { width: 22px; height: 22px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Job cards */
+  .jobs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; }
+  .jobs li { min-width: 0; display: flex; gap: 14px; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .jobs .badge { width: 42px; height: 42px; border-radius: 50%; background: var(--amber-soft); color: var(--amber-ink); display: grid; place-items: center; flex: none; }
+  .jobs li.eu .badge { background: var(--slate-soft); color: var(--slate); }
+  .jobs li.local .badge { background: var(--pass-soft); color: var(--pass); }
+  .jobs h3 { font-size: 16px; }
+  .jobs .tools { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+  .chip { font: 600 12px/1.2 var(--body); background: var(--panel); color: var(--ink); border-radius: 999px; padding: 4px 9px; }
+  .jobs .watch { display: flex; gap: 6px; font-size: 13px; line-height: 1.45; color: var(--muted); margin: 0; }
+  .jobs .watch .ico { width: 15px; height: 15px; color: var(--amber); margin-top: 2px; }
+
+  /* Flows */
+  .flow { display: flex; align-items: stretch; gap: 6px; margin: 18px 0 6px; }
+  .flow > .arr { display: grid; place-items: center; color: var(--amber); flex: none; width: 26px; }
+  .node { flex: 1 1 0; min-width: 0; background: var(--panel); border-radius: 10px; padding: 12px 12px 13px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; gap: 5px; }
+  .node .ico { width: 26px; height: 26px; color: var(--ink-2); }
+  .node b { font: 700 14px/1.25 var(--display); color: var(--ink); }
+  .node span { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+  .node.lead { background: var(--amber-soft); } .node.lead .ico { color: var(--amber-ink); }
+  .node.proof { background: var(--pass-soft); } .node.proof .ico { color: var(--pass); }
+  .node.eu { background: var(--slate-soft); } .node.eu .ico { color: var(--slate); }
+  .stack { flex: 1.3 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .stack .node { flex-direction: row; text-align: left; padding: 9px 12px; gap: 10px; }
+  .stack .node .ico { width: 20px; height: 20px; }
+  .stack .node span { margin-left: auto; }
+  .bands { display: flex; gap: 6px; margin-top: 18px; font: 700 11px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; }
+  .bands span { padding: 7px 10px; border-radius: 6px; text-align: center; }
+  .bands .l { flex: 3; background: var(--amber-soft); color: var(--amber-ink); }
+  .bands .p { flex: 2; background: var(--pass-soft); color: var(--pass); }
+  .bands + .flow { margin-top: 6px; }
+  .zone { flex: 2.2 1 0; min-width: 0; display: flex; gap: 6px; align-items: stretch; border: 2px dashed var(--pass); border-radius: 12px; padding: 22px 6px 6px; position: relative; }
+  .zone::before { content: attr(data-label); position: absolute; top: 5px; left: 10px; font: 700 10.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--pass); }
+  .zone > .arr { display: grid; place-items: center; color: var(--pass); width: 22px; flex: none; }
+
+  /* Do and don't */
+  .vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .vs > div { min-width: 0; border-radius: 10px; padding: 16px 18px; }
+  .vs .yes { background: var(--pass-soft); } .vs .no { background: var(--stop-soft); }
+  .vs .hd { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .vs .yes .hd .ico { color: var(--pass); } .vs .no .hd .ico { color: var(--stop); }
+  .vs p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+  .vs .pic { display: flex; align-items: center; gap: 6px; margin: 12px 0 4px; color: var(--ink-2); flex-wrap: wrap; }
+  .vs .pic .ico { width: 24px; height: 24px; }
+  .vs .pic small { font: 600 11px/1 var(--mono); color: var(--muted); margin-right: 4px; }
+  .vs .pic .arr { color: var(--muted); width: 16px; height: 16px; }
+
+  /* Icon steps and notes */
+  ol.isteps { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-direction: column; gap: 10px; counter-reset: st; }
+  ol.isteps li { counter-increment: st; display: flex; gap: 12px; color: var(--ink-2); }
+  ol.isteps li > .ico { width: 34px; height: 34px; padding: 7px; border-radius: 50%; background: var(--panel); color: var(--amber-ink); }
+  ol.isteps b { color: var(--ink); }
+  ol.isteps b::before { content: counter(st) ". "; color: var(--amber); }
+  .note { display: flex; gap: 12px; align-items: flex-start; }
+  .note > .ico { color: var(--amber-ink); margin-top: 1px; }
+  .callout.stop { border-left-color: var(--stop); background: var(--stop-soft); }
+  .callout.stop .note > .ico { color: var(--stop); }
+  .card .hd { display: flex; align-items: center; gap: 10px; }
+  .card .hd .ico { color: var(--amber-ink); }
+
+  /* Timeline */
+  .when-line { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); position: relative; }
+  .when-line::before { content: ""; position: absolute; top: 15px; left: 12.5%; right: 12.5%; height: 2px; background: var(--line); }
+  .when-line li { position: relative; text-align: center; padding: 0 6px; font-size: 13px; color: var(--muted); }
+  .when-line .dot { width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px; display: grid; place-items: center; background: var(--panel); color: var(--ink-2); position: relative; }
+  .when-line .dot .ico { width: 17px; height: 17px; }
+  .when-line li.key .dot { background: var(--amber); color: #fff; }
+  .when-line b { display: block; font: 700 14px/1.3 var(--display); color: var(--ink); }
+
+  /* Loop */
+  .loopwrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 28px; align-items: center; margin-top: 10px; }
+  .loop { width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto; }
+  .loop text { font-family: var(--display); fill: var(--ink); font-size: 14px; font-weight: 700; }
+  .loop .sm { font-size: 12px; font-weight: 400; fill: var(--muted); }
+  .loop .ring { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 4 6; }
+  .loop .arc { fill: none; stroke: var(--amber); stroke-width: 2.5; }
+  .loop .tip { fill: var(--amber); }
+  .loop .b1 { fill: var(--amber-soft); stroke: var(--amber); }
+  .loop .b2 { fill: var(--panel); stroke: var(--line); }
+  .loop .b3 { fill: var(--pass-soft); stroke: var(--pass); }
+
+  @media (max-width: 760px) {
+    .flow { flex-direction: column; }
+    .flow > .arr, .zone > .arr { width: auto; height: 22px; transform: rotate(90deg); }
+    .zone { flex-direction: column; }
+    .node { flex-direction: row; text-align: left; gap: 12px; }
+    .node span { margin-left: auto; text-align: right; }
+    .bands { display: none; }
+    .jobs, .vs, .loopwrap { grid-template-columns: minmax(0, 1fr); }
+    .when-line { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .when-line::before { display: none; }
+    .when-line li { display: grid; grid-template-columns: 32px 1fr; gap: 0 12px; text-align: left; }
+    .when-line .dot { margin: 0; grid-row: span 2; }
+  }
+
+  /* GitHub handout */
+  .jobs li > div { min-width: 0; }
+  .jobs .watch { margin-top: 4px; }
+  ul.pro { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-direction: column; gap: 6px; font-size: 14.5px; color: var(--ink-2); }
+  ul.pro li { display: flex; gap: 8px; align-items: flex-start; }
+  ul.pro .ico { width: 17px; height: 17px; margin-top: 3px; }
+  ul.pro .y .ico { color: var(--pass); } ul.pro .n .ico { color: var(--stop); }
+  .zone > .node { flex: 1 1 0; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l4.5 4.5 10-10"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 6.5h6l2 2h9v10h-17z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5 4.5 4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5l5-2 7 2.5 5-2v13l-5 2-7-2.5-5 2z"/><path d="M8.5 4.5v13M15.5 7v13"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></symbol>
+  <symbol id="i-mountain" viewBox="0 0 24 24"><path d="M2.5 19.5l6.5-11 4 6.5 2.5-3.5 6 8z"/><path d="M7.3 11.5l1.7 1.5 1.6-1.4"/></symbol>
+  <symbol id="i-face" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9 10v.5M15 10v.5M8.5 14.5c2 2 5 2 7 0"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3.5 8V4.5H7M17 4.5h3.5V8M20.5 16v3.5H17M7 19.5H3.5V16"/><path d="M7.5 9h9M7.5 12h9M7.5 15h6"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.6-1.3A4.5 4.5 0 0 1 17.5 18.5z"/></symbol>
+  <symbol id="i-eu" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.3 3.6 5.2 3.6 8.5s-1.1 6.2-3.6 8.5c-2.5-2.3-3.6-5.2-3.6-8.5S9.5 5.8 12 3.5z"/></symbol>
+  <symbol id="i-office" viewBox="0 0 24 24"><path d="M4 20.5V8l8-4.5L20 8v12.5z"/><path d="M9.5 20.5v-5h5v5M8 10.5h2M14 10.5h2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></symbol>
+  <symbol id="i-brush" viewBox="0 0 24 24"><path d="M14.5 4.5l5 5-8 8-5-5z"/><path d="M6.5 12.5c-2 1-3 3.5-3 7 3.5 0 6-1 7-3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 9.5v5M12 17.3v.2"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><circle cx="4.8" cy="6.5" r=".9"/><circle cx="4.8" cy="12" r=".9"/><circle cx="4.8" cy="17.5" r=".9"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M14.5 14.6a4.5 4.5 0 0 1 6 4.4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="12" rx="1.5"/><path d="M15.5 8.5v-4h-11v12h4"/></symbol>
+  <symbol id="i-window" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 8.5h17"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5.5 21V4M5.5 4.5h12l-2.5 4 2.5 4h-12"/></symbol>
+</svg>
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Praxis programme · Handout · GitHub</p>
+  <h1>One repository or several?</h1>
+  <p class="lede">A few of you are already building tools you want to share. GitHub keeps every version and lets several people work on the same files. The first question is whether everything goes in one place or each tool gets its own.</p>
+  <div class="meta">
+    <span>Read this <b>before you set up your accounts</b></span>
+    <span>We go through it together in <b>January</b></span>
+  </div>
+
+  <ol class="toc">
+    <li><a href="#words">Four words you'll need</a></li>
+    <li><a href="#choice">One repository or several</a></li>
+    <li><a href="#start">What we'll set up</a></li>
+    <li><a href="#split">When a tool gets its own</a></li>
+    <li><a href="#accounts">Your account</a></li>
+    <li><a href="#bring">Bring your project in</a></li>
+  </ol>
+
+  <section id="words">
+    <h2>Four words you'll need</h2>
+    <p class="sub">That's all the vocabulary. Claude does the rest when you ask in plain words.</p>
+    <ul class="jobs">
+      <li><span class="badge"><svg class="ico"><use href="#i-folder"/></svg></span><div><h3>Repository</h3><p class="watch">A project folder that remembers every version of every file, and who changed what.</p></div></li>
+      <li><span class="badge"><svg class="ico"><use href="#i-team"/></svg></span><div><h3>Organisation</h3><p class="watch">Background Italia's own space on GitHub. It holds your repositories and decides who sees each one.</p></div></li>
+      <li class="local"><span class="badge"><svg class="ico"><use href="#i-check"/></svg></span><div><h3>Save and share</h3><p class="watch">Keeps a version with a one-line reason and sends it to GitHub, so the others get it.</p></div></li>
+      <li class="eu"><span class="badge"><svg class="ico"><use href="#i-arrow"/></svg></span><div><h3>Get latest</h3><p class="watch">Brings everyone else's changes onto your computer. Do it each time you start.</p></div></li>
+    </ul>
+  </section>
+
+  <section id="choice">
+    <h2>One repository or several</h2>
+    <p class="sub">Both work. They suit different stages.</p>
+    <div class="two">
+      <div class="card">
+        <div class="hd"><svg class="ico"><use href="#i-folder"/></svg><h3>One team repository</h3></div>
+        <div class="tree" style="margin-top:12px"><pre><span class="d">bi-ai/</span>
+  CLAUDE.md
+  <span class="d">library/</span>     <span class="c">instructions, scorecards</span>
+  <span class="d">tools/</span>
+    <span class="d">media-screening/</span>
+    <span class="d">registry-chart/</span>
+    <span class="d">translation/</span></pre></div>
+        <ul class="pro">
+          <li class="y"><svg class="ico"><use href="#i-check"/></svg>One thing to set up, one place to look</li>
+          <li class="y"><svg class="ico"><use href="#i-check"/></svg>Tools reuse the library and each other</li>
+          <li class="y"><svg class="ico"><use href="#i-check"/></svg>"Get latest" once and you have it all</li>
+          <li class="n"><svg class="ico"><use href="#i-x"/></svg>Everyone in it sees everything</li>
+          <li class="n"><svg class="ico"><use href="#i-x"/></svg>Gets crowded as it grows</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="hd"><svg class="ico"><use href="#i-copy"/></svg><h3>One repository per tool</h3></div>
+        <div class="tree" style="margin-top:12px"><pre><span class="d">bi-library/</span>
+<span class="d">media-screening/</span>
+<span class="d">registry-chart/</span>
+<span class="d">translation/</span>
+<span class="c">each with its own CLAUDE.md,</span>
+<span class="c">its own people and history</span></pre></div>
+        <ul class="pro">
+          <li class="y"><svg class="ico"><use href="#i-check"/></svg>You choose who sees each tool</li>
+          <li class="y"><svg class="ico"><use href="#i-check"/></svg>A tool can run online or go to a client on its own</li>
+          <li class="y"><svg class="ico"><use href="#i-check"/></svg>A clear history per tool</li>
+          <li class="n"><svg class="ico"><use href="#i-x"/></svg>More to set up and remember</li>
+          <li class="n"><svg class="ico"><use href="#i-x"/></svg>The library has to be linked into each one</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="start">
+    <h2>What we'll set up: start with one</h2>
+    <p class="sub">A team of your size, with tools that are a few weeks old, is better off in one repository. Each tool gets a folder. A tool moves into its own repository when it needs to, and keeps its history when it does.</p>
+    <div class="flow" role="img" aria-label="Each person's project goes into a folder under tools in the one team repository, inside the Background Italia organisation. Client documents stay on the shared drive.">
+      <div class="stack">
+        <div class="node"><svg class="ico"><use href="#i-person"/></svg><b>Your project</b><span>on your laptop</span></div>
+        <div class="node"><svg class="ico"><use href="#i-person"/></svg><b>A colleague's project</b><span>on theirs</span></div>
+        <div class="node"><svg class="ico"><use href="#i-doc"/></svg><b>Riccardo's files</b><span>team library</span></div>
+      </div>
+      <span class="arr"><svg class="ico"><use href="#i-arrow"/></svg></span>
+      <div class="zone" data-label="Background Italia on GitHub">
+        <div class="node lead"><svg class="ico"><use href="#i-folder"/></svg><b>bi-ai</b><span>library/ and tools/, one folder per tool</span></div>
+      </div>
+      <span class="arr"><svg class="ico"><use href="#i-x"/></svg></span>
+      <div class="node eu"><svg class="ico"><use href="#i-lock"/></svg><b>Client documents</b><span>stay on the shared drive, never on GitHub</span></div>
+    </div>
+    <p class="foot">The organisation belongs to Background Italia. I join while we work together and leave when you're ready. Two of you are owners, so it never depends on one person.</p>
+  </section>
+
+  <section id="split">
+    <h2>When a tool gets its own repository</h2>
+    <p class="sub">If none of these is true, the tool stays a folder. If one is, ask Claude to move it out.</p>
+    <ol class="isteps">
+      <li><svg class="ico"><use href="#i-lock"/></svg><span><b>Different people.</b> Only some of you should see it, or a freelancer needs it and nothing else.</span></li>
+      <li><svg class="ico"><use href="#i-cloud"/></svg><span><b>It runs on its own.</b> It becomes a website, a service or something on the office machine.</span></li>
+      <li><svg class="ico"><use href="#i-office"/></svg><span><b>It leaves the firm.</b> You hand it to a client or a partner.</span></li>
+      <li><svg class="ico"><use href="#i-alert"/></svg><span><b>It's slowing everyone down.</b> Big files, or lots of changes nobody else needs.</span></li>
+    </ol>
+    <div class="prompts">
+      <div class="prompt">
+        <span class="label">To move a tool out</span>
+        <code>Move tools/media-screening into its own repository in our organisation, with its history. Give it a CLAUDE.md that points to our library, then remove the folder here and say where it went in the README.</code>
+      </div>
+    </div>
+  </section>
+
+  <section id="accounts">
+    <h2>Your account</h2>
+    <p class="sub">Ten minutes each. Use your work email.</p>
+    <ol class="isteps">
+      <li><svg class="ico"><use href="#i-person"/></svg><span><b>Sign up at github.com</b> with your Background Italia email. The free plan is all you need.</span></li>
+      <li><svg class="ico"><use href="#i-lock"/></svg><span><b>Add a passkey</b> under Settings, Password and authentication. It's your fingerprint or face, so no extra code to type.</span></li>
+      <li><svg class="ico"><use href="#i-chat"/></svg><span><b>Send Alice your username.</b> She adds you to the organisation and you accept the email.</span></li>
+      <li><svg class="ico"><use href="#i-window"/></svg><span><b>Sign in to VS Code with GitHub:</b> the person icon at the bottom left.</span></li>
+    </ol>
+  </section>
+
+  <section id="bring">
+    <h2>Bring your project in</h2>
+    <p class="sub">Keep working where you are until the repository exists. Then each of you brings one project in, with Claude checking it first.</p>
+    <div class="callout stop">
+      <div class="note"><svg class="ico"><use href="#i-x"/></svg><p>Put the repository in a plain folder such as <code>Documents/GitHub</code>. Not in Google Drive, OneDrive, Dropbox or iCloud: the sync and GitHub both write to the same hidden files and damage each other.</p></div>
+    </div>
+    <div class="prompts">
+      <div class="prompt">
+        <span class="label">Once, to get the team repository</span>
+        <code>Clone our team repository bi-ai into Documents/GitHub and open it.</code>
+      </div>
+      <div class="prompt">
+        <span class="label">Then, for your project</span>
+        <code>Copy my project from &lt;paste the path&gt; into tools/&lt;tool name&gt;/. Before you save anything, check it for client names, personal details, passwords, API keys and files over 50 MB, and show me what you found. Write a short README.md: what the tool does, how to start it and who looks after it. Then save and share with the message "Add &lt;tool name&gt;".</code>
+        <p>If Claude finds something, it goes on the shared drive or on the list of files GitHub ignores, and the tool reads it from there.</p>
+      </div>
+      <div class="prompt">
+        <span class="label">Every day after that</span>
+        <code>Get latest.</code>
+        <p>And when you're done: "Save and share: &lt;what you changed&gt;".</p>
+      </div>
+    </div>
+    <p class="foot">If two of you changed the same lines, Claude says so and suggests how to combine them. Read it, then say which version to keep.</p>
+  </section>
+</main>
+</div>
+</body>
+</html>

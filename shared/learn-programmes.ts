@@ -78,6 +78,7 @@ const M = {
   biSession4: { label: "Session 4 handout: write it down once", href: "/bi-session-4" },
   biSpecialistTools: { label: "Handout: which AI for which specialist job", href: "/bi-specialist-tools" },
   biTeamFiles: { label: "Handout: one set of files the whole team uses", href: "/bi-team-files" },
+  biGithub: { label: "Handout: one GitHub repository or several", href: "/bi-github" },
   designSystem: { label: "Design system guide: brief Claude on your brand", href: "/design-system", claude: "/design-system/praxis-design-system.md" },
   workspaces: { label: "Workspaces guide: share folders without copying them", href: "/workspaces", claude: "/workspaces/praxis-workspaces.md" },
   claudePrivacy: { label: "Privacy guide: stop Claude training on your chats", href: "/claude-privacy", claude: "/claude-privacy/praxis-claude-privacy.md" },
@@ -206,7 +207,7 @@ const BACKGROUND_ITALIA: Programme = {
       what: "Connect the assistant to your files within the rules from week 1. Replace copy and paste for the recurring client work with structured input from your own templates: report data, contract drafts with placeholders instead of real names, new landing pages from your existing structure.",
       leaveWith: "Your first small tools, set up on your own machines",
       practice: "Use your first tool on a real job and keep a note of anything it got wrong.",
-      materials: [M.biTeamFiles, M.biSpecialistTools, M.workspaces, M.cowork, M.mcp],
+      materials: [M.biTeamFiles, M.biGithub, M.biSpecialistTools, M.workspaces, M.cowork, M.mcp],
     },
     {
       number: 6,
