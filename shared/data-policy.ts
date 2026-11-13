@@ -30,6 +30,7 @@ export const SHARE_TOOLS = {
   "ai-charter": { label: "AI charter", path: "/ai-charter", storageKey: "praxis_charter_v2" },
   "handover-list": { label: "Hand-over check", path: "/handover-list", storageKey: "praxis-handover-list-v1" },
   "use-case-card": { label: "Use case card", path: "/use-case-card", storageKey: "praxis-scoping-worksheet-v1" },
+  "folder-builder": { label: "Folder builder", path: "/folder-builder", storageKey: "praxis-folder-builder-v2" },
 } as const;
 
 export type ShareTool = keyof typeof SHARE_TOOLS;

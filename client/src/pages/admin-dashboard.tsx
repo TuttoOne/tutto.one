@@ -761,6 +761,11 @@ const TOOLS = [
     href: "/handover-list",
     what: "Praxis session three. Takes one job through six steps and says what should do it: automation, AI or a person.",
   },
+  {
+    name: "Folder builder",
+    href: "/folder-builder",
+    what: "Six questions build the rules an AI reads every time, set up for Claude, ChatGPT, Mistral, Copilot or Gemini, with a scorecard and a first message.",
+  },
 ];
 
 function ToolsSection() {

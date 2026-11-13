@@ -1,6 +1,6 @@
 /* Praxis tools: the data policy, in the browser.
  *
- * Every tool (/agent-scorecard, /ai-charter, /handover-list, /use-case-card) keeps
+ * Every tool (/agent-scorecard, /ai-charter, /handover-list, /use-case-card, /folder-builder) keeps
  * its work in localStorage under one key and reads it back when it starts. This
  * script works at that level, so the tools barely change:
  *

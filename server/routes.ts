@@ -333,6 +333,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "use-case-card", "index.html"));
   });
 
+  // Praxis folder builder: same arrangement, link only, not indexed.
+  // Its script and styles are plain static files under /folder-builder/.
+  app.get(["/folder-builder", "/folder-builder/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "folder-builder", "index.html"));
+  });
+
   // The tools' Markdown versions download as files, also when opened from a link in an email.
   app.use((req, res, next) => {
     if (/^\/[a-z-]+\/praxis-[a-z-]+\.md$/.test(req.path)) {
@@ -416,6 +423,15 @@ export async function registerRoutes(
     res.setHeader("X-Robots-Tag", "noindex, nofollow");
     res.sendFile(path.join(deckDir, "bi-session-4", "index.html"));
   });
+
+  // Background Italia handouts from the 13 Nov call (specialist AI tools; one team library for
+  // the .md files): same arrangement, link only, not indexed.
+  for (const page of ["bi-specialist-tools", "bi-team-files"]) {
+    app.get([`/${page}`, `/${page}/`], (_req, res) => {
+      res.setHeader("X-Robots-Tag", "noindex, nofollow");
+      res.sendFile(path.join(deckDir, page, "index.html"));
+    });
+  }
 
   // The toolkit (VS Code extensions, command-line tools and Python libraries, and which to get):
   // same arrangement, link only, not indexed.

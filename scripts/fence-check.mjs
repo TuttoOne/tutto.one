@@ -38,10 +38,13 @@ const ROUTES = [
   "/agent-scorecard/",
   "/ai-charter",
   "/handover-list",
+  "/folder-builder",
   "/use-case-card",
   "/ai-files",
   "/vscode-setup",
   "/workspaces",
+  "/bi-specialist-tools",
+  "/bi-team-files",
   "/claude-privacy",
   // Course library
   "/courses/",

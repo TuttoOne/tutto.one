@@ -44,6 +44,7 @@ function shareTitle(tool: string, data: Record<string, any>): string {
     const listed = Array.isArray(S.week) ? S.week.find((w: any) => String(w?.task ?? "").trim())?.task : "";
     t = first(S.task?.sentence, S.card?.need, S.week?.[S.pick]?.task, listed);
   } else if (tool === "handover-list") t = first(S.job?.name);
+  else if (tool === "folder-builder") t = first(data?.jobOther, data?.job);
   else if (tool === "agent-scorecard") t = first(S.meta?.name, S.meta?.agent, S.objective?.statement);
   else if (tool === "ai-charter") t = first(data?.meta?.title, data?.org?.name, data?.me?.title, data?.me?.name);
   return t.slice(0, 200);
