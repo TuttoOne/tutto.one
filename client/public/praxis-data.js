@@ -191,24 +191,34 @@
 .btn.pd-share:hover,.btn.pd-share:focus-visible{background:#333;border-color:#333;color:#fff}\
 .pd-foot{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin-top:32px;padding-top:16px;border-top:1px solid hsl(var(--border,220 13% 91%))}\
 .pd-foot p{margin:0;color:hsl(var(--muted-foreground,220 9% 46%));font-size:.9rem}\
-.pd-back{position:fixed;inset:0;background:rgba(20,20,20,.45);z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px;overflow:auto}\
-.pd-box{background:hsl(var(--card,0 0% 100%));color:hsl(var(--foreground,0 0% 12%));border-radius:12px;max-width:560px;width:100%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25);font-size:15px;line-height:1.55}\
-.pd-box h2{margin:0 0 8px;font-size:1.35rem}\
-.pd-box h3{margin:20px 0 6px;font-size:1rem}\
+.pd-back{position:fixed;inset:0;background:rgba(20,20,20,.55);z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px;overflow:auto;-webkit-overflow-scrolling:touch}\
+.pd-box{--pd-bg:#fff;--pd-fg:#1f1f1f;--pd-soft:#5e6470;--pd-line:#e4e2dc;--pd-wash:#f3f1ec;--pd-accent:#a85700;--pd-btn:#db7400;--pd-btn-fg:#fff;background:var(--pd-bg);color:var(--pd-fg);border-radius:12px;max-width:560px;width:100%;box-sizing:border-box;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25);font:15px/1.55 Inter,system-ui,-apple-system,sans-serif;text-align:left}\
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .pd-box{--pd-bg:#1d1b18;--pd-fg:#f1eee8;--pd-soft:#a8a296;--pd-line:#34302b;--pd-wash:#2a2722;--pd-accent:#f5a54e;--pd-btn:#f08a1c;--pd-btn-fg:#151412}}\
+:root[data-theme=dark] .pd-box{--pd-bg:#1d1b18;--pd-fg:#f1eee8;--pd-soft:#a8a296;--pd-line:#34302b;--pd-wash:#2a2722;--pd-accent:#f5a54e;--pd-btn:#f08a1c;--pd-btn-fg:#151412}\
+.pd-box h2{margin:0 0 8px;font-size:1.35rem;line-height:1.25;color:var(--pd-fg)}\
+.pd-box h3{margin:20px 0 6px;font-size:1rem;color:var(--pd-fg)}\
 .pd-box p{margin:0 0 10px}\
 .pd-box ul{margin:0 0 12px;padding-left:20px}\
 .pd-box li{margin:0 0 6px}\
-.pd-muted{color:hsl(var(--muted-foreground,220 9% 46%));font-size:.875rem}\
+.pd-box .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:10px 20px;border-radius:999px;border:1px solid var(--pd-line);background:var(--pd-bg);color:var(--pd-fg);font-weight:600;font-size:15px;line-height:1.2;font-family:inherit;cursor:pointer;text-decoration:none}\
+.pd-box .btn-sm{min-height:36px;padding:7px 14px;font-size:13px}\
+.pd-box .btn-primary{background:var(--pd-btn);border-color:var(--pd-btn);color:var(--pd-btn-fg)}\
+.pd-box .btn.pd-share{background:var(--pd-fg);border-color:var(--pd-fg);color:var(--pd-bg)}\
+.pd-box .btn:disabled{opacity:.45;cursor:not-allowed}\
+.pd-muted{color:var(--pd-soft);font-size:.875rem}\
 .pd-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px}\
 .pd-box label.pd-f{display:block;font-size:.8rem;font-weight:600;margin:10px 0 4px}\
-.pd-box input[type=text],.pd-box input[type=email],.pd-box textarea{width:100%;box-sizing:border-box;border:1px solid hsl(var(--border,220 13% 91%));border-radius:6px;padding:8px 10px;font:inherit;background:#fff}\
-.pd-check{display:flex;gap:8px;align-items:flex-start;margin:14px 0;font-size:.9rem}\
-.pd-check input{margin-top:4px;width:auto!important;flex:0 0 auto}\
+.pd-box input[type=text],.pd-box input[type=email],.pd-box textarea{width:100%;box-sizing:border-box;border:1px solid var(--pd-line);border-radius:6px;padding:8px 10px;font:inherit;background:var(--pd-bg);color:var(--pd-fg)}\
+.pd-check{display:flex;gap:10px;align-items:flex-start;margin:16px 0;font-size:.95rem;cursor:pointer}\
+.pd-check input{margin-top:3px;width:20px!important;height:20px;flex:0 0 auto;accent-color:var(--pd-btn)}\
 .pd-check span{flex:1}\
-.pd-msg{margin-top:10px;font-size:.875rem;color:hsl(var(--primary,32 95% 44%))}\
-.pd-ok{padding:12px;border-radius:8px;background:hsl(var(--muted,40 5% 90%))}\
+.pd-msg{margin-top:10px;font-size:.875rem;color:var(--pd-accent)}\
+.pd-msg:empty{display:none}\
+.pd-act{position:sticky;bottom:-24px;margin:16px -24px -24px;padding:12px 24px 16px;background:var(--pd-bg);border-top:1px solid var(--pd-line);border-radius:0 0 12px 12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}\
+.pd-act .pd-check{margin:0;flex:1 1 220px}\
+.pd-ok{padding:12px;border-radius:8px;background:var(--pd-wash)}\
 .pd-close{float:right;background:none;border:0;font-size:22px;line-height:1;cursor:pointer;color:inherit}\
-.pd-box a{color:hsl(var(--primary,32 95% 44%))}\
+.pd-box a{color:var(--pd-accent)}\
 @media print{.pd-back,.pd-btn,.pd-foot{display:none!important}}';
 
   var box, msgEl;
@@ -245,12 +255,13 @@
       '<h2>Before you start</h2>' +
       '<p>' + LABEL.charAt(0).toUpperCase() + LABEL.slice(1) + ' works in your browser. Here\'s how we handle what you type.</p>' + HOW +
       '<p>If you share a copy with us, we keep it for the length of your programme and ' + RETENTION_MONTHS + ' months after, then delete it. You can ask us to delete it sooner, and we confirm in writing when it\'s done. The full details are in our <a href="' + POLICY_URL + '" target="_blank" rel="noopener">data policy</a>.</p>' +
-      '<label class="pd-check"><input type="checkbox" id="pd-agree-start"> <span>I\'ve read the data policy and agree to it.</span></label>' +
-      '<button type="button" class="btn btn-primary" id="pd-start" disabled>Start</button>',
+      '<div class="pd-act"><label class="pd-check"><input type="checkbox" id="pd-agree-start"> <span>I\'ve read the data policy and agree to it.</span></label>' +
+      '<button type="button" class="btn btn-primary" id="pd-start" disabled>Start</button></div>',
       { locked: true });
     var tick = back.querySelector('#pd-agree-start'), go = back.querySelector('#pd-start');
     tick.addEventListener('change', function () { go.disabled = !tick.checked; });
     go.addEventListener('click', function () { set(AGREED, POLICY_VERSION); close(); if (expired) expiredNote(); });
+    tick.focus({ preventScroll: true });
   }
 
   function expiredNote() {
