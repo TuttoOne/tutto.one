@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Scheduled tasks in the Claude app: set up a job Claude runs every day or week, look after it and share what it makes. Steps, drawings, a screenshot and links to Anthropic's documentation.">
+<title>Scheduled Tasks Guide | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<style>body{margin:0}img{max-width:100%}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&display=swap">
+<style>
+/* Praxis design system (tutto.one/praxis): warm off-white, near-black, amber accent; Roboto display, Inter body.
+   Layout: report: dark cover band, then a single 42rem reading column with full-width screenshots. */
+:root {
+  --bg: #FAF9F6;
+  --fg: #1F1F1F;
+  --card: #FFFFFF;
+  --muted: #E8E6E1;
+  --muted-fg: #6B7280;
+  --border: #E5E7EB;
+  --accent: #DB7400;
+  --accent-soft: rgb(219 116 0 / 0.08);
+  --cover-bg: #1F1F1F;
+  --cover-fg: #FAF9F6;
+  --hl-ring: rgb(255 255 255 / 0.85);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Roboto', 'Inter', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --content: 42rem;
+  --wide: 60rem;
+  --radius: 0.75rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0A09; --fg: #FAF9F6; --card: #171513; --muted: #221F1C; --muted-fg: #9AA0AA;
+    --border: #2A2622; --accent: #F08A1C; --accent-soft: rgb(240 138 28 / 0.12);
+    --cover-bg: #171513; --cover-fg: #FAF9F6; --hl-ring: rgb(0 0 0 / 0.5); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0A09; --fg: #FAF9F6; --card: #171513; --muted: #221F1C; --muted-fg: #9AA0AA;
+  --border: #2A2622; --accent: #F08A1C; --accent-soft: rgb(240 138 28 / 0.12);
+  --cover-bg: #171513; --cover-fg: #FAF9F6; --hl-ring: rgb(0 0 0 / 0.5); color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; font-feature-settings: 'cv11', 'ss01';
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; text-wrap: balance; margin: 0 0 1rem; }
+h2 { font-size: clamp(1.6rem, 4vw, 1.875rem); }
+h3 { font-size: 1.15rem; margin-top: 2rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--accent); text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+code, kbd { font-family: var(--font-mono); font-size: 0.88em; background: var(--muted); padding: 0.1em 0.4em; border-radius: 0.375rem; }
+kbd { border: 1px solid var(--border); white-space: nowrap; }
+.lead { font-size: 1.2rem; line-height: 1.45; color: var(--muted-fg); }
+.eyebrow { display: block; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; }
+.brand { font-family: var(--font-display); font-weight: 900; font-size: 1.35rem; letter-spacing: -0.025em; }
+.brand .dot { color: var(--accent); }
+.tag { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 0.7rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+
+/* Cover */
+.cover { background: var(--cover-bg); color: var(--cover-fg); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.cover-in { max-width: var(--wide); margin: 0 auto; padding-block: 2.5rem 3rem; display: grid; gap: 4rem; }
+.cover-top { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+.cover-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.claude-md { display: inline-flex; align-items: center; border: 1px solid var(--accent); border-radius: 999px; padding: 7px 14px; font: 500 0.85rem/1 var(--font-sans); color: var(--accent); text-decoration: none; white-space: nowrap; }
+.claude-md:hover, .claude-md:focus-visible { background: var(--accent); color: #fff; }
+.cover h1 { color: var(--cover-fg); font-weight: 900; font-size: clamp(2.4rem, 7vw, 3.75rem); margin: 0 0 1.25rem; max-width: 14ch; }
+.cover .lead { color: rgb(250 249 246 / 0.7); max-width: 34rem; margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; margin: 0; padding-top: 1.25rem; border-top: 1px solid rgb(250 249 246 / 0.15); }
+.meta dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(250 249 246 / 0.55); }
+.meta dd { margin: 0.15rem 0 0; font-weight: 500; }
+
+/* Page */
+.page { max-width: var(--wide); margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 3rem 2rem; }
+.page > nav, .page > article { max-width: var(--content); margin-inline: auto; }
+article { padding-top: 3.5rem; margin-top: 3.5rem; border-top: 1px solid var(--border); scroll-margin-top: 1rem; }
+nav.toc h2 { font-size: 1.25rem; }
+.toc ol { list-style: none; padding: 0; margin: 0 0 1.5rem; counter-reset: s; }
+.toc li { counter-increment: s; display: flex; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 1.05rem; }
+.toc li::before { content: counter(s, decimal-leading-zero); color: var(--accent); font-family: var(--font-display); font-weight: 700; min-width: 2.5ch; font-variant-numeric: tabular-nums; }
+.toc a { color: var(--fg); text-decoration: none; }
+.toc a:hover { color: var(--accent); }
+.note { font-size: 0.9rem; color: var(--muted-fg); }
+
+ol.steps { padding-left: 1.25rem; margin: 0 0 1rem; }
+ol.steps li { margin-bottom: 0.6rem; padding-left: 0.25rem; }
+ol.steps li::marker { color: var(--accent); font-weight: 700; font-family: var(--font-display); }
+ul.dash { list-style: none; padding: 0; margin: 0 0 1rem; }
+ul.dash li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; }
+ul.dash li::before { content: '–'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+/* Screenshots: full page width, breaking out of the reading column */
+.shot { margin: 2rem calc((var(--content) - min(var(--wide), 100vw - 32px)) / 2); }
+@media (max-width: 44rem) { .shot { margin-inline: 0; } }
+.frame { position: relative; display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--card); }
+.frame img { display: block; width: 100%; height: auto; }
+.frame:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hl {
+  position: absolute;
+  left: calc(var(--x) / 2000 * 100%); top: calc(var(--y) / var(--ih, 1299) * 100%);
+  width: calc(var(--w) / 2000 * 100%); height: calc(var(--h) / var(--ih, 1299) * 100%);
+  border: 2.5px solid var(--accent); border-radius: 6px;
+  box-shadow: 0 0 0 2px var(--hl-ring);
+  pointer-events: none;
+}
+.hl b {
+  position: absolute; top: -11px; left: -11px;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--accent); color: #fff;
+  font: 700 12px/1 var(--font-display);
+  box-shadow: 0 0 0 2px var(--hl-ring);
+}
+/* Badge outside the box, where the corner badge would cover the label */
+.hl.b-left b { top: 50%; left: -30px; transform: translateY(-50%); }
+.hl.b-right b { top: 50%; left: auto; right: -30px; transform: translateY(-50%); }
+.hl.b-below b { top: calc(100% + 6px); left: 0; }
+.shot figcaption { max-width: var(--content); margin: 0.85rem auto 0; font-weight: 500; }
+.fignum { font-family: var(--font-display); font-weight: 700; color: var(--accent); margin-right: 0.35rem; }
+.legend { list-style: none; padding: 0; max-width: var(--content); margin: 0.6rem auto 0; display: grid; gap: 0.45rem; }
+.legend li { display: flex; gap: 0.7rem; align-items: baseline; font-size: 0.93rem; color: var(--muted-fg); }
+.legend li b { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font: 700 11px/1 var(--font-display); transform: translateY(2px); }
+.legend li span { min-width: 0; }
+
+.callout { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 1rem 1.25rem; border-radius: 0 var(--radius) var(--radius) 0; margin: 2rem 0; }
+.callout p { margin: 0; }
+.callout.warn { border-left-width: 4px; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+th, td { padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-family: var(--font-display); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-fg); border-bottom: 2px solid var(--fg); }
+td code { word-break: break-all; }
+article > table { display: block; overflow-x: auto; }
+
+.doc-footer { max-width: var(--content); margin: 4rem auto 0; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; font-size: 0.85rem; color: var(--muted-fg); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* Drawn app panels (not screenshots): a simplified Claude window built from the help-centre labels. */
+.mock { margin: 2rem calc((var(--content) - min(var(--wide), 100vw - 32px)) / 2); }
+@media (max-width: 44rem) { .mock { margin-inline: 0; } }
+.win { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--card); font-size: 0.9rem; }
+.win-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: var(--muted); border-bottom: 1px solid var(--border); font-size: 0.78rem; color: var(--muted-fg); }
+.win-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--border); display: inline-block; }
+.win-bar span { margin-left: 8px; }
+.win-bar em { margin-left: auto; font-style: normal; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.68rem; }
+.win-body { display: grid; grid-template-columns: 11rem minmax(0, 1fr); min-height: 17rem; }
+.side { border-right: 1px solid var(--border); padding: 14px 10px; display: grid; gap: 4px; align-content: start; background: var(--bg); }
+.side span { padding: 6px 10px; border-radius: 6px; color: var(--muted-fg); }
+.side span.on { background: var(--accent-soft); color: var(--fg); font-weight: 600; }
+.main { padding: 18px 20px; min-width: 0; display: grid; gap: 14px; align-content: start; }
+.main-hd { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+.main-hd b { font: 700 1.15rem/1.2 var(--font-display); }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-weight: 500; background: var(--card); color: var(--fg); white-space: nowrap; }
+.btn.dark { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.menu { position: relative; justify-self: end; margin-top: -6px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); box-shadow: 0 6px 20px rgb(0 0 0 / 0.08); display: grid; min-width: 12rem; }
+.menu span { padding: 8px 12px; }
+.menu span + span { border-top: 1px solid var(--border); }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.card { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; min-width: 0; }
+.card b { display: block; font-weight: 600; }
+.card small { color: var(--muted-fg); }
+.form { display: grid; gap: 10px; }
+.field { display: grid; gap: 4px; }
+.field label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-fg); }
+.field .box { border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; color: var(--fg); background: var(--bg); min-width: 0; overflow-wrap: anywhere; }
+.field .box.tall { min-height: 4.2rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; font-size: 0.8rem; color: var(--muted-fg); }
+.chips span.on { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.runs { display: grid; gap: 0; border: 1px solid var(--border); border-radius: 8px; }
+.runs span { display: flex; justify-content: space-between; gap: 10px; padding: 7px 12px; font-size: 0.85rem; color: var(--muted-fg); }
+.runs span + span { border-top: 1px solid var(--border); }
+.runs b { color: var(--fg); font-weight: 500; }
+.toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; font-size: 0.8rem; }
+.toggle span { padding: 4px 10px; color: var(--muted-fg); }
+.toggle span.on { background: var(--accent); color: #fff; font-weight: 600; }
+.pin { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 11px/1 var(--font-display); margin-left: 6px; vertical-align: middle; flex: none; }
+.mock figcaption { max-width: var(--content); margin: 0.85rem auto 0; font-weight: 500; }
+.drawn { display: block; font-weight: 400; font-size: 0.85rem; color: var(--muted-fg); margin-top: 0.2rem; }
+
+.prompt { background: var(--muted); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 1.5rem 0; }
+.prompt .label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-fg); margin-bottom: 0.4rem; }
+.prompt pre { margin: 0; font: 500 0.9rem/1.6 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.prompt pre i { font-style: normal; color: var(--accent); }
+.copy { margin-top: 0.75rem; font: 600 0.75rem/1 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: var(--card); border: 1.5px solid var(--accent); border-radius: 6px; padding: 7px 12px; cursor: pointer; }
+.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ideas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.idea { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1rem; font-size: 0.93rem; color: var(--muted-fg); min-width: 0; }
+.idea b { display: block; color: var(--fg); font-family: var(--font-display); }
+
+@media (max-width: 40rem) {
+  .win-body { grid-template-columns: minmax(0, 1fr); }
+  .side { display: none; }
+  .cards, .two, .ideas { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-in">
+    <header class="cover-top"><a class="brand" href="/" style="color:inherit;text-decoration:none">Tutto<span class="dot">.</span></a><span class="cover-actions"><a class="claude-md" href="/claude-schedules/praxis-claude-schedules.md" download title="The same guide as a Markdown file. Open it with your AI assistant (Claude, ChatGPT, Mistral, Gemini, Copilot or any other) and it helps you set up your first task.">Download for your AI (.md)</a><span class="tag">Praxis</span></span></header>
+    <div class="title-block">
+      <span class="eyebrow">Scheduled tasks guide</span>
+      <h1>Let Claude do the weekly jobs</h1>
+      <p class="lead">A scheduled task is a job you describe once and Claude runs on its own, every morning, every Monday or whenever you click. The result waits for you in the app, and if it makes a page you can share it with your team by link.</p>
+    </div>
+    <dl class="meta">
+      <div><dt>Updated</dt><dd>November 2026</dd></div>
+      <div><dt>Time needed</dt><dd>About 10 minutes for your first task</dd></div>
+      <div><dt>Applies to</dt><dd>Pro, Max, Team and Enterprise plans</dd></div>
+    </dl>
+  </div>
+</section>
+
+<main class="page">
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#s1">What a scheduled task is</a></li>
+    <li><a href="#s2">Do it once in a chat first</a></li>
+    <li><a href="#s3">Three ways to set one up</a></li>
+    <li><a href="#s4">Write the instructions</a></li>
+    <li><a href="#s5">When it runs</a></li>
+    <li><a href="#s6">Look after your tasks</a></li>
+    <li><a href="#s7">Share what it makes</a></li>
+    <li><a href="#s8">Ideas to start with</a></li>
+    <li><a href="#s9">Quick reference and sources</a></li>
+  </ol>
+  <p class="note">The app changes often and menus move between versions. The drawn panels show the labels from Anthropic's help pages in November 2026; the sharing screenshot is from the Claude desktop app on a Mac. On Windows and on claude.ai the menus are the same. If yours looks different, the help pages in <a href="#s9">Sources</a> have the latest steps.</p>
+</nav>
+
+<article id="s1">
+  <span class="eyebrow">Step 01</span>
+  <h2>What a scheduled task is</h2>
+  <p class="lead">Think of it as a standing instruction to a colleague: "every Monday at 7, go and look at this and leave me a short note".</p>
+  <p>You give the task a name, the instructions and how often it runs. When the time comes, Claude starts a fresh chat on its own, does the work and saves the result under <strong>Scheduled</strong> in the left sidebar. It can search the web, read the files and connected apps you've given it access to (your calendar, email, Drive and so on) and make a document or a page.</p>
+  <p>Good jobs for it are the ones that start with "go and look at...": checking for new regulations, a morning brief from your calendar and inbox, a weekly summary of what changed in a shared file, a reminder list for Friday.</p>
+  <div class="callout"><p><strong>Plans.</strong> Scheduled tasks are on every paid plan: Pro, Max, Team and Enterprise. On Team and Enterprise your admin can switch them off, so if you can't see <em>Scheduled</em>, ask whoever manages your Claude account.</p></div>
+</article>
+
+<article id="s2">
+  <span class="eyebrow">Step 02</span>
+  <h2>Do it once in a chat first</h2>
+  <p class="lead">Before you put anything on a timetable, do the job once with Claude in an ordinary chat and check the result.</p>
+  <p>That tells you Claude can do it with what it has access to, and it shows you what to put in the instructions: the sources it should use, the format you want back and what it got wrong the first time. When the chat gives you something you'd be happy to receive every week, you're ready to schedule it.</p>
+</article>
+
+<article id="s3">
+  <span class="eyebrow">Step 03</span>
+  <h2>Three ways to set one up</h2>
+  <p class="lead">All three end in the same place. Pick the one that suits you.</p>
+  <ol class="steps">
+    <li><strong>Ask in any chat.</strong> In the newest version of the app you can just say it: "Every Monday at 7:00, check... and give me...". Answer Claude's questions, check the name, schedule and instructions it proposes, then click <em>Schedule</em>.</li>
+    <li><strong>Create with Claude.</strong> Click <em>Scheduled</em> in the left sidebar, then <em>New task</em> in the top right, then <em>Create with Claude</em>. Claude asks you a few questions, some with multiple-choice answers, and writes the task for you. Check it and click <em>Schedule</em>.</li>
+    <li><strong>Set up manually.</strong> Same start, but choose <em>Set up manually</em> and fill in the form yourself (Fig. 2). Good when you've already done the job in a chat and can paste in the instructions that worked.</li>
+  </ol>
+
+  <figure class="mock" id="fig1">
+    <div class="win" role="img" aria-label="Drawing of the Scheduled page: the sidebar with Scheduled selected, a New task button with its two options, and three template cards">
+      <div class="win-bar"><i></i><i></i><i></i><span>Claude</span><em>Drawing</em></div>
+      <div class="win-body">
+        <div class="side"><span>New chat</span><span>Chats</span><span>Projects</span><span>Artifacts</span><span class="on">Scheduled <b class="pin">1</b></span></div>
+        <div class="main">
+          <div class="main-hd"><b>Scheduled</b><span class="btn dark">New task <b class="pin">2</b></span></div>
+          <div class="menu"><span>Create with Claude <b class="pin">3</b></span><span>Set up manually <b class="pin">4</b></span></div>
+          <div class="cards">
+            <div class="card"><b>Morning brief</b><small>Calendar, important email and what needs you today</small></div>
+            <div class="card"><b>Inbox triage</b><small>Sort what's urgent from what can wait</small></div>
+            <div class="card"><b>Monitor a topic</b><small>New articles or notices on a subject you choose</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figcaption><span class="fignum">Fig. 1</span> The Scheduled page.<span class="drawn">Drawn from the help pages. The templates you see depend on your version.</span></figcaption>
+    <ol class="legend">
+      <li><b>1</b><span><em>Scheduled</em> in the left sidebar. If you don't see it, check you're in the chat view (the speech bubble at the top of the sidebar) and not in Code. In some versions it sits under <em>More</em>.</span></li>
+      <li><b>2</b><span><em>New task</em>, top right.</span></li>
+      <li><b>3</b><span><em>Create with Claude</em>: answer a few questions and Claude writes the task.</span></li>
+      <li><b>4</b><span><em>Set up manually</em>: opens the form in Fig. 2.</span></li>
+    </ol>
+  </figure>
+
+  <figure class="mock" id="fig2">
+    <div class="win" role="img" aria-label="Drawing of the Create scheduled task form with fields for task name, prompt, approval mode, frequency, model and folder">
+      <div class="win-bar"><i></i><i></i><i></i><span>Create scheduled task</span><em>Drawing</em></div>
+      <div class="main">
+        <div class="form">
+          <div class="field"><label>Task name <b class="pin">1</b></label><div class="box">Weekly regulation check</div></div>
+          <div class="field"><label>Prompt <b class="pin">2</b></label><div class="box tall">Every Monday, search the official sites below for anything published in the last 7 days about... For each item give the date, title, link and one line on what it means for us. If there's nothing new, say "Nothing new this week".</div></div>
+          <div class="field"><label>Frequency <b class="pin">3</b></label><div class="chips"><span>Hourly</span><span>Daily</span><span>Weekdays</span><span class="on">Weekly</span><span>Manual</span></div></div>
+          <div class="two">
+            <div class="field"><label>Approval mode <b class="pin">4</b></label><div class="box">Ask before acting</div></div>
+            <div class="field"><label>Model and folder <b class="pin">5</b></label><div class="box">Default · no folder</div></div>
+          </div>
+          <div><span class="btn dark">Save</span></div>
+        </div>
+      </div>
+    </div>
+    <figcaption><span class="fignum">Fig. 2</span> Set up manually.<span class="drawn">Drawn from the help pages. Some versions also offer notifications (in the app and by email) and a Project the task works in.</span></figcaption>
+    <ol class="legend">
+      <li><b>1</b><span><em>Task name</em>, required. Something you'll recognise in a list.</span></li>
+      <li><b>2</b><span><em>Prompt</em>, required: what Claude does each time. See step 04.</span></li>
+      <li><b>3</b><span><em>Frequency</em>, required: hourly, daily, weekdays, weekly or manually (only when you click <em>Run now</em>). Start with manual.</span></li>
+      <li><b>4</b><span><em>Approval mode</em>, required: how much Claude may do before it asks you. While you're learning, pick the one that asks first.</span></li>
+      <li><b>5</b><span><em>Model</em> and <em>Folder</em>, optional. Leave the model on the default. Only choose a folder if the job needs files on your computer, because then it can only run on your computer (step 05).</span></li>
+    </ol>
+  </figure>
+</article>
+
+<article id="s4">
+  <span class="eyebrow">Step 04</span>
+  <h2>Write the instructions</h2>
+  <p class="lead">Nobody is there to answer questions when the task runs, so the instructions have to say everything you'd say to a new colleague.</p>
+  <ul class="dash">
+    <li><strong>Where to look.</strong> Name the sites, files or apps. "Official sources only" is vague; "the Government Gazette and the Pharmacy Council website" is clear.</li>
+    <li><strong>What to bring back.</strong> The format, the length and the fields: date, title, link, one line on why it matters.</li>
+    <li><strong>What to do if there's nothing.</strong> "If there's nothing new, say so and stop." Otherwise it may fill the space.</li>
+    <li><strong>What not to do.</strong> Don't send anything, don't change any files, don't guess a number.</li>
+    <li><strong>A time guard.</strong> If the run happens late (step 05), "only look at the last 7 days" keeps it right.</li>
+  </ul>
+  <div class="prompt">
+    <span class="label">Template · copy and fill in the amber parts</span>
+    <pre id="tpl"><i>[How often]</i>, look at <i>[where: named sites, files or connected apps]</i> for <i>[what: anything new about..., anything due..., anything that changed...]</i> in the last <i>[7 days]</i>.
+For each item give <i>[the fields you want: date, title, link, one line on what it means for us]</i>.
+Use only what you find in those sources. If something is unclear, say so instead of guessing.
+If there's nothing new, say "Nothing new this week" and stop.
+Don't send emails, change files or contact anyone.</pre>
+    <button class="copy" type="button" data-target="tpl">Copy</button>
+  </div>
+</article>
+
+<article id="s5">
+  <span class="eyebrow">Step 05</span>
+  <h2>When it runs</h2>
+  <p class="lead">Most tasks run on Anthropic's servers, so they run on time even when your laptop is asleep or the app is closed.</p>
+  <ul class="dash">
+    <li><strong>Tasks that need your computer</strong> are different. If you pick a folder on your computer or a job needs an app installed on it, the task can only run there, so the computer has to be on and the app open.</li>
+    <li><strong>If your computer slept through a run,</strong> the app runs it once when you're back, for the most recent missed time only. A 7:00 task might run at 11:00. That's why the time guard in step 04 matters.</li>
+    <li><strong>A task that stops to ask permission</strong> waits for you, and nothing happens until you answer. Run it once with <em>Run now</em> while you're at your desk and approve what it needs, so later runs don't get stuck.</li>
+    <li><strong>It uses your plan.</strong> Every run counts towards your usage like a chat does. Hourly tasks add up fast, and weekly is plenty for most jobs.</li>
+  </ul>
+  <div class="callout"><p><strong>Using Claude Code?</strong> The Code tab of the desktop app has its own scheduled tasks for work on your files, local ones that need the app open and cloud ones that don't. The setup is a little different and is covered in <a href="https://code.claude.com/docs/en/desktop-scheduled-tasks" target="_blank" rel="noopener">Anthropic's Claude Code docs</a>.</p></div>
+</article>
+
+<article id="s6">
+  <span class="eyebrow">Step 06</span>
+  <h2>Look after your tasks</h2>
+  <p class="lead">Click <em>Scheduled</em> in the sidebar, then click a task to open it.</p>
+  <figure class="mock" id="fig3">
+    <div class="win" role="img" aria-label="Drawing of a task's page: Run now, an Active or Paused switch, Edit and Delete buttons and a list of past runs">
+      <div class="win-bar"><i></i><i></i><i></i><span>Weekly regulation check</span><em>Drawing</em></div>
+      <div class="main">
+        <div class="main-hd"><b>Weekly regulation check</b><span style="display:flex;flex-wrap:wrap;gap:8px"><span class="btn dark">Run now <b class="pin">1</b></span><span class="toggle"><span class="on">Active</span><span>Paused</span></span><b class="pin">2</b><span class="btn">Edit <b class="pin">3</b></span></span></div>
+        <div class="field"><label>History <b class="pin">4</b></label>
+          <div class="runs"><span><b>Mon 16 Nov, 7:02</b>3 new notices</span><span><b>Mon 9 Nov, 7:02</b>Nothing new this week</span><span><b>Mon 2 Nov, 11:40</b>Ran late: computer was asleep</span></div>
+        </div>
+        <div><span class="btn">Delete <b class="pin">5</b></span></div>
+      </div>
+    </div>
+    <figcaption><span class="fignum">Fig. 3</span> A task's page.<span class="drawn">Drawn from the help pages.</span></figcaption>
+    <ol class="legend">
+      <li><b>1</b><span><em>Run now</em>: run it straight away. Use it to test, and for manual tasks.</span></li>
+      <li><b>2</b><span>Pause it and turn it back on later without losing it.</span></li>
+      <li><b>3</b><span><em>Edit</em> the instructions or how often it runs. When a result is wrong, fix the instructions here, then <em>Run now</em> to check.</span></li>
+      <li><b>4</b><span>Past runs. Click one to open the chat it made, read the result and ask follow-up questions.</span></li>
+      <li><b>5</b><span><em>Delete</em> removes the task. The chats it made are kept in your archive.</span></li>
+    </ol>
+  </figure>
+  <p>New results show a small blue dot next to the task in the sidebar. Depending on your notification settings, you also get a pop-up when a run finishes.</p>
+</article>
+
+<article id="s7">
+  <span class="eyebrow">Step 07</span>
+  <h2>Share what it makes</h2>
+  <p class="lead">When a task (or any chat) makes a page, a chart or a document, Claude saves it as an artifact. You'll find it under <em>Artifacts</em> in the sidebar, and you can share it from there.</p>
+  <figure class="shot" id="fig4">
+    <a class="frame" href="/claude-schedules/img/share.jpg" target="_blank" rel="noopener">
+      <img src="/claude-schedules/img/share.jpg" alt="An artifact open in the Claude desktop app with the Share panel showing an email invite field, four people invited as Editor, General access set to Only people invited, and a Copy link button" width="1600" height="1039" loading="lazy">
+      <span class="hl b-below" style="--x:1604;--y:57;--w:105;--h:37"><b>1</b></span>
+      <span class="hl b-left" style="--x:1386;--y:267;--w:559;--h:40"><b>2</b></span>
+      <span class="hl b-right" style="--x:1789;--y:500;--w:105;--h:231"><b>3</b></span>
+      <span class="hl b-left" style="--x:1386;--y:802;--w:285;--h:42"><b>4</b></span>
+      <span class="hl b-left" style="--x:1802;--y:897;--w:143;--h:40"><b>5</b></span>
+      <span class="hl b-left" style="--x:1667;--y:204;--w:278;--h:39"><b>6</b></span>
+    </a>
+    <figcaption><span class="fignum">Fig. 4</span> The Share panel on an artifact.</figcaption>
+    <ol class="legend">
+      <li><b>1</b><span><em>Share</em>, top right of the artifact.</span></li>
+      <li><b>2</b><span>Invite people by email. They get an email invitation (check the Other or Junk folder) and need a Claude account with that address.</span></li>
+      <li><b>3</b><span>What each person can do: view, comment or edit. Editors can ask their own Claude to change it. Remove someone with the bin icon.</span></li>
+      <li><b>4</b><span>General access. It starts private (only you, or only the people you invite). Change it to <em>Anyone with the link</em> to share it more widely: most artifacts then open without a Claude account.</span></li>
+      <li><b>5</b><span><em>Copy link</em> to paste into an email, Teams or Slack.</span></li>
+      <li><b>6</b><span><em>Export</em>: a web page (HTML) that opens in any browser, a Markdown file to hand to another AI, or a PDF.</span></li>
+    </ol>
+  </figure>
+  <ul class="dash">
+    <li><strong>Someone without Claude needs to edit it?</strong> Ask Claude to make a Word or PowerPoint version and work on that. The layout shifts a little between formats.</li>
+    <li><strong>Need a PDF?</strong> The PDF export can break pages in odd places. Ask Claude in the chat instead: "make a PDF of this, with page breaks only before a heading".</li>
+    <li><strong>Team and Enterprise plans</strong> may also offer "Anyone at your organisation", and your admin decides whether links can go outside it.</li>
+  </ul>
+  <div class="callout warn"><p><strong>A link can be forwarded.</strong> Don't share a link to anything confidential, any personal data (names, ID numbers, marks, salaries) or a client's material. Invite named people instead, or export a file and send it the usual way. Check two numbers in anything a task made before someone else reads it.</p></div>
+</article>
+
+<article id="s8">
+  <span class="eyebrow">Step 08</span>
+  <h2>Ideas to start with</h2>
+  <p class="lead">Start with one task, set to manual. Run it a few times by hand, fix the instructions, then put it on a timetable.</p>
+  <div class="ideas">
+    <div class="idea"><b>Morning brief</b>Weekdays at 7:30: today's meetings, emails that need an answer and anything due this week.</div>
+    <div class="idea"><b>Regulation or news watch</b>Weekly: new notices on named official sites, with links or "nothing new".</div>
+    <div class="idea"><b>Before a board or client meeting</b>What changed in a shared file since last time, in one page.</div>
+    <div class="idea"><b>Friday look-ahead</b>What's due next week from a plan or timetable you keep in Claude.</div>
+    <div class="idea"><b>Content ideas</b>Weekly: three ideas for posts or lessons from what's new in your field, with sources.</div>
+    <div class="idea"><b>Housekeeping</b>Monthly: remind you to check your privacy setting and tidy your rules files.</div>
+  </div>
+</article>
+
+<article id="s9">
+  <span class="eyebrow">Reference</span>
+  <h2>Quick reference and sources</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>To do this</th><th>Go here</th></tr></thead>
+    <tbody>
+      <tr><td>See and create tasks</td><td><em>Scheduled</em> in the left sidebar, then <em>New task</em></td></tr>
+      <tr><td>Create one by talking</td><td>Any chat: "every Monday at 7, ..." (newest app), or <em>New task</em>, <em>Create with Claude</em></td></tr>
+      <tr><td>Test, pause, edit, delete</td><td>Click the task: <em>Run now</em>, Active/Paused, <em>Edit</em>, <em>Delete</em></td></tr>
+      <tr><td>Read a result</td><td>Click the task, then a run in its history</td></tr>
+      <tr><td>Share a page it made</td><td><em>Artifacts</em> in the sidebar, open it, <em>Share</em></td></tr>
+      <tr><td>Get the desktop app</td><td><a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>If something is missing</h3>
+  <ul class="dash">
+    <li><strong>No Scheduled in the sidebar:</strong> switch to the chat view (the speech bubble), look under <em>More</em>, and update the app. On Team and Enterprise, ask your admin whether it's switched on.</li>
+    <li><strong>A task didn't run:</strong> open it and check the history. Tasks that use a folder on your computer only run while it's awake and the app is open.</li>
+    <li><strong>A run is stuck:</strong> it's probably waiting for your permission. Open the run and answer it.</li>
+    <li><strong>No Share button, or no "Anyone with the link":</strong> on Team and Enterprise your admin controls outside sharing. Sharing settings can't be changed in the phone app.</li>
+  </ul>
+  <h3>Sources</h3>
+  <ul class="dash sources">
+    <li><a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Schedule recurring tasks</a>, Claude Help Center</li>
+    <li><a href="https://support.claude.com/en/articles/9547008-share-artifacts" target="_blank" rel="noopener">Share artifacts</a>, Claude Help Center</li>
+    <li><a href="https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them" target="_blank" rel="noopener">What are artifacts and how do I use them?</a>, Claude Help Center</li>
+    <li><a href="https://code.claude.com/docs/en/desktop-scheduled-tasks" target="_blank" rel="noopener">Schedule recurring tasks in Claude Code Desktop</a>, Claude Code docs</li>
+    <li><a href="https://code.claude.com/docs/en/routines" target="_blank" rel="noopener">Cloud scheduled tasks</a>, Claude Code docs</li>
+  </ul>
+</article>
+
+<footer class="doc-footer"><span>Tutto · Praxis · tutto.one</span><span>Scheduled tasks guide · v1</span></footer>
+</main>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.target);
+    function done(ok) { btn.textContent = ok ? 'Copied' : 'Select'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); }
+    function select() { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done(false); }
+    try { navigator.clipboard.writeText(el.textContent).then(function () { done(true); }, select); } catch (e) { select(); }
+  });
+});
+</script>
+</body>
+</html>

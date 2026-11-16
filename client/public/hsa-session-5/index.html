@@ -140,7 +140,16 @@
   .cell.x { background: var(--fail-soft); box-shadow: inset 0 0 0 1.5px var(--fail); }
 
   /* Share cards */
-  .share { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+  .share { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  .shotfig { margin: 0 0 16px; }
+  .shotfig img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; }
+  .shotfig figcaption { font-size: 13.5px; color: var(--muted); margin-top: 8px; }
+  .guide { display: flex; gap: 16px; align-items: flex-start; border: 1.5px solid var(--amber); border-radius: 12px; padding: 18px 20px; margin-top: 18px; background: var(--amber-soft); }
+  .guide .ico { color: var(--amber-ink); width: 28px; height: 28px; }
+  .guide h3 { margin-bottom: 4px; }
+  .guide p { color: var(--ink-2); font-size: 15px; }
+  .guide ul { margin: 8px 0 0; padding-left: 18px; font-size: 14.5px; }
+  .guide li + li { margin-top: 3px; }
   .scard { min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
   .scard .hd { display: flex; gap: 10px; align-items: center; }
   .scard .hd .ico { color: var(--amber-ink); }
@@ -178,6 +187,7 @@
 
   @media (max-width: 860px) {
     .places, .sched, .share, .rules, .hw, .ideas { grid-template-columns: minmax(0,1fr); }
+    .guide { flex-direction: column; }
     .steps { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .mock-body { grid-template-columns: minmax(0,1fr); }
   }
@@ -344,15 +354,23 @@ Use only the venues and capacities in the spreadsheet. Tell me any assumption yo
 
   <section aria-labelledby="share">
     <h2 id="share">Sharing an artifact, and when not to</h2>
-    <p class="sub">An artifact starts private. You choose who sees it.</p>
+    <p class="sub">An artifact starts private. You choose who sees it, with the Share button at the top right of the artifact. This is the one we used on Monday for the rugby page.</p>
+    <figure class="shotfig">
+      <a href="/claude-schedules/img/share.jpg" target="_blank" rel="noopener"><img src="/claude-schedules/img/share.jpg" alt="The Share panel on an artifact: invite people by email, each person set to Editor, General access set to Only people invited, and Copy link" width="1600" height="1039" loading="lazy"></a>
+      <figcaption>The Share panel. Type an email at the top, choose view, comment or edit for each person, then Invite. General access at the bottom decides who else can open the link.</figcaption>
+    </figure>
     <div class="share">
       <div class="scard">
-        <div class="hd"><svg class="ico"><use href="#i-link"/></svg><h3>Share a link</h3></div>
-        <p>Use Share or Publish on the artifact. Anyone with the link can open it, and they don't need a Claude account. Good for a planner the team works from.</p>
+        <div class="hd"><svg class="ico"><use href="#i-people"/></svg><h3>Invite by email</h3></div>
+        <p>Choose view, comment or edit. The invite comes by email (check your Other folder) and they need a Claude account with that address. Editors can open it in their own Claude app and ask Claude to change it.</p>
       </div>
       <div class="scard">
-        <div class="hd"><svg class="ico"><use href="#i-download"/></svg><h3>Make a file for the pack</h3></div>
-        <p>For board papers, ask: "make this as a PowerPoint slide" or "as a Word page". The file goes in the pack like anything else.</p>
+        <div class="hd"><svg class="ico"><use href="#i-link"/></svg><h3>Share a link</h3></div>
+        <p>Set General access to Anyone with the link, then Copy link. Most artifacts open without a Claude account, so it works for people outside HSA too.</p>
+      </div>
+      <div class="scard">
+        <div class="hd"><svg class="ico"><use href="#i-download"/></svg><h3>Export or make a file</h3></div>
+        <p>Export gives you a web page, a Markdown file or a PDF. For a PDF, ask in the chat: "make a PDF of this, with page breaks only before a heading". For someone without Claude, ask for a Word or PowerPoint version.</p>
       </div>
       <div class="scard warn">
         <div class="hd"><svg class="ico"><use href="#i-lock"/></svg><h3>Keep it private</h3></div>
@@ -398,6 +416,20 @@ Only list items you found on those official sites. If there's nothing new, say "
       <div class="idea"><b>Before each board meeting</b>Summarise what changed in the risk register since last time, from the file in your Board project.</div>
       <div class="idea"><b>Every Friday</b>A short list of what's due next week, from a timetable you keep in the app.</div>
       <div class="idea"><b>Monthly</b>Check the Claude privacy setting is still off for training, and remind you to tidy your CLAUDE.md files.</div>
+    </div>
+    <div class="guide">
+      <svg class="ico"><use href="#i-file"/></svg>
+      <div>
+        <h3>The full guide: scheduled tasks, step by step</h3>
+        <p>Everything from Monday's walk-through in one place, with drawings of each screen: the three ways to set up a task (ask in a chat, Create with Claude, Set up manually), a template for the instructions, what happens when your computer is asleep, how to test, pause and edit a task and how to share what it makes. There's also a version you can give to any AI to coach you through your first task.</p>
+        <ul>
+          <li><a href="/claude-schedules">Scheduled tasks guide</a> (<a href="/claude-schedules/praxis-claude-schedules.md" download>download for your AI</a>)</li>
+          <li><a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Anthropic: Schedule recurring tasks</a></li>
+          <li><a href="https://support.claude.com/en/articles/9547008-share-artifacts" target="_blank" rel="noopener">Anthropic: Share artifacts</a></li>
+          <li><a href="https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them" target="_blank" rel="noopener">Anthropic: What are artifacts?</a></li>
+        </ul>
+        <p style="margin-top:10px">One tip from Monday: do the job once in an ordinary chat first. When the result is something you'd be happy to get every week, then schedule it.</p>
+      </div>
     </div>
   </section>
 

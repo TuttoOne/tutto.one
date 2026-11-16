@@ -382,6 +382,13 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "claude-privacy", "index.html"));
   });
 
+  // Scheduled tasks guide (set up a job Claude runs on a schedule, and share the artifacts it makes):
+  // same arrangement, link only, not indexed. Its screenshot is a plain static file under /claude-schedules/img/.
+  app.get(["/claude-schedules", "/claude-schedules/"], (_req, res) => {
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+    res.sendFile(path.join(deckDir, "claude-schedules", "index.html"));
+  });
+
   // Session 2 handout (Define good: Claude in VS Code, the brand file, PDF, Excel, Word and a chart):
   // same arrangement, link only, not indexed.
   app.get(["/session-2", "/session-2/"], (_req, res) => {

@@ -82,6 +82,7 @@ const M = {
   designSystem: { label: "Design system guide: brief Claude on your brand", href: "/design-system", claude: "/design-system/praxis-design-system.md" },
   workspaces: { label: "Workspaces guide: share folders without copying them", href: "/workspaces", claude: "/workspaces/praxis-workspaces.md" },
   claudePrivacy: { label: "Privacy guide: stop Claude training on your chats", href: "/claude-privacy", claude: "/claude-privacy/praxis-claude-privacy.md" },
+  claudeSchedules: { label: "Scheduled tasks guide: let Claude do the weekly jobs", href: "/claude-schedules", claude: "/claude-schedules/praxis-claude-schedules.md" },
 } satisfies Record<string, Material>;
 
 const AI_FLUENT_TEAM: Programme = {
@@ -342,15 +343,15 @@ const HSA_CONTENT_TEAM: Programme = {
       what: "We step up from folders into the Claude app. Turn a risk register and a year plan into artifacts you can share, keep board work in a Project and set up a scheduled task that checks for new regulations every week.",
       leaveWith: "Two artifacts from your own work and one scheduled task",
       practice: "Run your scheduled task a few times by hand, check what it finds, then put it on a timetable.",
-      materials: [M.hsaSession5, M.handoverTool],
+      materials: [M.hsaSession5, M.claudeSchedules, M.designSystem, M.handoverTool],
     },
     {
       number: 6,
-      title: "Putting it together",
+      title: "Bring it to life",
       icon: "gear",
-      what: "Redesign one Stock Receiving lesson as a blended journey: short digital chunks, then facilitator time. How to write a brief for a freelancer, or for us. Then plan the 10-month rescope, from mapping to Council submission.",
-      leaveWith: "A lesson outline, a brief template and a 10-month roadmap",
-      practice: "Share the roadmap with the team and bring back what they'd change.",
+      what: "Short digital chunks for a blended lesson, on Stock Receiving. Storyboard and build a short animated clip, write a narration rules file from your own scripts so Claude can draft the next one, and decide what to do with a video you didn't make. Then where these fit in a lesson and what happens after the programme.",
+      leaveWith: "An animated clip, a narration rules file and a plan for January",
+      practice: "Narrate one more deck with your rules file and note every line you had to change.",
       materials: [M.scorecardTool, M.handoverTool],
     },
   ],
