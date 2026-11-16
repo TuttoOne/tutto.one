@@ -8,12 +8,13 @@
  * student's cohort.
  */
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, Redirect, useLocation } from "wouter";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Header } from "@/components/layout/Layout";
 import { SITE_TITLE } from "@/lib/i18n";
 import type { Material, ModuleIcon as IconName } from "@shared/learn-programmes";
 import { ModuleIcon } from "@/components/learn/ModuleIcon";
+import { Library } from "@/components/learn/Library";
 import { POLICY_PATH, POLICY_VERSION, BROWSER_DAYS, RETENTION_MONTHS } from "@shared/data-policy";
 
 const ROBOTO: React.CSSProperties = { fontFamily: "'Roboto', -apple-system, sans-serif" };
@@ -499,6 +500,7 @@ export function LearnDashboard() {
     <div style={PAGE}>
       <Header />
       <div style={WRAP}>
+        <ViewSwitch current="sessions" />
         <span style={{ ...CAPS, fontSize: 11, color: AMBER }}>
           {me.cohort.programmeName}{me.cohort.organisation ? ` · ${me.cohort.organisation}` : ""}
         </span>
@@ -638,6 +640,64 @@ export function LearnDashboard() {
           <button type="button" onClick={() => logout.mutate()} style={{ background: "none", border: 0, color: MUTED, cursor: "pointer", fontSize: 13, textDecoration: "underline" }}>
             Sign out
           </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── /learn/library ───────────────────────────────────────────────────────────
+
+/** The two ways to see /learn: the programme session by session, or everything you've been given in one searchable place. */
+function ViewSwitch({ current }: { current: "sessions" | "library" }) {
+  const tab = (active: boolean): React.CSSProperties => ({
+    ...ROBOTO, fontSize: 13, fontWeight: 700, letterSpacing: "0.02em", padding: "7px 14px", borderRadius: 999,
+    textDecoration: "none", color: active ? BG : MUTED, background: active ? INK : "transparent",
+  });
+  return (
+    <nav aria-label="Dashboard view" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 20 }}>
+      <div style={{ display: "inline-flex", gap: 2, padding: 3, border: `1px solid ${RULE}`, borderRadius: 999, background: "#fff" }}>
+        <Link href="/learn/dashboard" style={tab(current === "sessions")} aria-current={current === "sessions" ? "page" : undefined}>Your sessions</Link>
+        <Link href="/learn/library" style={tab(current === "library")} aria-current={current === "library" ? "page" : undefined}>Library and search</Link>
+      </div>
+    </nav>
+  );
+}
+
+export function LearnLibrary() {
+  useTitle("Your library");
+  const { data: me, isLoading, error } = useMe();
+
+  if (isLoading || (error && error.message === "UNAUTHORIZED")) {
+    return <div style={PAGE}><Header /><div style={WRAP}><p style={{ color: MUTED }}>Loading...</p></div></div>;
+  }
+  if (!me) {
+    return <div style={PAGE}><Header /><div style={WRAP}><p>{error?.message ?? "Something went wrong."}</p></div></div>;
+  }
+  // The data policy comes first, as on the dashboard.
+  if (!me.policyCurrent) return <Redirect to="/learn/dashboard" />;
+
+  const sessions = me.modules.map((m) => ({
+    number: m.number,
+    title: m.title,
+    when: m.session ? formatWhen(m.session.startsAt) : null,
+  }));
+
+  return (
+    <div style={PAGE}>
+      <Header />
+      <div style={{ ...WRAP, maxWidth: 980 }}>
+        <ViewSwitch current="library" />
+        <span style={{ ...CAPS, fontSize: 11, color: AMBER }}>
+          {me.cohort.programmeName}{me.cohort.organisation ? ` · ${me.cohort.organisation}` : ""}
+        </span>
+        <h1 style={{ ...H1, marginTop: 8 }}>Everything from your programme</h1>
+        <p style={{ margin: "0 0 8px", fontSize: 16, lineHeight: 1.6, color: MUTED, maxWidth: 640 }}>
+          Every handout, guide, tool and course you've been given, in one place. Search inside all of them at once, or browse by topic or by session. New ones appear here as we go.
+        </p>
+        <Library sessions={sessions} />
+        <div style={{ marginTop: 40, paddingTop: 24, borderTop: `1px solid ${RULE}`, fontSize: 13, color: MUTED }}>
+          Can't find something we sent you? Email <a href="mailto:daniel@tutto.one" style={{ color: INK }}>daniel@tutto.one</a> and we'll add it.
         </div>
       </div>
     </div>

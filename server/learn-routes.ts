@@ -23,7 +23,10 @@ import {
   studentProfileSchema,
   type Cohort, type CohortSession, type Student,
 } from "@shared/schema";
-import { getProgramme, type Module } from "@shared/learn-programmes";
+import { getProgramme, type Material, type Module } from "@shared/learn-programmes";
+import { EVERYONE, LIBRARY_TOPICS, hrefKey, libraryInfo, type LibraryItem } from "@shared/learn-library";
+// Built by scripts/build-learn-index.mjs from the handout pages.
+import learnIndex from "./learn-index.json";
 import { POLICY_VERSION } from "@shared/data-policy";
 import { eraseStudent } from "./data-routes";
 
@@ -128,6 +131,34 @@ async function loadDashboard(student: Student) {
     spares: sessions.filter((s) => s.isSpare).map((s) => ({ startsAt: s.startsAt.toISOString(), endsAt: s.endsAt.toISOString() })),
     modules,
   };
+}
+
+/**
+ * Every item in the student's programme once, under the first session it
+ * belongs to. The notes after a session only count once that session is done,
+ * as on the dashboard (loadDashboard leaves them out before then).
+ */
+function libraryItems(modules: ModuleView[]): LibraryItem[] {
+  const now = Date.now();
+  const seen = new Map<string, LibraryItem>();
+  const add = (mat: Material, session: number, upcoming: boolean) => {
+    const key = hrefKey(mat.href);
+    if (seen.has(key)) return;
+    const info = libraryInfo(mat.href);
+    seen.set(key, {
+      label: mat.label, href: mat.href, ...(mat.claude ? { claude: mat.claude } : {}),
+      ...info, session, upcoming,
+      sections: (learnIndex as Record<string, LibraryItem["sections"]>)[key] ?? [],
+    });
+  };
+  // The next session's reading is already theirs; anything after that is there to read ahead.
+  const isPast = (m: ModuleView) => m.progress.status === "done" || (!!m.session && new Date(m.session.endsAt).getTime() < now);
+  const next = modules.find((m) => !isPast(m))?.number ?? Infinity;
+  for (const m of modules) {
+    for (const mat of [...m.materials, ...(m.afterLinks ?? [])]) add(mat, m.number, m.number > next);
+  }
+  for (const mat of EVERYONE) add(mat, 1, false);
+  return Array.from(seen.values());
 }
 
 /** What the student sees of their own record. The blurb is ours. */
@@ -295,6 +326,17 @@ export function registerLearnRoutes(app: Express) {
       res.json(data);
     } catch (error) {
       fail(res, error, "load the dashboard");
+    }
+  });
+
+  // The Library view: everything they've been given, with its text, so it can be searched in one place.
+  app.get("/api/learn/library", requireStudent, async (req, res) => {
+    try {
+      const data = await loadDashboard(req.student!);
+      if (!data) return res.status(404).json({ error: "Not found" });
+      res.json({ topics: LIBRARY_TOPICS, items: libraryItems(data.modules) });
+    } catch (error) {
+      fail(res, error, "load the library");
     }
   });
 

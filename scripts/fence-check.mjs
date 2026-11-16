@@ -27,9 +27,11 @@ const ROUTES = [
   "/learn",
   "/learn/auth",
   "/learn/dashboard",
+  "/learn/library",
   "/learn/profile",
   "/learn/somewhere-else",
   "/api/learn/me",
+  "/api/learn/library",
   // Course reader
   "/praxis/learn/claude-101",
   "/praxis/learn/claude-101/1",

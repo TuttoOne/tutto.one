@@ -45,7 +45,7 @@ import PraxisLearn from "@/pages/praxis-learn";
 import { EventSeries, EventCancel } from "@/pages/soirees";
 // Students' private area: sign-in, dashboard and profile. Noindex, and kept
 // out of the nav and the WebMCP site index.
-import { LearnLogin, LearnAuth, LearnDashboard, LearnProfile } from "@/pages/learn";
+import { LearnLogin, LearnAuth, LearnDashboard, LearnLibrary, LearnProfile } from "@/pages/learn";
 import AdminDashboard from "@/pages/admin-dashboard";
 import AdminLogin from "@/pages/admin-login";
 import AdminSetup from "@/pages/admin-setup";
@@ -120,6 +120,7 @@ function Router() {
         <Route path="/learn" component={LearnLogin} />
         <Route path="/learn/auth" component={LearnAuth} />
         <Route path="/learn/dashboard" component={LearnDashboard} />
+        <Route path="/learn/library" component={LearnLibrary} />
         <Route path="/learn/profile" component={LearnProfile} />
         <Route path="/learn/*">{() => <Redirect to="/learn" />}</Route>
         <Route path="/admin" component={AdminDashboard} />

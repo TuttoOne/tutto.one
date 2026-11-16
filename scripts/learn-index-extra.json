@@ -1,0 +1,53 @@
+{
+  "_note": "Text for pages build-learn-index.mjs can't read: the tools (they build their page in the browser) and pages hosted elsewhere. Keyed by the href in shared/learn-programmes.ts.",
+  "https://claude.ai/artifact/S7dHFnALQxEY3GWG8SmWC3": [
+    {
+      "h": "The 8 steps, and what you fill in",
+      "id": "",
+      "t": "Each week builds on the one before, so the rules come first and every later step works inside them. Week 1 Rules first: your AI charter, first draft. Week 2 Define good: your use case card, 2 or 3 redacted example reports, then a scorecard for each recurring job. Week 3 Which tool, and what to hand over: the hand-over check for your task. Week 4 Brief it once: 3 samples of your own writing, so it learns your house style. Week 5 Tools: one template you reuse, with placeholders instead of real names. Week 6 Check it before it ships: one AI draft put through the checking routine. Week 7 Skills and automation: a colleague tries one of your skills. Week 8 Agents, and what comes next: your first agent, and the list of bigger jobs."
+    },
+    {
+      "h": "The rules we settle together",
+      "id": "",
+      "t": "1. Which tools and accounts can be used for client work? Paid accounts only, with training switched off. Free accounts for public information only. A login several people share means everyone sees everyone's chats. 2. Can a client's name go in? No. Write the client and paste the brief with names and identifying details removed. 3. Can an interview verbatim go in? Yes, once the source is Source A and anything that could identify them is removed. Target names can stay, in an approved account. 4. Criminal, health or other sensitive findings about a target? Only what the brief needs, only in an approved account and always read by a person before it reaches the client. Check with your lawyer or DPO how GDPR (Articles 9 and 10) applies. 5. Content from social media profiles that aren't public? Stays out of AI tools until agreed with your lawyer. Public posts can be screened against your keyword list. 6. Results from people-search tools and paid databases? Check each provider's terms first. 7. Connections to email, Google Drive or SharePoint? None until week 5, and then only to folders without live client files. 8. Who checks AI work before a client sees it? The person who signs the report reads every AI-drafted line against the source. 9. Do clients get told when AI was used? Italy's AI law (Law 132/2025) asks professionals to tell clients. Agree one sentence for your engagement letter or reports. 10. What if someone isn't sure, or a rule gets broken? Ask Alice before. If it already happened, tell Alice the same day. Nobody gets blamed for reporting it."
+    },
+    {
+      "h": "Switching training off",
+      "id": "",
+      "t": "In ChatGPT it's Settings, Data controls, Improve the model for everyone. In Claude it's Settings, Privacy, Help improve Claude. Free accounts have the same switch, so turn it off there too."
+    },
+    {
+      "h": "After the call: finish your charter",
+      "id": "",
+      "t": "Choose How our people use AI and How we govern and oversee AI. Background Italia Srl, Italy, which brings in GDPR, the EU AI Act and Law 132/2025. List where you already use AI: adverse media checks, translation, summarising articles and documents, cross-checking findings, polishing reports and interview write-ups. Say who approves a new tool, who people ask when they're not sure and who signs off client work. Review every 6 months."
+    }
+  ],
+  "/ai-charter": [
+    {
+      "h": "What it does",
+      "id": "",
+      "t": "Answer the questions section by section: what the charter covers, your organisation, vision and principles, people and governance, commitments and rollout, keeping it current. It writes the charter for you to download. Your answers stay in your browser, so finish on the same computer you start on. Choosing Italy brings in GDPR, the EU AI Act and Law 132/2025."
+    }
+  ],
+  "/use-case-card": [
+    {
+      "h": "What it does",
+      "id": "",
+      "t": "About 20 minutes for one real task: who it's for, what goes in, the steps you take today, what good output looks like and what must never happen. Open it from your dashboard so it saves to your account. Use dummy or redacted details."
+    }
+  ],
+  "/agent-scorecard": [
+    {
+      "h": "What it does",
+      "id": "",
+      "t": "Pick a recurring job and write the checks every draft has to pass: accuracy against the source, completeness, tone, format, what must never appear. Each check gets a pass mark. Use it to score AI drafts and your own work the same way. There is also a version you can give to any AI assistant."
+    }
+  ],
+  "/handover-list": [
+    {
+      "h": "What it does",
+      "id": "",
+      "t": "For one task, decide what AI should do, what it shouldn't, and what it needs to run without you: the inputs, the rules and the check at the end. There is also a version you can give to any AI assistant."
+    }
+  ]
+}

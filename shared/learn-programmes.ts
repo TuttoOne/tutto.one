@@ -75,6 +75,7 @@ const M = {
   hsaSession2: { label: "Session 2 handout: getting your content ready", href: "/hsa-session-2" },
   hsaSession4: { label: "Session 4 handout: where Claude looks for your rules", href: "/hsa-session-4" },
   hsaSession5: { label: "Session 5 handout: share it, schedule it", href: "/hsa-session-5" },
+  biWeek1: { label: "Week 1 page: rules first", href: "https://claude.ai/artifact/S7dHFnALQxEY3GWG8SmWC3" },
   biSession4: { label: "Session 4 handout: write it down once", href: "/bi-session-4" },
   biSpecialistTools: { label: "Handout: which AI for which specialist job", href: "/bi-specialist-tools" },
   biTeamFiles: { label: "Handout: one set of files the whole team uses", href: "/bi-team-files" },
@@ -172,7 +173,7 @@ const BACKGROUND_ITALIA: Programme = {
       what: "What may go into the tools (client names, personal data, bank details, contracts), which connections are allowed (email, Google Drive or SharePoint) and what never leaves the office. We check the settings on each account, including switching off training on your data, and write it the way you'd brief a new hire.",
       leaveWith: "Your AI use policy, first draft",
       practice: "Pick one real task from your week and bring it to week 2. Until the policy is agreed, use a redacted or dummy version.",
-      materials: [M.charterTool, M.claudePrivacy, M.startHere, M.limits],
+      materials: [M.biWeek1, M.charterTool, M.claudePrivacy, M.startHere, M.limits],
     },
     {
       number: 2,
