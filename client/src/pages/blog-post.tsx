@@ -10,6 +10,7 @@ import { usePageTr } from "@/lib/page-fr";
 import { copy, useT } from "@/lib/i18n";
 import type { BlogPost } from "@shared/schema";
 import capabilityGapImg from "@assets/c1952c81bca02a7c8cc05ef7801e67ca60831c55-4096x4096_1773827088246.webp";
+import { HANDOUT_VISUALS } from "@/components/blog/HandoutVisuals";
 
 // ── Visual components ────────────────────────────────────────────────────────
 
@@ -455,6 +456,7 @@ const VISUALS: Record<string, Record<string, React.ReactNode>> = {
     "not-an-isolated-case": <BiasNotIsolated />,
     "ai-act-deadlines": <AiActDeadlines />,
   },
+  ...HANDOUT_VISUALS,
 };
 
 // Partner looks for the intro card, taken from the partner's own site.

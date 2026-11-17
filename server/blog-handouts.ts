@@ -28,12 +28,7 @@ export const HANDOUT_POSTS = [
 
 Two places to build and try things, then one check and the live system. A tool only ever moves left to right.
 
-1. **My sandbox.** Your own computer. Only you see it.
-2. **Team sandbox.** Shared, inside the organisation, behind a login.
-3. **The check.** Someone signs the tool off, your IT team or us.
-4. **Live.** What customers and colleagues use for real work.
-
-A change to a live tool goes back to the team sandbox and through the check again. Nobody edits the live version directly.
+[VISUAL:four-places]
 
 ## The words we use, and IT's words
 
@@ -84,12 +79,9 @@ The person who signs is never someone who built the tool. They come to it fresh 
 
 ## Step by step, from idea to live
 
-1. **Build in your own sandbox.** Your folders, your rules file and Claude on your computer. This is what we do in the Praxis programme.
-2. **Set up the team sandbox.** Your GitHub organisation, the shared server or office machine, a login for each person and the rules for what data goes in.
-3. **Build and test together.** Everyone works on the same repository. The people who'll use the tool try it on real examples and score it.
-4. **The check.** The sign-off pack, the five questions, a specialist if the tool needs one, and a signature.
-5. **Go live.** The signed-off version moves across. We tell the people using it what changed and watch the first week closely.
-6. **Look after it.** Every change goes back to step 3, with a short monthly look at what's live: who uses it, what broke, what's next.
+Step 1 is what we do in the Praxis programme. Steps 2 to 6 are where you might want a hand.
+
+[VISUAL:road-to-live]
 
 ## Why it's worth setting up
 
@@ -160,7 +152,11 @@ To make Excel and Word files, Claude writes a short script and asks to run it. R
 
 ## The same chart, twice
 
-Same data, same request, one with the brand file and a clear brief. The first try, "make a chart of the report hours", came back titled "Chart 1", in six colours, with an axis starting at 2 that made one bar look 24 times shorter than another when the real gap was about 3 times. The second follows five rules:
+Same data, same request, one with the brand file and a clear brief. The first try, "make a chart of the report hours", came back titled "Chart 1", in six colours, with an axis starting at 2 that made one bar look 24 times shorter than another when the real gap was about 3 times.
+
+[VISUAL:same-chart-twice]
+
+The second follows five rules:
 
 - The title says what happened: "Report time down from 6.5 to 2.2 hours".
 - Colours mean something: grey for before, green for after.
@@ -174,13 +170,9 @@ Same data, same request, one with the brand file and a clear brief. The first tr
 
 Everything we checked becomes a scorecard: the standard every piece of AI work on that job gets judged against. Each check is something a colleague could tick without asking you. Here's the one for Fenwick & Rowe's monthly client summary:
 
-1. **No invented facts.** Open 3 cited pages and find the number. Pass when all 3 match.
-2. **Complete.** Compare with last month's summary. Pass when every section is there and gaps say [NOT IN SOURCE].
-3. **Totals add up.** Click the totals in the workbook. Pass when they're formulas and match the accounts.
-4. **On brand.** Put it next to a past report. Pass when colours, fonts and logo match.
-5. **Sounds like us.** Read the first paragraph aloud. Pass when you'd send it without rewording.
+[VISUAL:scorecard]
 
-"No invented facts" is always check number one. Four out of five is a fail: fix the brief or the brand file, then run it again.
+"No invented facts" is always check number one.
 
 > I do this job every [week / month]: [describe it]. Here's a good example I made: @[file]. Help me write 5 checks for a good result. Each check needs a way to test it and a clear pass. "No invented facts" is check 1.
 
@@ -199,9 +191,9 @@ Build your own with the [agent scorecard tool](/agent-scorecard), and use redact
 
 ## Three steps
 
-1. **The guide as it is.** The resource guide, learner guide and memo in Word, with their headings, tables and activities.
-2. **Clean text.** Same words, no layout. One heading per unit, tables kept as plain lists, page furniture taken out.
-3. **Tagged parts.** Every part carries a label saying where it sits in the qualification, what it teaches and how much it's worth.
+[VISUAL:three-steps]
+
+The guide as it is means the resource guide, learner guide and memo in Word. For the clean text, tables become plain lists and page furniture comes out. Each tagged part carries a label saying where it sits in the qualification, what it teaches and how much it's worth.
 
 Once every part is tagged, the AI can match old units to new modules and you can check each match.
 
@@ -221,6 +213,8 @@ Agree the final list as a team. If something in your guides doesn't fit a tag, w
 ## What a tagged part looks like
 
 One label per part, then the guide's own words underneath, exactly as they are. A tag that isn't in the guide says MISSING. That's a good sign: it means the AI didn't guess. Every part also carries its source, the guide and the pages it came from, so anyone can go back and check.
+
+[VISUAL:tagged-part]
 
 ## Three prompts, in order
 
@@ -258,9 +252,7 @@ A sample report does most of the work. Put all the documents for a job in one fo
 
 The case folder changes every time. The starting context and your design system stay in one place and get linked in, so you only keep one copy of each.
 
-- **case-folder/** for one job, named after it. It holds \`CLAUDE.md\` (read first, in every new chat), sources/ (the case documents, each PDF with its text version) and output/ (what Claude writes).
-- **starting-context/** with one copy on your computer, linked in. It holds INSTRUCTIONS.md (the standing brief: how this job is done), VOICE.md (how you write), SCORECARD.md (the checks every draft has to pass) and examples/ (a good past report, as text).
-- **design-system/** for your brand, made in the Claude app and linked the same way.
+[VISUAL:one-folder-per-job]
 
 Don't worry about getting the layout perfect. Use it, change it and tidy it with Claude when it gets messy.
 
@@ -278,11 +270,11 @@ When results start to get worse in a long chat, start a new one. It begins again
 
 ## Scorecards, from simple to measured
 
-A scorecard is the job description you'd give a new hire, with the KPIs you'd judge them on. It's as small or as big as the job needs: the more you want it to run on its own, the more exact it has to be.
+A scorecard is the job description you'd give a new hire, with the KPIs you'd judge them on. It's as small or as big as the job needs.
 
-- **A list in SCORECARD.md.** One to ten things a good draft has. You check it yourself as you read. "No invented facts. Every finding has its source."
-- **Checks with a number.** For review work where a client will spot a gap. Give it a threshold and a way to count. "Every document in sources/ is cited at least once. Every date matches its source."
-- **A table it fills in first.** Before it drafts, it counts the documents, lists the key facts and flags the holes. This is what an agent runs on its own across several cases.
+[VISUAL:scorecard-ladder]
+
+A list is one to ten things a good draft has, and you check it yourself as you read. Checks with a number are for review work where a client will spot a gap: give it a threshold and a way to count. A table it fills in first (counting the documents, listing the key facts, flagging the holes) is what an agent runs on its own across several cases.
 
 How hard you check depends on the report. On a long report, check the key issues and findings. On a short one, check every detail, because the client accepts fewer mistakes.
 
@@ -318,6 +310,8 @@ Use redacted, dummy or public material until your AI policy is agreed.`,
     content: `Once a team has used Claude for a few weeks, the same questions come up. Why did it follow this rule in one folder and not another? Why does a new chat still remember things? Where do I put a rule so I stop repeating it? This is the map I draw for them.
 
 Rules sit at different levels, like a company handbook, a department's way of working and the brief for one job. The level you put a rule at decides which work it applies to.
+
+[VISUAL:rule-levels]
 
 ## Two places, same account
 
@@ -365,8 +359,7 @@ There are two ways to point. Write @house-style.md and the file is loaded every 
 
 Claude reads \`CLAUDE.md\` and tries to follow it. Settings are rules the program enforces, so Claude can't talk its way round them.
 
-- **In CLAUDE.md:** "Use official sources and tell me when you do." Flexible, so Claude can still settle a contradiction between two documents by checking an official source. But it's a request, and in a long chat Claude can drift.
-- **In .claude/settings.json:** Claude has to ask you before every web search, or can't search at all. Enforced every time, in that folder only.
+[VISUAL:request-vs-rule]
 
 You don't need to type the file. Ask Claude: "In this folder's .claude settings, make Claude ask me before any web search or web page." For a hard stop, change ask to deny. Use both together: the \`CLAUDE.md\` rule says which sources are good, and the setting makes sure you see each one.
 
@@ -391,10 +384,7 @@ Start a new chat for each new piece of work. It forgets the last conversation an
 
 ## Which place for which job
 
-Same Claude, same account. The difference is what the work is for.
-
-- **VS Code, in a folder,** is best for content you build up and keep in files: guides, question banks, reports, many files read together, with your rules in \`CLAUDE.md\`.
-- **The Claude app** is best for things you show people and things that repeat: artifacts you share by link, projects for one area of work and scheduled tasks that run on their own.
+[VISUAL:which-place]
 
 If the Word and Excel add-ins aren't available to you, the app is also the easiest way to work on a spreadsheet: attach it to a chat.
 
@@ -411,6 +401,8 @@ As an artifact, a risk register becomes one page: what's most likely and most se
 > - The 5 highest risks with owner, next action and due date.
 > - What changed since the last version, if the file shows it.
 > Use only what is in the file. If a field is empty, show it as empty instead of filling it in. Keep it to one screen, in plain English for board members.
+
+[VISUAL:risk-heat-map]
 
 Then pick two dots and check them against the spreadsheet. Are they in the right square? Would a board member understand it without you in the room?
 
@@ -472,14 +464,9 @@ Other good first jobs: before each board meeting, summarise what changed in the 
 
 ## The short version
 
-- **Reports, translation, your folders:** Claude in VS Code. It works with your files, your \`CLAUDE.md\` and your scorecards.
-- **Where else a picture appears:** Google Lens, Yandex, Bing and TinEye. One engine finding nothing proves nothing, so use all four.
-- **Where a photo was taken:** ChatGPT, Gemini or Picarta. They guess with confidence. A guess is a lead to check, never a finding.
-- **Scans, tables, text in images:** Mistral or Gemini. Check the text against the original.
-- **Images for a proposal or a post:** ChatGPT or Gemini. Never make images of real people or anything that could pass as evidence.
-- **Sensitive documents kept in Europe:** Mistral. It needs more setup than Claude.
-- **Personal data you can't send anywhere:** a model on your own machine.
-- **Specialist geolocation, for firms:** Raven (the old GeoSpy). For vetted companies, only worth it if it becomes a weekly job.
+[VISUAL:tool-map]
+
+For specialist geolocation there's also Raven (the old GeoSpy), for vetted companies. It's only worth it if it becomes a weekly job.
 
 ## Find where a picture appears
 
@@ -525,6 +512,8 @@ Three levels, for three kinds of work. Decide which level a job needs before you
 2. **Stays in Europe: Mistral.** A specialist that only reads the sensitive documents, for a client who wants their data processed in the EU. You build the system with Claude.
 3. **Never leaves the office: a machine of your own.** For a list of people with personal details, the office machine takes the names out and puts codes in, with no internet. The clean version, where no one can be identified, goes to Claude for the analysis and the chart. The key that turns the codes back into names stays on the office machine.
 
+[VISUAL:names-stay-in-the-office]
+
 If your team needs the second or third level set up, [get in touch](/contact).`,
   },
   {
@@ -542,16 +531,17 @@ If your team needs the second or third level set up, [get in touch](/contact).`,
 
 Put a folder called team-library on the shared drive you already use (Google Drive or SharePoint) and sync it to everyone's computer. It holds how you do the work. Client documents stay in the case folders, and the library never holds them.
 
-- **README.md:** what's here and who looks after each job.
-- **VOICE.md:** how your firm writes, in each language you work in.
-- **design-system/:** your brand, from the Claude app.
-- **jobs/:** one folder per job you repeat, such as report-review/, translation/ or interview-report/. Each holds INSTRUCTIONS.md (the standing brief), SCORECARD.md (the checks every draft has to pass), LOG.md (what changed, when and why) and examples/ (a good past report as text, redacted).
+[VISUAL:team-library]
+
+There's one folder under jobs/ for each job you repeat, such as report review, translation or interview reports. Each holds the standing brief, the scorecard and a log of what changed and why, plus a good past report as text, redacted.
 
 Each job has one owner who looks after its files. Anyone can use them.
 
 ## Point to it, don't copy it
 
-When you copy the files into each case, you end up with ten versions and nobody knows which is right. A fix made in one case never reaches the others. Point to the library instead, and a fix made once reaches every case.
+When you copy the files into each case, you end up with ten versions and nobody knows which is right.
+
+[VISUAL:copy-vs-point]
 
 There are two ways to point.
 
@@ -605,22 +595,13 @@ When several people start editing the library at once, the next step is a GitHub
 
 That's all the vocabulary. Claude does the rest when you ask in plain words.
 
-- **Repository:** a project folder that remembers every version of every file, and who changed what.
-- **Organisation:** your company's own space on GitHub. It holds your repositories and decides who sees each one.
-- **Save and share:** keeps a version with a one-line reason and sends it to GitHub, so the others get it.
-- **Get latest:** brings everyone else's changes onto your computer. Do it each time you start.
+[VISUAL:four-words]
 
 ## One repository or several
 
 Both work. They suit different stages.
 
-### One team repository
-
-One repository with a \`CLAUDE.md\`, a library/ folder for instructions and scorecards, and a tools/ folder with one folder per tool. There's one thing to set up and one place to look, tools reuse the library and each other, and "get latest" once gives you everything. But everyone in it sees everything, and it gets crowded as it grows.
-
-### One repository per tool
-
-A library repository plus one per tool, each with its own \`CLAUDE.md\`, its own people and its own history. You choose who sees each tool, a tool can run online or go to a client on its own, and each has a clear history. But there's more to set up and remember, and the library has to be linked into each one.
+[VISUAL:one-or-several]
 
 ## Start with one
 

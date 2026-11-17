@@ -1330,6 +1330,18 @@ export async function seedBlogPostsIfEmpty() {
     }
   }
 
+  // The handout posts went out first without diagrams (commit 22248ca). If one
+  // is in the DB still in that first version (no diagrams, same title), replace
+  // its body with the version that has them. Runs once per post: after this
+  // the body contains [VISUAL:, so later /admin edits are never touched.
+  for (const post of HANDOUT_POSTS) {
+    const live = await storage.getBlogPostBySlug(post.slug);
+    if (live && !live.content.includes("[VISUAL:") && live.title === post.title && post.content.includes("[VISUAL:")) {
+      await storage.updateBlogPost(post.slug, { content: post.content });
+      console.log(`Added the diagrams to ${post.slug}.`);
+    }
+  }
+
   // Seed default site content if not yet stored
   const portfolioContent = await storage.getSiteContent("portfolio");
   if (!portfolioContent) {
