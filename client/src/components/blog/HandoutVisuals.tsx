@@ -137,7 +137,7 @@ function Steps({ steps }: { steps: { title: string; text: string; tag?: string; 
   );
 }
 
-// ── From your sandbox to something customers use ────────────────────────────
+// ── From your lab to something customers use ────────────────────────────
 
 function FourPlaces() {
   return (
@@ -147,14 +147,14 @@ function FourPlaces() {
         <span className="flex-[1.4] rounded-md bg-green-50 text-green-800 text-center py-1.5">In use</span>
       </div>
       <Flow nodes={[
-        { icon: Laptop, title: "My sandbox", sub: "your own computer, only you", tone: "lead" },
-        { icon: Users, title: "Team sandbox", sub: "shared, inside the organisation", tone: "lead" },
+        { icon: Laptop, title: "My lab", sub: "your own computer, only you", tone: "lead" },
+        { icon: Users, title: "Team lab", sub: "shared, inside the organisation", tone: "lead" },
         { icon: PenLine, title: "The check", sub: "signed off by IT, or by us", tone: "gate" },
         { icon: Store, title: "Live", sub: "customers, colleagues, real work", tone: "go" },
       ]} />
       <div className="flex items-center gap-2 mt-4 text-xs text-muted-foreground">
         <RotateCcw className="w-4 h-4 text-primary shrink-0" />
-        <span>A change to a live tool goes back through the team sandbox and the check. Nobody edits the live version directly.</span>
+        <span>A change to a live tool goes back through the team lab and the check. Nobody edits the live version directly.</span>
       </div>
     </Frame>
   );
@@ -164,8 +164,8 @@ function RoadToLive() {
   return (
     <Frame title="Step by step, from idea to live">
       <Steps steps={[
-        { title: "Build in your own sandbox", text: "Your folders, your rules file and Claude on your computer.", tag: "In the programme" },
-        { title: "Set up the team sandbox", text: "GitHub organisation, shared server or office machine, a login each, data rules.", tag: "Set-up, quoted once", tone: "us" },
+        { title: "Build in your own lab", text: "Your folders, your rules file and Claude on your computer.", tag: "In the programme" },
+        { title: "Set up the team lab", text: "GitHub organisation, shared server or office machine, a login each, data rules.", tag: "Set-up, quoted once", tone: "us" },
         { title: "Build and test together", text: "One repository. The people who'll use it try it on real examples and score it.", tag: "Your team, with support" },
         { title: "The check", text: "The sign-off pack, five questions, a specialist if needed, a signature.", tag: "Quoted per tool", tone: "us" },
         { title: "Go live", text: "The signed-off version moves across. We watch the first week closely.", tag: "Part of the check", tone: "go" },
@@ -602,7 +602,7 @@ function GithubFourWords() {
 }
 
 export const HANDOUT_VISUALS: Record<string, Record<string, ReactNode>> = {
-  "from-sandbox-to-live": { "four-places": <FourPlaces />, "road-to-live": <RoadToLive /> },
+  "from-lab-to-live": { "four-places": <FourPlaces />, "road-to-live": <RoadToLive /> },
   "define-good-before-you-hand-it-over": { "same-chart-twice": <SameChartTwice />, "scorecard": <ScorecardTable /> },
   "getting-your-content-ready-for-ai": { "three-steps": <ContentThreeSteps />, "tagged-part": <TaggedPart /> },
   "write-it-down-once": { "one-folder-per-job": <OneFolderPerJob />, "scorecard-ladder": <ScorecardLadder /> },

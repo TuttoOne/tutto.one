@@ -433,7 +433,7 @@ export async function registerRoutes(
 
   // Background Italia handouts from the 13 Nov call (specialist AI tools; one team library for
   // the .md files): same arrangement, link only, not indexed.
-  for (const page of ["bi-specialist-tools", "bi-team-files", "bi-github", "sandbox-to-live"]) {
+  for (const page of ["bi-specialist-tools", "bi-team-files", "bi-github", "lab-to-live"]) {
     app.get([`/${page}`, `/${page}/`], (_req, res) => {
       res.setHeader("X-Robots-Tag", "noindex, nofollow");
       res.sendFile(path.join(deckDir, page, "index.html"));
@@ -466,6 +466,9 @@ export async function registerRoutes(
   // course page says it better, so the nav and old links go there. Only the
   // bare path: /praxis/learn is the course reader and stays where it is.
   app.get(["/praxis", "/praxis/"], (_req, res) => res.redirect(301, "/praxis-programme"));
+  // The lab handout and its blog post were called sandbox until 17 Nov 2026.
+  app.get(["/sandbox-to-live", "/sandbox-to-live/"], (_req, res) => res.redirect(301, "/lab-to-live"));
+  app.get(["/blog/from-sandbox-to-live", "/blog/from-sandbox-to-live/"], (_req, res) => res.redirect(301, "/blog/from-lab-to-live"));
 
   // Pocket Praxis, the course decks as a phone game: link only, not indexed. Served from
   // the folder with a trailing slash, because its scripts, course files and offline

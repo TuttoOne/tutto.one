@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Praxis handout: how a team builds its own tools without touching the systems the business runs on. The four places a tool lives, the check before it goes live, who signs it off and what we set up with you.">
-<title>From sandbox to live | Tutto</title>
+<title>From lab to live | Tutto</title>
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -244,7 +244,7 @@
   ul.pro .y .ico { color: var(--pass); } ul.pro .n .ico { color: var(--stop); }
   .zone > .node { flex: 1 1 0; }
 
-  /* Sandbox to live handout (17 Nov 2026), for every team: same tokens and diagrams as /bi-github. */
+  /* Lab to live handout (17 Nov 2026), for every team: same tokens and diagrams as /bi-github. */
   .node.gate { background: var(--paper); border: 2px dashed var(--amber); }
   .node.gate .ico { color: var(--amber-ink); }
   .back-loop { display: flex; align-items: center; gap: 8px; margin: 10px 0 0; font-size: 14px; color: var(--muted); }
@@ -319,7 +319,7 @@
 <main class="doc">
   <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
   <p class="eyebrow">Praxis programme · Handout · Building safely</p>
-  <h1>From your sandbox to something customers use</h1>
+  <h1>From your lab to something customers use</h1>
   <p class="lede">Your team can build its own tools now. The worry we hear in every company is how to do that without breaking the systems everyone already relies on. The answer is to build in one place and use in another, with someone who checks each tool before it moves across.</p>
   <div class="meta">
     <span>For <b>any team building its own tools</b></span>
@@ -339,27 +339,27 @@
     <h2>The four places a tool lives</h2>
     <p class="sub">Two places to build and try things, then one check and the live system. A tool only ever moves left to right.</p>
     <div class="bands" aria-hidden="true"><span class="l">Building and trying</span><span class="p">In use</span></div>
-    <div class="flow" role="img" aria-label="My sandbox on your own computer, then the team sandbox shared inside the organisation, then the check signed off by IT or by us, then live, used by customers and colleagues.">
-      <div class="node lead"><svg class="ico"><use href="#i-laptop"/></svg><b>My sandbox</b><span>your own computer, only you</span></div>
+    <div class="flow" role="img" aria-label="My lab on your own computer, then the team lab shared inside the organisation, then the check signed off by IT or by us, then live, used by customers and colleagues.">
+      <div class="node lead"><svg class="ico"><use href="#i-laptop"/></svg><b>My lab</b><span>your own computer, only you</span></div>
       <span class="arr"><svg class="ico"><use href="#i-arrow"/></svg></span>
-      <div class="node lead"><svg class="ico"><use href="#i-team"/></svg><b>Team sandbox</b><span>shared, inside the organisation</span></div>
+      <div class="node lead"><svg class="ico"><use href="#i-team"/></svg><b>Team lab</b><span>shared, inside the organisation</span></div>
       <span class="arr"><svg class="ico"><use href="#i-arrow"/></svg></span>
       <div class="node gate"><svg class="ico"><use href="#i-sign"/></svg><b>The check</b><span>signed off by IT, or by us</span></div>
       <span class="arr"><svg class="ico"><use href="#i-arrow"/></svg></span>
       <div class="node proof"><svg class="ico"><use href="#i-store"/></svg><b>Live</b><span>customers, colleagues, real work</span></div>
     </div>
-    <p class="back-loop"><svg class="ico"><use href="#i-back"/></svg>A change to a live tool goes back to the team sandbox and through the check again. Nobody edits the live version directly.</p>
+    <p class="back-loop"><svg class="ico"><use href="#i-back"/></svg>A change to a live tool goes back to the team lab and through the check again. Nobody edits the live version directly.</p>
   </section>
 
   <section id="words">
     <h2>The words we use, and IT's words</h2>
-    <p class="sub">Engineers say development and production. Most of the people building tools now aren't engineers, so we use plain names. Keep this table for when you talk to IT or a supplier.</p>
+    <p class="sub">Engineers say development and production. Most of the people building tools now aren't engineers, so we use plain names. We call the first two a lab, the way R&amp;D teams and the AI labs do: a place to experiment. Keep this table for when you talk to IT or a supplier.</p>
     <div class="tablewrap">
       <table>
         <thead><tr><th>We say</th><th>IT says</th><th>What it means</th></tr></thead>
         <tbody>
-          <tr><td><b>My sandbox</b></td><td>Local development</td><td>Folders on your computer where you try things with Claude. Only you see it.</td></tr>
-          <tr><td><b>Team sandbox</b></td><td>Development or staging server</td><td>A shared copy the whole team can open, use and test. It sits inside the company, behind a login.</td></tr>
+          <tr><td><b>My lab</b></td><td>Local development</td><td>Folders on your computer where you try things with Claude. Only you see it.</td></tr>
+          <tr><td><b>Team lab</b></td><td>Development or staging server</td><td>A shared copy the whole team can open, use and test. It sits inside the company, behind a login.</td></tr>
           <tr><td><b>The check</b></td><td>Review, QA, release approval</td><td>Someone who didn't build the tool looks at it and signs it off.</td></tr>
           <tr><td><b>Live</b></td><td>Production</td><td>The version customers and colleagues rely on every day, with real information in it.</td></tr>
         </tbody>
@@ -372,7 +372,7 @@
     <p class="sub">The further right, the more people depend on it, so the more care it gets.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th></th><th>My sandbox</th><th>Team sandbox</th><th>Live</th></tr></thead>
+        <thead><tr><th></th><th>My lab</th><th>Team lab</th><th>Live</th></tr></thead>
         <tbody>
           <tr><td><b>Who uses it</b></td><td>You</td><td>Your team, each with their own login</td><td>Customers and colleagues</td></tr>
           <tr><td><b>What's in it</b></td><td>Samples and the documents you're allowed to use</td><td>Real documents can be used, and they stay inside the organisation. Nothing is public</td><td>Real customers, real workflows, real information</td></tr>
@@ -383,7 +383,7 @@
       </table>
     </div>
 
-    <h3 style="margin-top:28px">Where the team sandbox runs</h3>
+    <h3 style="margin-top:28px">Where the team lab runs</h3>
     <p class="sub" style="margin-top:6px">As soon as a tool is for more than one person, it needs somewhere shared to run. Two ways to do it, and the code lives in your GitHub organisation either way.</p>
     <div class="two">
       <div class="card">
@@ -440,8 +440,8 @@
     <h2>Step by step, from idea to live</h2>
     <p class="sub">Step 1 is what we already do in the programme. Steps 2 to 6 are where you need a hand, and each one is a separate piece of work we quote for.</p>
     <ol class="road">
-      <li><span class="n">1</span><div><h3>Build in your own sandbox</h3><p>Your folders, your rules file and Claude on your computer. You try things and nothing else is touched.</p></div><span class="tag">In the programme</span></li>
-      <li class="us"><span class="n">2</span><div><h3>Set up the team sandbox</h3><p>Your GitHub organisation, the shared server or office machine, a login for each person and the rules for what data goes in.</p></div><span class="tag">Set-up, quoted once</span></li>
+      <li><span class="n">1</span><div><h3>Build in your own lab</h3><p>Your folders, your rules file and Claude on your computer. You try things and nothing else is touched.</p></div><span class="tag">In the programme</span></li>
+      <li class="us"><span class="n">2</span><div><h3>Set up the team lab</h3><p>Your GitHub organisation, the shared server or office machine, a login for each person and the rules for what data goes in.</p></div><span class="tag">Set-up, quoted once</span></li>
       <li><span class="n">3</span><div><h3>Build and test together</h3><p>Everyone works on the same repository. The people who'll use the tool try it on real examples and score it.</p></div><span class="tag">Your team, with support</span></li>
       <li class="us"><span class="n">4</span><div><h3>The check</h3><p>The sign-off pack, the five questions, a specialist if the tool needs one, and a signature.</p></div><span class="tag">Quoted per tool</span></li>
       <li class="go"><span class="n">5</span><div><h3>Go live</h3><p>The signed-off version moves across. We tell the people using it what changed and watch the first week closely.</p></div><span class="tag">Part of the check</span></li>
@@ -454,7 +454,7 @@
     <p class="sub">Building on laptops is where every team starts, and it works for one person. The moment a tool is shared, it needs a proper home.</p>
     <div class="vs">
       <div class="no">
-        <div class="hd"><svg class="ico"><use href="#i-x"/></svg><h3>Shared without a team sandbox</h3></div>
+        <div class="hd"><svg class="ico"><use href="#i-x"/></svg><h3>Shared without a team lab</h3></div>
         <ul class="pro" style="margin-top:4px">
           <li class="n"><svg class="ico"><use href="#i-x"/></svg>The tool runs on one laptop and stops when that person is away</li>
           <li class="n"><svg class="ico"><use href="#i-x"/></svg>Copies get emailed round and nobody knows which one is right</li>
@@ -463,7 +463,7 @@
         </ul>
       </div>
       <div class="yes">
-        <div class="hd"><svg class="ico"><use href="#i-check"/></svg><h3>With a team sandbox and a check</h3></div>
+        <div class="hd"><svg class="ico"><use href="#i-check"/></svg><h3>With a team lab and a check</h3></div>
         <ul class="pro" style="margin-top:4px">
           <li class="y"><svg class="ico"><use href="#i-check"/></svg>Everyone uses the same version, from wherever they work</li>
           <li class="y"><svg class="ico"><use href="#i-check"/></svg>Every change has a name, a reason and a way back</li>
@@ -474,14 +474,14 @@
     </div>
 
     <ul class="offer" style="margin-top:20px">
-      <li><div class="hd"><svg class="ico"><use href="#i-wrench"/></svg><h3>Team sandbox set-up</h3></div><p>We choose the server or office machine with you, set up your GitHub organisation, logins and data rules, then move your first tool in.</p><p class="price">Quoted once</p></li>
+      <li><div class="hd"><svg class="ico"><use href="#i-wrench"/></svg><h3>Team lab set-up</h3></div><p>We choose the server or office machine with you, set up your GitHub organisation, logins and data rules, then move your first tool in.</p><p class="price">Quoted once</p></li>
       <li><div class="hd"><svg class="ico"><use href="#i-sign"/></svg><h3>The check and going live</h3></div><p>The sign-off pack, the review against the five questions, the signature, the move to live and the first week after.</p><p class="price">Quoted per tool</p></li>
       <li><div class="hd"><svg class="ico"><use href="#i-person"/></svg><h3>Specialists when you need them</h3></div><p>Security or data protection, or someone who knows your accounting, stock or CRM system. I find them, brief them and stay in the loop.</p><p class="price">Quoted when needed</p></li>
       <li><div class="hd"><svg class="ico"><use href="#i-calendar"/></svg><h3>Looking after it</h3></div><p>A monthly look at what's live, changes taken back through the check, and someone to call when it misbehaves.</p><p class="price">Monthly</p></li>
     </ul>
 
     <div class="callout">
-      <p><b>The first step:</b> pick the one tool your team most wants to share. We look at it together for an hour, and I come back with a quote for the team sandbox and its first sign-off.</p>
+      <p><b>The first step:</b> pick the one tool your team most wants to share. We look at it together for an hour, and I come back with a quote for the team lab and its first sign-off.</p>
     </div>
   </section>
 </main>

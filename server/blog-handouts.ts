@@ -14,9 +14,9 @@ const HANDOUT_DATE = "Nov 17, 2026";
 
 export const HANDOUT_POSTS = [
   {
-    // From /sandbox-to-live, which is written for any team and has no client detail.
-    slug: "from-sandbox-to-live",
-    title: "From your sandbox to something customers use",
+    // From /lab-to-live, which is written for any team and has no client detail.
+    slug: "from-lab-to-live",
+    title: "From your lab to something customers use",
     excerpt: "Teams can build their own tools now. The question we hear in every company is how to do that without breaking the systems everyone already relies on. Build in one place and use in another, with someone who checks each tool before it moves across.",
     date: HANDOUT_DATE,
     readTime: "5 min read",
@@ -32,10 +32,10 @@ Two places to build and try things, then one check and the live system. A tool o
 
 ## The words we use, and IT's words
 
-Engineers say development and production. Most of the people building tools now aren't engineers, so we use plain names. Keep this list for when you talk to IT or a supplier.
+Engineers say development and production. Most of the people building tools now aren't engineers, so we use plain names. We call the first two a lab, the way R&D teams and the AI labs do: a place to experiment. Keep this list for when you talk to IT or a supplier.
 
-- **My sandbox** is what IT calls local development: folders on your computer where you try things with Claude.
-- **Team sandbox** is a development or staging server: a shared copy the whole team can open, use and test, inside the company.
+- **My lab** is what IT calls local development: folders on your computer where you try things with Claude.
+- **Team lab** is a development or staging server: a shared copy the whole team can open, use and test, inside the company.
 - **The check** is review, QA or release approval: someone who didn't build the tool looks at it and signs it off.
 - **Live** is production: the version customers and colleagues rely on every day, with real information in it.
 
@@ -43,11 +43,11 @@ Engineers say development and production. Most of the people building tools now 
 
 The further right, the more people depend on it, so the more care it gets.
 
-- **In your sandbox** you use samples and the documents you're allowed to use. If it breaks you start again and nobody notices. The work is a folder on your computer and you look after it.
-- **In the team sandbox** real documents can be used, and they stay inside the organisation. Nothing is public. If it breaks the team waits while it's fixed. The work is kept in a GitHub repository in your organisation's account, and each tool has one named owner.
+- **In your lab** you use samples and the documents you're allowed to use. If it breaks you start again and nobody notices. The work is a folder on your computer and you look after it.
+- **In the team lab** real documents can be used, and they stay inside the organisation. Nothing is public. If it breaks the team waits while it's fixed. The work is kept in a GitHub repository in your organisation's account, and each tool has one named owner.
 - **Live** has real customers, real workflows and real information. If it breaks, customers notice. It runs the signed-off version from that same repository, and your IT team looks after it, or we do until you have someone.
 
-## Where the team sandbox runs
+## Where the team lab runs
 
 As soon as a tool is for more than one person, it needs somewhere shared to run. There are two ways to do it, and the code lives in your GitHub organisation either way.
 
@@ -85,11 +85,11 @@ Step 1 is what we do in the Praxis programme. Steps 2 to 6 are where you might w
 
 ## Why it's worth setting up
 
-Building on laptops is where every team starts, and it works for one person. The moment a tool is shared without a team sandbox, it runs on one laptop and stops when that person is away. Copies get emailed round and nobody knows which one is right. A quick fix goes straight to the people using it, and IT finds out last and says no.
+Building on laptops is where every team starts, and it works for one person. The moment a tool is shared without a team lab, it runs on one laptop and stops when that person is away. Copies get emailed round and nobody knows which one is right. A quick fix goes straight to the people using it, and IT finds out last and says no.
 
-With a team sandbox and a check, everyone uses the same version from wherever they work. Every change has a name, a reason and a way back. Testing happens where customers can't see it, and IT gets a pack they can say yes to.
+With a team lab and a check, everyone uses the same version from wherever they work. Every change has a name, a reason and a way back. Testing happens where customers can't see it, and IT gets a pack they can say yes to.
 
-We set up the team sandbox with you, run the check and the move to live for each tool, find specialists when you need them and look after it monthly if you want. The first step is to pick the one tool your team most wants to share. We look at it together for an hour, and I come back with a quote for the team sandbox and its first sign-off. [Get in touch](/contact).`,
+We set up the team lab with you, run the check and the move to live for each tool, find specialists when you need them and look after it monthly if you want. The first step is to pick the one tool your team most wants to share. We look at it together for an hour, and I come back with a quote for the team lab and its first sign-off. [Get in touch](/contact).`,
   },
   {
     // From /session-2. The firm in it, Fenwick & Rowe, is made up.
@@ -639,6 +639,6 @@ Put the repository in a plain folder such as Documents/GitHub. Not in Google Dri
 
 If Claude finds something, it goes on the shared drive or on the list of files GitHub ignores, and the tool reads it from there. Every day after that, say "get latest" when you start and "save and share: <what you changed>" when you're done. If two of you changed the same lines, Claude says so and suggests how to combine them. Read it, then say which version to keep.
 
-When a tool in the repository is ready for people outside the team, it goes through a check before it goes live. That's in [From your sandbox to something customers use](/blog/from-sandbox-to-live).`,
+When a tool in the repository is ready for people outside the team, it goes through a check before it goes live. That's in [From your lab to something customers use](/blog/from-lab-to-live).`,
   },
 ];

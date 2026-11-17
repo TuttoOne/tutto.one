@@ -1279,6 +1279,14 @@ async function createSeedPost(post: SeedPost) {
 }
 
 export async function seedBlogPostsIfEmpty() {
+  // The lab handout post was first published as from-sandbox-to-live (17 Nov 2026).
+  // Drop that copy so the seed adds it again as from-lab-to-live; routes.ts
+  // redirects the old address.
+  if (await storage.getBlogPostBySlug("from-sandbox-to-live")) {
+    await storage.deleteBlogPost("from-sandbox-to-live");
+    console.log("Removed from-sandbox-to-live; the seed adds it back as from-lab-to-live.");
+  }
+
   const count = await storage.getBlogPostCount();
   if (count === 0) {
     console.log("Seeding blog posts...");
