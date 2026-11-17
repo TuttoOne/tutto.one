@@ -53,6 +53,7 @@ export const LIBRARY_INFO: Record<string, LibraryInfo> = {
   "/bi-specialist-tools": { kind: "Handout", topic: "tools", summary: "Picture searches, finding where a photo was taken, faces, scans and the office machine." },
   "/bi-team-files": { kind: "Handout", topic: "team", summary: "One team library for instructions and scorecards, and pointing to it from each case." },
   "/bi-github": { kind: "Handout", topic: "team", summary: "Why we start with one team repository, when a tool gets its own and how to set up your account." },
+  "/sandbox-to-live": { kind: "Handout", topic: "team", summary: "Building tools without touching live systems: the team sandbox, the check before going live and who signs it off." },
   "/design-system": { kind: "Guide", topic: "brief", summary: "Set up your brand in Claude so what it makes looks like yours." },
   "/workspaces": { kind: "Guide", topic: "team", summary: "Link a shared folder into each project instead of copying it." },
   "/claude-privacy": { kind: "Guide", topic: "rules", summary: "Where the training switch is in each Claude app, and what it does and doesn't cover." },

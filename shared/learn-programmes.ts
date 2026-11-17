@@ -84,6 +84,7 @@ const M = {
   workspaces: { label: "Workspaces guide: share folders without copying them", href: "/workspaces", claude: "/workspaces/praxis-workspaces.md" },
   claudePrivacy: { label: "Privacy guide: stop Claude training on your chats", href: "/claude-privacy", claude: "/claude-privacy/praxis-claude-privacy.md" },
   claudeSchedules: { label: "Scheduled tasks guide: let Claude do the weekly jobs", href: "/claude-schedules", claude: "/claude-schedules/praxis-claude-schedules.md" },
+  sandboxToLive: { label: "Handout: from your sandbox to something customers use", href: "/sandbox-to-live" },
 } satisfies Record<string, Material>;
 
 const AI_FLUENT_TEAM: Programme = {
@@ -157,7 +158,7 @@ const AI_FLUENT_TEAM: Programme = {
       icon: "robot",
       what: "Your first agent: a job that runs on its own, on your data, checked against your scorecard. Then hand it over cleanly, so it is still changeable in a year.",
       practice: "For the next 30 days, send one piece of work a week for review.",
-      materials: [M.subagents, M.claudeCodeInAction],
+      materials: [M.subagents, M.claudeCodeInAction, M.sandboxToLive],
     },
   ],
 };
@@ -209,7 +210,7 @@ const BACKGROUND_ITALIA: Programme = {
       what: "Connect the assistant to your files within the rules from week 1. Replace copy and paste for the recurring client work with structured input from your own templates: report data, contract drafts with placeholders instead of real names, new landing pages from your existing structure.",
       leaveWith: "Your first small tools, set up on your own machines",
       practice: "Use your first tool on a real job and keep a note of anything it got wrong.",
-      materials: [M.biTeamFiles, M.biGithub, M.biSpecialistTools, M.workspaces, M.cowork, M.mcp],
+      materials: [M.biTeamFiles, M.biGithub, M.sandboxToLive, M.biSpecialistTools, M.workspaces, M.cowork, M.mcp],
     },
     {
       number: 6,
@@ -272,7 +273,7 @@ const SOLO_FAST_TRACK: Programme = {
       what: "We build the first version of the app for others, one piece at a time, reusing what already works in your own tools. At each step we explain how and why, so you can carry on without us.",
       leaveWith: "A first working version of the app on your own machine",
       practice: "Add one small feature on your own and bring what went wrong.",
-      materials: [M.claudeCode101, M.claudeCodeInAction],
+      materials: [M.claudeCode101, M.claudeCodeInAction, M.sandboxToLive],
     },
     {
       number: 4,
@@ -353,7 +354,7 @@ const HSA_CONTENT_TEAM: Programme = {
       what: "Short digital chunks for a blended lesson, on Stock Receiving. Storyboard and build a short animated clip, write a narration rules file from your own scripts so Claude can draft the next one, and decide what to do with a video you didn't make. Then where these fit in a lesson and what happens after the programme.",
       leaveWith: "An animated clip, a narration rules file and a plan for January",
       practice: "Narrate one more deck with your rules file and note every line you had to change.",
-      materials: [M.scorecardTool, M.handoverTool],
+      materials: [M.scorecardTool, M.handoverTool, M.sandboxToLive],
     },
   ],
 };
