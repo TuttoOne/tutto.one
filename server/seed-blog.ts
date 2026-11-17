@@ -1,5 +1,6 @@
 import { storage } from "./storage";
 import { WEBINAR_SLUG, WEBINAR_REPLAY_URL, FAQ_EN, faqToMarkdown } from "@shared/webinar-rentree-ia";
+import { HANDOUT_POSTS } from "./blog-handouts";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // This is the SINGLE source of truth for seeding blog posts into the database.
@@ -1241,6 +1242,7 @@ ${faqToMarkdown(FAQ_EN)}
 
 More sessions are coming, shorter and more focused, going deeper on the topics you were most interested in: tokens and costs, memory, privacy, and skills shared across a company. And if you'd rather have help with your own tools and your own case, we also run one-to-one and small-group sessions: [book a call with Altiplane](https://altiplane.fr), [write to Tutto](/contact), or see [the calendar of upcoming sessions](/calendar).`,
   },
+  ...HANDOUT_POSTS,
 ];
 
 const DEFAULT_PORTFOLIO_JSON = JSON.stringify([
