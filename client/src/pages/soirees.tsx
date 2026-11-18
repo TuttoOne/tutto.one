@@ -54,6 +54,11 @@ const COPY = {
     fr: "Pas besoin d'avoir une entreprise : indépendants, artisans, commerçants, propriétaires de gîtes ou simples curieux, tout le monde est bienvenu.",
     en: "You don't need a company: freelancers, tradespeople, shopkeepers, gîte owners or anyone curious, everyone's welcome.",
   },
+  /** Free or paid AI (18 November 2026, a friend asked if the free Mistral is enough). */
+  forYouPlan: {
+    fr: "La version gratuite de l'IA suffit pour voir comment tout fonctionne, et on vous le montre. On vous conseille quand même un abonnement payant : il vous permet de choisir de ne pas partager vos données, et vous tirez bien plus des outils.",
+    en: "The free version of the AI is enough to see how it all works, and we'll show you. We still recommend a paid subscription: it lets you choose not to share your data, and you get much more out of the tools.",
+  },
   /** The running example (9 November 2026). Say "préparer", never "déclarer à votre place". */
   exampleTitle: { fr: "L'exemple : vos papiers", en: "The example: your paperwork" },
   exampleNote: {
@@ -381,6 +386,7 @@ export function EventSeries({ series }: { series: string }) {
 
       <p id="pour-vous" style={{ ...P, scrollMarginTop: 96, padding: "12px 14px", background: "#fdf6ec", border: "1px solid #f0d9b0", borderRadius: 6 }}>
         <strong>{w.t("forYouTitle")}.</strong> {w.t("forYouWho")}
+        <span style={{ display: "block", marginTop: 8 }}>{w.t("forYouPlan")}</span>
       </p>
 
       {/* The arrows only make sense while the example sits on one line. */}
