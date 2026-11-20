@@ -5,10 +5,10 @@ import { createHmac, randomBytes, timingSafeEqual } from "crypto";
  * Bot screening for the public forms (enquiries, leads, workshop bookings).
  * Nothing here is visible to a visitor. Each submission gets one of three verdicts:
  *
- * - drop: the hidden honeypot field was filled in, or the form was sent faster
- *   than a person can type. We answer as if it worked, save nothing, mail nothing.
+ * - drop: the hidden honeypot field was filled in, the form was sent faster
+ *   than a person can type, or the sender is on the blocklist. We answer as if it worked, save nothing, mail nothing.
  * - flag: it got through but looks like spam (no form token, a link to someone
- *   else's site, a throwaway domain, a generated address). It is kept and mailed,
+ *   else's site, a throwaway domain, a generated address, sales-pitch wording). It is kept and mailed,
  *   with "[Likely spam]" in the subject, so a false positive costs nothing.
  * - ok: everything else.
  */
@@ -80,6 +80,33 @@ const DISPOSABLE = new Set([
 ]);
 const CHEAP_SUFFIXES = [".my.id", ".biz.id", ".web.id", ".xyz", ".top", ".icu", ".click", ".buzz", ".rest", ".cfd", ".sbs"];
 
+/**
+ * Senders who have already pitched us through the forms. Their submissions are
+ * dropped like a filled honeypot. Add an address in lower case, with a note.
+ */
+const BLOCKED_SENDERS = new Set([
+  "jwer.pro@gmail.com", // "Jevr Jonas": AI receptionist pitch 18 Nov 2026, Reddit reviews pitch 19 Nov 2026
+]);
+
+/**
+ * Phrases from cold sales pitches sent through the contact form. One match is
+ * enough to flag, since a flagged message still reaches the inbox.
+ */
+const PITCH_PATTERNS: RegExp[] = [
+  /\bI (?:built|made|created) (?:an? )?(?:AI|custom|free|demo)\b/i,
+  /\bAI (?:receptionist|voice agent|phone agent|chatbot) for\b/i,
+  /\btrained it on your website\b/i,
+  /\breply (?:with )?["“']?yes["”']?/i,
+  /\b(?:rank|ranking|first page|page one|position) (?:on|of) Google\b/i,
+  /\bposizionan[oi] su Google\b/i,
+  /\bpost(?:s)? (?:su|on) Reddit\b/i,
+  /\breviews?\b.{0,60}\b(?:Google|Trustpilot)\b.{0,60}\b(?:none|no|missing|nessuna)\b/i,
+  /\b(?:SEO|backlinks?|guest posts?|link building|web ?design|app development) (?:services?|packages?|agency)\b/i,
+  /\b(?:boost|increase|grow) your (?:traffic|rankings?|sales|leads)\b/i,
+  /\bmi faccia sapere se le interessa\b/i,
+  /\blet me know if (?:you(?:'re| are)|you'd be) interested\b/i,
+];
+
 function registrable(host: string) {
   return host.toLowerCase().replace(/^www\./, "");
 }
@@ -117,6 +144,9 @@ export function screen(req: Request, content: { email: string; message?: string 
   if (typeof body.website === "string" && body.website.trim() !== "") {
     return { action: "drop", reasons: ["honeypot filled"] };
   }
+  if (BLOCKED_SENDERS.has(content.email.trim().toLowerCase())) {
+    return { action: "drop", reasons: ["sender on the blocklist"] };
+  }
   const age = tokenAge(body.formToken);
   if (age !== null && age < MIN_AGE_MS) return { action: "drop", reasons: [`sent ${age}ms after the form loaded`] };
 
@@ -125,6 +155,8 @@ export function screen(req: Request, content: { email: string; message?: string 
   else if (age > MAX_AGE_MS) reasons.push("form token older than two days");
 
   const signals = contentSignals(content.email, content.message ?? "");
+  const pitch = PITCH_PATTERNS.some((p) => p.test(content.message ?? ""));
+  if (pitch) reasons.push("reads like a sales pitch");
   const flagged = reasons.length > 0 || signals.length >= 2;
   reasons.push(...signals);
 
