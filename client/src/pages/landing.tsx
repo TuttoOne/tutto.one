@@ -406,9 +406,12 @@ function Pricing() {
     <Section label={t(landing.pricing.label)}>
       <HeadlinePrice
         title={t(offer.title)}
-        price={econ.course}
+        price={econ.courseStandard}
         note={
           <>
+            {econ.todayOpen && (
+              <p className="mb-2">{t(offer.today).replace("{price}", econ.course)}</p>
+            )}
             <Link href="/praxis-programme" className="text-primary hover:underline">
               {t(offer.link)} →
             </Link>

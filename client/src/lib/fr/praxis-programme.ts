@@ -269,6 +269,10 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "Eight topics for you and up to four others, in eight, six or four sessions. Everything listed above.":
     "Huit thèmes pour vous et jusqu'à quatre autres personnes, en huit, six ou quatre séances. Tout ce qui figure ci-dessus.",
   "One-to-one": "En tête-à-tête",
+  "{price} if you book by 31 December 2026.":
+    "{price} si vous réservez au plus tard le 31 décembre 2026.",
+  "Member of a partner association? Your rate is {course} for the team course and {fastTrack} one to one. Give your association's code when you book.":
+    "Membre d'une association partenaire ? Votre tarif est de {course} pour la formation équipe et de {fastTrack} en tête-à-tête. Indiquez le code de votre association lors de la réservation.",
   "Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if a group follows.":
     "Quatre séances de 90 minutes, privées et en tête-à-tête. Les mêmes livrables, à votre échelle, avec le guide de terrain et 30 jours de relecture à distance. Déduite intégralement si un groupe suit.",
   "On your own, and you'd rather learn with people like you?":

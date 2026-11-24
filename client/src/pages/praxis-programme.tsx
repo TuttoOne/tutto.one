@@ -506,12 +506,14 @@ export default function PraxisProgramme() {
             {[
               {
                 label: "The team course",
-                price: econ.course,
+                price: econ.courseStandard,
+                today: econ.course,
                 note: tr("Eight topics for you and up to four others, in eight, six or four sessions. Everything listed above."),
               },
               {
                 label: "One-to-one",
-                price: econ.fastTrack,
+                price: econ.fastTrackStandard,
+                today: econ.fastTrack,
                 note: tr("Four 90-minute sessions, private and one to one. The same artefacts, scoped to you, with the Field Guide and 30 days of async review. Credited in full if a group follows."),
               },
             ].map((p) => (
@@ -529,10 +531,18 @@ export default function PraxisProgramme() {
                 <p style={{ ...ROBOTO, fontSize: 32, fontWeight: 900, color: "#1a1a1a", marginBottom: 4, letterSpacing: "-1px" }}>
                   {p.price}
                 </p>
+                {econ.todayOpen && (
+                  <p style={{ ...INTER, fontSize: 12, fontWeight: 600, color: "#d97706", marginBottom: 8 }}>
+                    {fill("{price} if you book by 31 December 2026.", { price: p.today })}
+                  </p>
+                )}
                 <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248" }}>{p.note}</p>
               </div>
             ))}
           </div>
+          <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "#5a5248", marginTop: 14 }}>
+            {fill("Member of a partner association? Your rate is {course} for the team course and {fastTrack} one to one. Give your association's code when you book.", { course: econ.course, fastTrack: econ.fastTrack })}
+          </p>
           {/* The peer track, as a block of its own under the two prices. */}
           <a
             href="/peer-groups"

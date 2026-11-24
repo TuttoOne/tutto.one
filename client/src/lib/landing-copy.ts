@@ -323,6 +323,11 @@ export const landing = {
         en: "We optimise your setup together, create your use policy, set up a scorecard for your agents and make sure you / your whole team knows how to manage the change. We build it together so your systems work every day.",
         fr: "Nous optimisons votre configuration ensemble, rédigeons votre politique d'usage, définissons une grille d'évaluation pour vos agents et veillons à ce que vous / toute votre équipe sachiez accompagner le changement. Nous le construisons ensemble pour que vos systèmes fonctionnent au quotidien.",
       },
+      /** Shown under the standard price until TODAYS_PRICE_ENDS (pricing.ts). */
+      today: {
+        en: "{price} if you book by 31 December 2026.",
+        fr: "{price} si vous réservez au plus tard le 31 décembre 2026.",
+      },
       link: {
         en: "What's included, and the guarantee",
         fr: "Ce qui est inclus, et la garantie",

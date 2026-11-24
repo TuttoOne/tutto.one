@@ -63,7 +63,7 @@ export default function PeerGroups() {
   const seat = price("peerGroupSeat", currency, locale);
   const deposit = price("peerGroupDeposit", currency, locale);
   const econ = praxisEconomics(currency, locale);
-  const fastTrack = econ.fastTrack;
+  const fastTrack = econ.fastTrackStandard;
   /** Figures go into the sentence at render, so the French stays in the dictionary. */
   const fill = (en: string, subs: Record<string, string>) =>
     Object.entries(subs).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), tr(en));

@@ -157,6 +157,15 @@ export const SCRIPT_BUILD_HOURS = 30;
  */
 const DIAGNOSTIC_DAY = { GBP: 500, EUR: 600, ZAR: 12000 };
 
+/**
+ * Today's price (the computed course and fastTrack figures) is open to anyone
+ * who books before this moment, UK time. After it the site shows only the
+ * standard price, and today's figures carry on as the member rate for
+ * partner associations. Midnight at the start of 1 Jan 2027 in London is
+ * 00:00 UTC, since the UK is on GMT in winter.
+ */
+export const TODAYS_PRICE_ENDS = new Date("2027-01-01T00:00:00Z");
+
 /** Base rates. Everything else on the site is derived from these. */
 export const PRICES: Record<PriceKey, Record<Currency, number>> = {
   /**
@@ -178,13 +187,15 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    * from the offer stack, not derived: the session rate stays where it is
    * because the trainer split is computed from it.
    *
-   * No longer shown on the site: since November 2026 the price is stated
-   * once, at the computed course and fastTrack figures, with nothing struck
-   * through. Kept for the admin price list.
+   * The standard price from 1 January 2027, shown on the site as the price,
+   * stated once and never struck through (set 24 Nov 2026). Enterprise
+   * clients such as Andros pay it. The computed course and fastTrack figures
+   * are today's price until TODAYS_PRICE_ENDS and then the member rate for
+   * partner associations, which is why the session rate stays where it is.
    *
    * ZAR is the Praxis rand rule (see zarPraxis), 25% under EUR x 20.
    */
-  teamRegular: { GBP: 3900, EUR: 4500, ZAR: zarPraxis(4500) },
+  teamRegular: { GBP: 4200, EUR: 5000, ZAR: zarPraxis(5000) },
   fastTrackRegular: { GBP: 1700, EUR: 2000, ZAR: zarPraxis(2000) },
   /**
    * One seat in a peer group: the Fast track's four sessions, taken by four
@@ -328,15 +339,11 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    */
   ongoingMinMonthly: { GBP: 170, EUR: 200, ZAR: 4000 },
   /**
-   * Team enablement IS the training — the same eight sessions as the course,
-   * computed from the session rate so the two can never show different prices
-   * for the same thing.
+   * Team enablement IS the training, the same eight sessions as the course,
+   * so it carries the team's standard price (teamRegular). Same figures, kept
+   * as its own key because stored services content refers to it.
    */
-  enablementFrom: {
-    GBP: SESSION.GBP * COURSE_SESSIONS_N,
-    EUR: SESSION.EUR * COURSE_SESSIONS_N,
-    ZAR: SESSION.ZAR * COURSE_SESSIONS_N,
-  },
+  enablementFrom: { GBP: 4200, EUR: 5000, ZAR: zarPraxis(5000) },
 
   /**
    * Hardware the client buys and we specify. Three rows that deliberately break
@@ -405,12 +412,12 @@ export const SELECTABLE_PRICES: { key: PriceKey; label: string }[] = [
   { key: "sovereigntyDiagnostic", label: "Sovereignty diagnostic (€1,500)" },
   { key: "agentBuildFrom", label: "Agent build, from (€3,000)" },
   { key: "scriptBuildFrom", label: "Scripting build, 30h (€3,000)" },
-  { key: "enablementFrom", label: "AI-Fluent Team, special (€2,000)" },
+  { key: "enablementFrom", label: "AI-Fluent Team, standard (€5,000)" },
   { key: "build", label: "Pythia build, excl. hardware (€7,000)" },
   { key: "sessionStandard", label: "Praxis session, 90 min (€250)" },
-  { key: "fastTrack", label: "Solo Fast Track, special (€1,000)" },
-  { key: "teamRegular", label: "AI-Fluent Team, regular (€4,500)" },
-  { key: "fastTrackRegular", label: "Solo Fast Track, regular (€2,000)" },
+  { key: "fastTrack", label: "Solo Fast Track, member rate (€1,000)" },
+  { key: "teamRegular", label: "AI-Fluent Team, standard (€5,000)" },
+  { key: "fastTrackRegular", label: "Solo Fast Track, standard (€2,000)" },
   { key: "spAuditFrom", label: "SharePoint audit (€600)" },
   { key: "spBuildFrom", label: "SharePoint build (€6,000)" },
   { key: "spRetainerMonthly", label: "SharePoint retainer (€600/mo)" },
@@ -505,6 +512,11 @@ export function praxisEconomics(currency: Currency, locale: Locale) {
     course: f(course),
     /** Four private sessions: one-to-one. */
     fastTrack: f(session * FAST_TRACK_SESSIONS_N),
+    /** The standard prices, shown as the price from 1 Jan 2027. */
+    courseStandard: f(amount("teamRegular", currency)),
+    fastTrackStandard: f(amount("fastTrackRegular", currency)),
+    /** True while today's price is open to anyone (see TODAYS_PRICE_ENDS). */
+    todayOpen: Date.now() < TODAYS_PRICE_ENDS.getTime(),
     /** Taken off the client's own fee per referred enrolment. */
     referralCredit: f(credit),
     /** The ceiling on stacked credits. */
