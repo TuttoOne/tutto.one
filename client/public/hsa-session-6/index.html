@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="HSA session 6: what the team made since session 5, where it goes next, the five handouts from the session and next steps for each person.">
+<title>Session 6 handout: bring it to life | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  /* HSA handouts after session 6. Same Praxis house tokens as sessions 2, 4 and 5.
+     Layout: one document card; each section leads with a diagram, then the steps and prompts. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #4f6274; --slate-soft: #e8edf2;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8; --fail: #b4322a; --fail-soft: #f8e3e1;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a;
+      --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a;
+    --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  p { margin: 0; }
+  a { color: var(--amber-ink); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+  code.inl { font: 500 0.88em/1.4 var(--mono); background: var(--panel); border-radius: 4px; padding: 1px 5px; }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; color: var(--ink); text-decoration: none; }
+  .brand span { color: var(--amber); }
+  .top a.back { font-size: 14px; color: var(--amber); }
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 60ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+  section { margin-top: 48px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { font: 700 17px/1.3 var(--display); margin: 0; text-wrap: balance; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 66ch; }
+  .plain { display: grid; gap: 10px; color: var(--ink-2); max-width: 66ch; }
+  .plain b { color: var(--ink); }
+
+  /* Diagrams */
+  .fig { margin: 0; background: var(--panel); border-radius: 12px; padding: 18px 16px 14px; }
+  .fig .scroll { overflow-x: auto; }
+  .fig svg { display: block; width: 100%; height: auto; color: var(--ink); font-family: var(--body); }
+  .fig figcaption { margin: 10px 4px 0; font-size: 14px; color: var(--ink-2); max-width: 72ch; }
+  svg .bx { fill: var(--paper); stroke: var(--line); stroke-width: 1.5; }
+  svg .bx-a { fill: var(--amber-soft); stroke: var(--amber); stroke-width: 1.5; }
+  svg .bx-p { fill: var(--pass-soft); stroke: var(--pass); stroke-width: 1.5; }
+  svg .bx-s { fill: var(--slate-soft); stroke: var(--slate); stroke-width: 1.5; }
+  svg .bx-f { fill: var(--fail-soft); stroke: var(--fail); stroke-width: 1.5; }
+  svg .t1 { font: 700 14px var(--display); fill: var(--ink); }
+  svg .t2 { font-size: 12px; fill: var(--ink-2); }
+  svg .t3 { font-size: 11px; fill: var(--muted); }
+  svg .tl { font: 700 11px var(--display); letter-spacing: .08em; fill: var(--muted); }
+  svg .ta { font: 700 12px var(--display); fill: var(--amber-ink); }
+  svg .tp { font: 700 12px var(--display); fill: var(--pass); }
+  svg .tf { font: 700 12px var(--display); fill: var(--fail); }
+  svg .ar { stroke: var(--ink-2); stroke-width: 1.6; fill: none; }
+  svg .ar-a { stroke: var(--amber); stroke-width: 2; fill: none; }
+  svg .ar-d { stroke: var(--muted); stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+  svg .hd { fill: var(--ink-2); } svg .hd-a { fill: var(--amber); } svg .hd-d { fill: var(--muted); }
+  svg .bar-a { fill: var(--amber); } svg .bar-p { fill: var(--pass); } svg .bar-s { fill: var(--slate); }
+  svg .grid { stroke: var(--line); stroke-width: 1; }
+
+  /* Cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card { min-width: 0; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+  .card p, .card li { font-size: 14.5px; color: var(--ink-2); }
+  .card ul { margin: 0; padding-left: 18px; }
+  .card .k { font: 700 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .card.a { background: var(--amber-soft); border-color: transparent; }
+  .card.p { background: var(--pass-soft); border-color: transparent; }
+  .card.s { background: var(--slate-soft); border-color: transparent; }
+  .card.f { background: var(--fail-soft); border-color: transparent; }
+  .cost { font: 700 12.5px/1 var(--display); display: inline-flex; gap: 6px; align-items: center; }
+  .cost.zero { color: var(--pass); } .cost.low { color: var(--amber-ink); } .cost.high { color: var(--fail); }
+
+  /* Steps */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; counter-reset: s; }
+  .steps li { min-width: 0; background: var(--panel); border-radius: 10px; padding: 14px 16px; font-size: 14px; color: var(--ink-2); counter-increment: s; }
+  .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--amber); color: var(--paper); font: 700 13px/1 var(--display); margin-bottom: 8px; }
+  .steps b { display: block; color: var(--ink); font: 700 14.5px/1.3 var(--display); margin-bottom: 2px; }
+
+  /* Tables */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; min-width: 640px; }
+  th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: 0; }
+  th { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+  td { color: var(--ink-2); } td:first-child { color: var(--ink); font-weight: 600; }
+
+  /* Prompts */
+  .prompts { display: grid; gap: 12px; margin-top: 16px; }
+  .prompt { background: var(--panel); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
+  .prompt .txt { min-width: 0; flex: 1; }
+  .prompt .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .prompt code { display: block; font: 500 14px/1.6 var(--mono); color: var(--ink); margin-top: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .prompt code i { font-style: normal; color: var(--amber-ink); background: var(--amber-soft); border-radius: 3px; padding: 0 3px; }
+  .copy { flex: none; font: 700 12px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber-ink); background: var(--paper); border: 1.5px solid var(--amber); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+  .copy:hover { background: var(--amber-soft); }
+
+  /* Rules and notes */
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 70ch; }
+  .rules li { display: flex; gap: 12px; align-items: flex-start; color: var(--ink-2); }
+  .rules li::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; background: var(--pass); }
+  .rules b { color: var(--ink); }
+  .note { border: 1.5px dashed var(--slate); background: var(--slate-soft); border-radius: 10px; padding: 14px 18px; color: var(--ink); font-size: 15px; max-width: 74ch; }
+  .note b { color: var(--slate); }
+  .tree { background: var(--panel); border-radius: 10px; padding: 16px 20px; overflow-x: auto; }
+  .tree pre { margin: 0; font: 500 14px/1.75 var(--mono); color: var(--ink); }
+  .tree .c { color: var(--muted); }
+
+  /* Related handouts */
+  .more { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .more ul { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .more a { display: block; text-decoration: none; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; color: var(--ink); font: 700 15px/1.3 var(--display); }
+  .more a span { display: block; font: 400 13.5px/1.4 var(--body); color: var(--muted); margin-top: 3px; }
+  .more a:hover { border-color: var(--amber); }
+  .more a[aria-current="page"] { background: var(--panel); pointer-events: none; }
+  .foot { margin-top: 28px; font-size: 14px; color: var(--muted); }
+
+  @media (max-width: 700px) {
+    .doc { padding: 28px 20px; }
+    .prompt { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Praxis programme · Session 6 of 6</p>
+  <h1>Bring it to life</h1>
+  <p class="lede">The last session became a look at what you've already made and where it goes next: interactive activities, tutoring, marking, the tools beyond Claude and the set-up that keeps it all safe. Each topic has its own handout below, so this page is the map.</p>
+  <div class="meta">
+    <span><b>When</b> Tue 24 Nov 2026, 9:00 to 10:30 SAST</span>
+    <span><b>Recording</b> in the Teams chat</span>
+    <span><b>Alta</b> missed this one: your exercise is below</span>
+  </div>
+
+  <section aria-labelledby="made">
+    <h2 id="made">What you made since session 5</h2>
+    <div class="cards">
+      <div class="card"><span class="k">Christine</span><p>A board note explaining the budget, then had Claude check her own edits to it. Split the housekeeping learner guide into activities and made a Moodle question file.</p></div>
+      <div class="card a"><span class="k">Elsa</span><p>One job end to end: old module to new with placeholders, a slide deck with the HSA logo, a Motion clip on the grading system and an interactive equipment self-inspection.</p></div>
+      <div class="card s"><span class="k">Laetitia</span><p>An animated clip with sound on hazardous substances, the first step to replacing the YouTube links that keep breaking.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="where">
+    <h2 id="where">Where each handout fits</h2>
+    <p class="sub">Making content is the middle. The handouts cover what comes before it, around it and after it.</p>
+    <figure class="fig">
+      <div class="scroll">
+        <svg viewBox="0 0 900 232" role="img" aria-label="Make: from a paragraph to a clip, and a tutor that doesn't give the answer. Around the making: make it once, and teach Claude your systems. After: marking with AI and a moderator. Underneath everything: from your lab to live." style="min-width:760px">
+          <defs><marker id="f1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+          <text class="tl" x="14" y="24">MAKE</text>
+          <text class="tl" x="314" y="24">KEEP AND CONNECT</text>
+          <text class="tl" x="614" y="24">ASSESS</text>
+          <rect class="bx-a" x="14" y="34" width="272" height="60" rx="10"/>
+          <text class="t1" x="30" y="60">From a paragraph to a clip</text><text class="t2" x="30" y="80">clips, voices, video tools, copyright</text>
+          <rect class="bx-a" x="14" y="106" width="272" height="60" rx="10"/>
+          <text class="t1" x="30" y="132">A tutor that doesn't give the answer</text><text class="t2" x="30" y="152">hint ladders, written once</text>
+          <rect class="bx-s" x="314" y="34" width="272" height="60" rx="10"/>
+          <text class="t1" x="330" y="60">Make it once, use it many times</text><text class="t2" x="330" y="80">recipes, scripts, what AI costs</text>
+          <rect class="bx-s" x="314" y="106" width="272" height="60" rx="10"/>
+          <text class="t1" x="330" y="132">Teach Claude your systems</text><text class="t2" x="330" y="152">Moodle files, the browser, IT</text>
+          <rect class="bx-p" x="614" y="34" width="272" height="132" rx="10"/>
+          <text class="t1" x="630" y="60">Marking with AI and a moderator</text><text class="t2" x="630" y="80">first marks against the rubric,</text><text class="t2" x="630" y="97">moderation that comes down</text><text class="t2" x="630" y="114">only when the numbers allow,</text><text class="t2" x="630" y="131">the case for the Council</text>
+          <line class="ar" x1="286" y1="100" x2="310" y2="100" marker-end="url(#f1)"/>
+          <line class="ar" x1="586" y1="100" x2="610" y2="100" marker-end="url(#f1)"/>
+          <rect class="bx" x="14" y="182" width="872" height="40" rx="10"/>
+          <text class="t1" x="30" y="207">Underneath everything: from your lab to live</text><text class="t2" x="400" y="207">build on your laptop, share in the team lab, check, then publish</text>
+        </svg>
+      </div>
+      <figcaption>Links to all five, and to lab to live, are at the bottom of this page.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="three">
+    <h2 id="three">The three steps that repeat everywhere</h2>
+    <p class="sub">Whether it's a clip, a tutor, a question bank or a first mark, it's the same way of working you'd use with a new colleague.</p>
+    <ol class="steps">
+      <li><b>Write the brief</b>What you want, for whom, from which source and what must never happen.</li>
+      <li><b>Show what good looks like</b>A real example: a clip you like, a question exported from Moodle, a marked portfolio.</li>
+      <li><b>A person signs it off</b>Nothing reaches a learner without someone's name on it.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="alta">
+    <h2 id="alta">For Alta: the narration rules file</h2>
+    <p class="sub">The slow part of narrating a deck is writing the script with its pauses. Give Claude two or three scripts you've already made with their decks and have it write the rules down once. Then every new script follows them. Narration runs at about 130 to 150 words a minute, so a 20-second slide gets about 45 words: easy to check with a stopwatch.</p>
+    <div class="prompts">
+      <div class="prompt"><div class="txt"><span class="label">1 · Write the rules</span><code id="p-n1">Attached are <i>3</i> narration scripts we've made and the slide decks they go with, for <i>[narration program]</i>. Write narration-rules.md: how and when pauses are marked and how long they are, how numbers, units, abbreviations and medicine names are written so the voice says them properly, South African English spelling, sentence length and tone, and roughly how many words a slide gets. Quote an example from my scripts for every rule.</code></div><button class="copy" type="button" data-target="p-n1">Copy</button></div>
+      <div class="prompt"><div class="txt"><span class="label">2 · Write a new script</span><code id="p-n2">Using @narration-rules.md, write the narration for the attached deck, one section per slide with the slide number and title. Use only the slide and its speaker notes. Mark anything you added with [CHECK]. At the end, list every medicine name and abbreviation so I can check how the voice says them.</code></div><button class="copy" type="button" data-target="p-n2">Copy</button></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="next">
+    <h2 id="next">Next steps</h2>
+    <div class="cards">
+      <div class="card"><span class="k">Christine</span><ul><li>Sit down with Laetitia, Elsa and Alta: what goes on Moodle, where the originals live and the deadlines</li><li>Note any training the team still needs</li><li>A call with Daniel to plan the next stage</li></ul></div>
+      <div class="card"><span class="k">Laetitia</span><ul><li>Run the tutor research prompt</li><li>Write the HSA video style</li><li>List the most-used YouTube videos to replace first</li></ul></div>
+      <div class="card"><span class="k">Elsa</span><ul><li>Share your end-to-end module with Laetitia for review</li><li>Save it as a recipe so it can be repeated for the next module</li></ul></div>
+      <div class="card"><span class="k">Alta</span><ul><li>The narration rules file above</li><li>A 1:1 with Daniel to go through it together</li></ul></div>
+      <div class="card"><span class="k">Everyone</span><ul><li>Ask IT the five questions in <a href="/hsa-teach-claude-your-systems#it">Teach Claude your systems</a></li></ul></div>
+    </div>
+  </section>
+
+  <nav class="more" aria-label="Handouts from session 6">
+    <h2>The session 6 handouts</h2>
+    <ul>
+      <li><a href="/hsa-session-6" aria-current="page">Session 6: bring it to life<span>What we covered and what's next</span></a></li>
+      <li><a href="/hsa-bring-to-life">From a paragraph to a clip<span>Clips, voices, video tools and copyright</span></a></li>
+      <li><a href="/hsa-ai-tutor">A tutor that doesn't give the answer<span>Hint ladders, written once</span></a></li>
+      <li><a href="/hsa-make-it-once">Make it once, use it many times<span>Recipes, scripts and what AI costs</span></a></li>
+      <li><a href="/hsa-teach-claude-your-systems">Teach Claude your systems<span>Moodle files, the browser, IT</span></a></li>
+      <li><a href="/hsa-ai-marking">Marking with AI and a moderator<span>First marks, sampling, the Council</span></a></li>
+      <li><a href="/lab-to-live">From your lab to live<span>Where work is built, checked and published</span></a></li>
+    </ul>
+  </nav>
+  <p class="foot">Questions? Message me in Teams and I'll book a quick call.</p>
+</main>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.target);
+    var text = el.textContent;
+    function done(ok) { btn.textContent = ok ? 'Copied' : 'Select'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); }
+    function select() { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done(false); }
+    try { navigator.clipboard.writeText(text).then(function () { done(true); }, select); } catch (e) { select(); }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="HSA handout after session 6: Claude as a first marker for online knowledge portfolios, briefed like a new assessor, with moderation that comes down only when the numbers allow, and the evidence the Council would want.">
+<title>Marking with AI and a moderator | Tutto</title>
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  /* HSA handouts after session 6. Same Praxis house tokens as sessions 2, 4 and 5.
+     Layout: one document card; each section leads with a diagram, then the steps and prompts. */
+  :root {
+    --bg: #faf9f6; --paper: #ffffff; --ink: #1f1f1f; --ink-2: #4a4f57; --muted: #6b7280;
+    --line: #e5e7eb; --panel: #f1efea; --amber: #db7400; --amber-soft: #fcefdf; --amber-ink: #8a4700;
+    --slate: #4f6274; --slate-soft: #e8edf2;
+    --pass: #2f7d4f; --pass-soft: #e3f1e8; --fail: #b4322a; --fail-soft: #f8e3e1;
+    --display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    --body: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+      --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+      --slate: #93a4b6; --slate-soft: #26303a;
+      --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151412; --paper: #1d1c19; --ink: #eeebe5; --ink-2: #c4c0b8; --muted: #9a968e;
+    --line: #34312c; --panel: #26241f; --amber: #f0932b; --amber-soft: #3a2710; --amber-ink: #f6b56a;
+    --slate: #93a4b6; --slate-soft: #26303a;
+    --pass: #6fcf97; --pass-soft: #1d3326; --fail: #f08a80; --fail-soft: #3d1f1c; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+  p { margin: 0; }
+  a { color: var(--amber-ink); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+  code.inl { font: 500 0.88em/1.4 var(--mono); background: var(--panel); border-radius: 4px; padding: 1px 5px; }
+  .page { max-width: 980px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .doc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 44px 52px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .brand { font: 900 1.35rem/1 var(--display); letter-spacing: -0.025em; color: var(--ink); text-decoration: none; }
+  .brand span { color: var(--amber); }
+  .top a.back { font-size: 14px; color: var(--amber); }
+  .eyebrow { font: 700 12px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 0 0 12px; }
+  h1 { font: 900 clamp(28px, 5vw, 42px)/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 14px; text-wrap: balance; }
+  .lede { font: italic 400 20px/1.5 var(--serif); color: var(--ink-2); margin: 0 0 22px; max-width: 60ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 14px; color: var(--muted); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .meta b { color: var(--ink); font-weight: 600; }
+  section { margin-top: 48px; }
+  h2 { font: 700 23px/1.25 var(--display); margin: 0 0 6px; text-wrap: balance; }
+  h3 { font: 700 17px/1.3 var(--display); margin: 0; text-wrap: balance; }
+  .sub { color: var(--ink-2); margin: 0 0 18px; max-width: 66ch; }
+  .plain { display: grid; gap: 10px; color: var(--ink-2); max-width: 66ch; }
+  .plain b { color: var(--ink); }
+
+  /* Diagrams */
+  .fig { margin: 0; background: var(--panel); border-radius: 12px; padding: 18px 16px 14px; }
+  .fig .scroll { overflow-x: auto; }
+  .fig svg { display: block; width: 100%; height: auto; color: var(--ink); font-family: var(--body); }
+  .fig figcaption { margin: 10px 4px 0; font-size: 14px; color: var(--ink-2); max-width: 72ch; }
+  svg .bx { fill: var(--paper); stroke: var(--line); stroke-width: 1.5; }
+  svg .bx-a { fill: var(--amber-soft); stroke: var(--amber); stroke-width: 1.5; }
+  svg .bx-p { fill: var(--pass-soft); stroke: var(--pass); stroke-width: 1.5; }
+  svg .bx-s { fill: var(--slate-soft); stroke: var(--slate); stroke-width: 1.5; }
+  svg .bx-f { fill: var(--fail-soft); stroke: var(--fail); stroke-width: 1.5; }
+  svg .t1 { font: 700 14px var(--display); fill: var(--ink); }
+  svg .t2 { font-size: 12px; fill: var(--ink-2); }
+  svg .t3 { font-size: 11px; fill: var(--muted); }
+  svg .tl { font: 700 11px var(--display); letter-spacing: .08em; fill: var(--muted); }
+  svg .ta { font: 700 12px var(--display); fill: var(--amber-ink); }
+  svg .tp { font: 700 12px var(--display); fill: var(--pass); }
+  svg .tf { font: 700 12px var(--display); fill: var(--fail); }
+  svg .ar { stroke: var(--ink-2); stroke-width: 1.6; fill: none; }
+  svg .ar-a { stroke: var(--amber); stroke-width: 2; fill: none; }
+  svg .ar-d { stroke: var(--muted); stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+  svg .hd { fill: var(--ink-2); } svg .hd-a { fill: var(--amber); } svg .hd-d { fill: var(--muted); }
+  svg .bar-a { fill: var(--amber); } svg .bar-p { fill: var(--pass); } svg .bar-s { fill: var(--slate); }
+  svg .grid { stroke: var(--line); stroke-width: 1; }
+
+  /* Cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card { min-width: 0; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+  .card p, .card li { font-size: 14.5px; color: var(--ink-2); }
+  .card ul { margin: 0; padding-left: 18px; }
+  .card .k { font: 700 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .card.a { background: var(--amber-soft); border-color: transparent; }
+  .card.p { background: var(--pass-soft); border-color: transparent; }
+  .card.s { background: var(--slate-soft); border-color: transparent; }
+  .card.f { background: var(--fail-soft); border-color: transparent; }
+  .cost { font: 700 12.5px/1 var(--display); display: inline-flex; gap: 6px; align-items: center; }
+  .cost.zero { color: var(--pass); } .cost.low { color: var(--amber-ink); } .cost.high { color: var(--fail); }
+
+  /* Steps */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; counter-reset: s; }
+  .steps li { min-width: 0; background: var(--panel); border-radius: 10px; padding: 14px 16px; font-size: 14px; color: var(--ink-2); counter-increment: s; }
+  .steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--amber); color: var(--paper); font: 700 13px/1 var(--display); margin-bottom: 8px; }
+  .steps b { display: block; color: var(--ink); font: 700 14.5px/1.3 var(--display); margin-bottom: 2px; }
+
+  /* Tables */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; min-width: 640px; }
+  th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: 0; }
+  th { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+  td { color: var(--ink-2); } td:first-child { color: var(--ink); font-weight: 600; }
+
+  /* Prompts */
+  .prompts { display: grid; gap: 12px; margin-top: 16px; }
+  .prompt { background: var(--panel); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
+  .prompt .txt { min-width: 0; flex: 1; }
+  .prompt .label { font: 600 11px/1.3 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .prompt code { display: block; font: 500 14px/1.6 var(--mono); color: var(--ink); margin-top: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .prompt code i { font-style: normal; color: var(--amber-ink); background: var(--amber-soft); border-radius: 3px; padding: 0 3px; }
+  .copy { flex: none; font: 700 12px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--amber-ink); background: var(--paper); border: 1.5px solid var(--amber); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+  .copy:hover { background: var(--amber-soft); }
+
+  /* Rules and notes */
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 70ch; }
+  .rules li { display: flex; gap: 12px; align-items: flex-start; color: var(--ink-2); }
+  .rules li::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; background: var(--pass); }
+  .rules b { color: var(--ink); }
+  .note { border: 1.5px dashed var(--slate); background: var(--slate-soft); border-radius: 10px; padding: 14px 18px; color: var(--ink); font-size: 15px; max-width: 74ch; }
+  .note b { color: var(--slate); }
+  .tree { background: var(--panel); border-radius: 10px; padding: 16px 20px; overflow-x: auto; }
+  .tree pre { margin: 0; font: 500 14px/1.75 var(--mono); color: var(--ink); }
+  .tree .c { color: var(--muted); }
+
+  /* Related handouts */
+  .more { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .more ul { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .more a { display: block; text-decoration: none; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; color: var(--ink); font: 700 15px/1.3 var(--display); }
+  .more a span { display: block; font: 400 13.5px/1.4 var(--body); color: var(--muted); margin-top: 3px; }
+  .more a:hover { border-color: var(--amber); }
+  .more a[aria-current="page"] { background: var(--panel); pointer-events: none; }
+  .foot { margin-top: 28px; font-size: 14px; color: var(--muted); }
+
+  @media (max-width: 700px) {
+    .doc { padding: 28px 20px; }
+    .prompt { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+<main class="doc">
+  <div class="top"><a class="brand" href="/">Tutto<span>.</span></a><a class="back" href="/learn">Your dashboard</a></div>
+  <p class="eyebrow">Praxis programme · After session 6</p>
+  <h1>Marking with AI and a moderator</h1>
+  <p class="lede">Laetitia asked how far Claude could go in marking a learner's online knowledge portfolio against the rubric. As a first marker, quite far. A registered assessor still signs every result, and moderation only comes down when the numbers show it's safe. The biggest gain is the one Laetitia named: every learner is marked to the same standard.</p>
+  <div class="meta">
+    <span><b>For</b> Laetitia and Christine, then the assessors</span>
+    <span><b>Status</b> an idea to pilot and prove before anyone approves it</span>
+  </div>
+
+  <section aria-labelledby="who">
+    <h2 id="who">Who does what</h2>
+    <p class="sub">Claude reads and suggests. People decide. Nothing goes to the gradebook without an assessor's name on it.</p>
+    <figure class="fig">
+      <div class="scroll">
+        <svg viewBox="0 0 900 252" role="img" aria-label="The learner submits the portfolio online. Claude gives a first mark against the rubric with a reason for each mark and flags. The assessor reads it, agrees or changes it, then signs. The result goes to the gradebook. A moderator samples signed results, and a second person marks some portfolios blind to compare with Claude." style="min-width:760px">
+          <defs><marker id="e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0 0 L10 5 L0 10 z"/></marker>
+          <marker id="e1d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd-d" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+          <text class="tl" x="94" y="26" text-anchor="middle">LEARNER</text>
+          <text class="tl" x="309" y="26" text-anchor="middle">CLAUDE</text>
+          <text class="tl" x="539" y="26" text-anchor="middle">PEOPLE</text>
+          <text class="tl" x="804" y="26" text-anchor="middle">RECORD</text>
+          <rect class="bx" x="14" y="38" width="160" height="88" rx="10"/>
+          <rect class="bx-a" x="214" y="38" width="190" height="88" rx="10"/>
+          <rect class="bx-s" x="444" y="38" width="190" height="88" rx="10"/>
+          <rect class="bx-p" x="724" y="38" width="160" height="88" rx="10"/>
+          <g text-anchor="middle">
+            <text class="t1" x="94" y="70">Portfolio</text><text class="t2" x="94" y="92">typed online,</text><text class="t2" x="94" y="109">submitted</text>
+            <text class="t1" x="309" y="70">First mark</text><text class="t2" x="309" y="92">against the rubric, a</text><text class="t2" x="309" y="109">reason for every mark</text>
+            <text class="t1" x="539" y="70">Assessor signs</text><text class="t2" x="539" y="92">reads, agrees or</text><text class="t2" x="539" y="109">changes, every result</text>
+            <text class="t1" x="804" y="70">Gradebook</text><text class="t2" x="804" y="92">competent or not</text><text class="t2" x="804" y="109">yet competent</text>
+          </g>
+          <line class="ar" x1="174" y1="82" x2="210" y2="82" marker-end="url(#e1)"/>
+          <line class="ar" x1="404" y1="82" x2="440" y2="82" marker-end="url(#e1)"/>
+          <line class="ar" x1="634" y1="82" x2="720" y2="82" marker-end="url(#e1)"/>
+          <rect class="bx" x="214" y="166" width="190" height="72" rx="10"/>
+          <rect class="bx" x="444" y="166" width="190" height="72" rx="10"/>
+          <g text-anchor="middle">
+            <text class="t1" x="309" y="194">Blind check</text><text class="t2" x="309" y="214">a person marks without</text><text class="t2" x="309" y="230">seeing Claude's mark</text>
+            <text class="t1" x="539" y="194">Moderator</text><text class="t2" x="539" y="214">samples signed results,</text><text class="t2" x="539" y="230">compares all three</text>
+          </g>
+          <path class="ar-d" d="M94 126 V202 H210" marker-end="url(#e1d)"/>
+          <line class="ar-d" x1="404" y1="202" x2="440" y2="202" marker-end="url(#e1d)"/>
+          <path class="ar-d" d="M539 166 V130" marker-end="url(#e1d)"/>
+          <text class="t3" x="548" y="152">feedback</text>
+          <text class="t3" x="660" y="160">Flags go straight to the assessor:</text>
+          <text class="t3" x="660" y="176">unclear, borderline, possibly copied,</text>
+          <text class="t3" x="660" y="192">or anything the rubric doesn't cover.</text>
+        </svg>
+      </div>
+    </figure>
+  </section>
+
+  <section aria-labelledby="brief">
+    <h2 id="brief">Brief it like a new assessor</h2>
+    <p class="sub">Laetitia's own answer: if you hired a pharmacist to mark, you'd rely on what they already know and write down the rest. Claude needs the same written brief. The more you write down, the less it guesses.</p>
+    <div class="cards">
+      <div class="card s"><span class="k">What a pharmacist brings</span><ul><li>What stock receiving, cold chain and schedules are</li><li>The vocabulary of a pharmacy</li><li>Judgement about whether an answer "means the same"</li></ul><p>Claude has most of the general knowledge but none of your judgement, so the brief has to spell it out.</p></div>
+      <div class="card a"><span class="k">What you write down</span><ul><li>The rubric and the memo for each question</li><li>Answers that mean the same in other words, with examples</li><li>Common mistakes and how to mark them</li><li>What never passes, however well written</li><li>When to flag instead of marking</li></ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="ramp">
+    <h2 id="ramp">How much to check, and when to check less</h2>
+    <p class="sub">Today you moderate 25%. Start above that, and come down only when Claude and your assessors agree, script after script.</p>
+    <figure class="fig">
+      <div class="scroll">
+        <svg viewBox="0 0 900 222" role="img" aria-label="Moderation by stage: pilot, every portfolio marked twice, 100 percent. First cohort, 100 percent moderated. Then 25 percent, today's level. Then 10 percent plus a random blind sample every cycle." style="min-width:720px">
+          <line class="grid" x1="70" y1="40" x2="880" y2="40"/>
+          <line class="grid" x1="70" y1="152" x2="880" y2="152"/>
+          <line class="grid" x1="70" y1="190" x2="880" y2="190" style="stroke:var(--ink-2)"/>
+          <g class="t3" text-anchor="end"><text x="62" y="44">100%</text><text x="62" y="156">25%</text><text x="62" y="194">0</text></g>
+          <rect class="bx-a" x="80" y="40" width="190" height="150" rx="4"/>
+          <rect class="bx-s" x="282" y="40" width="190" height="150" rx="4"/>
+          <rect class="bx-s" x="484" y="152" width="190" height="38" rx="4"/>
+          <rect class="bx-p" x="686" y="175" width="190" height="15" rx="4"/>
+          <g text-anchor="middle">
+            <text class="t1" x="175" y="104">Pilot</text><text class="t2" x="175" y="124">every portfolio marked</text><text class="t2" x="175" y="140">by Claude and a person</text>
+            <text class="t1" x="377" y="104">First cohort</text><text class="t2" x="377" y="124">100% moderated</text>
+            <text class="t1" x="579" y="138">25%</text><text class="t3" x="579" y="122">today's level</text>
+            <text class="t1" x="781" y="160">10%</text><text class="t3" x="781" y="144">plus a random blind sample</text>
+            <text class="t3" x="175" y="212">one module</text><text class="t3" x="377" y="212">when the pilot agrees</text>
+            <text class="t3" x="579" y="212">when the cohort agrees</text><text class="t3" x="781" y="212">when 25% keeps agreeing</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>Set your own target before you start, for example the same result (competent or not) on 95 portfolios in 100. A sample that disagrees sends you back up a step.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="gives">
+    <h2 id="gives">What it gives you, and what it can't do</h2>
+    <div class="cards">
+      <div class="card p"><span class="k">Gives you</span><ul><li>The same standard for every learner, whoever the assessor is</li><li>Faster feedback, so learners resubmit sooner</li><li>A written reason for every mark, which helps with appeals</li><li>Flags on copying and on answers the rubric didn't foresee</li></ul></div>
+      <div class="card f"><span class="k">Can't do</span><ul><li>Sign a result or take responsibility for it</li><li>Mark well against a rubric that's vague, so the rubric gets better first</li><li>Always resist a confident, wrong answer: that's why people mark some portfolios blind</li><li>Replace the practical assessments in class</li></ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="council">
+    <h2 id="council">Making the case to the Council</h2>
+    <p class="sub">Laetitia's fair worry: convincing the Pharmacy Council is a different matter. Go with evidence from a pilot.</p>
+    <ol class="steps">
+      <li><b>Talk early</b>An informal conversation with the Council and QCTO before the pilot, to hear their concerns.</li>
+      <li><b>Pilot one module</b>Every portfolio marked by Claude and by an assessor, without either seeing the other's mark.</li>
+      <li><b>Show the numbers</b>How often they agreed, where they didn't and what changed in the brief as a result.</li>
+      <li><b>Show the controls</b>Who signs, the moderation plan, the blind samples, appeals unchanged, POPIA and where learner work is processed.</li>
+    </ol>
+    <p class="note" style="margin-top:14px"><b>Running cost.</b> Marking a new portfolio is live work, so it goes through the API and is charged per portfolio. The pilot tells you the real cost per portfolio before anything is decided. See <a href="/hsa-make-it-once">Make it once</a>.</p>
+  </section>
+
+  <section aria-labelledby="prompts">
+    <h2 id="prompts">Prompts to copy</h2>
+    <p class="sub">Practise on made-up or fully anonymised portfolios until IT and FPD have agreed where real learner work can go.</p>
+    <div class="prompts">
+      <div class="prompt"><div class="txt"><span class="label">1 · Write the assessor brief</span><code id="p-ab">Here is the rubric and memo for <i>the Stock Receiving knowledge portfolio</i>, and <i>5</i> marked examples with the assessor's comments. Write assessor-brief.md for a new assessor who is a pharmacist but has never marked for us: for each question, what earns the mark, answers that mean the same in other words, common mistakes, what never passes, and when to flag it for a person instead of marking. Quote the examples. List anything the rubric leaves unclear.</code></div><button class="copy" type="button" data-target="p-ab">Copy</button></div>
+      <div class="prompt"><div class="txt"><span class="label">2 · Compare first marks with the assessor's</span><code id="p-cmp">Using @assessor-brief.md, mark these <i>10</i> anonymised portfolios. For each question give the mark, one line on why, and any flag. Then compare with @<i>assessor-marks.xlsx</i>: where did we disagree, which of us followed the brief, and what should change in the brief? Don't change the assessor's marks.</code></div><button class="copy" type="button" data-target="p-cmp">Copy</button></div>
+    </div>
+  </section>
+
+  <nav class="more" aria-label="Handouts from session 6">
+    <h2>The session 6 handouts</h2>
+    <ul>
+      <li><a href="/hsa-session-6">Session 6: bring it to life<span>What we covered and what's next</span></a></li>
+      <li><a href="/hsa-bring-to-life">From a paragraph to a clip<span>Clips, voices, video tools and copyright</span></a></li>
+      <li><a href="/hsa-ai-tutor">A tutor that doesn't give the answer<span>Hint ladders, written once</span></a></li>
+      <li><a href="/hsa-make-it-once">Make it once, use it many times<span>Recipes, scripts and what AI costs</span></a></li>
+      <li><a href="/hsa-teach-claude-your-systems">Teach Claude your systems<span>Moodle files, the browser, IT</span></a></li>
+      <li><a href="/hsa-ai-marking" aria-current="page">Marking with AI and a moderator<span>First marks, sampling, the Council</span></a></li>
+      <li><a href="/lab-to-live">From your lab to live<span>Where work is built, checked and published</span></a></li>
+    </ul>
+  </nav>
+  <p class="foot">Questions? Message me in Teams and I'll book a quick call.</p>
+</main>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.target);
+    var text = el.textContent;
+    function done(ok) { btn.textContent = ok ? 'Copied' : 'Select'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); }
+    function select() { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done(false); }
+    try { navigator.clipboard.writeText(text).then(function () { done(true); }, select); } catch (e) { select(); }
+  });
+});
+</script>
+</body>
+</html>

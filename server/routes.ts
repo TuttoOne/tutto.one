@@ -424,6 +424,15 @@ export async function registerRoutes(
     res.sendFile(path.join(deckDir, "hsa-session-5", "index.html"));
   });
 
+  // HSA session 6 handout and the five handouts from it (clips, tutor hints, recipes and costs,
+  // Moodle files and the browser, AI-assisted marking): same arrangement, link only, not indexed.
+  for (const page of ["hsa-session-6", "hsa-bring-to-life", "hsa-ai-tutor", "hsa-make-it-once", "hsa-teach-claude-your-systems", "hsa-ai-marking"]) {
+    app.get([`/${page}`, `/${page}/`], (_req, res) => {
+      res.setHeader("X-Robots-Tag", "noindex, nofollow");
+      res.sendFile(path.join(deckDir, page, "index.html"));
+    });
+  }
+
   // Background Italia session 4 handout (scorecards, CLAUDE.md, PDFs into text, workspaces, the design system):
   // same arrangement, link only, not indexed.
   app.get(["/bi-session-4", "/bi-session-4/"], (_req, res) => {
