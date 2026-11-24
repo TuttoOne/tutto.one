@@ -111,9 +111,9 @@ export function FicheSheet({ showContact = true }: { showContact?: boolean }) {
             mené en séance.
           </p>
           <p>
-            <strong className="text-foreground font-semibold">Garantie.</strong> Choisissez un travail récurrent avant de commencer. Si, à la
-            dernière séance, votre équipe ne sait pas le produire avec l'IA au niveau fixé par sa
-            propre grille, je continue sans frais jusqu'à ce qu'elle y parvienne.
+            <strong className="text-foreground font-semibold">Garantie.</strong> Essayez les deux premières séances sur votre propre
+            travail. Si elles n'en valent pas la peine, prévenez-moi avant la troisième : je vous
+            rembourse tout ce que vous avez payé, sauf ces deux séances.
           </p>
           <p>
             <strong className="text-foreground font-semibold">

@@ -169,8 +169,8 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "The team course is for you and up to four others: colleagues, family or friends. One-to-one is private, in four sessions, and it is credited in full if a group follows.":
     "La formation équipe s'adresse à vous et jusqu'à quatre autres personnes : collègues, famille ou amis. Le tête-à-tête est privé, en quatre séances, et il est déduit intégralement si un groupe suit.",
   "What if it doesn't work for us?": "Et si cela ne fonctionne pas pour nous ?",
-  "Pick one recurring piece of work before we start. If by the last session your group can't produce it with AI to the standard on your own scorecard, we keep working with you at no charge until they can. The only condition is that you attend and answer the questions.":
-    "Choisissez un travail récurrent avant de commencer. Si, à la dernière séance, votre groupe ne sait pas le produire avec l'IA au niveau fixé par votre propre grille, nous continuons à travailler avec vous sans frais jusqu'à ce qu'il y parvienne. La seule condition : assister aux séances et répondre aux questions.",
+  "Try the first two sessions on your own work. If they aren't worth it, tell us before session 3 and you get back everything you paid except those two sessions. You don't have to give a reason.":
+    "Essayez les deux premières séances sur votre propre travail. Si elles n'en valent pas la peine, prévenez-nous avant la troisième séance : nous vous remboursons tout ce que vous avez payé, sauf ces deux séances. Inutile de vous justifier.",
 
   // --- Who this is for ---
   "You already use AI":
@@ -262,10 +262,10 @@ export const PRAXIS_PROGRAMME_FR: FrDict = {
   "For \"we'll drift back in three months\": we look at what slipped and fix it.":
     "Pour « dans trois mois, on aura tout oublié » : on regarde ce qui a glissé et on le corrige.",
   "The guarantee": "La garantie",
-  "Pick one recurring piece of work before we start. By the last session your group produces it with AI to the standard on your own scorecard, or we keep working with you at no charge until they do.":
-    "Choisissez un travail récurrent avant de commencer. À la dernière séance, votre groupe le produit avec l'IA au niveau fixé par votre propre grille. Sinon, nous continuons à travailler avec vous sans frais jusqu'à ce qu'il y parvienne.",
-  "The only condition is that you attend the sessions and answer the questions.":
-    "La seule condition : assister aux séances et répondre aux questions.",
+  "Try the first two sessions on your own work. If they aren't worth it, stop there and you get back everything you paid except those two sessions.":
+    "Essayez les deux premières séances sur votre propre travail. Si elles n'en valent pas la peine, arrêtez-vous là : nous vous remboursons tout ce que vous avez payé, sauf ces deux séances.",
+  "Tell us before session 3. You don't have to give a reason.":
+    "Prévenez-nous avant la troisième séance. Inutile de vous justifier.",
   "Eight topics for you and up to four others, in eight, six or four sessions. Everything listed above.":
     "Huit thèmes pour vous et jusqu'à quatre autres personnes, en huit, six ou quatre séances. Tout ce qui figure ci-dessus.",
   "One-to-one": "En tête-à-tête",

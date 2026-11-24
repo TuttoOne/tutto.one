@@ -175,7 +175,7 @@ const faqs = [
   },
   {
     q: "What if it doesn't work for us?",
-    a: "Pick one recurring piece of work before we start. If by the last session your group can't produce it with AI to the standard on your own scorecard, we keep working with you at no charge until they can. The only condition is that you attend and answer the questions.",
+    a: "Try the first two sessions on your own work. If they aren't worth it, tell us before session 3 and you get back everything you paid except those two sessions. You don't have to give a reason.",
   },
 ];
 
@@ -498,8 +498,8 @@ export default function PraxisProgramme() {
 
           <div style={{ marginTop: 28, marginBottom: 28, borderRadius: 10, background: "#1a1a1a", padding: "24px 26px", maxWidth: 680 }}>
             <p style={{ ...CAPS, fontSize: 9, color: "#d97706", marginBottom: 12 }}>{tr("The guarantee")}</p>
-            <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, lineHeight: 1.55, color: "#f6f1ea", marginBottom: 10 }}>{tr("Pick one recurring piece of work before we start. By the last session your group produces it with AI to the standard on your own scorecard, or we keep working with you at no charge until they do.")}</p>
-            <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", margin: 0 }}>{tr("The only condition is that you attend the sessions and answer the questions.")}</p>
+            <p style={{ ...ROBOTO, fontSize: 16, fontWeight: 700, lineHeight: 1.55, color: "#f6f1ea", marginBottom: 10 }}>{tr("Try the first two sessions on your own work. If they aren't worth it, stop there and you get back everything you paid except those two sessions.")}</p>
+            <p style={{ ...INTER, fontSize: 12, lineHeight: 1.7, color: "rgba(246,241,234,0.6)", margin: 0 }}>{tr("Tell us before session 3. You don't have to give a reason.")}</p>
           </div>
 
           <p style={{ ...CAPS, fontSize: 10, color: "#1a1a1a", marginBottom: 14 }}>{tr("What you pay")}</p>
