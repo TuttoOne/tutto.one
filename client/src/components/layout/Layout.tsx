@@ -66,7 +66,7 @@ export function Header() {
 
           {/* Sign-in, far right at every width. Learners land on /learn (an emailed
               link, no password); the admin sign-in is linked from there. */}
-          <a
+          <Link
             href="/learn"
             aria-label={t(copy.nav.admin)}
             title={t(copy.nav.admin)}
@@ -74,7 +74,7 @@ export function Header() {
             className="p-2 text-muted-foreground hover:text-primary transition-colors xl:-mr-2"
           >
             <LogIn className="w-4 h-4" />
-          </a>
+          </Link>
 
           <button
             className="xl:hidden p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors"
@@ -149,9 +149,9 @@ export function Footer() {
               {item.label}
             </a>
           ))}
-          <a href="/data-policy" className="hover:text-foreground transition-colors">
+          <Link href="/data-policy" className="hover:text-foreground transition-colors">
             {t({ en: "Privacy", fr: "Confidentialité" })}
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { useFormGuard } from "@/lib/form-guard";
 import { useEffect, useState } from "react";
 import { usePageTr } from "@/lib/page-fr";
@@ -544,7 +545,7 @@ export default function PraxisProgramme() {
             {fill("Member of a partner association? Your rate is {course} for the team course and {fastTrack} one to one. Give your association's code when you book.", { course: econ.course, fastTrack: econ.fastTrack })}
           </p>
           {/* The peer track, as a block of its own under the two prices. */}
-          <a
+          <Link
             href="/peer-groups"
             style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", marginTop: 16, padding: "20px", border: "1px solid #d8d0c5", borderRadius: 10, background: "#faf8f5", textDecoration: "none" }}
           >
@@ -553,7 +554,7 @@ export default function PraxisProgramme() {
               <span style={{ ...INTER, display: "block", fontSize: 13, lineHeight: 1.7, color: "#5a5248" }}>{tr("Take the same four sessions in a small group.")}</span>
             </span>
             <span style={{ ...CTA_SECONDARY, whiteSpace: "nowrap" }}>{tr("See the small groups")} →</span>
-          </a>
+          </Link>
 
           {/* Ask for the call while the price and the guarantee are on screen,
               rather than only at the foot of the page after the questions. */}
@@ -579,7 +580,7 @@ export default function PraxisProgramme() {
           <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7, marginTop: 20, maxWidth: 560 }}>
             {tr("Start with the free 60-minute session: proof on one of your own jobs before you spend anything. When you book the course, a 15-minute call to say hello and set the dates comes with it. Both programmes are invoiced, ex VAT.")}{" "}
             {tr("We also run free sessions from time to time. They are general rather than built around your use case:")}{" "}
-            <a href="/rieuzal" style={{ color: "#d97706" }}>{tr("see Events")}</a>.
+            <Link href="/rieuzal" style={{ color: "#d97706" }}>{tr("see Events")}</Link>.
           </p>
           <div style={{ marginTop: 20, padding: "16px 20px", background: "#f0ece6", borderRadius: 8, maxWidth: 560 }}>
             <p style={{ ...INTER, fontSize: 12, color: "#5a5248", lineHeight: 1.7 }}>
@@ -789,10 +790,10 @@ export default function PraxisProgramme() {
             </div>
           </div>
           <div style={{ marginTop: 28 }}>
-            <a
+            <Link
               href="/become-a-trainer"
               style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#d97706", color: "#fff", ...ROBOTO, fontSize: 13, fontWeight: 700, padding: "11px 22px", borderRadius: 6, textDecoration: "none", letterSpacing: "0.04em" }}
-            >{tr("See the trainer track →")}</a>
+            >{tr("See the trainer track →")}</Link>
           </div>
         </div>
 

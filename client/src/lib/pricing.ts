@@ -95,7 +95,16 @@ function zarPraxis(eur: number): number {
 }
 
 /**
- * The session rate, for 90 minutes with a group of one to four. Course tuition
+ * Standard prices in rand, set by hand on 24 Nov 2026 rather than by
+ * zarPraxis, which gives R75,000 for the team: more than South African
+ * buyers will pay. R50,000 is about R25,000 a training day, the top of
+ * what SA facilitators charge. One to one is half the team price.
+ */
+const ZAR_STANDARD_TEAM = 50000;
+const ZAR_STANDARD_SOLO = 25000;
+
+/**
+ * The session rate, for 90 minutes with a group of one to five. Course tuition
  * and team enablement are both eight of these, and Fast track is four.
  */
 const SESSION = { GBP: 200, EUR: 250, ZAR: zarPraxis(250) };
@@ -193,10 +202,10 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    * are today's price until TODAYS_PRICE_ENDS and then the member rate for
    * partner associations, which is why the session rate stays where it is.
    *
-   * ZAR is the Praxis rand rule (see zarPraxis), 25% under EUR x 20.
+   * ZAR is set by hand (see ZAR_STANDARD_TEAM), not by the rand rule.
    */
-  teamRegular: { GBP: 4200, EUR: 5000, ZAR: zarPraxis(5000) },
-  fastTrackRegular: { GBP: 1700, EUR: 2000, ZAR: zarPraxis(2000) },
+  teamRegular: { GBP: 4200, EUR: 5000, ZAR: ZAR_STANDARD_TEAM },
+  fastTrackRegular: { GBP: 1700, EUR: 2000, ZAR: ZAR_STANDARD_SOLO },
   /**
    * One seat in a peer group: the Fast track's four sessions, taken by four
    * solo people matched by background (see peer-groups.ts). Half the private
@@ -343,7 +352,7 @@ export const PRICES: Record<PriceKey, Record<Currency, number>> = {
    * so it carries the team's standard price (teamRegular). Same figures, kept
    * as its own key because stored services content refers to it.
    */
-  enablementFrom: { GBP: 4200, EUR: 5000, ZAR: zarPraxis(5000) },
+  enablementFrom: { GBP: 4200, EUR: 5000, ZAR: ZAR_STANDARD_TEAM },
 
   /**
    * Hardware the client buys and we specify. Three rows that deliberately break

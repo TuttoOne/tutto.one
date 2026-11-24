@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { useFormGuard } from "@/lib/form-guard";
 import { useEffect, useRef, useState } from "react";
 import { usePageTr } from "@/lib/page-fr";
@@ -303,7 +304,7 @@ export default function PeerGroups() {
               <p style={{ ...BODY, marginTop: 12 }}>
                 {tr("No coding background needed.")}
               </p>
-              <a href="/praxis-programme" style={{ ...CTA_PRIMARY, background: "transparent", borderColor: "#1a1a1a", color: "#1a1a1a", marginTop: 16 }}>{tr("See the programme in full")} →</a>
+              <Link href="/praxis-programme" style={{ ...CTA_PRIMARY, background: "transparent", borderColor: "#1a1a1a", color: "#1a1a1a", marginTop: 16 }}>{tr("See the programme in full")} →</Link>
             </div>
             <div style={CARD}>
               <p style={{ ...CAPS, fontSize: 10, color: "#a8a092", marginBottom: 12 }}>{tr("A seat in a group")}</p>

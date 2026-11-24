@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { useFormGuard } from "@/lib/form-guard";
 /**
  * The public page for a series of in-person evenings (/rieuzal), and the page
@@ -333,7 +334,7 @@ function BookingPanel({ e, maxSeats, onBooked }: { e: PublicEvent; maxSeats: num
     <div style={{ marginTop: 14, background: CARD, border: `1px solid ${RULE}`, borderRadius: 8, padding: "16px 18px" }}>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "baseline", gap: "4px 16px" }}>
         <p style={{ ...ROBOTO, fontSize: 18, fontWeight: 700, margin: 0 }}>{w.day(e.startsAt)} · {w.time(e.startsAt)}</p>
-        <a href="/praxis-programme" style={{ ...A, fontSize: 14 }}>{w.t("moreInfo")}</a>
+        <Link href="/praxis-programme" style={{ ...A, fontSize: 14 }}>{w.t("moreInfo")}</Link>
       </div>
       <p style={{ margin: "4px 0 0", fontSize: 14, color: MUTED }}>
         {w.t("cardLine")}
@@ -431,7 +432,7 @@ export function EventSeries({ series }: { series: string }) {
       )}
 
       <p style={{ ...P, marginTop: 24, fontSize: 14, color: MUTED }}>
-        {w.t("privacyA")} {RETENTION_MONTHS} {w.t("privacyB")} <a style={A} href="/data-policy">{w.t("privacyLink")}</a>{w.en ? "" : " "}{w.t("privacyC")} <a style={A} href="mailto:daniel@tutto.one">daniel@tutto.one</a>
+        {w.t("privacyA")} {RETENTION_MONTHS} {w.t("privacyB")} <Link style={A} href="/data-policy">{w.t("privacyLink")}</Link>{w.en ? "" : " "}{w.t("privacyC")} <a style={A} href="mailto:daniel@tutto.one">daniel@tutto.one</a>
       </p>
     </Shell>
   );
