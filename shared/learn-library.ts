@@ -65,6 +65,13 @@ export const LIBRARY_INFO: Record<string, LibraryInfo> = {
   "/claude-privacy": { kind: "Guide", topic: "rules", summary: "Where the training switch is in each Claude app, and what it does and doesn't cover." },
   "/claude-schedules": { kind: "Guide", topic: "tools", summary: "Let Claude run the weekly jobs on a timetable, and check what it did." },
   "/folder-builder": { kind: "Tool", topic: "brief", summary: "Six questions build a rules folder for any AI." },
+  "/blog/define-good-before-you-hand-it-over": { kind: "Handout", topic: "check", summary: "Writing down what good output is for a job, so it can be scored." },
+  "/blog/write-it-down-once": { kind: "Handout", topic: "brief", summary: "One folder per job, standing instructions and scorecards, so it's right every time." },
+  "/blog/where-claude-looks-for-your-rules": { kind: "Handout", topic: "brief", summary: "Where Claude looks for your rules, and how to write them once at the right level." },
+  "/blog/getting-your-content-ready-for-ai": { kind: "Handout", topic: "brief", summary: "Turning documents into clean, tagged text AI can work with." },
+  "/blog/share-it-schedule-it": { kind: "Handout", topic: "tools", summary: "Sharing your work as artifacts, and scheduling the jobs that repeat." },
+  "/blog/one-set-of-files-the-whole-team-uses": { kind: "Handout", topic: "team", summary: "One team library for instructions and scorecards, pointed to from each job." },
+  "/blog/which-ai-for-which-specialist-job": { kind: "Handout", topic: "tools", summary: "Picture searches, scans, location and other specialist jobs, and which tool fits." },
   "https://claude.ai/artifact/S7dHFnALQxEY3GWG8SmWC3": { kind: "Handout", topic: "rules", summary: "The 10 questions your AI rules answer, the 8 steps and how to finish the charter." },
 };
 

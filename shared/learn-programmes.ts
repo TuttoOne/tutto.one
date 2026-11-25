@@ -91,7 +91,110 @@ const M = {
   claudePrivacy: { label: "Privacy guide: stop Claude training on your chats", href: "/claude-privacy", claude: "/claude-privacy/praxis-claude-privacy.md" },
   claudeSchedules: { label: "Scheduled tasks guide: let Claude do the weekly jobs", href: "/claude-schedules", claude: "/claude-schedules/praxis-claude-schedules.md" },
   labToLive: { label: "Handout: from your lab to something customers use", href: "/lab-to-live" },
+  // The client-free blog versions of the client handouts (server/blog-handouts.ts), for programmes
+  // that must not show another client's name, even in a link.
+  defineGood: { label: "Handout: define good before you hand a job to AI", href: "/blog/define-good-before-you-hand-it-over" },
+  writeOnce: { label: "Handout: write it down once", href: "/blog/write-it-down-once" },
+  whereRules: { label: "Handout: where Claude looks for your rules", href: "/blog/where-claude-looks-for-your-rules" },
+  contentReady: { label: "Handout: getting your content ready for AI", href: "/blog/getting-your-content-ready-for-ai" },
+  shareSchedule: { label: "Handout: share it, schedule it", href: "/blog/share-it-schedule-it" },
+  teamFiles: { label: "Handout: one set of files the whole team uses", href: "/blog/one-set-of-files-the-whole-team-uses" },
+  specialistTools: { label: "Handout: which AI for which specialist job", href: "/blog/which-ai-for-which-specialist-job" },
 } satisfies Record<string, Material>;
+
+/**
+ * The standard team path (25 Nov 2026), from the sweep of what actually ran with three teams
+ * (Tutto.One-private/strategy/SWEEP - what we actually taught (Nov 2026).md). Fixed sessions a
+ * champion can lead, one artefact made in the room in every session, accounts set up with IT
+ * before session 1. Materials are client-free only. Sessions 8 and 9 are the optional Builder tier.
+ */
+const TEAM_PATH: Programme = {
+  key: "praxis-team-path",
+  name: "team programme",
+  modules: [
+    {
+      number: 1,
+      title: "Scoping",
+      icon: "question",
+      what: "Where your week goes: what repeats, what's manual, what's costly when it's wrong. Each person picks one real task and makes it concrete: what starts it, what goes in, what comes out, who checks it and which parts stay with you.",
+      leaveWith: "Your use case card",
+      practice: "Note the last time you did your task: which files you used, how long it took and where the time went.",
+      materials: [M.startHere],
+    },
+    {
+      number: 2,
+      title: "Foundations and rules",
+      icon: "rules",
+      what: "How these tools work and where they go wrong, what they're good at and why context changes the answer. Then the first page of your rules: what may go in, which tools are approved and who signs off.",
+      leaveWith: "The first page of your AI charter",
+      practice: "Try one first step on your task with the approved tool, and note what it got wrong.",
+      materials: [M.limits, M.charterTool, M.claudePrivacy, M.claude101],
+    },
+    {
+      number: 3,
+      title: "Define good",
+      icon: "scorecard",
+      what: "What good output looks like for your task, written as about five checks a colleague could tick without asking you. No invented facts is always the first.",
+      leaveWith: "A scorecard for your task",
+      practice: "Score one piece of your own recent work against the scorecard and note where it falls short.",
+      materials: [M.defineGood, M.session2, M.scorecardTool],
+    },
+    {
+      number: 4,
+      title: "Write it down once",
+      icon: "pencil",
+      what: "What stays the same every time and what changes. A brief in six parts: context, task, inputs, output, checks and boundaries. Where the standing instructions live so the assistant reads them every time.",
+      leaveWith: "Standing instructions for your task",
+      practice: "Use your standing instructions on a real run this week and write down what you still had to correct.",
+      materials: [M.writeOnce, M.whereRules, M.skillFile, M.fluency],
+    },
+    {
+      number: 5,
+      title: "Build and check",
+      icon: "magnifier",
+      what: "Build, test, check, refine, on your real task. Four safety checks on the actual file: should I use it, do I need all of it, can I trust the output, who decides. When it falls short, fix the instructions and leave the draft alone.",
+      leaveWith: "A tested first version and a log of what you corrected",
+      practice: "Run it twice more and add each correction to the instructions, with the reason.",
+      materials: [M.evals, M.contentReady, M.session3],
+    },
+    {
+      number: 6,
+      title: "Share and hand over",
+      icon: "signpost",
+      what: "Turn what works into something your team can use, share it and schedule the jobs that repeat. Check it's ready to run without you.",
+      leaveWith: "A shared project or skill and your hand-over list",
+      practice: "Ask a colleague to use it and tell you where it tripped them up.",
+      materials: [M.shareSchedule, M.teamFiles, M.handoverTool, M.claudeSchedules, M.skills],
+    },
+    {
+      number: 7,
+      title: "Wrap-up",
+      icon: "chat",
+      what: "How you used to do the task, how you do it now, what improved and what you still check yourself. Then the team's list of what to build next.",
+      leaveWith: "Your before-and-after note and the team's use case register",
+      practice: "For the next 30 days, send one piece of work a week for review.",
+      materials: [M.toolkit],
+    },
+    {
+      number: 8,
+      title: "Builder: folders you own",
+      icon: "plug",
+      what: "Optional. Rules and files in folders you own, any model on the same folder including ones hosted in Europe, and connecting the tools you already use.",
+      leaveWith: "A working folder for your task",
+      practice: "Run your task from the folder with a second model and compare the results against your scorecard.",
+      materials: [M.workspaces, M.specialistTools, M.mcp, M.claudeCodeInAction],
+    },
+    {
+      number: 9,
+      title: "Builder: from lab to live",
+      icon: "robot",
+      what: "Optional. A first job that runs on its own, checked against its scorecard, built in your team's lab and ready for IT to review before it goes to more teams.",
+      leaveWith: "A first job that runs on its own and a lab-to-live checklist",
+      practice: "Write down what IT would need to see before this goes live.",
+      materials: [M.labToLive, M.subagents],
+    },
+  ],
+};
 
 const AI_FLUENT_TEAM: Programme = {
   key: "ai-fluent-team",
@@ -370,6 +473,7 @@ export const PROGRAMMES: Record<string, Programme> = {
   [BACKGROUND_ITALIA.key]: BACKGROUND_ITALIA,
   [SOLO_FAST_TRACK.key]: SOLO_FAST_TRACK,
   [HSA_CONTENT_TEAM.key]: HSA_CONTENT_TEAM,
+  [TEAM_PATH.key]: TEAM_PATH,
 };
 
 export function getProgramme(key: string): Programme | undefined {
